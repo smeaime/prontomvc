@@ -16,7 +16,178 @@
 </div>
 
 <script type="text/javascript">
+    function GrabarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var datos = $("#formid").serializeObject();
+        var err;
+
+        datos.IdLocalidad = gridId;
+        datos.IdProvincia = dataFromTheRow.IdProvincia;
+        datos.Nombre = dataFromTheRow.Nombre;
+        datos.Codigo = dataFromTheRow.Codigo;
+        datos.CodigoPostal = dataFromTheRow.CodigoPostal;
+        datos.CodigoESRI = dataFromTheRow.CodigoESRI;
+        datos.Partido = dataFromTheRow.Partido;
+
+        err = ""
+        if (datos.Nombre == "" || datos.Nombre == undefined) err = err + "Falta definir el nombre de la localidad.\n"
+
+        if (err != "") {
+            alert('No se pudo grabar el registro.\n' + err);
+        } else {
+            //$('html, body').css('cursor', 'wait');
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'RubroContable/BatchUpdate',
+                dataType: 'json',
+                data: JSON.stringify(datos),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        var rowid = $('#Lista').getGridParam('selrow');
+                        var valor = result.IdLocalidad;
+                        if (valor == "") { valor = "0"; }
+                        $('#Lista').jqGrid('setCell', rowid, 'IdLocalidad', valor);
+                    } else {
+                        alert('No se pudo grabar el registro.');
+                    }
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                    } catch (e) {
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                    }
+                }
+            });
+        };
+    };
+
+    function EliminarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var idprincipal = dataFromTheRow['IdLocalidad'];
+        if (idprincipal <= 0) {
+            $grid.jqGrid('delRowData', gridId);
+        } else {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'RubroContable/Delete',
+                dataType: 'json',
+                data: JSON.stringify({ id: idprincipal }),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('delRowData', gridId);
+                    } else {
+                        alert('No se pudo eliminar el registro.');
+                    }
+                },
+            });
+        };
+    };
+
     $(document).ready(function () {
+
+
+        var $grid = "";
+        var lastSelectedId;
+        var lastSelectediCol;
+        var lastSelectediRow;
+        var lastSelectediCol2;
+        var lastSelectediRow2;
+        var inEdit;
+        var selICol;
+        var selIRow;
+        var gridCellWasClicked = false;
+        var grillaenfoco = false;
+        var getColumnIndexByName = function (grid, columnName) {
+            var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+            for (i = 0; i < l; i++) {
+                if (cm[i].name === columnName) {
+                    return i; // return the index
+                }
+            }
+            return -1;
+        };
+        var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $.extend($.jgrid.inlineEdit, {
+            keys: true
+        });
+
+
+
+        window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+        document.body.onclick = saveEditedCell; // attach to current document.
+
+        function saveEditedCell(evt) {
+            var target = $(evt.target);
+
+            if ($grid) {
+                var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+                if (gridCellWasClicked && !isCellClicked) // check if a valid click
+                {
+                    gridCellWasClicked = false;
+                    $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+                }
+            }
+
+            //$grid = "";
+            gridCellWasClicked = false;
+
+            if (jQuery("#Lista").find(target).length) {
+                $grid = $('#Lista');
+                grillaenfoco = true;
+            }
+            if (grillaenfoco) {
+                gridCellWasClicked = true;
+                lastSelectediRow2 = lastSelectediRow;
+                lastSelectediCol2 = lastSelectediCol;
+            }
+        };
+
+        function MarcarSeleccionadosParaEliminar(grid) {
+            var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+            var i, Id;
+            for (i = selectedIds.length - 1; i >= 0; i--) {
+                Id = selectedIds[i];
+                var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+                grid.jqGrid('setRowData', Id, { act: se });
+                //grid.jqGrid('delRowData', selectedIds[i]);
+            }
+        };
+
+        function AgregarItemVacio(grid) {
+            var colModel = grid.jqGrid('getGridParam', 'colModel');
+            var dataIds = grid.jqGrid('getDataIDs');
+            var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+            var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+            var data, j, cm;
+
+            data = '{';
+            for (j = 1; j < colModel.length; j++) {
+                cm = colModel[j];
+                data = data + '"' + cm.index + '":' + '"",';
+            }
+            data = data.substring(0, data.length - 1) + '}';
+            data = data.replace(/(\r\n|\n|\r)/gm, "");
+            grid.jqGrid('addRowData', Id, data, "first");
+            grid.jqGrid('setRowData', Id, { act: se });
+        };
+
         var lastSelectedId;
         var inEdit;
         grid = $("#Lista");
@@ -27,15 +198,17 @@
             url: '@Url.Action("RubrosContables_DynamicGridData", "RubroContable")',
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdCliente', 'Razon social', '', 'codigo de agrupacion.', 'grupo', 'Distribuir gastos en analisis', 'Tomar datos del mes'
-                       ],
+            colNames: ['Acciones', 'IdCliente', 'Descripción', '',
+                'codigo de agrupacion.', 'Grupo', 'Distribuir gastos en analisis', 'Tomar datos del mes'
+            ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
-                        { name: 'IdCliente', index: 'IdCliente', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdRubroContable', index: 'IdRubroContable', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'codigo', index: '', align: 'left', width: 70, hidden: false, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
                         {
                             name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300,
 
-                            editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' ,
+                            editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
 
                             search: true, searchoptions: {
                                 clearSearch: true,
@@ -46,11 +219,51 @@
                         },
 
 
-                        { name: 'Codigo', index: 'Codigo', align: 'left', width: 70, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Subcodigo', index: 'Subcodigo', align: 'left', width: 40, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 200, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'codigogrupo', index: '', align: 'left', width: 70, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
+                   
+
+                        {
+                            name: 'Grupo', index: 'Grupo', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'RubcroContable/GetTiposRubrosFinancierosGrupos',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdProvincia').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdProvincia', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+
+
+                        {
+                            name: 'distribuir', index: '', align: 'left', width: 50,
+                            editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
+                            formatter: "checkbox", formatoptions: { disabled: false }
+                        },
+                        {
+                            name: 'tomadatos', index: '', align: 'left', width: 50,
+
+                            editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
+                            formatter: "checkbox", formatoptions: { disabled: false },
+                        },
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -106,21 +319,21 @@
 
 
            , cellEdit: true,
-        cellsubmit: 'clientArray',
-        editurl: ROOT + 'Empleado/EditGridData/'
+            cellsubmit: 'clientArray',
+            editurl: ROOT + 'Empleado/EditGridData/'
         });
 
 
-      //  //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-      //  jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-      //  jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-      // { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-      // {
-      //     //sopt: ["cn"]
-      //     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-      //     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-      // }
-      //);
+        //  //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //  jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //  jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+        // { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+        // {
+        //     //sopt: ["cn"]
+        //     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+        //     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+        // }
+        //);
 
 
 

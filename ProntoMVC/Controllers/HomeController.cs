@@ -783,11 +783,11 @@ namespace ProntoMVC.Controllers
             dic.Add("Fondo Fijo", "ComprobanteProveedor/IndexFF");
             dic.Add("CP Nuevo Comprobante de Proveedor", "ComprobanteProveedor/Edit/-1");
             dic.Add("Conceptos", "Concepto/");
-            dic.Add("Tabla de ganancias", "Ganancia/");
+            dic.Add("Tabla de ganancias", "TipoRetencionGanancia/");
             dic.Add("Categorias Ganancias", "Categoria/");
-            dic.Add("Condiciones de venta", "CondicionesVenta/");
+            dic.Add("Condiciones de venta", "CondicionVenta/");
             dic.Add("Puntos de venta", "PuntosVenta/");
-            dic.Add("Categorias IIBB", "IngresosBruto/");
+            dic.Add("Categorias IIBB Ingresos Brutos", "IBCondicion/");
             dic.Add("Listas de Precios", "ListasPrecio/");
             dic.Add("Clientes resumido", "Cliente/");
             dic.Add("Clientes detallado", "Cliente/");
@@ -802,6 +802,11 @@ namespace ProntoMVC.Controllers
             dic.Add("Cuenta Corriente Deudores - Ctas. Ctes.", "Reporte.aspx");
             dic.Add("Solicitudes de Cotización - Presupuestos ", "Presupuesto/");
 
+
+            dic.Add("Artículos", "Articulo/");
+
+            dic.Add("Firmas - Autorizaciones", "Autorizacion/");
+
             dic.Add("Cuentas", "Cuenta/");
             dic.Add("Asientos", "Asiento/");
             dic.Add("Rubros contables", "RubroContable/");
@@ -809,7 +814,15 @@ namespace ProntoMVC.Controllers
 
             //var lista = EntidadManager.GetStoreProcedure("", enumSPs.wbusqueda, prefixText);
             var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
-            DataTable lista2 = EntidadManager.GetStoreProcedure(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc), "wBusquedaMVC", term);
+            DataTable lista2 = new DataTable();
+            try
+            {
+                lista2 = EntidadManager.GetStoreProcedure(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc), "wBusquedaMVC", term);
+            }
+            catch (Exception ex)
+            {
+                ErrHandler.WriteError(ex);
+            }
 
             foreach (DataRow dr in lista2.Rows)
             {
