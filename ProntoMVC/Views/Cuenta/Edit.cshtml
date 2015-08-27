@@ -292,7 +292,7 @@
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            Va al CITI? (p/cta.IVA)
+                            @Html.LabelFor(model => model.DebeHaber, "Va al CITI? (p/cta.IVA)") 
                             @Html.RadioButtonFor(model => model.VaAlCiti, "SI") SI
                             @Html.RadioButtonFor(model => model.VaAlCiti, "NO") NO
                             debe haber
@@ -304,7 +304,7 @@
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            Ajusta por inflacion
+                            @Html.LabelFor(model => model.AjustaPorInflacion, "Ajusta por inflacion")
                             @Html.RadioButtonFor(model => model.AjustaPorInflacion, "SI") SI
                             @Html.RadioButtonFor(model => model.AjustaPorInflacion, "NO") NO
                         </div>
@@ -326,7 +326,7 @@
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            Imputar a presupuesto de obra
+                            @Html.LabelFor(model => model.ImputarAPresupuestoDeObra, "Imputar a presupuesto de obra")
                             @Html.RadioButtonFor(model => model.ImputarAPresupuestoDeObra, "SI") SI
                             @Html.RadioButtonFor(model => model.ImputarAPresupuestoDeObra, "NO") NO
                         </div>
