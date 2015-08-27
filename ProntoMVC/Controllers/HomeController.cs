@@ -811,6 +811,23 @@ namespace ProntoMVC.Controllers
             dic.Add("Asientos", "Asiento/");
             dic.Add("Rubros contables", "RubroContable/");
 
+            var q = db.Trees.Where(x => x.Clave.Contains(term) || x.Descripcion.Contains(term)).Take(5).ToList();
+            foreach (Tree o in q)
+            {
+                try
+                {
+                    dic.Add(o.Descripcion, o.Link);
+
+                }
+                catch (Exception)
+                {
+                    
+                    //throw;
+                }
+            }
+
+
+
 
             //var lista = EntidadManager.GetStoreProcedure("", enumSPs.wbusqueda, prefixText);
             var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
