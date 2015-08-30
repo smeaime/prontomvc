@@ -105,7 +105,8 @@ namespace ProntoMVC.Controllers
 
             //if ((o.IdProvincia ?? 0) == 0) { sErrorMsg += "\n" + "Falta la provincia"; }
 
-            if ((o.Codigo ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo"; }
+            //if ((o.Codigo ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo"; }
+            if ((o.Descripcion ?? "") == "") { sErrorMsg += "\n" + "Falta la descripcion"; }
 
             if (sErrorMsg != "") return false;
             else return true;
@@ -235,8 +236,8 @@ namespace ProntoMVC.Controllers
                                 a.Descripcion.NullSafeToString(),
 
                                 a.CodigoAgrupacion.NullSafeToString(),
-                                a.DistribuirGastosEnResumen.NullSafeToString(),
-                                a.TomarMesDeVentaEnResumen.NullSafeToString(),
+                                (a.DistribuirGastosEnResumen=="SI").NullSafeToString(),
+                                (a.TomarMesDeVentaEnResumen=="SI").NullSafeToString(),
                                 (a.TiposRubrosFinancierosGrupos==null) ?  "" :  a.TiposRubrosFinancierosGrupos.Descripcion.NullSafeToString(),
 
                                 (a.Cuenta==null) ?  "" :  a.Cuenta.Descripcion,
