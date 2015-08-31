@@ -257,31 +257,38 @@
 
                             <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
                                    style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
-
+                            <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
 
                         </div>
                     </div>
-                    <br />
 
                     <div class="row-fluid">
-                        <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "Asiento de apertura del ejercicio")
+                        <input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
+                        <input type="button" class="btn btn-small" id="edtData" value="Modificar" />
+                        <input type="button" class="btn btn-small" id="delData" value="Borrar" />
+
+                    </div>
+                        <br />
+
+                        <div class="row-fluid">
+                            <div class="span8 lightblue">
+                                @Html.LabelFor(model => model.FechaIngreso, "Asiento de apertura del ejercicio")
+                                @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
+                                @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+
+
+                            @Html.LabelFor(model => model.AsignarAPresupuestoObra, "Agregar a presupuesto de obra")
                             @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
                             @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
                         </div>
+
+
+
                     </div>
-
-                    <div class="row-fluid">
-
-
-                        @Html.LabelFor(model => model.AsignarAPresupuestoObra, "Agregar a presupuesto de obra")
-                        @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
-                        @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
-                    </div>
-
-
-                    
-                </div>
 
 
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
@@ -390,45 +397,102 @@
             $('#Lista').jqGrid({
                 url: ROOT + 'Asiento/DetAsientos/', // no puedo usar el modelo para cargar la grilla?????
                 postData: { 'Id': function () { return $("#IdAsiento").val(); } }, //esto es el parametro con que se llama a la url
-                editurl: ROOT + 'Cuenta/EditGridData/', // "clientArray",
+                editurl: ROOT + 'Asiento/EditGridData/', // "clientArray",
                 /////////
                 datatype: 'json',
                 mtype: 'POST',
                 //////////////////////////////////////////////
                 //////////////////////////////////////////////
-                //////////////////////////////////////////////
+              //////////////////////////////////////////////
 
-                colNames: ['Acciones', 'IdDetalleCuenta', 'Codigo anterior', 'Nombre anterior', 'FechaCambio'],
+                colNames: ['#',
+
+                    'IdDetalleAsiento',
+   'IdCuenta', 'Cuenta',
+
+   //'cód.',
+
+//    'Detalle de cuenta', 'Obra', 'Debe', 'Haber', 
+
+//    'registrar en analitico',
+//    'Moneda destino', 'Cotiz. moneda destino', 'importe mon destino',
+
+//    'enviar a libro',
+//'pase IVA',
+//'nro comprobante',
+//'porcentaje de iva'
+                ],
                 colModel: [
-                                { name: 'act', index: 'act', align: 'left', width: 70, sortable: false, editable: false, hidden: true },
+                                { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                                { name: 'IdDetalleAsiento', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                                { name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 200, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
+                                @*{ name: '', index: '', align: 'center', width: 50, hidden: true, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+
+                                { name: 'Cuenta', index: 'Cuenta', align: 'center', width: 250, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
                                 {
-                                    name: 'IdDetalleArticuloDocumento', index: 'IdDetalleArticuloDocumento', label: 'TB', align: 'left',
-                                    width: 85, editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false, required: true }
+                                    name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: false, search: true, hidden: false,
+                                    searchoptions: {
+                                        sopt: ['cn'],
+                                        dataInit: function (elem) {
+                                            // it demonstrates custom item rendering  http://stackoverflow.com/questions/7392236/jqgrid-with-autocompletion-cant-parse-data-from-controller-to-view/7392816#7392816
+                                            //                                    $(elem).autocomplete({ source:  ROOT + 'Articulo/GetObrasAutocomplete2' })
+                                            //                                                                .data("autocomplete")._renderItem = function (ul, item) {
+                                            //                                                                    return $("<li></li>")
+                                            //                                                                        .data("item.autocomplete", item)
+                                            //                                                                        .append("<a><span style='display:inline-block;width:60px;'><b>" +
+                                            //                                                                                item.value + "</b></span>" + item.title + "</a>")
+                                            //                                                                        .appendTo(ul);
+                                            //                                                                };
+
+
+
+
+                                            $(elem).autocomplete({
+                                                source: ROOT + 'Articulo/GetObrasAutocomplete2'
+
+                                                //,minLength: 3
+                                                //                                                                        ,select: function (event, ui) {
+
+                                                //                                                                            $("#IdCuenta").val(ui.item.id);
+                                                //                                                                            $("#CodigoCuenta").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                //                                                                            $("#Descripcion").val(ui.item.title);
+                                                //                                                                        }
+                                            })
+                                            .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                                return $("<li></li>")
+                                                    .data("ui-autocomplete-item", item)
+                                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " " + item.title + "</b></span></a>")
+                                                    .appendTo(ul);
+                                            };
+
+
+
+
+                                        }
+                                    }
+
+
                                 },
-                                {
-                                    name: 'CodigoAnterior', index: 'CodigoAnterior', label: 'TB', align: 'left', width: 300, editable: true,
-                                    hidden: false,
-                                    editoptions: {
-                                        //    disabled: 'disabled'
-                                    },
-                                    editrules: { edithidden: false, required: true }
-                                },
-                                 {
-                                     name: 'NombreAnterior', index: 'NombreAnterior', label: 'TB', align: 'left', width: 300, editable: true,
-                                     hidden: false,
-                                     editoptions: {
-                                         //    disabled: 'disabled'
-                                     },
-                                     editrules: { edithidden: false, required: true }
-                                 },
-                                  {
-                                      name: 'FechaCambio', index: 'FechaCambio', label: 'TB', align: 'left', width: 300, editable: true,
-                                      hidden: false,
-                                      editoptions: {
-                                          //    disabled: 'disabled'
-                                      },
-                                      editrules: { edithidden: false, required: true }
-                                  },
+
+                                { name: 'Debe', index: 'Debe', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'Haber', index: 'Haber', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+
+
+                                { name: 'analitico', index: '', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+
+
+                                { name: 'Moneda', index: 'Cumplido', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: true },
+                                { name: 'Cotiz', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+                                { name: 'importe', index: 'Entregado', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+
+                                { name: 'enviar', index: 'NumeroObra', align: 'left', width: 85, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+                                { name: 'pase', index: 'Pedidos', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+                                { name: 'nro', index: 'Comparativas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+                                { name: 'porcentaje', index: 'Pedidos', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },*@
+
+
+
 
                 ],
 
@@ -462,36 +526,52 @@
 
 
 
-                caption: "",
 
-                pager: $('#PagerDocumentos'),
-                rowNum: 15,
-                sortname: 'NumeroItem',
-                sortorder: 'asc',
-                width: 'auto',
-                height: 'auto',
-                altRows: false,
-                ////////////////////////
-                autowidth: true,
-                shrinkToFit: false,
-                ////////////////////////
-                footerrow: false,
-                userDataOnFooter: false,
-                loadonce: true
-
-
-
-                ////////////////////////
-                // PAGER
-                ////////////////////////
-
-               , rowList: [],        // disable page size dropdown
-                pgbuttons: false,     // disable page control like next, back button
-                pgtext: null,         // disable pager text like 'Page 0 of 10'
-                viewrecords: false    // disable current view record text like 'View 1-10 of 100'
-                ////////////////////////
-
+                pager: $('#ListaPager'),
+            rowNum: 100,
+            rowList: [10, 20, 50, 100],
+            sortname: 'IdDetalleAsiento',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '150px', // 'auto',
+            rownumbers: true,
+            multiselect: true,
+            altRows: false,
+            footerrow: true,
+            userDataOnFooter: true,
+            pgbuttons: false,
+            viewrecords: false,
+            pgtext: "",
+            pginput: false,
+            rowList: "",
+            caption: '',
+            cellEdit: true,
+            cellsubmit: 'clientArray'
             });
+
+
+
+
+
+            jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                             onClickButton: function () {
+                                                 //AgregarItemVacio(jQuery("#Lista"));
+                                             },
+                                         });
+            jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                             onClickButton: function () {
+                                                 EliminarSeleccionados(jQuery("#Lista"));
+                                             },
+                                         });
+            jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
 
 
@@ -551,7 +631,7 @@
                     type: 'POST',
                     // contentType: 'application/json; charset=utf-8',
                     contentType: 'application/json; charset=utf-8', // http://stackoverflow.com/a/2281875/1054200
-                    url: ROOT + 'Cuenta/BatchUpdate',   // 'Factura/UpdateAwesomeGridData',
+                    url: ROOT + 'Asiento/BatchUpdate',   // 'Factura/UpdateAwesomeGridData',
                     dataType: 'json',
                     // data:JSON.stringify( {formulario: colData , grilla: dataToSend })
                     data: dataToSend,
@@ -562,7 +642,7 @@
                             grid1.trigger('reloadGrid');
 
                             //window.location.replace(ROOT + "Cliente/index");
-                            window.location = (ROOT + "Cuenta/index");
+                            window.location = (ROOT + "Asiento/index");
 
                         } else {
                             // window.location.replace(ROOT + "Cliente/index");
@@ -659,14 +739,15 @@
                 mtype: 'POST',
                 cellEdit: false,
 
-                colNames: ['ver', '<<', 'IdRequerimiento', 'Cuenta', 'cód.',
 
-                    'Grupo', 'Obra', 'CdeGasto', '', '',
+                colNames: ['ver', '<<', 'IdCuenta', 'Cuenta', 'cód.',
 
-                    'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle',
-                     'Obra', 'Pedidos', 'Comparativas', 'Pedidos', 'Recepciones',
-                      'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
-                               'Observaciones', 'Lugar de entrega', 'IdObra', 'IdSector'],
+    'Grupo', 'Obra', 'CdeGasto', '', '',
+
+    'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle',
+     'Obra', 'Pedidos', 'Comparativas', 'Pedidos', 'Recepciones',
+      'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
+               'Observaciones', 'Lugar de entrega', 'IdObra', 'IdSector'],
                 colModel: [
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: '', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
@@ -766,6 +847,8 @@
                 ],
 
 
+
+
                 onSelectRow: function (id, status, e) {
                     //       var acceptId = $(ui.draggable).attr("id");
                     //		CopiarCuenta(acceptId, ui);
@@ -826,6 +909,10 @@
                     grid = $(this);
                     $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
                     $('#' + this.id + '_err').remove();
+
+                    AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
+
+
                 }
 
 
@@ -880,12 +967,12 @@
         function CopiarCuenta(acceptId, ui) {
 
 
-            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+           // jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
-            sacarDeEditMode();
+            // sacarDeEditMode();
 
 
-            GrabarGrillaLocal()
+           // GrabarGrillaLocal()
 
 
 
@@ -905,7 +992,7 @@
 
                 tmpdata['IdCuenta'] = getdata['IdCuenta'];
                 tmpdata['Codigo'] = getdata['Codigo'];
-                tmpdata['Descripcion'] = getdata['Cuenta'];
+                tmpdata['Cuenta'] = getdata['Cuenta'];
                 tmpdata['CuentaGasto'] = getdata['Cuenta'];
 
                 tmpdata['IvaComprasPorcentaje1'] = '0'; // "21";
@@ -933,49 +1020,7 @@
 
 
 
-
-            //////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-            ///////////////
-            // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
-            ///////////////
-            var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
-            // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
-            //alert(segundorenglon);
-            if (segundorenglon.indexOf("dnd") != -1) {
-                // tiró el renglon en modo dragdrop, no hizo dobleclic
-                $("#Lista").jqGrid('delRowData', segundorenglon);
-            }
-            //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-            //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
-
-
-            ///////////////
-            // paso 2: agregar en el ultimo lugar antes de los renglones vacios
-            ///////////////
-
-            //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
-
-            var pos = TraerPosicionLibre();
-            if (pos == null) {
-                $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
-            }
-            else {
-                $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
-            }
-            //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
-            // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
-            // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
-
-            //////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////
-
-
+            QuitarRenglonDragDrop(idazar, getdata)
 
 
 
@@ -987,9 +1032,9 @@
 
 
 
-            RefrescarOrigenDescripcion();
+            //RefrescarOrigenDescripcion();
             //    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
-            AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
+            AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
 
 
             //   var rows = $("#Lista").getGridParam("reccount");
@@ -1005,7 +1050,76 @@
         }
 
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+        $("#addData").click(function () {
+            jQuery("#Lista").jqGrid('editGridRow', "new", {
+                addCaption: "Agregar registro", bSubmit: "Aceptar", bCancel: "Cancelar",
+                width: 800, reloadAfterSubmit: false, closeOnEscape: true, closeAfterAdd: true,
+                recreateForm: true,
+                beforeShowForm: function (form) {
+                    var dlgDiv = $("#editmod" + grid[0].id);
+                    dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
+                    dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                },
+                beforeInitData: function () {
+                    inEdit = false;
+                },
+                onInitializeForm: function (form) {
+                    //$('#IdDetalleAsiento', form).val(0);
+                }
+                //beforeShowForm: function (form) { $('#tr_IdDetalleFactura', form).hide(); }
+            });
+        });
+
+        $("#edtData").click(function () {
+            var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+            if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr, {
+                editCaption: "Modificar registro", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true,
+                closeAfterEdit: true, recreateForm: true, Top: 0,
+                beforeShowForm: function (form) {
+                    // "editmodlist"
+                    var dlgDiv = $("#editmod" + grid[0].id);
+                    var parentDiv = dlgDiv.parent(); // div#gbox_list
+                    var dlgWidth = dlgDiv.width();
+                    var parentWidth = parentDiv.width();
+                    var dlgHeight = dlgDiv.height();
+                    var parentHeight = parentDiv.height();
+                    dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
+                    dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                },
+                beforeInitData: function () {
+                    inEdit = true;
+                }
+            });
+            else alert("Debe seleccionar un item!");
+        });
+
+
+        $("#delData").click(function () {
+            var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+            if (gr != null) {
+                //jQuery("#Lista").jqGrid('setRowData',gr,{Eliminado:"true"});
+                //$("#"+gr).hide();  
+                jQuery("#Lista").jqGrid('delGridRow', gr, { caption: "Borrar", msg: "Elimina el registro seleccionado?", bSubmit: "Borrar", bCancel: "Cancelar", width: 800, closeOnEscape: true, reloadAfterSubmit: true });
+            }
+            else alert("Debe seleccionar un item!");
+        });
+
+
+        //  jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////
 
     </script>
 }
