@@ -16,8 +16,34 @@
 </div>
 
 <script type="text/javascript">
+    var $grid = "";
+    var lastSelectedId;
+    var lastSelectediCol;
+    var lastSelectediRow;
+    var lastSelectediCol2;
+    var lastSelectediRow2;
+    var inEdit;
+    var selICol;
+    var selIRow;
+    var gridCellWasClicked = false;
+    var grillaenfoco = false;
+    var getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    };
+    var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
     function GrabarFila(gridId) {
         var $grid = $("#Lista");
+
+        //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+        //GrabarGrillaLocal()
 
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
         var datos = $("#formid").serializeObject();
@@ -28,8 +54,8 @@
         datos.Nombre = dataFromTheRow.Nombre;
         datos.Codigo = dataFromTheRow.Codigo;
         datos.CodigoPostal = dataFromTheRow.CodigoPostal;
-        datos.DistribuirGastosEnResumen = dataFromTheRow.CodigoESRI;
-        datos.TomarMesDeVentaEnResumen = dataFromTheRow.Partido;
+        dataFromTheRow.DistribuirGastosEnResumen = dataFromTheRow.DistribuirGastosEnResumen=="True" ? "SI" : "NO";
+        dataFromTheRow.TomarMesDeVentaEnResumen = dataFromTheRow.TomarMesDeVentaEnResumen == "True" ? "SI" : "NO";
 
         err = ""
         // if (datos.Nombre == "" || datos.Nombre == undefined) err = err + "Falta definir el nombre de la localidad.\n"
@@ -102,27 +128,6 @@
     $(document).ready(function () {
 
 
-        var $grid = "";
-        var lastSelectedId;
-        var lastSelectediCol;
-        var lastSelectediRow;
-        var lastSelectediCol2;
-        var lastSelectediRow2;
-        var inEdit;
-        var selICol;
-        var selIRow;
-        var gridCellWasClicked = false;
-        var grillaenfoco = false;
-        var getColumnIndexByName = function (grid, columnName) {
-            var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
-            for (i = 0; i < l; i++) {
-                if (cm[i].name === columnName) {
-                    return i; // return the index
-                }
-            }
-            return -1;
-        };
-        var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
 
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
@@ -259,7 +264,8 @@
                         {
                             name: 'DistribuirGastosEnResumen', index: 'DistribuirGastosEnResumen', align: 'left', width: 50,
                             editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
-                            formatter: "checkbox", formatoptions: { disabled: false }
+                            formatter: "checkbox", //  formatter: "SiNoFormatter", 
+                            formatoptions: { disabled: false }
                         },
                         {
                             name: 'TomarMesDeVentaEnResumen', index: 'TomarMesDeVentaEnResumen', align: 'left', width: 50,

@@ -232,41 +232,55 @@
 
                     <div class="row-fluid">
 
-                        <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "Numero de asiento")
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroAsiento, "Numero de asiento")
+                            @Html.TextBoxFor(model => model.NumeroAsiento, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroAsiento)
+                        </div>
+
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaIngreso, "Fecha")
                             @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.FechaIngreso)
                         </div>
-                    </div>
-
-                    <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "FechaIngreso")
-                            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.FechaIngreso)
+                            @Html.LabelFor(model => model.Concepto, "Concepto")
+                            @Html.TextBoxFor(model => model.Concepto, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Concepto)
                         </div>
                     </div>
                     <div class="row-fluid">
-
-                        <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "Concepto")
-                            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.FechaIngreso)
-                        </div>
-                    </div>
-
-                    <div class="row-fluid">
-                        <div id="divGrilla" class="span8 lightblue">
+                        <div id="divGrilla" class="span12 lightblue">
 
 
 
-                            <table id="ListaCambios" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
+                            <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
                                    style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
 
 
                         </div>
                     </div>
+                    <br />
+
+                    <div class="row-fluid">
+                        <div class="span8 lightblue">
+                            @Html.LabelFor(model => model.FechaIngreso, "Asiento de apertura del ejercicio")
+                            @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
+                            @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+
+
+                        @Html.LabelFor(model => model.AsignarAPresupuestoObra, "Agregar a presupuesto de obra")
+                        @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
+                        @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
+                    </div>
+
+
+                    
                 </div>
 
 
@@ -326,22 +340,22 @@
 
 
 
-            $.ajax({
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                url: ROOT + 'Pedido/Autorizaciones/',
-                data: { IdPedido: $("#IdPedido").val() },
-                dataType: "Json",
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var j = i + 1;
-                        $("#chk" + j).attr('checked', true);
-                        $("#chk" + j).attr('title', data[i].Nombre);
-                    }
+            //$.ajax({
+            //    type: "GET",
+            //    contentType: "application/json; charset=utf-8",
+            //    url: ROOT + 'Pedido/Autorizaciones/',
+            //    data: { IdPedido: $("#IdPedido").val() },
+            //    dataType: "Json",
+            //    success: function (data) {
+            //        for (var i = 0; i < data.length; i++) {
+            //            var j = i + 1;
+            //            $("#chk" + j).attr('checked', true);
+            //            $("#chk" + j).attr('title', data[i].Nombre);
+            //        }
 
 
-                }
-            });
+            //    }
+            //});
             Aprobado();
 
             function Aprobado() {
@@ -373,8 +387,8 @@
         $(function () {
 
 
-            $('#ListaCambios').jqGrid({
-                url: ROOT + 'Cuenta/DetCambios/', // no puedo usar el modelo para cargar la grilla?????
+            $('#Lista').jqGrid({
+                url: ROOT + 'Asiento/DetAsientos/', // no puedo usar el modelo para cargar la grilla?????
                 postData: { 'Id': function () { return $("#IdAsiento").val(); } }, //esto es el parametro con que se llama a la url
                 editurl: ROOT + 'Cuenta/EditGridData/', // "clientArray",
                 /////////
@@ -448,7 +462,7 @@
 
 
 
-                caption: "Detalle de cambios en la denominación de la cuenta",
+                caption: "",
 
                 pager: $('#PagerDocumentos'),
                 rowNum: 15,
@@ -863,7 +877,132 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        function CopiarCuenta(acceptId, ui) {
 
+
+            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+            sacarDeEditMode();
+
+
+            GrabarGrillaLocal()
+
+
+
+            var getdata = $("#ListaDrag").jqGrid('getRowData', acceptId);
+            var j = 0, tmpdata = {}, dropname;
+            // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+            //var prox = ProximoNumeroItem();
+            try {
+                //					for (var key in getdata) {
+                //						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
+                //							dropname = dropmodel[j].name;
+                //							tmpdata[dropname] = getdata[key];
+                //						}
+                //						j++;
+                //					}
+                tmpdata['IdDetalleComprobanteProveedor'] = 0;
+
+                tmpdata['IdCuenta'] = getdata['IdCuenta'];
+                tmpdata['Codigo'] = getdata['Codigo'];
+                tmpdata['Descripcion'] = getdata['Cuenta'];
+                tmpdata['CuentaGasto'] = getdata['Cuenta'];
+
+                tmpdata['IvaComprasPorcentaje1'] = '0'; // "21";
+
+                //name: 'CdeGasto', index: 'CuentasGasto'
+                //        tmpdata['OrigenDescripcion'] = 1;
+                //        var now = new Date();
+                //        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                //        tmpdata['FechaEntrega'] = currentDate;
+                //        tmpdata['IdUnidad'] = getdata['IdUnidad'];
+                //        tmpdata['Unidad'] = getdata['Unidad'];
+                //        tmpdata['IdDetalleRequerimiento'] = 0;
+                //        tmpdata['Cantidad'] = 0;
+                //        tmpdata['NumeroItem'] = prox++;
+                getdata = tmpdata;
+            } catch (e) { }
+            var grid;
+            grid = Math.ceil(Math.random() * 1000000);
+            // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+
+
+
+            var getdata = tmpdata;
+            var idazar = Math.ceil(Math.random() * 1000000);
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            ///////////////
+            // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+            ///////////////
+            var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+            // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+            //alert(segundorenglon);
+            if (segundorenglon.indexOf("dnd") != -1) {
+                // tiró el renglon en modo dragdrop, no hizo dobleclic
+                $("#Lista").jqGrid('delRowData', segundorenglon);
+            }
+            //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+            //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+            ///////////////
+            // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+            ///////////////
+
+            //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+            var pos = TraerPosicionLibre();
+            if (pos == null) {
+                $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+            }
+            else {
+                $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+            }
+            //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+            // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+            // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+            //////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+            //resetAltRows.call(this);
+            $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+
+
+
+
+            RefrescarOrigenDescripcion();
+            //    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
+            AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
+
+
+            //   var rows = $("#Lista").getGridParam("reccount");
+            //    if (rows > 4) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+            // Validar();
+
+
+
+        }
 
 
 
