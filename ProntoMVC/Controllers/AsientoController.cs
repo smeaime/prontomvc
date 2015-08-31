@@ -2155,10 +2155,10 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public virtual ActionResult DetPedidos(string sidx, string sord, int? page, int? rows, int? IdPedido)
+        public virtual ActionResult DetAsientos(string sidx, string sord, int? page, int? rows, int? IdAsiento)
         {
-            int IdPedido1 = IdPedido ?? 0;
-            var DetEntidad = db.DetallePedidos.Where(p => p.IdPedido == IdPedido1).AsQueryable();
+            int IdAsiento1 = IdAsiento ?? 0;
+            var DetEntidad = db.DetalleAsientos.Where(p => p.IdAsiento == IdAsiento1).AsQueryable();
 
             int pageSize = rows ?? 20;
             int totalRecords = DetEntidad.Count();
@@ -2170,33 +2170,10 @@ namespace ProntoMVC.Controllers
             var data = (from a in DetEntidad
                         select new
                         {
-                            a.IdDetallePedido,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.NumeroItem,
-                            // a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            a.Cantidad,
-                            a.Unidad.Abreviatura,
-                            a.Articulo.Codigo,
-                            a.Articulo.Descripcion,
-                            a.Precio,
-                            a.PorcentajeBonificacion,
-                            //a.boni.ImporteBonificacion,
-                            a.PorcentajeIVA,
-                            a.ImporteIva,
-                            a.ImporteTotalItem,
-                            a.FechaEntrega,
-                            a.FechaNecesidad,
-                            a.Observaciones,
-                            NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                            // NumeroRequerimiento = (a.IdDetalleRequerimiento > 0) ? db.Requerimientos.Find( db.DetalleRequerimientos.Find(a.IdDetalleRequerimiento).IdRequerimiento).NumeroRequerimiento.NullSafeToString() : "",
-                            // NumeroItemRM = (a.IdDetalleRequerimiento > 0) ? db.DetalleRequerimientos.Find(10).NumeroItem.NullSafeToString() : "",
-                            a.ArchivoAdjunto1,
-                            a.IdDetalleRequerimiento,
-                            a.IdDetalleAcopios,
-                            a.OrigenDescripcion,
-                            a.IdCentroCosto
+                            a.IdDetalleAsiento,
+                            a.IdCuenta,
+
+                      
 
                         }).OrderBy(p => p.NumeroItem)
 //
@@ -2218,31 +2195,7 @@ namespace ProntoMVC.Controllers
                                 a.IdDetallePedido.ToString(), 
                                 a.IdArticulo.ToString(), 
                                 a.IdUnidad.ToString(),
-                                a.NumeroItem.ToString(), 
-                                "",
-                                a.Cantidad.ToString(),
-                                a.Abreviatura,
-                                a.Codigo,
-                                "", // descripcionfalsa
-                                a.Descripcion,
-                                a.Precio.ToString(), 
-                                a.PorcentajeBonificacion.ToString(), 
-                                (a.PorcentajeBonificacion * a.Precio * a.Cantidad).ToString()  ,  // a.ImporteBonificacion.ToString(), 
-                                a.PorcentajeIVA.ToString(), 
-                                a.ImporteIva.ToString(), 
-                                a.ImporteTotalItem.ToString(), 
-                                a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.FechaNecesidad.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Observaciones,
-                                a.NumeroRequerimiento.ToString(),
-                                a.NumeroItemRM.ToString(),
-
-                                a.ArchivoAdjunto1,
-                                a.IdDetalleRequerimiento.NullSafeToString(),
-                                a.IdDetalleAcopios.NullSafeToString(),
-                                a.OrigenDescripcion.NullSafeToString(),
-                                a.IdCentroCosto.NullSafeToString()
-
+                            
                             
                             }
                         }).ToArray()
@@ -2250,36 +2203,14 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual JsonResult DetPedidosSinFormato(int IdPedido)
-        {
-            var Det = db.DetallePedidos.Where(p => p.IdPedido == IdPedido).AsQueryable();
 
-            var data = (from a in Det
-                        select new
-                        {
-                            a.IdDetallePedido,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdDetalleRequerimiento,
-                            a.NumeroItem,
-                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            a.Cantidad,
-                            a.Unidad.Abreviatura,
-                            a.Articulo.Codigo,
-                            a.Articulo.Descripcion,
-                            a.FechaEntrega,
-                            a.Observaciones,
-                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                            a.Adjunto,
-                            a.ArchivoAdjunto1,
-                            a.ArchivoAdjunto2,
-                            a.ArchivoAdjunto3,
-                            a.Precio
-                        }).OrderBy(p => p.NumeroItem).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
 
+
+
+
+
+
+   
         [HttpPost]
         public void EditGridData(int? IdRequerimiento, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
         {
