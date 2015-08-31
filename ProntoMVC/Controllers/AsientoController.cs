@@ -2172,10 +2172,10 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdDetalleAsiento,
                             a.IdCuenta,
-
+                            a.Item
                       
 
-                        }).OrderBy(p => p.NumeroItem)
+                        }).OrderBy(p => p.Item)
 //
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 
@@ -2189,12 +2189,12 @@ namespace ProntoMVC.Controllers
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdDetallePedido.ToString(),
+                            id = a.IdDetalleAsiento.ToString(),
                             cell = new string[] { 
                                 string.Empty, 
-                                a.IdDetallePedido.ToString(), 
-                                a.IdArticulo.ToString(), 
-                                a.IdUnidad.ToString(),
+                                a.IdDetalleAsiento.ToString(), 
+                                a.IdCuenta.ToString(), 
+                                a.Item.ToString(),
                             
                             
                             }
