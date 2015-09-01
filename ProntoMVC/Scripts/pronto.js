@@ -885,10 +885,17 @@ $(function () {
 
 
 function cargarTopPositionDelArbol() {
-    jQuery("#addtree").closest(".ui-jqgrid-bdiv").scrollTop($.cookie("scroll"))
+    //$.removeCookie('scroll');
+    if ($.cookie("scroll") !== null) {
+        jQuery("#addtree").closest(".ui-jqgrid-bdiv").scrollTop($.cookie("scroll"))
+    }
 }
 
 function guardarTopPositionDelArbol() {
+
+    //$.cookie("scroll", null);
+    //$.removeCookie('scroll');
+
     //I just had the same problem. I fixed it by always specifying the path when writing the cookie.
     // http://stackoverflow.com/questions/9326620/jquery-cookie-path
     $.cookie("scroll", jQuery("#addtree").closest(".ui-jqgrid-bdiv").scrollTop(), { path: '/' });
@@ -937,7 +944,7 @@ $(function () {
     // When a button is clicked...
     $(':submit').on("click", function () {
 
-        guardarTopPositionDelArbol();
+       // guardarTopPositionDelArbol();
 
     });
 
