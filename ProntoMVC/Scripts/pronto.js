@@ -19,8 +19,8 @@
 // formatter generico para columnas SI / NO
 
 
-jQuery.extend($.fn.fmatter , {
-    SiNoFormatter : function(cellvalue, options, rowdata) {
+jQuery.extend($.fn.fmatter, {
+    SiNoFormatter: function (cellvalue, options, rowdata) {
         switch (cellvalue) {
             case "True":
             case "SI":
@@ -35,8 +35,8 @@ jQuery.extend($.fn.fmatter , {
 
     }
 });
-jQuery.extend($.fn.fmatter.SiNoFormatter , {
-    unformat : function(cellvalue, options) {
+jQuery.extend($.fn.fmatter.SiNoFormatter, {
+    unformat: function (cellvalue, options) {
 
         switch (cellvalue) {
             case "True":
@@ -58,18 +58,18 @@ jQuery.extend($.fn.fmatter.SiNoFormatter , {
 
 // http://www.trirand.com/blog/?page_id=393/help/problems-with-custom-checkbox-formatter
 
-jQuery.extend($.fn.fmatter , {
-    mycheckbox : function(cellvalue, options, rowobject) {
+jQuery.extend($.fn.fmatter, {
+    mycheckbox: function (cellvalue, options, rowobject) {
         var checked = cellvalue == '2' ? "checked='checked' " : "";
         var disabled = cellvalue == '0' ? "disabled='disabled' " : "";
-      //  rtn = "<input type='checkbox' onclick="mychkclick('" + options.rowId + "','" + options.colModel.name + "');" " + checked + disabled + "value='"+ cellvalue+ "' />";
+        //  rtn = "<input type='checkbox' onclick="mychkclick('" + options.rowId + "','" + options.colModel.name + "');" " + checked + disabled + "value='"+ cellvalue+ "' />";
         return rtn;
     }
 });
 
-jQuery.extend($.fn.fmatter.mycheckbox , {
-    unformat : function(cellvalue, options, cellobject) {
-        var checked = $(cellobject).html().indexOf("checked",0) != -1 ? "2" : "1";
+jQuery.extend($.fn.fmatter.mycheckbox, {
+    unformat: function (cellvalue, options, cellobject) {
+        var checked = $(cellobject).html().indexOf("checked", 0) != -1 ? "2" : "1";
         return checked;
     }
 });
@@ -369,7 +369,7 @@ function searchBoxAncho() {
     searchDialog = $("#searchmodfbox_ListaDrag");
     searchDialog.css({ "width": "500px" });
 
-    
+
 
 
 }
@@ -377,7 +377,7 @@ function searchBoxAncho() {
 
 
 function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
-    
+
 
     nombregrilla = nombregrilla || "#Lista";
     var grid = jQuery(nombregrilla)
@@ -434,9 +434,9 @@ function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    
+
     if (!renglonVacio) {
-    //    alert('ssss');
+        //    alert('ssss');
         renglonVacio = {};
     }
 
@@ -809,12 +809,12 @@ $(function () {
                     merge = self.build([], self.push_counter(reverse_key), merge);
                 }
 
-                // fixed
+                    // fixed
                 else if (k.match(patterns.fixed)) {
                     merge = self.build([], k, merge);
                 }
 
-                // named
+                    // named
                 else if (k.match(patterns.named)) {
                     merge = self.build({}, k, merge);
                 }
@@ -881,7 +881,23 @@ $(function () {
 
 
 
+
+
+
+function cargarTopPositionDelArbol() {
+    jQuery("#addtree").closest(".ui-jqgrid-bdiv").scrollTop($.cookie("scroll"))
+}
+
+function guardarTopPositionDelArbol() {
+    //I just had the same problem. I fixed it by always specifying the path when writing the cookie.
+    // http://stackoverflow.com/questions/9326620/jquery-cookie-path
+    $.cookie("scroll", jQuery("#addtree").closest(".ui-jqgrid-bdiv").scrollTop(), { path: '/' });
+    //console.error($.cookie("scroll"));
+
+}
+
 $(function () {
+    //config.defaults = { path: '/' };
 
     // http: //stackoverflow.com/questions/875225/resize-jqgrid-when-browser-is-resized
     // http: //stackoverflow.com/questions/7745009/in-jqgrid-is-it-possible-to-resize-columns-to-fit-the-table-width-original-wid
@@ -899,12 +915,62 @@ $(function () {
 
     }).trigger('resize');
 
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    //http://stackoverflow.com/questions/18927301/using-jquery-to-store-scroll-position-works-well-how-do-i-allow-only-for-refre
+    // If cookie is set, scroll to the position saved in the cookie.
+    if ($.cookie("scroll") !== null) {
+
+
+        cargarTopPositionDelArbol();
+
+        //alert('algo');
+    }
+    else {
+
+        //alert('nada')
+    }
+
+    // When a button is clicked...
+    $(':submit').on("click", function () {
+
+        guardarTopPositionDelArbol();
+
+    });
+
+    window.onbeforeunload = function (e) {
+        guardarTopPositionDelArbol();
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
     function resizeLista() {
         var myGrid = $("#Lista");
         width = myGrid.jqGrid('getGridParam', 'width'); // get current width
         myGrid.jqGrid('setGridWidth', width, true);
 
     }
+
+
+
+
+
+
+
 });
 
 
