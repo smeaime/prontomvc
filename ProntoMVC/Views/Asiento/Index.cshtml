@@ -1,70 +1,70 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Pedido>
+﻿@model IEnumerable<ProntoMVC.Data.Models.Asiento>
 @{
     ViewBag.Title = "Asientos";
 }
 <div>
-    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
+</div>
 <div>
-    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<style>
-    /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
-    
-    
-    .ui-widget-content
-    {
-        border: 0px solid #aaaaaa;
-    }
-    
-    .ui-jqgrid
-    {
-        border-right-width: 0px;
-        border-left-width: 0px;
-    }
-    /* If you need to remove all grid's borders you can use
+    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]>
+</div>
+@if (false)
+{
+    <style>
+        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
 
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-right-color: #E4E4E4;
-    }
-    
-    
-    .ui-jqgrid tr.footrow-ltr td
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    
-    /*To remove horizontal border between the rows you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-bottom-color: #E4E4E4;
-    }
-    /*To remove vertical borders between the column headers you can use */
-    
-    th.ui-th-column
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    /* or alternatively (without the usage of !important) */
-    
-    .ui-jqgrid-labels .ui-th-column
-    {
-        border-right-color: #E4E4E4;
-    }
-</style>
-<br />
-<div class="row-fluid">
-    <div class="span12 lightblue">
-        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-            Nuevo
-        </button>
-        <div class="span4">
-            <div class="input-prepend input-append">
-                @* <div class="btn-group ">
+
+
+        .ui-widget-content {
+            border: 0px solid #aaaaaa;
+        }
+
+        .ui-jqgrid {
+            border-right-width: 0px;
+            border-left-width: 0px;
+        }
+            /* If you need to remove all grid's borders you can use
+
+        .ui-jqgrid { border-width: 0px; }
+        If you want additionally remove vertical border between the cells in the grid you can use */
+
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-right-color: #E4E4E4;
+            }
+
+
+            .ui-jqgrid tr.footrow-ltr td {
+                border-right-color: #E4E4E4 !important;
+            }
+
+            /*To remove horizontal border between the rows you can use */
+
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-bottom-color: #E4E4E4;
+            }
+        /*To remove vertical borders between the column headers you can use */
+
+        th.ui-th-column {
+            border-right-color: #E4E4E4 !important;
+        }
+        /* or alternatively (without the usage of !important) */
+
+        .ui-jqgrid-labels .ui-th-column {
+            border-right-color: #E4E4E4;
+        }
+    </style>
+}<br />
+
+<div style="padding-left: 15px; padding-right: 15px;">
+
+    <div class="row-fluid">
+        <div class="span12 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
+                Nuevo
+            </button>
+            <div class="span4">
+                <div class="input-prepend input-append">
+                    @* <div class="btn-group ">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 En todo <span class="caret"></span>
                             </button>
@@ -75,18 +75,19 @@ If you want additionally remove vertical border between the cells in the grid yo
                                 Número
                             </ul>
                         </div>*@
-                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                @*<div>
+                    <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                    @*<div>
                             <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
                         <div>
                             <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
                         <div>
                             <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>*@
-                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                    avanzada</button>
+                    <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                        avanzada
+                    </button>
+                </div>
             </div>
-        </div>
-        @*   <div class="btn-group  pull-right ">
+            @*   <div class="btn-group  pull-right ">
                     <button onclick="  " class="btn">
                         <
                     </button>
@@ -94,17 +95,17 @@ If you want additionally remove vertical border between the cells in the grid yo
                         >
                     </button>
                 </div>*@
-        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
         {
-                                               
+
             <button onclick="  " class="btn span1">
                 Excel
             </button>
         }
-    </div>
-    <br />
-    <br />
-    <script>
+        </div>
+        <br />
+        <br />
+        <script>
 
 
 
@@ -126,13 +127,13 @@ If you want additionally remove vertical border between the cells in the grid yo
 
             //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
         });
-    </script>
+        </script>
+    </div>
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
+    </div>
+    @*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
 </div>
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;">
-</table>
-<div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
-</div>
-@*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
 <script type="text/javascript">
     $(document).ready(function () {
         var lastSelectedId;
@@ -181,7 +182,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                 }
             },
             ondblClickRow: function (idrow) {
-                window.location.href = ROOT + 'Pedido/Edit/' + idrow;
+                window.location.href = ROOT + 'Asiento/Edit/' + idrow;
 
 
                 // $("#edtData").click();

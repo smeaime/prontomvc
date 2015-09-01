@@ -182,10 +182,7 @@ jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defa
 
 
 
-    jQuery("#addtree").jqGrid('setGridHeight', 600);
-
-
-
+   
 
  ///////////////////////////////////////////
  /////////////////////////////////////

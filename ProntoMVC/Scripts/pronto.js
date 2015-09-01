@@ -14,6 +14,83 @@
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// formatter generico para columnas SI / NO
+
+
+jQuery.extend($.fn.fmatter , {
+    SiNoFormatter : function(cellvalue, options, rowdata) {
+        switch (cellvalue) {
+            case "True":
+            case "SI":
+                return "true";
+
+            case "False":
+            case "NO":
+                return "false";
+            default:
+                return "false";
+        }
+
+    }
+});
+jQuery.extend($.fn.fmatter.SiNoFormatter , {
+    unformat : function(cellvalue, options) {
+
+        switch (cellvalue) {
+            case "True":
+            case "SI":
+                return "SI";
+
+            case "False":
+            case "NO":
+                return "NO";
+            default:
+                return "NO";
+        }
+
+
+    }
+});
+
+
+
+// http://www.trirand.com/blog/?page_id=393/help/problems-with-custom-checkbox-formatter
+
+jQuery.extend($.fn.fmatter , {
+    mycheckbox : function(cellvalue, options, rowobject) {
+        var checked = cellvalue == '2' ? "checked='checked' " : "";
+        var disabled = cellvalue == '0' ? "disabled='disabled' " : "";
+      //  rtn = "<input type='checkbox' onclick="mychkclick('" + options.rowId + "','" + options.colModel.name + "');" " + checked + disabled + "value='"+ cellvalue+ "' />";
+        return rtn;
+    }
+});
+
+jQuery.extend($.fn.fmatter.mycheckbox , {
+    unformat : function(cellvalue, options, cellobject) {
+        var checked = $(cellobject).html().indexOf("checked",0) != -1 ? "2" : "1";
+        return checked;
+    }
+});
+
+function mychkclick(rowid, colid) {
+    val = $("#list4").getCell(rowid, colid);
+    newValue = "1";
+    if (val == "1") newValue = "2";
+    $("#list4").setCell(rowid, colid, newValue);
+    val = $("#list4").getCell(rowid, colid);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 function initDateEdit(elem) {
     setTimeout(function () {
@@ -814,6 +891,11 @@ $(function () {
         //$("#Lista").setGridWidth($(window).width());
         $("#Lista").jqGrid('setGridWidth', $(window).width());
         // $("#Lista").jqGrid('setGridHeight', $(window).height()-250); // me mata en las grillas de detalle
+
+        //jQuery("#addtree").jqGrid('setGridHeight', 600);
+        $("#addtree").jqGrid('setGridHeight', $(window).height() - 150);
+
+
 
     }).trigger('resize');
 

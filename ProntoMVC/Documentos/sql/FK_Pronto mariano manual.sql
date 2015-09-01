@@ -1480,7 +1480,52 @@ go
 
 
 
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+alter table  DetalleAsientos
+		ADD CONSTRAINT FK_DetalleAsientos_IdCuenta
+		FOREIGN KEY (IdCuenta) REFERENCES Cuentas(IdCuenta)
+go
+
+
+
+alter table  DetalleAsientos
+		ADD CONSTRAINT FK_DetalleAsientos_IdObra
+		FOREIGN KEY (IdObra) REFERENCES Obras(IdObra)
+go
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+--Corrector de candidata a fk
+---------------------------------------------------------------------------------------
+select distinct Obras.IdObra,DetalleAsientos.IdObra
+from DetalleAsientos
+left join Obras on DetalleAsientos.IdObra=Obras.IdObra
+where Obras.IdObra is null
+	and not DetalleAsientos.IdObra is null
+--------------------------------------------------------------------------------------
+update DetalleAsientos
+set DetalleAsientos.IdObra=null  
+from DetalleAsientos
+left join Obras on Obras.IdObra=DetalleAsientos.IdObra
+where Obras.IdObra is null
+	and not DetalleAsientos.IdObra is null
+go	
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
+
+alter table  DetalleAsientos
+		ADD CONSTRAINT FK_DetalleAsientos_IdMoneda
+		FOREIGN KEY (IdMoneda) REFERENCES Monedas(IdMoneda)
+go
+
+alter table  DetalleAsientos
+		ADD CONSTRAINT FK_DetalleAsientos_IdMonedaDestino
+		FOREIGN KEY (IdMonedaDestino) REFERENCES Monedas(IdMoneda)
+go
 
 

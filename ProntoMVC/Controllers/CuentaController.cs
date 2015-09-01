@@ -772,6 +772,19 @@ namespace ProntoMVC.Controllers
             else
             {
                 o = db.Cuentas.SingleOrDefault(x => x.IdCuenta == id);
+                try
+                {
+                    ViewBag.Jerarquia1 = o.Jerarquia.Split('.')[0];
+                    ViewBag.Jerarquia2 = o.Jerarquia.Split('.')[1];
+                    ViewBag.Jerarquia3 = o.Jerarquia.Split('.')[2];
+                    ViewBag.Jerarquia4 = o.Jerarquia.Split('.')[3];
+                    ViewBag.Jerarquia5 = o.Jerarquia.Split('.')[4];
+                }
+                catch (Exception)
+                {
+                    
+                    //throw;
+                }
             }
             CargarViewBag(o);
             return View(o);
