@@ -9,7 +9,7 @@
 
 
 
-    
+
 
     @*para centrar verticalmente las observaciones *@
     <style type="text/css">
@@ -79,7 +79,7 @@
                 margin-right: 0px;
             }
         </style>
- 
+
         <style>
             /*  http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only */
             tr.jqgrow > td.textInDiv > div {
@@ -112,7 +112,7 @@
                                 Asiento @Html.DisplayFor(model => model.NumeroAsiento, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })
                             </span>
                         </div>
-              
+
                     </div>
 
                     <div class="row-fluid">
@@ -153,27 +153,47 @@
                         <input type="button" class="btn btn-small" id="delData" value="Borrar" />
 
                     </div>
-                        <br />
+                    <br />
 
-                        <div class="row-fluid">
-                            <div class="span8 lightblue">
-                                @Html.LabelFor(model => model.FechaIngreso, "Asiento de apertura del ejercicio")
-                                @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
-                                @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
-                            </div>
-                        </div>
-
-                        <div class="row-fluid">
-
-
-                            @Html.LabelFor(model => model.AsignarAPresupuestoObra, "Agregar a presupuesto de obra")
+                    <div class="row-fluid">
+                        <div class="span8 lightblue">
+                            @Html.LabelFor(model => model.FechaIngreso, "Asiento de apertura del ejercicio")
                             @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
                             @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
                         </div>
-
-
-
                     </div>
+
+                    <div class="row-fluid">
+
+
+                        @Html.LabelFor(model => model.AsignarAPresupuestoObra, "Agregar a presupuesto de obra")
+                        @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
+                        @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
+                    </div>
+
+
+                    <div class="row-fluid">
+                        @Html.Label("Diferencia")
+                        @Html.TextBox("Diferencia")
+
+                        <script>
+                            function calculateTotal() {
+                                var debe = $('#Lista').jqGrid('getCol', 'Debe', false, 'sum')
+                                var haber= $('#Lista').jqGrid('getCol', 'Haber', false, 'sum')
+
+                                $("#Lista").jqGrid('footerData', 'set', {
+                                    Obra: 'TOTALES', 
+                                    Debe: debe.toFixed(4),
+                                    Haber: haber.toFixed(4),
+                                });
+
+                                $("#Diferencia").val(debe-haber);
+                            }
+                        </script>
+                    </div>
+
+
+                </div>
 
 
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
@@ -285,42 +305,42 @@
 
 
                 url: ROOT + 'Asiento/DetAsientos/', // no puedo usar el modelo para cargar la grilla?????
-                postData: { 'Id': function () { return $("#IdAsiento").val(); } }, //esto es el parametro con que se llama a la url
+                postData: { 'IdAsiento': function () { return $("#IdAsiento").val(); } }, //esto es el parametro con que se llama a la url
                 //editurl: ROOT + 'Asiento/EditGridData/', // "clientArray",
                 /////////
                 datatype: 'json',
                 mtype: 'POST',
                 //////////////////////////////////////////////
                 //////////////////////////////////////////////
-              //////////////////////////////////////////////
+                //////////////////////////////////////////////
 
                 colNames: ['#',
 
                     'IdDetalleAsiento',
    'IdCuenta', 'Cuenta',
 
-   //'cód.',
+   'cód.',
 
-//    'Detalle de cuenta', 'Obra', 'Debe', 'Haber', 
+    'Detalle de cuenta', 'Obra', 'Debe', 'Haber',
 
-//    'registrar en analitico',
-//    'Moneda destino', 'Cotiz. moneda destino', 'importe mon destino',
+    'registrar en analitico',
+    'Moneda destino', 'Cotiz. moneda destino', 'importe mon destino',
 
-//    'enviar a libro',
-//'pase IVA',
-//'nro comprobante',
-//'porcentaje de iva'
+    'enviar a libro',
+'pase IVA',
+'nro comprobante',
+'porcentaje de iva'
                 ],
                 colModel: [
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: 'IdDetalleAsiento', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 200, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
-                                @*{ name: '', index: '', align: 'center', width: 50, hidden: true, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
+                                { name: '', index: '', align: 'left', width: 50, hidden: true, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
-                                { name: 'Cuenta', index: 'Cuenta', align: 'center', width: 250, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+                                { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 300, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
                                 {
-                                    name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: false, search: true, hidden: false,
+                                    name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: true, search: true, hidden: false,
                                     searchoptions: {
                                         sopt: ['cn'],
                                         dataInit: function (elem) {
@@ -364,21 +384,21 @@
 
                                 },
 
-                                { name: 'Debe', index: 'Debe', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'Haber', index: 'Haber', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'Debe', index: 'Debe', align: 'right', width: 100, editable: true, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'Haber', index: 'Haber', align: 'right', width: 100, editable: true, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
-                                { name: 'analitico', index: '', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+                                { name: 'analitico', index: '', align: 'left', width: 200, editable: true, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
 
 
-                                { name: 'Moneda', index: 'Cumplido', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: true },
-                                { name: 'Cotiz', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
-                                { name: 'importe', index: 'Entregado', align: 'center', width: 50, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+                                { name: 'Moneda', index: 'Cumplido', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: true },
+                                { name: 'Cotiz', index: 'Recepcionado', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'importe', index: 'Entregado', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
-                                { name: 'enviar', index: 'NumeroObra', align: 'left', width: 85, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
-                                { name: 'pase', index: 'Pedidos', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
-                                { name: 'nro', index: 'Comparativas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                                { name: 'porcentaje', index: 'Pedidos', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },*@
+                                { name: 'enviar', index: 'NumeroObra', align: 'left', width: 85, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'pase', index: 'Pedidos', align: 'left', width: 200, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'nro', index: 'Comparativas', align: 'left', width: 200, editable: true, editoptions: {}, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'porcentaje', index: 'Pedidos', align: 'left', width: 200, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
 
@@ -389,39 +409,42 @@
                 //////////////////////////////////////////////
                 //////////////////////////////////////////////
 
-                //onSelectRow: function (id) {
-                //    if (id && id !== lastSelectedId) {
-                //        if (typeof lastSelectedId !== "undefined") {
-                //            grid.jqGrid('restoreRow', lastSelectedId);
-                //        }
-                //        lastSelectedId = id;
-                //        calculateTotal();
-                //    }
-                //},
+                onSelectRow: function (id) {
+                    if (id && id !== lastSelectedId) {
+                        if (typeof lastSelectedId !== "undefined") {
+                            grid.jqGrid('restoreRow', lastSelectedId);
+                        }
+                        lastSelectedId = id;
+                        calculateTotal();
+                    }
+                },
 
-                //beforeShowForm: function (form) {
-                //    // "editmodlist" //http://stackoverflow.com/questions/3967488/how-to-center-jqgrid-popup-modal-window
-                //    var dlgDiv = $("#editmod" + grid[0].id);
-                //    var parentDiv = dlgDiv.parent(); // div#gbox_list
-                //    var dlgWidth = dlgDiv.width();
-                //    var parentWidth = parentDiv.width();
-                //    var dlgHeight = dlgDiv.height();
-                //    var parentHeight = parentDiv.height();
-                //    // TODO: change parentWidth and parentHeight in case of the grid
-                //    //       is larger as the browser window
-                //    dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
-                //    dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
-                //},
+                beforeShowForm: function (form) {
+                    // "editmodlist" //http://stackoverflow.com/questions/3967488/how-to-center-jqgrid-popup-modal-window
+                    var dlgDiv = $("#editmod" + grid[0].id);
+                    var parentDiv = dlgDiv.parent(); // div#gbox_list
+                    var dlgWidth = dlgDiv.width();
+                    var parentWidth = parentDiv.width();
+                    var dlgHeight = dlgDiv.height();
+                    var parentHeight = parentDiv.height();
+                    // TODO: change parentWidth and parentHeight in case of the grid
+                    //       is larger as the browser window
+                    dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
+                    dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
+                },
 
 
 
 
                 pager: $('#ListaPager'),
-                rowNum: 100,
-                rowList: [10, 20, 50, 100],
+                //rowNum: 100,
+                //rowList: [10, 20, 50, 100],
                 //sortname: 'NumeroItem',
                 //sortorder: 'asc',
-                viewrecords: true,
+                viewrecords: false,
+                pgbuttons: false,
+                pgtext: "",
+                pginput: false,
 
                 ///////////////////////////////
                 width: 'auto', // 'auto',
@@ -434,6 +457,7 @@
                 footerrow: true,
                 userDataOnFooter: true
              , multiselect: true
+
 
 
 
@@ -615,7 +639,7 @@
 
 
 
-        
+
 
 
 
@@ -864,12 +888,12 @@
         function CopiarCuenta(acceptId, ui) {
 
 
-           // jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+            // jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
             // sacarDeEditMode();
 
 
-           // GrabarGrillaLocal()
+            // GrabarGrillaLocal()
 
 
 
@@ -968,6 +992,9 @@
                 beforeInitData: function () {
                     inEdit = false;
                 },
+                afterComplete: function (response, postdata) {
+                    calculateTotal();
+                },
                 onInitializeForm: function (form) {
                     //$('#IdDetalleAsiento', form).val(0);
                 }
@@ -989,8 +1016,11 @@
                     var parentWidth = parentDiv.width();
                     var dlgHeight = dlgDiv.height();
                     var parentHeight = parentDiv.height();
-                    dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
-                    dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                    dlgDiv[0].style.top = 100 //Math.round((parentHeight-dlgHeight)/2) + "px";
+                    dlgDiv[0].style.left = 200 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                },
+                afterComplete: function (response, postdata) {
+                    calculateTotal();
                 },
                 beforeInitData: function () {
                     inEdit = true;
@@ -1004,8 +1034,9 @@
             var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
             if (gr != null) {
                 //jQuery("#Lista").jqGrid('setRowData',gr,{Eliminado:"true"});
-                //$("#"+gr).hide();  
+                //$("#"+gr).hide();
                 jQuery("#Lista").jqGrid('delGridRow', gr, { caption: "Borrar", msg: "Elimina el registro seleccionado?", bSubmit: "Borrar", bCancel: "Cancelar", width: 800, closeOnEscape: true, reloadAfterSubmit: true });
+                calculateTotal();
             }
             else alert("Debe seleccionar un item!");
         });
