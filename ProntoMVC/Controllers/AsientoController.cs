@@ -13,7 +13,8 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Reflection;
-using ProntoMVC.Data.Models; using ProntoMVC.Models;
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Web.Security;
@@ -33,7 +34,7 @@ using System.IO;
 namespace ProntoMVC.Controllers
 {
 
- //   [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
+    //   [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
     public partial class AsientoController : ProntoBaseController
     {
         public virtual ViewResult Index()
@@ -780,16 +781,16 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                string erar = "";
+                string erar = "", w = "";
 
 
-                //if (!Validar(Asiento, ref erar))
-                //{
-                //    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                //    List<string> errors = new List<string>();
-                //    errors.Add(erar);
-                //    return Json(errors);
-                //}
+                if (!Validar(Asiento, ref erar, ref w))
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    List<string> errors = new List<string>();
+                    errors.Add(erar);
+                    return Json(errors);
+                }
 
 
 
@@ -865,7 +866,7 @@ namespace ProntoMVC.Controllers
         }
 
 
- 
+
         private void ActualizacionesVariasPorComprobante(Pedido o)
         {
             // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11061
@@ -1280,7 +1281,7 @@ namespace ProntoMVC.Controllers
         }
 
 
-        private bool Validar(ProntoMVC.Data.Models.Pedido o, ref string sErrorMsg, ref string sWarningMsg)
+        private bool Validar(ProntoMVC.Data.Models.Asiento o, ref string sErrorMsg, ref string sWarningMsg)
         {
             // una opcion es extender el modelo autogenerado, para ensoquetar ahí las validaciones
             // si no, podemos usar una funcion como esta, y devolver los  errores de dos maneras:
@@ -1296,90 +1297,15 @@ namespace ProntoMVC.Controllers
 
 
 
-
-            List<int?> duplicates = o.DetallePedidos.Where(s => (s.IdDetalleRequerimiento ?? 0) > 0).GroupBy(s => s.IdDetalleRequerimiento)
-                         .Where(g => g.Count() > 1)
-                         .Select(g => g.Key)
-                         .ToList();
-
-
-            if (!HayCotizacionDolarDeHoy())
-            {
-
-                sErrorMsg += "\n" + " No hay cotización de dólar de hoy";
-
-            }
-
-            if (duplicates.Count > 0)
-            {
-                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-
-                foreach (int? i in duplicates)
-                {
-                    List<DetallePedido> q = o.DetallePedidos.Where(x => x.IdDetalleRequerimiento == i).Select(x => x).Skip(1).ToList();
-                    foreach (DetallePedido x in q)
-                    {
-
-                        // tacharlo de la grilla, no eliminarlo de pantalla
-                        // tacharlo de la grilla, no eliminarlo de pantalla
-                        string nombre = x.NumeroItem + " El item " + x.NumeroItem + "  (" + db.Articulos.Find(x.IdArticulo).Descripcion + ") ";
-                        sErrorMsg += "\n" + nombre + " usa un item de requerimiento que ya se está usando ";  // tacharlo de la grilla, no eliminarlo de pantalla
-                        // tacharlo de la grilla, no eliminarlo de pantalla
-                        // tacharlo de la grilla, no eliminarlo de pantalla
-
-                    }
+            //if ((o.IdComprador ?? 0) <= 0)
+            //{
+            //    // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+            //    sErrorMsg += "\n" + "Falta el comprador";
+            //    // return false;
+            //}
 
 
-                }
-
-                // verificar tambien si el  item ya se usa enum otro peddido
-                //sss
-
-                // return false;
-            }
-
-            if (!PuedeEditar(enumNodos.Asientos)) sErrorMsg += "\n" + "No tiene permisos de edición";
-
-
-            if (o.IdPedido <= 0)
-            {
-                //  string connectionString = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
-                //  o.NumeroFactura = (int)Pronto.ERP.Bll.FacturaManager.ProximoNumeroFacturaPorIdCodigoIvaYNumeroDePuntoVenta(connectionString,o.IdCodigoIva ?? 0,o.PuntoVenta ?? 0);
-            }
-
-            if ((o.IdProveedor ?? 0) <= 0)
-            {
-                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-                sErrorMsg += "\n" + "Falta el proveedor";
-                // return false;
-            }
-            if ((o.IdComprador ?? 0) <= 0)
-            {
-                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-                sErrorMsg += "\n" + "Falta el comprador";
-                // return false;
-            }
-
-            if ((o.CotizacionDolar ?? 0) <= 0)
-            {
-                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-                sErrorMsg += "\n" + "Falta la cotización";
-                // return false;
-            }
-
-
-            if ((o.IdMoneda ?? 0) <= 0)
-            {
-                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-                sErrorMsg += "\n" + "Falta la moneda";
-                // return false;
-            }
-            //if (o.NumeroFactura == null) sErrorMsg +="\n"+ "\n" + "Falta el número de factura";
-            //// if (o.IdPuntoVenta== null) sErrorMsg +="\n"+ "\n" + "Falta el punto de venta";
-            //if (o.IdCodigoIva == null) sErrorMsg +="\n"+ "\n" + "Falta el codigo de IVA";
-            //if (o.IdCondicionVenta == null) sErrorMsg +="\n"+ "\n" + "Falta la condicion venta";
-            //if (o.IdListaPrecios == null) sErrorMsg +="\n"+ "\n" + "Falta la lista de precios";
-            if (o.DetallePedidos.Count <= 0) sErrorMsg += "\n" + "El Pedido no tiene items";
+            if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El Asiento no tiene items";
 
             //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
 
@@ -1395,374 +1321,36 @@ namespace ProntoMVC.Controllers
             int mIdTipoCuenta = 0;
 
 
+            decimal debe = 0, haber = 0;
 
-
-
-            var mvarMontoMinimo = BuscarClaveINI("Monto minimo para registrar pedido");
-
-            //if (mvarTotalPedido * Val(txtCotizacionMoneda.Text) < Val(mvarMontoMinimo)) {
-            //    sErrorMsg +="\n"+ "El importe total del pedido debe ser mayor a " & Format(Val(mvarMontoMinimo), "#,##0.00");
-            //    return;
-            //   }
-
-            mvarControlFechaNecesidad = BuscarClaveINI("Quitar control fecha necesidad en pedidos");
-            mAuxS5 = BuscarClaveINI("Deshabilitar control de cuentas de obras");
-
-            foreach (ProntoMVC.Data.Models.DetallePedido x in o.DetallePedidos)
+            foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
             {
 
+                string nombre = x.Item + " El item " + x.Item + "  (" + x.Cuenta.Descripcion + ") ";
 
-                //x.Adjunto = x.Adjunto ?? "NO";
-                //if (x.FechaEntrega < o.FechaRequerimiento) sErrorMsg +="\n"+ "\n" + "La fecha de entrega de " + db.Articulos.Find(x.IdArticulo).Descripcion + " es anterior a la del requerimiento";
+                debe += x.Debe ?? 0;
+                haber += x.Haber ?? 0;
 
-                string nombre = "";
-                try
+
+                if (false && !PorObra)
                 {
-
-                    nombre = x.NumeroItem + " El item " + x.NumeroItem + "  (" + db.Articulos.Find(x.IdArticulo).Descripcion + ") ";
-
-                }
-                catch (Exception ex)
-                {
-                    ErrHandler.WriteError(ex);
-                    nombre = x.NumeroItem + " El item " + x.NumeroItem;
-                    sErrorMsg += "\n " + nombre + " no tiene un artículo válido";
-
-                }
-
-                if ((x.Cantidad ?? 0) <= 0) sErrorMsg += "\n" + nombre + " no tiene una cantidad válida";
-
-                //if (OrigenDescripcionDefault == "SI" && (x.Observaciones ?? "") != "") x.OrigenDescripcion = 3;
-                if (x.ArchivoAdjunto == null && x.ArchivoAdjunto1 == null) x.Adjunto = "NO";
-
-
-                if ((x.Precio ?? 0) <= 0 && o.IdPedidoAbierto == null)
-                {
-                    if (o.Aprobo != null)
-                    {
-                        sErrorMsg += "\n " + nombre + " no tiene precio unitario";
-                    }
-                    else
-                    {
-                        // solo un aviso
-                        sWarningMsg += "\n " + nombre + " no tiene precio unitario. Cuando libere el pedido deberá ingresarse.";
-                    }
+                    sErrorMsg += "\n" + nombre + " no tiene indicado centro de costo";
                     //break;
                 }
 
-                if (x.IdControlCalidad == null)
-                {
-                    // sErrorMsg +="\n"+ "Hay items de pedido que no tienen indicado control de calidad";
-                    //break;
-                }
-
-                if (x.FechaEntrega < o.FechaPedido)
-                {
-                    sErrorMsg += "\n " + nombre + " tiene una fecha de entrega anterior a la del pedido";
-                    //break;
-                }
-
-                if (x.FechaNecesidad != null && x.FechaNecesidad < o.FechaPedido && mvarControlFechaNecesidad != "SI")
-                {
-                    sErrorMsg += "\n " + nombre + " tiene una fecha de necesidad anterior a la del pedido";
-                    //break;
-                }
-
-                if (x.IdCentroCosto == null)
-                {
-                    PorObra = false;
-                    mTrasabilidad_RM_LA = false;
-
-                    if (x.IdDetalleAcopios != null || x.IdDetalleLMateriales != null)
-                    {
-                        PorObra = true;
-                    }
-
-                    if (x.IdDetalleRequerimiento != null)
-                    {
-
-                        var oRsx = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Requerimientos_TX_DatosObra, x.IdDetalleRequerimiento);
-
-                        if (oRsx.Rows.Count > 0)
-                        {
-                            if (oRsx.Rows[0]["Obra"] != null) PorObra = true;
-                            mIdObra = (int)oRsx.Rows[0]["IdObra"];
-                        }
-
-                    }
-
-
-                    if (mIdObra > 0 && mAuxS5 != "SI")
-                    {
-                        var oRsx = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Articulos_TX_DatosConCuenta, x.IdArticulo);
-
-                        mIdTipoCuenta = 0;
-                        //no anda, arreglar    if (oRsx.Rows.Count > 0) mIdTipoCuenta = (int)oRsx.Rows[0]["IdTipoCuentaCompras"];
-
-                        if (mIdTipoCuenta == 4)
-                        {
-                            var oRs = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Cuentas_TX_PorObraCuentaMadre, mIdObra, 0, x.IdArticulo, o.FechaPedido);
-                            if (oRs.Rows.Count == 0)
-                            {
-                                sErrorMsg += "\n" + nombre + " no tiene una cuenta contable para la obra-cuenta de compras";
-                                //break;
-                            }
-
-                        }
-                    }
-
-                    if (false && !PorObra)
-                    {
-                        sErrorMsg += "\n" + nombre + " no tiene indicado centro de costo";
-                        //break;
-                    }
-
-
-
-                    if (mExigirTrasabilidad_RMLA_PE && x.IdDetalleAcopios == null && x.IdDetalleRequerimiento == null)
-                    {
-                        sErrorMsg += "\n" + nombre + " no tiene trazabilidad a RM o LA";
-                        //break;
-                    }
-
-                }
+                if (x.Debe > 0 && x.Haber > 0) sErrorMsg += "\n" + "El item debe tener indicado el debe o el haber";
+                if (x.Debe == 0 && x.Haber == 0) sErrorMsg += "\n" + "El item debe tener indicado el debe o el haber";
 
 
             }
 
-            if ((o.Aprobo ?? 0) > 0 && o.FechaAprobacion == null) o.FechaAprobacion = DateTime.Now;
-
-
-            if (db.Pedidos.Any(p => p.NumeroPedido == o.NumeroPedido && p.SubNumero == o.SubNumero && p.IdPedido != o.IdPedido && p.PedidoExterior == o.PedidoExterior))
-            {
-
-                sErrorMsg += "\n" + "Numero/Subnumero de pedido ya existente";
-            }
-
-
-
-
-
-            //         if Len(mvarErr) {
-            //            if mIdAprobo = 0 {
-            //               mvarErr = mvarErr & vbCrLf & "Cuando libere el pedido estos errores deberan estar corregidos"
-            //               MsgBox "Errores encontrados :" & vbCrLf & mvarErr, vbExclamation
-            //            Else
-            //               MsgBox "Errores encontrados :" & vbCrLf & mvarErr, vbExclamation
-            //               GoTo Salida
-            //            }
-            //         }
-
-
-            //if Not mNumeracionPorPuntoVenta {
-            //            if mvarId = -1 And mNumeracionAutomatica <> "SI" And txtNumeroPedido.Text = mNumeroPedidoOriginal {
-            //               Set oPar = oAp.Parametros.Item(1)
-            //               if Check2.Value = 0 {
-            //                  mNum = oPar.Registrox.ProximoNumeroPedido").Value
-            //               Else
-            //                  mNum = oPar.Registrox.ProximoNumeroPedidoExterior").Value
-            //               }
-            //               origen.Registrox.NumeroPedido").Value = mNum
-            //               mNumeroPedidoOriginal = mNum
-            //               Set oPar = Nothing
-            //            }
-
-            //            Set oRs = oAp.Pedidos.TraerFiltrado("_PorNumero", Array(Val(txtNumeroPedido.Text), Val(txtSubnumero.Text), -1, Check2.Value))
-            //            if oRs.RecordCount > 0 {
-            //               if mvarId < 0 Or (mvarId > 0 And oRs.Fields(0).Value <> mvarId) {
-            //                  oRs.Close
-            //                  Set oRs = Nothing
-            //                  mvarNumero = MsgBox("Numero/Subnumero de pedido ya existente" & vbCrLf & "Desea actualizar el numero ?", vbYesNo, "Numero de pedido")
-            //                  if mvarNumero = vbYes {
-            //                     Set oPar = oAp.Parametros.Item(1)
-            //                     if Check2.Value = 0 {
-            //                        mNum = oPar.Registrox.ProximoNumeroPedido").Value
-            //                     Else
-            //                        mNum = oPar.Registrox.ProximoNumeroPedidoExterior").Value
-            //                     }
-            //                     origen.Registrox.NumeroPedido").Value = mNum
-            //                     Set oPar = Nothing
-            //                  }
-            //                  GoTo Salida
-            //               }
-            //            }
-            //            oRs.Close
-            //            Set oRs = Nothing
-            //         Else
-            //            Set oRs = oAp.Pedidos.TraerFiltrado("_PorNumero", Array(Val(txtNumeroPedido.Text), Val(txtSubnumero.Text), dcfields(10).BoundText))
-            //            if oRs.RecordCount > 0 {
-            //               if mvarId < 0 Or (mvarId > 0 And oRs.Fields(0).Value <> mvarId) {
-            //                  oRs.Close
-            //                  Set oRs = Nothing
-            //                  MsgBox "Numero/Subnumero de pedido ya existente", vbExclamation
-            //                  GoTo Salida
-            //               }
-            //            }
-            //            oRs.Close
-            //         }
-
-            //         mAuxS6 = BuscarClaveINI("Exigir adjunto en pedidos con subcontrato")
-
-            //            if mAuxS6 = "SI" And Iif(IsNull(x.NumeroSubcontrato").Value), 0, x.NumeroSubcontrato").Value) > 0 {
-            //               mConAdjuntos = False
-            //               For i = 1 To 10
-            //                  if Len(Iif(IsNull(x.ArchivoAdjunto" & i).Value), "", x.ArchivoAdjunto" & i).Value)) > 0 {
-            //                     mConAdjuntos = True
-            //                     Exit For
-            //                  }
-            //               Next
-            //               if Not mConAdjuntos {
-            //                  MsgBox "Para un pedido - subcontrato es necesario ingresar como adjunto las condiciones generales", vbExclamation
-            //                  GoTo Salida
-            //               }
-            //            }
-
-            //            if Not IsNull(x.IdPedidoAbierto").Value) {
-            //               mTotalPedidoAbierto = 0
-            //               mvarTotalPedidos = 0
-            //               mFechaLimite = 0
-            //               Set oRs1 = Aplicacion.PedidosAbiertos.TraerFiltrado("_Control", x.IdPedidoAbierto").Value)
-            //               if oRs1.RecordCount > 0 {
-            //                  mTotalPedidoAbierto = Iif(IsNull(oRs1x.ImporteLimite").Value), 0, oRs1x.ImporteLimite").Value)
-            //                  mvarTotalPedidos = Iif(IsNull(oRs1x.SumaPedidos").Value), 0, oRs1x.SumaPedidos").Value)
-            //                  mFechaLimite = Iif(IsNull(oRs1x.FechaLimite").Value), 0, oRs1x.FechaLimite").Value)
-            //               }
-            //               oRs1.Close
-            //               if mvarId > 0 {
-            //                  Set oRs1 = Aplicacion.Pedidos.TraerFiltrado("_PorId", mvarId)
-            //                  if oRs1.RecordCount > 0 {
-            //                     mvarTotalPedidos = mvarTotalPedidos - Iif(IsNull(oRs1x.TotalPedido").Value), 0, oRs1x.TotalPedido").Value)
-            //                  }
-            //                  oRs1.Close
-            //               }
-            //               mvarTotalPedidos = mvarTotalPedidos + mvarTotalPedido
-            //               if mTotalPedidoAbierto > 0 And mTotalPedidoAbierto < mvarTotalPedidos {
-            //                  MsgBox "Se supero el importe limite del pedido abierto : " & mTotalPedidoAbierto, vbCritical
-            //                  GoTo Salida
-            //               }
-            //               if mFechaLimite > 0 And mFechaLimite < DTFields(0).Value {
-            //                  MsgBox "Se supero la fecha limite del pedido abierto : " & mFechaLimite, vbCritical
-            //                  GoTo Salida
-            //               }
-            //            }
-            //            if mNumeracionPorPuntoVenta {
-            //               x.PuntoVenta").Value = Val(dcfields(10).Text)
-            //            Else
-            //               if mvarId = -1 And mNumeracionAutomatica <> "SI" And txtNumeroPedido.Text = mNumeroPedidoOriginal {
-            //                  Set oPar = oAp.Parametros.Item(1)
-            //                  if Check2.Value = 0 {
-            //                     mNum = oPar.Registrox.ProximoNumeroPedido").Value
-            //                     x.NumeroPedido").Value = mNum
-            //                     oPar.Registrox.ProximoNumeroPedido").Value = mNum + 1
-            //                  Else
-            //                     mNum = oPar.Registrox.ProximoNumeroPedidoExterior").Value
-            //                     x.NumeroPedido").Value = mNum
-            //                     oPar.Registrox.ProximoNumeroPedidoExterior").Value = mNum + 1
-            //                  }
-            //                  oPar.Guardar
-            //                  Set oPar = Nothing
-            //               }
-            //            }
-            //            x.Bonificacion").Value = mvarBonificacion
-            //            if IsNumeric(txtPorcentajeBonificacion.Text) { x.PorcentajeBonificacion").Value = Val(txtPorcentajeBonificacion.Text)
-            //            x.TotalIva1").Value = mvarIVA1
-            //            'x.TotalIva2").Value = mvarIVA2
-            //            x.TotalPedido").Value = mvarTotalPedido
-            //            x.PorcentajeIva1").Value = mvarP_IVA1
-            //            x.PorcentajeIva2").Value = mvarP_IVA2
-            //            x.TipoCompra").Value = Combo1(0).ListIndex + 1
-            //            x.CotizacionMoneda").Value = txtCotizacionMoneda.Text
-            //            x.CotizacionDolar").Value = txtCotizacionDolar.Text
-            //            if Check2.Value = 1 {
-            //               x.PedidoExterior").Value = "SI"
-            //            Else
-            //               x.PedidoExterior").Value = "NO"
-            //            }
-            //            if Not IsNull(x.NumeroSubcontrato").Value) {
-            //               x.Subcontrato").Value = "SI"
-            //            Else
-            //               x.Subcontrato").Value = "NO"
-            //            }
-            //            if Check4.Value = 1 {
-            //               x.Transmitir_a_SAT").Value = "SI"
-            //            Else
-            //               x.Transmitir_a_SAT").Value = "NO"
-            //            }
-            //            x.EnviarEmail").Value = 1
-            //            if mvarId <= 0 { x.NumeracionAutomatica").Value = mNumeracionAutomatica
-            //            x.Observaciones").Value = rchObservaciones.Text
-            //            x.IdTipoCompraRM").Value = origen.IdTipoCompraRM
-
-
-
+            if (debe != haber) sErrorMsg += "\n" + "El asiento no suma cero (diferencia: " + (debe - haber).ToString() + ")";
 
 
 
             sErrorMsg = sErrorMsg.Replace("\n", "<br/>"); //     ,"&#13;&#10;"); // "<br/>");
             if (sErrorMsg != "") return false;
             return true;
-
-        }
-
-        // es GET, no POST, porque el Validar no hace modificaciones (idempotencia) // [HttpPost]
-        // -peeeeero surge un problema:
-        //  Why you didn't add type: "POST" in $.ajax? Other way, i think it does GET request, and data has to be given in one string like this: var=val&var2=val2
-        // y queda muy larga la url, así que vuelvo a ponerlo como POST
-        [HttpPost]
-        public virtual JsonResult ValidarJson(Pedido Pedido)
-        {
-            string ms = "";
-            string ws = "";
-            JsonResponse res = new JsonResponse();
-
-            try
-            {
-                Validar(Pedido, ref ms, ref ws);
-
-                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                Response.TrySkipIisCustomErrors = true;
-
-                res.Status = Status.Error;
-                res.Errors = GetModelStateErrorsAsString(this.ModelState);
-
-
-                string[] errs = ms.Replace("<br/>", "\n").Split('\n');
-
-                foreach (string s in errs)
-                {
-                    if (s == "") continue;
-                    res.Errors.Add(s);
-                }
-
-                res.Message = String.Join("<br/>", errs); // "Errores";
-                //http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
-                //  nonono esta claro que en el res.Errors debo agregar la lista de errores que genera el Validar, y lo
-                //que eso devuelva lo procesará javascript
-
-
-
-                // return  new JsonResult(new { Comprobante = Pedido, Errores = ms });
-                // return Json (  new { Comprobante = Pedido, Errores = ms }) ;
-
-            }
-            catch (Exception ex)
-            {
-
-                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                Response.TrySkipIisCustomErrors = true;
-
-                res.Status = Status.Error;
-                res.Errors = GetModelStateErrorsAsString(this.ModelState);
-                res.Message = "El Pedido es inválido. " + ex.ToString();
-                //                throw;
-            }
-
-
-            // res.Status = Status.Error;
-            // res.Errors = GetModelStateErrorsAsString(this.ModelState);
-            //// res.Message = "El Pedido es inválido. " + ex.ToString();
-
-            return Json(res);
 
         }
 
@@ -1942,7 +1530,7 @@ namespace ProntoMVC.Controllers
 
 
                         ).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -2109,7 +1697,7 @@ namespace ProntoMVC.Controllers
                             Contacto = a.Contacto,
                             Observaciones = a.Observaciones
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -2155,10 +1743,10 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public virtual ActionResult DetPedidos(string sidx, string sord, int? page, int? rows, int? IdPedido)
+        public virtual ActionResult DetAsientos(string sidx, string sord, int? page, int? rows, int? IdAsiento)
         {
-            int IdPedido1 = IdPedido ?? 0;
-            var DetEntidad = db.DetallePedidos.Where(p => p.IdPedido == IdPedido1).AsQueryable();
+            int IdAsiento1 = IdAsiento ?? 0;
+            var DetEntidad = db.DetalleAsientos.Where(p => p.IdAsiento == IdAsiento1).AsQueryable();
 
             int pageSize = rows ?? 20;
             int totalRecords = DetEntidad.Count();
@@ -2167,40 +1755,9 @@ namespace ProntoMVC.Controllers
 
 
 
-            var data = (from a in DetEntidad
-                        select new
-                        {
-                            a.IdDetallePedido,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.NumeroItem,
-                            // a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            a.Cantidad,
-                            a.Unidad.Abreviatura,
-                            a.Articulo.Codigo,
-                            a.Articulo.Descripcion,
-                            a.Precio,
-                            a.PorcentajeBonificacion,
-                            //a.boni.ImporteBonificacion,
-                            a.PorcentajeIVA,
-                            a.ImporteIva,
-                            a.ImporteTotalItem,
-                            a.FechaEntrega,
-                            a.FechaNecesidad,
-                            a.Observaciones,
-                            NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                            // NumeroRequerimiento = (a.IdDetalleRequerimiento > 0) ? db.Requerimientos.Find( db.DetalleRequerimientos.Find(a.IdDetalleRequerimiento).IdRequerimiento).NumeroRequerimiento.NullSafeToString() : "",
-                            // NumeroItemRM = (a.IdDetalleRequerimiento > 0) ? db.DetalleRequerimientos.Find(10).NumeroItem.NullSafeToString() : "",
-                            a.ArchivoAdjunto1,
-                            a.IdDetalleRequerimiento,
-                            a.IdDetalleAcopios,
-                            a.OrigenDescripcion,
-                            a.IdCentroCosto
-
-                        }).OrderBy(p => p.NumeroItem)
-//
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+            var data = DetEntidad.OrderBy(p => p.Item)
+                //
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 
 .ToList();
 
@@ -2212,73 +1769,50 @@ namespace ProntoMVC.Controllers
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdDetallePedido.ToString(),
+                            id = a.IdDetalleAsiento.ToString(),
                             cell = new string[] { 
                                 string.Empty, 
-                                a.IdDetallePedido.ToString(), 
-                                a.IdArticulo.ToString(), 
-                                a.IdUnidad.ToString(),
-                                a.NumeroItem.ToString(), 
-                                "",
-                                a.Cantidad.ToString(),
-                                a.Abreviatura,
-                                a.Codigo,
-                                "", // descripcionfalsa
-                                a.Descripcion,
-                                a.Precio.ToString(), 
-                                a.PorcentajeBonificacion.ToString(), 
-                                (a.PorcentajeBonificacion * a.Precio * a.Cantidad).ToString()  ,  // a.ImporteBonificacion.ToString(), 
-                                a.PorcentajeIVA.ToString(), 
-                                a.ImporteIva.ToString(), 
-                                a.ImporteTotalItem.ToString(), 
-                                a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.FechaNecesidad.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Observaciones,
-                                a.NumeroRequerimiento.ToString(),
-                                a.NumeroItemRM.ToString(),
+                                a.IdDetalleAsiento.ToString(), 
+                                a.IdCuenta.ToString(), 
+                                a.Item.ToString(),
+                                a.Cuenta==null ? "" : a.Cuenta.Codigo.NullSafeToString(),
+                                a.Cuenta==null ? "" : a.Cuenta.Descripcion.NullSafeToString(),
+                                a.Obra==null ? "" : a.Obra.Descripcion.NullSafeToString(),
+                                
+                                a.Debe.NullSafeToString(),
+                                a.Haber.NullSafeToString(),
+                                a.RegistrarEnAnalitico.NullSafeToString(),
+                                
+                                a.Moneda1==null ? "" : a.Moneda1.Abreviatura.NullSafeToString(),
+                                a.CotizacionMoneda.NullSafeToString(),
+                                a.ImporteEnMonedaDestino.NullSafeToString(),
 
-                                a.ArchivoAdjunto1,
-                                a.IdDetalleRequerimiento.NullSafeToString(),
-                                a.IdDetalleAcopios.NullSafeToString(),
-                                a.OrigenDescripcion.NullSafeToString(),
-                                a.IdCentroCosto.NullSafeToString()
+                                
+                                a.Libro.NullSafeToString(),
+              //If Option2.Value Then .Fields("Libro").Value = "V"
+            //If Option3.Value Then .Fields("Libro").Value = "C"
+                                a.TipoImporte.NullSafeToString(),
+            //If Option4.Value Then .Fields("TipoImporte").Value = "I"
+            //If Option5.Value Then .Fields("TipoImporte").Value = "G"
+            //If Option6.Value Then .Fields("TipoImporte").Value = "N"
 
-                            
+
+                                a.NumeroComprobante.NullSafeToString(),
+                                a.PorcentajeIVA.NullSafeToString(),
+                           
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual JsonResult DetPedidosSinFormato(int IdPedido)
-        {
-            var Det = db.DetallePedidos.Where(p => p.IdPedido == IdPedido).AsQueryable();
 
-            var data = (from a in Det
-                        select new
-                        {
-                            a.IdDetallePedido,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdDetalleRequerimiento,
-                            a.NumeroItem,
-                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            a.Cantidad,
-                            a.Unidad.Abreviatura,
-                            a.Articulo.Codigo,
-                            a.Articulo.Descripcion,
-                            a.FechaEntrega,
-                            a.Observaciones,
-                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                            a.Adjunto,
-                            a.ArchivoAdjunto1,
-                            a.ArchivoAdjunto2,
-                            a.ArchivoAdjunto3,
-                            a.Precio
-                        }).OrderBy(p => p.NumeroItem).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+
+
+
+
+
+
 
         [HttpPost]
         public void EditGridData(int? IdRequerimiento, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
