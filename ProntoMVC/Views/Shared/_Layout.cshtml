@@ -1082,6 +1082,14 @@ Released   : 20120723
                     }
                 });
 
+
+
+
+
+
+
+
+
                 // $('#SuperBuscador').focus();
                 $('#SuperBuscador2').focus();
 
@@ -1109,7 +1117,24 @@ Released   : 20120723
 
 
 
+                //function monkeyPatchAutocomplete() {
 
+                //    // don't really need this, but in case I did, I could store it and chain
+                //    var oldFn = $.ui.autocomplete.prototype._renderItem;
+
+                //    $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+                //        var re = new RegExp("^" + this.term);
+                //        var t = item.label.replace(re, "<span style='font-weight:bold;color:Blue;'>" +
+                //                this.term +
+                //                "</span>");
+                //        return $("<li></li>")
+                //            .data("item.autocomplete", item)
+                //            .append("<a>" + t + "</a>")
+                //            .appendTo(ul);
+                //    };
+                //}
+
+                //monkeyPatchAutocomplete();
 
                 /*
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1448,13 +1473,13 @@ Released   : 20120723
                                     <button class="btn btn-link pull-left" style="padding: 0px; margin-top: 2px; margin-left: 7px;
                             max-width: ; vertical-align: middle" id="LogoEmpresa">
                                         <li class="dropdown ">
-                                            <a href="#" id="ssssss" data-toggle="dropdown" class="dropdown-toggle  pull-left "
+                                            <a href="@Url.Content("~/")" id="ssssss" data-toggle="dropdown" class="dropdown-toggle  pull-left "
                                                onclick="conmutarPanelesNorte()  " style="padding: 0px">
                                                 <img src="@s" alt="" style="text-align: left; margin-top: 1px; margin-left: 12px;
                                 width: ; height: 42px;" />
                                                 @* @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                                                    {<span style="margin-left: 5px; text-align: right; margin-top: 20px; margin-right: 5px;"
-                                                        class="caret"></span>}</img> si pongo el span con el caret anidandolo en el img, me tira la bronca*@
+            {<span style="margin-left: 5px; text-align: right; margin-top: 20px; margin-right: 5px;"
+                class="caret"></span>}</img> si pongo el span con el caret anidandolo en el img, me tira la bronca*@
                                             </a>
                                             @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                             {
@@ -2245,8 +2270,7 @@ Released   : 20120723
                         font-weight: normal; bottom: 3px; text-align: center; width: 100%; text-decoration: none;
                         margin-left: 60px">©2015 BDL</a>
                         </div>
-                        <br />
-                        <br />
+                    
                         <style>
                             .filetree li {
                                 padding: 2px 0 2px 10px;
@@ -2349,7 +2373,7 @@ Released   : 20120723
 
                     function conmutarPanelesNorte() {
 
-                        window.location = (ROOT + "Home");
+                        // window.location = (ROOT + "Home");
                         return;
 
                         if (true) {

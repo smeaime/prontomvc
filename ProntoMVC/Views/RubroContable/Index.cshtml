@@ -16,7 +16,35 @@
 </div>
 
 <script type="text/javascript">
+    var $grid = "";
+    var lastSelectedId;
+    var lastSelectediCol;
+    var lastSelectediRow;
+    var lastSelectediCol2;
+    var lastSelectediRow2;
+    var inEdit;
+    var selICol;
+    var selIRow;
+    var gridCellWasClicked = false;
+    var grillaenfoco = false;
+    var getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    };
+    var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
     function GrabarFila(gridId) {
+        var $grid = $("#Lista");
+
+        //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+        //GrabarGrillaLocal()
+
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
         var datos = $("#formid").serializeObject();
         var err;
@@ -26,11 +54,11 @@
         datos.Nombre = dataFromTheRow.Nombre;
         datos.Codigo = dataFromTheRow.Codigo;
         datos.CodigoPostal = dataFromTheRow.CodigoPostal;
-        datos.CodigoESRI = dataFromTheRow.CodigoESRI;
-        datos.Partido = dataFromTheRow.Partido;
+        dataFromTheRow.DistribuirGastosEnResumen = dataFromTheRow.DistribuirGastosEnResumen=="True" ? "SI" : "NO";
+        dataFromTheRow.TomarMesDeVentaEnResumen = dataFromTheRow.TomarMesDeVentaEnResumen == "True" ? "SI" : "NO";
 
         err = ""
-        if (datos.Nombre == "" || datos.Nombre == undefined) err = err + "Falta definir el nombre de la localidad.\n"
+        // if (datos.Nombre == "" || datos.Nombre == undefined) err = err + "Falta definir el nombre de la localidad.\n"
 
         if (err != "") {
             alert('No se pudo grabar el registro.\n' + err);
@@ -41,7 +69,7 @@
                 contentType: 'application/json; charset=utf-8',
                 url: ROOT + 'RubroContable/BatchUpdate',
                 dataType: 'json',
-                data: JSON.stringify(datos),
+                data: JSON.stringify(dataFromTheRow), 
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('setRowData', gridId, { act: "" });
@@ -100,27 +128,6 @@
     $(document).ready(function () {
 
 
-        var $grid = "";
-        var lastSelectedId;
-        var lastSelectediCol;
-        var lastSelectediRow;
-        var lastSelectediCol2;
-        var lastSelectediRow2;
-        var inEdit;
-        var selICol;
-        var selIRow;
-        var gridCellWasClicked = false;
-        var grillaenfoco = false;
-        var getColumnIndexByName = function (grid, columnName) {
-            var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
-            for (i = 0; i < l; i++) {
-                if (cm[i].name === columnName) {
-                    return i; // return the index
-                }
-            }
-            return -1;
-        };
-        var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
 
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
@@ -198,13 +205,14 @@
             url: '@Url.Action("RubrosContables_DynamicGridData", "RubroContable")',
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdCliente', 'Descripción', '',
-                'codigo de agrupacion.', 'Grupo', 'Distribuir gastos en analisis', 'Tomar datos del mes'
+            colNames: ['Acciones', 'IdRubroContable', 'Descripción', '',
+              //  'codigo de agrupacion.',
+                'Grupo', 'Distribuir gastos en analisis', 'Tomar datos del mes'
             ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
                         { name: 'IdRubroContable', index: 'IdRubroContable', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'codigo', index: '', align: 'left', width: 70, hidden: false, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Codigo', index: 'Codigo', align: 'left', width: 70, hidden: false, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
                         {
                             name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300,
 
@@ -219,7 +227,7 @@
                         },
 
 
-                        { name: 'codigogrupo', index: '', align: 'left', width: 70, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
+                   //     { name: 'codigogrupo', index: '', align: 'left', width: 70, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
                    
 
                         {
@@ -254,12 +262,13 @@
 
 
                         {
-                            name: 'distribuir', index: '', align: 'left', width: 50,
+                            name: 'DistribuirGastosEnResumen', index: 'DistribuirGastosEnResumen', align: 'left', width: 50,
                             editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
-                            formatter: "checkbox", formatoptions: { disabled: false }
+                            formatter: "checkbox", //  formatter: "SiNoFormatter", 
+                            formatoptions: { disabled: false }
                         },
                         {
-                            name: 'tomadatos', index: '', align: 'left', width: 50,
+                            name: 'TomarMesDeVentaEnResumen', index: 'TomarMesDeVentaEnResumen', align: 'left', width: 50,
 
                             editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
                             formatter: "checkbox", formatoptions: { disabled: false },

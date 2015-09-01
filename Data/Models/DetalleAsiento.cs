@@ -44,5 +44,9 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdDetalleComprobanteProveedor { get; set; }
     
         public virtual Asiento Asiento { get; set; }
+        public virtual Cuenta Cuenta { get; set; }
+        public virtual Moneda Moneda { get; set; }
+        public virtual Moneda Moneda1 { get; set; }
+        public virtual Obra Obra { get; set; }
     }
 }
