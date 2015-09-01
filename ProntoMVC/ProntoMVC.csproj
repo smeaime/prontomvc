@@ -1260,10 +1260,7 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\CotizacionMoneda\Index.cshtml" />
-    <Content Include="Views\Subdiario\Edit.cshtml" />
-    <Content Include="Views\Subdiario\EditExterno.cshtml" />
     <Content Include="Views\Subdiario\Index.cshtml" />
-    <Content Include="Views\Subdiario\IndexExterno.cshtml" />
     <Content Include="Views\NotaDebito\Edit.cshtml" />
     <Content Include="Views\NotaDebito\Index.cshtml" />
     <Content Include="Views\NotaCredito\Edit.cshtml" />
@@ -1302,6 +1299,7 @@
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
     <Content Include="Views\OrdenPago\IndexExterno.cshtml" />
     <Content Include="Views\OrdenPago\EditExterno.cshtml" />
+    <Content Include="Views\Subdiario\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />
