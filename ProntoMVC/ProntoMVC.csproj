@@ -776,6 +776,7 @@
     <None Include="Documentos\vb6\frmDetRequerimientos.frmz" />
     <None Include="Documentos\vb6\frmRequerimientos.frmz" />
     <Content Include="packages.config" />
+    <Content Include="Views\Shared\SinConexion.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
