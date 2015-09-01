@@ -569,7 +569,7 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaSalidaMateriales)
                         
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
