@@ -132,6 +132,7 @@ jQuery("#addtree").jqGrid({
 
     loadComplete: function (data) {
         refrescarFondo_addtree();
+        cargarTopPositionDelArbol();
     },
 
 
