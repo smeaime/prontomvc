@@ -343,7 +343,23 @@ namespace ProntoMVC
 
             IController errorsController = new Controllers.ErrorController();
             var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
-            errorsController.Execute(rc);
+            try
+            {
+                errorsController.Execute(rc);
+            }
+            catch (   System.Data.SqlClient.SqlException x)
+            {
+                // por qué la llamada al ErrorController necesita del Membership (y por lo tanto, de la conexion SQL)?
+                //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
+                //ssss
+                Response.Redirect("~/Views/Shared/SinConexion.cshtml");
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
 
             /*
                     Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)

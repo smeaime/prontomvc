@@ -9,78 +9,7 @@
 
 
 
-    <script>
-
-        function deshabilitar() {
-
-            // $("*").attr("disabled", "disabled");
-            $("#formid *").not("#Lista").not(".ui-jqgrid").not("#lImprimir").not("#anular").not("#AnularFirmas").attr("disabled", "disabled");
-
-
-            // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-
-
-            $.blockUI.defaults.css.cursor = 'default';
-            $.blockUI.defaults.overlayCSS.cursor = 'default';
-
-            //http://stackoverflow.com/questions/19810312/disabling-entire-jqgrid-jquery-grid-plugin-using-jquery-blockui-plugin
-            //                $("#Lista").closest(".ui-jqgrid").block({
-            //                    message: "", //"<h1>Being processed...</h1>",
-            //                    css: { border: "3px solid #a00" }
-            //                });
-
-
-
-
-
-            $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-                message: "", //"<h1>Being processed...</h1>",
-                //                css: {
-                //                    // border: "3px solid #a00"
-                ////                    'cursor': 'default',
-                ////                    'background-color': 'rgb(218, 211, 211)',
-                ////                    'color': '#fff'
-                //                }
-                //                ,
-                theme: true,
-                themedCSS: {
-                    width: "35%",
-                    left: "30%"
-                    // ,  background-color: 'rgb(218, 211, 211)'
-                    //  ,  border: "3px solid #a00"
-                }
-
-            });
-
-            $("#ListaDrag").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-                message: "", //"<h1>Being processed...</h1>",
-                css: {
-                    // border: "3px solid #a00"
-                    // cursor: 'default'
-                }
-                  ,
-                theme: true,
-                themedCSS: {
-                    width: "35%",
-                    left: "30%"
-                    // ,  background-color: 'rgb(218, 211, 211)'
-                    //  ,  border: "3px solid #a00"
-                }
-            });
-            $("#ListaDrag2").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-                message: "", //"<h1>Being processed...</h1>",
-                css: {
-                    // border: "3px solid #a00"
-                    cursor: 'default'
-
-                }
-            });
-            //panelLayout(""
-
-
-
-        }
-    </script>
+    
 
     @*para centrar verticalmente las observaciones *@
     <style type="text/css">
@@ -150,51 +79,7 @@
                 margin-right: 0px;
             }
         </style>
-        @if (false)
-        {
-
-            <style>
-                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-
-                .ui-jqgrid {
-                    border-right-width: 0px;
-                    border-left-width: 0px;
-                }
-
-                    /* If you need to remove all grid's borders you can use
-
-                .ui-jqgrid { border-width: 0px; }
-                If you want additionally remove vertical border between the cells in the grid you can use */
-
-
-                    .ui-jqgrid tr.ui-row-ltr td {
-                        /* border-right-color: transparent; */
-                        border-right-color: #E4E4E4;
-                    }
-
-
-
-
-                    /*To remove horizontal border between the rows you can use */
-
-                    .ui-jqgrid tr.ui-row-ltr td {
-                        /* border-right-color: transparent; */
-                        border-right-color: #E4E4E4;
-                    }
-                /*To remove vertical borders between the column headers you can use */
-
-                th.ui-th-column {
-                    /*    border-right-color: transparent !important; */
-                    border-right-color: rgb(234, 234, 234) !important;
-                }
-                /* or alternatively (without the usage of !important) */
-
-                .ui-jqgrid-labels .ui-th-column {
-                    /* border-right-color: transparent;*/
-                    border-right-color: #E4E4E4;
-                }
-            </style>
-        }
+ 
         <style>
             /*  http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only */
             tr.jqgrow > td.textInDiv > div {
@@ -395,9 +280,13 @@
 
 
             $('#Lista').jqGrid({
+
+
+
+
                 url: ROOT + 'Asiento/DetAsientos/', // no puedo usar el modelo para cargar la grilla?????
                 postData: { 'Id': function () { return $("#IdAsiento").val(); } }, //esto es el parametro con que se llama a la url
-                editurl: ROOT + 'Asiento/EditGridData/', // "clientArray",
+                //editurl: ROOT + 'Asiento/EditGridData/', // "clientArray",
                 /////////
                 datatype: 'json',
                 mtype: 'POST',
@@ -500,56 +389,64 @@
                 //////////////////////////////////////////////
                 //////////////////////////////////////////////
 
-                onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
-                        }
-                        lastSelectedId = id;
-                        calculateTotal();
-                    }
-                },
+                //onSelectRow: function (id) {
+                //    if (id && id !== lastSelectedId) {
+                //        if (typeof lastSelectedId !== "undefined") {
+                //            grid.jqGrid('restoreRow', lastSelectedId);
+                //        }
+                //        lastSelectedId = id;
+                //        calculateTotal();
+                //    }
+                //},
 
-                beforeShowForm: function (form) {
-                    // "editmodlist" //http://stackoverflow.com/questions/3967488/how-to-center-jqgrid-popup-modal-window
-                    var dlgDiv = $("#editmod" + grid[0].id);
-                    var parentDiv = dlgDiv.parent(); // div#gbox_list
-                    var dlgWidth = dlgDiv.width();
-                    var parentWidth = parentDiv.width();
-                    var dlgHeight = dlgDiv.height();
-                    var parentHeight = parentDiv.height();
-                    // TODO: change parentWidth and parentHeight in case of the grid
-                    //       is larger as the browser window
-                    dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
-                    dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
-                },
+                //beforeShowForm: function (form) {
+                //    // "editmodlist" //http://stackoverflow.com/questions/3967488/how-to-center-jqgrid-popup-modal-window
+                //    var dlgDiv = $("#editmod" + grid[0].id);
+                //    var parentDiv = dlgDiv.parent(); // div#gbox_list
+                //    var dlgWidth = dlgDiv.width();
+                //    var parentWidth = parentDiv.width();
+                //    var dlgHeight = dlgDiv.height();
+                //    var parentHeight = parentDiv.height();
+                //    // TODO: change parentWidth and parentHeight in case of the grid
+                //    //       is larger as the browser window
+                //    dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
+                //    dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
+                //},
 
 
 
 
                 pager: $('#ListaPager'),
-            rowNum: 100,
-            rowList: [10, 20, 50, 100],
-            sortname: 'IdDetalleAsiento',
-            sortorder: 'asc',
-            viewrecords: true,
-            width: 'auto', // 'auto',
-            autowidth: true,
-            shrinkToFit: false,
-            height: '150px', // 'auto',
-            rownumbers: true,
-            multiselect: true,
-            altRows: false,
-            footerrow: true,
-            userDataOnFooter: true,
-            pgbuttons: false,
-            viewrecords: false,
-            pgtext: "",
-            pginput: false,
-            rowList: "",
-            caption: '',
-            cellEdit: true,
-            cellsubmit: 'clientArray'
+                rowNum: 100,
+                rowList: [10, 20, 50, 100],
+                //sortname: 'NumeroItem',
+                //sortorder: 'asc',
+                viewrecords: true,
+
+                ///////////////////////////////
+                width: 'auto', // 'auto',
+                autowidth: true,
+                shrinkToFit: false,
+                //////////////////////////////
+                height: '150px', // 'auto',
+                altRows: false,
+                rownumbers: false,
+                footerrow: true,
+                userDataOnFooter: true
+             , multiselect: true
+
+
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////
+                // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
+         ,
+                cellEdit: true,
+                cellsubmit: 'clientArray'
+        , editurl: ROOT + 'Asiento/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
+                ///////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////
             });
 
 
@@ -1059,12 +956,12 @@
 
 
         $("#addData").click(function () {
-            jQuery("#Lista").jqGrid('editGridRow', "new", {
+            $("#Lista").jqGrid('editGridRow', "new", {
                 addCaption: "Agregar registro", bSubmit: "Aceptar", bCancel: "Cancelar",
                 width: 800, reloadAfterSubmit: false, closeOnEscape: true, closeAfterAdd: true,
                 recreateForm: true,
                 beforeShowForm: function (form) {
-                    var dlgDiv = $("#editmod" + grid[0].id);
+                    var dlgDiv = $("#editmod" + $("#Lista")[0].id);
                     dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
                     dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
                 },
@@ -1081,11 +978,12 @@
         $("#edtData").click(function () {
             var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
             if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr, {
-                editCaption: "Modificar registro", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true,
+                editCaption: "Modificar registro", bSubmit: "Aceptar", bCancel: "Cancelar",
+                width: 800, reloadAfterSubmit: false, closeOnEscape: true,
                 closeAfterEdit: true, recreateForm: true, Top: 0,
                 beforeShowForm: function (form) {
                     // "editmodlist"
-                    var dlgDiv = $("#editmod" + grid[0].id);
+                    var dlgDiv = $("#editmod" + $("#Lista")[0].id);
                     var parentDiv = dlgDiv.parent(); // div#gbox_list
                     var dlgWidth = dlgDiv.width();
                     var parentWidth = parentDiv.width();

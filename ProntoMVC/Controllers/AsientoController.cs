@@ -2195,7 +2195,10 @@ namespace ProntoMVC.Controllers
                                 a.IdDetalleAsiento.ToString(), 
                                 a.IdCuenta.ToString(), 
                                 a.Item.ToString(),
-                            
+                            "",
+                            "",
+                            "",
+                            "",
                             
                             }
                         }).ToArray()
