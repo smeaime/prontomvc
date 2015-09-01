@@ -892,6 +892,11 @@ $(function () {
         $("#Lista").jqGrid('setGridWidth', $(window).width());
         // $("#Lista").jqGrid('setGridHeight', $(window).height()-250); // me mata en las grillas de detalle
 
+        //jQuery("#addtree").jqGrid('setGridHeight', 600);
+        $("#addtree").jqGrid('setGridHeight', $(window).height() - 150);
+
+
+
     }).trigger('resize');
 
     function resizeLista() {
