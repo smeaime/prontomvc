@@ -1001,7 +1001,7 @@ namespace ProntoMVC.Controllers
 
                         if (mIdNotaDebito <= 0 && !mAnulada)
                         {
-                            Subdiario s;
+                           Data.Models.Subdiario s;
 
                             Cliente Cliente = db.Clientes.Where(c => c.IdCliente == mIdCliente).SingleOrDefault();
                             mIdCuenta = 0;

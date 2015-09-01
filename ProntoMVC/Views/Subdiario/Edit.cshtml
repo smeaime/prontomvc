@@ -1,121 +1,85 @@
-﻿@model ProntoMVC.Data.Models.Pedido
+﻿@model IEnumerable<ProntoMVC.Data.Models.Subdiario>
 @{
-    ViewBag.Title = "Subdiario";
+    ViewBag.Title = "Subdiarios";
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
-{
 
-    @Html.ValidationSummary(true)
+<div><input id="IdCuentaSubdiario" name="IdCuentaSubdiario" type="hidden" value=@Request.QueryString["IdCuentaSubdiario"]></div>
+<div><input id="Año" name="Año" type="hidden" value=@Request.QueryString["Año"]></div>
+<div><input id="Mes" name="Mes" type="hidden" value=@Request.QueryString["Mes"]></div>
+<div><input id="Detalle" name="Detalle" type="hidden" value=@Request.QueryString["Subdiario"]></div>
 
-    <script src="@Url.Content("~/Scripts/ScriptPedido.js?1519")"  type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
-
- 
-
-        
-    
-    
-    <div class="container-fluid">
-        <div class="modal" id="loading">
-            <img  src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
-            Cargando...
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
         </div>
-        <style>
-            input[readonly]
-            {
-                background: transparent;
-                border: 0;
-                -webkit-box-shadow: none;
-                -moz-box-shadow: none;
-                box-shadow: none;
-            }
-            
-            .container-fluid
-            {
-                padding-left: 8px; /*    margin-right: 15px; */
-            }
-        </style>
-        <style>
-            /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-            
-            .ui-jqgrid
-            {
-                border-right-width: 0px;
-                border-left-width: 0px;
-            }
-            /* If you need to remove all grid's borders you can use
-
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-            
-            .ui-jqgrid tr.ui-row-ltr td
-            {
-                border-right-color: transparent;
-            }
-            
-            
-            .ui-jqgrid tr.footrow-ltr td
-            {
-                border-right-color: transparent !important;
-                border: 0 transparent !important;
-            }
-            
-            /*To remove horizontal border between the rows you can use */
-            
-            .ui-jqgrid tr.ui-row-ltr td
-            {
-                border-bottom-color: transparent;
-            }
-            /*To remove vertical borders between the column headers you can use */
-            
-            th.ui-th-column
-            {
-                /*    border-right-color: transparent !important; */
-                border-right-color: rgb(234, 234, 234) !important;
-            }
-            /* or alternatively (without the usage of !important) */
-            
-            .ui-jqgrid-labels .ui-th-column
-            {
-                /* border-right-color: transparent;*/
-            }
-        </style>
-        <form class="form-horizontal">
-@*        <div>@Html.Hidden("IdPedido", Model.IdPedido)</div>
-        <div>@Html.Hidden("IdProveedor", Model.IdProveedor)</div>*@
-        <div class="span12">
-            <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-                @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
-                <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
-                    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                    @*    <div class="span4  ">
-                        Pedido
-                    </div>*@ @*@Html.Display("Pedido" , new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding: 0; background: transparent;", @class = "span6", @readonly = "readonly" })*@
-                    @*@Html.TextBox("dummy","Pedido", new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding:0 ; background: transparent;", @class = "span4", @readonly = "readonly" })*@
-                    <span class="span1" style="padding-top: 15px; width: 140px">Subdiario </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
-                    @Html.TextBoxFor(model => model.NumeroPedido, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
-                    
-                    
-                </div>
-                <script>
-                    $(function () {
-
-                        function resizeInput() {
-                            // $(this).attr('size', $(this).val().length + 2);
-                            $(this).css('width', $(this).val().length * 32);
-                        }
-
-
-                        $('#SubNumero').keyup(resizeInput).each(resizeInput);
-
-                        $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
-
-                    })
-                </script>
-            </div>
-        
-         
-        </div>
-        </form>
     </div>
-    <!--/.fluid-container-->
-}
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("Detalle", "Subdiario")',
+            postData: { 'IdCuentaSubdiario': function () { return $("#IdCuentaSubdiario").val(); }, 'Año': function () { return $("#Año").val(); }, 'Mes': function () { return $("#Mes").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['IdSubdiario', 'IdCuentaSubdiario', 'IdCuenta', 'Codigo', 'IdTipoComprobante', 'IdComprobante', 'Cuenta', 'Tipo', 'Numero', 'Fecha', 'Debe', 'Haber', 'Detalle'],
+            colModel: [
+                        { name: 'IdSubdiario', index: 'IdSubdiario', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdCuentaSubdiario', index: 'IdCuentaSubdiario', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdCuenta', index: 'IdCuenta', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 100, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'IdTipoComprobante', index: 'IdTipoComprobante', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdComprobante', index: 'IdComprobante', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Cuenta', index: 'Cuenta', width: 300, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'TipoComprobante', index: 'TipoComprobante', width: 50, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 80, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'Fecha', index: 'Fecha', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Debe', index: 'Debe', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Haber', index: 'Haber', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Detalle', index: 'Detalle', width: 500, sortable: false, editable: false, search: false, hidden: false }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 1000,
+            rowList: [10, 20, 50, 20000],
+            sortname: 'Subdiario',
+            sortorder: 'desc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>' + $("#Detalle").val() + '</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+    });
+
+</script>
