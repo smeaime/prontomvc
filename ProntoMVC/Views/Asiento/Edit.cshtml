@@ -179,15 +179,15 @@
                         <script>
                             function calculateTotal() {
                                 var debe = $('#Lista').jqGrid('getCol', 'Debe', false, 'sum')
-                                var haber= $('#Lista').jqGrid('getCol', 'Haber', false, 'sum')
+                                var haber = $('#Lista').jqGrid('getCol', 'Haber', false, 'sum')
 
                                 $("#Lista").jqGrid('footerData', 'set', {
-                                    Obra: 'TOTALES', 
+                                    Obra: 'TOTALES',
                                     Debe: debe.toFixed(4),
                                     Haber: haber.toFixed(4),
                                 });
 
-                                $("#Diferencia").val(debe-haber);
+                                $("#Diferencia").val(debe - haber);
                             }
                         </script>
                     </div>
@@ -418,6 +418,19 @@
                         calculateTotal();
                     }
                 },
+
+                ondblClickRow: function (id) {
+                    //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+                    if (id && id !== lastSelectedId) {
+                        if (typeof lastSelectedId !== "undefined") {
+                            // jQuery('#Lista').jqGrid('restoreRow', lastSelectedId);
+                        }
+                        lastSelectedId = id;
+
+                    }
+                    $("#edtData").click(); //prefiero que copie con solo hacer clic  -y quizás hace el drag inutil, en especial cuando las grillas son fijas
+                },
+
 
                 beforeShowForm: function (form) {
                     // "editmodlist" //http://stackoverflow.com/questions/3967488/how-to-center-jqgrid-popup-modal-window
