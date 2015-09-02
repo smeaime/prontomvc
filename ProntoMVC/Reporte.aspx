@@ -463,12 +463,19 @@ If you want additionally remove vertical border between the cells in the grid yo
         <div class="span9" style="background: /*  rgba(255, 255, 255, 0.58) */; /* background-image: url('http://www.bootstrapcdn.com/img/bootstrap-bkg.jpg') */">
             <br />
             <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
-                <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
+                <div class="" style='font-size: 34px; margin-top: 5px; height: 6px; font-weight: 400;
                     margin-left: 0px; text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                    <asp:Label ID="lblTitulo" runat="server" />
                 </div>
                 <asp:Label ID="info" runat="server" />
-                <asp:TextBox ID="txtDebug" runat="server" TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="txtDebug" runat="server" TextMode="MultiLine" Height="16px"></asp:TextBox>
+                <rsweb:ReportViewer ID="ReportViewerRemoto" runat="server" Height="800" Width="100%"
+                    ZoomMode="Percent" ZoomPercent="100" OnReportRefresh="RefrescaInforme" AsyncRendering="false">
+                    <%--sizetoreportcontent="false"--%>
+                    <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />
+                    <%-- <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />--%>
+                </rsweb:ReportViewer>
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
                 <br />
                 <%--               
                 <a href="<%=ConfigurationManager.AppSettings["ReportServer"]%>">Servidor de informes</a>
@@ -486,14 +493,6 @@ If you want additionally remove vertical border between the cells in the grid yo
                    
                 <% } %>--%>
                 <%--http://stackoverflow.com/questions/6144513/how-can-i-use-a-reportviewer-control-in-an-asp-net-mvc-3-razor-view?lq=1--%>
-                <asp:ScriptManager ID="ScriptManager1" runat="server">
-                </asp:ScriptManager>
-                <rsweb:ReportViewer ID="ReportViewerRemoto" runat="server" Height="1500" Width="100%"
-                    ZoomMode="Percent" ZoomPercent="100" OnReportRefresh="RefrescaInforme" AsyncRendering="false">
-                    <%--sizetoreportcontent="false"--%>
-                    <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />
-                    <%-- <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />--%>
-                </rsweb:ReportViewer>
                 <%--        <iframe id="IFRAME1" src="http://bdlconsultores.dyndns.org:81/ReportServer/Pages/ReportViewer.aspx?%2fPronto+informes%2fPosicion+Financiera&rs:Command=Render"
         runat="server" height="1200px" width="100%" frameborder="0" />--%>
                 <%--    <iframe id="Iframe2" src="http://192.168.66.6/Reports/Pages/Folder.aspx" runat="server"

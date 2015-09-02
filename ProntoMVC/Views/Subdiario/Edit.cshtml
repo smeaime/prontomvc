@@ -31,7 +31,7 @@
             postData: { 'IdCuentaSubdiario': function () { return $("#IdCuentaSubdiario").val(); }, 'Año': function () { return $("#Año").val(); }, 'Mes': function () { return $("#Mes").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['IdSubdiario', 'IdCuentaSubdiario', 'IdCuenta', 'Codigo', 'IdTipoComprobante', 'IdComprobante', 'Cuenta', 'Tipo', 'Numero', 'Fecha', 'Debe', 'Haber', 'Detalle'],
+            colNames: ['IdSubdiario', 'IdCuentaSubdiario', 'IdCuenta', 'Codigo', 'IdTipoComprobante', 'IdComprobante', 'Cuenta', 'Tipo', 'Numero', 'Fecha', 'Formulario', 'Debe', 'Haber', 'Detalle'],
             colModel: [
                         { name: 'IdSubdiario', index: 'IdSubdiario', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'IdCuentaSubdiario', index: 'IdCuentaSubdiario', width: 80, sortable: false, editable: false, search: false, hidden: true },
@@ -43,6 +43,7 @@
                         { name: 'TipoComprobante', index: 'TipoComprobante', width: 50, sortable: false, editable: false, search: false, hidden: false },
                         { name: 'Numero', index: 'Numero', align: 'right', width: 80, sortable: false, editable: false, search: false, hidden: false },
                         { name: 'Fecha', index: 'Fecha', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Formulario', index: 'Formulario', align: 'center', width: 120, sortable: false, editable: false, search: false, hidden: false },
                         { name: 'Debe', index: 'Debe', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Haber', index: 'Haber', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Detalle', index: 'Detalle', width: 500, sortable: false, editable: false, search: false, hidden: false }
@@ -56,8 +57,8 @@
                 }
             },
             pager: $('#ListaPager'),
-            rowNum: 1000,
-            rowList: [10, 20, 50, 20000],
+            rowNum: 5000,
+            rowList: [100, 500, 1000, 5000],
             sortname: 'Subdiario',
             sortorder: 'desc',
             viewrecords: true,

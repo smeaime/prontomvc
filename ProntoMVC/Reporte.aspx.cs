@@ -65,6 +65,7 @@ namespace ProntoMVC.Reportes
 
             int idproveedor;
             int idcliente;
+            int idauxiliar;
 
             var sc = Generales.sCadenaConex(sss);
             var scsql = Generales.sCadenaConexSQL(sss);
@@ -99,6 +100,7 @@ namespace ProntoMVC.Reportes
                 //si es deudor,  no puede ser <=0 esto
                 idproveedor = c.buscaridproveedorporcuit(cuit);
                 idcliente = c.buscaridclienteporcuit(cuit);
+                idauxiliar = -1;
                 //this.Session["NombreProveedor"];
                 //el tema es esto!!! ReportViewerRemoto.ShowParameterPrompts = false; // lo oculto en el setparameter
                 // ReportViewerRemoto.ShowPromptAreaButton = false;
@@ -107,6 +109,7 @@ namespace ProntoMVC.Reportes
             {
                 idproveedor = -1;
                 idcliente = -1;
+                idauxiliar = -1;
 
                 ReportViewerRemoto.ShowParameterPrompts = true;
             }
@@ -123,6 +126,11 @@ namespace ProntoMVC.Reportes
                 idcliente = Generales.Val(this.Request.QueryString["idCliente"]);
                 ReportViewerRemoto.ShowParameterPrompts = true;
                 bMostrar = true;
+            }
+
+            if (this.Request.QueryString["id"] != null)
+            {
+                idauxiliar = Generales.Val(this.Request.QueryString["id"]);
             }
 
             this.Session["idproveedor"] = idproveedor;
@@ -191,7 +199,7 @@ namespace ProntoMVC.Reportes
 
             ReportViewerRemoto.ServerReport.ReportPath = "/Pronto informes/" + reportName;
 
-            lblTitulo.Text = reportName;
+            //lblTitulo.Text = reportName;
 
             //if (this.Request.QueryString["ReportName"] == null || this.Request.QueryString["ReportName"] == "Resumen Cuenta Corriente Acreedores")
             if (reportName == "Resumen Cuenta Corriente Acreedores")
@@ -310,7 +318,7 @@ namespace ProntoMVC.Reportes
                 //yourParams[2] = new ReportParameter("Hasta", ""); // DateTime.Today.ToShortDateString()); 
                 //if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
-                lblTitulo.Text = "Libro de IVA Ventas";
+                //lblTitulo.Text = "Libro de IVA Ventas";
             }
 
             else if (reportName == "Subdiario")
@@ -337,7 +345,7 @@ namespace ProntoMVC.Reportes
 
                 if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
-                lblTitulo.Text = "Balance";
+                //lblTitulo.Text = "Balance";
             }
 
             else if (reportName == "Mayor")
@@ -439,13 +447,28 @@ namespace ProntoMVC.Reportes
                 yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
             }
+            else if (reportName == "Estadistica de ventas por rubro - articulo")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
+            else if (reportName == "Factura Venta" || reportName == "Recibo" || reportName == "Nota Debito" || reportName == "Nota Credito" || reportName == "Orden Pago" || reportName == "Gasto Bancario" || reportName == "Plazo Fijo" || reportName == "Salida Materiales" || reportName == "Recepcion" || reportName == "Deposito" || reportName == "Comprobante Proveedores")
+            {
+                ReportParameter[] yourParams = new ReportParameter[2];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                yourParams[1] = new ReportParameter("Id", idauxiliar.ToString(), false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
 
             else
             {
                 var keys = this.Request.QueryString.AllKeys;
 
                 ReportParameter[] yourParams = new ReportParameter[1]; // keys.Count];
-                yourParams[0] = new ReportParameter("CadenaConexion", sc, false);
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
                 foreach (string i in keys)
                 {
                     //yourParams[0] = new ReportParameter(i.na, sc, false);
