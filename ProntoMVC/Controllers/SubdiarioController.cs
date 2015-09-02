@@ -139,6 +139,7 @@ namespace ProntoMVC.Controllers
                             TipoComprobante = a[7],
                             Numero = a[8],
                             Fecha = a[9],
+                            Formulario = (a[4].NullSafeToString() == "1") ? "Factura Venta" : ((a[4].NullSafeToString() == "2") ? "Recibo" : ((a[4].NullSafeToString() == "3") ? "Nota Debito" : ((a[4].NullSafeToString() == "4") ? "Nota Credito" : ((a[4].NullSafeToString() == "5") ? "Devolucion" : ((a[4].NullSafeToString() == "17") ? "Orden Pago" : ((a[4].NullSafeToString() == "28") ? "Gasto Bancario" : ((a[4].NullSafeToString() == "29") ? "Gasto Bancario" : ((a[4].NullSafeToString() == "39") ? "Plazo Fijo" : ((a[4].NullSafeToString() == "50") ? "Salida Materiales" : ((a[4].NullSafeToString() == "60") ? "Recepcion" : ((a[4].NullSafeToString() == "14") ? "Deposito" : "Comprobante Proveedores"))))))))))),
                             Debe = a[10],
                             Haber = a[11],
                             Detalle = a[12]
@@ -164,6 +165,7 @@ namespace ProntoMVC.Controllers
                                 a.TipoComprobante.NullSafeToString(),  
                                 a.Numero.NullSafeToString() ,  
                                 a.Fecha.NullSafeToString(),
+                                "<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=" +a.Formulario + "&Id=" + a.IdComprobante + "'>Ver comprobante</a>",  //"Certificado%20IVA&Id="
                                 a.Debe.NullSafeToString(),
                                 a.Haber.NullSafeToString(),
                                 a.Detalle.NullSafeToString()

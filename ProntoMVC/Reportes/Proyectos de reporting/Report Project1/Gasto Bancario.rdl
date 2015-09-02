@@ -1009,8 +1009,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>51d3eb48-2504-4820-b526-b55bea6d9839</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1391,9 +1395,15 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="Id">
       <DataType>Integer</DataType>
-      <Prompt>Id Valor</Prompt>
+      <Prompt>Id</Prompt>
+      <Hidden>true</Hidden>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
