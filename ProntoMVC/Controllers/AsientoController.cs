@@ -804,11 +804,14 @@ namespace ProntoMVC.Controllers
                         //    GuardarHistoricoDeCambio();
                         //}
 
-                        var EntidadOriginal = db.Asientos.Where(p => p.IdAsiento == Asiento.IdAsiento).SingleOrDefault();
-                        var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(Asiento);
+                        UpdateColeccion(Asiento);
 
-                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+
+                        //var EntidadOriginal = db.Asientos.Where(p => p.IdAsiento == Asiento.IdAsiento).SingleOrDefault();
+                        //var EntidadEntry = db.Entry(EntidadOriginal);
+                        //EntidadEntry.CurrentValues.SetValues(Asiento);
+
+                        //db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
 
                         //UpdateColecciones(ref Articulo);
                     }
@@ -864,6 +867,42 @@ namespace ProntoMVC.Controllers
             }
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
+
+
+
+
+
+        void UpdateColeccion(Asiento Asiento)
+        {
+            var EntidadOriginal = db.Asientos.Where(p => p.IdAsiento == Asiento.IdAsiento).Include(p => p.DetalleAsientos).SingleOrDefault();
+            var EntidadEntry = db.Entry(EntidadOriginal);
+            EntidadEntry.CurrentValues.SetValues(Asiento);
+
+            foreach (var dr in Asiento.DetalleAsientos)
+            {
+                var DetalleEntidadOriginal = EntidadOriginal.DetalleAsientos.Where(c => c.IdDetalleAsiento == dr.IdDetalleAsiento && dr.IdDetalleAsiento > 0).SingleOrDefault();
+                if (DetalleEntidadOriginal != null)
+                {
+                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                    DetalleEntidadEntry.CurrentValues.SetValues(dr);
+                }
+                else
+                {
+                    EntidadOriginal.DetalleAsientos.Add(dr);
+                }
+            }
+
+            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleAsientos.Where(c => c.IdDetalleAsiento != 0).ToList())
+            {
+                if (!Asiento.DetalleAsientos.Any(c => c.IdDetalleAsiento == DetalleEntidadOriginal.IdDetalleAsiento))
+                    EntidadOriginal.DetalleAsientos.Remove(DetalleEntidadOriginal);
+            }
+            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+        }
+
+
+
+
 
 
 
@@ -1323,10 +1362,22 @@ namespace ProntoMVC.Controllers
 
             decimal debe = 0, haber = 0;
 
+
+            var reqsToDelete = o.DetalleAsientos.Where(x => (x.IdCuenta ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetalleAsientos.Remove(deleteReq);
+            }
+
+
+
+
             foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
             {
+                var c=db.Cuentas.Find(x.IdCuenta);
+                if (c==null) continue;
 
-                string nombre = x.Item + " El item " + x.Item + "  (" + x.Cuenta.Descripcion + ") ";
+                string nombre = x.Item + " El item " + x.Item + "  (" + c.Descripcion + ") ";
 
                 debe += x.Debe ?? 0;
                 haber += x.Haber ?? 0;
@@ -1338,8 +1389,8 @@ namespace ProntoMVC.Controllers
                     //break;
                 }
 
-                if (x.Debe > 0 && x.Haber > 0) sErrorMsg += "\n" + "El item debe tener indicado el debe o el haber";
-                if (x.Debe == 0 && x.Haber == 0) sErrorMsg += "\n" + "El item debe tener indicado el debe o el haber";
+                if (x.Debe > 0 && x.Haber > 0) sErrorMsg += "\n" + nombre + " debe tener indicado el debe o el haber";
+                if (x.Debe == 0 && x.Haber == 0) sErrorMsg += "\n" + nombre + " debe tener indicado el debe o el haber";
 
 
             }
@@ -1799,7 +1850,7 @@ namespace ProntoMVC.Controllers
 
                                 a.NumeroComprobante.NullSafeToString(),
                                 a.PorcentajeIVA.NullSafeToString(),
-                           
+                                a.IdObra.NullSafeToString(),
                             }
                         }).ToArray()
             };
