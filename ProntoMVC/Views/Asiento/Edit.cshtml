@@ -118,7 +118,7 @@
                     <div class="row-fluid">
 
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.NumeroAsiento, "Número de asiento")
+                            @Html.LabelFor(model => model.NumeroAsiento, "Número")
                             @Html.TextBoxFor(model => model.NumeroAsiento, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.NumeroAsiento)
                         </div>
@@ -168,9 +168,9 @@
 
                     <div class="row-fluid">
                         <div class="span6 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "Asiento de apertura del ejercicio")
-                            @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
-                            @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
+                            @Html.LabelFor(model => model.AsientoApertura, "Asiento de apertura del ejercicio")
+                            @Html.RadioButtonFor(model => model.AsientoApertura, "SI") SI
+                            @Html.RadioButtonFor(model => model.AsientoApertura, "NO") NO
                         </div>
 
                         <div class="span1 lightblue">
@@ -229,6 +229,10 @@
     </div>
     <!--/.fluid-container-->
     <script type="text/javascript">
+
+
+        var lastColIndex;
+        var lastRowIndex;
 
 
         $(window).resize(function () {
@@ -345,12 +349,12 @@
                             'Enviar a libro',
                         'Pase IVA',
                         'Nro Comprobante',
-                        'Porcentaje de IVA'
+                        'Porcentaje de IVA', 'IdObra'
                 ],
                 colModel: [
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdDetalleAsiento', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: 'IdDetalleAsiento', label: 'TB', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                                { name: 'IdCuenta', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
                                 { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
                                 { name: '', index: '', align: 'left', width: 50, hidden: true, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
@@ -400,23 +404,23 @@
 
                                 },
 
-                                { name: 'Debe', index: 'Debe', align: 'right', width: 100, editable: true, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'Haber', index: 'Haber', align: 'right', width: 100, editable: true, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'Debe', label: 'TB', index: 'Debe', align: 'right', width: 100, editable: true, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'Haber', label: 'TB', index: 'Haber', align: 'right', width: 100, editable: true, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
 
 
                                  {
-                                     name: 'analitico', index: 'analitico', align: 'center', width: 50,
+                                     name: 'analitico', label: 'TB', index: 'analitico', align: 'center', width: 50,
                                      editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
                                      formatter: "checkbox", //  formatter: "SiNoFormatter",
                                      formatoptions: { disabled: false }
                                  },
 
 
-                                { name: 'Moneda', index: 'Cumplido', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: false },
-                                { name: 'Cotiz', index: 'Recepcionado', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'importe', index: 'Entregado', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'Moneda', label: 'TB', index: 'Cumplido', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: false },
+                                { name: 'Cotiz', label: 'TB', index: 'Recepcionado', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'importe', label: 'TB', index: 'Entregado', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
 
@@ -466,10 +470,11 @@
 
 
 
-                                { name: 'nro', index: 'Comparativas', align: 'left', width: 200, editable: true, editoptions: {}, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'porcentaje', index: 'Pedidos', align: 'left', width: 200, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'nro', index: 'nro', label: 'TB', align: 'left', width: 100, editable: true, editoptions: {}, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'porcentajeiva', label: 'TB', index: 'porcentajeiva', align: 'left', width: 70, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
+                                { name: 'IdObra', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
 
 
                 ],
@@ -493,16 +498,17 @@
                 },
 
                 ondblClickRow: function (id) {
-                    //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
                     try {
+                        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
-                        if (id && id !== lastSelectedId) {
-                            if (typeof lastSelectedId !== "undefined") {
-                                // jQuery('#Lista').jqGrid('restoreRow', lastSelectedId);
-                            }
-                            lastSelectedId = id;
+                        //if (id && id !== lastSelectedId) {
+                        //    if (typeof lastSelectedId !== "undefined") {
+                        //        jQuery('#Lista').jqGrid('restoreRow', lastSelectedId);
+                        //    }
+                        //    lastSelectedId = id;
 
-                        }
+                        //}
+                        //jQuery('#Lista').jqGrid('restoreRow', id);
                     } catch (e) {
 
                     }
@@ -524,6 +530,10 @@
                     dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
                 },
 
+                beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
+                    lastRowIndex = iRow;
+                    lastColIndex = iCol;
+                },
 
 
 
@@ -599,6 +609,202 @@
 
 
 
+            function SerializaForm() {
+                var cm, data1, data2, valor;
+                var colModel = jQuery("#Lista").jqGrid('getGridParam', 'colModel');
+                //            var cabecera = { "IdPedido": "", "Numero": "", "SubNumero": "", "FechaIngreso": "", "IdProveedor": "", "Validez": "", "Bonificacion": "", "PorcentajeIva1": "", "IdMoneda": "",
+                //                "ImporteBonificacion": "", "ImporteIva1": "", "ImporteTotal": "", "IdPlazoEntrega": "", "IdCondicionCompra": "", "Garantia": "", "LugarEntrega": "",
+                //                "IdComprador": "", "Aprobo": "", "Referencia": "", "Detalle": "", "Contacto": "", "Observaciones": "", "DetallePedidos": []
+                //            };
+
+                //var ImporteBonificacion = $("#TotalBonificacionGlobal").val();
+                //            ImporteBonificacion = ImporteBonificacion.replace(".", ",");
+
+                //////////////////////////////////////////////////////////////////////////////////////////////
+                var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
+                cabecera.DetalleAsientos = [];
+
+
+                //cabecera.IdProveedor = $("#IdProveedor").val();
+                //// como no le encontre la vuelta a automatizar la serializacion de inputs disableados, los pongo manualmente
+                //// como no le encontre la vuelta a automatizar la serializacion de inputs disableados, los pongo manualmente
+                ////cabecera.NumeroFactura = $("#NumeroFactura").val();
+
+
+
+
+                ////            cabecera.IdPedido = $("#IdPedido").val();
+                //cabecera.NumeroPedido = $("#NumeroPedido").val();
+                //// cabecera.FechaPedido = $("#FechaPedido").datepicker("getDate");
+                //cabecera.FechaPedido = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", $("#FechaPedido").val()));
+                ////            cabecera.SubNumero = $("#SubNumero").val();
+                ////            cabecera.FechaIngreso = $("#FechaIngreso").val();
+                ////            cabecera.IdProveedor = $("#IdProveedor").val();
+                ////            cabecera.Validez = $("#Validez").val();
+                //cabecera.DetalleCondicionCompra = $("#DetalleCondicionCompra").val();
+                //cabecera.Bonificacion = $("#TotalBonificacionGlobal").val().replace(".", ",");
+                //////            cabecera.PorcentajeIva1 = 21;
+                ////            cabecera.IdMoneda = $("#IdMoneda").val();
+                ////            cabecera.ImporteBonificacion = ImporteBonificacion;
+                //cabecera.TotalIva1 = $("#TotalIva").val().replace(".", ",");
+                //cabecera.TotalPedido = $("#Total").val().replace(".", ",");
+                ////            cabecera.IdPlazoEntrega = $("#IdPlazoEntrega").val();
+                ////            cabecera.IdCondicionCompra = $("#IdCondicionCompra").val();
+                ////            cabecera.Garantia = $("#Garantia").val();
+                ////            cabecera.LugarEntrega = $("#LugarEntrega").val();
+                ////            cabecera.IdComprador = $("#IdComprador").val();
+                ////            cabecera.Aprobo = $("#Aprobo").val();
+                ////            cabecera.Referencia = $("#Referencia").val();
+                ////            cabecera.Detalle = $("#Detalle").val();
+                ////            cabecera.Contacto = $("#Contacto").val();
+                ////            cabecera.Observaciones = $("#Observaciones").val();
+
+                //cabecera.CotizacionMoneda = $("#CotizacionMoneda").val().replace(".", ",");
+
+                var dataIds = $('#Lista').jqGrid('getDataIDs');
+                for (var i = 0; i < dataIds.length; i++) {
+                    try {
+
+
+                        var saveparameters = {
+                            "successfunc": null,
+                            "url": 'clientArray',
+                            "extraparam": {},
+                            //                "aftersavefunc": function (response) {
+                            //                    alert('saved');
+                            //                },
+                            "errorfunc": null,
+                            "afterrestorefunc": null,
+                            "restoreAfterError": true,
+                            "mtype": "POST"
+                        }
+
+                        $('#Lista').jqGrid('saveRow', dataIds[i], saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
+
+
+
+
+                        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+
+
+
+                        var iddeta = data['IdDetalleAsiento'];
+                        //alert(iddeta);
+                        if (!iddeta) continue;
+
+
+
+                        data1 = '{"IdAsiento":"' + $("#IdAsiento").val() + '",'
+                        for (var j = 0; j < colModel.length; j++) {
+                            cm = colModel[j]
+                            if (cm.label === 'TB') {
+                                valor = data[cm.name];
+
+
+                                valor = valor.replace(".", ",")
+
+
+
+                                //if (cm.name === 'Cantidad') valor = valor.replace(".", ",") // parseFloat(this.value).toFixed(2) valor.replace(",", ".").toFixed(2)
+                                //if (cm.name === 'Precio') valor = valor.replace(".", ",")
+                                //if (cm.name === 'PorcentajeBonificacion') valor = valor.replace(".", ",")  // parseFloat(valor) || 0;
+                                //if (cm.name === 'ImporteBonificacion') valor = valor.replace(".", ",")
+                                //if (cm.name === 'PorcentajeIva') valor = valor.replace(".", ",")
+                                //if (cm.name === 'ImporteIva') valor = valor.replace(".", ",")
+                                //if (cm.name === 'ImporteTotalItem') valor = valor.replace(".", ",")
+
+                                //if (cm.name === 'IdDetalleRequerimiento') valor = valor.replace(".", ",")
+                                ////if (cm.name === 'Observaciones') {
+
+
+                                ////}
+                                //if (cm.name === 'Adj. 1') {
+                                //    valor = '';
+                                //}
+
+
+                                //if (cm.name.indexOf("Fecha") !== -1) {
+                                //    try {
+                                //        valor = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", valor));
+                                //    } catch (e) {
+                                //        $.post(ROOT + "Error/JSErrorHandler", { msg: "Error al formatear como fecha " + valor });
+                                //        valor = null;
+                                //    }
+
+                                //}
+
+                                //if (cm.name === 'Cumplido' && cabecera.Cumplido === 'AN') valor = 'AN'
+
+
+                                //if (cm.name === 'OrigenDescripcion') {
+                                //    if (valor == 'Solo el material') {
+                                //        valor = 1;
+                                //    }
+                                //    else if (valor == 'Solo las observaciones') {
+                                //        valor = 2;
+                                //    }
+                                //    else if (valor == 'Material mas observaciones') {
+                                //        valor = 3;
+                                //    }
+                                //    else {
+                                //        //valor = 0;
+                                //    }
+
+
+                                //}
+
+
+
+
+                                try {
+                                    // replace() solo reemplaza la primera aparicion !!!!!!!!
+                                    // http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+
+                                    valor = replaceAll('"', '\\"', valor);
+                                    valor = replaceAll('\t', '\\t', valor);
+                                    valor = replaceAll('\n', '\\n', valor);
+                                    //                                   valor = valor.replace('\t', '\\t');
+                                    //                                   valor = valor.replace('\n', '\\n');
+                                    //                                   valor = valor.replace('\r', '\\r');
+                                    // http://stackoverflow.com/questions/983451/where-can-i-find-a-list-of-escape-characters-required-for-my-json-ajax-return-ty
+                                } catch (e) {
+                                    //
+                                }
+
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                data1 = data1 + '"' + cm.name + '":"' + valor + '",';
+                            }
+                        }
+
+
+
+
+
+
+
+
+                        data1 = data1.substring(0, data1.length - 1) + '}';
+                        data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                        data2 = JSON.parse(data1);
+                        cabecera.DetalleAsientos.push(data2);
+                    }
+                    catch (ex) {
+                        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+                        alert("No se pudo grabar el comprobante. " + ex);
+                        return;
+                    }
+                }
+
+
+                return cabecera;
+            }
+
+
 
             $("#grabar2").click(function () {
                 //  http://stackoverflow.com/questions/10744694/submitting-jqgrid-row-data-from-view-to-controller-what-method
@@ -606,8 +812,8 @@
 
 
                 var griddata = $("#Lista").jqGrid('getGridParam', 'data');
-                var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
-
+                //var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
+                var cabecera = SerializaForm();
 
                 //  var aaa = $.toJSON(formdata);
 
@@ -649,12 +855,32 @@
                     data: dataToSend,
                     //  data: { "formulario": formdata ,"grilla": dataToSend }, // $.toJSON(griddata),
                     success: function (result) {
+
+
+                    
+
+
+
                         if (result) {
+                            var dt = new Date();
+                            var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                            $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                            $("#mensajeAlerta").show();
+                            // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                            //si graban de nuevo, va a dar un alta!!!!
+
+
+                            $('html, body').css('cursor', 'auto');
+                            $('#grabar2').attr("disabled", false);
+                            //$('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
+
                             //alert('hola.');
                             grid1.trigger('reloadGrid');
 
                             //window.location.replace(ROOT + "Cliente/index");
-                            window.location = (ROOT + "Asiento/index");
+
+                            // window.location = (ROOT + "Asiento/index");
 
                         } else {
                             // window.location.replace(ROOT + "Cliente/index");
@@ -1000,7 +1226,7 @@
                 //						}
                 //						j++;
                 //					}
-                tmpdata['IdDetalleComprobanteProveedor'] = 0;
+                tmpdata['IdDetalleAsiento'] = 0;
 
                 tmpdata['IdCuenta'] = getdata['IdCuenta'];
                 tmpdata['Codigo'] = getdata['Codigo'];
