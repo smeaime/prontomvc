@@ -147,6 +147,10 @@
       <FullPath>Factura Venta.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Gasto Bancario.rdl</Name>
+      <FullPath>Gasto Bancario.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Generacion SICORE.rdl</Name>
       <FullPath>Generacion SICORE.rdl</FullPath>
     </ProjectItem>
@@ -195,6 +199,10 @@
       <FullPath>Pedidos pendientes de recibir.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Recepcion.rdl</Name>
+      <FullPath>Recepcion.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Recibo.rdl</Name>
       <FullPath>Recibo.rdl</FullPath>
     </ProjectItem>
@@ -241,6 +249,10 @@
     <ProjectItem>
       <Name>Vales emitidos no retirados.rdl</Name>
       <FullPath>Vales emitidos no retirados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Estadistica de ventas por rubro - Articulo.rdl</Name>
+      <FullPath>Estadistica de ventas por rubro - Articulo.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
