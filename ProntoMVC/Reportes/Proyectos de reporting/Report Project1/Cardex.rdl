@@ -2753,7 +2753,7 @@ Fields!IdTipoComprobante.Value=108,"Otros Ingresos"
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.36in</Top>
+        <Top>1.09079cm</Top>
         <Height>1.01164in</Height>
         <Width>21.3578in</Width>
         <Style />
@@ -2782,6 +2782,9 @@ Fields!IdTipoComprobante.Value=108,"Otros Ingresos"
         <Width>8in</Width>
         <ZIndex>1</ZIndex>
         <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -2789,7 +2792,7 @@ Fields!IdTipoComprobante.Value=108,"Otros Ingresos"
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>2.04124in</Height>
+    <Height>2.05624in</Height>
     <Style />
   </Body>
   <Width>21.3578in</Width>
