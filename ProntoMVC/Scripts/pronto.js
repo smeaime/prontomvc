@@ -208,6 +208,26 @@ function CargarEmpleadosParaAprobar(fcallback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+function TodaLaGrillaEnEditMode(grilla) {
+    var $this = $(grilla), rows = grilla.rows, l = rows.length, i, row;
+    for (i = 0; i < l; i++) {
+        row = rows[i];
+        if ($.inArray('jqgrow', row.className.split(' ')) >= 0) {
+            $this.jqGrid('editRow', row.id, true);
+        }
+    }
+}
+
+function sacarDeEditMode2(grilla) {
+
+    for (r = 0; r < grilla.rows.length; c++) {
+        for (c = 0; c < l; c++) {
+            jQuery('#Lista').jqGrid('saveCell', r, c);
+        }
+    }
+
+}
+
 function sacarDeEditMode() {
 
     // grabando o deshaciendo???
