@@ -1840,6 +1840,8 @@ namespace ProntoMVC.Controllers
                                 a.Haber.NullSafeToString(),
                                 a.RegistrarEnAnalitico.NullSafeToString(),
                                 
+                                a.Detalle,
+
                                 a.Moneda1==null ? "" : a.Moneda1.Abreviatura.NullSafeToString(),
                                 a.CotizacionMoneda.NullSafeToString(),
                                 a.ImporteEnMonedaDestino.NullSafeToString(),
@@ -1857,6 +1859,7 @@ namespace ProntoMVC.Controllers
                                 a.NumeroComprobante.NullSafeToString(),
                                 a.PorcentajeIVA.NullSafeToString(),
                                 a.IdObra.NullSafeToString(),
+                                a.IdCuenta.NullSafeToString(),
                             }
                         }).ToArray()
             };
