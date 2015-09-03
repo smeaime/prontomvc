@@ -119,7 +119,7 @@
 
                         <div class="span2 lightblue">
                             @Html.LabelFor(model => model.NumeroAsiento, "Número")
-                            @Html.TextBoxFor(model => model.NumeroAsiento,new { @class = "span12", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.NumeroAsiento, new { @class = "span12", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model.NumeroAsiento)
                         </div>
 
@@ -337,28 +337,142 @@
                 colNames: ['#',
 
                                 'IdDetalleAsiento',
-                           'IdCuenta', 'Cuenta',
+                           'IdCuenta', 'item',
 
-                           'cód.',
+                           'Cuenta',
 
                             'Detalle de cuenta', 'Obra', 'Debe', 'Haber',
 
-                            'Registrar en analitico',
+                            'Registrar en analitico', 'Detalle',
                             'Moneda destino', 'Cotiz. moneda destino', 'Importe mon destino',
 
                             'Enviar a libro',
                         'Pase IVA',
                         'Nro Comprobante',
-                        'Porcentaje de IVA', 'IdObra'
+                        'Porcentaje de IVA', 'IdObra','IdMoneda'
                 ],
                 colModel: [
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: 'IdDetalleAsiento', label: 'TB', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: 'IdCuenta', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
-                                { name: '', index: '', align: 'left', width: 50, hidden: true, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+                                { name: 'item', index: 'item', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
+                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, hidden: false, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
-                                { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 300, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+                                {
+                                    name: 'Cuenta', formoptions: {  label: "Cuenta" }, index: 'Cuenta', align: 'left', width: 250,
+                                    hidden: false,
+                                    editable: true, edittype: 'text',
+                                    editoptions: {
+                                        rows: '1', cols: '1',
+                                        dataInit: function (elem) {
+                                            var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
+
+                                            $(elem).autocomplete({
+
+                                                source: ROOT + 'Cuenta/GetCuentasAutocomplete',
+                                                minLength: 0,
+                                                select: function (event, ui) {
+
+                                                    if (ui.item.label === NoResultsLabel) {
+                                                        event.preventDefault();
+                                                        return;
+                                                    }
+                                                    // cómo hago si la modificacion se hizo en modo inline??????
+
+
+                                                    //if ($($("#Lista").jqGrid("getInd", rowid, true)).attr("editable") === "1") {
+                                                    // the row having id=rowid is in editing mode
+
+
+                                                    //                                            }
+                                                    //                                          else {
+
+
+
+                                                    //                                            $("#IdCuenta").val(ui.id);
+                                                    //                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                    //                                            $("#CuentaGasto").val(ui.title);
+
+                                                    $("#IdCuenta").val(ui.item.id);
+                                                    $("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                    $("#CuentaGasto").val(ui.item.title);
+                                                    //}
+
+                                                },
+                                                focus: function (event, ui) {
+                                                    if (ui.item.label === NoResultsLabel) {
+                                                        event.preventDefault();
+                                                    }
+                                                }
+                                            })
+                                            .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                                return $("<li></li>")
+                                                    .data("ui-autocomplete-item", item)
+                                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.codigo + "]</b></span></a>")
+                                                    .appendTo(ul);
+                                            };
+                                        }
+
+
+                                                ,
+                                        dataEvents: [{
+                                            type: 'change',
+                                            fn: function (e) {
+
+                                                //alert(this.value);
+
+                                                if (this.value == "No se encontraron resultados") {
+                                                    $("#Descripcion").val("");
+                                                    return;
+                                                }
+
+                                                $.post(ROOT + 'Cuenta/GetCuentasAutocomplete',  // ?term=' + val
+                                                    { term: this.value },
+                                                    function (data) {
+                                                        if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                            var ui = data[0];
+
+                                                            if (ui.codigo == "") {
+                                                                alert("No existe la cuenta"); // se está bancando que no sea identica la descripcion
+                                                                $("#Descripcion").val("");
+                                                                return;
+                                                            }
+
+
+                                                            //alert('hay ' + data.length);
+
+                                                            alert(ui.codigo);
+
+                                                            $("#IdCuenta").val(ui.id);
+                                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                            $("#CuentaGasto").val(ui.title);
+
+                                                            //                                                    $("#IdArticulo").val(ui.id);
+                                                            //                                                    $("#Codigo").val(ui.codigo);
+                                                            //                                                    $("#IdUnidad").val(ui.IdUnidad);
+                                                            //                                                    //$("#Unidad").val(ui.item.Unidad);
+                                                            //                                                    $("#Unidad").val(ui.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
+
+                                                            //                                                    UltimoIdArticulo = ui.id;
+                                                            //                                                    UltimoIdUnidad = ui.IdUnidad;
+
+
+                                                        }
+                                                        else {
+
+                                                            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        }
+                                                    }
+                                                );
+
+
+
+                                            }
+                                        }]
+                                    },
+                                    editrules: { required: false }
+                                },
+
                                 {
                                     name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: true, search: true, hidden: false,
                                     searchoptions: {
@@ -411,38 +525,84 @@
 
 
                                  {
-                                     name: 'analitico', label: 'TB', index: 'analitico', align: 'center', width: 50,
+                                     name: 'RegistrarEnAnalitico', label: 'TB', index: 'RegistrarEnAnalitico', align: 'center', width: 50,
                                      editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
-                                     formatter: "checkbox", //  formatter: "SiNoFormatter",
+                                     //formatter: "checkbox",
+                                     formatter: "SiNoFormatter",
                                      formatoptions: { disabled: false }
                                  },
 
+                                { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
-                                { name: 'Moneda', label: 'TB', index: 'Cumplido', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: false },
-                                { name: 'Cotiz', label: 'TB', index: 'Recepcionado', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'importe', label: 'TB', index: 'Entregado', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+
+                                {
+                                    name: 'Moneda', index: 'Moneda', align: 'center', width: 100, editable: true, search: true, hidden: false,
+                                    searchoptions: {
+                                        sopt: ['cn'],
+                                        dataInit: function (elem) {
+                                            // it demonstrates custom item rendering  http://stackoverflow.com/questions/7392236/jqgrid-with-autocompletion-cant-parse-data-from-controller-to-view/7392816#7392816
+                                            //                                    $(elem).autocomplete({ source:  ROOT + 'Articulo/GetObrasAutocomplete2' })
+                                            //                                                                .data("autocomplete")._renderItem = function (ul, item) {
+                                            //                                                                    return $("<li></li>")
+                                            //                                                                        .data("item.autocomplete", item)
+                                            //                                                                        .append("<a><span style='display:inline-block;width:60px;'><b>" +
+                                            //                                                                                item.value + "</b></span>" + item.title + "</a>")
+                                            //                                                                        .appendTo(ul);
+                                            //                                                                };
+
+
+
+
+                                            $(elem).autocomplete({
+                                                source: ROOT + 'Moneda/GetMonedas'
+
+                                                //,minLength: 3
+                                                //                                                                        ,select: function (event, ui) {
+
+                                                //                                                                            $("#IdCuenta").val(ui.item.id);
+                                                //                                                                            $("#CodigoCuenta").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                //                                                                            $("#Descripcion").val(ui.item.title);
+                                                //                                                                        }
+                                            })
+                                            .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                                return $("<li></li>")
+                                                    .data("ui-autocomplete-item", item)
+                                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " " + item.title + "</b></span></a>")
+                                                    .appendTo(ul);
+                                            };
+
+
+
+
+                                        }
+                                    }
+
+
+                                }, { name: 'CotizacionMoneda', label: 'TB', index: 'CotizacionMoneda', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'ImporteEnMonedaDestino', label: 'TB', index: 'ImporteEnMonedaDestino', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
 
                                  {
 
-                                     name: 'enviar', label: 'TB'
+                                     name: 'Libro', label: 'TB'
                                     , formoptions: {
                                         //rowpos: 11, colpos: 2,
                                         label: "Enviar a libros"
                                     }
-                                    , index: 'enviar',
-                                     align: 'center', width: 35, editable: true, hidden: false, edittype: 'select', // edittype: 'custom',
+                                    , index: 'Libro',
+                                    align: 'center', width: 100, editable: true, hidden: false,
+                                    edittype: 'select', formatter: 'select',
                                      // formatter: radioFormatter, unformat: unformatRadio,
                                      editrules: {
-                                         required: true
+                                         required: false
                                          //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  )                , disabled: 'disabled'
                                      },
                                      editoptions: {
                                          //                         readonly: true,
                                          //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
                                          //defaultValue: OrigenDescripcionDefault,
-                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro ventas;" //, size: 3
+                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro ventas;:" //, size: 3
                                          //,
                                          //     custom_element: myelem, custom_value: myvalue
                                      }
@@ -451,23 +611,25 @@
 
                                 {
 
-                                    name: 'Pase ', label: 'TB'
+                                    name: 'TipoImporte', label: 'TB'
                                         , formoptions: {
                                             //rowpos: 11, colpos: 2,
                                             label: "El pase es"
                                         }
-                                        , index: 'pase',
-                                    align: 'center', width: 35, editable: true, hidden: false, edittype: 'select', // edittype: 'custom',
+                                        , index: 'TipoImporte',
+                                        align: 'center', width: 100, editable: true, hidden: false,
+                                        edittype: 'select', formatter: 'select',
+                                    // edittype: 'custom',
                                     // formatter: radioFormatter, unformat: unformatRadio,
                                     editrules: {
-                                        required: true
+                                        required: false
                                         //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  )                , disabled: 'disabled'
                                     },
                                     editoptions: {
                                         //                         readonly: true,
                                         //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
                                         //defaultValue: OrigenDescripcionDefault,
-                                        value: "I:IVA; G:Gravado; N:No gravado;" //, size: 3
+                                        value: "I:IVA;G:Gravado;N:No gravado;:" //, size: 3
                                         //,
                                         //     custom_element: myelem, custom_value: myvalue
                                     }
@@ -476,11 +638,12 @@
 
 
 
-                                { name: 'nro', index: 'nro', label: 'TB', align: 'left', width: 100, editable: true, editoptions: {}, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'porcentajeiva', label: 'TB', index: 'porcentajeiva', align: 'left', width: 70, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'NumeroComprobante', index: 'NumeroComprobante', label: 'TB', align: 'left', width: 100, editable: true, editoptions: {}, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'PorcentajeIVA', label: 'TB', index: 'PorcentajeIVA', align: 'left', width: 70, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
-                                { name: 'IdObra', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: 'IdObra', label: 'TB', key: true, index: 'IdObra', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: 'IdMoneda', label: 'TB', key: true, index: 'IdMoneda', align: 'left', width: 100, editable: false, hidden: true },
 
 
                 ],
@@ -494,7 +657,7 @@
                 },
 
                 onSelectRow: function (id) {
-                
+
 
                     try {
                         if (id && id !== lastSelectedId) {
@@ -889,7 +1052,7 @@
                     success: function (result) {
 
 
-                    
+
 
 
 
