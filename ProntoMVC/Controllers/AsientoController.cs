@@ -1097,8 +1097,16 @@ namespace ProntoMVC.Controllers
                             a.NumeroAsiento.NullSafeToString(),
                             a.FechaAsiento.NullSafeToString(),
                             a.Tipo.NullSafeToString(),
-                            a.IdCuentaSubdiario.NullSafeToString(),
+                            a.IdCuentaSubdiario==null ? "" :  a.AsientoApertura .NullSafeToString(),
                             a.AsientoApertura.NullSafeToString(),
+                            a.Concepto.NullSafeToString(),
+                            a.DetalleAsientos.Select(x=>x.Debe).Sum().NullSafeToString(),
+                            a.DetalleAsientos.Select(x=>x.Haber).Sum().NullSafeToString(),
+                            (a.DetalleAsientos.Select(x=>x.Debe).Sum()-a.DetalleAsientos.Select(x=>x.Haber).Sum()).NullSafeToString(),
+                            a.IdIngreso .NullSafeToString(),
+                            a.FechaIngreso .NullSafeToString(),
+                            a.IdModifico .NullSafeToString(),
+                            a.FechaUltimaModificacion .NullSafeToString(),
 
                             
                             // (a.TiposCuenta==null) ?  "" :  a.TiposCuenta.Descripcion,
@@ -1860,6 +1868,7 @@ namespace ProntoMVC.Controllers
                                 a.PorcentajeIVA.NullSafeToString(),
                                 a.IdObra.NullSafeToString(),
                                 a.IdCuenta.NullSafeToString(),
+                                a.IdMonedaDestino.NullSafeToString(),
                             }
                         }).ToArray()
             };

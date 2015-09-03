@@ -1,4 +1,5 @@
-﻿drop table tree
+﻿
+drop table tree
 go
 
 CREATE TABLE Tree       
@@ -16,6 +17,8 @@ CREATE TABLE Tree
 	  CONSTRAINT [PK_Tree] PRIMARY KEY CLUSTERED ([IdItem] ASC)
    )  
 go
+
+
 
 
 /****** Object:  StoredProcedure [dbo].[Tree_TX_Generar]    Script Date: 09/01/2015 15:52:41 ******/
@@ -133,6 +136,12 @@ INSERT INTO #Auxiliar1
  FROM ComprobantesProveedores   
  LEFT OUTER JOIN  cuentas on cuentas.idcuenta=ComprobantesProveedores.idcuenta  
  WHERE IdProveedor is null and ComprobantesProveedores.IdCuenta is not null   
+
+
+
+INSERT INTO #Auxiliar1     
+ SELECT DISTINCT -101, Null, Null, Year(FechaAsiento), Month(FechaAsiento) FROM Asientos  ORDER BY Year(FechaAsiento), Month(FechaAsiento) desc    
+
   
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT -100, Null, Null, Year(FechaComprobante), Month(FechaComprobante) FROM Subdiarios  ORDER BY Year(FechaComprobante), Month(FechaComprobante) desc    
@@ -432,14 +441,15 @@ INSERT INTO #Auxiliar0 Select '01-12-06','TiposCuentaGrupos','Grupos de cuenta',
 INSERT INTO #Auxiliar0 Select '01-12-07','CuentasGastos','Cuentas para obras','01-12',7,Null,Null,'CuentasGastos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-08','Cuentas','Cuentas','01-12',8,Null,Null,'Cuentas','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-08-01','CuentasTodas','Cuentas (Todas)','01-12-08',1,Null,'<a href="/' + @Directorio + '/Cuenta/Index">Cuentas (Todas)</a>','Cuentas','NO','Principal'  
+
 INSERT INTO #Auxiliar0 Select '01-12-09','Subdiarios','Subdiarios','01-12',9,Null,Null,'Subdiarios','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-09-01','SubdiariosAgrupados','Por Períodos','01-12-09',1,Null,Null,'Subdiarios','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-09-02','SubdiariosTodos','Todos','01-12-09',2,Null,'<a href="/' + @directorio + '/Subdiario/Index">Todos</a>','Subdiarios','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-12-10','Asientos','Asientos','01-12',10,Null,Null,'Asientos','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-12-10-01','AsientosAgrupados','Por Períodos','01-12-10',1,Null,Null,'Asientos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-12-10-02','AsientosSyJ','Asientos (Sueldos)','01-12-10',2,Null,Null,'Asientos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-12-10-03','AsientosTodos','Asientos (Todos)','01-12-10',3,Null,Null,'Asientos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-12-10-01','AsientosAgrupados','Por Períodos','01-12-10',1,Null,Null,'Asientos','SI','Principal'  
+INSERT INTO #Auxiliar0 Select '01-12-10-02','AsientosSyJ','Asientos (Sueldos)','01-12-10',2,Null,Null,'Asientos','SI','Principal'  
+INSERT INTO #Auxiliar0 Select '01-12-10-03','AsientosTodos','Asientos (Todos)','01-12-10',3,Null,'<a href="/' + @directorio + '/Asiento/Index">Todos</a>','Asientos','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-13','ActivoFijo','Activo Fijo','01',1,Null,Null,'ActivoFijo','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-13-01','CoeficientesImpositivos','Coeficientes Impositivos','01-13',1,Null,Null,'CoeficientesImpositivos','NO','Principal'  
@@ -900,7 +910,26 @@ WHILE @@FETCH_STATUS = 0
 				'<a href="/' + @directorio + '/OtroIngresoAlmacen/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'OtrosIngresosAlmacen', 'NO','Principal'  
 	  END  
 
-	--SUBDIARIOS
+	--ASIENTOS
+	IF @TipoComprobante=-101
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-12-10-01-'+Substring('000',1,3-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'AsientosAgrupados'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-12-10-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/Asiento/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Asientos', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'Asientos'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Asiento/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Asientos', 'NO','Principal'  
+	  END  
+
+
+	  	--SUBDIARIOS
 	IF @TipoComprobante=-100
 	  BEGIN  
 		IF @AñoAnt1<>@Año  
@@ -917,6 +946,7 @@ WHILE @@FETCH_STATUS = 0
 		 SELECT @Clave, 'Subdiarios'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
 				'<a href="/' + @directorio + '/Subdiario/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Subdiarios', 'NO','Principal'  
 	  END  
+
 
 	FETCH NEXT FROM Cur INTO @TipoComprobante, @Obra, @IdObra, @Año, @Mes  
   END  
@@ -1242,3 +1272,8 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
 DROP TABLE #Auxiliar0
 DROP TABLE #Auxiliar1
 DROP TABLE #Auxiliar2
+go
+
+
+[Tree_TX_Generar]  
+
