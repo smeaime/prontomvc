@@ -18,20 +18,31 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // formatter generico para columnas SI / NO
 
+// http://www.trirand.com/blog/?page_id=393/help/checkbox-formatting-and-editing
 
 jQuery.extend($.fn.fmatter, {
     SiNoFormatter: function (cellvalue, options, rowdata) {
+
+
+        var checked;
+
         switch (cellvalue) {
             case "True":
             case "SI":
-                return "true";
+                checked = "checked='checked' ";
 
             case "False":
             case "NO":
-                return "false";
+                checked = "";
             default:
-                return "false";
+                checked = "";
         }
+
+        //var checked = cellvalue != 'N' ? "checked='checked' " : "";
+        rtn = "<input type='checkbox' onclick=\"ajaxSaveUsers('" + options.rowId + "','" + options.colModel.name + "');\" " + checked + " value='" + cellvalue + "' />";
+        return rtn;
+
+
 
     }
 });
@@ -53,6 +64,11 @@ jQuery.extend($.fn.fmatter.SiNoFormatter, {
 
     }
 });
+
+
+
+
+
 
 
 
@@ -964,7 +980,7 @@ $(function () {
     // When a button is clicked...
     $(':submit').on("click", function () {
 
-       // guardarTopPositionDelArbol();
+        // guardarTopPositionDelArbol();
 
     });
 
