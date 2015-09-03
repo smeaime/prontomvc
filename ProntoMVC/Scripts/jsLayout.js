@@ -114,8 +114,12 @@ jQuery("#addtree").jqGrid({
     //                                    ],
 
 
+    onSelectRow: function (id, status, e) {
+        guardarTopPositionDelArbol();
+    },
 
     beforeProcessing: function (data) {
+        //guardarTopPositionDelArbol();
         if (bPersisteArbol) {
             var rows = data.rows, i, l = rows.length, row, index;
             for (i = 0; i < l; i++) {
