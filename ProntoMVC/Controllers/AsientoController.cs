@@ -752,9 +752,9 @@ namespace ProntoMVC.Controllers
             {
                 Asiento Asiento = new Asiento();
 
-                //inic(ref Asiento);
+                inic(ref Asiento);
 
-                //CargarViewBag(Asiento);
+                CargarViewBag(Asiento);
 
 
                 return View(Asiento);
@@ -817,12 +817,17 @@ namespace ProntoMVC.Controllers
                     }
                     else
                     {
+                        Parametros parametros = db.Parametros.Find(1);
+                        Asiento.NumeroAsiento = parametros.ProximoAsiento;
+                        parametros.ProximoAsiento = parametros.ProximoAsiento + 1;
+                        db.Entry(parametros).State = System.Data.Entity.EntityState.Modified;
+
                         db.Asientos.Add(Asiento);
                     }
 
                     db.SaveChanges();
 
-                    return Json(new { Success = 1, IdCuenta = Asiento.IdAsiento, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
+                    return Json(new { Success = 1, IdAsiento = Asiento.IdAsiento, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
                 }
                 else
                 {
@@ -1125,29 +1130,30 @@ namespace ProntoMVC.Controllers
 
 
 
-
-        void inic(ref Pedido o)
+        
+        void inic(ref Asiento o)
         {
 
 
             Parametros parametros = db.Parametros.Find(1);
-            o.NumeroPedido = parametros.ProximoNumeroPedido;
-            o.SubNumero = 0;
-            o.FechaPedido = DateTime.Today;
-            o.IdMoneda = 1;
-            o.CotizacionMoneda = 1;
-            ViewBag.Proveedor = "";
+            o.NumeroAsiento= parametros.ProximoAsiento;
+            
+            //o.SubNumero = 0;
+            o.FechaAsiento = DateTime.Today;
+            //o.IdMoneda = 1;
+            //o.CotizacionMoneda = 1;
+            //ViewBag.Proveedor = "";
 
 
 
 
-            o.Importante = parametros.PedidosImportante;
-            o.Garantia = parametros.PedidosGarantia;
-            o.Documentacion = parametros.PedidosDocumentacion;
-            o.FormaPago = parametros.PedidosFormaPago;
-            //o.ImprimeInspecciones = parametros.PedidosInspecciones;
-            o.LugarEntrega = parametros.PedidosLugarEntrega;
-            o.PlazoEntrega = parametros.PedidosPlazoEntrega;
+            //o.Importante = parametros.PedidosImportante;
+            //o.Garantia = parametros.PedidosGarantia;
+            //o.Documentacion = parametros.PedidosDocumentacion;
+            //o.FormaPago = parametros.PedidosFormaPago;
+            ////o.ImprimeInspecciones = parametros.PedidosInspecciones;
+            //o.LugarEntrega = parametros.PedidosLugarEntrega;
+            //o.PlazoEntrega = parametros.PedidosPlazoEntrega;
 
 
             //o.PorcentajeIva1 = 21;                  //  mvarP_IVA1_Tomado
@@ -1190,9 +1196,9 @@ namespace ProntoMVC.Controllers
 
             // db.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
             var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
-            o.CotizacionMoneda = 1;
-            //  o.CotizacionADolarFijo=
-            o.CotizacionDolar = (decimal)mvarCotizacion;
+            //o.CotizacionMoneda = 1;
+            ////  o.CotizacionADolarFijo=
+            //o.CotizacionDolar = (decimal)mvarCotizacion;
 
             //o.DetalleFacturas.Add(new DetalleFactura());
             //o.DetalleFacturas.Add(new DetalleFactura());
@@ -1224,7 +1230,7 @@ namespace ProntoMVC.Controllers
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
 
-        void CargarViewBag(Pedido o)
+        void CargarViewBag(Asiento o)
         {
 
 

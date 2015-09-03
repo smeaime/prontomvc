@@ -119,7 +119,7 @@
 
                         <div class="span2 lightblue">
                             @Html.LabelFor(model => model.NumeroAsiento, "Número")
-                            @Html.TextBoxFor(model => model.NumeroAsiento, new { @class = "span12" })
+                            @Html.TextBoxFor(model => model.NumeroAsiento,new { @class = "span12", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model.NumeroAsiento)
                         </div>
 
@@ -427,9 +427,12 @@
                                  {
 
                                      name: 'enviar', label: 'TB'
-                                    , formoptions: { rowpos: 11, colpos: 2, label: "" }
+                                    , formoptions: {
+                                        //rowpos: 11, colpos: 2,
+                                        label: "Enviar a libros"
+                                    }
                                     , index: 'enviar',
-                                     align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
+                                     align: 'center', width: 35, editable: true, hidden: false, edittype: 'select', // edittype: 'custom',
                                      // formatter: radioFormatter, unformat: unformatRadio,
                                      editrules: {
                                          required: true
@@ -438,8 +441,8 @@
                                      editoptions: {
                                          //                         readonly: true,
                                          //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
-                                         defaultValue: OrigenDescripcionDefault,
-                                         value: ":no enviar a los libros;V:enviar al libro ventas; C:enviar al libro ventas;", size: 3
+                                         //defaultValue: OrigenDescripcionDefault,
+                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro ventas;" //, size: 3
                                          //,
                                          //     custom_element: myelem, custom_value: myvalue
                                      }
@@ -448,10 +451,13 @@
 
                                 {
 
-                                    name: 'pase ', label: 'TB'
-                                        , formoptions: { rowpos: 11, colpos: 2, label: "El pase es" }
+                                    name: 'Pase ', label: 'TB'
+                                        , formoptions: {
+                                            //rowpos: 11, colpos: 2,
+                                            label: "El pase es"
+                                        }
                                         , index: 'pase',
-                                    align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
+                                    align: 'center', width: 35, editable: true, hidden: false, edittype: 'select', // edittype: 'custom',
                                     // formatter: radioFormatter, unformat: unformatRadio,
                                     editrules: {
                                         required: true
@@ -460,8 +466,8 @@
                                     editoptions: {
                                         //                         readonly: true,
                                         //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
-                                        defaultValue: OrigenDescripcionDefault,
-                                        value: "I:IVA; G:Gravado; N:No gravado", size: 3
+                                        //defaultValue: OrigenDescripcionDefault,
+                                        value: "I:IVA; G:Gravado; N:No gravado;" //, size: 3
                                         //,
                                         //     custom_element: myelem, custom_value: myvalue
                                     }
@@ -488,13 +494,20 @@
                 },
 
                 onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
+                
+
+                    try {
+                        if (id && id !== lastSelectedId) {
+                            if (typeof lastSelectedId !== "undefined") {
+                                grid.jqGrid('restoreRow', lastSelectedId);
+                            }
+                            lastSelectedId = id;
+                            calculateTotal();
                         }
-                        lastSelectedId = id;
-                        calculateTotal();
+                    } catch (e) {
+
                     }
+
                 },
 
                 ondblClickRow: function (id) {
@@ -534,6 +547,11 @@
                     lastRowIndex = iRow;
                     lastColIndex = iCol;
                 },
+
+                afterSaveCell: function () {
+                    calculateTotal();
+                },
+
 
 
 
@@ -811,6 +829,20 @@
                 //  http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-form-input-elements?answertab=votes#tab-top
 
 
+                try {
+                    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+                    //if (id && id !== lastSelectedId) {
+                    //    if (typeof lastSelectedId !== "undefined") {
+                    //        jQuery('#Lista').jqGrid('restoreRow', lastSelectedId);
+                    //    }
+                    //    lastSelectedId = id;
+
+                    //}
+                    //jQuery('#Lista').jqGrid('restoreRow', id);
+                } catch (e) {
+
+                }
                 var griddata = $("#Lista").jqGrid('getGridParam', 'data');
                 //var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
                 var cabecera = SerializaForm();
@@ -876,11 +908,11 @@
                             //$('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
 
                             //alert('hola.');
-                            grid1.trigger('reloadGrid');
+                            // grid1.trigger('reloadGrid');
 
                             //window.location.replace(ROOT + "Cliente/index");
 
-                            // window.location = (ROOT + "Asiento/index");
+                            window.location = (ROOT + "Asiento/Edit/" + result.IdAsiento);
 
                         } else {
                             // window.location.replace(ROOT + "Cliente/index");
@@ -898,8 +930,7 @@
                             errorMessages.push(errorData[key]);
                         }
                         $('#result').html(errorMessages.join("<br />"));
-                        alert(errorMessages.join("<br />"));
-
+                        alert(errorMessages.join("\n").replace(/<br\/>/g, '\n'));
                     }
 
 
@@ -1272,7 +1303,7 @@
 
             //RefrescarOrigenDescripcion();
             //    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
-            AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
+            //AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
 
 
             //   var rows = $("#Lista").getGridParam("reccount");
