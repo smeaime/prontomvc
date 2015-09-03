@@ -234,7 +234,7 @@ if (true) {
     function RefrescarArbol() {
         $("#addtree2").trigger("reloadGrid");
     }
-
+    
     if (localStorage.arbol != null) {
         $("#addtree2").jqGrid({
             data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),

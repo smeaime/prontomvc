@@ -532,7 +532,7 @@
                                      formatoptions: { disabled: false }
                                  },
 
-                                { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+                                { name: 'Detalle', index: 'Detalle', label: 'TB', align: 'left', width: 300, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
 
                                 {
@@ -764,6 +764,7 @@
                                          {
                                              caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
                                              onClickButton: function () {
+                                                 $("#addData").click();
                                                  //AgregarItemVacio(jQuery("#Lista"));
                                              },
                                          });
