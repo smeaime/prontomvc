@@ -19,6 +19,7 @@
 var bPersisteArbol = true; // no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea 
 //  que no vuelve a llamar al servidor cuando se aprieta un nodo
 
+var eslaprimeravez = true;
 
 
 var $grid = $('#addtree')
@@ -134,9 +135,15 @@ jQuery("#addtree").jqGrid({
 
     },
 
+
+
     loadComplete: function (data) {
         refrescarFondo_addtree();
-        cargarTopPositionDelArbol();
+
+        if (eslaprimeravez) {
+            cargarTopPositionDelArbol();
+            eslaprimeravez = false;
+        }
     },
 
 
