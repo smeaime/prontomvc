@@ -32,7 +32,7 @@ var idsOfExpandedRows = []
 
 if (bPersisteArbol) {
 
-    var 
+    var
         saveObjectInLocalStorage = function (storageItemName, object) {
             if (typeof window.localStorage !== 'undefined') {
                 window.localStorage.setItem(storageItemName, JSON.stringify(object));
@@ -72,6 +72,11 @@ if (bPersisteArbol) {
 
 }
 
+
+
+
+
+/////////////////////////////////////////////
 jQuery("#addtree").jqGrid({
 
     //columns names
@@ -81,7 +86,7 @@ jQuery("#addtree").jqGrid({
                                     { name: 'Name', index: 'Name', align: 'left', width: 170 },
                                     { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
                                     { name: 'Role', index: 'Role', width: 1, hidden: true },
-                                ],
+    ],
 
     // el treeReader define las columnas que vienen despues del colmodel para manejo del arbol. por default se agregan 4 columnas
     //    treeReader: {
@@ -194,226 +199,283 @@ jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defa
 
 
 
-   
-
- ///////////////////////////////////////////
- /////////////////////////////////////
- /////////////////////////////////////
- // scroll 
- $(".ui-jqgrid").css("overflow-x", "hidden");
- $(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
- /////////////////////////////////////
- /////////////////////////////////////
- /////////////////////////////////////
- // transparente
- //$("#addtree > .ui-jqgrid tr.jqgrow").css(" background-color", "yellow !important;");
-  $("#addtree > .ui-widget-content").css("background", "transparent");
-  $("#gbox_addtree").css("background", "transparent");
-  $("#gbox_addtree").css("border", "0");
-  /////////////////////////////////////
-  /////////////////////////////////////
-  // http://stackoverflow.com/questions/1195374/jqgrid-change-theme
-  //     $('#myGrid .ui-widget').addClass('jqgrid-widget');
-     $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
 
 
 
-     function refrescarFondo_addtree() {
+if (true) {
+    // pruebas para árbol usando cookie
+    // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
 
-         $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+    //if ($.cookie("arbol") == null) {
+    //    RecargarCookieArbol();
+    //}
 
-     }
+    if (localStorage.arbol == null) {
+        RecargarCookieArbol();
+    }
+
+    function RecargarCookieArbol() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + "Home/TreeGrid",
+            dataType: "json",
+            success: function (data) {
+                var lala = JSON.stringify(data);
+                // $.cookie("arbol", lala, { path: '/' });
+                localStorage.arbol = lala;
+                RefrescarArbol();
+
+            }
+        });
+    }
+
+
+    function RefrescarArbol() {
+        $("#addtree2").trigger("reloadGrid");
+    }
+
+    if (localStorage.arbol != null) {
+        $("#addtree2").jqGrid({
+            data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),
+            datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
+            colModel: [
+                { name: "id", width: 50 },
+                { name: "Name", width: 50 },
+                { name: "Name2", width: 50 },
+                { name: "Name3", width: 50 },
+                { name: "Name4", width: 50 },
+                { name: "Name5", width: 50 },
+            ],
+            //pager: "#packagePager",
+            //rowNum: 2,
+            //rowList: [1, 2, 10],
+            viewrecords: true,
+            rownumbers: true,
+            caption: "Packages",
+            height: "auto",
+            //autoencode: true,
+            //gridview: true,
+            //ignoreCase: true,
+
+        });
+    }
+}
+///////////////////////////////////////////
+/////////////////////////////////////
+/////////////////////////////////////
+// scroll 
+$(".ui-jqgrid").css("overflow-x", "hidden");
+$(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
+/////////////////////////////////////
+/////////////////////////////////////
+/////////////////////////////////////
+// transparente
+//$("#addtree > .ui-jqgrid tr.jqgrow").css(" background-color", "yellow !important;");
+$("#addtree > .ui-widget-content").css("background", "transparent");
+$("#gbox_addtree").css("background", "transparent");
+$("#gbox_addtree").css("border", "0");
+/////////////////////////////////////
+/////////////////////////////////////
+// http://stackoverflow.com/questions/1195374/jqgrid-change-theme
+//     $('#myGrid .ui-widget').addClass('jqgrid-widget');
+$('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+
+
+
+function refrescarFondo_addtree() {
+
+    $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+
+}
 
 
 
 ///////////////////
- // para borrar el encabezado
- var gview = $("#addtree").parents("div.ui-jqgrid-view");
- gview.children("div.ui-jqgrid-hdiv").hide();
-
- 
- 
-     ////////////////
-
-
-     if (bPersisteArbol) {
+// para borrar el encabezado
+var gview = $("#addtree").parents("div.ui-jqgrid-view");
+gview.children("div.ui-jqgrid-hdiv").hide();
 
 
 
+////////////////
 
-         $grid.jqGrid('navButtonAdd', '#paddtree', {
-             caption: "",
-             buttonicon: "ui-icon-closethick",
-             title: "Clear saved grid's settings",
-             onClickButton: function () {
-                 removeObjectFromLocalStorage(myColumnStateName($(this)));
-                 window.location.reload();
-             }
-         });
-         $.jgrid.extend({
-             expandRow: function (rc) {
-                 //alert('before expandNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
-                 updateIdsOfExpandedRows(rc._id_, true);
-                 return orgExpandRow.call(this, rc);
-             },
-             collapseRow: function (rc) {
-                 //alert('before collapseNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
-                 updateIdsOfExpandedRows(rc._id_, false);
-                 return orgCollapseRow.call(this, rc);
-             }
-         });
-     }
 
- 
+if (bPersisteArbol) {
+
+
+
+
+    $grid.jqGrid('navButtonAdd', '#paddtree', {
+        caption: "",
+        buttonicon: "ui-icon-closethick",
+        title: "Clear saved grid's settings",
+        onClickButton: function () {
+            removeObjectFromLocalStorage(myColumnStateName($(this)));
+            window.location.reload();
+        }
+    });
+    $.jgrid.extend({
+        expandRow: function (rc) {
+            //alert('before expandNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+            updateIdsOfExpandedRows(rc._id_, true);
+            return orgExpandRow.call(this, rc);
+        },
+        collapseRow: function (rc) {
+            //alert('before collapseNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+            updateIdsOfExpandedRows(rc._id_, false);
+            return orgCollapseRow.call(this, rc);
+        }
+    });
+}
 
 
 
 
 
-    /* Remove jquery-ui styles from jqgrid */
-    function estiloArbol(){
-        $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
-
-        $("#addtree").find(".jqgfirstrow").hide(); //borra el renglon fantasma de la pantalla, parece un bug de la jqgrid http://www.trirand.com/blog/?page_id=393/help/updatecolumns-deprecated-in-3-8-is-there-a-replacement-to-fix-header-widthing-issue-1
-    }
-
-    /* Remove jquery-ui styles from jqgrid */
-    function removeJqgridUiStyles(){
-        $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
-        $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
-        $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
-        $(".ui-jqgrid-pager").removeClass("ui-state-default");
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////
 
 
+/* Remove jquery-ui styles from jqgrid */
+function estiloArbol() {
+    $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
 
+    $("#addtree").find(".jqgfirstrow").hide(); //borra el renglon fantasma de la pantalla, parece un bug de la jqgrid http://www.trirand.com/blog/?page_id=393/help/updatecolumns-deprecated-in-3-8-is-there-a-replacement-to-fix-header-widthing-issue-1
+}
 
+/* Remove jquery-ui styles from jqgrid */
+function removeJqgridUiStyles() {
+    $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+    $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+    $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+    $(".ui-jqgrid-pager").removeClass("ui-state-default");
+}
 
-    function armarMenu() {
-
-        // https: //github.com/twitter/bootstrap/issues/160
-        //                http: //stackoverflow.com/questions/9758587/twitter-bootstrap-multilevel-dropdown-menu
-        // http: //wiki.pixelpress.com.au/2012/07/23/bootstrap-3rd-level-navbar-dropdowns/
-        $.post(ROOT + "Home/Menu", null, function (data) {
-            var menu_html = '';
-
-            // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
-
-            var longitud = 0
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 
-            if (!data) return;
+function armarMenu() {
 
+    // https: //github.com/twitter/bootstrap/issues/160
+    //                http: //stackoverflow.com/questions/9758587/twitter-bootstrap-multilevel-dropdown-menu
+    // http: //wiki.pixelpress.com.au/2012/07/23/bootstrap-3rd-level-navbar-dropdowns/
+    $.post(ROOT + "Home/Menu", null, function (data) {
+        var menu_html = '';
 
-            for (var i = 0; i < data.length; i++) {
+        // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
 
-
-
-                if (longitud > 0) {
-                    if (longitud - data[i].IdItem.split("-").length == 1) { menu_html += '</ul></li>' }
-                    if (longitud - data[i].IdItem.split("-").length == 2) { menu_html += '</ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
-                    // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
-
-
-                    if (data[i - 1].EsPadre == "SI" && (longitud == data[i].IdItem.split("-").length)) { menu_html += '</ul></li>' }
-                }
-
-
-
-                //if (longitud > 0) {
-                //    if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
-                //    if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
-                //    if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                //    if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                //}
+        var longitud = 0
 
 
 
 
 
-                //if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
+        if (!data) return;
 
-                //    if (data[i].Link.length > 0) {
-                //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '"><strong>' + data[i].Link + '</strong></span><ul>'
-                //    }
-                //    else {
-                //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span><ul>'
-                //    }
 
-                //}
-                //else {
-                //    if (data[i].Link.length > 0) {
-                //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Link + '</span>' + '</li>'
-                //    }
-                //    else {
-                //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span></li>'
-                //    }
-                //}
+        for (var i = 0; i < data.length; i++) {
 
 
 
-                if (data[i].EsPadre == "SI") {
-                    if (data[i].ParentId == "") {
-                        menu_html += '<li class="dropdown pull-left " name="MenusesPronto" ><a href="#" data-toggle="dropdown" class="dropdown-toggle  pull-left ">' + data[i].Descripcion
-                        // + ' <b class="caret"></b>'
-                        + '</a><ul class="dropdown-menu" id="444' + i + '">'
-                    }
-                    else {
-                        menu_html += '<li class="dropdown-submenu " name="MenusesPronto"><a href="#">' + data[i].Descripcion + '</a><ul class="dropdown-menu" id="444' + i + '">'
-                    }
-                }
-                else {
-                    try {
-                        if (data[i].Link.length > 0) {
-                            menu_html += '<li>' + data[i].Link + '</li>'
-                        }
-                        else {
-                            menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
-                        }
-                    } catch (e) {
-                        menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
-
-                    }
+            if (longitud > 0) {
+                if (longitud - data[i].IdItem.split("-").length == 1) { menu_html += '</ul></li>' }
+                if (longitud - data[i].IdItem.split("-").length == 2) { menu_html += '</ul></li></ul></li>' }
+                if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+                // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
 
 
-                }
-
-
-
-                //longitud = data[i].IdItem.length;
-                longitud = data[i].IdItem.split("-").length;
+                if (data[i - 1].EsPadre == "SI" && (longitud == data[i].IdItem.split("-").length)) { menu_html += '</ul></li>' }
             }
 
 
 
             //if (longitud > 0) {
-            //    if (longitud - 2 == 3) { menu_html += '</ul></li>' }
-            //    if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
-            //    if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-            //    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+            //    if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
+            //    if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
+            //    if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+            //    if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
             //}
 
-            if (longitud > 0) {
-                if (longitud == 1) { menu_html += '</ul></li>' }
-                if (longitud == 2) { menu_html += '</ul></li></ul></li>' }
-                if (longitud == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
-                //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                if (longitud >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
+
+
+
+
+            //if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
+
+            //    if (data[i].Link.length > 0) {
+            //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '"><strong>' + data[i].Link + '</strong></span><ul>'
+            //    }
+            //    else {
+            //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span><ul>'
+            //    }
+
+            //}
+            //else {
+            //    if (data[i].Link.length > 0) {
+            //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Link + '</span>' + '</li>'
+            //    }
+            //    else {
+            //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span></li>'
+            //    }
+            //}
+
+
+
+            if (data[i].EsPadre == "SI") {
+                if (data[i].ParentId == "") {
+                    menu_html += '<li class="dropdown pull-left " name="MenusesPronto" ><a href="#" data-toggle="dropdown" class="dropdown-toggle  pull-left ">' + data[i].Descripcion
+                    // + ' <b class="caret"></b>'
+                    + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                }
+                else {
+                    menu_html += '<li class="dropdown-submenu " name="MenusesPronto"><a href="#">' + data[i].Descripcion + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                }
+            }
+            else {
+                try {
+                    if (data[i].Link.length > 0) {
+                        menu_html += '<li>' + data[i].Link + '</li>'
+                    }
+                    else {
+                        menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
+                    }
+                } catch (e) {
+                    menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
+
+                }
+
+
             }
 
 
 
+            //longitud = data[i].IdItem.length;
+            longitud = data[i].IdItem.split("-").length;
+        }
+
+
+
+        //if (longitud > 0) {
+        //    if (longitud - 2 == 3) { menu_html += '</ul></li>' }
+        //    if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
+        //    if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+        //    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+        //}
+
+        if (longitud > 0) {
+            if (longitud == 1) { menu_html += '</ul></li>' }
+            if (longitud == 2) { menu_html += '</ul></li></ul></li>' }
+            if (longitud == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+            //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+            if (longitud >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
+        }
 
 
 
@@ -425,11 +487,14 @@ jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defa
 
 
 
-            menu_html += ''
-            //                    $("#navigation2").empty().append(menu_html);
-            //$("#navigation2").append(menu_html);
-            //$("#navigation3").empty().append(menu_html);
-            $("#navigation3").empty().replaceWith(menu_html);
+
+
+
+        menu_html += ''
+        //                    $("#navigation2").empty().append(menu_html);
+        //$("#navigation2").append(menu_html);
+        //$("#navigation3").empty().append(menu_html);
+        $("#navigation3").empty().replaceWith(menu_html);
 
 
 
@@ -444,9 +509,9 @@ jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defa
 
 
 
-            estiloArbol();
+        estiloArbol();
 
 
-        });
-    }
+    });
+}
 
