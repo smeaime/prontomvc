@@ -1308,6 +1308,28 @@ function validatePwd2(fCallbackEnExito, fCallbackRechazada) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function Moneda_Cotizacion(fecha, IdMoneda) {
+    if (IdMoneda != 1) {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + 'Moneda/Moneda_Cotizacion',
+            data: { fecha: fecha, IdMoneda: IdMoneda },
+            dataType: "json",
+            success: function (data) {
+                if (data > 0) {
+                    return data;
+                }
+                else {
+                    return 0
+                }
+            }
+        });
+    }
+    else {
+        return 1;
+    }
+}
 
 
 
