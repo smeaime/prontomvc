@@ -20340,6 +20340,7 @@ Public Class LogicaImportador
         VICENTIN
         VICENTIN_ExcepcionTagRemitenteConflictivo
         Reyser
+        Reyser2
         ReyserAnalisis
         Unidad6
         Unidad6Prefijo_NroCarta

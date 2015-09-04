@@ -355,7 +355,7 @@
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: 'IdDetalleAsiento', label: 'TB', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: 'IdCuenta', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'item', index: 'item', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
+                                { name: 'Item', index: 'Item', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
                                 { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, hidden: false, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
                                 {
@@ -612,7 +612,9 @@
                                 {
                                     name: 'MonedaDestino', index: 'MonedaDestino',
                                     align: 'left',
-                                    width: 50, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                                    width: 50, editable: true, hidden: false,
+                                    edittype: 'select', // formatter: 'select',
+                                    editrules: { required: false },
                                     editoptions: {
                                         dataUrl: ROOT +  'Moneda/GetMonedas',
                                         dataInit: function (elem) {
@@ -624,14 +626,19 @@
                                                 if ($this.hasClass("FormElement")) {
                                                     // form editing
                                                     $('#IdMonedaDestino').val(this.value);
-                                                    $('#CotizacionMoneda').val(Moneda_Cotizacion(null, this.value));
+                                                    Moneda_Cotizacion(null, this.value, function (cotiz) {
+                                                                    $('#CotizacionMoneda').val (cotiz);
+                                                    });
                                                 } else {
                                                     $td = $this.closest("td");
                                                     if ($td.hasClass("edit-cell")) {
                                                         // cell editing
                                                         var rowid = $('#Lista').getGridParam('selrow');
                                                         $('#Lista').jqGrid('setCell', rowid, 'IdMonedaDestino', this.value);
-                                                        $('#Lista').jqGrid('setCell', rowid, 'CotizacionMoneda', Moneda_Cotizacion(null, this.value));
+                                                        Moneda_Cotizacion(null, this.value, function (cotiz) {
+                                                                $('#Lista').jqGrid('setCell', rowid, 'CotizacionMoneda', cotiz);
+                                                        });
+                                                        
                                                     } else {
                                                         // inline editing
                                                     }
@@ -706,7 +713,7 @@
 
 
                                 { name: 'IdObra', label: 'TB', key: true, index: 'IdObra', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'IdMonedaDestino', label: 'TB', key: true, index: 'IdMoneda', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: 'IdMonedaDestino', label: 'TB', key: true, index: 'IdMonedaDestino', align: 'left', width: 100, editable: false, hidden: true },
 
 
                 ],
@@ -1582,7 +1589,7 @@
                 },
                 onInitializeForm: function (form) {
                     $('#IdDetalleAsiento', form).val(0);
-                    $('#NumeroItem', form).val(ProximoNumeroItem());
+                    $('#Item', form).val(($("#Lista").jqGrid('getCol', 'Item', false, 'max') || 0) + 1);
                 }
                 //beforeShowForm: function (form) { $('#tr_IdDetalleFactura', form).hide(); }
             });
