@@ -169,7 +169,7 @@ public static class Generales
         }
 
 
-        string SC = FormatearConexParaEntityFramework(s);
+        string SC = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(s);
 
         return SC;
 
@@ -265,28 +265,7 @@ public static class Generales
         return false;
     }
 
-    public static string FormatearConexParaEntityFramework(string s)
-    {
 
-
-        var parser = new System.Data.SqlClient.SqlConnectionStringBuilder(s);
-        string servidorSQL = parser.DataSource; // "MARIANO-PC\\SQLEXPRESS";
-        string basePronto = parser.InitialCatalog;  // "Autotrol";
-        string user = parser.UserID;
-        string pass = parser.Password;
-
-
-        string SC =
-               "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;" +
-               "provider=System.Data.SqlClient;provider connection string=\"" +
-               "data source=" + servidorSQL + ";" +
-               "initial catalog=" + basePronto + ";" +
-               "persist security info=True;user id=" + user + ";" +
-               "password=" + pass + ";" +
-                "multipleactiveresultsets=True;App=EntityFramework\"";
-
-        return SC;
-    }
 
 
     public static string FormatearConexParaEntityFrameworkMant(string conexSQLBaseNormal, string nombreBaseMantenimiento)
