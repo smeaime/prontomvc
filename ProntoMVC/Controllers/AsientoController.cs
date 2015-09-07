@@ -1362,10 +1362,7 @@ namespace ProntoMVC.Controllers
 
 
 
-
-            if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El asiento no tiene items";
-
-            //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
+     //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
 
 
             //         Dim mvarImprime As Integer, mvarNumero As Integer, i As Integer
@@ -1389,6 +1386,9 @@ namespace ProntoMVC.Controllers
             }
 
 
+            if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El asiento no tiene items";
+
+       
 
 
             foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
