@@ -1138,14 +1138,14 @@ namespace ProntoMVC.Controllers
 
 
 
-        
+
         void inic(ref Asiento o)
         {
 
 
             Parametros parametros = db.Parametros.Find(1);
-            o.NumeroAsiento= parametros.ProximoAsiento;
-            
+            o.NumeroAsiento = parametros.ProximoAsiento;
+
             //o.SubNumero = 0;
             o.FechaAsiento = DateTime.Today;
             //o.IdMoneda = 1;
@@ -1349,16 +1349,21 @@ namespace ProntoMVC.Controllers
             //res.Errors = GetModelStateErrorsAsString(this.ModelState);
 
 
-
-            //if ((o.IdComprador ?? 0) <= 0)
-            //{
-            //    // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-            //    sErrorMsg += "\n" + "Falta el comprador";
-            //    // return false;
-            //}
+            if (o.FechaAsiento == null)
+            {
+                sErrorMsg += "\n" + "Falta la fecha del asiento";
+            }
 
 
-            if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El Asiento no tiene items";
+            if ((o.Concepto ?? "" ) == "")
+            {
+                sErrorMsg += "\n" + "Falta el concepto";
+            }
+
+
+
+
+            if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El asiento no tiene items";
 
             //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
 
@@ -1388,8 +1393,8 @@ namespace ProntoMVC.Controllers
 
             foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
             {
-                var c=db.Cuentas.Find(x.IdCuenta);
-                if (c==null) continue;
+                var c = db.Cuentas.Find(x.IdCuenta);
+                if (c == null) continue;
 
                 string nombre = x.Item + " El item " + x.Item + "  (" + c.Descripcion + ") ";
 
