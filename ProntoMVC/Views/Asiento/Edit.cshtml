@@ -124,12 +124,12 @@
                         </div>
 
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "Fecha")
-                            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.FechaIngreso)
+                            @Html.LabelFor(model => model.FechaAsiento, "Fecha")
+                            @Html.TextBoxFor(model => model.FechaAsiento, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.FechaAsiento)
                         </div>
                         <script>
-                            $("#FechaIngreso").datepicker({
+                            $("#FechaAsiento").datepicker({
                                 changeMonth: true,
                                 changeYear: true,
                                 dateFormat: 'dd/mm/yy'
