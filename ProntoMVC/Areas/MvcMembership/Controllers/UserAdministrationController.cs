@@ -1282,7 +1282,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
                 string sinencript = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-                string sc = Generales.FormatearConexParaEntityFramework(sinencript).Replace(".Pronto", ".bdlmaster");
+                string sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(sinencript).Replace(".Pronto", ".bdlmaster");
                 string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sinencript);
 
                 var dt = Pronto.ERP.Bll.EntidadManager.ExecDinamico(sConexBDLMaster, "[wResetearPass] '" + UserName + "'," + "'" + txtPass + "'");
@@ -1532,7 +1532,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
             string sinencript = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-            string sc = Generales.FormatearConexParaEntityFramework(sinencript).Replace(".Pronto", ".bdlmaster");
+            string sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(sinencript).Replace(".Pronto", ".bdlmaster");
             string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sinencript);
 
             DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster, "SELECT * FROM BASES");
