@@ -170,28 +170,41 @@ function RefrescaAnchoJqgrids() {
     }
 
 
-    //// if (grid = $('.ui-jqgrid-btable:visible')) {
-    //if (grid = $('.ui-jqgrid-btable')) { // le quité el visible para que tambien trabaje sobre el tab que todavía no saltó a la pantalla
-    //    grid.each(function (index) {
-    //        var gridId = $(this).attr('id');
-    //        var gridParentWidth = $('#gbox_' + gridId).parent().width();
-    //        $('#' + gridId).setGridWidth(gridParentWidth);
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // este es el codigo que actualiza (muy tarde) el ancho del arbolito
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // if (grid = $('.ui-jqgrid-btable:visible')) {
+    if (grid = $('.ui-jqgrid-btable')) { // le quité el visible para que tambien trabaje sobre el tab que todavía no saltó a la pantalla
+        grid.each(function (index) {
+            var gridId = $(this).attr('id');
+            var gridParentWidth = $('#gbox_' + gridId).parent().width();
+            $('#' + gridId).setGridWidth(gridParentWidth);
 
-    //        //en cuanto a la altura: http://stackoverflow.com/questions/3203402/jqgrid-set-row-height/3204842#3204842
+            //en cuanto a la altura: http://stackoverflow.com/questions/3203402/jqgrid-set-row-height/3204842#3204842
 
-    //        //                    var height = $('#gbox_' + gridId).parent().height();
-    //        //                    $('#' + gridId).setGridHeight(height);
+            //                    var height = $('#gbox_' + gridId).parent().height();
+            //                    $('#' + gridId).setGridHeight(height);
 
-    //        //                    jQuery("table.ui-jqgrid-htable", jQuery("#gview_list")).css("height", 30);
+            //                    jQuery("table.ui-jqgrid-htable", jQuery("#gview_list")).css("height", 30);
 
 
-    //        //                    var grid = $("#lista");
-    //        //                    var ids = grid.getDataIDs();
-    //        //                    for (var i = 0; i < ids.length; i++) {
-    //        //                        grid.setRowData(ids[i], false, { height: 20 + i * 2 });
-    //        //                    }
-    //    });
-    //}
+            //                    var grid = $("#lista");
+            //                    var ids = grid.getDataIDs();
+            //                    for (var i = 0; i < ids.length; i++) {
+            //                        grid.setRowData(ids[i], false, { height: 20 + i * 2 });
+            //                    }
+        });
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     searchBoxAncho();
