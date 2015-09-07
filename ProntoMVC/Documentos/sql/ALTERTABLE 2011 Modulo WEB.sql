@@ -1314,7 +1314,7 @@ go
 
 
 
-
+----//////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1322,7 +1322,7 @@ CREATE TABLE [dbo].FertilizantesCupos (
     [IdFertilizanteCupo]                                INT             IDENTITY (1, 1) NOT NULL,
     [Numero]											BIGINT          NULL,
 
-	
+
 	
 --Nº CUPO
 
@@ -1332,24 +1332,27 @@ CREATE TABLE [dbo].FertilizantesCupos (
     [Anulada]                                       VARCHAR (2)     NULL,
     [IdUsuarioAnulo]                                INT             NULL,
     [FechaAnulacion]                                DATETIME        NULL,
-    [Observaciones]                                 VARCHAR (200)   NULL,
     [FechaTimeStamp]                                ROWVERSION      NULL,
 
 
 
-    [Cliente]	                                    INT             NULL,
-    [CuentaOrden]                                  INT             NULL,
-
-    [IdArticulo]                                    INT             NULL,
-
 
 
 	--Fecha
+    [FechaCupo]                                  DATETIME        NULL,
 --Cliente
 --C/ORDEN
 --CUIT
 --Nombre del Chofer
 --DNI /CUIL
+	TipoEgresoIngreso							VARCHAR(1) NULL,
+
+    [Cliente]	                                    INT             NULL,
+    [CuentaOrden]									INT             NULL,
+    [IdChofer]                                      INT             NULL,
+
+
+
 
 
 
@@ -1361,21 +1364,27 @@ CREATE TABLE [dbo].FertilizantesCupos (
 --Acoplado
 
 
-
-
+	
+    [IdTransportista]                               INT             NULL,
 --Transporte
 --CUIT
 --Localidad Transp
+    [IdLocalidadTransportista]                                       INT             NULL,
 --Recorrido
---Destino de la mercaderia
+   Recorrido									INT             NULL,
+ --Destino de la mercaderia
+    [Destino]                                       INT             NULL,
 --Codigo de San
 --Contrato
+    [Contrato]                                      VARCHAR (20)    NULL,
+
+
+
+
+
+
+
 --Producto (UG,DAP,MAP,etc)
-
-
-
-
-
 --Puro
 --Mezcla
 --Producto 1
@@ -1388,6 +1397,7 @@ CREATE TABLE [dbo].FertilizantesCupos (
 --%
 
 
+    [IdArticulo]                                    INT             NULL,
 
     Puro                                       VARCHAR (2)     NULL,
     Mezcla                                       VARCHAR (2)     NULL,
@@ -1406,12 +1416,15 @@ CREATE TABLE [dbo].FertilizantesCupos (
 
 
 	--Forma de despacho (granel,bls, bigbag)
+	FormaDespacho									INT NULL,
+
 --Cantidad (Kg)
 --OBSERVACIONES
 
 
     [Cantidad]                                      NUMERIC (12, 2) NULL,
 
+    [Observaciones]                                 VARCHAR (200)   NULL,
 
 
 
