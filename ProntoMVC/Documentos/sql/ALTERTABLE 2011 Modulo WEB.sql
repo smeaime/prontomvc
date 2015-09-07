@@ -1307,3 +1307,130 @@ go
 --select * from CartasDePorteDetalle
 
 
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE [dbo].FertilizantesCupos (
+    [IdFertilizanteCupo]                                INT             IDENTITY (1, 1) NOT NULL,
+    [Numero]											BIGINT          NULL,
+
+	
+	
+--Nº CUPO
+
+
+    [IdUsuarioIngreso]                              INT             NULL,
+    [FechaIngreso]                                  DATETIME        NULL,
+    [Anulada]                                       VARCHAR (2)     NULL,
+    [IdUsuarioAnulo]                                INT             NULL,
+    [FechaAnulacion]                                DATETIME        NULL,
+    [Observaciones]                                 VARCHAR (200)   NULL,
+    [FechaTimeStamp]                                ROWVERSION      NULL,
+
+
+
+    [Cliente]	                                    INT             NULL,
+    [CuentaOrden]                                  INT             NULL,
+
+    [IdArticulo]                                    INT             NULL,
+
+
+
+	--Fecha
+--Cliente
+--C/ORDEN
+--CUIT
+--Nombre del Chofer
+--DNI /CUIL
+
+
+
+    [Chasis]                                      VARCHAR (20)    NULL,
+    [Acoplado]                                      VARCHAR (20)    NULL,
+
+
+--Chasis
+--Acoplado
+
+
+
+
+--Transporte
+--CUIT
+--Localidad Transp
+--Recorrido
+--Destino de la mercaderia
+--Codigo de San
+--Contrato
+--Producto (UG,DAP,MAP,etc)
+
+
+
+
+
+--Puro
+--Mezcla
+--Producto 1
+--%
+--Producto 2
+--%
+--Producto 3
+--%
+--Producto4
+--%
+
+
+
+    Puro                                       VARCHAR (2)     NULL,
+    Mezcla                                       VARCHAR (2)     NULL,
+
+
+    [IdArticuloComponente1]                             INT             NULL,
+    [Porcentaje1]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente2]                             INT             NULL,
+    [Porcentaje2]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente3]                             INT             NULL,
+    [Porcentaje3]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente4]                             INT             NULL,
+    [Porcentaje4]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente5]                             INT             NULL,
+    [Porcentaje5]	                                    NUMERIC (18, 2) NULL,
+
+
+	--Forma de despacho (granel,bls, bigbag)
+--Cantidad (Kg)
+--OBSERVACIONES
+
+
+    [Cantidad]                                      NUMERIC (12, 2) NULL,
+
+
+
+
+
+    [PathImagen]                                    VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [PathImagen2]                                   VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [AgrupadorDeTandaPeriodos]                      INT             NULL,
+    [ClaveEncriptada]                               VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [NumeroCartaEnTextoParaBusqueda]                VARCHAR (20)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [SubnumeroVagonEnTextoParaBusqueda]             VARCHAR (50)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+
+
+
+	
+
+);
+
+
+
+
+
+
