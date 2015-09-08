@@ -1,0 +1,50 @@
+
+Log Entry : 
+07/28/2015 11:10:31
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/28/2015 11:10:32
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/28/2015 11:10:37
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/28/2015 11:38:42
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+07/28/2015 11:39:05
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+07/28/2015 20:28:41
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+07/28/2015 20:28:54
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+07/28/2015 21:05:23
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:The controller for path '/Pronto500/OrdenCompra_DynamicGridData/TT' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+07/28/2015 21:05:23
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/28/2015 21:05:28
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:Mandado
+__________________________

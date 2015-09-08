@@ -1,0 +1,272 @@
+
+Log Entry : 
+08/03/2015 08:19:22
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.NotaDebitoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/03/2015 08:19:22
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:19:28
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 08:19:56
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.NotaDebitoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/03/2015 08:19:56
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:19:59
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 08:32:21
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+08/03/2015 08:32:21
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:32:25
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:24
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:'Tipo' is not a member of type 'DemoProntoModel.NotasDebito' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:24
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:28
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:40
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:'Tipo' is not a member of type 'DemoProntoModel.NotasDebito' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:40
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:45
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:58
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:'Tipo' is not a member of type 'DemoProntoModel.NotasDebito' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 08:54:58
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:55:02
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 08:56:03
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:'Codigo' is not a member of type 'DemoProntoModel.Recibo' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 08:56:03
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:56:06
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 08:58:03
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:'Codigo' is not a member of type 'DemoProntoModel.Recibo' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 08:58:03
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 08:58:07
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 09:00:36
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:'CtaCte' is not a member of type 'DemoProntoModel.Recibo' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 09:00:36
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 09:00:40
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 09:01:57
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:'Vendedor' is not a member of type 'DemoProntoModel.Recibo' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 09:01:57
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 09:02:00
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 09:16:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/03/2015 09:16:29
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/03/2015 09:16:57
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/03/2015 09:54:19
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:'UsuarioIngreso' is not a member of type 'DemoProntoModel.OrdenesCompra' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+08/03/2015 09:54:19
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 09:54:22
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 11:30:03
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/03/2015 11:30:03
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 11:30:08
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 11:30:47
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/03/2015 11:30:47
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 11:30:51
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 15:30:22
+Error in: http://localhost:40053/Pronto500/. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/03/2015 15:30:22
+Error in: http://localhost:40053/Pronto500/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 15:30:26
+Error in: http://localhost:40053/Pronto500/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 16:43:04
+Error in: http://localhost:40053/Pronto500/. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/03/2015 16:43:04
+Error in: http://localhost:40053/Pronto500/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 16:43:08
+Error in: http://localhost:40053/Pronto500/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/03/2015 18:17:26
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:archivo \\SERVERSQL2\DocumentosPronto\Plantillas\..\app\DemoProntoWeb.app
+__________________________
+
+Log Entry : 
+08/03/2015 18:17:48
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:archivo \\SERVERSQL2\DocumentosPronto\Plantillas\..\app\DemoProntoWeb.app
+__________________________
+
+Log Entry : 
+08/03/2015 18:19:07
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:archivo \\SERVERSQL2\DocumentosPronto\Plantillas\..\app\DemoProntoWeb.app
+__________________________
+
+Log Entry : 
+08/03/2015 18:40:17
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+__________________________
+
+Log Entry : 
+08/03/2015 18:40:17
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/03/2015 18:40:21
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mandado
+__________________________

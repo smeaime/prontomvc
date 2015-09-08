@@ -1,0 +1,214 @@
+
+Log Entry : 
+09/04/2015 12:35:37
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/04/2015 12:35:38
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/04/2015 12:35:41
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/04/2015 12:44:50
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=asientos. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+09/04/2015 12:44:50
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=asientos. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:eeaf61a5-c6a0-43f9-a07b-b3bb72038fde
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 847
+DataAccess
+__________________________
+
+Log Entry : 
+09/04/2015 12:45:14
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 12:45:37
+Error in: http://localhost:40053/Pronto500/Moneda/Moneda_Cotizacion?fecha=&IdMoneda=. Error Message:The parameters dictionary contains a null entry for parameter 'IdMoneda' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.JsonResult Moneda_Cotizacion(System.Nullable`1[System.DateTime], Int32)' in 'ProntoMVC.Controllers.MonedaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/04/2015 12:45:37
+Error in: http://localhost:40053/Pronto500/Moneda/Moneda_Cotizacion?fecha=&IdMoneda=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/04/2015 12:45:40
+Error in: http://localhost:40053/Pronto500/Moneda/Moneda_Cotizacion?fecha=&IdMoneda=. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/04/2015 12:48:52
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 12:58:58
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 13:23:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 13:23:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 13:24:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 13:26:00
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 13:27:00
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 13:28:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:09:24
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:09:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:13:47
+Error in: http://localhost:40053/Pronto500/Asiento/Edit/3424. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+09/04/2015 14:13:47
+Error in: http://localhost:40053/Pronto500/Asiento/Edit/3424. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/04/2015 14:13:51
+Error in: http://localhost:40053/Pronto500/Asiento/Edit/3424. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/04/2015 14:14:04
+Error in: http://localhost:40053/Pronto500/Asiento/Edit/3424. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+09/04/2015 14:14:04
+Error in: http://localhost:40053/Pronto500/Asiento/Edit/3424. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/04/2015 14:14:08
+Error in: http://localhost:40053/Pronto500/Asiento/Edit/3424. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/04/2015 14:14:28
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:17:04
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:18:24
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:20:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:22:46
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:33:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:34:20
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:34:37
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/04/2015 14:36:36
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________

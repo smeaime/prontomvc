@@ -1,0 +1,1055 @@
+
+Log Entry : 
+08/26/2015 08:02:18
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1953
+mscorlib
+__________________________
+
+Log Entry : 
+08/26/2015 08:02:36
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/8bacc72a-e49a-4d76-80c4-a322cba37af6. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1953
+mscorlib
+__________________________
+
+Log Entry : 
+08/26/2015 08:02:59
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/UsersEmpresas/8bacc72a-e49a-4d76-80c4-a322cba37af6. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1953
+mscorlib
+__________________________
+
+Log Entry : 
+08/26/2015 08:03:18
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/UsersEmpresas/8bacc72a-e49a-4d76-80c4-a322cba37af6. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1953
+mscorlib
+__________________________
+
+Log Entry : 
+08/26/2015 08:03:39
+Error in: http://localhost:40053/Pronto500/Account/BaseElegida/?sBase=Vialagro. Error Message:System.InvalidOperationException
+The 'IdCondicionVenta' property on 'Factura' could not be set to a 'System.Int16' value. You must set this property to a non-null value of type 'System.Int32'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.GetPropertyValueWithErrorHandling[TProperty](Int32 ordinal, String propertyName, String typeName)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.AccountController.BaseElegida(String sBase, String returnUrl) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccountController.cs:line 1496
+EntityFramework
+__________________________
+
+Log Entry : 
+08/26/2015 08:04:49
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuen. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:04
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuen. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:04
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuen. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:09
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuen. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:11
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuent. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:13
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuent. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:13
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuent. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:16
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuent. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 08:05:38
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=c. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 08:14:36
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:The controller for path '/Pronto500/Categoria/' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/26/2015 08:14:36
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:14:39
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 08:23:00
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/26/2015 08:23:00
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:23:04
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 08:24:18
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:The controller for path '/Pronto500/Categoria/' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/26/2015 08:24:18
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:24:22
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 08:25:13
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:The controller for path '/Pronto500/Categoria/' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/26/2015 08:25:13
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:25:17
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 08:28:31
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:The controller for path '/Pronto500/Categoria/' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/26/2015 08:28:31
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:28:34
+Error in: http://localhost:40053/Pronto500/Categoria/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 08:28:57
+Error in: http://localhost:40053/Pronto500/IngresosBruto/. Error Message:The controller for path '/Pronto500/IngresosBruto/' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/26/2015 08:28:57
+Error in: http://localhost:40053/Pronto500/IngresosBruto/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 08:29:00
+Error in: http://localhost:40053/Pronto500/IngresosBruto/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 09:45:50
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/2. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/26/2015 09:46:16
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/26/2015 09:48:26
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/3. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 10:01:12
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/3. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 10:29:18
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/-1. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/26/2015 10:29:19
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 10:29:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 10:32:34
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/-1. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/26/2015 10:33:22
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 10:33:27
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 11:18:12
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/26/2015 11:18:12
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 11:18:16
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 11:27:26
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/26/2015 11:27:26
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 11:27:30
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 11:32:04
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/26/2015 11:32:04
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 11:32:07
+Error in: http://localhost:40053/Pronto500/Proveedor/Proveedores. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 12:04:41
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuentas. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 12:04:42
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuentas. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:ed64f86b-3e8e-4a97-af14-8c31b5debcb0
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 820
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 12:05:27
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 12:05:28
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:ed64f86b-3e8e-4a97-af14-8c31b5debcb0
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 820
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 12:09:55
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 12:13:09
+Error in: http://localhost:40053/Pronto500/. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+08/26/2015 12:13:09
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+08/26/2015 12:13:09
+Error in: http://localhost:40053/Pronto500/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 12:13:09
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 12:13:13
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 12:13:18
+Error in: http://localhost:40053/Pronto500/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 12:14:08
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+08/26/2015 12:14:08
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 12:14:11
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:14
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:14
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:14
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:14
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:14
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:14
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:14
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:18
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:21
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:21
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 12:16:21
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/26/2015 14:29:08
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/7. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 14:31:24
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/7. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 14:56:29
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/7. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 14:57:26
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/7. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 15:05:48
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/7. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:31
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cu. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:31
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cu. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:36
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cue. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:36
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cue. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:42
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuen. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:42
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuen. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:43
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuent. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:43
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=cuent. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:46
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=c. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:46
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=c. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:47
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:47
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:48
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=reque. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:48
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=reque. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:59
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:41:59
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________
+
+Log Entry : 
+08/26/2015 15:42:06
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=rub. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/26/2015 15:42:06
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=rub. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusquedaMVC conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4}mLkuGfg0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:8642674a-d62d-46e7-949e-a1128bb2074d
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 337
+   at ProntoMVC.Controllers.HomeController.Superbuscador(String term) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 837
+DataAccess
+__________________________

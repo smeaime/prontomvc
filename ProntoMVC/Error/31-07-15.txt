@@ -1,0 +1,330 @@
+
+Log Entry : 
+07/31/2015 01:40:38
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/31/2015 01:40:38
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 01:40:42
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 02:36:00
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/31/2015 02:36:00
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 02:36:04
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 02:37:06
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/31/2015 02:37:06
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 02:37:10
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 02:44:54
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+07/31/2015 02:44:54
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 02:44:57
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 02:54:01
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+07/31/2015 02:54:01
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 02:54:05
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 03:00:17
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 28.
+__________________________
+
+Log Entry : 
+07/31/2015 03:00:17
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 03:00:21
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 05:55:09
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/31/2015 05:55:10
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 05:55:15
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 05:59:41
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:The argument types 'Edm.String' and 'Edm.Int32' are incompatible for this operation. Near addition operation, line 6, column 61.
+__________________________
+
+Log Entry : 
+07/31/2015 05:59:41
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 05:59:45
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 06:01:34
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:The argument types 'Edm.String' and 'Edm.Int32' are incompatible for this operation. Near addition operation, line 6, column 61.
+__________________________
+
+Log Entry : 
+07/31/2015 06:01:34
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 06:01:37
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 06:02:58
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:The argument types 'Edm.String' and 'Edm.Int32' are incompatible for this operation. Near addition operation, line 6, column 61.
+__________________________
+
+Log Entry : 
+07/31/2015 06:02:58
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 06:03:02
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 12:39:13
+Error in: http://localhost:40053/Pronto500/Factura/Index. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+07/31/2015 12:39:13
+Error in: http://localhost:40053/Pronto500/Factura/Index. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 12:39:18
+Error in: http://localhost:40053/Pronto500/Factura/Index. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 15:19:53
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:The controller for path '/Pronto500/OrdenCompra_DynamicGridData/TT' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+07/31/2015 15:19:53
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 15:19:57
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 15:33:28
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\pronto500\e4a64adc\13429a27\App_Web_recuperarpassword.cshtml.5f83eb8c.svuhk5cy.0.cs(32): error CS0234: The type or namespace name 'RecuperarPasswordModel' does not exist in the namespace 'ProntoMVC.Data.Models' (are you missing an assembly reference?)
+__________________________
+
+Log Entry : 
+07/31/2015 15:33:28
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 15:33:33
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 15:48:15
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/8. Error Message:El nombre de columna 'Activa' no es válido.
+__________________________
+
+Log Entry : 
+07/31/2015 15:48:15
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/8. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 15:48:19
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/8. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 15:49:38
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:The CAST argument expression must be of a scalar type. Near member access expression, line 6, column 11.
+__________________________
+
+Log Entry : 
+07/31/2015 15:49:39
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 15:49:42
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 16:16:15
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:'FechaRecibo' is not a member of type 'DemoProntoModel.NotasDebito' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+07/31/2015 16:16:15
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 16:16:19
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 16:25:42
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:'FechaRecibo' is not a member of type 'DemoProntoModel.NotasDebito' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+07/31/2015 16:25:42
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 16:25:45
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 16:41:25
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/31/2015 16:41:25
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 16:41:29
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 16:52:48
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/31/2015 16:52:48
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 16:52:52
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 17:10:16
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+07/31/2015 17:10:16
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 17:10:20
+Error in: http://localhost:40053/Pronto500/NotaDebito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 17:12:21
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:The CAST argument expression must be of a scalar type. Near member access expression, line 6, column 11.
+__________________________
+
+Log Entry : 
+07/31/2015 17:12:21
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 17:12:25
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/31/2015 17:12:32
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:The CAST argument expression must be of a scalar type. Near member access expression, line 6, column 11.
+__________________________
+
+Log Entry : 
+07/31/2015 17:12:32
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/31/2015 17:12:36
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:Mandado
+__________________________
