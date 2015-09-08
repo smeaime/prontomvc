@@ -1,0 +1,30 @@
+
+Log Entry : 
+06/29/2015 10:04:42
+Error in: http://localhost:40053/Pronto500/Scripts/ScriptRecibo?222.js. Error Message:The controller for path '/Pronto500/Scripts/ScriptRecibo' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+06/29/2015 10:04:42
+Error in: http://localhost:40053/Pronto500/Scripts/ScriptRecibo?222.js. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/29/2015 10:04:46
+Error in: http://localhost:40053/Pronto500/Scripts/ScriptRecibo?222.js. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/29/2015 10:04:46
+Error in: http://localhost:40053/Pronto500/Scripts/ScriptRecibo?222.js. Error Message:The controller for path '/Pronto500/Scripts/ScriptRecibo' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+06/29/2015 10:04:46
+Error in: http://localhost:40053/Pronto500/Scripts/ScriptRecibo?222.js. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/29/2015 10:04:50
+Error in: http://localhost:40053/Pronto500/Scripts/ScriptRecibo?222.js. Error Message:Mandado
+__________________________

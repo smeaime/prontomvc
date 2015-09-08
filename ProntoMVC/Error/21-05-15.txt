@@ -1,0 +1,507 @@
+
+Log Entry : 
+05/21/2015 09:31:17
+Error in: http://localhost:40053/Pronto500/. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+05/21/2015 09:31:17
+Error in: http://localhost:40053/Pronto500/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 09:31:21
+Error in: http://localhost:40053/Pronto500/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 09:34:59
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Guid' for method 'System.Web.Mvc.ViewResult Details(System.Guid)' in 'ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+05/21/2015 09:34:59
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 09:35:03
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 09:39:38
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Guid' for method 'System.Web.Mvc.ViewResult Details(System.Guid)' in 'ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+05/21/2015 09:39:38
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 09:39:41
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 09:56:59
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Guid' for method 'System.Web.Mvc.ViewResult Details(System.Guid)' in 'ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+05/21/2015 09:56:59
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 09:57:03
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 09:57:14
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:40:52
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Guid' for method 'System.Web.Mvc.ViewResult Details(System.Guid)' in 'ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+05/21/2015 10:40:52
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 10:40:56
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 10:40:59
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:41:14
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1bc7ce95-2fc3-4a27-89a0-5c31d59e14e9. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:41:43
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:42:54
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:43:11
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:43:31
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:45:04
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:45:21
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/UsersEmpresas/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:45:33
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/UsersEmpresas/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 10:53:53
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/2115. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\Articulo\Edit.cshtml(39): error CS1061: 'ProntoMVC.Data.Models.Articulo' does not contain a definition for 'p' and no extension method 'p' accepting a first argument of type 'ProntoMVC.Data.Models.Articulo' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+05/21/2015 10:53:53
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/2115. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 10:53:58
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/2115. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 10:54:55
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/2115. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\Articulo\Edit.cshtml(39): error CS1061: 'ProntoMVC.Data.Models.Articulo' does not contain a definition for 'p' and no extension method 'p' accepting a first argument of type 'ProntoMVC.Data.Models.Articulo' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+05/21/2015 10:54:55
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/2115. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 10:55:00
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/2115. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 11:08:07
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 11:13:06
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'democomercial2' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at WebMatrix.WebData.SimpleRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccesoController.cs:line 370
+System.Web
+__________________________
+
+Log Entry : 
+05/21/2015 11:28:56
+Error in: http://localhost:40053/Pronto500/Articulo/RefrescarMascara?IdRubro=1&IdSubrubro=1. Error Message:System.ArgumentException
+An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Web.Mvc.ViewDataDictionary.Add(String key, Object value)
+   at ProntoMVC.Controllers.ArticuloController.CargarViewBag(Articulo o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ArticuloController.cs:line 585
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 11:29:08
+Error in: http://localhost:40053/Pronto500/Articulo/RefrescarMascara?IdRubro=1&IdSubrubro=1. Error Message:System.ArgumentException
+An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Web.Mvc.ViewDataDictionary.Add(String key, Object value)
+   at ProntoMVC.Controllers.ArticuloController.CargarViewBag(Articulo o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ArticuloController.cs:line 585
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 11:37:31
+Error in: http://localhost:40053/Pronto500/Articulo/RefrescarMascara?IdRubro=1&IdSubrubro=1. Error Message:System.ArgumentException
+An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Web.Mvc.ViewDataDictionary.Add(String key, Object value)
+   at ProntoMVC.Controllers.ArticuloController.CargarViewBag(Articulo o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ArticuloController.cs:line 585
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 11:37:40
+Error in: http://localhost:40053/Pronto500/Articulo/RefrescarMascara?IdRubro=1&IdSubrubro=1. Error Message:System.ArgumentException
+An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Web.Mvc.ViewDataDictionary.Add(String key, Object value)
+   at ProntoMVC.Controllers.ArticuloController.CargarViewBag(Articulo o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ArticuloController.cs:line 585
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 11:51:27
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 11:52:40
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'democomercial2' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at WebMatrix.WebData.SimpleRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccesoController.cs:line 370
+System.Web
+__________________________
+
+Log Entry : 
+05/21/2015 11:54:16
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'democomercial2' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at WebMatrix.WebData.SimpleRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccesoController.cs:line 370
+System.Web
+__________________________
+
+Log Entry : 
+05/21/2015 11:55:26
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'democomercial2' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at WebMatrix.WebData.SimpleRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccesoController.cs:line 370
+System.Web
+__________________________
+
+Log Entry : 
+05/21/2015 11:57:48
+Error in: http://localhost:40053/Pronto500/Autorizacion/. Error Message:No tiene permisos de autorización
+__________________________
+
+Log Entry : 
+05/21/2015 11:57:48
+Error in: http://localhost:40053/Pronto500/Autorizacion/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 11:57:52
+Error in: http://localhost:40053/Pronto500/Autorizacion/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 11:59:08
+Error in: http://localhost:40053/Pronto500/Autorizacion/. Error Message:No tiene permisos de autorización
+__________________________
+
+Log Entry : 
+05/21/2015 11:59:08
+Error in: http://localhost:40053/Pronto500/Autorizacion/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 11:59:14
+Error in: http://localhost:40053/Pronto500/Autorizacion/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 12:01:42
+Error in: http://localhost:40053/Pronto500/__browserLink/requestData/2590657fc3c64bec93ae57f56a3cb200?version=2. Error Message:The controller for path '/Pronto500/__browserLink/requestData/2590657fc3c64bec93ae57f56a3cb200' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+05/21/2015 12:01:42
+Error in: http://localhost:40053/Pronto500/__browserLink/requestData/2590657fc3c64bec93ae57f56a3cb200?version=2. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 12:01:46
+Error in: http://localhost:40053/Pronto500/__browserLink/requestData/2590657fc3c64bec93ae57f56a3cb200?version=2. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 14:41:35
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:Emision "=dwamIwd4:,a+`ixw}*Spwdtncs(;Mtaunbn(%yrg4""uAdv0xusv*8hautv4dvuavudfAC0""8;""_+gT%ynbEvj`tusvjwqONvcM~aMau0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\",141,False,Nothing,1,NO|NO|2|3|4|1/1/1800|1/1/2100,Nothing
+__________________________
+
+Log Entry : 
+05/21/2015 14:41:35
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:5 argumento
+__________________________
+
+Log Entry : 
+05/21/2015 14:41:59
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:Explota en la llamada a Emision ()Exception from HRESULT: 0x800A9C68
+__________________________
+
+Log Entry : 
+05/21/2015 14:41:59
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:Pudo ejecutar el Emision(), ahora tratará de grabar
+__________________________
+
+Log Entry : 
+05/21/2015 14:41:59
+Error in: http://localhost:40053/Pronto500/NotaDebito/Index. Error Message:No tenés permisos
+__________________________
+
+Log Entry : 
+05/21/2015 14:41:59
+Error in: http://localhost:40053/Pronto500/NotaDebito/Index. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 14:42:04
+Error in: http://localhost:40053/Pronto500/NotaDebito/Index. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 14:42:08
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:cerrando...
+__________________________
+
+Log Entry : 
+05/21/2015 14:42:12
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:oDoc.Close(False) exito
+__________________________
+
+Log Entry : 
+05/21/2015 14:42:12
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:NAR(oDoc) exito
+__________________________
+
+Log Entry : 
+05/21/2015 14:42:12
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:oW.Quit() exito
+__________________________
+
+Log Entry : 
+05/21/2015 14:42:12
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message: NAR(oW) exito
+__________________________
+
+Log Entry : 
+05/21/2015 14:42:12
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/141. Error Message:Se llamó con exito a GC.Collect
+__________________________
+
+Log Entry : 
+05/21/2015 14:50:02
+Error in: http://localhost:40053/Pronto500/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=810d17861f7c43949c3f61cd063583a9. Error Message:La sesión ASP.NET ha expirado o no se pudo encontrar.
+__________________________
+
+Log Entry : 
+05/21/2015 14:50:02
+Error in: http://localhost:40053/Pronto500/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=810d17861f7c43949c3f61cd063583a9. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 14:50:06
+Error in: http://localhost:40053/Pronto500/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=810d17861f7c43949c3f61cd063583a9. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/21/2015 16:13:11
+Error in: http://localhost:40053/Pronto500/Articulo/RefrescarMascara?IdRubro=1&IdSubrubro=1. Error Message:System.ArgumentException
+An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Web.Mvc.ViewDataDictionary.Add(String key, Object value)
+   at ProntoMVC.Controllers.ArticuloController.CargarViewBag(Articulo o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ArticuloController.cs:line 585
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 16:19:34
+Error in: http://localhost:40053/Pronto500/Articulo/RefrescarMascara?IdRubro=1&IdSubrubro=1. Error Message:System.ArgumentException
+An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Web.Mvc.ViewDataDictionary.Add(String key, Object value)
+   at ProntoMVC.Controllers.ArticuloController.CargarViewBag(Articulo o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ArticuloController.cs:line 585
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 16:20:10
+Error in: http://localhost:40053/Pronto500/Articulo/RefrescarMascara?IdRubro=1&IdSubrubro=1. Error Message:System.ArgumentException
+An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Web.Mvc.ViewDataDictionary.Add(String key, Object value)
+   at ProntoMVC.Controllers.ArticuloController.CargarViewBag(Articulo o) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ArticuloController.cs:line 585
+mscorlib
+__________________________
+
+Log Entry : 
+05/21/2015 16:23:40
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/-1. Error Message:Encountered end tag "div" with no matching start tag.  Are your start/end tags properly balanced?
+
+__________________________
+
+Log Entry : 
+05/21/2015 16:23:40
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/21/2015 16:23:44
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/-1. Error Message:Mandado
+__________________________

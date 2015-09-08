@@ -1,0 +1,220 @@
+
+Log Entry : 
+05/27/2015 15:06:52
+Error in: http://localhost:40053/Pronto500/. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+05/27/2015 15:06:52
+Error in: http://localhost:40053/Pronto500/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 15:06:55
+Error in: http://localhost:40053/Pronto500/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:02
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Emision "=dwamIwd4:,a+`ixw}*Spwdtncs(;Mtaunbn(%yrg4""uAdv0xusv*8hautv4dvuavudfAC0""8;""_+gT%ynbEvj`tusvjwqONvcM~aMau0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\",143,False,Nothing,1,NO|NO|2|3|4|1/1/1800|1/1/2100,Nothing
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:02
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:5 argumento
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:12
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Explota en la llamada a Emision ()No se puede mover el enfoque al control porque no es visible, no está habilitado o es de un tipo que no acepta el enfoque.
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:12
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Pudo ejecutar el Emision(), ahora tratará de grabar
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:13
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:cerrando...
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:13
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:oDoc.Close(False) exito
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:13
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:NAR(oDoc) exito
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:13
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:oW.Quit() exito
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:13
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message: NAR(oW) exito
+__________________________
+
+Log Entry : 
+05/27/2015 15:32:14
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Se llamó con exito a GC.Collect
+__________________________
+
+Log Entry : 
+05/27/2015 16:28:20
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:No se encuentra la plantilla C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Documentos\Factura_A_BaseNueva_FA.dot
+__________________________
+
+Log Entry : 
+05/27/2015 16:29:09
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Could not find file 'C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Documentos\archivo.pdf'.
+__________________________
+
+Log Entry : 
+05/27/2015 16:29:09
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 16:29:13
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:05
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Emision "=dwamIwd4:,a+`ixw}*Spwdtncs(;Mtaunbn(%yrg4""uAdv0xusv*8hautv4dvuavudfAC0""8;""_+gT%ynbEvj`tusvjwqONvcM~aMau0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\",143,False,Nothing,1,NO|NO|2|3|4|1/1/1800|1/1/2100,Nothing
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:05
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:5 argumento
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:05
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Explota en la llamada a Emision ()Number of parameters specified does not match the expected number.
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:05
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Pudo ejecutar el Emision(), ahora tratará de grabar
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:07
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:cerrando...
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:08
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:oDoc.Close(False) exito
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:08
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:NAR(oDoc) exito
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:08
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:oW.Quit() exito
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:08
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message: NAR(oW) exito
+__________________________
+
+Log Entry : 
+05/27/2015 17:05:08
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInteropPDF/143. Error Message:Se llamó con exito a GC.Collect
+__________________________
+
+Log Entry : 
+05/27/2015 17:11:31
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInterop/143. Error Message:Sólo podes acceder a facturas a tu nombre
+__________________________
+
+Log Entry : 
+05/27/2015 17:11:31
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInterop/143. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 17:11:35
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInterop/143. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/27/2015 17:47:52
+Error in: http://localhost:40053/Pronto500/Content/bootstrap.css. Error Message:Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+__________________________
+
+Log Entry : 
+05/27/2015 17:47:52
+Error in: http://localhost:40053/Pronto500/Content/bootstrap.css. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 17:47:52
+Error in: http://localhost:40053/Pronto500/Content/jquery.alerts.css. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 17:47:55
+Error in: http://localhost:40053/Pronto500/Content/bootstrap.css. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/27/2015 17:47:56
+Error in: http://localhost:40053/Pronto500/Content/jquery.alerts.css. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/27/2015 17:47:58
+Error in: http://localhost:40053/Pronto500/Scripts/TreeView/jquery.cookie.js. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:05
+Error in: http://localhost:40053/Pronto500/Scripts/jquery-layout/jquery.layout-latest.min.js. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:05
+Error in: http://localhost:40053/Pronto500/Scripts/jquery-grid/grid.locale-es.js. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:05
+Error in: http://localhost:40053/Pronto500/Scripts/TreeView/jquery.cookie.js. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:07
+Error in: http://localhost:40053/Pronto500/Scripts/jquery-layout/jquery.layout-latest.min.js. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:07
+Error in: http://localhost:40053/Pronto500/Scripts/jquery-grid/grid.locale-es.js. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:10
+Error in: http://localhost:40053/Pronto500/Scripts/jquery-grid/grid.locale-es.js. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:10
+Error in: http://localhost:40053/Pronto500/Scripts/jquery-layout/jquery.layout-latest.min.js. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/27/2015 17:48:11
+Error in: http://localhost:40053/Pronto500/Scripts/TreeView/jquery.cookie.js. Error Message:Mandado
+__________________________
