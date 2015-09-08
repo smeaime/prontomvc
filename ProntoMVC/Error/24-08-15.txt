@@ -1,0 +1,111 @@
+
+Log Entry : 
+08/24/2015 18:10:54
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/24/2015 18:10:54
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/24/2015 18:10:57
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/24/2015 18:14:15
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:A public action method 'IndexExterno' was not found on controller 'ProntoMVC.Controllers.OrdenPagoController'.
+__________________________
+
+Log Entry : 
+08/24/2015 18:14:15
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/24/2015 18:14:18
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/24/2015 18:14:36
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:A public action method 'IndexExterno' was not found on controller 'ProntoMVC.Controllers.OrdenPagoController'.
+__________________________
+
+Log Entry : 
+08/24/2015 18:14:36
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/24/2015 18:14:39
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/24/2015 18:16:54
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:A public action method 'IndexExterno' was not found on controller 'ProntoMVC.Controllers.OrdenPagoController'.
+__________________________
+
+Log Entry : 
+08/24/2015 18:16:54
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/24/2015 18:16:57
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/24/2015 18:29:56
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:A public action method 'IndexExterno' was not found on controller 'ProntoMVC.Controllers.OrdenPagoController'.
+__________________________
+
+Log Entry : 
+08/24/2015 18:29:56
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/24/2015 18:29:59
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/24/2015 18:30:46
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:A public action method 'IndexExterno' was not found on controller 'ProntoMVC.Controllers.OrdenPagoController'.
+__________________________
+
+Log Entry : 
+08/24/2015 18:30:46
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/24/2015 18:30:49
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/24/2015 18:33:27
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:A public action method 'IndexExterno' was not found on controller 'ProntoMVC.Controllers.OrdenPagoController'.
+__________________________
+
+Log Entry : 
+08/24/2015 18:33:27
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/24/2015 18:33:30
+Error in: http://localhost:40053/Pronto500/OrdenPago/IndexExterno. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/24/2015 18:41:35
+Error in: http://localhost:40053/Pronto500/OrdenPago/OrdenesPagoEnCajaUsandoDataset. Error Message:Me faltan parametros. OrdenesPago_TX_EnCaja esperaba 2 y se le pasaron 1
+__________________________
