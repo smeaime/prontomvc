@@ -1,0 +1,950 @@
+
+Log Entry : 
+07/01/2015 10:15:26
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Character literal must contain exactly one character
+__________________________
+
+Log Entry : 
+07/01/2015 10:15:26
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:15:30
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:16:35
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Character literal must contain exactly one character
+__________________________
+
+Log Entry : 
+07/01/2015 10:16:35
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:16:39
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:17:22
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Operator '=' incompatible with operand types 'String' and 'Char'
+__________________________
+
+Log Entry : 
+07/01/2015 10:17:22
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:17:26
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:21:41
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:')' or operator expected
+__________________________
+
+Log Entry : 
+07/01/2015 10:21:41
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:21:44
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:22:22
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:')' or operator expected
+__________________________
+
+Log Entry : 
+07/01/2015 10:22:22
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:22:25
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:23:10
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:')' or operator expected
+__________________________
+
+Log Entry : 
+07/01/2015 10:23:10
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:23:13
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:23:35
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Expression of type 'Boolean' expected
+__________________________
+
+Log Entry : 
+07/01/2015 10:23:35
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:23:38
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:24:16
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Expression of type 'Boolean' expected
+__________________________
+
+Log Entry : 
+07/01/2015 10:24:16
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:24:20
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 10:24:42
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Expression of type 'Boolean' expected
+__________________________
+
+Log Entry : 
+07/01/2015 10:24:42
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 10:24:46
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 12:14:46
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No property or field 'p0' exists in type 'CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1'
+__________________________
+
+Log Entry : 
+07/01/2015 12:14:46
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 12:14:51
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 12:16:40
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No property or field 'p0' exists in type 'CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1'
+__________________________
+
+Log Entry : 
+07/01/2015 12:16:40
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 12:16:43
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 12:18:18
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No property or field 'p0' exists in type 'CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1'
+__________________________
+
+Log Entry : 
+07/01/2015 12:18:18
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 12:18:22
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 12:41:25
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+07/01/2015 12:41:25
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 12:41:29
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 12:45:37
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+07/01/2015 12:45:37
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 12:45:41
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 13:00:42
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+07/01/2015 13:00:42
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 13:00:46
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 13:01:07
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:The result of a query cannot be enumerated more than once.
+__________________________
+
+Log Entry : 
+07/01/2015 13:01:07
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 13:01:11
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 13:03:11
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+__________________________
+
+Log Entry : 
+07/01/2015 13:03:11
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 13:03:15
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 13:26:17
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+07/01/2015 13:26:17
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 13:26:21
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 13:35:05
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:The result of a query cannot be enumerated more than once.
+__________________________
+
+Log Entry : 
+07/01/2015 13:35:05
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 13:35:09
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 14:35:03
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+07/01/2015 14:35:03
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 14:35:07
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 14:50:06
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+07/01/2015 14:50:06
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 14:50:09
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 15:12:47
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:String was not recognized as a valid DateTime.
+__________________________
+
+Log Entry : 
+07/01/2015 15:12:47
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 15:12:51
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 15:13:35
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:String was not recognized as a valid DateTime.
+__________________________
+
+Log Entry : 
+07/01/2015 15:13:35
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 15:13:39
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 15:22:20
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:String was not recognized as a valid DateTime.
+__________________________
+
+Log Entry : 
+07/01/2015 15:22:20
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 15:22:23
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 15:24:15
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:String was not recognized as a valid DateTime.
+__________________________
+
+Log Entry : 
+07/01/2015 15:24:15
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 15:24:19
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 15:57:26
+Error in: http://localhost:40053/Pronto500/Factura/Edit/142. Error Message:El nombre de columna 'IdClienteObservaciones' no es válido.
+__________________________
+
+Log Entry : 
+07/01/2015 15:57:26
+Error in: http://localhost:40053/Pronto500/Factura/Edit/142. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 15:57:30
+Error in: http://localhost:40053/Pronto500/Factura/Edit/142. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 16:05:56
+Error in: http://localhost:40053/Pronto500/Account/BaseElegida/?sBase=DemoProntoWeb. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.AccountController.BaseElegida(String sBase, String returnUrl) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccountController.cs:line 1494
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 16:06:32
+Error in: http://localhost:40053/Pronto500/Factura/Edit/142. Error Message:El nombre de columna 'IdClienteObservaciones' no es válido.
+__________________________
+
+Log Entry : 
+07/01/2015 16:06:32
+Error in: http://localhost:40053/Pronto500/Factura/Edit/142. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 16:06:36
+Error in: http://localhost:40053/Pronto500/Factura/Edit/142. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:14:50
+Error in: http://localhost:40053/Pronto500/. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:14:50
+Error in: http://localhost:40053/Pronto500/. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.HomeController.Index() in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 68
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:14:51
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:14:52
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+07/01/2015 18:14:53
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 415
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:15:27
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+07/01/2015 18:15:27
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 18:15:32
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:09
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:10
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:11
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 415
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:16
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:16
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:19
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:21
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:24
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:24
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:28
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:16:28
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:19
+Error in: http://localhost:40053/Pronto500/. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:19
+Error in: http://localhost:40053/Pronto500/. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.HomeController.Index() in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\HomeController.cs:line 68
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:20
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:21
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:22
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 415
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:55
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:55
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 18:18:59
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:19:17
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:19:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+07/01/2015 18:19:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 18:19:28
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:19:29
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:21:41
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at Generales.sCadenaConexMant(DemoProntoEntities db, String nombreEmpresa) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Funciones.cs:line 182
+   at ProntoMVC.Controllers.ProntoBaseController.asignacadena(String rccadena) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 180
+EntityFramework
+__________________________
+
+Log Entry : 
+07/01/2015 18:28:45
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:No se ha encontrado la ruta de acceso de la red
+__________________________
+
+Log Entry : 
+07/01/2015 18:28:46
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:No se ha encontrado la ruta de acceso de la red
+__________________________
+
+Log Entry : 
+07/01/2015 18:28:51
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 18:28:51
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/01/2015 18:29:32
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:29:32
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/01/2015 18:46:18
+Error in: http://localhost:40053/Pronto500/Factura/BatchUpdate. Error Message:ActivarLicenciaSiNoExiste : C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Documentos\FE_30692284433.lic - Ultimo mensaje : Could not load file or assembly 'Google.GData.Client, Version=1.4.0.2, Culture=neutral, PublicKeyToken=04a59ca9b0273830' or one of its dependencies. El sistema no puede encontrar el archivo especificado. - 
+__________________________
+
+Log Entry : 
+07/01/2015 18:46:25
+Error in: http://localhost:40053/Pronto500/Factura/BatchUpdate. Error Message:ActivarLicenciaSiNoExiste : C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Documentos\FE_30692284433.lic - Ultimo mensaje :  - 
+__________________________

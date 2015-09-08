@@ -1,0 +1,57 @@
+
+Log Entry : 
+07/20/2015 12:04:14
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel. Error Message:The parameters dictionary contains a null entry for parameter 'page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult Articulos_DynamicGridData_GenerarExcel(System.String, System.String, Int32, Int32, Boolean, System.String)' in 'ProntoMVC.Controllers.ArticuloController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+07/20/2015 12:04:14
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/20/2015 12:04:18
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/20/2015 12:07:42
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/8bacc72a-e49a-4d76-80c4-a322cba37af6. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+07/20/2015 12:10:43
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=1&sord=dddd&page=2&rows=222&_search=false&filters=ooo. Error Message:The query syntax is not valid. Near term '.1', line 6, column 5.
+__________________________
+
+Log Entry : 
+07/20/2015 12:10:43
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=1&sord=dddd&page=2&rows=222&_search=false&filters=ooo. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/20/2015 12:10:47
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=1&sord=dddd&page=2&rows=222&_search=false&filters=ooo. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/20/2015 12:11:56
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=1&sord=dddd&page=2&rows=222&_search=false&filters=ooo. Error Message:The query syntax is not valid. Near term '.1', line 6, column 5.
+__________________________
+
+Log Entry : 
+07/20/2015 12:11:56
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=1&sord=dddd&page=2&rows=222&_search=false&filters=ooo. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/20/2015 12:12:01
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=1&sord=dddd&page=2&rows=222&_search=false&filters=ooo. Error Message:Mandado
+__________________________

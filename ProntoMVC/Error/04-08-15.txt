@@ -1,0 +1,171 @@
+
+Log Entry : 
+08/04/2015 07:35:28
+Error in: http://localhost:40053/Pronto500/Factura/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ViewResult Edit(Int32)' in 'ProntoMVC.Controllers.FacturaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/04/2015 07:35:28
+Error in: http://localhost:40053/Pronto500/Factura/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/04/2015 07:35:32
+Error in: http://localhost:40053/Pronto500/Factura/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/04/2015 07:41:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:41:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:44:33
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:44:46
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:46:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:46:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:47:01
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:47:14
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:47:21
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:47:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:49:47
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:49:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:53:02
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 07:53:09
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 08:00:50
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:No applicable method 'Contains' exists in type 'Int32?'
+__________________________
+
+Log Entry : 
+08/04/2015 08:00:50
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/04/2015 08:00:54
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/04/2015 08:15:17
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:No applicable method 'Contains' exists in type 'Int32?'
+__________________________
+
+Log Entry : 
+08/04/2015 08:15:17
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/04/2015 08:15:20
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/04/2015 08:17:52
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:No applicable method 'Contains' exists in type 'Int32?'
+__________________________
+
+Log Entry : 
+08/04/2015 08:17:52
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/04/2015 08:17:55
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/04/2015 08:22:52
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 08:23:08
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/04/2015 08:32:11
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:No property or field 'Value' exists in type 'String'
+__________________________
+
+Log Entry : 
+08/04/2015 08:32:11
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/04/2015 08:32:16
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/04/2015 08:35:24
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:No property or field 'Value' exists in type 'String'
+__________________________
+
+Log Entry : 
+08/04/2015 08:35:24
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/04/2015 08:35:27
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________

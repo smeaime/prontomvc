@@ -1,0 +1,270 @@
+
+Log Entry : 
+06/30/2015 10:43:00
+Error in: http://localhost:40053/Pronto500/Recibo/Edit/-1. Error Message:A public action method 'Edit' was not found on controller 'ProntoMVC.Controllers.ReciboController'.
+__________________________
+
+Log Entry : 
+06/30/2015 10:43:00
+Error in: http://localhost:40053/Pronto500/Recibo/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 10:43:04
+Error in: http://localhost:40053/Pronto500/Recibo/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 10:44:48
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:El nombre de columna 'Activa' no es válido.
+__________________________
+
+Log Entry : 
+06/30/2015 10:44:48
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 10:44:51
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 10:45:22
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:El nombre de columna 'Activa' no es válido.
+__________________________
+
+Log Entry : 
+06/30/2015 10:45:22
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 10:45:25
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 10:47:18
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mapping and metadata information could not be found for EntityType 'ProntoMVC.Data.Models.CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result'.
+__________________________
+
+Log Entry : 
+06/30/2015 10:47:18
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 10:47:21
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 13:14:57
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:The data reader is incompatible with the specified 'DemoProntoModel.CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result'. A member of the type, 'Comp_', does not have a corresponding column in the data reader with the same name.
+__________________________
+
+Log Entry : 
+06/30/2015 13:14:57
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 13:15:02
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 13:16:49
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:The data reader is incompatible with the specified 'DemoProntoModel.CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result'. A member of the type, 'Comp_', does not have a corresponding column in the data reader with the same name.
+__________________________
+
+Log Entry : 
+06/30/2015 13:16:49
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 13:16:53
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 14:24:50
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+06/30/2015 14:24:50
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 14:24:54
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 14:40:51
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No property or field 'p0' exists in type 'CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1'
+__________________________
+
+Log Entry : 
+06/30/2015 14:40:51
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 14:40:55
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 14:41:50
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Operator '=' incompatible with operand types 'String' and 'Int32'
+__________________________
+
+Log Entry : 
+06/30/2015 14:41:50
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 14:41:53
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 14:57:59
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No se encontró el procedimiento almacenado 'dbo.CtasCtesD_TXPorTrs_AuxiliarEntityFramework'.
+__________________________
+
+Log Entry : 
+06/30/2015 14:57:59
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 14:58:03
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:31:13
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No se encontró el procedimiento almacenado 'dbo.CtasCtesD_TXPorTrs_AuxiliarEntityFramework'.
+__________________________
+
+Log Entry : 
+06/30/2015 15:31:13
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:31:16
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:34:12
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+06/30/2015 15:34:12
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:34:18
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:36:31
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+06/30/2015 15:36:31
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:36:36
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:45:58
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No se encontró el procedimiento almacenado 'dbo.CtasCtesD_TXPorTrs_AuxiliarEntityFramework'.
+__________________________
+
+Log Entry : 
+06/30/2015 15:45:58
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:46:02
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:47:22
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:No se encontró el procedimiento almacenado 'dbo.CtasCtesD_TXPorTrs_AuxiliarEntityFramework'.
+__________________________
+
+Log Entry : 
+06/30/2015 15:47:22
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:47:26
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:49:23
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:')' or operator expected
+__________________________
+
+Log Entry : 
+06/30/2015 15:49:23
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:49:27
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:50:00
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:')' or operator expected
+__________________________
+
+Log Entry : 
+06/30/2015 15:50:00
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:50:04
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/30/2015 15:57:05
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Expression of type 'Boolean' expected
+__________________________
+
+Log Entry : 
+06/30/2015 15:57:05
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/30/2015 15:57:09
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
