@@ -123,7 +123,7 @@ namespace ProntoMVC
 
             // http://stackoverflow.com/questions/557730/i-am-getting-a-blank-page-while-deploying-mvc-application-on-iis
             // deshabilitar el control de errores para ver bugs serios de instalacion (falta de assemblies)
-            if (true)
+            if (false)
             {
                 Exception exception = Server.GetLastError();
                 RouteData routeData = new RouteData();
