@@ -23,12 +23,12 @@ namespace ProntoMVC
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            
-            
+
+
             filters.Add(new HandleErrorAttribute());
 
 
-        // http://stackoverflow.com/questions/6507568/using-mvc-miniprofiler-for-every-action-call/24197984#24197984
+            // http://stackoverflow.com/questions/6507568/using-mvc-miniprofiler-for-every-action-call/24197984#24197984
             filters.Add(new ProfileActionsAttribute());
         }
 
@@ -120,183 +120,55 @@ namespace ProntoMVC
         protected void Application_Error()
         {
 
-            // si salta el error : Could not load file or assembly 
-            // 'CodeEngine.Framework.QueryBuilder' or one of its dependencies. El parámetro no es correcto. (Exception from HRESULT: 0x80070057 (E_INVALIDARG))
-            // limpiar los directorios temporales de asp.net
-            // http://stackoverflow.com/questions/3831287/could-not-load-file-or-assembly-app-licenses
 
-
-            //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
-
-
-
-            Exception lastErrorWrapper = Server.GetLastError();
-
-
-            Exception lastError = lastErrorWrapper;
-            if (lastErrorWrapper.InnerException != null) lastError = lastErrorWrapper.InnerException;
-
-
-            string lastErrorTypeName = lastError.GetType().ToString();
-            string lastErrorMessage = lastError.Message;
-            string lastErrorStackTrace = lastError.StackTrace;
-
-            if (lastErrorStackTrace == null) lastErrorStackTrace = "";
-
-            try
+            // http://stackoverflow.com/questions/557730/i-am-getting-a-blank-page-while-deploying-mvc-application-on-iis
+            // deshabilitar el control de errores para ver bugs serios de instalacion (falta de assemblies)
+            if (true)
             {
-                ErrHandler.WriteError(lastErrorMessage);
+                Exception exception = Server.GetLastError();
+                RouteData routeData = new RouteData();
+                routeData.Values.Add("controller", "ErrorController");
+                routeData.Values.Add("action", "HandleTheError");
+                routeData.Values.Add("error", exception);
 
+                Response.Clear();
+                Server.ClearError();
+
+                IController errorController = new Controllers.ErrorController();
+                errorController.Execute(new RequestContext(
+                    new HttpContextWrapper(Context), routeData));
             }
-            catch (Exception)
-            {
-
-                //throw;
-            }
-
-
-
-            //  Attach the Yellow Screen of Death for this error   
-            string YSODmarkup = "";
-            HttpException lastErrorWrapperHttp = null;
-            try
-            {
-
-                lastErrorWrapperHttp = (System.Web.HttpException)lastErrorWrapper;
-
-                YSODmarkup = lastErrorWrapperHttp.GetHtmlErrorMessage();
-                if (!String.IsNullOrEmpty(YSODmarkup))
-                {
-                    var YSOD = System.Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm");
-                }
-
-
-                if (lastErrorWrapperHttp.Message == "The controller for path '/Pronto2/Content/jquery-ui-layout/jquery.ui.base.css' was not found or does not implement IController.")
-                //.ErrorCode == -2147467259)
-                {
-                    // es el error del jquery.layout que le falta el theme
-                    ErrHandler.WriteError(lastErrorWrapperHttp.Message);
-                    return;
-                }
-
-
-            }
-            catch (Exception ex) { };
-
-
-            string Body = "";
-            //            if (lastErrorWrapperHttp != null)
-            try
-            {
-                Body = String.Format(
-                    "<html><body> <h1>Hubo un error!</h1>_  <table cellpadding=\"5\" cellspacing=\"0\" border=\"1\">  <tr>  <td style=\"text-align: right;font-weight: bold\">URL:</td>  <td>{0}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">User:</td>  <td>{1}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Exception Type:</td>  <td>{2}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Message:</td>  <td>{3}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Stack Trace:</td>  <td>{4}</td>  </tr>   </table></body></html>",
-                        (lastErrorWrapperHttp == null ? "NO EXISTE REQUEST" : Request.RawUrl),
-                            (lastErrorWrapperHttp == null ? "NO EXISTE USUARIO" : User.Identity.Name),
-                    lastErrorTypeName,
-                    lastErrorMessage,
-                    lastErrorStackTrace.Replace(Environment.NewLine, "<br />"));
-
-            }
-            catch (Exception)
-            {
-
-            }
-
-            Body += (YSODmarkup ?? "");
-
-
-            // var direccion = "mscalella911@gmail.com";
-            string direccion;
-            try
-            {
-                direccion = ConfigurationManager.AppSettings["ErrorMail"];
-            }
-            catch (Exception)
-            {
-
-                direccion = "mscalella911@gmail.com";
-            }
-
-
-
-
-            /////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////
-            //aca podria enviarme el ultimo log 
-            // -Cómo se cual es el ultimo Log?
-            const string DirectorioErrores = "~/Error/";
-
-            string nombre = DirectorioErrores + DateTime.Today.ToString("dd-MM-yy") + ".txt";
-            string nombreLargo = "";
-
-            try
-            {
-                if (System.Web.HttpContext.Current == null)
-                {
-                    nombreLargo = AppDomain.CurrentDomain.BaseDirectory + @"Error\" + DateTime.Today.ToString("dd-MM-yy") + ".txt";
-                }
-                else
-                {
-                    nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre);
-                }
-
-
-            }
-            catch (Exception)
-            {
-                nombreLargo = AppDomain.CurrentDomain.BaseDirectory + @"Error\" + DateTime.Today.ToString("dd-MM-yy") + ".txt";
-            }
-
-            string log = "";
-            try
-            {
-                log = System.IO.File.ReadAllText(nombreLargo);
-
-            }
-            catch (Exception)
-            {
-
-                //throw;
-            }
-
-
-            /////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////
-
-
-            ErrHandler.WriteError("Mando mail");
-
-
-            try
+            else
             {
 
 
+                // si salta el error : Could not load file or assembly 
+                // 'CodeEngine.Framework.QueryBuilder' or one of its dependencies. El parámetro no es correcto. (Exception from HRESULT: 0x80070057 (E_INVALIDARG))
+                // limpiar los directorios temporales de asp.net
+                // http://stackoverflow.com/questions/3831287/could-not-load-file-or-assembly-app-licenses
 
-                // 'apgurisatti@bdlconsultores.com.ar", _
-                ProntoFuncionesGenerales.MandaEmailSimple(direccion,
-                             (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
-                               Body,
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpServer"],
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpPass"],
-                                   (YSODmarkup + log) ?? "",
-                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+                //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
 
 
 
+                Exception lastErrorWrapper = Server.GetLastError();
 
 
+                Exception lastError = lastErrorWrapper;
+                if (lastErrorWrapper.InnerException != null) lastError = lastErrorWrapper.InnerException;
 
-            }
-            catch (Exception ex)
-            {
+
+                string lastErrorTypeName = lastError.GetType().ToString();
+                string lastErrorMessage = lastError.Message;
+                string lastErrorStackTrace = lastError.StackTrace;
+
+                if (lastErrorStackTrace == null) lastErrorStackTrace = "";
+
                 try
                 {
-                    ErrHandler.WriteError(ex);
+                    ErrHandler.WriteError(lastErrorMessage);
+
                 }
                 catch (Exception)
                 {
@@ -306,188 +178,338 @@ namespace ProntoMVC
 
 
 
-            };
-
-
-            ErrHandler.WriteError("Mandado");
-
-
-            // http://stackoverflow.com/questions/5226791/custom-error-pages-on-asp-net-mvc3
-            var exception = Server.GetLastError();
-            var httpException = exception as HttpException;
-            Response.Clear();
-            Server.ClearError();
-            var routeData = new RouteData();
-            routeData.Values["controller"] = "Errors";
-            routeData.Values["action"] = "Index"; // "General";
-            routeData.Values["exception"] = exception;
-            Response.StatusCode = 500;
-            Response.TrySkipIisCustomErrors = true;
-            Response.ContentType = "text/html";
-            if (httpException != null)
-            {
-                Response.StatusCode = httpException.GetHttpCode();
-                switch (Response.StatusCode)
+                //  Attach the Yellow Screen of Death for this error   
+                string YSODmarkup = "";
+                HttpException lastErrorWrapperHttp = null;
+                try
                 {
-                    //case 403:
-                    //    routeData.Values["action"] = "Http403";
-                    //    break;
-                    case 404:
-                        routeData.Values["action"] = "PageNotFound";
-                        break;
-                    default:
-                        routeData.Values["action"] = "Index";
-                        break;
+
+                    lastErrorWrapperHttp = (System.Web.HttpException)lastErrorWrapper;
+
+                    YSODmarkup = lastErrorWrapperHttp.GetHtmlErrorMessage();
+                    if (!String.IsNullOrEmpty(YSODmarkup))
+                    {
+                        var YSOD = System.Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm");
+                    }
+
+
+                    if (lastErrorWrapperHttp.Message == "The controller for path '/Pronto2/Content/jquery-ui-layout/jquery.ui.base.css' was not found or does not implement IController.")
+                    //.ErrorCode == -2147467259)
+                    {
+                        // es el error del jquery.layout que le falta el theme
+                        ErrHandler.WriteError(lastErrorWrapperHttp.Message);
+                        return;
+                    }
+
+
                 }
+                catch (Exception ex) { };
+
+
+                string Body = "";
+                //            if (lastErrorWrapperHttp != null)
+                try
+                {
+                    Body = String.Format(
+                        "<html><body> <h1>Hubo un error!</h1>_  <table cellpadding=\"5\" cellspacing=\"0\" border=\"1\">  <tr>  <td style=\"text-align: right;font-weight: bold\">URL:</td>  <td>{0}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">User:</td>  <td>{1}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Exception Type:</td>  <td>{2}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Message:</td>  <td>{3}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Stack Trace:</td>  <td>{4}</td>  </tr>   </table></body></html>",
+                            (lastErrorWrapperHttp == null ? "NO EXISTE REQUEST" : Request.RawUrl),
+                                (lastErrorWrapperHttp == null ? "NO EXISTE USUARIO" : User.Identity.Name),
+                        lastErrorTypeName,
+                        lastErrorMessage,
+                        lastErrorStackTrace.Replace(Environment.NewLine, "<br />"));
+
+                }
+                catch (Exception)
+                {
+
+                }
+
+                Body += (YSODmarkup ?? "");
+
+
+                // var direccion = "mscalella911@gmail.com";
+                string direccion;
+                try
+                {
+                    direccion = ConfigurationManager.AppSettings["ErrorMail"];
+                }
+                catch (Exception)
+                {
+
+                    direccion = "mscalella911@gmail.com";
+                }
+
+
+
+
+                /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+                //aca podria enviarme el ultimo log 
+                // -Cómo se cual es el ultimo Log?
+                const string DirectorioErrores = "~/Error/";
+
+                string nombre = DirectorioErrores + DateTime.Today.ToString("dd-MM-yy") + ".txt";
+                string nombreLargo = "";
+
+                try
+                {
+                    if (System.Web.HttpContext.Current == null)
+                    {
+                        nombreLargo = AppDomain.CurrentDomain.BaseDirectory + @"Error\" + DateTime.Today.ToString("dd-MM-yy") + ".txt";
+                    }
+                    else
+                    {
+                        nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre);
+                    }
+
+
+                }
+                catch (Exception)
+                {
+                    nombreLargo = AppDomain.CurrentDomain.BaseDirectory + @"Error\" + DateTime.Today.ToString("dd-MM-yy") + ".txt";
+                }
+
+                string log = "";
+                try
+                {
+                    log = System.IO.File.ReadAllText(nombreLargo);
+
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+
+
+                /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+
+
+                ErrHandler.WriteError("Mando mail");
+
+
+                try
+                {
+
+
+
+                    // 'apgurisatti@bdlconsultores.com.ar", _
+                    ProntoFuncionesGenerales.MandaEmailSimple(direccion,
+                                 (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
+                                   Body,
+                                    ConfigurationManager.AppSettings["SmtpUser"],
+                                    ConfigurationManager.AppSettings["SmtpServer"],
+                                    ConfigurationManager.AppSettings["SmtpUser"],
+                                    ConfigurationManager.AppSettings["SmtpPass"],
+                                       (YSODmarkup + log) ?? "",
+                                   Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+
+
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        ErrHandler.WriteError(ex);
+                    }
+                    catch (Exception)
+                    {
+
+                        //throw;
+                    }
+
+
+
+                };
+
+
+                ErrHandler.WriteError("Mandado");
+
+
+                // http://stackoverflow.com/questions/5226791/custom-error-pages-on-asp-net-mvc3
+                var exception = Server.GetLastError();
+                var httpException = exception as HttpException;
+                Response.Clear();
+                Server.ClearError();
+                var routeData = new RouteData();
+                routeData.Values["controller"] = "Errors";
+                routeData.Values["action"] = "Index"; // "General";
+                routeData.Values["exception"] = exception;
+                Response.StatusCode = 500;
+                Response.TrySkipIisCustomErrors = true;
+                Response.ContentType = "text/html";
+                if (httpException != null)
+                {
+                    Response.StatusCode = httpException.GetHttpCode();
+                    switch (Response.StatusCode)
+                    {
+                        //case 403:
+                        //    routeData.Values["action"] = "Http403";
+                        //    break;
+                        case 404:
+                            routeData.Values["action"] = "PageNotFound";
+                            break;
+                        default:
+                            routeData.Values["action"] = "Index";
+                            break;
+                    }
+                }
+
+                IController errorsController = new Controllers.ErrorController();
+                var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
+                try
+                {
+                    errorsController.Execute(rc);
+                }
+                catch (System.Data.SqlClient.SqlException x)
+                {
+                    // por qué la llamada al ErrorController necesita del Membership (y por lo tanto, de la conexion SQL)?
+                    //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
+                    //ssss
+                    Response.Redirect("~/Views/Shared/SinConexion.cshtml");
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+
+                /*
+                        Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
+                        ' Code that runs when an unhandled error occurs
+        
+                        ' http://www.asp.net/hosting/tutorials/processing-unhandled-exceptions-cs
+
+        
+                        'Get the error details
+
+        
+                        'Dim lastErrorWrapper As HttpException = Server.GetLastError()
+                        Dim lastErrorWrapper As Exception = Server.GetLastError()
+        
+        
+                        Dim lastError As Exception = lastErrorWrapper
+                        If lastErrorWrapper.InnerException IsNot Nothing Then
+                            lastError = lastErrorWrapper.InnerException
+                        End If
+        
+                        Dim lastErrorTypeName As String = lastError.GetType().ToString()
+                        Dim lastErrorMessage As String = lastError.Message
+                        Dim lastErrorStackTrace As String = lastError.StackTrace
+        
+                        If lastErrorStackTrace Is Nothing Then lastErrorStackTrace = ""
+        
+                        ErrHandler.WriteError(lastError)
+    
+        
+                        ' Attach the Yellow Screen of Death for this error   
+                        Dim YSODmarkup As String
+                        Dim lastErrorWrapperHttp As HttpException
+                        Try
+                            lastErrorWrapperHttp = lastErrorWrapper
+        
+                            YSODmarkup = lastErrorWrapperHttp.GetHtmlErrorMessage()
+                            If (Not String.IsNullOrEmpty(YSODmarkup)) Then
+            
+                                Dim YSOD = Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm")
+                                'mm.Attachments.Add(YSOD)
+            
+                            End If
+                        Catch ex As Exception
+            
+                        End Try
+    
+                        Dim Body As String = ""
+                        If Not IsNothing(lastErrorWrapperHttp) Then
+                            Body = String.Format( _
+                                "<html><body> <h1>Hubo un error!</h1>_  <table cellpadding=""5"" cellspacing=""0"" border=""1"">  <tr>  <td style=""text-align: right;font-weight: bold"">URL:</td>  <td>{0}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">User:</td>  <td>{1}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Exception Type:</td>  <td>{2}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Message:</td>  <td>{3}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Stack Trace:</td>  <td>{4}</td>  </tr>   </table></body></html>", _
+                                If(lastErrorWrapperHttp Is Nothing, "NO EXISTE REQUEST", Request.RawUrl), _
+                                 If(lastErrorWrapperHttp Is Nothing, "NO EXISTE USUARIO", User.Identity.Name), _
+                                lastErrorTypeName, _
+                                lastErrorMessage, _
+                                lastErrorStackTrace.Replace(Environment.NewLine, "<br />"))
+                        End If
+            
+                        Body &= iisNull(YSODmarkup, "")
+        
+                        Dim direccion As String
+                        Try
+                            direccion = ConfigurationManager.AppSettings("ErrorMail")
+                        Catch ex As Exception
+                            direccion = ""
+                            'Dim direccion = "mscalella911@gmail.com"
+                        End Try
+                        If iisNull(direccion, "") = "" Then direccion = "mscalella911@gmail.com,apgurisatti@bdlconsultores.com.ar"
+        
+        
+                        'me fijo si estoy depurando en el IDE. No lo hago antes para probar el pedazo de codigo de arriba. Es el mail
+                        'lo que traba todo
+                        If System.Diagnostics.Debugger.IsAttached() Then Return
+    
+        
+                        Try
+                            'apgurisatti@bdlconsultores.com.ar", _
+                            MandaEmailSimple(direccion, _
+                                            ConfigurationManager.AppSettings("ConfiguracionEmpresa") & " ProntoWeb" & ": " & lastErrorMessage, _
+                                           Body, _
+                                            ConfigurationManager.AppSettings("SmtpUser"), _
+                                            ConfigurationManager.AppSettings("SmtpServer"), _
+                                            ConfigurationManager.AppSettings("SmtpUser"), _
+                                            ConfigurationManager.AppSettings("SmtpPass"), _
+                                            iisNull(YSODmarkup, ""), _
+                                            ConfigurationManager.AppSettings("SmtpPort"), , , )
+            
+                        Catch ex As Exception
+                            ErrHandler.WriteError(ex)
+                        End Try
+        
+        
+        
+        
+                        '/////////////////////////////////////////////////////////////////////////////
+                        '/////////////////////////////////////////////////////////////////////////////
+                        'http://stackoverflow.com/questions/178600/microsoft-reportviewer-session-expired-errors
+                        Dim exc As Exception = Server.GetLastError().GetBaseException()
+                        If TypeOf exc Is Microsoft.Reporting.WebForms.AspNetSessionExpiredException Then
+                            Server.ClearError()
+                            Response.Redirect(FormsAuthentication.LoginUrl + "?ReturnUrl=" + HttpUtility.UrlEncode(Request.Url.PathAndQuery), True)
+                        End If
+                        '/////////////////////////////////////////////////////////////////////////////
+                        '/////////////////////////////////////////////////////////////////////////////
+                                   
+                    End Sub
+                  */
             }
 
-            IController errorsController = new Controllers.ErrorController();
-            var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
-            try
-            {
-                errorsController.Execute(rc);
-            }
-            catch (   System.Data.SqlClient.SqlException x)
-            {
-                // por qué la llamada al ErrorController necesita del Membership (y por lo tanto, de la conexion SQL)?
-                //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
-                //ssss
-                Response.Redirect("~/Views/Shared/SinConexion.cshtml");
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            
 
             /*
-                    Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
-                    ' Code that runs when an unhandled error occurs
-        
-                    ' http://www.asp.net/hosting/tutorials/processing-unhandled-exceptions-cs
-
-        
-                    'Get the error details
-
-        
-                    'Dim lastErrorWrapper As HttpException = Server.GetLastError()
-                    Dim lastErrorWrapper As Exception = Server.GetLastError()
-        
-        
-                    Dim lastError As Exception = lastErrorWrapper
-                    If lastErrorWrapper.InnerException IsNot Nothing Then
-                        lastError = lastErrorWrapper.InnerException
-                    End If
-        
-                    Dim lastErrorTypeName As String = lastError.GetType().ToString()
-                    Dim lastErrorMessage As String = lastError.Message
-                    Dim lastErrorStackTrace As String = lastError.StackTrace
-        
-                    If lastErrorStackTrace Is Nothing Then lastErrorStackTrace = ""
-        
-                    ErrHandler.WriteError(lastError)
-    
-        
-                    ' Attach the Yellow Screen of Death for this error   
-                    Dim YSODmarkup As String
-                    Dim lastErrorWrapperHttp As HttpException
-                    Try
-                        lastErrorWrapperHttp = lastErrorWrapper
-        
-                        YSODmarkup = lastErrorWrapperHttp.GetHtmlErrorMessage()
-                        If (Not String.IsNullOrEmpty(YSODmarkup)) Then
-            
-                            Dim YSOD = Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm")
-                            'mm.Attachments.Add(YSOD)
-            
-                        End If
-                    Catch ex As Exception
-            
-                    End Try
-    
-                    Dim Body As String = ""
-                    If Not IsNothing(lastErrorWrapperHttp) Then
-                        Body = String.Format( _
-                            "<html><body> <h1>Hubo un error!</h1>_  <table cellpadding=""5"" cellspacing=""0"" border=""1"">  <tr>  <td style=""text-align: right;font-weight: bold"">URL:</td>  <td>{0}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">User:</td>  <td>{1}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Exception Type:</td>  <td>{2}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Message:</td>  <td>{3}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Stack Trace:</td>  <td>{4}</td>  </tr>   </table></body></html>", _
-                            If(lastErrorWrapperHttp Is Nothing, "NO EXISTE REQUEST", Request.RawUrl), _
-                             If(lastErrorWrapperHttp Is Nothing, "NO EXISTE USUARIO", User.Identity.Name), _
-                            lastErrorTypeName, _
-                            lastErrorMessage, _
-                            lastErrorStackTrace.Replace(Environment.NewLine, "<br />"))
-                    End If
-            
-                    Body &= iisNull(YSODmarkup, "")
-        
-                    Dim direccion As String
-                    Try
-                        direccion = ConfigurationManager.AppSettings("ErrorMail")
-                    Catch ex As Exception
-                        direccion = ""
-                        'Dim direccion = "mscalella911@gmail.com"
-                    End Try
-                    If iisNull(direccion, "") = "" Then direccion = "mscalella911@gmail.com,apgurisatti@bdlconsultores.com.ar"
-        
-        
-                    'me fijo si estoy depurando en el IDE. No lo hago antes para probar el pedazo de codigo de arriba. Es el mail
-                    'lo que traba todo
-                    If System.Diagnostics.Debugger.IsAttached() Then Return
-    
-        
-                    Try
-                        'apgurisatti@bdlconsultores.com.ar", _
-                        MandaEmailSimple(direccion, _
-                                        ConfigurationManager.AppSettings("ConfiguracionEmpresa") & " ProntoWeb" & ": " & lastErrorMessage, _
-                                       Body, _
-                                        ConfigurationManager.AppSettings("SmtpUser"), _
-                                        ConfigurationManager.AppSettings("SmtpServer"), _
-                                        ConfigurationManager.AppSettings("SmtpUser"), _
-                                        ConfigurationManager.AppSettings("SmtpPass"), _
-                                        iisNull(YSODmarkup, ""), _
-                                        ConfigurationManager.AppSettings("SmtpPort"), , , )
-            
-                    Catch ex As Exception
-                        ErrHandler.WriteError(ex)
-                    End Try
-        
-        
-        
-        
-                    '/////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////
-                    'http://stackoverflow.com/questions/178600/microsoft-reportviewer-session-expired-errors
-                    Dim exc As Exception = Server.GetLastError().GetBaseException()
-                    If TypeOf exc Is Microsoft.Reporting.WebForms.AspNetSessionExpiredException Then
-                        Server.ClearError()
-                        Response.Redirect(FormsAuthentication.LoginUrl + "?ReturnUrl=" + HttpUtility.UrlEncode(Request.Url.PathAndQuery), True)
-                    End If
-                    '/////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////
-                                   
-                End Sub
-              */
-        }
-
-
-        /*
-        public async Task SendEmail(string toEmailAddress, string emailSubject, string emailMessage)
-        {
-
-            // necesito .NET 4.5 para esto
-            var message = new MailMessage();
-            message.To.Add(toEmailAddress);
-
-            message.Subject = emailSubject;
-            message.Body = emailMessage;
-
-            using (var smtpClient = new SmtpClient())
+            public async Task SendEmail(string toEmailAddress, string emailSubject, string emailMessage)
             {
-                await smtpClient.SendMailAsync(message);
-            }
-        } 
-        */
 
+                // necesito .NET 4.5 para esto
+                var message = new MailMessage();
+                message.To.Add(toEmailAddress);
 
+                message.Subject = emailSubject;
+                message.Body = emailMessage;
+
+                using (var smtpClient = new SmtpClient())
+                {
+                    await smtpClient.SendMailAsync(message);
+                }
+            } 
+            */
+
+        }
 
 
     }
