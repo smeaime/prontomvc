@@ -6104,6 +6104,10 @@
     <EntitySetMapping Name="FertilizantesCupos">
       <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesCupos">
         <MappingFragment StoreEntitySet="FertilizantesCupos">
+          <ScalarProperty Name="NumeradorTexto" ColumnName="NumeradorTexto" />
+          <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
           <ScalarProperty Name="SubnumeroVagonEnTextoParaBusqueda" ColumnName="SubnumeroVagonEnTextoParaBusqueda" />
           <ScalarProperty Name="NumeroCartaEnTextoParaBusqueda" ColumnName="NumeroCartaEnTextoParaBusqueda" />
           <ScalarProperty Name="ClaveEncriptada" ColumnName="ClaveEncriptada" />
