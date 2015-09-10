@@ -992,13 +992,13 @@
       <End Role="DetalleDevolucione" EntitySet="DetalleDevoluciones" />
     </AssociationSet>
     <FunctionImport Name="LogComprobantesElectronicos_InsertarRegistro">
+      <Parameter Name="Recibido" Mode="In" Type="String" />
+      <Parameter Name="Tipo" Mode="In" Type="String" />
+      <Parameter Name="Letra" Mode="In" Type="String" />
       <Parameter Name="PuntoVenta" Mode="In" Type="Int32" />
       <Parameter Name="NumeroComprobante" Mode="In" Type="Int32" />
       <Parameter Name="Identificador" Mode="In" Type="Int32" />
       <Parameter Name="Enviado" Mode="In" Type="String" />
-      <Parameter Name="Recibido" Mode="In" Type="String" />
-      <Parameter Name="Tipo" Mode="In" Type="String" />
-      <Parameter Name="Letra" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="Choferes" EntityType="DemoProntoModel.Chofere" />
     <EntitySet Name="LogComprobantesElectronicos" EntityType="DemoProntoModel.LogComprobantesElectronico" />
@@ -11303,6 +11303,10 @@
     <Property Name="ClaveEncriptada" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="NumeroCartaEnTextoParaBusqueda" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuarioModifico" Type="Int32" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdFacturaImputada" Type="Int32" />
+    <Property Name="NumeradorTexto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
