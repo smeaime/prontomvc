@@ -54,7 +54,7 @@ Imports System.Net
 'Imports System.Web.Security
 
 
-'Imports CartaDePorteManager
+Imports CartaDePorteManager
 Imports CDPMailFiltrosManager2
 '
 Imports LogicaImportador.FormatosDeExcel
@@ -70,7 +70,22 @@ Public Class FertilizanteManager
     Inherits ServicedComponent
 
 
-    Public Shared Function GetItemPorNumero(ByVal SC As String, ByVal NumeroCartaDePorte As Long) As FertilizantesCupos
+
+
+    Public Shared Function GetItem(ByVal SC As String, ByVal id As Integer, ByVal getCartaDePorteDetalles As Boolean) As FertilizantesCupos
+  
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+
+
+        Dim f = db.FertilizantesCupos.Find(id)
+
+        
+        Return f
+    End Function
+
+
+    Public Shared Function GetItemPorNumero(ByVal SC As String, ByVal NumeroCartaDePorte As String) As FertilizantesCupos
 
         ' Dim ds As Data.DataSet '= GeneralDB.TraerDatos(SC, "wCartasDePorte_TX_PorNumero", NumeroCartaDePorte, SubNumeroVagon)
         '        CREATE PROCEDURE [dbo].wCartasDePorte_TX_PorNumero
@@ -92,12 +107,12 @@ Public Class FertilizanteManager
 
 
 
-        Dim db As New DemoProntoEntities(Encriptar(SC))
-
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+     
 
 
         Dim familia = (From e In db.FertilizantesCupos _
-                                      Where e.Numero.GetValueOrDefault = NumeroCartaDePorte _
+                                      Where e.NumeradorTexto = NumeroCartaDePorte _
                                             Order By e.FechaAnulacion Descending _
                                       Select e).ToList()
 
@@ -147,11 +162,208 @@ Public Class FertilizanteManager
             '   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
             'Más de una carta tiene ese numero y vagon
             Return Nothing
- 
+
 
         End If
 
     End Function
+
+
+    Shared Function GrabaRenglonEnTablaFertilizantes(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
+                                    txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
+                                    chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
+                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList, _
+                                    NoValidarColumnas As List(Of String) _
+        ) As String 'devuelve la columna del error si es que hubo
+        'Dim dt = ViewstateToDatatable()
+
+        'Dim dr = dt.Rows(row)
+
+        Dim myCartaDePorte As New ProntoMVC.Data.Models.FertilizantesCupos
+
+
+
+
+
+
+        'If existeLaCarta Then
+        Dim numeroCarta As String = Replace(dr.Item("NumeroCDP"), "-", "")
+        Dim vagon As Long = 0 'por ahora, las cdp importadas tendran subnumero 0
+        Dim subfijo As Long = 0 'por ahora, las cdp importadas tendran subnumero 0
+
+
+        Dim subnumerodefac As Long = Val(iisNull(dr.Item("SUBNUMERODEFACTURACION"), -1))
+        If subnumerodefac <= 0 Then subnumerodefac = -1
+
+
+        'Tomar como regla que cuando se haga la pegatina siempre se PEGUE con el prefijo 5 adelante. (ESTO TOMARLO COMO REGLA PARA TODAS LAS PEGATINAS DE TODOS LOS PUERTOS)
+        'If numeroCarta < 100000000 Then numeroCarta += 500000000
+
+
+
+        myCartaDePorte = FertilizanteManager.GetItemPorNumero(SC, numeroCarta)
+
+        'y si tiene duplicados, como sabes?
+
+
+        'End If
+
+        With myCartaDePorte
+
+            'If .IdFacturaImputada > 0 Then
+            '    'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
+            '    ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque ya existe como facturada")
+            '    Return 0
+            'End If
+
+
+            'If .NetoFinalSinMermas > 0 Or .NetoFinalIncluyendoMermas > 0 Then
+            '    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
+            '    'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
+            '    ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
+            '    Return 0
+            'End If
+
+
+            'If .Anulada = "SI" Then
+            '    ErrHandler.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
+            '    LogPronto(SC, .Id, "IMPANU", Session(SESSIONPRONTO_UserName))
+            '    CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
+
+            '    .Anulada = "NO"
+            'End If
+
+
+
+
+            'If .Id > 0 And .SubnumeroDeFacturacion > -1 Then
+
+            '    Dim q As IQueryable(Of CartasDePorte) = CartaDePorteManager.FamiliaDeDuplicadosDeCartasPorte(SC, myCartaDePorte)
+
+            '    If q.Count > 1 Then
+            '        'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
+            '        ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
+            '        Return 0
+            '    End If
+
+            'ElseIf .Id <= 0 Then
+            '    .SubnumeroDeFacturacion = -1
+            'End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            'Pinta que no hay otra manera de actualizar un dataset suelto http://forums.asp.net/p/755961/1012665.aspx
+            '.Numero = numeroCarta
+            .NumeradorTexto = numeroCarta
+            '.SubnumeroVagon = vagon
+            '.SubnumeroDeFacturacion = subnumerodefac
+
+            'If .NumeroCartaDePorte <= 0 Then
+            '    'Debug.Print(r.Item("Carta Porte"))
+            '    'renglonControl(r, "Carta Porte").BackColor = System.Drawing.Color.Red
+            '    Stop
+            '    Return 0
+            'End If
+
+
+
+            '/////////////////////////////////////////
+            '/////////////////////////////////////////
+
+            dr.Item("Producto") = iisNull(dr.Item("Producto"))
+            If dr.Item("Producto") <> "NO_VALIDAR" Then
+                .IdArticulo = BuscaIdArticuloPreciso(dr.Item("Producto"), SC)
+                If .IdArticulo = -1 Then .IdArticulo = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Producto")), SC)
+                'dt.Rows(row).Item("IdArticulo") = .IdArticulo
+                If .IdArticulo = -1 Then Return "Producto"
+            End If
+
+            ''/////////////////////////////////////////
+
+            'dr.Item("Titular") = iisNull(dr.Item("Titular"))
+            'If dr.Item("Titular") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Titular") Then
+            '    .Titular = BuscaIdClientePrecisoConCUIT(dr.Item("Titular"), SC)
+            '    If .Titular = -1 Then .Titular = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Titular")), SC)
+            '    dr.Item("IdTitular") = .Titular
+            '    If .Titular = -1 Then Return "Titular"
+            'End If
+
+
+
+            'sector del confeccionó
+
+
+
+            Dim ms As String
+            If FertilizanteManager.IsValid(SC, myCartaDePorte, ms) Then
+                '                Try
+
+
+                Try
+                    'EntidadManager.LogPronto(HFSC.Value, id, "CartaPorte Anulacion de posiciones ", Session(SESSIONPRONTO_UserName))
+
+                    'loguear el formato usado   y el nombre del archivo importado
+                    'Dim nombre = Session("NombreArchivoSubido")
+                    'Dim formato '= FormatoDelArchivo(nombre, cmbFormato)
+                    'Dim s = " F:" + formato.ToString + " " + nombre
+
+
+                    'EntidadManager.Tarea(SC, "Log_InsertarRegistro", "IMPORT", _
+                    '                          .Id, 0, Now, 0, "Tabla : CartaPorte", "", Session(SESSIONPRONTO_UserName), _
+                    '                         s, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                    '                        DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                    '                        DBNull.Value, DBNull.Value, DBNull.Value)
+
+
+
+                    'GetStoreProcedure(SC, enumSPs.Log_InsertarRegistro, IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
+                    '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+                If Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName)) = -1 Then
+                    'Debug.Print("No se pudo grabar el renglon n° " & myCartaDePorte.NumeroCartaDePorte)
+                    'ErrHandler.WriteError("Error al grabar CDP importada")
+                Else
+                    'poner url hacia el ABM
+                    'Response.Redirect(String.Format("CartaDePorte.aspx?Id={0}", IdCartaDePorte.ToString))
+
+                    'Dim hl As WebControls.HyperLink = CType(r.Cells(getGridIDcolbyHeader("Ir a", gvExcel)).Controls(1), WebControls.HyperLink)
+                    'hl.NavigateUrl = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
+                    'dr.Item("URLgenerada") = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
+
+                End If
+
+            Else
+                'Dim sError = "Error al validar CDP importada: " & myCartaDePorte.NumeroCartaDePorte & " " & ms
+                'ErrHandler.WriteError(sError)
+                'txtLogErrores.Visible = True
+                'If txtLogErrores.Text = "" Then txtLogErrores.Text = "Errores: " & vbCrLf
+                'txtLogErrores.Text &= sError & vbCrLf
+            End If
+
+        End With
+
+        Return 0
+    End Function
+
 
     <DataObjectMethod(DataObjectMethodType.Update, True)> _
     Public Shared Function Save(ByVal SC As String, ByVal cupoFertilizante As ProntoMVC.Data.Models.FertilizantesCupos, ByVal IdUsuario As Integer, ByVal NombreUsuario As String, Optional ByVal bCopiarDuplicados As Boolean = True) As Integer
@@ -171,7 +383,7 @@ Public Class FertilizanteManager
 
 
             With cupoFertilizante
-                Dim db As New DemoProntoEntities(Encriptar(SC))
+                Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
 
@@ -208,6 +420,7 @@ Public Class FertilizanteManager
 
         Return cupoFertilizante.IdFertilizanteCupo
     End Function
+
 
 
     Shared Sub UpdateColecciones(ByRef o As FertilizantesCupos, db As DemoProntoEntities)
