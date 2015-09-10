@@ -1,6 +1,4 @@
 
-
-
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
@@ -1442,6 +1440,16 @@ CREATE TABLE [dbo].FertilizantesCupos (
 
 );
 
+alter table FertilizantesCupos ADD
+	IdUsuarioModifico int NULL,
+	FechaModificacion datetime NULL,
+	IdFacturaImputada int null,
+	NumeradorTexto        VARCHAR (20)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+go
+
+alter table FertilizantesCupos ADD
+	constraint U_Numero unique NONCLUSTERED (NumeradorTexto,FechaAnulacion)
+go
 
 
 
