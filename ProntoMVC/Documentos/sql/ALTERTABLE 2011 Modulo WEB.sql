@@ -1314,10 +1314,8 @@ go
 
 ----//////////////////////////////////////////////////////////////////////////////
 
-
-
 CREATE TABLE [dbo].FertilizantesCupos (
-    [IdFertilizanteCupo]                                INT             IDENTITY (1, 1) NOT NULL,
+    [IdFertilizanteCupo]                                INT             IDENTITY (1, 1) PRIMARY KEY,
     [Numero]											BIGINT          NULL,
 
 
@@ -1450,8 +1448,6 @@ go
 alter table FertilizantesCupos ADD
 	constraint U_Numero unique NONCLUSTERED (NumeradorTexto,FechaAnulacion)
 go
-
-
 
 
 

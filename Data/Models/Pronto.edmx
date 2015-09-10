@@ -780,12 +780,6 @@ warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a
           <Property Name="FueraDeEstandar" Type="varchar" MaxLength="2" />
           <Property Name="CalidadPuntaSombreada" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Pronto.dbo.CartasDePorteMailClusters' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CartasDePorteMailClusters">
-          <Property Name="IdCartaDePorte" Type="int" />
-          <Property Name="AgrupadorDeTandaPeriodos" Type="int" />
-        </EntityType>-->
         <EntityType Name="CartasDePorteReglasDeFacturacion">
           <Key>
             <PropertyRef Name="IdRegla" />
@@ -3224,8 +3218,6 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="Fecha" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.FertilizantesCupos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="FertilizantesCupos">
           <Key>
             <PropertyRef Name="IdFertilizanteCupo" />
@@ -3272,6 +3264,10 @@ warning 6002: The table/view 'Pronto.dbo.FertilizantesCupos' does not have a pri
           <Property Name="ClaveEncriptada" Type="varchar" MaxLength="150" />
           <Property Name="NumeroCartaEnTextoParaBusqueda" Type="varchar" MaxLength="20" />
           <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioModifico" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdFacturaImputada" Type="int" />
+          <Property Name="NumeradorTexto" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Formularios">
           <Key>
@@ -5590,9 +5586,6 @@ warning 6002: The table/view 'Pronto.dbo.FertilizantesCupos' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__CartasDeP__IdCar__4A4FCF14" />-->
         <Association Name="FK__CartasDeP__IdCar__5A512CB3">
           <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="0..1" />
           <End Role="CartasDePorteDetalle" Type="Self.CartasDePorteDetalle" Multiplicity="*" />
@@ -8280,13 +8273,13 @@ error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a 
           <Parameter Name="IdFactura" Type="int" Mode="In" />
         </Function>
         <Function Name="LogComprobantesElectronicos_InsertarRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Recibido" Type="ntext" Mode="In" />
+          <Parameter Name="Tipo" Type="varchar" Mode="In" />
+          <Parameter Name="Letra" Type="varchar" Mode="In" />
           <Parameter Name="PuntoVenta" Type="int" Mode="In" />
           <Parameter Name="NumeroComprobante" Type="int" Mode="In" />
           <Parameter Name="Identificador" Type="int" Mode="In" />
           <Parameter Name="Enviado" Type="ntext" Mode="In" />
-          <Parameter Name="Recibido" Type="ntext" Mode="In" />
-          <Parameter Name="Tipo" Type="varchar" Mode="In" />
-          <Parameter Name="Letra" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Obras_EliminarCuentasNoUsadasPorIdObra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdObra" Type="int" Mode="In" />
@@ -8451,6 +8444,7 @@ error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a 
           <EntitySet Name="Estados Proveedores" EntityType="Self.Estados Proveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FertilizantesCupos" EntityType="Self.FertilizantesCupos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GruposObras" EntityType="Self.GruposObras" Schema="dbo" store:Type="Tables" />
@@ -8681,52 +8675,6 @@ error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a 
     [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
     [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
     FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="FertilizantesCupos" EntityType="Self.FertilizantesCupos" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FertilizantesCupos].[IdFertilizanteCupo] AS [IdFertilizanteCupo], 
-    [FertilizantesCupos].[Numero] AS [Numero], 
-    [FertilizantesCupos].[IdUsuarioIngreso] AS [IdUsuarioIngreso], 
-    [FertilizantesCupos].[FechaIngreso] AS [FechaIngreso], 
-    [FertilizantesCupos].[Anulada] AS [Anulada], 
-    [FertilizantesCupos].[IdUsuarioAnulo] AS [IdUsuarioAnulo], 
-    [FertilizantesCupos].[FechaAnulacion] AS [FechaAnulacion], 
-    [FertilizantesCupos].[FechaTimeStamp] AS [FechaTimeStamp], 
-    [FertilizantesCupos].[FechaCupo] AS [FechaCupo], 
-    [FertilizantesCupos].[TipoEgresoIngreso] AS [TipoEgresoIngreso], 
-    [FertilizantesCupos].[Cliente] AS [Cliente], 
-    [FertilizantesCupos].[CuentaOrden] AS [CuentaOrden], 
-    [FertilizantesCupos].[IdChofer] AS [IdChofer], 
-    [FertilizantesCupos].[Chasis] AS [Chasis], 
-    [FertilizantesCupos].[Acoplado] AS [Acoplado], 
-    [FertilizantesCupos].[IdTransportista] AS [IdTransportista], 
-    [FertilizantesCupos].[IdLocalidadTransportista] AS [IdLocalidadTransportista], 
-    [FertilizantesCupos].[Recorrido] AS [Recorrido], 
-    [FertilizantesCupos].[Destino] AS [Destino], 
-    [FertilizantesCupos].[Contrato] AS [Contrato], 
-    [FertilizantesCupos].[IdArticulo] AS [IdArticulo], 
-    [FertilizantesCupos].[Puro] AS [Puro], 
-    [FertilizantesCupos].[Mezcla] AS [Mezcla], 
-    [FertilizantesCupos].[IdArticuloComponente1] AS [IdArticuloComponente1], 
-    [FertilizantesCupos].[Porcentaje1] AS [Porcentaje1], 
-    [FertilizantesCupos].[IdArticuloComponente2] AS [IdArticuloComponente2], 
-    [FertilizantesCupos].[Porcentaje2] AS [Porcentaje2], 
-    [FertilizantesCupos].[IdArticuloComponente3] AS [IdArticuloComponente3], 
-    [FertilizantesCupos].[Porcentaje3] AS [Porcentaje3], 
-    [FertilizantesCupos].[IdArticuloComponente4] AS [IdArticuloComponente4], 
-    [FertilizantesCupos].[Porcentaje4] AS [Porcentaje4], 
-    [FertilizantesCupos].[IdArticuloComponente5] AS [IdArticuloComponente5], 
-    [FertilizantesCupos].[Porcentaje5] AS [Porcentaje5], 
-    [FertilizantesCupos].[FormaDespacho] AS [FormaDespacho], 
-    [FertilizantesCupos].[Cantidad] AS [Cantidad], 
-    [FertilizantesCupos].[Observaciones] AS [Observaciones], 
-    [FertilizantesCupos].[PathImagen] AS [PathImagen], 
-    [FertilizantesCupos].[PathImagen2] AS [PathImagen2], 
-    [FertilizantesCupos].[AgrupadorDeTandaPeriodos] AS [AgrupadorDeTandaPeriodos], 
-    [FertilizantesCupos].[ClaveEncriptada] AS [ClaveEncriptada], 
-    [FertilizantesCupos].[NumeroCartaEnTextoParaBusqueda] AS [NumeroCartaEnTextoParaBusqueda], 
-    [FertilizantesCupos].[SubnumeroVagonEnTextoParaBusqueda] AS [SubnumeroVagonEnTextoParaBusqueda]
-    FROM [dbo].[FertilizantesCupos] AS [FertilizantesCupos]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__CartasDeP__Acopi__5498535D" Association="Self.FK__CartasDeP__Acopi__5498535D">
             <End Role="CartasPorteAcopios" EntitySet="CartasPorteAcopios" />
@@ -10605,13 +10553,13 @@ error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a 
             <End Role="DetalleDevolucione" EntitySet="DetalleDevoluciones" />
           </AssociationSet>
           <FunctionImport Name="LogComprobantesElectronicos_InsertarRegistro">
+            <Parameter Name="Recibido" Mode="In" Type="String" />
+            <Parameter Name="Tipo" Mode="In" Type="String" />
+            <Parameter Name="Letra" Mode="In" Type="String" />
             <Parameter Name="PuntoVenta" Mode="In" Type="Int32" />
             <Parameter Name="NumeroComprobante" Mode="In" Type="Int32" />
             <Parameter Name="Identificador" Mode="In" Type="Int32" />
             <Parameter Name="Enviado" Mode="In" Type="String" />
-            <Parameter Name="Recibido" Mode="In" Type="String" />
-            <Parameter Name="Tipo" Mode="In" Type="String" />
-            <Parameter Name="Letra" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Choferes" EntityType="DemoProntoModel.Chofere" />
           <EntitySet Name="LogComprobantesElectronicos" EntityType="DemoProntoModel.LogComprobantesElectronico" />
@@ -20927,6 +20875,10 @@ error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a 
           <Property Name="ClaveEncriptada" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="NumeroCartaEnTextoParaBusqueda" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioModifico" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdFacturaImputada" Type="Int32" />
+          <Property Name="NumeradorTexto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__CartasDeP__Acopi__5498535D">
           <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -27094,6 +27046,10 @@ error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a 
           <EntitySetMapping Name="FertilizantesCupos">
             <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesCupos">
               <MappingFragment StoreEntitySet="FertilizantesCupos">
+                <ScalarProperty Name="NumeradorTexto" ColumnName="NumeradorTexto" />
+                <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
                 <ScalarProperty Name="SubnumeroVagonEnTextoParaBusqueda" ColumnName="SubnumeroVagonEnTextoParaBusqueda" />
                 <ScalarProperty Name="NumeroCartaEnTextoParaBusqueda" ColumnName="NumeroCartaEnTextoParaBusqueda" />
                 <ScalarProperty Name="ClaveEncriptada" ColumnName="ClaveEncriptada" />

@@ -416,8 +416,20 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Obras_EliminarCuentasNoUsadasPorIdObra", idObraParameter);
         }
     
-        public virtual int LogComprobantesElectronicos_InsertarRegistro(Nullable<int> puntoVenta, Nullable<int> numeroComprobante, Nullable<int> identificador, string enviado, string recibido, string tipo, string letra)
+        public virtual int LogComprobantesElectronicos_InsertarRegistro(string recibido, string tipo, string letra, Nullable<int> puntoVenta, Nullable<int> numeroComprobante, Nullable<int> identificador, string enviado)
         {
+            var recibidoParameter = recibido != null ?
+                new ObjectParameter("Recibido", recibido) :
+                new ObjectParameter("Recibido", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(string));
+    
+            var letraParameter = letra != null ?
+                new ObjectParameter("Letra", letra) :
+                new ObjectParameter("Letra", typeof(string));
+    
             var puntoVentaParameter = puntoVenta.HasValue ?
                 new ObjectParameter("PuntoVenta", puntoVenta) :
                 new ObjectParameter("PuntoVenta", typeof(int));
@@ -434,19 +446,7 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("Enviado", enviado) :
                 new ObjectParameter("Enviado", typeof(string));
     
-            var recibidoParameter = recibido != null ?
-                new ObjectParameter("Recibido", recibido) :
-                new ObjectParameter("Recibido", typeof(string));
-    
-            var tipoParameter = tipo != null ?
-                new ObjectParameter("Tipo", tipo) :
-                new ObjectParameter("Tipo", typeof(string));
-    
-            var letraParameter = letra != null ?
-                new ObjectParameter("Letra", letra) :
-                new ObjectParameter("Letra", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", puntoVentaParameter, numeroComprobanteParameter, identificadorParameter, enviadoParameter, recibidoParameter, tipoParameter, letraParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", recibidoParameter, tipoParameter, letraParameter, puntoVentaParameter, numeroComprobanteParameter, identificadorParameter, enviadoParameter);
         }
     
         public virtual int Articulos_TX_BD_ProntoMantenimientoTodos(Nullable<int> idObraPronto)

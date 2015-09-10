@@ -56,5 +56,9 @@ namespace ProntoMVC.Data.Models
         public string ClaveEncriptada { get; set; }
         public string NumeroCartaEnTextoParaBusqueda { get; set; }
         public string SubnumeroVagonEnTextoParaBusqueda { get; set; }
+        public Nullable<int> IdUsuarioModifico { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public Nullable<int> IdFacturaImputada { get; set; }
+        public string NumeradorTexto { get; set; }
     }
 }
