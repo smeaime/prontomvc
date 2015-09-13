@@ -1580,7 +1580,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    .CTG
 
                     PrintLine(nF, sb)
                 End With
