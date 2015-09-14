@@ -1010,11 +1010,6 @@
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>=dateserial(year(now),month(now),day(now))</Value>
-        </Values>
-      </DefaultValue>
       <Prompt>Hasta</Prompt>
     </ReportParameter>
     <ReportParameter Name="RegistrosResumidos">

@@ -1538,7 +1538,23 @@ namespace ProntoMVC.Controllers
             SqlParameter storedParam = new SqlParameter("@ip", p1);
 
             //var dt = TablasDAL.GetStore(this.Session["BasePronto"].ToString(), sp, parametros);
+
             var dt = EntidadManager.GetStoreProcedure(SCsql(), sp, p1);
+
+            var unidades = (from DataRow u in dt.Rows
+                            select new
+                            {
+                                value = u[0].ToString(),
+                                title = u[1].ToString()
+                            }
+                           ).ToList();
+
+            return Json(unidades, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetStoreProcSinParametros(string sp)
+        {
+            var dt = EntidadManager.GetStoreProcedure(SCsql(), sp);
 
             var unidades = (from DataRow u in dt.Rows
                             select new

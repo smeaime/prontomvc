@@ -3,8 +3,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>0ec63e3d-b56f-4870-97e5-3596b3bd2562</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -3144,7 +3148,7 @@ Order By [Titulo]</CommandText>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>4.44642in</Height>
+        <Height>2.19642in</Height>
         <Style />
       </Body>
       <Width>33.7255in</Width>
@@ -3161,26 +3165,31 @@ Order By [Titulo]</CommandText>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="Desde">
       <DataType>DateTime</DataType>
       <DefaultValue>
         <Values>
-          <Value>=DateSerial(2011,7,1)</Value>
+          <Value>=dateserial(2000,1,1)</Value>
         </Values>
       </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="Hasta">
       <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>=DateSerial(2011,7,15)</Value>
-        </Values>
-      </DefaultValue>
       <Prompt>Hasta</Prompt>
     </ReportParameter>
     <ReportParameter Name="IdObra">
       <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>-1</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Obra</Prompt>
       <ValidValues>
         <DataSetReference>

@@ -293,5 +293,22 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+        public virtual ActionResult GetTiposArchivoExportado2()
+        {
+            Dictionary<int, string> TiposArchivoExportado = new Dictionary<int, string>();
+            TiposArchivoExportado.Add(1, "SIFERE");
+            TiposArchivoExportado.Add(2, "e-SICOL");
+
+            return PartialView("Select", TiposArchivoExportado);
+        }
+
+        public virtual JsonResult GetTiposArchivoExportado()
+        {
+            var jsonData = new {items = new[] {new {value = "1" , title = "SIFERE"}, new {value = "2" , title = "e-SICOL"}}};
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
