@@ -118,16 +118,27 @@
                     <div class="row-fluid">
 
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.NumeroAsiento, "Numero de asiento")
-                            @Html.TextBoxFor(model => model.NumeroAsiento, new { @class = "span12" })
+                            @Html.LabelFor(model => model.NumeroAsiento, "Número")
+                            @Html.TextBoxFor(model => model.NumeroAsiento, new { @class = "span12", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model.NumeroAsiento)
                         </div>
 
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "Fecha")
-                            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.FechaIngreso)
+                            @Html.LabelFor(model => model.FechaAsiento, "Fecha")
+                            @Html.TextBoxFor(model => model.FechaAsiento, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.FechaAsiento)
                         </div>
+                        <script>
+                            $("#FechaAsiento").datepicker({
+                                changeMonth: true,
+                                changeYear: true,
+                                dateFormat: 'dd/mm/yy'
+                                //numberOfMonths: 2,
+                            });
+
+
+
+                        </script>
 
                         <div class="span8 lightblue">
                             @Html.LabelFor(model => model.Concepto, "Concepto")
@@ -156,10 +167,33 @@
                     <br />
 
                     <div class="row-fluid">
-                        <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.FechaIngreso, "Asiento de apertura del ejercicio")
-                            @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "SI") SI
-                            @Html.RadioButtonFor(model => model.AsignarAPresupuestoObra, "NO") NO
+                        <div class="span6 lightblue">
+                            @Html.LabelFor(model => model.AsientoApertura, "Asiento de apertura del ejercicio")
+                            @Html.RadioButtonFor(model => model.AsientoApertura, "SI") SI
+                            @Html.RadioButtonFor(model => model.AsientoApertura, "NO") NO
+                        </div>
+
+                        <div class="span1 lightblue">
+                            @Html.Label("Diferencia")
+                        </div>
+                        <div class="span4 lightblue">
+
+                            @Html.TextBox("Diferencia", "", new { @class = "span12", @readonly = "readonly" })
+
+                            <script>
+                                function calculateTotal() {
+                                    var debe = $('#Lista').jqGrid('getCol', 'Debe', false, 'sum')
+                                    var haber = $('#Lista').jqGrid('getCol', 'Haber', false, 'sum')
+
+                                    $("#Lista").jqGrid('footerData', 'set', {
+                                        Obra: 'TOTALES',
+                                        Debe: debe.toFixed(4),
+                                        Haber: haber.toFixed(4),
+                                    });
+
+                                    $("#Diferencia").val(debe - haber);
+                                }
+                            </script>
                         </div>
                     </div>
 
@@ -172,25 +206,7 @@
                     </div>
 
 
-                    <div class="row-fluid">
-                        @Html.Label("Diferencia")
-                        @Html.TextBox("Diferencia")
 
-                        <script>
-                            function calculateTotal() {
-                                var debe = $('#Lista').jqGrid('getCol', 'Debe', false, 'sum')
-                                var haber = $('#Lista').jqGrid('getCol', 'Haber', false, 'sum')
-
-                                $("#Lista").jqGrid('footerData', 'set', {
-                                    Obra: 'TOTALES',
-                                    Debe: debe.toFixed(4),
-                                    Haber: haber.toFixed(4),
-                                });
-
-                                $("#Diferencia").val(debe - haber);
-                            }
-                        </script>
-                    </div>
 
 
                 </div>
@@ -213,6 +229,10 @@
     </div>
     <!--/.fluid-container-->
     <script type="text/javascript">
+
+
+        var lastColIndex;
+        var lastRowIndex;
 
 
         $(window).resize(function () {
@@ -316,91 +336,384 @@
 
                 colNames: ['#',
 
-                    'IdDetalleAsiento',
-   'IdCuenta', 'Cuenta',
+                                'IdDetalleAsiento',
+                           'IdCuenta', 'item',
 
-   'cód.',
+                           'Cuenta',
 
-    'Detalle de cuenta', 'Obra', 'Debe', 'Haber',
+                            'Detalle de cuenta', 'Obra', 'Debe', 'Haber',
 
-    'registrar en analitico',
-    'Moneda destino', 'Cotiz. moneda destino', 'importe mon destino',
+                            'Registrar en analitico', 'Detalle',
+                            'Moneda destino', 'Cotiz. moneda destino', 'Importe mon destino',
 
-    'enviar a libro',
-'pase IVA',
-'nro comprobante',
-'porcentaje de iva'
+                            'Enviar a libro',
+                        'Pase IVA',
+                        'Nro Comprobante',
+                        'Porcentaje de IVA', 'IdObra','IdMoneda'
                 ],
                 colModel: [
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdDetalleAsiento', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
-                                { name: '', index: '', align: 'left', width: 50, hidden: true, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+                                { name: 'IdDetalleAsiento', label: 'TB', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                                { name: 'IdCuenta', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: 'Item', index: 'Item', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
+                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, hidden: false, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
-                                { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 300, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
                                 {
-                                    name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: true, search: true, hidden: false,
-                                    searchoptions: {
-                                        sopt: ['cn'],
+                                    name: 'Cuenta', formoptions: {  label: "Cuenta" }, index: 'Cuenta', align: 'left', width: 250,
+                                    hidden: false,
+                                    editable: true, edittype: 'text',
+                                    editoptions: {
+                                        rows: '1', cols: '1',
                                         dataInit: function (elem) {
-                                            // it demonstrates custom item rendering  http://stackoverflow.com/questions/7392236/jqgrid-with-autocompletion-cant-parse-data-from-controller-to-view/7392816#7392816
-                                            //                                    $(elem).autocomplete({ source:  ROOT + 'Articulo/GetObrasAutocomplete2' })
-                                            //                                                                .data("autocomplete")._renderItem = function (ul, item) {
-                                            //                                                                    return $("<li></li>")
-                                            //                                                                        .data("item.autocomplete", item)
-                                            //                                                                        .append("<a><span style='display:inline-block;width:60px;'><b>" +
-                                            //                                                                                item.value + "</b></span>" + item.title + "</a>")
-                                            //                                                                        .appendTo(ul);
-                                            //                                                                };
-
-
-
+                                            var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
 
                                             $(elem).autocomplete({
-                                                source: ROOT + 'Articulo/GetObrasAutocomplete2'
 
-                                                //,minLength: 3
-                                                //                                                                        ,select: function (event, ui) {
+                                                source: ROOT + 'Cuenta/GetCuentasAutocomplete',
+                                                minLength: 0,
+                                                select: function (event, ui) {
 
-                                                //                                                                            $("#IdCuenta").val(ui.item.id);
-                                                //                                                                            $("#CodigoCuenta").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
-                                                //                                                                            $("#Descripcion").val(ui.item.title);
-                                                //                                                                        }
+                                                    if (ui.item.label === NoResultsLabel) {
+                                                        event.preventDefault();
+                                                        return;
+                                                    }
+                                                    // cómo hago si la modificacion se hizo en modo inline??????
+
+
+                                                    //if ($($("#Lista").jqGrid("getInd", rowid, true)).attr("editable") === "1") {
+                                                    // the row having id=rowid is in editing mode
+
+
+                                                    //                                            }
+                                                    //                                          else {
+
+
+
+                                                    //                                            $("#IdCuenta").val(ui.id);
+                                                    //                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                    //                                            $("#CuentaGasto").val(ui.title);
+
+                                                    $("#IdCuenta").val(ui.item.id);
+                                                    $("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                    $("#CuentaGasto").val(ui.item.title);
+                                                    //}
+
+                                                },
+                                                focus: function (event, ui) {
+                                                    if (ui.item.label === NoResultsLabel) {
+                                                        event.preventDefault();
+                                                    }
+                                                }
                                             })
                                             .data("ui-autocomplete")._renderItem = function (ul, item) {
                                                 return $("<li></li>")
                                                     .data("ui-autocomplete-item", item)
-                                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " " + item.title + "</b></span></a>")
+                                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.codigo + "]</b></span></a>")
                                                     .appendTo(ul);
                                             };
-
-
-
-
                                         }
-                                    }
 
+
+                                                ,
+                                        dataEvents: [{
+                                            type: 'change',
+                                            fn: function (e) {
+
+                                                //alert(this.value);
+
+                                                if (this.value == "No se encontraron resultados") {
+                                                    $("#Descripcion").val("");
+                                                    return;
+                                                }
+
+                                                $.post(ROOT + 'Cuenta/GetCuentasAutocomplete',  // ?term=' + val
+                                                    { term: this.value },
+                                                    function (data) {
+                                                        if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                            var ui = data[0];
+
+                                                            if (ui.codigo == "") {
+                                                                alert("No existe la cuenta"); // se está bancando que no sea identica la descripcion
+                                                                $("#Descripcion").val("");
+                                                                return;
+                                                            }
+
+
+                                                            //alert('hay ' + data.length);
+
+                                                            alert(ui.codigo);
+
+                                                            $("#IdCuenta").val(ui.id);
+                                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                            $("#CuentaGasto").val(ui.title);
+
+                                                            //                                                    $("#IdArticulo").val(ui.id);
+                                                            //                                                    $("#Codigo").val(ui.codigo);
+                                                            //                                                    $("#IdUnidad").val(ui.IdUnidad);
+                                                            //                                                    //$("#Unidad").val(ui.item.Unidad);
+                                                            //                                                    $("#Unidad").val(ui.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
+
+                                                            //                                                    UltimoIdArticulo = ui.id;
+                                                            //                                                    UltimoIdUnidad = ui.IdUnidad;
+
+
+                                                        }
+                                                        else {
+
+                                                            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        }
+                                                    }
+                                                );
+
+
+
+                                            }
+                                        }]
+                                    },
+                                    editrules: { required: false }
+                                },
+
+
+                                {
+                                    name: 'Obra', formoptions: { label: "Obra" }, index: 'Cuenta', align: 'left', width: 250,
+                                    hidden: false,
+                                    editable: true, edittype: 'text',
+                                    editoptions: {
+                                        rows: '1', cols: '1',
+                                        dataInit: function (elem) {
+                                            var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
+
+                                            $(elem).autocomplete({
+
+                                                source: ROOT + 'Articulo/GetObrasAutocomplete2',
+                                                minLength: 0,
+                                                select: function (event, ui) {
+
+                                                    if (ui.item.label === NoResultsLabel) {
+                                                        event.preventDefault();
+                                                        return;
+                                                    }
+                                                    // cómo hago si la modificacion se hizo en modo inline??????
+
+
+                                                    //if ($($("#Lista").jqGrid("getInd", rowid, true)).attr("editable") === "1") {
+                                                    // the row having id=rowid is in editing mode
+
+
+                                                    //                                            }
+                                                    //                                          else {
+
+
+
+                                                    //                                            $("#IdCuenta").val(ui.id);
+                                                    //                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                    //                                            $("#CuentaGasto").val(ui.title);
+
+                                                    $("#IdObra").val(ui.item.id);
+                                                    //$("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                    //$("#CuentaGasto").val(ui.item.title);
+                                                    //}
+
+                                                },
+                                                focus: function (event, ui) {
+                                                    if (ui.item.label === NoResultsLabel) {
+                                                        event.preventDefault();
+                                                    }
+                                                }
+                                            })
+                                            .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                                return $("<li></li>")
+                                                    .data("ui-autocomplete-item", item)
+                                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.codigo + "]</b></span></a>")
+                                                    .appendTo(ul);
+                                            };
+                                        }
+
+
+                                                ,
+                                        dataEvents: [{
+                                            type: 'change',
+                                            fn: function (e) {
+
+                                                //alert(this.value);
+
+                                                if (this.value == "No se encontraron resultados") {
+                                                    $("#Obra").val("");
+                                                    return;
+                                                }
+
+                                                $.post(ROOT + 'Articulo/GetObrasAutocomplete2',  // ?term=' + val
+                                                    { term: this.value },
+                                                    function (data) {
+                                                        if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                            var ui = data[0];
+
+                                                            if (ui.codigo == "") {
+                                                                alert("No existe la obra"); // se está bancando que no sea identica la descripcion
+                                                                $("#Obra").val("");
+                                                                return;
+                                                            }
+
+
+                                                            //alert('hay ' + data.length);
+
+                                                            alert(ui.codigo);
+
+                                                            $("#IdObra").val(ui.id);
+                                                            //$("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                            //$("#CuentaGasto").val(ui.title);
+
+                                                            //                                                    $("#IdArticulo").val(ui.id);
+                                                            //                                                    $("#Codigo").val(ui.codigo);
+                                                            //                                                    $("#IdUnidad").val(ui.IdUnidad);
+                                                            //                                                    //$("#Unidad").val(ui.item.Unidad);
+                                                            //                                                    $("#Unidad").val(ui.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
+
+                                                            //                                                    UltimoIdArticulo = ui.id;
+                                                            //                                                    UltimoIdUnidad = ui.IdUnidad;
+
+
+                                                        }
+                                                        else {
+
+                                                            alert("No existe la obra"); // se está bancando que no sea identica la descripcion
+                                                        }
+                                                    }
+                                                );
+
+
+
+                                            }
+                                        }]
+                                    },
+                                    editrules: { required: false }
+                                },
+
+
+                                { name: 'Debe', label: 'TB', index: 'Debe', align: 'right', width: 100, editable: true, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'Haber', label: 'TB', index: 'Haber', align: 'right', width: 100, editable: true, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+
+
+
+
+                                 {
+                                     name: 'RegistrarEnAnalitico', label: 'TB', index: 'RegistrarEnAnalitico', align: 'center', width: 50,
+                                     editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
+                                     //formatter: "checkbox",
+                                     formatter: "SiNoFormatter",
+                                     formatoptions: { disabled: false }
+                                 },
+
+                                { name: 'Detalle', index: 'Detalle', label: 'TB', align: 'left', width: 300, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+
+
+
+
+                                {
+                                    name: 'MonedaDestino', index: 'MonedaDestino',
+                                    align: 'left',
+                                    width: 50, editable: true, hidden: false,
+                                    edittype: 'select', // formatter: 'select',
+                                    editrules: { required: false },
+                                    editoptions: {
+                                        dataUrl: ROOT +  'Moneda/GetMonedas',
+                                        dataInit: function (elem) {
+                                            $(elem).width(40);
+                                        },
+                                        dataEvents: [{
+                                            type: 'change', fn: function (e) {
+                                                var $this = $(e.target), $td;
+                                                if ($this.hasClass("FormElement")) {
+                                                    // form editing
+                                                    $('#IdMonedaDestino').val(this.value);
+                                                    Moneda_Cotizacion(null, this.value, function (cotiz) {
+                                                                    $('#CotizacionMoneda').val (cotiz);
+                                                    });
+                                                } else {
+                                                    $td = $this.closest("td");
+                                                    if ($td.hasClass("edit-cell")) {
+                                                        // cell editing
+                                                        var rowid = $('#Lista').getGridParam('selrow');
+                                                        $('#Lista').jqGrid('setCell', rowid, 'IdMonedaDestino', this.value);
+                                                        Moneda_Cotizacion(null, this.value, function (cotiz) {
+                                                                $('#Lista').jqGrid('setCell', rowid, 'CotizacionMoneda', cotiz);
+                                                        });
+                                                        
+                                                    } else {
+                                                        // inline editing
+                                                    }
+                                                }
+                                            }
+                                        }]
+                                    },
+                                },
+
+                                { name: 'CotizacionMoneda', label: 'TB', index: 'CotizacionMoneda', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'ImporteEnMonedaDestino', label: 'TB', index: 'ImporteEnMonedaDestino', align: 'center', width: 80, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
+
+
+
+                                 {
+
+                                     name: 'Libro', label: 'TB'
+                                    , formoptions: {
+                                        //rowpos: 11, colpos: 2,
+                                        label: "Enviar a libros"
+                                    }
+                                    , index: 'Libro',
+                                    align: 'center', width: 100, editable: true, hidden: false,
+                                    edittype: 'select', formatter: 'select',
+                                     // formatter: radioFormatter, unformat: unformatRadio,
+                                     editrules: {
+                                         required: false
+                                         //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  )                , disabled: 'disabled'
+                                     },
+                                     editoptions: {
+                                         //                         readonly: true,
+                                         //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
+                                         //defaultValue: OrigenDescripcionDefault,
+                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro compras;" //, size: 3
+                                         //,
+                                         //     custom_element: myelem, custom_value: myvalue
+                                     }
+
+                                 },
+
+                                {
+
+                                    name: 'TipoImporte', label: 'TB'
+                                        , formoptions: {
+                                            //rowpos: 11, colpos: 2,
+                                            label: "El pase es"
+                                        }
+                                        , index: 'TipoImporte',
+                                        align: 'center', width: 100, editable: true, hidden: false,
+                                        edittype: 'select', formatter: 'select',
+                                    // edittype: 'custom',
+                                    // formatter: radioFormatter, unformat: unformatRadio,
+                                    editrules: {
+                                        required: false
+                                        //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  )                , disabled: 'disabled'
+                                    },
+                                    editoptions: {
+                                        //                         readonly: true,
+                                        //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
+                                        //defaultValue: OrigenDescripcionDefault,
+                                        value: "I:IVA;G:Gravado;N:No gravado;:" //, size: 3
+                                        //,
+                                        //     custom_element: myelem, custom_value: myvalue
+                                    }
 
                                 },
 
-                                { name: 'Debe', index: 'Debe', align: 'right', width: 100, editable: true, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'Haber', index: 'Haber', align: 'right', width: 100, editable: true, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
-                                { name: 'analitico', index: '', align: 'left', width: 200, editable: true, search: false, searchoptions: { sopt: ['cn'] }, hidden: true },
+                                { name: 'NumeroComprobante', index: 'NumeroComprobante', label: 'TB', align: 'left', width: 100, editable: true, editoptions: {}, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                                { name: 'PorcentajeIVA', label: 'TB', index: 'PorcentajeIVA', align: 'left', width: 70, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
-                                { name: 'Moneda', index: 'Cumplido', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: true },
-                                { name: 'Cotiz', index: 'Recepcionado', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'importe', index: 'Entregado', align: 'center', width: 50, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
-
-                                { name: 'enviar', index: 'NumeroObra', align: 'left', width: 85, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'pase', index: 'Pedidos', align: 'left', width: 200, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'nro', index: 'Comparativas', align: 'left', width: 200, editable: true, editoptions: {}, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                                { name: 'porcentaje', index: 'Pedidos', align: 'left', width: 200, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
-
-
+                                { name: 'IdObra', label: 'TB', key: true, index: 'IdObra', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: 'IdMonedaDestino', label: 'TB', key: true, index: 'IdMonedaDestino', align: 'left', width: 100, editable: false, hidden: true },
 
 
                 ],
@@ -409,23 +722,40 @@
                 //////////////////////////////////////////////
                 //////////////////////////////////////////////
 
+                loadComplete: function (data) {
+                    calculateTotal();
+                },
+
                 onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
+
+
+                    try {
+                        if (id && id !== lastSelectedId) {
+                            if (typeof lastSelectedId !== "undefined") {
+                                grid.jqGrid('restoreRow', lastSelectedId);
+                            }
+                            lastSelectedId = id;
+                            calculateTotal();
                         }
-                        lastSelectedId = id;
-                        calculateTotal();
+                    } catch (e) {
+
                     }
+
                 },
 
                 ondblClickRow: function (id) {
-                    //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            // jQuery('#Lista').jqGrid('restoreRow', lastSelectedId);
-                        }
-                        lastSelectedId = id;
+                    try {
+                        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+                        //if (id && id !== lastSelectedId) {
+                        //    if (typeof lastSelectedId !== "undefined") {
+                        //        jQuery('#Lista').jqGrid('restoreRow', lastSelectedId);
+                        //    }
+                        //    lastSelectedId = id;
+
+                        //}
+                        //jQuery('#Lista').jqGrid('restoreRow', id);
+                    } catch (e) {
 
                     }
                     $("#edtData").click(); //prefiero que copie con solo hacer clic  -y quizás hace el drag inutil, en especial cuando las grillas son fijas
@@ -444,6 +774,15 @@
                     //       is larger as the browser window
                     dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
                     dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
+                },
+
+                beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
+                    lastRowIndex = iRow;
+                    lastColIndex = iCol;
+                },
+
+                afterSaveCell: function () {
+                    calculateTotal();
                 },
 
 
@@ -495,6 +834,7 @@
                                          {
                                              caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
                                              onClickButton: function () {
+                                                 $("#addData").click();
                                                  //AgregarItemVacio(jQuery("#Lista"));
                                              },
                                          });
@@ -521,15 +861,235 @@
 
 
 
+            function SerializaForm() {
+                var cm, data1, data2, valor;
+                var colModel = jQuery("#Lista").jqGrid('getGridParam', 'colModel');
+                //            var cabecera = { "IdPedido": "", "Numero": "", "SubNumero": "", "FechaIngreso": "", "IdProveedor": "", "Validez": "", "Bonificacion": "", "PorcentajeIva1": "", "IdMoneda": "",
+                //                "ImporteBonificacion": "", "ImporteIva1": "", "ImporteTotal": "", "IdPlazoEntrega": "", "IdCondicionCompra": "", "Garantia": "", "LugarEntrega": "",
+                //                "IdComprador": "", "Aprobo": "", "Referencia": "", "Detalle": "", "Contacto": "", "Observaciones": "", "DetallePedidos": []
+                //            };
+
+                //var ImporteBonificacion = $("#TotalBonificacionGlobal").val();
+                //            ImporteBonificacion = ImporteBonificacion.replace(".", ",");
+
+                //////////////////////////////////////////////////////////////////////////////////////////////
+                var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
+                cabecera.DetalleAsientos = [];
+
+
+                //cabecera.IdProveedor = $("#IdProveedor").val();
+                //// como no le encontre la vuelta a automatizar la serializacion de inputs disableados, los pongo manualmente
+                //// como no le encontre la vuelta a automatizar la serializacion de inputs disableados, los pongo manualmente
+                ////cabecera.NumeroFactura = $("#NumeroFactura").val();
+
+
+
+
+                ////            cabecera.IdPedido = $("#IdPedido").val();
+                //cabecera.NumeroPedido = $("#NumeroPedido").val();
+                //// cabecera.FechaPedido = $("#FechaPedido").datepicker("getDate");
+                //cabecera.FechaPedido = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", $("#FechaPedido").val()));
+                ////            cabecera.SubNumero = $("#SubNumero").val();
+                ////            cabecera.FechaIngreso = $("#FechaIngreso").val();
+                ////            cabecera.IdProveedor = $("#IdProveedor").val();
+                ////            cabecera.Validez = $("#Validez").val();
+                //cabecera.DetalleCondicionCompra = $("#DetalleCondicionCompra").val();
+                //cabecera.Bonificacion = $("#TotalBonificacionGlobal").val().replace(".", ",");
+                //////            cabecera.PorcentajeIva1 = 21;
+                ////            cabecera.IdMoneda = $("#IdMoneda").val();
+                ////            cabecera.ImporteBonificacion = ImporteBonificacion;
+                //cabecera.TotalIva1 = $("#TotalIva").val().replace(".", ",");
+                //cabecera.TotalPedido = $("#Total").val().replace(".", ",");
+                ////            cabecera.IdPlazoEntrega = $("#IdPlazoEntrega").val();
+                ////            cabecera.IdCondicionCompra = $("#IdCondicionCompra").val();
+                ////            cabecera.Garantia = $("#Garantia").val();
+                ////            cabecera.LugarEntrega = $("#LugarEntrega").val();
+                ////            cabecera.IdComprador = $("#IdComprador").val();
+                ////            cabecera.Aprobo = $("#Aprobo").val();
+                ////            cabecera.Referencia = $("#Referencia").val();
+                ////            cabecera.Detalle = $("#Detalle").val();
+                ////            cabecera.Contacto = $("#Contacto").val();
+                ////            cabecera.Observaciones = $("#Observaciones").val();
+
+                //cabecera.CotizacionMoneda = $("#CotizacionMoneda").val().replace(".", ",");
+
+                var dataIds = $('#Lista').jqGrid('getDataIDs');
+                for (var i = 0; i < dataIds.length; i++) {
+                    try {
+
+
+                        var saveparameters = {
+                            "successfunc": null,
+                            "url": 'clientArray',
+                            "extraparam": {},
+                            //                "aftersavefunc": function (response) {
+                            //                    alert('saved');
+                            //                },
+                            "errorfunc": null,
+                            "afterrestorefunc": null,
+                            "restoreAfterError": true,
+                            "mtype": "POST"
+                        }
+
+                        $('#Lista').jqGrid('saveRow', dataIds[i], saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
+
+
+
+
+                        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+
+
+
+                        var iddeta = data['IdDetalleAsiento'];
+                        //alert(iddeta);
+                        if (!iddeta) continue;
+
+
+
+                        data1 = '{"IdAsiento":"' + $("#IdAsiento").val() + '",'
+                        for (var j = 0; j < colModel.length; j++) {
+                            cm = colModel[j]
+                            if (cm.label === 'TB') {
+                                valor = data[cm.name];
+
+
+                                valor = valor.replace(".", ",")
+
+
+
+                                //if (cm.name === 'Cantidad') valor = valor.replace(".", ",") // parseFloat(this.value).toFixed(2) valor.replace(",", ".").toFixed(2)
+                                //if (cm.name === 'Precio') valor = valor.replace(".", ",")
+                                //if (cm.name === 'PorcentajeBonificacion') valor = valor.replace(".", ",")  // parseFloat(valor) || 0;
+                                //if (cm.name === 'ImporteBonificacion') valor = valor.replace(".", ",")
+                                //if (cm.name === 'PorcentajeIva') valor = valor.replace(".", ",")
+                                //if (cm.name === 'ImporteIva') valor = valor.replace(".", ",")
+                                //if (cm.name === 'ImporteTotalItem') valor = valor.replace(".", ",")
+
+                                //if (cm.name === 'IdDetalleRequerimiento') valor = valor.replace(".", ",")
+                                ////if (cm.name === 'Observaciones') {
+
+
+                                ////}
+                                //if (cm.name === 'Adj. 1') {
+                                //    valor = '';
+                                //}
+
+
+                                //if (cm.name.indexOf("Fecha") !== -1) {
+                                //    try {
+                                //        valor = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", valor));
+                                //    } catch (e) {
+                                //        $.post(ROOT + "Error/JSErrorHandler", { msg: "Error al formatear como fecha " + valor });
+                                //        valor = null;
+                                //    }
+
+                                //}
+
+                                //if (cm.name === 'Cumplido' && cabecera.Cumplido === 'AN') valor = 'AN'
+
+
+                                //if (cm.name === 'OrigenDescripcion') {
+                                //    if (valor == 'Solo el material') {
+                                //        valor = 1;
+                                //    }
+                                //    else if (valor == 'Solo las observaciones') {
+                                //        valor = 2;
+                                //    }
+                                //    else if (valor == 'Material mas observaciones') {
+                                //        valor = 3;
+                                //    }
+                                //    else {
+                                //        //valor = 0;
+                                //    }
+
+
+                                //}
+
+
+
+
+                                try {
+                                    // replace() solo reemplaza la primera aparicion !!!!!!!!
+                                    // http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+
+                                    valor = replaceAll('"', '\\"', valor);
+                                    valor = replaceAll('\t', '\\t', valor);
+                                    valor = replaceAll('\n', '\\n', valor);
+                                    //                                   valor = valor.replace('\t', '\\t');
+                                    //                                   valor = valor.replace('\n', '\\n');
+                                    //                                   valor = valor.replace('\r', '\\r');
+                                    // http://stackoverflow.com/questions/983451/where-can-i-find-a-list-of-escape-characters-required-for-my-json-ajax-return-ty
+                                } catch (e) {
+                                    //
+                                }
+
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////
+                                data1 = data1 + '"' + cm.name + '":"' + valor + '",';
+                            }
+                        }
+
+
+
+
+
+
+
+
+                        data1 = data1.substring(0, data1.length - 1) + '}';
+                        data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                        data2 = JSON.parse(data1);
+                        cabecera.DetalleAsientos.push(data2);
+                    }
+                    catch (ex) {
+                        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+                        alert("No se pudo grabar el comprobante. " + ex);
+                        return;
+                    }
+                }
+
+
+                return cabecera;
+            }
+
+
+
+
+
+
+
+      
+
+
+
+
 
             $("#grabar2").click(function () {
                 //  http://stackoverflow.com/questions/10744694/submitting-jqgrid-row-data-from-view-to-controller-what-method
                 //  http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-form-input-elements?answertab=votes#tab-top
 
 
-                var griddata = $("#Lista").jqGrid('getGridParam', 'data');
-                var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
+                try {
+                    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
+                    //if (id && id !== lastSelectedId) {
+                    //    if (typeof lastSelectedId !== "undefined") {
+                    //        jQuery('#Lista').jqGrid('restoreRow', lastSelectedId);
+                    //    }
+                    //    lastSelectedId = id;
+
+                    //}
+                    //jQuery('#Lista').jqGrid('restoreRow', id);
+                } catch (e) {
+
+                }
+                var griddata = $("#Lista").jqGrid('getGridParam', 'data');
+                //var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
+                var cabecera = SerializaForm();
 
                 //  var aaa = $.toJSON(formdata);
 
@@ -571,12 +1131,32 @@
                     data: dataToSend,
                     //  data: { "formulario": formdata ,"grilla": dataToSend }, // $.toJSON(griddata),
                     success: function (result) {
+
+
+
+
+
+
                         if (result) {
+                            var dt = new Date();
+                            var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                            $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                            $("#mensajeAlerta").show();
+                            // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                            //si graban de nuevo, va a dar un alta!!!!
+
+
+                            $('html, body').css('cursor', 'auto');
+                            $('#grabar2').attr("disabled", false);
+                            //$('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
+
                             //alert('hola.');
-                            grid1.trigger('reloadGrid');
+                            // grid1.trigger('reloadGrid');
 
                             //window.location.replace(ROOT + "Cliente/index");
-                            window.location = (ROOT + "Asiento/index");
+
+                            window.location = (ROOT + "Asiento/Edit/" + result.IdAsiento);
 
                         } else {
                             // window.location.replace(ROOT + "Cliente/index");
@@ -594,8 +1174,7 @@
                             errorMessages.push(errorData[key]);
                         }
                         $('#result').html(errorMessages.join("<br />"));
-                        alert(errorMessages.join("<br />"));
-
+                        alert(errorMessages.join("\n").replace(/<br\/>/g, '\n'));
                     }
 
 
@@ -844,7 +1423,7 @@
                     $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
                     $('#' + this.id + '_err').remove();
 
-                    AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
+                    AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0", "RegistrarEnAnalitico": "NO" });
 
 
                 }
@@ -922,7 +1501,7 @@
                 //						}
                 //						j++;
                 //					}
-                tmpdata['IdDetalleComprobanteProveedor'] = 0;
+                tmpdata['IdDetalleAsiento'] = 0;
 
                 tmpdata['IdCuenta'] = getdata['IdCuenta'];
                 tmpdata['Codigo'] = getdata['Codigo'];
@@ -968,7 +1547,7 @@
 
             //RefrescarOrigenDescripcion();
             //    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
-            AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
+            //AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0" });
 
 
             //   var rows = $("#Lista").getGridParam("reccount");
@@ -1009,7 +1588,8 @@
                     calculateTotal();
                 },
                 onInitializeForm: function (form) {
-                    //$('#IdDetalleAsiento', form).val(0);
+                    $('#IdDetalleAsiento', form).val(0);
+                    $('#Item', form).val(($("#Lista").jqGrid('getCol', 'Item', false, 'max') || 0) + 1);
                 }
                 //beforeShowForm: function (form) { $('#tr_IdDetalleFactura', form).hide(); }
             });

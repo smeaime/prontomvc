@@ -1,0 +1,70 @@
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/jquery.fileupload.css. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/Site.css. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/jquery.alerts.css. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/jquery-ui-layout/layout-default-latest.css. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/jquery-ui-layout/layout-default-latest.css. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/Site.css. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/jquery.fileupload.css. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/jquery.alerts.css. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:38
+Error in: http://localhost:40053/Pronto500/Content/bootstrap.css. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:43
+Error in: http://localhost:40053/Pronto500/Content/jquery-ui-layout/layout-default-latest.css. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:43
+Error in: http://localhost:40053/Pronto500/Content/Site.css. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:44
+Error in: http://localhost:40053/Pronto500/Content/bootstrap.css. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:44
+Error in: http://localhost:40053/Pronto500/Content/jquery.fileupload.css. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/22/2015 15:15:44
+Error in: http://localhost:40053/Pronto500/Content/jquery.alerts.css. Error Message:Mandado
+__________________________

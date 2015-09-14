@@ -1,6 +1,4 @@
 
-
-
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
@@ -1305,5 +1303,151 @@ go
 
 
 --select * from CartasDePorteDetalle
+
+
+
+
+
+
+
+
+
+----//////////////////////////////////////////////////////////////////////////////
+
+CREATE TABLE [dbo].FertilizantesCupos (
+    [IdFertilizanteCupo]                                INT             IDENTITY (1, 1) PRIMARY KEY,
+    [Numero]											BIGINT          NULL,
+
+
+	
+--Nº CUPO
+
+
+    [IdUsuarioIngreso]                              INT             NULL,
+    [FechaIngreso]                                  DATETIME        NULL,
+    [Anulada]                                       VARCHAR (2)     NULL,
+    [IdUsuarioAnulo]                                INT             NULL,
+    [FechaAnulacion]                                DATETIME        NULL,
+    [FechaTimeStamp]                                ROWVERSION      NULL,
+
+
+
+
+
+	--Fecha
+    [FechaCupo]                                  DATETIME        NULL,
+--Cliente
+--C/ORDEN
+--CUIT
+--Nombre del Chofer
+--DNI /CUIL
+	TipoEgresoIngreso							VARCHAR(1) NULL,
+
+    [Cliente]	                                    INT             NULL,
+    [CuentaOrden]									INT             NULL,
+    [IdChofer]                                      INT             NULL,
+
+
+
+
+
+
+    [Chasis]                                      VARCHAR (20)    NULL,
+    [Acoplado]                                      VARCHAR (20)    NULL,
+
+
+--Chasis
+--Acoplado
+
+
+	
+    [IdTransportista]                               INT             NULL,
+--Transporte
+--CUIT
+--Localidad Transp
+    [IdLocalidadTransportista]                                       INT             NULL,
+--Recorrido
+   Recorrido									INT             NULL,
+ --Destino de la mercaderia
+    [Destino]                                       INT             NULL,
+--Codigo de San
+--Contrato
+    [Contrato]                                      VARCHAR (20)    NULL,
+
+
+
+
+
+
+
+--Producto (UG,DAP,MAP,etc)
+--Puro
+--Mezcla
+--Producto 1
+--%
+--Producto 2
+--%
+--Producto 3
+--%
+--Producto4
+--%
+
+
+    [IdArticulo]                                    INT             NULL,
+
+    Puro                                       VARCHAR (2)     NULL,
+    Mezcla                                       VARCHAR (2)     NULL,
+
+
+    [IdArticuloComponente1]                             INT             NULL,
+    [Porcentaje1]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente2]                             INT             NULL,
+    [Porcentaje2]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente3]                             INT             NULL,
+    [Porcentaje3]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente4]                             INT             NULL,
+    [Porcentaje4]	                                    NUMERIC (18, 2) NULL,
+    [IdArticuloComponente5]                             INT             NULL,
+    [Porcentaje5]	                                    NUMERIC (18, 2) NULL,
+
+
+	--Forma de despacho (granel,bls, bigbag)
+	FormaDespacho									INT NULL,
+
+--Cantidad (Kg)
+--OBSERVACIONES
+
+
+    [Cantidad]                                      NUMERIC (12, 2) NULL,
+
+    [Observaciones]                                 VARCHAR (200)   NULL,
+
+
+
+
+    [PathImagen]                                    VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [PathImagen2]                                   VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [AgrupadorDeTandaPeriodos]                      INT             NULL,
+    [ClaveEncriptada]                               VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [NumeroCartaEnTextoParaBusqueda]                VARCHAR (20)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [SubnumeroVagonEnTextoParaBusqueda]             VARCHAR (50)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+
+
+
+	
+
+);
+
+alter table FertilizantesCupos ADD
+	IdUsuarioModifico int NULL,
+	FechaModificacion datetime NULL,
+	IdFacturaImputada int null,
+	NumeradorTexto        VARCHAR (20)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+go
+
+alter table FertilizantesCupos ADD
+	constraint U_Numero unique NONCLUSTERED (NumeradorTexto,FechaAnulacion)
+go
+
 
 

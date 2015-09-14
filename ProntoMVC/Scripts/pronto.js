@@ -18,20 +18,33 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // formatter generico para columnas SI / NO
 
+// http://www.trirand.com/blog/?page_id=393/help/checkbox-formatting-and-editing
 
 jQuery.extend($.fn.fmatter, {
     SiNoFormatter: function (cellvalue, options, rowdata) {
+
+
+        var checked;
+
+        //if (cellvalue == undefined) cellvalue = "False";
+
         switch (cellvalue) {
             case "True":
             case "SI":
-                return "true";
+                checked = "checked='checked' ";
 
             case "False":
             case "NO":
-                return "false";
+                checked = "";
             default:
-                return "false";
+                checked = "";
         }
+
+        //var checked = cellvalue != 'N' ? "checked='checked' " : "";
+        rtn = "<input type='checkbox' onclick=\"ajaxSaveUsers('" + options.rowId + "','" + options.colModel.name + "');\" " + checked + " value='" + cellvalue + "' />";
+        return rtn;
+
+
 
     }
 });
@@ -53,6 +66,11 @@ jQuery.extend($.fn.fmatter.SiNoFormatter, {
 
     }
 });
+
+
+
+
+
 
 
 
@@ -150,6 +168,14 @@ function RefrescaAnchoJqgrids() {
 
         $("#LogoEmpresa").css('width', parseInt($("#panelOeste").css('width')) - MARGENLOGO);
     }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // este es el codigo que actualiza (muy tarde) el ancho del arbolito
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     // if (grid = $('.ui-jqgrid-btable:visible')) {
     if (grid = $('.ui-jqgrid-btable')) { // le quité el visible para que tambien trabaje sobre el tab que todavía no saltó a la pantalla
         grid.each(function (index) {
@@ -172,6 +198,13 @@ function RefrescaAnchoJqgrids() {
             //                    }
         });
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     searchBoxAncho();
@@ -207,6 +240,26 @@ function CargarEmpleadosParaAprobar(fcallback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+function TodaLaGrillaEnEditMode(grilla) {
+    var $this = $(grilla), rows = grilla.rows, l = rows.length, i, row;
+    for (i = 0; i < l; i++) {
+        row = rows[i];
+        if ($.inArray('jqgrow', row.className.split(' ')) >= 0) {
+            $this.jqGrid('editRow', row.id, true);
+        }
+    }
+}
+
+function sacarDeEditMode2(grilla) {
+
+    for (r = 0; r < grilla.rows.length; c++) {
+        for (c = 0; c < l; c++) {
+            jQuery('#Lista').jqGrid('saveCell', r, c);
+        }
+    }
+
+}
 
 function sacarDeEditMode() {
 
@@ -917,6 +970,7 @@ $(function () {
 
         //jQuery("#addtree").jqGrid('setGridHeight', 600);
         $("#addtree").jqGrid('setGridHeight', $(window).height() - 150);
+        $("#addtree2").jqGrid('setGridHeight', $(window).height() - 250);
 
 
 
@@ -944,7 +998,7 @@ $(function () {
     // When a button is clicked...
     $(':submit').on("click", function () {
 
-       // guardarTopPositionDelArbol();
+        // guardarTopPositionDelArbol();
 
     });
 
@@ -1272,6 +1326,28 @@ function validatePwd2(fCallbackEnExito, fCallbackRechazada) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function Moneda_Cotizacion(fecha, IdMoneda,funcioncallback ) {
+    if (IdMoneda != 1) {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + 'Moneda/Moneda_Cotizacion',
+            data: { fecha: fecha, IdMoneda: IdMoneda },
+            dataType: "json",
+            success: function (data) {
+                if (data > 0) {
+                    funcioncallback(data);
+                }
+                else {
+                    funcioncallback(0);
+                }
+            }
+        });
+    }
+    else {
+        funcioncallback(1);
+    }
+}
 
 
 
