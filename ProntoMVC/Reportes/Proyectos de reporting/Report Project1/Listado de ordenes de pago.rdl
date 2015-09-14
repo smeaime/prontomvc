@@ -1665,6 +1665,9 @@
                     <Subreport Name="Subreport4">
                       <ReportName>Detalle Orden Pago Imputaciones 2</ReportName>
                       <Parameters>
+                        <Parameter Name="CadenaConexion">
+                          <Value>=Parameters!CadenaConexion.Value</Value>
+                        </Parameter>
                         <Parameter Name="IdOrdenPago">
                           <Value>=Fields!IdOrdenPago.Value</Value>
                         </Parameter>
@@ -1685,6 +1688,9 @@
                         <Parameter Name="IdOrdenPago">
                           <Value>=Fields!IdOrdenPago.Value</Value>
                         </Parameter>
+                        <Parameter Name="CadenaConexion">
+                          <Value>=Parameters!CadenaConexion.Value</Value>
+                        </Parameter>
                       </Parameters>
                       <Style>
                         <Border>
@@ -1702,6 +1708,9 @@
                         <Parameter Name="IdOrdenPago">
                           <Value>=Fields!IdOrdenPago.Value</Value>
                         </Parameter>
+                        <Parameter Name="CadenaConexion">
+                          <Value>=Parameters!CadenaConexion.Value</Value>
+                        </Parameter>
                       </Parameters>
                       <Style>
                         <Border>
@@ -1709,6 +1718,7 @@
                         </Border>
                       </Style>
                     </Subreport>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1787,8 +1797,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>8bd11d83-db2a-4076-9bad-e494af1160e5</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1992,8 +2006,18 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="Desde">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(year(now),month(now),1)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="Hasta">
