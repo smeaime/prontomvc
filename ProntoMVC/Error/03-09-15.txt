@@ -1,0 +1,704 @@
+
+Log Entry : 
+09/03/2015 10:12:38
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 10:12:39
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 10:12:43
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 10:13:33
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:14:00
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:14:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:15:00
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:15:22
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:20:07
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:20:49
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:A public action method 'BatchUpdate' was not found on controller 'ProntoMVC.Controllers.AsientoController'.
+__________________________
+
+Log Entry : 
+09/03/2015 10:20:49
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 10:20:52
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 10:22:47
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:25:30
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:27:58
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:34:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:35:16
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:35:47
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:35:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:44:09
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 10:44:09
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 10:44:12
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 10:44:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:44:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:45:47
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:46:27
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:46:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:51:50
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:52:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:53:30
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:54:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:55:34
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 10:55:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 11:04:13
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 11:04:13
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 11:04:16
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 11:04:29
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 11:05:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 11:07:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 11:08:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 11:54:55
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 11:58:09
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 12:13:27
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 12:20:40
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 12:58:54
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:A public action method 'TreeGrid' was not found on controller 'ProntoMVC.Controllers.HomeController'.
+__________________________
+
+Log Entry : 
+09/03/2015 12:58:54
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 12:58:58
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 13:00:08
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:A public action method 'TreeGrid' was not found on controller 'ProntoMVC.Controllers.HomeController'.
+__________________________
+
+Log Entry : 
+09/03/2015 13:00:08
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 13:00:12
+Error in: http://localhost:40053/Pronto500/Home/TreeGrid. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 14:03:29
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:10:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:11:05
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:11:42
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:12:09
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:14:42
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:14:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:16:03
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:16:17
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:16:40
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:36:09
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 14:36:09
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 14:36:13
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 14:37:27
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:38:04
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:38:51
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:39:22
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+__________________________
+
+Log Entry : 
+09/03/2015 14:39:22
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 14:39:26
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 14:39:35
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+__________________________
+
+Log Entry : 
+09/03/2015 14:39:35
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 14:39:39
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 14:41:43
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+__________________________
+
+Log Entry : 
+09/03/2015 14:41:43
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 14:41:46
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 14:43:37
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+__________________________
+
+Log Entry : 
+09/03/2015 14:43:37
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 14:43:40
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 14:43:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 14:58:55
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:00:06
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:00:23
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:02:37
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 15:02:38
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 15:02:41
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 15:02:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:04:06
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:05:54
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+__________________________
+
+Log Entry : 
+09/03/2015 15:05:54
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 15:05:58
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 15:09:44
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+__________________________
+
+Log Entry : 
+09/03/2015 15:09:44
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 15:09:47
+Error in: http://localhost:40053/Pronto500/Asiento/BatchUpdate. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 15:09:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:14:08
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:14:23
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:14:33
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:14:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:16:51
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:18:33
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:20:02
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:21:58
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:22:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:23:10
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:23:29
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:23:50
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 15:59:57
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 15:59:57
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 16:00:01
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 16:02:06
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 16:04:39
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 16:09:37
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 16:15:12
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 16:15:12
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 16:15:16
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 16:15:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 16:16:26
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 16:18:28
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:El nombre de columna 'PorcentajeIva' no es válido.
+El nombre de columna 'ImporteIva' no es válido.
+__________________________
+
+Log Entry : 
+09/03/2015 16:18:28
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 16:18:32
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 16:57:06
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.AsientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+09/03/2015 16:57:06
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 16:57:10
+Error in: http://localhost:40053/Pronto500/Asiento/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 16:57:20
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 17:05:02
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 17:13:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 17:14:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 17:14:32
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 17:24:45
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 17:25:21
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 18:21:24
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:The result of a query cannot be enumerated more than once.
+__________________________
+
+Log Entry : 
+09/03/2015 18:21:24
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+09/03/2015 18:21:29
+Error in: http://localhost:40053/Pronto500/CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+09/03/2015 18:41:13
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 18:42:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 19:02:22
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 19:11:04
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 19:14:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+09/03/2015 19:21:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________

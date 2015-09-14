@@ -264,6 +264,7 @@
       <DependentUpon>LinqBDLmaster.dbml</DependentUpon>
     </Compile>
     <Compile Include="ListaPreciosManager.vb" />
+    <Compile Include="ManagerDebug\FertilizanteManager.vb" />
     <Compile Include="ManagerDebug\CartaDePorteManager.vb" />
     <Compile Include="ManagerDebug\CDPStockMovimientoManager.vb" />
     <Compile Include="ManagerDebug\ConsultasLinq.vb" />

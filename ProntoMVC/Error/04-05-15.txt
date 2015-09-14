@@ -1,0 +1,211 @@
+
+Log Entry : 
+05/04/2015 10:56:57
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 10:57:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Areas\MvcMembership\Views\UserAdministration\Index.cshtml(68): error CS1928: 'System.Web.Mvc.HtmlHelper<ProntoMVC.Areas.MvcMembership.Models.UserAdministration.IndexViewModel>' does not contain a definition for 'PagedListPager' and the best extension method overload 'PagedList.Mvc.HtmlHelper.PagedListPager(System.Web.Mvc.HtmlHelper, PagedList.IPagedList, System.Func<int,string>)' has some invalid arguments
+__________________________
+
+Log Entry : 
+05/04/2015 10:57:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/04/2015 10:57:05
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/04/2015 11:06:52
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/1768. Error Message:The 'AuxiliarNumerico1' property on 'Articulo' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Decimal'. 
+__________________________
+
+Log Entry : 
+05/04/2015 11:06:52
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/1768. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/04/2015 11:06:55
+Error in: http://localhost:40053/Pronto500/Articulo/Edit/1768. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/04/2015 11:15:58
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 11:16:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Areas\MvcMembership\Views\UserAdministration\Index.cshtml(68): error CS1928: 'System.Web.Mvc.HtmlHelper<ProntoMVC.Areas.MvcMembership.Models.UserAdministration.IndexViewModel>' does not contain a definition for 'PagedListPager' and the best extension method overload 'PagedList.Mvc.HtmlHelper.PagedListPager(System.Web.Mvc.HtmlHelper, PagedList.IPagedList, System.Func<int,string>)' has some invalid arguments
+__________________________
+
+Log Entry : 
+05/04/2015 11:16:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/04/2015 11:16:05
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/04/2015 11:19:18
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 11:22:43
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 11:22:55
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1bc7ce95-2fc3-4a27-89a0-5c31d59e14e9. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 11:24:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1bc7ce95-2fc3-4a27-89a0-5c31d59e14e9. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 11:24:07
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/UsersEmpresas/1bc7ce95-2fc3-4a27-89a0-5c31d59e14e9. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 11:26:41
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1bc7ce95-2fc3-4a27-89a0-5c31d59e14e9. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 11:28:22
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1bc7ce95-2fc3-4a27-89a0-5c31d59e14e9. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 12:52:34
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 16:07:42
+Error in: http://localhost:40053/Pronto500/. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+05/04/2015 16:07:42
+Error in: http://localhost:40053/Pronto500/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/04/2015 16:07:47
+Error in: http://localhost:40053/Pronto500/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/04/2015 16:09:11
+Error in: http://localhost:40053/Pronto500/. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+05/04/2015 16:09:15
+Error in: http://localhost:40053/Pronto500/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/04/2015 16:09:22
+Error in: http://localhost:40053/Pronto500/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/04/2015 16:12:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2015 16:12:39
+Error in: http://localhost:40053/Pronto500/MvcMembership/Home/Superbuscador?term=. Error Message:The controller for path '/Pronto500/MvcMembership/Home/Superbuscador' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+05/04/2015 16:12:39
+Error in: http://localhost:40053/Pronto500/MvcMembership/Home/Superbuscador?term=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/04/2015 16:12:42
+Error in: http://localhost:40053/Pronto500/MvcMembership/Home/Superbuscador?term=. Error Message:Mandado
+__________________________

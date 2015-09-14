@@ -1,0 +1,130 @@
+
+Log Entry : 
+06/11/2015 11:00:20
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:Emision "=dwamIwd4:,a+`ixw}*Spwdtncs(;Mtaunbn(%yrg4""uAdv0xusv*8hautv4dvuavudfAC0""8;""_+gT%ynbEvj`tusvjwqONvcM~aMau0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\",2,False,Nothing,1,NO|NO|2|3|4|1/1/1800|1/1/2100,Nothing
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:20
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:5 argumento
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:21
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:Explota en la llamada a Emision ()Number of parameters specified does not match the expected number.
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:21
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:Pudo ejecutar el Emision(), ahora tratará de grabar
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:24
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:cerrando...
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:24
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:oDoc.Close(False) exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:24
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:NAR(oDoc) exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:25
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:oW.Quit() exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:25
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message: NAR(oW) exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:00:25
+Error in: http://localhost:40053/Pronto500/NotaDebito/ImprimirConInteropPDF/2. Error Message:Se llamó con exito a GC.Collect
+__________________________
+
+Log Entry : 
+06/11/2015 11:02:19
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit/2. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\NotaDebito\Edit.cshtml(307): error CS1061: 'ProntoMVC.Data.Models.NotasDebito' does not contain a definition for 'IdFactura' and no extension method 'IdFactura' accepting a first argument of type 'ProntoMVC.Data.Models.NotasDebito' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+06/11/2015 11:02:19
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit/2. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/11/2015 11:02:26
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit/2. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/11/2015 11:03:30
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit/2. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\NotaDebito\Edit.cshtml(307): error CS1061: 'ProntoMVC.Data.Models.NotasDebito' does not contain a definition for 'IdFactura' and no extension method 'IdFactura' accepting a first argument of type 'ProntoMVC.Data.Models.NotasDebito' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+06/11/2015 11:03:30
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit/2. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/11/2015 11:03:38
+Error in: http://localhost:40053/Pronto500/NotaDebito/Edit/2. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:56
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:Emision "=dwamIwd4:,a+`ixw}*Spwdtncs(;Mtaunbn(%yrg4""uAdv0xusv*8hautv4dvuavudfAC0""8;""_+gT%ynbEvj`tusvjwqONvcM~aMau0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\",2,False,Nothing,1,NO|NO|2|3|4|1/1/1800|1/1/2100,Nothing
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:56
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:5 argumento
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:56
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:Explota en la llamada a Emision ()Number of parameters specified does not match the expected number.
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:56
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:Pudo ejecutar el Emision(), ahora tratará de grabar
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:57
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:cerrando...
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:57
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:oDoc.Close(False) exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:57
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:NAR(oDoc) exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:57
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:oW.Quit() exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:57
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message: NAR(oW) exito
+__________________________
+
+Log Entry : 
+06/11/2015 11:05:57
+Error in: http://localhost:40053/Pronto500/NotaCredito/ImprimirConInteropPDF/2. Error Message:Se llamó con exito a GC.Collect
+__________________________

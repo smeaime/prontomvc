@@ -1,0 +1,408 @@
+
+Log Entry : 
+06/18/2015 07:58:22
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fac. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+06/18/2015 07:59:30
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fac. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+06/18/2015 07:59:30
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fac. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 07:59:34
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fac. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 07:59:35
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fact. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+06/18/2015 08:00:24
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fact. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+06/18/2015 08:00:24
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fact. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 08:00:28
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=fact. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 08:01:25
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:A public action method 'TT_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.OrdenCompraController'.
+__________________________
+
+Log Entry : 
+06/18/2015 08:01:25
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 08:01:28
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 08:02:41
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:A public action method 'TT_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.OrdenCompraController'.
+__________________________
+
+Log Entry : 
+06/18/2015 08:02:41
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 08:02:45
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 09:19:42
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument types 'Edm.Int32' and 'Edm.String' are incompatible for this operation. Near equals expression, line 6, column 23.
+__________________________
+
+Log Entry : 
+06/18/2015 09:19:42
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 09:19:46
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 09:22:57
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument types 'Edm.Int32' and 'Edm.String' are incompatible for this operation. Near equals expression, line 6, column 23.
+__________________________
+
+Log Entry : 
+06/18/2015 09:22:57
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 09:23:01
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 09:25:01
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument types 'Edm.Int32' and 'Edm.String' are incompatible for this operation. Near equals expression, line 6, column 23.
+__________________________
+
+Log Entry : 
+06/18/2015 09:25:01
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 09:25:05
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 09:27:34
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument types 'Edm.Int32' and 'Edm.String' are incompatible for this operation. Near equals expression, line 6, column 61.
+__________________________
+
+Log Entry : 
+06/18/2015 09:27:34
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 09:27:37
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 09:46:13
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:'NumeroOrdenCompra' could not be resolved in the current scope or context. Make sure that all referenced variables are in scope, that required schemas are loaded, and that namespaces are referenced correctly. Near simple identifier, line 6, column 21.
+__________________________
+
+Log Entry : 
+06/18/2015 09:46:13
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 09:46:45
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 09:55:46
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:'NumeroOrdenCompra' could not be resolved in the current scope or context. Make sure that all referenced variables are in scope, that required schemas are loaded, and that namespaces are referenced correctly. Near simple identifier, line 6, column 21.
+__________________________
+
+Log Entry : 
+06/18/2015 09:55:46
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 09:55:52
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:06:29
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:06:29
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:06:33
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:07:55
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:07:56
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:07:59
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:22:30
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:22:31
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:22:35
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:22:56
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:22:56
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:23:00
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:24:00
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:24:00
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:24:03
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:27:20
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:27:20
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:27:23
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:27:45
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:27:45
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:27:49
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:28:02
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:28:02
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:28:06
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:28:37
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:28:37
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:28:40
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:32:37
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/18/2015 10:32:37
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:32:41
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:38:59
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Incluir el tipo System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] en el selectcase
+__________________________
+
+Log Entry : 
+06/18/2015 10:38:59
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:39:02
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:39:19
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:The argument types 'Edm.DateTime' and 'Edm.String' are incompatible for this operation. Near greater than or equals expression, line 6, column 17.
+__________________________
+
+Log Entry : 
+06/18/2015 10:39:19
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:39:22
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 10:45:58
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:String was not recognized as a valid DateTime.
+__________________________
+
+Log Entry : 
+06/18/2015 10:45:58
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 10:46:02
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/18/2015 13:07:44
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:El nombre de columna 'FechaEntrega' no es válido.
+__________________________
+
+Log Entry : 
+06/18/2015 13:07:44
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/18/2015 13:07:48
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________

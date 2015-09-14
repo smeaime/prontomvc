@@ -1,0 +1,1005 @@
+
+Log Entry : 
+08/12/2015 02:13:41
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:The CAST argument expression must be of a scalar type. Near member access expression, line 6, column 11.
+__________________________
+
+Log Entry : 
+08/12/2015 02:13:41
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 02:13:46
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 02:14:40
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:The CAST argument expression must be of a scalar type. Near member access expression, line 6, column 11.
+__________________________
+
+Log Entry : 
+08/12/2015 02:14:40
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 02:14:44
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 02:15:47
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+08/12/2015 02:15:47
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 02:15:51
+Error in: http://localhost:40053/Pronto500/Presupuesto/Presupuestos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:19:44
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:A public action method 'Edit' was not found on controller 'ProntoMVC.Controllers.CuentaController'.
+__________________________
+
+Log Entry : 
+08/12/2015 05:19:44
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:19:48
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:22:44
+Error in: http://localhost:40053/Pronto500/RubroContable/RubrosContables_DynamicGridData. Error Message:A public action method 'RubrosContables_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.RubroContableController'.
+__________________________
+
+Log Entry : 
+08/12/2015 05:22:44
+Error in: http://localhost:40053/Pronto500/RubroContable/RubrosContables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:22:47
+Error in: http://localhost:40053/Pronto500/RubroContable/RubrosContables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:22:50
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:A public action method 'Cuentas_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.CuentaController'.
+__________________________
+
+Log Entry : 
+08/12/2015 05:22:50
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:22:54
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:23:26
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:A public action method 'Edit' was not found on controller 'ProntoMVC.Controllers.CuentaController'.
+__________________________
+
+Log Entry : 
+08/12/2015 05:23:26
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:23:29
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:23:30
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:A public action method 'Edit' was not found on controller 'ProntoMVC.Controllers.RubroContableController'.
+__________________________
+
+Log Entry : 
+08/12/2015 05:23:30
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:23:33
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:19
+Error in: http://localhost:40053/Pronto500/RubroContable/RubrosContables_DynamicGridData. Error Message:A public action method 'RubrosContables_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.RubroContableController'.
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:19
+Error in: http://localhost:40053/Pronto500/RubroContable/RubrosContables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:22
+Error in: http://localhost:40053/Pronto500/RubroContable/RubrosContables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:26
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:A public action method 'Cuentas_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.CuentaController'.
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:26
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:29
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:34
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\RubroContable\Edit.cshtml(3): error CS1061: 'ProntoMVC.Data.Models.RubrosContable' does not contain a definition for 'RazonSocial' and no extension method 'RazonSocial' accepting a first argument of type 'ProntoMVC.Data.Models.RubrosContable' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:34
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:45
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:47
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\pronto500\e4a64adc\13429a27\App_Web_edit.cshtml.5e4268fd.0ar_qeyw.0.cs(5259): error CS1513: } expected
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:47
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:37:55
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:45:28
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.CuentaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 05:45:28
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:45:32
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:04
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:04
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:08
+Error in: http://localhost:40053/Pronto500/Cuenta/Cuentas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:11
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\RubroContable\Edit.cshtml(3): error CS1061: 'ProntoMVC.Data.Models.RubrosContable' does not contain a definition for 'RazonSocial' and no extension method 'RazonSocial' accepting a first argument of type 'ProntoMVC.Data.Models.RubrosContable' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:11
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:23
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:24
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.CuentaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:24
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:28
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:30
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\pronto500\e4a64adc\13429a27\App_Web_edit.cshtml.5e4268fd.wrianwrz.0.cs(5259): error CS1513: } expected
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:30
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:40
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:42
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\pronto500\e4a64adc\13429a27\App_Web_edit.cshtml.5e4268fd.yqvspgvi.0.cs(5259): error CS1513: } expected
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:42
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:49
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:50
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.CuentaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:50
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:46:53
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:47:05
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\RubroContable\Edit.cshtml(3): error CS1061: 'ProntoMVC.Data.Models.RubrosContable' does not contain a definition for 'RazonSocial' and no extension method 'RazonSocial' accepting a first argument of type 'ProntoMVC.Data.Models.RubrosContable' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+08/12/2015 05:47:05
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:47:14
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:48:17
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\RubroContable\Edit.cshtml(3): error CS1061: 'ProntoMVC.Data.Models.RubrosContable' does not contain a definition for 'RazonSocial' and no extension method 'RazonSocial' accepting a first argument of type 'ProntoMVC.Data.Models.RubrosContable' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+08/12/2015 05:48:18
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:48:29
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:52:24
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/20. Error Message:c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Views\RubroContable\Edit.cshtml(3): error CS1061: 'ProntoMVC.Data.Models.RubrosContable' does not contain a definition for 'RazonSocial' and no extension method 'RazonSocial' accepting a first argument of type 'ProntoMVC.Data.Models.RubrosContable' could be found (are you missing a using directive or an assembly reference?)
+__________________________
+
+Log Entry : 
+08/12/2015 05:52:24
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/20. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:52:35
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/20. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:54:16
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/20. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/12/2015 05:54:16
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/20. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:54:20
+Error in: http://localhost:40053/Pronto500/RubroContable/Edit/20. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:54:36
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\pronto500\e4a64adc\13429a27\App_Web_edit.cshtml.5e4268fd.wzddwqds.0.cs(5259): error CS1513: } expected
+__________________________
+
+Log Entry : 
+08/12/2015 05:54:36
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:54:46
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:57:55
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 05:57:55
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:57:58
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:58:01
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 05:58:01
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:58:04
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 05:58:12
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/12/2015 05:58:12
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 05:58:16
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 06:00:03
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/12/2015 06:00:03
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 06:00:07
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 06:00:09
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 06:00:09
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 06:00:13
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 06:01:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 06:01:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 06:01:29
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:12:47
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.CuentaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 07:12:47
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:12:51
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:28:11
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.RequerimientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 07:28:11
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:28:14
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:30:05
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.RequerimientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 07:30:05
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:30:08
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:32:30
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.RequerimientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 07:32:30
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:32:34
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:37:23
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.RequerimientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 07:37:23
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:37:26
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:38:21
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.RequerimientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 07:38:21
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:38:24
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:40:20
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.RequerimientoController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/12/2015 07:40:20
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:40:23
+Error in: http://localhost:40053/Pronto500/Requerimiento/Edit/@Url.Action("Requerimientos_DynamicGridData", "Requerimiento"). Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:43:53
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:09
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:10
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:13
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:18
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:27
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:27
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:30
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:40
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:40
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 07:44:45
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:01
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:12
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:12
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:17
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:21
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:21
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:25
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:30
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:34
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:34
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 09:27:39
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 09:36:49
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 09:47:54
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 09:55:32
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 09:56:21
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+08/12/2015 09:56:21
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 09:56:25
+Error in: http://localhost:40053/Pronto500/Comparativa/Comparativas_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 09:56:38
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+08/12/2015 09:56:38
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 09:56:42
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 09:56:42
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 09:58:45
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 10:17:26
+Error in: http://localhost:40053/Pronto500/Account/BaseElegida?sBase=Autotrol. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.AccountController.BaseElegida(String sBase, String returnUrl) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccountController.cs:line 1496
+EntityFramework
+__________________________
+
+Log Entry : 
+08/12/2015 10:17:42
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 10:21:48
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 10:21:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 10:34:08
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 10:34:19
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:22:22
+Error in: http://localhost:40053/Pronto500/Account/BaseElegida?sBase=Autotrol. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.AccountController.BaseElegida(String sBase, String returnUrl) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccountController.cs:line 1496
+EntityFramework
+__________________________
+
+Log Entry : 
+08/12/2015 11:22:32
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:28:23
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/12/2015 11:28:23
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 11:28:27
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 11:28:46
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:36:58
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:37:32
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:37:45
+Error in: http://localhost:40053/Pronto500/Account/BaseElegida?sBase=Autotrol. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.AccountController.BaseElegida(String sBase, String returnUrl) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccountController.cs:line 1496
+EntityFramework
+__________________________
+
+Log Entry : 
+08/12/2015 11:37:58
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:45:48
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:46:37
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:46:50
+Error in: http://localhost:40053/Pronto500/Account/BaseElegida?sBase=Autotrol. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.AccountController.BaseElegida(String sBase, String returnUrl) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccountController.cs:line 1496
+EntityFramework
+__________________________
+
+Log Entry : 
+08/12/2015 11:47:00
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:49:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:50:32
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/12/2015 11:50:32
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 11:50:36
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 11:51:13
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/12/2015 11:51:13
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 11:51:16
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 11:52:57
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/12/2015 11:52:57
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 11:53:00
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/12/2015 11:55:24
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:55:43
+Error in: http://localhost:40053/Pronto500/Account/BaseElegida?sBase=Autotrol. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Controllers.AccountController.BaseElegida(String sBase, String returnUrl) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\AccountController.cs:line 1496
+EntityFramework
+__________________________
+
+Log Entry : 
+08/12/2015 11:55:59
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:56:43
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/12/2015 11:57:16
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+__________________________
+
+Log Entry : 
+08/12/2015 11:57:16
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/12/2015 11:57:19
+Error in: http://localhost:40053/Pronto500/Requerimiento/RequerimientosComprables_DynamicGridData. Error Message:Mandado
+__________________________

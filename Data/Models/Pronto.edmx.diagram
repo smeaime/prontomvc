@@ -2377,6 +2377,20 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAsientos_IdMoneda" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAsientos_IdMonedaDestino" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAsientos_IdObra" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorte" Width="1.5" PointX="31.5" PointY="68.375" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteDetalle" Width="1.5" PointX="33.75" PointY="85.125" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteReglasDeFacturacion" Width="1.5" PointX="13" PointY="107.375" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasPorteAcopio" Width="1.5" PointX="13" PointY="111.625" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteHistorico" Width="1.5" PointX="25.375" PointY="19.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasPorteMovimiento" Width="1.5" PointX="28.5" PointY="112.375" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.FertilizantesCupos" Width="1.5" PointX="20.375" PointY="26.75" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__Acopi__5498535D" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCli__1C6908D3" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasPor__IdCli__4496F5BE" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasPor__IdDet__56CAB492" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />

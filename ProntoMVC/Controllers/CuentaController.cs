@@ -883,7 +883,6 @@ namespace ProntoMVC.Controllers
             {
                 string erar = "";
 
-
                 if (!Validar(Cuenta, ref erar))
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
@@ -891,7 +890,6 @@ namespace ProntoMVC.Controllers
                     errors.Add(erar);
                     return Json(errors);
                 }
-
 
 
                 if (ModelState.IsValid || true)

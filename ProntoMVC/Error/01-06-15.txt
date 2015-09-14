@@ -1,0 +1,62 @@
+
+Log Entry : 
+06/01/2015 09:22:25
+Error in: http://localhost:40053/Pronto500/Factura/Imprimir. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult Imprimir(Int32)' in 'ProntoMVC.Controllers.FacturaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+06/01/2015 09:22:25
+Error in: http://localhost:40053/Pronto500/Factura/Imprimir. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/01/2015 09:22:29
+Error in: http://localhost:40053/Pronto500/Factura/Imprimir. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/01/2015 09:23:32
+Error in: http://localhost:40053/Pronto500/Factura/Imprimir/143. Error Message:System.NullReferenceException
+Object variable or With block variable not set.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   at Pronto.ERP.Bll.OpenXML_Pronto.FacturaXML_DOCX(String document, Factura oFac, String SC) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\OpenXML.vb:line 678
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/01/2015 09:32:47
+Error in: http://localhost:40053/Pronto500/Factura/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ViewResult Edit(Int32)' in 'ProntoMVC.Controllers.FacturaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+06/01/2015 09:32:47
+Error in: http://localhost:40053/Pronto500/Factura/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/01/2015 09:32:51
+Error in: http://localhost:40053/Pronto500/Factura/Edit. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/01/2015 09:37:51
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInterop/143. Error Message:No se encuentra la plantilla C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Documentos\Factura_A_Hawk_Nueva_FA.dot
+__________________________
+
+Log Entry : 
+06/01/2015 09:37:55
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInterop/143. Error Message:Could not find file 'C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Documentos\archivo.doc'.
+__________________________
+
+Log Entry : 
+06/01/2015 09:37:55
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInterop/143. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/01/2015 09:37:59
+Error in: http://localhost:40053/Pronto500/Factura/ImprimirConInterop/143. Error Message:Mandado
+__________________________

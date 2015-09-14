@@ -209,7 +209,7 @@ namespace ProntoMVC.Controllers
             }
 
             var Facturas = db.Facturas.Where(p => p.IdPuntoVenta == mIdPuntoVenta && p.TipoABC == mTipoABC && p.NumeroFactura == mNumero && p.IdFactura != mIdFactura).OrderByDescending(p => p.FechaFactura).FirstOrDefault();
-            if (Facturas != null) { sErrorMsg += "\n" + "La factura ya existe."; } 
+            if (Facturas != null) { sErrorMsg += "\n" + "La factura ya existe."; }
 
             mProntoIni = BuscarClaveINI("Validar fecha de facturas nuevas", -1);
             if ((mProntoIni ?? "") == "SI" && mIdFactura <= 0 && mIdPuntoVenta > 0)
@@ -249,24 +249,24 @@ namespace ProntoMVC.Controllers
             }
 
 
-            
-         //If mvarId < 0 And IsNumeric(dcfields(10).BoundText) And Not BuscarClaveINI("Validar fecha de facturas nuevas") = "NO" Then
-         //   Set oRs = Aplicacion.Facturas.TraerFiltrado("_UltimaPorIdPuntoVenta", dcfields(10).BoundText)
-         //   If oRs.RecordCount > 0 Then
-         //      If oRs.Fields("FechaFactura").Value > DTFields(0).Value Then
-         //         MsgBox "La fecha de la ultima factura es " & oRs.Fields("FechaFactura").Value & ", modifiquela", vbExclamation
-         //         oRs.Close
-         //         Set oRs = Nothing
-         //         Exit Sub
-         //      End If
-         //   End If
-         //   oRs.Close
-         //   Set oRs = Nothing
-         //End If
-            
-            
+
+            //If mvarId < 0 And IsNumeric(dcfields(10).BoundText) And Not BuscarClaveINI("Validar fecha de facturas nuevas") = "NO" Then
+            //   Set oRs = Aplicacion.Facturas.TraerFiltrado("_UltimaPorIdPuntoVenta", dcfields(10).BoundText)
+            //   If oRs.RecordCount > 0 Then
+            //      If oRs.Fields("FechaFactura").Value > DTFields(0).Value Then
+            //         MsgBox "La fecha de la ultima factura es " & oRs.Fields("FechaFactura").Value & ", modifiquela", vbExclamation
+            //         oRs.Close
+            //         Set oRs = Nothing
+            //         Exit Sub
+            //      End If
+            //   End If
+            //   oRs.Close
+            //   Set oRs = Nothing
+            //End If
+
+
             // VERIFICAR QUE EXISTAN TODAS LAS CUENTAS CONTABLES DEL ASIENTO DE SUBDIARIO
-            
+
             sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
             if (sErrorMsg != "") return false;
             return true;
@@ -324,7 +324,7 @@ namespace ProntoMVC.Controllers
                 mIdCuentaOtrasPercepciones3 = parametros.IdCuentaOtrasPercepciones3 ?? 0;
                 mIdCuentaPercepcionesIVA = parametros.IdCuentaPercepcionesIVA ?? 0;
 
-                               
+
 
                 string usuario = ViewBag.NombreUsuario;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -392,7 +392,7 @@ namespace ProntoMVC.Controllers
                                     }
                                 }
                             }
-                            
+
                             ////////////////////////////////////////////// ARTICULOS //////////////////////////////////////////////
                             //foreach (var d in Factura.DetalleFacturas)
                             //{
@@ -456,11 +456,11 @@ namespace ProntoMVC.Controllers
                                 {
                                     LogComprobantesElectronico log = new LogComprobantesElectronico();
                                     string sErrores = "";
-                                    if  (!Logica_FacturaElectronica(ref Factura, ref log, ref sErrores))
+                                    if (!Logica_FacturaElectronica(ref Factura, ref log, ref sErrores))
                                     {
                                         throw new Exception(sErrores);
                                     }
-                                        
+
                                     db.LogComprobantesElectronicos.Add(log);
                                 }
                                 PuntoVenta.ProximoNumero = Factura.NumeroFactura + 1;
@@ -763,7 +763,7 @@ namespace ProntoMVC.Controllers
 
                                 mAlicuotaIVA = db.Articulos.Find(d.IdArticulo).AlicuotaIVA ?? 0;
 
-                                if (mAlicuotaIVA == 0) 
+                                if (mAlicuotaIVA == 0)
                                 { mImporteNoGravado += mImporteDetalle; }
                                 else { mImporteGravado -= mImporteDetalle; }
                             }
@@ -777,7 +777,7 @@ namespace ProntoMVC.Controllers
 
                                 mIdRubro = db.Articulos.Find(d.IdArticulo).IdRubro ?? 0;
                                 mIdCuenta = db.Rubros.Find(mIdRubro).IdCuenta ?? 0;
-                                
+
                                 if (mIdCuenta > 0)
                                 {
                                     s = new Subdiario();
@@ -893,7 +893,7 @@ namespace ProntoMVC.Controllers
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-            if (idcliente!=0 &&
+            if (idcliente != 0 &&
                   db.Facturas.Find(id).IdCliente != idcliente
                  && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
@@ -993,8 +993,35 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
+
+            //            if (FechaInicial != string.Empty)
+            //          {
+
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaDesde = DateTime.MinValue;
+            }
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            //        }
+
+            IQueryable<Data.Models.Factura> q = (from a in db.Facturas where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
 
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1002,8 +1029,8 @@ namespace ProntoMVC.Controllers
 
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Factura>
-                                ("DescripcionIvas,Obras,Vendedores,Empleados,Provincias,Condiciones_Compras,ListasPrecios", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+            List<Data.Models.Factura> pagedQuery =
+            Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Factura>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1011,11 +1038,11 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
+
 
             string campo = String.Empty;
-            int pageSize = rows ;
-            int currentPage = page ;
+            int pageSize = rows;
+            int currentPage = page;
 
             var data = (from a in pagedQuery
                         //from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
@@ -1034,14 +1061,14 @@ namespace ProntoMVC.Controllers
                             a.PuntoVenta,
                             a.NumeroFactura,
                             a.FechaFactura,
-                            Sucursal = a.Deposito  != null ? a.Deposito.Descripcion : "",
+                            Sucursal = a.Deposito != null ? a.Deposito.Descripcion : "",
                             a.Anulada,
                             ClienteSubCod = a.Cliente.Codigo.Substring(1, 2),
                             ClienteCodigo = a.Cliente.CodigoCliente,
                             ClienteNombre = a.Cliente.RazonSocial,
                             DescripcionIva = a.DescripcionIva != null ? a.DescripcionIva.Descripcion : "",
                             ClienteCuit = a.Cliente.Cuit,
-                            CondicionVenta =  a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
+                            CondicionVenta = a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
                             a.FechaVencimiento,
                             ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
                             //#Auxiliar1.OCompras as [Ordenes de compra],
@@ -1057,9 +1084,9 @@ namespace ProntoMVC.Controllers
                             TotalOtrasPercepciones = (a.OtrasPercepciones1 ?? 0) + (a.OtrasPercepciones2 ?? 0) + (a.OtrasPercepciones3 ?? 0),
                             a.ImporteTotal,
                             Moneda = a.Moneda.Abreviatura,
-                            Obra = a.Obra  != null ? a.Obra.NumeroObra : "",
+                            Obra = a.Obra != null ? a.Obra.NumeroObra : "",
                             Vendedor = a.Vendedore != null ? a.Vendedore.Nombre : "",
-                            ProvinciaDestino =  a.Provincia  != null ? a.Provincia.Nombre : "",
+                            ProvinciaDestino = a.Provincia != null ? a.Provincia.Nombre : "",
                             //(Select Count(*) From DetalleFacturas df Where df.IdFactura=Facturas.IdFactura and Patindex('%'+Convert(varchar,df.IdArticulo)+'%', @IdAbonos)<>0) as [Cant.Abonos],
                             //'Grupo '+Convert(varchar,
                             //(Select Top 1 oc.Agrupacion2Facturacion From DetalleFacturasOrdenesCompra dfoc 
@@ -1084,7 +1111,7 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -1186,7 +1213,7 @@ namespace ProntoMVC.Controllers
                             a.FechaFactura,
                             Sucursal = h != null ? h.Descripcion : "",
                             a.Anulada,
-                            ClienteSubCod = a.Cliente.Codigo.Substring(1,2),
+                            ClienteSubCod = a.Cliente.Codigo.Substring(1, 2),
                             ClienteCodigo = a.Cliente.CodigoCliente,
                             ClienteNombre = a.Cliente.RazonSocial,
                             DescripcionIva = b != null ? b.Descripcion : "",
@@ -1194,8 +1221,8 @@ namespace ProntoMVC.Controllers
                             CondicionVenta = i != null ? i.Descripcion : "",
                             a.FechaVencimiento,
                             ListaDePrecio = j != null ? "Lista " + j.NumeroLista.ToString() + " " + j.Descripcion : "",
- //#Auxiliar1.OCompras as [Ordenes de compra],
- //#Auxiliar3.Remitos as [Remitos],
+                            //#Auxiliar1.OCompras as [Ordenes de compra],
+                            //#Auxiliar3.Remitos as [Remitos],
                             OCompras = "",
                             Remitos = "",
                             TotalGravado = (a.ImporteTotal ?? 0) - (a.ImporteIva1 ?? 0) - (a.AjusteIva ?? 0) - (a.PercepcionIVA ?? 0) - (a.RetencionIBrutos1 ?? 0) - (a.RetencionIBrutos2 ?? 0) - (a.RetencionIBrutos3 ?? 0) - (a.OtrasPercepciones1 ?? 0) - (a.OtrasPercepciones2 ?? 0) - (a.OtrasPercepciones3 ?? 0) + (a.ImporteBonificacion ?? 0),
@@ -1210,12 +1237,12 @@ namespace ProntoMVC.Controllers
                             Obra = c != null ? c.NumeroObra : "",
                             Vendedor = d != null ? d.Nombre : "",
                             ProvinciaDestino = g != null ? g.Nombre : "",
- //(Select Count(*) From DetalleFacturas df Where df.IdFactura=Facturas.IdFactura and Patindex('%'+Convert(varchar,df.IdArticulo)+'%', @IdAbonos)<>0) as [Cant.Abonos],
- //'Grupo '+Convert(varchar,
- //(Select Top 1 oc.Agrupacion2Facturacion From DetalleFacturasOrdenesCompra dfoc 
- //   Left Outer Join DetalleOrdenesCompra doc On doc.IdDetalleOrdenCompra=dfoc.IdDetalleOrdenCompra
- //   Left Outer Join OrdenesCompra oc On oc.IdOrdenCompra=doc.IdOrdenCompra
- //   Where dfoc.IdFactura=Facturas.IdFactura)) as [Grupo facturacion automatica],
+                            //(Select Count(*) From DetalleFacturas df Where df.IdFactura=Facturas.IdFactura and Patindex('%'+Convert(varchar,df.IdArticulo)+'%', @IdAbonos)<>0) as [Cant.Abonos],
+                            //'Grupo '+Convert(varchar,
+                            //(Select Top 1 oc.Agrupacion2Facturacion From DetalleFacturasOrdenesCompra dfoc 
+                            //   Left Outer Join DetalleOrdenesCompra doc On doc.IdDetalleOrdenCompra=dfoc.IdDetalleOrdenCompra
+                            //   Left Outer Join OrdenesCompra oc On oc.IdOrdenCompra=doc.IdOrdenCompra
+                            //   Where dfoc.IdFactura=Facturas.IdFactura)) as [Grupo facturacion automatica],
                             CantidadItems = 0,
                             CantidadAbonos = 0,
                             GrupoFacturacionAutomatica = "",
@@ -1242,7 +1269,7 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -1348,8 +1375,8 @@ namespace ProntoMVC.Controllers
                             a.Cantidad,
                             Unidad = a.Unidade.Abreviatura,
                             a.PorcentajeCertificacion,
-                            Costo = Math.Round((double)a.Costo,2),
-                            PrecioUnitario = Math.Round((double)a.PrecioUnitario,2),
+                            Costo = Math.Round((double)a.Costo, 2),
+                            PrecioUnitario = Math.Round((double)a.PrecioUnitario, 2),
                             a.Bonificacion,
                             Importe = Math.Round((double)a.Cantidad * (double)a.PrecioUnitario * (double)(1 - (a.Bonificacion ?? 0) / 100), 2),
                             TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
@@ -1359,7 +1386,7 @@ namespace ProntoMVC.Controllers
                             RemitoNumero = f.Remito.NumeroRemito,
                             RemitoItem = f.NumeroItem
                         }).OrderBy(x => x.IdDetalleFactura)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -1552,7 +1579,7 @@ namespace ProntoMVC.Controllers
             var data = (from a in Fac
                         //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -1587,7 +1614,7 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public bool Logica_FacturaElectronica(ref ProntoMVC.Data.Models.Factura o,ref ProntoMVC.Data.Models.LogComprobantesElectronico log, ref string sErrores)
+        public bool Logica_FacturaElectronica(ref ProntoMVC.Data.Models.Factura o, ref ProntoMVC.Data.Models.LogComprobantesElectronico log, ref string sErrores)
         {
             WSAFIPFE.Factura FE;
 
@@ -1621,7 +1648,7 @@ namespace ProntoMVC.Controllers
             Int32 mIndiceItem = 0;
             Int32 mTipoIvaAFIP = 0;
             Int32 mNumeroComprobanteElectronico = 0;
-            
+
             decimal mImporteTotal = 0;
             decimal mSubTotal = 0;
             decimal mImporteIva1 = 0;
@@ -1637,7 +1664,7 @@ namespace ProntoMVC.Controllers
             decimal mOtrasPercepciones2 = 0;
             decimal mOtrasPercepciones3 = 0;
 
-            bool mResul=false;
+            bool mResul = false;
             bool glbDebugFacturaElectronica = false;
 
             Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
@@ -1649,7 +1676,7 @@ namespace ProntoMVC.Controllers
             if (Parametros2 != null) { if ((Parametros2.Valor ?? "") == "SI") { glbDebugFacturaElectronica = true; } }
 
             var Empresa = db.Empresas.Where(p => p.IdEmpresa == 1).FirstOrDefault();
-            mCuitEmpresa = (Empresa.Cuit ?? "").Replace("-","");
+            mCuitEmpresa = (Empresa.Cuit ?? "").Replace("-", "");
             mArchivoAFIP = (Empresa.ArchivoAFIP ?? "");
 
             mIdPuntoVenta = o.IdPuntoVenta ?? 0;
@@ -1705,11 +1732,13 @@ namespace ProntoMVC.Controllers
             if (mWebService == "WSFE1" && (mTipoABC == "A" || mTipoABC == "B"))
             {
                 mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
-                if (glbDebugFacturaElectronica) { 
-                    Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); 
+                if (glbDebugFacturaElectronica)
+                {
+                    Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
                 }
 
-                if (!mResul) {
+                if (!mResul)
+                {
                     ErrHandler.WriteError("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
                 }
 
@@ -1717,7 +1746,7 @@ namespace ProntoMVC.Controllers
 
                 if (!mResul)
                 {
-                    ErrHandler.WriteError("iniciar : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg );
+                    ErrHandler.WriteError("iniciar : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
                 }
 
 
@@ -1728,11 +1757,12 @@ namespace ProntoMVC.Controllers
                 }
 
 
-                if (glbDebugFacturaElectronica) { 
+                if (glbDebugFacturaElectronica)
+                {
                     Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
-                
+
                 }
-                                
+
 
                 if (mResul)
                 {
@@ -1784,7 +1814,8 @@ namespace ProntoMVC.Controllers
                         {
                             mIndiceItem = 0;
                             FE.F1DetalleTributoItemCantidad = mDetalleTributoItemCantidad;
-                            if (mRetencionIBrutos1 != 0) {
+                            if (mRetencionIBrutos1 != 0)
+                            {
                                 mIndiceItem++;
                                 FE.f1IndiceItem = mIndiceItem - 1;
                                 FE.F1DetalleTributoId = 2;
@@ -1888,7 +1919,7 @@ namespace ProntoMVC.Controllers
 
                         if (System.IO.File.Exists(mArchivoXMLEnviado)) { mArchivoXMLEnviado2 = System.IO.File.ReadAllText(mArchivoXMLEnviado); }
                         if (System.IO.File.Exists(mArchivoXMLRecibido)) { mArchivoXMLRecibido2 = System.IO.File.ReadAllText(mArchivoXMLRecibido); }
-                        
+
                         // Read the file as one string.
                         //System.IO.StreamReader myFile = new System.IO.StreamReader("c:\\test.txt");
                         //string myString = myFile.ReadToEnd();
@@ -1939,7 +1970,7 @@ namespace ProntoMVC.Controllers
                 FE = null;
             }
 
-            
+
             return mResul;
         }
 
