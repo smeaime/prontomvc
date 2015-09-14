@@ -1293,7 +1293,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.42944in</Top>
         <Height>0.99619in</Height>
-        <Width>10.16568in</Width>
+        <Width>10.16567in</Width>
         <ZIndex>1</ZIndex>
         <Style />
       </Tablix>
@@ -1315,8 +1315,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>0e6bae76-c14f-488f-9c75-202ed5785dd0</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1430,19 +1434,34 @@ ORDER by [Titulo]</CommandText>
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="FechaDesde">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(2000,1,1)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(year(now),month(now),day(now))</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Hasta</Prompt>
     </ReportParameter>
     <ReportParameter Name="CodigoEmpresaDesde">
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
-          <Value xml:space="preserve">  </Value>
+          <Value xml:space="preserve"> </Value>
         </Values>
       </DefaultValue>
       <Prompt>Codigo Empresa Desde</Prompt>

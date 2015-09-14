@@ -387,10 +387,10 @@ DROP TABLE #Auxiliar6</CommandText>
                   <Width>1.10417in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.58333in</Width>
+                  <Width>0.9375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.41667in</Width>
+                  <Width>2.4375in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.77083in</Width>
@@ -399,7 +399,7 @@ DROP TABLE #Auxiliar6</CommandText>
                   <Width>1.20833in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.91667in</Width>
+                  <Width>2.63542in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
@@ -1973,7 +1973,7 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
             <DataSetName>DataSet1</DataSetName>
             <Top>0.36in</Top>
             <Height>0.89in</Height>
-            <Width>11in</Width>
+            <Width>13.09375in</Width>
             <Style />
           </Tablix>
           <Textbox Name="textbox1">
@@ -2010,7 +2010,7 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
         <Height>1.25in</Height>
         <Style />
       </Body>
-      <Width>12in</Width>
+      <Width>13.09375in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -2024,14 +2024,20 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
     <ReportParameter Name="CadenaConexion">
       <DataType>String</DataType>
       <Prompt>CadenaConexion</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="FechaDesde">
-      <DataType>DateTime</DataType>
-      <Prompt>Fecha Desde</Prompt>
+      <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
-      <Prompt>Fecha Hasta</Prompt>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(year(now),month(now),1)</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Hasta</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FechaDesde">
+      <DataType>DateTime</DataType>
+      <Prompt>Desde</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Language>es-ES</Language>

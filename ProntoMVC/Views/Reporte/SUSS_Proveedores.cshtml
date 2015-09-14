@@ -1,0 +1,162 @@
+﻿<div style="padding-left: 15px; padding-right: 15px;">
+    <h3>SUSS Proveedores</h3>
+    <div class="row-fluid">
+        <div class="span3 lightblue">
+            <div class="row-fluid">
+                <div class="span3 lightblue">
+                    Fecha inicial : 
+                </div>
+                <div class="span3 lightblue">
+                    <input type="text" name="FechaInicial" id="FechaInicial" style="text-align: center; font-size: 20px; font-weight: bold; background-color: #e8eef4; " />
+                    <script>
+                        $("#FechaInicial").datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: 'dd/mm/yy'
+                            //numberOfMonths: 2,
+                        });
+                    </script>
+                </div>
+                <div class="span1 lightblue">
+                </div>
+            </div>
+        </div>
+        <div class="span3 lightblue">
+            <div class="row-fluid">
+                <div class="span3 lightblue">
+                    Fecha final :
+                </div>
+                <div class="span3 lightblue">
+                    <input type="text" name="FechaFinal" id="FechaFinal" style="text-align: center; font-size: 20px; font-weight: bold; background-color: #e8eef4; " />
+                    <script>
+                        $("#FechaFinal").datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: 'dd/mm/yy'
+                            //numberOfMonths: 2,
+                        });
+                    </script>
+                </div>
+                <div class="span1 lightblue">
+                </div>
+            </div>
+        </div>
+        <div class="span5 lightblue">
+            <div class="span2 lightblue">
+                <input type="button" id="Aceptar" value="Ejecutar consulta" class="btn btn-primary pull-right" usesubmitbehavior="false" />
+            </div>
+            <div class="span2 lightblue">
+                <input type="button" id="Generar" value="Generar TXT" class="btn btn-primary pull-right" usesubmitbehavior="false" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        $('#Generar:button').attr('disabled', 'disabled');
+
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Aceptar').click(function () {
+            var Fecha;
+
+            Fecha = $("#FechaInicial").val();
+            if (Fecha.length == 0) {
+                alert("Debe ingresar la fecha inicial");
+                return;
+            }
+            Fecha = $("#FechaFinal").val();
+            if (Fecha.length == 0) {
+                alert("Debe ingresar la fecha final");
+                return;
+            }
+
+            $('#Generar:button').removeAttr('disabled');
+
+            $('#Lista').jqGrid('GridUnload');
+            $('#Lista').jqGrid({
+                url: '@Url.Action("SUSS_Proveedores_Informe", "Reporte")',
+                postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+                datatype: 'json',
+                mtype: 'POST',
+                colNames: ['Acciones', 'IdAux', 'Proveedor', 'Cuit', 'Fecha', 'Numero movimiento', 'Numero certificado', 'Importe retencion', 'Registro'],
+                colModel: [
+                            { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false, hidden: true },
+                            { name: 'IdAux', index: 'IdAux', align: 'left', width: 0, editable: false, hidden: true },
+                            { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 400, editable: false, hidden: false },
+                            { name: 'Cuit', index: 'Cuit', align: 'center', width: 100, editable: false, hidden: false },
+                            { name: 'Fecha', index: 'Fecha', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                            { name: 'NumeroMovimiento', index: 'NumeroMovimiento', align: 'right', width: 120, editable: false, hidden: false },
+                            { name: 'NumeroCertificado', index: 'NumeroCertificado', align: 'right', width: 120, editable: false, hidden: false },
+                            { name: 'ImporteRetencion', index: 'ImporteRetencion', align: 'right', width: 100, editable: false, hidden: false },
+                            { name: 'Registro', index: 'Registro', align: 'left', width: 500, editable: false, hidden: false },
+                ],
+                onSelectRow: function (id) {
+                    if (id && id !== lastSelectedId) {
+                        if (typeof lastSelectedId !== "undefined") {
+                            grid.jqGrid('restoreRow', lastSelectedId);
+                        }
+                        lastSelectedId = id;
+                    }
+                },
+                pager: $('#ListaPager'),
+                rowNum: 5000,
+                rowList: [10, 20, 5000],
+                sortname: 'IdAux',
+                sortorder: 'asc',
+                viewrecords: true,
+                width: 'auto',
+                height: '100%',
+                altRows: false,
+                footerrow: true,
+                userDataOnFooter: true,
+                caption: '',
+                autowidth: true,
+                shrinkToFit: false
+            });
+            jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        });
+
+        $('#Generar').click(function () {
+            var cm, colModel, dataIds, data1, filename, valor, iddeta, h, i, j;
+
+            $grid = $('#Lista');
+            colModel = $grid.jqGrid('getGridParam', 'colModel');
+            dataIds = $grid.jqGrid('getDataIDs');
+
+            data1 = "";
+            filename = "SUSS.txt";
+            for (i = 0; i < dataIds.length; i++) {
+                try {
+                    data = $grid.jqGrid('getRowData', dataIds[i]);
+                    valor = data['Registro'];
+                    data1 = data1 + valor + '\r\n';
+                }
+                catch (ex) {
+                    alert("Generar TXT: No se pudo generar el TXT : " + ex);
+                    return;
+                }
+            };
+            data1 = data1.substring(0, data1.length - 1)
+            //Rutina para pasarle al cliente el archivo generado
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data1));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        });
+
+    });
+</script>

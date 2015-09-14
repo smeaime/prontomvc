@@ -1,5 +1,4 @@
-﻿
-drop table tree
+﻿drop table tree
 go
 
 CREATE TABLE Tree       
@@ -19,23 +18,16 @@ CREATE TABLE Tree
 go
 
 
-
-
-/****** Object:  StoredProcedure [dbo].[Tree_TX_Generar]    Script Date: 09/01/2015 15:52:41 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER Procedure [dbo].[Tree_TX_Generar]  
   
 AS   
 
 DECLARE @Directorio as varchar(50), @BasePRONTOMANT varchar(50), @TipoComprobante int, @IdObra int, @Año int, @Mes int, @Obra varchar(30), @NombreMes varchar(15),   
 		@Parent varchar(30), @Clave varchar(30), @FechaInicial varchar(10), @FechaFinal varchar(10), @Fecha datetime    
-    
+
 SET @Directorio='Pronto2'    
 --SET @BasePRONTOMANT=IsNull((Select Top 1 BasePRONTOMantenimiento From Parametros Where IdParametro=1),'')    
-    
+
 CREATE TABLE #Auxiliar0     
    (    
     IdItem VARCHAR(30),    
@@ -137,15 +129,11 @@ INSERT INTO #Auxiliar1
  LEFT OUTER JOIN  cuentas on cuentas.idcuenta=ComprobantesProveedores.idcuenta  
  WHERE IdProveedor is null and ComprobantesProveedores.IdCuenta is not null   
 
-
-
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT -101, Null, Null, Year(FechaAsiento), Month(FechaAsiento) FROM Asientos  ORDER BY Year(FechaAsiento), Month(FechaAsiento) desc    
-
   
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT -100, Null, Null, Year(FechaComprobante), Month(FechaComprobante) FROM Subdiarios  ORDER BY Year(FechaComprobante), Month(FechaComprobante) desc    
-
 
 INSERT INTO #Auxiliar2
  SELECT DISTINCT IsNull(Articulos.IdRubro,0), Rubros.Descripcion
@@ -980,19 +968,14 @@ INSERT INTO #Auxiliar0 Select '01-11-13-01-00','ComparativasAgrupadas','','01-11
 INSERT INTO #Auxiliar0 Select '80-01','mnuMaster2','Consultas',Null,1,Null,Null,Null,'SI','Horizontal'  
   
 INSERT INTO #Auxiliar0 Select '80-01-01','mnuSub0','Almacenes','80-01',1,Null,Null,Null,'SI','Horizontal'  
-  
-INSERT INTO #Auxiliar0 Select '80-01-01-01','mnuSubA0','Requerimientos pendientes de asignacion','80-01-01',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Requerimientos pendientes de asignacion">Requerimientos pendientes de asignacion</a>
-',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-01-01','mnuSubA0','Requerimientos pendientes de asignacion','80-01-01',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Requerimientos pendientes de asignacion">Requerimientos pendientes de asignacion</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-02','mnuSubA0','Pedidos pendientes de recibir','80-01-01',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Pedidos pendientes de recibir">Pedidos pendientes de recibir</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-03','mnuSubA3','Vales emitidos no retirados','80-01-01',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Vales emitidos no retirados">Vales emitidos no retirados</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-04','mnuSubA4','Cardex','80-01-01',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Cardex">Cardex</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-05','mnuSubA5','Transporte de mercaderia','80-01-01',5,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Transporte de mercaderia">Transporte de mercaderia</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-01-06','mnuSubA6','Informe de remitos de proveedores','80-01-01',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-01-07','mnuSubA7','Informe de vales de consumo','80-01-01',7,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-01-06','mnuSubA6','Informe de remitos de proveedores','80-01-01',6,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-01-07','mnuSubA7','Informe de vales de consumo','80-01-01',7,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-08','mnuSubA8','Informe de salida de materiales','80-01-01',8,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Salidas de materiales">Informe de salida de materiales</a>',Null,'NO','Horizontal'  
--- --------------------------------------------------
--- FALTA (Estadistica de ventas por rubro - articulo)
--- --------------------------------------------------
 INSERT INTO #Auxiliar0 Select '80-01-01-09','mnuSubA9','Estadistica de ventas por rubro-articulo','80-01-01',9,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Estadistica de ventas por rubro - articulo">Estadistica de ventas por rubro-articulo</a>',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-01-10','mnuSubA10','Ordenes de trabajo','80-01-01',10,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-11','mnuSubA11','Desarrollo y seguimiento por item de ordenes de compra','80-01-01',11,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Desarrollo y seguimiento por item de ordenes de compra">Desarrollo y seguimiento por item de ordenes de compra</a>',Null,'NO','Horizontal'  
@@ -1015,15 +998,9 @@ INSERT INTO #Auxiliar0 Select '80-01-02-02','mnuSubC2','Pedidos pendientes de re
 --INSERT INTO #Auxiliar0 Select '80-01-02-14','mnuSubC14','Pedidos pendientes por fecha de vencimiento','80-01-02',14,Null,'',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-02-15','mnuSubC15','Notas de pedido y materiales recibidos','80-01-02',15,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-02-16','mnuSubC16','Seguimiento de compras','80-01-02',16,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Seguimiento Compras">Seguimiento de compras</a>',Null,'NO','Horizontal'  
--- -----------------------------------------------------
--- FALTA (Notas de pedidos con items dados por cumplido)
--- -----------------------------------------------------
-INSERT INTO #Auxiliar0 Select '80-01-02-17','mnuSubC17','Nota de pedido con items dados por cumplido','80-01-02',17,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-02-17','mnuSubC17','Nota de pedido con items dados por cumplido','80-01-02',17,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Notas de pedidos con items dados por cumplido">Notas de pedidos con items dados por cumplido</a>',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-02-18','mnuSubC18','Modificacion de costos','80-01-02',18,Null,'',Null,'NO','Horizontal'  
--- --------------------------
--- FALTA (Listado de pedidos)
--- --------------------------
-INSERT INTO #Auxiliar0 Select '80-01-02-19','mnuSubC19','Listado de pedidos','80-01-02',19,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-02-19','mnuSubC19','Listado de pedidos','80-01-02',19,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Listado de pedidos">Listado de pedidos</a>',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-02-20','mnuSubC20','Pedidos pendientes de facturar','80-01-02',20,Null,'',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-02-21','mnuSubC21','Subcontratos - Certificaciones','80-01-02',21,Null,'',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-02-22','mnuSubC22','Subcontratos - Resumen','80-01-02',22,Null,'',Null,'NO','Horizontal'  
@@ -1031,18 +1008,17 @@ INSERT INTO #Auxiliar0 Select '80-01-02-19','mnuSubC19','Listado de pedidos','80
 
 INSERT INTO #Auxiliar0 Select '80-01-03','mnuSub2','Proveedores','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-03-01','MnuSubPrv0','Retenciones y Percepciones','80-01-03',1,Null,Null,Null,'SI','Horizontal'  
-
-INSERT INTO #Auxiliar0 Select '80-01-03-01-01','MnuSubPrvRet1','SICORE - Retenciones de impuesto a las ganancias (Control)','80-01-03-01',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-02','MnuSubPrvRet2','SICORE - Generacion','80-01-03-01',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-03','MnuSubPrvRet3','SICORE - Retenciones de IVA','80-01-03-01',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Proveedores - SICORE - Retencion iva">SICORE - Retenciones de IVA</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-04','MnuSubPrvRet4','SICORE - Percepciones de IVA','80-01-03-01',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-05','MnuSubPrvRet5','SIFERE - Percepciones IIBB (Compras) - Convenio multilateral','80-01-03-01',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-06','MnuSubPrvRet6','SIFERE - Percepciones IIBB (Compras) - Jurisdiccion local','80-01-03-01',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-07','MnuSubPrvRet7','SIFERE - Retenciones IIBB (Pagos)','80-01-03-01',7,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-08','MnuSubPrvRet8','SIFERE - SIRCREB','80-01-03-01',8,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-09','MnuSubPrvRet9','CITI','80-01-03-01',9,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-03-01-10','MnuSubPrvRet10','SUSS','80-01-03-01',10,Null,'',Null,'NO','Horizontal'  
-
+--INSERT INTO #Auxiliar0 Select '80-01-03-01-01','MnuSubPrvRet1','SICORE - Retenciones de impuesto a las ganancias (Control)','80-01-03-01',1,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-02','MnuSubPrvRet2','SICORE - Retenciones Ganancias','80-01-03-01',2,Null,'<a href="/' + @Directorio + '/Reporte/SICORE_RetencionesGanancias_Proveedores">SICORE - Retenciones Ganancias</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-03','MnuSubPrvRet3','SICORE - Retenciones de IVA','80-01-03-01',3,Null,'<a href="/' + @Directorio + '/Reporte/SICORE_RetencionesIVA_Proveedores">SICORE - Retenciones de IVA</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-04','MnuSubPrvRet4','SICORE - Percepciones de IVA','80-01-03-01',4,Null,'<a href="/' + @Directorio + '/Reporte/SICORE_PercepcionesIva_Proveedores">SICORE - Percepciones de IVA</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-05','MnuSubPrvRet5','SIFERE - Percepciones IIBB (Compras) - Convenio multilateral','80-01-03-01',5,Null,'<a href="/' + @Directorio + '/Reporte/SIFERE_PercepcionesIIBB_Convenio_Proveedores">SIFERE - Percepciones IIBB (Compras) - Convenio multilateral</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-06','MnuSubPrvRet6','SIFERE - Percepciones IIBB (Compras) - Jurisdiccion local','80-01-03-01',6,Null,'<a href="/' + @Directorio + '/Reporte/SIFERE_PercepcionesIIBB_JurisdiccionLocal_Proveedores">SIFERE - Percepciones IIBB (Compras) - Jurisdiccion local</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-07','MnuSubPrvRet7','SIFERE - Retenciones IIBB (Pagos)','80-01-03-01',7,Null,'<a href="/' + @Directorio + '/Reporte/SIFERE_RetencionesIIBBPagos_Proveedores">SIFERE - Retenciones IIBB (Pagos)</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-08','MnuSubPrvRet8','SIFERE - SIRCREB','80-01-03-01',8,Null,'<a href="/' + @Directorio + '/Reporte/SIFERE_SIRCREB_Proveedores">SIFERE - SIRCREB</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-03-01-09','MnuSubPrvRet9','CITI','80-01-03-01',9,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-10','MnuSubPrvRet10','SUSS','80-01-03-01',10,Null,'<a href="/' + @Directorio + '/Reporte/SUSS_Proveedores">SUSS</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-01-11','MnuSubPrvRet11','SIRE','80-01-03-01',11,Null,'<a href="/' + @Directorio + '/Reporte/SIRE_Proveedores">SIRE</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-03-02','mnuSubPrv1','Resumen de compras por proveedor','80-01-03',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Proveedores - Resumen de compras">Resumen de compras por proveedor</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-03-03','mnuSubPrv2','Ranking de compras por proveedor','80-01-03',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Ranking proveedores">Ranking de compras por proveedor</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-03-04','mnuSubPrv3','Listado de comprobantes ingresados','80-01-03',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Proveedores - Listado de comprobantes detallado">Listado de comprobantes ingresados</a>',Null,'NO','Horizontal'  
@@ -1059,152 +1035,196 @@ INSERT INTO #Auxiliar0 Select '80-01-03-10','mnuSubPrv9','Listado de ordenes de 
 --INSERT INTO #Auxiliar0 Select '80-01-03-15','mnuSubPrv14','Caja egresos','80-01-03',15,Null,'',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-03-16','mnuSubPrv15','Listado de saldos de fondos fijos (todos)','80-01-03',16,Null,'',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-03-16','mnuSubPrv16','Informe de proyeccion de egresos','80-01-03',17,Null,'',Null,'NO','Horizontal'  
--- -------------------------------------
--- FALTA (Reporte de seguimiento por IP)
--- -------------------------------------
-INSERT INTO #Auxiliar0 Select '80-01-03-16','mnuSubPrv17','Reporte de seguimiento por IP','80-01-03',18,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-03-16','mnuSubPrv17','Reporte de seguimiento por IP','80-01-03',18,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Reporte de seguimiento por IP">Reporte de seguimiento por IP</a>',Null,'NO','Horizontal'  
 
 INSERT INTO #Auxiliar0 Select '80-01-04','mnuSub3','Clientes','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-01','MnuSubCli0','Retenciones y Percepciones','80-01-04',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-01','MnuSubCliRet0','SICORE - Generacion','80-01-04-01',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-02','MnuSubCliRet1','SICORE - Retenciones de IVA','80-01-04-01',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-03','MnuSubCliRet2','SICORE - Percepciones de IVA','80-01-04-01',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-04','MnuSubCliRet3','SIFERE - Percepciones IIBB (Ventas)','80-01-04-01',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-05','MnuSubCliRet4','SIFERE - Retenciones IIBB (Cobranzas)','80-01-04-01',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-06','MnuSubCliRet5','CITI','80-01-04-01',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-07','MnuSubCliRet6','SUSS','80-01-04-01',7,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-01','MnuSubCliRet0','SICORE - Retenciones Ganancias','80-01-04-01',1,Null,'<a href="/' + @Directorio + '/Reporte/SICORE_RetencionesGanancias_Clientes">SICORE - Retenciones Ganancias</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-02','MnuSubCliRet1','SICORE - Retenciones de IVA','80-01-04-01',2,Null,'<a href="/' + @Directorio + '/Reporte/SICORE_RetencionesIVA_Clientes">SICORE - Retenciones de IVA</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-03','MnuSubCliRet2','SICORE - Percepciones de IVA','80-01-04-01',3,Null,'<a href="/' + @Directorio + '/Reporte/SICORE_PercepcionesIVA_Clientes">SICORE - Percepciones de IVA</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-04','MnuSubCliRet3','SIFERE - Percepciones IIBB (Ventas)','80-01-04-01',4,Null,'<a href="/' + @Directorio + '/Reporte/SIFERE_PercepcionesIIBB_Clientes">SIFERE - Percepciones IIBB (Ventas)</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-05','MnuSubCliRet4','SIFERE - Retenciones IIBB (Cobranzas)','80-01-04-01',5,Null,'<a href="/' + @Directorio + '/Reporte/SIFERE_RetencionesIIBB_Clientes">SIFERE - Retenciones IIBB (Cobranzas)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-01-06','MnuSubCliRet5','CITI','80-01-04-01',6,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-07','MnuSubCliRet6','SUSS','80-01-04-01',7,Null,'<a href="/' + @Directorio + '/Reporte/SUSS_Clientes">SUSS</a>',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-04-02','MnuSubCli1','Resumen de ventas por cliente','80-01-04',2,Null,'',Null,'NO','Horizontal'  
--- -------------------------------------
--- FALTA (Ranking de ventas por cliente)
--- -------------------------------------
-INSERT INTO #Auxiliar0 Select '80-01-04-03','MnuSubCli2','Ranking de ventas por cliente','80-01-04',3,Null,'',Null,'NO','Horizontal'  
--- ---------------------------------------------------
--- FALTA (Listado de comprobantes de venta ingresados)
--- ---------------------------------------------------
-INSERT INTO #Auxiliar0 Select '80-01-04-04','MnuSubCli3','Listado de comprobantes ingresados','80-01-04',4,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-03','MnuSubCli2','Ranking de ventas por cliente','80-01-04',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Ranking de ventas por cliente">Ranking de ventas por cliente</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-04','MnuSubCli3','Listado de comprobantes ingresados','80-01-04',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Listado de comprobantes de venta ingresados">Listado de comprobantes de venta ingresados</a>',Null,'NO','Horizontal'  
 --INSERT INTO #Auxiliar0 Select '80-01-04-05','MnuSubCli4','Listado de saldos de clientes','80-01-04',5,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Saldos Clientes">Listado de saldos de clientes</a>',Null,'NO','Horizontal'  
--- -----------------------------------------------
--- FALTA (Remitos de venta pendientes de facturar)
--- -----------------------------------------------
-INSERT INTO #Auxiliar0 Select '80-01-04-06','MnuSubCli5','Remitos pendientes de facturar','80-01-04',6,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-06','MnuSubCli5','Remitos pendientes de facturar','80-01-04',6,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Remitos de venta pendientes de facturar">Remitos de venta pendientes de facturar</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-07','MnuSubCli6','Desarrollo de items de ordenes de compra','80-01-04',7,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Desarrollo y seguimiento por item de ordenes de compra">Desarrollo de items de ordenes de compra</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-08','MnuSubCli7','Creditos vencidos a fecha','80-01-04',8,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Creditos Vencidos a Fecha">Creditos vencidos a fecha</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-09','MnuSubCli8','Caja ingresos','80-01-04',9,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Caja ingresos">Caja ingresos</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-10','MnuSubCli9','Analisis de cobranzas','80-01-04',10,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-11','MnuSubCli10','Listado de ordenes de compra','80-01-04',11,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-12','MnuSubCli11','Cobranzas por cobrador','80-01-04',12,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-13','MnuSubCli12','Ranking de ventas por vendedor','80-01-04',13,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-14','MnuSubCli13','Entregas / Devoluciones','80-01-04',14,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-15','MnuSubCli14','Analisis de cobranzas / facturacion','80-01-04',15,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-16','MnuSubCli15','Control de facturacion electronica','80-01-04',16,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-17','MnuSubCli16','Remitos - Movimiento de materiales por cliente','80-01-04',17,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Remitos por cliente">Remitos - Movimiento de materiales por cliente</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-18','MnuSubCli17','Resumen por certificaciones de obra','80-01-04',18,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-10','MnuSubCli9','Analisis de cobranzas','80-01-04',10,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Analisis de cobranzas">Analisis de cobranzas</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-11','MnuSubCli10','Listado de ordenes de compra','80-01-04',11,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Listado de ordenes de compra">Listado de ordenes de compra</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-12','MnuSubCli11','Cobranzas por cobrador','80-01-04',12,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-13','MnuSubCli12','Ranking de ventas por vendedor','80-01-04',13,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-14','MnuSubCli13','Entregas / Devoluciones','80-01-04',14,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-15','MnuSubCli14','Analisis de cobranzas / facturacion','80-01-04',15,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-16','MnuSubCli15','Control de facturacion electronica','80-01-04',16,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-17','MnuSubCli16','Remitos - Movimiento de materiales por cliente','80-01-04',17,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Remitos por cliente">Remitos - Movimiento de materiales por cliente</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-04-18','MnuSubCli17','Resumen por certificaciones de obra','80-01-04',18,Null,'',Null,'NO','Horizontal'  
   
 INSERT INTO #Auxiliar0 Select '80-01-05','mnuSub4','Fabrica','80-01',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-01','MnuSubF0','Disponibilidad de materiales (segun lista de materiales)','80-01-05',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-02','MnuSubF1','Consulta de revisiones','80-01-05',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-03','MnuSubF2','Informe general de controles de calidad','80-01-05',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-04','MnuSubF3','Informe de materiales recibidos','80-01-05',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-05','MnuSubF4','Informe de materiales recibidos y aprobados','80-01-05',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-06','MnuSubF5','Materiales controlados - remitos de rechazo','80-01-05',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-07','MnuSubF6','Informe de materiales recibidos con datos de transporte','80-01-05',7,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-08','MnuSubF7','Informe de salida de materiales con datos de transporte','80-01-05',8,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-05-09','MnuSubF8','Informe de materiales recibidos para obras','80-01-05',9,Null,'',Null,'NO','Horizontal'  
-  
-INSERT INTO #Auxiliar0 Select '80-01-06','mnuSub5','Obras','80-01',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-06-01','MnuSubO0','Obras, equipos y planos','80-01-06',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-06-02','MnuSubO1','Estado de polizas','80-01-06',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-06-03','MnuSubO2','Detalle de equipos instalados por fecha','80-01-06',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-06-04','MnuSubO3','Estado de equipos','80-01-06',4,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-01','MnuSubF0','Disponibilidad de materiales (segun lista de materiales)','80-01-05',1,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-02','MnuSubF1','Consulta de revisiones','80-01-05',2,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-03','MnuSubF2','Informe general de controles de calidad','80-01-05',3,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-05-04','MnuSubF3','Informe de materiales recibidos','80-01-05',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Informe de materiales recibidos">Informe de materiales recibidos</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-05','MnuSubF4','Informe de materiales recibidos y aprobados','80-01-05',5,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-06','MnuSubF5','Materiales controlados - remitos de rechazo','80-01-05',6,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-07','MnuSubF6','Informe de materiales recibidos con datos de transporte','80-01-05',7,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-08','MnuSubF7','Informe de salida de materiales con datos de transporte','80-01-05',8,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-05-09','MnuSubF8','Informe de materiales recibidos para obras','80-01-05',9,Null,'',Null,'NO','Horizontal'  
+
+--INSERT INTO #Auxiliar0 Select '80-01-06','mnuSub5','Obras','80-01',1,Null,Null,Null,'SI','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-06-01','MnuSubO0','Obras, equipos y planos','80-01-06',1,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-06-02','MnuSubO1','Estado de polizas','80-01-06',2,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-06-03','MnuSubO2','Detalle de equipos instalados por fecha','80-01-06',3,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-06-04','MnuSubO3','Estado de equipos','80-01-06',4,Null,'',Null,'NO','Horizontal'  
 
 INSERT INTO #Auxiliar0 Select '80-01-07','mnuSub6','Planeamiento','80-01',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-01','MnuSubP0','Listados de acopio sumarizados por obra','80-01-07',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-02','MnuSubP1','Listados de materiales sumarizados por obra','80-01-07',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-03','MnuSubP2','Requerimientos de materiales sumarizados por obra','80-01-07',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-04','MnuSubP3','LM - LA - RM - RS','80-01-07',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-05','MnuSubP4','Reservas de stock sumarizados por obra','80-01-07',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-06','MnuSubP5','Requerimientos y listas de acopio pendientes sin nota de pedido','80-01-07',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-07','MnuSubP6','Activacion de compras de materiales','80-01-07',7,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-08','MnuSubP7','Costos de materiales por equipo','80-01-07',8,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-09','MnuSubP8','Historico de equipos instalados','80-01-07',9,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-10','MnuSubP9','Salidas de materiales','80-01-07',10,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-11','MnuSubP10','Informe de gastos por OT','80-01-07',11,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-12','MnuSubP11','Control lista de materiales salidas por destino','80-01-07',12,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-13','MnuSubP12','Desarrollo de items de RMs','80-01-07',13,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-14','MnuSubP13','Analisis de materiales en obra y desvios','80-01-07',14,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-15','MnuSubP14','Asignacion de salidas y comprobantes a presupuesto de obra','80-01-07',15,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-16','MnuSubP15','Salida de materiales - control de transportistas','80-01-07',16,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-17','MnuSubP16','Requerimientos con desliberaciones y/o eliminacion de firmas','80-01-07',17,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-07-18','MnuSubP17','Control de facturas y recepciones','80-01-07',18,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-01','MnuSubP0','Listados de acopio sumarizados por obra','80-01-07',1,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-02','MnuSubP1','Listados de materiales sumarizados por obra','80-01-07',2,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-03','MnuSubP2','Requerimientos de materiales sumarizados por obra','80-01-07',3,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-04','MnuSubP3','LM - LA - RM - RS','80-01-07',4,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-05','MnuSubP4','Reservas de stock sumarizados por obra','80-01-07',5,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-06','MnuSubP5','Requerimientos y listas de acopio pendientes sin nota de pedido','80-01-07',6,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-07','MnuSubP6','Activacion de compras de materiales','80-01-07',7,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-08','MnuSubP7','Costos de materiales por equipo','80-01-07',8,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-09','MnuSubP8','Historico de equipos instalados','80-01-07',9,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-07-10','MnuSubP9','Salidas de materiales','80-01-07',10,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Salidas de materiales">Salidas de materiales</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-11','MnuSubP10','Informe de gastos por OT','80-01-07',11,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-12','MnuSubP11','Control lista de materiales salidas por destino','80-01-07',12,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-07-13','MnuSubP12','Desarrollo de items de RMs','80-01-07',13,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Desarrollo y seguimiento por item de requerimiento">Desarrollo y seguimiento por item de requerimiento</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-14','MnuSubP13','Analisis de materiales en obra y desvios','80-01-07',14,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-15','MnuSubP14','Asignacion de salidas y comprobantes a presupuesto de obra','80-01-07',15,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-16','MnuSubP15','Salida de materiales - control de transportistas','80-01-07',16,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-17','MnuSubP16','Requerimientos con desliberaciones y/o eliminacion de firmas','80-01-07',17,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-07-18','MnuSubP17','Control de facturas y recepciones','80-01-07',18,Null,'',Null,'NO','Horizontal'  
   
 INSERT INTO #Auxiliar0 Select '80-01-08','mnuSub7','Stock','80-01',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-08-01','MnuSubS0','Stock actual','80-01-08',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-08-02','MnuSubS1','Costos promedios ponderados','80-01-08',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-08-03','MnuSubS2','Stock de articulos a fecha','80-01-08',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-08-04','MnuSubS3','Stock de articulos a fecha (Cubo)','80-01-08',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-08-05','MnuSubS4','Control stock reposicion - minimo','80-01-08',5,Null,'',Null,'NO','Horizontal'  
-  
+--INSERT INTO #Auxiliar0 Select '80-01-08-01','MnuSubS0','Stock actual','80-01-08',1,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-08-02','MnuSubS1','Costos promedios ponderados','80-01-08',2,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-08-03','MnuSubS2','Stock de articulos a fecha','80-01-08',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Stock a fecha">Stock a fecha</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-08-04','MnuSubS3','Stock de articulos a fecha (Cubo)','80-01-08',4,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-08-05','MnuSubS4','Control stock reposicion - minimo','80-01-08',5,Null,'',Null,'NO','Horizontal'  
+
 INSERT INTO #Auxiliar0 Select '80-01-09','mnuSub8','Contabilidad','80-01',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-01','mnuSubCo0','Diario','80-01-09',1,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-09-01','mnuSubCo0','Diario','80-01-09',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Diario">Diario</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-02','mnuSubCo1','Mayor de cuentas detallado','80-01-09',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Mayor">Mayor de cuentas detallado</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-03','mnuSubCo2','Balance de sumas y saldos','80-01-09',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Balance2">Balance de sumas y saldos</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-04','mnuSubCo3','Balance de sumas y saldos (con apertura)','80-01-09',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Balance2">Balance de sumas y saldos (con apertura)</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-05','mnuSubCo4','Resumen por rubros contables','80-01-09',5,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-04','mnuSubCo3','Balance de sumas y saldos (con apertura)','80-01-09',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Balance2">Balance de sumas y saldos (con apertura)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-05','mnuSubCo4','Resumen por rubros contables','80-01-09',5,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-06','mnuSubCo5','IVA Ventas','80-01-09',6,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=IVA Ventas">IVA Ventas</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-07','mnuSubCo6','IVA Compras','80-01-09',7,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-08','mnuSubCo7','IVA Compras detallado','80-01-09',8,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-09','mnuSubCo8','Resolucion 1361','80-01-09',9,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-10','mnuSubCo9','Resolucion 1547','80-01-09',10,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-11','mnuSubCo9','Activo fijo','80-01-09',11,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-11-01','mnuDetAF0','Amortizaciones activo fijo (contable)','80-01-09-11',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-11-02','mnuDetAF1','Revaluo activo fijo','80-01-09-11',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-11-03','mnuDetAF2','Amortizaciones activo fijo (impositivo)','80-01-09-11',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-12','mnuSubCo10','Cierre de ejercicio','80-01-09',12,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-13','mnuSubCo11','Apertura de ejercicio','80-01-09',13,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-14','mnuSubCo12','Detalle imputaciones por rubro p/presupuesto financiero','80-01-09',14,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-15','mnuSubCo13','Cuadro de ingresos y egresos','80-01-09',15,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-15-01','80-01-09-15-01','Defincion de cuadro','80-01-09-15',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-15-02','80-01-09-15-02','Emision de cuadro','80-01-09-15',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16','mnuSubCo14','Cuadro de flujo de caja y estado de resultados','80-01-09',16,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-01','mnuSubCoB0','Definicion de cuadros','80-01-09-16',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-02','mnuSubCoB1','Emision de flujo de caja','80-01-09-16',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-03','mnuSubCoB2','Emision de flujo de caja (x Mes + Proyectado) Modelo 1','80-01-09-16',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-04','mnuSubCoB3','Emision de flujo de caja (Mes + Acumulado)','80-01-09-16',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-05','mnuSubCoB4','Emision de flujo de caja (x Mes + Proyectado) Modelo 2','80-01-09-16',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-06','mnuSubCoB5','Emision de flujo de caja (x Mes + Desvios)','80-01-09-16',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-07','mnuSubCoB6','Emision de estado de resultados (x Mes + Desvios) Modelo 1','80-01-09-16',7,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-08','mnuSubCoB7','Emision de estado de resultados (x Mes + Desvios) Modelo 2','80-01-09-16',8,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-09','mnuSubCoB8','Emision de estado de resultados (x Mes + Proyectado)','80-01-09-16',9,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-10','mnuSubCoB9','Emision de estado de resultados (x Mes + Acumulado) Modelo 1','80-01-09-16',10,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-16-11','mnuSubCoB10','Emision de estado de resultados (x Mes + Acumulado) Modelo 2','80-01-09-16',11,Null,'',Null,'NO','Horizontal'  
-  
-INSERT INTO #Auxiliar0 Select '80-01-09-17','mnuSubCo16','Subdiarios','80-01-09',17,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-17-01','mnuSubCo16__','Subdiario de proveedores','80-01-09-17',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-17-02','mnuSubCo16__','Subdiario de pagos','80-01-09-17',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-17-03','mnuSubCo16__','Subdiario de clientes','80-01-09-17',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-17-04','mnuSubCo16__','Subdiario de caja y bancos','80-01-09-17',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-17-05','mnuSubCo16__','Subdiario de cobranzas','80-01-09-17',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-17-06','mnuSubCo16__','Subdiario de iva ventas','80-01-09-17',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-17-07','mnuSubCo16__','Subdiario de iva compras','80-01-09-17',7,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-09-07','mnuSubCo6','IVA Compras','80-01-09',7,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=IVA Compras">IVA Compras</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-08','mnuSubCo7','IVA Compras detallado','80-01-09',8,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-09','mnuSubCo8','Resolucion 1361','80-01-09',9,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-10','mnuSubCo9','Resolucion 1547','80-01-09',10,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-11','mnuSubCo9','Activo fijo','80-01-09',11,Null,Null,Null,'SI','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-11-01','mnuDetAF0','Amortizaciones activo fijo (contable)','80-01-09-11',1,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-11-02','mnuDetAF1','Revaluo activo fijo','80-01-09-11',2,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-11-03','mnuDetAF2','Amortizaciones activo fijo (impositivo)','80-01-09-11',3,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-12','mnuSubCo10','Cierre de ejercicio','80-01-09',12,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-13','mnuSubCo11','Apertura de ejercicio','80-01-09',13,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-14','mnuSubCo12','Detalle imputaciones por rubro p/presupuesto financiero','80-01-09',14,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-15','mnuSubCo13','Cuadro de ingresos y egresos','80-01-09',15,Null,Null,Null,'SI','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-15-01','80-01-09-15-01','Defincion de cuadro','80-01-09-15',1,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-15-02','80-01-09-15-02','Emision de cuadro','80-01-09-15',2,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16','mnuSubCo14','Cuadro de flujo de caja y estado de resultados','80-01-09',16,Null,Null,Null,'SI','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-01','mnuSubCoB0','Definicion de cuadros','80-01-09-16',1,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-02','mnuSubCoB1','Emision de flujo de caja','80-01-09-16',2,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-03','mnuSubCoB2','Emision de flujo de caja (x Mes + Proyectado) Modelo 1','80-01-09-16',3,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-04','mnuSubCoB3','Emision de flujo de caja (Mes + Acumulado)','80-01-09-16',4,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-05','mnuSubCoB4','Emision de flujo de caja (x Mes + Proyectado) Modelo 2','80-01-09-16',5,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-06','mnuSubCoB5','Emision de flujo de caja (x Mes + Desvios)','80-01-09-16',6,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-07','mnuSubCoB6','Emision de estado de resultados (x Mes + Desvios) Modelo 1','80-01-09-16',7,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-08','mnuSubCoB7','Emision de estado de resultados (x Mes + Desvios) Modelo 2','80-01-09-16',8,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-09','mnuSubCoB8','Emision de estado de resultados (x Mes + Proyectado)','80-01-09-16',9,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-10','mnuSubCoB9','Emision de estado de resultados (x Mes + Acumulado) Modelo 1','80-01-09-16',10,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-16-11','mnuSubCoB10','Emision de estado de resultados (x Mes + Acumulado) Modelo 2','80-01-09-16',11,Null,'',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-17','mnuSubCo15','IVA Compras detallado','80-01-09',17,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=IVA Compras detallado">IVA Compras detallado</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18','mnuSubCo16','Subdiarios','80-01-09',18,Null,Null,Null,'SI','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18-01','MnuSubCoC0','Subdiario de proveedores','80-01-09-18',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Subdiario de proveedores">Subdiario de proveedores</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18-02','MnuSubCoC1','Subdiario de pagos','80-01-09-18',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Subdiario de pagos">Subdiario de pagos</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18-03','MnuSubCoC2','Subdiario de clientes','80-01-09-18',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Subdiario de clientes">Subdiario de clientes</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18-04','MnuSubCoC3','Subdiario de caja y bancos','80-01-09-18',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Subdiario de caja y bancos">Subdiario de caja y bancos</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18-05','MnuSubCoC4','Subdiario de cobranzas','80-01-09-18',5,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Subdiario de cobranzas">Subdiario de cobranzas</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18-06','MnuSubCoC5','Subdiario de iva ventas','80-01-09-18',6,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Subdiario de iva ventas">Subdiario de iva ventas</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-18-07','MnuSubCoC6','Subdiario de iva compras','80-01-09-18',7,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Subdiario de iva compras">Subdiario de iva compras</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-09-19','mnuSubCo17','Diario IGJ','80-01-09',19,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Diario IGJ">Diario IGJ</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-09-20','mnuSubCo18','Regimen de informacion de compras y ventas','80-01-09',20,Null,'<a href="/' + @Directorio + '/Reporte/RegimenDeInformacionDeComprasYVentas">Regimen de informacion de compras y ventas</a>',Null,'NO','Horizontal'  
+ 
+INSERT INTO #Auxiliar0 Select '80-01-10','mnuSub9','Informes gerenciales','80-01',1,Null,Null,Null,'SI','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-10-01','mnuSubCom0','Ordenes de compra pendientes de facturar','80-01-10',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Ordenes de compra pendientes de facturar">Ordenes de compra pendientes de facturar</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-02','mnuSubCom1','Proyeccion de egresos','80-01-10',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Proyeccion de egresos">Proyeccion de egresos</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-03','mnuSubCom2','Proyeccion de egresos (detallados)','80-01-10',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Proyeccion de egresos (detallados)">Proyeccion de egresos (detallados)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-04','mnuSubCom3','Cuadro de gastos (detallados)','80-01-10',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Cuadro de gastos (detallados)">Cuadro de gastos (detallados)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-05','mnuSubCom4','Ventas (detalladas)','80-01-10',5,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Ventas (detalladas)">Ventas (detalladas)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-06','mnuSubCom5','Resumen posicion financiera','80-01-10',6,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Resumen posicion financiera">Resumen posicion financiera</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-07','mnuSubCom6','Cuadro de Ingresos - Egresos por Obra','80-01-10',7,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Cuadro de Ingresos - Egresos por Obra">Cuadro de Ingresos - Egresos por Obra</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-08','mnuSubCom7','Analisis de comprobantes para presupuesto financiero','80-01-10',8,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Analisis de comprobantes para presupuesto financiero">Analisis de comprobantes para presupuesto financiero</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-09','mnuSubCom8','Presupuesto financiero por rubro contable','80-01-10',9,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Presupuesto financiero por rubro contable">Presupuesto financiero por rubro contable</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-10','mnuSubCom9','Presupuesto economico por cuenta','80-01-10',10,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Presupuesto economico por cuenta">Presupuesto economico por cuenta</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-11','mnuSubCom10','Saldos de comprobantes por proveedor - obra','80-01-10',11,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Saldos de comprobantes por proveedor - obra">Saldos de comprobantes por proveedor - obra</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-12','mnuSubCom11','IVA ventas - compras por obra','80-01-10',12,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=IVA ventas - compras por obra">IVA ventas - compras por obra</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-13','mnuSubCom12','Costos de importacion','80-01-10',13,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Costos de importacion">Costos de importacion</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-14','mnuSubCom13','Ventas en cuotas','80-01-10',14,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Ventas en cuotas">Ventas en cuotas</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-15','mnuSubCom14','Reserva presupuestaria','80-01-10',15,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Reserva presupuestaria">Reserva presupuestaria</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-16','mnuSubCom15','AVL','80-01-10',16,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=AVL">AVL</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-17','mnuSubCom16','Reintegros (ComEx)','80-01-10',17,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Reintegros (ComEx)">Reintegros (ComEx)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-18','mnuSubCom17','Comprobantes comercio exterior','80-01-10',18,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Comprobantes comercio exterior">Comprobantes comercio exterior</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-19','mnuSubCom18','Analisis Pedidos - Entregas','80-01-10',19,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Analisis Pedidos - Entregas">Analisis Pedidos - Entregas</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-20','mnuSubCom19','Resumen posicion financiera (Cubo)','80-01-10',20,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Resumen posicion financiera (Cubo)">Resumen posicion financiera (Cubo)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-21','mnuSubCom20','Cuadro de Egresos (detallados por obra)','80-01-10',21,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Cuadro de Egresos (detallados por obra)">Cuadro de Egresos (detallados por obra)</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-22','mnuSubCom21','Resumen posicion financiera 2','80-01-10',22,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Resumen posicion financiera 2">Resumen posicion financiera 2</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-23','mnuSubCom22','Informe Dominio - Equipo - Sim','80-01-10',23,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Informe Dominio - Equipo - Sim">Informe Dominio - Equipo - Sim</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-24','mnuSubCom23','Resumen de gastos por rubros contables','80-01-10',24,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Resumen de gastos por rubros contables">Resumen de gastos por rubros contables</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-10-25','mnuSubCom24','Analisis de contribucion por obra','80-01-10',25,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Analisis de contribucion por obra">Analisis de contribucion por obra</a>',Null,'NO','Horizontal'  
 
-INSERT INTO #Auxiliar0 Select '80-01-09-18','mnuSubCo17','Diario IGJ','80-01-09',18,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-11','mnuSub10','Bancos','80-01',1,Null,Null,Null,'SI','Horizontal'
+INSERT INTO #Auxiliar0 Select '80-01-11-01','MnuSubBco0','Valores a depositar','80-01-11',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Valores a depositar">Valores a depositar</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-11-02','MnuSubBco1','Saldos a fecha','80-01-11',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Saldos a fecha">Saldos a fecha</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-11-03','MnuSubBco2','Retenciones','80-01-11',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Retenciones">Retenciones</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-11-04','MnuSubBco3','Valores diferidos pendientes','80-01-11',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Valores diferidos pendientes">Valores diferidos pendientes</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-11-05','MnuSubBco4','Cheques anulados','80-01-11',5,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Cheques anulados">Cheques anulados</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-11-06','MnuSubBco5','Posicion bancos','80-01-11',6,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Posicion bancos">Posicion bancos</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-11-07','MnuSubBco6','Reporte financiero por rubro','80-01-11',7,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Reporte financiero por rubro">Reporte financiero por rubro</a>',Null,'NO','Horizontal'  
+
+--INSERT INTO #Auxiliar0 Select '80-01-12','mnuSub11','Personal','80-01',1,Null,Null,Null,'SI','Horizontal'
+--INSERT INTO #Auxiliar0 Select '80-01-12-01','MnuSubPer0','Estado anticipos al personal','80-01-12',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Estado anticipos al personal">Estado anticipos al personal</a>',Null,'NO','Horizontal'  
+
+--INSERT INTO #Auxiliar0 Select '80-01-13','mnuSub12','ProntoSat','80-01',1,Null,Null,Null,'SI','Horizontal'
+--INSERT INTO #Auxiliar0 Select '80-01-13-01','MnuSubSAT0','Control de remitos a SAT','80-01-13',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Control de remitos a SAT">Control de remitos a SAT</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-13-02','MnuSubSAT0','Recepciones en SAT','80-01-13',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Recepciones en SAT">Recepciones en SAT</a>',Null,'NO','Horizontal'  
+
+--INSERT INTO #Auxiliar0 Select '80-01-14','mnuSub13','Transportes','80-01',1,Null,Null,Null,'SI','Horizontal'
+--INSERT INTO #Auxiliar0 Select '80-01-14-01','MnuSubT0','Asignacion de tarifas de fletes','80-01-14',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Asignacion de tarifas de fletes">Asignacion de tarifas de fletes</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-14-02','MnuSubT1','Informe de viajes y gastos','80-01-14',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Informe de viajes y gastos">Informe de viajes y gastos</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-14-03','MnuSubT2','Liquidacion de fletes','80-01-14',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Liquidacion de fletes">Liquidacion de fletes</a>',Null,'NO','Horizontal'  
+
+--INSERT INTO #Auxiliar0 Select '80-01-15','mnuSub14','Modulos especiales','80-01',1,Null,Null,Null,'SI','Horizontal'
+--INSERT INTO #Auxiliar0 Select '80-01-15-01','MnuSubMod0','Polizas de obras','80-01-15',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Polizas de obras">Polizas de obras</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-15-02','MnuSubMod1','Polizas de equipos','80-01-15',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Polizas de equipos">Polizas de equipos</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-15-03','MnuSubMod2','Planes','80-01-15',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Planes">Planes</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-15-04','MnuSubMod3','Planes a vencer a fecha','80-01-15',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Planes a vencer a fecha">Planes a vencer a fecha</a>',Null,'NO','Horizontal'  
+
+--INSERT INTO #Auxiliar0 Select '80-01-16','mnuSub15','Presupuesto de obras','80-01',1,Null,Null,Null,'SI','Horizontal'
+--INSERT INTO #Auxiliar0 Select '80-01-16-01','MnuSubPre0','Control de consumos (Hs.Hombre - Hs.Equipos)','80-01-16',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Control de consumos (Hs.Hombre - Hs.Equipos)">Control de consumos (Hs.Hombre - Hs.Equipos)</a>',Null,'NO','Horizontal'  
 
 INSERT INTO #Auxiliar0 Select '80-02','mnuMaster4','Seguridad',Null,1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-20','mnuSeg0','Usuarios Web','80-02',1,Null,'<a href="/' + @directorio + '/MvcMembership/UserAdministration">Usuarios Web</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-01','mnuSeg0','Definicion de accesos','80-02',1,Null,'<a href="/' + @directorio + '/Acceso/Edit/-1">Definicion de accesos</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-02','mnuSeg1','Definicion de autorizaciones','80-02',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-03','mnuSeg2','Autorizacion de documentos','80-02',3,Null,'<a href="/' + @directorio + '/Autorizacion">Autorizacion de documentos</a>',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-04','mnuSeg3','Control del circuito de firmas','80-02',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-05','mnuSeg4','Control de lotes transmitidos','80-02',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-06','mnuSeg5','Destinatarios de mensajes por eventos','80-02',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-07','mnuSeg6','Ver mensajes para usuario actual','80-02',7,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-08','mnuSeg7','Definicion de anulacion de comprobantes','80-02',8,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-09','mnuSeg8','Log de movimientos','80-02',9,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-10','mnuSeg9','Configuracion de usuarios (Pronto Ini)','80-02',10,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-02-11','mnuSeg10','Control facturacion electronica','80-02',11,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-01','mnuSeg0','Definicion de accesos','80-02',2,Null,'<a href="/' + @directorio + '/Acceso/Edit/-1">Definicion de accesos</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-02','mnuSeg1','Definicion de autorizaciones','80-02',3,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-03','mnuSeg2','Autorizacion de documentos','80-02',4,Null,'<a href="/' + @directorio + '/Autorizacion">Autorizacion de documentos</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-04','mnuSeg3','Control del circuito de firmas','80-02',5,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-05','mnuSeg4','Control de lotes transmitidos','80-02',6,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-06','mnuSeg5','Destinatarios de mensajes por eventos','80-02',7,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-07','mnuSeg6','Ver mensajes para usuario actual','80-02',8,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-08','mnuSeg7','Definicion de anulacion de comprobantes','80-02',9,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-09','mnuSeg8','Log de movimientos','80-02',10,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-10','mnuSeg9','Configuracion de usuarios (Pronto Ini)','80-02',11,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-11','mnuSeg10','Control facturacion electronica','80-02',12,Null,'',Null,'NO','Horizontal'  
 
 INSERT INTO #Auxiliar0 Select '80-03','mnuMaster5','Utilidades',Null,1,Null,Null,Null,'SI','Horizontal'  
-
 INSERT INTO #Auxiliar0 Select '80-03-01','MnuUti0','Importacion de comprobantes','80-03',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-03-01-01','MnuUtiImp0','Imp. de datos desde DataNet','80-03-01',1,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-03-01-02','MnuUtiImp1','Imp. de conjuntos ( Excel )','80-03-01',2,Null,'',Null,'NO','Horizontal'  
@@ -1272,8 +1292,5 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
 DROP TABLE #Auxiliar0
 DROP TABLE #Auxiliar1
 DROP TABLE #Auxiliar2
-go
 
-
-[Tree_TX_Generar]  
 
