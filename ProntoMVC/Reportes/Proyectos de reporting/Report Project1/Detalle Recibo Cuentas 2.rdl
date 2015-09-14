@@ -341,7 +341,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>0.99417cm</Height>
-        <Width>12.08708cm</Width>
+        <Width>12.08709cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -352,7 +352,7 @@
     <Height>0.40625in</Height>
     <Style />
   </Body>
-  <Width>4.75869in</Width>
+  <Width>4.7587in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -366,8 +366,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>0302557a-650b-4869-a7d7-c4365c72d8c8</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -427,6 +431,10 @@
     <ReportParameter Name="IdRecibo">
       <DataType>Integer</DataType>
       <Prompt>Id Recibo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
