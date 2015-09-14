@@ -68,7 +68,7 @@
                 </button>
                 <div class="span4">
                     <div class="input-append ">
-                        <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                        @*<input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />*@
                         @*<div class="btn-group append ">
                                 <button class="btn dropdown-toggle append" data-toggle="dropdown">
                                     <span class="caret"></span>
@@ -150,7 +150,7 @@
                 name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
                 search: true, searchoptions: {
                     clearSearch: true, searchOperators: true
-                    , sopt: ['eq', 'cn']
+                    , sopt: ['cn','eq']
                 }
             },
             {
@@ -160,7 +160,7 @@
                 , search: true, searchoptions: {
                     clearSearch: true,
                     searchOperators: true
-                    , sopt: ['eq', 'cn']
+                    , sopt: ['cn','eq']
                     //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
                 }
             },

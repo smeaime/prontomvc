@@ -29,7 +29,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "Recepcion")',
+            url: '@Url.Action("TT_DynamicGridData", "Recepcion")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -46,27 +46,27 @@
                         { name: 'NumeroRecepcionAlmacen', index: 'NumeroRecepcionAlmacen', align: 'right', width: 80, editable: false, hidden: false },
                         { name: 'NumeroRecepcion', index: 'NumeroRecepcion', align: 'right', width: 110, editable: false, hidden: false },
                         { name: 'FechaRecepcion', index: 'FechaRecepcion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'ProveedorCodigo', index: 'ProveedorCodigo', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'ProveedorNombre', index: 'ProveedorNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'ProveedorCuit', index: 'ProveedorCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Obras', index: 'Obras', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Requerimientos', index: 'Requerimientos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Solicitantes', index: 'Solicitantes', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Items', index: 'Items', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Transportista', index: 'Transportista', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Emitio', index: 'Emitio', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Confecciono', index: 'Confecciono', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ProveedorCodigo', index: 'ProveedorCodigo', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ProveedorNombre', index: 'ProveedorNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ProveedorCuit', index: 'ProveedorCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Obras', index: 'Obras', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Requerimientos', index: 'Requerimientos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Solicitantes', index: 'Solicitantes', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Items', index: 'Items', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Transportista', index: 'Transportista', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Emitio', index: 'Emitio', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Confecciono', index: 'Confecciono', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaUltimaModificacion', index: 'FechaUltimaModificacion', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Anulo', index: 'Anulo', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Anulo', index: 'Anulo', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Chofer', index: 'Chofer', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Patente', index: 'Patente', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'NumeroRemitoTransporte', index: 'NumeroRemitoTransporte', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Chofer', index: 'Chofer', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Patente', index: 'Patente', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'NumeroRemitoTransporte', index: 'NumeroRemitoTransporte', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false }
             ],
             onSelectRow: function (id) {
@@ -77,24 +77,56 @@
                     lastSelectedId = id;
                 }
             },
+
+
+
+
+
+
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 20000],
-            sortname: 'NumeroRecepcionAlmacen',
+            rowList: [10, 20, 50],
+            sortname: 'NumeroRecepcionAlmacen', // 'FechaRecibo,NumeroRecibo',
             sortorder: 'desc',
             viewrecords: true,
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            height: '100%',
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            footerrow: false,
+            footerrow: false, //true,
             userDataOnFooter: true,
             caption: '<b>RECEPCIONES</b>'
+
+
+    , gridview: true
+    , multiboxonly: true
+    , multipleSearch: true
+
+
+
+
+
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
