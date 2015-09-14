@@ -3,8 +3,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>95154e56-5461-4bcc-aeba-5de13b175a57</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -134,10 +138,16 @@
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="Obras">
-      <SharedDataSet>
-        <SharedDataSetReference>Obras_TL</SharedDataSetReference>
-      </SharedDataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>Select -1 as [IdObra], '_Todas' as [Titulo]
+Union all
+Select IdObra as [IdObra], NumeroObra+' - '+Descripcion as [Titulo]
+From Obras
+Where IsNull(Activa,'')&lt;&gt;'NO' and Jerarquia is not null
+Order By [Titulo]</CommandText>
+      </Query>
       <Fields>
         <Field Name="IdObra">
           <DataField>IdObra</DataField>
@@ -149,10 +159,16 @@
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="Articulos">
-      <SharedDataSet>
-        <SharedDataSetReference>Articulos_TL</SharedDataSetReference>
-      </SharedDataSet>
+    <DataSet Name="DataSet3">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>Select -1 as [IdArticulo], '_Todos' as [Titulo]
+Union all
+Select IdArticulo as [IdArticulo], Substring(Descripcion+IsNull(' - ['+Codigo COLLATE SQL_Latin1_General_CP1_CI_AS+']',''),1,300) as [Titulo]
+From Articulos
+Where Descripcion is not null
+Order By [Titulo]</CommandText>
+      </Query>
       <Fields>
         <Field Name="IdArticulo">
           <DataField>IdArticulo</DataField>
@@ -164,10 +180,21 @@
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="Ubicaciones">
-      <SharedDataSet>
-        <SharedDataSetReference>Ubicaciones_TL</SharedDataSetReference>
-      </SharedDataSet>
+    <DataSet Name="DataSet4">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>Select -1 as [IdUbicacion], '_Todas' as [Titulo]
+Union all
+Select IdUbicacion as [IdUbicacion],
+ IsNull(Depositos.Abreviatura,Depositos.Descripcion COLLATE SQL_Latin1_General_CP1_CI_AS)+
+	IsNull(', '+Ubicaciones.Descripcion COLLATE SQL_Latin1_General_CP1_CI_AS,'')+
+	IsNull(' - Est.:'+Ubicaciones.Estanteria COLLATE SQL_Latin1_General_CP1_CI_AS,'')+
+	IsNull(' - Mod.:'+Ubicaciones.Modulo COLLATE SQL_Latin1_General_CP1_CI_AS,'')+
+	IsNull(' - Gab.:'+Ubicaciones.Gabeta COLLATE SQL_Latin1_General_CP1_CI_AS,'') as [Titulo]
+From Ubicaciones
+Left Outer Join Depositos On Ubicaciones.IdDeposito = Depositos.IdDeposito
+Order By [Titulo]</CommandText>
+      </Query>
       <Fields>
         <Field Name="IdUbicacion">
           <DataField>IdUbicacion</DataField>
@@ -3744,7 +3771,7 @@
             <DataSetName>DataSet1</DataSetName>
             <Top>0.47167in</Top>
             <Height>1.87152in</Height>
-            <Width>15.35753in</Width>
+            <Width>15.35755in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -3766,9 +3793,14 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
-      <Prompt>Fecha a la que se calcula stock :</Prompt>
+      <Prompt>Hasta</Prompt>
     </ReportParameter>
     <ReportParameter Name="IdArticulo">
       <DataType>Integer</DataType>
@@ -3780,7 +3812,7 @@
       <Prompt>Articulo</Prompt>
       <ValidValues>
         <DataSetReference>
-          <DataSetName>Articulos</DataSetName>
+          <DataSetName>DataSet3</DataSetName>
           <ValueField>IdArticulo</ValueField>
           <LabelField>Titulo</LabelField>
         </DataSetReference>
@@ -3796,7 +3828,7 @@
       <Prompt>Obra</Prompt>
       <ValidValues>
         <DataSetReference>
-          <DataSetName>Obras</DataSetName>
+          <DataSetName>DataSet2</DataSetName>
           <ValueField>IdObra</ValueField>
           <LabelField>Titulo</LabelField>
         </DataSetReference>
@@ -3812,7 +3844,7 @@
       <Prompt>Ubicacion</Prompt>
       <ValidValues>
         <DataSetReference>
-          <DataSetName>Ubicaciones</DataSetName>
+          <DataSetName>DataSet4</DataSetName>
           <ValueField>IdUbicacion</ValueField>
           <LabelField>Titulo</LabelField>
         </DataSetReference>
@@ -3822,16 +3854,17 @@
       <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
-          <Value>0</Value>
+          <Value>-1</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Numero de caja (0=Todas)</Prompt>
+      <Prompt>Numero Caja</Prompt>
+      <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="Formato">
       <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
-          <Value>1</Value>
+          <Value>=1</Value>
         </Values>
       </DefaultValue>
       <Prompt>Formato</Prompt>

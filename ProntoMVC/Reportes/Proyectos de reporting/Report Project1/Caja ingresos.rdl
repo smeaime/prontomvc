@@ -966,6 +966,9 @@
                     <Subreport Name="Subreport10">
                       <ReportName>Detalle Recibo Impuestos 2</ReportName>
                       <Parameters>
+                        <Parameter Name="CadenaConexion">
+                          <Value>=Parameters!CadenaConexion.Value</Value>
+                        </Parameter>
                         <Parameter Name="IdRecibo">
                           <Value>=Fields!IdRecibo.Value</Value>
                         </Parameter>
@@ -976,6 +979,7 @@
                         </Border>
                       </Style>
                     </Subreport>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -985,6 +989,9 @@
                       <Parameters>
                         <Parameter Name="IdRecibo">
                           <Value>=Fields!IdRecibo.Value</Value>
+                        </Parameter>
+                        <Parameter Name="CadenaConexion">
+                          <Value>=Parameters!CadenaConexion.Value</Value>
                         </Parameter>
                       </Parameters>
                       <Style>
@@ -1003,6 +1010,9 @@
                         <Parameter Name="IdRecibo">
                           <Value>=Fields!IdRecibo.Value</Value>
                         </Parameter>
+                        <Parameter Name="CadenaConexion">
+                          <Value>=Parameters!CadenaConexion.Value</Value>
+                        </Parameter>
                       </Parameters>
                       <Style>
                         <Border>
@@ -1019,6 +1029,9 @@
                       <Parameters>
                         <Parameter Name="IdRecibo">
                           <Value>=Fields!IdRecibo.Value</Value>
+                        </Parameter>
+                        <Parameter Name="CadenaConexion">
+                          <Value>=Parameters!CadenaConexion.Value</Value>
                         </Parameter>
                       </Parameters>
                       <Style>
@@ -1074,7 +1087,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.50056in</Top>
         <Height>0.555in</Height>
-        <Width>21.41522in</Width>
+        <Width>21.41521in</Width>
         <ZIndex>1</ZIndex>
         <Style />
       </Tablix>
@@ -1126,8 +1139,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>a1f85aae-db0e-48b8-b03e-ded2aa80aaf1</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1251,8 +1268,18 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="Desde">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(year(now),month(now),1)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="Hasta">

@@ -27,8 +27,16 @@
       <FullPath>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Analisis de cobranzas.rdl</Name>
+      <FullPath>Analisis de cobranzas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Balance2.rdl</Name>
       <FullPath>Balance2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Caja ingresos.rdl</Name>
+      <FullPath>Caja ingresos.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Cardex.rdl</Name>
@@ -67,8 +75,16 @@
       <FullPath>Comprobante Proveedores.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Creditos Vencidos a Fecha.rdl</Name>
+      <FullPath>Creditos Vencidos a Fecha.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Desarrollo y seguimiento por item de ordenes de compra.rdl</Name>
       <FullPath>Desarrollo y seguimiento por item de ordenes de compra.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Desarrollo y seguimiento por item de requerimiento.rdl</Name>
+      <FullPath>Desarrollo y seguimiento por item de requerimiento.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Detalle Comprobante Proveedores.rdl</Name>
@@ -91,6 +107,10 @@
       <FullPath>Detalle Nota Debito.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Detalle Orden Pago Cuentas 2.rdl</Name>
+      <FullPath>Detalle Orden Pago Cuentas 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Detalle Orden Pago Cuentas.rdl</Name>
       <FullPath>Detalle Orden Pago Cuentas.rdl</FullPath>
     </ProjectItem>
@@ -99,8 +119,16 @@
       <FullPath>Detalle Orden Pago Impuestos.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Detalle Orden Pago Imputaciones 2.rdl</Name>
+      <FullPath>Detalle Orden Pago Imputaciones 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Detalle Orden Pago Imputaciones.rdl</Name>
       <FullPath>Detalle Orden Pago Imputaciones.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Valores 2.rdl</Name>
+      <FullPath>Detalle Orden Pago Valores 2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Detalle Orden Pago Valores.rdl</Name>
@@ -143,6 +171,14 @@
       <FullPath>Detalle Remito.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Deuda Vencida a Fecha.rdl</Name>
+      <FullPath>Deuda Vencida a Fecha.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Estadistica de ventas por rubro - Articulo.rdl</Name>
+      <FullPath>Estadistica de ventas por rubro - Articulo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Factura Venta.rdl</Name>
       <FullPath>Factura Venta.rdl</FullPath>
     </ProjectItem>
@@ -155,8 +191,28 @@
       <FullPath>Generacion SICORE.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Informe de materiales recibidos.rdl</Name>
+      <FullPath>Informe de materiales recibidos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>IVA Ventas.rdl</Name>
       <FullPath>IVA Ventas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado de comprobantes de venta ingresados.rdl</Name>
+      <FullPath>Listado de comprobantes de venta ingresados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado de ordenes de compra.rdl</Name>
+      <FullPath>Listado de ordenes de compra.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado de ordenes de pago.rdl</Name>
+      <FullPath>Listado de ordenes de pago.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado de pedidos.rdl</Name>
+      <FullPath>Listado de pedidos.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
@@ -191,6 +247,10 @@
       <FullPath>Nota Debito.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Notas de pedidos con items dados por cumplido.rdl</Name>
+      <FullPath>Notas de pedidos con items dados por cumplido.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Orden Pago.rdl</Name>
       <FullPath>Orden Pago.rdl</FullPath>
     </ProjectItem>
@@ -199,12 +259,36 @@
       <FullPath>Pedidos pendientes de recibir.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Proveedores - Listado de comprobantes detallado.rdl</Name>
+      <FullPath>Proveedores - Listado de comprobantes detallado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Proveedores - Resumen de compras.rdl</Name>
+      <FullPath>Proveedores - Resumen de compras.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ranking de ventas por cliente.rdl</Name>
+      <FullPath>Ranking de ventas por cliente.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ranking proveedores.rdl</Name>
+      <FullPath>Ranking proveedores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Recepcion.rdl</Name>
       <FullPath>Recepcion.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Recibo.rdl</Name>
       <FullPath>Recibo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Remitos de venta pendientes de facturar.rdl</Name>
+      <FullPath>Remitos de venta pendientes de facturar.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Reporte de seguimiento por IP.rdl</Name>
+      <FullPath>Reporte de seguimiento por IP.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Requerimientos pendientes de asignacion.rdl</Name>
@@ -239,6 +323,14 @@
       <FullPath>Salidas de materiales.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Seguimiento Compras.rdl</Name>
+      <FullPath>Seguimiento Compras.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Stock a fecha.rdl</Name>
+      <FullPath>Stock a fecha.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Subdiario.rdl</Name>
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
@@ -251,8 +343,32 @@
       <FullPath>Vales emitidos no retirados.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Estadistica de ventas por rubro - Articulo.rdl</Name>
-      <FullPath>Estadistica de ventas por rubro - Articulo.rdl</FullPath>
+      <Name>Diario.rdl</Name>
+      <FullPath>Diario.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>IVA Compras.rdl</Name>
+      <FullPath>IVA Compras.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ordenes de compra pendientes de facturar.rdl</Name>
+      <FullPath>Ordenes de compra pendientes de facturar.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cheques anulados.rdl</Name>
+      <FullPath>Cheques anulados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Saldos a fecha.rdl</Name>
+      <FullPath>Saldos a fecha.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Valores a depositar.rdl</Name>
+      <FullPath>Valores a depositar.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Valores diferidos pendientes.rdl</Name>
+      <FullPath>Valores diferidos pendientes.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

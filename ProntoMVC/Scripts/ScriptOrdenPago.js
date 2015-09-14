@@ -281,15 +281,6 @@ $(function () {
         afterSaveCell: function (rowid) {
             calculaTotalImputaciones();
         },
-
-
-
-
-
-
-
-
-
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
@@ -1284,11 +1275,8 @@ $(function () {
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
-    
-        
         
     pager: $('#ListaDragPager'),
-
 
     rowNum: 15,
     rowList: [10, 20, 50, 100],
@@ -1296,7 +1284,6 @@ $(function () {
     sortorder: "asc",
     viewrecords: true,
     emptyrecords: 'No hay registros para mostrar', //,
-
 
     ///////////////////////////////
     width: 'auto', // 'auto',
@@ -1308,7 +1295,6 @@ $(function () {
     altRows: false,
     footerrow: false, //true,
     userDataOnFooter: true
-            
 
         , gridview: true
         , multiboxonly: true
@@ -1333,8 +1319,6 @@ jQuery("#ListaDrag").filterToolbar({
 }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
         
     
-
-
 
     $("#ListaDrag2").jqGrid({
         url: ROOT + 'Valor/ValoresEnCartera',
@@ -1365,13 +1349,7 @@ jQuery("#ListaDrag").filterToolbar({
             $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
 
-
-
-
-        
-
         pager: $('#ListaDragPager2'),
-
 
         rowNum: 15,
         rowList: [10, 20, 50, 100],
@@ -1379,7 +1357,6 @@ jQuery("#ListaDrag").filterToolbar({
         sortorder: 'desc',
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
-
 
         ///////////////////////////////
         width: 'auto', // 'auto',
