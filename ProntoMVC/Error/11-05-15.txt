@@ -1,0 +1,30 @@
+
+Log Entry : 
+05/11/2015 12:49:54
+Error in: http://localhost:40053/Pronto500/Recepcion/RecepcionesPendientesDeSalidaMateriales. Error Message:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+__________________________
+
+Log Entry : 
+05/11/2015 12:49:54
+Error in: http://localhost:40053/Pronto500/Recepcion/RecepcionesPendientesDeSalidaMateriales. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/11/2015 12:49:58
+Error in: http://localhost:40053/Pronto500/Recepcion/RecepcionesPendientesDeSalidaMateriales. Error Message:Mandado
+__________________________
+
+Log Entry : 
+05/11/2015 13:23:52
+Error in: http://localhost:40053/Pronto500/SalidaMateriales/DetSalidaMateriales/. Error Message:Object reference not set to an instance of an object.
+__________________________
+
+Log Entry : 
+05/11/2015 13:23:53
+Error in: http://localhost:40053/Pronto500/SalidaMateriales/DetSalidaMateriales/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/11/2015 13:23:59
+Error in: http://localhost:40053/Pronto500/SalidaMateriales/DetSalidaMateriales/. Error Message:Mandado
+__________________________

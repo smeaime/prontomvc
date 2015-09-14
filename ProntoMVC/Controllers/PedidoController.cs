@@ -797,7 +797,7 @@ namespace ProntoMVC.Controllers
                     db.Tree_TX_Actualizar("PedidosAgrupados", Pedido.IdPedido, "Pedido");
 
 
-                    
+
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
 
@@ -1689,7 +1689,7 @@ namespace ProntoMVC.Controllers
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Pedido>
                                 ("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-                               //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
+            //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1769,7 +1769,7 @@ namespace ProntoMVC.Controllers
 
 
                         ).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -2095,7 +2095,7 @@ namespace ProntoMVC.Controllers
                             Contacto = a.Contacto,
                             Observaciones = a.Observaciones
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -2185,7 +2185,7 @@ namespace ProntoMVC.Controllers
                             ControlCalidadDesc = (a.ControlesCalidad == null) ? "" : a.ControlesCalidad.Descripcion
 
                         }).OrderBy(p => p.NumeroItem)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -2238,59 +2238,130 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult PedidosPendientes(string sidx, string sord, int? page, int? rows)
+
+
+
+
+
+        private class DetallePedido2
+        {
+
+            public DateTime? FechaAsignacionCosto { get; set; }
+            public DateTime? FechaDadoPorCumplido { get; set; }
+            public DateTime? FechaEntrega { get; set; }
+            public DateTime? FechaModificacionCosto { get; set; }
+            public DateTime? FechaNecesidad { get; set; }
+            public int? IdArticulo { get; set; }
+            public int? IdAsignacionCosto { get; set; }
+            public int? IdAutorizoCumplido { get; set; }
+            public int? IdCentroCosto { get; set; }
+            public int? IdControlCalidad { get; set; }
+            public int? IdCuenta { get; set; }
+            public int? IdProveedor { get; set; }
+            public int? IdObra { get; set; }
+            public int? IdDetalleAcopios { get; set; }
+            public int? IdDetalleComparativa { get; set; }
+            public int? IdDetalleLMateriales { get; set; }
+            public int IdDetallePedido { get; set; }
+            public int? IdDetallePedidoOriginal { get; set; }
+            public int? IdDetalleRequerimiento { get; set; }
+            public int? IdDetalleRequerimientoOriginal { get; set; }
+            public int? IdDioPorCumplido { get; set; }
+            public int? IdOrigenTransmision { get; set; }
+            public int? IdPedido { get; set; }
+            public int? IdPedidoOriginal { get; set; }
+            public int? IdUnidad { get; set; }
+            public int? IdUsuarioAsignoCosto { get; set; }
+            public int? IdUsuarioModificoCosto { get; set; }
+            public decimal? PorcentajeBonificacion { get; set; }
+            public decimal? PorcentajeIVA { get; set; }
+            public decimal? Precio { get; set; }
+
+                public int? NumeroPedido { get; set; }
+            public int? SubNumero { get; set; }
+            public int? ItemPE { get; set; }
+            public DateTime? FechaPedido { get; set; }
+            public string Proveedor { get; set; }
+            public string Obra { get; set; }
+            public string Comprador { get; set; }
+            public string SolicitoRM { get; set; }
+            public string ArticuloCodigo { get; set; }
+            public string ArticuloDescripcion { get; set; }
+            public string ObservacionesRM { get; set; }
+            public string ObservacionesPE { get; set; }
+            public decimal? Cantidad { get; set; }
+            public string Unidad { get; set; }
+            public int? NumeroRequerimiento { get; set; }
+            public int? ItemRM { get; set; }
+            public string Cumplido { get; set; }
+            public string TipoCompra { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
+            public string ControlCalidad { get; set; }
+                          
+        }
+
+
+        public virtual ActionResult PedidosPendientes_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             var DetEntidad = db.DetallePedidos.Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && p.Pedido.Aprobo != null).AsQueryable();
 
-            int pageSize = rows ?? 20;
+            int pageSize = rows; 
             int totalRecords = DetEntidad.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            int currentPage = page ?? 1;
+            int currentPage = page;
 
             var data = (from a in DetEntidad
                         from b in db.Empleados.Where(y => y.IdEmpleado == a.Pedido.IdComprador).DefaultIfEmpty()
                         from c in db.Empleados.Where(y => y.IdEmpleado == a.DetalleRequerimiento.Requerimientos.IdSolicito).DefaultIfEmpty()
                         from d in db.TiposCompras.Where(y => y.IdTipoCompra == a.DetalleRequerimiento.Requerimientos.IdTipoCompra).DefaultIfEmpty()
                         from f in db.ControlesCalidads.Where(o => o.IdControlCalidad == a.DetalleRequerimiento.IdControlCalidad).DefaultIfEmpty()
-                        select new
+                        select new DetallePedido2
                         {
-                            a.IdDetallePedido,
-                            a.IdPedido,
-                            a.Pedido.IdProveedor,
-                            a.DetalleRequerimiento.Requerimientos.IdObra,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.Pedido.NumeroPedido,
-                            a.Pedido.SubNumero,
+                            IdDetallePedido = a.IdDetallePedido,
+                            IdPedido = a.IdPedido,
+                            IdProveedor = a.Pedido.IdProveedor,
+                            IdObra = a.DetalleRequerimiento.Requerimientos.IdObra,
+                            IdArticulo = a.IdArticulo,
+                            IdUnidad = a.IdUnidad,
+                            NumeroPedido = a.Pedido.NumeroPedido,
+                            SubNumero = a.Pedido.SubNumero,
                             ItemPE = a.NumeroItem,
-                            a.Pedido.FechaPedido,
+                            FechaPedido = a.Pedido.FechaPedido,
                             Proveedor = a.Pedido.Proveedor.RazonSocial,
                             Obra = a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
                             Comprador = b != null ? b.Nombre : "",
                             SolicitoRM = c != null ? c.Nombre : "",
-                            a.FechaEntrega,
+                            FechaEntrega = a.FechaEntrega,
                             ArticuloCodigo = a.Articulo.Codigo,
                             ArticuloDescripcion = a.Articulo.Descripcion,
                             ObservacionesRM = a.DetalleRequerimiento.Observaciones,
                             ObservacionesPE = a.Observaciones,
-                            a.Cantidad,
+                            Cantidad = a.Cantidad,
                             Unidad = a.Unidad.Abreviatura,
-                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
                             ItemRM = a.DetalleRequerimiento.NumeroItem,
-                            a.Cumplido,
+                            Cumplido = a.Cumplido,
                             TipoCompra = d != null ? d.Descripcion : "",
-                            a.Pedido.CircuitoFirmasCompleto,
+                            CircuitoFirmasCompleto = a.Pedido.CircuitoFirmasCompleto,
                             ControlCalidad = f != null ? f.Descripcion : ""
                         }).OrderBy(p => p.NumeroPedido).OrderBy(p => p.ItemPE)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+;
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<DetallePedido2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+
+
+
+
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdDetallePedido.ToString(),

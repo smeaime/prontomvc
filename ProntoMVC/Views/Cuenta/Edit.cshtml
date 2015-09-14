@@ -311,7 +311,7 @@
 
                         <div class="span8 lightblue">
 
-                            <hr />
+                            @*<hr />*@
                             @Html.LabelFor(model => model.Descripcion, "Agrupación auxiliar")
                             <br />
                             @*@Html.RadioButtonFor(model => model.Activo, "SI") SI
@@ -324,10 +324,13 @@
                                 @Html.LabelFor(model => model.Descripcion, "Obra/ CC")
                                 @Html.DropDownList("IdTipoCuentaGrupo", null, String.Empty, new { @class = "span12" })
                             </div>
-                            <hr />
-                        </div>
-                    </div>
 
+                        </div>
+
+                    </div>
+                    @*<div class="row-fluid">
+                        <hr />
+                    </div>*@
                     <div class="row-fluid">
 
 
@@ -335,7 +338,7 @@
                         @Html.RadioButtonFor(model => model.ImputarAPresupuestoDeObra, "SI") SI
                         @Html.RadioButtonFor(model => model.ImputarAPresupuestoDeObra, "NO") NO
                     </div>
-
+                    <br />
 
 
                     <div class="row-fluid">
@@ -379,12 +382,6 @@
 
                     <div class="row-fluid">
                         <div class="span4 lightblue">
-                            @*@Html.LabelFor(model => model..Activo, "Activo")
-                                @Html.RadioButtonFor(model => model.Activo, "SI") ACTIVAR
-                                @Html.RadioButtonFor(model => model.Activo, "NO") DESACTIVAR*@
-                        </div>
-
-                        <div class="span4 lightblue">
                             @Html.LabelFor(model => model.IdRubroFinanciero, "Rubro financiero")
                             @Html.DropDownList("IdRubroFinanciero", null, String.Empty, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.IdRubroFinanciero)
@@ -420,12 +417,13 @@
 
                         <div class="span8 lightblue">
                             @Html.LabelFor(model => model.Jerarquia, "Jerarquía")
+                            <br />
                             @*@Html.TextBoxFor(model => model.Jerarquia, new { @class = "span12" })*@
-                            @Html.TextBox("Jerarquia1", "", new { @class = "span1" })
-                            @Html.TextBox("Jerarquia2", "", new { @class = "span1" })
-                            @Html.TextBox("Jerarquia3", "", new { @class = "span1" })
-                            @Html.TextBox("Jerarquia4", "", new { @class = "span1" })
-                            @Html.TextBox("Jerarquia5", "", new { @class = "span1" })
+                            @Html.TextBox("Jerarquia1", (string)ViewBag.Jerarquia1, new { @class = "span1" })
+                            @Html.TextBox("Jerarquia2", (string)ViewBag.Jerarquia2, new { @class = "span1" })
+                            @Html.TextBox("Jerarquia3", (string)ViewBag.Jerarquia3, new { @class = "span1" })
+                            @Html.TextBox("Jerarquia4", (string)ViewBag.Jerarquia4, new { @class = "span1" })
+                            @Html.TextBox("Jerarquia5", (string)ViewBag.Jerarquia5, new { @class = "span1" })
                             @Html.ValidationMessageFor(model => model.Jerarquia)
                         </div>
                     </div>
@@ -741,6 +739,9 @@
 
 
             // ShowProgressAnimation();
+
+            cabecera.Jerarquia = $("#Jerarquia1").val() + "." + $("#Jerarquia2").val() + "." + $("#Jerarquia3").val() + "." + $("#Jerarquia4").val() + "." + $("#Jerarquia5").val();
+
 
             $.ajax({
                 type: 'POST',

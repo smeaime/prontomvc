@@ -327,7 +327,7 @@ namespace ProntoMVC.Controllers
 
             var data = from a in Req  // .Where(campo)
                            .OrderBy(sidx + " " + sord)
-                           
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
@@ -911,11 +911,104 @@ namespace ProntoMVC.Controllers
             }
         }
 
-        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+
+        private class Recepcione2
         {
+
+            public string Acargo { get; set; }
+            public string ActualizarCostoImportacionDesdePedido { get; set; }
+            public string Anulada { get; set; }
+            public string ArchivoAdjunto1 { get; set; }
+            public decimal? CantidadEnOrigen { get; set; }
+            public string Chofer { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
+            public string CodigoTarifador { get; set; }
+            public virtual ICollection<DetalleRecepcione> DetalleRecepciones { get; set; }
+            public decimal? DistanciaRecorrida { get; set; }
+            public byte? EnviarEmail { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public DateTime? FechaImportacionTransmision { get; set; }
+            public DateTime? FechaIngreso { get; set; }
+            public DateTime? FechaLiberacion { get; set; }
+            public DateTime? FechaPesada { get; set; }
+            public DateTime? FechaRecepcion { get; set; }
+            public DateTime? FechaRegistracion { get; set; }
+            public DateTime? FechaUltimaModificacion { get; set; }
+            public int? IdAcopio { get; set; }
+            public int? IdChofer { get; set; }
+            public int? IdComprador { get; set; }
+            public int? IdDepositoOrigen { get; set; }
+            public int? IdEquipo { get; set; }
+            public int? IdFlete { get; set; }
+            public int? IdObra { get; set; }
+            public int? IdOrigenTransmision { get; set; }
+            public int? IdPedido { get; set; }
+            public int? IdPesada { get; set; }
+            public int? IdProveedor { get; set; }
+            public int IdRecepcion { get; set; }
+            public int? IdRecepcionOriginal { get; set; }
+            public int? IdRecepcionSAT { get; set; }
+            public int? IdRequerimiento { get; set; }
+            public int? IdTarifaFlete { get; set; }
+            public int? IdTransportista { get; set; }
+            public int? IdUsuarioAnulo { get; set; }
+            public int? IdUsuarioIngreso { get; set; }
+            public int? IdUsuarioModifico { get; set; }
+            public decimal? ImporteIVA { get; set; }
+            public decimal? ImpuestosInternos { get; set; }
+            public int? Libero { get; set; }
+            public string MotivoAnulacion { get; set; }
+            public string NumeroDocumentoChofer { get; set; }
+            public int? NumeroOrdenCarga { get; set; }
+            public int? NumeroPesada { get; set; }
+            public int? NumeroRecepcion1 { get; set; }
+            public int? NumeroRecepcion2 { get; set; }
+            public int? NumeroRecepcionAlmacen { get; set; }
+            public int? NumeroRecepcionOrigen1 { get; set; }
+            public int? NumeroRecepcionOrigen2 { get; set; }
+            public int? NumeroRemitoTransporte1 { get; set; }
+            public int? NumeroRemitoTransporte2 { get; set; }
+            public string Observaciones { get; set; }
+            public string ObservacionesPesada { get; set; }
+            public string Patente { get; set; }
+            public decimal? PercepcionIIBB { get; set; }
+            public decimal? PercepcionIVA { get; set; }
+            public decimal? PesoBruto { get; set; }
+            public decimal? PesoNeto { get; set; }
+            public DateTime? PRESTOFechaProceso { get; set; }
+            public string ProcesadoPorCPManualmente { get; set; }
+            public decimal? Progresiva1 { get; set; }
+            public decimal? Progresiva2 { get; set; }
+            public int? Realizo { get; set; }
+            public string SubNumero { get; set; }
+            public decimal? Tara { get; set; }
+            public decimal? TarifaFlete { get; set; }
+            public int? TipoRecepcion { get; set; }
+
+
+
+            public string ProveedorCodigo { get; set; }
+            public string ProveedorNombre { get; set; }
+            public string ProveedorCuit { get; set; }
+            public string Obra { get; set; }
+            public string Requerimientos { get; set; }
+            public string Solicitantes { get; set; }
+            public string Pedidos { get; set; }
+            public int? CantidadItems { get; set; }
+            public string Transportista { get; set; }
+            public string Emitio { get; set; }
+            public string Confecciono { get; set; }
+            public string Modifico { get; set; }
+            public string Anulo { get; set; }
+
+        }
+
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+
             string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int pageSize = rows;
+            int currentPage = page;
 
             var data = (from a in db.Recepciones.Include(x => x.DetalleRecepciones)
                         from b in db.Proveedores.Where(v => v.IdProveedor == a.IdProveedor).DefaultIfEmpty()
@@ -925,18 +1018,18 @@ namespace ProntoMVC.Controllers
                         from f in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
                         from g in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
                         from h in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioAnulo).DefaultIfEmpty()
-                        select new
+                        select new Recepcione2
                         {
-                            a.IdRecepcion,
-                            a.DetalleRecepciones,
-                            a.IdProveedor,
-                            a.IdObra,
-                            a.IdTransportista,
-                            a.NumeroRecepcionAlmacen,
-                            a.NumeroRecepcion1,
-                            a.NumeroRecepcion2,
-                            a.FechaRecepcion,
-                            a.Anulada,
+                            IdRecepcion = a.IdRecepcion,
+                            DetalleRecepciones = a.DetalleRecepciones,
+                            IdProveedor = a.IdProveedor,
+                            IdObra = a.IdObra,
+                            IdTransportista = a.IdTransportista,
+                            NumeroRecepcionAlmacen = a.NumeroRecepcionAlmacen,
+                            NumeroRecepcion1 = a.NumeroRecepcion1,
+                            NumeroRecepcion2 = a.NumeroRecepcion2,
+                            FechaRecepcion = a.FechaRecepcion,
+                            Anulada = a.Anulada,
                             ProveedorCodigo = b.CodigoEmpresa != null ? b.CodigoEmpresa : "",
                             ProveedorNombre = b.RazonSocial != null ? b.RazonSocial : "",
                             ProveedorCuit = b.Cuit != null ? b.Cuit : "",
@@ -948,17 +1041,17 @@ namespace ProntoMVC.Controllers
                             Transportista = d != null ? d.RazonSocial : "",
                             Emitio = e != null ? e.Nombre : "",
                             Confecciono = f != null ? f.Nombre : "",
-                            a.FechaIngreso,
+                            FechaIngreso = a.FechaIngreso,
                             Modifico = g != null ? g.Nombre : "",
-                            a.FechaUltimaModificacion,
+                            FechaUltimaModificacion = a.FechaUltimaModificacion,
                             Anulo = h != null ? h.Nombre : "",
-                            a.FechaAnulacion,
-                            a.MotivoAnulacion,
-                            a.Chofer,
-                            a.Patente,
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion,
+                            Chofer = a.Chofer,
+                            Patente = a.Patente,
                             NumeroRemitoTransporte1 = a.NumeroRemitoTransporte1 != null ? a.NumeroRemitoTransporte1 : 0,
                             NumeroRemitoTransporte2 = a.NumeroRemitoTransporte2 != null ? a.NumeroRemitoTransporte2 : 0,
-                            a.Observaciones
+                            Observaciones = a.Observaciones
                         }).AsQueryable();
 
             if (FechaInicial != string.Empty)
@@ -971,18 +1064,20 @@ namespace ProntoMVC.Controllers
             int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data1 = (from a in data select a)
-                        .OrderByDescending(x => x.NumeroRecepcionAlmacen)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Recepcione2>
+                   (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+
+
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data1
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdRecepcion.ToString(),
@@ -1084,7 +1179,7 @@ namespace ProntoMVC.Controllers
                             ControlCalidad = f != null ? f.Descripcion : "",
                             a.Observaciones
                         }).OrderBy(x => x.IdDetalleRecepcion)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -1207,7 +1302,7 @@ namespace ProntoMVC.Controllers
                             ControlCalidad = f != null ? f.Descripcion : "",
                             a.Observaciones
                         }).OrderByDescending(x => x.NumeroRecepcionAlmacen)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()

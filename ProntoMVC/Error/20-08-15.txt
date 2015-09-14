@@ -1,0 +1,356 @@
+
+Log Entry : 
+08/20/2015 11:23:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1953
+mscorlib
+__________________________
+
+Log Entry : 
+08/20/2015 11:23:47
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/EditarConexion. Error Message:A circular reference was detected while serializing an object of type 'System.Globalization.CultureInfo'.
+__________________________
+
+Log Entry : 
+08/20/2015 11:23:48
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/EditarConexion. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 11:23:51
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/EditarConexion. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 11:24:07
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1953
+mscorlib
+__________________________
+
+Log Entry : 
+08/20/2015 11:24:51
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 415
+EntityFramework
+__________________________
+
+Log Entry : 
+08/20/2015 11:25:22
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+08/20/2015 11:25:22
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 11:25:26
+Error in: http://localhost:40053/Pronto500/Account/Usuarios. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 11:28:43
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+08/20/2015 11:28:43
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 11:28:46
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaCombo/. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 11:28:48
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1953
+mscorlib
+__________________________
+
+Log Entry : 
+08/20/2015 13:58:33
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:El nombre de red especificado ya no está disponible
+__________________________
+
+Log Entry : 
+08/20/2015 13:58:34
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 13:58:44
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 14:00:25
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:Tiempo de espera de la operación de espera agotado
+__________________________
+
+Log Entry : 
+08/20/2015 14:00:26
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 14:00:29
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 14:53:35
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroContable'.
+__________________________
+
+Log Entry : 
+08/20/2015 14:53:35
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 14:53:38
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 14:57:32
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroContable'.
+__________________________
+
+Log Entry : 
+08/20/2015 14:57:32
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 14:57:36
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 15:06:07
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroContable'.
+__________________________
+
+Log Entry : 
+08/20/2015 15:06:07
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 15:06:10
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 15:07:20
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroContable'.
+__________________________
+
+Log Entry : 
+08/20/2015 15:07:20
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 15:07:23
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 15:07:50
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroContable'.
+__________________________
+
+Log Entry : 
+08/20/2015 15:07:50
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 15:07:54
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 15:08:46
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroContable'.
+__________________________
+
+Log Entry : 
+08/20/2015 15:08:46
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 15:08:49
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 15:09:17
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroContable'.
+__________________________
+
+Log Entry : 
+08/20/2015 15:09:17
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 15:09:20
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 15:41:31
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdRubroFinanciero'.
+__________________________
+
+Log Entry : 
+08/20/2015 15:41:31
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 15:41:36
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/4. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 17:11:51
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/20/2015 17:12:07
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:There is no ViewData item of type 'IEnumerable<SelectListItem>' that has the key 'IdCuentaConsolidacion2'.
+__________________________
+
+Log Entry : 
+08/20/2015 17:12:07
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 17:12:11
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 17:12:59
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/20/2015 17:14:04
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/20/2015 17:33:14
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit/1. Error Message:Me faltan parametros. RubrosContables_TX_ParaComboFinancierosTodos esperaba 1 y se le pasaron 0
+__________________________
+
+Log Entry : 
+08/20/2015 17:51:22
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:The controller for path '/Pronto500/Presupuestos_DynamicGridData/Presupuestos' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/20/2015 17:51:22
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 17:51:25
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 17:57:44
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:The controller for path '/Pronto500/Presupuestos_DynamicGridData/Presupuestos' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/20/2015 17:57:44
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 17:57:47
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 17:58:19
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:The controller for path '/Pronto500/Presupuestos_DynamicGridData/Presupuestos' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/20/2015 17:58:19
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 17:58:23
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 17:58:49
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:The controller for path '/Pronto500/Presupuestos_DynamicGridData/Presupuestos' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/20/2015 17:58:49
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 17:58:53
+Error in: http://localhost:40053/Pronto500/Presupuestos_DynamicGridData/Presupuestos. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/20/2015 17:59:48
+Error in: http://localhost:40053/Pronto500/Presupuestos/Presupuestos_DynamicGridData. Error Message:The controller for path '/Pronto500/Presupuestos/Presupuestos_DynamicGridData' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+08/20/2015 17:59:48
+Error in: http://localhost:40053/Pronto500/Presupuestos/Presupuestos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/20/2015 17:59:52
+Error in: http://localhost:40053/Pronto500/Presupuestos/Presupuestos_DynamicGridData. Error Message:Mandado
+__________________________

@@ -1,0 +1,240 @@
+
+Log Entry : 
+06/19/2015 08:34:49
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:El nombre de columna 'FechaEntrega' no es válido.
+__________________________
+
+Log Entry : 
+06/19/2015 08:34:49
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:34:54
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:15
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:29
+Error in: http://localhost:40053/Pronto500/MvcMembership/Home/Superbuscador?term=. Error Message:The controller for path '/Pronto500/MvcMembership/Home/Superbuscador' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:29
+Error in: http://localhost:40053/Pronto500/MvcMembership/Home/Superbuscador?term=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:32
+Error in: http://localhost:40053/Pronto500/MvcMembership/Home/Superbuscador?term=. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:39
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:El nombre de columna 'FechaEntrega' no es válido.
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:39
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:42
+Error in: http://localhost:40053/Pronto500/Remito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:50
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Guid' for method 'System.Web.Mvc.ViewResult Details(System.Guid)' in 'ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:51
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:35:54
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473=) =. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:36:19
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+06/19/2015 08:37:35
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/UsersEmpresas/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+06/19/2015 08:37:55
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/UsersEmpresas/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ProntoMVC.Controllers.ProntoBaseController.BasesPorUsuarioColeccion2(Guid id, Guid idAdmin) in c:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\Controllers\ProntoBaseController.cs:line 1917
+mscorlib
+__________________________
+
+Log Entry : 
+06/19/2015 08:39:55
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/19/2015 08:39:55
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:39:58
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:40:35
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/19/2015 08:40:35
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:40:38
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:42:37
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+06/19/2015 08:42:37
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:42:40
+Error in: http://localhost:40053/Pronto500/Articulo/Articulos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:49:10
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+06/19/2015 08:49:10
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:49:14
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:49:23
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+06/19/2015 08:49:23
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:49:26
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 08:50:48
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+06/19/2015 08:50:48
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 08:50:51
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 09:04:04
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+06/19/2015 09:04:04
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 09:04:08
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 09:15:46
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+06/19/2015 09:15:46
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 09:15:50
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+06/19/2015 09:18:28
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:The argument 'predicate' cannot be null, empty or contain only white space.
+__________________________
+
+Log Entry : 
+06/19/2015 09:18:28
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+06/19/2015 09:18:31
+Error in: http://localhost:40053/Pronto500/OrdenCompra/TT_DynamicGridData. Error Message:Mandado
+__________________________
