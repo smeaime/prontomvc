@@ -3279,7 +3279,7 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>5.1875in</Height>
+    <Height>2.23958in</Height>
     <Style />
   </Body>
   <Width>23.75314in</Width>
@@ -3296,8 +3296,12 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>b7cbe863-11f0-4012-ab94-ca925d181798</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -3495,6 +3499,11 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="ActivaFechas">
       <DataType>Integer</DataType>
       <DefaultValue>
@@ -3509,15 +3518,21 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
       <DataType>DateTime</DataType>
       <DefaultValue>
         <Values>
-          <Value>=DateSerial(2000,1,1)</Value>
+          <Value>=dateserial(2000,1,1)</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Fecha Desde</Prompt>
+      <Prompt>Desde</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
-      <Prompt>Calculo al :</Prompt>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(year(now),month(now),day(now))</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Hasta</Prompt>
+      <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="VentasEnCuotas">
       <DataType>String</DataType>
@@ -3540,7 +3555,7 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="ActivaRango">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
           <Value>-1</Value>
@@ -3563,7 +3578,7 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
-          <Value xml:space="preserve"> </Value>
+          <Value>zzzzzz</Value>
         </Values>
       </DefaultValue>
       <Prompt>Hasta Alfa</Prompt>

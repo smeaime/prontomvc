@@ -247,6 +247,7 @@
     <Compile Include="Areas\MvcMembership\Models\UserAdministration\RoleViewModel.cs" />
     <Compile Include="Areas\MvcMembership\MvcMembershipAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\PresupuestoObraController.cs" />
     <Compile Include="Controllers\OrdenTrabajoController.cs" />
     <Compile Include="Controllers\ValeSalidaController.cs" />
@@ -1293,14 +1294,28 @@
     <Content Include="Views\OtroIngresoAlmacen\Index.cshtml" />
     <Content Include="Views\RubroContable\Edit.cshtml" />
     <Content Include="Views\RubroContable\Index.cshtml" />
-    <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frm" />
-    <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frm" />
     <Content Include="Views\Cuenta\EditExterno.cshtml" />
     <Content Include="Views\Cuenta\IndexExterno.cshtml" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
     <Content Include="Views\OrdenPago\IndexExterno.cshtml" />
     <Content Include="Views\OrdenPago\EditExterno.cshtml" />
     <Content Include="Views\Subdiario\Edit.cshtml" />
+    <Content Include="Views\Reporte\RegimenDeInformacionDeComprasYVentas.cshtml" />
+    <Content Include="Views\Reporte\SICORE_RetencionesGanancias_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SICORE_RetencionesIVA_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SICORE_PercepcionesIva_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SUSS_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SIRE_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SIFERE_RetencionesIIBBPagos_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SIFERE_SIRCREB_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SIFERE_PercepcionesIIBB_Convenio_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SIFERE_PercepcionesIIBB_JurisdiccionLocal_Proveedores.cshtml" />
+    <Content Include="Views\Reporte\SICORE_RetencionesGanancias_Clientes.cshtml" />
+    <Content Include="Views\Reporte\SICORE_RetencionesIVA_Clientes.cshtml" />
+    <Content Include="Views\Reporte\SICORE_PercepcionesIVA_Clientes.cshtml" />
+    <Content Include="Views\Reporte\SIFERE_PercepcionesIIBB_Clientes.cshtml" />
+    <Content Include="Views\Reporte\SIFERE_RetencionesIIBB_Clientes.cshtml" />
+    <Content Include="Views\Reporte\SUSS_Clientes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />
@@ -1522,7 +1537,6 @@
     <Folder Include="Adjuntos\" />
     <Folder Include="App_Data\uploads\" />
     <Folder Include="Novedades\" />
-    <Folder Include="Views\Reportes\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
