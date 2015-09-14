@@ -1,0 +1,15 @@
+
+Log Entry : 
+07/30/2015 12:06:56
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:The controller for path '/Pronto500/OrdenCompra_DynamicGridData/TT' was not found or does not implement IController.
+__________________________
+
+Log Entry : 
+07/30/2015 12:06:56
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/30/2015 12:07:00
+Error in: http://localhost:40053/Pronto500/OrdenCompra_DynamicGridData/TT. Error Message:Mandado
+__________________________

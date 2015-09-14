@@ -752,9 +752,9 @@ namespace ProntoMVC.Controllers
             {
                 Asiento Asiento = new Asiento();
 
-                //inic(ref Asiento);
+                inic(ref Asiento);
 
-                //CargarViewBag(Asiento);
+                CargarViewBag(Asiento);
 
 
                 return View(Asiento);
@@ -804,22 +804,30 @@ namespace ProntoMVC.Controllers
                         //    GuardarHistoricoDeCambio();
                         //}
 
-                        var EntidadOriginal = db.Asientos.Where(p => p.IdAsiento == Asiento.IdAsiento).SingleOrDefault();
-                        var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(Asiento);
+                        UpdateColeccion(Asiento);
 
-                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+
+                        //var EntidadOriginal = db.Asientos.Where(p => p.IdAsiento == Asiento.IdAsiento).SingleOrDefault();
+                        //var EntidadEntry = db.Entry(EntidadOriginal);
+                        //EntidadEntry.CurrentValues.SetValues(Asiento);
+
+                        //db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
 
                         //UpdateColecciones(ref Articulo);
                     }
                     else
                     {
+                        Parametros parametros = db.Parametros.Find(1);
+                        Asiento.NumeroAsiento = parametros.ProximoAsiento;
+                        parametros.ProximoAsiento = parametros.ProximoAsiento + 1;
+                        db.Entry(parametros).State = System.Data.Entity.EntityState.Modified;
+
                         db.Asientos.Add(Asiento);
                     }
 
                     db.SaveChanges();
 
-                    return Json(new { Success = 1, IdCuenta = Asiento.IdAsiento, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
+                    return Json(new { Success = 1, IdAsiento = Asiento.IdAsiento, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
                 }
                 else
                 {
@@ -864,6 +872,42 @@ namespace ProntoMVC.Controllers
             }
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
+
+
+
+
+
+        void UpdateColeccion(Asiento Asiento)
+        {
+            var EntidadOriginal = db.Asientos.Where(p => p.IdAsiento == Asiento.IdAsiento).Include(p => p.DetalleAsientos).SingleOrDefault();
+            var EntidadEntry = db.Entry(EntidadOriginal);
+            EntidadEntry.CurrentValues.SetValues(Asiento);
+
+            foreach (var dr in Asiento.DetalleAsientos)
+            {
+                var DetalleEntidadOriginal = EntidadOriginal.DetalleAsientos.Where(c => c.IdDetalleAsiento == dr.IdDetalleAsiento && dr.IdDetalleAsiento > 0).SingleOrDefault();
+                if (DetalleEntidadOriginal != null)
+                {
+                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                    DetalleEntidadEntry.CurrentValues.SetValues(dr);
+                }
+                else
+                {
+                    EntidadOriginal.DetalleAsientos.Add(dr);
+                }
+            }
+
+            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleAsientos.Where(c => c.IdDetalleAsiento != 0).ToList())
+            {
+                if (!Asiento.DetalleAsientos.Any(c => c.IdDetalleAsiento == DetalleEntidadOriginal.IdDetalleAsiento))
+                    EntidadOriginal.DetalleAsientos.Remove(DetalleEntidadOriginal);
+            }
+            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+        }
+
+
+
+
 
 
 
@@ -1053,8 +1097,16 @@ namespace ProntoMVC.Controllers
                             a.NumeroAsiento.NullSafeToString(),
                             a.FechaAsiento.NullSafeToString(),
                             a.Tipo.NullSafeToString(),
-                            a.IdCuentaSubdiario.NullSafeToString(),
+                            a.IdCuentaSubdiario==null ? "" :  a.AsientoApertura .NullSafeToString(),
                             a.AsientoApertura.NullSafeToString(),
+                            a.Concepto.NullSafeToString(),
+                            a.DetalleAsientos.Select(x=>x.Debe).Sum().NullSafeToString(),
+                            a.DetalleAsientos.Select(x=>x.Haber).Sum().NullSafeToString(),
+                            (a.DetalleAsientos.Select(x=>x.Debe).Sum()-a.DetalleAsientos.Select(x=>x.Haber).Sum()).NullSafeToString(),
+                            a.IdIngreso .NullSafeToString(),
+                            a.FechaIngreso .NullSafeToString(),
+                            a.IdModifico .NullSafeToString(),
+                            a.FechaUltimaModificacion .NullSafeToString(),
 
                             
                             // (a.TiposCuenta==null) ?  "" :  a.TiposCuenta.Descripcion,
@@ -1087,28 +1139,29 @@ namespace ProntoMVC.Controllers
 
 
 
-        void inic(ref Pedido o)
+        void inic(ref Asiento o)
         {
 
 
             Parametros parametros = db.Parametros.Find(1);
-            o.NumeroPedido = parametros.ProximoNumeroPedido;
-            o.SubNumero = 0;
-            o.FechaPedido = DateTime.Today;
-            o.IdMoneda = 1;
-            o.CotizacionMoneda = 1;
-            ViewBag.Proveedor = "";
+            o.NumeroAsiento = parametros.ProximoAsiento;
+
+            //o.SubNumero = 0;
+            o.FechaAsiento = DateTime.Today;
+            //o.IdMoneda = 1;
+            //o.CotizacionMoneda = 1;
+            //ViewBag.Proveedor = "";
 
 
 
 
-            o.Importante = parametros.PedidosImportante;
-            o.Garantia = parametros.PedidosGarantia;
-            o.Documentacion = parametros.PedidosDocumentacion;
-            o.FormaPago = parametros.PedidosFormaPago;
-            //o.ImprimeInspecciones = parametros.PedidosInspecciones;
-            o.LugarEntrega = parametros.PedidosLugarEntrega;
-            o.PlazoEntrega = parametros.PedidosPlazoEntrega;
+            //o.Importante = parametros.PedidosImportante;
+            //o.Garantia = parametros.PedidosGarantia;
+            //o.Documentacion = parametros.PedidosDocumentacion;
+            //o.FormaPago = parametros.PedidosFormaPago;
+            ////o.ImprimeInspecciones = parametros.PedidosInspecciones;
+            //o.LugarEntrega = parametros.PedidosLugarEntrega;
+            //o.PlazoEntrega = parametros.PedidosPlazoEntrega;
 
 
             //o.PorcentajeIva1 = 21;                  //  mvarP_IVA1_Tomado
@@ -1151,9 +1204,9 @@ namespace ProntoMVC.Controllers
 
             // db.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
             var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
-            o.CotizacionMoneda = 1;
-            //  o.CotizacionADolarFijo=
-            o.CotizacionDolar = (decimal)mvarCotizacion;
+            //o.CotizacionMoneda = 1;
+            ////  o.CotizacionADolarFijo=
+            //o.CotizacionDolar = (decimal)mvarCotizacion;
 
             //o.DetalleFacturas.Add(new DetalleFactura());
             //o.DetalleFacturas.Add(new DetalleFactura());
@@ -1185,7 +1238,7 @@ namespace ProntoMVC.Controllers
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
 
-        void CargarViewBag(Pedido o)
+        void CargarViewBag(Asiento o)
         {
 
 
@@ -1296,18 +1349,20 @@ namespace ProntoMVC.Controllers
             //res.Errors = GetModelStateErrorsAsString(this.ModelState);
 
 
-
-            //if ((o.IdComprador ?? 0) <= 0)
-            //{
-            //    // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-            //    sErrorMsg += "\n" + "Falta el comprador";
-            //    // return false;
-            //}
+            if (o.FechaAsiento == null)
+            {
+                sErrorMsg += "\n" + "Falta la fecha del asiento";
+            }
 
 
-            if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El Asiento no tiene items";
+            if ((o.Concepto ?? "" ) == "")
+            {
+                sErrorMsg += "\n" + "Falta el concepto";
+            }
 
-            //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
+
+
+     //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
 
 
             //         Dim mvarImprime As Integer, mvarNumero As Integer, i As Integer
@@ -1323,10 +1378,25 @@ namespace ProntoMVC.Controllers
 
             decimal debe = 0, haber = 0;
 
+
+            var reqsToDelete = o.DetalleAsientos.Where(x => (x.IdCuenta ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetalleAsientos.Remove(deleteReq);
+            }
+
+
+            if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El asiento no tiene items";
+
+       
+
+
             foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
             {
+                var c = db.Cuentas.Find(x.IdCuenta);
+                if (c == null) continue;
 
-                string nombre = x.Item + " El item " + x.Item + "  (" + x.Cuenta.Descripcion + ") ";
+                string nombre = x.Item + " El item " + x.Item + "  (" + c.Descripcion + ") ";
 
                 debe += x.Debe ?? 0;
                 haber += x.Haber ?? 0;
@@ -1338,8 +1408,8 @@ namespace ProntoMVC.Controllers
                     //break;
                 }
 
-                if (x.Debe > 0 && x.Haber > 0) sErrorMsg += "\n" + "El item debe tener indicado el debe o el haber";
-                if (x.Debe == 0 && x.Haber == 0) sErrorMsg += "\n" + "El item debe tener indicado el debe o el haber";
+                if (x.Debe > 0 && x.Haber > 0) sErrorMsg += "\n" + nombre + " debe tener indicado el debe o el haber";
+                if (x.Debe == 0 && x.Haber == 0) sErrorMsg += "\n" + nombre + " debe tener indicado el debe o el haber";
 
 
             }
@@ -1783,6 +1853,8 @@ namespace ProntoMVC.Controllers
                                 a.Haber.NullSafeToString(),
                                 a.RegistrarEnAnalitico.NullSafeToString(),
                                 
+                                a.Detalle,
+
                                 a.Moneda1==null ? "" : a.Moneda1.Abreviatura.NullSafeToString(),
                                 a.CotizacionMoneda.NullSafeToString(),
                                 a.ImporteEnMonedaDestino.NullSafeToString(),
@@ -1799,7 +1871,9 @@ namespace ProntoMVC.Controllers
 
                                 a.NumeroComprobante.NullSafeToString(),
                                 a.PorcentajeIVA.NullSafeToString(),
-                           
+                                a.IdObra.NullSafeToString(),
+                                a.IdCuenta.NullSafeToString(),
+                                a.IdMonedaDestino.NullSafeToString(),
                             }
                         }).ToArray()
             };

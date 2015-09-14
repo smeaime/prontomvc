@@ -1,0 +1,180 @@
+
+Log Entry : 
+07/23/2015 11:59:04
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:'NumeroFactura' could not be resolved in the current scope or context. Make sure that all referenced variables are in scope, that required schemas are loaded, and that namespaces are referenced correctly. Near simple identifier, line 6, column 17.
+__________________________
+
+Log Entry : 
+07/23/2015 11:59:04
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 11:59:08
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 12:05:55
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:LIKE arguments must be of string type. Near member access expression, line 6, column 4.
+__________________________
+
+Log Entry : 
+07/23/2015 12:05:55
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 12:05:59
+Error in: http://localhost:40053/Pronto500/Factura/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 13:28:29
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:'NumeroRecibo' could not be resolved in the current scope or context. Make sure that all referenced variables are in scope, that required schemas are loaded, and that namespaces are referenced correctly. Near simple identifier, line 6, column 16.
+__________________________
+
+Log Entry : 
+07/23/2015 13:28:29
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 13:28:34
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 13:32:12
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:'Numero' is not a member of type 'DemoProntoModel.NotasCredito' in the currently loaded schemas. Near simple identifier, line 6, column 4.
+__________________________
+
+Log Entry : 
+07/23/2015 13:32:12
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 13:32:16
+Error in: http://localhost:40053/Pronto500/NotaCredito/TT_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 13:35:51
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:El nombre de columna 'Activa' no es válido.
+__________________________
+
+Log Entry : 
+07/23/2015 13:35:51
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 13:35:55
+Error in: http://localhost:40053/Pronto500/Recibo/EditCC/-1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 13:36:08
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:'NumeroRecibo' could not be resolved in the current scope or context. Make sure that all referenced variables are in scope, that required schemas are loaded, and that namespaces are referenced correctly. Near simple identifier, line 6, column 16.
+__________________________
+
+Log Entry : 
+07/23/2015 13:36:08
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 13:36:12
+Error in: http://localhost:40053/Pronto500/Recibo/Recibos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 13:45:20
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:A public action method 'Pedidos_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.PedidoController'.
+__________________________
+
+Log Entry : 
+07/23/2015 13:45:20
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 13:45:24
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 13:45:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:A public action method 'Requerimientos_DynamicGridData' was not found on controller 'ProntoMVC.Controllers.RequerimientoController'.
+__________________________
+
+Log Entry : 
+07/23/2015 13:45:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 13:45:28
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 16:50:18
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:Expression expected
+__________________________
+
+Log Entry : 
+07/23/2015 16:50:18
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 16:50:22
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 16:59:06
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:A specified Include path is not valid. The EntityType 'DemoProntoModel.Pedido' does not declare a navigation property with the name 'Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista'.
+__________________________
+
+Log Entry : 
+07/23/2015 16:59:06
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 16:59:10
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 16:59:17
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:A specified Include path is not valid. The EntityType 'DemoProntoModel.Requerimiento' does not declare a navigation property with the name 'Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista'.
+__________________________
+
+Log Entry : 
+07/23/2015 16:59:17
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 16:59:21
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mandado
+__________________________
+
+Log Entry : 
+07/23/2015 18:16:51
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:A specified Include path is not valid. The EntityType 'DemoProntoModel.Requerimiento' does not declare a navigation property with the name 'Obra,DetalleRequerimientos'.
+__________________________
+
+Log Entry : 
+07/23/2015 18:16:51
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+07/23/2015 18:16:56
+Error in: http://localhost:40053/Pronto500/Requerimiento/Requerimientos_DynamicGridData. Error Message:Mandado
+__________________________

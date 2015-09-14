@@ -220,6 +220,246 @@ namespace ProntoMVC.Controllers
 
 
         [HttpPost]
+        public virtual ActionResult TreeGrid_ParaGrillaNoTreeviewEnLocalStorage(FormCollection collection)
+        {
+
+            //http://stackoverflow.com/questions/3672041/how-to-use-jqgrid-treegrid-in-mvc-net-2
+            // http://stackoverflow.com/questions/9715697/jqgrid-treegrid-setup-to-load-child-on-demandon-expansion-for-json-data
+            // http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3aadjacency_model#what_we_post
+            // http://stackoverflow.com/questions/16651620/jqgrid-treegrid-cant-collapsing-and-expanding
+
+            int role = -1;
+            //Here we get the Roles names this user
+            //In my case IsAgent, IsDealer, IsServiceWritter
+            //One user can have all roles or any role
+            //So the first important thing is get the
+            //highest hierarchy role, in this case "IsAgent"
+            //And asign to this role a code.
+            //So IsAgent = 2, IsDealer = 1, IsServiceWritter = 0
+
+            //var rolesArray = (string[])Session["Roles"];
+            //// We search for the highest hiearchy level and 
+            //// end up the loop
+            //foreach (var s in rolesArray)
+            //{
+            //    if (s ==  ROLE_NAME_AGENT)
+            //    {
+            //        role = (int)RolesEnum.Agent;
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        if (s == ROLE_NAME_DEALER)
+            //        {
+            //            role = (int)RolesEnum.Dealer;
+            //            break;
+            //        }
+            //        else
+            //        {
+
+            //            if (s == ROLE_NAME_SW)
+            //            {
+            //                role = (int)RolesEnum.SW;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+
+
+
+
+            //    var children = new List<GetTreeGridValuesResult>();
+            int level = 0;
+            int parentId = 0;
+
+            List<Tablas.Tree> q;
+            List<string> v = new List<string>();
+
+
+
+
+
+
+            // If we found out a level, we enter the if
+            //if (role != -1)
+            //{
+            //    // A very important thing to consider is that there
+            //    // are two keys being send from the treegrid component:
+            //    // 1. [nodeid] that is the id of the node we are expanding
+            //    // 2. [n_level] the root is 0, so, if we expand the first child
+            //    // of the root element the level will be 1... also if we expand the second
+            //    // child of the root, level is 1. And so... 
+            //    // If [nodeid] is not found it means that we are not expanding anything,
+            //    // so we are at root level.
+            if (collection["idsOfExpandedRows"].NullSafeToString() == "" && collection["nodeid"].NullSafeToString() == "")
+            {
+                // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
+                //q = q.Where(x => x.ParentId == "01").ToList();
+                q = TablaTree("01").ToList();
+                //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
+
+                //no hay cacheados nodos expandidos ni el nodo apretado. Debe ser la primera pantalla de la sesión. entonces, debo 
+                // mostrar todos los nodos raíces de los que tenga permiso...
+
+            }
+            else if (collection.AllKeys.Contains("idsOfExpandedRows"))
+            {
+                // recbo los nodos por postdata
+                // List<string> v = collection["idsOfExpandedRows"].ToList();
+
+                q = TablaTree(); //podrias devolver un queryable
+
+
+                if (collection["nodeid"].NullSafeToString() == "")
+                {
+                    // es la primera llamada, debo incluir las raices
+
+                    if (collection["idsOfExpandedRows"] != "") v = collection["idsOfExpandedRows"].ToString().Split(',').ToList();
+                    v.Add("01");
+                }
+                else
+                {
+                    // apretaron el nodo
+                    v.Add(collection["nodeid"].NullSafeToString());
+                }
+
+                q = q.Where(x => v.Contains(x.ParentId)).ToList();
+            }
+            else if (collection.AllKeys.Contains("nodeid"))
+            {
+
+
+                q = TablaTree(); //podrias devolver un queryable
+
+                //In case we are expanding a level, we retrieve the level we are right now
+                //In this example i'll explain the 
+                //Tree with id's so you can imagine the way i'm concatenating the id's:
+                // In this case we are at Agent level that have 2 dealers and each dealer 3 service writters
+                // Agent: 5
+                //  |_Dealer1: 5_25
+                //      |_SW1: 5_25_1
+                //      |_SW2: 5_25_2
+                //      |_SW3: 5_25_3
+                //  |_Dealer2: 5_26
+                //      |_SW4: 5_26_4
+                //      |_SW5: 5_26_5
+                //      |_SW6: 5_26_6
+                // So, if we clic over the SW6: the id will be 5_26_6, his parent will be 5_26
+                // Dealer2 Id is 5_26 and his parent will be 5.
+                level = Generales.Val(collection["n_level"] ?? "0") + 1;
+                //First we split the nodeid with '_' that is our split character.
+                var stringSplitted = collection["nodeid"].Split('-');
+                //the parent id will be located at the last position of the splitted array.
+                parentId = int.Parse(stringSplitted[stringSplitted.Length - 1]);
+            }
+            else
+            {
+
+                q = TablaTree();// podrias devolver un queryable
+
+            }
+
+            //Getting childrens
+            //var userId = new Guid(Session["UserId"].ToString());
+            // children = GetTreeGridValues(role, userId, parentId, level);
+            //if (!collection.AllKeys.Contains("idsOfExpandedRows"))
+            //{
+            //    if (collection["nodeid"].NullSafeToString() != "")
+            //    {
+            //        q = q.Where(x => x.ParentId == collection["nodeid"].ToString()).ToList();
+            //    }
+            //    else
+            //    {
+            //        q = q.Where(x => x.ParentId == "01").ToList();
+            //    }
+            //}
+            //Each children have a name, an id, and a rolename (rolename is just for control)
+            //So if we are are root level we send the parameters and we have in return all the children of the root.
+
+
+
+            // http://stackoverflow.com/questions/3672041/how-to-use-jqgrid-treegrid-in-mvc-net-2
+            // http://stackoverflow.com/questions/16651620/jqgrid-treegrid-cant-collapsing-and-expanding
+            //Preparing result
+            var filesData = new
+            {
+                rows = (from child in q
+                        select new
+                        {
+                           descr=  ((child.Link ?? "")  =="") ?    child.Descripcion :  child.Link, // Correspond to the colmodel NAME in javascript
+                            
+                            // The next one correspond to the colmodel ID in javascript Id
+                            // If we are are the root level the [nodeid] will be empty as i explained above
+                            // So the id will be clean. Following the example, just 5
+                            // If we are expanding the Agent 5 so, the [nodeid] will not be empty
+                            // so we take the Agent id, 5 and concatenate the child id, so 5_25
+                             child.IdItem,
+                            child.Link, //Correspond to the colmodel ROLE in javascript 
+                            
+                            
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //The next attributes are obligatory and defines the behavior of the TreeGrid 
+                           
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //LEVEL: This is the actual level of the child so, root will be 0, that's why i'm adding
+                            // one to the level above.
+                           l= ((child.IdItem.Replace("-","").Length) / 2-2).ToString()  ,  // level.ToString(),
+                            
+                           
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                           //PARENT ID: If we are at the root [nodeid] will be empty so the parent id is ""
+                            // In case of a service writter the parent id is the nodeid, because is the node
+                            // we are expanding
+                            parentid= child.ParentId ?? string.Empty, //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
+                            
+                           
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                           //IS NOT EXPANDABLE: One thing that was tricky here was that I was using c# true, false
+                            //and to make it work it's needed to be strings "true" or "false"
+                            // The Child.Role the role name, so i know that if it's a ServiceWriter i'm the last level
+                            // so it's not expandable, the optimal way is to get from the database store procedure
+                            // if the leaf has children.
+                            espadre= (child.EsPadre!="SI" ? "true" : "false" ).ToString(),
+                           
+                            
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //IS EXPANDED: I use that is always false,
+                          iditem=   (v.Contains(child.IdItem)  ? "true" : "false" ).ToString()
+                            
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            // LOADED: si está puesto en true, no vuelve a llamar al servidor
+                           // , "false" 
+
+                            // http://stackoverflow.com/questions/6508838/in-jqgrid-treegrid-how-can-i-specify-that-i-want-to-load-the-entire-tree-up-fro
+                   //                If I understand your question correct, the most important lines of the Tree Grid code to answer on 
+                    //                your question you will find here and here. I can describe the code fragment so: 
+                    //if the user try to expand a node it will be examined the contain of the hidden column 'loaded' of the node. 
+                    //    You can post the contain of 'loaded' column together with the JSON/XML row data. 
+                    //    If the 'loaded' column contains false (or the 'loaded' is not set by the server) 
+                    //    the parameters nodeid, parentid and n_level will be set and the tree grid will be reloaded.
+
+                        }
+                       ).ToArray()
+            };
+
+            //Returning json data
+            return Json(filesData);
+
+
+        }
+
+        [HttpPost]
         public virtual ActionResult TreeGrid(FormCollection collection)
         {
             //http://stackoverflow.com/questions/3672041/how-to-use-jqgrid-treegrid-in-mvc-net-2
@@ -469,6 +709,9 @@ namespace ProntoMVC.Controllers
             return Json(filesData);
 
         }
+
+
+
 
         [HttpPost]
         public virtual ActionResult TreeGridConNiveles_Todos_ParaEdicionEnAccesos(FormCollection collection)

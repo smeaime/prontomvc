@@ -1,0 +1,366 @@
+
+Log Entry : 
+08/19/2015 10:01:10
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=<a+href="/Pronto500/Requerimiento/Imprimir/2">Imprimir</a>. Error Message:A potentially dangerous Request.QueryString value was detected from the client (IdRequerimiento="<a href="/Pronto500/...").
+__________________________
+
+Log Entry : 
+08/19/2015 10:01:10
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=<a+href="/Pronto500/Requerimiento/Imprimir/2">Imprimir</a>. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:01:13
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=<a+href="/Pronto500/Requerimiento/Imprimir/2">Imprimir</a>. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:02:45
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=<a+href="/Pronto500/Requerimiento/Imprimir/1">Imprimir</a>. Error Message:A potentially dangerous Request.QueryString value was detected from the client (IdRequerimiento="<a href="/Pronto500/...").
+__________________________
+
+Log Entry : 
+08/19/2015 10:02:45
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=<a+href="/Pronto500/Requerimiento/Imprimir/1">Imprimir</a>. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:02:49
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=<a+href="/Pronto500/Requerimiento/Imprimir/1">Imprimir</a>. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:11:54
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/19/2015 10:11:54
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=2. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/19/2015 10:11:54
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:11:57
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:12:11
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=2. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:12:24
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/19/2015 10:12:25
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:12:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=1. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:12:29
+Error in: http://localhost:40053/Pronto500/Requerimiento/DetRequerimientosSinFormato/?IdRequerimiento=1. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:12:29
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:13:13
+Error in: http://localhost:40053/Pronto500/Account/LogOn. Error Message:No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+__________________________
+
+Log Entry : 
+08/19/2015 10:13:13
+Error in: http://localhost:40053/Pronto500/Account/LogOn. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:13:16
+Error in: http://localhost:40053/Pronto500/Account/LogOn. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:18:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 10:18:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 10:23:50
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/19/2015 10:23:59
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+08/19/2015 10:23:59
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:24:02
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:24:32
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 10:24:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 10:27:45
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/19/2015 10:27:51
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+08/19/2015 10:27:51
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:27:54
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 10:29:57
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/19/2015 10:30:13
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+08/19/2015 10:30:13
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 10:30:17
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 12:16:05
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 12:16:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 15:56:53
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 15:56:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 15:57:02
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/19/2015 15:57:14
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+08/19/2015 15:57:14
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 15:57:18
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 16:49:40
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:System.Data.SqlClient.SqlException
+El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+08/19/2015 16:50:34
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:El nombre de objeto 'dbo.wFuncionBusquedaMVC' no es válido.
+__________________________
+
+Log Entry : 
+08/19/2015 16:50:35
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 16:50:38
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=. Error Message:Mandado
+__________________________
+
+Log Entry : 
+08/19/2015 17:57:32
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 17:57:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 18:05:56
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 18:06:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+08/19/2015 18:24:02
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult Edit(Int32)' in 'ProntoMVC.Controllers.CuentaController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+__________________________
+
+Log Entry : 
+08/19/2015 18:24:02
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+08/19/2015 18:24:05
+Error in: http://localhost:40053/Pronto500/Cuenta/Edit. Error Message:Mandado
+__________________________

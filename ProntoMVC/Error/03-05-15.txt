@@ -1,0 +1,18 @@
+
+Log Entry : 
+05/03/2015 21:31:05
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos. Error Message:El nombre de columna 'IdPlazoEntrega' no es válido.
+El nombre de columna 'CodigoCategoriaIIBBAlternativo' no es válido.
+El nombre de columna 'FechaInicialControlComprobantes' no es válido.
+El nombre de columna 'ResolucionAfip3668' no es válido.
+__________________________
+
+Log Entry : 
+05/03/2015 21:31:06
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos. Error Message:Mando mail
+__________________________
+
+Log Entry : 
+05/03/2015 21:31:11
+Error in: http://localhost:40053/Pronto500/Pedido/Pedidos. Error Message:Mandado
+__________________________
