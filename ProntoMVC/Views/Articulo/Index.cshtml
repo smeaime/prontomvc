@@ -13,34 +13,36 @@
                     Nuevo
                 </button>
                 <div class="span4">
-                    <div class="input-append span4">
-                        <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                        {
-                            <select id="campos " class="span4 append">
-                                <option>Número</option>
-                                <option>Fecha</option>
-                            </select>
-                            <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                                ...
-                            </button>
+                    @*<div class="input-append span4">
+                            <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                            {
+                                <select id="campos " class="span4 append">
+                                    <option>Número</option>
+                                    <option>Fecha</option>
+                                </select>
+                                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                                    ...
+                                </button>
 
-                        }
-                    </div>
+                            }
+                        </div>*@
                 </div>
-                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                 {
                     <div class="span2">
                         <button onclick=" exportExcel($('#Lista')) " class="btn span12">
                             Excel
                         </button>
                     </div>
+                    <a href="@Url.Content("~")Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=Descripcion&sord=asc&page=1&rows=222&_search=false&filters=">Excel2</a>
+
                 }
 
-                <a href="@Url.Content("~")Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=Descripcion&sord=asc&page=1&rows=222&_search=false&filters=">Excel2</a>
 
             </div>
         </div>
+        <br />
         <div class="span1">
             <div>
                 <input id="IdRubro" name="IdRubro" type="hidden" value=@Request.QueryString["IdRubro"]>
@@ -132,7 +134,7 @@
 
 
         })
-;
+        ;
 
         jQuery("#Lista").jqGrid('bindKeys');
 
