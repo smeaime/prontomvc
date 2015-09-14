@@ -59,7 +59,7 @@
         $('#BuscadorListado').focus();
 
         $("#Lista").jqGrid({
-            url: ROOT + 'Articulo/ArticulosGridData', // '@Url.Action("ArticulosGridData", "Articulo")',
+            url: ROOT + 'Articulo/Articulos_DynamicGridData', // '@Url.Action("ArticulosGridData", "Articulo")',
             datatype: 'json',
             mtype: 'POST',
             postData: {
@@ -69,13 +69,15 @@
             },
             //            cellEdit: true,
             //            cellurl: '@Url.Action("UpdateArticuloProperty")',
-            colNames: ['', '', 'IdArticulo', 'Codigo', 'Nro. inventario', 'Descripcion', 'Rubro', 'Subrubro', '% IVA', 'Costo PPP', 'Costo PPP u$s', 'Costo Rep', 'Costo rep u$s', 'Stock minimo',
+            colNames: ['', ''
+                //, 'IdArticulo'
+                , 'Codigo', 'Nro. inventario', 'Descripcion', 'Rubro', 'Subrubro', '% IVA', 'Costo PPP', 'Costo PPP u$s', 'Costo Rep', 'Costo rep u$s', 'Stock minimo',
                        'Stock reposicion', 'Stock actual', 'En', 'Ubicacion', 'Marca', 'Modelo', 'Para mant.?', 'Cuenta para compra', 'Fecha alta', 'Usuario alta', 'Fecha ult. modif.'
             ],
             colModel: [
                         { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
                         { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-                        { name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        //{ name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', search: true, stype: 'text' },
                         { name: 'NumeroInventario', index: 'NumeroInventario', width: 130, align: 'left', search: true, stype: 'text' },
                         { name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }, search: true, searchoptions: { sopt: ['cn'] } },
