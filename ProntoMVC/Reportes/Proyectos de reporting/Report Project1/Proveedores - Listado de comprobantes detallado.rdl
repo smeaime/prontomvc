@@ -1811,7 +1811,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.42944in</Top>
         <Height>0.75997in</Height>
-        <Width>14.90477in</Width>
+        <Width>14.90478in</Width>
         <ZIndex>1</ZIndex>
         <Style />
       </Tablix>
@@ -1833,8 +1833,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>d42dafcc-ed51-4e59-adc5-d6c511b90c50</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1941,8 +1945,18 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
     <ReportParameter Name="FechaDesde">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(2000,1,1)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">

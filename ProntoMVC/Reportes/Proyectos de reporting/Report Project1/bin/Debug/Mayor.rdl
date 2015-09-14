@@ -9,7 +9,7 @@
               <Width>1.10417in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.58333in</Width>
+              <Width>1.11458in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.63542in</Width>
@@ -21,7 +21,7 @@
               <Width>1.20833in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.91667in</Width>
+              <Width>3.75in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -1461,7 +1461,7 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
         <Top>0.375in</Top>
         <Left>0.0926cm</Left>
         <Height>0.64in</Height>
-        <Width>17.94743in</Width>
+        <Width>20.31201in</Width>
         <Style />
       </Tablix>
       <Textbox Name="textbox1">
@@ -1500,7 +1500,7 @@ Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>17.98389in</Width>
+  <Width>20.34847in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -1943,8 +1943,7 @@ SELECT IdCuenta as [IdCuenta], Descripcion+IsNull(' - ['+Convert(varchar,Codigo)
 FROM Cuentas
 WHERE IdTipoCuenta=2 and Len(LTrim(IsNull(Descripcion,'')))&gt;0
 GROUP By IdCuenta, Codigo, Descripcion
-ORDER by [Titulo]
-</CommandText>
+ORDER by [Titulo]</CommandText>
       </Query>
       <Fields>
         <Field Name="IdCuenta">
@@ -1962,14 +1961,20 @@ ORDER by [Titulo]
     <ReportParameter Name="CadenaConexion">
       <DataType>String</DataType>
       <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="FechaDesde">
       <DataType>DateTime</DataType>
-      <Prompt>Fecha Desde</Prompt>
+      <DefaultValue>
+        <Values>
+          <Value>=dateserial(year(now),month(now),1)</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
-      <Prompt>Fecha Hasta</Prompt>
+      <Prompt>Hasta</Prompt>
     </ReportParameter>
     <ReportParameter Name="IdCuenta">
       <DataType>Integer</DataType>
