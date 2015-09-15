@@ -2563,6 +2563,11 @@ Order By [Titulo]</CommandText>
     </ReportParameter>
     <ReportParameter Name="Desde">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateSerial(2000,1,1)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="Hasta">

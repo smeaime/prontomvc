@@ -1,6 +1,0 @@
-C:\Backup\BDL\ProntoMVC\ClassLibrary2\bin\Debug\ClassLibrary2.dll.config
-C:\Backup\BDL\ProntoMVC\ClassLibrary2\bin\Debug\ClassLibrary2.dll
-C:\Backup\BDL\ProntoMVC\ClassLibrary2\bin\Debug\ClassLibrary2.pdb
-C:\Backup\BDL\ProntoMVC\ClassLibrary2\bin\Debug\EntityFramework.dll
-C:\Backup\BDL\ProntoMVC\ClassLibrary2\obj\Debug\ClassLibrary2.dll
-C:\Backup\BDL\ProntoMVC\ClassLibrary2\obj\Debug\ClassLibrary2.pdb

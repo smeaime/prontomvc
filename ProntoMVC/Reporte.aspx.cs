@@ -69,6 +69,7 @@ namespace ProntoMVC.Reportes
 
             var sc = Generales.sCadenaConex(sss);
             var scsql = Generales.sCadenaConexSQL(sss);
+            var scsql_Cubos = "Data Source=serversql3\\testing;Initial Catalog=DemoProntoWeb";
             // ReportViewerRemoto.Reset
 
             bool bMostrar = false;
@@ -451,6 +452,12 @@ namespace ProntoMVC.Reportes
             {
                 ReportParameter[] yourParams = new ReportParameter[1];
                 yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+            else if (reportName == "Cubo Stock 2")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql_Cubos, false);
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
             }
 
