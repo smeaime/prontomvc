@@ -1470,17 +1470,22 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual JsonResult Articulos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual JsonResult Articulos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, int IdRubro = 0)
         {
-
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Articulo>
-                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            var data = (from a in db.Articulos where (IdRubro == 0 || (IdRubro != 0 && a.IdRubro == IdRubro)) select a).AsQueryable();
+
+            //var pagedQuery = Filters.FiltroGenerico<Data.Models.Articulo>
+            //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Articulo>
+                                ( sidx, sord, page, rows, _search, filters, db, ref totalRecords,data);
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1507,19 +1512,48 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                             //"<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +" target='_blank' >Editar</>",
                             "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
-                            "",
+                             a.IdArticulo.NullSafeToString(),
+                            
                             a.Codigo.NullSafeToString(), 
+                            a.NumeroInventario,
+                            
                             a.Descripcion.NullSafeToString(), 
                             
                             (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString()   ,
                             (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
  
+
+
+                            a.AlicuotaIVA.NullSafeToString(),
+                            a.CostoPPP.NullSafeToString(),
+                            a.CostoPPPDolar.NullSafeToString(),
+                            a.CostoReposicion.NullSafeToString(),
+                            a.CostoReposicionDolar.NullSafeToString(),
+                            a.StockMinimo.NullSafeToString(),
+                            a.StockReposicion.NullSafeToString(),
+                            ((db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0).NullSafeToString() ,
+                            a.Unidad.Abreviatura ?? "",
+                            (a.Ubicacione.Deposito.Abreviatura ?? "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
+                            a.Marca != null ? a.Marca.Descripcion : "",
+                            a.Modelo.Descripcion != null ? a.Modelo.Descripcion : "",
+                            a.ParaMantenimiento,
+                            (a.Cuenta.Descripcion ?? ""),
+                            a.FechaAlta.NullSafeToString() ,
+                            a.UsuarioAlta.NullSafeToString() ,
+                            a.FechaUltimaModificacion.NullSafeToString() ,
+
                             a.NumeroInventario.NullSafeToString()  ,
                             
                             a.IdArticulo.NullSafeToString(),
                             a.IdUnidad.NullSafeToString(),
 
                             (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
+
+
+                            
+                            
+
+
                             }
                         }
                         ).ToArray()
