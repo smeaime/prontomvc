@@ -71,6 +71,10 @@
       <FullPath>Certificado SUSS.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Cheques anulados.rdl</Name>
+      <FullPath>Cheques anulados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Comprobante Proveedores.rdl</Name>
       <FullPath>Comprobante Proveedores.rdl</FullPath>
     </ProjectItem>
@@ -175,6 +179,10 @@
       <FullPath>Deuda Vencida a Fecha.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Diario.rdl</Name>
+      <FullPath>Diario.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Estadistica de ventas por rubro - Articulo.rdl</Name>
       <FullPath>Estadistica de ventas por rubro - Articulo.rdl</FullPath>
     </ProjectItem>
@@ -193,6 +201,10 @@
     <ProjectItem>
       <Name>Informe de materiales recibidos.rdl</Name>
       <FullPath>Informe de materiales recibidos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>IVA Compras.rdl</Name>
+      <FullPath>IVA Compras.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>IVA Ventas.rdl</Name>
@@ -255,6 +267,10 @@
       <FullPath>Orden Pago.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Ordenes de compra pendientes de facturar.rdl</Name>
+      <FullPath>Ordenes de compra pendientes de facturar.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Pedidos pendientes de recibir.rdl</Name>
       <FullPath>Pedidos pendientes de recibir.rdl</FullPath>
     </ProjectItem>
@@ -307,6 +323,10 @@
       <FullPath>Resumen Cuenta Corriente Deudores.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Saldos a fecha.rdl</Name>
+      <FullPath>Saldos a fecha.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Saldos Clientes.rdl</Name>
       <FullPath>Saldos Clientes.rdl</FullPath>
     </ProjectItem>
@@ -343,32 +363,16 @@
       <FullPath>Vales emitidos no retirados.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Diario.rdl</Name>
-      <FullPath>Diario.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>IVA Compras.rdl</Name>
-      <FullPath>IVA Compras.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Ordenes de compra pendientes de facturar.rdl</Name>
-      <FullPath>Ordenes de compra pendientes de facturar.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cheques anulados.rdl</Name>
-      <FullPath>Cheques anulados.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Saldos a fecha.rdl</Name>
-      <FullPath>Saldos a fecha.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Valores a depositar.rdl</Name>
       <FullPath>Valores a depositar.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Valores diferidos pendientes.rdl</Name>
       <FullPath>Valores diferidos pendientes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Stock 2.rdl</Name>
+      <FullPath>Cubo Stock 2.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
