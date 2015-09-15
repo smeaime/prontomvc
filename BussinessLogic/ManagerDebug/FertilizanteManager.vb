@@ -280,7 +280,7 @@ Public Class FertilizanteManager
             'End If
 
             'LogicaImportador.actualizar(.Cantidad, dr.Item("NetoProc"))
-            .Cantidad = dr.Item("NetoProc")
+            .Cantidad = Val(dr.Item("NetoProc"))
 
 
             .Chasis = iisNull(dr.Item("Patente"))
@@ -645,10 +645,27 @@ Public Class FertilizanteManager
                 Return "Intermediario"
 
 
-            Case "PRODUCTO 1"
-                'Return enumColumnasDeGrillaFinalFertilizantes.Titular
 
+            Case "PURO"
+                Return enumColumnasDeGrillaFinalFertilizantes.column20
+            Case "MEZCLA"
+                Return enumColumnasDeGrillaFinalFertilizantes.column21
+
+
+
+
+
+
+            Case "PRODUCTO 1"
+                Return enumColumnasDeGrillaFinalFertilizantes.column12
             Case "PRODUCTO 2"
+                Return enumColumnasDeGrillaFinalFertilizantes.column13
+            Case "PRODUCTO 3"
+                Return enumColumnasDeGrillaFinalFertilizantes.column14
+            Case "PRODUCTO4", "PRODUCTO 4"
+                Return enumColumnasDeGrillaFinalFertilizantes.column15
+
+
             Case "FORMA DE DESPACHO (GRANEL,BLS, BIGBAG)"
 
             Case "CANTIDAD (KG)"
