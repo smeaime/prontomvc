@@ -1578,10 +1578,9 @@ Namespace Pronto.ERP.Bll
 
                     sb &= "," & IntVal(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
 
+                    sb &= "," & IntVal(.CTG).ToString
 
-
-                    .CTG
-
+                    
                     PrintLine(nF, sb)
                 End With
             Next
