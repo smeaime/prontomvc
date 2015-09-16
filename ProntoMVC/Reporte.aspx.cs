@@ -70,7 +70,7 @@ namespace ProntoMVC.Reportes
             var scEF = Generales.sCadenaConex(nombreBase);
             var scsql = Generales.sCadenaConexSQL(nombreBase);
             var scsql_Cubos = "Data Source=serversql3\\testing;Initial Catalog=DemoProntoWeb";
-            uyggyuuygigjgj
+            
             // ReportViewerRemoto.Reset
 
             bool bMostrar = false;
