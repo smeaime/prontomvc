@@ -1503,9 +1503,6 @@ namespace ProntoMVC.Controllers
                 page = page,
                 records = totalRecords,
                 rows = (from a in q
-
-
-
                         select new ProntoMVC.Controllers.jqGridRowJson
                         {
                             id = a.IdArticulo.ToString(),
@@ -1515,15 +1512,12 @@ namespace ProntoMVC.Controllers
                              a.IdArticulo.NullSafeToString(),
                             
                             a.Codigo.NullSafeToString(), 
-                            a.NumeroInventario,
+                            a.NumeroInventario.NullSafeToString() ,
                             
                             a.Descripcion.NullSafeToString(), 
                             
                             (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString()   ,
                             (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
- 
-
-
                             a.AlicuotaIVA.NullSafeToString(),
                             a.CostoPPP.NullSafeToString(),
                             a.CostoPPPDolar.NullSafeToString(),
@@ -1531,13 +1525,37 @@ namespace ProntoMVC.Controllers
                             a.CostoReposicionDolar.NullSafeToString(),
                             a.StockMinimo.NullSafeToString(),
                             a.StockReposicion.NullSafeToString(),
-                            ((db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0).NullSafeToString() ,
-                            a.Unidad.Abreviatura ?? "",
-                            (a.Ubicacione.Deposito.Abreviatura ?? "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
-                            a.Marca != null ? a.Marca.Descripcion : "",
-                            a.Modelo.Descripcion != null ? a.Modelo.Descripcion : "",
-                            a.ParaMantenimiento,
-                            (a.Cuenta.Descripcion ?? ""),
+                           
+                           ((db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0).NullSafeToString() ,
+                            
+                           
+                            (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
+
+                             (a.Ubicacione != null ?  
+                             (
+                          (a.Ubicacione.Deposito != null ? " " + a.Ubicacione.Deposito.Abreviatura : "") 
+                          + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") 
+                          + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") 
+                          + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") 
+                          + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : "")
+                          )
+                          : "")
+                          ,
+                            
+                          
+                          
+                          a.Marca != null ? a.Marca.Descripcion : "",
+
+                            (a.Modelo ?? new Modelo()).Descripcion.NullSafeToString()   ,
+                            
+                            
+                            a.ParaMantenimiento.NullSafeToString() ,
+                            
+                            
+                               (a.Cuenta ?? new Cuenta()).Descripcion.NullSafeToString()   ,
+                               
+                            
+                            
                             a.FechaAlta.NullSafeToString() ,
                             a.UsuarioAlta.NullSafeToString() ,
                             a.FechaUltimaModificacion.NullSafeToString() ,

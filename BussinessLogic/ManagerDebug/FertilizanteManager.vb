@@ -279,8 +279,13 @@ Public Class FertilizanteManager
             '    Return 0
             'End If
 
+            'LogicaImportador.actualizar(.Cantidad, dr.Item("NetoProc"))
+            .Cantidad = Val(dr.Item("NetoProc"))
 
 
+            .Chasis = iisNull(dr.Item("Patente"))
+            .Acoplado = iisNull(dr.Item("Acoplado"))
+           
             '/////////////////////////////////////////
             '/////////////////////////////////////////
 
@@ -294,13 +299,13 @@ Public Class FertilizanteManager
 
             ''/////////////////////////////////////////
 
-            'dr.Item("Titular") = iisNull(dr.Item("Titular"))
-            'If dr.Item("Titular") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Titular") Then
-            '    .Titular = BuscaIdClientePrecisoConCUIT(dr.Item("Titular"), SC)
-            '    If .Titular = -1 Then .Titular = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Titular")), SC)
-            '    dr.Item("IdTitular") = .Titular
-            '    If .Titular = -1 Then Return "Titular"
-            'End If
+            dr.Item("Titular") = iisNull(dr.Item("Titular"))
+            If dr.Item("Titular") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Titular") Then
+                .Cliente = BuscaIdClientePrecisoConCUIT(dr.Item("Titular"), SC)
+                If .Cliente = -1 Then .Cliente = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Titular")), SC)
+                dr.Item("IdTitular") = .Cliente
+                If .Cliente = -1 Then Return "Titular"
+            End If
 
 
 
@@ -619,15 +624,77 @@ Public Class FertilizanteManager
         End If
 
         Select Case s
-            Case "PRODUCTO", "PROD.", "MERC.", "MER", "GRANO", "MERCADERIA", "PROD"
+            Case "PRODUCTO (UG,DAP,MAP,ETC)"
                 Return "Producto"
-
-            Case "SUBNUMERODEFACTURACION"
-                Return "SubnumeroDeFacturacion"
 
             Case "Nº CUPO"
                 Return "NumeroCDP"
 
+            Case "DESTINO DE LA MERCADERIA"
+
+            Case "CONTRATO"
+                '  Return enumColumnasDeGrillaFinalFertilizantes.
+
+            Case "CLIENTE"
+                Return enumColumnasDeGrillaFinalFertilizantes.Titular
+
+            Case "FECHA"
+                Return enumColumnasDeGrillaFinalFertilizantes.FechaDescarga
+
+            Case "C/ORDEN"
+                Return "Intermediario"
+
+
+
+            Case "PURO"
+                Return enumColumnasDeGrillaFinalFertilizantes.column20
+            Case "MEZCLA"
+                Return enumColumnasDeGrillaFinalFertilizantes.column21
+
+
+
+
+
+
+            Case "PRODUCTO 1"
+                Return enumColumnasDeGrillaFinalFertilizantes.column12
+            Case "PRODUCTO 2"
+                Return enumColumnasDeGrillaFinalFertilizantes.column13
+            Case "PRODUCTO 3"
+                Return enumColumnasDeGrillaFinalFertilizantes.column14
+            Case "PRODUCTO4", "PRODUCTO 4"
+                Return enumColumnasDeGrillaFinalFertilizantes.column15
+
+
+            Case "FORMA DE DESPACHO (GRANEL,BLS, BIGBAG)"
+
+            Case "CANTIDAD (KG)"
+                Return "NetoProc"
+
+
+            Case "TRANSPORTISTA", "TRANSP.", "TRANSPORTE"
+                Return "column21"
+            Case "CUIT TRANS"
+                Return "column22"
+            Case "NOMBRE DEL CHOFER"
+                Return enumColumnasDeGrillaFinalFertilizantes.column23
+            Case "CUIT CHOFER"
+                Return "column24"
+            Case "OBSERVACIONES.", "OBSERVACIONES", "OBSERVACION", "OBSERV.", "MER/REB", "ANÁLISIS"
+                Return "column25"
+
+            Case "PATENTE", "PAT CHASIS", "PTE.", "PATE", "CHASIS"
+
+                Return "Patente"
+            Case "ACOPLADO", "ACOPL", "PAT.ACOP."
+
+                Return "Acoplado"
+
+
+
+            Case "XXXXX"
+            Case "XXXXX"
+            Case "XXXXX"
 
 
             Case Else
