@@ -1822,7 +1822,7 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosRubrosContable" Width="1.5" PointX="15.25" PointY="116.375" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosValore" Width="1.5" PointX="15.25" PointY="120" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Recibo" Width="1.5" PointX="13" PointY="105.25" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosContable" Width="1.5" PointX="1.375" PointY="2.625" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosContable" Width="1.5" PointX="1" PointY="2.25" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosValore" Width="1.5" PointX="14.875" PointY="9.75" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
           <edmx:ConnectorPoint PointX="27.749999999999996" PointY="79.525" />
