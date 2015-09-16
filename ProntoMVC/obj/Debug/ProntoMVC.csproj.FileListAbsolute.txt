@@ -80,14 +80,12 @@ C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Documentos\Factura_A_B
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Documentos\NotaCredito_A_BaseNueva.dot
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Documentos\NotaDebito_A_BaseNueva.dot
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\ProntoMVC.dll.config
-D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
-D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.dll
+D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.Net4.dll
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Pedido_Autotrol_PUNTONET.docx
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Factura_A_BaseNueva.dot
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Factura_A_BaseNueva_FA.dot
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\NotaCredito_A_BaseNueva.dot
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\NotaDebito_A_BaseNueva.dot
-D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.Net4.dll
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Requerimiento1_AUTOTROL_PUNTONET - Copia.docx
 D:\ProntoMVC3\ProntoMVC\bin\Error\dummy.html
@@ -129,7 +127,6 @@ D:\ProntoMVC3\ProntoMVC\bin\DataAccess.dll
 D:\ProntoMVC3\ProntoMVC\bin\CodeEngine.Framework.QueryBuilder.dll
 D:\ProntoMVC3\ProntoMVC\bin\Ionic.Zip.dll
 D:\ProntoMVC3\ProntoMVC\bin\itextsharp.dll
-D:\ProntoMVC3\ProntoMVC\bin\System.Linq.Dynamic.dll
 D:\ProntoMVC3\ProntoMVC\bin\ProntoMVC.Data.pdb
 D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.pdb
 D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.xml
@@ -160,4 +157,6 @@ D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.Deployment.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.Razor.xml
 D:\ProntoMVC3\ProntoMVC\bin\itextsharp.xml
+D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
+D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.dll
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.pdb
