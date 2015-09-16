@@ -46,19 +46,19 @@ namespace ProntoMVC.Reportes
 
         protected void Informe()
         {
-            string sss;
+            string nombreBase;
 
             try
             {
-                sss = this.Session["BasePronto"].ToString();
+                nombreBase = this.Session["BasePronto"].ToString();
             }
             catch (Exception)
             {
                 var c = new ProntoMVC.Controllers.AccountController();
-                sss = c.BuscarUltimaBaseAccedida();
+                nombreBase = c.BuscarUltimaBaseAccedida();
             }
 
-            if (sss == "")
+            if (nombreBase == "")
             {
                 throw new Exception("No se encontró base para conectar");
             }
@@ -67,9 +67,10 @@ namespace ProntoMVC.Reportes
             int idcliente;
             int idauxiliar;
 
-            var sc = Generales.sCadenaConex(sss);
-            var scsql = Generales.sCadenaConexSQL(sss);
+            var scEF = Generales.sCadenaConex(nombreBase);
+            var scsql = Generales.sCadenaConexSQL(nombreBase);
             var scsql_Cubos = "Data Source=serversql3\\testing;Initial Catalog=DemoProntoWeb";
+            
             // ReportViewerRemoto.Reset
 
             bool bMostrar = false;
@@ -94,7 +95,7 @@ namespace ProntoMVC.Reportes
                     // this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey); // NO! esto ya tiene que venir marcado! no puedo usar la default si el tipo eligió otra!
                 }
 
-                c.db = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
+                c.db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);
 
                 string cuit = c.DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
                 
@@ -364,7 +365,7 @@ namespace ProntoMVC.Reportes
             else if (reportName.IndexOf("Certificado") >= 0)
             {
                 var keys = this.Request.QueryString.AllKeys;
-                var db = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
+                var db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);
                 var op = db.OrdenesPago.Find(Generales.Val(this.Request.QueryString["Id"].NullSafeToString()));
                 if (op.IdProveedor != idproveedor && idproveedor != -1)
                 {
