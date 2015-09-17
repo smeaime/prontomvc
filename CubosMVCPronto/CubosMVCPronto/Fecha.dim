@@ -1,0 +1,323 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="bd6a265e-52dc-4191-ac70-6d5203ce7bda" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Fecha</ID>
+  <Name>Fecha</Name>
+  <CreatedTimestamp>0001-01-01T03:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T03:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="3" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-4253" scrolltop="-8123" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="11615" y="21246" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="DW_DimFecha" left="20" top="-1271" logicalid="2" controlid="1" masterid="0" hint1="0" hint2="0" width="3704" height="6271" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="00080000780e00007f180000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_DW_DimFecha" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-4253</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-8123</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>-1271</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="101">
+            <Shape Id="Clave Fecha" Expanded="false">
+              <Attributes>
+                <Attribute Id="Clave Fecha" />
+                <Attribute Id="Numero Dia Mes" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+            <Shape Id="Nombre Mes" Expanded="false">
+              <Attributes>
+                <Attribute Id="Nombre Mes" />
+              </Attributes>
+              <Position x="151" y="20" />
+            </Shape>
+            <Shape Id="Numero Año" Expanded="false">
+              <Attributes>
+                <Attribute Id="Numero Año" />
+              </Attributes>
+              <Position x="282" y="20" />
+            </Shape>
+            <Shape Id="Numero Mes" Expanded="false">
+              <Attributes>
+                <Attribute Id="Numero Mes" />
+              </Attributes>
+              <Position x="151" y="68" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T03:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="7d9a799f-1dba-4437-995a-0e0621e56bb9">
+    <DataSourceViewID>Cubos MVC</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="d7030f98-45c4-47b0-9370-77f93b813ee7">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="d9c59ec1-a8ef-47bd-9e93-bbbd72fff81c">
+      <ID>Clave Fecha</ID>
+      <Name>Clave Fecha</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4df34216-0943-4eb6-a1bc-f3fb73ae9372">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f9e3c7ca-9876-4519-a6f2-31175ad4b20d">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>ClaveFecha</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="5e53d7bb-9933-4845-88df-4e783ff1c738">
+          <AttributeID>Numero Dia Mes</AttributeID>
+          <Name>Numero Dia Mes</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="85a216d7-3811-4fcc-84f9-a9d065a5d43c">
+          <AttributeID>Numero Mes</AttributeID>
+          <RelationshipType>Rigid</RelationshipType>
+          <Name>Numero Mes</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a63114d4-bdde-4f29-8b2c-b38475133a7d">
+          <AttributeID>Nombre Mes</AttributeID>
+          <RelationshipType>Rigid</RelationshipType>
+          <Name>Nombre Mes</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="d0144d67-a0cc-4e2c-a676-e4bf8025fbc6">
+          <AttributeID>Fecha</AttributeID>
+          <Name>Fecha</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="5572688d-efee-4aff-b9a3-e624d7a688e1">
+      <ID>Numero Año</ID>
+      <Name>Numero Año</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="516c3b58-2869-4c24-88bb-d8032b7ddcdf">
+          <DataType>SmallInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a0d6b99e-5365-4a7f-a67d-e3b5a30bb918">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>NumeroAño</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="db7ff09f-2100-4c99-bcb0-f7656884296f">
+      <ID>Numero Dia Mes</ID>
+      <Name>Numero Dia Mes</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c8fa1524-4d97-48a9-a7e1-faaa4ffd3d4f">
+          <DataType>UnsignedTinyInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a2e1a8d1-8d6b-4055-b505-8afb3df18b61">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>NumeroDiaMes</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="62937e3b-a940-4547-b30c-076468a5f5f3">
+      <ID>Numero Mes</ID>
+      <Name>Numero Mes</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7d065c4f-dfcc-4446-90eb-8ed520edaf17">
+          <DataType>SmallInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="70dabb92-3130-4fea-852d-3b9bc51eed16">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>NumeroAño</ColumnID>
+          </Source>
+        </KeyColumn>
+        <KeyColumn dwd:design-time-name="f6c70a38-5540-453c-8d7e-fcac9a831690">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3e4293ec-a6e8-4c65-840a-2cd693398c1a">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>NumeroMes</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="ef8d04a9-3bc1-4863-ac90-4b45f6953752">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="d988f8c9-768a-4395-8170-c4dd766ef5fd">
+          <TableID>dbo_DW_DimFecha</TableID>
+          <ColumnID>NumeroMes</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="baf87b3b-e369-405b-8386-4d730a67cf56">
+          <AttributeID>Numero Año</AttributeID>
+          <RelationshipType>Rigid</RelationshipType>
+          <Name>Numero Año</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ValueColumn dwd:design-time-name="f7d3edbe-5f4b-4be4-b39e-bbb82aa1d3c2">
+        <DataType>Integer</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="8e0dc394-89a0-4d1d-b313-e0130a851cdd">
+          <TableID>dbo_DW_DimFecha</TableID>
+          <ColumnID>NumeroMes</ColumnID>
+        </Source>
+      </ValueColumn>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="0276b53a-28c5-46e3-8560-be78e85fa97a">
+      <ID>Nombre Mes</ID>
+      <Name>Nombre Mes</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4f793d32-7336-442a-ae53-eb3aba8a338d">
+          <DataType>SmallInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="331bc829-28a2-4903-9825-47c5d5d9bd4f">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>NumeroAño</ColumnID>
+          </Source>
+        </KeyColumn>
+        <KeyColumn dwd:design-time-name="d584076e-99d5-4445-9150-82d7e893b95e">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a5784144-acc8-4afc-88e7-2f0adf86a419">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>NumeroMes</ColumnID>
+          </Source>
+        </KeyColumn>
+        <KeyColumn dwd:design-time-name="f77103c4-9764-481f-b116-22236637048e">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d33dc4ef-623f-4a52-9be6-0c17976b61af">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>NombreMes</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="b1324fe9-cca2-49ac-b099-f07c231cd014">
+        <DataType>WChar</DataType>
+        <DataSize>10</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="69b3ef8a-4bc0-4bde-8966-4ebaeb78f38d">
+          <TableID>dbo_DW_DimFecha</TableID>
+          <ColumnID>NombreMes</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="248dc25c-ef2c-4488-b062-29baaad0011f">
+          <AttributeID>Numero Año</AttributeID>
+          <RelationshipType>Rigid</RelationshipType>
+          <Name>Numero Año</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ValueColumn dwd:design-time-name="cffa583a-639b-4ed7-8f11-549460957b58">
+        <DataType>Integer</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="50aa9a1f-0486-4a5e-be04-455b39e54c6e">
+          <TableID>dbo_DW_DimFecha</TableID>
+          <ColumnID>NumeroMes</ColumnID>
+        </Source>
+      </ValueColumn>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="7695c304-1301-4e3f-81fc-e44e4cbbaeaf">
+      <ID>Fecha</ID>
+      <Name>Fecha</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ac713746-b162-4d1d-94ba-8faac3693db0">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="52da51ba-93ec-46a3-a5b8-d0653dff58e0">
+            <TableID>dbo_DW_DimFecha</TableID>
+            <ColumnID>Fecha</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="3cef0474-3771-4fee-9349-80db28fa4458">
+      <ID>Jerarquía</ID>
+      <Name>Año-NombreMes</Name>
+      <Levels>
+        <Level dwd:design-time-name="24ff77f2-e03f-4ba1-9502-d34257007781">
+          <ID>Numero Año</ID>
+          <Name>Numero Año</Name>
+          <SourceAttributeID>Numero Año</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="ed26ac4b-0772-4829-b4ee-babc2872c4cc">
+          <ID>Nombre Mes</ID>
+          <Name>Nombre Mes</Name>
+          <SourceAttributeID>Nombre Mes</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+    <Hierarchy dwd:design-time-name="0dd2dd5e-067c-4c9d-a5b0-120fa5d81b18">
+      <ID>Jerarquía 1</ID>
+      <Name>Año-NumeroMes</Name>
+      <Levels>
+        <Level dwd:design-time-name="2d6cc26d-ac94-411c-aca9-4be30a622e85">
+          <ID>Numero Año</ID>
+          <Name>Numero Año</Name>
+          <SourceAttributeID>Numero Año</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="a4bc2709-51a1-42ca-85ee-21d9da5fc64d">
+          <ID>Numero Mes</ID>
+          <Name>Numero Mes</Name>
+          <SourceAttributeID>Numero Mes</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+</Dimension>
