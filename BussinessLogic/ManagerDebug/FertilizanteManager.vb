@@ -631,9 +631,8 @@ Public Class FertilizanteManager
                 Return "NumeroCDP"
 
             Case "DESTINO DE LA MERCADERIA"
+                Return "Destino"
 
-            Case "CONTRATO"
-                '  Return enumColumnasDeGrillaFinalFertilizantes.
 
             Case "CLIENTE"
                 Return enumColumnasDeGrillaFinalFertilizantes.Titular
@@ -645,11 +644,13 @@ Public Class FertilizanteManager
                 Return "Intermediario"
 
 
-
+            Case "CONTRATO"
+                '  Return enumColumnasDeGrillaFinalFertilizantes.
+                Return enumColumnasDeGrillaFinalFertilizantes.Auxiliar5
             Case "PURO"
                 Return enumColumnasDeGrillaFinalFertilizantes.column20
             Case "MEZCLA"
-                Return enumColumnasDeGrillaFinalFertilizantes.column21
+                Return enumColumnasDeGrillaFinalFertilizantes.column16
 
 
 
