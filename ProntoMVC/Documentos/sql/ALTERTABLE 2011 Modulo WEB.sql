@@ -1451,3 +1451,12 @@ go
 
 
 
+--------------------------------------------------------------------------
+
+ update  cartasdeporte
+ set fechaanulacion=null
+  where Anulada<>'SI'
+     
+alter table CartasDePorte ADD
+	CONSTRAINT chk_FechaAnulacion2 CHECK ((FechaAnulacion is null AND Anulada='NO') OR (FechaAnulacion is not null AND Anulada='SI')) 
+go
