@@ -10697,7 +10697,39 @@ Public Class LogicaFacturacion
     End Function
 
 
-    Shared Sub CorrectorSubnumeroFacturacion(SC As String, ByRef mensajes As String)
+    Shared Sub CorrectorParcheSubnumeroFacturacion(SC As String, ByRef mensajes As String)
+
+
+        '--el update se va a ir haciendo parcialmente
+        Dim s As String =
+        "          " & _
+        "        Update(CartasDePorte)  " & _
+        "set SubNumeroDefacturacion =    " & _
+        "(  " & _
+        "	select max(SubNumeroDefacturacion) from cartasdeporte as Q2   " & _
+        "		where    " & _
+        "			Q2.NumeroCartaDePorte=NumeroCartaDePorte AND   " & _
+        "			Q2.NumeroSubFijo=NumeroSubFijo AND   " & _
+        "			Q2.SubNumeroVagon=SubNumeroVagon  " & _
+        "			and Anulada<>'SI'  " & _
+        ")+1  " & _
+        "select Q.NumeroCartaDePorte,Q.NumeroSubFijo,Q.SubNumeroVagon  " & _
+        "from  cartasdeporte as Q  " & _
+        "inner join    " & _
+        "(  " & _
+        "select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon --, COUNT (NumeroCartaDePorte) as cant  " & _
+        "from cartasdeporte  " & _
+        "where Anulada<>'SI'  " & _
+        "group by NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  " & _
+        "having     COUNT(NumeroCartaDePorte) > 1  " & _
+        ") as REPES on REPES.NumeroCartaDePorte=Q.NumeroCartaDePorte AND REPES.NumeroSubFijo=Q.NumeroSubFijo AND       " & _
+        "REPES.SubNumeroVagon=Q.SubNumeroVagon  " & _
+        "where SubNumeroDefacturacion =-1"
+
+        ExecDinamico(SC, s, 200)
+
+
+
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
         'busco todas las cartas con copia sin incluir originales, a ver cuales solo tienen 1 carta en el grupo, lo que quiere decir que está mal
@@ -10719,6 +10751,10 @@ Public Class LogicaFacturacion
                     .CantCartas = g.Count, _
                     .IdCartaDePorte = g.Sum(Function(x) x.IdCartaDePorte) _
                 }).Where(Function(i) i.CantCartas = 1).Select(Function(i) i.IdCartaDePorte).Distinct().ToList.Take(100)
+
+
+
+        ErrHandler.WriteError("CorrectorParcheSubnumeroFacturacion 1ra etapa:  " & q2.Count)
 
 
         Try
@@ -10818,7 +10854,17 @@ Public Class LogicaFacturacion
                 .subnumerovagon = subnumerovagon, _
                 .CantCartas = g.Count _
             }).Where(Function(i) i.CantCartas = 2).Distinct()
-            'y si hay mas de 2?
+            'y si hay mas de 2? -hay problemas... como con la 546818635, de la que hay 1,0 y -1. como el where solo filtra 2, pasan al 
+            'for, y este le asigna un "1" a una, subnumero que ya existe... -no puede ser! si hago un if de un count nuevecito!!! y le asigna un
+            '10 al subnumerodefac!!!
+
+
+
+            'select NumeroCartaDePorte from CartasDePorte
+            'where (SubnumeroDeFacturacion=0 or  
+            'SubnumeroDeFacturacion=-1 or SubnumeroDeFacturacion is null )  And Anulada <> 'SI'
+            'group by NumeroCartaDePorte,subnumerovagon
+            'having COUNT (NumeroCartaDePorte)>1
 
 
 
@@ -10832,6 +10878,7 @@ Public Class LogicaFacturacion
                     Dim a = ccc.Where(Function(x) x.SubnumeroDeFacturacion = -1).FirstOrDefault
                     a.SubnumeroDeFacturacion = 10
                 Else
+
                     If ccc(0).SubnumeroDeFacturacion = -1 Then ccc(0).SubnumeroDeFacturacion = 1
                     If ccc(1).SubnumeroDeFacturacion = -1 Then ccc(1).SubnumeroDeFacturacion = 1
                 End If
