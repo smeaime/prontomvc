@@ -17,6 +17,8 @@ namespace ProntoMVC.Data.Models
         public Transportista()
         {
             this.Remitos = new HashSet<Remito>();
+            this.FertilizantesCupos = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos1 = new HashSet<FertilizantesCupos>();
         }
     
         public int IdTransportista { get; set; }
@@ -41,5 +43,7 @@ namespace ProntoMVC.Data.Models
     
         public virtual Localidad Localidade { get; set; }
         public virtual ICollection<Remito> Remitos { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
     }
 }

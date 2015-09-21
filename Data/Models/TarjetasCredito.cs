@@ -24,5 +24,6 @@ namespace ProntoMVC.Data.Models
         public string CodigoServicio { get; set; }
         public string NumeroServicio { get; set; }
         public Nullable<int> Codigo { get; set; }
+        public Nullable<int> IdBanco { get; set; }
     }
 }

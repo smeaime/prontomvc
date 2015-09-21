@@ -52,6 +52,10 @@ namespace ProntoMVC.Data.Models
             this.OrdenesPagoes1 = new HashSet<OrdenPago>();
             this.OrdenesPagoes2 = new HashSet<OrdenPago>();
             this.OrdenesPagoes3 = new HashSet<OrdenPago>();
+            this.FertilizantesCupos = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos1 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos2 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos3 = new HashSet<FertilizantesCupos>();
         }
     
         public int IdEmpleado { get; set; }
@@ -131,5 +135,9 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<OrdenPago> OrdenesPagoes1 { get; set; }
         public virtual ICollection<OrdenPago> OrdenesPagoes2 { get; set; }
         public virtual ICollection<OrdenPago> OrdenesPagoes3 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos2 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos3 { get; set; }
     }
 }

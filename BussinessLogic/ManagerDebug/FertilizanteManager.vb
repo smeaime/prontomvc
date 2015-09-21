@@ -737,10 +737,10 @@ Public Class FertilizanteManager
             '    Return False
             'End If
 
-            'If .NumeroCartaDePorte > 1999999999 Then ' > Int32.MaxValue Then
-            '    ms = "El número de CDP debe ser menor que 2.000.000.000"
-            '    Return False
-            'End If
+            If .NumeradorTexto.Trim = "" Then ' > Int32.MaxValue Then
+                ms = "El cupo debe tener una descripción"
+                Return False
+            End If
 
             'If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
             '    sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
