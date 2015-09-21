@@ -21,6 +21,8 @@ namespace ProntoMVC.Data.Models
             this.Proveedores = new HashSet<Proveedor>();
             this.DetalleClientesLugaresEntregas = new HashSet<DetalleClientesLugaresEntrega>();
             this.Transportistas = new HashSet<Transportista>();
+            this.FertilizantesCupos = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos1 = new HashSet<FertilizantesCupos>();
         }
     
         public int IdLocalidad { get; set; }
@@ -43,5 +45,7 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleClientesLugaresEntrega> DetalleClientesLugaresEntregas { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual ICollection<Transportista> Transportistas { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
     }
 }

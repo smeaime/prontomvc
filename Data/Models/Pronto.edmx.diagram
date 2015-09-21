@@ -2391,6 +2391,30 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCli__1C6908D3" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasPor__IdCli__4496F5BE" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasPor__IdDet__56CAB492" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__424498F8" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__4338BD31" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__442CE16A" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__452105A3" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__461529DC" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__47094E15" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__4F9E9416" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__5092B84F" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__5186DC88" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__527B00C1" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__536F24FA" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdArt__54634933" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__Clien__405C5086" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__Clien__4DB64BA4" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__Cuent__415074BF" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__Cuent__4EAA6FDD" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdUsu__4BCE0332" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdUsu__4CC2276B" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdUsu__5927FE50" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdUsu__5A1C2289" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdLoc__49E5BAC0" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdTra__48F19687" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdTra__564B91A5" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
