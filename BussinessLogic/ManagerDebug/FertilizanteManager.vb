@@ -58,6 +58,7 @@ Imports CartaDePorteManager
 Imports CDPMailFiltrosManager2
 '
 Imports LogicaImportador.FormatosDeExcel
+Imports LogicaImportador
 
 Imports ProntoMVC.Data.Models
 
@@ -281,6 +282,7 @@ Public Class FertilizanteManager
 
             'LogicaImportador.actualizar(.Cantidad, dr.Item("NetoProc"))
             .Cantidad = Val(dr.Item("NetoProc"))
+            .Contrato = dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString)
 
 
             .Chasis = iisNull(dr.Item("Patente"))
@@ -309,7 +311,53 @@ Public Class FertilizanteManager
 
 
 
+
+
+            dr.Item("Destino") = iisNull(dr.Item("Destino"))
+            If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") Then
+                .Destino = BuscaIdWilliamsDestinoPreciso(RTrim(dr.Item("Destino")), SC)
+                If .Destino = -1 Then .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Destino")), SC)
+                'dt.Rows(row).Item("IdDestino") = .Destino
+                If .Destino = -1 And dr.Item("Destino") = "" Then
+                    'solo uso el default si está vacío el texto
+                    .Destino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, SC)
+                End If
+                If .Destino = -1 Then
+                    Return "Destino"
+                Else
+                    'AsignarContratistasSegunDestino(dr, SC)
+                End If
+            End If
+
+
             'sector del confeccionó
+
+            '/////////////////////////////////////////
+
+
+
+            dr.Item("column21") = iisNull(dr.Item("column21"))
+            If dr.Item("column21") <> "NO_VALIDAR" And dr.Item("column21") <> "" And Not NoValidarColumnas.Contains("column21") Then
+                .IdTransportista = BuscaIdTransportistaPreciso(dr.Item("column21"), SC)
+                If .IdTransportista = -1 Then .IdTransportista = BuscaIdTransportistaPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column21")), SC)
+                If .IdTransportista = -1 Then Return "column21"
+            End If
+
+
+            dr.Item("column23") = iisNull(dr.Item("column23"))
+            If dr.Item("column23") <> "NO_VALIDAR" And dr.Item("column23") <> "" And Not NoValidarColumnas.Contains("column23") Then
+                .IdChofer = BuscaIdChoferPreciso(dr.Item("column23"), SC)
+                If .IdChofer = -1 Then .IdChofer = BuscaIdChoferPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column23")), SC)
+                If .IdChofer = -1 Then Return "column23"
+            End If
+
+
+
+            '/////////////////////////////////////////
+
+
+            actualizar(.Observaciones, dr.Item("column25"))
+
 
 
 
@@ -398,8 +446,8 @@ Public Class FertilizanteManager
                     db.FertilizantesCupos.Add(cupoFertilizante)
                 Else
 
-                    '.FechaModificacion = Now
-                    '.IdUsuarioModifico = IdUsuario
+                    .FechaModificacion = Now
+                    .IdUsuarioModifico = IdUsuario
                     UpdateColecciones(cupoFertilizante, db)
 
                 End If
