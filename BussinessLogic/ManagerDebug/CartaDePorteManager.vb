@@ -10703,7 +10703,7 @@ Public Class LogicaFacturacion
         '--el update se va a ir haciendo parcialmente
         Dim s As String =
         "          " & _
-        "        Update(CartasDePorte)  " & _
+        "        Update CartasDePorte  " & _
         "set SubNumeroDefacturacion =    " & _
         "(  " & _
         "	select max(SubNumeroDefacturacion) from cartasdeporte as Q2   " & _
@@ -10717,7 +10717,7 @@ Public Class LogicaFacturacion
         "from  cartasdeporte as Q  " & _
         "inner join    " & _
         "(  " & _
-        "select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon --, COUNT (NumeroCartaDePorte) as cant  " & _
+        "select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  " & _
         "from cartasdeporte  " & _
         "where Anulada<>'SI'  " & _
         "group by NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  " & _
