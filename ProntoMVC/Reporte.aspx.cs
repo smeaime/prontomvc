@@ -455,7 +455,7 @@ namespace ProntoMVC.Reportes
                 yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
             }
-            else if (reportName == "Cubo Stock 2")
+            else if (reportName == "Cubo Stock 2" || reportName == "Cubo Gastos Detallados 2" || reportName == "Cubo Egresos Proyectados 2" || reportName == "Cubo Ingresos Egresos Por Obra 3" || reportName == "Cubo Presupuesto Financiero" || reportName == "Cubo Posicion Financiera" || reportName == "Cubo Balance")
             {
                 ReportParameter[] yourParams = new ReportParameter[1];
                 yourParams[0] = new ReportParameter("CadenaConexion", scsql_Cubos, false);

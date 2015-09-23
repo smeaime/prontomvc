@@ -83,6 +83,30 @@
       <FullPath>Creditos Vencidos a Fecha.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Cubo Egresos Proyectados 2.rdl</Name>
+      <FullPath>Cubo Egresos Proyectados 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Gastos Detallados 2.rdl</Name>
+      <FullPath>Cubo Gastos Detallados 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Ingresos Egresos Por Obra 3.rdl</Name>
+      <FullPath>Cubo Ingresos Egresos Por Obra 3.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Posicion Financiera.rdl</Name>
+      <FullPath>Cubo Posicion Financiera.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Presupuesto Financiero.rdl</Name>
+      <FullPath>Cubo Presupuesto Financiero.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Stock 2.rdl</Name>
+      <FullPath>Cubo Stock 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Desarrollo y seguimiento por item de ordenes de compra.rdl</Name>
       <FullPath>Desarrollo y seguimiento por item de ordenes de compra.rdl</FullPath>
     </ProjectItem>
@@ -371,8 +395,8 @@
       <FullPath>Valores diferidos pendientes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Cubo Stock 2.rdl</Name>
-      <FullPath>Cubo Stock 2.rdl</FullPath>
+      <Name>Cubo Balance.rdl</Name>
+      <FullPath>Cubo Balance.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
