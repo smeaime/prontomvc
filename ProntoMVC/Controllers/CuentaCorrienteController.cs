@@ -320,10 +320,12 @@ namespace ProntoMVC.Controllers
 
             int totalRecords = 0;
 
-            var set = db.CtasCtesD_TXPorTrs_AuxiliarEntityFramework(IdCliente, 1, null, null, null, null);
+            var set = db.CtasCtesD_TXPorTrs_AuxiliarEntityFramework(IdCliente, 1, null, null, null, null).ToList();
+
+
 
             var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista <CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>
-                              (sidx, sord, page, rows, _search, filters, db, ref totalRecords , set  );
+                              (sidx, sord, page, rows, _search, filters, db, ref totalRecords ,  set  );
 
 
 
