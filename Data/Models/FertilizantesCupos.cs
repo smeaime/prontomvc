@@ -60,5 +60,32 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdFacturaImputada { get; set; }
         public string NumeradorTexto { get; set; }
+    
+        public virtual Articulo Articulo { get; set; }
+        public virtual Articulo Articulo1 { get; set; }
+        public virtual Articulo Articulo2 { get; set; }
+        public virtual Articulo Articulo3 { get; set; }
+        public virtual Articulo Articulo4 { get; set; }
+        public virtual Articulo Articulo5 { get; set; }
+        public virtual Articulo Articulo6 { get; set; }
+        public virtual Articulo Articulo7 { get; set; }
+        public virtual Articulo Articulo8 { get; set; }
+        public virtual Articulo Articulo9 { get; set; }
+        public virtual Articulo Articulo10 { get; set; }
+        public virtual Articulo Articulo11 { get; set; }
+        public virtual Chofere Chofere { get; set; }
+        public virtual Chofere Chofere1 { get; set; }
+        public virtual Cliente Cliente1 { get; set; }
+        public virtual Cliente Cliente2 { get; set; }
+        public virtual Cliente Cliente3 { get; set; }
+        public virtual Cliente Cliente4 { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual Empleado Empleado2 { get; set; }
+        public virtual Empleado Empleado3 { get; set; }
+        public virtual Localidad Localidade { get; set; }
+        public virtual Localidad Localidade1 { get; set; }
+        public virtual Transportista Transportista { get; set; }
+        public virtual Transportista Transportista1 { get; set; }
     }
 }
