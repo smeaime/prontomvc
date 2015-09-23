@@ -5,12 +5,10 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-      <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;"> 
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;"> 
         <form class="form-horizontal" style=" margin-bottom: 0px;">
-
             <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative; height: 100% ">
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
-
                     <legend>Punto de venta</legend>
                     @Html.HiddenFor(model => model.IdPuntoVenta)
                     <div class="row-fluid">
@@ -69,306 +67,285 @@
                                     @* si pone WSFEx, hay que poner WebServiceModoTest en SI si pone Carga Manual, hay que poner CAEManual en SI*@
                                 </div>
                             </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_R_A, "Numero CAI remitos")
+                            @Html.TextBoxFor(model => model.NumeroCAI_R_A, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_R_A)
                         </div>
-                        <!--/row-->
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_R_A, "Numero CAI remitos")
-                                @Html.TextBoxFor(model => model.NumeroCAI_R_A, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_R_A)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_R_A, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_R_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_R_A)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_R_A").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_F_A, "Numero CAI facturas A")
-                                @Html.TextBoxFor(model => model.NumeroCAI_F_A, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_F_A)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_F_A, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_F_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_F_A)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_F_A").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_C_A, "Numero CAI notas credito A")
-                                @Html.TextBoxFor(model => model.NumeroCAI_C_A, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_C_A)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_C_A, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_C_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_C_A)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_C_A").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_D_A, "Numero CAI notas debito A")
-                                @Html.TextBoxFor(model => model.NumeroCAI_D_A, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_D_A)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_D_A, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_D_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_D_A)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_D_A").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_F_B, "Numero CAI facturas B")
-                                @Html.TextBoxFor(model => model.NumeroCAI_F_B, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_F_B)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_F_B, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_F_B, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_F_B)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_F_B").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_C_B, "Numero CAI notas credito B")
-                                @Html.TextBoxFor(model => model.NumeroCAI_C_B, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_C_B)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_C_B, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_C_B, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_C_B)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_C_B").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_D_B, "Numero CAI notas debito B")
-                                @Html.TextBoxFor(model => model.NumeroCAI_D_B, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_D_B)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_D_B, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_D_B, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_D_B)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_D_B").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_F_E, "Numero CAI facturas E")
-                                @Html.TextBoxFor(model => model.NumeroCAI_F_E, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_F_E)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_F_E, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_F_E, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_F_E)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_F_E").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_C_E, "Numero CAI notas credito E")
-                                @Html.TextBoxFor(model => model.NumeroCAI_C_E, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_C_E)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_C_E, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_C_E, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_C_E)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_C_E").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.NumeroCAI_D_E, "Numero CAI notas debito E")
-                                @Html.TextBoxFor(model => model.NumeroCAI_D_E, new { @class = "span12" })
-                                @Html.ValidationMessageFor(model => model.NumeroCAI_D_E)
-                            </div>
-                            <div class="span2 lightblue">
-                                @Html.LabelFor(model => model.FechaCAI_D_E, "Fecha de vencimiento")
-                                @Html.TextBoxFor(model => model.FechaCAI_D_E, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                @Html.ValidationMessageFor(model => model.FechaCAI_D_E)
-                                <script type="text/jscript">
-                                    $("#FechaCAI_D_E").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
-                                </script>
-                            </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_R_A, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_R_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_R_A)
+                            <script type="text/jscript">
+                                $("#FechaCAI_R_A").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
                         </div>
                     </div>
-
-                    <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
-                        <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
-                        <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                            <div class="span4 pull-left">
-                            </div>
-                            <div class="span8 pull-right">
-                                <input type="submit" id="Guardar" value="Aceptar" class="btn  btn-large btn-primary" />
-                                @if (Model.IdPuntoVenta > 0)
-                                { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdPuntoVenta }, new { @class = "btn  btn-large  btn-default" }) }
-                                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn  btn-large  btn-link" })
-                            </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_F_A, "Numero CAI facturas A")
+                            @Html.TextBoxFor(model => model.NumeroCAI_F_A, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_F_A)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_F_A, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_F_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_F_A)
+                            <script type="text/jscript">
+                                $("#FechaCAI_F_A").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
                         </div>
                     </div>
-
-                    <script>
-                        $(document).ready(function () {
-                            $("#Eliminar").click(function() {
-                                // $('#dialog-confirm').data('Combo', 'Aprobo');
-                                $('#dialog-confirm').dialog('open');
-                            });
-
-                            $( "#dialog-confirm" ).dialog({
-                                title: "Confirmar",
-                                content: "Quiere borrar el item?",
-                                type: "confirm",
-                                buttons: [{ value: "Sí" }, { value: "No"}],
-                                success: function (result) {
-                                    if (result == "Sí") {
-                                        // alert("One cup of coffee coming right up!");
-                                        $.ajax({
-                                            url: @Url.Action("Borrar", "DeleteConfirmedDirecto") ,
-                                            success: function (data) {                            }
-                                        });
-                                    }
-                                }
-                            });
-
-                        });
-                    </script>
-
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_C_A, "Numero CAI notas credito A")
+                            @Html.TextBoxFor(model => model.NumeroCAI_C_A, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_C_A)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_C_A, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_C_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_C_A)
+                            <script type="text/jscript">
+                                $("#FechaCAI_C_A").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_D_A, "Numero CAI notas debito A")
+                            @Html.TextBoxFor(model => model.NumeroCAI_D_A, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_D_A)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_D_A, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_D_A, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_D_A)
+                            <script type="text/jscript">
+                                $("#FechaCAI_D_A").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_F_B, "Numero CAI facturas B")
+                            @Html.TextBoxFor(model => model.NumeroCAI_F_B, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_F_B)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_F_B, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_F_B, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_F_B)
+                            <script type="text/jscript">
+                                $("#FechaCAI_F_B").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_C_B, "Numero CAI notas credito B")
+                            @Html.TextBoxFor(model => model.NumeroCAI_C_B, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_C_B)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_C_B, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_C_B, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_C_B)
+                            <script type="text/jscript">
+                                $("#FechaCAI_C_B").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_D_B, "Numero CAI notas debito B")
+                            @Html.TextBoxFor(model => model.NumeroCAI_D_B, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_D_B)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_D_B, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_D_B, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_D_B)
+                            <script type="text/jscript">
+                                $("#FechaCAI_D_B").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_F_E, "Numero CAI facturas E")
+                            @Html.TextBoxFor(model => model.NumeroCAI_F_E, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_F_E)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_F_E, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_F_E, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_F_E)
+                            <script type="text/jscript">
+                                $("#FechaCAI_F_E").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_C_E, "Numero CAI notas credito E")
+                            @Html.TextBoxFor(model => model.NumeroCAI_C_E, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_C_E)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_C_E, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_C_E, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_C_E)
+                            <script type="text/jscript">
+                                $("#FechaCAI_C_E").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroCAI_D_E, "Numero CAI notas debito E")
+                            @Html.TextBoxFor(model => model.NumeroCAI_D_E, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.NumeroCAI_D_E)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaCAI_D_E, "Fecha de vencimiento")
+                            @Html.TextBoxFor(model => model.FechaCAI_D_E, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaCAI_D_E)
+                            <script type="text/jscript">
+                                $("#FechaCAI_D_E").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                    </div>
                 </div>
-            </form>
 
-        </div>
+                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
+                    <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
+                    <div class="row-fluid " style="padding: 11px 0px 0px 0px">
+                        <div class="span4 pull-left">
+                        </div>
+                        <div class="span8 pull-right">
+                            <input type="submit" id="Guardar" value="Aceptar" class="btn btn-primary btn-large" />
+                            @if (Model.IdPuntoVenta > 0)
+                            { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdPuntoVenta }, new { @class = "btn btn-default" }) }
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn  btn-large  btn-link" })
+                        </div>
+                    </div>
+                </div>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#FechaPuntosVenta").datepicker({
-                    changeMonth: true,
-                    changeYear: true
-                    //numberOfMonths: 2,
-                });
+                <script>
+                    $(document).ready(function () {
+                        $("#Eliminar").click(function() {
+                            // $('#dialog-confirm').data('Combo', 'Aprobo');
+                            $('#dialog-confirm').dialog('open');
+                        });
 
-                //Para que haga wrap en las celdas
-                $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
-                //$.jgrid.formatter.integer.thousandsSeparator=',';
+                        $( "#dialog-confirm" ).dialog({
+                            title: "Confirmar",
+                            content: "Quiere borrar el item?",
+                            type: "confirm",
+                            buttons: [{ value: "Sí" }, { value: "No"}],
+                            success: function (result) {
+                                if (result == "Sí") {
+                                    // alert("One cup of coffee coming right up!");
+                                    $.ajax({
+                                        url: @Url.Action("Borrar", "DeleteConfirmedDirecto") ,
+                                        success: function (data) {                            }
+                                    });
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#FechaPuntosVenta").datepicker({
+                changeMonth: true,
+                changeYear: true
+                //numberOfMonths: 2,
             });
 
-            Aprobado();
+            //Para que haga wrap en las celdas
+            $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+            //$.jgrid.formatter.integer.thousandsSeparator=',';
+        });
 
-            function Aprobado() {
-                if ($('#Aprobo').val() != "") {
-                    $("#chk0").attr('checked', true);
-                    var Aprobo = $("#Aprobo > option:selected").html();
-                    $("#chk0").attr('title', Aprobo);
-                }
-                else {
-                    $("#chk0").attr('checked', false);
-                    $("#chk0").attr('title', "");
-                }
+        Aprobado();
+
+        function Aprobado() {
+            if ($('#Aprobo').val() != "") {
+                $("#chk0").attr('checked', true);
+                var Aprobo = $("#Aprobo > option:selected").html();
+                $("#chk0").attr('title', Aprobo);
             }
-
-            function pickdates(id) {
-                jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
+            else {
+                $("#chk0").attr('checked', false);
+                $("#chk0").attr('title', "");
             }
+        }
 
-            function formEdit() {
-                $('input[name=rdEditApproach]').attr('disabled', true);
-                $('#Lista').navGrid(
-                    '#Lista',
-                //enabling buttons
-                    {add: true, del: true, edit: true, search: false },
-                //edit option
-                    {width: 'auto' },
-                //add options
-                    {width: 'auto', url: '/Home/AddProduct/' },
-                //delete options
-                    {url: '/Home/DeleteProduct/' });
-            };
+        function pickdates(id) {
+            jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
+        }
 
-        </script>
-    <script type="text/javascript">
+        $(window).resize(function () {
+            RefrescaAnchoGrillaDetalle();
 
-    $(window).resize(function () {
-        RefrescaAnchoGrillaDetalle();
-
-        $("#conscroll").height($(window).height() - 120);
-    });
+            $("#conscroll").height($(window).height() - 120);
+        });
     </script>
 }
