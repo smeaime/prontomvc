@@ -41,7 +41,6 @@ C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Ionic.Zip.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\itextsharp.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\DataAccess.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\CodeEngine.Framework.QueryBuilder.dll
-C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Linq.Dynamic.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\ProntoMVC.Data.pdb
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\AutoMapper.pdb
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\AutoMapper.xml
