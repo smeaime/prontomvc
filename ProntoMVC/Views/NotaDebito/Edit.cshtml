@@ -301,18 +301,12 @@
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
                         <div class="span4 lightblue">
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
-                            <span>
-                                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link " })
-                            </span>
-
                             @if (Model.IdNotaDebito > 0)
                             {
                                 <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />
                                 <a class="btn  btn-large" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdNotaDebito })">
                                     <i class="icon-print"></i>&nbsp;Imprimir
                                 </a>
-
-                            
                             }
                             <script>
                                 $(function () {
