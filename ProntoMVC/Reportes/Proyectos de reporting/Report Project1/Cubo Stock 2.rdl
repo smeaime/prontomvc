@@ -151,6 +151,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -189,6 +190,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -216,27 +218,27 @@
         <TablixColumnHierarchy>
           <TablixMembers>
             <TablixMember>
-              <Group Name="Id_Obra">
+              <Group Name="Obra">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!Id_Obra.Value</GroupExpression>
+                  <GroupExpression>=Fields!Numero_Obra.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!Id_Obra.Value</Value>
+                  <Value>=Fields!Numero_Obra.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
                 <Size>0.23622in</Size>
                 <CellContents>
-                  <Textbox Name="Id_Obra">
+                  <Textbox Name="Numero_Obra">
                     <CanGrow>true</CanGrow>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!Id_Obra.Value</Value>
+                            <Value>=Fields!Numero_Obra.Value</Value>
                             <Style>
                               <FontFamily>Tahoma</FontFamily>
                               <FontSize>8pt</FontSize>
@@ -250,7 +252,7 @@
                         </Style>
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>Id_Obra</rd:DefaultName>
+                    <rd:DefaultName>Numero_Obra</rd:DefaultName>
                     <Style>
                       <Border>
                         <Color>LightGrey</Color>
@@ -411,27 +413,27 @@
               </TablixHeader>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="Clave_Comprobante">
+                  <Group Name="Comprobante">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!Clave_Comprobante.Value</GroupExpression>
+                      <GroupExpression>=Fields!Comprobante.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!Clave_Comprobante.Value</Value>
+                      <Value>=Fields!Comprobante.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
                     <Size>1.86967in</Size>
                     <CellContents>
-                      <Textbox Name="Clave_Comprobante">
+                      <Textbox Name="Comprobante">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!Clave_Comprobante.Value</Value>
+                                <Value>=Fields!Comprobante.Value</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontSize>8pt</FontSize>
@@ -441,7 +443,7 @@
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Clave_Comprobante</rd:DefaultName>
+                        <rd:DefaultName>Comprobante</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>LightGrey</Color>
@@ -553,7 +555,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.41556in</Top>
+        <Top>0.42944in</Top>
         <Height>0.89202in</Height>
         <Width>6.65067in</Width>
         <Style />
@@ -565,7 +567,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Stock a fecha (cubo)</Value>
+                <Value>Cubo Stock</Value>
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
                   <FontSize>20pt</FontSize>
@@ -579,12 +581,9 @@
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
         <Height>0.36in</Height>
-        <Width>7.36917in</Width>
+        <Width>5in</Width>
         <ZIndex>1</ZIndex>
         <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -622,7 +621,7 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandText> SELECT NON EMPTY { [Measures].[Cantidad] } ON COLUMNS, NON EMPTY { ([Obras].[Id Obra].[Id Obra].ALLMEMBERS * [Articulos].[Id Articulo].[Id Articulo].ALLMEMBERS * [Fecha].[Clave Fecha].[Clave Fecha].ALLMEMBERS * [Comprobantes].[Clave Comprobante].[Clave Comprobante].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM [Stock] CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</CommandText>
+        <CommandText> SELECT NON EMPTY { [Measures].[Cantidad] } ON COLUMNS, NON EMPTY { ([Obras].[Numero Obra].[Numero Obra].ALLMEMBERS * [Articulos].[Id Articulo].[Id Articulo].ALLMEMBERS * [Fecha].[Año-NombreMes].[Nombre Mes].ALLMEMBERS * [Comprobantes].[Comprobante].[Comprobante].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM [Stock] CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</CommandText>
         <rd:DesignerState>
           <QueryDefinition xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition">
             <CommandType>MDX</CommandType>
@@ -632,12 +631,12 @@
                   <Item>
                     <ID xsi:type="Level">
                       <DimensionName>Obras</DimensionName>
-                      <HierarchyName>Id Obra</HierarchyName>
-                      <HierarchyUniqueName>[Obras].[Id Obra]</HierarchyUniqueName>
-                      <LevelName>Id Obra</LevelName>
-                      <UniqueName>[Obras].[Id Obra].[Id Obra]</UniqueName>
+                      <HierarchyName>Numero Obra</HierarchyName>
+                      <HierarchyUniqueName>[Obras].[Numero Obra]</HierarchyUniqueName>
+                      <LevelName>Numero Obra</LevelName>
+                      <UniqueName>[Obras].[Numero Obra].[Numero Obra]</UniqueName>
                     </ID>
-                    <ItemCaption>Id Obra</ItemCaption>
+                    <ItemCaption>Numero Obra</ItemCaption>
                     <UniqueName>true</UniqueName>
                   </Item>
                   <Item>
@@ -654,23 +653,34 @@
                   <Item>
                     <ID xsi:type="Level">
                       <DimensionName>Fecha</DimensionName>
-                      <HierarchyName>Clave Fecha</HierarchyName>
-                      <HierarchyUniqueName>[Fecha].[Clave Fecha]</HierarchyUniqueName>
-                      <LevelName>Clave Fecha</LevelName>
-                      <UniqueName>[Fecha].[Clave Fecha].[Clave Fecha]</UniqueName>
+                      <HierarchyName>Año-NombreMes</HierarchyName>
+                      <HierarchyUniqueName>[Fecha].[Año-NombreMes]</HierarchyUniqueName>
+                      <LevelName>Numero Año</LevelName>
+                      <UniqueName>[Fecha].[Año-NombreMes].[Numero Año]</UniqueName>
                     </ID>
-                    <ItemCaption>Clave Fecha</ItemCaption>
+                    <ItemCaption>Numero Año</ItemCaption>
+                    <UniqueName>true</UniqueName>
+                  </Item>
+                  <Item>
+                    <ID xsi:type="Level">
+                      <DimensionName>Fecha</DimensionName>
+                      <HierarchyName>Año-NombreMes</HierarchyName>
+                      <HierarchyUniqueName>[Fecha].[Año-NombreMes]</HierarchyUniqueName>
+                      <LevelName>Nombre Mes</LevelName>
+                      <UniqueName>[Fecha].[Año-NombreMes].[Nombre Mes]</UniqueName>
+                    </ID>
+                    <ItemCaption>Nombre Mes</ItemCaption>
                     <UniqueName>true</UniqueName>
                   </Item>
                   <Item>
                     <ID xsi:type="Level">
                       <DimensionName>Comprobantes</DimensionName>
-                      <HierarchyName>Clave Comprobante</HierarchyName>
-                      <HierarchyUniqueName>[Comprobantes].[Clave Comprobante]</HierarchyUniqueName>
-                      <LevelName>Clave Comprobante</LevelName>
-                      <UniqueName>[Comprobantes].[Clave Comprobante].[Clave Comprobante]</UniqueName>
+                      <HierarchyName>Comprobante</HierarchyName>
+                      <HierarchyUniqueName>[Comprobantes].[Comprobante]</HierarchyUniqueName>
+                      <LevelName>Comprobante</LevelName>
+                      <UniqueName>[Comprobantes].[Comprobante].[Comprobante]</UniqueName>
                     </ID>
-                    <ItemCaption>Clave Comprobante</ItemCaption>
+                    <ItemCaption>Comprobante</ItemCaption>
                     <UniqueName>true</UniqueName>
                   </Item>
                   <Item>
@@ -700,27 +710,31 @@
               <QueryProperties />
             </QuerySpecification>
             <Query>
-              <Statement> SELECT NON EMPTY { [Measures].[Cantidad] } ON COLUMNS, NON EMPTY { ([Obras].[Id Obra].[Id Obra].ALLMEMBERS * [Articulos].[Id Articulo].[Id Articulo].ALLMEMBERS * [Fecha].[Clave Fecha].[Clave Fecha].ALLMEMBERS * [Comprobantes].[Clave Comprobante].[Clave Comprobante].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM [Stock] CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</Statement>
+              <Statement> SELECT NON EMPTY { [Measures].[Cantidad] } ON COLUMNS, NON EMPTY { ([Obras].[Numero Obra].[Numero Obra].ALLMEMBERS * [Articulos].[Id Articulo].[Id Articulo].ALLMEMBERS * [Fecha].[Año-NombreMes].[Nombre Mes].ALLMEMBERS * [Comprobantes].[Comprobante].[Comprobante].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM [Stock] CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</Statement>
               <ParameterDefinitions />
             </Query>
           </QueryDefinition>
         </rd:DesignerState>
       </Query>
       <Fields>
-        <Field Name="Id_Obra">
-          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Obras].[Id Obra].[Id Obra]" /&gt;</DataField>
+        <Field Name="Numero_Obra">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Obras].[Numero Obra].[Numero Obra]" /&gt;</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Id_Articulo">
           <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Articulos].[Id Articulo].[Id Articulo]" /&gt;</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Clave_Fecha">
-          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Fecha].[Clave Fecha].[Clave Fecha]" /&gt;</DataField>
+        <Field Name="Numero_Año">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Fecha].[Año-NombreMes].[Numero Año]" /&gt;</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Clave_Comprobante">
-          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Comprobantes].[Clave Comprobante].[Clave Comprobante]" /&gt;</DataField>
+        <Field Name="Nombre_Mes">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Fecha].[Año-NombreMes].[Nombre Mes]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Comprobante">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Comprobantes].[Comprobante].[Comprobante]" /&gt;</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Cantidad">
