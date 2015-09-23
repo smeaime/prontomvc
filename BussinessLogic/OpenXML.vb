@@ -1013,7 +1013,7 @@ Namespace Pronto.ERP.Bll
                     ErrHandler.WriteError(ex)
                 End Try
 
-                regexReplace(docText, "#NumeroFactura#", oFac.Numero)
+                regexReplace(docText, "#NumeroFactura#", oFac.NumeradorTexto)
                 'regexReplace(docText, "#Fecha#", oFac.Fecha)
                 'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
                 'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
