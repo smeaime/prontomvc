@@ -699,6 +699,7 @@
     <Content Include="Documentos\sql\FK_Pronto - Adicionales por ProntoMVC.sql" />
     <Content Include="Documentos\sql\FK_Pronto mariano manual.sql" />
     <Content Include="Documentos\sql\FK_Pronto.sql" />
+    <Content Include="Documentos\sql\Para los cubos\Generacion de tablas para cubos.sql" />
     <Content Include="Documentos\sql\pruebas\autotrol mvc alter table.sql" />
     <Content Include="Documentos\sql\pruebas\autotrol mvc.sql" />
     <Content Include="Documentos\sql\pruebas\bdl master.sql" />
