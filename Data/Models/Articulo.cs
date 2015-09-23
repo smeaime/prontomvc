@@ -30,6 +30,18 @@ namespace ProntoMVC.Data.Models
             this.DetalleRecepciones = new HashSet<DetalleRecepcione>();
             this.DetalleSalidasMateriales = new HashSet<DetalleSalidasMateriale>();
             this.DetalleValesSalidas = new HashSet<DetalleValesSalida>();
+            this.FertilizantesCupos = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos1 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos2 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos3 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos4 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos5 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos6 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos7 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos8 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos9 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos10 = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos11 = new HashSet<FertilizantesCupos>();
         }
     
         public int IdArticulo { get; set; }
@@ -300,5 +312,17 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleValesSalida> DetalleValesSalidas { get; set; }
         public virtual Marca Marca { get; set; }
         public virtual Modelo Modelo { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos2 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos3 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos4 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos5 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos6 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos7 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos8 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos9 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos10 { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos11 { get; set; }
     }
 }

@@ -1450,4 +1450,48 @@ alter table FertilizantesCupos ADD
 go
 
 
+alter table  FertilizantesCupos ADD
+		 FOREIGN KEY (Cliente) REFERENCES Clientes(IdCliente),
+		 FOREIGN KEY (CuentaOrden) REFERENCES Clientes(IdCliente),
+		 FOREIGN KEY (IdArticulo) REFERENCES Articulos(IdArticulo)
+go
 
+alter table  FertilizantesCupos ADD
+		 FOREIGN KEY (IdArticuloComponente1) REFERENCES Articulos(IdArticulo),
+		 FOREIGN KEY (IdArticuloComponente2) REFERENCES Articulos(IdArticulo),
+		 FOREIGN KEY (IdArticuloComponente3) REFERENCES Articulos(IdArticulo),
+		 FOREIGN KEY (IdArticuloComponente4) REFERENCES Articulos(IdArticulo),
+		 FOREIGN KEY (IdArticuloComponente5) REFERENCES Articulos(IdArticulo),
+		 FOREIGN KEY (IdChofer) REFERENCES Choferes(IdChofer),
+		 FOREIGN KEY (IdTransportista) REFERENCES Transportistas(IdTransportista),
+		 FOREIGN KEY (IdLocalidadTransportista) REFERENCES Localidades(Idlocalidad),
+		 FOREIGN KEY (Destino) REFERENCES WilliamsDestinos(idWilliamsDestino),
+		 FOREIGN KEY (IdUsuarioIngreso) REFERENCES empleados(Idempleado),
+		 FOREIGN KEY (IdUsuarioAnulo) REFERENCES empleados(Idempleado)
+go
+
+
+--------------------------------------------------------------------------
+
+ update  cartasdeporte
+ set fechaanulacion=getdate()
+  where Anulada='SI' and FechaAnulacion is null
+ 
+update CartasDePorte
+set FechaAnulacion =null
+where FechaAnulacion is not  null AND Anulada='NO'
+
+update CartasDePorte
+set Anulada='SI'
+where FechaAnulacion is not  null AND Anulada='NO'
+
+
+select SubnumeroDeFacturacion,* from cartasdeporte where numerocartadeporte=540816830 
+
+--alter table CartasDePorte ADD
+--	CONSTRAINT chk_FechaAnulacion2 CHECK ((FechaAnulacion is null AND Anulada='NO') OR (FechaAnulacion is not null AND Anulada='SI')) 
+--go
+
+alter table CartasDePorte ADD
+	CONSTRAINT chk_FechaAnulacion3 CHECK (not (FechaAnulacion is not null AND Anulada='NO') ) 
+go
