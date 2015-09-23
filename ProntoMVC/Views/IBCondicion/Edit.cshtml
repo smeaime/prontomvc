@@ -4,195 +4,227 @@
 }
 
 @*<link href="~/Content/themes/base/jquery.ui.combobox.css" rel="stylesheet" />
-<script src="~/Scripts/jCombobox/jquery.ui.combobox.js"></script>*@
+    <script src="~/Scripts/jCombobox/jquery.ui.combobox.js"></script>*@
 <script src="~/Scripts/bootstrap-combobox.js"></script>
 <link href="~/Content/bootstrap-combobox.css" rel="stylesheet" />
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
 {
     @Html.ValidationSummary(true)
-    <div class="container-fluid">
-        <div>@Html.Hidden("IdIBCondicion", Model.IdIBCondicion)</div>
-        <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-            <div class="span5 lightblue">
-                @Html.TextBox("Titulo", "CATEGORIAS DE INGRESOS BRUTOS", new { style = "font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 24px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif'; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span10", @readonly = "readonly" })
-            </div>
-            <div class="span4 lightblue">
-                <input type="button" id="grabar2" value="Aceptar" class="btn btn-primary" />
-                @if (Model.IdIBCondicion > 0)
-                { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdIBCondicion }, new { @class = "btn  btn-default" }) }
-                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span8 lightblue">
-                @Html.LabelFor(model => model.Descripcion, "Descripcion")
-                @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                @Html.ValidationMessageFor(model => model.Descripcion)
-            </div>
-        </div>
 
-        <div class="row-fluid">
-            <div class="span4 lightblue">
-                @Html.LabelFor(model => model.IdProvincia, "Provincia")
-                @Html.DropDownList("IdProvincia", null, "", new { @class = "combobox input-large4", @style = "height: 15px; line-height: 14px; " })
-                @Html.ValidationMessageFor(model => model.IdProvincia)
-            </div>
-            <div class="span4 lightblue">
-                @Html.LabelFor(model => model.IdProvinciaReal, "Provincia real")
-                @Html.DropDownList("IdProvinciaReal", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                @Html.ValidationMessageFor(model => model.IdProvinciaReal)
-            </div>
-        </div>
 
-        <div class="row-fluid">
-            <div class="span4 lightblue">
-                @Html.LabelFor(model => model.FechaVigencia, "Fecha vigencia")
-                @Html.TextBoxFor(model => model.FechaVigencia, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                @Html.ValidationMessageFor(model => model.FechaVigencia)
-                <script>
-                    $("#FechaVigencia").datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        dateFormat: 'dd/mm/yy'
-                        //numberOfMonths: 2,
-                    });
-                </script>
-            </div>
-            <div class="span2 lightblue">
-                @Html.LabelFor(model => model.Codigo, "Codigo")
-                @Html.TextBoxFor(model => model.Codigo, new { @class = "span12" })
-                @Html.ValidationMessageFor(model => model.Codigo)
-            </div>
-            <div class="span2 lightblue">
-                @Html.LabelFor(model => model.CodigoActividad, "Codigo actividad")
-                @Html.TextBoxFor(model => model.CodigoActividad, new { @class = "span12" })
-                @Html.ValidationMessageFor(model => model.CodigoActividad)
-            </div>
-        </div>
 
-        <div class="row-fluid">
-            <div class="span4 lightblue">
-                @Html.LabelFor(model => model.InformacionAuxiliar, "Informacion auxiliar")
-                @Html.TextBoxFor(model => model.InformacionAuxiliar, new { @class = "span12" })
-                @Html.ValidationMessageFor(model => model.InformacionAuxiliar)
-            </div>
-            <div class="span2 lightblue">
-                @Html.LabelFor(model => model.CodigoAFIP, "Codigo AFIP")
-                @Html.TextBoxFor(model => model.CodigoAFIP, new { @class = "span12" })
-                @Html.ValidationMessageFor(model => model.CodigoAFIP)
-            </div>
-            <div class="span2 lightblue">
-                @Html.LabelFor(model => model.CodigoArticuloInciso, "Cod. articulo Inciso")
-                @Html.TextBoxFor(model => model.CodigoArticuloInciso, new { @class = "span12" })
-                @Html.ValidationMessageFor(model => model.CodigoArticuloInciso)
-            </div>
-        </div>
 
-        <div class="well well-sm" style="height: 150px; width: 900px;">
-            <h5>RETENCIONES</h5>
-            <div class="row-fluid">
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.ImporteTopeMinimo, "Importe tope minimo")
-                    @Html.TextBoxFor(model => model.ImporteTopeMinimo, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.ImporteTopeMinimo)
-                </div>
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.Alicuota, "Alicuota")
-                    @Html.TextBoxFor(model => model.Alicuota, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.Alicuota)
-                </div>
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.PorcentajeATomarSobreBase, "% a tomar sobre base")
-                    @Html.TextBoxFor(model => model.PorcentajeATomarSobreBase, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.PorcentajeATomarSobreBase)
-                </div>
-            </div>
-            <div class="row-fluid">
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.PorcentajeAdicional, "% Adicional")
-                    @Html.TextBoxFor(model => model.PorcentajeAdicional, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.PorcentajeAdicional)
-                </div>
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.LeyendaPorcentajeAdicional, "Leyenda % adicional")
-                    @Html.TextBoxFor(model => model.LeyendaPorcentajeAdicional, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.LeyendaPorcentajeAdicional)
-                </div>
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.CodigoNormaRetencion, "Cod. norma retencion")
-                    @Html.TextBoxFor(model => model.CodigoNormaRetencion, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.CodigoNormaRetencion)
-                </div>
-            </div>
-        </div>
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+        <form class="form-horizontal" style=" margin-bottom: 0px;">
+            <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100% ">
+                <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
 
-        <div class="well well-sm" style="height: 280px; width: 900px;">
-            <h5>PERCEPCIONES</h5>
-            <h5>VENTAS</h5>
-            <div class="row-fluid">
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.ImporteTopeMinimoPercepcion, "Importe tope minimo perc.")
-                    @Html.TextBoxFor(model => model.ImporteTopeMinimoPercepcion, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.ImporteTopeMinimoPercepcion)
+
+                    <div>@Html.Hidden("IdIBCondicion", Model.IdIBCondicion)</div>
+                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                        <div class="span5 lightblue">
+                            @Html.TextBox("Titulo", "CATEGORIAS DE INGRESOS BRUTOS", new { style = "font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 24px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif'; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span10", @readonly = "readonly" })
+                        </div>
+                        <div class="span4 lightblue">
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span8 lightblue">
+                            @Html.LabelFor(model => model.Descripcion, "Descripcion")
+                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Descripcion)
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span4 lightblue">
+                            @Html.LabelFor(model => model.IdProvincia, "Provincia")
+                            @Html.DropDownList("IdProvincia", null, "", new { @class = "combobox input-large4", @style = "height: 15px; line-height: 14px; " })
+                            @Html.ValidationMessageFor(model => model.IdProvincia)
+                        </div>
+                        <div class="span4 lightblue">
+                            @Html.LabelFor(model => model.IdProvinciaReal, "Provincia real")
+                            @Html.DropDownList("IdProvinciaReal", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                            @Html.ValidationMessageFor(model => model.IdProvinciaReal)
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span4 lightblue">
+                            @Html.LabelFor(model => model.FechaVigencia, "Fecha vigencia")
+                            @Html.TextBoxFor(model => model.FechaVigencia, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaVigencia)
+                            <script>
+                                $("#FechaVigencia").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.Codigo, "Codigo")
+                            @Html.TextBoxFor(model => model.Codigo, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Codigo)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.CodigoActividad, "Codigo actividad")
+                            @Html.TextBoxFor(model => model.CodigoActividad, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.CodigoActividad)
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span4 lightblue">
+                            @Html.LabelFor(model => model.InformacionAuxiliar, "Informacion auxiliar")
+                            @Html.TextBoxFor(model => model.InformacionAuxiliar, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.InformacionAuxiliar)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.CodigoAFIP, "Codigo AFIP")
+                            @Html.TextBoxFor(model => model.CodigoAFIP, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.CodigoAFIP)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.CodigoArticuloInciso, "Cod. articulo Inciso")
+                            @Html.TextBoxFor(model => model.CodigoArticuloInciso, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.CodigoArticuloInciso)
+                        </div>
+                    </div>
+
+                    <div class="well well-sm" style="height: 150px; width: 900px;">
+                        <h5>RETENCIONES</h5>
+                        <div class="row-fluid">
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.ImporteTopeMinimo, "Importe tope minimo")
+                                @Html.TextBoxFor(model => model.ImporteTopeMinimo, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.ImporteTopeMinimo)
+                            </div>
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.Alicuota, "Alicuota")
+                                @Html.TextBoxFor(model => model.Alicuota, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.Alicuota)
+                            </div>
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.PorcentajeATomarSobreBase, "% a tomar sobre base")
+                                @Html.TextBoxFor(model => model.PorcentajeATomarSobreBase, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.PorcentajeATomarSobreBase)
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.PorcentajeAdicional, "% Adicional")
+                                @Html.TextBoxFor(model => model.PorcentajeAdicional, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.PorcentajeAdicional)
+                            </div>
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.LeyendaPorcentajeAdicional, "Leyenda % adicional")
+                                @Html.TextBoxFor(model => model.LeyendaPorcentajeAdicional, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.LeyendaPorcentajeAdicional)
+                            </div>
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.CodigoNormaRetencion, "Cod. norma retencion")
+                                @Html.TextBoxFor(model => model.CodigoNormaRetencion, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.CodigoNormaRetencion)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well well-sm" style="height: 280px; width: 900px;">
+                        <h5>PERCEPCIONES</h5>
+                        <h5>VENTAS</h5>
+                        <div class="row-fluid">
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.ImporteTopeMinimoPercepcion, "Importe tope minimo perc.")
+                                @Html.TextBoxFor(model => model.ImporteTopeMinimoPercepcion, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.ImporteTopeMinimoPercepcion)
+                            </div>
+                            <div class="span2 lightblue">
+                                @Html.LabelFor(model => model.AlicuotaPercepcion, "Alicuota perc.")
+                                @Html.TextBoxFor(model => model.AlicuotaPercepcion, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.AlicuotaPercepcion)
+                            </div>
+                            <div class="span4 lightblue">
+                                @Html.LabelFor(model => model.IdCuentaPercepcionIIBB, "Cuenta contable normal")
+                                @Html.DropDownList("IdCuentaPercepcionIIBB", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                @Html.ValidationMessageFor(model => model.IdCuentaPercepcionIIBB)
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span3 lightblue">
+                                @Html.LabelFor(model => model.CodigoNormaPercepcion, "Cod. norma perc.")
+                                @Html.TextBoxFor(model => model.CodigoNormaPercepcion, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.CodigoNormaPercepcion)
+                            </div>
+                            <div class="span2 lightblue">
+                                @Html.LabelFor(model => model.AlicuotaPercepcionConvenio, "Alicuota perc. conv.")
+                                @Html.TextBoxFor(model => model.AlicuotaPercepcionConvenio, new { @class = "span12" })
+                                @Html.ValidationMessageFor(model => model.AlicuotaPercepcionConvenio)
+                            </div>
+                            <div class="span4 lightblue">
+                                @Html.LabelFor(model => model.IdCuentaPercepcionIIBBConvenio, "Cuenta contable convenio")
+                                @Html.DropDownList("IdCuentaPercepcionIIBBConvenio", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                @Html.ValidationMessageFor(model => model.IdCuentaPercepcionIIBBConvenio)
+                            </div>
+                        </div>
+                        <h5>COMPRAS</h5>
+                        <div class="row-fluid">
+                            <div class="span3 lightblue">
+                            </div>
+                            <div class="span2 lightblue">
+                            </div>
+                            <div class="span4 lightblue">
+                                @Html.LabelFor(model => model.IdCuentaPercepcionIIBBCompras, "Cuenta contable compras")
+                                @Html.DropDownList("IdCuentaPercepcionIIBBCompras", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                @Html.ValidationMessageFor(model => model.IdCuentaPercepcionIIBBCompras)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.AcumulaMensualmente, "Acumula por mes los pagos para calculo del impuesto ?")
+                        @Html.RadioButtonFor(model => model.AcumulaMensualmente, "SI") SI
+                        @Html.RadioButtonFor(model => model.AcumulaMensualmente, "NO") NO
+                    </div>
+
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.BaseCalculo, "Base sobre la que se aplicara la alicuota del impuesto")
+                        @Html.RadioButtonFor(model => model.BaseCalculo, "SIN IMPUESTOS") SIN IMPUESTOS
+                        @Html.RadioButtonFor(model => model.BaseCalculo, "TOTAL PAGADO") TOTAL PAGADO
+                    </div>
+
+
                 </div>
-                <div class="span2 lightblue">
-                    @Html.LabelFor(model => model.AlicuotaPercepcion, "Alicuota perc.")
-                    @Html.TextBoxFor(model => model.AlicuotaPercepcion, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.AlicuotaPercepcion)
-                </div>
-                <div class="span4 lightblue">
-                    @Html.LabelFor(model => model.IdCuentaPercepcionIIBB, "Cuenta contable normal")
-                    @Html.DropDownList("IdCuentaPercepcionIIBB", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                    @Html.ValidationMessageFor(model => model.IdCuentaPercepcionIIBB)
+
+                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
+                    <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
+                    <div class="row-fluid " style="padding: 11px 0px 0px 0px">
+                        <div class="span4 pull-left">
+                        </div>
+                        <div class="span8 pull-right">
+                            <input type="button" id="grabar2" value="Aceptar" class="btn btn-primary" />
+                            @if (Model.IdIBCondicion > 0)
+                            { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdIBCondicion }, new { @class = "btn  btn-default" }) }
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span3 lightblue">
-                    @Html.LabelFor(model => model.CodigoNormaPercepcion, "Cod. norma perc.")
-                    @Html.TextBoxFor(model => model.CodigoNormaPercepcion, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.CodigoNormaPercepcion)
-                </div>
-                <div class="span2 lightblue">
-                    @Html.LabelFor(model => model.AlicuotaPercepcionConvenio, "Alicuota perc. conv.")
-                    @Html.TextBoxFor(model => model.AlicuotaPercepcionConvenio, new { @class = "span12" })
-                    @Html.ValidationMessageFor(model => model.AlicuotaPercepcionConvenio)
-                </div>
-                <div class="span4 lightblue">
-                    @Html.LabelFor(model => model.IdCuentaPercepcionIIBBConvenio, "Cuenta contable convenio")
-                    @Html.DropDownList("IdCuentaPercepcionIIBBConvenio", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                    @Html.ValidationMessageFor(model => model.IdCuentaPercepcionIIBBConvenio)
-                </div>
-            </div>
-            <h5>COMPRAS</h5>
-            <div class="row-fluid">
-                <div class="span3 lightblue">
-                </div>
-                <div class="span2 lightblue">
-                </div>
-                <div class="span4 lightblue">
-                    @Html.LabelFor(model => model.IdCuentaPercepcionIIBBCompras, "Cuenta contable compras")
-                    @Html.DropDownList("IdCuentaPercepcionIIBBCompras", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                    @Html.ValidationMessageFor(model => model.IdCuentaPercepcionIIBBCompras)
-                </div>
-            </div>
-        </div>
-
-        <div class="span4 lightblue">
-            @Html.LabelFor(model => model.AcumulaMensualmente, "Acumula por mes los pagos para calculo del impuesto ?")
-            @Html.RadioButtonFor(model => model.AcumulaMensualmente, "SI") SI
-            @Html.RadioButtonFor(model => model.AcumulaMensualmente, "NO") NO
-        </div>
-
-        <div class="span4 lightblue">
-            @Html.LabelFor(model => model.BaseCalculo, "Base sobre la que se aplicara la alicuota del impuesto")
-            @Html.RadioButtonFor(model => model.BaseCalculo, "SIN IMPUESTOS") SIN IMPUESTOS
-            @Html.RadioButtonFor(model => model.BaseCalculo, "TOTAL PAGADO") TOTAL PAGADO
-        </div>
-
+        </form>
     </div>
 
+
     <script type="text/javascript">
+        $(window).resize(function () {
+            RefrescaAnchoGrillaDetalle();
+
+            $("#conscroll").height($(window).height() - 120);
+        });
+
         $(document).ready(function () {
 
             //$('select').combobox();
