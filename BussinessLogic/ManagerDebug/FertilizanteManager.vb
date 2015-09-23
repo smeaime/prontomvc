@@ -299,6 +299,46 @@ Public Class FertilizanteManager
                 If .IdArticulo = -1 Then Return "Producto"
             End If
 
+
+            '/////////////////////////////////////////
+            'revisar MostrarAutocompleteCorrespondiente() en el codebehind de FertilizantesImportador
+
+            dr.Item("column12") = iisNull(dr.Item("column12"))
+            If dr.Item("column12") <> "NO_VALIDAR" And dr.Item("column12") <> "" Then
+                .IdArticuloComponente1 = BuscaIdArticuloPreciso(dr.Item("column12"), SC)
+                If .IdArticuloComponente1 = -1 Then .IdArticuloComponente1 = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column12")), SC)
+                'dt.Rows(row).Item("IdArticulo") = .IdArticulo
+                If .IdArticuloComponente1 = -1 Then Return "column12"
+            End If
+
+            dr.Item("column13") = iisNull(dr.Item("column13"))
+            If dr.Item("column13") <> "NO_VALIDAR" And dr.Item("column13") <> "" Then
+                .IdArticuloComponente2 = BuscaIdArticuloPreciso(dr.Item("column13"), SC)
+                If .IdArticuloComponente2 = -1 Then .IdArticuloComponente2 = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column13")), SC)
+                'dt.Rows(row).Item("IdArticulo") = .IdArticulo
+                If .IdArticuloComponente2 = -1 Then Return "column13"
+            End If
+
+            dr.Item("column14") = iisNull(dr.Item("column14"))
+            If dr.Item("column14") <> "NO_VALIDAR" And dr.Item("column14") <> "" Then
+                .IdArticuloComponente3 = BuscaIdArticuloPreciso(dr.Item("column14"), SC)
+                If .IdArticuloComponente3 = -1 Then .IdArticuloComponente3 = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column14")), SC)
+                'dt.Rows(row).Item("IdArticulo") = .IdArticulo
+                If .IdArticuloComponente3 = -1 Then Return "column14"
+            End If
+
+            dr.Item("column15") = iisNull(dr.Item("column15"))
+            If dr.Item("column15") <> "NO_VALIDAR" And dr.Item("column15") <> "" Then
+                .IdArticuloComponente4 = BuscaIdArticuloPreciso(dr.Item("column15"), SC)
+                If .IdArticuloComponente4 = -1 Then .IdArticuloComponente4 = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column15")), SC)
+                'dt.Rows(row).Item("IdArticulo") = .IdArticulo
+                If .IdArticuloComponente4 = -1 Then Return "column15"
+            End If
+
+
+
+
+
             ''/////////////////////////////////////////
 
             dr.Item("Titular") = iisNull(dr.Item("Titular"))
@@ -673,13 +713,13 @@ Public Class FertilizanteManager
 
         Select Case s
             Case "PRODUCTO (UG,DAP,MAP,ETC)"
-                Return "Producto"
+                Return enumColumnasDeGrillaFinalFertilizantes.Producto
 
             Case "Nº CUPO"
-                Return "NumeroCDP"
+                Return enumColumnasDeGrillaFinalFertilizantes.NumeroCDP
 
             Case "DESTINO DE LA MERCADERIA"
-                Return "Destino"
+                Return enumColumnasDeGrillaFinalFertilizantes.Destino
 
 
             Case "CLIENTE"
@@ -696,9 +736,9 @@ Public Class FertilizanteManager
                 '  Return enumColumnasDeGrillaFinalFertilizantes.
                 Return enumColumnasDeGrillaFinalFertilizantes.Auxiliar5
             Case "PURO"
-                Return enumColumnasDeGrillaFinalFertilizantes.column20
+                Return enumColumnasDeGrillaFinalFertilizantes.Calidad
             Case "MEZCLA"
-                Return enumColumnasDeGrillaFinalFertilizantes.column16
+                Return enumColumnasDeGrillaFinalFertilizantes.Exporta
 
 
 
@@ -714,30 +754,50 @@ Public Class FertilizanteManager
             Case "PRODUCTO4", "PRODUCTO 4"
                 Return enumColumnasDeGrillaFinalFertilizantes.column15
 
+            Case "% PRODUCTO 1"
+                Return enumColumnasDeGrillaFinalFertilizantes.column17
+            Case "% PRODUCTO 2"
+                Return enumColumnasDeGrillaFinalFertilizantes.column18
+            Case "% PRODUCTO 3"
+                Return enumColumnasDeGrillaFinalFertilizantes.column19
+            Case "% PRODUCTO 4"
+                Return enumColumnasDeGrillaFinalFertilizantes.column20
+
+
+
 
             Case "FORMA DE DESPACHO (GRANEL,BLS, BIGBAG)"
 
+                Return enumColumnasDeGrillaFinalFertilizantes.Comprador
+
             Case "CANTIDAD (KG)"
-                Return "NetoProc"
+                Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
+            Case "RECORRIDO"
+                Return enumColumnasDeGrillaFinalFertilizantes.KmARecorrer
+
 
 
             Case "TRANSPORTISTA", "TRANSP.", "TRANSPORTE"
-                Return "column21"
+                Return enumColumnasDeGrillaFinalFertilizantes.column21
             Case "CUIT TRANS"
-                Return "column22"
+                Return enumColumnasDeGrillaFinalFertilizantes.column22
             Case "NOMBRE DEL CHOFER"
                 Return enumColumnasDeGrillaFinalFertilizantes.column23
             Case "CUIT CHOFER"
-                Return "column24"
+                Return enumColumnasDeGrillaFinalFertilizantes.column24
+
+
+            Case "LOCALIDAD TRANSP"
+
+                Return enumColumnasDeGrillaFinalFertilizantes.Procedencia
+               
             Case "OBSERVACIONES.", "OBSERVACIONES", "OBSERVACION", "OBSERV.", "MER/REB", "ANÁLISIS"
-                Return "column25"
+                Return enumColumnasDeGrillaFinalFertilizantes.column25
 
             Case "PATENTE", "PAT CHASIS", "PTE.", "PATE", "CHASIS"
-
-                Return "Patente"
+                Return enumColumnasDeGrillaFinalFertilizantes.Patente
             Case "ACOPLADO", "ACOPL", "PAT.ACOP."
-
-                Return "Acoplado"
+                Return enumColumnasDeGrillaFinalFertilizantes.Acoplado
 
 
 
