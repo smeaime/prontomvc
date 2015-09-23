@@ -287,29 +287,29 @@
                     </div>
 
                     <script>
-                $(document).ready(function () {
-                    $("#Eliminar").click(function() {
-                        // $('#dialog-confirm').data('Combo', 'Aprobo');
-                        $('#dialog-confirm').dialog('open');
-                    });
+                        $(document).ready(function () {
+                            $("#Eliminar").click(function() {
+                                // $('#dialog-confirm').data('Combo', 'Aprobo');
+                                $('#dialog-confirm').dialog('open');
+                            });
 
-                    $( "#dialog-confirm" ).dialog({
-                        title: "Confirmar",
-                        content: "Quiere borrar el item?",
-                        type: "confirm",
-                        buttons: [{ value: "Sí" }, { value: "No"}],
-                        success: function (result) {
-                            if (result == "Sí") {
-                                // alert("One cup of coffee coming right up!");
-                                $.ajax({
-                                    url: @Url.Action("Borrar", "DeleteConfirmedDirecto") ,
-                                    success: function (data) {                            }
-                                });
-                            }
-                        }
-                    });
+                            $( "#dialog-confirm" ).dialog({
+                                title: "Confirmar",
+                                content: "Quiere borrar el item?",
+                                type: "confirm",
+                                buttons: [{ value: "Sí" }, { value: "No"}],
+                                success: function (result) {
+                                    if (result == "Sí") {
+                                        // alert("One cup of coffee coming right up!");
+                                        $.ajax({
+                                            url: @Url.Action("Borrar", "DeleteConfirmedDirecto") ,
+                                            success: function (data) {                            }
+                                        });
+                                    }
+                                }
+                            });
 
-                });
+                        });
                     </script>
 
                 </div>
