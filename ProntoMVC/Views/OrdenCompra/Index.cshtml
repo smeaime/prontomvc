@@ -29,7 +29,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "OrdenCompra_DynamicGridData")',
+            url: '@Url.Action(  "TT_DynamicGridData","OrdenCompra")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
