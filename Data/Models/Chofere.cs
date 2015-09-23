@@ -14,10 +14,19 @@ namespace ProntoMVC.Data.Models
     
     public partial class Chofere
     {
+        public Chofere()
+        {
+            this.FertilizantesCupos = new HashSet<FertilizantesCupos>();
+            this.FertilizantesCupos1 = new HashSet<FertilizantesCupos>();
+        }
+    
         public int IdChofer { get; set; }
         public string Nombre { get; set; }
         public string PathImagen1 { get; set; }
         public string NumeroDocumento { get; set; }
         public string Cuil { get; set; }
+    
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos { get; set; }
+        public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
     }
 }

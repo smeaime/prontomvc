@@ -5223,6 +5223,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="CodigoServicio" Type="varchar" MaxLength="5" />
           <Property Name="NumeroServicio" Type="varchar" MaxLength="10" />
           <Property Name="Codigo" Type="int" />
+          <Property Name="IdBanco" Type="int" />
         </EntityType>
         <EntityType Name="Tipos">
           <Key>
@@ -5655,6 +5656,318 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             </Principal>
             <Dependent Role="CartasPorteMovimientos">
               <PropertyRef Name="IdDetalleFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Clien__405C5086">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Clien__4DB64BA4">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Cuent__415074BF">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="CuentaOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Cuent__4EAA6FDD">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="CuentaOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__424498F8">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__4338BD31">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__442CE16A">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__452105A3">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__461529DC">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__47094E15">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__4F9E9416">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__5092B84F">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__5186DC88">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__527B00C1">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__536F24FA">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__54634933">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdCho__47FD724E">
+          <End Role="Choferes" Type="Self.Choferes" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Choferes">
+              <PropertyRef Name="IdChofer" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdChofer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdCho__55576D6C">
+          <End Role="Choferes" Type="Self.Choferes" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Choferes">
+              <PropertyRef Name="IdChofer" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdChofer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdLoc__49E5BAC0">
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdLocalidadTransportista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdLoc__573FB5DE">
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdLocalidadTransportista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdTra__48F19687">
+          <End Role="Transportistas" Type="Self.Transportistas" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transportistas">
+              <PropertyRef Name="IdTransportista" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdTransportista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdTra__564B91A5">
+          <End Role="Transportistas" Type="Self.Transportistas" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transportistas">
+              <PropertyRef Name="IdTransportista" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdTransportista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__4BCE0332">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__4CC2276B">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioAnulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__5927FE50">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__5A1C2289">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="FertilizantesCupos" Type="Self.FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioAnulo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8704,6 +9017,110 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
             <End Role="CartasPorteMovimientos" EntitySet="CartasPorteMovimientos" />
           </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Clien__405C5086" Association="Self.FK__Fertiliza__Clien__405C5086">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Clien__4DB64BA4" Association="Self.FK__Fertiliza__Clien__4DB64BA4">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Cuent__415074BF" Association="Self.FK__Fertiliza__Cuent__415074BF">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Cuent__4EAA6FDD" Association="Self.FK__Fertiliza__Cuent__4EAA6FDD">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__424498F8" Association="Self.FK__Fertiliza__IdArt__424498F8">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__4338BD31" Association="Self.FK__Fertiliza__IdArt__4338BD31">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__442CE16A" Association="Self.FK__Fertiliza__IdArt__442CE16A">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__452105A3" Association="Self.FK__Fertiliza__IdArt__452105A3">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__461529DC" Association="Self.FK__Fertiliza__IdArt__461529DC">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__47094E15" Association="Self.FK__Fertiliza__IdArt__47094E15">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__4F9E9416" Association="Self.FK__Fertiliza__IdArt__4F9E9416">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__5092B84F" Association="Self.FK__Fertiliza__IdArt__5092B84F">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__5186DC88" Association="Self.FK__Fertiliza__IdArt__5186DC88">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__527B00C1" Association="Self.FK__Fertiliza__IdArt__527B00C1">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__536F24FA" Association="Self.FK__Fertiliza__IdArt__536F24FA">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__54634933" Association="Self.FK__Fertiliza__IdArt__54634933">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdCho__47FD724E" Association="Self.FK__Fertiliza__IdCho__47FD724E">
+            <End Role="Choferes" EntitySet="Choferes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdCho__55576D6C" Association="Self.FK__Fertiliza__IdCho__55576D6C">
+            <End Role="Choferes" EntitySet="Choferes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdLoc__49E5BAC0" Association="Self.FK__Fertiliza__IdLoc__49E5BAC0">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdLoc__573FB5DE" Association="Self.FK__Fertiliza__IdLoc__573FB5DE">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdTra__48F19687" Association="Self.FK__Fertiliza__IdTra__48F19687">
+            <End Role="Transportistas" EntitySet="Transportistas" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdTra__564B91A5" Association="Self.FK__Fertiliza__IdTra__564B91A5">
+            <End Role="Transportistas" EntitySet="Transportistas" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__4BCE0332" Association="Self.FK__Fertiliza__IdUsu__4BCE0332">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__4CC2276B" Association="Self.FK__Fertiliza__IdUsu__4CC2276B">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__5927FE50" Association="Self.FK__Fertiliza__IdUsu__5927FE50">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__5A1C2289" Association="Self.FK__Fertiliza__IdUsu__5A1C2289">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Articulos_IdMarca" Association="Self.FK_Articulos_IdMarca">
             <End Role="Marcas" EntitySet="Marcas" />
             <End Role="Articulos" EntitySet="Articulos" />
@@ -11006,6 +11423,110 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             <End Role="DetalleFactura" EntitySet="DetalleFacturas" />
             <End Role="CartasPorteMovimiento" EntitySet="CartasPorteMovimientos" />
           </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__424498F8" Association="DemoProntoModel.FK__Fertiliza__IdArt__424498F8">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__4338BD31" Association="DemoProntoModel.FK__Fertiliza__IdArt__4338BD31">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__442CE16A" Association="DemoProntoModel.FK__Fertiliza__IdArt__442CE16A">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__452105A3" Association="DemoProntoModel.FK__Fertiliza__IdArt__452105A3">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__461529DC" Association="DemoProntoModel.FK__Fertiliza__IdArt__461529DC">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__47094E15" Association="DemoProntoModel.FK__Fertiliza__IdArt__47094E15">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__4F9E9416" Association="DemoProntoModel.FK__Fertiliza__IdArt__4F9E9416">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__5092B84F" Association="DemoProntoModel.FK__Fertiliza__IdArt__5092B84F">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__5186DC88" Association="DemoProntoModel.FK__Fertiliza__IdArt__5186DC88">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__527B00C1" Association="DemoProntoModel.FK__Fertiliza__IdArt__527B00C1">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__536F24FA" Association="DemoProntoModel.FK__Fertiliza__IdArt__536F24FA">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdArt__54634933" Association="DemoProntoModel.FK__Fertiliza__IdArt__54634933">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdCho__47FD724E" Association="DemoProntoModel.FK__Fertiliza__IdCho__47FD724E">
+            <End Role="Chofere" EntitySet="Choferes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdCho__55576D6C" Association="DemoProntoModel.FK__Fertiliza__IdCho__55576D6C">
+            <End Role="Chofere" EntitySet="Choferes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Clien__405C5086" Association="DemoProntoModel.FK__Fertiliza__Clien__405C5086">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Clien__4DB64BA4" Association="DemoProntoModel.FK__Fertiliza__Clien__4DB64BA4">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Cuent__415074BF" Association="DemoProntoModel.FK__Fertiliza__Cuent__415074BF">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__Cuent__4EAA6FDD" Association="DemoProntoModel.FK__Fertiliza__Cuent__4EAA6FDD">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__4BCE0332" Association="DemoProntoModel.FK__Fertiliza__IdUsu__4BCE0332">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__4CC2276B" Association="DemoProntoModel.FK__Fertiliza__IdUsu__4CC2276B">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__5927FE50" Association="DemoProntoModel.FK__Fertiliza__IdUsu__5927FE50">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdUsu__5A1C2289" Association="DemoProntoModel.FK__Fertiliza__IdUsu__5A1C2289">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdLoc__49E5BAC0" Association="DemoProntoModel.FK__Fertiliza__IdLoc__49E5BAC0">
+            <End Role="Localidad" EntitySet="Localidades" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdLoc__573FB5DE" Association="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE">
+            <End Role="Localidad" EntitySet="Localidades" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdTra__48F19687" Association="DemoProntoModel.FK__Fertiliza__IdTra__48F19687">
+            <End Role="Transportista" EntitySet="Transportistas" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fertiliza__IdTra__564B91A5" Association="DemoProntoModel.FK__Fertiliza__IdTra__564B91A5">
+            <End Role="Transportista" EntitySet="Transportistas" />
+            <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -11281,6 +11802,18 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="AuxiliarNumerico1" Type="Decimal" Nullable="true" Precision="18" Scale="2" />
           <NavigationProperty Name="Marca" Relationship="DemoProntoModel.FK_Articulos_IdMarca" FromRole="Articulo" ToRole="Marca" />
           <NavigationProperty Name="Modelo" Relationship="DemoProntoModel.FK_Articulos_IdModelo" FromRole="Articulo" ToRole="Modelo" />
+          <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__424498F8" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__4338BD31" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos2" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__442CE16A" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos3" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__452105A3" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos4" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__461529DC" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos5" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__47094E15" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos6" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__4F9E9416" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos7" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__5092B84F" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos8" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__5186DC88" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos9" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__527B00C1" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos10" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__536F24FA" FromRole="Articulo" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos11" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__54634933" FromRole="Articulo" ToRole="FertilizantesCupos" />
         </EntityType>
         <EntityType Name="ControlCalidad">
           <Key>
@@ -12133,6 +12666,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <NavigationProperty Name="DetalleClientesTelefonos" Relationship="DemoProntoModel.FK_DetalleClientesTelefonos_Clientes" FromRole="Cliente" ToRole="DetalleClientesTelefono" />
           <NavigationProperty Name="CartasDePorteReglasDeFacturacions" Relationship="DemoProntoModel.FK__CartasDeP__IdCli__1C6908D3" FromRole="Cliente" ToRole="CartasDePorteReglasDeFacturacion" />
           <NavigationProperty Name="CartasPorteAcopios" Relationship="DemoProntoModel.FK__CartasPor__IdCli__4496F5BE" FromRole="Cliente" ToRole="CartasPorteAcopio" />
+          <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__Clien__405C5086" FromRole="Cliente" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__Clien__4DB64BA4" FromRole="Cliente" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos2" Relationship="DemoProntoModel.FK__Fertiliza__Cuent__415074BF" FromRole="Cliente" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos3" Relationship="DemoProntoModel.FK__Fertiliza__Cuent__4EAA6FDD" FromRole="Cliente" ToRole="FertilizantesCupos" />
         </EntityType>
         <EntityType Name="PuntosVenta">
           <Key>
@@ -13011,6 +13548,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <NavigationProperty Name="Provincia" Relationship="DemoProntoModel.FK_Localidades_Provincias" FromRole="Localidad" ToRole="Provincia" />
           <NavigationProperty Name="Transportistas" Relationship="DemoProntoModel.FK_Transportistas_Localidades" FromRole="Localidad" ToRole="Transportista" />
           <Property Name="CodigoAfip" Type="Int32" />
+          <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__49E5BAC0" FromRole="Localidad" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" FromRole="Localidad" ToRole="FertilizantesCupos" />
         </EntityType>
         <EntityType Name="Moneda">
           <Key>
@@ -14114,6 +14653,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Type="String" Name="CodigoServicio" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="NumeroServicio" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Codigo" />
+          <Property Name="IdBanco" Type="Int32" />
         </EntityType>
         <Association Name="FK_BancoChequeras_Bancos">
           <End Type="DemoProntoModel.Banco" Role="Banco" Multiplicity="0..1" />
@@ -17155,6 +17695,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Codigo" Type="Int32" />
           <NavigationProperty Name="Localidade" Relationship="DemoProntoModel.FK_Transportistas_Localidades" FromRole="Transportista" ToRole="Localidad" />
           <NavigationProperty Name="Remitos" Relationship="DemoProntoModel.FK_Remitos_Transportistas" FromRole="Transportista" ToRole="Remito" />
+          <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__48F19687" FromRole="Transportista" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__564B91A5" FromRole="Transportista" ToRole="FertilizantesCupos" />
         </EntityType>
         <Association Name="FK_Localidades_Provincias">
           <End Type="DemoProntoModel.Provincia" Role="Provincia" Multiplicity="0..1" />
@@ -17328,6 +17870,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <NavigationProperty Name="OrdenesPagoes1" Relationship="DemoProntoModel.FK_OrdenesPago_IdUsuarioAnulo" FromRole="Empleado" ToRole="OrdenPago" />
           <NavigationProperty Name="OrdenesPagoes2" Relationship="DemoProntoModel.FK_OrdenesPago_IdUsuarioIngreso" FromRole="Empleado" ToRole="OrdenPago" />
           <NavigationProperty Name="OrdenesPagoes3" Relationship="DemoProntoModel.FK_OrdenesPago_IdUsuarioModifico" FromRole="Empleado" ToRole="OrdenPago" />
+          <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__4BCE0332" FromRole="Empleado" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__4CC2276B" FromRole="Empleado" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos2" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__5927FE50" FromRole="Empleado" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos3" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__5A1C2289" FromRole="Empleado" ToRole="FertilizantesCupos" />
         </EntityType>
         <Association Name="FK_Empleados_Cargos">
           <End Type="DemoProntoModel.Cargo" Role="Cargo" Multiplicity="0..1" />
@@ -18444,6 +18990,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="PathImagen1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NumeroDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Cuil" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__IdCho__47FD724E" FromRole="Chofere" ToRole="FertilizantesCupos" />
+          <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdCho__55576D6C" FromRole="Chofere" ToRole="FertilizantesCupos" />
         </EntityType>
         <EntityType Name="LogComprobantesElectronico">
           <Key>
@@ -20879,6 +21427,32 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdFacturaImputada" Type="Int32" />
           <Property Name="NumeradorTexto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__424498F8" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo1" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__4338BD31" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo2" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__442CE16A" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo3" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__452105A3" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo4" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__461529DC" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo5" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__47094E15" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo6" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__4F9E9416" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo7" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__5092B84F" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo8" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__5186DC88" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo9" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__527B00C1" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo10" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__536F24FA" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo11" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__54634933" FromRole="FertilizantesCupos" ToRole="Articulo" />
+          <NavigationProperty Name="Chofere" Relationship="DemoProntoModel.FK__Fertiliza__IdCho__47FD724E" FromRole="FertilizantesCupos" ToRole="Chofere" />
+          <NavigationProperty Name="Chofere1" Relationship="DemoProntoModel.FK__Fertiliza__IdCho__55576D6C" FromRole="FertilizantesCupos" ToRole="Chofere" />
+          <NavigationProperty Name="Cliente1" Relationship="DemoProntoModel.FK__Fertiliza__Clien__405C5086" FromRole="FertilizantesCupos" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente2" Relationship="DemoProntoModel.FK__Fertiliza__Clien__4DB64BA4" FromRole="FertilizantesCupos" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente3" Relationship="DemoProntoModel.FK__Fertiliza__Cuent__415074BF" FromRole="FertilizantesCupos" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente4" Relationship="DemoProntoModel.FK__Fertiliza__Cuent__4EAA6FDD" FromRole="FertilizantesCupos" ToRole="Cliente" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__4BCE0332" FromRole="FertilizantesCupos" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__4CC2276B" FromRole="FertilizantesCupos" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado2" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__5927FE50" FromRole="FertilizantesCupos" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado3" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__5A1C2289" FromRole="FertilizantesCupos" ToRole="Empleado" />
+          <NavigationProperty Name="Localidade" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__49E5BAC0" FromRole="FertilizantesCupos" ToRole="Localidad" />
+          <NavigationProperty Name="Localidade1" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" FromRole="FertilizantesCupos" ToRole="Localidad" />
+          <NavigationProperty Name="Transportista" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__48F19687" FromRole="FertilizantesCupos" ToRole="Transportista" />
+          <NavigationProperty Name="Transportista1" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__564B91A5" FromRole="FertilizantesCupos" ToRole="Transportista" />
         </EntityType>
         <Association Name="FK__CartasDeP__Acopi__5498535D">
           <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -20961,6 +21535,318 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             </Principal>
             <Dependent Role="CartasPorteMovimiento">
               <PropertyRef Name="IdDetalleFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__424498F8">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__4338BD31">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__442CE16A">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__452105A3">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__461529DC">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__47094E15">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__4F9E9416">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__5092B84F">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__5186DC88">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__527B00C1">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__536F24FA">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdArt__54634933">
+          <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdArticuloComponente5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdCho__47FD724E">
+          <End Type="DemoProntoModel.Chofere" Role="Chofere" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chofere">
+              <PropertyRef Name="IdChofer" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdChofer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdCho__55576D6C">
+          <End Type="DemoProntoModel.Chofere" Role="Chofere" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chofere">
+              <PropertyRef Name="IdChofer" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdChofer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Clien__405C5086">
+          <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Clien__4DB64BA4">
+          <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Cuent__415074BF">
+          <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="CuentaOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__Cuent__4EAA6FDD">
+          <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="CuentaOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__4BCE0332">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__4CC2276B">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioAnulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__5927FE50">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdUsu__5A1C2289">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdUsuarioAnulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdLoc__49E5BAC0">
+          <End Type="DemoProntoModel.Localidad" Role="Localidad" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdLocalidadTransportista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdLoc__573FB5DE">
+          <End Type="DemoProntoModel.Localidad" Role="Localidad" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdLocalidadTransportista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdTra__48F19687">
+          <End Type="DemoProntoModel.Transportista" Role="Transportista" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transportista">
+              <PropertyRef Name="IdTransportista" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdTransportista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fertiliza__IdTra__564B91A5">
+          <End Type="DemoProntoModel.Transportista" Role="Transportista" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transportista">
+              <PropertyRef Name="IdTransportista" />
+            </Principal>
+            <Dependent Role="FertilizantesCupos">
+              <PropertyRef Name="IdTransportista" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -22925,6 +23811,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySetMapping Name="TarjetasCreditoes">
             <EntityTypeMapping TypeName="DemoProntoModel.TarjetasCredito">
               <MappingFragment StoreEntitySet="TarjetasCredito">
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="NumeroServicio" ColumnName="NumeroServicio" />
                 <ScalarProperty Name="CodigoServicio" ColumnName="CodigoServicio" />
