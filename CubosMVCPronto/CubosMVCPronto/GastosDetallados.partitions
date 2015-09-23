@@ -1,0 +1,25 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="776888a8-025c-401b-886e-ce7f5513d35a" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>GastosDetallados</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>DW Fact Cuadro Gastos Detallado</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="e5a349d4-6a06-4af5-8dd1-44117c118818">
+          <ID>DW Fact Cuadro Gastos Detallado</ID>
+          <Name>DW Fact Cuadro Gastos Detallado</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="5848b737-a3d0-4259-8c87-59ce2df71ee6">
+            <DataSourceViewID>Cubos MVC</DataSourceViewID>
+            <TableID>dbo_DW_FactCuadroGastosDetallado</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

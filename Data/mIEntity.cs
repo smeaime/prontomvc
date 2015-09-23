@@ -43,4 +43,12 @@ namespace ProntoMVC.Data.Models
 
         public int ID { get { return this.IdMoneda; } }
     }
+
+
+  //  [Serializable]
+    public partial class FertilizantesCupos
+    {
+
+    }
+
 }

@@ -1983,6 +1983,7 @@
     <EntitySetMapping Name="TarjetasCreditoes">
       <EntityTypeMapping TypeName="DemoProntoModel.TarjetasCredito">
         <MappingFragment StoreEntitySet="TarjetasCredito">
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="NumeroServicio" ColumnName="NumeroServicio" />
           <ScalarProperty Name="CodigoServicio" ColumnName="CodigoServicio" />
