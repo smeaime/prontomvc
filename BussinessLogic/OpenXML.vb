@@ -950,7 +950,772 @@ Namespace Pronto.ERP.Bll
             End Using
         End Sub
 
+        Public Shared Sub RemitoParaLDC_XML_DOCX_Williams(ByVal document As String, ByVal oFac As ProntoMVC.Data.Models.FertilizantesCupos, ByVal SC As String)
 
+            'Dim oFac As Pronto.ERP.BO.Requerimiento = CType(Me.ViewState(mKey), Pronto.ERP.BO.Requerimiento)
+
+
+            Dim wordDoc As WordprocessingDocument = WordprocessingDocument.Open(document, True)
+
+
+
+            Dim settings As New SimplifyMarkupSettings
+            With settings
+                .RemoveComments = True
+                .RemoveContentControls = True
+                .RemoveEndAndFootNotes = True
+                .RemoveFieldCodes = False
+                .RemoveLastRenderedPageBreak = True
+                .RemovePermissions = True
+                .RemoveProof = True
+                .RemoveRsidInfo = True
+                .RemoveSmartTags = True
+                .RemoveSoftHyphens = True
+                .ReplaceTabsWithSpaces = True
+            End With
+            MarkupSimplifier.SimplifyMarkup(wordDoc, settings)
+
+
+
+
+
+            Using (wordDoc)
+                Dim docText As String = Nothing
+                Dim sr As StreamReader = New StreamReader(wordDoc.MainDocumentPart.GetStream)
+
+
+
+                Using (sr)
+                    docText = sr.ReadToEnd
+                End Using
+
+                '/////////////////////////////
+                '/////////////////////////////
+                'Hace el reemplazo
+                '/////////////////////////////
+
+
+
+
+                Try
+                    'oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
+                    'regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial)
+                    'regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+
+
+                    'regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+
+
+                    'regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    'regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+                regexReplace(docText, "#NumeroFactura#", oFac.Numero)
+                'regexReplace(docText, "#Fecha#", oFac.Fecha)
+                'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                'regexReplace(docText, "#CAE#", oFac.CAE)
+
+                regexReplace(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+
+
+
+
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace(docText, "#Total#", oFac.Total)
+
+
+
+
+                Dim sw As StreamWriter = New StreamWriter(wordDoc.MainDocumentPart.GetStream(FileMode.Create))
+                Using (sw)
+                    sw.Write(docText)
+                End Using
+
+
+
+
+
+
+
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                Dim mainPart = wordDoc.MainDocumentPart
+                'Dim contentBloc = mainPart.HeaderParts..Descendants(Of Wordprocessing.SdtBlock)().First
+
+                'http://stackoverflow.com/questions/7026449/replacing-bookmarks-in-docx-file-using-openxml-sdk-and-c-cli
+                'http://openxmldeveloper.org/blog/b/openxmldeveloper/archive/2011/09/01/how-to-retrieve-the-text-of-a-bookmark-from-an-openxml-wordprocessingml-document.aspx
+                'http://openxmldeveloper.org/blog/b/openxmldeveloper/archive/2011/09/06/replacing-text-of-a-bookmark-in-an-openxml-wordprocessingml-document.aspx
+
+
+
+
+
+                Dim formfield = wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.FormFieldData)().FirstOrDefault
+                'Dim e = formfield.GetFirstChild(Of Wordprocessing.Enabled)()
+                'e.Val = True
+                'Dim parent = formfield.Parent
+                'Dim runEEE = New Wordprocessing.Run(New Wordprocessing.Text("sfsdf"))
+                'parent.ReplaceChild(runEEE, formfield)
+
+                'Dim t = formfield.GetFirstChild(Of Wordprocessing.TextInput)()
+
+
+                Dim bookmarkstartCliente = (From bookmark In _
+                                 wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
+                               Where bookmark.Name = "Cliente" _
+                               Select bookmark).SingleOrDefault
+
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/a/4725777/1054200
+                'http://stackoverflow.com/a/4725777/1054200
+                'http://stackoverflow.com/a/4725777/1054200
+                'http://stackoverflow.com/a/4725777/1054200
+                'Dim textoCliente = bmCliente.NextSibling(Of Wordprocessing.Run)()
+                'If Not IsNull(textoCliente) Then
+                '    Dim textito = textoCliente.GetFirstChild(Of Wordprocessing.Text)()
+                '    textito.Text = "blah"
+                'End If
+                '
+                '   
+                '
+
+                Try
+
+                    Dim textoRellenar = "RazonSocial S.A." 'EntidadManager.NombreCliente(sc, oFac.IdCliente)
+
+                    Dim bsText As DocumentFormat.OpenXml.OpenXmlElement = bookmarkstartCliente.NextSibling
+                    If Not bsText Is Nothing Then
+                        If TypeOf bsText Is Wordprocessing.BookmarkEnd Then
+                            'Add Text element after start bookmark
+                            bookmarkstartCliente.Parent.InsertAfter(New Wordprocessing.Run(New Wordprocessing.Text(textoRellenar)), _
+                                                                    bookmarkstartCliente)
+                        Else
+                            'Change Bookmark Text
+                            If TypeOf bsText Is Wordprocessing.Run Then
+                                If bsText.GetFirstChild(Of Wordprocessing.Text)() Is Nothing Then
+                                    'bsText.InsertAt(New Wordprocessing.Text(textoRellenar), 2)
+                                    'bsText.InsertAt(New Wordprocessing.Text(textoRellenar), 1)
+                                    bsText.InsertAt(New Wordprocessing.Text(textoRellenar), 0)
+                                End If
+                                bsText.GetFirstChild(Of Wordprocessing.Text)().Text = textoRellenar 'bookmarkstartCliente.Name
+                            End If
+                        End If
+                    End If
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+
+
+                'Dim ccWithTable As Wordprocessing.SdtBlock = mainPart.Document.Body.Descendants(Of Wordprocessing.SdtBlock)().Where _
+                '                        (Function(r) r.SdtProperties.GetFirstChild(Of Wordprocessing.Tag)().Val = tblTag).Single()
+
+
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                'CUERPO  (repetir renglones)
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                'http://msdn.microsoft.com/en-us/library/cc850835(office.14).aspx
+
+                '///////////////////////////////////////////////////////////////////////////////////
+                '   http://stackoverflow.com/a/3783607/1054200
+                '@Matt S: I've put in a few extra links that should also help you get started. There are a number of ways 
+                'to do repeaters with Content Controls - one is what you mentioned. The other way is to use Building Blocks. 
+                'Another way is to kind of do the opposite of what you mentioned - put a table with just a header row and then 
+                'create rows populated with CCs in the cells (creo que esto es lo que hago yo). Do take a look 
+                'at the Word Content Control Kit as well - that will save your life in working with CCs until you 
+                'become much more familiar. – Otaku Sep 25 '10 at 15:46
+                '/////////////////////////////////////////////////////////////////////////////////////
+
+                '  'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+
+
+
+
+                '///////////////////////////////////////
+                'en VBA, Edu busca el sector así:
+                '
+                '            Selection.GoTo(What:=wdGoToBookmark, Name:="Detalles")
+                '
+                '-no encuentro en qué lugar dice "Detalles"!!! -ahí está (Ctrl-I). no sé como mostrarlos. Edu se maneja
+                ' con bookmarks. Para hacer la migracion, debería imitar lo mas posible esa idea (haciendolo
+                ' compatible, mostrando los bookmarks como placeholders, etc.
+                ' APARECEN CON CORCHETES SI TIENEN UN ITEM. SI ES UNA UBICACION, APARECEN CON EL I-beam (una "I" grande)
+                '- y cómo sé el nombre que tiene???????
+                '///////////////////////////////////////
+
+                'mostrar bookmarks en Word2007
+                'http://www.google.com.ar/imgres?um=1&hl=es&safe=off&sa=N&biw=1163&bih=839&tbm=isch&tbnid=VBegw7vZDThDNM:&imgrefurl=http://www.howtogeek.com/76142/navigate-long-documents-in-word-2007-and-2010-using-bookmarks/&docid=lavUxX3WcLhNAM&imgurl=http://www.howtogeek.com/wp-content/uploads/2011/10/05_turning_on_show_bookmarks.png&w=544&h=414&ei=cNNiT7OYAoKgtwfd2eWLCA&zoom=1&iact=rc&dur=312&sig=101947458089387539527&page=1&tbnh=145&tbnw=191&start=0&ndsp=20&ved=1t:429,r:1,s:0&tx=113&ty=93
+
+                '            Isn() 't there a way in Word 2007 to show all bookmarks in a document
+                'In any version of Word, you can get the Bookmark dialog to display the names 
+                'of all the bookmarks by both checking the "Hidden bookmarks" box *and* 
+                'selecting "Sort by: Location." You can select any given bookmark name and 
+                'click Go To to find it.
+
+                '//////////////////////////////////////////////////////////////
+                'cómo mostrar el tab de DEVELOPER en office
+                'Click the Microsoft Office Button, and then click Excel Options, PowerPoint Options, or Word Options.
+                'Click Popular, and then select the Show Developer tab in the Ribbon check box.
+                '//////////////////////////////////////////////////////////////
+
+                '//////////////////////////////////////////////////
+                'en VBA, Edu busca el sector así:
+                '
+                '            Selection.GoTo(What:=wdGoToBookmark, Name:="Detalles")
+                '
+                'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+                '//////////////////////////////////////////////////////////
+
+
+
+
+                Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
+           Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
+           Select bookmark).FirstOrDefault
+
+
+                Dim tempParent
+
+                Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
+                                          Where bookmark.Text = "#Descripcion#" _
+                                          Select bookmark).FirstOrDefault
+
+                If Not placeholderCANT Is Nothing Then
+                    tempParent = placeholderCANT.Parent
+                Else
+                    tempParent = bookmarkDetalles.Parent
+                End If
+
+
+
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+
+                'qué tabla contiene al bookmark "Detalles"? (es el que usa Edu en VBA)
+                Dim table As Wordprocessing.Table
+
+                ' Find the second row in the table.
+                Dim row1 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(0)
+                Dim row2 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(1)
+
+
+                If True Then
+
+                    'METODO B:
+                    'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+                    ' loop till we get the containing element in case bookmark is inside a table etc.
+                    ' keep checking the element's parent and update it till we reach the Body
+                    'Dim tempParent = bookmarkDetalles.Parent
+                    Dim isInTable As Boolean = False
+
+                    While Not TypeOf (tempParent.Parent) Is Wordprocessing.Body ',) <> mainPart.Document.Body
+                        tempParent = tempParent.Parent
+                        If (TypeOf (tempParent) Is Wordprocessing.TableRow And Not isInTable) Then
+                            isInTable = True
+                            Exit While
+                        End If
+                    End While
+
+                    If isInTable Then
+                        'table = tempParent
+                        'no basta con saber la tabla. necesito saber la posicion del bookmark en la tabla
+                        'table.ChildElements(
+                        'bookmarkDetalles.
+                        row1 = tempParent
+                        table = row1.Parent
+                    Else
+                        Err.Raise(5454, "asdasdasa")
+                    End If
+
+                Else
+
+                    '////////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////////
+                    'METODO A:
+                    ' Find the first table in the document.
+                    table = wordDoc.MainDocumentPart.Document.Body.Elements(Of Wordprocessing.Table)().First
+
+                End If
+
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+                '/////////////////////////////
+                '/////////////////////////////
+                'PIE
+                '/////////////////////////////
+                '/////////////////////////////
+
+                For Each pie As FooterPart In wordDoc.MainDocumentPart.FooterParts
+                    'Dim pie = wordDoc.MainDocumentPart.FooterParts.First
+                    pie.GetStream()
+
+                    docText = Nothing
+                    sr = New StreamReader(pie.GetStream())
+
+                    Using (sr)
+                        docText = sr.ReadToEnd
+                    End Using
+
+                    regexReplace(docText, "observaciones", oFac.Observaciones)
+                    'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+                    'regexReplace(docText, "libero", oFac.Aprobo)
+                    'regexReplace(docText, "fecharecepcion", oFac.Fecha)
+                    'regexReplace(docText, "jefesector", "")
+
+                    ''regexReplace(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
+                    ''regexReplace(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
+                    ''Subtotal = (FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos) * (100 - oFac.PorcentajeBonificacion) / 100
+
+                    'regexReplace(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
+                    'regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    'regexReplace(docText, "#IIBB#", oFac.IBrutos)
+                    'regexReplace(docText, "#Total#", FF2(oFac.Total))
+
+
+                    sw = New StreamWriter(pie.GetStream(FileMode.Create))
+                    Using (sw)
+                        sw.Write(docText)
+                    End Using
+                Next
+
+
+                'buscar bookmark http://openxmldeveloper.org/discussions/formats/f/13/p/2539/8302.aspx
+                'Dim mainPart As MainDocumentPart = wordDoc.MainDocumentPart()
+                'Dim bookmarkStart = mainPart.Document.Body.Descendants().Where(bms >= bms.Name = "testBookmark").SingleOrDefault()
+                'Dim bookmarkEnd = mainPart.Document.Body.Descendants().Where(bme >= bme.Id.Value = bookmarkStart.Id.Value).SingleOrDefault()
+                'BookmarkStart.Remove()
+                'BookmarkEnd.Remove()
+
+
+
+            End Using
+        End Sub
+
+        Public Shared Sub OrdenCarga_XML_DOCX_Williams(ByVal document As String, ByVal oFac As ProntoMVC.Data.Models.FertilizantesCupos, ByVal SC As String)
+
+            'Dim oFac As Pronto.ERP.BO.Requerimiento = CType(Me.ViewState(mKey), Pronto.ERP.BO.Requerimiento)
+
+
+            Dim wordDoc As WordprocessingDocument = WordprocessingDocument.Open(document, True)
+
+
+
+            Dim settings As New SimplifyMarkupSettings
+            With settings
+                .RemoveComments = True
+                .RemoveContentControls = True
+                .RemoveEndAndFootNotes = True
+                .RemoveFieldCodes = False
+                .RemoveLastRenderedPageBreak = True
+                .RemovePermissions = True
+                .RemoveProof = True
+                .RemoveRsidInfo = True
+                .RemoveSmartTags = True
+                .RemoveSoftHyphens = True
+                .ReplaceTabsWithSpaces = True
+            End With
+            MarkupSimplifier.SimplifyMarkup(wordDoc, settings)
+
+
+
+
+
+            Using (wordDoc)
+                Dim docText As String = Nothing
+                Dim sr As StreamReader = New StreamReader(wordDoc.MainDocumentPart.GetStream)
+
+
+
+                Using (sr)
+                    docText = sr.ReadToEnd
+                End Using
+
+                '/////////////////////////////
+                '/////////////////////////////
+                'Hace el reemplazo
+                '/////////////////////////////
+
+
+
+
+                Try
+                    'oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
+                    'regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial)
+                    'regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+
+
+                    'regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+
+
+                    'regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    'regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+                regexReplace(docText, "#NumeroFactura#", oFac.Numero)
+                'regexReplace(docText, "#Fecha#", oFac.Fecha)
+                'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                'regexReplace(docText, "#CAE#", oFac.CAE)
+
+                regexReplace(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+
+
+
+
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace(docText, "#Total#", oFac.Total)
+
+
+
+
+                Dim sw As StreamWriter = New StreamWriter(wordDoc.MainDocumentPart.GetStream(FileMode.Create))
+                Using (sw)
+                    sw.Write(docText)
+                End Using
+
+
+
+
+
+
+
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                Dim mainPart = wordDoc.MainDocumentPart
+                'Dim contentBloc = mainPart.HeaderParts..Descendants(Of Wordprocessing.SdtBlock)().First
+
+                'http://stackoverflow.com/questions/7026449/replacing-bookmarks-in-docx-file-using-openxml-sdk-and-c-cli
+                'http://openxmldeveloper.org/blog/b/openxmldeveloper/archive/2011/09/01/how-to-retrieve-the-text-of-a-bookmark-from-an-openxml-wordprocessingml-document.aspx
+                'http://openxmldeveloper.org/blog/b/openxmldeveloper/archive/2011/09/06/replacing-text-of-a-bookmark-in-an-openxml-wordprocessingml-document.aspx
+
+
+
+
+
+                Dim formfield = wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.FormFieldData)().FirstOrDefault
+                'Dim e = formfield.GetFirstChild(Of Wordprocessing.Enabled)()
+                'e.Val = True
+                'Dim parent = formfield.Parent
+                'Dim runEEE = New Wordprocessing.Run(New Wordprocessing.Text("sfsdf"))
+                'parent.ReplaceChild(runEEE, formfield)
+
+                'Dim t = formfield.GetFirstChild(Of Wordprocessing.TextInput)()
+
+
+                Dim bookmarkstartCliente = (From bookmark In _
+                                 wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
+                               Where bookmark.Name = "Cliente" _
+                               Select bookmark).SingleOrDefault
+
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
+                'http://stackoverflow.com/a/4725777/1054200
+                'http://stackoverflow.com/a/4725777/1054200
+                'http://stackoverflow.com/a/4725777/1054200
+                'http://stackoverflow.com/a/4725777/1054200
+                'Dim textoCliente = bmCliente.NextSibling(Of Wordprocessing.Run)()
+                'If Not IsNull(textoCliente) Then
+                '    Dim textito = textoCliente.GetFirstChild(Of Wordprocessing.Text)()
+                '    textito.Text = "blah"
+                'End If
+                '
+                '   
+                '
+
+                Try
+
+                    Dim textoRellenar = "RazonSocial S.A." 'EntidadManager.NombreCliente(sc, oFac.IdCliente)
+
+                    Dim bsText As DocumentFormat.OpenXml.OpenXmlElement = bookmarkstartCliente.NextSibling
+                    If Not bsText Is Nothing Then
+                        If TypeOf bsText Is Wordprocessing.BookmarkEnd Then
+                            'Add Text element after start bookmark
+                            bookmarkstartCliente.Parent.InsertAfter(New Wordprocessing.Run(New Wordprocessing.Text(textoRellenar)), _
+                                                                    bookmarkstartCliente)
+                        Else
+                            'Change Bookmark Text
+                            If TypeOf bsText Is Wordprocessing.Run Then
+                                If bsText.GetFirstChild(Of Wordprocessing.Text)() Is Nothing Then
+                                    'bsText.InsertAt(New Wordprocessing.Text(textoRellenar), 2)
+                                    'bsText.InsertAt(New Wordprocessing.Text(textoRellenar), 1)
+                                    bsText.InsertAt(New Wordprocessing.Text(textoRellenar), 0)
+                                End If
+                                bsText.GetFirstChild(Of Wordprocessing.Text)().Text = textoRellenar 'bookmarkstartCliente.Name
+                            End If
+                        End If
+                    End If
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+
+
+                'Dim ccWithTable As Wordprocessing.SdtBlock = mainPart.Document.Body.Descendants(Of Wordprocessing.SdtBlock)().Where _
+                '                        (Function(r) r.SdtProperties.GetFirstChild(Of Wordprocessing.Tag)().Val = tblTag).Single()
+
+
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                'CUERPO  (repetir renglones)
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                'http://msdn.microsoft.com/en-us/library/cc850835(office.14).aspx
+
+                '///////////////////////////////////////////////////////////////////////////////////
+                '   http://stackoverflow.com/a/3783607/1054200
+                '@Matt S: I've put in a few extra links that should also help you get started. There are a number of ways 
+                'to do repeaters with Content Controls - one is what you mentioned. The other way is to use Building Blocks. 
+                'Another way is to kind of do the opposite of what you mentioned - put a table with just a header row and then 
+                'create rows populated with CCs in the cells (creo que esto es lo que hago yo). Do take a look 
+                'at the Word Content Control Kit as well - that will save your life in working with CCs until you 
+                'become much more familiar. – Otaku Sep 25 '10 at 15:46
+                '/////////////////////////////////////////////////////////////////////////////////////
+
+                '  'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+
+
+
+
+                '///////////////////////////////////////
+                'en VBA, Edu busca el sector así:
+                '
+                '            Selection.GoTo(What:=wdGoToBookmark, Name:="Detalles")
+                '
+                '-no encuentro en qué lugar dice "Detalles"!!! -ahí está (Ctrl-I). no sé como mostrarlos. Edu se maneja
+                ' con bookmarks. Para hacer la migracion, debería imitar lo mas posible esa idea (haciendolo
+                ' compatible, mostrando los bookmarks como placeholders, etc.
+                ' APARECEN CON CORCHETES SI TIENEN UN ITEM. SI ES UNA UBICACION, APARECEN CON EL I-beam (una "I" grande)
+                '- y cómo sé el nombre que tiene???????
+                '///////////////////////////////////////
+
+                'mostrar bookmarks en Word2007
+                'http://www.google.com.ar/imgres?um=1&hl=es&safe=off&sa=N&biw=1163&bih=839&tbm=isch&tbnid=VBegw7vZDThDNM:&imgrefurl=http://www.howtogeek.com/76142/navigate-long-documents-in-word-2007-and-2010-using-bookmarks/&docid=lavUxX3WcLhNAM&imgurl=http://www.howtogeek.com/wp-content/uploads/2011/10/05_turning_on_show_bookmarks.png&w=544&h=414&ei=cNNiT7OYAoKgtwfd2eWLCA&zoom=1&iact=rc&dur=312&sig=101947458089387539527&page=1&tbnh=145&tbnw=191&start=0&ndsp=20&ved=1t:429,r:1,s:0&tx=113&ty=93
+
+                '            Isn() 't there a way in Word 2007 to show all bookmarks in a document
+                'In any version of Word, you can get the Bookmark dialog to display the names 
+                'of all the bookmarks by both checking the "Hidden bookmarks" box *and* 
+                'selecting "Sort by: Location." You can select any given bookmark name and 
+                'click Go To to find it.
+
+                '//////////////////////////////////////////////////////////////
+                'cómo mostrar el tab de DEVELOPER en office
+                'Click the Microsoft Office Button, and then click Excel Options, PowerPoint Options, or Word Options.
+                'Click Popular, and then select the Show Developer tab in the Ribbon check box.
+                '//////////////////////////////////////////////////////////////
+
+                '//////////////////////////////////////////////////
+                'en VBA, Edu busca el sector así:
+                '
+                '            Selection.GoTo(What:=wdGoToBookmark, Name:="Detalles")
+                '
+                'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+                '//////////////////////////////////////////////////////////
+
+
+
+
+                Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
+           Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
+           Select bookmark).FirstOrDefault
+
+
+                Dim tempParent
+
+                Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
+                                          Where bookmark.Text = "#Descripcion#" _
+                                          Select bookmark).FirstOrDefault
+
+                If Not placeholderCANT Is Nothing Then
+                    tempParent = placeholderCANT.Parent
+                Else
+                    tempParent = bookmarkDetalles.Parent
+                End If
+
+
+
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+
+                'qué tabla contiene al bookmark "Detalles"? (es el que usa Edu en VBA)
+                Dim table As Wordprocessing.Table
+
+                ' Find the second row in the table.
+                Dim row1 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(0)
+                Dim row2 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(1)
+
+
+                If True Then
+
+                    'METODO B:
+                    'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+                    ' loop till we get the containing element in case bookmark is inside a table etc.
+                    ' keep checking the element's parent and update it till we reach the Body
+                    'Dim tempParent = bookmarkDetalles.Parent
+                    Dim isInTable As Boolean = False
+
+                    While Not TypeOf (tempParent.Parent) Is Wordprocessing.Body ',) <> mainPart.Document.Body
+                        tempParent = tempParent.Parent
+                        If (TypeOf (tempParent) Is Wordprocessing.TableRow And Not isInTable) Then
+                            isInTable = True
+                            Exit While
+                        End If
+                    End While
+
+                    If isInTable Then
+                        'table = tempParent
+                        'no basta con saber la tabla. necesito saber la posicion del bookmark en la tabla
+                        'table.ChildElements(
+                        'bookmarkDetalles.
+                        row1 = tempParent
+                        table = row1.Parent
+                    Else
+                        Err.Raise(5454, "asdasdasa")
+                    End If
+
+                Else
+
+                    '////////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////////
+                    'METODO A:
+                    ' Find the first table in the document.
+                    table = wordDoc.MainDocumentPart.Document.Body.Elements(Of Wordprocessing.Table)().First
+
+                End If
+
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+                '////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+                ''Make a copy of the 2nd row (assumed that the 1st row is header) http://patrickyong.net/tags/openxml/
+                'Dim rows = table.Elements(Of Wordprocessing.TableRow)()
+                
+
+
+
+
+                '/////////////////////////////
+                '/////////////////////////////
+                'PIE
+                '/////////////////////////////
+                '/////////////////////////////
+
+                For Each pie As FooterPart In wordDoc.MainDocumentPart.FooterParts
+                    'Dim pie = wordDoc.MainDocumentPart.FooterParts.First
+                    pie.GetStream()
+
+                    docText = Nothing
+                    sr = New StreamReader(pie.GetStream())
+
+                    Using (sr)
+                        docText = sr.ReadToEnd
+                    End Using
+
+                    regexReplace(docText, "observaciones", oFac.Observaciones)
+                    'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+                    'regexReplace(docText, "libero", oFac.Aprobo)
+                    'regexReplace(docText, "fecharecepcion", oFac.Fecha)
+                    regexReplace(docText, "jefesector", "")
+
+                    'regexReplace(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
+                    'regexReplace(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
+                    'Subtotal = (FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos) * (100 - oFac.PorcentajeBonificacion) / 100
+
+                    'regexReplace(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
+                    'regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    'regexReplace(docText, "#IIBB#", oFac.IBrutos)
+                    'regexReplace(docText, "#Total#", FF2(oFac.Total))
+
+
+                    sw = New StreamWriter(pie.GetStream(FileMode.Create))
+                    Using (sw)
+                        sw.Write(docText)
+                    End Using
+                Next
+
+
+                'buscar bookmark http://openxmldeveloper.org/discussions/formats/f/13/p/2539/8302.aspx
+                'Dim mainPart As MainDocumentPart = wordDoc.MainDocumentPart()
+                'Dim bookmarkStart = mainPart.Document.Body.Descendants().Where(bms >= bms.Name = "testBookmark").SingleOrDefault()
+                'Dim bookmarkEnd = mainPart.Document.Body.Descendants().Where(bme >= bme.Id.Value = bookmarkStart.Id.Value).SingleOrDefault()
+                'BookmarkStart.Remove()
+                'BookmarkEnd.Remove()
+
+
+
+            End Using
+        End Sub
 
 
         Public Shared Sub RequerimientoXML_DOCX(ByVal document As String, ByVal oFac As Pronto.ERP.BO.Requerimiento, ByVal SC As String)
