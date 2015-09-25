@@ -264,8 +264,7 @@ Released   : 20120723
             ///////////////////////////////////////////////////////////////////////////////////
         *@
         <style>
-
-            /* para que no se me corran los menús al ser tan anchos y terminen ocupando dos renglones*/ 
+            /* para que no se me corran los menús al ser tan anchos y terminen ocupando dos renglones*/
             .navbar .nav > li > a {
                 padding-left: 8px;
                 padding-right: 8px;
@@ -279,36 +278,35 @@ Released   : 20120723
             /*.jqgrid-widget { ... override widget styles ... }*/
             /* .jqgrid-widget input, .jqgrid-widget select ... */
             .jqgrid-widget-content {
-                /*  uso este estilo a traves de la funcion estiloArbol() 
+                /*  uso este estilo a traves de la funcion estiloArbol()
                     -pero así no sabés en qué nodo estás paarado...
 
                 */
-                background: transparent ;
+                background: transparent;
                 color: Gray;
             }
 
 
-           
+
             /* http://stackoverflow.com/questions/4305223/selected-row-background-color */
 
             .ui-jqgrid-btable .ui-state-highlight {
-                background:  #33333;
+                background: #33333;
                 font: bold;
             }
 
             .ui-jqgrid-btable .ui-state-hover {
                 background: #e2e2e2;
             }
-
         </style>
 
 
-    <style>
-    .ui-tabs .ui-tabs-nav li.ui-tabs-active {
-        /*color de la pestaña activa*/
-        background-color: lightgray !important;
-    }
-</style>
+        <style>
+            .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+                /*color de la pestaña activa*/
+                background-color: lightgray !important;
+            }
+        </style>
 
         @*
 
@@ -349,10 +347,20 @@ Released   : 20120723
 
 
 
+            /*//////////////////////////////////////////////////////////////////*/
+            /*////////////////////////LA PAPA //////////////////////////////////*/
+
+            .ui-jqgrid .ui-jqgrid-view {
+                font-size: 15px;
+            }
 
             label {
+                /*//////////////////////////////////////////////////////////////////*/
+                /*////////////////////////LA PAPA //////////////////////////////////*/
                 /* font-size: 10pt; */
                 font-size: 10pt;
+                /*//////////////////////////////////////////////////////////////////*/
+                /*//////////////////////////////////////////////////////////////////*/
                 line-height: 14px;
                 font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
                 color: #9C0000 !important;
@@ -376,6 +384,7 @@ Released   : 20120723
                 }
 
             input, button, select, textarea {
+                font-size: 11pt;
                 font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
             }
 
@@ -405,48 +414,48 @@ Released   : 20120723
             }
         </style>
         <style>
-                /* el asunto de que se va el contenido del popup de la grilla para la derecha */
-                /* http://stackoverflow.com/questions/5377929/in-jqgrid-is-there-anyway-to-have-an-auto-calculated-width-of-editgridrow-pop */
+            /* el asunto de que se va el contenido del popup de la grilla para la derecha */
+            /* http://stackoverflow.com/questions/5377929/in-jqgrid-is-there-anyway-to-have-an-auto-calculated-width-of-editgridrow-pop */
 
 
-                form.FormGrid {
-                    float: left;
-                    width: auto;
-                }
+            form.FormGrid {
+                float: left;
+                width: auto;
+            }
 
-                /* botones  */
+            /* botones  */
 
 
-                div.ui-jqdialog-content table.EditTable {
-                    /*  width: auto;
+            div.ui-jqdialog-content table.EditTable {
+                /*  width: auto;
                         float: left; */
-                }
+            }
 
-                div.ui-jqdialog-content > span > table.EditTable {
-                    /* width: auto;
+            div.ui-jqdialog-content > span > table.EditTable {
+                /* width: auto;
                         clear: left;
                         float: right;*/
-                }
+            }
 
-                div.ui-jqdialog-titlebar {
-                    padding-bottom: 13px !important;
-                }
+            div.ui-jqdialog-titlebar {
+                padding-bottom: 13px !important;
+            }
 
 
-                div.ui-jqdialog {
-                    padding: 12px !important;
-                }
-                /*.ui-widget-content {
+            div.ui-jqdialog {
+                padding: 12px !important;
+            }
+            /*.ui-widget-content {
             padding: 8px;
             }*/
         </style>
         <style>
-                /* estilos del autocomplete
+            /* estilos del autocomplete
 
                    http://stackoverflow.com/questions/8395074/customizing-the-drop-down-autocomplete-box
                    http://stackoverflow.com/questions/9317380/how-can-i-style-jquery-ui-autocomplete-differently-than-jquery-ui-tabs
                    */
-                /*
+            /*
                    .ui-widget-content {
                         padding: 1px;
                         border: 1px solid #000000 !important;
@@ -456,85 +465,85 @@ Released   : 20120723
             color: red !important;
             }
             */
-                .ui-autocomplete {
-                    border: 1px black !important;
-                    color: gray;
-                    border-bottom: none;
-                    clear: both;
-                    border-top: 1px solid grey; /*      max-width:100%; */
-                    white-space: nowrap; /*  overflow: hidden; */
-                    text-overflow: ellipsis;
-                    max-height: 300px;
-                    overflow-y: auto; /* prevent horizontal scrollbar */
-                    overflow-x: hidden; /* add padding to account for vertical scrollbar */
-                    padding-right: 20px;
-                }
-                /* IE 6 doesn't support max-height
+            .ui-autocomplete {
+                border: 1px black !important;
+                color: gray;
+                border-bottom: none;
+                clear: both;
+                border-top: 1px solid grey; /*      max-width:100%; */
+                white-space: nowrap; /*  overflow: hidden; */
+                text-overflow: ellipsis;
+                max-height: 300px;
+                overflow-y: auto; /* prevent horizontal scrollbar */
+                overflow-x: hidden; /* add padding to account for vertical scrollbar */
+                padding-right: 20px;
+            }
+            /* IE 6 doesn't support max-height
              * we use height instead, but this forces the menu to always be this tall
              */
-                * html .ui-autocomplete {
-                    height: 200px;
-                }
+            * html .ui-autocomplete {
+                height: 200px;
+            }
 
 
 
 
 
-                /*        https://gist.github.com/daz/2168334 */
+            /*        https://gist.github.com/daz/2168334 */
 
 
-                .ui-autocomplete {
-                    position: absolute;
-                    /*   top: 100%; */
-                    left: 0;
-                    z-index: 1000;
-                    float: left;
-                    display: none;
-                    min-width: 160px;
-                    _width: 160px;
-                    padding: 4px 0;
-                    margin: 2px 0 0 0;
-                    list-style: none;
-                    background-color: #ffffff;
-                    border-color: #ccc;
-                    border-color: black !important; /*  rgba(0, 0, 0, 0.2); */
-                    border-style: solid;
-                    border-width: 1px;
-                    -webkit-border-radius: 5px;
-                    -moz-border-radius: 5px;
-                    border-radius: 5px;
-                    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-                    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-                    -webkit-background-clip: padding-box;
-                    -moz-background-clip: padding;
-                    background-clip: padding-box;
-                    *border-right-width: 2px;
-                    *border-bottom-width: 2px;
-                    .ui-menu-item > a.ui-corner-all;
+            .ui-autocomplete {
+                position: absolute;
+                /*   top: 100%; */
+                left: 0;
+                z-index: 1000;
+                float: left;
+                display: none;
+                min-width: 160px;
+                _width: 160px;
+                padding: 4px 0;
+                margin: 2px 0 0 0;
+                list-style: none;
+                background-color: #ffffff;
+                border-color: #ccc;
+                border-color: black !important; /*  rgba(0, 0, 0, 0.2); */
+                border-style: solid;
+                border-width: 1px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                -webkit-background-clip: padding-box;
+                -moz-background-clip: padding;
+                background-clip: padding-box;
+                *border-right-width: 2px;
+                *border-bottom-width: 2px;
+                .ui-menu-item > a.ui-corner-all;
 
-                {
-                    display: block;
-                    padding: 3px 15px;
-                    clear: both;
-                    font-weight: normal;
-                    line-height: 18px;
-                    color: #555555;
-                    white-space: nowrap;
-                    &.ui-state-hover, &.ui-state-active;
+            {
+                display: block;
+                padding: 3px 15px;
+                clear: both;
+                font-weight: normal;
+                line-height: 18px;
+                color: #555555;
+                white-space: nowrap;
+                &.ui-state-hover, &.ui-state-active;
 
-                {
-                    color: #ffffff;
-                    text-decoration: none;
-                    background-color: #0088cc;
-                    border-radius: 0px;
-                    -webkit-border-radius: 0px;
-                    -moz-border-radius: 0px;
-                    background-image: none;
-                }
+            {
+                color: #ffffff;
+                text-decoration: none;
+                background-color: #0088cc;
+                border-radius: 0px;
+                -webkit-border-radius: 0px;
+                -moz-border-radius: 0px;
+                background-image: none;
+            }
 
-                }
-                }
+            }
+            }
         </style>
         <style>
             /*  emparchando lo de los renglones editables, que no se me mueva con justificado a la izquierda */
@@ -554,10 +563,10 @@ Released   : 20120723
             }
         </style>
         <style>
-                /******************************************************************************************/
-                /* resetear estilo del scrollbar del webkit*/
+            /******************************************************************************************/
+            /* resetear estilo del scrollbar del webkit*/
 
-                /*
+            /*
             .viewDialogLabel::-webkit-scrollbar
             {
                 width: initial;
@@ -589,18 +598,18 @@ Released   : 20120723
             */
 
 
-                /************/
-                .ui-jqgrid ::-webkit-scrollbar-thumb {
-                    background-color: white;
-                }
+            /************/
+            .ui-jqgrid ::-webkit-scrollbar-thumb {
+                background-color: white;
+            }
 
-                .ui-jqgrid:hover ::-webkit-scrollbar-thumb {
-                    background-color: #BBB;
-                }
+            .ui-jqgrid:hover ::-webkit-scrollbar-thumb {
+                background-color: #BBB;
+            }
 
 
 
-                /******************************************************************************************/
+            /******************************************************************************************/
         </style>
         <style>
             /* fix the size of the pager */
@@ -635,8 +644,6 @@ Released   : 20120723
             .ui-layout-west {
                 z-index: 1 !important;
             }
-
-
         </style>
 
 
@@ -669,52 +676,52 @@ Released   : 20120723
             /********************************/
         </style>
         <style>
-                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+            /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
 
 
 
-                .ui-widget-content {
-                    border: 1px solid #E4E4E4; /*padding: 2px;*/
-                }
+            .ui-widget-content {
+                border: 1px solid #E4E4E4; /*padding: 2px;*/
+            }
 
 
-                .ui-jqgrid {
-                    border-width: 1px;
-                }
+            .ui-jqgrid {
+                border-width: 1px;
+            }
 
 
-                    /* If you need to remove all grid's borders you can use
+                /* If you need to remove all grid's borders you can use
 
             If you want additionally remove vertical border between the cells in the grid you can use */
 
 
 
-                    /* el pie */ /* el pie */
-                    .ui-jqgrid tr.footrow-ltr {
-                        border: 0;
+                /* el pie */ /* el pie */
+                .ui-jqgrid tr.footrow-ltr {
+                    border: 0;
+                }
+
+                    .ui-jqgrid tr.footrow-ltr td {
+                        border-right-color: #E4E4E4 !important;
                     }
 
-                        .ui-jqgrid tr.footrow-ltr td {
-                            border-right-color: #E4E4E4 !important;
-                        }
+                /*To remove horizontal border between the rows you can use */
 
-                    /*To remove horizontal border between the rows you can use */
-
-                    .ui-jqgrid tr.ui-row-ltr td {
-                        border-bottom-color: #E4E4E4;
-                        border-color: rgb(234, 234, 234) /* para zafar del borde del arbol de la izquierda  -no me funciona*/;
-                    }
-
-                /*To remove vertical borders between the column headers you can use */
-
-                th.ui-th-column {
-                    border-right-color: #E4E4E4 !important;
+                .ui-jqgrid tr.ui-row-ltr td {
+                    border-bottom-color: #E4E4E4;
+                    border-color: rgb(234, 234, 234) /* para zafar del borde del arbol de la izquierda  -no me funciona*/;
                 }
-                /* or alternatively (without the usage of !important) */
 
-                .ui-jqgrid-labels .ui-th-column {
-                    border-right-color: #E4E4E4;
-                }
+            /*To remove vertical borders between the column headers you can use */
+
+            th.ui-th-column {
+                border-right-color: #E4E4E4 !important;
+            }
+            /* or alternatively (without the usage of !important) */
+
+            .ui-jqgrid-labels .ui-th-column {
+                border-right-color: #E4E4E4;
+            }
         </style>
         @{
             ViewBag.MenuYoutube = false;
@@ -1415,17 +1422,17 @@ Released   : 20120723
             }
         </style>
         <style>
-                /* para sacarle la sombra */
-                .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
-                    /*
+            /* para sacarle la sombra */
+            .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+                /*
                         -webkit-box-shadow: 0 ;
                         -moz-box-shadow: 0;
                         box-shadow: 0; */
-                }
+            }
 
 
 
-                /*        .navbar-inner {
+            /*        .navbar-inner {
             border: 1px solid #d4d4d4;
             -webkit-border-radius: 4px;
             -moz-border-radius: 4px;
@@ -1488,8 +1495,8 @@ Released   : 20120723
                                                 <img src="@s" alt="" style="text-align: left; margin-top: 1px; margin-left: 12px;
                                 width: ; height: 42px;" />
                                                 @* @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-            {<span style="margin-left: 5px; text-align: right; margin-top: 20px; margin-right: 5px;"
-                class="caret"></span>}</img> si pongo el span con el caret anidandolo en el img, me tira la bronca*@
+                                                    {<span style="margin-left: 5px; text-align: right; margin-top: 20px; margin-right: 5px;"
+                                                        class="caret"></span>}</img> si pongo el span con el caret anidandolo en el img, me tira la bronca*@
                                             </a>
                                             @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                             {
@@ -1527,7 +1534,8 @@ Released   : 20120723
                                                                     <a href="@Url.Content("~")Proveedor/Index/-1">Proveedores</a><a class="pull-right" href="@Url.Content("~")Proveedor/Edit/-1">
                                                                         +
                                                                     </a>
-                                                                </li>             <li style="line-height: 30px;">
+                                                                </li>
+                                                                <li style="line-height: 30px;">
                                                                     <a href="@Url.Content("~")Obra/Index/">Obras</a><a class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
                                                                         +
                                                                     </a>
@@ -1539,7 +1547,7 @@ Released   : 20120723
                                                                         +
                                                                     </a>
                                                                 </li>
-                                                   
+
                                                                 <li style="line-height: 30px;">
                                                                     <a href="@Url.Content("~")Presupuesto/Index/-1">Presupuestos</a><a class="pull-right" href="@Url.Content("~")Presupuesto/Edit/-1">
                                                                         +
@@ -1590,10 +1598,11 @@ Released   : 20120723
                                                                     <a href="@Url.Content("~")Cliente/Index/-1">Clientes</a><a class="pull-right" href="@Url.Content("~")Cliente/Edit/-1">
                                                                         +
                                                                     </a>
-                                                                </li>        <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                                </li>
                                                                 <li style="line-height: 30px;"><a href="#">...</a> </li>
                                                                 <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                        
+                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
+
                                                                 <li style="line-height: 30px;"><a href="#">...</a> </li>
                                                                 <li style="line-height: 30px;"><a href="#">...</a> </li>
                                                                 <li style="line-height: 30px;">
@@ -1663,6 +1672,10 @@ Released   : 20120723
                                             <option>Requerimientos</option>
                                             <option>Pedidos</option>
                                         </select>*@
+                                    <button type="submit" class="btn"><i class=" icon-search"></i></button>
+
+
+
                                 </div>
                             </div>
                             <script>
@@ -2251,14 +2264,14 @@ Released   : 20120723
                     <div class="row-fluid">
                         <div>
                             <style>
-                                    /* este truco me provoca el desfasaje de los encabezados con el cuerpo
+                                /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                 /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                 .ui-jqgrid .ui-jqgrid-btable
                                 {
                                     /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                     /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                     /* http://stackoverflow.com/questions/1395746/jqgrid-how-do-i-removed-the-annoying-horizontal-scrollbar-when-autowidth-true */
-                                    /*table-layout: auto;*/ /* este truco me provoca el desfasaje de los encabezados con el cuerpo
+                                /*table-layout: auto;*/ /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                 }
 
                                 .ui-icon ui-icon-document-b tree-leaf treeclick
@@ -2282,7 +2295,7 @@ Released   : 20120723
                         font-weight: normal; bottom: 3px; text-align: center; width: 100%; text-decoration: none;
                         margin-left: 60px">©2015 BDL</a>
                         </div>
-                    
+
                         <style>
                             .filetree li {
                                 padding: 2px 0 2px 10px;
@@ -2848,11 +2861,11 @@ Released   : 20120723
                                         </li>
                                     </ul>
                                     <style>
-                                            .ui-tabs .ui-tabs-panel {
-                                                padding: 0px;
-                                            }
+                                        .ui-tabs .ui-tabs-panel {
+                                            padding: 0px;
+                                        }
 
-                                            /* .ui-pager-control
+                                        /* .ui-pager-control
                                         {
                                             height: 30px;
                                         }
@@ -2896,21 +2909,21 @@ Released   : 20120723
                             border: 0;">
                                             <div class="ui-tabs-panel outline  " style="border-top: 0; padding: 0; margin: 0;
                                 background: rgb(234, 234, 234)">
-                                                
-                                                    <div id="tabs3" class="ui-jqgrid" style="border-top: 0; padding: 0; margin: 0; background: rgb(234, 234, 234);
+
+                                                <div id="tabs3" class="ui-jqgrid" style="border-top: 0; padding: 0; margin: 0; background: rgb(234, 234, 234);
                                     font-size: 14px; line-height: 29px; font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;">
 
-                                                        <div class="row-fluid">
-                                                            
-                                                            <table id="ListaDrag3" class="scroll" style="background: rgb(234, 234, 234); font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+                                                    <div class="row-fluid">
+
+                                                        <table id="ListaDrag3" class="scroll" style="background: rgb(234, 234, 234); font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
                                             font-size: 14px;" cellpadding="0" cellspacing="0"></table>
 
-                                                            <div id="ListaDragPager3" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
-                                                            </div>
-                                                            <p>
-                                                            </p>
+                                                        <div id="ListaDragPager3" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
                                                         </div>
+                                                        <p>
+                                                        </p>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div id="tab-panel-east-4" class="full-height no-padding add-scrollbar" style="border-top: 0;
@@ -2946,35 +2959,45 @@ Released   : 20120723
                                                             <p>
                                                             </p>
                                                         </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @*(System.Diagnostics.Debug.att.IsAttached())*@
-                        @if (ViewBag.NombreUsuario == "Mariano" && System.Diagnostics.Debugger.IsAttached & System.Environment.MachineName == "MARIANO-PC" && false)
-                        {
-                            //var s=Url.Content("~/Content/images/Wizard-Resource-Arcane-Power.gif");
-                            //var aas = "http://trolr.com/wp-content/uploads/2012/05/Witch-Doctor-Resource-Mana.gif";
-                            var aas = "http://trolr.com/wp-content/uploads/2012/05/Monk-Resource-Spirit.gif";
+                            @*(System.Diagnostics.Debug.att.IsAttached())*@
+                            @if (ViewBag.NombreUsuario == "Mariano" && System.Diagnostics.Debugger.IsAttached & System.Environment.MachineName == "MARIANO-PC" && false)
+                            {
+                                //var s=Url.Content("~/Content/images/Wizard-Resource-Arcane-Power.gif");
+                                //var aas = "http://trolr.com/wp-content/uploads/2012/05/Witch-Doctor-Resource-Mana.gif";
+                                var aas = "http://trolr.com/wp-content/uploads/2012/05/Monk-Resource-Spirit.gif";
 
-                            <img src=@aas
-                                 alt="" style="text-align: ; margin-top: ; margin-left: ; width: ; height: 150px;
+                                <img src=@aas
+                                     alt="" style="text-align: ; margin-top: ; margin-left: ; width: ; height: 150px;
     bottom: -8px; position: fixed; right: 0; left: ; z-index: 1030; margin-bottom: 0;" />
+                            }
+                        </div>
+                        <div class="modal">
+                            <!-- Place at bottom of page -->
+                            @*http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation*@
+                        </div>
+
+
+                        @if (true)
+                        {
+                            @MiniProfiler.RenderIncludes(position: RenderPosition.Right)
                         }
-                    </div>
-                    <div class="modal">
-                        <!-- Place at bottom of page -->
-                        @*http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation*@
-                    </div>
 
 
-                    @if (true)
-                    {
-                        @MiniProfiler.RenderIncludes(position: RenderPosition.Right)
-                    }
+
+
+
+
+
+
+
+                    </div>
 
 
 
