@@ -127,7 +127,7 @@ namespace ProntoMVC.Controllers
             else
             {
                 mMaxLength = GetMaxLength<Cliente>(x => x.Codigo) ?? 0;
-                if (o.Codigo.Length > mMaxLength) { sErrorMsg += "\n" + "La codigo no puede tener mas de " + mMaxLength + " digitos"; }
+                if (o.Codigo.Length > mMaxLength) { sErrorMsg += "\n" + "El codigo no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
             if (o.RazonSocial.NullSafeToString() == "")
@@ -173,7 +173,6 @@ namespace ProntoMVC.Controllers
             string s = "asdasd";
             s = o.Cuit.NullSafeToString().Replace("-", "").PadLeft(11);
             o.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
-
             if (!Generales.mkf_validacuit(o.Cuit.NullSafeToString())) { sErrorMsg += "\n" + "El CUIT es incorrecto"; }
 
             if (sErrorMsg != "") return false;
@@ -374,32 +373,17 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult Clientes_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Cliente>
                                 ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
             var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
-
-
 
             var Entidad1 = (from a in Entidad
                             select new { IdCliente = a.IdCliente }).ToList();
 
-           
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Entidad
