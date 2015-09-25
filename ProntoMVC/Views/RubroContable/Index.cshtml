@@ -127,15 +127,11 @@
 
     $(document).ready(function () {
 
-
-
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $.extend($.jgrid.inlineEdit, {
             keys: true
         });
-
-
 
         window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
         document.body.onclick = saveEditedCell; // attach to current document.
@@ -205,10 +201,7 @@
             url: '@Url.Action("RubrosContables_DynamicGridData", "RubroContable")',
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdRubroContable', 'Descripción', '',
-              //  'codigo de agrupacion.',
-                'Grupo', 'Distribuir gastos en analisis', 'Tomar datos del mes'
-            ],
+            colNames: ['Acciones', 'IdRubroContable', 'Codigo', 'Descripción', 'Grupo', 'Distribuir gastos en analisis', 'Tomar datos del mes'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
                         { name: 'IdRubroContable', index: 'IdRubroContable', align: 'left', width: 100, editable: false, hidden: true },
@@ -225,11 +218,6 @@
                                 //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
                             }
                         },
-
-
-                   //     { name: 'codigogrupo', index: '', align: 'left', width: 70, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
-                   
-
                         {
                             name: 'Grupo', index: 'Grupo', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
@@ -259,16 +247,14 @@
                                 }]
                             },
                         },
-
-
                         {
-                            name: 'DistribuirGastosEnResumen', index: 'DistribuirGastosEnResumen', align: 'left', width: 50,
+                            name: 'DistribuirGastosEnResumen', index: 'DistribuirGastosEnResumen', align: 'left', width: 100,
                             editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
                             formatter: "checkbox", //  formatter: "SiNoFormatter", 
                             formatoptions: { disabled: false }
                         },
                         {
-                            name: 'TomarMesDeVentaEnResumen', index: 'TomarMesDeVentaEnResumen', align: 'left', width: 50,
+                            name: 'TomarMesDeVentaEnResumen', index: 'TomarMesDeVentaEnResumen', align: 'left', width: 100,
 
                             editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
                             formatter: "checkbox", formatoptions: { disabled: false },
@@ -306,26 +292,18 @@
 
             caption: '<b>RUBROS CONTABLES</b>',
 
-
-
-
-
-            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
 
             height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
             userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
 
           , gridview: true
           , multiboxonly: true
           , multipleSearch: true
-
 
            , cellEdit: true,
             cellsubmit: 'clientArray',
@@ -344,9 +322,6 @@
         // }
         //);
 
-
-
-
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
              { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
              {
@@ -355,12 +330,6 @@
                  width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
              }
             );
-
-
-
-        //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { add: false, edit: false, del: false },
-        //{}, {}, {}, { multipleSearch: true, overlay: false });
-
         jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager', {
             caption: "",
             buttonicon: "ui-icon-calculator",
@@ -372,8 +341,6 @@
                     .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
             }
         });
-
-
 
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,

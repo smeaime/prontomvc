@@ -247,6 +247,12 @@
     <Compile Include="Areas\MvcMembership\Models\UserAdministration\RoleViewModel.cs" />
     <Compile Include="Areas\MvcMembership\MvcMembershipAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepositoBancarioController.cs" />
+    <Compile Include="Controllers\BancoChequeraController.cs" />
+    <Compile Include="Controllers\TarjetaCreditoController.cs" />
+    <Compile Include="Controllers\CuentaBancariaController.cs" />
+    <Compile Include="Controllers\DescripcionIvaController.cs" />
+    <Compile Include="Controllers\CajaController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\PresupuestoObraController.cs" />
     <Compile Include="Controllers\OrdenTrabajoController.cs" />
@@ -1293,7 +1299,6 @@
     <Content Include="Views\Cliente\IndexAConfirmar.cshtml" />
     <Content Include="Views\OtroIngresoAlmacen\Edit.cshtml" />
     <Content Include="Views\OtroIngresoAlmacen\Index.cshtml" />
-    <Content Include="Views\RubroContable\Edit.cshtml" />
     <Content Include="Views\RubroContable\Index.cshtml" />
     <Content Include="Views\Cuenta\EditExterno.cshtml" />
     <Content Include="Views\Cuenta\IndexExterno.cshtml" />
@@ -1317,6 +1322,14 @@
     <Content Include="Views\Reporte\SIFERE_PercepcionesIIBB_Clientes.cshtml" />
     <Content Include="Views\Reporte\SIFERE_RetencionesIIBB_Clientes.cshtml" />
     <Content Include="Views\Reporte\SUSS_Clientes.cshtml" />
+    <Content Include="Views\CuentaGasto\Index.cshtml" />
+    <Content Include="Views\Caja\Index.cshtml" />
+    <Content Include="Views\Banco\Index.cshtml" />
+    <Content Include="Views\CuentaBancaria\Index.cshtml" />
+    <Content Include="Views\BancoChequera\Index.cshtml" />
+    <Content Include="Views\TarjetaCredito\Index.cshtml" />
+    <Content Include="Views\DepositoBancario\Edit.cshtml" />
+    <Content Include="Views\DepositoBancario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />
