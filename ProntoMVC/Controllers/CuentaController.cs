@@ -654,13 +654,21 @@ namespace ProntoMVC.Controllers
 
         }
 
-        public virtual ActionResult GetCuentas(int? TipoEntidad)
+        public virtual ActionResult GetCuentas(int? Texto)
         {
-            int TipoEntidad1 = TipoEntidad ?? 0;
+            int Texto1 = Texto ?? 0;
             Dictionary<int, string> Datacombo = new Dictionary<int, string>();
 
-            foreach (Cuenta u in db.Cuentas.Where(x => x.IdTipoCuenta == 2).OrderBy(x => x.Descripcion).ToList())
-                Datacombo.Add(u.IdCuenta, u.Descripcion + " " + u.Codigo.ToString());
+            if (Texto1 == 0)
+            {
+                foreach (Cuenta u in db.Cuentas.Where(x => x.IdTipoCuenta == 2).OrderBy(x => x.Descripcion).ToList())
+                    Datacombo.Add(u.IdCuenta, u.Descripcion + " " + u.Codigo.ToString());
+            }
+            if (Texto1 == 1)
+            {
+                foreach (Cuenta u in db.Cuentas.Where(x => x.IdTipoCuenta == 2).OrderBy(x => x.Descripcion).ToList())
+                    Datacombo.Add(u.IdCuenta, u.Descripcion.ToString());
+            }
 
             return PartialView("Select", Datacombo);
         }
@@ -671,6 +679,27 @@ namespace ProntoMVC.Controllers
 
             foreach (Cuenta u in db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4).OrderBy(x => x.Codigo).ToList())
                 Datacombo.Add(u.IdCuenta, u.Codigo + " " + u.Descripcion.ToString());
+
+            return PartialView("Select", Datacombo);
+        }
+
+        public virtual ActionResult GetCuentasSinCuentasGastosObras(int? Texto)
+        {
+            int Texto1 = Texto ?? 0;
+
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+            string JerarquiasValidas = "1 2 3 4 5";  //JerarquiasValidas.Contains(x.Jerarquia.Substring(1, 1))==true
+
+            if (Texto1 == 0)
+            {
+                foreach (Cuenta u in db.Cuentas.Where(x => (x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4) && JerarquiasValidas.Contains(x.Jerarquia.Substring(0, 1)) == true).OrderBy(x => x.Codigo).ToList())
+                    Datacombo.Add(u.IdCuenta, u.Codigo + " " + u.Descripcion.ToString());
+            }
+            if (Texto1 == 1)
+            {
+                foreach (Cuenta u in db.Cuentas.Where(x => (x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4) && JerarquiasValidas.Contains(x.Jerarquia.Substring(0, 1)) == true).OrderBy(x => x.Codigo).ToList())
+                    Datacombo.Add(u.IdCuenta, u.Descripcion.ToString());
+            }
 
             return PartialView("Select", Datacombo);
         }

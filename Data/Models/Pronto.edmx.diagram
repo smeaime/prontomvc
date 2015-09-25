@@ -2,7 +2,7 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <edmx:Designer>
     <edmx:Diagrams>
-      <edmx:Diagram Name="Pronto" ZoomLevel="100">
+      <edmx:Diagram Name="Pronto" ZoomLevel="10">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRequerimiento" Width="2.75" PointX="19.625" PointY="40.625" Height="0.4" IsExpanded="false" />
@@ -2415,6 +2415,10 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdTra__48F19687" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__IdTra__564B91A5" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DepositosBancario" Width="1.5" PointX="25.375" PointY="0.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleDepositosBancario" Width="1.5" PointX="26.375" PointY="5.75" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleDepositosBancarios_DepositosBancarios" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleDepositosBancarios_Valores" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />

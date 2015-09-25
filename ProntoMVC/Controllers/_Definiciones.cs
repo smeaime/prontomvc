@@ -238,9 +238,6 @@ namespace ProntoMVC.Controllers
             ///////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
             var serializer = new JavaScriptSerializer();
             Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
             ObjectQuery<T> filteredQuery =
@@ -265,18 +262,7 @@ namespace ProntoMVC.Controllers
                 throw;
             }
 
-
-
-
-
-
-
             // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-
 
             var pagedQuery = filteredQuery
                                         .Skip("it." + sidx + " " + sord, "@skip",
@@ -284,15 +270,9 @@ namespace ProntoMVC.Controllers
                                          .Top("@limit", new ObjectParameter("limit", rows));
             // to be able to use ToString() below which is NOT exist in the LINQ to Entity
 
-
             return pagedQuery;
 
             ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
         }
 
 

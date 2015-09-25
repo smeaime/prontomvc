@@ -105,6 +105,7 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             a.IdEjercicioContable,
+                            a.NumeroEjercicio,
                             a.FechaInicio,
                             a.FechaFinalizacion
                         }).OrderByDescending(x => x.FechaInicio)
@@ -123,6 +124,7 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 string.Empty,
                                 a.IdEjercicioContable.ToString(), 
+                                a.NumeroEjercicio.NullSafeToString(),
                                 a.FechaInicio == null ? "" : a.FechaInicio.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.FechaFinalizacion == null ? "" : a.FechaFinalizacion.GetValueOrDefault().ToString("dd/MM/yyyy")
                          }
