@@ -1471,6 +1471,15 @@ alter table  FertilizantesCupos ADD
 go
 
 
+
+
+--alter table  FertilizantesCupos ADD
+--    [NetoProc]                                      NUMERIC (12, 2) NULL,
+--    [TaraProc]                                      NUMERIC (12, 2) NULL,
+--    [BrutoProc]                                      NUMERIC (12, 2) NULL,
+--    [NetoFinal]                                      NUMERIC (12, 2) NULL
+--go
+
 --------------------------------------------------------------------------
 
  update  cartasdeporte
