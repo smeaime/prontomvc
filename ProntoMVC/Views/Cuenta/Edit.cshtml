@@ -236,9 +236,9 @@
                                 }
 
 
-                                $('#SubNumero').keyup(resizeInput).each(resizeInput);
+                                //$('#SubNumero').keyup(resizeInput).each(resizeInput);
 
-                                $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
+                                //$('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
 
                             })
                         </script>
@@ -735,13 +735,23 @@
             //            formData: formdata
             //        };
 
-            var dataToSend = JSON.stringify(cabecera); // JSON.stringify(griddata);   JSON.parse() ;   $.toJSON();
 
 
             // ShowProgressAnimation();
 
             cabecera.Jerarquia = $("#Jerarquia1").val() + "." + $("#Jerarquia2").val() + "." + $("#Jerarquia3").val() + "." + $("#Jerarquia4").val() + "." + $("#Jerarquia5").val();
+            //delete cabecera.Jerarquia1;
+            //delete cabecera.Jerarquia2;
+            //delete cabecera.Jerarquia3;
+            //delete cabecera.Jerarquia4;
+            //delete cabecera.Jerarquia5;
 
+
+
+
+
+
+            var dataToSend = JSON.stringify(cabecera); // JSON.stringify(griddata);   JSON.parse() ;   $.toJSON();
 
             $.ajax({
                 type: 'POST',
