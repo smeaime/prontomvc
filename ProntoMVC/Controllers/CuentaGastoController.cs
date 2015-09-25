@@ -27,46 +27,90 @@ namespace ProntoMVC.Controllers
 {
     public partial class CuentaGastoController : ProntoBaseController
     {
-        [HttpGet]
-        public virtual ActionResult Index(int page = 1)
+        public virtual ViewResult Index()
         {
-            var Tabla = db.CuentasGastos
-                .OrderBy(s => s.Descripcion)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            if (!PuedeLeer(enumNodos.CuentasGastos)) throw new Exception("No tenés permisos");
 
-            ViewBag.CurrentPage = page;
-            ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.CuentasGastos.Count() / pageSize);
-
-            return View(Tabla);
+            return View();
         }
 
-        public virtual JsonResult BatchUpdate(CuentasGasto CuentaGasto)
+        public virtual ActionResult Edit(int id)
         {
+            CuentasGasto o;
+            if (id <= 0)
+            {
+                o = new CuentasGasto();
+            }
+            else
+            {
+                o = db.CuentasGastos.SingleOrDefault(x => x.IdCuentaGasto == id);
+            }
+            CargarViewBag(o);
+            return View(o);
+        }
+
+        void CargarViewBag(CuentasGasto o)
+        {
+            Parametros parametros = db.Parametros.Find(1);
+            int? i = parametros.IdTipoCuentaGrupoFF;
+        }
+
+        public bool Validar(ProntoMVC.Data.Models.CuentasGasto o, ref string sErrorMsg)
+        {
+            if ((o.Descripcion ?? "") == "") { sErrorMsg += "\n" + "Falta la descripcion"; }
+
+            if (sErrorMsg != "") return false;
+            else return true;
+        }
+
+
+        public virtual JsonResult BatchUpdate(CuentasGasto CuentasGasto)
+        {
+            if (!PuedeEditar(enumNodos.CuentasGastos)) throw new Exception("No tenés permisos");
+
             try
             {
+                string errs = "";
+                if (!Validar(CuentasGasto, ref errs))
+                {
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+
+                    string[] words = errs.Split('\n');
+                    res.Errors = words.ToList();
+                    res.Message = "Hay datos invalidos";
+
+                    return Json(res);
+                }
+
                 if (ModelState.IsValid)
                 {
-                    if (CuentaGasto.IdCuentaGasto > 0)
+                    if (CuentasGasto.IdCuentaGasto > 0)
                     {
-                        var EntidadOriginal = db.TiposCuentaGrupos.Where(p => p.IdTipoCuentaGrupo == CuentaGasto.IdCuentaGasto).SingleOrDefault();
+                        var EntidadOriginal = db.CuentasGastos.Where(p => p.IdCuentaGasto == CuentasGasto.IdCuentaGasto).SingleOrDefault();
                         var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(CuentaGasto);
+                        EntidadEntry.CurrentValues.SetValues(CuentasGasto);
 
                         db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
                     }
                     else
                     {
-                        db.CuentasGastos.Add(CuentaGasto);
+                        db.CuentasGastos.Add(CuentasGasto);
                     }
 
                     db.SaveChanges();
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
-                    return Json(new { Success = 1, IdCuentaGasto = CuentaGasto.IdCuentaGasto, ex = "" });
+                    return Json(new { Success = 1, IdCuentaGasto = CuentasGasto.IdCuentaGasto, ex = "" });
                 }
                 else
                 {
@@ -95,66 +139,66 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult Delete(int Id)
         {
-            CuentasGasto CuentaGasto = db.CuentasGastos.Find(Id);
-            db.CuentasGastos.Remove(CuentaGasto);
+            CuentasGasto Entidad = db.CuentasGastos.Find(Id);
+            db.CuentasGastos.Remove(Entidad);
             db.SaveChanges();
             return Json(new { Success = 1, IdCuentaGasto = Id, ex = "" });
         }
 
-        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
+        public virtual ActionResult CuentasGastos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-            string campo = "true";
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int totalRecords = 0;
 
-            var Entidad = db.CuentasGastos.AsQueryable();
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "a":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.CuentasGasto>
+                                ("RubrosContables,Cuentas", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
-            var Entidad1 = (from a in Entidad
-                            select new { IdCuentaGasto = a.IdCuentaGasto }).Where(campo).ToList();
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            //var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
 
-            int totalRecords = Entidad1.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
 
-            var data = (from a in Entidad
+            var data = (from a in pagedQuery
+                        from b in db.RubrosContables.Where(o => o.IdRubroContable == a.IdRubroContable).DefaultIfEmpty()
+                        from c in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaMadre).DefaultIfEmpty()
                         select new
                         {
                             a.IdCuentaGasto,
-                            a.Descripcion
-                        }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                            a.IdRubroContable,
+                            a.IdCuentaMadre,
+                            a.Codigo,
+                            a.Descripcion,
+                            RubroContable = b != null ? b.Descripcion : "",
+                            CuentaMadre = c != null ? c.Descripcion : "",
+                            a.CodigoDestino,
+                            a.Activa,
+                            a.Titulo
+                        }).OrderBy(sidx + " " + sord).ToList();
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
-                page = currentPage,
+                page = page,
                 records = totalRecords,
                 rows = (from a in data
                         select new jqGridRowJson
                         {
                             id = a.IdCuentaGasto.ToString(),
-                            cell = new string[] { "",
+                            cell = new string[] { 
+                                "",
                                 a.IdCuentaGasto.ToString(),
-                                a.Descripcion.NullSafeToString()
+                                a.IdRubroContable.NullSafeToString(),
+                                a.IdCuentaMadre.NullSafeToString(),
+                                a.Codigo.NullSafeToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.RubroContable.NullSafeToString(),
+                                a.CuentaMadre.NullSafeToString(),
+                                a.CodigoDestino.NullSafeToString(),
+                                a.Activa.NullSafeToString(),
+                                a.Titulo.NullSafeToString()
                             }
                         }).ToArray()
             };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
@@ -165,6 +209,15 @@ namespace ProntoMVC.Controllers
                 registros.Add(u.IdCuentaGasto, u.Descripcion);
 
             return PartialView("Select", registros);
+        }
+
+        public virtual ActionResult GetCuentasGastos()
+        {
+            Dictionary<int, string> CuentaGasto = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.CuentasGasto u in db.CuentasGastos.OrderBy(x => x.Descripcion).ToList())
+                CuentaGasto.Add(u.IdCuentaGasto, u.Descripcion);
+
+            return PartialView("Select", CuentaGasto);
         }
 
     }

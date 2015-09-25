@@ -43,14 +43,6 @@ namespace ProntoMVC.Controllers
 
             return View();
         }
-        public virtual ActionResult GetRubrosContables()
-        {
-            Dictionary<int, string> rubrocontable = new Dictionary<int, string>();
-            foreach (ProntoMVC.Data.Models.RubrosContable u in db.RubrosContables.OrderBy(x => x.Descripcion).ToList())
-                rubrocontable.Add(u.IdRubroContable, u.Descripcion);
-
-            return PartialView("Select", rubrocontable);
-        }
 
         public virtual ActionResult Edit(int id)
         {
@@ -71,41 +63,10 @@ namespace ProntoMVC.Controllers
         {
             Parametros parametros = db.Parametros.Find(1);
             int? i = parametros.IdTipoCuentaGrupoFF;
-
-            //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
-            //ViewBag.IdUnidadOperativa = new SelectList(db.UnidadesOperativas, "IdUnidadOperativa", "Descripcion", o.IdUnidadOperativa);
-            //ViewBag.IdGrupoObra = new SelectList(db.GruposObras, "IdGrupoObra", "Descripcion", o.IdGrupoObra);
-            //ViewBag.IdMonedaValorObra = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMonedaValorObra);
-            //ViewBag.IdCuentaContableFF = new SelectList(db.Cuentas.Where(x => (x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4) && x.IdTipoCuentaGrupo == i).OrderBy(x => x.Codigo), "IdCuenta", "Descripcion", o.IdCuentaContableFF);
-            //ViewBag.IdProvincia = new SelectList(db.Provincias, "IdProvincia", "Nombre", o.IdProvincia);
-            //ViewBag.IdPais = new SelectList(db.Paises, "IdPais", "Descripcion", o.IdPais);
-            //ViewBag.IdJefeRegional = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdJefeRegional);
-            //ViewBag.IdJefe = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdJefe);
-            //ViewBag.IdSubjefe = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdSubjefe);
-
         }
 
         public bool Validar(ProntoMVC.Data.Models.RubrosContable o, ref string sErrorMsg)
         {
-            Int32 mPruebaInt = 0;
-            Int32 mMaxLength = 0;
-            string mProntoIni = "";
-            string mExigirCUIT = "";
-            Boolean result;
-
-            //if (o.Nombre.NullSafeToString() == "")
-            //{
-            //    sErrorMsg += "\n" + "Falta el nombre";
-            //}
-            //else
-            //{
-            //    mMaxLength = GetMaxLength<Localidad>(x => x.Nombre) ?? 0;
-            //    if (o.Nombre.Length > mMaxLength) { sErrorMsg += "\n" + "El nombre de la localidad no puede tener mas de " + mMaxLength + " digitos"; }
-            //}
-
-            //if ((o.IdProvincia ?? 0) == 0) { sErrorMsg += "\n" + "Falta la provincia"; }
-
-            //if ((o.Codigo ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo"; }
             if ((o.Descripcion ?? "") == "") { sErrorMsg += "\n" + "Falta la descripcion"; }
 
             if (sErrorMsg != "") return false;
@@ -185,39 +146,16 @@ namespace ProntoMVC.Controllers
             }
         }
 
-        public virtual ActionResult RubrosContables_DynamicGridData
-    (string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult RubrosContables_DynamicGridData (string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             string campo = String.Empty;
-            //int pageSize = rows ?? 20;
-            int currentPage = page; // ?? 1;
-
-            // var Entidad = db.Presupuestos.AsQueryable();
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            int currentPage = page; 
 
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.RubrosContable>
-                                ("",
-                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
-                                 );
-            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
-            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-            //int totalRecords = Entidad1.Count();
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
-
-            
 
             var jsonData = new jqGridJson()
             {
@@ -229,19 +167,15 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdRubroContable.ToString(),
                             cell = new string[] { 
-                                "", // "<a href="+ Url.Action("Edit",new {id = a.IdRubroContable} ) + " target='' >Editar</>" ,
-								// +"|"+"<a href=../Presupuesto/Edit/" + a.IdPresupuesto + "?code=1" + ">Detalles</a> ",
+                                "", 
                                 a.IdRubroContable.ToString(), 
                                 a.Codigo.NullSafeToString(),
                                 a.Descripcion.NullSafeToString(),
-
                                 a.CodigoAgrupacion.NullSafeToString(),
                                 (a.DistribuirGastosEnResumen=="SI").NullSafeToString(),
                                 (a.TomarMesDeVentaEnResumen=="SI").NullSafeToString(),
                                 (a.TiposRubrosFinancierosGrupos==null) ?  "" :  a.TiposRubrosFinancierosGrupos.Descripcion.NullSafeToString(),
-
                                 (a.Cuenta==null) ?  "" :  a.Cuenta.Descripcion,
-                                //a.Cuenta.Descripcion.NullSafeToString(),
                                 (a.Obra==null) ?  "" :  a.Obra.Descripcion.NullSafeToString(),
                             }
                         }).ToArray()
@@ -250,14 +184,22 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult GetRubrosContables()
+        {
+            Dictionary<int, string> tabla = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.RubrosContable u in db.RubrosContables.Where(x => (x.Financiero ?? "") != "SI").OrderBy(x => x.Descripcion).ToList())
+                tabla.Add(u.IdRubroContable, u.Descripcion);
+
+            return PartialView("Select", tabla);
+        }
 
         public virtual ActionResult GetTiposRubrosFinancierosGrupos()
         {
-            Dictionary<int, string> provincias = new Dictionary<int, string>();
+            Dictionary<int, string> tabla = new Dictionary<int, string>();
             foreach (ProntoMVC.Data.Models.TiposRubrosFinancierosGrupos u in db.TiposRubrosFinancierosGrupos.OrderBy(x => x.Descripcion).ToList())
-                provincias.Add(u.IdTipoRubroFinancieroGrupo, u.Descripcion);
+                tabla.Add(u.IdTipoRubroFinancieroGrupo, u.Descripcion);
 
-            return PartialView("Select", provincias);
+            return PartialView("Select", tabla);
         }
 
     }
