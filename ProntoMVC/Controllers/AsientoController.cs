@@ -1355,14 +1355,14 @@ namespace ProntoMVC.Controllers
             }
 
 
-            if ((o.Concepto ?? "" ) == "")
+            if ((o.Concepto ?? "") == "")
             {
                 sErrorMsg += "\n" + "Falta el concepto";
             }
 
 
 
-     //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
+            //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
 
 
             //         Dim mvarImprime As Integer, mvarNumero As Integer, i As Integer
@@ -1380,15 +1380,19 @@ namespace ProntoMVC.Controllers
 
 
             var reqsToDelete = o.DetalleAsientos.Where(x => (x.IdCuenta ?? 0) <= 0).ToList();
-            foreach (var deleteReq in reqsToDelete)
+
+            for (int i = 0; i < reqsToDelete.Count; i++)
             {
+                var deleteReq = reqsToDelete[i];
+
+                if ((deleteReq.Debe ?? 0) != 0 || (deleteReq.Haber ?? 0) != 0) sErrorMsg += "\n" + "El item " + (i+1).ToString() + " no tiene cuenta";
                 o.DetalleAsientos.Remove(deleteReq);
             }
 
 
             if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El asiento no tiene items";
 
-       
+
 
 
             foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
