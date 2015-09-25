@@ -25,6 +25,199 @@ namespace ProntoMVC.Controllers
 {
     public partial class BancoController : ProntoBaseController
     {
+
+        public virtual ViewResult Index()
+        {
+            if (!PuedeLeer(enumNodos.Bancos)) throw new Exception("No tenés permisos");
+
+            return View();
+        }
+
+        public virtual ActionResult Edit(int id)
+        {
+            Banco o;
+            if (id <= 0)
+            {
+                o = new Banco();
+            }
+            else
+            {
+                o = db.Bancos.SingleOrDefault(x => x.IdBanco == id);
+            }
+            CargarViewBag(o);
+            return View(o);
+        }
+
+        void CargarViewBag(Banco o)
+        {
+            Parametros parametros = db.Parametros.Find(1);
+            int? i = parametros.IdTipoCuentaGrupoFF;
+        }
+
+        public bool Validar(ProntoMVC.Data.Models.Banco o, ref string sErrorMsg)
+        {
+            if ((o.Nombre ?? "") == "") { sErrorMsg += "\n" + "Falta la Nombre"; }
+
+            if ((o.IdCodigoIva ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo de IVA"; }
+
+            if ((o.IdCuenta ?? 0) == 0) { sErrorMsg += "\n" + "Falta la cuenta contable"; }
+
+            string s = "asdasd";
+            s = o.Cuit.NullSafeToString().Replace("-", "").PadLeft(11);
+            o.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+            if (!Generales.mkf_validacuit(o.Cuit.NullSafeToString())) { sErrorMsg += "\n" + "El CUIT es incorrecto"; }
+
+            if (sErrorMsg != "") return false;
+            else return true;
+        }
+
+        public virtual JsonResult BatchUpdate(Banco Banco)
+        {
+            if (!PuedeEditar(enumNodos.Bancos)) throw new Exception("No tenés permisos");
+
+            try
+            {
+                string errs = "";
+                if (!Validar(Banco, ref errs))
+                {
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+
+                    string[] words = errs.Split('\n');
+                    res.Errors = words.ToList();
+                    res.Message = "Hay datos invalidos";
+
+                    return Json(res);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    if (Banco.IdBanco > 0)
+                    {
+                        var EntidadOriginal = db.Bancos.Where(p => p.IdBanco == Banco.IdBanco).SingleOrDefault();
+                        var EntidadEntry = db.Entry(EntidadOriginal);
+                        EntidadEntry.CurrentValues.SetValues(Banco);
+
+                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Bancos.Add(Banco);
+                    }
+
+                    db.SaveChanges();
+
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+                    return Json(new { Success = 1, IdBanco = Banco.IdBanco, ex = "" });
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    Response.TrySkipIisCustomErrors = true;
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "El registro tiene datos invalidos";
+
+                    return Json(res);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return Json(errors);
+            }
+        }
+
+        [HttpPost]
+        public virtual JsonResult Delete(int Id)
+        {
+            Banco Entidad = db.Bancos.Find(Id);
+            db.Bancos.Remove(Entidad);
+            db.SaveChanges();
+            return Json(new { Success = 1, IdBanco = Id, ex = "" });
+        }
+
+        public virtual ActionResult Bancos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Banco>
+                                ("Cuentas", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            //var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+
+            var data = (from a in pagedQuery
+                        from b in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        from c in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaParaChequesDiferidos).DefaultIfEmpty()
+                        from d in db.DescripcionIvas.Where(o => o.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdBanco,
+                            a.IdCuenta,
+                            a.IdCuentaParaChequesDiferidos,
+                            a.IdCodigoIva,
+                            a.CodigoUniversal,
+                            a.Nombre,
+                            Cuenta = b != null ? b.Descripcion : "",
+                            CuentaParaChequesDiferidos = c != null ? c.Descripcion : "",
+                            a.Cuit,
+                            DescripcionIva = d != null ? d.Descripcion : "",
+                            a.CodigoResumen,
+                            a.Codigo,
+                            a.Entidad,
+                            a.Subentidad
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdBanco.ToString(),
+                            cell = new string[] { 
+                                "",
+                                a.IdBanco.ToString(),
+                                a.IdCuenta.NullSafeToString(),
+                                a.IdCuentaParaChequesDiferidos.NullSafeToString(),
+                                a.IdCodigoIva.NullSafeToString(),
+                                a.CodigoUniversal.NullSafeToString(),
+                                a.Nombre.NullSafeToString(),
+                                a.Cuenta.NullSafeToString(),
+                                a.CuentaParaChequesDiferidos.NullSafeToString(),
+                                a.Cuit.NullSafeToString(),
+                                a.DescripcionIva.NullSafeToString(),
+                                a.CodigoResumen.NullSafeToString(),
+                                a.Codigo.NullSafeToString(),
+                                a.Entidad.NullSafeToString(),
+                                a.Subentidad.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+        
         public virtual ActionResult GetBancosPropios(int? TipoEntidad)
         {
             int TipoEntidad1 = TipoEntidad ?? 0;
@@ -35,10 +228,15 @@ namespace ProntoMVC.Controllers
                 foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => x.Activa == "SI").OrderBy(x => x.Banco.Nombre).ToList())
                     Datacombo.Add(u.IdCuentaBancaria, u.Banco.Nombre + " " + u.Cuenta);
             }
+            if (TipoEntidad == 10)
+            {
+                foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => x.Activa == "SI").OrderBy(x => x.Banco.Nombre).ToList())
+                    Datacombo.Add(u.IdCuentaBancaria, u.Banco.Nombre);
+            }
             if (TipoEntidad == 2)
             {
-                foreach (Caja u in db.Cajas.OrderBy(x => x.Descripcion).ToList())
-                    Datacombo.Add(u.IdCaja, u.Descripcion);
+                foreach (Banco u in db.Bancos.OrderBy(x => x.Nombre).ToList())
+                    Datacombo.Add(u.IdBanco, u.Nombre);
             }
             if (TipoEntidad == 3)
             {
@@ -128,16 +326,16 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", Datacombo);
         }
 
-        public virtual JsonResult GetCajasPorIdCuenta(int IdCuenta, int Filler = 0)
+        public virtual JsonResult GetBancosPorIdCuenta(int IdCuenta, int Filler = 0)
         {
-            var filtereditems = (from a in db.Cajas
+            var filtereditems = (from a in db.Bancos
                                  where (a.IdCuenta == IdCuenta)
-                                 orderby a.Descripcion
+                                 orderby a.Nombre
                                  select new
                                  {
-                                     id = a.IdCaja,
-                                     Caja = a.Descripcion.Trim(),
-                                     value = a.Descripcion
+                                     id = a.IdBanco,
+                                     Banco = a.Nombre.Trim(),
+                                     value = a.Nombre
                                  }).ToList();
 
             if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
@@ -145,12 +343,12 @@ namespace ProntoMVC.Controllers
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult GetCajasPorIdCuenta2(int IdCuenta = 0)
+        public virtual ActionResult GetBancosPorIdCuenta2(int IdCuenta = 0)
         {
             Dictionary<int, string> Datacombo = new Dictionary<int, string>();
 
-            foreach (Caja u in db.Cajas.Where(x => IdCuenta == 0 || x.IdCuenta == IdCuenta).OrderBy(x => x.Descripcion).ToList())
-                Datacombo.Add(u.IdCaja, u.Descripcion);
+            foreach (Banco u in db.Bancos.Where(x => IdCuenta == 0 || x.IdCuenta == IdCuenta).OrderBy(x => x.Nombre).ToList())
+                Datacombo.Add(u.IdBanco, u.Nombre);
 
             return PartialView("Select", Datacombo);
         }

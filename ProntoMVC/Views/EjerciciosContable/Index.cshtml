@@ -56,10 +56,12 @@
         var err;
 
         datos.IdEjercicioContable = gridId;
+        datos.NumeroEjercicio = dataFromTheRow.NumeroEjercicio;
         datos.FechaInicio = dataFromTheRow.FechaInicio;
         datos.FechaFinalizacion = dataFromTheRow.FechaFinalizacion;
 
         err = ""
+        if (datos.NumeroEjercicio == "" || datos.NumeroEjercicio == undefined) err = err + "Falta definir el numero de ejercicio.\n"
         if (datos.FechaInicio == "" || datos.FechaInicio == undefined) err = err + "Falta definir la fecha de inicio.\n"
         if (datos.FechaFinalizacion == "" || datos.FechaFinalizacion == undefined) err = err + "Falta definir la fecha de fin.\n"
 
@@ -194,10 +196,25 @@
         postData: {  },
         datatype: 'json',
         mtype: 'POST',
-        colNames: [' ', 'IdEjercicioContable', 'Fecha de inicio', 'Fecha de finalizacion'],
+        colNames: [' ', 'IdEjercicioContable', 'NumeroEjercicio', 'Fecha de inicio', 'Fecha de finalizacion'],
         colModel: [
                     { name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false },
                     { name: 'IdEjercicioContable', index: 'IdEjercicioContable', align: 'left', width: 100, editable: false, hidden: true },
+                    {
+                        name: 'NumeroEjercicio', index: 'NumeroEjercicio', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 10, defaultValue: '',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
                     {
                         name: 'FechaInicio', index: 'FechaInicio', width: 120, sortable: false, align: 'right', editable: true,
                         editoptions: {
@@ -270,7 +287,8 @@
         sortorder: 'desc',
         viewrecords: true,
         multiselect: true,
-        shrinkToFit: true,
+        autowidth: true,
+        shrinkToFit: false,
         width: 'auto',
         height: '100%',
         altRows: false,
