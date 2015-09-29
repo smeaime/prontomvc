@@ -85,6 +85,69 @@ Public Class FertilizanteManager
         Return f
     End Function
 
+    Public Shared Function Anular(ByVal sc As String, ByVal cupo As FertilizantesCupos, ByVal IdUsuario As Integer, ByVal NombreUsuario As String) As Integer
+        With cupo
+
+            'esto tiene que estar en el manager, dios!
+            .FechaAnulacion = Now
+            '.UsuarioAnulacion = cmbUsuarioAnulo.SelectedValue
+            '.Cumplido = "AN"
+
+            .Anulada = "SI"
+
+            'For Each i As CartaDePorteItem In .Detalles
+            '    With i
+            '        .Cumplido = "AN"
+            '        '.EnviarEmail = 1
+            '    End With
+            'Next
+
+            'revisar queda una en la familia, y ponerla como original
+            Return Save(sc, cupo, IdUsuario, NombreUsuario)
+
+
+
+
+            '                tira un error de duplicacion al anular
+            '                _
+            'URL:	/ProntoWeb/CartaDePorte.aspx?Id=1090650
+            'User:           scabrera()
+            '                Exception(Type) : System.ApplicationException()
+            'Message:	Error en la grabacion Error en la grabacion Violation of UNIQUE KEY constraint 'U_NumeroCartaRestringido'. Cannot insert duplicate key in object 'CartasDePorte'. The statement has been terminated.
+            'Stack Trace:	 at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario)
+            'at CartaDePorteManager.Anular(String sc, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario)
+            'at CartadeporteABM.btnAnularOk_Click(Object sender, EventArgs e)
+            'at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+            'at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+            'at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+            'at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+            'at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+            'at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+        End With
+    End Function
+
+
+    Public Shared Function DesAnular(ByVal sc As String, ByVal cupo As FertilizantesCupos, ByVal IdUsuario As Integer, ByVal NombreUsuario As String) As Integer
+        With cupo
+
+            'esto tiene que estar en el manager, dios!
+            .FechaAnulacion = Now
+            '.UsuarioAnulacion = cmbUsuarioAnulo.SelectedValue
+            '.Cumplido = "AN"
+
+            .Anulada = "NO"
+
+            'For Each i As CartaDePorteItem In .Detalles
+            '    With i
+            '        .Cumplido = "AN"
+            '        '.EnviarEmail = 1
+            '    End With
+            'Next
+            Return Save(sc, cupo, IdUsuario, NombreUsuario)
+        End With
+    End Function
+
+
 
     Public Shared Function GetItemPorNumero(ByVal SC As String, ByVal NumeroCartaDePorte As String) As FertilizantesCupos
 
@@ -284,10 +347,33 @@ Public Class FertilizanteManager
             .Cantidad = Val(dr.Item("NetoProc"))
             .Contrato = dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString)
 
+            .FechaIngreso = iisValidSqlDate(TextoAFecha(iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.FechaDescarga.ToString))))
 
             .Chasis = iisNull(dr.Item("Patente"))
             .Acoplado = iisNull(dr.Item("Acoplado"))
-           
+
+            .Puro = IIf(iisNull(dr.Item("Calidad")) = "X", 1, 0)
+            .Mezcla = cmbPuntoVenta.SelectedValue
+
+            .Porcentaje1 = StringToDecimal(iisNull(dr.Item("column17")))
+            .Porcentaje2 = StringToDecimal(iisNull(dr.Item("column18")))
+            .Porcentaje3 = StringToDecimal(iisNull(dr.Item("column19")))
+            .Porcentaje4 = StringToDecimal(iisNull(dr.Item("column20")))
+
+
+
+            Select Case iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Comprador)).ToString.Trim.ToUpper
+                Case "GRANEL"
+                    .FormaDespacho = 1
+                Case "BOLSA", "BOLSAS"
+                    .FormaDespacho = 2
+                Case "BIGBAG", "BIG BAGS (1000 KG)", "BIG BAGS (500 KG)"
+                    .FormaDespacho = 3
+            End Select
+
+
+
+
             '/////////////////////////////////////////
             '/////////////////////////////////////////
 
@@ -368,6 +454,18 @@ Public Class FertilizanteManager
                     'AsignarContratistasSegunDestino(dr, SC)
                 End If
             End If
+
+
+
+
+            dr.Item("Procedencia") = iisNull(dr.Item("Procedencia"))
+            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") Then
+                .IdLocalidadTransportista = BuscaIdLocalidadPreciso(RTrim(dr.Item("Procedencia")), SC)
+                If .IdLocalidadTransportista = -1 Then .IdLocalidadTransportista = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Procedencia")), SC)
+                'dt.Rows(row).Item("IdProcedencia") = .Procedencia
+                If .IdLocalidadTransportista = -1 Then Return "Procedencia"
+            End If
+
 
 
             'sector del confeccionó
