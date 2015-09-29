@@ -1549,6 +1549,16 @@
       <End Role="Transportista" EntitySet="Transportistas" />
       <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
     </AssociationSet>
+    <EntitySet Name="DepositosBancarios" EntityType="DemoProntoModel.DepositosBancario" />
+    <EntitySet Name="DetalleDepositosBancarios" EntityType="DemoProntoModel.DetalleDepositosBancario" />
+    <AssociationSet Name="FK_DetalleDepositosBancarios_DepositosBancarios" Association="DemoProntoModel.FK_DetalleDepositosBancarios_DepositosBancarios">
+      <End Role="DepositosBancario" EntitySet="DepositosBancarios" />
+      <End Role="DetalleDepositosBancario" EntitySet="DetalleDepositosBancarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleDepositosBancarios_Valores" Association="DemoProntoModel.FK_DetalleDepositosBancarios_Valores">
+      <End Role="Valore" EntitySet="Valores" />
+      <End Role="DetalleDepositosBancario" EntitySet="DetalleDepositosBancarios" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -8230,6 +8240,7 @@
     <NavigationProperty Name="TiposComprobante" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" FromRole="Valore" ToRole="TiposComprobante" />
     <NavigationProperty Name="TiposComprobante1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="Valore" ToRole="TiposComprobante" />
     <NavigationProperty Name="Moneda1" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" FromRole="Valore" ToRole="Moneda" />
+    <NavigationProperty Name="DetalleDepositosBancarios" Relationship="DemoProntoModel.FK_DetalleDepositosBancarios_Valores" FromRole="Valore" ToRole="DetalleDepositosBancario" />
   </EntityType>
   <Association Name="FK_Valores_Monedas_IdMoneda">
     <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
@@ -11858,6 +11869,59 @@
       </Principal>
       <Dependent Role="FertilizantesCupos">
         <PropertyRef Name="IdTransportista" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DepositosBancario">
+    <Key>
+      <PropertyRef Name="IdDepositoBancario" />
+    </Key>
+    <Property Name="IdDepositoBancario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaDeposito" Type="DateTime" Precision="3" />
+    <Property Name="IdBanco" Type="Int32" />
+    <Property Name="NumeroDeposito" Type="Int32" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Efectivo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdCuentaBancaria" Type="Int32" />
+    <Property Name="Anulado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdAutorizaAnulacion" Type="Int32" />
+    <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+    <Property Name="IdCaja" Type="Int32" />
+    <Property Name="IdMonedaEfectivo" Type="Int32" />
+    <Property Name="CotizacionMoneda" Type="Decimal" Precision="18" Scale="4" />
+    <NavigationProperty Name="DetalleDepositosBancarios" Relationship="DemoProntoModel.FK_DetalleDepositosBancarios_DepositosBancarios" FromRole="DepositosBancario" ToRole="DetalleDepositosBancario" />
+  </EntityType>
+  <EntityType Name="DetalleDepositosBancario">
+    <Key>
+      <PropertyRef Name="IdDetalleDepositoBancario" />
+    </Key>
+    <Property Name="IdDetalleDepositoBancario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDepositoBancario" Type="Int32" />
+    <Property Name="IdValor" Type="Int32" />
+    <NavigationProperty Name="DepositosBancario" Relationship="DemoProntoModel.FK_DetalleDepositosBancarios_DepositosBancarios" FromRole="DetalleDepositosBancario" ToRole="DepositosBancario" />
+    <NavigationProperty Name="Valore" Relationship="DemoProntoModel.FK_DetalleDepositosBancarios_Valores" FromRole="DetalleDepositosBancario" ToRole="Valore" />
+  </EntityType>
+  <Association Name="FK_DetalleDepositosBancarios_DepositosBancarios">
+    <End Type="DemoProntoModel.DepositosBancario" Role="DepositosBancario" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleDepositosBancario" Role="DetalleDepositosBancario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepositosBancario">
+        <PropertyRef Name="IdDepositoBancario" />
+      </Principal>
+      <Dependent Role="DetalleDepositosBancario">
+        <PropertyRef Name="IdDepositoBancario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleDepositosBancarios_Valores">
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleDepositosBancario" Role="DetalleDepositosBancario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valore">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleDepositosBancario">
+        <PropertyRef Name="IdValor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
