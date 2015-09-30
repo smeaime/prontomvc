@@ -2948,6 +2948,131 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
+        Public Shared Function Sincronismo_SyngentaFacturacion_ConLINQ(q As Generic.List(Of CartasConCalada), _
+                                    ByRef sErrores As String, ByVal titulo As String, SC As String) As String
+
+
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+
+            'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14979
+
+         
+
+
+            Dim codigoBahiaBlanca As String
+            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
+                codigoBahiaBlanca = (From x In db.WilliamsDestinos Where x.Descripcion = "Bahia Blanca" Select x.CodigoLosGrobo).FirstOrDefault
+                If codigoBahiaBlanca = "" Then Throw New Exception("Falta asignar código al destino 'Bahia Blanca'")
+            End Using
+            Dim l As String = iisNull(ParametroManager.TraerValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo"), "")
+            'la dichosa tabla Parametros no tiene los campos de valor muy largos
+            If l = "" Or True Then
+                l = "CANGREJALES;LDC - PUERTO GALVAN;CARGILL BAHIA BLANCA;TERMINAL BAHIA BLANCA SA;ACTIAR SRL;PUERTO GALVAN. O.M.H.S.A"  '"LDC - PUERTO GALVAN"
+                ParametroManager.GuardarValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo", l)
+            End If
+            Dim bahiablanca = Split(l, ";").ToList
+
+
+
+
+
+            Dim sErroresProcedencia, sErroresDestinos As String
+
+            Dim sErroresOtros As String
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroSyngentaFac " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+            Dim n = 0
+
+            Const cuitYPF = "30546689979"
+
+            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+
+                For Each cdp As CartasConCalada In q
+                    i = 0 : sb = ""
+
+
+                    '            Campos	Tipo de Dato	Detalle
+                    'CARPORTE	NUMBER (14)	Nro de Carta de Porte Facturada
+                    'TOTNETO	NUMBER (12)	Kg Facturados
+                    'NROCOMPROBANTE	NUMBER (12)	Nro de Comprobante 
+                    'FECHA	DATE	Fecha de Comprobante (DD/MM/YYYY)
+                    'CUENTAENTRE	VARCHAR2(16)	Nro Cuenta Entregador
+                    'NOMBENTRE	VARCHAR2(40)	Nombre Entregador
+
+
+                    If n > 0 Then sb &= vbNewLine
+
+
+
+                    sb &= cdp.NumeroCartaDePorte.ToString & ";"
+                    sb &= Int(cdp.NetoProc).ToString & ";"
+
+
+
+                    Dim fac = db.linqFacturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
+                    If fac.IdCliente <> 4333 Then Continue For 'tienen que ser de syngenta
+                    sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
+                    sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
+                    sb &= "6508001111;WILLIAMS ENTREGAS S. A.;"
+
+                    'cdp.NetoFinal()
+                    '  cdp.IdFacturaImputada()
+                    '  DBConcurrencyException.facturas cdp.fa()
+
+
+                    If cdp.ProcedenciaPartidoONCCA = "" And False Then
+                        'si no tiene codigo ni está ya en sErrores, lo meto
+
+                        'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
+
+                        'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
+
+                        'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                        sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Partido con código asignado</a>; <br/>"
+                    End If
+
+
+                    Print(nF, sb)
+                    n += 1
+                Next
+
+
+            End Using
+
+
+            ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
+            'sErrores &= sErroresOtros
+
+            If sErrores <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+
+            FileClose(nF)
+            Return vFileName
+            'Return TextToExcel(vFileName, titulo)
+
+
+        End Function
+
         Public Shared Function Sincronismo_YPF(ByVal pDataTable As DataTable, ByRef sErrores As String, ByVal titulo As String, SC As String) As String
 
 

@@ -1864,6 +1864,7 @@ Public Class CartaDePorteManager
                 Where _
             cdp.Vendedor > 0 _
             And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+            And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
             And (cdp.Anulada <> "SI") _
             And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
             And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
@@ -7710,7 +7711,7 @@ Public Class CartaDePorteManager
         With myCartaDePorte
 
             'esto tiene que estar en el manager, dios!
-            .FechaAnulacion = Now
+            .FechaAnulacion = Nothing
             '.UsuarioAnulacion = cmbUsuarioAnulo.SelectedValue
             '.Cumplido = "AN"
 

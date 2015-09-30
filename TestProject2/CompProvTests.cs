@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Web;
 using System.Linq;
-using System.Linq.Dynamic;
+//using System.Linq.Dynamic;
 using ProntoMVC.Models;
 using ProntoMVC.Controllers;
 using System.Web;
@@ -410,7 +410,7 @@ namespace ProntoMVC.Tests
             //controller.Execute(requestContext);
 
 
-            c.FakeInitialize(sc);
+            c.FakeInitialize(sc );
 
             // este tipo sugiere directamente sacar del Initialize el codigo y meterlo en un metodo para llamarlo aparte
             // http://stackoverflow.com/questions/5769163/asp-net-mvc-unit-testing-override-initialize-method
