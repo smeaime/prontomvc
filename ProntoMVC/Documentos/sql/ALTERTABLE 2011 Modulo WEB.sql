@@ -1504,3 +1504,7 @@ select SubnumeroDeFacturacion,* from cartasdeporte where numerocartadeporte=5408
 alter table CartasDePorte ADD
 	CONSTRAINT chk_FechaAnulacion3 CHECK (not (FechaAnulacion is not null AND Anulada='NO') ) 
 go
+
+
+
+select top 10 * from facturas

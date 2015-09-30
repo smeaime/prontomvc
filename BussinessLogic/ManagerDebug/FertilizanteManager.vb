@@ -355,10 +355,10 @@ Public Class FertilizanteManager
             .Puro = IIf(iisNull(dr.Item("Calidad")) = "X", 1, 0)
             .Mezcla = cmbPuntoVenta.SelectedValue
 
-            .Porcentaje1 = StringToDecimal(iisNull(dr.Item("column17")))
-            .Porcentaje2 = StringToDecimal(iisNull(dr.Item("column18")))
-            .Porcentaje3 = StringToDecimal(iisNull(dr.Item("column19")))
-            .Porcentaje4 = StringToDecimal(iisNull(dr.Item("column20")))
+            .Porcentaje1 = StringToDecimal(iisNull(dr.Item("column17"))) * 100
+            .Porcentaje2 = StringToDecimal(iisNull(dr.Item("column18"))) * 100
+            .Porcentaje3 = StringToDecimal(iisNull(dr.Item("column19"))) * 100
+            .Porcentaje4 = StringToDecimal(iisNull(dr.Item("column20"))) * 100
 
 
 
@@ -435,6 +435,17 @@ Public Class FertilizanteManager
                 If .Cliente = -1 Then Return "Titular"
             End If
 
+
+
+            dr.Item("Intermediario") = iisNull(dr.Item("Intermediario"))
+            If dr.Item("Intermediario") <> "NO_VALIDAR" And Trim(dr.Item("Intermediario")) <> "" Then
+                .CuentaOrden = BuscaIdClientePrecisoConCUIT(dr.Item("Intermediario"), SC)
+                If .CuentaOrden = -1 Then .CuentaOrden = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Intermediario")), SC)
+                dr.Item("IdIntermediario") = .CuentaOrden
+                If .CuentaOrden = -1 Then Return "Intermediario"
+            End If
+
+         
 
 
 
