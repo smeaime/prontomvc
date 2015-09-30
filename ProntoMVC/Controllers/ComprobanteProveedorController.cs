@@ -107,6 +107,18 @@ namespace ProntoMVC.Controllers
 
         }
 
+        public void FakeInitialize(string SC)
+        {
+            // para usar la inicializacion en testing
+
+            // base.Initialize(rc); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
+            unitOfWork = new UnitOfWork(SC);
+            fondoFijoService = new FondoFijoService(unitOfWork);
+
+            //base.db = unitOfWork.ComprobantesproveedorRepositorio.HACKEADOcontext;
+
+        }
+
         /// //////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////

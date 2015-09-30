@@ -165,17 +165,10 @@
     <Compile Include="CompProvTests.cs" />
     <Compile Include="NuevosTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIMap.cs">
-      <DependentUpon>UIMap.uitest</DependentUpon>
-    </Compile>
-    <Compile Include="UIMap.Designer.cs">
-      <DependentUpon>UIMap.uitest</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="UIMap.uitest" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Viejos.vb" />
