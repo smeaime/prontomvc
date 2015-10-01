@@ -78,7 +78,6 @@ D:\ProntoMVC3\ProntoMVC\bin\itextsharp.xml
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.dll
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.pdb
-C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\AutoMapper.Net4.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Documentos\Pedido_Autotrol_PUNTONET.docx
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Documentos\Factura_A_BaseNueva.dot
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Documentos\Factura_A_BaseNueva_FA.dot
@@ -114,6 +113,9 @@ C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\PagedList.Mvc.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\ProntoMVC.Data.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Repositorio.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Servicio.dll
+C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.IO.dll
+C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Runtime.dll
+C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Threading.Tasks.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.Helpers.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.Mvc.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.Razor.dll
@@ -127,9 +129,7 @@ C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\CodeEngine.Framework.Q
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Ionic.Zip.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\itextsharp.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\ProntoMVC.Data.pdb
-C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\AutoMapper.pdb
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\AutoMapper.xml
-C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\AutoMapper.Net4.pdb
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\BusinessLogic.pdb
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\BusinessLogic.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\ClosedXML.xml
@@ -149,6 +149,9 @@ C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\PagedList.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\PagedList.Mvc.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Repositorio.pdb
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\Servicio.pdb
+C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.IO.xml
+C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Runtime.xml
+C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Threading.Tasks.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.Helpers.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.Mvc.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.Razor.xml
@@ -156,6 +159,7 @@ C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.WebPages.xm
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\System.Web.WebPages.Razor.xml
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\bin\itextsharp.xml
+C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\obj\Debug\ProntoMVC.csproj.App.config
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\obj\Debug\ProntoMVC.dll
 C:\Users\Administrador\Documents\bdl\pronto\ProntoMVC\obj\Debug\ProntoMVC.pdb

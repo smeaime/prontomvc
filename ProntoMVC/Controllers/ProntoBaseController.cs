@@ -100,17 +100,17 @@ namespace ProntoMVC.Controllers
 
         }
 
-        private void asignacadena(string rccadena)
+        private void asignacadena(string nombreEmpresa)
         {
             string sc;
             try
             {
-                sc = Generales.sCadenaConex(rccadena);
+                sc = Generales.sCadenaConex(nombreEmpresa);
             }
             catch (Exception)
             {
                 //return;
-                throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + rccadena + "]");
+                throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + nombreEmpresa + "]");
             }
 
             if (sc == null)
@@ -149,13 +149,13 @@ namespace ProntoMVC.Controllers
                         return;
                     }
                 }
-                catch (     System.Data.SqlClient.SqlException x)
+                catch (System.Data.SqlClient.SqlException x)
                 {
                     throw;
                 }
                 catch (Exception)
                 {
-                    
+
                     throw;
                 }
 
@@ -255,6 +255,15 @@ namespace ProntoMVC.Controllers
             }
 
         }
+
+
+        public void FakeInitialize(string nombreempresa)
+        {
+
+            asignacadena(nombreempresa);
+
+        }
+
 
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
