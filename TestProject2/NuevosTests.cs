@@ -1077,8 +1077,8 @@ namespace ProntoMVC.Tests
             //IController controller = c;
             //controller.Execute(requestContext);
 
-
-            c.FakeInitialize(sc);
+            c.FakeInitialize("DemoProntoWeb");
+            //c.FakeInitialize(sc);
 
             // este tipo sugiere directamente sacar del Initialize el codigo y meterlo en un metodo para llamarlo aparte
             // http://stackoverflow.com/questions/5769163/asp-net-mvc-unit-testing-override-initialize-method
