@@ -1031,6 +1031,18 @@ namespace ProntoMVC.Tests
             userMock.SetupGet(x => x.Identity.Name).Returns("superadmin");
 
 
+            // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
+            
+            var membershipMock = new Mock<IStaticMembershipService>();
+            var userMock2 = new Mock<MembershipUser>();
+            userMock2.Setup(u => u.ProviderUserKey).Returns(new Guid());
+            membershipMock.Setup(s => s.GetUser()).Returns(userMock2.Object);
+
+
+
+
+
+
             // mockeas ControllerContext +  HttpContextBase + IPrincipal
 
             var contextMock = new Mock<HttpContextBase>();
@@ -1097,6 +1109,24 @@ namespace ProntoMVC.Tests
 
     }
 
+    
+    public interface IStaticMembershipService
+    {
+        MembershipUser GetUser();
 
- 
+        void UpdateUser(MembershipUser user);
+    }
+
+    public class StaticMembershipService : IStaticMembershipService
+    {
+        public System.Web.Security.MembershipUser GetUser()
+        {
+            return Membership.GetUser();
+        }
+
+        public void UpdateUser(MembershipUser user)
+        {
+            Membership.UpdateUser(user);
+        }
+    }
 }
