@@ -122,6 +122,62 @@
         background: transparent;
         color: Gray;
     }
+
+     /*//////////////////////////////////////////////////////////////////*/
+            /*////////////////////////LA PAPA //////////////////////////////////*/
+
+            .ui-jqgrid .ui-jqgrid-view {
+                font-size: 14px; /* tamaño de letra de la grilla, incluyendo encabezado */
+                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+            }
+
+            label {
+                /*//////////////////////////////////////////////////////////////////*/
+                /*////////////////////////LA PAPA //////////////////////////////////*/
+                /* font-size: 10pt; */
+                font-size: 10pt;
+                /*//////////////////////////////////////////////////////////////////*/
+                /*//////////////////////////////////////////////////////////////////*/
+                line-height: 14px;
+                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+                color: #9C0000 !important;
+                vertical-align: middle;
+                display: inline;
+                /* para que al achicar el ancho, no ocupe más de un renglon */
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+
+
+
+            .ui-widget {
+                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+            }
+
+                .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+                    /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+                    font-size: 1em;
+                }
+
+            input, button, select, textarea {
+                font-size: 11pt;
+                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+            }
+
+            body {
+                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+                font-size: 16px !important;
+            }
+
+            .nav {
+                font-size: 16px !important;
+            }
 </style>
 <style>
     /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
@@ -280,11 +336,13 @@ If you want additionally remove vertical border between the cells in the grid yo
                             alt="" style="text-align: left; margin-top: 2px; margin-left: 27px; width: ;
                             height: 42px;" />
                     </a></li>
-                    <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0; width: 322px">
+                    <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0;margin-top: 9px; width: 322px">
                         <div class="span10">
                             <div class="input-prepend input-append">
-                                <input id="SuperBuscador2" type="text" class="" style="margin-top: 9px; width: 322px"
+                                <input id="SuperBuscador2" type="text" class="" style=" width: 322px"
                                     placeholder="">
+                                 <button type="submit" class="btn" style="padding-bottom: 4px;" ><i class=" icon-search"></i></button>
+
                             </div>
                         </div>
                     </div>
@@ -436,9 +494,9 @@ If you want additionally remove vertical border between the cells in the grid yo
             <%--196px http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=12643--%>
             <br />
             <%-- <a   title="fdasdasd"  href="Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores"    >... </a>--%>
-            <table id="addtree" class="test link-class" style="background: transparent; font-size: 16px;
+            <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px;
                 color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);
-                font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;">
+                ">
             </table>
             <div id="paddtree">
             </div>
