@@ -17,3 +17,4 @@ C:\Users\Administrador\Documents\bdl\pronto\Data\bin\x86\Debug\EntityFramework.x
 C:\Users\Administrador\Documents\bdl\pronto\Data\bin\x86\Debug\EntityFramework.SqlServer.xml
 C:\Users\Administrador\Documents\bdl\pronto\Data\obj\x86\Debug\ProntoMVC.Data.dll
 C:\Users\Administrador\Documents\bdl\pronto\Data\obj\x86\Debug\ProntoMVC.Data.pdb
+C:\Users\Administrador\Documents\bdl\pronto\Data\obj\x86\Debug\ProntoMVC.Data.csprojResolveAssemblyReference.cache

@@ -351,8 +351,8 @@ Released   : 20120723
             /*////////////////////////LA PAPA //////////////////////////////////*/
 
             .ui-jqgrid .ui-jqgrid-view {
-                 font-size: 14px; /* tamaño de letra de la grilla, incluyendo encabezado */
-                 font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+                font-size: 14px; /* tamaño de letra de la grilla, incluyendo encabezado */
+                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
             }
 
             label {
@@ -363,12 +363,8 @@ Released   : 20120723
                 /*//////////////////////////////////////////////////////////////////*/
                 /*//////////////////////////////////////////////////////////////////*/
                 line-height: 14px;
-                
-                
                 /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
                 font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-
-
                 color: #9C0000 !important;
                 vertical-align: middle;
                 display: inline;
@@ -381,24 +377,24 @@ Released   : 20120723
 
 
             .ui-widget {
-                  /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
                 font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
             }
 
                 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
-                     /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+                    /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
                     font-size: 1em;
                 }
 
             input, button, select, textarea {
                 font-size: 11pt;
-                  /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
                 font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
             }
 
             body {
-                  /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
                 font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
                 font-size: 16px !important;
             }
@@ -2291,7 +2287,7 @@ Released   : 20120723
                             </style>
                             <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px;
                         margin-bottom: 15px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);
-                        
+
                         border: 0"></table>
                             <div id="paddtree">
                             </div>
@@ -2373,10 +2369,14 @@ Released   : 20120723
                             pageLayout.show('west', true);
                             pageLayout.open('west');
 
+                            $("#btnConmutarPanelIzquierdo").hide();
+
                         }
                         else {
 
+                            $("#btnConmutarPanelIzquierdo").show();
                             pageLayout.hide('west');
+
 
                         }
                     }
@@ -2592,18 +2592,53 @@ Released   : 20120723
 
 
 
-                                    @if (false)
+                                    @if (true)
                                     {
+                                        <button type="button" class="btn btn-small clearfix"
+                                                id="btnConmutarPanelIzquierdo"
+                                                value="Buscar"
+                                                style="display:block; position:absolute;
+                                                    top:20px; left:-20px ;
+                                                    text-align: right; margin-right: 0px; float: right;"
+                                                onclick="conmutarPanelesIzq(); pageLayout.hide('south');
+                                        pageLayout.hide('north');
+                                        RefrescaAnchoGrillaDetalle(); ">
+                                           ^ Arbol
+                                        </button>
+
+
+
                                         <button type="button" class="btn btn-small clearfix"
                                                 id="btnConmutarPanelDerecho"
                                                 value="Buscar"
-                                                style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
+                                                style="display:block; position:absolute;
+                                                    top:20px; right:-20px ;
+                                                    text-align: right; margin-right: 0px; float: right;"
                                                 onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
                                         pageLayout.hide('north');
                                         RefrescaAnchoGrillaDetalle(); ">
-                                            Grillas
+                                            v Grillas
                                         </button>
                                     }
+
+
+                                    <style>
+                                        #btnConmutarPanelIzquierdo {
+                                            -webkit-transform: rotate(90deg);
+                                            -moz-transform: rotate(90deg);
+                                            -o-transform: rotate(90deg);
+                                            /* filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5); */
+                                            -ms-transform: rotate(90deg);
+                                        }
+
+                                        #btnConmutarPanelDerecho {
+                                            -webkit-transform: rotate(90deg);
+                                            -moz-transform: rotate(90deg);
+                                            -o-transform: rotate(90deg);
+                                            /* filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5); */
+                                            -ms-transform: rotate(90deg);
+                                        }
+                                    </style>
 
 
                                     <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
@@ -2848,7 +2883,7 @@ Released   : 20120723
                         line-height: 25px; background: none; border: 0 !important;   ;">
                                     </div>
                                     <ul class="allow-overflow" style="margin: 0 1px; font-size: 12px; background: none;
-                        border: 0 !important; 
+                        border: 0 !important;
                         ">
                                         <li style="font-size: 12px; border: 0 !important; padding-right: 10px;">
                                             <a id="a_panel_este_tab1"
@@ -3138,11 +3173,20 @@ Released   : 20120723
             <script src="@Url.Content("~/Scripts/jsLayout.js?1620")" type="text/javascript"></script>
             <script>
                 $(function () {
+                    panelessetup()
+                })
+
+                function panelessetup() {
+
+
                     estiloArbol();
 
                     if (!(pageLayout.state.east.isHidden || pageLayout.state.east.isClosed)) {
                         $("#btnConmutarPanelDerecho").hide();
                     }
 
-                })
+                    if (!(pageLayout.state.west.isHidden || pageLayout.state.west.isClosed)) {
+                        $("#btnConmutarPanelIzquierdo").hide();
+                    }
+                }
             </script>

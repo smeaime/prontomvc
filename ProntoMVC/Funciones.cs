@@ -144,13 +144,13 @@ public static class Generales
     }
 
 
-    public static string sCadenaConex(string nombreEmpresa)
+    public static string sCadenaConex(string nombreEmpresa, Guid userGuid = new Guid())
     {
         string s;
 
         try
         {
-            s = sCadenaConexSQL(nombreEmpresa);
+            s = sCadenaConexSQL(nombreEmpresa, userGuid);
         }
         catch (Exception ex)
         {
@@ -458,6 +458,7 @@ public static class Generales
             try
             {
                 userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+
                 sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
                 esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
 
@@ -481,6 +482,12 @@ public static class Generales
 
 
             }
+        }
+        else
+        {
+
+            sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
         }
         //string us = Membership.GetUser().UserName;
 
