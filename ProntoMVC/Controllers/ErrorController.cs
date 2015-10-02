@@ -183,8 +183,21 @@ namespace ProntoMVC.Controllers
                 //                                                                                      el "potentially dangerous". pierdo algo?
                 body = body.Replace("\n", "<br />");
 
-                ProntoFuncionesGenerales.MandaEmailSimple(ConfigurationManager.AppSettings["ErrorMail"],
-                                    "JScript Linea " + line + "  " + body,
+
+               string nombrebase="";
+                try 
+	{
+        nombrebase = this.HttpContext.Session["BasePronto"].ToString();
+	}
+	catch (Exception)
+	{
+		
+		//throw;
+	}
+                
+
+                ProntoFuncionesGenerales.MandaEmailSimple( ConfigurationManager.AppSettings["ErrorMail"],
+                                   nombrebase + ": JScript Linea " + line + "  " + body,
                                 body,
                                 ConfigurationManager.AppSettings["SmtpUser"],
                                 ConfigurationManager.AppSettings["SmtpServer"],
