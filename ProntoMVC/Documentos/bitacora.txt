@@ -14,7 +14,7 @@ PASEO general, que no le explote a Claudio en la mano:
 Hay formularios donde no deberia estar habilitado el panel de grillas (en el de nota de debito, o en los maestros)
 
 
-
+Recibo, NC, y ND, tienen un titulo con font distinto
 
 
 
