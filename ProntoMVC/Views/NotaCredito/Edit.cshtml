@@ -44,8 +44,8 @@
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     <div class="row-fluid">
-                        <div class="span3 lightblue">
-                            <legend>Nota de Credito</legend>
+                        <div class="span3 lightblue titulo" style="font-size: 34px">
+                            Nota de Credito
                         </div>
                         <div class="span1 lightblue">
                             <div>@Html.Hidden("IdNotaCredito", Model.IdNotaCredito)</div>
@@ -60,14 +60,17 @@
                         </div>
                         <div class="span1 lightblue">
                         </div>
-                        <div class="span4 lightblue">
-                            @Html.LabelFor(model => model.CtaCte, "Tipo")
-                            @Html.RadioButtonFor(model => model.CtaCte, "SI") Normal
-                            @Html.RadioButtonFor(model => model.CtaCte, "NO") Interna
-                        </div>
+                    
                     </div>
 
                     <div class="row-fluid">
+
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.CtaCte, "Tipo") <br />
+                            @Html.RadioButtonFor(model => model.CtaCte, "SI") Normal
+                            @Html.RadioButtonFor(model => model.CtaCte, "NO") Interna
+                        </div>
+
                         <div class="span1 lightblue">
                             @Html.LabelFor(model => model.IdPuntoVenta, "Punto de venta")
                             @Html.DropDownList("IdPuntoVenta", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
@@ -92,9 +95,9 @@
                             </script>
                         </div>
                         <div class="span1 lightblue">
-                            @Html.TextBoxFor(model => model.TipoABC, new { style = "width: 50px; height: 50px; font-weight: 400; font-size: 20px; border: 5px solid black; padding: ; text-align: center; font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.TipoABC, new { style = "width: 50px; height: 50px; font-weight: 400; font-size: 20px; border: 2px solid black; padding: ; text-align: center; font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1", @readonly = "readonly" })
                         </div>
-                        <div class="span4 lightblue">
+                        <div class="span2 lightblue">
                             @Html.LabelFor(model => model.IdObra, "Obra")
                             @Html.DropDownList("IdObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                             @Html.ValidationMessageFor(model => model.IdObra)
