@@ -79,3 +79,4 @@ C:\Users\Administrador\Documents\bdl\pronto\TestProject2\obj\Debug\ProntoMVC.Tes
 C:\Users\Administrador\Documents\bdl\pronto\TestProject2\obj\Debug\ProntoMVC.Test.csprojResolveAssemblyReference.cache
 C:\Users\Administrador\Documents\bdl\pronto\TestProject2\obj\Debug\TestProject2.dll
 C:\Users\Administrador\Documents\bdl\pronto\TestProject2\obj\Debug\TestProject2.pdb
+C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\DataAccess.dll

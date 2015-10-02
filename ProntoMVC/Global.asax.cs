@@ -242,6 +242,28 @@ namespace ProntoMVC
 
 
 
+
+    
+                /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+                
+//                1- en el caso de error en el Loggin (por un error de compilacion o algo por el estilo) si nos podes enviar en el mail las bases de datos de la BDLMaesteer (Solo las bases no los string de conexiones)
+
+//2-En el caso de otro tipo de error en que base de datos fue y si es posible el usuario (similar a los errores de Williams)
+
+//es es mas que nada para poder saber cuando nos llegan los mails saber en donde estan pasando
+                string nombrebase = "";
+                try
+                {
+                    nombrebase = System.Web.HttpContext.Current.Session["BasePronto"].ToString();
+                    //nombrebase = this.HttpContext.Session["BasePronto"].ToString();
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+
                 /////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////
@@ -299,7 +321,7 @@ namespace ProntoMVC
 
                     // 'apgurisatti@bdlconsultores.com.ar", _
                     ProntoFuncionesGenerales.MandaEmailSimple(direccion,
-                                 (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
+                               (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + nombrebase + " " + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
                                    Body,
                                     ConfigurationManager.AppSettings["SmtpUser"],
                                     ConfigurationManager.AppSettings["SmtpServer"],

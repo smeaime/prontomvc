@@ -334,6 +334,140 @@ namespace ProntoMVC.Tests
 
 
 
+        /// <summary>
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+
+        [TestMethod]
+        public void EditPedidoMoq()
+        {
+
+            var c = new  PedidoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Edit(-1);
+            
+        }
+
+
+        [TestMethod]
+        public void MaestroPedidoMoq()
+        {
+
+            var c = new PedidoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Pedidos_DynamicGridData("NumeroPedido", "desc", 0, 50, false, "");
+
+        }
+
+
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        
+        
+        static private void GetMockedControllerGenerico(ProntoBaseController c)
+        {
+
+
+
+            //var httpContextMock = new Mock<HttpContextBase>();
+            //var serverMock = new Mock<HttpServerUtilityBase>();
+            //serverMock.Setup(x => x.MapPath("~/App_Data")).Returns(@"C:\Backup\BDL\ProntoMVC\ProntoMVC\App_Data");  // es case sensitive!!!!  no pongas "app_data"    // (@"C:\Users\Mariano\Desktop");
+            //httpContextMock.Setup(x => x.Server).Returns(serverMock.Object);
+            //var sut = new ComprobanteProveedorController();
+            //sut.ControllerContext = new ControllerContext(httpContextMock.Object, new System.Web.Routing.RouteData(), sut);
+
+
+            // http://stackoverflow.com/questions/1389744/testing-controller-action-that-uses-user-identity-name
+            // por qué necesito usar un mock para hacer que uso un usuario específico? No puedo usar el controller derecho viejo sin mockear?
+            // -sea lo que fuere, vos necesitás inyectar 
+
+            var identity = new GenericIdentity("superadmin");
+            var userMock = new Mock<IPrincipal>();
+            userMock.Setup(p => p.IsInRole("Administrador")).Returns(true);
+            userMock.SetupGet(x => x.Identity.Name).Returns("superadmin");
+
+
+            // mockeas ControllerContext +  HttpContextBase + IPrincipal
+
+            var contextMock = new Mock<HttpContextBase>();
+            contextMock.SetupGet(ctx => ctx.User)
+                       .Returns(userMock.Object);
+
+
+            var controllerContext = new Mock<ControllerContext>();
+
+            controllerContext.SetupGet(con => con.HttpContext)
+                                 .Returns(contextMock.Object);
+
+
+
+
+
+
+            //controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns(Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey));
+            controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns("DemoProntoWeb");
+            //  controllerContext.SetupGet(p => p.HttpContext.User.Identity.Name).Returns(_testEmail);
+            controllerContext.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
+            controllerContext.SetupGet(p => p.HttpContext.Response.Cookies).Returns(new HttpCookieCollection());
+
+            controllerContext.Setup(p => p.HttpContext.Request.Form.Get("ReturnUrl")).Returns("sample-return-url");
+            controllerContext.Setup(p => p.HttpContext.Request.Params.Get("q")).Returns("sample-search-term");
+
+            c.ControllerContext = controllerContext.Object;
+
+
+
+
+
+
+
+
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            // necesito llamar a mano al Initialize  http://stackoverflow.com/questions/1452665/how-to-trigger-initialize-method-while-trying-to-unit-test
+            //  http://stackoverflow.com/questions/1452418/how-do-i-mock-the-httpcontext-in-asp-net-mvc-using-moq
+
+
+            //var requestContext = new System.Web.Routing.RequestContext(controllerContext.Object, new System.Web.Routing.RouteData());
+            //var requestContext = new System.Web.Routing.RequestContext(contextMock.Object, new System.Web.Routing.RouteData());
+            //IController controller = c;
+            //controller.Execute(requestContext);
+
+
+            c.FakeInitialize("DemoProntoWeb");
+
+            // este tipo sugiere directamente sacar del Initialize el codigo y meterlo en un metodo para llamarlo aparte
+            // http://stackoverflow.com/questions/5769163/asp-net-mvc-unit-testing-override-initialize-method
+            // I suggest you to factor out your custom Initialize() logic out into different method. Then create fake (stub) subclass with 
+            // public method that calls this factored out protected Initialzie. Are you with me?
+
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+
+
+
+
+            
+
+        }
+
+
+
         static private ComprobanteProveedorController GetMockedComprobanteProveedorController()
         {
 
@@ -410,7 +544,7 @@ namespace ProntoMVC.Tests
             //controller.Execute(requestContext);
 
 
-            c.FakeInitialize(sc );
+            c.FakeInitialize("DemoProntoWeb");
 
             // este tipo sugiere directamente sacar del Initialize el codigo y meterlo en un metodo para llamarlo aparte
             // http://stackoverflow.com/questions/5769163/asp-net-mvc-unit-testing-override-initialize-method

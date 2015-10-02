@@ -10727,7 +10727,9 @@ Public Class LogicaFacturacion
         "REPES.SubNumeroVagon=Q.SubNumeroVagon  " & _
         "where SubNumeroDefacturacion =-1"
 
-        ExecDinamico(SC, s, 200)
+        If False Then
+            ExecDinamico(SC, s, 200)
+        End If
 
 
 
