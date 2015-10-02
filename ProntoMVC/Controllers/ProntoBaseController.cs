@@ -105,7 +105,7 @@ namespace ProntoMVC.Controllers
             string sc;
             try
             {
-                sc = Generales.sCadenaConex(nombreEmpresa);
+                sc = Generales.sCadenaConex(nombreEmpresa, (Guid) oStaticMembershipService.GetUser().ProviderUserKey );
             }
             catch (Exception)
             {
@@ -269,9 +269,13 @@ namespace ProntoMVC.Controllers
         {
             MiniProfiler profiler = MiniProfiler.Current;
 
+
             using (profiler.Step("En el Initialize"))
             {
                 base.Initialize(rc);
+
+                oStaticMembershipService = new StaticMembershipService();
+
 
                 // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
                 // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
@@ -451,6 +455,30 @@ namespace ProntoMVC.Controllers
             base.OnActionExecuted(filterContext);
         }
 
+
+
+
+        StaticMembershipService oStaticMembershipService;
+
+        public interface IStaticMembershipService
+        {
+            MembershipUser GetUser();
+
+            void UpdateUser(MembershipUser user);
+        }
+
+        public class StaticMembershipService : IStaticMembershipService
+        {
+            public System.Web.Security.MembershipUser GetUser()
+            {
+                return Membership.GetUser();
+            }
+
+            public void UpdateUser(MembershipUser user)
+            {
+                Membership.UpdateUser(user);
+            }
+        }
 
 
 
@@ -3322,3 +3350,7 @@ public static class ErrorLog2
         }
     }
 };
+
+
+
+
