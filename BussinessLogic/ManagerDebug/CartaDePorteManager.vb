@@ -3003,7 +3003,7 @@ Public Class CartaDePorteManager
                     While Not (inner Is Nothing)
                         If System.Diagnostics.Debugger.IsAttached() Then
                             MsgBox(inner.Message)
-                            'Stop
+                            Stop
                         End If
                         ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
                         inner = inner.InnerException
@@ -20692,7 +20692,7 @@ Public Class LogicaImportador
             If .NumeroCartaDePorte <= 0 Then
                 'Debug.Print(r.Item("Carta Porte"))
                 'renglonControl(r, "Carta Porte").BackColor = System.Drawing.Color.Red
-                Stop
+                'Stop
                 Return 0
             End If
 
@@ -21693,7 +21693,7 @@ Public Class ExcelImportadorManager
                     ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
 
 
-                    Stop
+                    'Stop
                     Return -1 'me rindo
                 End If
             End If
@@ -21702,7 +21702,7 @@ Public Class ExcelImportadorManager
 
         Catch ex As Exception
             ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
-            Stop
+            'Stop
             Return -1 'me rindo
         End Try
 
@@ -21850,7 +21850,7 @@ Public Class ExcelImportadorManager
             adapterForTable1.Update(dt)
         Catch ex As Exception
             ErrHandler.WriteError("ExcelImportadorManager.Insert()  " & ex.ToString)
-            Stop
+            'Stop
             Throw
         End Try
 
