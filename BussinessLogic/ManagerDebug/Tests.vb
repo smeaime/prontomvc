@@ -1930,7 +1930,7 @@ Public Module Tests
 
 
             .IdTipoComprobante = BuscaIdTipoComprobantePreciso("Factura compra", SC)
-            If .IdTipoComprobante = -1 Then Stop
+            '    If .IdTipoComprobante = -1 Then Stop
 
             '.Fecha = Now
             .FechaComprobante = Now
