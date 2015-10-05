@@ -4,7 +4,7 @@
 
 
 
-<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -116,259 +116,247 @@
     /* estilos de grilla transparentes para el arbol. se asignan por jquery en el jsLayout.js */
     /*.jqgrid-widget { ... override widget styles ... }*/
     /* .jqgrid-widget input, .jqgrid-widget select ... */
-    .jqgrid-widget-content
-    {
+    .jqgrid-widget-content {
         /*  uso este estilo a traves de la funcion estiloArbol()  */
         background: transparent;
         color: Gray;
     }
 
-     /*//////////////////////////////////////////////////////////////////*/
-            /*////////////////////////LA PAPA //////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////*/
+    /*////////////////////////LA PAPA //////////////////////////////////*/
 
-            .ui-jqgrid .ui-jqgrid-view {
-                font-size: 14px; /* tamaño de letra de la grilla, incluyendo encabezado */
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-            }
+    .ui-jqgrid .ui-jqgrid-view {
+        font-size: 14px; /* tamaño de letra de la grilla, incluyendo encabezado */
+        font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+    }
 
-            label {
-                /*//////////////////////////////////////////////////////////////////*/
-                /*////////////////////////LA PAPA //////////////////////////////////*/
-                /* font-size: 10pt; */
-                font-size: 10pt;
-                /*//////////////////////////////////////////////////////////////////*/
-                /*//////////////////////////////////////////////////////////////////*/
-                line-height: 14px;
-                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-                color: #9C0000 !important;
-                vertical-align: middle;
-                display: inline;
-                /* para que al achicar el ancho, no ocupe más de un renglon */
-                white-space: nowrap;
-                overflow: hidden;
-            }
-
-
+    label {
+        /*//////////////////////////////////////////////////////////////////*/
+        /*////////////////////////LA PAPA //////////////////////////////////*/
+        /* font-size: 10pt; */
+        font-size: 10pt;
+        /*//////////////////////////////////////////////////////////////////*/
+        /*//////////////////////////////////////////////////////////////////*/
+        line-height: 14px;
+        /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+        font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+        color: #9C0000 !important;
+        vertical-align: middle;
+        display: inline;
+        /* para que al achicar el ancho, no ocupe más de un renglon */
+        white-space: nowrap;
+        overflow: hidden;
+    }
 
 
-            .ui-widget {
-                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-            }
 
-                .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
-                    /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-                    font-size: 1em;
-                }
 
-            input, button, select, textarea {
-                font-size: 11pt;
-                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-            }
+    .ui-widget {
+        /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+        font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+    }
 
-            body {
-                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-                font-size: 16px !important;
-            }
+        .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+            /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+            font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+            font-size: 1em;
+        }
 
-            .nav {
-                font-size: 16px !important;
-            }
+    input, button, select, textarea {
+        font-size: 11pt;
+        /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+        font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+    }
+
+    body {
+        /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+        font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+        font-size: 16px !important;
+    }
+
+    .nav {
+        font-size: 14px !important;
+    }
 </style>
 <style>
     /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
-    
-    
-    .ui-widget-content
-    {
+
+
+
+    .ui-widget-content {
         border: 1px solid #E4E4E4;
         padding: 2px;
     }
-    
-    
-    .ui-jqgrid
-    {
+
+
+    .ui-jqgrid {
         border-width: 1px;
     }
-    
-    
-    /* If you need to remove all grid's borders you can use
+
+
+        /* If you need to remove all grid's borders you can use
 
 If you want additionally remove vertical border between the cells in the grid you can use */
-    
-    
-    
-    /* el pie *//* el pie */
-    .ui-jqgrid tr.footrow-ltr
-    {
-        border: 0;
-    }
-    
-    .ui-jqgrid tr.footrow-ltr td
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    
-    /*To remove horizontal border between the rows you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-bottom-color: #E4E4E4;
-        border-color: rgb(234, 234, 234) /* para zafar del borde del arbol de la izquierda  -no me funciona*/;
-    }
-    
+
+
+
+        /* el pie */ /* el pie */
+        .ui-jqgrid tr.footrow-ltr {
+            border: 0;
+        }
+
+            .ui-jqgrid tr.footrow-ltr td {
+                border-right-color: #E4E4E4 !important;
+            }
+
+        /*To remove horizontal border between the rows you can use */
+
+        .ui-jqgrid tr.ui-row-ltr td {
+            border-bottom-color: #E4E4E4;
+            border-color: rgb(234, 234, 234) /* para zafar del borde del arbol de la izquierda  -no me funciona*/;
+        }
+
     /*To remove vertical borders between the column headers you can use */
-    
-    th.ui-th-column
-    {
+
+    th.ui-th-column {
         border-right-color: #E4E4E4 !important;
     }
     /* or alternatively (without the usage of !important) */
-    
-    .ui-jqgrid-labels .ui-th-column
-    {
+
+    .ui-jqgrid-labels .ui-th-column {
         border-right-color: #E4E4E4;
     }
 </style>
 <style>
     /* fix the size of the pager */
-    input.ui-pg-input
-    {
+    input.ui-pg-input {
         width: auto;
     }
     /* Este es para hacer wrap en los encabezados del jqgrid */
-    th.ui-th-column div
-    {
+    th.ui-th-column div {
         white-space: normal !important;
         height: auto !important;
         padding: 2px;
     }
-    
-    
-    
+
+
+
     /* para sacar el wrap en los renglones comunes    */
-    .ui-jqgrid tr.jqgrow td
-    {
+    .ui-jqgrid tr.jqgrow td {
         white-space: nowrap;
         padding-left: 8px;
         padding-right: 8px;
     }
-    
-    
-    
-    
+
+
+
+
     /* http://www.trirand.com/blog/?page_id=393/bugs/jquery-ui-1-10-2-autocomplete-drop-down-renders-behind-jqgird-form */
-    
-    .ui-front
-    {
+
+    .ui-front {
         z-index: 1000;
     }
-    
-    .ui-layout-west
-    {
+
+    .ui-layout-west {
         z-index: 1 !important;
     }
-    
-    
+
+
     /* http://stackoverflow.com/questions/4305223/selected-row-background-color */
-    
-    
-    .ui-jqgrid-btable .ui-state-highlight
-    {
+
+
+    .ui-jqgrid-btable .ui-state-highlight {
         background: #33333;
     }
-    .ui-jqgrid-btable .ui-state-hover
-    {
+
+    .ui-jqgrid-btable .ui-state-hover {
         background: rgb(234, 234, 234);
     }
 </style>
 <body style="background-color: ; background-repeat: no-repeat;">
     <form id="form1" runat="server">
-    <div class="navbar navbar-fixed-top ">
-        <div class="">
-            <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
-                <ul class="nav nav-pills   row-fluid " id="navigation2" style="vertical-align: middle;
-                    background: rgb(234, 234, 234); border-bottom: 1px solid lightgray;">
-                    <style>
-                        .nav
-                        {
-                            font-size: 12px;
-                        }
-                        .navbar .nav .dropdown-toggle .caret
-                        {
-                            margin-top: 10px;
-                        }
-                        
-                        .nav-tabs > li > a, .nav-pills > li > a
-                        {
-                            line-height: 25px; /*  font-size: 12px; */
-                        }
-                        
-                        
-                        div.test
-                        {
-                            margin-left: 13px;
-                            overflow: hidden !important;
-                            overflow-y: hidden !important;
-                        }
-                        
-                        div.test:hover
-                        {
-                            text-overflow: inherit; /*            overflow: auto !important; */
-                            overflow-y: auto !important;
-                            overflow-x: hidden !important;
-                        }
-                        
-                        
-                        input[type="text"]
-                        {
-                            border-color: #e2e2e2;
-                        }
-                    </style>
-                    <li class="span2" style="padding: 0px; margin: 0; width: 196px" id="LogoEmpresa"><a
-                        href="<%=Page.ResolveUrl("~/")%>" class="pull-left" style="padding: 0px">
-                        <img src="<%=Page.ResolveUrl("~/")%>Content/Images/Empresas/<%=  (( Session["BasePronto"].NullSafeToString() ?? "") =="" )? "DemoPronto" : Session["BasePronto"].NullSafeToString()   %>.png"
-                            alt="" style="text-align: left; margin-top: 2px; margin-left: 27px; width: ;
-                            height: 42px;" />
-                    </a></li>
-                    <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0;margin-top: 9px; width: 322px">
-                        <div class="span10">
-                            <div class="input-prepend input-append">
-                                <input id="SuperBuscador2" type="text" class="" style=" width: 322px"
-                                    placeholder="">
-                                 <button type="submit" class="btn" style="padding-bottom: 4px;" ><i class=" icon-search"></i></button>
+        <div class="navbar navbar-fixed-top ">
+            <div class="">
+                <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
+                    <ul class="nav nav-pills   row-fluid " id="navigation2" style="vertical-align: middle; background: rgb(234, 234, 234); border-bottom: 1px solid lightgray;">
+                        <style>
+                            .nav {
+                                font-size: 12px;
+                            }
 
+                            .navbar .nav .dropdown-toggle .caret {
+                                margin-top: 10px;
+                            }
+
+                            .nav-tabs > li > a, .nav-pills > li > a {
+                                line-height: 25px; /*  font-size: 12px; */
+                            }
+
+
+                            div.test {
+                                margin-left: 13px;
+                                overflow: hidden !important;
+                                overflow-y: hidden !important;
+                            }
+
+                                div.test:hover {
+                                    text-overflow: inherit; /*            overflow: auto !important; */
+                                    overflow-y: auto !important;
+                                    overflow-x: hidden !important;
+                                }
+
+
+                            input[type="text"] {
+                                border-color: #e2e2e2;
+                            }
+                        </style>
+                        <li class="span2" style="padding: 0px; margin: 0; width: 196px" id="LogoEmpresa"><a
+                            href="<%=Page.ResolveUrl("~/")%>" class="pull-left" style="padding: 0px">
+                            <img src="<%=Page.ResolveUrl("~/")%>Content/Images/Empresas/<%=  (( Session["BasePronto"].NullSafeToString() ?? "") =="" )? "DemoPronto" : Session["BasePronto"].NullSafeToString()   %>.png"
+                                alt="" style="text-align: left; margin-top: 2px; margin-left: 27px; width: ; height: 42px;" />
+                        </a></li>
+                        <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0; margin-top: 9px; width: 322px">
+                            <div class="span10">
+                                <div class="input-prepend input-append">
+                                    <input id="SuperBuscador2" type="text" class="" style="width: 322px"
+                                        placeholder="">
+                                    <button type="submit" class="btn" style="padding-bottom: 4px;"><i class=" icon-search"></i></button>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <li class="span1"><a href=""></a></li>
-                    <div id="navigation3" class="pull-left ">
-                    </div>
-                    <div class="pull-right nav nav-pills ">
-                        <li class="pull-right "><a runat="server" href="~/Account/ElegirBase">
-                            <%=Session["BasePronto"] %></a> </li>
-                        <li class="pull-right"><a href=""><i class="icon-user "></i>&nbsp;<%=User.Identity.Name %></a>
-                        </li>
-                  
-                        <li class="pull-right "><a href="MvcMembership\UserAdministration" class="pull-right"
-                            onclick="" title="Seguridad"><i class="icon-lock"></i></a></li>
-                        <li class="pull-right "><a href="MvcMembership\UserAdministration\Configuracion\"
-                            class="pull-right" onclick="" title="Configuración"><i class="icon-cog"></i></a>
-                        </li>
-                        <%--<li class="pull-right "><a runat="server" href="~/Account/Logoff">Salir</a></li>--%>
-                    </div>
-                </ul>
+                        <li class="span1"><a href=""></a></li>
+                        <div id="navigation3" class="pull-left ">
+                        </div>
+                        <div class="pull-right nav nav-pills ">
+                            <li class="pull-right "><a runat="server" href="~/Account/ElegirBase">
+                                <%=Session["BasePronto"] %></a> </li>
+                            <li class="pull-right"><a href=""><i class="icon-user "></i>&nbsp;<%=User.Identity.Name %></a>
+                            </li>
+
+                            <li class="pull-right "><a href="MvcMembership\UserAdministration" class="pull-right"
+                                onclick="" title="Seguridad"><i class="icon-lock"></i></a></li>
+
+                            <li class="pull-right ">
+                                <a href="" class="pull-right" onclick="" title="Notificaciones y Firmas">
+                                    <i class="icon-bell"></i>
+                                    <span class="badge badge-info" title="Notificaciones y Firmas"></span>
+                                </a>
+                            </li>
+
+
+                            <li class="pull-right "><a href="MvcMembership\UserAdministration\Configuracion\"
+                                class="pull-right" onclick="" title="Configuración"><i class="icon-cog"></i></a>
+                            </li>
+                            <%--<li class="pull-right "><a runat="server" href="~/Account/Logoff">Salir</a></li>--%>
+                        </div>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <br />
-    <br />
-    <%--   
+        <br />
+        <br />
+        <%--   
        <table id="addtree">
                 </table>
                 <div id="paddtree">
@@ -487,55 +475,47 @@ If you want additionally remove vertical border between the cells in the grid yo
 
 
                 </script>
-    --%>
-    <div class="row-fluid" style="margin-top: 10px;">
-        <div class="span2" style="background: rgb(234, 234, 234); font-size: 13px; overflow-y: scroll;
-            min-height: 1000px; width: ">
-            <%--196px http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=12643--%>
-            <br />
-            <%-- <a   title="fdasdasd"  href="Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores"    >... </a>--%>
-            <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px;
-                color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);
-                ">
-            </table>
-            <div id="paddtree">
-            </div>
-            <table id="addtree2">
-            </table>
-            <br />
-            <br />
-            <a id="lnkBDL" class="linkHoverSubrayado" href="http://www.bdlconsultores.com.ar/"
-                style="text-shadow: 0 1px 0 white; color: rgb(184, 172, 172); font-size: 12px;
-                font-weight: normal; bottom: 3px; text-align: center; width: 100%; text-decoration: none;
-                margin-left: 60px">©2015 BDL</a>
-            <style>
-                .filetree li
-                {
-                    padding: 0px 0 2px 0px;
-                }
-            </style>
-            <div id="Accord1" class="test link-class" style="background: none; font-size: 12px;
-                margin-top: 12px; color: Gray; overflow-y: scroll">
-            </div>
-        </div>
-        <div class="span9" style="background: /*  rgba(255, 255, 255, 0.58) */; /* background-image: url('http://www.bootstrapcdn.com/img/bootstrap-bkg.jpg') */">
-            <br />
-            <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
-                <div class="" style='font-size: 34px; margin-top: 5px; height: 6px; font-weight: 400;
-                    margin-left: 0px; text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                </div>
-                <asp:Label ID="info" runat="server" />
-                <asp:TextBox ID="txtDebug" runat="server" TextMode="MultiLine" Height="16px"></asp:TextBox>
-                <rsweb:ReportViewer ID="ReportViewerRemoto" runat="server" Height="800" Width="100%"
-                    ZoomMode="Percent" ZoomPercent="100" OnReportRefresh="RefrescaInforme" AsyncRendering="false">
-                    <%--sizetoreportcontent="false"--%>
-                    <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />
-                    <%-- <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />--%>
-                </rsweb:ReportViewer>
-                <asp:ScriptManager ID="ScriptManager1" runat="server">
-                </asp:ScriptManager>
+        --%>
+        <div class="row-fluid" style="margin-top: 10px;">
+            <div class="span2" style="background: rgb(234, 234, 234); font-size: 13px; overflow-y: scroll; min-height: 1000px; width: ">
+                <%--196px http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=12643--%>
                 <br />
-                <%--               
+                <%-- <a   title="fdasdasd"  href="Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores"    >... </a>--%>
+                <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);">
+                </table>
+                <div id="paddtree">
+                </div>
+                <table id="addtree2">
+                </table>
+                <br />
+                <br />
+                <a id="lnkBDL" class="linkHoverSubrayado" href="http://www.bdlconsultores.com.ar/"
+                    style="text-shadow: 0 1px 0 white; color: rgb(184, 172, 172); font-size: 12px; font-weight: normal; bottom: 3px; text-align: center; width: 100%; text-decoration: none; margin-left: 60px">©2015 BDL</a>
+                <style>
+                    .filetree li {
+                        padding: 0px 0 2px 0px;
+                    }
+                </style>
+                <div id="Accord1" class="test link-class" style="background: none; font-size: 12px; margin-top: 12px; color: Gray; overflow-y: scroll">
+                </div>
+            </div>
+            <div class="span9" style="background: /*  rgba(255, 255, 255, 0.58) */; /* background-image: url('http://www.bootstrapcdn.com/img/bootstrap-bkg.jpg') */">
+                <br />
+                <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
+                    <div class="" style='font-size: 34px; margin-top: 5px; height: 6px; font-weight: 400; margin-left: 0px; text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+                    </div>
+                    <asp:Label ID="info" runat="server" />
+                    <asp:TextBox ID="txtDebug" runat="server" TextMode="MultiLine" Height="16px"></asp:TextBox>
+                    <rsweb:ReportViewer ID="ReportViewerRemoto" runat="server" Height="800" Width="100%"
+                        ZoomMode="Percent" ZoomPercent="100" OnReportRefresh="RefrescaInforme" AsyncRendering="false">
+                        <%--sizetoreportcontent="false"--%>
+                        <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />
+                        <%-- <ServerReport ReportPath="informes/sss" ReportServerUrl="http://localhost/ReportServer" />--%>
+                    </rsweb:ReportViewer>
+                    <asp:ScriptManager ID="ScriptManager1" runat="server">
+                    </asp:ScriptManager>
+                    <br />
+                    <%--               
                 <a href="<%=ConfigurationManager.AppSettings["ReportServer"]%>">Servidor de informes</a>
                 <a href="<%=ConfigurationManager.AppSettings["ReportServer"].Replace("ReportServer","Reports") %>">
                     Interfaz web</a>
@@ -550,28 +530,28 @@ If you want additionally remove vertical border between the cells in the grid yo
                 <% { %}
                    
                 <% } %>--%>
-                <%--http://stackoverflow.com/questions/6144513/how-can-i-use-a-reportviewer-control-in-an-asp-net-mvc-3-razor-view?lq=1--%>
-                <%--        <iframe id="IFRAME1" src="http://bdlconsultores.dyndns.org:81/ReportServer/Pages/ReportViewer.aspx?%2fPronto+informes%2fPosicion+Financiera&rs:Command=Render"
+                    <%--http://stackoverflow.com/questions/6144513/how-can-i-use-a-reportviewer-control-in-an-asp-net-mvc-3-razor-view?lq=1--%>
+                    <%--        <iframe id="IFRAME1" src="http://bdlconsultores.dyndns.org:81/ReportServer/Pages/ReportViewer.aspx?%2fPronto+informes%2fPosicion+Financiera&rs:Command=Render"
         runat="server" height="1200px" width="100%" frameborder="0" />--%>
-                <%--    <iframe id="Iframe2" src="http://192.168.66.6/Reports/Pages/Folder.aspx" runat="server"
+                    <%--    <iframe id="Iframe2" src="http://192.168.66.6/Reports/Pages/Folder.aspx" runat="server"
         height="1200px" width="100%" frameborder="0" />--%>
-                <%--        <iframe id="Iframe1" src="http://201.231.168.164:5001/Reports/Pages/Report.aspx?ItemPath=%2fOrdenes+Pago+en+Caja&rc:Zoom=Whole+Page"
+                    <%--        <iframe id="Iframe1" src="http://201.231.168.164:5001/Reports/Pages/Report.aspx?ItemPath=%2fOrdenes+Pago+en+Caja&rc:Zoom=Whole+Page"
             runat="server" height="1200px" width="1200px" frameborder="0" />--%>
-                <%--SAFÉ haciendo un segundo proxy para acceder al reportserver--%>
-                <%--  <rsweb:reportviewer id="ReportViewerRemoto" runat="server" font-names="Verdana" font-size="8pt"
+                    <%--SAFÉ haciendo un segundo proxy para acceder al reportserver--%>
+                    <%--  <rsweb:reportviewer id="ReportViewerRemoto" runat="server" font-names="Verdana" font-size="8pt"
             width="100%" visible="true" zoommode="PageWidth" sizetoreportcontent="false"
             height="600px" processingmode="Remote">
             
              <ServerReport   ReportPath="Ordenes Pago en Caja" ReportServerUrl="http://localhost/ReportServer"   />
         </rsweb:reportviewer>--%>
-                <%--Una caja de texto para escribir el Codigo a buscar--%>
-                <br />
-                <br />
-                <br />
-                <br />
+                    <%--Una caja de texto para escribir el Codigo a buscar--%>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
             </div>
         </div>
-    </div>
     </form>
 </body>
 </html>
@@ -586,7 +566,7 @@ If you want additionally remove vertical border between the cells in the grid yo
         //Verificamos que sea diferente de vacio
 
         if (id != '')
-        //Invocamos al getJSON
+            //Invocamos al getJSON
             $.getJSON(ROOT + "PaginaWebForm/VerReporte/" + id, function (data) {
                 //Muestra el iframe 
 
@@ -603,13 +583,13 @@ If you want additionally remove vertical border between the cells in the grid yo
             var menu_html = '<ul id="Tablas1" class="filetree treeview-famfamfam treeview"  >';
             var longitud = 0
             for (var i = 0; i < data.length; i++) {
-                     if (longitud > 0) {
-                if (longitud - data[i].IdItem.split("-").length == 1) { menu_html += '</ul></li>' }
-                if (longitud - data[i].IdItem.split("-").length == 2) { menu_html += '</ul></li></ul></li>' }
-                if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
-                // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
-            }
+                if (longitud > 0) {
+                    if (longitud - data[i].IdItem.split("-").length == 1) { menu_html += '</ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length == 2) { menu_html += '</ul></li></ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+                    // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
+                }
 
                 if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
 
@@ -629,16 +609,16 @@ If you want additionally remove vertical border between the cells in the grid yo
                         menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span></li>'
                     }
                 }
-                    // longitud = data[i].IdItem.length;
-            longitud = data[i].IdItem.split("-").length;
+                // longitud = data[i].IdItem.length;
+                longitud = data[i].IdItem.split("-").length;
             }
-              if (longitud > 0) {
-            if (longitud == 1) { menu_html += '</ul></li>' }
-            if (longitud == 2) { menu_html += '</ul></li></ul></li>' }
-            if (longitud == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
-            //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-            if (longitud >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
-        }
+            if (longitud > 0) {
+                if (longitud == 1) { menu_html += '</ul></li>' }
+                if (longitud == 2) { menu_html += '</ul></li></ul></li>' }
+                if (longitud == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+                //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                if (longitud >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
+            }
             menu_html += '</ul>';
             $("#Accord1").empty().append(menu_html);
 
