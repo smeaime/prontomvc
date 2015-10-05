@@ -103,9 +103,22 @@ namespace ProntoMVC.Controllers
         private void asignacadena(string nombreEmpresa)
         {
             string sc;
+
+            Guid uguid;
+
             try
             {
-                sc = Generales.sCadenaConex(nombreEmpresa, (Guid) oStaticMembershipService.GetUser().ProviderUserKey );
+                uguid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+            }
+            catch (Exception)
+            {
+                //return;
+                throw new Exception("Falla la conexion a la bdlmaster para verficar el membership .net");
+            }
+
+            try
+            {
+                sc = Generales.sCadenaConex(nombreEmpresa, uguid);
             }
             catch (Exception)
             {
