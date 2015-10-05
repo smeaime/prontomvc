@@ -408,7 +408,9 @@ Released   : 20120723
 
             .titulo {
                 font-size: 34px;
-                margin-top: 5px; height: 45px; font-weight: 400; text-shadow: 0 1px 0  lightgray; 
+                padding-top: 15px;
+                margin-bottom: 15px; margin-top: 5px;
+                height: 45px; font-weight: 400; text-shadow: 0 1px 0  lightgray; 
             }
         </style>
 
@@ -1686,7 +1688,7 @@ Released   : 20120723
                                             <option>Requerimientos</option>
                                             <option>Pedidos</option>
                                         </select>*@
-                                    <button type="submit" class="btn"><i class=" icon-search"></i></button>
+                                    <button type="submit" class="btn" style="background-image:none"><i class=" icon-search"></i></button>
 
 
 
@@ -1881,7 +1883,7 @@ Released   : 20120723
                                         <li class="pull-right ">
                                             <a href="@Url.Content("~")Autorizacion\" class="pull-right" onclick="" title="Notificaciones y Firmas">
                                                 <i class="icon-bell"></i><span class="badge badge-info" title="Notificaciones y Firmas">
-                                                    8
+                                                    @*8*@
                                                 </span>
                                             </a>
                                         </li>
@@ -2732,10 +2734,10 @@ Released   : 20120723
                 <div id="tabs-east" class="ui-layout-east no-padding no-scrollbar" style="margin: 9px;
         background-color: rgb(234, 234, 234); display: none">
                     @* (235, 238, 241)  (235, 238, 241);*@
-                    @if (false)
+                    @if (true)
                     {
                         <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;"
-                                onclick="           pageLayout.hide('east'); ">
+                                onclick="          conmutarPanelesDerecho(); ">
                             &times;
                         </button>
                     }

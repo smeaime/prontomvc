@@ -21693,7 +21693,8 @@ Public Class ExcelImportadorManager
                     ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
 
 
-                    'Stop
+                    If Debugger.IsAttached() Then Stop
+
                     Return -1 'me rindo
                 End If
             End If
@@ -21702,7 +21703,8 @@ Public Class ExcelImportadorManager
 
         Catch ex As Exception
             ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
-            'Stop
+            If Debugger.IsAttached() Then Stop
+
             Return -1 'me rindo
         End Try
 
@@ -22582,7 +22584,7 @@ Public Class CDPMailFiltrosManager2
                     While Not (inner Is Nothing)
                         If System.Diagnostics.Debugger.IsAttached() Then
                             'MsgBox(inner.Message)
-                            'Stop
+                            Stop
                         End If
                         ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                         inner = inner.InnerException

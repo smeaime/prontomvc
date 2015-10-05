@@ -48,13 +48,13 @@
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
                         @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
-                        <div class="titulo" 
+                        <div class="" 
                              >
-                            <span class="span8" style="padding-top: 15px; ">
+                            <span class="span8 titulo" style="padding-top: 15px; ">
                                 Factura
                                 @*@Html.DisplayFor(model => model.TipoABC, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })
-                                    @Html.DisplayFor(model => model.PuntoVenta, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })
-                                    @Html.DisplayFor(model => model.NumeroFactura, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })*@
+            @Html.DisplayFor(model => model.PuntoVenta, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })
+            @Html.DisplayFor(model => model.NumeroFactura, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })*@
 
                                 <div>@Html.Hidden("IdFactura", Model.IdFactura)</div>
                                 <div>@Html.Hidden("IdCliente", Model.IdCliente)</div>
@@ -68,7 +68,7 @@
                                 <input type="hidden" name="BaseMinimaParaPercepcionIVA" id="BaseMinimaParaPercepcionIVA" style="font-size: 15px; text-align: left;" class="span12" />
                                 <input type="hidden" name="EsAgenteRetencionIVA" id="EsAgenteRetencionIVA" style="font-size: 15px; text-align: left;" class="span12" />
                                 <input type="hidden" name="CantidadDias1" id="CantidadDias1" style="font-size: 15px; text-align: left;" class="span12" />
-                        </div>
+</div>
                     </div>
 
                     <div class="row-fluid">
