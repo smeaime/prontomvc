@@ -18413,7 +18413,15 @@ Public Class barras
         '    http://www.sistemasagiles.com.ar/trac/wiki/ManualPyAfipWs#PyI25:GeneradordeCódigosdeBarras
         Dim PyI25 As Object
 
-        PyI25 = CreateObject("PyI25")
+        Try
+            PyI25 = CreateObject("PyI25")
+        Catch ex As Exception
+            está instlado?
+        End Try
+
+
+
+
 
         ' cuit, tipo_cbte, punto_vta, cae, fch_venc_cae
         'Dim barras As String = "202675653930240016120303473904220110529"
