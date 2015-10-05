@@ -44,8 +44,8 @@
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     <div class="row-fluid">
-                        <div class="span3 lightblue">
-                            <legend>Nota de Debito</legend>
+                        <div class="span6 lightblue titulo">
+                            Nota de Débito
                         </div>
                         <div class="span1 lightblue">
                             <div>@Html.Hidden("IdNotaDebito", Model.IdNotaDebito)</div>
@@ -80,7 +80,10 @@
                             @Html.TextBoxFor(model => model.NumeroNotaDebito, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model.NumeroNotaDebito)
                         </div>
-                        <div class="span2 lightblue">
+                        <div class="span1 lightblue">
+                            @Html.TextBoxFor(model => model.TipoABC, new { style = "width: 50px; height: 50px; font-weight: 400; font-size: 20px; border: 2px solid black; padding: ; text-align: center; font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1", @readonly = "readonly" })
+                        </div>
+                        <div class="span1 lightblue">
                             @Html.LabelFor(model => model.FechaNotaDebito, "Fecha")
                             @Html.TextBoxFor(model => model.FechaNotaDebito, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                             @Html.ValidationMessageFor(model => model.FechaNotaDebito)
@@ -93,9 +96,7 @@
                                 });
                             </script>
                         </div>
-                        <div class="span1 lightblue">
-                            @Html.TextBoxFor(model => model.TipoABC, new { style = "width: 50px; height: 50px; font-weight: 400; font-size: 20px; border: 2px solid black; padding: ; text-align: center; font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1", @readonly = "readonly" })
-                        </div>
+                
                         <div class="span2 lightblue">
                             @Html.LabelFor(model => model.IdObra, "Obra")
                             @Html.DropDownList("IdObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })

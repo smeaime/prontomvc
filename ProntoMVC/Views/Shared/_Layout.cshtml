@@ -409,8 +409,11 @@ Released   : 20120723
             .titulo {
                 font-size: 34px;
                 padding-top: 15px;
-                margin-bottom: 15px; margin-top: 5px;
-                height: 45px; font-weight: 400; text-shadow: 0 1px 0  lightgray; 
+                margin-bottom: 15px;
+                margin-top: 5px;
+                height: 45px;
+                font-weight: 400;
+                text-shadow: 0 1px 0 lightgray;
             }
         </style>
 
@@ -2185,6 +2188,7 @@ Released   : 20120723
                     <br />
                     <br />
                 }
+                <br />
                 <button onclick="pageLayout.hide('west'); " class="btn btn-link pull-right" style="display: none;">
                     x
                 </button>
@@ -2198,7 +2202,7 @@ Released   : 20120723
                 @*   <a href="#">ADMINISTRACION</a></h6>*@
                 @if (!ViewBag.MenuYoutube)
                 {
-                    <br />
+                   
                     if (false)
                     {
                         <div class="row-fluid">
@@ -2278,6 +2282,13 @@ Released   : 20120723
                         </div>
                     }
                     <div class="row-fluid">
+                        @if (false)
+                        {
+                            <button type="button" class="close" style="height: 40px; width: 40px; margin-right:10px; font-size: x-large;"
+                                    onclick="          conmutarPanelesIzq(); ">
+                                &times;
+                            </button>
+                        }
                         <div>
                             <style>
                                 /* este truco me provoca el desfasaje de los encabezados con el cuerpo
@@ -2295,16 +2306,19 @@ Released   : 20120723
                                     background: transparent;
                                 }
                             </style>
+                        
                             <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px;
                         margin-bottom: 15px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);
 
                         border: 0"></table>
+
+
                             <div id="paddtree">
                             </div>
                             <table id="addtree2"></table>
                             <div id="addtree2Pager" class="" style="line-height: 15px;">
                             </div>
-                           
+
                             <br />
 
                             <a id="lnkBDL2" class="linkHoverSubrayado" href="http://www.bdlconsultores.com.ar/"
@@ -2618,7 +2632,7 @@ Released   : 20120723
                                                 onclick="conmutarPanelesIzq(); pageLayout.hide('south');
                                         pageLayout.hide('north');
                                         RefrescaAnchoGrillaDetalle(); ">
-                                           ^ Arbol
+                                            ^ Arbol
                                         </button>
 
 
