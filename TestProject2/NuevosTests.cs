@@ -177,6 +177,24 @@ namespace ProntoMVC.Tests
         }
 
 
+
+        [TestMethod]
+        public void GrabaPedidoMoq()
+        {
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+            Pedido Pedido = db.Pedidos.First();
+
+            var c = new PedidoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.BatchUpdate(Pedido);
+
+        }
+
+
+
         [TestMethod]
         public void MaestroPedidoMoq()
         {
@@ -1056,70 +1074,72 @@ namespace ProntoMVC.Tests
         static private void GetMockedControllerGenerico(ProntoBaseController c)
         {
 
-
-
-            //var httpContextMock = new Mock<HttpContextBase>();
-            //var serverMock = new Mock<HttpServerUtilityBase>();
-            //serverMock.Setup(x => x.MapPath("~/App_Data")).Returns(@"C:\Backup\BDL\ProntoMVC\ProntoMVC\App_Data");  // es case sensitive!!!!  no pongas "app_data"    // (@"C:\Users\Mariano\Desktop");
-            //httpContextMock.Setup(x => x.Server).Returns(serverMock.Object);
-            //var sut = new ComprobanteProveedorController();
-            //sut.ControllerContext = new ControllerContext(httpContextMock.Object, new System.Web.Routing.RouteData(), sut);
-
-
-            // http://stackoverflow.com/questions/1389744/testing-controller-action-that-uses-user-identity-name
-            // por qué necesito usar un mock para hacer que uso un usuario específico? No puedo usar el controller derecho viejo sin mockear?
-            // -sea lo que fuere, vos necesitás inyectar 
-
-            var identity = new GenericIdentity("superadmin");
-            var userMock = new Mock<IPrincipal>();
-            userMock.Setup(p => p.IsInRole("Administrador")).Returns(true);
-            userMock.SetupGet(x => x.Identity.Name).Returns("superadmin");
-
-            // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
-
-            var membershipMock = new Mock<IStaticMembershipService>();
-            var userMock2 = new Mock<MembershipUser>();
-            userMock2.Setup(u => u.ProviderUserKey).Returns(new Guid());
-            membershipMock.Setup(s => s.GetUser()).Returns(userMock2.Object);
-
-
-
-            Mock<MembershipProvider> memberShipProvider;
-            Mock<MembershipUser> user;
-            memberShipProvider = new Mock<MembershipProvider>();
-            user = new Mock<MembershipUser>();
-            user.SetupGet(u => u.Email)
-                .Returns("test@test.com");
-            user.Setup(u => u.ResetPassword("secret"))
-                .Returns("test2");
-            memberShipProvider
-                .Setup(prov => prov.GetUser("test", false))
-                .Returns(user.Object);
-
-
-
-            /*
-Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-
-            */
-
-
-
-            // mockeas ControllerContext +  HttpContextBase + IPrincipal
-
-            var contextMock = new Mock<HttpContextBase>();
-            contextMock.SetupGet(ctx => ctx.User)
-                       .Returns(userMock.Object);
-
-
             var controllerContext = new Mock<ControllerContext>();
 
-            controllerContext.SetupGet(con => con.HttpContext)
-                                 .Returns(contextMock.Object);
+            if (false)
+            {
+                //var httpContextMock = new Mock<HttpContextBase>();
+                //var serverMock = new Mock<HttpServerUtilityBase>();
+                //serverMock.Setup(x => x.MapPath("~/App_Data")).Returns(@"C:\Backup\BDL\ProntoMVC\ProntoMVC\App_Data");  // es case sensitive!!!!  no pongas "app_data"    // (@"C:\Users\Mariano\Desktop");
+                //httpContextMock.Setup(x => x.Server).Returns(serverMock.Object);
+                //var sut = new ComprobanteProveedorController();
+                //sut.ControllerContext = new ControllerContext(httpContextMock.Object, new System.Web.Routing.RouteData(), sut);
+
+
+                // http://stackoverflow.com/questions/1389744/testing-controller-action-that-uses-user-identity-name
+                // por qué necesito usar un mock para hacer que uso un usuario específico? No puedo usar el controller derecho viejo sin mockear?
+                // -sea lo que fuere, vos necesitás inyectar 
+
+                var identity = new GenericIdentity("superadmin");
+                var userMock = new Mock<IPrincipal>();
+                userMock.Setup(p => p.IsInRole("Administrador")).Returns(true);
+                userMock.SetupGet(x => x.Identity.Name).Returns("superadmin");
+
+                // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
+
+                var membershipMock = new Mock<IStaticMembershipService>();
+                var userMock2 = new Mock<MembershipUser>();
+                userMock2.Setup(u => u.ProviderUserKey).Returns(new Guid());
+                membershipMock.Setup(s => s.GetUser()).Returns(userMock2.Object);
+
+
+
+                Mock<MembershipProvider> memberShipProvider;
+                Mock<MembershipUser> user;
+                memberShipProvider = new Mock<MembershipProvider>();
+                user = new Mock<MembershipUser>();
+                user.SetupGet(u => u.Email)
+                    .Returns("test@test.com");
+                user.Setup(u => u.ResetPassword("secret"))
+                    .Returns("test2");
+                memberShipProvider
+                    .Setup(prov => prov.GetUser("test", false))
+                    .Returns(user.Object);
+
+
+
+                /*
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+
+                */
+
+                // mockeas ControllerContext +  HttpContextBase + IPrincipal
+
+                var contextMock = new Mock<HttpContextBase>();
+                contextMock.SetupGet(ctx => ctx.User)
+                           .Returns(userMock.Object);
+
+
+
+                controllerContext.SetupGet(con => con.HttpContext)
+                                     .Returns(contextMock.Object);
+
+            }
+
 
 
 
@@ -1129,7 +1149,7 @@ Then you should avoid using the Membership. It's static and it's not designed to
             // agregarlas en el app config de este proyecto!!!
             // agregarlas en el app config de este proyecto!!!
             // agregarlas en el app config de este proyecto!!!
-        // http://stackoverflow.com/questions/17580485/cannot-use-configurationmanager-inside-unit-test-project
+            // http://stackoverflow.com/questions/17580485/cannot-use-configurationmanager-inside-unit-test-project
 
 
 
@@ -1213,7 +1233,7 @@ Then you should avoid using the Membership. It's static and it's not designed to
 
 
             // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
-            
+
             var membershipMock = new Mock<IStaticMembershipService>();
             var userMock2 = new Mock<MembershipUser>();
             userMock2.Setup(u => u.ProviderUserKey).Returns(new Guid());
@@ -1290,7 +1310,7 @@ Then you should avoid using the Membership. It's static and it's not designed to
 
     }
 
-    
+
     public interface IStaticMembershipService
     {
         MembershipUser GetUser();
@@ -1300,6 +1320,11 @@ Then you should avoid using the Membership. It's static and it's not designed to
 
     public class StaticMembershipService : IStaticMembershipService
     {
+
+        // https://github.com/r0k3t/TaskBoardAuth/blob/master/TaskBoardAuth.Tests/Controllers/AccountControllerTests.cs
+        // https://github.com/r0k3t/TaskBoardAuth/blob/master/TaskBoardAuth/Controllers/AccountController.cs
+
+
         public System.Web.Security.MembershipUser GetUser()
         {
             return Membership.GetUser();
