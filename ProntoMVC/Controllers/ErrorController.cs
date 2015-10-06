@@ -31,6 +31,20 @@ namespace ProntoMVC.Controllers
 
 
 
+        public virtual ViewResult SinConexion(Exception exception)
+        {
+
+
+            // Response.StatusCode = statusCode;
+            //var model = new ErrorModel() {Exception = exception, HttpStatusCode = statusCode};
+            //return View(model);
+
+            var m = new HandleErrorInfo(exception, "Error", "Index");
+
+
+            return View("SinConexion", m);
+        }
+
         public virtual ViewResult Index(Exception exception)
         {
 
