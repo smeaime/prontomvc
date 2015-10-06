@@ -104,11 +104,13 @@ namespace ProntoMVC.Controllers
         {
             string sc;
 
-            Guid uguid;
+            Guid uguid = (Guid)new Guid();
 
             try
             {
-                uguid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+                if (!System.Diagnostics.Debugger.IsAttached)
+                    uguid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+
             }
             catch (Exception)
             {
@@ -1851,8 +1853,10 @@ namespace ProntoMVC.Controllers
             ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
 
 
+            var u = dbMaster.aspnet_Users.Where(x => x.LoweredUserName == usuario).FirstOrDefault();
+            if (u == null) return new Guid();
 
-            var guid = dbMaster.aspnet_Users.Where(x => x.LoweredUserName == usuario).FirstOrDefault().UserId;
+            var guid = u.UserId;
 
 
             return guid;

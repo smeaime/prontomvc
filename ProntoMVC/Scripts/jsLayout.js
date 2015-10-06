@@ -88,7 +88,7 @@ if (true) {
         colNames: ['', '', ''],
         //columns model
         colModel: [
-                                        { name: 'Name', index: 'Name', align: 'left', width: 170 },
+                                        { name: 'Name', index: 'Name', align: 'left', width: 400 },
                                         { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
                                         { name: 'Role', index: 'Role', width: 1, hidden: true },
         ],
@@ -156,8 +156,8 @@ if (true) {
             }
 
             var gridId = $("#addtree").attr('id');
-            var gridParentWidth = $('#gbox_' + gridId).parent().width();
-            $('#' + gridId).setGridWidth(gridParentWidth);
+            //var gridParentWidth = $('#gbox_' + gridId).parent().width();
+            //$('#' + gridId).setGridWidth(gridParentWidth);
 
         },
 
@@ -183,6 +183,13 @@ if (true) {
             leaf: 'ui-icon-blank'  // http://stackoverflow.com/questions/22248944/jqgrid-treegrid-remove-icon-from-leaf-nodes
             //leaf: 'ui-icon-document-b' 
         },
+
+
+        ///////////////////////////////
+        width: 'auto', // 'auto',
+        autowidth: false,
+        shrinkToFit: true,
+        //////////////////////////////
 
 
         ExpandColClick: true,
