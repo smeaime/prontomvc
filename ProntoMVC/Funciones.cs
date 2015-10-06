@@ -457,10 +457,14 @@ public static class Generales
         {
             try
             {
-                userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                if (!System.Diagnostics.Debugger.IsAttached)
+                {
+                    userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                    esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+                }
+                else esSuperadmin = true;
 
                 sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-                esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
 
             }
             catch (Exception)
@@ -470,10 +474,10 @@ public static class Generales
                 {
                     // por ahora no le encontré la vuelta a mockear el membership
                     userGuid = new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9");
+                    esSuperadmin = true;
                     // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
                     // supervisor       1804B573-0439-4EA0-B631-712684B54473
                     sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-                    esSuperadmin = true;
                 }
                 else
                 {
@@ -493,10 +497,16 @@ public static class Generales
 
 
 
-        string us = userGuid.ToString();
-
         sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
 
+
+
+
+
+
+        string us = "";
+
+        if (!System.Diagnostics.Debugger.IsAttached) us=  userGuid.ToString();
 
 
         string s;
