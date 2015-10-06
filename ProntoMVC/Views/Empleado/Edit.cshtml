@@ -20,9 +20,10 @@
 
 
                 <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-                    <div class="span5 lightblue">
-                        @Html.TextBox("TituloFormulario", "Empleado", 
-                        new { style = "-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span8 titulo", @readonly = "readonly" })
+                    <div class="span7 lightblue titulo">
+                        Empleado @(Model.Nombre)
+                        @*@Html.TextBox( "TituloFormulario",  "Empleado", 
+                        new { style = "-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span8 titulo", @readonly = "readonly" })*@
                     </div>
                  
                 </div>
@@ -39,7 +40,7 @@
                             @Html.ValidationMessageFor(model => model.Legajo)
                         </div>
 
-                        <div class="span4 lightblue">
+                        <div class="span5 lightblue">
                             @Html.LabelFor(model => model.Nombre, "Nombre")
                             @Html.TextBoxFor(model => model.Nombre, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.Nombre)
@@ -60,7 +61,7 @@
                         </div>
 
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.Iniciales, "Iniciales")
+                            @Html.LabelFor(model => model.Iniciales, "Iniciales")<br /> 
                             @Html.TextBoxFor(model => model.Iniciales, new { @class = "span4" })
                             @Html.ValidationMessageFor(model => model.Iniciales)
                         </div>
@@ -135,21 +136,21 @@
 
                     <div class="row-fluid">
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.Administrador, "Administrador")
+                            @Html.LabelFor(model => model.Administrador, "Administrador") <br />
                             @Html.RadioButtonFor(model => model.Administrador, "SI") SI
                             @Html.RadioButtonFor(model => model.Administrador, "NO") NO
                             @Html.ValidationMessageFor(model => model.Administrador)
                         </div>
 
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.Activo, "Activo?")
+                            @Html.LabelFor(model => model.Activo, "Activo?") <br />
                             @Html.RadioButtonFor(model => model.Activo, "SI") SI
                             @Html.RadioButtonFor(model => model.Activo, "NO") NO
                             @Html.ValidationMessageFor(model => model.Activo)
                         </div>
 
-                        <div class="span4 lightblue">
-                            @Html.LabelFor(model => model.TipoUsuario, "Tipo de usuario")
+                        <div class="span5 lightblue">
+                            @Html.LabelFor(model => model.TipoUsuario, "Tipo de usuario") <br />
                             @Html.RadioButtonFor(model => model.TipoUsuario, 1) Propio
                             @Html.RadioButtonFor(model => model.TipoUsuario, 2) Obras propias
                             @Html.RadioButtonFor(model => model.TipoUsuario, 3) Obras ext.

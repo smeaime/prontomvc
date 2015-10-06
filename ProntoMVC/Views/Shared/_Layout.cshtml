@@ -374,6 +374,10 @@ Released   : 20120723
             }
 
 
+            .ui-jqgrid-title {
+                font-weight: 300 !important;
+            }
+
 
 
             .ui-widget {
@@ -997,6 +1001,7 @@ Released   : 20120723
 
                 pageLayout.options.center.onresize = function () { RefrescaAnchoJqgrids(); };
                 pageLayout.options.east.onresize = function () { RefrescaAnchoJqgrids(); };
+                pageLayout.options.west.onresize = function () { panelWestResize(); };
 
 
 
@@ -1885,9 +1890,10 @@ Released   : 20120723
                                     {
                                         <li class="pull-right ">
                                             <a href="@Url.Content("~")Autorizacion\" class="pull-right" onclick="" title="Notificaciones y Firmas">
-                                                <i class="icon-bell"></i><span class="badge badge-info" title="Notificaciones y Firmas">
-                                                    @*8*@
-                                                </span>
+                                                <i class="icon-bell"></i>
+                                                @*<span class="badge badge-info" title="Notificaciones y Firmas">
+                                                8    
+                                                </span>*@
                                             </a>
                                         </li>
                                     }
@@ -2324,7 +2330,7 @@ Released   : 20120723
                             <a id="lnkBDL2" class="linkHoverSubrayado" href="http://www.bdlconsultores.com.ar/"
                                style="text-shadow: 0 1px 0 white; color: rgb(184, 172, 172); font-size: 13px;
                         font-weight: normal; bottom: 14px; text-align: center; width: 100%; text-decoration: none;
-                        margin-left: 73px">Pronto</a>
+                        margin-left: 73px">Pronto</a><br />
                             <a id="lnkBDL" class="linkHoverSubrayado" href="http://www.bdlconsultores.com.ar/"
                                style="text-shadow: 0 1px 0 white; color: rgb(184, 172, 172); font-size: 13px;
                         font-weight: normal; bottom: 10px; text-align: center; width: 100%; text-decoration: none;
