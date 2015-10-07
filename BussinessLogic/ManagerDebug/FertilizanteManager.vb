@@ -74,14 +74,14 @@ Public Class FertilizanteManager
 
 
     Public Shared Function GetItem(ByVal SC As String, ByVal id As Integer, ByVal getCartaDePorteDetalles As Boolean) As FertilizantesCupos
-  
+
         Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
 
         Dim f = db.FertilizantesCupos.Find(id)
 
-        
+
         Return f
     End Function
 
@@ -172,7 +172,7 @@ Public Class FertilizanteManager
 
 
         Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
-     
+
 
 
         Dim familia = (From e In db.FertilizantesCupos _
@@ -345,7 +345,7 @@ Public Class FertilizanteManager
 
             'LogicaImportador.actualizar(.Cantidad, dr.Item("NetoProc"))
             .Cantidad = Val(dr.Item("NetoProc"))
-            .Contrato = dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString)
+            .Contrato = Left(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString), 20)
 
             .FechaIngreso = iisValidSqlDate(TextoAFecha(iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.FechaDescarga.ToString))))
 
@@ -445,7 +445,7 @@ Public Class FertilizanteManager
                 If .CuentaOrden = -1 Then Return "Intermediario"
             End If
 
-         
+
 
 
 
@@ -610,6 +610,21 @@ Public Class FertilizanteManager
 
             End With
 
+        Catch ex As System.Data.Entity.Validation.DbEntityValidationException
+
+            'http://stackoverflow.com/questions/10219864/ef-code-first-how-do-i-see-entityvalidationerrors-property-from-the-nuget-pac
+            Dim sb = New StringBuilder()
+
+            For Each failure In ex.EntityValidationErrors
+
+                sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType())
+                For Each er In failure.ValidationErrors
+                    sb.AppendFormat("- {0} : {1}", er.PropertyName, er.ErrorMessage)
+                    sb.AppendLine()
+                Next
+            Next
+
+            Throw New ApplicationException("Error en la grabacion " + sb.ToString(), ex)
 
         Catch ex As Exception
             'ContextUtil.SetAbort()
@@ -899,7 +914,7 @@ Public Class FertilizanteManager
             Case "LOCALIDAD TRANSP"
 
                 Return enumColumnasDeGrillaFinalFertilizantes.Procedencia
-               
+
             Case "OBSERVACIONES.", "OBSERVACIONES", "OBSERVACION", "OBSERV.", "MER/REB", "ANÁLISIS"
                 Return enumColumnasDeGrillaFinalFertilizantes.column25
 
