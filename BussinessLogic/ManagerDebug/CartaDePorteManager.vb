@@ -18416,7 +18416,8 @@ Public Class barras
         Try
             PyI25 = CreateObject("PyI25")
         Catch ex As Exception
-            está instlado?
+            MandarMailDeError("Falla la imagen del codigo de barras")
+            Throw
         End Try
 
 
