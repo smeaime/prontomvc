@@ -1577,22 +1577,22 @@ Namespace Pronto.ERP.Bll
 
 
 
-                Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
-           Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
-           Select bookmark).FirstOrDefault
+                '     Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
+                'Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
+                'Select bookmark).FirstOrDefault
 
 
-                Dim tempParent
+                '     Dim tempParent
 
-                Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
-                                          Where bookmark.Text = "#Descripcion#" _
-                                          Select bookmark).FirstOrDefault
+                '     Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
+                '                               Where bookmark.Text = "#Descripcion#" _
+                '                               Select bookmark).FirstOrDefault
 
-                If Not placeholderCANT Is Nothing Then
-                    tempParent = placeholderCANT.Parent
-                Else
-                    tempParent = bookmarkDetalles.Parent
-                End If
+                '     If Not placeholderCANT Is Nothing Then
+                '         tempParent = placeholderCANT.Parent
+                '     Else
+                '         tempParent = bookmarkDetalles.Parent
+                '     End If
 
 
 
@@ -1601,51 +1601,51 @@ Namespace Pronto.ERP.Bll
                 '////////////////////////////////////////////////////////////////////////////////////
                 '////////////////////////////////////////////////////////////////////////////////////
 
-                'qué tabla contiene al bookmark "Detalles"? (es el que usa Edu en VBA)
-                Dim table As Wordprocessing.Table
+                ''qué tabla contiene al bookmark "Detalles"? (es el que usa Edu en VBA)
+                'Dim table As Wordprocessing.Table
 
-                ' Find the second row in the table.
-                Dim row1 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(0)
-                Dim row2 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(1)
+                '' Find the second row in the table.
+                'Dim row1 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(0)
+                'Dim row2 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(1)
 
 
-                If True Then
+                'If True Then
 
-                    'METODO B:
-                    'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
-                    ' loop till we get the containing element in case bookmark is inside a table etc.
-                    ' keep checking the element's parent and update it till we reach the Body
-                    'Dim tempParent = bookmarkDetalles.Parent
-                    Dim isInTable As Boolean = False
+                '    'METODO B:
+                '    'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+                '    ' loop till we get the containing element in case bookmark is inside a table etc.
+                '    ' keep checking the element's parent and update it till we reach the Body
+                '    'Dim tempParent = bookmarkDetalles.Parent
+                '    Dim isInTable As Boolean = False
 
-                    While Not TypeOf (tempParent.Parent) Is Wordprocessing.Body ',) <> mainPart.Document.Body
-                        tempParent = tempParent.Parent
-                        If (TypeOf (tempParent) Is Wordprocessing.TableRow And Not isInTable) Then
-                            isInTable = True
-                            Exit While
-                        End If
-                    End While
+                '    While Not TypeOf (tempParent.Parent) Is Wordprocessing.Body ',) <> mainPart.Document.Body
+                '        tempParent = tempParent.Parent
+                '        If (TypeOf (tempParent) Is Wordprocessing.TableRow And Not isInTable) Then
+                '            isInTable = True
+                '            Exit While
+                '        End If
+                '    End While
 
-                    If isInTable Then
-                        'table = tempParent
-                        'no basta con saber la tabla. necesito saber la posicion del bookmark en la tabla
-                        'table.ChildElements(
-                        'bookmarkDetalles.
-                        row1 = tempParent
-                        table = row1.Parent
-                    Else
-                        Err.Raise(5454, "asdasdasa")
-                    End If
+                '    If isInTable Then
+                '        'table = tempParent
+                '        'no basta con saber la tabla. necesito saber la posicion del bookmark en la tabla
+                '        'table.ChildElements(
+                '        'bookmarkDetalles.
+                '        row1 = tempParent
+                '        table = row1.Parent
+                '    Else
+                '        Err.Raise(5454, "asdasdasa")
+                '    End If
 
-                Else
+                'Else
 
-                    '////////////////////////////////////////////////////////////////////////////////////
-                    '////////////////////////////////////////////////////////////////////////////////////
-                    'METODO A:
-                    ' Find the first table in the document.
-                    table = wordDoc.MainDocumentPart.Document.Body.Elements(Of Wordprocessing.Table)().First
+                '    '////////////////////////////////////////////////////////////////////////////////////
+                '    '////////////////////////////////////////////////////////////////////////////////////
+                '    'METODO A:
+                '    ' Find the first table in the document.
+                '    table = wordDoc.MainDocumentPart.Document.Body.Elements(Of Wordprocessing.Table)().First
 
-                End If
+                'End If
 
                 '////////////////////////////////////////////////////////////////////////////////////
                 '////////////////////////////////////////////////////////////////////////////////////
