@@ -6642,6 +6642,12 @@ Public Class CartaDePorteManager
 
 
             With myCartaDePorte
+
+
+                If .SubnumeroDeFacturacion < 0 Then .SubnumeroDeFacturacion = 0 'ver si asi podemos dejar de usar el -1
+
+
+
                 If .Id <= 0 Then
                     .FechaIngreso = Now
                     .IdUsuarioIngreso = IdUsuario
@@ -6827,7 +6833,7 @@ Public Class CartaDePorteManager
                     '    ErrHandler.WriteError(ex)
                     'End Try
 
-                    
+
 
                     SetDetalle("CalidadGastoDeSecada", db, CartaDePorteId, .CalidadGastoDeSecada)
                     SetDetalle("CalidadGastoDeSecadaRebaja", db, CartaDePorteId, .CalidadGastoDeSecadaRebaja)
@@ -6922,7 +6928,7 @@ Public Class CartaDePorteManager
                         If myCartaDePorte.Anulada = "SI" Then
                             'si está anulando una copia, y el unico que queda es el original, entonces ponerlo "como no copiado"
                             If duplicados.Count = 1 Then
-                                duplicados(0).SubnumeroDeFacturacion = -1
+                                duplicados(0).SubnumeroDeFacturacion = 0 '-1
                             End If
                         Else
                             'si no es una anulacion, entonces le paso normalmente a su familia los cambios
@@ -10730,6 +10736,60 @@ Public Class LogicaFacturacion
         If False Then
             ExecDinamico(SC, s, 200)
         End If
+
+
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        'usando cursor:
+
+
+
+        '        DECLARE @employee_id INT 
+        'DECLARE @getemployee_id CURSOR 
+
+        'SET @getemployee_id = CURSOR FOR 
+        '  select IdCartaDePorte from CartasDePorte
+        '	where SubnumeroDeFacturacion =11
+
+
+        'OPEN @getemployee_id
+        'FETCH NEXT FROM @getemployee_ID 
+        'INTO @employee_ID 
+
+
+
+        'WHILE @@FETCH_STATUS = 0 
+        'BEGIN 
+        '    PRINT @employee_ID 
+
+        '    update CartasDePorte
+        '    set SubnumeroDeFacturacion=0
+        '  	where IdCartaDePorte =@employee_ID
+
+        '    FETCH NEXT FROM @getemployee_ID 
+        '    INTO @employee_id 
+        '                End
+
+
+
+
+        'CLOSE @getemployee_ID 
+        'DEALLOCATE @getemployee_ID
+
+
+
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
