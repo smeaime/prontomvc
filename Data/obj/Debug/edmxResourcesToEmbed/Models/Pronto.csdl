@@ -6482,6 +6482,8 @@
     <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_OrdenesPago_IdObra" FromRole="OrdenPago" ToRole="Obra" />
     <NavigationProperty Name="OrdenesPago1" Relationship="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" FromRole="OrdenPago" ToRole="OrdenPago1" />
     <NavigationProperty Name="OrdenesPago2" Relationship="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" FromRole="OrdenPago1" ToRole="OrdenPago" />
+    <Property Name="IdTipoRetencionGanancia" Type="Int32" />
+    <Property Name="CuitOpcional" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
     <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -11422,7 +11424,7 @@
     <Property Name="IdLocalidadTransportista" Type="Int32" />
     <Property Name="Recorrido" Type="Int32" />
     <Property Name="Destino" Type="Int32" />
-    <Property Name="Contrato" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Contrato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IdArticulo" Type="Int32" />
     <Property Name="Puro" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="Mezcla" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
@@ -11475,6 +11477,17 @@
     <NavigationProperty Name="Localidade1" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" FromRole="FertilizantesCupos" ToRole="Localidad" />
     <NavigationProperty Name="Transportista" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__48F19687" FromRole="FertilizantesCupos" ToRole="Transportista" />
     <NavigationProperty Name="Transportista1" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__564B91A5" FromRole="FertilizantesCupos" ToRole="Transportista" />
+    <Property Name="HoraArribo" Type="DateTime" Precision="3" />
+    <Property Name="HoraCarga" Type="DateTime" Precision="3" />
+    <Property Name="HoraAutorizacion" Type="DateTime" Precision="3" />
+    <Property Name="HoraDespacho" Type="DateTime" Precision="3" />
+    <Property Name="KilosMaximo" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="NumeroRemito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroCotizacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Tara" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Bruto" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Despacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PuntoDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
