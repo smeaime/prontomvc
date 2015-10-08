@@ -233,6 +233,72 @@ Public Class FertilizanteManager
     End Function
 
 
+
+    Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
+
+        Dim DIRFTP = DirApp & "\DataBackupear\"
+        Dim nombre = NameOnlyFromFullPath ' (AsyncFileUpload1.PostedFile.FileName)
+        Randomize()
+        Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+        Dim numeroCarta = Val(nombre)
+        Dim vagon = 0
+
+
+
+        If (AsyncFileUpload1.HasFile) Then
+            Try
+
+
+                'Dim nombresolo As String = Mid(nombre, nombre.LastIndexOf("\"))
+
+                '    Session("NombreArchivoSubido") = DIRFTP + nombrenuevo
+
+                Dim MyFile1 As New FileInfo(DIRFTP + nombrenuevo)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
+
+                AsyncFileUpload1.SaveAs(DIRFTP + nombrenuevo)
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex.ToString)
+                Throw
+            End Try
+        Else
+            'FileUpLoad2.click 'estaría bueno que se pudiese hacer esto, es decir, llamar al click
+        End If
+
+
+
+        If forzarID = -1 Then
+            Dim cdp = FertilizanteManager.GetItemPorNumero(SC, numeroCarta)
+            If cdp.IdFertilizanteCupo = -1 Then
+                sError = "No se encontró la carta " & numeroCarta
+                Return nombrenuevo
+                Exit Function
+            End If
+            forzarID = cdp.IdFertilizanteCupo
+        End If
+
+
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        Dim oCarta = (From i In db.FertilizantesCupos Where i.IdFertilizanteCupo = forzarID).SingleOrDefault
+        oCarta.PathImagen2 = nombrenuevo 'nombrenuevo
+        db.SaveChanges()
+        sError &= "<a href=""Fertilizante.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeradorTexto & "</a>; "
+
+
+        Return nombrenuevo
+
+
+    End Function
+
+
     Shared Function GrabaRenglonEnTablaFertilizantes(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
                                     txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
@@ -592,6 +658,8 @@ Public Class FertilizanteManager
                 If .IdFertilizanteCupo <= 0 Then
                     .FechaIngreso = Now
                     .IdUsuarioIngreso = IdUsuario
+                    .FechaModificacion = Now
+                    .IdUsuarioModifico = IdUsuario
                     db.FertilizantesCupos.Add(cupoFertilizante)
                 Else
 
