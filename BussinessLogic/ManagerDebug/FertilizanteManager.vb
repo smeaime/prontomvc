@@ -77,7 +77,7 @@ Public Class FertilizanteManager
 
         Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-
+        If id <= 0 Then Return Nothing
 
         Dim f = db.FertilizantesCupos.Find(id)
 
