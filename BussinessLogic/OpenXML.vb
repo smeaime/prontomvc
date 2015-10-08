@@ -1023,6 +1023,19 @@ Namespace Pronto.ERP.Bll
                 'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
 
 
+                regexReplace(docText, "#Fecha#", oFac.FechaIngreso)
+                regexReplace(docText, "#Cliente#", oFac.Cliente1.RazonSocial)
+                regexReplace(docText, "#Direccion#", oFac.Cliente1.Direccion)
+                regexReplace(docText, "#CUIT#", oFac.Cliente1.Cuit)
+                regexReplace(docText, "#Transportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.RazonSocial, ""))
+                regexReplace(docText, "#DomicilioTransportista#", oFac.Transportista1.Direccion)
+                regexReplace(docText, "#Producto#", oFac.Articulo.Descripcion)
+                regexReplace(docText, "#FormaDespacho#", oFac.FormaDespacho)
+                regexReplace(docText, "#Bruto#", oFac.Bruto)
+                regexReplace(docText, "#Tara#", oFac.Tara)
+                regexReplace(docText, "#Neto#", oFac.Cantidad)
+
+
 
 
                 'NO USAR. El reemplazo del pie está al final de esta funcion
@@ -1198,75 +1211,75 @@ Namespace Pronto.ERP.Bll
 
 
 
-                Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
-           Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
-           Select bookmark).FirstOrDefault
+                '     Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
+                'Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
+                'Select bookmark).FirstOrDefault
 
 
-                Dim tempParent
+                '     Dim tempParent
 
-                Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
-                                          Where bookmark.Text = "#Descripcion#" _
-                                          Select bookmark).FirstOrDefault
+                '     Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
+                '                               Where bookmark.Text = "#Descripcion#" _
+                '                               Select bookmark).FirstOrDefault
 
-                If Not placeholderCANT Is Nothing Then
-                    tempParent = placeholderCANT.Parent
-                Else
-                    tempParent = bookmarkDetalles.Parent
-                End If
-
-
-
-                '////////////////////////////////////////////////////////////////////////////////////
-                '////////////////////////////////////////////////////////////////////////////////////
-                '////////////////////////////////////////////////////////////////////////////////////
-                '////////////////////////////////////////////////////////////////////////////////////
-
-                'qué tabla contiene al bookmark "Detalles"? (es el que usa Edu en VBA)
-                Dim table As Wordprocessing.Table
-
-                ' Find the second row in the table.
-                Dim row1 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(0)
-                Dim row2 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(1)
+                '     If Not placeholderCANT Is Nothing Then
+                '         tempParent = placeholderCANT.Parent
+                '     Else
+                '         tempParent = bookmarkDetalles.Parent
+                '     End If
 
 
-                If True Then
 
-                    'METODO B:
-                    'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
-                    ' loop till we get the containing element in case bookmark is inside a table etc.
-                    ' keep checking the element's parent and update it till we reach the Body
-                    'Dim tempParent = bookmarkDetalles.Parent
-                    Dim isInTable As Boolean = False
+                '     '////////////////////////////////////////////////////////////////////////////////////
+                '     '////////////////////////////////////////////////////////////////////////////////////
+                '     '////////////////////////////////////////////////////////////////////////////////////
+                '     '////////////////////////////////////////////////////////////////////////////////////
 
-                    While Not TypeOf (tempParent.Parent) Is Wordprocessing.Body ',) <> mainPart.Document.Body
-                        tempParent = tempParent.Parent
-                        If (TypeOf (tempParent) Is Wordprocessing.TableRow And Not isInTable) Then
-                            isInTable = True
-                            Exit While
-                        End If
-                    End While
+                '     'qué tabla contiene al bookmark "Detalles"? (es el que usa Edu en VBA)
+                '     Dim table As Wordprocessing.Table
 
-                    If isInTable Then
-                        'table = tempParent
-                        'no basta con saber la tabla. necesito saber la posicion del bookmark en la tabla
-                        'table.ChildElements(
-                        'bookmarkDetalles.
-                        row1 = tempParent
-                        table = row1.Parent
-                    Else
-                        Err.Raise(5454, "asdasdasa")
-                    End If
+                '     ' Find the second row in the table.
+                '     Dim row1 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(0)
+                '     Dim row2 As Wordprocessing.TableRow '= table.Elements(Of Wordprocessing.TableRow)().ElementAt(1)
 
-                Else
 
-                    '////////////////////////////////////////////////////////////////////////////////////
-                    '////////////////////////////////////////////////////////////////////////////////////
-                    'METODO A:
-                    ' Find the first table in the document.
-                    table = wordDoc.MainDocumentPart.Document.Body.Elements(Of Wordprocessing.Table)().First
+                '     If True Then
 
-                End If
+                '         'METODO B:
+                '         'http://stackoverflow.com/questions/1612511/insert-openxmlelement-after-word-bookmark-in-open-xml-sdk
+                '         ' loop till we get the containing element in case bookmark is inside a table etc.
+                '         ' keep checking the element's parent and update it till we reach the Body
+                '         'Dim tempParent = bookmarkDetalles.Parent
+                '         Dim isInTable As Boolean = False
+
+                '         While Not TypeOf (tempParent.Parent) Is Wordprocessing.Body ',) <> mainPart.Document.Body
+                '             tempParent = tempParent.Parent
+                '             If (TypeOf (tempParent) Is Wordprocessing.TableRow And Not isInTable) Then
+                '                 isInTable = True
+                '                 Exit While
+                '             End If
+                '         End While
+
+                '         If isInTable Then
+                '             'table = tempParent
+                '             'no basta con saber la tabla. necesito saber la posicion del bookmark en la tabla
+                '             'table.ChildElements(
+                '             'bookmarkDetalles.
+                '             row1 = tempParent
+                '             table = row1.Parent
+                '         Else
+                '             Err.Raise(5454, "asdasdasa")
+                '         End If
+
+                '     Else
+
+                '         '////////////////////////////////////////////////////////////////////////////////////
+                '         '////////////////////////////////////////////////////////////////////////////////////
+                '         'METODO A:
+                '         ' Find the first table in the document.
+                '         table = wordDoc.MainDocumentPart.Document.Body.Elements(Of Wordprocessing.Table)().First
+
+                '     End If
 
                 '////////////////////////////////////////////////////////////////////////////////////
                 '////////////////////////////////////////////////////////////////////////////////////
@@ -1401,6 +1414,18 @@ Namespace Pronto.ERP.Bll
                 regexReplace(docText, "#Observaciones#", oFac.Observaciones)
                 'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
 
+                regexReplace(docText, "#Fecha#", oFac.FechaIngreso)
+                regexReplace(docText, "#cupo#", oFac.NumeradorTexto)
+                regexReplace(docText, "#despacho#", oFac.Despacho)
+                regexReplace(docText, "#Cliente#", oFac.Cliente1.RazonSocial)
+                regexReplace(docText, "#Producto#", oFac.Articulo.Descripcion)
+                regexReplace(docText, "#Contrato#", oFac.Contrato)
+                regexReplace(docText, "#FormaDespacho#", oFac.FormaDespacho)
+                regexReplace(docText, "#Cantidad#", oFac.Cantidad)
+                regexReplace(docText, "#Chofer#", oFac.Chofere.Nombre)
+                regexReplace(docText, "#CUIT#", oFac.Chofere.Nombre)
+                regexReplace(docText, "#chasis#", oFac.Chasis)
+                regexReplace(docText, "#acoplado#", oFac.Acoplado)
 
 
 
