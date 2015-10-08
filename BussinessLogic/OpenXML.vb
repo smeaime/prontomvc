@@ -1027,14 +1027,21 @@ Namespace Pronto.ERP.Bll
                 regexReplace(docText, "#Cliente#", oFac.Cliente1.RazonSocial)
                 regexReplace(docText, "#Direccion#", oFac.Cliente1.Direccion)
                 regexReplace(docText, "#CUIT#", oFac.Cliente1.Cuit)
+                regexReplace(docText, "#IVA#", 0)
                 regexReplace(docText, "#Transportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.RazonSocial, ""))
+                regexReplace(docText, "#CUIT_Transportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.Cuit, ""))
                 regexReplace(docText, "#DomicilioTransportista#", oFac.Transportista1.Direccion)
                 regexReplace(docText, "#Producto#", oFac.Articulo.Descripcion)
-                regexReplace(docText, "#FormaDespacho#", oFac.FormaDespacho)
+                regexReplace(docText, "#Composicion#",
+                                     If(oFac.Articulo1 IsNot Nothing, oFac.Articulo1.Descripcion + " " + oFac.Porcentaje1.ToString + "%" + vbCrLf, "") & _
+                                     If(oFac.Articulo2 IsNot Nothing, oFac.Articulo2.Descripcion + " " + oFac.Porcentaje2.ToString + "%" + vbCrLf, "") & _
+                                     If(oFac.Articulo3 IsNot Nothing, oFac.Articulo3.Descripcion + " " + oFac.Porcentaje3.ToString + "%" + vbCrLf, "") & _
+                                     If(oFac.Articulo4 IsNot Nothing, oFac.Articulo4.Descripcion + " " + oFac.Porcentaje4.ToString + "%" + vbCrLf, "") & _
+                    "")
+                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, oFac.FormaDespacho))
                 regexReplace(docText, "#Bruto#", oFac.Bruto)
                 regexReplace(docText, "#Tara#", oFac.Tara)
                 regexReplace(docText, "#Neto#", oFac.Cantidad)
-
 
 
 
@@ -1307,7 +1314,14 @@ Namespace Pronto.ERP.Bll
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "observaciones", oFac.Observaciones)
+
+                    regexReplace(docText, "#transporte#", oFac.Transportista1.RazonSocial)
+                    regexReplace(docText, "#patente#", oFac.Chasis)
+                    regexReplace(docText, "#acoplado#", oFac.Acoplado)
+                    regexReplace(docText, "#chofer#", oFac.Chofere.Nombre)
+                    regexReplace(docText, "#CUIL#", oFac.Chofere.Cuil)
+
+
                     'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
                     'regexReplace(docText, "libero", oFac.Aprobo)
                     'regexReplace(docText, "fecharecepcion", oFac.Fecha)
@@ -1420,12 +1434,13 @@ Namespace Pronto.ERP.Bll
                 regexReplace(docText, "#Cliente#", oFac.Cliente1.RazonSocial)
                 regexReplace(docText, "#Producto#", oFac.Articulo.Descripcion)
                 regexReplace(docText, "#Contrato#", oFac.Contrato)
-                regexReplace(docText, "#FormaDespacho#", oFac.FormaDespacho)
+                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, oFac.FormaDespacho))
                 regexReplace(docText, "#Cantidad#", oFac.Cantidad)
-                regexReplace(docText, "#Chofer#", oFac.Chofere.Nombre)
-                regexReplace(docText, "#CUIT#", oFac.Chofere.Nombre)
+                regexReplace(docText, "#Chofer#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Nombre, ""))
+                regexReplace(docText, "#CUIL#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Cuil, ""))
                 regexReplace(docText, "#chasis#", oFac.Chasis)
                 regexReplace(docText, "#acoplado#", oFac.Acoplado)
+                regexReplace(docText, "#destino#", NombreDestino(SC, oFac.Destino))
 
 
 
@@ -1685,7 +1700,7 @@ Namespace Pronto.ERP.Bll
 
                 ''Make a copy of the 2nd row (assumed that the 1st row is header) http://patrickyong.net/tags/openxml/
                 'Dim rows = table.Elements(Of Wordprocessing.TableRow)()
-                
+
 
 
 
@@ -1712,6 +1727,7 @@ Namespace Pronto.ERP.Bll
                     'regexReplace(docText, "libero", oFac.Aprobo)
                     'regexReplace(docText, "fecharecepcion", oFac.Fecha)
                     regexReplace(docText, "jefesector", "")
+
 
                     'regexReplace(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
                     'regexReplace(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
