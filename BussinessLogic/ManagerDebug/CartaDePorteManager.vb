@@ -20461,10 +20461,12 @@ Public Class LogicaImportador
         Reyser
         Reyser2
         ReyserAnalisis
+        CerealnetToepfer
         Unidad6
         Unidad6Prefijo_NroCarta
         Unidad6Analisis
         AdmServPortuarios
+
 
         Nidera
         'esta enumeracion debe tener el mismo orden que el combo

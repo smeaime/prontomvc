@@ -3033,7 +3033,11 @@ Namespace Pronto.ERP.Bll
                     If fac.IdCliente <> 4333 Then Continue For 'tienen que ser de syngenta
                     sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
                     sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
-                    sb &= "6508001111;WILLIAMS ENTREGAS S. A.;"
+                    'sb &= "6508001111;WILLIAMS ENTREGAS S. A.;"
+                    Dim wilycuit = "30707386076"
+                    sb &= wilycuit & ";WILLIAMS ENTREGAS S. A.;"
+
+
 
                     'cdp.NetoFinal()
                     '  cdp.IdFacturaImputada()
