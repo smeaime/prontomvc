@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.Valore>
+@{
+    ViewBag.Title = "Conciliacion caja";
+}
+
+<div><input id="IdCaja" name="IdCaja" type="hidden" value=@Request.QueryString["IdCaja"]></div>
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+
+<br />
+
+<div style="padding-left: 15px; padding-right: 15px;">
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("ConciliacionCaja", "Valor")',
+            postData: { 'IdCaja': function () { return $("#IdCaja").val(); }, 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['', 'IdValor', 'Tipo', 'IdCaja', 'Ingresos', 'Egresos', 'Saldo', 'Conv.$', 'Ingresos $', 'Egresos $', 'Saldo $', 'Fecha comp.', 'Conc.', 'Mov. conf. bco.', 'Fecha conf. bco.',
+                       'Cuenta banco', 'Numero conciliacion', 'Fecha conciliacion', 'Fecha deposito', 'Numero deposito', 'Iva', 'Mon.', 'Tipo comp.', 'Numero Comprobante', 'Fecha origen',
+                       'Cliente', 'Proveedor', 'Cuenta contable', 'Observaciones'],
+            colModel: [
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'IdValor', index: 'IdValor', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Tipo', index: 'Tipo', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'IdCaja', index: 'IdCaja', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Ingresos', index: 'Ingresos', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Egresos', index: 'Egresos', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Saldo', index: 'Saldo', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CotizacionMoneda', index: 'CotizacionMoneda', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IngresosPesos', index: 'IngresosPesos', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'EgresosPesos', index: 'EgresosPesos', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'SaldoPesos', index: 'SaldoPesos', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'FechaComprobante', index: 'FechaComprobante', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Conciliado', index: 'Conciliado', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'MovimientoConfirmadoBanco', index: 'MovimientoConfirmadoBanco', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'FechaConfirmacionBanco', index: 'FechaConfirmacionBanco', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 150, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'NumeroConciliacion', index: 'NumeroConciliacion', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'FechaIngresoConciliacion', index: 'FechaIngresoConciliacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaDeposito', index: 'FechaDeposito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'NumeroDeposito', index: 'NumeroDeposito', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'Iva', index: 'Iva', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'TipoComprobante', index: 'TipoComprobante', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'NumeroComprobante', index: 'NumeroComprobante', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'FechaOrigen', index: 'FechaOrigen', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Cliente', index: 'Cliente', align: 'left', width: 300, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 300, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'CuentaContable', index: 'CuentaContable', align: 'left', width: 300, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 300, sortable: false, editable: false, search: false, hidden: false }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 20000,
+            rowList: [10, 20, 50, 20000],
+            sortname: 'FechaComprobante',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>CONCILIACION CAJAS</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+    });
+
+</script>

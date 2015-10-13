@@ -310,10 +310,6 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-
-
         public virtual ActionResult OrdenesPago_DynamicGridData
             (string sidx, string sord, int page, int rows, bool _search, string filters,
             string FechaInicial, string FechaFinal)
@@ -328,10 +324,7 @@ namespace ProntoMVC.Controllers
             //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
             //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
-
-
             var Req = db.OrdenesPago.AsQueryable();
-
 
             if (FechaInicial != string.Empty)
             {
@@ -348,29 +341,14 @@ namespace ProntoMVC.Controllers
                 //Entidad = Entidad.Where(p => (string)p["Proveedor"].NullSafeToString() == razonsocial).AsQueryable();
             }
 
-
-                
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             int totalRecords = 0;
-
-        
+       
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.OrdenPago>
                                 (                               sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req  );
 
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
                                 //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
-
-
-
-
-
-
-
 
             var data = (
                         from a in pagedQuery //db.OrdenesPago
@@ -435,9 +413,8 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
   //                      .OrderByDescending(x => x.FechaOrdenPago)
                         //.OrderByDescending(x => x.NumeroOrdenPago)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -587,9 +564,8 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaOrdenPago)
                         //.OrderByDescending(x => x.NumeroOrdenPago)
-                        
-.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -718,9 +694,8 @@ namespace ProntoMVC.Controllers
                         })
                 //.Where(campo)
                 //.OrderBy(sidx + " " + sord)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -789,8 +764,6 @@ namespace ProntoMVC.Controllers
             if (MyFile1.Exists) MyFile1.Delete();
 
             System.IO.File.Copy(plantilla, output); // 'http://stackoverflow.com/questions/1233228/saving-an-openxml-document-word-generated-from-a-template 
-
-
 
             // Pronto.ERP.BO.Comparativa comp = ComparativaManager.GetItem(SC, id, true);
 
@@ -898,8 +871,8 @@ namespace ProntoMVC.Controllers
                             CategoriaIIBB = a[27],
                             CategoriaGanancias = a[28]
                         }).OrderBy(s => s.IdDetalleOrdenPago)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1000,8 +973,8 @@ namespace ProntoMVC.Controllers
                             a.ChequesALaOrdenDe,
                             a.NoALaOrden
                         }).OrderBy(x => x.IdDetalleOrdenPagoValores)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1085,8 +1058,8 @@ namespace ProntoMVC.Controllers
                             a.Debe,
                             a.Haber
                         }).OrderBy(x => x.IdDetalleOrdenPagoCuentas)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
 
             //var data = (from a in Entidad
@@ -1099,8 +1072,8 @@ namespace ProntoMVC.Controllers
             //                Debe = a[5],
             //                Haber = a[6]
             //            }).OrderBy(s => s.IdDetalleOrdenPagoCuentas)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
+            //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+            //.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1175,8 +1148,8 @@ namespace ProntoMVC.Controllers
                             NumeroCertificadoRetencionIIBB = a[16],
                             ImporteTotalFacturasMPagadasSujetasARetencion = a[17]
                         }).OrderBy(s => s.IdDetalleOrdenPagoImpuestos)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1231,8 +1204,8 @@ namespace ProntoMVC.Controllers
                             RubroContable = b.Descripcion != null ? b.Descripcion : "",
                             a.Importe
                         }).OrderBy(x => x.IdDetalleOrdenPagoRubrosContables)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -2551,20 +2524,6 @@ namespace ProntoMVC.Controllers
                 mNumeroOP3 = parametros.ProximaOrdenPagoFF ?? 1;
                 mNumeroOP4 = parametros.ProximaOrdenPagoExterior ?? 1;
 
-                string usuario = ViewBag.NombreUsuario;
-                int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-
-                if (OrdenPago.IdOrdenPago > 0)
-                {
-                    OrdenPago.IdUsuarioModifico = IdUsuario;
-                    OrdenPago.FechaModifico = DateTime.Now;
-                }
-                else
-                {
-                    OrdenPago.IdUsuarioIngreso = IdUsuario;
-                    OrdenPago.FechaIngreso = DateTime.Now;
-                }
-
                 if (!Validar(OrdenPago, ref errs, ref warnings))
                 {
                     try
@@ -2597,6 +2556,20 @@ namespace ProntoMVC.Controllers
                         mFormaAnulacionCheques = OrdenPago.FormaAnulacionCheques ?? "";
                         if ((OrdenPago.AsientoManual ?? "") == "SI") { mAsientoManual = true; }
                         mTipo = OrdenPago.Tipo ?? "";
+
+                        string usuario = ViewBag.NombreUsuario;
+                        int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
+                        if (OrdenPago.IdOrdenPago > 0)
+                        {
+                            OrdenPago.IdUsuarioModifico = IdUsuario;
+                            OrdenPago.FechaModifico = DateTime.Now;
+                        }
+                        else
+                        {
+                            OrdenPago.IdUsuarioIngreso = IdUsuario;
+                            OrdenPago.FechaIngreso = DateTime.Now;
+                        }
 
                         if (OrdenPago.Anulada == "OK")
                         {
@@ -3195,7 +3168,7 @@ namespace ProntoMVC.Controllers
                                                 }
                                             }
 
-                                            var DetalleConciliaciones = db.DetalleConciliaciones.Where(c => c.IdValor == mIdValor).ToList();
+                                            var DetalleConciliaciones = db.DetalleConciliacionesContables.Where(c => c.IdValor == mIdValor).ToList();
                                             if (DetalleConciliaciones != null)
                                             {
                                                 foreach (DetalleConciliacione dc in DetalleConciliaciones)

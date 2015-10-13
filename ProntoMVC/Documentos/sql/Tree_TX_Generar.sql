@@ -67,10 +67,13 @@ ALTER Procedure [dbo].[Tree_TX_Generar]
 AS   
 
 DECLARE @Directorio as varchar(50), @BasePRONTOMANT varchar(50), @TipoComprobante int, @IdObra int, @Año int, @Mes int, @Obra varchar(30), @NombreMes varchar(15),   
-		@Parent varchar(30), @Clave varchar(30), @FechaInicial varchar(10), @FechaFinal varchar(10), @Fecha datetime    
+		@Parent varchar(30), @Parent2 varchar(30), @Parent3 varchar(30), @Clave varchar(30), @FechaInicial varchar(10), @FechaFinal varchar(10), @Fecha datetime, 
+		@ActivarCircuitoChequesDiferidos varchar(2), @FechaArranqueCajaYBancos datetime
 
 SET @Directorio='Pronto2'    
 --SET @BasePRONTOMANT=IsNull((Select Top 1 BasePRONTOMantenimiento From Parametros Where IdParametro=1),'')    
+SET @ActivarCircuitoChequesDiferidos=ISNULL((Select ActivarCircuitoChequesDiferidos From Parametros Where IdParametro=1),'NO')
+SET @FechaArranqueCajaYBancos=ISNULL((Select FechaArranqueCajaYBancos From Parametros Where IdParametro=1),Convert(datetime,'01/01/1980'))
 
 CREATE TABLE #Auxiliar0     
    (    
@@ -99,11 +102,19 @@ CREATE NONCLUSTERED INDEX IX__Auxiliar1 ON #Auxiliar1 (TipoComprobante, Obra, Id
 
 CREATE TABLE #Auxiliar2     
    (    
-    IdRubro INTEGER,    
-    Rubro VARCHAR(50)    
+    IdEntidad INTEGER,    
+    Entidad VARCHAR(50)    
    )    
-CREATE NONCLUSTERED INDEX IX__Auxiliar2 ON #Auxiliar2 (IdRubro) ON [PRIMARY]    
+CREATE NONCLUSTERED INDEX IX__Auxiliar2 ON #Auxiliar2 (IdEntidad) ON [PRIMARY]    
     
+CREATE TABLE #Auxiliar3     
+   (    
+    IdEntidad2 INTEGER,    
+    Entidad2 VARCHAR(50)    
+   )    
+CREATE NONCLUSTERED INDEX IX__Auxiliar3 ON #Auxiliar3 (IdEntidad2) ON [PRIMARY]    
+    
+
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT 103, Null, Null, Year(FechaRequerimiento), Month(FechaRequerimiento)   
  FROM Requerimientos   
@@ -135,6 +146,9 @@ INSERT INTO #Auxiliar1
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT 4, Null, Null, Year(FechaNotaCredito), Month(FechaNotaCredito) FROM NotasCredito ORDER BY Year(FechaNotaCredito), Month(FechaNotaCredito) desc    
     
+INSERT INTO #Auxiliar1     
+ SELECT DISTINCT 14, Null, Null, Year(FechaDeposito), Month(FechaDeposito) FROM DepositosBancarios ORDER BY Year(FechaDeposito), Month(FechaDeposito) desc    
+
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT 17, Null, Null, Year(FechaOrdenPago), Month(FechaOrdenPago) FROM OrdenesPago ORDER BY Year(FechaOrdenPago), Month(FechaOrdenPago) desc    
     
@@ -174,23 +188,70 @@ INSERT INTO #Auxiliar1
  WHERE IdProveedor is null and ComprobantesProveedores.IdCuenta is not null   
 
 INSERT INTO #Auxiliar1     
- SELECT DISTINCT -101, Null, Null, Year(FechaAsiento), Month(FechaAsiento) FROM Asientos  ORDER BY Year(FechaAsiento), Month(FechaAsiento) desc    
+ SELECT DISTINCT -100, Null, Null, Year(FechaComprobante), Month(FechaComprobante) FROM Subdiarios ORDER BY Year(FechaComprobante), Month(FechaComprobante) desc    
+
+INSERT INTO #Auxiliar1     
+ SELECT DISTINCT -101, Null, Null, Year(FechaAsiento), Month(FechaAsiento) FROM Asientos ORDER BY Year(FechaAsiento), Month(FechaAsiento) desc    
   
 INSERT INTO #Auxiliar1     
- SELECT DISTINCT -100, Null, Null, Year(FechaComprobante), Month(FechaComprobante) FROM Subdiarios  ORDER BY Year(FechaComprobante), Month(FechaComprobante) desc    
+ SELECT DISTINCT -102, Null, Null, Year(FechaComprobante), Month(FechaComprobante) FROM Valores WHERE Estado='G' ORDER BY Year(FechaComprobante), Month(FechaComprobante) desc    
+  
+/*   Conciliaciones bancos   */
+INSERT INTO #Auxiliar1
+ SELECT DISTINCT 
+  -103, 
+  Case When v.Estado='D' Then v.IdCuentaBancariaDeposito Else v.IdCuentaBancaria End, 
+  Null, 
+  Year(Case When IsNull(v.Estado,'')='D' Then IsNull(v.FechaDeposito,v.FechaComprobante) When IsNull(v.Estado,'')='G' Then v.FechaComprobante Else Case When IsNull(v.RegistroContableChequeDiferido,'NO')='SI' Then v.FechaValor Else v.FechaComprobante End End), 
+  Month(Case When IsNull(v.Estado,'')='D' Then IsNull(v.FechaDeposito,v.FechaComprobante) When IsNull(v.Estado,'')='G' Then v.FechaComprobante Else Case When IsNull(v.RegistroContableChequeDiferido,'NO')='SI' Then v.FechaValor Else v.FechaComprobante End End) 
+ FROM Valores v 
+ LEFT OUTER JOIN DetalleOrdenesPagoValores dopv ON v.IdDetalleOrdenPagoValores=dopv.IdDetalleOrdenPagoValores
+ LEFT OUTER JOIN BancoChequeras bc ON dopv.IdBancoChequera=bc.IdBancoChequera
+ WHERE v.FechaComprobante is not null and 
+	(
+	 (v.Estado='D' and IsNull(v.FechaDeposito,v.FechaComprobante)>=@FechaArranqueCajaYBancos) 
+	 or  
+	 ((v.IdTipoComprobante=17 or v.IdDetalleComprobanteProveedor is not null) and 
+	  Case When IsNull(v.RegistroContableChequeDiferido,'NO')='SI' Then v.FechaValor Else v.FechaComprobante End >=@FechaArranqueCajaYBancos and 
+	  not (@ActivarCircuitoChequesDiferidos='SI' and v.IdTipoValor=6 and IsNull(bc.ChequeraPagoDiferido,'NO')='SI' and 
+		IsNull(v.RegistroContableChequeDiferido,'NO')='NO'))
+	 or
+	 (v.Estado='G' and v.FechaComprobante>=@FechaArranqueCajaYBancos)
+	 or 
+	 (not (v.IdTipoComprobante=17 or v.IdDetalleComprobanteProveedor is not null) and v.Estado is null and 
+	  Case When IsNull(v.RegistroContableChequeDiferido,'NO')='SI' Then v.FechaValor Else v.FechaComprobante End >=@FechaArranqueCajaYBancos and 
+	  not (@ActivarCircuitoChequesDiferidos='SI' and v.IdTipoValor=6 and IsNull(bc.ChequeraPagoDiferido,'NO')='SI' and 
+		IsNull(v.RegistroContableChequeDiferido,'NO')='NO'))
+	 )
+ ORDER BY Year(Case When IsNull(v.Estado,'')='D' Then IsNull(v.FechaDeposito,v.FechaComprobante) When IsNull(v.Estado,'')='G' Then v.FechaComprobante Else Case When IsNull(v.RegistroContableChequeDiferido,'NO')='SI' Then v.FechaValor Else v.FechaComprobante End End), 
+			Month(Case When IsNull(v.Estado,'')='D' Then IsNull(v.FechaDeposito,v.FechaComprobante) When IsNull(v.Estado,'')='G' Then v.FechaComprobante Else Case When IsNull(v.RegistroContableChequeDiferido,'NO')='SI' Then v.FechaValor Else v.FechaComprobante End End) desc    
 
-INSERT INTO #Auxiliar2
- SELECT DISTINCT IsNull(Articulos.IdRubro,0), Rubros.Descripcion
- FROM Articulos
- LEFT OUTER JOIN Rubros ON Rubros.IdRubro=Articulos.IdRubro  
- ORDER BY Rubros.Descripcion
+/*   Conciliaciones cajas   */
+INSERT INTO #Auxiliar1
+ SELECT DISTINCT 
+  -104, 
+  v.IdCaja, 
+  Null, 
+  Year(Case When v.IdBancoDeposito is not null and v.FechaDeposito is not null Then v.FechaDeposito Else v.FechaComprobante End), 
+  Month(Case When v.IdBancoDeposito is not null and v.FechaDeposito is not null Then v.FechaDeposito Else v.FechaComprobante End) 
+ FROM Valores v 
+ WHERE IsNull(v.IdCaja,0)>0
+ ORDER BY Year(Case When v.IdBancoDeposito is not null and v.FechaDeposito is not null Then v.FechaDeposito Else v.FechaComprobante End), 
+			Month(Case When v.IdBancoDeposito is not null and v.FechaDeposito is not null Then v.FechaDeposito Else v.FechaComprobante End) desc    
 
+/*   Conciliaciones tarjetas   */
+INSERT INTO #Auxiliar1
+ SELECT DISTINCT -105, v.IdTarjetaCredito, Null,  Year(v.FechaComprobante), Month(v.FechaComprobante) 
+ FROM Valores v 
+ WHERE IsNull(v.IdTarjetaCredito,0)>0
+ ORDER BY Year(v.FechaComprobante), Month(v.FechaComprobante) desc    
+
+/*   Resumenes de Conciliaciones   */
 INSERT INTO #Auxiliar1     
- SELECT DISTINCT 14, Null, Null, Year(FechaDeposito), Month(FechaDeposito) FROM DepositosBancarios ORDER BY Year(FechaDeposito), Month(FechaDeposito) desc    
+ SELECT DISTINCT -106, Null, Null, Year(FechaFinal), Month(FechaFinal) FROM Conciliaciones  ORDER BY Year(FechaFinal), Month(FechaFinal) desc    
 
 
-
---TRUNCATE TABLE tree
+ TRUNCATE TABLE tree
 --INSERT INTO #Auxiliar0 Select '01','Ppal','PRINCIPAL',Null,1,Null,Null,'Ppal','SI','Principal'    
   
 INSERT INTO #Auxiliar0 Select '01-01','Tablas Generales','Generales','01',1,Null,Null,'TablasG','SI','Principal'  
@@ -520,27 +581,32 @@ INSERT INTO #Auxiliar0 Select '01-14-07-01','DepositosBancariosAgrupados','Depos
 INSERT INTO #Auxiliar0 Select '01-14-07-02','DepositosBancariosTodos','Depositos (Todos)','01-14-07',2,Null,'<a href="/' + @directorio + '/DepositoBancario/Index">Todos</a>','DepositosBancarios','NO','Principal'  
 
 INSERT INTO #Auxiliar0 Select '01-14-08','GastosBancarios','Debitos y creditos bancarios','01-14',8,Null,Null,'GastosBancarios','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-08-01','GastosBancariosAgrupados','Por Períodos','01-14-08',1,Null,Null,'GastosBancarios','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-08-02','GastosBancariosTodos','Todos','01-14-08',2,Null,Null,'GastosBancarios','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-08-01','GastosBancariosAgrupados','Por Períodos','01-14-08',1,Null,Null,'GastosBancarios','SI','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-08-02','GastosBancariosTodos','Todos','01-14-08',2,Null,'<a href="/' + @directorio + '/Valor/Index">Todos</a>','GastosBancarios','NO','Principal'  
 
-INSERT INTO #Auxiliar0 Select '01-14-09','ConciliacionesCajas','Conciliacion de cajas','01-14',9,Null,Null,'ConciliacionesCajas','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-10','Conciliaciones','Conciliacion de bancos','01-14',10,Null,Null,'Conciliaciones','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-11','ConciliacionesTarjetas','Conciliacion de tarjetas de credito','01-14',11,Null,Null,'Conciliaciones','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-12','ChequesPendientes','Cheques pendientes','01-14',12,Null,Null,'ChequesPendientes','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-09','ConciliacionesCajas','Conciliacion de cajas','01-14',9,Null,Null,'ConciliacionesCajas','SI','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-10','Conciliaciones','Conciliacion de bancos','01-14',10,Null,Null,'Conciliaciones','SI','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-11','ConciliacionesTarjetas','Conciliacion de tarjetas de credito','01-14',11,Null,Null,'ConciliacionesTarjetas','SI','Principal'  
+
+INSERT INTO #Auxiliar0 Select '01-14-12','ChequesPendientes','Cheques pendientes','01-14',12,Null,'<a href="/' + @directorio + '/Valor/IndexChequesPendientes">Cheques pendientes</a>','ChequesPendientes','NO','Principal'  
+
 INSERT INTO #Auxiliar0 Select '01-14-13','ChequesNoUsados','Cheques no utilizados','01-14',13,Null,Null,'ChequesPendientes','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-13-01','ChequesNoUsadosNoVistos','Cheques no utilizados','01-14-13',1,Null,Null,'ChequesPendientes','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-13-02','ChequesNoUsadosVistos','Cheques no utilizados (vistos)','01-14-13',2,Null,Null,'ChequesPendientes','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-13-01','ChequesNoUsadosNoVistos','Cheques no utilizados','01-14-13',1,Null,'<a href="/' + @directorio + '/Valor/IndexChequesNoUtilizados?Visto=NO">Cheques no utilizados</a>','ChequesPendientes','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-13-02','ChequesNoUsadosVistos','Cheques no utilizados (vistos)','01-14-13',2,Null,'<a href="/' + @directorio + '/Valor/IndexChequesNoUtilizados?Visto=SI">Cheques no utilizados (vistos)</a>','ChequesPendientes','NO','Principal'  
+
 INSERT INTO #Auxiliar0 Select '01-14-14','ResumenesParaConciliacion','Resumenes de Conciliacion','01-14',14,Null,Null,'ResumenesParaConciliacion','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-14-01','ResumenesParaConciliacionAgrupados','Resumenes de Conciliacion (por períodos)','01-14-14',1,Null,Null,'ResumenesParaConciliacion','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-14-02','ResumenesParaConciliacionTodos','Todos','01-14-14',2,Null,Null,'ResumenesParaConciliacion','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-14-01','ResumenesParaConciliacionAgrupados','Resumenes de Conciliacion (por períodos)','01-14-14',1,Null,Null,'ResumenesParaConciliacion','SI','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-14-02','ResumenesParaConciliacionTodos','Todos','01-14-14',2,Null,'<a href="/' + @directorio + '/ResumenConciliacion/Index">Todos</a>','ResumenesParaConciliacion','NO','Principal'  
+
 INSERT INTO #Auxiliar0 Select '01-14-15','EmisionCheques','Emision de cheques','01-14',15,Null,Null,'EmisionCheques','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-14-15-01','EmisionChequesTodosEmitidos','Emision de cheques (Emitidos)','01-14-15',1,Null,Null,'EmisionCheques','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-14-15-02','EmisionChequesTodosNoEmitidos','Emision de cheques (No emitidos)','01-14-15',2,Null,Null,'EmisionCheques','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-14-15-03','EmisionChequesTodosNoEmitidosPorCuenta','Emision de cheques (No emitidos por cuenta)','01-14-15',3,Null,Null,'EmisionCheques','NO','Principal'  
+
 INSERT INTO #Auxiliar0 Select '01-14-16','PlazosFijos','Plazos fijos','01-14',16,Null,Null,'PlazosFijos','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-16-01','PlazosFijosAVencer','Plazos fijos (A vencer)','01-14-16',1,Null,Null,'PlazosFijos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-16-02','PlazosFijosVencidos','Plazos fijos (Vencidos)','01-14-16',2,Null,Null,'PlazosFijos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-14-16-03','PlazosFijosTodos','Plazos fijos (Todos)','01-14-16',3,Null,Null,'PlazosFijos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-16-01','PlazosFijosAVencer','Plazos fijos (A vencer)','01-14-16',1,Null,'<a href="/' + @directorio + '/PlazoFijo/Index?Tipo=AVencer">Plazos fijos (A vencer)</a>','PlazosFijos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-16-02','PlazosFijosVencidos','Plazos fijos (Vencidos)','01-14-16',2,Null,'<a href="/' + @directorio + '/PlazoFijo/Index?Tipo=Vencidos">Plazos fijos (Vencidos)</a>','PlazosFijos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-14-16-03','PlazosFijosTodos','Plazos fijos (Todos)','01-14-16',3,Null,'<a href="/' + @directorio + '/PlazoFijo/Index?Tipo=Todos">Plazos fijos (Todos)</a>','PlazosFijos','NO','Principal'  
   
 --INSERT INTO #Auxiliar0 Select '01-15','ModulosAdicionales','Modulos adicionales','01',1,Null,Null,'ModulosAdicionales','SI','Principal'  
 --INSERT INTO #Auxiliar0 Select '01-15-01','PolizasObras','Polizas obras','01-15',1,Null,Null,'PolizasObras','SI','Principal'  
@@ -576,8 +642,8 @@ INSERT INTO #Auxiliar0 Select '01-14-16-03','PlazosFijosTodos','Plazos fijos (To
 --INSERT INTO #Auxiliar0 Select '01-17','PpalSAT','Comprob Pronto SAT','01',1,Null,Null,'PpalSAT','SI','Principal'  
 --INSERT INTO #Auxiliar0 Select '01-17-01','RecepcionesSAT','Recepciones','01-17',1,Null,Null,'RecepcionesSAT','NO','Principal'  
   
-DECLARE @AñoAnt103 int, @Contador103 int, @Contador1030 int, @AñoAnt1 int, @Contador1 int, @AñoAnt104 int, @Contador104 int, @AñoAnt900 int ,@Contador900 int,   
-		@Contador9100 int, @Contador91002 int, @TipoComprobanteAnt int
+DECLARE @AñoAnt103 int, @Contador103 int, @Contador1030 int, @AñoAnt1 int, @Contador1 int, @AñoAnt104 int, @Contador104 int, @AñoAnt900 int ,@Contador900 int, @Contador9100 int, @Contador91002 int, 
+		@TipoComprobanteAnt int, @IdEntidad int, @Entidad varchar(50), @Contador int, @IdEntidad2 int, @Entidad2 varchar(50), @Contador2 int, @Contador3 int
 
 SET @AñoAnt103=-1  
 SET @AñoAnt900=-1  
@@ -1013,6 +1079,43 @@ WHILE @@FETCH_STATUS = 0
 				'<a href="/' + @directorio + '/DepositoBancario/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'DepositosBancarios', 'NO','Principal'  
 	  END  
   
+	--GASTOS BANCARIOS
+	IF @TipoComprobante=-102
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-14-08-01-'+Substring('000',1,3-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'GastosBancariosAgrupados'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-14-08-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/Valor/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'GastosBancarios', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'GastosBancarios'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Valor/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'GastosBancarios', 'NO','Principal'  
+	  END  
+
+
+	--RESUMENES DE CONCILIACION
+	IF @TipoComprobante=-106
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-14-14-01-'+Substring('000',1,3-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'ResumenesParaConciliacionAgrupados'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-14-14-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/ResumenConciliacion/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'ResumenesParaConciliacion', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'ResumenesParaConciliacionAgrupados'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/ResumenConciliacion/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'ResumenesParaConciliacion', 'NO','Principal'  
+	  END  
+
 
 	FETCH NEXT FROM Cur INTO @TipoComprobante, @Obra, @IdObra, @Año, @Mes  
   END  
@@ -1020,23 +1123,255 @@ CLOSE Cur
 DEALLOCATE Cur  
   
 
-DECLARE @IdRubro int, @Contador int, @Rubro varchar(50)
+/*   Articulos por rubros   */
+TRUNCATE TABLE #Auxiliar2
+INSERT INTO #Auxiliar2
+ SELECT DISTINCT IsNull(Articulos.IdRubro,0), Rubros.Descripcion
+ FROM Articulos
+ LEFT OUTER JOIN Rubros ON Rubros.IdRubro=Articulos.IdRubro  
+ ORDER BY Rubros.Descripcion
+
 SET @Contador=0
-DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT IdRubro, Rubro FROM #Auxiliar2 ORDER BY Rubro
+DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT IdEntidad, Entidad FROM #Auxiliar2 ORDER BY Entidad
 OPEN Cur  
-FETCH NEXT FROM Cur INTO @IdRubro, @Rubro
+FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
 WHILE @@FETCH_STATUS = 0  
   BEGIN  
 	SET @Contador=@Contador+1  
 	SET @Parent='01-02-04-'+Substring('00',1,3-Len(Convert(varchar,@Contador)))+Convert(varchar,@Contador)  
 	INSERT INTO #Auxiliar0   
-	 SELECT @Parent, 'ArticulosRubros'+Convert(varchar,@IdRubro),@Rubro,'01-02-04', @Contador, Null,  
-			'<a href="/' + @directorio + '/Articulo/Index?IdRubro='+Convert(varchar,@IdRubro)+'">'+@Rubro+'</a>', 'Articulos', 'NO','Principal'  
-	FETCH NEXT FROM Cur INTO @IdRubro, @Rubro
+	 SELECT @Parent, 'ArticulosRubros'+Convert(varchar,@IdEntidad),@Entidad,'01-02-04', @Contador, Null,  
+			'<a href="/' + @directorio + '/Articulo/Index?IdRubro='+Convert(varchar,@IdEntidad)+'">'+@Entidad+'</a>', 'Articulos', 'NO','Principal'  
+	FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
   END  
 CLOSE Cur  
 DEALLOCATE Cur  
   
+
+/*   Conciliacion bancos por cuenta bancaria   */
+TRUNCATE TABLE #Auxiliar2
+INSERT INTO #Auxiliar2
+ SELECT IdBanco, Nombre
+ FROM Bancos 
+ WHERE IdCuenta is not null and Exists(Select Top 1 CuentasBancarias.IdCuentaBancaria From CuentasBancarias Where CuentasBancarias.IdBanco=Bancos.IdBanco) 
+ ORDER by Nombre
+
+SET @Contador=0
+DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT IdEntidad, Entidad FROM #Auxiliar2 ORDER BY Entidad
+OPEN Cur  
+FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
+WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+	SET @Contador=@Contador+1  
+	SET @Parent='01-14-10-'+Substring('00',1,3-Len(Convert(varchar,@Contador)))+Convert(varchar,@Contador)  
+	INSERT INTO #Auxiliar0   
+	 SELECT @Parent, 'Conciliaciones'+Convert(varchar,@IdEntidad), @Entidad, '01-14-10', @Contador, Null, Null, 'Conciliaciones', 'SI','Principal'  
+
+	TRUNCATE TABLE #Auxiliar3
+	INSERT INTO #Auxiliar3
+	 SELECT IdCuentaBancaria, Cuenta
+	 FROM CuentasBancarias 
+	 WHERE Cuenta is not null and IdBanco=@IdEntidad
+	 ORDER by Cuenta
+
+	SET @Contador2=0
+	DECLARE Cur1 CURSOR LOCAL FORWARD_ONLY FOR SELECT IdEntidad2, Entidad2 FROM #Auxiliar3 ORDER BY Entidad2
+	OPEN Cur1  
+	FETCH NEXT FROM Cur1 INTO @IdEntidad2, @Entidad2
+	WHILE @@FETCH_STATUS = 0  
+	  BEGIN  
+		SET @Contador2=@Contador2+1  
+		SET @Parent2=@Parent+'-'+Substring('00',1,3-Len(Convert(varchar,@Contador2)))+Convert(varchar,@Contador2)  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Parent2, 'ConciliacionesCuentaBancaria'+Convert(varchar,@IdEntidad2), @Entidad2, @Parent, @Contador2, Null,  
+				'<a href="/' + @directorio + '/Valor/IndexValores?IdCuentaBancaria='+Convert(varchar,@IdEntidad2)+'&fechainicial=01/01/2000'+'&fechafinal=31/12/'+Convert(varchar,Year(GetDate()))+'">'+@Entidad2+'</a>', 'Conciliaciones', 'SI','Principal'  
+
+		SET @Contador3=0
+		SET @TipoComprobanteAnt=-1  
+		SET @AñoAnt1=-1  
+		DECLARE Cur2 CURSOR LOCAL FORWARD_ONLY FOR SELECT TipoComprobante, Año, Mes FROM #Auxiliar1 WHERE TipoComprobante=-103 and IdObra=@IdEntidad2 ORDER BY TipoComprobante, Año desc, Mes asc  
+		OPEN Cur2  
+		FETCH NEXT FROM Cur2 INTO @TipoComprobante, @Año, @Mes  
+		WHILE @@FETCH_STATUS = 0  
+		  BEGIN  
+			IF @TipoComprobante<>@TipoComprobanteAnt
+			  BEGIN
+				SET @AñoAnt1=-1  
+				SET @TipoComprobanteAnt=@TipoComprobante 
+			  END
+
+			SELECT @NombreMes = Case When @Mes=1 Then 'Enero' When @Mes=2 Then 'Febrero' When @Mes=3 Then 'Marzo' When @Mes=4 Then 'Abril'   
+										When @Mes=5 Then 'Mayo' When @Mes=6 Then 'Junio' When @Mes=7 Then 'Julio' When @Mes=8 Then 'Agosto'  
+										When @Mes=9 Then 'Septiembre' When @Mes=10 Then 'Octubre' When @Mes=11 Then 'Noviembre' When @Mes=12 Then 'Diciembre'  
+								End  
+			SET @FechaInicial='01/'+Substring('00',1,2-Len(Convert(varchar,@Mes)))+Convert(varchar,@Mes)+'/'+Convert(varchar,@Año)  
+			SET @Fecha=DateAdd(d,-1,DateAdd(m,1,Convert(datetime,@FechaInicial,103)))  
+			SET @FechaFinal=Substring('00',1,2-Len(Convert(varchar,Day(@Fecha))))+Convert(varchar,Day(@Fecha))+'/'+  
+							Substring('00',1,2-Len(Convert(varchar,Month(@Fecha))))+Convert(varchar,Month(@Fecha))+'/'+Convert(varchar,Year(@Fecha))  
+
+			IF @AñoAnt1<>@Año  
+			  BEGIN  
+				SET @AñoAnt1=@Año  
+				SET @Contador3=@Contador3+1  
+				SET @Parent3=@Parent2+'-'+Substring('00',1,3-Len(Convert(varchar,@Contador3)))+Convert(varchar,@Contador3)  
+				INSERT INTO #Auxiliar0   
+				 SELECT @Parent3, 'ConciliacionesCuentaBancaria'+Convert(varchar,@IdEntidad2)+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),@Parent2, @Contador3, Null,  
+						'<a href="/' + @directorio + '/Valor/IndexValores?IdCuentaBancaria='+Convert(varchar,@IdEntidad2)+'&fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Conciliaciones', 'SI','Principal'  
+			  END  
+			SET @Clave=@Parent3+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Clave, 'ConciliacionesCuentaBancaria'+Convert(varchar,@IdEntidad2)+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent3, abs(12-@Mes), Null,  
+					'<a href="/' + @directorio + '/Valor/IndexValores?IdCuentaBancaria='+Convert(varchar,@IdEntidad2)+'&fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Conciliaciones', 'NO','Principal'  
+
+			FETCH NEXT FROM Cur2 INTO @TipoComprobante, @Año, @Mes  
+		  END  
+		CLOSE Cur2  
+		DEALLOCATE Cur2  
+
+		FETCH NEXT FROM Cur1 INTO @IdEntidad2, @Entidad2
+	  END  
+	CLOSE Cur1  
+	DEALLOCATE Cur1  
+
+	FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
+  END  
+CLOSE Cur  
+DEALLOCATE Cur  
+
+
+/*   Conciliacion cajas   */
+TRUNCATE TABLE #Auxiliar2
+INSERT INTO #Auxiliar2
+ SELECT IdCaja, Descripcion
+ FROM Cajas 
+ WHERE Exists(Select Top 1 a1.TipoComprobante From #Auxiliar1 a1 Where a1.TipoComprobante=-104 and a1.IdObra=Cajas.IdCaja) 
+ ORDER by Descripcion
+
+SET @Contador=0
+DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT IdEntidad, Entidad FROM #Auxiliar2 ORDER BY Entidad
+OPEN Cur  
+FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
+WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+	SET @Contador=@Contador+1  
+	SET @Parent='01-14-09-'+Substring('00',1,3-Len(Convert(varchar,@Contador)))+Convert(varchar,@Contador)  
+	INSERT INTO #Auxiliar0   
+	 SELECT @Parent, 'ConciliacionesCajas'+Convert(varchar,@IdEntidad), @Entidad, '01-14-09', @Contador, Null, Null, 'ConciliacionesCajas', 'SI','Principal'  
+
+	SET @Contador2=0
+	SET @TipoComprobanteAnt=-1  
+	SET @AñoAnt1=-1  
+	DECLARE Cur2 CURSOR LOCAL FORWARD_ONLY FOR SELECT TipoComprobante, Año, Mes FROM #Auxiliar1 WHERE TipoComprobante=-104 and IdObra=@IdEntidad ORDER BY TipoComprobante, Año desc, Mes asc  
+	OPEN Cur2  
+	FETCH NEXT FROM Cur2 INTO @TipoComprobante, @Año, @Mes  
+	WHILE @@FETCH_STATUS = 0  
+		BEGIN  
+		IF @TipoComprobante<>@TipoComprobanteAnt
+			BEGIN
+			SET @AñoAnt1=-1  
+			SET @TipoComprobanteAnt=@TipoComprobante 
+			END
+
+		SELECT @NombreMes = Case When @Mes=1 Then 'Enero' When @Mes=2 Then 'Febrero' When @Mes=3 Then 'Marzo' When @Mes=4 Then 'Abril'   
+									When @Mes=5 Then 'Mayo' When @Mes=6 Then 'Junio' When @Mes=7 Then 'Julio' When @Mes=8 Then 'Agosto'  
+									When @Mes=9 Then 'Septiembre' When @Mes=10 Then 'Octubre' When @Mes=11 Then 'Noviembre' When @Mes=12 Then 'Diciembre'  
+							End  
+		SET @FechaInicial='01/'+Substring('00',1,2-Len(Convert(varchar,@Mes)))+Convert(varchar,@Mes)+'/'+Convert(varchar,@Año)  
+		SET @Fecha=DateAdd(d,-1,DateAdd(m,1,Convert(datetime,@FechaInicial,103)))  
+		SET @FechaFinal=Substring('00',1,2-Len(Convert(varchar,Day(@Fecha))))+Convert(varchar,Day(@Fecha))+'/'+  
+						Substring('00',1,2-Len(Convert(varchar,Month(@Fecha))))+Convert(varchar,Month(@Fecha))+'/'+Convert(varchar,Year(@Fecha))  
+
+		IF @AñoAnt1<>@Año  
+			BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador2=@Contador2+1  
+			SET @Parent2=@Parent+'-'+Substring('00',1,3-Len(Convert(varchar,@Contador2)))+Convert(varchar,@Contador2)  
+			INSERT INTO #Auxiliar0   
+				SELECT @Parent2, 'ConciliacionesCajas'+Convert(varchar,@IdEntidad)+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),@Parent, @Contador2, Null,  
+					'<a href="/' + @directorio + '/Valor/IndexMovimientosCaja?IdCaja='+Convert(varchar,@IdEntidad)+'&fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'ConciliacionesCajas', 'SI','Principal'  
+			END  
+		SET @Clave=@Parent2+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+			SELECT @Clave, 'ConciliacionesCajas'+Convert(varchar,@IdEntidad)+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent2, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Valor/IndexMovimientosCaja?IdCaja='+Convert(varchar,@IdEntidad)+'&fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'ConciliacionesCajas', 'NO','Principal'  
+
+		FETCH NEXT FROM Cur2 INTO @TipoComprobante, @Año, @Mes  
+		END  
+	CLOSE Cur2  
+	DEALLOCATE Cur2  
+
+	FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
+  END  
+CLOSE Cur  
+DEALLOCATE Cur  
+
+
+/*   Conciliacion tarjetas   */
+TRUNCATE TABLE #Auxiliar2
+INSERT INTO #Auxiliar2
+ SELECT IdTarjetaCredito, Nombre
+ FROM TarjetasCredito 
+ WHERE Exists(Select Top 1 a1.TipoComprobante From #Auxiliar1 a1 Where a1.TipoComprobante=-105 and a1.IdObra=TarjetasCredito.IdTarjetaCredito) 
+ ORDER by Nombre
+
+SET @Contador=0
+DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT IdEntidad, Entidad FROM #Auxiliar2 ORDER BY Entidad
+OPEN Cur  
+FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
+WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+	SET @Contador=@Contador+1  
+	SET @Parent='01-14-11-'+Substring('00',1,3-Len(Convert(varchar,@Contador)))+Convert(varchar,@Contador)  
+	INSERT INTO #Auxiliar0   
+	 SELECT @Parent, 'ConciliacionesTarjetas'+Convert(varchar,@IdEntidad), @Entidad, '01-14-11', @Contador, Null, Null, 'ConciliacionesTarjetas', 'SI','Principal'  
+
+	SET @Contador2=0
+	SET @TipoComprobanteAnt=-1  
+	SET @AñoAnt1=-1  
+	DECLARE Cur2 CURSOR LOCAL FORWARD_ONLY FOR SELECT TipoComprobante, Año, Mes FROM #Auxiliar1 WHERE TipoComprobante=-105 and IdObra=@IdEntidad ORDER BY TipoComprobante, Año desc, Mes asc  
+	OPEN Cur2  
+	FETCH NEXT FROM Cur2 INTO @TipoComprobante, @Año, @Mes  
+	WHILE @@FETCH_STATUS = 0  
+		BEGIN  
+		IF @TipoComprobante<>@TipoComprobanteAnt
+			BEGIN
+			SET @AñoAnt1=-1  
+			SET @TipoComprobanteAnt=@TipoComprobante 
+			END
+
+		SELECT @NombreMes = Case When @Mes=1 Then 'Enero' When @Mes=2 Then 'Febrero' When @Mes=3 Then 'Marzo' When @Mes=4 Then 'Abril'   
+									When @Mes=5 Then 'Mayo' When @Mes=6 Then 'Junio' When @Mes=7 Then 'Julio' When @Mes=8 Then 'Agosto'  
+									When @Mes=9 Then 'Septiembre' When @Mes=10 Then 'Octubre' When @Mes=11 Then 'Noviembre' When @Mes=12 Then 'Diciembre'  
+							End  
+		SET @FechaInicial='01/'+Substring('00',1,2-Len(Convert(varchar,@Mes)))+Convert(varchar,@Mes)+'/'+Convert(varchar,@Año)  
+		SET @Fecha=DateAdd(d,-1,DateAdd(m,1,Convert(datetime,@FechaInicial,103)))  
+		SET @FechaFinal=Substring('00',1,2-Len(Convert(varchar,Day(@Fecha))))+Convert(varchar,Day(@Fecha))+'/'+  
+						Substring('00',1,2-Len(Convert(varchar,Month(@Fecha))))+Convert(varchar,Month(@Fecha))+'/'+Convert(varchar,Year(@Fecha))  
+
+		IF @AñoAnt1<>@Año  
+			BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador2=@Contador2+1  
+			SET @Parent2=@Parent+'-'+Substring('00',1,3-Len(Convert(varchar,@Contador2)))+Convert(varchar,@Contador2)  
+			INSERT INTO #Auxiliar0   
+				SELECT @Parent2, 'ConciliacionesTarjetas'+Convert(varchar,@IdEntidad)+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),@Parent, @Contador2, Null,  
+					'<a href="/' + @directorio + '/Valor/IndexMovimientosTarjeta?IdTarjetaCredito='+Convert(varchar,@IdEntidad)+'&fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'ConciliacionesTarjetas', 'SI','Principal'  
+			END  
+		SET @Clave=@Parent2+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+			SELECT @Clave, 'ConciliacionesTarjetas'+Convert(varchar,@IdEntidad)+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent2, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Valor/IndexMovimientosTarjeta?IdTarjetaCredito='+Convert(varchar,@IdEntidad)+'&fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'ConciliacionesTarjetas', 'NO','Principal'  
+
+		FETCH NEXT FROM Cur2 INTO @TipoComprobante, @Año, @Mes  
+		END  
+	CLOSE Cur2  
+	DEALLOCATE Cur2  
+
+	FETCH NEXT FROM Cur INTO @IdEntidad, @Entidad
+  END  
+CLOSE Cur  
+DEALLOCATE Cur  
+
 
 INSERT INTO #Auxiliar0 Select '01-11-12-01-99','PresupuestosAgrupados','','01-11-12-01',1,Null,Null,'','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-13-01-00','ComparativasAgrupadas','','01-11-13-01',1,Null,Null,'','NO','Principal'  
@@ -1370,4 +1705,6 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
 DROP TABLE #Auxiliar0
 DROP TABLE #Auxiliar1
 DROP TABLE #Auxiliar2
+DROP TABLE #Auxiliar3
+
 

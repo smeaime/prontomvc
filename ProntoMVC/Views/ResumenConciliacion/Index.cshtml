@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.Conciliacione>
+@{
+    ViewBag.Title = "Resumen de conciliacion";
+}
+
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+
+<br />
+
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nuevo resumen</button>
+        </div>
+    </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("TT", "ResumenConciliacion")',
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['', 'IdConciliacion', 'IdCuentaBancaria', 'IdRealizo', 'IdAprobo', 'Banco', 'Cuenta bancaria', 'Fecha ingreso', 'Fecha inicial', 'Fecha final', 'Numero resumen',
+                       'Saldo inicial', 'Saldo final', 'Importe ajuste', 'Observaciones', 'Realizo', 'Aprobo'],
+            colModel: [
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'IdConciliacion', index: 'IdConciliacion', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdRealizo', index: 'IdRealizo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdAprobo', index: 'IdAprobo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Banco', index: 'Banco', align: 'left', width: 300, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'CuentaBancaria', index: 'CuentaBancaria', align: 'left', width: 150, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaInicial', index: 'FechaInicial', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaFinal', index: 'FechaFinal', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Numero', index: 'Numero', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'SaldoInicialResumen', index: 'SaldoInicialResumen', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'SaldoFinalResumen', index: 'SaldoFinalResumen', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ImporteAjuste', index: 'ImporteAjuste', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'Realizo', index: 'Realizo', align: 'left', width: 150, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 150, sortable: false, editable: false, search: false, hidden: false }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 20000],
+            sortname: 'Banco',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>RESUMENES DE CONCILIACION</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+    });
+
+</script>
