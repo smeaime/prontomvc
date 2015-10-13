@@ -166,7 +166,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<Asiento> Asientos { get; set; }
         public virtual DbSet<DetalleAsiento> DetalleAsientos { get; set; }
         public virtual DbSet<Conciliacione> Conciliaciones { get; set; }
-        public virtual DbSet<DetalleConciliacione> DetalleConciliaciones { get; set; }
+        public virtual DbSet<DetalleConciliacione> DetalleConciliacionesContables { get; set; }
         public virtual DbSet<DetalleConciliacionesNoContable> DetalleConciliacionesNoContables { get; set; }
         public virtual DbSet<Tree> Trees { get; set; }
         public virtual DbSet<TiposImpuesto> TiposImpuestoes { get; set; }
@@ -227,6 +227,11 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<FertilizantesCupos> FertilizantesCupos { get; set; }
         public virtual DbSet<DepositosBancario> DepositosBancarios { get; set; }
         public virtual DbSet<DetalleDepositosBancario> DetalleDepositosBancarios { get; set; }
+        public virtual DbSet<DetalleValoresCuenta> DetalleValoresCuentas { get; set; }
+        public virtual DbSet<DetalleValoresProvincia> DetalleValoresProvincias { get; set; }
+        public virtual DbSet<DetalleValoresRubrosContable> DetalleValoresRubrosContables { get; set; }
+        public virtual DbSet<ValoresFaltantesVisto> ValoresFaltantesVistos { get; set; }
+        public virtual DbSet<DetallePlazosFijosRubrosContable> DetallePlazosFijosRubrosContables { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

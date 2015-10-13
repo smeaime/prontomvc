@@ -14,6 +14,11 @@ namespace ProntoMVC.Data.Models
     
     public partial class PlazosFijo
     {
+        public PlazosFijo()
+        {
+            this.DetallePlazosFijosRubrosContables = new HashSet<DetallePlazosFijosRubrosContable>();
+        }
+    
         public int IdPlazoFijo { get; set; }
         public Nullable<int> IdBanco { get; set; }
         public Nullable<int> NumeroCertificado1 { get; set; }
@@ -44,5 +49,7 @@ namespace ProntoMVC.Data.Models
         public string Anulado { get; set; }
         public string AcreditarInteresesAlFinalizar { get; set; }
         public string NoExigirRubroContable { get; set; }
+    
+        public virtual ICollection<DetallePlazosFijosRubrosContable> DetallePlazosFijosRubrosContables { get; set; }
     }
 }

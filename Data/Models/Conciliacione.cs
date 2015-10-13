@@ -16,7 +16,7 @@ namespace ProntoMVC.Data.Models
     {
         public Conciliacione()
         {
-            this.DetalleConciliaciones = new HashSet<DetalleConciliacione>();
+            this.DetalleConciliacionesContables = new HashSet<DetalleConciliacione>();
             this.DetalleConciliacionesNoContables = new HashSet<DetalleConciliacionesNoContable>();
         }
     
@@ -34,7 +34,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdAprobo { get; set; }
     
         public virtual CuentasBancaria CuentasBancaria { get; set; }
-        public virtual ICollection<DetalleConciliacione> DetalleConciliaciones { get; set; }
+        public virtual ICollection<DetalleConciliacione> DetalleConciliacionesContables { get; set; }
         public virtual ICollection<DetalleConciliacionesNoContable> DetalleConciliacionesNoContables { get; set; }
     }
 }
