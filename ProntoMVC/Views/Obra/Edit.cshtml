@@ -5,289 +5,319 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
 {
     @Html.ValidationSummary(true)
-    <script src="@Url.Content("~/Scripts/ScriptObra.js")"  type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ScriptObra.js")" type="text/javascript"></script>
 
-    <div class="container-fluid">
-        <div>@Html.Hidden("IdObra", Model.IdObra)</div>
-        <div>@Html.Hidden("IdLocalidad", Model.IdLocalidad)</div>
-        <div>@Html.Hidden("IdArticuloAsociado", Model.IdArticuloAsociado)</div>
-        
-        <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-            <div class="span5 lightblue">
-                @Html.TextBox("TituloPrincipal", Model.Descripcion, new { style = "font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 24px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif'; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span8", @readonly = "readonly" })
+
+
+
+    <div id="principal" class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+        <form class="form-horizontal" style=" margin-bottom: 0px;">
+            <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
+                <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
+
+
+                    <div class="row-fluid">
+                        <div>@Html.Hidden("IdObra", Model.IdObra)</div>
+                        <div>@Html.Hidden("IdLocalidad", Model.IdLocalidad)</div>
+                        <div>@Html.Hidden("IdArticuloAsociado", Model.IdArticuloAsociado)</div>
+
+                        <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                            <div class="span5 lightblue">
+                                @Html.TextBox("TituloPrincipal", Model.Descripcion, new { style = "font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 24px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif'; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span8", @readonly = "readonly" })
+                            </div>
+                          
+                        </div>
+
+                        <style>
+                            .nav-tabs > li > a {
+                                border: 1px solid rgba(0, 0, 0, 0.03);
+                            }
+                        </style>
+                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active"><a href="#red" data-toggle="tab">Datos generales</a></li>
+                            <li><a href="#ubicacion" data-toggle="tab">Ubicacion</a></li>
+                            <li><a href="#polizas" data-toggle="tab">Polizas</a></li>
+                            <li><a href="#equipos" data-toggle="tab">Equipos instalados</a></li>
+                        </ul>
+
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="red">
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Descripcion, "Descripcion")
+                                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Descripcion)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.NumeroObra, "Codigo")
+                                        @Html.TextBoxFor(model => model.NumeroObra, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.NumeroObra)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.Jerarquia, "Jerarquia contable")
+                                        @Html.TextBoxFor(model => model.Jerarquia, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Jerarquia)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.IdGrupoObra, "Grupo de obra")
+                                        @Html.DropDownList("IdGrupoObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdGrupoObra)
+                                    </div>
+                                    <div class="span3 lightblue">
+                                        @Html.LabelFor(model => model.TipoObra, "Tipo de obra")<br />
+                                        @Html.RadioButtonFor(model => model.TipoObra, "1") Taller
+                                        @Html.RadioButtonFor(model => model.TipoObra, "2") Montaje
+                                        @Html.RadioButtonFor(model => model.TipoObra, "3") Servicio
+                                    </div>
+                                    <div class="span1 lightblue">
+                                        @Html.LabelFor(model => model.Activa, "Activa?")
+                                        @Html.CheckBox("Activa", Model.Activa == "SI")
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.FechaInicio, "Fecha inicio")
+                                        @Html.TextBoxFor(model => model.FechaInicio, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                                        @Html.ValidationMessageFor(model => model.FechaInicio)
+                                        <script>
+                                            $("#FechaInicio").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.FechaFinalizacion, "Fecha finalizacion")
+                                        @Html.TextBoxFor(model => model.FechaFinalizacion, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                                        @Html.ValidationMessageFor(model => model.FechaFinalizacion)
+                                        <script>
+                                            $("#FechaFinalizacion").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.FechaEntrega, "Fecha entrega")
+                                        @Html.TextBoxFor(model => model.FechaEntrega, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                                        @Html.ValidationMessageFor(model => model.FechaEntrega)
+                                        <script>
+                                            $("#FechaEntrega").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.IdCliente, "Cliente")
+                                        @Html.DropDownList("IdCliente", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdCliente)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.IdJefeRegional, "Jefe regional")
+                                        @Html.DropDownList("IdJefeRegional", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdJefeRegional)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.IdJefe, "Jefe local")
+                                        @Html.DropDownList("IdJefe", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdJefe)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.IdSubjefe, "Subjefe")
+                                        @Html.DropDownList("IdSubjefe", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdSubjefe)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.IdUnidadOperativa, "Unidad operativa")
+                                        @Html.DropDownList("IdUnidadOperativa", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdUnidadOperativa)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span3 lightblue">
+                                        <label for="ArticuloAsociado">Articulo asociado</label>
+                                        <input type="text" name="ArticuloAsociado" id="ArticuloAsociado" style="font-size: 15px; text-align: left;" class="span12" />
+                                        <script type="text/jscript">
+                                            $("#ArticuloAsociado").autocomplete({
+                                                source: '@Url.Action("GetArticulosAutocomplete2", "Articulo")',
+                                                minLength: 0,
+                                                messages: { noResults: "", results: function () { } },
+                                                select: function (event, ui) {
+                                                    $("#IdArticuloAsociado").val(ui.item.id);
+                                                    $("#ArticuloAsociado").val(ui.item.value);
+                                                    event.preventDefault();
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.IdCuentaContableFF, "Cuenta de fondo fijo")
+                                        @Html.DropDownList("IdCuentaContableFF", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdCuentaContableFF)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.ValorObra, "Valor de la obra")
+                                        @Html.TextBoxFor(model => model.ValorObra, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.ValorObra)
+                                    </div>
+                                    <div class="span1 lightblue">
+                                        @Html.LabelFor(model => model.IdMonedaValorObra, "Moneda")
+                                        @Html.DropDownList("IdMonedaValorObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdMonedaValorObra)
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="ubicacion">
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Direccion)
+                                        @Html.TextBoxFor(model => model.Direccion, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Direccion)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span3 lightblue">
+                                        <label for="Localidad">Localidad</label>
+                                        <input type="text" name="Localidad" id="Localidad" style="font-size: 15px; text-align: left;" class="span12" />
+                                        <script type="text/jscript">
+                                            $("#Localidad").autocomplete({
+                                                source: '@Url.Action("GetLocalidadesAutocomplete","Localidad")',
+                                                minLength: 0,
+                                                messages: { noResults: "", results: function () { } },
+                                                select: function (event, ui) {
+                                                    $("#IdLocalidad").val(ui.item.id);
+                                                    $("#Localidad").val(ui.item.value);
+                                                    $("#IdProvincia").val(ui.item.idprovincia);
+                                                    $("#IdPais").val(ui.item.IdPais);
+                                                    event.preventDefault();
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="span1 lightblue">
+                                        @Html.LabelFor(model => model.CodigoPostal, "Codigo postal")
+                                        @Html.TextBoxFor(model => model.CodigoPostal, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.CodigoPostal)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.IdProvincia, "Provincia")
+                                        @Html.DropDownList("IdProvincia", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdProvincia)
+                                    </div>
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.IdPais, "Pais")
+                                        @Html.DropDownList("IdPais", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        @Html.ValidationMessageFor(model => model.IdPais)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span3 lightblue">
+                                        @Html.LabelFor(model => model.Telefono, "Telefono")
+                                        @Html.TextBoxFor(model => model.Telefono, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Telefono)
+                                    </div>
+                                    <div class="span3 lightblue">
+                                        @Html.LabelFor(model => model.Responsable, "Responsable")
+                                        @Html.TextBoxFor(model => model.Responsable, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Responsable)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.LugarPago, "Lugar de pago")
+                                        @Html.TextBoxFor(model => model.LugarPago, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.LugarPago)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.ProximoNumeroAutorizacionCompra, "Proximo numero autorizacion compra")
+                                        @Html.TextBoxFor(model => model.ProximoNumeroAutorizacionCompra, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.ProximoNumeroAutorizacionCompra)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.OrdenamientoSecundario, "Orden secundario")
+                                        @Html.TextBoxFor(model => model.OrdenamientoSecundario, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.OrdenamientoSecundario)
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.ActivarPresupuestoObra, "Activa presupuesto de obra?")
+                                        @Html.CheckBox("ActivarPresupuestoObra", Model.ActivarPresupuestoObra == "SI")
+                                    </div>
+                                    <div class="span2 lightblue">
+                                        @Html.LabelFor(model => model.DiasLiquidacionCertificados, "Dias liquidacion certificados")
+                                        @Html.TextBoxFor(model => model.DiasLiquidacionCertificados, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.DiasLiquidacionCertificados)
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span8 lightblue">
+                                        @Html.LabelFor(model => model.Observaciones)
+                                        @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12", @style = "height: 50px;" })
+                                        @Html.ValidationMessageFor(model => model.Observaciones)
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="polizas">
+                                <div class="row-fluid">
+                                    <div class="span12 lightblue">
+                                        <table id="ListaPolizas" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                        <div id="PagerPolizas" class="scroll"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="equipos">
+                                <div class="row-fluid">
+                                    <div class="span12 lightblue">
+                                        <table id="ListaEquipos" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                        <div id="PagerEquipos" class="scroll"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
+                    <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
+                    <div class="row-fluid " style="padding: 11px 0px 0px 0px">
+                        <div class="span5 lightblue">
+                            <input type="button" id="grabar2" value="Aceptar" class="btn btn-primary" />
+                            @if (Model.IdObra > 0)
+                            { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdObra }, new { @class = "btn  btn-default" }) }
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div class="span5 lightblue">
-                <input type="button" id="grabar2" value="Aceptar" class="btn btn-primary" />
-                @if (Model.IdObra > 0)
-                { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdObra }, new { @class = "btn  btn-default" }) }
-                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
-            </div>
-        </div>
-
-        <style>
-            .nav-tabs > li > a {
-                border: 1px solid rgba(0, 0, 0, 0.03);
-            }
-        </style>
-        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-            <li class="active"><a href="#red" data-toggle="tab">Datos generales</a></li>
-            <li><a href="#ubicacion" data-toggle="tab">Ubicacion</a></li>
-            <li><a href="#polizas" data-toggle="tab">Polizas</a></li>
-            <li><a href="#equipos" data-toggle="tab">Equipos instalados</a></li>
-        </ul>
-
-        <div id="my-tab-content" class="tab-content">
-            <div class="tab-pane active" id="red">
-                <div class="row-fluid">
-                    <div class="span4 lightblue">
-                        @Html.LabelFor(model => model.Descripcion, "Descripcion")
-                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.Descripcion)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.NumeroObra, "Codigo")
-                        @Html.TextBoxFor(model => model.NumeroObra, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.NumeroObra)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.Jerarquia, "Jerarquia contable")
-                        @Html.TextBoxFor(model => model.Jerarquia, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.Jerarquia)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.IdGrupoObra, "Grupo de obra")
-                        @Html.DropDownList("IdGrupoObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdGrupoObra)
-                    </div>
-                    <div class="span3 lightblue">
-                        @Html.LabelFor(model => model.TipoObra, "Tipo de obra")
-                        @Html.RadioButtonFor(model => model.TipoObra, "1") Taller
-                        @Html.RadioButtonFor(model => model.TipoObra, "2") Montaje
-                        @Html.RadioButtonFor(model => model.TipoObra, "3") Servicio
-                    </div>
-                    <div class="span1 lightblue">
-                        @Html.LabelFor(model => model.Activa, "Activa?")
-                        @Html.CheckBox("Activa", Model.Activa == "SI")
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.FechaInicio, "Fecha inicio")
-                        @Html.TextBoxFor(model => model.FechaInicio, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                        @Html.ValidationMessageFor(model => model.FechaInicio)
-                        <script>
-                            $("#FechaInicio").datepicker({
-                                changeMonth: true,
-                                changeYear: true,
-                                dateFormat: 'dd/mm/yy'
-                                //numberOfMonths: 2,
-                            });
-                        </script>
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.FechaFinalizacion, "Fecha finalizacion")
-                        @Html.TextBoxFor(model => model.FechaFinalizacion, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                        @Html.ValidationMessageFor(model => model.FechaFinalizacion)
-                        <script>
-                            $("#FechaFinalizacion").datepicker({
-                                changeMonth: true,
-                                changeYear: true,
-                                dateFormat: 'dd/mm/yy'
-                                //numberOfMonths: 2,
-                            });
-                        </script>
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.FechaEntrega, "Fecha entrega")
-                        @Html.TextBoxFor(model => model.FechaEntrega, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                        @Html.ValidationMessageFor(model => model.FechaEntrega)
-                        <script>
-                            $("#FechaEntrega").datepicker({
-                                changeMonth: true,
-                                changeYear: true,
-                                dateFormat: 'dd/mm/yy'
-                                //numberOfMonths: 2,
-                            });
-                        </script>
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.IdCliente, "Cliente")
-                        @Html.DropDownList("IdCliente", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdCliente)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.IdJefeRegional, "Jefe regional")
-                        @Html.DropDownList("IdJefeRegional", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdJefeRegional)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.IdJefe, "Jefe local")
-                        @Html.DropDownList("IdJefe", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdJefe)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.IdSubjefe, "Subjefe")
-                        @Html.DropDownList("IdSubjefe", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdSubjefe)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.IdUnidadOperativa, "Unidad operativa")
-                        @Html.DropDownList("IdUnidadOperativa", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdUnidadOperativa)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span3 lightblue">
-                        <label for="ArticuloAsociado">Articulo asociado</label>
-                        <input type="text" name="ArticuloAsociado" id="ArticuloAsociado" style="font-size: 15px; text-align: left;" class="span12" />
-                        <script type="text/jscript">
-                            $("#ArticuloAsociado").autocomplete({
-                                source: '@Url.Action("GetArticulosAutocomplete2", "Articulo")',
-                                minLength: 0,
-                                messages: { noResults: "", results: function () { } },
-                                select: function (event, ui) {
-                                    $("#IdArticuloAsociado").val(ui.item.id);
-                                    $("#ArticuloAsociado").val(ui.item.value);
-                                    event.preventDefault();
-                                }
-                            });
-                        </script>
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.IdCuentaContableFF, "Cuenta de fondo fijo")
-                        @Html.DropDownList("IdCuentaContableFF", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdCuentaContableFF)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.ValorObra, "Valor de la obra")
-                        @Html.TextBoxFor(model => model.ValorObra, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.ValorObra)
-                    </div>
-                    <div class="span1 lightblue">
-                        @Html.LabelFor(model => model.IdMonedaValorObra, "Moneda")
-                        @Html.DropDownList("IdMonedaValorObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdMonedaValorObra)
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="tab-pane" id="ubicacion">
-                <div class="row-fluid">
-                    <div class="span4 lightblue">
-                        @Html.LabelFor(model => model.Direccion)
-                        @Html.TextBoxFor(model => model.Direccion, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.Direccion)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span3 lightblue">
-                        <label for="Localidad">Localidad</label>
-                        <input type="text" name="Localidad" id="Localidad" style="font-size: 15px; text-align: left;" class="span12" />
-                        <script type="text/jscript">
-                            $("#Localidad").autocomplete({
-                                source: '@Url.Action("GetLocalidadesAutocomplete","Localidad")',
-                                minLength: 0,
-                                messages: { noResults: "", results: function () { } },
-                                select: function (event, ui) {
-                                    $("#IdLocalidad").val(ui.item.id);
-                                    $("#Localidad").val(ui.item.value);
-                                    $("#IdProvincia").val(ui.item.idprovincia);
-                                    $("#IdPais").val(ui.item.IdPais);
-                                    event.preventDefault();
-                                }
-                            });
-                        </script>
-                    </div>
-                    <div class="span1 lightblue">
-                        @Html.LabelFor(model => model.CodigoPostal, "Codigo postal")
-                        @Html.TextBoxFor(model => model.CodigoPostal, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.CodigoPostal)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span4 lightblue">
-                        @Html.LabelFor(model => model.IdProvincia, "Provincia")
-                        @Html.DropDownList("IdProvincia", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdProvincia)
-                    </div>
-                    <div class="span4 lightblue">
-                        @Html.LabelFor(model => model.IdPais, "Pais")
-                        @Html.DropDownList("IdPais", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdPais)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span3 lightblue">
-                        @Html.LabelFor(model => model.Telefono, "Telefono")
-                        @Html.TextBoxFor(model => model.Telefono, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.Telefono)
-                    </div>
-                    <div class="span3 lightblue">
-                        @Html.LabelFor(model => model.Responsable, "Responsable")
-                        @Html.TextBoxFor(model => model.Responsable, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.Responsable)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.LugarPago, "Lugar de pago")
-                        @Html.TextBoxFor(model => model.LugarPago, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.LugarPago)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.ProximoNumeroAutorizacionCompra, "Proximo numero autorizacion compra")
-                        @Html.TextBoxFor(model => model.ProximoNumeroAutorizacionCompra, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.ProximoNumeroAutorizacionCompra)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.OrdenamientoSecundario, "Orden secundario")
-                        @Html.TextBoxFor(model => model.OrdenamientoSecundario, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.OrdenamientoSecundario)
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.ActivarPresupuestoObra, "Activa presupuesto de obra?")
-                        @Html.CheckBox("ActivarPresupuestoObra", Model.ActivarPresupuestoObra == "SI")
-                    </div>
-                    <div class="span2 lightblue">
-                        @Html.LabelFor(model => model.DiasLiquidacionCertificados, "Dias liquidacion certificados")
-                        @Html.TextBoxFor(model => model.DiasLiquidacionCertificados, new { @class = "span12" })
-                        @Html.ValidationMessageFor(model => model.DiasLiquidacionCertificados)
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span8 lightblue">
-                        @Html.LabelFor(model => model.Observaciones)
-                        @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12", @style = "height: 50px;" })
-                        @Html.ValidationMessageFor(model => model.Observaciones)
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="tab-pane" id="polizas">
-                <div class="row-fluid">
-                    <div class="span12 lightblue">
-                        <table id="ListaPolizas" class="scroll" cellpadding="0" cellspacing="0"></table>
-                        <div id="PagerPolizas" class="scroll"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-pane" id="equipos">
-                <div class="row-fluid">
-                    <div class="span12 lightblue">
-                        <table id="ListaEquipos" class="scroll" cellpadding="0" cellspacing="0"></table>
-                        <div id="PagerEquipos" class="scroll"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+            
+        </form>
     </div>
+
+
+    <script type="text/javascript">
+    $(window).resize(function () {
+        RefrescaAnchoGrillaDetalle();
+        $("#conscroll").height($(window).height() - 120);
+    });
+    </script>
+
 }

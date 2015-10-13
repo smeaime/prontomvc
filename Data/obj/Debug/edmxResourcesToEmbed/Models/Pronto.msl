@@ -3229,6 +3229,8 @@
     <EntitySetMapping Name="OrdenesPago">
       <EntityTypeMapping TypeName="DemoProntoModel.OrdenPago">
         <MappingFragment StoreEntitySet="OrdenesPago">
+          <ScalarProperty Name="CuitOpcional" ColumnName="CuitOpcional" />
+          <ScalarProperty Name="IdTipoRetencionGanancia" ColumnName="IdTipoRetencionGanancia" />
           <ScalarProperty Name="FechaReversionContablePorAnulacion" ColumnName="FechaReversionContablePorAnulacion" />
           <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
           <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
@@ -6105,6 +6107,17 @@
     <EntitySetMapping Name="FertilizantesCupos">
       <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesCupos">
         <MappingFragment StoreEntitySet="FertilizantesCupos">
+          <ScalarProperty Name="PuntoDespacho" ColumnName="PuntoDespacho" />
+          <ScalarProperty Name="Despacho" ColumnName="Despacho" />
+          <ScalarProperty Name="Bruto" ColumnName="Bruto" />
+          <ScalarProperty Name="Tara" ColumnName="Tara" />
+          <ScalarProperty Name="NumeroCotizacion" ColumnName="NumeroCotizacion" />
+          <ScalarProperty Name="NumeroRemito" ColumnName="NumeroRemito" />
+          <ScalarProperty Name="KilosMaximo" ColumnName="KilosMaximo" />
+          <ScalarProperty Name="HoraDespacho" ColumnName="HoraDespacho" />
+          <ScalarProperty Name="HoraAutorizacion" ColumnName="HoraAutorizacion" />
+          <ScalarProperty Name="HoraCarga" ColumnName="HoraCarga" />
+          <ScalarProperty Name="HoraArribo" ColumnName="HoraArribo" />
           <ScalarProperty Name="NumeradorTexto" ColumnName="NumeradorTexto" />
           <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
@@ -6151,6 +6164,34 @@
           <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
           <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="IdFertilizanteCupo" ColumnName="IdFertilizanteCupo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepositosBancarios">
+      <EntityTypeMapping TypeName="DemoProntoModel.DepositosBancario">
+        <MappingFragment StoreEntitySet="DepositosBancarios">
+          <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
+          <ScalarProperty Name="IdMonedaEfectivo" ColumnName="IdMonedaEfectivo" />
+          <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+          <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+          <ScalarProperty Name="IdAutorizaAnulacion" ColumnName="IdAutorizaAnulacion" />
+          <ScalarProperty Name="Anulado" ColumnName="Anulado" />
+          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+          <ScalarProperty Name="Efectivo" ColumnName="Efectivo" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="NumeroDeposito" ColumnName="NumeroDeposito" />
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+          <ScalarProperty Name="FechaDeposito" ColumnName="FechaDeposito" />
+          <ScalarProperty Name="IdDepositoBancario" ColumnName="IdDepositoBancario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleDepositosBancarios">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleDepositosBancario">
+        <MappingFragment StoreEntitySet="DetalleDepositosBancarios">
+          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+          <ScalarProperty Name="IdDepositoBancario" ColumnName="IdDepositoBancario" />
+          <ScalarProperty Name="IdDetalleDepositoBancario" ColumnName="IdDetalleDepositoBancario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

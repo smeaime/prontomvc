@@ -718,6 +718,7 @@ namespace ProntoMVC.Controllers
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
+            inicializardbmant
 
             var data2 = (from a in data
 

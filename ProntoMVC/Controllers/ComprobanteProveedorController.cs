@@ -63,9 +63,12 @@ namespace ProntoMVC.Controllers
         {
             // para usar la inicializacion en testing
 
-            // base.Initialize(rc); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
+             //base.Initialize(rc); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
             base.unitOfWork = new UnitOfWork(SC);
             fondoFijoService = new FondoFijoService(unitOfWork);
+
+
+
 
             //base.db = unitOfWork.ComprobantesproveedorRepositorio.HACKEADOcontext;
 
@@ -102,6 +105,18 @@ namespace ProntoMVC.Controllers
             base.Initialize(rc); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
             unitOfWork = new UnitOfWork(SC);
             fondoFijoService = new FondoFijoService(unitOfWork);
+
+            //base.db = unitOfWork.ComprobantesproveedorRepositorio.HACKEADOcontext;
+
+        }
+
+        public void FakeInitialize(string nombreEmpresa)
+        {
+            // para usar la inicializacion en testing
+
+            base.FakeInitialize(nombreEmpresa); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
+            //unitOfWork = new UnitOfWork(SC);
+            //fondoFijoService = new FondoFijoService(unitOfWork);
 
             //base.db = unitOfWork.ComprobantesproveedorRepositorio.HACKEADOcontext;
 
