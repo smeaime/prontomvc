@@ -7,6 +7,58 @@
 BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
 ----------------------------------------------------------------------------------------
 
+se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
+
+PASEO general, que no le explote a Claudio en la mano:
+	autofiltros (en maestros y grillas aux)
+		no funcionan las fechas en los autofiltros.
+
+Hay formularios donde no deberia estar habilitado el panel de grillas (en el de nota de debito, o en los maestros) -hacer una funcion que revise si hay grillas auxiliares, y si no, que deshabilite el panel y el boton de grillas
+
+Con la nueva tipografía, quedan angostas algunas columnas (las de fechas)
+
+
+ancho del div contenido en el panel izquierdo (el del arbol) -panelWestResize() no funciona -Hecho mas o menos: si el texto no entra, no hará wrap...
+
+Recibo, NC, y ND, tienen un titulo con font distinto
+
+TESTS? -hay que solucionar el mockeado del membership.getuser  -cómo se llama a StaticMembership en ese proyecto que encontraste?
+
+
+Algunos pies quedan con los botones justificados a la izquierda, y otros a la derecha (y tambien por el medio, etc) ej Salidas mat
+
+Mayúsculas, acentos
+
+PROVEEDORES
+	no tiene autofiltros
+
+EMPLEADOS - 
+	no hay autofiltros en empleados. 
+	el titulo está mal. 
+	no me deja grabar un empleado existente, dice que el "falta el legajo "
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+HECHO
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+HECHO- pie en el formulario de obra
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 agregar lo del tree_actualizar
 
 uno es que me dice fer y tiene razon, cuando grabas un comprobante y se produjo un error (cartel rojo) 

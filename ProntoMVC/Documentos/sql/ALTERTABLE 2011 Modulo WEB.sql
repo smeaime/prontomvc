@@ -1504,3 +1504,31 @@ select SubnumeroDeFacturacion,* from cartasdeporte where numerocartadeporte=5408
 alter table CartasDePorte ADD
 	CONSTRAINT chk_FechaAnulacion3 CHECK (not (FechaAnulacion is not null AND Anulada='NO') ) 
 go
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+ALTER TABLE FertilizantesCupos alter column contrato varchar(50) NULL
+go
+
+alter table FertilizantesCupos ADD
+	HoraArribo datetime NULL,
+	HoraCarga  datetime NULL,
+	HoraAutorizacion  datetime NULL,
+	HoraDespacho  datetime NULL,
+	KilosMaximo NUMERIC (12, 2) NULL,
+	NumeroRemito VARCHAR (20)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	NumeroCotizacion VARCHAR (20)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Tara            NUMERIC (12, 2) NULL,
+	Bruto			NUMERIC (12, 2) NULL,
+	Despacho		VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	PuntoDespacho	VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+go
+
+
+
+

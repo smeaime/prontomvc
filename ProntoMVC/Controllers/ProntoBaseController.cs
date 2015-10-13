@@ -100,17 +100,32 @@ namespace ProntoMVC.Controllers
 
         }
 
-        private void asignacadena(string rccadena)
+        private void asignacadena(string nombreEmpresa)
         {
             string sc;
+
+            Guid uguid = (Guid)new Guid();
+
             try
             {
-                sc = Generales.sCadenaConex(rccadena);
+                if (!System.Diagnostics.Debugger.IsAttached)
+                    uguid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+
             }
             catch (Exception)
             {
                 //return;
-                throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + rccadena + "]");
+                throw new Exception("Falla la conexion a la bdlmaster para verficar el membership .net");
+            }
+
+            try
+            {
+                sc = Generales.sCadenaConex(nombreEmpresa, uguid);
+            }
+            catch (Exception)
+            {
+                //return;
+                throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + nombreEmpresa + "]");
             }
 
             if (sc == null)
@@ -149,13 +164,13 @@ namespace ProntoMVC.Controllers
                         return;
                     }
                 }
-                catch (     System.Data.SqlClient.SqlException x)
+                catch (System.Data.SqlClient.SqlException x)
                 {
                     throw;
                 }
                 catch (Exception)
                 {
-                    
+
                     throw;
                 }
 
@@ -256,13 +271,26 @@ namespace ProntoMVC.Controllers
 
         }
 
+
+        public void FakeInitialize(string nombreempresa)
+        {
+
+            asignacadena(nombreempresa);
+
+        }
+
+
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
             MiniProfiler profiler = MiniProfiler.Current;
 
+
             using (profiler.Step("En el Initialize"))
             {
                 base.Initialize(rc);
+
+                oStaticMembershipService = new StaticMembershipService();
+
 
                 // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
                 // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
@@ -442,6 +470,30 @@ namespace ProntoMVC.Controllers
             base.OnActionExecuted(filterContext);
         }
 
+
+
+
+        StaticMembershipService oStaticMembershipService;
+
+        public interface IStaticMembershipService
+        {
+            MembershipUser GetUser();
+
+            void UpdateUser(MembershipUser user);
+        }
+
+        public class StaticMembershipService : IStaticMembershipService
+        {
+            public System.Web.Security.MembershipUser GetUser()
+            {
+                return Membership.GetUser();
+            }
+
+            public void UpdateUser(MembershipUser user)
+            {
+                Membership.UpdateUser(user);
+            }
+        }
 
 
 
@@ -1801,8 +1853,10 @@ namespace ProntoMVC.Controllers
             ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
 
 
+            var u = dbMaster.aspnet_Users.Where(x => x.LoweredUserName == usuario).FirstOrDefault();
+            if (u == null) return new Guid();
 
-            var guid = dbMaster.aspnet_Users.Where(x => x.LoweredUserName == usuario).FirstOrDefault().UserId;
+            var guid = u.UserId;
 
 
             return guid;
@@ -3313,3 +3367,7 @@ public static class ErrorLog2
         }
     }
 };
+
+
+
+
