@@ -74,16 +74,79 @@ Public Class FertilizanteManager
 
 
     Public Shared Function GetItem(ByVal SC As String, ByVal id As Integer, ByVal getCartaDePorteDetalles As Boolean) As FertilizantesCupos
-  
+
         Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-
+        If id <= 0 Then Return Nothing
 
         Dim f = db.FertilizantesCupos.Find(id)
 
-        
+
         Return f
     End Function
+
+    Public Shared Function Anular(ByVal sc As String, ByVal cupo As FertilizantesCupos, ByVal IdUsuario As Integer, ByVal NombreUsuario As String) As Integer
+        With cupo
+
+            'esto tiene que estar en el manager, dios!
+            .FechaAnulacion = Now
+            '.UsuarioAnulacion = cmbUsuarioAnulo.SelectedValue
+            '.Cumplido = "AN"
+
+            .Anulada = "SI"
+
+            'For Each i As CartaDePorteItem In .Detalles
+            '    With i
+            '        .Cumplido = "AN"
+            '        '.EnviarEmail = 1
+            '    End With
+            'Next
+
+            'revisar queda una en la familia, y ponerla como original
+            Return Save(sc, cupo, IdUsuario, NombreUsuario)
+
+
+
+
+            '                tira un error de duplicacion al anular
+            '                _
+            'URL:	/ProntoWeb/CartaDePorte.aspx?Id=1090650
+            'User:           scabrera()
+            '                Exception(Type) : System.ApplicationException()
+            'Message:	Error en la grabacion Error en la grabacion Violation of UNIQUE KEY constraint 'U_NumeroCartaRestringido'. Cannot insert duplicate key in object 'CartasDePorte'. The statement has been terminated.
+            'Stack Trace:	 at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario)
+            'at CartaDePorteManager.Anular(String sc, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario)
+            'at CartadeporteABM.btnAnularOk_Click(Object sender, EventArgs e)
+            'at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+            'at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+            'at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+            'at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+            'at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+            'at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+        End With
+    End Function
+
+
+    Public Shared Function DesAnular(ByVal sc As String, ByVal cupo As FertilizantesCupos, ByVal IdUsuario As Integer, ByVal NombreUsuario As String) As Integer
+        With cupo
+
+            'esto tiene que estar en el manager, dios!
+            .FechaAnulacion = Now
+            '.UsuarioAnulacion = cmbUsuarioAnulo.SelectedValue
+            '.Cumplido = "AN"
+
+            .Anulada = "NO"
+
+            'For Each i As CartaDePorteItem In .Detalles
+            '    With i
+            '        .Cumplido = "AN"
+            '        '.EnviarEmail = 1
+            '    End With
+            'Next
+            Return Save(sc, cupo, IdUsuario, NombreUsuario)
+        End With
+    End Function
+
 
 
     Public Shared Function GetItemPorNumero(ByVal SC As String, ByVal NumeroCartaDePorte As String) As FertilizantesCupos
@@ -109,7 +172,7 @@ Public Class FertilizanteManager
 
 
         Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
-     
+
 
 
         Dim familia = (From e In db.FertilizantesCupos _
@@ -166,6 +229,72 @@ Public Class FertilizanteManager
 
 
         End If
+
+    End Function
+
+
+
+    Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
+
+        Dim DIRFTP = DirApp & "\DataBackupear\"
+        Dim nombre = NameOnlyFromFullPath ' (AsyncFileUpload1.PostedFile.FileName)
+        Randomize()
+        Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+        Dim numeroCarta = Val(nombre)
+        Dim vagon = 0
+
+
+
+        If (AsyncFileUpload1.HasFile) Then
+            Try
+
+
+                'Dim nombresolo As String = Mid(nombre, nombre.LastIndexOf("\"))
+
+                '    Session("NombreArchivoSubido") = DIRFTP + nombrenuevo
+
+                Dim MyFile1 As New FileInfo(DIRFTP + nombrenuevo)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
+
+                AsyncFileUpload1.SaveAs(DIRFTP + nombrenuevo)
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex.ToString)
+                Throw
+            End Try
+        Else
+            'FileUpLoad2.click 'estaría bueno que se pudiese hacer esto, es decir, llamar al click
+        End If
+
+
+
+        If forzarID = -1 Then
+            Dim cdp = FertilizanteManager.GetItemPorNumero(SC, numeroCarta)
+            If cdp.IdFertilizanteCupo = -1 Then
+                sError = "No se encontró la carta " & numeroCarta
+                Return nombrenuevo
+                Exit Function
+            End If
+            forzarID = cdp.IdFertilizanteCupo
+        End If
+
+
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        Dim oCarta = (From i In db.FertilizantesCupos Where i.IdFertilizanteCupo = forzarID).SingleOrDefault
+        oCarta.PathImagen2 = nombrenuevo 'nombrenuevo
+        db.SaveChanges()
+        sError &= "<a href=""Fertilizante.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeradorTexto & "</a>; "
+
+
+        Return nombrenuevo
+
 
     End Function
 
@@ -282,12 +411,35 @@ Public Class FertilizanteManager
 
             'LogicaImportador.actualizar(.Cantidad, dr.Item("NetoProc"))
             .Cantidad = Val(dr.Item("NetoProc"))
-            .Contrato = dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString)
+            .Contrato = Left(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString), 20)
 
+            .FechaIngreso = iisValidSqlDate(TextoAFecha(iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.FechaDescarga.ToString))))
 
             .Chasis = iisNull(dr.Item("Patente"))
             .Acoplado = iisNull(dr.Item("Acoplado"))
-           
+
+            .Puro = IIf(iisNull(dr.Item("Calidad")) = "X", 1, 0)
+            .Mezcla = cmbPuntoVenta.SelectedValue
+
+            .Porcentaje1 = StringToDecimal(iisNull(dr.Item("column17"))) * 100
+            .Porcentaje2 = StringToDecimal(iisNull(dr.Item("column18"))) * 100
+            .Porcentaje3 = StringToDecimal(iisNull(dr.Item("column19"))) * 100
+            .Porcentaje4 = StringToDecimal(iisNull(dr.Item("column20"))) * 100
+
+
+
+            Select Case iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Comprador)).ToString.Trim.ToUpper
+                Case "GRANEL"
+                    .FormaDespacho = 1
+                Case "BOLSA", "BOLSAS"
+                    .FormaDespacho = 2
+                Case "BIGBAG", "BIG BAGS (1000 KG)", "BIG BAGS (500 KG)"
+                    .FormaDespacho = 3
+            End Select
+
+
+
+
             '/////////////////////////////////////////
             '/////////////////////////////////////////
 
@@ -351,6 +503,17 @@ Public Class FertilizanteManager
 
 
 
+            dr.Item("Intermediario") = iisNull(dr.Item("Intermediario"))
+            If dr.Item("Intermediario") <> "NO_VALIDAR" And Trim(dr.Item("Intermediario")) <> "" Then
+                .CuentaOrden = BuscaIdClientePrecisoConCUIT(dr.Item("Intermediario"), SC)
+                If .CuentaOrden = -1 Then .CuentaOrden = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Intermediario")), SC)
+                dr.Item("IdIntermediario") = .CuentaOrden
+                If .CuentaOrden = -1 Then Return "Intermediario"
+            End If
+
+
+
+
 
 
             dr.Item("Destino") = iisNull(dr.Item("Destino"))
@@ -368,6 +531,18 @@ Public Class FertilizanteManager
                     'AsignarContratistasSegunDestino(dr, SC)
                 End If
             End If
+
+
+
+
+            dr.Item("Procedencia") = iisNull(dr.Item("Procedencia"))
+            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") Then
+                .IdLocalidadTransportista = BuscaIdLocalidadPreciso(RTrim(dr.Item("Procedencia")), SC)
+                If .IdLocalidadTransportista = -1 Then .IdLocalidadTransportista = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Procedencia")), SC)
+                'dt.Rows(row).Item("IdProcedencia") = .Procedencia
+                If .IdLocalidadTransportista = -1 Then Return "Procedencia"
+            End If
+
 
 
             'sector del confeccionó
@@ -483,6 +658,8 @@ Public Class FertilizanteManager
                 If .IdFertilizanteCupo <= 0 Then
                     .FechaIngreso = Now
                     .IdUsuarioIngreso = IdUsuario
+                    .FechaModificacion = Now
+                    .IdUsuarioModifico = IdUsuario
                     db.FertilizantesCupos.Add(cupoFertilizante)
                 Else
 
@@ -501,6 +678,21 @@ Public Class FertilizanteManager
 
             End With
 
+        Catch ex As System.Data.Entity.Validation.DbEntityValidationException
+
+            'http://stackoverflow.com/questions/10219864/ef-code-first-how-do-i-see-entityvalidationerrors-property-from-the-nuget-pac
+            Dim sb = New StringBuilder()
+
+            For Each failure In ex.EntityValidationErrors
+
+                sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType())
+                For Each er In failure.ValidationErrors
+                    sb.AppendFormat("- {0} : {1}", er.PropertyName, er.ErrorMessage)
+                    sb.AppendLine()
+                Next
+            Next
+
+            Throw New ApplicationException("Error en la grabacion " + sb.ToString(), ex)
 
         Catch ex As Exception
             'ContextUtil.SetAbort()
@@ -790,7 +982,7 @@ Public Class FertilizanteManager
             Case "LOCALIDAD TRANSP"
 
                 Return enumColumnasDeGrillaFinalFertilizantes.Procedencia
-               
+
             Case "OBSERVACIONES.", "OBSERVACIONES", "OBSERVACION", "OBSERV.", "MER/REB", "ANÁLISIS"
                 Return enumColumnasDeGrillaFinalFertilizantes.column25
 

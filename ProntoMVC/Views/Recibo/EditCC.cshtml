@@ -44,8 +44,8 @@
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     <div class="row-fluid">
-                        <div class="span3 lightblue">
-                            <legend>Recibo (Clientes)</legend>
+                        <div class="span3 lightblue titulo">
+                            Recibo (Clientes)
                         </div>
                         <div class="span1 lightblue">
                             <div>@Html.Hidden("IdRecibo", Model.IdRecibo)</div>
@@ -89,7 +89,7 @@
                         <div class="span1 lightblue">
                             @if (Model.Anulado == "SI")
                             {
-                                <span style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 4px; border-spacing: 0px; font-size: 15px; background-color: rgb(100%, 88%, 88%); ">ANULADO</span>
+                                <span style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 0px; border-spacing: 0px; font-size: 15px; background-color: rgb(100%, 88%, 88%); ">ANULADO</span>
                             }
                         </div>
                         <div class="span3 lightblue">
@@ -481,7 +481,7 @@
                         </div>
                         <div class="span4 lightblue">
                             <table id="Totales" class="subtotales span12" width="" border="0" cellspacing="0" cellpadding="0"
-                                   style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 4px; border-spacing: 0px; font-size: xx-small; background-color: #E0ECFF; ">
+                                   style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 0px; border-spacing: 0px; font-size: xx-small; background-color: #E0ECFF; ">
                                 <tr class="">
                                     <td width="200" colspan="2" style="font-size: 12px; font-weight: bold; ">SUBTOTAL</td>
                                     <td width="100"><input type="text" name="Subtotal" id="Subtotal" style="width: 83%; text-align: right; font-size: 12px; font-weight: bold; background-color: #e8eef4; " readonly="readonly" /></td>

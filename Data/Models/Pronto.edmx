@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content lkjlkjlk -->
     <edmx:StorageModels>
-    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="_TempAutorizaciones">
           <Key>
             <PropertyRef Name="IdTempAutorizacion" />
@@ -662,8 +662,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -805,8 +805,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene 
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -3045,8 +3045,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -3312,7 +3312,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdLocalidadTransportista" Type="int" />
           <Property Name="Recorrido" Type="int" />
           <Property Name="Destino" Type="int" />
-          <Property Name="Contrato" Type="varchar" MaxLength="20" />
+          <Property Name="Contrato" Type="varchar" MaxLength="50" />
           <Property Name="IdArticulo" Type="int" />
           <Property Name="Puro" Type="varchar" MaxLength="2" />
           <Property Name="Mezcla" Type="varchar" MaxLength="2" />
@@ -3339,6 +3339,17 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdFacturaImputada" Type="int" />
           <Property Name="NumeradorTexto" Type="varchar" MaxLength="20" />
+          <Property Name="HoraArribo" Type="datetime" />
+          <Property Name="HoraCarga" Type="datetime" />
+          <Property Name="HoraAutorizacion" Type="datetime" />
+          <Property Name="HoraDespacho" Type="datetime" />
+          <Property Name="KilosMaximo" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="NumeroRemito" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroCotizacion" Type="varchar" MaxLength="20" />
+          <Property Name="Tara" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="Bruto" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="Despacho" Type="varchar" MaxLength="50" />
+          <Property Name="PuntoDespacho" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Formularios">
           <Key>
@@ -3879,6 +3890,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
           <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
           <Property Name="FechaReversionContablePorAnulacion" Type="datetime" />
+          <Property Name="IdTipoRetencionGanancia" Type="int" />
+          <Property Name="CuitOpcional" Type="varchar" MaxLength="13" />
         </EntityType>
         <EntityType Name="OrdenesTrabajo">
           <Key>
@@ -16677,6 +16690,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_OrdenesPago_IdObra" FromRole="OrdenPago" ToRole="Obra" />
           <NavigationProperty Name="OrdenesPago1" Relationship="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" FromRole="OrdenPago" ToRole="OrdenPago1" />
           <NavigationProperty Name="OrdenesPago2" Relationship="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" FromRole="OrdenPago1" ToRole="OrdenPago" />
+          <Property Name="IdTipoRetencionGanancia" Type="Int32" />
+          <Property Name="CuitOpcional" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
           <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -21621,7 +21636,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdLocalidadTransportista" Type="Int32" />
           <Property Name="Recorrido" Type="Int32" />
           <Property Name="Destino" Type="Int32" />
-          <Property Name="Contrato" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Contrato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdArticulo" Type="Int32" />
           <Property Name="Puro" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Mezcla" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
@@ -21674,6 +21689,17 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="Localidade1" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" FromRole="FertilizantesCupos" ToRole="Localidad" />
           <NavigationProperty Name="Transportista" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__48F19687" FromRole="FertilizantesCupos" ToRole="Transportista" />
           <NavigationProperty Name="Transportista1" Relationship="DemoProntoModel.FK__Fertiliza__IdTra__564B91A5" FromRole="FertilizantesCupos" ToRole="Transportista" />
+          <Property Name="HoraArribo" Type="DateTime" Precision="3" />
+          <Property Name="HoraCarga" Type="DateTime" Precision="3" />
+          <Property Name="HoraAutorizacion" Type="DateTime" Precision="3" />
+          <Property Name="HoraDespacho" Type="DateTime" Precision="3" />
+          <Property Name="KilosMaximo" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="NumeroRemito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroCotizacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tara" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Bruto" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Despacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PuntoDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__CartasDeP__Acopi__5498535D">
           <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -25439,6 +25465,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySetMapping Name="OrdenesPago">
             <EntityTypeMapping TypeName="DemoProntoModel.OrdenPago">
               <MappingFragment StoreEntitySet="OrdenesPago">
+                <ScalarProperty Name="CuitOpcional" ColumnName="CuitOpcional" />
+                <ScalarProperty Name="IdTipoRetencionGanancia" ColumnName="IdTipoRetencionGanancia" />
                 <ScalarProperty Name="FechaReversionContablePorAnulacion" ColumnName="FechaReversionContablePorAnulacion" />
                 <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
                 <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
@@ -28315,6 +28343,17 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySetMapping Name="FertilizantesCupos">
             <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesCupos">
               <MappingFragment StoreEntitySet="FertilizantesCupos">
+                <ScalarProperty Name="PuntoDespacho" ColumnName="PuntoDespacho" />
+                <ScalarProperty Name="Despacho" ColumnName="Despacho" />
+                <ScalarProperty Name="Bruto" ColumnName="Bruto" />
+                <ScalarProperty Name="Tara" ColumnName="Tara" />
+                <ScalarProperty Name="NumeroCotizacion" ColumnName="NumeroCotizacion" />
+                <ScalarProperty Name="NumeroRemito" ColumnName="NumeroRemito" />
+                <ScalarProperty Name="KilosMaximo" ColumnName="KilosMaximo" />
+                <ScalarProperty Name="HoraDespacho" ColumnName="HoraDespacho" />
+                <ScalarProperty Name="HoraAutorizacion" ColumnName="HoraAutorizacion" />
+                <ScalarProperty Name="HoraCarga" ColumnName="HoraCarga" />
+                <ScalarProperty Name="HoraArribo" ColumnName="HoraArribo" />
                 <ScalarProperty Name="NumeradorTexto" ColumnName="NumeradorTexto" />
                 <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />

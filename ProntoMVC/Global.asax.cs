@@ -155,6 +155,15 @@ namespace ProntoMVC
                 Exception lastErrorWrapper = Server.GetLastError();
 
 
+                if (lastErrorWrapper==null)
+                {
+                    // http://stackoverflow.com/questions/343014/asp-net-custom-error-page-server-getlasterror-is-null
+
+                    // Try using something like Server.Transfer("~/ErrorPage.aspx"); from within the Application_Error() method of global.asax.cs
+                    Server.Transfer("~/Shared/SinConexion.cshtml");
+                }
+
+
                 Exception lastError = lastErrorWrapper;
                 if (lastErrorWrapper.InnerException != null) lastError = lastErrorWrapper.InnerException;
 
@@ -242,6 +251,28 @@ namespace ProntoMVC
 
 
 
+
+    
+                /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+                
+//                1- en el caso de error en el Loggin (por un error de compilacion o algo por el estilo) si nos podes enviar en el mail las bases de datos de la BDLMaesteer (Solo las bases no los string de conexiones)
+
+//2-En el caso de otro tipo de error en que base de datos fue y si es posible el usuario (similar a los errores de Williams)
+
+//es es mas que nada para poder saber cuando nos llegan los mails saber en donde estan pasando
+                string nombrebase = "";
+                try
+                {
+                    nombrebase = System.Web.HttpContext.Current.Session["BasePronto"].ToString();
+                    //nombrebase = this.HttpContext.Session["BasePronto"].ToString();
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+
                 /////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////
@@ -299,7 +330,7 @@ namespace ProntoMVC
 
                     // 'apgurisatti@bdlconsultores.com.ar", _
                     ProntoFuncionesGenerales.MandaEmailSimple(direccion,
-                                 (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
+                               (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + nombrebase + " " + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
                                    Body,
                                     ConfigurationManager.AppSettings["SmtpUser"],
                                     ConfigurationManager.AppSettings["SmtpServer"],
@@ -374,8 +405,15 @@ namespace ProntoMVC
                     // por qué la llamada al ErrorController necesita del Membership (y por lo tanto, de la conexion SQL)?
                     //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
                     //ssss
-                    Response.Redirect("~/Views/Shared/SinConexion.cshtml");
-                    throw;
+                    
+                    // http://stackoverflow.com/questions/15894254/how-to-solve-redirect-loop
+
+                    routeData.Values["action"] = "SinConexion";
+                    IController errorsController2 = new Controllers.ErrorController();
+                    var rc2 = new RequestContext(new HttpContextWrapper(Context), routeData);
+                    errorsController2.Execute(rc);
+                    // Response.Redirect("~/Views/Shared/SinConexion.cshtml");
+                    //throw;
                 }
                 catch (Exception)
                 {

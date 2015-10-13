@@ -148,6 +148,9 @@ function getColumnIndexByName(grid, columnName) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function panelWestResize() {
+    $("#addtree").jqGrid('setGridWidth', pageLayout.west.state.innerWidth - 0, true);
+}
 
 function RefrescaAnchoJqgrids() {
     //return;
@@ -963,6 +966,8 @@ $(function () {
     // http: //stackoverflow.com/questions/7745009/in-jqgrid-is-it-possible-to-resize-columns-to-fit-the-table-width-original-wid
     // http: //stackoverflow.com/questions/3906300/jqgrid-and-the-autowidth-option-how-does-it-works
 
+
+
     $(window).bind('resize', function () {
         //$("#Lista").setGridWidth($(window).width());
         $("#Lista").jqGrid('setGridWidth', $(window).width());
@@ -1326,7 +1331,7 @@ function validatePwd2(fCallbackEnExito, fCallbackRechazada) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function Moneda_Cotizacion(fecha, IdMoneda,funcioncallback ) {
+function Moneda_Cotizacion(fecha, IdMoneda, funcioncallback) {
     if (IdMoneda != 1) {
         $.ajax({
             type: "GET",

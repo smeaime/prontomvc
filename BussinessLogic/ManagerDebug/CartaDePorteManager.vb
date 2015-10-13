@@ -1864,6 +1864,7 @@ Public Class CartaDePorteManager
                 Where _
             cdp.Vendedor > 0 _
             And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+            And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
             And (cdp.Anulada <> "SI") _
             And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
             And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
@@ -3002,7 +3003,7 @@ Public Class CartaDePorteManager
                     While Not (inner Is Nothing)
                         If System.Diagnostics.Debugger.IsAttached() Then
                             MsgBox(inner.Message)
-                            'Stop
+                            Stop
                         End If
                         ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
                         inner = inner.InnerException
@@ -6641,6 +6642,12 @@ Public Class CartaDePorteManager
 
 
             With myCartaDePorte
+
+
+                If .SubnumeroDeFacturacion < 0 Then .SubnumeroDeFacturacion = 0 'ver si asi podemos dejar de usar el -1
+
+
+
                 If .Id <= 0 Then
                     .FechaIngreso = Now
                     .IdUsuarioIngreso = IdUsuario
@@ -6826,7 +6833,7 @@ Public Class CartaDePorteManager
                     '    ErrHandler.WriteError(ex)
                     'End Try
 
-                    
+
 
                     SetDetalle("CalidadGastoDeSecada", db, CartaDePorteId, .CalidadGastoDeSecada)
                     SetDetalle("CalidadGastoDeSecadaRebaja", db, CartaDePorteId, .CalidadGastoDeSecadaRebaja)
@@ -6921,7 +6928,7 @@ Public Class CartaDePorteManager
                         If myCartaDePorte.Anulada = "SI" Then
                             'si está anulando una copia, y el unico que queda es el original, entonces ponerlo "como no copiado"
                             If duplicados.Count = 1 Then
-                                duplicados(0).SubnumeroDeFacturacion = -1
+                                duplicados(0).SubnumeroDeFacturacion = 0 '-1
                             End If
                         Else
                             'si no es una anulacion, entonces le paso normalmente a su familia los cambios
@@ -7710,7 +7717,7 @@ Public Class CartaDePorteManager
         With myCartaDePorte
 
             'esto tiene que estar en el manager, dios!
-            .FechaAnulacion = Now
+            .FechaAnulacion = Nothing
             '.UsuarioAnulacion = cmbUsuarioAnulo.SelectedValue
             '.Cumplido = "AN"
 
@@ -10726,7 +10733,63 @@ Public Class LogicaFacturacion
         "REPES.SubNumeroVagon=Q.SubNumeroVagon  " & _
         "where SubNumeroDefacturacion =-1"
 
-        ExecDinamico(SC, s, 200)
+        If False Then
+            ExecDinamico(SC, s, 200)
+        End If
+
+
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        'usando cursor:
+
+
+
+        '        DECLARE @employee_id INT 
+        'DECLARE @getemployee_id CURSOR 
+
+        'SET @getemployee_id = CURSOR FOR 
+        '  select IdCartaDePorte from CartasDePorte
+        '	where SubnumeroDeFacturacion =11
+
+
+        'OPEN @getemployee_id
+        'FETCH NEXT FROM @getemployee_ID 
+        'INTO @employee_ID 
+
+
+
+        'WHILE @@FETCH_STATUS = 0 
+        'BEGIN 
+        '    PRINT @employee_ID 
+
+        '    update CartasDePorte
+        '    set SubnumeroDeFacturacion=0
+        '  	where IdCartaDePorte =@employee_ID
+
+        '    FETCH NEXT FROM @getemployee_ID 
+        '    INTO @employee_id 
+        '                End
+
+
+
+
+        'CLOSE @getemployee_ID 
+        'DEALLOCATE @getemployee_ID
+
+
+
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -18410,7 +18473,16 @@ Public Class barras
         '    http://www.sistemasagiles.com.ar/trac/wiki/ManualPyAfipWs#PyI25:GeneradordeCódigosdeBarras
         Dim PyI25 As Object
 
-        PyI25 = CreateObject("PyI25")
+        Try
+            PyI25 = CreateObject("PyI25")
+        Catch ex As Exception
+            MandarMailDeError("Falla la imagen del codigo de barras")
+            Throw
+        End Try
+
+
+
+
 
         ' cuit, tipo_cbte, punto_vta, cae, fch_venc_cae
         'Dim barras As String = "202675653930240016120303473904220110529"
@@ -20389,10 +20461,12 @@ Public Class LogicaImportador
         Reyser
         Reyser2
         ReyserAnalisis
+        CerealnetToepfer
         Unidad6
         Unidad6Prefijo_NroCarta
         Unidad6Analisis
         AdmServPortuarios
+
 
         Nidera
         'esta enumeracion debe tener el mismo orden que el combo
@@ -20689,7 +20763,7 @@ Public Class LogicaImportador
             If .NumeroCartaDePorte <= 0 Then
                 'Debug.Print(r.Item("Carta Porte"))
                 'renglonControl(r, "Carta Porte").BackColor = System.Drawing.Color.Red
-                Stop
+                'Stop
                 Return 0
             End If
 
@@ -21690,7 +21764,8 @@ Public Class ExcelImportadorManager
                     ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
 
 
-                    Stop
+                    If Debugger.IsAttached() Then Stop
+
                     Return -1 'me rindo
                 End If
             End If
@@ -21699,7 +21774,8 @@ Public Class ExcelImportadorManager
 
         Catch ex As Exception
             ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
-            Stop
+            If Debugger.IsAttached() Then Stop
+
             Return -1 'me rindo
         End Try
 
@@ -21847,7 +21923,7 @@ Public Class ExcelImportadorManager
             adapterForTable1.Update(dt)
         Catch ex As Exception
             ErrHandler.WriteError("ExcelImportadorManager.Insert()  " & ex.ToString)
-            Stop
+            'Stop
             Throw
         End Try
 
@@ -22579,7 +22655,7 @@ Public Class CDPMailFiltrosManager2
                     While Not (inner Is Nothing)
                         If System.Diagnostics.Debugger.IsAttached() Then
                             'MsgBox(inner.Message)
-                            'Stop
+                            Stop
                         End If
                         ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                         inner = inner.InnerException
