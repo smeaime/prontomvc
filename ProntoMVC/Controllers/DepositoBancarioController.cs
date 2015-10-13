@@ -498,13 +498,7 @@ namespace ProntoMVC.Controllers
                                 a.FechaDeposito == null ? "" : a.FechaDeposito.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Banco.NullSafeToString(),
                                 a.NumeroDeposito.NullSafeToString(),
-<<<<<<< HEAD
                                 db.DetalleDepositosBancarios.Where(x=>x.IdDepositoBancario==a.IdDepositoBancario && (a.Anulado ?? "NO") != "SI").Select(x=>(x.Valore.Importe ?? 0)).DefaultIfEmpty() .Sum().NullSafeToString(),
-=======
-                       //db.DetalleDepositosBancarios.Where(x=>x.IdDepositoBancario==a.IdDepositoBancario).Select(x=>(x.Valore.Importe ?? 0)).Sum().NullSafeToString(),
-                                db.DetalleDepositosBancarios.Where(x=>x.IdDepositoBancario==a.IdDepositoBancario && (a.Anulado ?? "NO") != "SI").Select(x=>(x.Valore.Importe ?? 0)).DefaultIfEmpty() .Sum().NullSafeToString(),
-
->>>>>>> 4ed0a434eb96294c5ef8ca13d7255efa71266370
                                 a.Efectivo.NullSafeToString(),
                                 a.Anulado.NullSafeToString(),
                                 a.Anulo,
