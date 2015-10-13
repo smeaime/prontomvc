@@ -1,7 +1,0 @@
-C:\Users\Administrador\Documents\bdl\pronto\Database1\bin\Release\Database1.dacpac
-C:\Users\Administrador\Documents\bdl\pronto\Database1\obj\Release\Model.xml
-C:\Users\Administrador\Documents\bdl\pronto\Database1\obj\Release\refactor.xml
-C:\Users\Administrador\Documents\bdl\pronto\Database1\obj\Release\postdeploy.sql
-C:\Users\Administrador\Documents\bdl\pronto\Database1\obj\Release\predeploy.sql
-C:\Users\Administrador\Documents\bdl\pronto\Database1\obj\Release\Database1.dll
-C:\Users\Administrador\Documents\bdl\pronto\Database1\obj\Release\Database1.pdb
