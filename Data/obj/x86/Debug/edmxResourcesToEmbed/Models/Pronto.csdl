@@ -895,7 +895,7 @@
       <End Role="DetalleAsiento" EntitySet="DetalleAsientos" />
     </AssociationSet>
     <EntitySet Name="Conciliaciones" EntityType="DemoProntoModel.Conciliacione" />
-    <EntitySet Name="DetalleConciliaciones" EntityType="DemoProntoModel.DetalleConciliacione" />
+    <EntitySet Name="DetalleConciliacionesContables" EntityType="DemoProntoModel.DetalleConciliacione" />
     <EntitySet Name="DetalleConciliacionesNoContables" EntityType="DemoProntoModel.DetalleConciliacionesNoContable" />
     <AssociationSet Name="FK_Conciliaciones_CuentasBancarias" Association="DemoProntoModel.FK_Conciliaciones_CuentasBancarias">
       <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
@@ -903,7 +903,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_DetalleConciliaciones_Conciliaciones" Association="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones">
       <End Role="Conciliacione" EntitySet="Conciliaciones" />
-      <End Role="DetalleConciliacione" EntitySet="DetalleConciliaciones" />
+      <End Role="DetalleConciliacione" EntitySet="DetalleConciliacionesContables" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleConciliacionesNoContables_Conciliaciones" Association="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones">
       <End Role="Conciliacione" EntitySet="Conciliaciones" />
@@ -1558,6 +1558,27 @@
     <AssociationSet Name="FK_DetalleDepositosBancarios_Valores" Association="DemoProntoModel.FK_DetalleDepositosBancarios_Valores">
       <End Role="Valore" EntitySet="Valores" />
       <End Role="DetalleDepositosBancario" EntitySet="DetalleDepositosBancarios" />
+    </AssociationSet>
+    <EntitySet Name="DetalleValoresCuentas" EntityType="DemoProntoModel.DetalleValoresCuenta" />
+    <EntitySet Name="DetalleValoresProvincias" EntityType="DemoProntoModel.DetalleValoresProvincia" />
+    <EntitySet Name="DetalleValoresRubrosContables" EntityType="DemoProntoModel.DetalleValoresRubrosContable" />
+    <AssociationSet Name="FK_DetalleValoresCuentas_Valores" Association="DemoProntoModel.FK_DetalleValoresCuentas_Valores">
+      <End Role="Valore" EntitySet="Valores" />
+      <End Role="DetalleValoresCuenta" EntitySet="DetalleValoresCuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleValoresProvincias_Valores" Association="DemoProntoModel.FK_DetalleValoresProvincias_Valores">
+      <End Role="Valore" EntitySet="Valores" />
+      <End Role="DetalleValoresProvincia" EntitySet="DetalleValoresProvincias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleValoresRubrosContables_Valores" Association="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores">
+      <End Role="Valore" EntitySet="Valores" />
+      <End Role="DetalleValoresRubrosContable" EntitySet="DetalleValoresRubrosContables" />
+    </AssociationSet>
+    <EntitySet Name="ValoresFaltantesVistos" EntityType="DemoProntoModel.ValoresFaltantesVisto" />
+    <EntitySet Name="DetallePlazosFijosRubrosContables" EntityType="DemoProntoModel.DetallePlazosFijosRubrosContable" />
+    <AssociationSet Name="FK_DetallePlazosFijosRubrosContables_PlazosFijos" Association="DemoProntoModel.FK_DetallePlazosFijosRubrosContables_PlazosFijos">
+      <End Role="PlazosFijo" EntitySet="PlazosFijos" />
+      <End Role="DetallePlazosFijosRubrosContable" EntitySet="DetallePlazosFijosRubrosContables" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
@@ -8241,6 +8262,9 @@
     <NavigationProperty Name="TiposComprobante1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="Valore" ToRole="TiposComprobante" />
     <NavigationProperty Name="Moneda1" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" FromRole="Valore" ToRole="Moneda" />
     <NavigationProperty Name="DetalleDepositosBancarios" Relationship="DemoProntoModel.FK_DetalleDepositosBancarios_Valores" FromRole="Valore" ToRole="DetalleDepositosBancario" />
+    <NavigationProperty Name="DetalleValoresCuentas" Relationship="DemoProntoModel.FK_DetalleValoresCuentas_Valores" FromRole="Valore" ToRole="DetalleValoresCuenta" />
+    <NavigationProperty Name="DetalleValoresProvincias" Relationship="DemoProntoModel.FK_DetalleValoresProvincias_Valores" FromRole="Valore" ToRole="DetalleValoresProvincia" />
+    <NavigationProperty Name="DetalleValoresRubrosContables" Relationship="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" FromRole="Valore" ToRole="DetalleValoresRubrosContable" />
   </EntityType>
   <Association Name="FK_Valores_Monedas_IdMoneda">
     <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
@@ -8499,7 +8523,7 @@
     <Property Name="IdRealizo" Type="Int32" />
     <Property Name="IdAprobo" Type="Int32" />
     <NavigationProperty Name="CuentasBancaria" Relationship="DemoProntoModel.FK_Conciliaciones_CuentasBancarias" FromRole="Conciliacione" ToRole="CuentasBancaria" />
-    <NavigationProperty Name="DetalleConciliaciones" Relationship="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacione" />
+    <NavigationProperty Name="DetalleConciliacionesContables" Relationship="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacione" />
     <NavigationProperty Name="DetalleConciliacionesNoContables" Relationship="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacionesNoContable" />
   </EntityType>
   <EntityType Name="DetalleConciliacione">
@@ -9063,6 +9087,7 @@
     <Property Name="Anulado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="AcreditarInteresesAlFinalizar" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="NoExigirRubroContable" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DetallePlazosFijosRubrosContables" Relationship="DemoProntoModel.FK_DetallePlazosFijosRubrosContables_PlazosFijos" FromRole="PlazosFijo" ToRole="DetallePlazosFijosRubrosContable" />
   </EntityType>
   <Association Name="FK_Proveedores_EstadosProveedores">
     <End Type="DemoProntoModel.Estados_Proveedore" Role="Estados_Proveedore" Multiplicity="0..1" />
@@ -11922,6 +11947,114 @@
       </Principal>
       <Dependent Role="DetalleDepositosBancario">
         <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DetalleValoresCuenta">
+    <Key>
+      <PropertyRef Name="IdDetalleValorCuentas" />
+    </Key>
+    <Property Name="IdDetalleValorCuentas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="IdCuenta" Type="Int32" />
+    <Property Name="CodigoCuenta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Debe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Haber" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdCuentaGasto" Type="Int32" />
+    <Property Name="IdCuentaBancaria" Type="Int32" />
+    <Property Name="IdCaja" Type="Int32" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="CotizacionMonedaDestino" Type="Decimal" Precision="18" Scale="4" />
+    <NavigationProperty Name="Valore" Relationship="DemoProntoModel.FK_DetalleValoresCuentas_Valores" FromRole="DetalleValoresCuenta" ToRole="Valore" />
+  </EntityType>
+  <EntityType Name="DetalleValoresProvincia">
+    <Key>
+      <PropertyRef Name="IdDetalleValorProvincias" />
+    </Key>
+    <Property Name="IdDetalleValorProvincias" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="Porcentaje" Type="Decimal" Precision="6" Scale="2" />
+    <NavigationProperty Name="Valore" Relationship="DemoProntoModel.FK_DetalleValoresProvincias_Valores" FromRole="DetalleValoresProvincia" ToRole="Valore" />
+  </EntityType>
+  <EntityType Name="DetalleValoresRubrosContable">
+    <Key>
+      <PropertyRef Name="IdDetalleValorRubrosContables" />
+    </Key>
+    <Property Name="IdDetalleValorRubrosContables" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="IdRubroContable" Type="Int32" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Valore" Relationship="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" FromRole="DetalleValoresRubrosContable" ToRole="Valore" />
+  </EntityType>
+  <Association Name="FK_DetalleValoresCuentas_Valores">
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleValoresCuenta" Role="DetalleValoresCuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valore">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleValoresCuenta">
+        <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleValoresProvincias_Valores">
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleValoresProvincia" Role="DetalleValoresProvincia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valore">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleValoresProvincia">
+        <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleValoresRubrosContables_Valores">
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleValoresRubrosContable" Role="DetalleValoresRubrosContable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valore">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleValoresRubrosContable">
+        <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ValoresFaltantesVisto">
+    <Key>
+      <PropertyRef Name="IdValorFaltanteVisto" />
+    </Key>
+    <Property Name="IdValorFaltanteVisto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBancoChequera" Type="Int32" />
+    <Property Name="NumeroCheque" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IdUsuarioMarco" Type="Int32" />
+    <Property Name="FechaMarcado" Type="DateTime" Precision="3" />
+    <Property Name="MotivoMarcado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DetallePlazosFijosRubrosContable">
+    <Key>
+      <PropertyRef Name="IdDetallePlazoFijoRubrosContables" />
+    </Key>
+    <Property Name="IdDetallePlazoFijoRubrosContables" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPlazoFijo" Type="Int32" />
+    <Property Name="IdRubroContable" Type="Int32" />
+    <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="PlazosFijo" Relationship="DemoProntoModel.FK_DetallePlazosFijosRubrosContables_PlazosFijos" FromRole="DetallePlazosFijosRubrosContable" ToRole="PlazosFijo" />
+  </EntityType>
+  <Association Name="FK_DetallePlazosFijosRubrosContables_PlazosFijos">
+    <End Type="DemoProntoModel.PlazosFijo" Role="PlazosFijo" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetallePlazosFijosRubrosContable" Role="DetallePlazosFijosRubrosContable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlazosFijo">
+        <PropertyRef Name="IdPlazoFijo" />
+      </Principal>
+      <Dependent Role="DetallePlazosFijosRubrosContable">
+        <PropertyRef Name="IdPlazoFijo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

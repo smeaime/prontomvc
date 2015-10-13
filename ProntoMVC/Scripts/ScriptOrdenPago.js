@@ -322,7 +322,7 @@ $(function () {
                                  });
     
 
-        $('#ListaValores').jqGrid({
+    $('#ListaValores').jqGrid({
         url: ROOT + 'OrdenPago/DetOrdenesPagoValores/',
         postData: { 'IdOrdenPago': function () { return $("#IdOrdenPago").val(); } },
         editurl: ROOT + 'OrdenPago/EditGridData/',
@@ -882,7 +882,7 @@ $(function () {
                     {
                         name: 'CuentaGasto', index: 'CuentaGasto', formoptions: { rowpos: 3, colpos: 1 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
-                            dataUrl: ROOT + 'Obra/GetCuentasGasto',
+                            dataUrl: ROOT + 'CuentaGasto/GetCuentasGasto',
                             dataInit: function (elem) {
                                 $(elem).width(190);
                             },
@@ -917,7 +917,7 @@ $(function () {
                     {
                         name: 'TipoCuentaGrupo', index: 'TipoCuentaGrupo', formoptions: { rowpos: 3, colpos: 2 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
-                            dataUrl: ROOT + 'Obra/GetTiposCuentaGrupos',
+                            dataUrl: ROOT + 'TiposCuentaGrupos/GetTiposCuentaGrupos',
                             dataInit: function (elem) {
                                 $(elem).width(190);
                             },
@@ -1067,7 +1067,7 @@ $(function () {
         cellEdit: true,
         cellsubmit: 'clientArray',
         loadonce: true
-});
+    });
     jQuery("#ListaImpuestos").jqGrid('navGrid', '#ListaPager4', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     $("#ListaPager4").find("table.navtable").hide();
 
@@ -1276,47 +1276,44 @@ $(function () {
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
         
-    pager: $('#ListaDragPager'),
+        pager: $('#ListaDragPager'),
 
-    rowNum: 15,
-    rowList: [10, 20, 50, 100],
-    sortname: 'IdImputacion,Cabeza,Fecha,Numero',
-    sortorder: "asc",
-    viewrecords: true,
-    emptyrecords: 'No hay registros para mostrar', //,
+        rowNum: 15,
+        rowList: [10, 20, 50, 100],
+        sortname: 'IdImputacion,Cabeza,Fecha,Numero',
+        sortorder: "asc",
+        viewrecords: true,
+        emptyrecords: 'No hay registros para mostrar', //,
 
-    ///////////////////////////////
-    width: 'auto', // 'auto',
-    autowidth: true,
-    shrinkToFit: false,
-    //////////////////////////////
+        ///////////////////////////////
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        //////////////////////////////
 
-    height: $(window).height() - ALTOLISTADO, // '100%'
-    altRows: false,
-    footerrow: false, //true,
-    userDataOnFooter: true
-
-        , gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
-
-
-})
-jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
-    { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-    {
-        //sopt: ["cn"]
-        //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-        width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-    }
-);
-jQuery("#ListaDrag").filterToolbar({
-    stringResult: true, searchOnEnter: true,
-    defaultSearch: 'cn',
-    enableClear: false
-}); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+        height: $(window).height() - ALTOLISTADO, // '100%'
+        altRows: false,
+        footerrow: false, //true,
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
+    })
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+        { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+        {
+            //sopt: ["cn"]
+            //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+            width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+        }
+    );
+    jQuery("#ListaDrag").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
         
     
 
@@ -1367,14 +1364,10 @@ jQuery("#ListaDrag").filterToolbar({
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
-        userDataOnFooter: true
-            
-
-            , gridview: true
-            , multiboxonly: true
-            , multipleSearch: true
-
-
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
     })
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
@@ -1392,11 +1385,6 @@ jQuery("#ListaDrag").filterToolbar({
         enableClear: false
     }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
         
-        
-
-
-
-
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Cuenta corriente');
@@ -1812,6 +1800,7 @@ jQuery("#ListaDrag").filterToolbar({
     function SerializaForm() {
         saveEditedCell("");
         var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo;
+
         var cabecera = $("#formid").serializeObject();
         cabecera.IdProveedor = $("#IdProveedor").val();
         cabecera.IdCuenta = $("#IdCuenta").val();

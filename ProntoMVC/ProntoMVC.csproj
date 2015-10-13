@@ -247,6 +247,8 @@
     <Compile Include="Areas\MvcMembership\Models\UserAdministration\RoleViewModel.cs" />
     <Compile Include="Areas\MvcMembership\MvcMembershipAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ResumenConciliacionController.cs" />
+    <Compile Include="Controllers\PlazoFijoController.cs" />
     <Compile Include="Controllers\DepositoBancarioController.cs" />
     <Compile Include="Controllers\BancoChequeraController.cs" />
     <Compile Include="Controllers\TarjetaCreditoController.cs" />
@@ -784,6 +786,10 @@
     <None Include="Documentos\vb6\frmDetRequerimientos.frmz" />
     <None Include="Documentos\vb6\frmRequerimientos.frmz" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\ScriptResumenConciliacion.js" />
+    <Content Include="Scripts\ScriptPlazoFijo.js" />
+    <Content Include="Scripts\ScriptGastoBancario.js" />
+    <Content Include="Scripts\ScriptDepositoBancario.js" />
     <Content Include="Views\Shared\SinConexion.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
@@ -1330,6 +1336,17 @@
     <Content Include="Views\TarjetaCredito\Index.cshtml" />
     <Content Include="Views\DepositoBancario\Edit.cshtml" />
     <Content Include="Views\DepositoBancario\Index.cshtml" />
+    <Content Include="Views\Valor\Edit.cshtml" />
+    <Content Include="Views\Valor\Index.cshtml" />
+    <Content Include="Views\Valor\IndexValores.cshtml" />
+    <Content Include="Views\Valor\IndexMovimientosCaja.cshtml" />
+    <Content Include="Views\Valor\IndexMovimientosTarjeta.cshtml" />
+    <Content Include="Views\Valor\IndexChequesPendientes.cshtml" />
+    <Content Include="Views\Valor\IndexChequesNoUtilizados.cshtml" />
+    <Content Include="Views\PlazoFijo\Edit.cshtml" />
+    <Content Include="Views\PlazoFijo\Index.cshtml" />
+    <Content Include="Views\ResumenConciliacion\Edit.cshtml" />
+    <Content Include="Views\ResumenConciliacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />

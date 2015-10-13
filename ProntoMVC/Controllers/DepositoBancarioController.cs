@@ -69,15 +69,18 @@ namespace ProntoMVC.Controllers
             {
                 o = db.DepositosBancarios.SingleOrDefault(x => x.IdDepositoBancario == id);
                 CargarViewBag(o);
-                Session.Add("AjusteStock", o);
+                Session.Add("DepositosBancarios", o);
                 return View(o);
             }
         }
 
         void CargarViewBag(DepositosBancario o)
         {
-            //ViewBag.IdRealizo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdRealizo);
-            //ViewBag.IdAprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdAprobo);
+            ViewBag.IdMonedaEfectivo = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMonedaEfectivo);
+            ViewBag.IdCaja = new SelectList(db.Cajas, "IdCaja", "Descripcion", o.IdCaja);
+            ViewBag.IdCuentaBancaria = new SelectList((from i in db.CuentasBancarias
+                                                       where i.Activa == "SI"
+                                                       select new { IdCuentaBancaria = i.IdCuentaBancaria, Nombre = i.Banco.Nombre + " " + i.Cuenta }).Distinct(), "IdCuentaBancaria", "Nombre",o.IdCuentaBancaria);
         }
 
         void inic(ref DepositosBancario o)
@@ -85,305 +88,358 @@ namespace ProntoMVC.Controllers
             o.FechaDeposito = DateTime.Today;
         }
 
-//        private bool Validar(ProntoMVC.Data.Models.DepositosBancario o, ref string sErrorMsg, ref string sWarningMsg)
-//        {
-//            if (!PuedeEditar(enumNodos.DepositosBancarios)) sErrorMsg += "\n" + "No tiene permisos de edición";
+        private bool Validar(ProntoMVC.Data.Models.DepositosBancario o, ref string sErrorMsg, ref string sWarningMsg)
+        {
+            if (!PuedeEditar(enumNodos.DepositosBancarios)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
-//            Int32 mIdDepositoBancario = 0;
-//            Int32 mNumero = 0;
-//            Int32 mIdTipoComprobante = 106;
-//            Int32 mIdArticulo = 0;
-//            Int32 mIdArticuloAnterior = 0;
+            Int32 mIdDepositoBancario = 0;
+            Int32 mNumero = 0;
 
-//            decimal mCantidad = 0;
-//            decimal mCantidadAnterior = 0;
-//            decimal mCantidadNeta = 0;
-//            decimal mStockGlobal = 0;
+            decimal mEfectivo = 0;
 
-//            string mObservaciones = "";
-//            string mProntoIni_InhabilitarUbicaciones = "";
-//            string mProntoIni_InhabilitarStockNegativo = "";
-//            string mProntoIni_InhabilitarStockNegativoGlobal = "";
-//            string mProntoIni_ExigirOrdenCompra = "";
-//            string mProntoIni_NoPermitirItemsEnCero = "";
-//            string mAnulado = "";
-//            string mRegistrarStock = "";
-//            string mArticulo = "";
+            DateTime mFecha = DateTime.Today;
 
-//            DateTime mFechaAjuste = DateTime.Today;
+            mIdDepositoBancario = o.IdDepositoBancario;
+            mNumero = o.NumeroDeposito ?? 0;
+            mEfectivo = o.Efectivo ?? 0;
 
-//            mIdDepositoBancario = o.IdDepositoBancario;
-//            mFechaAjuste = o.FechaAjuste ?? DateTime.MinValue;
-//            mNumero = o.NumeroAjusteStock ?? 0;
-//            mObservaciones = o.Observaciones ?? "";
+            if (mNumero <= 0) { sErrorMsg += "\n" + "Falta el número"; }
 
-//            if ((o.NumeroAjusteStock ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número"; }
-            
-//            var DepositosBancarios = db.DepositosBancarios.Where(x => x.NumeroAjusteStock == mNumero && x.IdDepositoBancario != mIdDepositoBancario).Select(x => x.IdDepositoBancario).FirstOrDefault();
-//            if (DepositosBancarios > 0) { sErrorMsg += "\n" + "El numero de ajuste de stock ya existe."; }
+            if (mNumero.ToString().Length >7) { sErrorMsg += "\n" + "El numero de deposito no puede tener mas de 7 digitos"; }
 
-//            mProntoIni_InhabilitarUbicaciones = BuscarClaveINI("Inhabilitar ubicaciones en movimientos de stock", -1) ?? "";
-//            mProntoIni_InhabilitarStockNegativo = BuscarClaveINI("Inhabilitar stock negativo", -1) ?? "";
-//            mProntoIni_InhabilitarStockNegativoGlobal = BuscarClaveINI("Inhabilitar stock global negativo", -1) ?? "";
-//            mProntoIni_ExigirOrdenCompra = BuscarClaveINI("Exigir orden de compra en DepositosBancarios", -1) ?? "";
-//            mProntoIni_NoPermitirItemsEnCero = BuscarClaveINI("No permitir items en cero en DepositosBancarios de venta", -1) ?? "";
+            if ((o.IdCuentaBancaria ?? 0) == 0) { sErrorMsg += "\n" + "Falta el banco"; }
 
-//            if (o.DetalleDepositosBancarios.Count <= 0) sErrorMsg += "\n" + "El ajuste de stock no tiene items";
-//            foreach (ProntoMVC.Data.Models.DetalleDepositosBancarios x in o.DetalleDepositosBancarios)
-//            {
-//                mIdArticulo = (x.IdArticulo ?? 0);
-//                mRegistrarStock = db.Articulos.Where(y => y.IdArticulo == mIdArticulo).Select(y => y.RegistrarStock).FirstOrDefault() ?? "";
-//                mCantidad = (x.CantidadUnidades ?? 0);
+            if (o.FechaDeposito == null) { sErrorMsg += "\n" + "Falta la fecha del deposito"; }
 
-//                if (mIdArticulo == 0) { sErrorMsg += "\n" + "Hay items que no tienen articulo"; }
-//                if ((x.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin obra"; }
-//                if ((x.IdUbicacion ?? 0) <= 0 && mProntoIni_InhabilitarUbicaciones != "SI") { sErrorMsg += "\n" + "Hay items sin ubicacion"; }
+            if (o.DetalleDepositosBancarios.Count <= 0 && mEfectivo == 0) sErrorMsg += "\n" + "El deposito no puede estar vacio";
 
-//                // FALTA CONTROLAR SI EL ARTICULO ES UN PACK Y DESCONTAR POR COMPONENTES
-//                if (mRegistrarStock != "NO") {
-//                    var mStockGlobal1 = db.Stocks.Where(y => y.IdArticulo == mIdArticulo).Sum(y => y.CantidadUnidades);
-//                    mStockGlobal = mStockGlobal1 ?? 0;
-//                    mIdArticuloAnterior = 0;
-//                    mCantidadAnterior = 0;
-//                    if (x.IdDetalleAjusteStock > 0) {
-//                        DetalleDepositosBancarios DetalleAjusteStockAnterior = db.DetalleDepositosBancarios.Where(c => c.IdDetalleAjusteStock == x.IdDetalleAjusteStock).FirstOrDefault();
-//                        if (DetalleAjusteStockAnterior != null)
-//                        {
-//                            mIdArticuloAnterior = DetalleAjusteStockAnterior.IdArticulo ?? 0;
-//                            mCantidadAnterior = DetalleAjusteStockAnterior.CantidadUnidades ?? 0;
-//                        }
-//                    }
-//                    mCantidadNeta = mCantidad;
-//                    if (mIdArticulo == mIdArticuloAnterior) { mCantidadNeta = mCantidad + mCantidadAnterior; }
-//                    if (mCantidadNeta > mStockGlobal && mProntoIni_InhabilitarStockNegativoGlobal == "SI") {
-//                        mArticulo = db.Articulos.Where(y => y.IdArticulo == mIdArticulo).Select(y => y.Descripcion).FirstOrDefault() ?? "";
-//                        sErrorMsg += "\n" + "El articulo " + mArticulo + ", no tiene stock global suficiente"; 
-//                    }
-//                }
-//            }
+            var DepositosBancarios = db.DepositosBancarios.Where(x => x.NumeroDeposito == mNumero && x.IdDepositoBancario != mIdDepositoBancario).Select(x => x.IdDepositoBancario).FirstOrDefault();
+            if (DepositosBancarios > 0) { sErrorMsg += "\n" + "El numero de deposito ya existe."; }
 
-//            sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
-//            sWarningMsg = sWarningMsg.Replace("\n", "<br/>");
-//            if (sErrorMsg != "") return false;
-//            return true;
-//        }
+            if (mEfectivo < 0 ) { sErrorMsg += "\n" + "El importe en efectivo debe ser mayor o igual a cero"; }
+            if (mEfectivo > 0 && (o.IdCaja ?? 0) == 0) { sErrorMsg += "\n" + "No ingreso la caja origen del efectivo a depositar"; }
+            if (mEfectivo > 0 && (o.IdMonedaEfectivo ?? 0) == 0) { sErrorMsg += "\n" + "No ingreso la moneda del efectivo a depositar"; }
+            if (mEfectivo > 0 && (o.CotizacionMoneda ?? 0) == 0) { sErrorMsg += "\n" + "No ingreso la equivalencia a pesos del efectivo a depositar"; }
 
-//        [HttpPost]
-//        public virtual JsonResult BatchUpdate(ProntoMVC.Data.Models.DepositosBancario AjusteStock)
-//        {
-//            if (!PuedeEditar(enumNodos.DepositosBancarios)) throw new Exception("No tenés permisos");
+            sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
+            sWarningMsg = sWarningMsg.Replace("\n", "<br/>");
+            if (sErrorMsg != "") return false;
+            return true;
+        }
 
-//            try
-//            {
-//                Int32 mIdDepositoBancario = 0;
-//                Int32 mNumero = 0;
-//                Int32 mIdTipoComprobante = 106;
+        [HttpPost]
+        public virtual JsonResult BatchUpdate(ProntoMVC.Data.Models.DepositosBancario DepositoBancario)
+        {
+            if (!PuedeEditar(enumNodos.DepositosBancarios)) throw new Exception("No tenés permisos");
 
-//                string errs = "";
-//                string warnings = "";
-//                string mWebService = "";
+            try
+            {
+                Int32 mIdDepositoBancario = 0;
+                Int32 mNumero = 0;
+                Int32 mIdTipoComprobante = 14;
+                Int32 mIdBanco = 0;
+                Int32 mIdCaja = 0;
+                Int32 mIdTipoComprobanteEfectivo = 0;
+                Int32 mIdMoneda = 1;
+                Int32 mIdValor = 0;
+                Int32 mIdCuentaValores = 0;
+                Int32 mIdCuentaValores1 = 0;
+                Int32 mIdCuentaCajaTitulo = 0;
+                Int32 mIdCuentaCaja = 0;
+                
+                decimal mEfectivo = 0;
+                decimal mCotizacionMoneda = 1;
+                decimal mCotizacionMoneda2 = 1;
+                decimal mImporteValor = 0;
+                decimal mTotalValores = 0;
 
-//                bool mAnulado = false;
+                string errs = "";
+                string warnings = "";
+                string mWebService = "";
+                string mDetalleValor = "";
+                
+                bool mAnulado = false;
 
-//                //Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+                Valore v;
 
-//                string usuario = ViewBag.NombreUsuario;
-//                int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+                if (!Validar(DepositoBancario, ref errs, ref warnings))
+                {
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    }
+                    catch (Exception)
+                    {
+                    }
 
-//                if (AjusteStock.IdDepositoBancario > 0)
-//                {
-//                    AjusteStock.IdUsuarioModifico = IdUsuario;
-//                    AjusteStock.FechaModifico = DateTime.Now;
-//                }
-//                else
-//                {
-//                    AjusteStock.IdUsuarioIngreso = IdUsuario;
-//                    AjusteStock.FechaIngreso = DateTime.Now;
-//                }
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
 
-//                if (!Validar(AjusteStock, ref errs, ref warnings))
-//                {
-//                    try
-//                    {
-//                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-//                    }
-//                    catch (Exception)
-//                    {
-//                    }
+                    string[] words = errs.Split('\n');
+                    res.Errors = words.ToList();
+                    res.Message = "Hay datos invalidos";
 
-//                    JsonResponse res = new JsonResponse();
-//                    res.Status = Status.Error;
+                    return Json(res);
+                }
 
-//                    string[] words = errs.Split('\n');
-//                    res.Errors = words.ToList();
-//                    res.Message = "Hay datos invalidos";
+                Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+                mIdTipoComprobanteEfectivo = parametros.IdTipoComprobanteEfectivo ?? 0;
+                mIdCuentaValores = parametros.IdCuentaValores ?? 0;
+                mIdCuentaCajaTitulo = parametros.IdCuentaCajaTitulo ?? 0;
+                mIdCuentaCaja = parametros.IdCuentaCaja ?? 0;
 
-//                    return Json(res);
-//                }
+                mIdBanco = db.CuentasBancarias.Where(x => x.IdCuentaBancaria == (DepositoBancario.IdCuentaBancaria ?? 0)).Select(x => (x.IdBanco ?? 0)).FirstOrDefault();
+                DepositoBancario.IdBanco = mIdBanco;
 
-//                if (ModelState.IsValid)
-//                {
-//                    using (TransactionScope scope = new TransactionScope())
-//                    {
-//                        mIdDepositoBancario = AjusteStock.IdDepositoBancario;
+                Banco Banco = db.Bancos.Where(c => c.IdBanco == mIdBanco).SingleOrDefault();
+                if (Banco != null) { mIdCuentaValores1 = Banco.IdCuenta ?? mIdCuentaValores; }
 
-//                        if (mIdDepositoBancario > 0)
-//                        {
-//                            var EntidadOriginal = db.DepositosBancarios.Where(p => p.IdDepositoBancario == mIdDepositoBancario).SingleOrDefault();
+                mIdCaja = DepositoBancario.IdCaja ?? 0;
+                if (mIdCaja > 0)
+                {
+                    Caja Caja = db.Cajas.Where(c => c.IdCaja == mIdCaja).SingleOrDefault();
+                    if (Caja != null) { mIdCuentaCaja = Caja.IdCuenta ?? mIdCuentaCaja; }
+                }
 
-//                            var EntidadoEntry = db.Entry(EntidadOriginal);
-//                            EntidadoEntry.CurrentValues.SetValues(AjusteStock);
+                if (ModelState.IsValid)
+                {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        mIdDepositoBancario = DepositoBancario.IdDepositoBancario;
+                        if (DepositoBancario.Anulado == "SI") { mAnulado = true; }
+                        mCotizacionMoneda = DepositoBancario.CotizacionMoneda ?? 1;
+                        mEfectivo = DepositoBancario.Efectivo ?? 0;
+                        mIdMoneda = DepositoBancario.IdMonedaEfectivo ?? 1;
 
-//                            //////////////////////////////////////////////// ITEMS ////////////////////////////////////////////////
-//                            foreach (var d in AjusteStock.DetalleDepositosBancarios)
-//                            {
-//                                var DetalleEntidadOriginal = EntidadOriginal.DetalleDepositosBancarios.Where(c => c.IdDetalleAjusteStock == d.IdDetalleAjusteStock && d.IdDetalleAjusteStock > 0).SingleOrDefault();
-//                                if (DetalleEntidadOriginal != null)
-//                                {
-//                                    // Restaurar stock 
-//                                    Stock Stock = db.Stocks.Where(
-//                                        c => c.IdArticulo == DetalleEntidadOriginal.IdArticulo &&
-//                                             (c.Partida ?? "") == (DetalleEntidadOriginal.Partida ?? "") &&
-//                                             (c.IdUbicacion ?? 0) == (DetalleEntidadOriginal.IdUbicacion ?? 0) &&
-//                                             (c.IdObra ?? 0) == (DetalleEntidadOriginal.IdObra ?? 0) &&
-//                                             (c.IdUnidad ?? 0) == (DetalleEntidadOriginal.IdUnidad ?? 0) &&
-//                                             (c.NumeroCaja ?? 0) == (DetalleEntidadOriginal.NumeroCaja ?? 0) &&
-//                                             (c.IdColor ?? 0) == (DetalleEntidadOriginal.IdColor ?? 0) &&
-//                                             (c.Talle ?? "") == (DetalleEntidadOriginal.Talle ?? "")
-//                                    ).FirstOrDefault();
-//                                    if (Stock != null)
-//                                    {
-//                                        Stock.CantidadUnidades = (Stock.CantidadUnidades ?? 0) - (DetalleEntidadOriginal.CantidadUnidades ?? 0);
-//                                        db.Entry(Stock).State = System.Data.Entity.EntityState.Modified;
-//                                    }
-//                                    else
-//                                    {
-//                                        Stock = new Stock();
-//                                        Stock.IdArticulo = DetalleEntidadOriginal.IdArticulo;
-//                                        Stock.Partida = DetalleEntidadOriginal.Partida ?? "";
-//                                        Stock.IdUbicacion = DetalleEntidadOriginal.IdUbicacion ?? 0;
-//                                        Stock.IdObra = DetalleEntidadOriginal.IdObra ?? 0;
-//                                        Stock.IdUnidad = DetalleEntidadOriginal.IdUnidad ?? 0;
-//                                        Stock.NumeroCaja = DetalleEntidadOriginal.NumeroCaja ?? 0;
-//                                        Stock.IdColor = DetalleEntidadOriginal.IdColor ?? 0;
-//                                        Stock.Talle = DetalleEntidadOriginal.Talle ?? "";
-//                                        Stock.CantidadUnidades = (DetalleEntidadOriginal.CantidadUnidades ?? 0) * -1;
-//                                        db.Stocks.Add(Stock);
-//                                    }
+                        if (mIdDepositoBancario > 0)
+                        {
+                            var EntidadOriginal = db.DepositosBancarios.Where(p => p.IdDepositoBancario == mIdDepositoBancario).SingleOrDefault();
 
-//                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-//                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-//                                }
-//                                else
-//                                {
-//                                    EntidadOriginal.DetalleDepositosBancarios.Add(d);
-//                                }
-//                            }
-//                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleDepositosBancarios.Where(c => c.IdDetalleAjusteStock != 0).ToList())
-//                            {
-//                                if (!AjusteStock.DetalleDepositosBancarios.Any(c => c.IdDetalleAjusteStock == DetalleEntidadOriginal.IdDetalleAjusteStock))
-//                                {
-//                                    EntidadOriginal.DetalleDepositosBancarios.Remove(DetalleEntidadOriginal);
-//                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-//                                }
-//                            }
+                            var EntidadoEntry = db.Entry(EntidadOriginal);
+                            EntidadoEntry.CurrentValues.SetValues(DepositoBancario);
 
-//                            ////////////////////////////////////////////// FIN MODIFICACION //////////////////////////////////////////////
-//                            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
-//                            db.SaveChanges();
-//                        }
-//                        else
-//                        {
-//                            Parametros parametros2 = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
-//                            if (parametros2 != null)
-//                            {
-//                                mNumero = parametros2.ProximoNumeroAjusteStock ?? 1;
-//                                AjusteStock.NumeroAjusteStock = mNumero;
-//                                parametros2.ProximoNumeroAjusteStock = mNumero + 1;
-//                                db.Entry(parametros2).State = System.Data.Entity.EntityState.Modified;
-//                            }
+                            ////////////////////////////////////////////// ANULACION //////////////////////////////////////////////
+                            if (mAnulado)
+                            {
+                                //Libera los valores depositados y los pone en cartera
+                                foreach (var d in EntidadOriginal.DetalleDepositosBancarios.Where(c => c.IdDetalleDepositoBancario != 0).ToList())
+                                {
+                                    var Valores = db.Valores.Where(c => c.IdValor == d.IdValor).ToList();
+                                    if (Valores != null)
+                                    {
+                                        foreach (Valore v1 in Valores)
+                                        {
+                                            v1.Estado = null;
+                                            v1.IdCuentaBancariaDeposito = null;
+                                            v1.IdBancoDeposito = null;
+                                            v1.FechaDeposito = null;
+                                            v1.NumeroDeposito = null;
+                                            db.Entry(v1).State = System.Data.Entity.EntityState.Modified;
+                                        }
+                                    }
+                                }
+                            }
 
-//                            db.DepositosBancarios.Add(AjusteStock);
-//                            db.SaveChanges();
-//                        }
+                            ////////////////////////////////////////////// FIN MODIFICACION //////////////////////////////////////////////
+                            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            db.DepositosBancarios.Add(DepositoBancario);
+                            db.SaveChanges();
+                        }
 
-//                        //////////////////////////////////////////////  STOCK  //////////////////////////////////////////////
-//                        if (!mAnulado)
-//                        {
-//                            // Registrar stock
-//                            foreach (var d in AjusteStock.DetalleDepositosBancarios)
-//                            {
-//                                Stock Stock = db.Stocks.Where(
-//                                    c => c.IdArticulo == d.IdArticulo &&
-//                                         (c.Partida ?? "") == (d.Partida ?? "") &&
-//                                         (c.IdUbicacion ?? 0) == (d.IdUbicacion ?? 0) &&
-//                                         (c.IdObra ?? 0) == (d.IdObra ?? 0) &&
-//                                         (c.IdUnidad ?? 0) == (d.IdUnidad ?? 0) &&
-//                                         (c.NumeroCaja ?? 0) == (d.NumeroCaja ?? 0) &&
-//                                         (c.IdColor ?? 0) == (d.IdColor ?? 0) &&
-//                                         (c.Talle ?? "") == (d.Talle ?? "")
-//                                ).FirstOrDefault();
-//                                if (Stock != null)
-//                                {
-//                                    Stock.CantidadUnidades = (Stock.CantidadUnidades ?? 0) + (d.CantidadUnidades ?? 0);
-//                                    db.Entry(Stock).State = System.Data.Entity.EntityState.Modified;
-//                                }
-//                                else
-//                                {
-//                                    Stock = new Stock();
-//                                    Stock.IdArticulo = d.IdArticulo;
-//                                    Stock.Partida = d.Partida ?? "";
-//                                    Stock.IdUbicacion = d.IdUbicacion ?? 0;
-//                                    Stock.IdObra = d.IdObra ?? 0;
-//                                    Stock.IdUnidad = d.IdUnidad ?? 0;
-//                                    Stock.NumeroCaja = d.NumeroCaja ?? 0;
-//                                    Stock.IdColor = d.IdColor ?? 0;
-//                                    Stock.Talle = d.Talle ?? "";
-//                                    Stock.CantidadUnidades = (d.CantidadUnidades ?? 0);
-//                                    db.Stocks.Add(Stock);
-//                                }
-//                            }
-//                            db.SaveChanges();
-//                        }
+                        if (mEfectivo > 0 && mIdTipoComprobanteEfectivo > 0)
+                        {
+                            if (!mAnulado)
+                            {
+                                CuentasBancaria CuentaBancaria = db.CuentasBancarias.Where(c => c.IdCuentaBancaria == DepositoBancario.IdCuentaBancaria).SingleOrDefault();
+                                if (CuentaBancaria != null)
+                                {
+                                    if (CuentaBancaria.IdMoneda != mIdMoneda)
+                                    {
+                                        mEfectivo = mEfectivo * mCotizacionMoneda;
+                                        mIdMoneda = CuentaBancaria.IdMoneda ?? 1;
+                                        mCotizacionMoneda = 1;
+                                    }
+                                }
+                                v = new Valore();
+                                v.IdTipoValor = mIdTipoComprobanteEfectivo;
+                                v.IdCuentaBancariaDeposito = DepositoBancario.IdCuentaBancaria;
+                                v.IdBancoDeposito = DepositoBancario.IdBanco;
+                                v.FechaDeposito = DepositoBancario.FechaDeposito;
+                                v.NumeroDeposito = DepositoBancario.NumeroDeposito;
+                                v.Importe = mEfectivo;
+                                v.NumeroComprobante = DepositoBancario.NumeroDeposito;
+                                v.IdTipoComprobante = mIdTipoComprobante;
+                                v.FechaComprobante = DepositoBancario.FechaDeposito;
+                                v.IdCaja = DepositoBancario.IdCaja;
+                                v.IdMoneda = mIdMoneda;
+                                v.NumeroValor = 0;
+                                v.NumeroInterno = 0;
+                                v.CotizacionMoneda = mCotizacionMoneda;
+                                v.Estado = "D";
+                                v.IdValor = -1;
+                                db.Valores.Add(v); 
+                            }
+                            else
+                            {
+                                var Valores = db.Valores.Where(c => c.IdTipoValor == mIdTipoComprobanteEfectivo && c.NumeroDeposito == DepositoBancario.NumeroDeposito && c.IdCuentaBancariaDeposito == DepositoBancario.IdCuentaBancaria && c.FechaDeposito == DepositoBancario.FechaDeposito).ToList();
+                                if (Valores != null)
+                                {
+                                    foreach (Valore v1 in Valores)
+                                    {
+                                        db.Entry(v1).State = System.Data.Entity.EntityState.Deleted;
+                                    }
+                                }
+                            }
+                        }
 
-//                        scope.Complete();
-//                        scope.Dispose();
-//                    }
+                        ////////////////////////////////////////////// VALORES //////////////////////////////////////////////
+                        if (mIdDepositoBancario <= 0 && !mAnulado)
+                        {
+                            foreach (var d in DepositoBancario.DetalleDepositosBancarios)
+                            {
+                                mIdValor = d.IdValor ?? -1;
+                                v = db.Valores.Where(c => c.IdValor == mIdValor).SingleOrDefault();
+                                if (v != null)
+                                {
+                                    v.Estado = "D";
+                                    v.IdCuentaBancariaDeposito = DepositoBancario.IdCuentaBancaria;
+                                    v.IdBancoDeposito = mIdBanco;
+                                    v.FechaDeposito = DepositoBancario.FechaDeposito;
+                                    v.NumeroDeposito = DepositoBancario.NumeroDeposito;
+                                    db.Entry(v).State = System.Data.Entity.EntityState.Modified; 
+                                }
+                            }
+                        }
+                        db.SaveChanges();
 
-//                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+                        ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
+                        if (mAnulado)
+                        {
+                            var Subdiarios = db.Subdiarios.Where(c => c.IdTipoComprobante == mIdTipoComprobante && c.IdComprobante == mIdDepositoBancario).ToList();
+                            if (Subdiarios != null) { foreach (Subdiario s in Subdiarios) { db.Entry(s).State = System.Data.Entity.EntityState.Deleted; } }
+                            db.SaveChanges();
+                        }
 
-//                    return Json(new { Success = 1, IdDepositoBancario = AjusteStock.IdDepositoBancario, ex = "" });
-//                }
-//                else
-//                {
-//                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-//                    Response.TrySkipIisCustomErrors = true;
+                        if (mIdDepositoBancario <= 0 && !mAnulado)
+                        {
+                            Data.Models.Subdiario s;
 
-//                    JsonResponse res = new JsonResponse();
-//                    res.Status = Status.Error;
-//                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
-//                    res.Message = "El comprobante tiene datos invalidos";
+                            if (mEfectivo > 0)
+                            {
+                                s = new Subdiario();
+                                s.IdCuentaSubdiario = mIdCuentaCajaTitulo;
+                                s.IdCuenta = mIdCuentaValores1;
+                                s.IdTipoComprobante = mIdTipoComprobante;
+                                s.NumeroComprobante = DepositoBancario.NumeroDeposito;
+                                s.FechaComprobante = DepositoBancario.FechaDeposito;
+                                s.IdComprobante = DepositoBancario.IdDepositoBancario;
+                                s.Detalle = "Efectivo";
+                                s.Debe = mEfectivo;
+                                s.IdMoneda = mIdMoneda;
+                                s.CotizacionMoneda = mCotizacionMoneda;
+                                db.Subdiarios.Add(s);
 
-//                    return Json(res);
-//                }
-//            }
+                                s = new Subdiario();
+                                s.IdCuentaSubdiario = mIdCuentaCajaTitulo;
+                                s.IdCuenta = mIdCuentaCaja;
+                                s.IdTipoComprobante = mIdTipoComprobante;
+                                s.NumeroComprobante = DepositoBancario.NumeroDeposito;
+                                s.FechaComprobante = DepositoBancario.FechaDeposito;
+                                s.IdComprobante = DepositoBancario.IdDepositoBancario;
+                                s.Detalle = "Efectivo";
+                                s.Haber = mEfectivo;
+                                s.IdMoneda = mIdMoneda;
+                                s.CotizacionMoneda = mCotizacionMoneda;
+                                db.Subdiarios.Add(s);
+                            }
 
-//            catch (TransactionAbortedException ex)
-//            {
-//                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-//                Response.TrySkipIisCustomErrors = true;
-//                return Json("TransactionAbortedException Message: {0}", ex.Message);
-//            }
-//            catch (Exception ex)
-//            {
-//                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-//                Response.TrySkipIisCustomErrors = true;
+                            foreach (var d in DepositoBancario.DetalleDepositosBancarios)
+                            {
+                                mIdValor = d.IdValor ?? -1;
+                                v = db.Valores.Where(c => c.IdValor == mIdValor).SingleOrDefault();
+                                if (v != null)
+                                {
+                                    mDetalleValor = "Ch." + v.NumeroValor.ToString() + " [" + v.NumeroInterno.ToString() + "] Vto. :" + v.FechaValor.ToString();
+                                    mCotizacionMoneda2 = v.CotizacionMoneda ?? 1;
+                                    mImporteValor = v.Importe ?? 0;
+                                    mTotalValores = mTotalValores + mImporteValor;
 
-//                List<string> errors = new List<string>();
-//                errors.Add(ex.Message);
-//                return Json(errors);
-//            }
-//        }
+                                    s = new Subdiario();
+                                    s.IdCuentaSubdiario = mIdCuentaCajaTitulo;
+                                    s.IdCuenta = mIdCuentaValores;
+                                    s.IdTipoComprobante = mIdTipoComprobante;
+                                    s.NumeroComprobante = DepositoBancario.NumeroDeposito;
+                                    s.FechaComprobante = DepositoBancario.FechaDeposito;
+                                    s.IdComprobante = DepositoBancario.IdDepositoBancario;
+                                    s.Haber = mImporteValor;
+                                    s.IdMoneda = mIdMoneda;
+                                    s.CotizacionMoneda = mCotizacionMoneda2;
+                                    db.Subdiarios.Add(s);
+                                }
+                            }
+
+                            if (mTotalValores > 0)
+                            {
+                                s = new Subdiario();
+                                s.IdCuentaSubdiario = mIdCuentaCajaTitulo;
+                                s.IdCuenta = mIdCuentaValores1;
+                                s.IdTipoComprobante = mIdTipoComprobante;
+                                s.NumeroComprobante = DepositoBancario.NumeroDeposito;
+                                s.FechaComprobante = DepositoBancario.FechaDeposito;
+                                s.IdComprobante = DepositoBancario.IdDepositoBancario;
+                                s.Debe = mTotalValores;
+                                s.IdMoneda = mIdMoneda;
+                                s.CotizacionMoneda = mCotizacionMoneda;
+                                db.Subdiarios.Add(s);
+                            }
+                            
+                            db.SaveChanges();
+                        }
+
+                        db.Tree_TX_Actualizar(Tree_TX_ActualizarParam.DepositosBancariosAgrupados.ToString(), DepositoBancario.IdDepositoBancario, "DepositoBancario");
+
+                        scope.Complete();
+                        scope.Dispose();
+                    }
+
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+                    return Json(new { Success = 1, IdDepositoBancario = DepositoBancario.IdDepositoBancario, ex = "" });
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    Response.TrySkipIisCustomErrors = true;
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "El comprobante tiene datos invalidos";
+
+                    return Json(res);
+                }
+            }
+
+            catch (TransactionAbortedException ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+                return Json("TransactionAbortedException Message: {0}", ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return Json(errors);
+            }
+        }
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
@@ -442,7 +498,7 @@ namespace ProntoMVC.Controllers
                                 a.FechaDeposito == null ? "" : a.FechaDeposito.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Banco.NullSafeToString(),
                                 a.NumeroDeposito.NullSafeToString(),
-                                db.DetalleDepositosBancarios.Where(x=>x.IdDepositoBancario==a.IdDepositoBancario).Select(x=>(x.Valore.Importe ?? 0)).Sum().NullSafeToString(),
+                                db.DetalleDepositosBancarios.Where(x=>x.IdDepositoBancario==a.IdDepositoBancario).Select(x=>(x.Valore.Importe ?? 0)).DefaultIfEmpty().Sum().NullSafeToString(),
                                 //db.DetalleDepositosBancarios.Where(x=>x.IdDepositoBancario==a.IdDepositoBancario && (a.Anulado ?? "NO") != "SI").Select(x=>(x.Valore.Importe ?? 0)).Sum().NullSafeToString(),
                                 a.Efectivo.NullSafeToString(),
                                 a.Anulado.NullSafeToString(),
@@ -454,74 +510,59 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-//        public virtual ActionResult DetAjusteStock(string sidx, string sord, int? page, int? rows, int? IdDepositoBancario)
-//        {
-//            int IdDepositoBancario1 = IdDepositoBancario ?? 0;
-//            var Det = db.DetalleDepositosBancarios.Where(p => p.IdDepositoBancario == IdDepositoBancario1).AsQueryable();
-//            int pageSize = rows ?? 20;
-//            int totalRecords = Det.Count();
-//            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-//            int currentPage = page ?? 1;
+        public virtual ActionResult DetDepositoBancario(string sidx, string sord, int? page, int? rows, int? IdDepositoBancario)
+        {
+            int IdDepositoBancario1 = IdDepositoBancario ?? 0;
+            var Det = db.DetalleDepositosBancarios.Where(p => p.IdDepositoBancario == IdDepositoBancario1).AsQueryable();
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
 
-//            var data = (from a in Det
-//                        from b in db.Articulos.Where(o => o.IdArticulo == a.IdArticulo).DefaultIfEmpty()
-//                        from c in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
-//                        from d in db.Ubicaciones.Where(o => o.IdUbicacion == a.IdUbicacion).DefaultIfEmpty()
-//                        from e in db.Depositos.Where(o => o.IdDeposito == d.IdDeposito).DefaultIfEmpty()
-//                        from f in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-//                        from g in db.Obras.Where(o => o.IdObra == a.IdObra).DefaultIfEmpty()
-//                        select new
-//                        {
-//                            a.IdDetalleAjusteStock,
-//                            a.IdArticulo,
-//                            a.IdUnidad,
-//                            a.IdColor,
-//                            a.IdUbicacion,
-//                            a.IdObra,
-//                            Codigo = b.Codigo != null ? b.Codigo : "",
-//                            Articulo = (b.Descripcion != null ? b.Descripcion : "") + (c != null ? " " + c.Descripcion : ""),
-//                            a.CantidadUnidades,
-//                            Unidad = f.Abreviatura != null ? f.Abreviatura : "",
-//                            a.Partida,
-//                            a.NumeroCaja,
-//                            Obra = g.NumeroObra != null ? g.NumeroObra : "",
-//                            Ubicacion = (e != null ? e.Abreviatura : "") + (d.Descripcion != null ? " " + d.Descripcion : "") + (d.Estanteria != null ? " Est.:" + d.Estanteria : "") + (d.Modulo != null ? " Mod.:" + d.Modulo : "") + (d.Gabeta != null ? " Gab.:" + d.Gabeta : ""),
-//                            a.Observaciones,
-//                        }).OrderBy(x => x.IdDetalleAjusteStock)
-//                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
+            var data = (from a in Det
+                        from b in db.Clientes.Where(o => o.IdCliente == a.Valore.IdCliente).DefaultIfEmpty()
+                        from c in db.Bancos.Where(o => o.IdBanco == a.Valore.IdBanco).DefaultIfEmpty()
+                        from d in db.Monedas.Where(o => o.IdMoneda == a.Valore.IdMoneda).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleDepositoBancario,
+                            a.IdValor,
+                            a.Valore.NumeroInterno,
+                            a.Valore.NumeroValor,
+                            a.Valore.FechaValor,
+                            Cliente = b.RazonSocial != null ? b.RazonSocial : "",
+                            Banco = c.Nombre != null ? c.Nombre : "",
+                            a.Valore.Importe,
+                            Moneda = d.Abreviatura != null ? d.Abreviatura : ""
+                        }).OrderBy(x => x.IdDetalleDepositoBancario)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
-//            var jsonData = new jqGridJson()
-//            {
-//                total = totalPages,
-//                page = currentPage,
-//                records = totalRecords,
-//                rows = (from a in data
-//                        select new jqGridRowJson
-//                        {
-//                            id = a.IdDetalleAjusteStock.ToString(),
-//                            cell = new string[] { 
-//                            string.Empty, 
-//                            a.IdDetalleAjusteStock.ToString(), 
-//                            a.IdArticulo.NullSafeToString(),
-//                            a.IdUnidad.NullSafeToString(),
-//                            a.IdColor.NullSafeToString(),
-//                            a.IdUbicacion.NullSafeToString(),
-//                            a.IdObra.NullSafeToString(),
-//                            a.Codigo.NullSafeToString(),
-//                            a.Articulo.NullSafeToString(),
-//                            a.CantidadUnidades.NullSafeToString(),
-//                            a.Unidad.NullSafeToString(),
-//                            a.Partida.NullSafeToString(),
-//                            a.NumeroCaja.NullSafeToString(),
-//                            a.Obra.NullSafeToString(),
-//                            a.Ubicacion.NullSafeToString(),
-//                            a.Observaciones.NullSafeToString()
-//                            }
-//                        }).ToArray()
-//            };
-//            return Json(jsonData, JsonRequestBehavior.AllowGet);
-//        }
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleDepositoBancario.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdDetalleDepositoBancario.ToString(), 
+                            a.IdValor.NullSafeToString(),
+                            a.NumeroInterno.NullSafeToString(),
+                            a.NumeroValor.NullSafeToString(),
+                            a.FechaValor == null ? "" : a.FechaValor.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                            a.Cliente.NullSafeToString(),
+                            a.Banco.NullSafeToString(),
+                            a.Importe.NullSafeToString(),
+                            a.Moneda.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public void EditGridData(int? IdDepositoBancario, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
