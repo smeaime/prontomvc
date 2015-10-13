@@ -53,7 +53,6 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetCuentasAutocomplete(string term)
         {
-
             // http://stackoverflow.com/questions/444798/case-insensitive-containsstring
 
             var ci = new System.Globalization.CultureInfo("en-US");
@@ -82,7 +81,6 @@ namespace ProntoMVC.Controllers
 
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
-
 
         public virtual JsonResult GetCuentasGastoAutocomplete(string term, int obra = 0)
         {
@@ -224,9 +222,8 @@ namespace ProntoMVC.Controllers
             var idCuentaGrupo = 2;
 
             var s = "SELECT  TOP 100  IdCuenta,Descripcion,Codigo " +
-                        "FROM Cuentas " +
-                        "WHERE Descripcion + ' ' + Convert(varchar,Codigo) LIKE '" + term +
-                               "%' AND IdTipoCuentaGrupo=" + idCuentaGrupo;
+                    "FROM Cuentas " +
+                    "WHERE Descripcion + ' ' + Convert(varchar,Codigo) LIKE '" + term + "%' AND IdTipoCuentaGrupo=" + idCuentaGrupo;
 
             string sc = "";
             var lista = EntidadManager.ExecDinamico(sc, s);
@@ -349,66 +346,12 @@ namespace ProntoMVC.Controllers
             catch (Exception)
             {
 
-                //                throw;
             }
 
-            //switch (sidx.ToLower())
-            //{
-            //    case "numerorequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //    case "fecharequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.FechaRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.FechaRequerimiento);
-            //        break;
-            //    case "numeroobra":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Obra.NumeroObra);
-            //        else
-            //            Req = Req.OrderBy(a => a.Obra.NumeroObra);
-            //        break;
-            //    case "libero":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados.Nombre);
-            //        break;
-            //    case "aprobo":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados1.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados1.Nombre);
-            //        break;
-            //    case "sector":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Sectores.Descripcion);
-            //        else
-            //            Req = Req.OrderBy(a => a.Sectores.Descripcion);
-            //        break;
-            //    case "detalle":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Detalle);
-            //        else
-            //            Req = Req.OrderBy(a => a.Detalle);
-            //        break;
-            //    default:
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //}
-
             var data = (from a in Req
-                        select a
-            ).Where(campo).OrderBy(sidx + " " + sord)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        select a).Where(campo).OrderBy(sidx + " " + sord)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -441,11 +384,7 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-        public virtual ActionResult Cuentas_DynamicGridData
-    (string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult Cuentas_DynamicGridData (string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             string campo = String.Empty;
             int pageSize = rows; // ?? 20;
@@ -469,85 +408,22 @@ namespace ProntoMVC.Controllers
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
             //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
             try
             {
-
                 //var Req1 = from a in Req.Where(campo) select a.IdCuenta;
-
                 // totalRecords = Req1.Count();
                 totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             }
             catch (Exception)
             {
 
-                //                throw;
             }
 
-            //switch (sidx.ToLower())
-            //{
-            //    case "numerorequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //    case "fecharequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.FechaRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.FechaRequerimiento);
-            //        break;
-            //    case "numeroobra":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Obra.NumeroObra);
-            //        else
-            //            Req = Req.OrderBy(a => a.Obra.NumeroObra);
-            //        break;
-            //    case "libero":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados.Nombre);
-            //        break;
-            //    case "aprobo":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados1.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados1.Nombre);
-            //        break;
-            //    case "sector":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Sectores.Descripcion);
-            //        else
-            //            Req = Req.OrderBy(a => a.Sectores.Descripcion);
-            //        break;
-            //    case "detalle":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Detalle);
-            //        else
-            //            Req = Req.OrderBy(a => a.Detalle);
-            //        break;
-            //    default:
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //}
-
             var data = (from a in pagedQuery
-                        select a
-            )//.Where(campo).OrderBy(sidx + " " + sord)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        select a )//.Where(campo).OrderBy(sidx + " " + sord)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -584,17 +460,12 @@ namespace ProntoMVC.Controllers
                             a.CodigoSecundario   .NullSafeToString(),
                             a.IdCuentaGasto.NullSafeToString(),
                             a.IdObra.NullSafeToString()
-
-                            
-
                             }
                         }).ToArray()
             };
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
 
         public virtual ActionResult DetCambios(string sidx, string sord, int? page, int? rows, int? Id)
         {
@@ -614,8 +485,8 @@ namespace ProntoMVC.Controllers
                             a.NombreAnterior,
                             a.FechaCambio,
                         }).OrderBy(p => p.IdDetalleCuenta)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -789,8 +660,6 @@ namespace ProntoMVC.Controllers
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
 
-
-
         public virtual ActionResult Edit(int id)
         {
             Cuenta o;
@@ -824,28 +693,16 @@ namespace ProntoMVC.Controllers
             Parametros parametros = db.Parametros.Find(1);
             int? i = parametros.IdTipoCuentaGrupoFF;
 
-
             ViewBag.IdTipoCuenta = new SelectList(db.TiposCuentas, "IdTipoCuenta", "Descripcion", o.IdTipoCuenta);
             ViewBag.IdTipoCuentaGrupo = new SelectList(db.TiposCuentaGrupos, "IdTipoCuentaGrupo", "Descripcion", o.IdTipoCuentaGrupo);
             ViewBag.IdRubroContable = new SelectList(db.RubrosContables, "IdRubroContable", "Descripcion", o.IdRubroContable);
-
-
-
-
             ViewBag.IdCuentaConsolidacion = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdCuenta", "Descripcion", o.IdCuentaConsolidacion);
             ViewBag.IdCuentaConsolidacion2 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdCuenta", "Descripcion", o.IdCuentaConsolidacion2);
             ViewBag.IdCuentaConsolidacion3 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdCuenta", "Descripcion", o.IdCuentaConsolidacion3);
             //Set oControl.RowSource = oAp.Cuentas.TraerFiltrado("_CuentasConsolidacionParaCombo", 1)
-
-
-
             ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "Descripcion", o.IdObra);
             ViewBag.IdCuentaGasto = new SelectList(db.CuentasGastos, "IdCuentaGasto", "Descripcion", o.IdCuentaGasto);
             ViewBag.IdProvincia = new SelectList(db.Provincias, "IdProvincia", "Nombre", o.IdProvincia);
-
-
-
-
 
             IEnumerable<DataRow> Entidad  = EntidadManager.GetStoreProcedure(SCsql(), ProntoFuncionesGenerales.enumSPs.RubrosContables_TX_ParaComboFinancierosTodos).AsEnumerable();
             var data = (from a in Entidad
@@ -857,19 +714,12 @@ namespace ProntoMVC.Controllers
             ViewBag.IdRubroFinanciero = new SelectList(data
                         , "IdRubroContable", "Titulo", o.IdRubroFinanciero);
 
-
-
-
             //Set oRs = oAp.Conceptos.TraerFiltrado("_PorGrupoParaCombo", 3)
             //Set DataCombo2(0).RowSource = oRs
             //Set oRs = oAp.Conceptos.TraerFiltrado("_PorGrupoParaCombo", 4)
             //Set DataCombo2(1).RowSource = oRs
             //Set oRs = oAp.Conceptos.TraerFiltrado("_PorGrupoParaCombo", 5)
             //Set DataCombo2(2).RowSource = oRs
-
-
-
-
             //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
             //ViewBag.IdUnidadOperativa = new SelectList(db.UnidadesOperativas, "IdUnidadOperativa", "Descripcion", o.IdUnidadOperativa);
             //ViewBag.IdGrupoObra = new SelectList(db.GruposObras, "IdGrupoObra", "Descripcion", o.IdGrupoObra);
@@ -880,28 +730,18 @@ namespace ProntoMVC.Controllers
             //ViewBag.IdJefeRegional = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdJefeRegional);
             //ViewBag.IdJefe = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdJefe);
             //ViewBag.IdSubjefe = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdSubjefe);
-
         }
-
-
 
         private bool Validar(ProntoMVC.Data.Models.Cuenta o, ref string sErrorMsg)
         {
             if ((o.Descripcion ?? "") == "") sErrorMsg += "\n" + "Falta la descripción";
-
-
-
             if (sErrorMsg != "") return false;
             return true;
         }
 
-
         private void GuardarHistoricoDeCambio(Cuenta Cuenta) {
-            
-
 
         }
-
 
         [HttpPost]
         public virtual JsonResult BatchUpdate(Cuenta Cuenta) // el Exclude es para las altas, donde el Id viene en 0
@@ -920,12 +760,10 @@ namespace ProntoMVC.Controllers
                     return Json(errors);
                 }
 
-
                 if (ModelState.IsValid || true)
                 {
                     if (Cuenta.IdCuenta > 0)
                     {
-                        
                         //if (SeCambioLaCuenta())
                         //{
                         //    GuardarHistoricoDeCambio();
@@ -936,8 +774,6 @@ namespace ProntoMVC.Controllers
                         EntidadEntry.CurrentValues.SetValues(Cuenta);
                         
                         db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
-
-                        //UpdateColecciones(ref Articulo);
                     }
                     else
                     {
@@ -992,9 +828,42 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
 
+        public virtual JsonResult SaldoContablePorIdCuentaBancaria(int IdCuentaBancaria = 0, string Fecha = "")
+        {
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Cuentas_TX_MayorPorIdCuentaBancaria", IdCuentaBancaria, Fecha);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
+            int totalRecords = Entidad.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            Saldo = (a[0].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[0].NullSafeToString()),
+                            OrdenesPagoAnuladas = (a[1].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[1].NullSafeToString()),
+                        })
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = 1,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = "1",
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.Saldo.ToString(), 
+                            a.OrdenesPagoAnuladas.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
 
     }
-
 
 }

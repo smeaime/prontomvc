@@ -2653,13 +2653,7 @@ function AsignarBancoPorIdCuentaBancaria(IdCuentaBancaria) {
     });
 }
 
-
-
-
 function PopupCentrar(grid) {
-
-
-
     var dlgDiv = $("#editmod" + grid[0].id);
     //$("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
     //$("#editmod" + grid[0].id).find('#FechaPosible').width(160);
@@ -2680,10 +2674,6 @@ function PopupCentrar(grid) {
     dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
     dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
 };
-
-
-
-
 
 function MostrarDatosCliente(Id) {
     var Entidad = "";
