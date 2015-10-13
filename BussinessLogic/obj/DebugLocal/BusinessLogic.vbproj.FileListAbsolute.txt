@@ -1,5 +1,0 @@
-C:\Backup\BDL\BussinessLogic\obj\DebugLocal\ResolveAssemblyReference.cache
-C:\Backup\BDL\BussinessLogic\obj\DebugLocal\BusinessLogic.vbproj.ResolveComReference.cache
-C:\Backup\BDL\BussinessLogic\obj\DebugLocal\Resources.resources
-C:\Backup\BDL\BussinessLogic\obj\DebugLocal\ResGen.read.1.tlog
-C:\Backup\BDL\BussinessLogic\obj\DebugLocal\ResGen.write.1.tlog
