@@ -3229,6 +3229,8 @@
     <EntitySetMapping Name="OrdenesPago">
       <EntityTypeMapping TypeName="DemoProntoModel.OrdenPago">
         <MappingFragment StoreEntitySet="OrdenesPago">
+          <ScalarProperty Name="CuitOpcional" ColumnName="CuitOpcional" />
+          <ScalarProperty Name="IdTipoRetencionGanancia" ColumnName="IdTipoRetencionGanancia" />
           <ScalarProperty Name="FechaReversionContablePorAnulacion" ColumnName="FechaReversionContablePorAnulacion" />
           <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
           <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
@@ -6105,6 +6107,17 @@
     <EntitySetMapping Name="FertilizantesCupos">
       <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesCupos">
         <MappingFragment StoreEntitySet="FertilizantesCupos">
+          <ScalarProperty Name="PuntoDespacho" ColumnName="PuntoDespacho" />
+          <ScalarProperty Name="Despacho" ColumnName="Despacho" />
+          <ScalarProperty Name="Bruto" ColumnName="Bruto" />
+          <ScalarProperty Name="Tara" ColumnName="Tara" />
+          <ScalarProperty Name="NumeroCotizacion" ColumnName="NumeroCotizacion" />
+          <ScalarProperty Name="NumeroRemito" ColumnName="NumeroRemito" />
+          <ScalarProperty Name="KilosMaximo" ColumnName="KilosMaximo" />
+          <ScalarProperty Name="HoraDespacho" ColumnName="HoraDespacho" />
+          <ScalarProperty Name="HoraAutorizacion" ColumnName="HoraAutorizacion" />
+          <ScalarProperty Name="HoraCarga" ColumnName="HoraCarga" />
+          <ScalarProperty Name="HoraArribo" ColumnName="HoraArribo" />
           <ScalarProperty Name="NumeradorTexto" ColumnName="NumeradorTexto" />
           <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />

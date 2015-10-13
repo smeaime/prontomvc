@@ -20,3 +20,4 @@ D:\ProntoMVC3\Data\obj\x86\Debug\ProntoMVC.Data.pdb
 =======
 C:\Users\Administrador\Documents\bdl\pronto\Data\obj\x86\Debug\ProntoMVC.Data.csprojResolveAssemblyReference.cache
 >>>>>>> 7dfe60a9fe0ca0472f6f4ed304883fd04c1f2498
+D:\ProntoMVC3\Data\obj\x86\Debug\ProntoMVC.Data.csprojResolveAssemblyReference.cache
