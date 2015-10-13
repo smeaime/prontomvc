@@ -1440,6 +1440,24 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="Abreviatura" Type="varchar" MaxLength="10" />
     <Property Name="IdObra" Type="int" />
   </EntityType>
+  <EntityType Name="DepositosBancarios">
+    <Key>
+      <PropertyRef Name="IdDepositoBancario" />
+    </Key>
+    <Property Name="IdDepositoBancario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaDeposito" Type="datetime" />
+    <Property Name="IdBanco" Type="int" />
+    <Property Name="NumeroDeposito" Type="int" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="Efectivo" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdCuentaBancaria" Type="int" />
+    <Property Name="Anulado" Type="varchar" MaxLength="2" />
+    <Property Name="IdAutorizaAnulacion" Type="int" />
+    <Property Name="FechaAnulacion" Type="datetime" />
+    <Property Name="IdCaja" Type="int" />
+    <Property Name="IdMonedaEfectivo" Type="int" />
+    <Property Name="CotizacionMoneda" Type="numeric" Precision="18" Scale="4" />
+  </EntityType>
   <EntityType Name="DescripcionIva">
     <Key>
       <PropertyRef Name="IdCodigoIva" />
@@ -1911,6 +1929,14 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="FechaCambio" Type="datetime" />
     <Property Name="CodigoAnterior" Type="int" />
     <Property Name="JerarquiaAnterior" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="DetalleDepositosBancarios">
+    <Key>
+      <PropertyRef Name="IdDetalleDepositoBancario" />
+    </Key>
+    <Property Name="IdDetalleDepositoBancario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDepositoBancario" Type="int" />
+    <Property Name="IdValor" Type="int" />
   </EntityType>
   <EntityType Name="DetalleDevoluciones">
     <Key>
@@ -3236,7 +3262,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdLocalidadTransportista" Type="int" />
     <Property Name="Recorrido" Type="int" />
     <Property Name="Destino" Type="int" />
-    <Property Name="Contrato" Type="varchar" MaxLength="20" />
+    <Property Name="Contrato" Type="varchar" MaxLength="50" />
     <Property Name="IdArticulo" Type="int" />
     <Property Name="Puro" Type="varchar" MaxLength="2" />
     <Property Name="Mezcla" Type="varchar" MaxLength="2" />
@@ -3263,6 +3289,17 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdFacturaImputada" Type="int" />
     <Property Name="NumeradorTexto" Type="varchar" MaxLength="20" />
+    <Property Name="HoraArribo" Type="datetime" />
+    <Property Name="HoraCarga" Type="datetime" />
+    <Property Name="HoraAutorizacion" Type="datetime" />
+    <Property Name="HoraDespacho" Type="datetime" />
+    <Property Name="KilosMaximo" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="NumeroRemito" Type="varchar" MaxLength="20" />
+    <Property Name="NumeroCotizacion" Type="varchar" MaxLength="20" />
+    <Property Name="Tara" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Bruto" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Despacho" Type="varchar" MaxLength="50" />
+    <Property Name="PuntoDespacho" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Formularios">
     <Key>
@@ -3803,6 +3840,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
     <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
     <Property Name="FechaReversionContablePorAnulacion" Type="datetime" />
+    <Property Name="IdTipoRetencionGanancia" Type="int" />
+    <Property Name="CuitOpcional" Type="varchar" MaxLength="13" />
   </EntityType>
   <EntityType Name="OrdenesTrabajo">
     <Key>
@@ -6674,6 +6713,30 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleDepositosBancarios_DepositosBancarios">
+    <End Role="DepositosBancarios" Type="Self.DepositosBancarios" Multiplicity="0..1" />
+    <End Role="DetalleDepositosBancarios" Type="Self.DetalleDepositosBancarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepositosBancarios">
+        <PropertyRef Name="IdDepositoBancario" />
+      </Principal>
+      <Dependent Role="DetalleDepositosBancarios">
+        <PropertyRef Name="IdDepositoBancario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleDepositosBancarios_Valores">
+    <End Role="Valores" Type="Self.Valores" Multiplicity="0..1" />
+    <End Role="DetalleDepositosBancarios" Type="Self.DetalleDepositosBancarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valores">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleDepositosBancarios">
+        <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleDevoluciones_Devoluciones">
     <End Role="Devoluciones" Type="Self.Devoluciones" Multiplicity="0..1" />
     <End Role="DetalleDevoluciones" Type="Self.DetalleDevoluciones" Multiplicity="*" />
@@ -8675,6 +8738,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <EntitySet Name="CurvasTalles" EntityType="Self.CurvasTalles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DefinicionArticulos" EntityType="Self.DefinicionArticulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Depositos" EntityType="Self.Depositos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DepositosBancarios" EntityType="Self.DepositosBancarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DescripcionIva" EntityType="Self.DescripcionIva" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleAcopios" EntityType="Self.DetalleAcopios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleAjustesStock" EntityType="Self.DetalleAjustesStock" Schema="dbo" store:Type="Tables" />
@@ -8698,6 +8762,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <EntitySet Name="DetalleConciliacionesNoContables" EntityType="Self.DetalleConciliacionesNoContables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleConjuntos" EntityType="Self.DetalleConjuntos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleDepositosBancarios" EntityType="Self.DetalleDepositosBancarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleDevoluciones" EntityType="Self.DetalleDevoluciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="Self.DetalleEmpleadosCuentasBancarias" Schema="dbo" store:Type="Tables" />
@@ -9351,6 +9416,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <AssociationSet Name="FK_DetalleConjuntos_Conjuntos" Association="Self.FK_DetalleConjuntos_Conjuntos">
       <End Role="Conjuntos" EntitySet="Conjuntos" />
       <End Role="DetalleConjuntos" EntitySet="DetalleConjuntos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleDepositosBancarios_DepositosBancarios" Association="Self.FK_DetalleDepositosBancarios_DepositosBancarios">
+      <End Role="DepositosBancarios" EntitySet="DepositosBancarios" />
+      <End Role="DetalleDepositosBancarios" EntitySet="DetalleDepositosBancarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleDepositosBancarios_Valores" Association="Self.FK_DetalleDepositosBancarios_Valores">
+      <End Role="Valores" EntitySet="Valores" />
+      <End Role="DetalleDepositosBancarios" EntitySet="DetalleDepositosBancarios" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleDevoluciones_Devoluciones" Association="Self.FK_DetalleDevoluciones_Devoluciones">
       <End Role="Devoluciones" EntitySet="Devoluciones" />

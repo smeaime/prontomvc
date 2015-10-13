@@ -144,13 +144,13 @@ public static class Generales
     }
 
 
-    public static string sCadenaConex(string nombreEmpresa)
+    public static string sCadenaConex(string nombreEmpresa, Guid userGuid = new Guid())
     {
         string s;
 
         try
         {
-            s = sCadenaConexSQL(nombreEmpresa);
+            s = sCadenaConexSQL(nombreEmpresa, userGuid);
         }
         catch (Exception ex)
         {
@@ -443,29 +443,70 @@ public static class Generales
         nombreEmpresa = nombreEmpresa ?? "";
         if (nombreEmpresa == "") return null;
 
-        if (userGuid == Guid.Empty) userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-        //string us = Membership.GetUser().UserName;
-        string us = userGuid.ToString();
+
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
         //usuario.Empresa = IdEmpresa
 
-        string sConexBDLMaster;
-        bool esSuperadmin;
+        string sConexBDLMaster = "";
+        bool esSuperadmin = false;
 
-        if (System.Diagnostics.Debugger.IsAttached && false)
+
+
+        if (userGuid == Guid.Empty)
         {
-            sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-            esSuperadmin = true;
+            try
+            {
+                if (!System.Diagnostics.Debugger.IsAttached)
+                {
+                    userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                    esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+                }
+                else esSuperadmin = true;
+
+                sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+
+            }
+            catch (Exception)
+            {
+
+                if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    // por ahora no le encontré la vuelta a mockear el membership
+                    userGuid = new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9");
+                    esSuperadmin = true;
+                    // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+                    // supervisor       1804B573-0439-4EA0-B631-712684B54473
+                    sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+                }
+                else
+                {
+                    throw;
+                }
+
+
+            }
         }
         else
         {
+
             sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
-
         }
+        //string us = Membership.GetUser().UserName;
+
+
+
         sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
 
+
+
+
+
+
+        string us = "";
+
+        if (!System.Diagnostics.Debugger.IsAttached) us=  userGuid.ToString();
 
 
         string s;

@@ -19,7 +19,7 @@
 
             <p>@*Version de storeproc*@    </p>
 
-            <br /><br />
+            
             <a href="@System.Configuration.ConfigurationManager.AppSettings["ReportServer"]">Servidor de informes</a>
             <br />
             <a href="localhost/Reports_MSSQLSERVER2/Pages/Folder.aspx?ViewMode=Detail">
@@ -42,6 +42,7 @@
 
 
             @Html.LabelFor(model => model.CartelAviso, "Aviso") @*para que quede el espacio*@
+            <br />
             @Html.TextAreaFor(m => m.CartelAviso, new { id = "Aviso", @class = "span8" })
 
             <br />
@@ -49,11 +50,13 @@
             @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Numeradores:") @*para que quede el espacio*@
             <br />
             @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Compr. Proveedor") @*para que quede el espacio*@
+            <br />
             @Html.TextBoxFor(m => m.ProximoComprobanteProveedorReferencia, new { id = "Aviso", @class = "span2" })
 
             <br /><br />
 
             @Html.LabelFor(model => model.PathPlantillas, "Directorio de plantillas y archivo .APP") @*para que quede el espacio*@
+    <br />
             @Html.TextBoxFor(m => m.PathPlantillas, new { id = "Aviso", @class = "span6" })
 
 
@@ -70,7 +73,7 @@
                     <br />
                     <a class="btn  " style="color: Black" href="@Url.Action("BajarPlantilla")">
                         @*<i class="icon-print">
-                        </i>&nbsp;*@
+                            </i>&nbsp;*@
                         Descargar
                     </a>
                 </div>
@@ -83,7 +86,7 @@
             }
 
 
-
+            <br />
             <input type="submit" value='Aceptar' class="btn  btn-large btn-primary" style="width: 100px;
         height: 40px" />
 
