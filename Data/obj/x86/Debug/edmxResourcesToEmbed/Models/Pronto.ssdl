@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="_TempAutorizaciones">
     <Key>
       <PropertyRef Name="IdTempAutorizacion" />
@@ -657,8 +657,8 @@
     <Property Name="Campo" Type="varchar" MaxLength="40" />
     <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CartasDePorteHistorico">
     <Key>
       <PropertyRef Name="IdCartaDePorte" />
@@ -800,8 +800,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene 
     <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="IdCliente" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CartasPorteMovimientos">
     <Key>
       <PropertyRef Name="IdCDPMovimiento" />
@@ -3040,8 +3040,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
     <Property Name="FechaInicio" Type="datetime" />
     <Property Name="FechaFinalizacion" Type="datetime" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EjerciciosPeriodos">
     <Key>
       <PropertyRef Name="IdEjercicioPeriodo" />
@@ -3307,7 +3307,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdLocalidadTransportista" Type="int" />
     <Property Name="Recorrido" Type="int" />
     <Property Name="Destino" Type="int" />
-    <Property Name="Contrato" Type="varchar" MaxLength="20" />
+    <Property Name="Contrato" Type="varchar" MaxLength="50" />
     <Property Name="IdArticulo" Type="int" />
     <Property Name="Puro" Type="varchar" MaxLength="2" />
     <Property Name="Mezcla" Type="varchar" MaxLength="2" />
@@ -3334,6 +3334,17 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdFacturaImputada" Type="int" />
     <Property Name="NumeradorTexto" Type="varchar" MaxLength="20" />
+    <Property Name="HoraArribo" Type="datetime" />
+    <Property Name="HoraCarga" Type="datetime" />
+    <Property Name="HoraAutorizacion" Type="datetime" />
+    <Property Name="HoraDespacho" Type="datetime" />
+    <Property Name="KilosMaximo" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="NumeroRemito" Type="varchar" MaxLength="20" />
+    <Property Name="NumeroCotizacion" Type="varchar" MaxLength="20" />
+    <Property Name="Tara" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Bruto" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Despacho" Type="varchar" MaxLength="50" />
+    <Property Name="PuntoDespacho" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Formularios">
     <Key>
@@ -3874,6 +3885,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
     <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
     <Property Name="FechaReversionContablePorAnulacion" Type="datetime" />
+    <Property Name="IdTipoRetencionGanancia" Type="int" />
+    <Property Name="CuitOpcional" Type="varchar" MaxLength="13" />
   </EntityType>
   <EntityType Name="OrdenesTrabajo">
     <Key>
