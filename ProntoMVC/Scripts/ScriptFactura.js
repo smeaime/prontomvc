@@ -89,10 +89,6 @@
         grid.jqGrid('setCell', Id, 'Cantidad', 0);
     };
 
-
-
-
-
     var CalcularItem = function (value, colname) {
         if (colname === "Cantidad") {
             var rowid = $('#ListaArticulos').getGridParam('selrow');
@@ -349,22 +345,11 @@
         },
         gridComplete: function () {
             calculaTotalImputaciones();
-
-       
         },
 
-        loadComplete: function () { //si uso esto, no puedo usar tranquilo lo de aria-selected para el refresco de la edicion inline
-            
-
-                AgregarItemVacio(jQuery("#ListaArticulos"));
-                //AgregarItemVacio(jQuery("#ListaArticulos"));
-                //AgregarItemVacio(jQuery("#ListaArticulos"));
-
-                //AgregarRenglonesEnBlanco({ "IdDetalleFactura": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "", "TiposDeDescripcion": "Solo material", "OrigenDescripcion": "1" }, "#ListaArticulos");
-
-            },
-       
-
+        loadComplete: function () { 
+            AgregarItemVacio(jQuery("#ListaArticulos"));
+        },
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
@@ -406,14 +391,7 @@
                                  });
     jQuery("#ListaArticulos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     $("#ListaDrag").jqGrid({
         url: ROOT + 'OrdenCompra/TT_DynamicGridData',
@@ -442,8 +420,6 @@
                         //sorttype: 'integer',
                         width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  }
                     },
-
-
                     {
                         name: 'FechaOrdenCompra', index: 'FechaOrdenCompra', width: 80, align: 'center',
                         sorttype: 'date', hidden: false, editable: false,
@@ -466,13 +442,7 @@
                                 });
                             }
                         }
-
-
                     },
-
-
-
-
                     { name: 'Producido', index: 'Producido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
@@ -500,11 +470,7 @@
                     { name: 'PorcentajeBonificacion', index: 'PorcentajeBonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Moneda', index: 'Moneda.Abreviatura', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    {
-                        name: 'Observaciones', index: 'Observaciones', align: 'left',
-                        width: 500, editable: false, hidden: false
-                        , search: true, searchoptions: { sopt: ['cn'] }
-                    }
+                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false, search: true, searchoptions: { sopt: ['cn'] } }
         ],
         ondblClickRow: function (id) {
             Copiar1(id, "Dbl");
@@ -513,8 +479,6 @@
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
-
-
         pager: $('#ListaDragPager'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -522,42 +486,20 @@
         sortorder: "desc",
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
-
-
-        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        //////////////////////////////
-
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
-        userDataOnFooter: true
-        // ,caption: '<b>PEDIDOS</b>'
-
-        , gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
-
-
-
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
     })
-
     //    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-
-
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
-         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-         {
-             //sopt: ["cn"]
-             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-         }
-        );
-
-
-
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false } );
     jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaPager', {
         caption: "",
         buttonicon: "ui-icon-calculator",
@@ -569,14 +511,11 @@
                 .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
         }
     });
-
-
     jQuery("#ListaDrag").filterToolbar({
         stringResult: true, searchOnEnter: true,
         defaultSearch: 'cn',
         enableClear: false
     }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
     jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaPager',
         {
             caption: "Filter", title: "Toggle Searching Toolbar",
@@ -584,17 +523,7 @@
             onClickButton: function () { myGrid[0].toggleToolbar(); }
         });
 
-
-
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     $("#ListaDrag2").jqGrid({
         url: ROOT + 'Remito/TT_DynamicGridData',
@@ -644,8 +573,6 @@
                                 });
                             }
                         }
-
-
                     },
                     { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'Cliente.Codigo', index: 'Cliente.Codigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
@@ -678,13 +605,6 @@
             grid = $(this);
             $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
-
-
-
-
-
-
-
         pager: $('#ListaDragPager2'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -692,43 +612,20 @@
         sortorder: "desc",
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
-
-
-        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        //////////////////////////////
-
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
-        userDataOnFooter: true
-        // ,caption: '<b>PEDIDOS</b>'
-
-        , gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
-
-
-
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
     })
     // jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-
-
-
-
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
-         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-         {
-             //sopt: ["cn"]
-             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-         }
-        );
-
-
-
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false } );
     jQuery("#ListaDrag2").jqGrid('navButtonAdd', '#ListaDragPager2', {
         caption: "",
         buttonicon: "ui-icon-calculator",
@@ -740,46 +637,18 @@
                 .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
         }
     });
-
-
     jQuery("#ListaDrag2").filterToolbar({
         stringResult: true, searchOnEnter: true,
         defaultSearch: 'cn',
         enableClear: false
     }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-    jQuery("#ListaDrag2").jqGrid('navButtonAdd', '#ListaDragPager2',
-        {
-            caption: "Filter", title: "Toggle Searching Toolbar",
-            buttonicon: 'ui-icon-pin-s',
-            onClickButton: function () { myGrid[0].toggleToolbar(); }
-        });
-
-
+    jQuery("#ListaDrag2").jqGrid('navButtonAdd', '#ListaDragPager2', { caption: "Filter", title: "Toggle Searching Toolbar", buttonicon: 'ui-icon-pin-s', onClickButton: function () { myGrid[0].toggleToolbar(); } });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
     $("#ListaDrag3").jqGrid({
-
-
         //url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
         url: ROOT + 'Articulo/Articulos_DynamicGridData',
-
-
         datatype: 'json',
         mtype: 'POST',
         postData: {
@@ -787,65 +656,44 @@
             'FechaFinal': function () { return $("#FechaFinal").val(); },
             'IdObra': function () { return $("#IdObra").val(); }
         },
-
-
-
-        colNames: ['', '', 'Codigo', 'NumeroInventario', 'Descripcion'
-
-   , 'Rubro'
-
-   , 'Subrubro'
-   , 'Nro.inv.'
-
-
-        ],
+        colNames: ['', '', 'Codigo', 'Descripcion', 'Rubro', 'Subrubro', 'Nro.inv.' ],
         colModel: [
-        { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
-        { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-        {
-            name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
-            search: true, searchoptions: {
-                clearSearch: true, searchOperators: true
-                , sopt: ['cn']
-            }
-        },
-             { name: 'NumeroInventario', index: 'Edit', width: 50, align: 'left', hidden: true},
-        {
-            name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
-            editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
+                    { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false, hidden: true },
+                    { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+                    {
+                        name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
+                        search: true, searchoptions: {
+                            clearSearch: true, searchOperators: true
+                            , sopt: ['cn']
+                        }
+                    },
+                    {
+                        name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
+                        editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
 
-            , search: true, searchoptions: {
-                clearSearch: true,
-                searchOperators: true
-                , sopt: ['cn']
-                //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
-            }
-        },
-        {
-            name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
-            editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
-            , search: true, searchoptions: {
-                //sopt: ['cn']
-            }
-        },
-
-
-        { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
-        { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
+                        , search: true, searchoptions: {
+                            clearSearch: true,
+                            searchOperators: true
+                            , sopt: ['cn']
+                        }
+                    },
+                    {
+                        name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
+                        editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
+                        , search: true, searchoptions: {
+                            //sopt: ['cn']
+                        }
+                    },
+                    { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
+                    { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
 
         ],
-
         ondblClickRow: function (id) {
             Copiar3(id, "Dbl");
         },
         loadComplete: function () {
             grid = $("ListaDrag3");
         },
-
-
-
-
-
         pager: '#ListaDragPager3', // $(),
         rowNum: 50,
         rowList: [10, 20, 50, 100],
@@ -853,65 +701,24 @@
         sortorder: "desc",
         viewrecords: true,
         //toppager: true,
-
         emptyrecords: 'No hay registros para mostrar',
-
-
-
-        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        //////////////////////////////
-
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
-        userDataOnFooter: true
-        // ,caption: '<b>PEDIDOS</b>'
-
-          , gridview: true
-
-          , multiboxonly: true
-
-          , multipleSearch: true
-        //,
-        //search : { caption: "Search...", Find: "Find", Reset: "Reset",
-        //odata : ['equal', 'not equal', 'less'],
-        //groupOps: [ { op: "AND", text: "all" },
-        //            { op: "OR", text: "any" }],
-        //matchText: " match",
-        //rulesText: " rules" },
-
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
     })
-    //        .navGrid("#ListaPager",
-    //            { refresh: true, add: false, edit: false, del: false },
-    //                {}, // settings for edit
-    //                {}, // settings for add
-    //                {}, // settings for delete
-    //                {closeAfterSearch: true, closeOnEscape: true },
-    //                { sopt: ["cn"]} // Search options. Some options can be set on column level
-    //         );
-
-
-    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-
     jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
      { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
      {
-         //sopt: ["cn"]
-         //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
          width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
      }
     );
-
-
-
-    //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { add: false, edit: false, del: false },
-    //{}, {}, {}, { multipleSearch: true, overlay: false });
-
     jQuery("#ListaDrag3").jqGrid('navButtonAdd', '#ListaDragPager3', {
         caption: "",
         buttonicon: "ui-icon-calculator",
@@ -923,16 +730,11 @@
                 .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
         }
     });
-
-
-
     jQuery("#ListaDrag3").filterToolbar({
         stringResult: true, searchOnEnter: true,
         defaultSearch: 'cn',
         enableClear: false
-    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-    //myGrid.filterToolbar({  });
-
+    });
     jQuery("#ListaDrag3").jqGrid('navButtonAdd', '#ListaDragPager3',
         {
             caption: "Filter", title: "Toggle Searching Toolbar",
@@ -940,25 +742,7 @@
             onClickButton: function () { myGrid[0].toggleToolbar(); }
         });
 
-
-
-
-
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Ordenes de compra');
@@ -1526,6 +1310,14 @@ function ActualizarDatos() {
     $("#TipoABC").val(Letra)
 
     calculaTotalImputaciones();
+}
+
+function ActualizarPuntosDeVenta() {
+    var IdCodigoIva = 0, Letra = "B", id = 0, IdFactura = 0;
+
+    IdFactura = $("#IdFactura").val() || 0;
+    IdCodigoIva = $("#IdCodigoIva").val();
+    Letra = $("#TipoABC").val();
 
     if (IdFactura <= 0) {
         $.ajax({
