@@ -790,7 +790,7 @@
 
 
 
-        colNames: ['', '', 'Codigo', 'Descripcion'
+        colNames: ['', '', 'Codigo', 'NumeroInventario', 'Descripcion'
 
    , 'Rubro'
 
@@ -809,6 +809,7 @@
                 , sopt: ['cn']
             }
         },
+             { name: 'NumeroInventario', index: 'Edit', width: 50, align: 'left', hidden: true},
         {
             name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
             editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
