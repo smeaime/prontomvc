@@ -202,5 +202,15 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", Tabla);
         }
 
+        public virtual ActionResult GetCajasPorIdCuenta2(int IdCuenta = 0)
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (ProntoMVC.Data.Models.Caja u in db.Cajas.Where(x => IdCuenta == 0 || x.IdCuenta == IdCuenta).OrderBy(x => x.Descripcion).ToList())
+                Datacombo.Add(u.IdCaja, u.Descripcion);
+
+            return PartialView("Select", Datacombo);
+        }
+
     }
 }
