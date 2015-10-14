@@ -7,7 +7,7 @@
 BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
 ----------------------------------------------------------------------------------------
 
-se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
+Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
 
 Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en Orden de compra)
 
@@ -21,7 +21,7 @@ Hay formularios donde no deberia estar habilitado el panel de grillas (en el de 
 Con la nueva tipografía, quedan angostas algunas columnas (las de fechas)
 
 
-ancho del div contenido en el panel izquierdo (el del arbol) -panelWestResize() no funciona -Hecho mas o menos: si el texto no entra, no hará wrap...
+Ancho del div contenido en el panel izquierdo (el del arbol) -panelWestResize() no funciona -Hecho mas o menos: si el texto no entra, no hará wrap...
 
 Recibo, NC, y ND, tienen un titulo con font distinto
 
