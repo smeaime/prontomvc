@@ -289,6 +289,7 @@ namespace ProntoMVC.Controllers
                     if ((x.NumeroTarjetaCredito ?? "").Length == 0) { sErrorMsg += "\n" + "Hay tarjetas de credito sin numero"; }
                 }
                 mTotalValores += x.Importe ?? 0;
+                if ((x.IdCuentaBancariaTransferencia ?? 0) <= 0 && (x.IdBanco ?? 0) <= 0 && (x.IdCaja ?? 0) <= 0 && (x.IdTarjetaCredito ?? 0) <= 0) { sErrorMsg += "\n" + "Hay valores sin entidad emisora"; }
             }
 
             if (o.DetalleRecibosCuentas.Count <= 0) sErrorMsg += "\n" + "No hay registro contable";
@@ -1436,8 +1437,8 @@ namespace ProntoMVC.Controllers
                             Saldo = a.Recibo.IdMoneda == mIdMonedaDolar ? b.Saldo * h.Coeficiente : b.Saldo * h.Coeficiente,
                             a.Importe
                         }).OrderBy(x => x.IdDetalleRecibo)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1506,8 +1507,8 @@ namespace ProntoMVC.Controllers
                             a.CantidadCuotas,
                             a.NumeroAutorizacionTarjetaCredito
                         }).OrderBy(x => x.IdDetalleReciboValores)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1585,8 +1586,8 @@ namespace ProntoMVC.Controllers
                             a.Debe,
                             a.Haber
                         }).OrderBy(x => x.IdDetalleReciboCuentas)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1641,8 +1642,8 @@ namespace ProntoMVC.Controllers
                             RubroContable = b.Descripcion != null ? b.Descripcion : "",
                             a.Importe
                         }).OrderBy(x => x.IdDetalleReciboRubrosContables)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {

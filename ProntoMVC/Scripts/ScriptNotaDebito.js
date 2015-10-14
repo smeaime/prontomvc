@@ -139,7 +139,7 @@
                     {
                         name: 'Caja', index: 'Caja', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
                         editoptions: {
-                            dataUrl: ROOT + 'Banco/GetCajasPorIdCuenta2?IdCuenta=0',
+                            dataUrl: ROOT + 'Caja/GetCajasPorIdCuenta2?IdCuenta=0',
                             dataInit: function (elem) {
                                 $(elem).width(190);
                             },

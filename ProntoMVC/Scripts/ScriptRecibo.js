@@ -458,7 +458,7 @@ $(function () {
                     {
                         name: 'Caja', index: 'Caja', formoptions: { rowpos: 6, colpos: 1 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
-                            dataUrl: ROOT + 'Banco/GetCajasPorIdCuenta2',
+                            dataUrl: ROOT + 'Caja/GetCajasPorIdCuenta2',
                             dataInit: function (elem) {
                                 $(elem).width(190);
                             },
@@ -2074,7 +2074,7 @@ function DatosCuenta(IdCuenta, origen, rowid, campo, indice) {
                     }
                 } else {
                     $("#ListaContable").setColProp('CuentaBancaria', { editoptions: { dataUrl: ROOT + 'Banco/GetCuentasBancariasPorIdCuenta2?IdCuenta=' + IdCuenta } });
-                    $("#ListaContable").setColProp('Caja', { editoptions: { dataUrl: ROOT + 'Banco/GetCajasPorIdCuenta2?IdCuenta=' + IdCuenta } });
+                    $("#ListaContable").setColProp('Caja', { editoptions: { dataUrl: ROOT + 'Caja/GetCajasPorIdCuenta2?IdCuenta=' + IdCuenta } });
                     $("#ListaContable").setColProp('TarjetaCredito', { editoptions: { dataUrl: ROOT + 'Banco/GetTarjetasCreditoPorIdCuenta2?IdCuenta=' + IdCuenta } });
 
                     if (origen == "f") {

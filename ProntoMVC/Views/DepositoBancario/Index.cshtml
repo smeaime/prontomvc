@@ -40,14 +40,14 @@
                         { name: 'IdDepositoBancario', index: 'IdDepositoBancario', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'IdBanco', index: 'IdBanco', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'IdAutorizaAnulacion', index: 'IdAutorizaAnulacion', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'FechaDeposito', index: 'FechaDeposito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaDeposito', index: 'FechaDeposito', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Banco', index: 'Banco', align: 'left', width: 300, sortable: false, editable: false, search: false, hidden: false },
                         { name: 'NumeroDeposito', index: 'NumeroDeposito', align: 'left', width: 80, editable: false, hidden: false },
                         { name: 'Valores', index: 'Valores', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Efectivo', index: 'Efectivo', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulado', index: 'Anulado', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'Anulo', index: 'Anulo', align: 'left', width: 300, sortable: false, editable: false, search: false, hidden: false },
-                        { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
