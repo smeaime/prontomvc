@@ -9,6 +9,9 @@ BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importa
 
 se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
 
+Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en Orden de compra)
+
+
 PASEO general, que no le explote a Claudio en la mano:
 	autofiltros (en maestros y grillas aux)
 		no funcionan las fechas en los autofiltros.
