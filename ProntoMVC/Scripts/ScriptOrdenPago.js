@@ -2281,7 +2281,7 @@ function DatosCuenta(IdCuenta, origen, rowid, campo) {
                     if (campo == "Codigo") { $("#CodigoCuenta").val(data[0].codigo); }
                 } else {
                     $("#ListaContable").setColProp('CuentaBancaria', { editoptions: { dataUrl: ROOT + 'Banco/GetCuentasBancariasPorIdCuenta2?IdCuenta=' + IdCuenta } });
-                    $("#ListaContable").setColProp('Caja', { editoptions: { dataUrl: ROOT + 'Banco/GetCajasPorIdCuenta2?IdCuenta=' + IdCuenta } });
+                    $("#ListaContable").setColProp('Caja', { editoptions: { dataUrl: ROOT + 'Caja/GetCajasPorIdCuenta2?IdCuenta=' + IdCuenta } });
                     $("#ListaContable").setColProp('TarjetaCredito', { editoptions: { dataUrl: ROOT + 'Banco/GetTarjetasCreditoPorIdCuenta2?IdCuenta=' + IdCuenta } });
 
                     if (origen == "f") {
