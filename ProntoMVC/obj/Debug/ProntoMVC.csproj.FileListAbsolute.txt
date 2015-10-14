@@ -1,4 +1,5 @@
-D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.Net4.dll
+D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csproj.App.config
+D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Pedido_Autotrol_PUNTONET.docx
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Factura_A_BaseNueva.dot
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Factura_A_BaseNueva_FA.dot
@@ -33,6 +34,9 @@ D:\ProntoMVC3\ProntoMVC\bin\PagedList.Mvc.dll
 D:\ProntoMVC3\ProntoMVC\bin\ProntoMVC.Data.dll
 D:\ProntoMVC3\ProntoMVC\bin\Repositorio.dll
 D:\ProntoMVC3\ProntoMVC\bin\Servicio.dll
+D:\ProntoMVC3\ProntoMVC\bin\System.IO.dll
+D:\ProntoMVC3\ProntoMVC\bin\System.Runtime.dll
+D:\ProntoMVC3\ProntoMVC\bin\System.Threading.Tasks.dll
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.Helpers.dll
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.Mvc.dll
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.Razor.dll
@@ -46,9 +50,7 @@ D:\ProntoMVC3\ProntoMVC\bin\CodeEngine.Framework.QueryBuilder.dll
 D:\ProntoMVC3\ProntoMVC\bin\Ionic.Zip.dll
 D:\ProntoMVC3\ProntoMVC\bin\itextsharp.dll
 D:\ProntoMVC3\ProntoMVC\bin\ProntoMVC.Data.pdb
-D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.pdb
 D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.xml
-D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.Net4.pdb
 D:\ProntoMVC3\ProntoMVC\bin\BusinessLogic.pdb
 D:\ProntoMVC3\ProntoMVC\bin\BusinessLogic.xml
 D:\ProntoMVC3\ProntoMVC\bin\ClosedXML.xml
@@ -68,6 +70,9 @@ D:\ProntoMVC3\ProntoMVC\bin\PagedList.xml
 D:\ProntoMVC3\ProntoMVC\bin\PagedList.Mvc.xml
 D:\ProntoMVC3\ProntoMVC\bin\Repositorio.pdb
 D:\ProntoMVC3\ProntoMVC\bin\Servicio.pdb
+D:\ProntoMVC3\ProntoMVC\bin\System.IO.xml
+D:\ProntoMVC3\ProntoMVC\bin\System.Runtime.xml
+D:\ProntoMVC3\ProntoMVC\bin\System.Threading.Tasks.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.Helpers.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.Mvc.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.Razor.xml
@@ -75,6 +80,5 @@ D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.Deployment.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.Razor.xml
 D:\ProntoMVC3\ProntoMVC\bin\itextsharp.xml
-D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.dll
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.pdb
