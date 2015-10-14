@@ -9055,6 +9055,9 @@ Public Class CartaDePorteManager
         Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
 
+        si es un tiff paginado
+
+
         If InStr(nombrenuevo.ToUpper, "TK") Then
             If oCarta.PathImagen2 <> "" Then
                 'qué hago con el archivo anterior? -por ahora lo conservo
@@ -9105,6 +9108,25 @@ Public Class CartaDePorteManager
         Return nombrenuevo
     End Function
 
+
+
+    private List<Image> GetAllPages(string file)
+        {
+            List<Image> images = new List<Image>();
+            Bitmap bitmap = (Bitmap)Image.FromFile(file);
+            int count = bitmap.GetFrameCount(FrameDimension.Page);
+            for (int idx = 0; idx < count; idx++)
+            {
+                // save each frame to a bytestream
+                bitmap.SelectActiveFrame(FrameDimension.Page, idx);
+                MemoryStream byteStream = new MemoryStream();
+                bitmap.Save(byteStream, ImageFormat.Tiff);
+
+                // and then create a new Image from it
+                images.Add(Image.FromStream(byteStream));
+            }
+            return images;
+        }
 
 
     Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
