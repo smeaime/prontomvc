@@ -275,11 +275,11 @@
                         },
                     },
                     {
-                        name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, 
+                        name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, 
                         editoptions: {
                             dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
                             dataInit: function (elem) {
-                                $(elem).width(115);
+                                $(elem).width(295);
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
