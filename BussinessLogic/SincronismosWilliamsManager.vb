@@ -11524,7 +11524,12 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    'Campo 28 CUITPlantaOrigen: Esta viniendo el CUIT y Nombre del Puerto de descarga, y tendría que venir si es un CDC de la A.C.A., el código de A.C.A. de la
+
+
+
+                    'Campo 28 CUITPlantaOrigen: 
+                    '   Esta viniendo el CUIT y Nombre del Puerto de descarga, y tendría que venir 
+                    ' si es un CDC de la A.C.A., el código de A.C.A. de la
                     '             Planta del CDC, en vuestro caso son:  
                     '100102 PLANTA CDC C. M. NAON
                     '100104 PLANTA CDC PEHUAJO
@@ -11533,7 +11538,7 @@ Namespace Pronto.ERP.Bll
                     '#8559 consulta
                     If .IsEnumSyngentaDivisionNull Then .EnumSyngentaDivision = ""
                     If .EnumSyngentaDivision <> "" Then
-                        sb &= CodigosACA_Planta(.EnumSyngentaDivision)
+                        sb &= JustificadoIzquierda(CodigosACA_Planta(.EnumSyngentaDivision), 14) + JustificadoIzquierda(.EnumSyngentaDivision.ToUpper, 30)
                     Else
                         sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
                         sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPlantaOrigen	STRING(30)	Nombre Planta Origen)    497)    526
@@ -11854,17 +11859,43 @@ Namespace Pronto.ERP.Bll
 
         Private Shared Function CodigosACA_Planta(EnumSygentaACA As String) As String
 
+            'Campo 28 CUITPlantaOrigen: Esta viniendo el CUIT y Nombre del Puerto de descarga, y tendría que venir si es un CDC de la A.C.A., el código de A.C.A. de la
+            '             Planta del CDC, en vuestro caso son:  
+            '100102 PLANTA CDC C. M. NAON
+            '100104 PLANTA CDC PEHUAJO
+            '        Si es una Cooperativa o un Tercero, va el CUIT.
+
+
+
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+
 
             Select Case EnumSygentaACA
-                Case "CDC Pehua.", "CDC Olavar", "CDC Naon", "CDC G.Vill", "CDC Iriart", "CDC Wright"
+                Case "CDC Pehua.", "CDC Olavar", "CDC G.Vill", "CDC Iriart", "CDC Wright"
                     Return "100102"
+
+                Case "CDC Naon"
+                    Return "100104"
+
                 Case Else
-                    Return ""
+                    Return "100001"
             End Select
             '100102 PLANTA CDC C. M. NAON
             '100104 PLANTA CDC PEHUAJO
 
 
+            '100093 ACA Olavarria 100126 Planta Olavarria
+            '100073 ACA Huanguelen 100113 Planta Huanguelen
+            '100068 ACA Villegas 100106 Planta Villegas
+            '100079 ACA E. Castex 100116 Planta E. Castex (Bajo el mismo código entra Santa Rosa, Winifreda y Colonia Barón)
+            '100067 ACA Pehuajo 100104 Planta Pehuajo
+            '100078 ACA BB. A Dest Usa los puertos de destino donde recibe. 
+            '100001 ACA Exportación Usa los puertos de destino donde recibe.
+            '100002 ACA Corredor (Comprador y/o Vendedor)
 
 
         End Function
