@@ -326,7 +326,7 @@ Public Class CartaDePorteManager
         Public idcliente As Integer?
     End Class
 
-    Public Shared Function excepciones(SC As String, Optional idcliente As Integer = 0) As List(Of aaa)
+    Public Shared Function excepcionesAcopios(SC As String, Optional idcliente As Integer = 0) As List(Of aaa)
         'Get
 
         If True Then
@@ -395,8 +395,8 @@ Public Class CartaDePorteManager
         Return q
 
 
-        Dim s = excepciones(SC)
-        For n = 0 To excepciones(SC).Count - 1
+        Dim s = excepcionesAcopios(SC)
+        For n = 0 To excepcionesAcopios(SC).Count - 1
             If s(n).desc = descripcionAcopio Then Return s(n).idacopio
         Next
 
@@ -7436,7 +7436,7 @@ Public Class CartaDePorteManager
                 If (InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0) Then 'por ahora solo reviso los casos de A.C.A
 
 
-                    If (CartaDePorteManager.excepciones(SC, .Titular).Count > 1 And .Acopio1 <= 0) Then
+                    If (CartaDePorteManager.excepcionesAcopios(SC, .Titular).Count > 1 And .Acopio1 <= 0) Then
                         ms = "Falta elegir a qué acopio corresponde el titular"
                         Return False
                     End If
@@ -7447,7 +7447,7 @@ Public Class CartaDePorteManager
                     If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden2).ToUpper, "A.C.A") > 0) Then 'por ahora solo reviso los casos de A.C.A
 
                         If (.CuentaOrden2 > 0) Then
-                            If (CartaDePorteManager.excepciones(SC, .CuentaOrden2).Count > 1 And .Acopio3 <= 0) Then
+                            If (CartaDePorteManager.excepcionesAcopios(SC, .CuentaOrden2).Count > 1 And .Acopio3 <= 0) Then
                                 'rcomercial
                                 ms = "Falta elegir a qué acopio corresponde el remitente comercial"
                                 Return False
@@ -7461,7 +7461,7 @@ Public Class CartaDePorteManager
                     If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden1).ToUpper, "A.C.A") > 0) Then 'por ahora solo reviso los casos de A.C.A
 
                         If (.CuentaOrden1 > 0) Then
-                            If (CartaDePorteManager.excepciones(SC, .CuentaOrden1).Count > 1 And .Acopio2 <= 0) Then
+                            If (CartaDePorteManager.excepcionesAcopios(SC, .CuentaOrden1).Count > 1 And .Acopio2 <= 0) Then
                                 'intermediario
                                 ms = "Falta elegir a qué acopio corresponde el intermediario"
                                 Return False
@@ -9055,7 +9055,8 @@ Public Class CartaDePorteManager
         Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
 
-        si es un tiff paginado
+        'si es un tiff paginado
+        'getallpages()
 
 
         If InStr(nombrenuevo.ToUpper, "TK") Then
@@ -9110,23 +9111,23 @@ Public Class CartaDePorteManager
 
 
 
-    private List<Image> GetAllPages(string file)
-        {
-            List<Image> images = new List<Image>();
-            Bitmap bitmap = (Bitmap)Image.FromFile(file);
-            int count = bitmap.GetFrameCount(FrameDimension.Page);
-            for (int idx = 0; idx < count; idx++)
-            {
-                // save each frame to a bytestream
-                bitmap.SelectActiveFrame(FrameDimension.Page, idx);
-                MemoryStream byteStream = new MemoryStream();
-                bitmap.Save(byteStream, ImageFormat.Tiff);
+    'private List<Image> GetAllPages(string file)
+    '    {
+    '        List<Image> images = new List<Image>();
+    '        Bitmap bitmap = (Bitmap)Image.FromFile(file);
+    '        int count = bitmap.GetFrameCount(FrameDimension.Page);
+    '        for (int idx = 0; idx < count; idx++)
+    '        {
+    '            // save each frame to a bytestream
+    '            bitmap.SelectActiveFrame(FrameDimension.Page, idx);
+    '            MemoryStream byteStream = new MemoryStream();
+    '            bitmap.Save(byteStream, ImageFormat.Tiff);
 
-                // and then create a new Image from it
-                images.Add(Image.FromStream(byteStream));
-            }
-            return images;
-        }
+    '            // and then create a new Image from it
+    '            images.Add(Image.FromStream(byteStream));
+    '        }
+    '        return images;
+    '    }
 
 
     Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
@@ -20869,7 +20870,7 @@ Public Class LogicaImportador
                     (.CuentaOrden1 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0) _
                     Or _
                     (.CuentaOrden2 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0) Then
-                    Dim excep = CartaDePorteManager.excepciones(SC)
+                    Dim excep = CartaDePorteManager.excepcionesAcopios(SC)
 
                     'Const otros = Array.FindIndex(excep, AddressOf EsOTROS)
                     Dim otros As Long
