@@ -2500,7 +2500,7 @@ Public Class CartaDePorteManager
                                          , _
                                          CCOaddress, _
                                             truquito _
-                                            , "Williams Entregas" _
+                                             , "Williams Entregas" _
                                        )
 
                     End If
