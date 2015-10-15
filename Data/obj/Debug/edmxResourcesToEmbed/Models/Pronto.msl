@@ -4446,7 +4446,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DetalleConciliaciones">
+    <EntitySetMapping Name="DetalleConciliacionesContables">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleConciliacione">
         <MappingFragment StoreEntitySet="DetalleConciliaciones">
           <ScalarProperty Name="ControladoNoConciliado" ColumnName="ControladoNoConciliado" />
@@ -6192,6 +6192,67 @@
           <ScalarProperty Name="IdValor" ColumnName="IdValor" />
           <ScalarProperty Name="IdDepositoBancario" ColumnName="IdDepositoBancario" />
           <ScalarProperty Name="IdDetalleDepositoBancario" ColumnName="IdDetalleDepositoBancario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleValoresCuentas">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleValoresCuenta">
+        <MappingFragment StoreEntitySet="DetalleValoresCuentas">
+          <ScalarProperty Name="CotizacionMonedaDestino" ColumnName="CotizacionMonedaDestino" />
+          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+          <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+          <ScalarProperty Name="IdCuentaGasto" ColumnName="IdCuentaGasto" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="Haber" ColumnName="Haber" />
+          <ScalarProperty Name="Debe" ColumnName="Debe" />
+          <ScalarProperty Name="CodigoCuenta" ColumnName="CodigoCuenta" />
+          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+          <ScalarProperty Name="IdDetalleValorCuentas" ColumnName="IdDetalleValorCuentas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleValoresProvincias">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleValoresProvincia">
+        <MappingFragment StoreEntitySet="DetalleValoresProvincias">
+          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+          <ScalarProperty Name="IdDetalleValorProvincias" ColumnName="IdDetalleValorProvincias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleValoresRubrosContables">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleValoresRubrosContable">
+        <MappingFragment StoreEntitySet="DetalleValoresRubrosContables">
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="IdRubroContable" ColumnName="IdRubroContable" />
+          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+          <ScalarProperty Name="IdDetalleValorRubrosContables" ColumnName="IdDetalleValorRubrosContables" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ValoresFaltantesVistos">
+      <EntityTypeMapping TypeName="DemoProntoModel.ValoresFaltantesVisto">
+        <MappingFragment StoreEntitySet="ValoresFaltantesVistos">
+          <ScalarProperty Name="MotivoMarcado" ColumnName="MotivoMarcado" />
+          <ScalarProperty Name="FechaMarcado" ColumnName="FechaMarcado" />
+          <ScalarProperty Name="IdUsuarioMarco" ColumnName="IdUsuarioMarco" />
+          <ScalarProperty Name="NumeroCheque" ColumnName="NumeroCheque" />
+          <ScalarProperty Name="IdBancoChequera" ColumnName="IdBancoChequera" />
+          <ScalarProperty Name="IdValorFaltanteVisto" ColumnName="IdValorFaltanteVisto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallePlazosFijosRubrosContables">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetallePlazosFijosRubrosContable">
+        <MappingFragment StoreEntitySet="DetallePlazosFijosRubrosContables">
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IdRubroContable" ColumnName="IdRubroContable" />
+          <ScalarProperty Name="IdPlazoFijo" ColumnName="IdPlazoFijo" />
+          <ScalarProperty Name="IdDetallePlazoFijoRubrosContables" ColumnName="IdDetallePlazoFijoRubrosContables" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
