@@ -80,7 +80,7 @@ if (bPersisteArbol) {
 
 
 /////////////////////////////////////////////
-if (true) {
+if (false) {
 
     jQuery("#addtree").jqGrid({
 
@@ -258,7 +258,7 @@ else {
             datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
             colModel: [
                 { name: "id", width: 1 },
-                { name: "descr", width: 150 },
+                { name: "descr", width: 150  , searchoptions: { sopt: ['cn', 'eq'] }  },
                 { name: "Name2", width: 1 },
                 { name: "Name3", width: 1 },
                 { name: "Name4", width: 1 },
@@ -279,7 +279,7 @@ else {
 
             },
 
-            pager: "#addtree2Pager",
+            // pager: "#addtree2Pager",
             rowNum: 500,
             //rowList: [1, 2, 10],
             viewrecords: true,
@@ -289,6 +289,13 @@ else {
             //ignoreCase: true,
 
         });
+
+        jQuery("#addtree2").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
+
     }
 }
 ///////////////////////////////////////////

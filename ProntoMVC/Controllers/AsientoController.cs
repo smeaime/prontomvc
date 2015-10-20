@@ -976,8 +976,39 @@ namespace ProntoMVC.Controllers
 
 
         public virtual ActionResult Asientos_DynamicGridData
-    (string sidx, string sord, int page, int rows, bool _search, string filters)
+    (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
+
+            //            if (FechaInicial != string.Empty)
+            //          {
+
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaDesde = DateTime.MinValue;
+            }
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            //        }
+
+    
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+        
             string campo = String.Empty;
             int pageSize = rows; // ?? 20;
             int currentPage = page; // ?? 1;
@@ -985,18 +1016,27 @@ namespace ProntoMVC.Controllers
             int totalPages = 0;
 
 
-            var Req = db.Asientos.AsQueryable();
+            // var Req = db.Asientos.AsQueryable();
             //  Req = Req.Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI")).AsQueryable();
+            var q = (from a in db.Asientos where a.FechaAsiento >= FechaDesde && a.FechaAsiento <= FechaHasta select a).AsQueryable();
 
+
+            
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Asiento>
-                                ("",
-                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
-                                 );
+            //var pagedQuery = Filters.FiltroGenerico<Data.Models.Asiento>
+            //                    ("",
+            //                    sidx, sord, page, rows, _search, filters, db, ref totalRecords
+            //                     );
+
+            List<Data.Models.Asiento> pagedQuery =
+    Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Asiento>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+      
+
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
             //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
