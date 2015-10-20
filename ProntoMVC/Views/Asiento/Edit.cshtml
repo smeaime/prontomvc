@@ -152,10 +152,8 @@
 
 
                             <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
-                                   style="font-size: 16px; 
-                                ">
-
-                            </table>
+                                   style="font-size: 16px;
+                                "></table>
                             <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
 
                         </div>
@@ -352,17 +350,33 @@
                             'Enviar a libro',
                         'Pase IVA',
                         'Nro Comprobante',
-                        'Porcentaje de IVA', 'IdObra','IdMoneda'
+                        'Porcentaje de IVA', 'IdObra', 'IdMoneda'
                 ],
                 colModel: [
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdDetalleAsiento', label: 'TB', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdCuenta', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'Item', index: 'Item', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
+                                {
+                                    name: 'IdDetalleAsiento', label: 'TB',
+                                    index: 'IdDetalleAsiento', align: 'center', width: 80, key:true,
+                                    sortable: false, editable: false, search: false, hidden: true
+                                }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+
+                            
+                                 {
+                                     name: 'IdCuenta', formoptions: { rowpos: 3, colpos: 1 },
+                                     index: 'IdCuenta', label: 'TB', align: 'left', width: 85, editable: true,
+                                     hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true }
+                                 },
+
+
+
+                                {
+                                    name: 'Item', index: 'Item', label: 'TB', align: 'left', width: 50, editable: true,
+                                    search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] }
+                                },
                                 { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, hidden: false, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
 
                                 {
-                                    name: 'Cuenta', formoptions: {  label: "Cuenta" }, index: 'Cuenta', align: 'left', width: 250,
+                                    name: 'Cuenta', formoptions: { label: "Cuenta" }, index: 'Cuenta', align: 'left', width: 250,
                                     hidden: false,
                                     editable: true, edittype: 'text',
                                     editoptions: {
@@ -383,23 +397,19 @@
                                                     // cómo hago si la modificacion se hizo en modo inline??????
 
 
-                                                    //if ($($("#Lista").jqGrid("getInd", rowid, true)).attr("editable") === "1") {
-                                                    // the row having id=rowid is in editing mode
+                                                    if ($($("#Lista").jqGrid("getInd", rowid, true)).attr("editable") === "1") {
+                                                        // the row having id=rowid is in editing mode
 
-
-                                                    //                                            }
-                                                    //                                          else {
-
-
-
-                                                    //                                            $("#IdCuenta").val(ui.id);
-                                                    //                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
-                                                    //                                            $("#CuentaGasto").val(ui.title);
-
-                                                    $("#IdCuenta").val(ui.item.id);
-                                                    $("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
-                                                    $("#CuentaGasto").val(ui.item.title);
-                                                    //}
+                                                        var rowid = $('#ListaArticulos').getGridParam('selrow');
+                                                        $('#Lista').jqGrid('setCell', rowid, 'IdCuenta', ui.item.id);
+                                                        $('#Lista').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
+                                                        $('#Lista').jqGrid('setCell', rowid, 'CuentaGasto', ui.item.title);
+                                                    }
+                                                    else {
+                                                        $("#IdCuenta").val(ui.item.id);
+                                                        $("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                        $("#CuentaGasto").val(ui.item.title);
+                                                    }
 
                                                 },
                                                 focus: function (event, ui) {
@@ -619,7 +629,7 @@
                                     edittype: 'select', // formatter: 'select',
                                     editrules: { required: false },
                                     editoptions: {
-                                        dataUrl: ROOT +  'Moneda/GetMonedas',
+                                        dataUrl: ROOT + 'Moneda/GetMonedas',
                                         dataInit: function (elem) {
                                             $(elem).width(40);
                                         },
@@ -630,7 +640,7 @@
                                                     // form editing
                                                     $('#IdMonedaDestino').val(this.value);
                                                     Moneda_Cotizacion(null, this.value, function (cotiz) {
-                                                                    $('#CotizacionMoneda').val (cotiz);
+                                                        $('#CotizacionMoneda').val(cotiz);
                                                     });
                                                 } else {
                                                     $td = $this.closest("td");
@@ -639,9 +649,9 @@
                                                         var rowid = $('#Lista').getGridParam('selrow');
                                                         $('#Lista').jqGrid('setCell', rowid, 'IdMonedaDestino', this.value);
                                                         Moneda_Cotizacion(null, this.value, function (cotiz) {
-                                                                $('#Lista').jqGrid('setCell', rowid, 'CotizacionMoneda', cotiz);
+                                                            $('#Lista').jqGrid('setCell', rowid, 'CotizacionMoneda', cotiz);
                                                         });
-                                                        
+
                                                     } else {
                                                         // inline editing
                                                     }
@@ -664,8 +674,8 @@
                                         label: "Enviar a libros"
                                     }
                                     , index: 'Libro',
-                                    align: 'center', width: 100, editable: true, hidden: false,
-                                    edittype: 'select', formatter: 'select',
+                                     align: 'center', width: 100, editable: true, hidden: false,
+                                     edittype: 'select', formatter: 'select',
                                      // formatter: radioFormatter, unformat: unformatRadio,
                                      editrules: {
                                          required: false
@@ -690,8 +700,8 @@
                                             label: "El pase es"
                                         }
                                         , index: 'TipoImporte',
-                                        align: 'center', width: 100, editable: true, hidden: false,
-                                        edittype: 'select', formatter: 'select',
+                                    align: 'center', width: 100, editable: true, hidden: false,
+                                    edittype: 'select', formatter: 'select',
                                     // edittype: 'custom',
                                     // formatter: radioFormatter, unformat: unformatRadio,
                                     editrules: {
@@ -945,7 +955,7 @@
 
                         var iddeta = data['IdDetalleAsiento'];
                         //alert(iddeta);
-                        if (!iddeta) continue;
+                        //if (!iddeta) continue;
 
 
 
@@ -1065,7 +1075,7 @@
 
 
 
-      
+
 
 
 
@@ -1168,6 +1178,18 @@
 
                     },
 
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+
+
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    },
 
                     error: function (xhr, textStatus, exceptionThrown) {
                         var errorData = $.parseJSON(xhr.responseText);
@@ -1180,6 +1202,8 @@
                         alert(errorMessages.join("\n").replace(/<br\/>/g, '\n'));
                     }
 
+
+              
 
 
 

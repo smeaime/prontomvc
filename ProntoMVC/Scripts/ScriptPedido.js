@@ -1007,9 +1007,14 @@ $(function () {
 
                         { name: 'IdDetallePedido', formoptions: { rowpos: 2, colpos: 1 },
                             index: 'IdDetallePedido', label: 'TB', align: 'left', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }
+                            hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 },
+                            editrules: { edithidden: true, required: false }
                         },
-                        { name: 'IdArticulo', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdArticulo', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true} },
+                        {
+                            name: 'IdArticulo', formoptions: { rowpos: 3, colpos: 1 },
+                            index: 'IdArticulo', label: 'TB', align: 'left', width: 85, editable: true, 
+                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true }
+                        },
                         { name: 'IdUnidad', formoptions: { rowpos: 4, colpos: 1 },
                             index: 'IdUnidad', label: 'TB', align: 'left', width: 85, editable: true,
                             hidden: true, editrules: { edithidden: true, required: false, custom: true, custom_func: mypricecheck }

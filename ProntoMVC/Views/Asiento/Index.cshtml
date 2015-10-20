@@ -148,7 +148,7 @@
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'Acciones', 'IdCuenta', 'Número', 'Fecha', 'Tipo cuenta',
-            'Apertura', 'Concepto', 'Debe', 'Haber', 'Diferencia',
+           'IdCuentaSubdiario', 'Apertura', 'Concepto', 'Debe', 'Haber', 'Diferencia',
             'Ingreso', 'Fecha ingreso', 'Modifico'
 
             ],
@@ -160,6 +160,8 @@
                         { name: 'Numero', index: 'Numero', align: 'left', width: 100, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'Fecha', index: 'Fecha', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'TiposCuenta.Descripcion', index: 'TiposCuenta.Descripcion', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+
+                        { name: 'IdCuentaSubdiario', index: 'Jerarquia', align: 'left', width: 100, editable: false, search: true, hidden: true, searchoptions: { sopt: ['cn'] } },
 
                         { name: 'Apertura', index: 'Jerarquia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Concepto', index: 'Concepto', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },

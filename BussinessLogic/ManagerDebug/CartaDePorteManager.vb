@@ -15675,6 +15675,7 @@ Public Class LogicaFacturacion
         If acopios.Count > 1 Then
             'Return vbCrLf + "Acopios id" + nombreacopio(acopios(0), SC)
             s = nombreacopio(ccc(0), SC)
+            america no es de ldc??
             If InStr(s, "LDC") And EsDeExportacion(idfactura, SC) Then s = "ELEVACION "
         Else
             'Return ""
@@ -15686,7 +15687,16 @@ Public Class LogicaFacturacion
 
 
     Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
-        Return True
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
+        Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+
+        Dim expo = From x In oListaCDP
+                    Where x.Exporta = "SI"
+               
+
+        Return expo.Count > 0
 
     End Function
 
@@ -18535,8 +18545,11 @@ Public Class barras
         Try
             PyI25 = CreateObject("PyI25")
         Catch ex As Exception
-            MandarMailDeError("Falla la imagen del codigo de barras")
-            Throw
+            If Not Debugger.IsAttached Then
+                MandarMailDeError("Falla la imagen del codigo de barras")
+                Throw
+            End If
+            Return ""
         End Try
 
 
