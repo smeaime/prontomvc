@@ -11538,7 +11538,7 @@ Namespace Pronto.ERP.Bll
                     '#8559 consulta
                     If .IsEnumSyngentaDivisionNull Then .EnumSyngentaDivision = ""
                     If .EnumSyngentaDivision <> "" Then
-                        sb &= JustificadoIzquierda(CodigosACA_Planta(.EnumSyngentaDivision), 14) + JustificadoIzquierda(.EnumSyngentaDivision.ToUpper, 30)
+                        sb &= JustificadoIzquierda(CodigosACA_Planta_acopio(.EnumSyngentaDivision), 14) + JustificadoIzquierda(.EnumSyngentaDivision.ToUpper, 30)
                     Else
                         sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
                         sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPlantaOrigen	STRING(30)	Nombre Planta Origen)    497)    526
@@ -11857,7 +11857,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Private Shared Function CodigosACA_Planta(EnumSygentaACA As String) As String
+        Private Shared Function CodigosACA_Planta_acopio(EnumSygentaACA As String) As String
 
             'Campo 28 CUITPlantaOrigen: Esta viniendo el CUIT y Nombre del Puerto de descarga, y tendría que venir si es un CDC de la A.C.A., el código de A.C.A. de la
             '             Planta del CDC, en vuestro caso son:  
@@ -11865,7 +11865,7 @@ Namespace Pronto.ERP.Bll
             '100104 PLANTA CDC PEHUAJO
             '        Si es una Cooperativa o un Tercero, va el CUIT.
 
-
+            'Consultas 8559 y 12807
 
             'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
             'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
