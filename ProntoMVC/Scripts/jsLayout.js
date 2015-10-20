@@ -265,6 +265,8 @@ else {
                 { name: "Name5", width: 1 },
             ],
 
+            ignoreCase: true,
+
             loadComplete: function (data) {
                 refrescarFondo_addtree();
 
