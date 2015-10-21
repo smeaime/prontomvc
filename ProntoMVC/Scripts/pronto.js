@@ -215,6 +215,48 @@ function RefrescaAnchoJqgrids() {
 }
 
 
+function PopupCentrar() {
+    var grid = $("#Lista");
+
+    //return ;
+    var dlgDiv = $("#editmod" + grid[0].id);
+
+    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+
+    //            $("#editmod" + grid[0].id + " [type=button]").attr("class", "btn btn-primary");
+    //            $(":button").attr("class", "btn btn-primary");
+    $("#editmod" + grid[0].id).find('#FechaEntrega').width(160);
+
+    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+    $("#sData").attr("class", "btn btn-primary");
+    $("#sData").css("color", "white");
+    $("#sData").css("margin-right", "20px");
+    $("#cData").attr("class", "btn");
+
+    //            $("#editmod" + grid[0].id).find(":hr").remove();
+
+    $("#editmod" + grid[0].id).find('.ui-icon-disk').remove();
+    $("#editmod" + grid[0].id).find('.ui-icon-close').remove();
+
+    //                    $("#sData").addClass("btn");
+    //                    $("#cData").addClass("btn");
+
+
+    var parentDiv = dlgDiv.parent(); // div#gbox_list
+    var dlgWidth = dlgDiv.width();
+    var parentWidth = parentDiv.width();
+    var dlgHeight = dlgDiv.height();
+    var parentHeight = parentDiv.height();
+
+    var left = (screen.width / 2) - (dlgWidth / 2) + "px";
+    var top = ((screen.height / 2) - (dlgHeight / 2) + 50) + "px";
+
+    dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
+    dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
+
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // en este pedazo suelto, se carga el popup de aprobo con la lista de usuarios
 function CargarEmpleadosParaAprobar(fcallback) {
@@ -307,7 +349,7 @@ function RefrescaAnchoGrillaDetalle() {
 
 function ReajustarAlto(g) {
 
-    rows = g.getGridParam("reccount");
+   var rows = g.getGridParam("reccount");
     if (rows >= 4) g.jqGrid('setGridHeight', rows * 40, true);
 
 }
