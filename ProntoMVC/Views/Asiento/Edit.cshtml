@@ -364,7 +364,8 @@
                                  {
                                      name: 'IdCuenta', formoptions: { rowpos: 3, colpos: 1 },
                                      index: 'IdCuenta', label: 'TB', align: 'left', width: 85, editable: true,
-                                     hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true }
+                                     hidden: true, editoptions: { disabled: 'disabled' },
+                                     editrules: { edithidden: true, required: true }
                                  },
 
 
@@ -1640,6 +1641,9 @@
                     //var dlgDiv = $("#editmod" + $("#Lista")[0].id);
                     //dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
                     //dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                    $('#tr_IdCuenta', form).hide();
+                    $('#tr_IdObra', form).hide();
+
                     PopupCentrar();
                 },
                 beforeInitData: function () {
@@ -1652,6 +1656,7 @@
                 },
                 onInitializeForm: function (form) {
                     $('#IdDetalleAsiento', form).val(0);
+
                     $('#Item', form).val(($("#Lista").jqGrid('getCol', 'Item', false, 'max') || 0) + 1);
                 }
                 //beforeShowForm: function (form) { $('#tr_IdDetalleFactura', form).hide(); }
@@ -1666,6 +1671,10 @@
                 closeAfterEdit: true, recreateForm: true, Top: 0,
                 beforeShowForm: function (form) {
                     // "editmodlist"
+                    $('#tr_IdCuenta', form).hide();
+                    $('#tr_IdObra', form).hide();
+
+
                     var dlgDiv = $("#editmod" + $("#Lista")[0].id);
                     var parentDiv = dlgDiv.parent(); // div#gbox_list
                     var dlgWidth = dlgDiv.width();
