@@ -1004,11 +1004,11 @@ namespace ProntoMVC.Controllers
 
             //        }
 
-    
+
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////
-        
+
             string campo = String.Empty;
             int pageSize = rows; // ?? 20;
             int currentPage = page; // ?? 1;
@@ -1021,7 +1021,7 @@ namespace ProntoMVC.Controllers
             var q = (from a in db.Asientos where a.FechaAsiento >= FechaDesde && a.FechaAsiento <= FechaHasta select a).AsQueryable();
 
 
-            
+
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1035,7 +1035,7 @@ namespace ProntoMVC.Controllers
             List<Data.Models.Asiento> pagedQuery =
     Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Asiento>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
 
-      
+
 
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
             //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
@@ -1433,8 +1433,6 @@ namespace ProntoMVC.Controllers
             if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El asiento no tiene items";
 
 
-
-
             foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
             {
                 var c = db.Cuentas.Find(x.IdCuenta);
@@ -1445,6 +1443,7 @@ namespace ProntoMVC.Controllers
                 debe += x.Debe ?? 0;
                 haber += x.Haber ?? 0;
 
+                if ((x.Item ?? 0) <= 0) x.Item=o.DetalleAsientos.Select(y=>y.Item ).Max()  +1;
 
                 if (false && !PorObra)
                 {

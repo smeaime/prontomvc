@@ -258,11 +258,11 @@ else {
             datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
             colModel: [
                 { name: "id", width: 1 },
-                { name: "descr", width: 150  , searchoptions: { sopt: ['cn', 'eq'] }  },
-                { name: "Name2", width: 1 },
-                { name: "Name3", width: 1 },
-                { name: "Name4", width: 1 },
-                { name: "Name5", width: 1 },
+                { name: "descr", width: 400  , searchoptions: { sopt: ['cn', 'eq'] }  },
+                { name: "Name2", width: 1 , hidden:true },
+                { name: "Name3", width: 1, hidden: true },
+                { name: "Name4", width: 1, hidden: true },
+                { name: "Name5", width: 1, hidden: true },
             ],
 
             ignoreCase: true,
