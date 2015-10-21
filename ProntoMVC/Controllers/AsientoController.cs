@@ -1445,7 +1445,7 @@ namespace ProntoMVC.Controllers
                 debe += x.Debe ?? 0;
                 haber += x.Haber ?? 0;
 
-                if ((x.Item ?? 0) <= 0) x.Item=o.DetalleAsientos.Select(y=>y.Item ).Max()  +1;
+                if ((x.Item ?? 0) <= 0) x.Item=o.DetalleAsientos.Select(y=>y.Item ?? 0 ).Max()  +1;
 
                 if (false && !PorObra)
                 {
