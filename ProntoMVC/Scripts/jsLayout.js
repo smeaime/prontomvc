@@ -80,7 +80,7 @@ if (bPersisteArbol) {
 
 
 /////////////////////////////////////////////
-if (false) {
+if (true) {
 
     jQuery("#addtree").jqGrid({
 
@@ -290,6 +290,9 @@ else {
             //gridview: true,
             //ignoreCase: true,
 
+            //treeGrid: true,
+            caption: ""
+
         });
 
         jQuery("#addtree2").filterToolbar({
@@ -325,6 +328,7 @@ $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
 function refrescarFondo_addtree() {
 
     $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+    $('#addtree2 .ui-widget-content').addClass('jqgrid-widget-content');
 
 }
 

@@ -387,7 +387,7 @@ namespace ProntoMVC.Controllers
                 rows = (from child in q
                         select new
                         {
-                            descr = new String('_', ((child.IdItem.Replace("-", "").Length) / 2 - 2) * 5) +
+                            descr = (new String('_', ((child.IdItem.Replace("-", "").Length) / 2 - 2) * 5)).Replace("_", "&nbsp;")  +
                                     (((child.Link ?? "")  =="") ?    child.Descripcion :  child.Link ), // Correspond to the colmodel NAME in javascript
                             
                             // The next one correspond to the colmodel ID in javascript Id
