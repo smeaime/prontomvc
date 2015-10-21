@@ -338,13 +338,13 @@
                 colNames: ['#',
 
                                 'IdDetalleAsiento',
-                           'IdCuenta', 'item',
+                           'IdCuenta', '#',
 
                            'Cuenta',
 
                             'Detalle de cuenta', 'Obra', 'Debe', 'Haber',
 
-                            'Registrar en analitico', 'Detalle',
+                            'Registra analítico', 'Detalle',
                             'Moneda destino', 'Cotiz. moneda destino', 'Importe mon destino',
 
                             'Enviar a libro',
@@ -371,11 +371,11 @@
 
 
                                 {
-                                    name: 'Item', index: 'Item', label: 'TB', align: 'left', width: 50, editable: true,
+                                    name: 'Item', index: 'Item', label: 'TB', align: 'left', width: 30, editable: true,
                                     search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] }
                                 },
                                 {
-                                    name: 'Codigo', index: 'Codigo', align: 'left', width: 50, hidden: false,
+                                    name: 'Codigo', index: 'Codigo', align: 'right', width: 90, hidden: false,
                                     editable: true, search: true
                                     ,editoptions: { disabled: 'disabled' }, editrules: { edithidden: false, required: true }
                                 },
@@ -628,7 +628,7 @@
 
                                  {
                                      name: 'RegistrarEnAnalitico', label: 'TB', index: 'RegistrarEnAnalitico', align: 'center', width: 50,
-                                     editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
+                                     editable: true, edittype: 'checkbox', editoptions: { value: "SI:NO" },
                                      //formatter: "checkbox",
                                      formatter: "SiNoFormatter",
                                      formatoptions: { disabled: false }
@@ -702,7 +702,7 @@
                                          //                         readonly: true,
                                          //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
                                          //defaultValue: OrigenDescripcionDefault,
-                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro compras;" //, size: 3
+                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro compras;:" //, size: 3
                                          //,
                                          //     custom_element: myelem, custom_value: myvalue
                                      }
@@ -1691,6 +1691,9 @@
                     var parentHeight = parentDiv.height();
                     dlgDiv[0].style.top = 100 //Math.round((parentHeight-dlgHeight)/2) + "px";
                     dlgDiv[0].style.left = 200 //Math.round((parentWidth-dlgWidth)/2) + "px";
+
+                    PopupCentrar();
+
                 },
                 afterComplete: function (response, postdata) {
                     calculateTotal();
