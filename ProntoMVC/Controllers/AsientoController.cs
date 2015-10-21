@@ -827,6 +827,8 @@ namespace ProntoMVC.Controllers
 
                     db.SaveChanges();
 
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
                     return Json(new { Success = 1, IdAsiento = Asiento.IdAsiento, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
                 }
                 else
