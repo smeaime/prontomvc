@@ -537,7 +537,8 @@
                                                     //                                            $("#IdCuenta").val(ui.id);
                                                     //                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
                                                     //                                            $("#CuentaGasto").val(ui.title);
-
+                                                    var rowid = $('#Lista').getGridParam('selrow');
+                                                    $('#Lista').jqGrid('setCell', rowid, 'IdObra', ui.item.id);
                                                     $("#IdObra").val(ui.item.id);
                                                     //$("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
                                                     //$("#CuentaGasto").val(ui.item.title);
@@ -741,7 +742,14 @@
                                 { name: 'PorcentajeIVA', label: 'TB', index: 'PorcentajeIVA', align: 'left', width: 70, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
-                                { name: 'IdObra', label: 'TB', key: true, index: 'IdObra', align: 'left', width: 100, editable: false, hidden: true },
+
+                                 {
+                                     name: 'IdObra', index: 'IdObra', label: 'TB', align: 'left', width: 85, editable: true,
+                                     hidden: true, editoptions: { disabled: 'disabled' },
+                                     editrules: { edithidden: true, required: false }
+                                 },
+
+
                                 { name: 'IdMonedaDestino', label: 'TB', key: true, index: 'IdMonedaDestino', align: 'left', width: 100, editable: false, hidden: true },
 
 
