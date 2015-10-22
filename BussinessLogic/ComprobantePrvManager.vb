@@ -968,7 +968,7 @@ Namespace Pronto.ERP.Bll
 
             'oCont = GetObjectContext
 
-            oDet = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
+            'oDet = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
             'If oCont Is Nothing Then
             '    'CreateObject("MTSPronto.General") dfgh
             'Else
@@ -1094,7 +1094,7 @@ Mal:
             Dim mvarIdMonedaPesos As Integer
             Dim mvarTotalMonedaLocal As Double, mvarTotalMonedaExtranjera As Double
 
-            oSrv = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
+            ' oSrv = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
 
             oRs = ParametroManager.TraerRenglonUnicoDeTablaParametroOriginal(SC)
 
