@@ -13,9 +13,12 @@ Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en O
 
 
 ASIENTO
-	en modo inline, la modificacion del SI/NO del "registra analitico" se convierte en check, o en true/false
-
-
+	cuando deja de ser editable el asiento?
+	no anda bien el borrar de la grilla de dtalle
+	anda el eliminar asiento?
+	en modo inline, la modificacion del SI/NO del "registra analitico" se convierte en check, o en true/false -LISTO!
+	por qué "enviar a libro" tiene undefined, y "pase a iva" no? -LISTO!
+	cuando pasas de pagina en la grilla axu, agrega un renglon en blanco LISTO!
 
 
 PASEO general, que no le explote a Claudio en la mano:

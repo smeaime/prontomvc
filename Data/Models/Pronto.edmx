@@ -652,6 +652,7 @@
           <Property Name="CalidadHumedadResultado" Type="numeric" Precision="18" Scale="2" />
           <Property Name="CalidadGastosFumigacionResultado" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Acopio6" Type="int" />
+          <Property Name="ConDuplicados" Type="int" />
         </EntityType>
         <EntityType Name="CartasDePorteDetalle">
           <Key>
@@ -7062,6 +7063,18 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleNotasDebito_Conceptos_IdConcepto">
+          <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="0..1" />
+          <End Role="DetalleNotasDebito" Type="Self.DetalleNotasDebito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conceptos">
+              <PropertyRef Name="IdConcepto" />
+            </Principal>
+            <Dependent Role="DetalleNotasDebito">
+              <PropertyRef Name="IdConcepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetalleNotasDebito_NotasDebito">
           <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="0..1" />
           <End Role="DetalleNotasDebito" Type="Self.DetalleNotasDebito" Multiplicity="*" />
@@ -7926,6 +7939,30 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NotasDebito_Clientes_IdCliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="NotasDebito">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotasDebito_Empleados_IdUsuarioIngreso">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="NotasDebito">
+              <PropertyRef Name="IdUsuarioIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NotasDebito_IdCodigoIva">
           <End Role="DescripcionIva" Type="Self.DescripcionIva" Multiplicity="0..1" />
           <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
@@ -7995,6 +8032,18 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             </Principal>
             <Dependent Role="NotasDebito">
               <PropertyRef Name="IdVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotasDebito_Monedas_IdMoneda">
+          <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+          <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monedas">
+              <PropertyRef Name="IdMoneda" />
+            </Principal>
+            <Dependent Role="NotasDebito">
+              <PropertyRef Name="IdMoneda" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9627,6 +9676,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             <End Role="Conceptos" EntitySet="Conceptos" />
             <End Role="DetalleNotasDebito" EntitySet="DetalleNotasDebito" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleNotasDebito_Conceptos_IdConcepto" Association="Self.FK_DetalleNotasDebito_Conceptos_IdConcepto">
+            <End Role="Conceptos" EntitySet="Conceptos" />
+            <End Role="DetalleNotasDebito" EntitySet="DetalleNotasDebito" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetalleNotasDebito_NotasDebito" Association="Self.FK_DetalleNotasDebito_NotasDebito">
             <End Role="NotasDebito" EntitySet="NotasDebito" />
             <End Role="DetalleNotasDebito" EntitySet="DetalleNotasDebito" />
@@ -9915,6 +9968,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="NotasDebito" EntitySet="NotasDebito" />
           </AssociationSet>
+          <AssociationSet Name="FK_NotasDebito_Clientes_IdCliente" Association="Self.FK_NotasDebito_Clientes_IdCliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="NotasDebito" EntitySet="NotasDebito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotasDebito_Empleados_IdUsuarioIngreso" Association="Self.FK_NotasDebito_Empleados_IdUsuarioIngreso">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="NotasDebito" EntitySet="NotasDebito" />
+          </AssociationSet>
           <AssociationSet Name="FK_NotasDebito_IdCodigoIva" Association="Self.FK_NotasDebito_IdCodigoIva">
             <End Role="DescripcionIva" EntitySet="DescripcionIva" />
             <End Role="NotasDebito" EntitySet="NotasDebito" />
@@ -9937,6 +9998,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           </AssociationSet>
           <AssociationSet Name="FK_NotasDebito_IdVendedor" Association="Self.FK_NotasDebito_IdVendedor">
             <End Role="Vendedores" EntitySet="Vendedores" />
+            <End Role="NotasDebito" EntitySet="NotasDebito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotasDebito_Monedas_IdMoneda" Association="Self.FK_NotasDebito_Monedas_IdMoneda">
+            <End Role="Monedas" EntitySet="Monedas" />
             <End Role="NotasDebito" EntitySet="NotasDebito" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenesCompra_Aprobo" Association="Self.FK_OrdenesCompra_Aprobo">
@@ -21425,6 +21490,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <NavigationProperty Name="CartasDePorteDetalles" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3" FromRole="CartasDePorte" ToRole="CartasDePorteDetalle" />
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" FromRole="CartasDePorte" ToRole="Vendedor" />
           <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="CartasDePorte" ToRole="DetalleFactura" />
+          <Property Name="ConDuplicados" Type="Int32" />
         </EntityType>
         <EntityType Name="CartasDePorteDetalle">
           <Key>
@@ -27975,6 +28041,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySetMapping Name="CartasDePortes">
             <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
               <MappingFragment StoreEntitySet="CartasDePorte">
+                <ScalarProperty Name="ConDuplicados" ColumnName="ConDuplicados" />
                 <ScalarProperty Name="Acopio6" ColumnName="Acopio6" />
                 <ScalarProperty Name="CalidadGastosFumigacionResultado" ColumnName="CalidadGastosFumigacionResultado" />
                 <ScalarProperty Name="CalidadHumedadResultado" ColumnName="CalidadHumedadResultado" />

@@ -761,6 +761,8 @@
 
                 loadComplete: function (data) {
                     calculateTotal();
+                    AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0", "RegistrarEnAnalitico": "NO" });
+
                     ReajustarAlto($("#Lista"));
 
                 },
