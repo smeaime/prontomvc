@@ -49,6 +49,9 @@ Imports System.Web.UI.WebControls
 Imports Word = Microsoft.Office.Interop.Word
 Imports Excel = Microsoft.Office.Interop.Excel
 
+Imports ProntoMVC.Data.Models
+
+
 Imports System.Net
 'Imports System.Configuration
 'Imports System.Web.Security
@@ -6295,8 +6298,8 @@ Public Class CartaDePorteManager
         myCartaDePorte = CartaDePorteDB.GetItem(SC, id)
 
         With myCartaDePorte
-
-            Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+            Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+            'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
             Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = id).SingleOrDefault
 
             Try
@@ -6392,7 +6395,7 @@ Public Class CartaDePorteManager
 
                 Try
 
-                    Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                    Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
                                                         Where i.IdCartaDePorte = id _
                                                         And i.Campo = "CalidadGastoDeSecada"
                                                     ).SingleOrDefault
@@ -6447,11 +6450,11 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function GetDetalle(nombrecampo As String, db As LinqCartasPorteDataContext, id As Long) As Decimal
+    Shared Function GetDetalle(nombrecampo As String, db As DemoProntoEntities, id As Long) As Decimal
 
         Try
 
-            Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+            Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
                                                 Where i.IdCartaDePorte = id _
                                                 And i.Campo = nombrecampo
                                             ).SingleOrDefault
@@ -6467,23 +6470,24 @@ Public Class CartaDePorteManager
 
     End Function
 
-    Shared Sub SetDetalle(nombrecampo As String, db As LinqCartasPorteDataContext, id As Long, valor As Decimal)
+    Shared Sub SetDetalle(nombrecampo As String, db As DemoProntoEntities, id As Long, valor As Decimal)
 
 
 
 
         Try
 
-            Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+            Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
                                                 Where i.IdCartaDePorte = id _
                                                 And i.Campo = nombrecampo
                                             ).SingleOrDefault
             If IsNothing(oDet) Then
-                oDet = New CartasDePorteDetalle
+                oDet = New ProntoMVC.Data.Models.CartasDePorteDetalle
                 oDet.IdCartaDePorte = id
                 oDet.Campo = nombrecampo
                 oDet.Valor = valor
-                db.CartasDePorteDetalles.InsertOnSubmit(oDet)
+                'acá había un insertonsubmit
+                db.SaveChanges()
             Else
                 oDet.Valor = valor
             End If
@@ -6713,10 +6717,12 @@ Public Class CartaDePorteManager
                 '- Replicar todas las modificaciones realizadas en el original inclusive la imagen y exceptuando los campos liberados según el punto anterior.
 
 
+                Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
                 Try
 
-                    Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+                    'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+                    'Dim db As New ProntoMVC.Data.Models.DemoProntoEntities(Encriptar(SC))
 
 
                     Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = CartaDePorteId).SingleOrDefault
@@ -6926,18 +6932,25 @@ Public Class CartaDePorteManager
                                            And e.SubnumeroVagon = oCarta.SubnumeroVagon _
                                             And e.IdCartaDePorte <> CartaDePorteId).ToList
 
+
+
+
                         If myCartaDePorte.Anulada = "SI" Then
                             'si está anulando una copia, y el unico que queda es el original, entonces ponerlo "como no copiado"
                             If duplicados.Count = 1 Then
                                 duplicados(0).SubnumeroDeFacturacion = 0 '-1
+                                duplicados(0).ConDuplicados = 0
                             End If
                         Else
                             'si no es una anulacion, entonces le paso normalmente a su familia los cambios
+                            oCarta.ConDuplicados = duplicados.Count
+
                             Try
                                 For Each c In duplicados
+                                    c.ConDuplicados = duplicados.Count
                                     CopiarCarta(oCarta, c)
                                     'db.CartasDePortes.
-                                    db.SubmitChanges()
+                                    db.SaveChanges()
                                 Next
 
                             Catch ex As Exception
@@ -6953,7 +6966,7 @@ Public Class CartaDePorteManager
 
 
 
-                    db.SubmitChanges()
+                    db.SaveChanges()
 
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
@@ -6973,7 +6986,6 @@ Public Class CartaDePorteManager
 
                 If .Anulada = "SI" Then
                     'si de la familia solo queda una sin rechazar, ponela como original independiente (o sea, subnumerodefacturacion=-1)
-                    Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
                     Dim duplicados = ( _
                                 From e In db.CartasDePortes _
                                 Where e.NumeroCartaDePorte = .NumeroCartaDePorte _
@@ -6982,8 +6994,9 @@ Public Class CartaDePorteManager
                                  And e.Anulada <> "SI").AsEnumerable
 
                     If duplicados.Count = 1 Then
-                        duplicados(0).SubnumeroDeFacturacion = -1 'esto es un tema, porque si anulás el original, un duplicado pasa a ser el original, y te queda el link a los dos
-                        db.SubmitChanges()
+                        duplicados(0).SubnumeroDeFacturacion = 0 'esto es un tema, porque si anulás el original, un duplicado pasa a ser el original, y te queda el link a los dos
+                        duplicados(0).ConDuplicados = 1
+                        db.SaveChanges()
                     End If
 
                     db = Nothing
@@ -7090,7 +7103,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Sub CopiarCarta(ByVal orig As CartasDePorte, ByRef dest As CartasDePorte)
+    Shared Sub CopiarCarta(ByVal orig As ProntoMVC.Data.Models.CartasDePorte, ByRef dest As ProntoMVC.Data.Models.CartasDePorte)
 
 
 
@@ -11036,25 +11049,53 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Shared Function CartasConCopiaPendiente(q As IQueryable(Of CartasDePorte), ByRef mensajes As String) As IQueryable(Of CartasDePorte) ' este se queda con los pendientes, para mostrar en informe
-        Dim rows = (From i In q _
-                          Where If(i.SubnumeroDeFacturacion, -1) >= 0 And _
-                               If(i.IdFacturaImputada, 0) = 0 And _
-                               i.IdClienteAFacturarle Is Nothing)
+    Shared Function CartasConCopiaPendiente(q As IQueryable(Of CartasDePorte), ByRef mensajes As String, SC As String) _
+        As List(Of CartasDePorte) ' este se queda con los pendientes, para mostrar en informe
 
-        Return rows
+        'como puedo saber cuales estan duplicadas?
+
+        If False Then
+            Dim rows = (From i In q _
+                              Where If(i.SubnumeroDeFacturacion, -1) >= 0 And _
+                                   If(i.IdFacturaImputada, 0) = 0 And _
+                                   i.IdClienteAFacturarle Is Nothing)
+        End If
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        db.CommandTimeout = 3 * 60
+
+        Dim q2 = (From cdp In db.CartasDePortes _
+            Group cdp By _
+                numerocartadeporte = cdp.NumeroCartaDePorte, _
+                subnumerovagon = cdp.SubnumeroVagon _
+            Into g = Group _
+            Select New With { _
+                .numerocartadeporte = numerocartadeporte, _
+                .subnumerovagon = subnumerovagon, _
+                .CantCartas = g.Count, _
+                .Cartas = g.ToList()
+            }).Where(Function(i) i.CantCartas > 1)
+
+
+        Dim q3 = q2.SelectMany(Function(x) x.Cartas) _
+                .Where(Function(x) If(x.IdFacturaImputada, 0) = 0 And x.Anulada <> "SI").Take(1000)
+
+
+
+        Return q3.ToList
 
     End Function
 
-    Shared Sub CartasConCopiaPendiente(ByRef dt As DataTable, ByRef mensajes As String) 'este se queda con los pendientes, para mostrar en informe
-        Dim rows = (From i In dt.AsEnumerable _
-                  Where If(IsNull(i("SubnumeroDeFacturacion")), 0, i("SubnumeroDeFacturacion")) >= 0 And _
-                       IsNull(i("IdClienteAFacturarle")) _
-              )
-        If rows.Any() Then dt = rows.CopyToDataTable() Else dt = dt.Clone
+    'Shared Sub CartasConCopiaPendiente(ByRef dt As DataTable, ByRef mensajes As String) 'este se queda con los pendientes, para mostrar en informe
+    '    Dim rows = (From i In dt.AsEnumerable _
+    '              Where If(IsNull(i("SubnumeroDeFacturacion")), 0, i("SubnumeroDeFacturacion")) >= 0 And _
+    '                   IsNull(i("IdClienteAFacturarle")) _
+    '          )
+    '    If rows.Any() Then dt = rows.CopyToDataTable() Else dt = dt.Clone
 
 
-    End Sub
+    'End Sub
 
     Shared Sub FiltrarCartasConCopiaPendiente(ByRef dt As DataTable, ByRef mensajes As String) 'este se queda con los NO pendientes
         'http://stackoverflow.com/questions/656167/hitting-the-2100-parameter-limit-sql-server-when-using-contains
@@ -15670,18 +15711,24 @@ Public Class LogicaFacturacion
         'If If(acopioseparado, 0) > 0 Then carta.ClienteSeparado = "acopiosepara " & nombreacopio(acopioseparado)
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14851
+   
+
+
 
         Dim s = ""
         If acopios.Count > 1 Then
             'Return vbCrLf + "Acopios id" + nombreacopio(acopios(0), SC)
             s = nombreacopio(ccc(0), SC)
-            america no es de ldc??
-            If InStr(s, "LDC") And EsDeExportacion(idfactura, SC) Then s = "ELEVACION "
-        Else
-            'Return ""
-        End If
 
-        Return s
+
+            Dim o = db.CartasPorteAcopios1.Where(Function(x) x.IdAcopio = ccc(0)).First
+            
+            If o.IdCliente = 2775 And EsDeExportacion(idfactura, SC) Then s = "ELEVACION "
+            Else
+                'Return ""
+            End If
+
+            Return s
 
     End Function
 

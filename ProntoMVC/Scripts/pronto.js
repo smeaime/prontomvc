@@ -349,8 +349,10 @@ function RefrescaAnchoGrillaDetalle() {
 
 function ReajustarAlto(g) {
 
-   var rows = g.getGridParam("reccount");
-    if (rows >= 4) g.jqGrid('setGridHeight', rows * 40, true);
+    var rows = g.getGridParam("reccount");
+
+    g.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+    //if (rows >= 4) g.jqGrid('setGridHeight', rows * 40, true);
 
 }
 
@@ -507,8 +509,9 @@ function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
 
 
         var desc = data['Descripcion'];
+        if (desc==undefined)  desc = data['Cuenta'];
         // alert(desc);
-        if (desc == "") continue;
+        if (desc == "" || desc == undefined) continue;
 
         if (data['NumeroItem'] == "") {
             data['NumeroItem'] = ProximoNumeroItem();
@@ -572,7 +575,9 @@ function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
 
     //alert(rows);
 
-    grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+   //grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+
+    ReajustarAlto(grid)
 }
 
 
