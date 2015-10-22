@@ -58,6 +58,7 @@ Namespace Pronto.ERP.Bll
         Public Shared Function IsValidEmail(email As String) As Boolean
             'http://stackoverflow.com/questions/1365407/c-sharp-code-to-validate-email-address
             Try
+                email = email.Trim.Replace(";", ",")
                 Dim addr = New System.Net.Mail.MailAddress(email)
                 Return addr.Address = email
             Catch ex As Exception
