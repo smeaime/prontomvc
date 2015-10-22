@@ -11049,10 +11049,15 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Shared Function CartasConCopiaPendiente(q As IQueryable(Of CartasDePorte), ByRef mensajes As String, SC As String) _
-        As List(Of CartasDePorte) ' este se queda con los pendientes, para mostrar en informe
+    Shared Function CartasConCopiaPendiente(q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte), ByRef mensajes As String, SC As String) _
+        As List(Of ProntoMVC.Data.Models.CartasDePorte) ' este se queda con los pendientes, para mostrar en informe
 
         'como puedo saber cuales estan duplicadas?
+
+
+
+
+
 
         If False Then
             Dim rows = (From i In q _
@@ -11061,9 +11066,23 @@ Public Class LogicaFacturacion
                                    i.IdClienteAFacturarle Is Nothing)
         End If
 
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        '        Dim db As New LinqCartasPorteDataContext(Encriptar(SC) ) sssss
+        'db.CommandTimeout = 3 * 60
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        db.CommandTimeout = 3 * 60
+
+        Dim q4 = (From i In q _
+                          Where If(i.ConDuplicados, -1) >= 0 And _
+                               If(i.IdFacturaImputada, 0) = 0 And _
+                               i.IdClienteAFacturarle Is Nothing)
+
+
+        Return q4.ToList
+
+
+
+
+
 
         Dim q2 = (From cdp In db.CartasDePortes _
             Group cdp By _
@@ -11083,7 +11102,7 @@ Public Class LogicaFacturacion
 
 
 
-        Return q3.ToList
+        ' Return q3.ToList
 
     End Function
 

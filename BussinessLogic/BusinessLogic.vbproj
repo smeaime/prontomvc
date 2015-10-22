@@ -122,9 +122,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\prontoweb\Bin\BusinessObject.dll</HintPath>
+    <Reference Include="BusinessObject">
+      <HintPath>..\..\bussinessobject\BusinessObject\bin\Debug\BusinessObject.dll</HintPath>
     </Reference>
     <Reference Include="ClaseMigrar">
       <HintPath>..\..\bussinessobject\ClaseMigrar\bin\Debug\ClaseMigrar.dll</HintPath>
@@ -134,9 +133,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\CodeEngine.Framework.QueryBuilder.dll</HintPath>
     </Reference>
-    <Reference Include="DataAccess, Version=1.0.0.27142, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\prontoweb\Bin\DataAccess.dll</HintPath>
+    <Reference Include="DataAccess">
+      <HintPath>..\..\bussinessobject\DataAccess\bin\Debug\DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework">

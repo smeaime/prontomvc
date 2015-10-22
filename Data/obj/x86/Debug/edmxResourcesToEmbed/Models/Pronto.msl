@@ -5739,6 +5739,7 @@
     <EntitySetMapping Name="CartasDePortes">
       <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
         <MappingFragment StoreEntitySet="CartasDePorte">
+          <ScalarProperty Name="ConDuplicados" ColumnName="ConDuplicados" />
           <ScalarProperty Name="Acopio6" ColumnName="Acopio6" />
           <ScalarProperty Name="CalidadGastosFumigacionResultado" ColumnName="CalidadGastosFumigacionResultado" />
           <ScalarProperty Name="CalidadHumedadResultado" ColumnName="CalidadHumedadResultado" />
