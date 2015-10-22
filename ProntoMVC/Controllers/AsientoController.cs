@@ -1525,8 +1525,8 @@ namespace ProntoMVC.Controllers
         [HttpPost, ActionName("Delete")]
         public virtual ActionResult DeleteConfirmed(int id)
         {
-            Pedido Pedido = db.Pedidos.Find(id);
-            db.Pedidos.Remove(Pedido);
+            Asiento asiento = db.Asientos.Find(id);
+            db.Asientos.Remove(asiento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
