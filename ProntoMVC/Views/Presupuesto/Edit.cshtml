@@ -386,7 +386,7 @@
                                style="font-size:; ">
                             @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
                         </table>
-                        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
+                        @*<div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>*@
                     </div>
                 </div>
                 @* <div id="ListaPager" class="scroll">
@@ -725,7 +725,7 @@
                         { name: 'NumeroRequerimiento', formoptions: { rowpos: 17, colpos: 1 }, index: 'NumeroRequerimiento', label: 'TB', align: 'right', width: 50, sortable: false, editable: false },
                         { name: 'NumeroItemRM', index: 'NumeroItemRM', label: 'TB', align: 'right', width: 100, sortable: false, editable: false },
                         {
-                            name: 'Adj. 1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file',
+                            name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file',
                             editoptions: {
                                 enctype: "multipart/form-data", dataEvents: [{
                                     type: 'change', fn: function (e) {
@@ -772,7 +772,7 @@
             afterSaveCell: function (rowid, name, val, iRow, iCol) {
                 //No anda calculateTotal();
             },
-            pager: $('#ListaPager'),
+            //pager: $('#ListaPager'),
             rowNum: 100,
             rowList: [10, 20, 50, 100],
             sortname: 'NumeroItem',
@@ -996,8 +996,10 @@
                             if (cm.name === 'PorcentajeIva') valor = valor.replace(".", ",")
                             if (cm.name === 'ImporteIva') valor = valor.replace(".", ",")
                             if (cm.name === 'ImporteTotalItem') valor = valor.replace(".", ",")
-                            if (cm.name === 'Observaciones') {
-                                valor = valor.replace('"', '\\"');
+                            if (cm.name === 'Observaciones' || cm.name == "ArchivoAdjunto1") {
+                                
+                                //valor = valor.replace('"', '\\"');
+                                valor= escapeRegExp(valor)
                             }
 
                             data1 = data1 + '"' + cm.name + '":"' + valor + '",';
@@ -1032,11 +1034,30 @@
                     //                    }
 
                     if (result) {
-                        $('#Lista').trigger('reloadGrid');
+                        //$('#Lista').trigger('reloadGrid');
+
+                        //$('html, body').css('cursor', 'auto');
+                        //window.location = (ROOT + "Presupuesto/index");
+
+                        var dt = new Date();
+                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                        $("#mensajeAlerta").show();
+                        // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                        //si graban de nuevo, va a dar un alta!!!!
+
 
                         $('html, body').css('cursor', 'auto');
-                        window.location = (ROOT + "Presupuesto/index");
+                        $('#grabar2').attr("disabled", false);
+                        //$('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
 
+                        //alert('hola.');
+                        // grid1.trigger('reloadGrid');
+
+                        //window.location.replace(ROOT + "Cliente/index");
+
+                        window.location = (ROOT + "Presupuesto/Edit/" + result.IdAsiento);
                     } else {
 
 
@@ -1048,6 +1069,48 @@
                     }
 
                 },
+
+                beforeSend: function () {
+                    //$('.loading').html('some predefined loading img html');
+                    $("#loading").show();
+                    $('#grabar2').attr("disabled", true).val("Espere...");
+
+
+
+
+                },
+                
+                complete: function () {
+                    $("#loading").hide();
+                },
+                kjkjllhk
+                error: function (xhr, textStatus, exceptionThrown) {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    //this ugly loop is because List<> is serialized to an object instead of an array
+                    for (var key in errorData) {
+                        errorMessages.push(errorData[key]);
+                    }
+
+
+
+                    $('#result').html(errorMessages.join("<br />"));
+                    alert(errorMessages.join("\n").replace(/<br\/>/g, '\n'));
+
+
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                    //alert(errorMessages.join("<br />"));
+
+                    $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
+                    //$('#result').html(errorMessages.join("<br />"));
+                    //$("#textoMensajeAlerta").html(xhr.responseText);
+                    //$("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                    pageLayout.show('east');
+
+                }
 
                 beforeSend: function () {
                     //$('.loading').html('some predefined loading img html');
