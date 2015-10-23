@@ -59,7 +59,8 @@ Namespace Pronto.ERP.Bll
             'http://stackoverflow.com/questions/1365407/c-sharp-code-to-validate-email-address
             Try
                 email = email.Trim.Replace(";", ",")
-                Dim addr = New System.Net.Mail.MailAddress(email)
+
+                Dim addr = New System.Net.Mail.MailAddress(email) 'solo valida direcciones individuales
                 Return addr.Address = email
             Catch ex As Exception
                 Return False
@@ -73,6 +74,10 @@ Namespace Pronto.ERP.Bll
 
             Para = Para.Replace(";", ",").Trim
             If Right(Para, 1) = "," Then Para = Left(Para, Para.Length - 1)
+
+
+
+
 
             De = De.Replace(";", ",")
 
@@ -102,7 +107,23 @@ Namespace Pronto.ERP.Bll
 
 
 
-                Dim message As New MailMessage(De, Para, Asunto, Cuerpo)
+                Dim message As New MailMessage() 'De, Para, Asunto, Cuerpo)
+
+                message.From = New MailAddress(De)
+
+                Dim lista As String() = Para.Split(",")
+
+                For Each a As String In lista
+                    If IsValidEmail(a) Then message.To.Add(New MailAddress(a))
+                Next
+
+
+                message.Subject = Asunto
+                message.Body = Cuerpo
+
+
+
+
                 If sFileNameAdjunto <> "" Then message.Attachments.Add(New Attachment(sFileNameAdjunto))
                 'Seteo que el server notifique solamente en el error de entrega
                 message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
