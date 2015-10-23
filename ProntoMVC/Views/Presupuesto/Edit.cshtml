@@ -997,9 +997,9 @@
                             if (cm.name === 'ImporteIva') valor = valor.replace(".", ",")
                             if (cm.name === 'ImporteTotalItem') valor = valor.replace(".", ",")
                             if (cm.name === 'Observaciones' || cm.name == "ArchivoAdjunto1") {
-                                
+
                                 //valor = valor.replace('"', '\\"');
-                                valor= escapeRegExp(valor)
+                                valor = escapeRegExp(valor)
                             }
 
                             data1 = data1 + '"' + cm.name + '":"' + valor + '",';
@@ -1057,7 +1057,7 @@
 
                         //window.location.replace(ROOT + "Cliente/index");
 
-                        window.location = (ROOT + "Presupuesto/Edit/" + result.IdAsiento);
+                        window.location = (ROOT + "Presupuesto/Edit/" + result.IdPresupuesto);
                     } else {
 
 
@@ -1079,11 +1079,13 @@
 
 
                 },
-                
+
                 complete: function () {
                     $("#loading").hide();
                 },
-                kjkjllhk
+
+
+
                 error: function (xhr, textStatus, exceptionThrown) {
                     var errorData = $.parseJSON(xhr.responseText);
                     var errorMessages = [];
@@ -1112,35 +1114,9 @@
 
                 }
 
-                beforeSend: function () {
-                    //$('.loading').html('some predefined loading img html');
-                    $('#grabar2').attr("disabled", true).val("Espere...");
-
-                },
-                error: function (xhr, textStatus, exceptionThrown) {
-                    try {
-                        var errorData = $.parseJSON(xhr.responseText);
-                        var errorMessages = [];
-                        //this ugly loop is because List<> is serialized to an object instead of an array
-                        for (var key in errorData) {
-                            errorMessages.push(errorData[key]);
-                        }
-                        $('#result').html(errorMessages.join("<br />"));
-
-                        $('html, body').css('cursor', 'auto');
-                        $('#grabar2').attr("disabled", false).val("Aceptar");
-                        alert(errorMessages.join("<br />"));
-                    } catch (e) {
-                        // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                        // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
-                        $('html, body').css('cursor', 'auto');
-                        $('#grabar2').attr("disabled", false).val("Aceptar");
-                        alert(xhr.responseText);
-                    }
 
 
-                }
+
             });
         });
 
@@ -2245,16 +2221,16 @@
                                 tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
                                 getdata = tmpdata;
                                 idazar = Math.ceil(Math.random() * 1000000);
-    
+
                                 //    $("#Lista").jqGrid('addRowData', idazar, getdata);
-    
-    
+
+
                                 ///////////////
                                 // paso 2: agregar en el ultimo lugar antes de los renglones vacios
                                 ///////////////
-    
+
                                 //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
-    
+
                                 var pos = TraerPosicionLibre();
                                 if (pos == null) {
                                     $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
@@ -2265,12 +2241,12 @@
                                 //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
                                 // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
                                 // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
-    
+
                                 //////////////////////////////////////////////////////////////////////////////////
                                 //////////////////////////////////////////////////////////////////////////////////
                                 //////////////////////////////////////////////////////////////////////////////////
-    
-    
+
+
                             }
                         }
                     });
