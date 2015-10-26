@@ -1073,7 +1073,7 @@ Namespace Pronto.ERP.Bll
 
 
         Public Shared Function NombreFormaDespacho(ByVal SC As String, ByVal IdFormaDespacho As Long) As String
-            If IdFormaDespacho < 1 Then Return Nothing
+            If IdFormaDespacho < 1 Then Return ""
             Try
                 Select Case IdFormaDespacho
 
@@ -1089,7 +1089,8 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                Return Nothing
+                ErrHandler.WriteError(ex)
+                Return ""
             End Try
         End Function
 

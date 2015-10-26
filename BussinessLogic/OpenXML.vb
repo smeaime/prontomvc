@@ -1023,7 +1023,7 @@ Namespace Pronto.ERP.Bll
                 'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
 
 
-                regexReplace(docText, "#Fecha#", Convert.ToDateTime(oFac.FechaIngreso).ToShortDateString)
+                regexReplace(docText, "#Fecha#", Convert.ToDateTime(If(oFac.FechaIngreso, DateTime.MinValue)).ToShortDateString)
                 regexReplace(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
                 regexReplace(docText, "#Direccion#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Direccion, ""))
                 regexReplace(docText, "#CUIT#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Cuit, ""))
@@ -1038,10 +1038,10 @@ Namespace Pronto.ERP.Bll
                                      If(oFac.Articulo3 IsNot Nothing, oFac.Articulo3.Descripcion + " " + oFac.Porcentaje3.ToString + "%" + vbCrLf, "") & _
                                      If(oFac.Articulo4 IsNot Nothing, oFac.Articulo4.Descripcion + " " + oFac.Porcentaje4.ToString + "%" + vbCrLf, "") & _
                     "")
-                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, oFac.FormaDespacho))
-                regexReplace(docText, "#Bruto#", oFac.Bruto)
-                regexReplace(docText, "#Tara#", oFac.Tara)
-                regexReplace(docText, "#Neto#", oFac.Cantidad)
+                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, If(oFac.FormaDespacho, 0)))
+                regexReplace(docText, "#Bruto#", If(oFac.Bruto, 0))
+                regexReplace(docText, "#Tara#", If(oFac.Tara, 0))
+                regexReplace(docText, "#Neto#", If(oFac.Cantidad, 0))
 
 
 
@@ -1434,7 +1434,7 @@ Namespace Pronto.ERP.Bll
                 regexReplace(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
                 regexReplace(docText, "#Producto#", If(oFac.Articulo IsNot Nothing, oFac.Articulo.Descripcion, ""))
                 regexReplace(docText, "#Contrato#", oFac.Contrato)
-                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, oFac.FormaDespacho))
+                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, If(oFac.FormaDespacho, 0)))
                 regexReplace(docText, "#Cantidad#", oFac.Cantidad)
                 regexReplace(docText, "#Chofer#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Nombre, ""))
                 regexReplace(docText, "#CUIL#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Cuil, ""))
