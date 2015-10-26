@@ -98,5 +98,7 @@ namespace ProntoMVC.Data.Models
         public virtual Localidad Localidade1 { get; set; }
         public virtual Transportista Transportista { get; set; }
         public virtual Transportista Transportista1 { get; set; }
+        public virtual WilliamsDestino WilliamsDestino { get; set; }
+        public virtual WilliamsDestino WilliamsDestino1 { get; set; }
     }
 }

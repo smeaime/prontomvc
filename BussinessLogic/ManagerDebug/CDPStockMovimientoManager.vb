@@ -232,7 +232,7 @@ Namespace Pronto.ERP.Bll
                     '///////////////////////////////////////////////////////////////////////////////////////////
 
                     Try
-                        ClaseMigrar.GrabarAjusteStockConCompronto(SC, .IdAjusteStock, .IdArticulo, IIf(.Entrada_o_Salida = 1, .Cantidad, .Cantidad * -1))
+                        'ClaseMigrar.GrabarAjusteStockConCompronto(SC, .IdAjusteStock, .IdArticulo, IIf(.Entrada_o_Salida = 1, .Cantidad, .Cantidad * -1))
                     Catch ex As Exception
                         ErrHandler.WriteError(ex)
                     End Try
