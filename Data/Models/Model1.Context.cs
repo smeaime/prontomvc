@@ -232,6 +232,11 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleValoresRubrosContable> DetalleValoresRubrosContables { get; set; }
         public virtual DbSet<ValoresFaltantesVisto> ValoresFaltantesVistos { get; set; }
         public virtual DbSet<DetallePlazosFijosRubrosContable> DetallePlazosFijosRubrosContables { get; set; }
+        public virtual DbSet<Calidade> Calidades { get; set; }
+        public virtual DbSet<CDPEstablecimiento> CDPEstablecimientos { get; set; }
+        public virtual DbSet<CDPHumedade> CDPHumedades { get; set; }
+        public virtual DbSet<WilliamsDestino> WilliamsDestinos { get; set; }
+        public virtual DbSet<WilliamsMailFiltrosCola> WilliamsMailFiltrosColas { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

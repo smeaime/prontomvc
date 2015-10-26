@@ -830,10 +830,16 @@ Public Class CartaDePorteManager
             Optional ByVal QueContenga2 As String = "", _
             Optional ByVal idClienteAuxiliar As Integer = -1, _
             Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "" _
-    ) As IQueryable(Of CartasDePorte)
+            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+ Optional ByRef db2 As DemoProntoEntities = Nothing _
+    ) As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte)
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db As DemoProntoEntities
+        If db2 Is Nothing Then db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC))) Else db = db2
+
+        'db.ObjectTrackingEnabled = False
+
+        If System.Diagnostics.Debugger.IsAttached Then maximumRows = 300
 
 
         '       Remember, the query is nothing more than an object which represents the query. Think of it 
@@ -857,21 +863,21 @@ Public Class CartaDePorteManager
         '           The delegate can only take 3 input parameters (can be solved by wrapping the parameters in containers)
         '           And above all… Developers are lazy….Well, not all, but many. I know I am..
 
-        Dim q As IQueryable(Of CartasDePorte) = From cdp In db.CartasDePortes _
-    Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-    From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-    From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-    From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-    From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-    From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-    From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
+        Dim q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte) = From cdp In db.CartasDePortes _
+    Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
+    From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
+    From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
+    From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
+    From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
+    From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
+    From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
     From cal In db.Calidades.Where(Function(i) i.IdCalidad = CInt(cdp.Calidad)).DefaultIfEmpty _
     From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-    From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
+    From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
     From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
     From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
     From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-    From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
+    From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
     Where _
         cdp.Vendedor > 0 _
         And cli.RazonSocial IsNot Nothing _
@@ -11049,7 +11055,8 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Shared Function CartasConCopiaPendiente(q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte), ByRef mensajes As String, SC As String) _
+    Shared Function CartasConCopiaPendiente(q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte), ByRef mensajes As String, SC As String _
+                                                    ) _
         As List(Of ProntoMVC.Data.Models.CartasDePorte) ' este se queda con los pendientes, para mostrar en informe
 
         'como puedo saber cuales estan duplicadas?
@@ -11066,39 +11073,41 @@ Public Class LogicaFacturacion
                                    i.IdClienteAFacturarle Is Nothing)
         End If
 
-        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        If q Is Nothing Then Return Nothing
+
+        ' Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
         '        Dim db As New LinqCartasPorteDataContext(Encriptar(SC) ) sssss
         'db.CommandTimeout = 3 * 60
 
 
-        Dim q4 = (From i In q _
-                          Where If(i.ConDuplicados, -1) >= 0 And _
+        Dim q4 As List(Of ProntoMVC.Data.Models.CartasDePorte) = (From i As ProntoMVC.Data.Models.CartasDePorte In q _
+                          Where If(i.ConDuplicados, 0) > 0 And _
                                If(i.IdFacturaImputada, 0) = 0 And _
-                               i.IdClienteAFacturarle Is Nothing)
+                               i.IdClienteAFacturarle Is Nothing Select i).ToList
 
 
-        Return q4.ToList
-
-
-
+        Return q4
 
 
 
-        Dim q2 = (From cdp In db.CartasDePortes _
-            Group cdp By _
-                numerocartadeporte = cdp.NumeroCartaDePorte, _
-                subnumerovagon = cdp.SubnumeroVagon _
-            Into g = Group _
-            Select New With { _
-                .numerocartadeporte = numerocartadeporte, _
-                .subnumerovagon = subnumerovagon, _
-                .CantCartas = g.Count, _
-                .Cartas = g.ToList()
-            }).Where(Function(i) i.CantCartas > 1)
 
 
-        Dim q3 = q2.SelectMany(Function(x) x.Cartas) _
-                .Where(Function(x) If(x.IdFacturaImputada, 0) = 0 And x.Anulada <> "SI").Take(1000)
+
+        'Dim q2 = (From cdp In db.CartasDePortes _
+        '    Group cdp By _
+        '        numerocartadeporte = cdp.NumeroCartaDePorte, _
+        '        subnumerovagon = cdp.SubnumeroVagon _
+        '    Into g = Group _
+        '    Select New With { _
+        '        .numerocartadeporte = numerocartadeporte, _
+        '        .subnumerovagon = subnumerovagon, _
+        '        .CantCartas = g.Count, _
+        '        .Cartas = g.ToList()
+        '    }).Where(Function(i) i.CantCartas > 1)
+
+
+        'Dim q3 = q2.SelectMany(Function(x) x.Cartas) _
+        '        .Where(Function(x) If(x.IdFacturaImputada, 0) = 0 And x.Anulada <> "SI").Take(1000)
 
 
 
@@ -15730,7 +15739,7 @@ Public Class LogicaFacturacion
         'If If(acopioseparado, 0) > 0 Then carta.ClienteSeparado = "acopiosepara " & nombreacopio(acopioseparado)
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14851
-   
+
 
 
 
@@ -15741,13 +15750,13 @@ Public Class LogicaFacturacion
 
 
             Dim o = db.CartasPorteAcopios1.Where(Function(x) x.IdAcopio = ccc(0)).First
-            
-            If o.IdCliente = 2775 And EsDeExportacion(idfactura, SC) Then s = "ELEVACION "
-            Else
-                'Return ""
-            End If
 
-            Return s
+            If o.IdCliente = 2775 And EsDeExportacion(idfactura, SC) Then s = "ELEVACION "
+        Else
+            'Return ""
+        End If
+
+        Return s
 
     End Function
 
@@ -15760,7 +15769,7 @@ Public Class LogicaFacturacion
 
         Dim expo = From x In oListaCDP
                     Where x.Exporta = "SI"
-               
+
 
         Return expo.Count > 0
 

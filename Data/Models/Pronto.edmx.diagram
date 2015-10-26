@@ -2427,6 +2427,18 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ValoresFaltantesVisto" Width="1.5" PointX="22.375" PointY="26.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetallePlazosFijosRubrosContable" Width="1.5" PointX="27.375" PointY="19.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Calidade" Width="1.5" PointX="27.375" PointY="22.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CDPEstablecimiento" Width="1.5" PointX="27.375" PointY="25.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CDPHumedade" Width="1.5" PointX="7" PointY="54" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.WilliamsDestino" Width="1.5" PointX="20" PointY="88.5" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.WilliamsMailFiltrosCola" Width="1.5" PointX="28.375" PointY="3.75" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CDPHumeda__IdArt__48D19AF6" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__WilliamsD__Subco__0180086D" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__WilliamsD__Subco__02742CA6" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__Desti__4AD9DEF9" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Fertiliza__Desti__5833DA17" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__WilliamsD__IdLoc__3EDE1C68" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__WilliamsD__IdPro__3DE9F82F" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
