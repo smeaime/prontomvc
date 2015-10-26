@@ -300,7 +300,7 @@ Public Class FertilizanteManager
 
 
     Shared Function GrabaRenglonEnTablaFertilizantes(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
-                                    txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
+                                    cmbdespacho As System.Web.UI.WebControls.DropDownList, cmbpuntodespacho As System.Web.UI.WebControls.DropDownList, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
                                     txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList, _
                                     NoValidarColumnas As List(Of String) _
@@ -438,6 +438,9 @@ Public Class FertilizanteManager
             End Select
 
 
+            .Despacho = cmbdespacho.Text
+            .PuntoDespacho = cmbpuntodespacho.Text
+
 
 
             '/////////////////////////////////////////
@@ -523,7 +526,7 @@ Public Class FertilizanteManager
                 'dt.Rows(row).Item("IdDestino") = .Destino
                 If .Destino = -1 And dr.Item("Destino") = "" Then
                     'solo uso el default si está vacío el texto
-                    .Destino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, SC)
+                    '.Destino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, SC)
                 End If
                 If .Destino = -1 Then
                     Return "Destino"
