@@ -6493,7 +6493,8 @@ Public Class CartaDePorteManager
                 oDet.Campo = nombrecampo
                 oDet.Valor = valor
                 'acá había un insertonsubmit
-                db.SaveChanges()
+                db.CartasDePorteDetalles.Add(oDet)
+                'db.SaveChanges()
             Else
                 oDet.Valor = valor
             End If
