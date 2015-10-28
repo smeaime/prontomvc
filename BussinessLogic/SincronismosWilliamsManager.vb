@@ -3034,7 +3034,7 @@ Namespace Pronto.ERP.Bll
                     sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
                     sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
                     'sb &= "6508001111;WILLIAMS ENTREGAS S. A.;"
-                    Dim wilycuit = "30707386076"
+                    Dim wilycuit = "6508001111"
                     sb &= wilycuit & ";WILLIAMS ENTREGAS S. A.;"
 
 
