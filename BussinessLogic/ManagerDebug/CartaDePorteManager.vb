@@ -4521,7 +4521,7 @@ Public Class CartaDePorteManager
     "       CLIENT.Razonsocial  as  [Destinatario], " & _
     "         LOCDES.Descripcion   as  DestinoDesc, " & _
     "        LOCORI.Nombre as    [Procedcia.] , " & _
-    "           CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos,CDP.Exporta,IdClienteAFacturarle,IdClienteEntregador " & _
+    "           CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos,CDP.Exporta,IdClienteAFacturarle,IdClienteEntregador,ConDuplicados " & _
                   " FROM CartasDePorte CDP " & _
                    " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
                    " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
@@ -4738,7 +4738,7 @@ Public Class CartaDePorteManager
                     " CLICO1.Razonsocial  ,        CLICO2.Razonsocial  ,        " & _
                     " CLICOR.Nombre ,        CLIENT.Razonsocial  ,          " & _
                     " LOCDES.Descripcion  ,         LOCORI.Nombre  , CDP.Exporta,            " & _
-                    "     CDP.Destino, CDP.AgregaItemDeGastosAdministrativos, TarifaFacturada,IdClienteAFacturarle, IdClienteEntregador, " & _
+                    "     CDP.Destino, CDP.AgregaItemDeGastosAdministrativos, TarifaFacturada,IdClienteAFacturarle, IdClienteEntregador, ConDuplicados," & _
 "          " & tablafact & ".Confirmado, " & _
 "          " & tablafact & ".IdCodigoIVA,   " & _
 "          " & tablafact & ".CUIT   "
@@ -6968,7 +6968,7 @@ Public Class CartaDePorteManager
 
                         End If
                     Else
-                        myCartaDePorte.ConDuplicados = 0
+                        ' myCartaDePorte.ConDuplicados = 0
                     End If
 
 
@@ -11134,19 +11134,20 @@ Public Class LogicaFacturacion
         Try
 
             Dim l = (From i In dt.AsEnumerable _
-                       Where If(IsNull(i("SubnumeroDeFacturacion")), 0, CInt(i("SubnumeroDeFacturacion"))) >= 0 And _
+                       Where If(IsNull(i("ConDuplicados")), 0, CInt(i("ConDuplicados"))) > 0 And _
                              IsNull(i("IdClienteAFacturarle")) _
                 Select New With { _
                         .IdCartaDePorte = CLng(If(i("IdCartaDePorte"), 0)), _
                         .NumeroCartaDePorte = CLng(If(i("NumeroCartaDePorte"), 0)), _
                         .SubnumeroVagon = If(IsNull(i("SubnumeroVagon")), 0, CInt(i("SubnumeroVagon"))), _
-                        .SubnumeroDeFacturacion = If(IsNull(i("SubnumeroDeFacturacion")), 0, CInt(i("SubnumeroDeFacturacion"))) _
+                        .SubnumeroDeFacturacion = If(IsNull(i("SubnumeroDeFacturacion")), 0, CInt(i("SubnumeroDeFacturacion"))), _
+                        .ConDuplicados = If(IsNull(i("ConDuplicados")), 0, CInt(i("ConDuplicados"))) _
                                  } _
             ).ToList
 
 
             Dim rows = (From i In dt.AsEnumerable _
-                        Where Not (If(IsNull(i("SubnumeroDeFacturacion")), 0, i("SubnumeroDeFacturacion")) >= 0 And _
+                        Where Not (If(IsNull(i("ConDuplicados")), 0, i("ConDuplicados")) > 0 And _
                              IsNull(i("IdClienteAFacturarle"))) _
                     )
             If rows.Any() Then dt = rows.CopyToDataTable() Else dt = dt.Clone
@@ -22979,6 +22980,39 @@ Public Class CDPMailFiltrosManager2
 
 
 
+    Public Shared Function FetchById(ByVal SC As String, Id As Integer) As DataRow
+
+        'se está trayenda la tabla de filtros, no la de cartas de porte, ojo. Es un asqueroso select *, hay
+        'que cambiarlo, pero por lo menos no te asustes, no es la tabla de cartas de porte
+
+        'TODO: ineficiente, y a este se lo llama seguido...
+
+
+
+        Return ExecDinamico(SC, String.Format("SELECT " & _
+                        "     CDP.*, " & _
+                            " CLIVEN.Razonsocial as VendedorDesc, " & _
+                            " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
+                            " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
+                            " CLICOR.Nombre as CorredorDesc, " & _
+                            " CLIENT.Razonsocial as EntregadorDesc, " & _
+                            " CLIAUX.Razonsocial as ClienteAuxiliarDesc, " & _
+                            " Articulos.Descripcion as Producto, " & _
+                            " LOCORI.Nombre as ProcedenciaDesc, " & _
+                            " LOCDES.Descripcion as DestinoDesc " & _
+                            " FROM " & Tabla & " CDP " & _
+                            " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+                            " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
+                            " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
+                            " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
+                            " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
+                            " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+                            " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+                            " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+                            " LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
+                            " WHERE IdWilliamsMailFiltro=" & Id)).Rows(0)
+
+    End Function
 
 
 
