@@ -16138,7 +16138,7 @@ Public Class LogicaFacturacion
 
 
                         '.Fields("IdCorredorObservaciones").Value = IdCorredorObservaciones
-                        If False And SeFacturaEsteClienteObservacionesComoCorredor(SC, IdClienteObservaciones) Then
+                        If True And SeFacturaEsteClienteObservacionesComoCorredor(SC, IdClienteObservaciones) Then
                             .Fields("IdClienteObservaciones").Value = IdClienteObservaciones
                         End If
 

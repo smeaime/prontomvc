@@ -533,7 +533,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/>Destinos sin código postal: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -1076,7 +1076,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -1576,11 +1576,13 @@ Namespace Pronto.ERP.Bll
                     'NECESITAN QUE SALGAN LOS CODIGOS DE ONNCA Y PROCEDENCIA.
                     sb &= "," & IntVal(.ProcedenciaCodigoONCAA).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
 
-                    sb &= "," & IntVal(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+
+                    sb &= "," & IntVal(.DestinoCodigoONCAA).ToString
+
 
                     sb &= "," & IntVal(.CTG).ToString
 
-                    
+
                     PrintLine(nF, sb)
                 End With
             Next
@@ -2163,7 +2165,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas & "Procedencias sin código:<br/> " & sErroresProcedencia & "<br/>Destinos sin código: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2397,7 +2399,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2632,7 +2634,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2939,7 +2941,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             'Return vFileName
             'Return TextToExcel(vFileName, titulo)
@@ -3068,7 +3070,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             FileClose(nF)
             Return vFileName
@@ -3312,7 +3314,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -3520,7 +3522,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If False Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -3752,7 +3754,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -3987,7 +3989,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -4401,7 +4403,7 @@ Namespace Pronto.ERP.Bll
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -7305,7 +7307,7 @@ Namespace Pronto.ERP.Bll
 
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = ""
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 
                 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
                 '-no hacerlo acá, que decida el front end
             End If
@@ -8336,7 +8338,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -9049,7 +9051,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -9825,7 +9827,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -10518,7 +10520,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -11039,7 +11041,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -11846,7 +11848,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Destinos sin CUIT: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -14350,7 +14352,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -15818,7 +15820,7 @@ Namespace Pronto.ERP.Bll
 
             sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
             Sincronismo_NOBLEarchivoadicional(pDataTable, sWHERE)
@@ -17066,7 +17068,7 @@ Namespace Pronto.ERP.Bll
 
             sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
-            '  If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            '  If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
 
@@ -17159,7 +17161,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -17481,7 +17483,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -18637,7 +18639,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia ' & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
 
