@@ -11,6 +11,9 @@ Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
 
 Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en Orden de compra)
 
+PRESUPUESTO
+	no graba la cadena "\\SERVER\Archivoadjunto" en adjunto (o en observaciones)
+
 
 ASIENTO
 	cuando deja de ser editable el asiento?
