@@ -6967,7 +6967,8 @@ Public Class CartaDePorteManager
                             End Try
 
                         End If
-
+                    Else
+                        myCartaDePorte.ConDuplicados = 0
                     End If
 
 
