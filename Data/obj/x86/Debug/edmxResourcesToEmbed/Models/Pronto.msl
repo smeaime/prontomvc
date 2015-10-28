@@ -6257,5 +6257,100 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Calidades">
+      <EntityTypeMapping TypeName="DemoProntoModel.Calidade">
+        <MappingFragment StoreEntitySet="Calidades">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdCalidad" ColumnName="IdCalidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CDPEstablecimientos">
+      <EntityTypeMapping TypeName="DemoProntoModel.CDPEstablecimiento">
+        <MappingFragment StoreEntitySet="CDPEstablecimientos">
+          <ScalarProperty Name="AuxiliarString3" ColumnName="AuxiliarString3" />
+          <ScalarProperty Name="AuxiliarString2" ColumnName="AuxiliarString2" />
+          <ScalarProperty Name="AuxiliarString1" ColumnName="AuxiliarString1" />
+          <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+          <ScalarProperty Name="IdTitular" ColumnName="IdTitular" />
+          <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdEstablecimiento" ColumnName="IdEstablecimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CDPHumedades">
+      <EntityTypeMapping TypeName="DemoProntoModel.CDPHumedade">
+        <MappingFragment StoreEntitySet="CDPHumedades">
+          <ScalarProperty Name="Merma" ColumnName="Merma" />
+          <ScalarProperty Name="Humedad" ColumnName="Humedad" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="IdCDPHumedad" ColumnName="IdCDPHumedad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WilliamsDestinos">
+      <EntityTypeMapping TypeName="DemoProntoModel.WilliamsDestino">
+        <MappingFragment StoreEntitySet="WilliamsDestinos">
+          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+          <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="CodigoYPF" ColumnName="CodigoYPF" />
+          <ScalarProperty Name="CodigoLosGrobo" ColumnName="CodigoLosGrobo" />
+          <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="CodigoWilliams" ColumnName="CodigoWilliams" />
+          <ScalarProperty Name="AuxiliarString3" ColumnName="AuxiliarString3" />
+          <ScalarProperty Name="AuxiliarString2" ColumnName="AuxiliarString2" />
+          <ScalarProperty Name="AuxiliarString1" ColumnName="AuxiliarString1" />
+          <ScalarProperty Name="SincronismoNoble2" ColumnName="SincronismoNoble2" />
+          <ScalarProperty Name="SincronismoNoble1" ColumnName="SincronismoNoble1" />
+          <ScalarProperty Name="CodigoONCAA" ColumnName="CodigoONCAA" />
+          <ScalarProperty Name="CodigoSAJPYA" ColumnName="CodigoSAJPYA" />
+          <ScalarProperty Name="Subcontratista2" ColumnName="Subcontratista2" />
+          <ScalarProperty Name="Subcontratista1" ColumnName="Subcontratista1" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdWilliamsDestino" ColumnName="IdWilliamsDestino" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WilliamsMailFiltrosColas">
+      <EntityTypeMapping TypeName="DemoProntoModel.WilliamsMailFiltrosCola">
+        <MappingFragment StoreEntitySet="WilliamsMailFiltrosCola">
+          <ScalarProperty Name="Corredor2" ColumnName="Corredor2" />
+          <ScalarProperty Name="ModoImpresion" ColumnName="ModoImpresion" />
+          <ScalarProperty Name="AgrupadorDeTandaPeriodos" ColumnName="AgrupadorDeTandaPeriodos" />
+          <ScalarProperty Name="IdUsuarioEncolo" ColumnName="IdUsuarioEncolo" />
+          <ScalarProperty Name="EstadoDeCartaPorte" ColumnName="EstadoDeCartaPorte" />
+          <ScalarProperty Name="QueContenga" ColumnName="QueContenga" />
+          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+          <ScalarProperty Name="UltimoResultado" ColumnName="UltimoResultado" />
+          <ScalarProperty Name="AuxiliarString2" ColumnName="AuxiliarString2" />
+          <ScalarProperty Name="AuxiliarString1" ColumnName="AuxiliarString1" />
+          <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
+          <ScalarProperty Name="Destino" ColumnName="Destino" />
+          <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="Entregador" ColumnName="Entregador" />
+          <ScalarProperty Name="Corredor" ColumnName="Corredor" />
+          <ScalarProperty Name="CuentaOrden2" ColumnName="CuentaOrden2" />
+          <ScalarProperty Name="CuentaOrden1" ColumnName="CuentaOrden1" />
+          <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+          <ScalarProperty Name="AplicarANDuORalFiltro" ColumnName="AplicarANDuORalFiltro" />
+          <ScalarProperty Name="Modo" ColumnName="Modo" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="EsMailOesFax" ColumnName="EsMailOesFax" />
+          <ScalarProperty Name="Enviar" ColumnName="Enviar" />
+          <ScalarProperty Name="EsPosicion" ColumnName="EsPosicion" />
+          <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+          <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+          <ScalarProperty Name="Emails" ColumnName="Emails" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdWilliamsMailFiltro" ColumnName="IdWilliamsMailFiltro" />
+          <ScalarProperty Name="IdWilliamsMailFiltroCola" ColumnName="IdWilliamsMailFiltroCola" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
