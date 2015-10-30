@@ -7123,6 +7123,8 @@ Public Class CartaDePorteManager
 
             Dim column As System.Data.Linq.Mapping.ColumnAttribute = DirectCast(Attribute.GetCustomAttribute(sourceProp, GetType(System.Data.Linq.Mapping.ColumnAttribute)), System.Data.Linq.Mapping.ColumnAttribute)
 
+            If sourceProp.Name = "IdCartaDePorte" Then Continue For
+
             'If sourceProp.Name = "NumeroCartaDePorte" Then Continue For
             If sourceProp.Name = "IdFacturaImputada" Then Continue For
             If sourceProp.Name = "IdClienteAFacturarle" Then Continue For
@@ -7168,22 +7170,22 @@ Public Class CartaDePorteManager
 
 
 
-            If (column IsNot Nothing AndAlso Not column.IsPrimaryKey) Then
+            '       If (column IsNot Nothing AndAlso Not column.IsPrimaryKey) Then
 
-                For Each destinationProp As System.Reflection.PropertyInfo In destinationProps
+            For Each destinationProp As System.Reflection.PropertyInfo In destinationProps
 
 
-                    If sourceProp.Name = destinationProp.Name And destinationProp.CanWrite Then
+                If sourceProp.Name = destinationProp.Name And destinationProp.CanWrite Then
 
-                        destinationProp.SetValue(dest, sourceProp.GetValue(orig, Nothing), Nothing)
+                    destinationProp.SetValue(dest, sourceProp.GetValue(orig, Nothing), Nothing)
 
-                        Exit For
+                    Exit For
 
-                    End If
+                End If
 
-                Next
+            Next
 
-            End If
+            'End If
 
         Next
     End Sub
@@ -7267,26 +7269,31 @@ Public Class CartaDePorteManager
             ms += " " & titular.RazonSocial
         End If
 
-        If myCartaDePorte.Entregador > 0 AndAlso destinatario.DeshabilitadoPorCobranzas = "NO" Then
-            ms += " " & destinatario.RazonSocial
-        End If
+        'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14610
+        'El bloqueo para clientes que no están habilitado por cobranzas, debe controlar unicamente si el cliente está en la posición de Titular
 
-
-        If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.DeshabilitadoPorCobranzas = "NO" Then
-            ms += " " & intermediario.RazonSocial
-        End If
-
-        Try
-            If Not IsNothing(corredor) AndAlso corredor.DeshabilitadoPorCobranzas = "NO" Then
-                ms += " " & corredor.RazonSocial
+        If False Then
+            If myCartaDePorte.Entregador > 0 AndAlso destinatario.DeshabilitadoPorCobranzas = "NO" Then
+                ms += " " & destinatario.RazonSocial
             End If
-        Catch ex As Exception
-            ErrHandler.WriteError(ex)
-        End Try
 
 
-        If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.DeshabilitadoPorCobranzas = "NO" Then
-            ms += " " & remitcomercial.RazonSocial
+            If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.DeshabilitadoPorCobranzas = "NO" Then
+                ms += " " & intermediario.RazonSocial
+            End If
+
+            Try
+                If Not IsNothing(corredor) AndAlso corredor.DeshabilitadoPorCobranzas = "NO" Then
+                    ms += " " & corredor.RazonSocial
+                End If
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+
+
+            If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.DeshabilitadoPorCobranzas = "NO" Then
+                ms += " " & remitcomercial.RazonSocial
+            End If
         End If
 
 
@@ -16138,10 +16145,12 @@ Public Class LogicaFacturacion
 
 
 
-
+                        
                         '.Fields("IdCorredorObservaciones").Value = IdCorredorObservaciones
-                        If True And SeFacturaEsteClienteObservacionesComoCorredor(SC, IdClienteObservaciones) Then
-                            .Fields("IdClienteObservaciones").Value = IdClienteObservaciones
+                        Dim idcliobs = TodasLasCartasTienenElMismoClienteObsConCircuitoEspecial(SC, oListaCDP)
+                        If idcliobs > 0 Then
+                            .Fields("IdClienteObservaciones").Value = idcliobs
+                            'tengo acceso a este campo con compronto?
                         End If
 
 
@@ -16763,24 +16772,32 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Function SeFacturaEsteClienteObservacionesComoCorredor(SC As String, idcliente As Long) As Boolean
+    Shared Function TodasLasCartasTienenElMismoClienteObsConCircuitoEspecial(SC As String, ByVal oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte)) As Integer
         '        http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=13928
 
         '* Agregar una marca en la tabla de clientes para indicar cuales tienen que entrar por este circuito
         '* En facturación cuando filtren con el campo Cliente Observaciones algún cliente que tiene la marca del punto anterior, ponerle el id del cliente en cuestión a todas las facturas que se creen en un campo nuevo en la cabeza de las facturas (IdClienteObservaciones)
 
-        Return False
-
-        Dim clipront = ClienteManager.GetItem(SC, idcliente)
-
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim cli = db.linqClientes.Where(Function(x) x.IdCliente = idcliente).FirstOrDefault
 
 
-        If clipront.EsClienteObservacionesFacturadoComoCorredor = "SI" Then Return True
+
+        Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+        Dim cartas = oListaCDP.Select(Function(x) x.Id).ToList
 
 
-        Return False
+        Dim q = (From x In db.CartasDePortes
+                 From c In db.DetalleClientesContactos Where c.IdCliente = x.IdClienteAuxiliar And c.Acciones = "EsClienteObservacionesFacturadoComoCorredor"
+                 Where cartas.Contains(x.IdCartaDePorte)
+                 Select c
+                ).Distinct.ToList
+
+        If q.Count = 1 Then
+            If q(0).Contacto = "SI" Then Return q(0).IdCliente
+        End If
+
+        Return 0
+
     End Function
 
 
