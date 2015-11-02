@@ -1045,6 +1045,34 @@ Public Class FertilizanteManager
                 Return False
             End If
 
+            
+            'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=15079
+            'Por lo de los litros, tiene que funcionar así:
+
+            'En todos los camiones debe informarse en el remito el kilaje de la carga por un tema legal.
+            'Por otro lado, ellos deben controlar el máximo autorizado, pero en AgroQuimicos o Liquidos este dato va en litros.
+            'Por eso, en estos casos debe agregarse un campo "Litros Finales" y el control debe ser contra este dato (para Commodities y Especialidades debe ser contra Neto Final)
+
+
+
+            If .Despacho = "AGROQUIMICOS" Or .Despacho = "LIQUIDOS" Then
+                If .KilosMaximo < .LitrosFinal Then
+                    ms = "Litros Final supera el máximo autorizado"
+                    Return False
+                End If
+            Else
+                If .KilosMaximo < .Cantidad Then
+                    ms = "Kilos Final supera el máximo autorizado"
+                    Return False
+                End If
+            End If
+
+
+
+
+
+
+
             'If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
             '    sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
             'End If

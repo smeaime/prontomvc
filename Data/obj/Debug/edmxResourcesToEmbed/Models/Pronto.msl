@@ -2944,6 +2944,7 @@
     <EntitySetMapping Name="Comparativas">
       <EntityTypeMapping TypeName="DemoProntoModel.Comparativa">
         <MappingFragment StoreEntitySet="Comparativas">
+          <ScalarProperty Name="Cumplida" ColumnName="Cumplida" />
           <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
           <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
           <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
@@ -3353,6 +3354,7 @@
     <EntitySetMapping Name="ComprobantesProveedor">
       <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
         <MappingFragment StoreEntitySet="ComprobantesProveedores">
+          <ScalarProperty Name="NoTomarParaCalculoDeImpuestos" ColumnName="NoTomarParaCalculoDeImpuestos" />
           <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
           <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
           <ScalarProperty Name="IdTipoOperacion" ColumnName="IdTipoOperacion" />
@@ -3747,6 +3749,7 @@
     <EntitySetMapping Name="Empresas">
       <EntityTypeMapping TypeName="DemoProntoModel.Empresa">
         <MappingFragment StoreEntitySet="Empresa">
+          <ScalarProperty Name="ConstitucionSocietaria" ColumnName="ConstitucionSocietaria" />
           <ScalarProperty Name="TipoActividadComercializacionGranos" ColumnName="TipoActividadComercializacionGranos" />
           <ScalarProperty Name="ActividadComercializacionGranos" ColumnName="ActividadComercializacionGranos" />
           <ScalarProperty Name="CodigoActividadIIBB" ColumnName="CodigoActividadIIBB" />
@@ -6108,6 +6111,7 @@
     <EntitySetMapping Name="FertilizantesCupos">
       <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesCupos">
         <MappingFragment StoreEntitySet="FertilizantesCupos">
+          <ScalarProperty Name="LitrosFinal" ColumnName="LitrosFinal" />
           <ScalarProperty Name="PuntoDespacho" ColumnName="PuntoDespacho" />
           <ScalarProperty Name="Despacho" ColumnName="Despacho" />
           <ScalarProperty Name="Bruto" ColumnName="Bruto" />

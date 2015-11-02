@@ -40,6 +40,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public Nullable<int> IdUsuarioAnulo { get; set; }
         public string MotivoAnulacion { get; set; }
+        public string Cumplida { get; set; }
     
         public virtual ICollection<DetalleComparativa> DetalleComparativas { get; set; }
     }

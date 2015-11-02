@@ -71,6 +71,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> Bruto { get; set; }
         public string Despacho { get; set; }
         public string PuntoDespacho { get; set; }
+        public Nullable<decimal> LitrosFinal { get; set; }
     
         public virtual Articulo Articulo { get; set; }
         public virtual Articulo Articulo1 { get; set; }
