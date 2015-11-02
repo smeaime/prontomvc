@@ -1568,5 +1568,10 @@ select conduplicados from cartasdeporte
 
 
 
+-----------------------------------------------------------------------------------------------------------------------
 
+
+alter table FertilizantesCupos ADD
+	LitrosFinal NUMERIC (12, 2) NULL
+go
 
