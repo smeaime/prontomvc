@@ -6188,6 +6188,7 @@
     <Property Type="Int32" Name="IdUsuarioAnulo" />
     <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="DetalleComparativas" Relationship="DemoProntoModel.FK_DetalleComparativas" FromRole="Comparativa" ToRole="DetalleComparativa" />
+    <Property Name="Cumplida" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetalleComparativa">
     <Key>
@@ -6757,6 +6758,7 @@
     <Property Name="ArchivoAdjunto1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="ArchivoAdjunto2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Cuenta1" Relationship="DemoProntoModel.FK_ComprobantesProveedores_CuentaOtros" FromRole="ComprobanteProveedor" ToRole="Cuenta" />
+    <Property Name="NoTomarParaCalculoDeImpuestos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedore">
     <Key>
@@ -7124,6 +7126,7 @@
     <Property Type="Int32" Name="CodigoActividadIIBB" />
     <Property Type="String" Name="ActividadComercializacionGranos" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="TipoActividadComercializacionGranos" />
+    <Property Name="ConstitucionSocietaria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Formulario">
     <Key>
@@ -11554,6 +11557,7 @@
     <Property Name="PuntoDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="WilliamsDestino" Relationship="DemoProntoModel.FK__Fertiliza__Desti__4AD9DEF9" FromRole="FertilizantesCupos" ToRole="WilliamsDestino" />
     <NavigationProperty Name="WilliamsDestino1" Relationship="DemoProntoModel.FK__Fertiliza__Desti__5833DA17" FromRole="FertilizantesCupos" ToRole="WilliamsDestino" />
+    <Property Name="LitrosFinal" Type="Decimal" Precision="12" Scale="2" />
   </EntityType>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />

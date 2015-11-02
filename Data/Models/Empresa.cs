@@ -37,5 +37,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> CodigoActividadIIBB { get; set; }
         public string ActividadComercializacionGranos { get; set; }
         public Nullable<int> TipoActividadComercializacionGranos { get; set; }
+        public string ConstitucionSocietaria { get; set; }
     }
 }
