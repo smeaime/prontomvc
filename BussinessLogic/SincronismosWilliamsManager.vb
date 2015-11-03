@@ -11501,9 +11501,9 @@ Namespace Pronto.ERP.Bll
                     If If(x.Acopio1, 0) > 0 Then idac = x.Acopio1
                     If If(x.Acopio2, 0) > 0 Then idac = x.Acopio2
                     If If(x.Acopio3, 0) > 0 Then idac = x.Acopio3
-                    If If(x.Acopio4, 0) > 0 Then idac = x.Acopio4
+                    'If If(x.Acopio4, 0) > 0 Then idac = x.Acopio4
                     If If(x.Acopio5, 0) > 0 Then idac = x.Acopio5
-                    If If(x.Acopio6, 0) > 0 Then idac = x.Acopio6
+                    'If If(x.Acopio6, 0) > 0 Then idac = x.Acopio6
 
 
                     If idac > 0 Then
