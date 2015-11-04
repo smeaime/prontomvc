@@ -15818,50 +15818,57 @@ Public Class LogicaFacturacion
 
 
         '()
+        Try
+            Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+            'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura).ToList()
-        Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
-
-
-        Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
+            Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura).ToList()
+            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
 
-        'LeyendaSyngenta(oListaCDP, oFac.IdCliente, SC)
+            Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
 
-        If oFac.IdCliente = idSyngentaAGRO Then
 
-            If oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioAgro Or If(c.Acopio2, -1) = IdAcopioAgro Or If(c.Acopio3, -1) = IdAcopioAgro Or If(c.Acopio4, -1) = IdAcopioAgro _
-                                    Or If(c.Acopio5, -1) = IdAcopioAgro Or If(c.Acopio6, -1) = IdAcopioAgro) Then
+            'LeyendaSyngenta(oListaCDP, oFac.IdCliente, SC)
 
-                'quienautoriza()
-                ErrHandler.WriteError("LeyendaSyngenta Agro")
+            If oFac.IdCliente = idSyngentaAGRO Then
 
-                Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
-                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
-                Return vbCrLf + "División AGRO – Andreas Bluhm"
-                Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
+                If oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioAgro Or If(c.Acopio2, -1) = IdAcopioAgro Or If(c.Acopio3, -1) = IdAcopioAgro Or If(c.Acopio4, -1) = IdAcopioAgro _
+                                        Or If(c.Acopio5, -1) = IdAcopioAgro Or If(c.Acopio6, -1) = IdAcopioAgro) Then
 
-            ElseIf oListaCDP.Exists(Function(xc) If(xc.Acopio1, -1) = IdAcopioSeeds Or If(xc.Acopio2, -1) = IdAcopioSeeds Or If(xc.Acopio3, -1) = IdAcopioSeeds Or If(xc.Acopio4, -1) = IdAcopioSeeds Or If(xc.Acopio5, -1) = IdAcopioSeeds Or If(xc.Acopio6, -1) = IdAcopioSeeds) Then
+                    'quienautoriza()
+                    ErrHandler.WriteError("LeyendaSyngenta Agro")
 
-                ErrHandler.WriteError("LeyendaSyngenta Seeds")
+                    Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                    Return vbCrLf + "División AGRO – Andreas Bluhm"
+                    Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
 
-                'quienautoriza()
-                Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
-                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
-                Return vbCrLf + "División AGRO – Andreas Bluhm"
-                Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
-            Else
-                Return vbCrLf + "División AGRO – Andreas Bluhm"
+                ElseIf oListaCDP.Exists(Function(xc) If(xc.Acopio1, -1) = IdAcopioSeeds Or If(xc.Acopio2, -1) = IdAcopioSeeds Or If(xc.Acopio3, -1) = IdAcopioSeeds Or If(xc.Acopio4, -1) = IdAcopioSeeds Or If(xc.Acopio5, -1) = IdAcopioSeeds Or If(xc.Acopio6, -1) = IdAcopioSeeds) Then
+
+                    ErrHandler.WriteError("LeyendaSyngenta Seeds")
+
+                    'quienautoriza()
+                    Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                    Return vbCrLf + "División AGRO – Andreas Bluhm"
+                    Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
+                Else
+                    Return vbCrLf + "División AGRO – Andreas Bluhm"
+                End If
+
+
+                'ErrHandler.WriteError("LeyendaSyngenta Nada")
+                Return ""
+
+
             End If
-
-
-            'ErrHandler.WriteError("LeyendaSyngenta Nada")
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
             Return ""
 
-
-        End If
+        End Try
 
     End Function
 
