@@ -1783,6 +1783,10 @@ Public Class CartaDePorteManager
             '* Si el mail es de Posición o Descargas del día + Posiciones:
 
             'Posición del 04/07 al 04/07 - Nombre del cliente
+            s = s.Replace("Posición y Descargas de Hoy  del", "Posición del")
+
+
+
 
 
 
@@ -15797,7 +15801,7 @@ Public Class LogicaFacturacion
 
 
 
-    Shared Function LeyendaSyngenta(idfactura As Long, SC As String) As String
+    Shared Function LeyendaSyngenta(idfactura As Integer, SC As String) As String
 
         '        Log Entry
         '12/09/2014 15:38:31
@@ -22506,16 +22510,21 @@ Public Class CDPMailFiltrosManager2
 
                 If sTituloFiltroUsado = "" Then
                     Select Case estado
-                        Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
-                            sTituloFiltroUsado &= "Descargas + Todas las Posiciones"
+                        Case CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas
+                            sTituloFiltroUsado &= "Todas (menos las rechazadas), "
                         Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
-                            sTituloFiltroUsado &= "Descargas de Hoy + Todas las Posiciones"
+                            sTituloFiltroUsado &= "Descargas de Hoy + Todas las Posiciones, "
+                        Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+                            'acá podría verificar si las fechas no son las límite del año 1753 y 2100
+                            sTituloFiltroUsado &= "Descargas de Hoy + Posiciones filtradas, "
                         Case CartaDePorteManager.enumCDPestado.Posicion
-                            sTituloFiltroUsado &= "Posiciones"
+                            sTituloFiltroUsado &= "Posición, "
                         Case CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
-                            sTituloFiltroUsado &= "Descargas"
+                            sTituloFiltroUsado &= "Descargas, "
                         Case CartaDePorteManager.enumCDPestado.Rechazadas
-                            sTituloFiltroUsado &= "Rechazos"
+                            sTituloFiltroUsado &= "Rechazadas, "
+                        Case Else
+                            sTituloFiltroUsado &= estado.ToString
                     End Select
                 End If
 
