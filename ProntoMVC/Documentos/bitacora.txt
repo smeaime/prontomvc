@@ -7,12 +7,36 @@
 BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
 ----------------------------------------------------------------------------------------
 
+Hay que ordenar estas cosas por importancia......
+
+
 Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
 
 Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en Orden de compra)
 
+Los botones del pie, en algunos formularios, aparecen justificados a la izquierda
+
+Funciona el orden por columna en todos los listados?
+
+PLANTILLAS
+
+GRILLAS AUX 
+	funciona el filtrador general ese?
+
+INFORMES
+	Queda choto que tenga otro layout por ser un webform.
+
+COMPARATIVAS
+	listado: falta columna link de "editar"
+
+
+PEDIDO
+	listado con todas las columnas angostísimas
+
+
 PRESUPUESTO
 	no graba la cadena "\\SERVER\Archivoadjunto" en adjunto (o en observaciones)
+	en el form, el subnumero no está pegado al número 
 
 
 ASIENTO
