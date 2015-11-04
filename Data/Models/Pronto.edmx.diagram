@@ -1865,7 +1865,7 @@
           <edmx:ConnectorPoint PointX="12.453124375" PointY="105.45" />
           <edmx:ConnectorPoint PointX="13.375" PointY="105.45" />
         </edmx:AssociationConnector>
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Comparativa" Width="1.5" PointX="18.625" PointY="124.25" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Comparativa" Width="1.5" PointX="18.625" PointY="124.25" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleComparativa" Width="1.5" PointX="20.875" PointY="124.375" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Autorizacione" Width="1.5" PointX="16.875" PointY="0.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.AutorizacionesCompra" Width="1.5" PointX="16.875" PointY="3.75" Height="0.4" IsExpanded="false" />

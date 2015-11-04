@@ -1575,3 +1575,8 @@ alter table FertilizantesCupos ADD
 	LitrosFinal NUMERIC (12, 2) NULL
 go
 
+
+
+ALTER TABLE facturas alter column idcondicionventa int NULL
+
+
