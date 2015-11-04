@@ -783,12 +783,6 @@ warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a
     <Property Name="FueraDeEstandar" Type="varchar" MaxLength="2" />
     <Property Name="CalidadPuntaSombreada" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Pronto.dbo.CartasDePorteMailClusters' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CartasDePorteMailClusters">
-          <Property Name="IdCartaDePorte" Type="int" />
-          <Property Name="AgrupadorDeTandaPeriodos" Type="int" />
-        </EntityType>-->
   <EntityType Name="CartasDePorteReglasDeFacturacion">
     <Key>
       <PropertyRef Name="IdRegla" />
@@ -1029,6 +1023,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="FechaAnulacion" Type="datetime" />
     <Property Name="IdUsuarioAnulo" Type="int" />
     <Property Name="MotivoAnulacion" Type="ntext" />
+    <Property Name="Cumplida" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="ComprobantesProveedores">
     <Key>
@@ -1165,6 +1160,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="IdTipoOperacion" Type="int" />
     <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="200" />
     <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="200" />
+    <Property Name="NoTomarParaCalculoDeImpuestos" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="Conceptos">
     <Key>
@@ -3174,6 +3170,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="CodigoActividadIIBB" Type="int" />
     <Property Name="ActividadComercializacionGranos" Type="varchar" MaxLength="2" />
     <Property Name="TipoActividadComercializacionGranos" Type="int" />
+    <Property Name="ConstitucionSocietaria" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Estados Proveedores">
     <Key>
@@ -3381,6 +3378,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="Bruto" Type="numeric" Precision="12" Scale="2" />
     <Property Name="Despacho" Type="varchar" MaxLength="50" />
     <Property Name="PuntoDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="LitrosFinal" Type="numeric" Precision="12" Scale="2" />
   </EntityType>
   <EntityType Name="Formularios">
     <Key>
@@ -5774,9 +5772,6 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-error 6004: The table 'Pronto.dbo.CartasDePorteMailClusters' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__CartasDeP__IdCar__4A4FCF14" />-->
   <Association Name="FK__CartasDeP__IdCar__5A512CB3">
     <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="0..1" />
     <End Role="CartasDePorteDetalle" Type="Self.CartasDePorteDetalle" Multiplicity="*" />
