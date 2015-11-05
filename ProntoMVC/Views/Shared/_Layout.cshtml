@@ -3059,17 +3059,6 @@ Released   : 20120723
                                     </div>
                                 </div>
                             </div>
-                            @*(System.Diagnostics.Debug.att.IsAttached())*@
-                            @if (ViewBag.NombreUsuario == "Mariano" && System.Diagnostics.Debugger.IsAttached & System.Environment.MachineName == "MARIANO-PC" && false)
-                            {
-                                //var s=Url.Content("~/Content/images/Wizard-Resource-Arcane-Power.gif");
-                                //var aas = "http://trolr.com/wp-content/uploads/2012/05/Witch-Doctor-Resource-Mana.gif";
-                                var aas = "http://trolr.com/wp-content/uploads/2012/05/Monk-Resource-Spirit.gif";
-
-                                <img src=@aas
-                                     alt="" style="text-align: ; margin-top: ; margin-left: ; width: ; height: 150px;
-    bottom: -8px; position: fixed; right: 0; left: ; z-index: 1030; margin-bottom: 0;" />
-                            }
                         </div>
                         <div class="modal">
                             <!-- Place at bottom of page -->
@@ -3091,6 +3080,27 @@ Released   : 20120723
 
 
                     </div>
+
+
+
+
+
+        @*(System.Diagnostics.Debug.att.IsAttached())*@
+        @if (System.Diagnostics.Debugger.IsAttached & System.Environment.MachineName == "MARIANOPC" && true)
+        {
+            //var s=Url.Content("~/Content/images/Wizard-Resource-Arcane-Power.gif");
+            //var aas = "http://trolr.com/wp-content/uploads/2012/05/Witch-Doctor-Resource-Mana.gif";
+            var aas = "http://trolr.com/wp-content/uploads/2012/05/Monk-Resource-Spirit.gif";
+
+            <img src=@aas
+                 alt="" style="text-align: ; margin-top: ; margin-left: ; width: ; height: 150px;
+    bottom: -8px; position: fixed; right: 0; left: ; z-index: 1030; margin-bottom: 0;" />
+        }
+
+
+
+
+
 
 
 
