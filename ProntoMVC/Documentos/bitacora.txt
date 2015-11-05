@@ -13,13 +13,20 @@ Si está corriendo el debugger, poder elegir la cadena de conexion bdlmaster en 
 
 Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
 
+Mensaje de "perdiste conexion"
+
 Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en Orden de compra)
 
 Los botones del pie, en algunos formularios, aparecen justificados a la izquierda
 
 Funciona el orden por columna en todos los listados?
 
-hay formularios que en lugar de ocupar el span12 ocupan solo span8
+Hay formularios que en lugar de ocupar el span12 ocupan solo span8  (remito,nd,nc)
+
+PASEO general, que no le explote a Claudio en la mano:
+	meterse en el formulario y ver si graba
+	autofiltros (en maestros y grillas aux)
+		no funcionan las fechas en los autofiltros.
 
 PLANTILLAS
 
@@ -51,9 +58,6 @@ ASIENTO
 	cuando pasas de pagina en la grilla axu, agrega un renglon en blanco LISTO!
 
 
-PASEO general, que no le explote a Claudio en la mano:
-	autofiltros (en maestros y grillas aux)
-		no funcionan las fechas en los autofiltros.
 
 Hay formularios donde no deberia estar habilitado el panel de grillas (en el de nota de debito, o en los maestros) -hacer una funcion que revise si hay grillas auxiliares, y si no, que deshabilite el panel y el boton de grillas
 
