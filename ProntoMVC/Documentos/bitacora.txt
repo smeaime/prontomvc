@@ -9,6 +9,7 @@ BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importa
 
 Hay que ordenar estas cosas por importancia......
 
+Si está corriendo el debugger, poder elegir la cadena de conexion bdlmaster en el login
 
 Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
 
@@ -17,6 +18,8 @@ Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en O
 Los botones del pie, en algunos formularios, aparecen justificados a la izquierda
 
 Funciona el orden por columna en todos los listados?
+
+hay formularios que en lugar de ocupar el span12 ocupan solo span8
 
 PLANTILLAS
 
