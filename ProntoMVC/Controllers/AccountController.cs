@@ -8,7 +8,7 @@ using System.Web.Security;
 //using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 
-
+using System.Data.SqlClient;
 
 using Pronto.ERP.Bll;
 using System.Configuration;
@@ -19,6 +19,39 @@ namespace ProntoMVC.Controllers
 {
     public partial class AccountController : Controller // este no creo que deba heredar ProntoBaseController, no? -por qué?
     {
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual  bool DBConnectionStatus()
+        {
+
+            // var sc=   sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid());
+
+            var sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+
+            //var sConexSQL = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
+
+          
+            
+
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(sConexBDLMaster))
+                {
+                    sqlConn.Open();
+
+                    return (sqlConn.State == ConnectionState.Open);
+                }
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
 
 
 
