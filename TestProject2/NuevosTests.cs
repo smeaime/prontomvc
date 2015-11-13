@@ -214,6 +214,19 @@ namespace ProntoMVC.Tests
 
 
 
+
+            // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
+
+            var m = new Mock<Generales.IStaticMembershipService>();
+            var us = new Mock<MembershipUser>();
+            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
+            m.Setup(s => s.GetUser()).Returns(us.Object);
+            m.Setup(s => s.EsSuperAdmin()).Returns(true);
+            c.oStaticMembershipService = m.Object;
+            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+            // supervisor       1804B573-0439-4EA0-B631-712684B54473
+
+
             /////////////////////////////////////////////////////
             /////////////////////////////////////////////////////
             // necesito llamar a mano al Initialize  http://stackoverflow.com/questions/1452665/how-to-trigger-initialize-method-while-trying-to-unit-test
@@ -236,16 +249,6 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////
             /////////////////////////////////////////////////////
 
-
-            // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
-
-            var m = new Mock<Generales.IStaticMembershipService>();
-            var us = new Mock<MembershipUser>();
-            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
-            m.Setup(s => s.GetUser()).Returns(us.Object);
-            c.oStaticMembershipService = (Generales.IStaticMembershipService)m;
-            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
-            // supervisor       1804B573-0439-4EA0-B631-712684B54473
 
 
 
