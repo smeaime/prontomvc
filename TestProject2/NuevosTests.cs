@@ -32,10 +32,245 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+    [TestClass]
+    public class TestsBasicos
+    {
+
+        const string scbdlmaster =
+                  @"metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;provider=System.Data.SqlClient;provider connection string=""data source=SERVERSQL3\TESTING;initial catalog=BDLMaster;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;connect timeout=8;application name=EntityFramework""";
+
+        const string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=DemoProntoWeb;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
+        //string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=MARIANO-PC\\SQLEXPRESS;initial catalog=Autotrol;integrated security=True;multipleactiveresultsets=True;App=EntityFramework'";
+        //            "metadata=res://*/Entity.csdl|res://*/Entity.ssdl|res://*/Entity.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=SOMESERVER;Initial Catalog=SOMECATALOG;Persist Security Info=True;User ID=Entity;Password=Entity;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" 
+
+
+
+        /// </summary>
+
+        [TestMethod]
+        public void EditPedidoMoq()
+        {
+
+            var c = new PedidoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Edit(-1);
+
+        }
+
+
+
+        [TestMethod]
+        public void GrabaPedidoMoq()
+        {
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+            Pedido Pedido = db.Pedidos.First();
+
+            var c = new PedidoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.BatchUpdate(Pedido);
+
+        }
+
+
+
+        [TestMethod]
+        public void MaestroPedidoMoq()
+        {
+
+            var c = new PedidoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Pedidos_DynamicGridData("NumeroPedido", "desc", 0, 50, false, "");
+
+        }
+
+
+        [TestMethod]
+        public void MaestroRequerimientosMoq()
+        {
+
+            var c = new RequerimientoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Requerimientos_DynamicGridData("NumeroRequerimiento", "desc", 0, 50, false, "", "", "", "");
+
+        }
+
+
+
+
+
+        static private void GetMockedControllerGenerico(ProntoBaseController c)
+        {
+
+            var controllerContext = new Mock<ControllerContext>();
+
+            if (false)
+            {
+                //var httpContextMock = new Mock<HttpContextBase>();
+                //var serverMock = new Mock<HttpServerUtilityBase>();
+                //serverMock.Setup(x => x.MapPath("~/App_Data")).Returns(@"C:\Backup\BDL\ProntoMVC\ProntoMVC\App_Data");  // es case sensitive!!!!  no pongas "app_data"    // (@"C:\Users\Mariano\Desktop");
+                //httpContextMock.Setup(x => x.Server).Returns(serverMock.Object);
+                //var sut = new ComprobanteProveedorController();
+                //sut.ControllerContext = new ControllerContext(httpContextMock.Object, new System.Web.Routing.RouteData(), sut);
+
+
+                // http://stackoverflow.com/questions/1389744/testing-controller-action-that-uses-user-identity-name
+                // por qué necesito usar un mock para hacer que uso un usuario específico? No puedo usar el controller derecho viejo sin mockear?
+                // -sea lo que fuere, vos necesitás inyectar 
+
+                var identity = new GenericIdentity("superadmin");
+                var userMock = new Mock<IPrincipal>();
+                userMock.Setup(p => p.IsInRole("Administrador")).Returns(true);
+                userMock.SetupGet(x => x.Identity.Name).Returns("superadmin");
+
+                // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
+
+                var membershipMock = new Mock<Generales.IStaticMembershipService>();
+                var userMock2 = new Mock<MembershipUser>();
+                userMock2.Setup(u => u.ProviderUserKey).Returns(new Guid());
+                membershipMock.Setup(s => s.GetUser()).Returns(userMock2.Object);
+
+
+
+
+
+                Mock<MembershipProvider> memberShipProvider;
+                Mock<MembershipUser> user;
+                memberShipProvider = new Mock<MembershipProvider>();
+                user = new Mock<MembershipUser>();
+                user.SetupGet(u => u.Email)
+                    .Returns("test@test.com");
+                user.Setup(u => u.ResetPassword("secret"))
+                    .Returns("test2");
+                memberShipProvider
+                    .Setup(prov => prov.GetUser("test", false))
+                    .Returns(user.Object);
+
+
+
+                /*
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
+
+                */
+
+                // mockeas ControllerContext +  HttpContextBase + IPrincipal
+
+                var contextMock = new Mock<HttpContextBase>();
+                contextMock.SetupGet(ctx => ctx.User)
+                           .Returns(userMock.Object);
+
+
+
+                controllerContext.SetupGet(con => con.HttpContext)
+                                     .Returns(contextMock.Object);
+
+            }
+
+
+
+
+
+            // cómo hacer con la cadena de conexion en ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            // http://stackoverflow.com/questions/9486087/how-to-mock-configurationmanager-appsettings-with-moq
+            // agregarlas en el app config de este proyecto!!!
+            // agregarlas en el app config de este proyecto!!!
+            // agregarlas en el app config de este proyecto!!!
+            // http://stackoverflow.com/questions/17580485/cannot-use-configurationmanager-inside-unit-test-project
+
+
+
+            //controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns(Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey));
+            controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns("DemoProntoWeb");
+            controllerContext.SetupGet(p => p.HttpContext.Session["Usuario"]).Returns("supervisor");
+            //  controllerContext.SetupGet(p => p.HttpContext.User.Identity.Name).Returns(_testEmail);
+            controllerContext.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
+            controllerContext.SetupGet(p => p.HttpContext.Response.Cookies).Returns(new HttpCookieCollection());
+
+            controllerContext.Setup(p => p.HttpContext.Request.Form.Get("ReturnUrl")).Returns("sample-return-url");
+            controllerContext.Setup(p => p.HttpContext.Request.Params.Get("q")).Returns("sample-search-term");
+
+            c.ControllerContext = controllerContext.Object;
+
+
+
+
+
+
+
+
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            // necesito llamar a mano al Initialize  http://stackoverflow.com/questions/1452665/how-to-trigger-initialize-method-while-trying-to-unit-test
+            //  http://stackoverflow.com/questions/1452418/how-do-i-mock-the-httpcontext-in-asp-net-mvc-using-moq
+
+
+            //var requestContext = new System.Web.Routing.RequestContext(controllerContext.Object, new System.Web.Routing.RouteData());
+            //var requestContext = new System.Web.Routing.RequestContext(contextMock.Object, new System.Web.Routing.RouteData());
+            //IController controller = c;
+            //controller.Execute(requestContext);
+
+
+            c.FakeInitialize("DemoProntoWeb");
+
+            // este tipo sugiere directamente sacar del Initialize el codigo y meterlo en un metodo para llamarlo aparte
+            // http://stackoverflow.com/questions/5769163/asp-net-mvc-unit-testing-override-initialize-method
+            // I suggest you to factor out your custom Initialize() logic out into different method. Then create fake (stub) subclass with 
+            // public method that calls this factored out protected Initialzie. Are you with me?
+
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+
+
+            // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
+
+            var m = new Mock<Generales.IStaticMembershipService>();
+            var us = new Mock<MembershipUser>();
+            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
+            m.Setup(s => s.GetUser()).Returns(us.Object);
+            c.oStaticMembershipService = (Generales.IStaticMembershipService)m;
+            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+            // supervisor       1804B573-0439-4EA0-B631-712684B54473
+
+
+
+        }
+
+
+
+    }
+
     [TestClass]
     public class FondoFijoControllerTest
     {
 
+        const string scbdlmaster =
+                  @"metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;provider=System.Data.SqlClient;provider connection string=""data source=SERVERSQL3\TESTING;initial catalog=BDLMaster;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;connect timeout=8;application name=EntityFramework""";
+
+        const string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=DemoProntoWeb;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
+        //string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=MARIANO-PC\\SQLEXPRESS;initial catalog=Autotrol;integrated security=True;multipleactiveresultsets=True;App=EntityFramework'";
+        //            "metadata=res://*/Entity.csdl|res://*/Entity.ssdl|res://*/Entity.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=SOMESERVER;Initial Catalog=SOMECATALOG;Persist Security Info=True;User ID=Entity;Password=Entity;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" 
+
+
+
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         [TestMethod()]
@@ -159,71 +394,6 @@ namespace ProntoMVC.Tests
 
 
 
-        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// </summary>
-
-        [TestMethod]
-        public void EditPedidoMoq()
-        {
-
-            var c = new PedidoController();
-
-            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
-
-            var result = c.Edit(-1);
-
-        }
-
-
-
-        [TestMethod]
-        public void GrabaPedidoMoq()
-        {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
-
-            Pedido Pedido = db.Pedidos.First();
-
-            var c = new PedidoController();
-
-            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
-
-            var result = c.BatchUpdate(Pedido);
-
-        }
-
-
-
-        [TestMethod]
-        public void MaestroPedidoMoq()
-        {
-
-            var c = new PedidoController();
-
-            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
-
-            var result = c.Pedidos_DynamicGridData("NumeroPedido", "desc", 0, 50, false, "");
-
-        }
-
-
-        [TestMethod]
-        public void MaestroRequerimientosMoq()
-        {
-
-            var c = new RequerimientoController();
-
-            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
-
-            var result = c.Requerimientos_DynamicGridData("NumeroRequerimiento", "desc", 0, 50, false, "", "", "", "");
-
-        }
-
-
-        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [TestMethod()]
         public void BatchUpdateFFTest()
@@ -651,16 +821,6 @@ namespace ProntoMVC.Tests
 
 
 
-        const string scbdlmaster =
-                         @"metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;provider=System.Data.SqlClient;provider connection string=""data source=SERVERSQL3\TESTING;initial catalog=BDLMaster;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;connect timeout=8;application name=EntityFramework""";
-
-        const string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=DemoProntoWeb;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
-        //string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=MARIANO-PC\\SQLEXPRESS;initial catalog=Autotrol;integrated security=True;multipleactiveresultsets=True;App=EntityFramework'";
-        //            "metadata=res://*/Entity.csdl|res://*/Entity.ssdl|res://*/Entity.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=SOMESERVER;Initial Catalog=SOMECATALOG;Persist Security Info=True;User ID=Entity;Password=Entity;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" 
-
-
-
-
 
 
 
@@ -1071,137 +1231,6 @@ namespace ProntoMVC.Tests
 
 
 
-        static private void GetMockedControllerGenerico(ProntoBaseController c)
-        {
-
-            var controllerContext = new Mock<ControllerContext>();
-
-            if (false)
-            {
-                //var httpContextMock = new Mock<HttpContextBase>();
-                //var serverMock = new Mock<HttpServerUtilityBase>();
-                //serverMock.Setup(x => x.MapPath("~/App_Data")).Returns(@"C:\Backup\BDL\ProntoMVC\ProntoMVC\App_Data");  // es case sensitive!!!!  no pongas "app_data"    // (@"C:\Users\Mariano\Desktop");
-                //httpContextMock.Setup(x => x.Server).Returns(serverMock.Object);
-                //var sut = new ComprobanteProveedorController();
-                //sut.ControllerContext = new ControllerContext(httpContextMock.Object, new System.Web.Routing.RouteData(), sut);
-
-
-                // http://stackoverflow.com/questions/1389744/testing-controller-action-that-uses-user-identity-name
-                // por qué necesito usar un mock para hacer que uso un usuario específico? No puedo usar el controller derecho viejo sin mockear?
-                // -sea lo que fuere, vos necesitás inyectar 
-
-                var identity = new GenericIdentity("superadmin");
-                var userMock = new Mock<IPrincipal>();
-                userMock.Setup(p => p.IsInRole("Administrador")).Returns(true);
-                userMock.SetupGet(x => x.Identity.Name).Returns("superadmin");
-
-                // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
-
-                var membershipMock = new Mock<IStaticMembershipService>();
-                var userMock2 = new Mock<MembershipUser>();
-                userMock2.Setup(u => u.ProviderUserKey).Returns(new Guid());
-                membershipMock.Setup(s => s.GetUser()).Returns(userMock2.Object);
-
-
-
-                Mock<MembershipProvider> memberShipProvider;
-                Mock<MembershipUser> user;
-                memberShipProvider = new Mock<MembershipProvider>();
-                user = new Mock<MembershipUser>();
-                user.SetupGet(u => u.Email)
-                    .Returns("test@test.com");
-                user.Setup(u => u.ResetPassword("secret"))
-                    .Returns("test2");
-                memberShipProvider
-                    .Setup(prov => prov.GetUser("test", false))
-                    .Returns(user.Object);
-
-
-
-                /*
-    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-    Then you should avoid using the Membership. It's static and it's not designed to be unit testable. The better choice would be to use the controller's User property:
-
-                */
-
-                // mockeas ControllerContext +  HttpContextBase + IPrincipal
-
-                var contextMock = new Mock<HttpContextBase>();
-                contextMock.SetupGet(ctx => ctx.User)
-                           .Returns(userMock.Object);
-
-
-
-                controllerContext.SetupGet(con => con.HttpContext)
-                                     .Returns(contextMock.Object);
-
-            }
-
-
-
-
-
-            // cómo hacer con la cadena de conexion en ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-            // http://stackoverflow.com/questions/9486087/how-to-mock-configurationmanager-appsettings-with-moq
-            // agregarlas en el app config de este proyecto!!!
-            // agregarlas en el app config de este proyecto!!!
-            // agregarlas en el app config de este proyecto!!!
-            // http://stackoverflow.com/questions/17580485/cannot-use-configurationmanager-inside-unit-test-project
-
-
-
-            //controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns(Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey));
-            controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns("DemoProntoWeb");
-            //  controllerContext.SetupGet(p => p.HttpContext.User.Identity.Name).Returns(_testEmail);
-            controllerContext.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
-            controllerContext.SetupGet(p => p.HttpContext.Response.Cookies).Returns(new HttpCookieCollection());
-
-            controllerContext.Setup(p => p.HttpContext.Request.Form.Get("ReturnUrl")).Returns("sample-return-url");
-            controllerContext.Setup(p => p.HttpContext.Request.Params.Get("q")).Returns("sample-search-term");
-
-            c.ControllerContext = controllerContext.Object;
-
-
-
-
-
-
-
-
-            /////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////
-            // necesito llamar a mano al Initialize  http://stackoverflow.com/questions/1452665/how-to-trigger-initialize-method-while-trying-to-unit-test
-            //  http://stackoverflow.com/questions/1452418/how-do-i-mock-the-httpcontext-in-asp-net-mvc-using-moq
-
-
-            //var requestContext = new System.Web.Routing.RequestContext(controllerContext.Object, new System.Web.Routing.RouteData());
-            //var requestContext = new System.Web.Routing.RequestContext(contextMock.Object, new System.Web.Routing.RouteData());
-            //IController controller = c;
-            //controller.Execute(requestContext);
-
-
-            c.FakeInitialize("DemoProntoWeb");
-
-            // este tipo sugiere directamente sacar del Initialize el codigo y meterlo en un metodo para llamarlo aparte
-            // http://stackoverflow.com/questions/5769163/asp-net-mvc-unit-testing-override-initialize-method
-            // I suggest you to factor out your custom Initialize() logic out into different method. Then create fake (stub) subclass with 
-            // public method that calls this factored out protected Initialzie. Are you with me?
-
-            /////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////
-
-
-
-
-
-
-        }
-
-
-
 
         static private ComprobanteProveedorController GetMockedComprobanteProveedorController()
         {
@@ -1234,7 +1263,8 @@ namespace ProntoMVC.Tests
 
             // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
 
-            var membershipMock = new Mock<IStaticMembershipService>();
+
+            var membershipMock = new Mock<Generales.IStaticMembershipService>();
             var userMock2 = new Mock<MembershipUser>();
             userMock2.Setup(u => u.ProviderUserKey).Returns(new Guid());
             membershipMock.Setup(s => s.GetUser()).Returns(userMock2.Object);
@@ -1311,28 +1341,28 @@ namespace ProntoMVC.Tests
     }
 
 
-    public interface IStaticMembershipService
-    {
-        MembershipUser GetUser();
+    //public interface IStaticMembershipService
+    //{
+    //    MembershipUser GetUser();
 
-        void UpdateUser(MembershipUser user);
-    }
+    //    void UpdateUser(MembershipUser user);
+    //}
 
-    public class StaticMembershipService : IStaticMembershipService
-    {
+    //public class StaticMembershipService : IStaticMembershipService
+    //{
 
-        // https://github.com/r0k3t/TaskBoardAuth/blob/master/TaskBoardAuth.Tests/Controllers/AccountControllerTests.cs
-        // https://github.com/r0k3t/TaskBoardAuth/blob/master/TaskBoardAuth/Controllers/AccountController.cs
+    //    // https://github.com/r0k3t/TaskBoardAuth/blob/master/TaskBoardAuth.Tests/Controllers/AccountControllerTests.cs
+    //    // https://github.com/r0k3t/TaskBoardAuth/blob/master/TaskBoardAuth/Controllers/AccountController.cs
 
 
-        public System.Web.Security.MembershipUser GetUser()
-        {
-            return Membership.GetUser();
-        }
+    //    public System.Web.Security.MembershipUser GetUser()
+    //    {
+    //        return Membership.GetUser();
+    //    }
 
-        public void UpdateUser(MembershipUser user)
-        {
-            Membership.UpdateUser(user);
-        }
-    }
+    //    public void UpdateUser(MembershipUser user)
+    //    {
+    //        Membership.UpdateUser(user);
+    //    }
+    //}
 }
