@@ -205,15 +205,63 @@ namespace ProntoMVC.Tests
             controllerContext.Setup(p => p.HttpContext.Request.Form.Get("ReturnUrl")).Returns("sample-return-url");
             controllerContext.Setup(p => p.HttpContext.Request.Params.Get("q")).Returns("sample-search-term");
 
+
+            
+            
+           
+            
+
+
+       
+
+
+
+
+            
+            // si queres que te funcionen las llamadas a Url.Action(...), tenes que mandar una url mockeada
+            http://stackoverflow.com/questions/15258669/mocking-controller-url-actionstring-string-object-string-in-asp-net-mvc
+
+            var routes = new  System.Web.Routing.RouteCollection();
+            MvcApplication.RegisterRoutes(routes);
+
+            var request = new Mock<HttpRequestBase>(); //MockBehavior.Strict);
+            request.SetupGet(x => x.ApplicationPath).Returns("/");
+            request.SetupGet(x => x.Url).Returns(new Uri("http://localhost/a", UriKind.Absolute));
+            request.SetupGet(x => x.ServerVariables).Returns(new System.Collections.Specialized.NameValueCollection());
+
+            var response = new Mock<HttpResponseBase>(); //MockBehavior.Strict);
+            response.Setup(x => x.ApplyAppPathModifier("/post1")).Returns("http://localhost/post1");
+
+            var context = new Mock<HttpContextBase>(); // (MockBehavior.Strict);
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            context.SetupGet(x => x.Response).Returns(response.Object);
+
+            //controllerContext.SetupGet(x => x.Request).Returns(request.Object);
+            //controllerContext.SetupGet(x => x.Response).Returns(response.Object);
+
+        
+            
+            
+            
             c.ControllerContext = controllerContext.Object;
 
 
+            //var controller = new LinkbackController(dbF.Object);
+            //controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            c.Url = new UrlHelper(new System.Web.Routing.RequestContext(context.Object, new System.Web.Routing.RouteData()), routes);
 
 
 
 
 
 
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            
 
             // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
 
@@ -225,6 +273,7 @@ namespace ProntoMVC.Tests
             c.oStaticMembershipService = m.Object;
             // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
             // supervisor       1804B573-0439-4EA0-B631-712684B54473
+
 
 
             /////////////////////////////////////////////////////
