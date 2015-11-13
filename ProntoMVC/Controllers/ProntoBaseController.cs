@@ -94,7 +94,7 @@ namespace ProntoMVC.Controllers
             var d = new dsEncrypt();
             d.KeyString = "EDS";
 
-            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService );
             return d.Encrypt(s);
 
 
@@ -132,7 +132,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                sc = Generales.sCadenaConex(nombreEmpresa, uguid);
+                sc = Generales.sCadenaConex(nombreEmpresa, oStaticMembershipService);
             }
             catch (Exception)
             {
@@ -222,7 +222,7 @@ namespace ProntoMVC.Controllers
                     // return Redirect(returnUrl);
 
                     string sss2 = this.Session["BasePronto"].ToString();
-                    sc = Generales.sCadenaConex(sss2);
+                    sc = Generales.sCadenaConex(sss2, oStaticMembershipService);
                     if (sc == null)
                     {
                         // throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
@@ -236,7 +236,7 @@ namespace ProntoMVC.Controllers
                 }
 
                 string sss = this.Session["BasePronto"].ToString();
-                sc = Generales.sCadenaConex(sss);
+                sc = Generales.sCadenaConex(sss, oStaticMembershipService);
                 //    return RedirectToAction("Index", "Home");
                 if (sc == null) throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
             }
@@ -497,7 +497,7 @@ namespace ProntoMVC.Controllers
             {
                 string usuario = ViewBag.NombreUsuario;
                 IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             }
             else
             {
@@ -1616,7 +1616,9 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                dest = Generales.sCadenaConex(nombrebasepronto);
+                
+
+                dest = Generales.sCadenaConex(nombrebasepronto, oStaticMembershipService);
                 dbDest = new ProntoMVC.Data.Models.DemoProntoEntities(dest);
 
 
@@ -1749,7 +1751,7 @@ namespace ProntoMVC.Controllers
             if (string.IsNullOrEmpty(connectionString)) return;
 
 
-            string nuevaconex = Generales.sCadenaConexSQL(nombrebaseoriginal).Replace(nombrebaseoriginal, nombrebasenueva);
+            string nuevaconex = Generales.sCadenaConexSQL(nombrebaseoriginal, oStaticMembershipService).Replace(nombrebaseoriginal, nombrebasenueva);
 
             CrearConexionlaEnLaTablaBases(nombrebasenueva, nuevaconex); // corregir. estoy pasando la conexion de la bdlmaster
 
@@ -2827,8 +2829,8 @@ namespace ProntoMVC.Controllers
             bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
             bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
 
-            string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
-            SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString());
+            string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
+            SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
             bool esfirma = Generales.TienePermisosDeFirma(SC, IdUsuario);
 
             foreach (Tablas.Tree o in Tree)
