@@ -1796,20 +1796,20 @@ namespace ProntoMVC.Controllers
                                 a.IdPedido.ToString(), 
                                 a.NumeroPedido.NullSafeToString(), 
                                 a.SubNumero.NullSafeToString(), 
-                                a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                //GetCustomDateFormat(a.FechaPedido).NullSafeToString(), 
-                                a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                 a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                 a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido.NullSafeToString(), 
 
 
-
-                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
-                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra).Distinct()),
-                                //(i.DetalleRequerimiento == null ? "" : i.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString()));
-                                //"", //a.detallepedidos.select (obras,
-                                
-                                
-                                
+                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
+                                                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
+                                                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
+                                                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
+                              
+                                                             
                                 a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
                                 (a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
                                 a.Bonificacion.NullSafeToString(), 
@@ -1837,6 +1837,7 @@ namespace ProntoMVC.Controllers
                                 a.IdComprador.NullSafeToString(),
                                 a.IdProveedor.NullSafeToString(),
                                 a.ConfirmadoPorWeb_1.NullSafeToString()
+                               
                             }
                         }).ToArray()
             };
