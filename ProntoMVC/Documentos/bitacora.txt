@@ -9,7 +9,11 @@ BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importa
 
 Hay que ordenar estas cosas por importancia......
 
+Poder librarse de una vez del membership en testing
+
 Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
+	lo molesto de esta cuestion es que no todos los formularios aceptan regrabar uno existente.
+
 
 Si está corriendo el debugger, poder elegir la cadena de conexion bdlmaster en el login
 

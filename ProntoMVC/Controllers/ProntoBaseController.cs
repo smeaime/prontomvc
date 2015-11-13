@@ -106,10 +106,19 @@ namespace ProntoMVC.Controllers
 
             Guid uguid = (Guid)new Guid();
 
+
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
+
+
+                //if (!System.Diagnostics.Debugger.IsAttached) //si uso esto, anda hacer "Debug test", pero no "Run test".
+
+                if (this.Session["Usuario"].NullSafeToString() == "")
                     uguid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+                else
+                    uguid = new Guid("1804B573-0439-4EA0-B631-712684B54473");
+                // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+                // supervisor       1804B573-0439-4EA0-B631-712684B54473
 
             }
             catch (Exception)
@@ -117,6 +126,9 @@ namespace ProntoMVC.Controllers
                 //return;
                 throw new Exception("Falla la conexion a la bdlmaster para verficar el membership .net");
             }
+
+
+
 
             try
             {
@@ -145,7 +157,7 @@ namespace ProntoMVC.Controllers
 
                 try
                 {
-                    if (Membership.GetUser() == null)
+                    if (oStaticMembershipService.GetUser() == null)
                     {
                         FormsAuthentication.SignOut();
                         Session.Abandon();
@@ -214,13 +226,13 @@ namespace ProntoMVC.Controllers
                     if (sc == null)
                     {
                         // throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
-                        this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                        this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey);
                     }
                 }
                 else
                 {
 
-                    this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                    this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey);
                 }
 
                 string sss = this.Session["BasePronto"].ToString();
@@ -289,7 +301,7 @@ namespace ProntoMVC.Controllers
             {
                 base.Initialize(rc);
 
-                oStaticMembershipService = new StaticMembershipService();
+                oStaticMembershipService = new Generales.StaticMembershipService();
 
 
                 // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
@@ -473,27 +485,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        StaticMembershipService oStaticMembershipService;
-
-        public interface IStaticMembershipService
-        {
-            MembershipUser GetUser();
-
-            void UpdateUser(MembershipUser user);
-        }
-
-        public class StaticMembershipService : IStaticMembershipService
-        {
-            public System.Web.Security.MembershipUser GetUser()
-            {
-                return Membership.GetUser();
-            }
-
-            public void UpdateUser(MembershipUser user)
-            {
-                Membership.UpdateUser(user);
-            }
-        }
+        public Generales.IStaticMembershipService oStaticMembershipService;
 
 
 
