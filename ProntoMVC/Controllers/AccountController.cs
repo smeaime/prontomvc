@@ -638,7 +638,7 @@ namespace ProntoMVC.Controllers
             string sc;
             try
             {
-                if (Membership.GetUser() != null) sc = Generales.sCadenaConex(rc);
+               // if (Membership.GetUser() != null) sc = Generales.sCadenaConex(rc);
 
                 //ViewData["BasePronto"] = sBasePronto;
                 ViewBag.BasePronto = this.Session["BasePronto"];
