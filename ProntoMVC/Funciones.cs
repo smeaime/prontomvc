@@ -85,6 +85,29 @@ public static class StringExtensions
 public static class Generales
 {
 
+    public interface IStaticMembershipService
+    {
+        MembershipUser GetUser();
+
+        void UpdateUser(MembershipUser user);
+    }
+
+    public class StaticMembershipService : IStaticMembershipService
+    {
+        public System.Web.Security.MembershipUser GetUser()
+        {
+            return Membership.GetUser();
+        }
+
+        public void UpdateUser(MembershipUser user)
+        {
+            Membership.UpdateUser(user);
+        }
+    }
+
+
+
+
     // http://stackoverflow.com/questions/7195846/how-can-i-make-html-checkboxfor-work-on-a-string-field
     public static MvcHtmlString CheckBoxStringFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, string>> expression)
     {
@@ -436,7 +459,8 @@ public static class Generales
 
     }
 
-    public static string sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid())
+    public static string sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid()
+                        , StaticMembershipService ServicioMembership=null)
     {
         // string datos = HttpContext.Current.Request.Session["data"] as string;
         //var ss=ControllerContext.HttpContext.Session["{name}"];
@@ -459,7 +483,8 @@ public static class Generales
             {
                 if (!System.Diagnostics.Debugger.IsAttached)
                 {
-                    userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                    // cómo llamo desde esta funcion al servicio ?
+                    userGuid = (Guid)ServicioMembership.GetUser().ProviderUserKey;
                     esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
                 }
                 else esSuperadmin = true;
@@ -481,6 +506,7 @@ public static class Generales
                 }
                 else
                 {
+                   
                     throw;
                 }
 
@@ -489,9 +515,8 @@ public static class Generales
         }
         else
         {
-
             sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-            esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+            //esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
         }
         //string us = Membership.GetUser().UserName;
 
