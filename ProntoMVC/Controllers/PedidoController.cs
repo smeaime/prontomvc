@@ -86,7 +86,7 @@ namespace ProntoMVC.Controllers
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -673,7 +673,7 @@ namespace ProntoMVC.Controllers
             //End With
             int glbIdUsuario = Pedido.Aprobo ?? -1;
             if (glbIdUsuario <= 0) glbIdUsuario = -1;
-            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             Pronto.ERP.Bll.EntidadManager.Tarea(nSC, "AutorizacionesPorComprobante_EliminarFirmas", (int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.NotaPedido,
                                                     Pedido.IdPedido, -1, glbIdUsuario);  // idformulario,idcomprobante, orden autorizacion, idusuarioelimino
 
@@ -1043,7 +1043,7 @@ namespace ProntoMVC.Controllers
             ///////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////
-            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
             var sq = (from r in rows select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();

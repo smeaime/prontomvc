@@ -227,7 +227,7 @@ namespace ProntoMVC.Models
             List<Tablas.Tree> TreeCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase, userGuid);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;

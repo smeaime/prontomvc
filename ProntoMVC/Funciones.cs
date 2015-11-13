@@ -87,6 +87,8 @@ public static class Generales
 
     public interface IStaticMembershipService
     {
+        bool EsSuperAdmin();
+
         MembershipUser GetUser();
 
         void UpdateUser(MembershipUser user);
@@ -94,6 +96,11 @@ public static class Generales
 
     public class StaticMembershipService : IStaticMembershipService
     {
+        public bool EsSuperAdmin()
+        {
+            return Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+        }
+
         public System.Web.Security.MembershipUser GetUser()
         {
             return Membership.GetUser();
@@ -160,20 +167,22 @@ public static class Generales
     //}
 
 
-    public static string sCadenaConex(System.Web.Routing.RequestContext rc)
-    {
-        string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
-        return sCadenaConex(sBasePronto);
-    }
+    //public static string sCadenaConex(System.Web.Routing.RequestContext rc)
+    //{
+    //    string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
+    //    return sCadenaConex(sBasePronto,null);
+    //}
 
 
-    public static string sCadenaConex(string nombreEmpresa, Guid userGuid = new Guid())
+    public static string sCadenaConex(string nombreEmpresa, IStaticMembershipService ServicioMembership = null)
     {
         string s;
 
+        Guid userGuid = new Guid();
+
         try
         {
-            s = sCadenaConexSQL(nombreEmpresa, userGuid);
+            s = sCadenaConexSQL(nombreEmpresa, ServicioMembership);
         }
         catch (Exception ex)
         {
@@ -459,15 +468,15 @@ public static class Generales
 
     }
 
-    public static string sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid()
-                        , StaticMembershipService ServicioMembership=null)
+    public static string sCadenaConexSQL(string nombreEmpresa
+                        , IStaticMembershipService ServicioMembership = null)
     {
         // string datos = HttpContext.Current.Request.Session["data"] as string;
         //var ss=ControllerContext.HttpContext.Session["{name}"];
         nombreEmpresa = nombreEmpresa ?? "";
         if (nombreEmpresa == "") return null;
 
-
+        Guid userGuid = new Guid();
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
         //usuario.Empresa = IdEmpresa
@@ -477,17 +486,18 @@ public static class Generales
 
 
 
-        if (userGuid == Guid.Empty)
+        if (ServicioMembership != null)
         {
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
-                {
-                    // cómo llamo desde esta funcion al servicio ?
-                    userGuid = (Guid)ServicioMembership.GetUser().ProviderUserKey;
-                    esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
-                }
-                else esSuperadmin = true;
+                //if (!System.Diagnostics.Debugger.IsAttached)
+                //{
+                // cómo llamo desde esta funcion al servicio ?
+                userGuid = (Guid)ServicioMembership.GetUser().ProviderUserKey;
+                esSuperadmin = ServicioMembership.EsSuperAdmin();
+                //  Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+                ///}
+                //else esSuperadmin = true;
 
                 sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
 
@@ -506,7 +516,7 @@ public static class Generales
                 }
                 else
                 {
-                   
+
                     throw;
                 }
 
@@ -531,7 +541,7 @@ public static class Generales
 
         string us = "";
 
-        if (!System.Diagnostics.Debugger.IsAttached) us=  userGuid.ToString();
+        if (!System.Diagnostics.Debugger.IsAttached) us = userGuid.ToString();
 
 
         string s;
