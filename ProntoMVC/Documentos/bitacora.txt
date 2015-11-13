@@ -9,9 +9,9 @@ BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importa
 
 Hay que ordenar estas cosas por importancia......
 
-Si está corriendo el debugger, poder elegir la cadena de conexion bdlmaster en el login
-
 Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
+
+Si está corriendo el debugger, poder elegir la cadena de conexion bdlmaster en el login
 
 Mensaje de "perdiste conexion"
 
