@@ -2388,7 +2388,7 @@ namespace ProntoMVC.Controllers
             // return RedirectToAction("Arbol", "Acceso");
 
             //esta llamada tarda // y no se puede usar linqtosql acá??????
-            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString());
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
             List<Tablas.Tree> TreeDest2 = new List<Tablas.Tree>();
@@ -2960,10 +2960,10 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public List<Tablas.Tree> ArbolConNiveles_Tree(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid = new Guid())
+        public List<Tablas.Tree> ArbolConNiveles_Tree(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Generales.IStaticMembershipService ServicioMembership)
         {
 
-            List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase, userGuid);
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase, ServicioMembership);
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
 
             //string usuario = ViewBag.NombreUsuario;
@@ -2989,7 +2989,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            var archivoapp = LeerArchivoAPP(IdUsuario, sBase, usuario, dbcontext, userGuid);
+            var archivoapp = LeerArchivoAPP(IdUsuario, sBase, usuario, dbcontext, (Guid) ServicioMembership.GetUser().ProviderUserKey );
 
 
             var permisos = (from i in dbcontext.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();

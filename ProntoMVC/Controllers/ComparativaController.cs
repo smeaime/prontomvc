@@ -1259,7 +1259,7 @@ namespace ProntoMVC.Controllers
 
                     try
                     {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)

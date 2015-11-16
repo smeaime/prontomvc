@@ -534,7 +534,7 @@ namespace ProntoMVC.Controllers
 
 
                         // esto tarda 30 segundos en autotrol!!!
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)
