@@ -457,7 +457,7 @@ namespace ProntoMVC.Controllers
                         if (b == 0)
                         {
 
-                            //Roles.GetRolesForUser(Membership.GetUser().UserName)
+                            //Roles.GetRolesForUser(oStaticMembershipService.GetUser().UserName)
                             if (Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin"))
                             {
                                 //    return RedirectToAction("Index", "Autorizacion", new { area = "" });
@@ -638,11 +638,11 @@ namespace ProntoMVC.Controllers
             string sc;
             try
             {
-               // if (Membership.GetUser() != null) sc = Generales.sCadenaConex(rc);
+               // if (oStaticMembershipService.GetUser() != null) sc = Generales.sCadenaConex(rc);
 
                 //ViewData["BasePronto"] = sBasePronto;
                 ViewBag.BasePronto = this.Session["BasePronto"];
-                // this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                // this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey);
 
                 //}
                 // string sss = this.Session["BasePronto"].ToString();
@@ -1455,7 +1455,7 @@ namespace ProntoMVC.Controllers
 
 
             Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-            //string us = Membership.GetUser().UserName;
+            //string us = oStaticMembershipService.GetUser().UserName;
             string us = userGuid.ToString();
 
 

@@ -348,8 +348,8 @@ namespace ProntoMVC.Controllers
 
 
 
-            //Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-            //string us = Membership.GetUser().UserName;
+            //Guid userGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+            //string us = oStaticMembershipService.GetUser().UserName;
             //string us = userGuid.ToString();
 
 

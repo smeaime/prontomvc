@@ -30,9 +30,9 @@ namespace ProntoMVC.Controllers
         public virtual ViewResult Index()
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                     !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                 ) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -42,9 +42,9 @@ namespace ProntoMVC.Controllers
         public virtual ViewResult IndexFF()
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                     !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                 ) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);

@@ -309,7 +309,7 @@ namespace ProntoMVC.Controllers
                 ROOT = ConfigurationManager.AppSettings["Root"];
                 asignacadena((string)rc.HttpContext.Session["BasePronto"]);
 
-                string us = Membership.GetUser().ProviderUserKey.ToString();
+                string us = oStaticMembershipService.GetUser().ProviderUserKey.ToString();
 
                 string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
                 System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
@@ -473,8 +473,8 @@ namespace ProntoMVC.Controllers
 
 
 
-            //Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-            //string us = Membership.GetUser().UserName;
+            //Guid userGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+            //string us = oStaticMembershipService.GetUser().UserName;
             //string us = userGuid.ToString();
 
 
@@ -525,7 +525,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                ViewBag.NombreUsuario = Membership.GetUser().UserName;
+                ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
             }
             catch (Exception ex)
             {
@@ -1995,7 +1995,7 @@ namespace ProntoMVC.Controllers
 
             string usuario = ViewBag.NombreUsuario;
             //Guid guiduser = (Guid)Membership.GetUser(usuario).ProviderUserKey; // si no lo encontró en la base pronto, el usuario está en null
-            Guid guiduser = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid guiduser = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
 
 
             bool EsSuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
@@ -2262,7 +2262,7 @@ namespace ProntoMVC.Controllers
                 string nombreproveedor = "";
                 try
                 {
-                    Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                    Guid oGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
                     string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
                     int idproveedor = buscaridproveedorporcuit(cuit);
                     if (idproveedor <= 0)
@@ -2416,7 +2416,7 @@ namespace ProntoMVC.Controllers
 
             TreeDest = new List<Tablas.Tree>(Tree); //la duplico
 
-            var archivoapp = LeerArchivoAPP(IdUsuario, this.Session["BasePronto"].ToString(), usuario, db, new Guid(Membership.GetUser().ProviderUserKey.ToString()));
+            var archivoapp = LeerArchivoAPP(IdUsuario, this.Session["BasePronto"].ToString(), usuario, db, new Guid(oStaticMembershipService.GetUser().ProviderUserKey.ToString()));
 
 
             bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
@@ -2586,7 +2586,7 @@ namespace ProntoMVC.Controllers
                 {
                     try
                     {
-                        Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                        Guid oGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
                         string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
                         int idproveedor = buscaridproveedorporcuit(cuit);
                         if (idproveedor <= 0)
