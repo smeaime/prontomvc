@@ -170,10 +170,10 @@ namespace ProntoMVC.Controllers
         {
             //if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras") &&
-                     !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras") &&
+                     !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                 )) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = fondoFijoService.ObtenerTodos().Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -946,10 +946,10 @@ namespace ProntoMVC.Controllers
 
 
 
-            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 )
             {
 
@@ -1214,10 +1214,10 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 ))
             {
 
@@ -1487,10 +1487,10 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 ))
             {
 
@@ -1773,10 +1773,10 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras") &&
-                                     !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras") &&
+                                     !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                                      )
              ) throw new Exception("No tenés permisos");
 

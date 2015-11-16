@@ -29,8 +29,8 @@ namespace ProntoMVC.Controllers
         {
             //            if (!PuedeLeer(enumNodos.cuen)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")
                 ) throw new Exception("No tenés permisos");
             return View();
         }

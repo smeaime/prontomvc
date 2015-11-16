@@ -56,6 +56,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.4.0.4\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BussinessLogic\bin\Debug\BusinessObject.dll</HintPath>
+    </Reference>
     <Reference Include="ClaseMigrar">
       <HintPath>..\..\ClaseMigrar\bin\Debug\ClaseMigrar.dll</HintPath>
     </Reference>
@@ -163,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompProvTests.cs" />
+    <Compile Include="FFtests.cs" />
     <Compile Include="NuevosTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -186,6 +191,9 @@
       <Project>{562FC343-B9F1-4418-A862-2D4F2097DDC1}</Project>
       <Name>ProntoMVC.Servicio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
