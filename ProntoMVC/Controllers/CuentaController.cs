@@ -831,7 +831,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult SaldoContablePorIdCuentaBancaria(int IdCuentaBancaria = 0, string Fecha = "")
         {
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Cuentas_TX_MayorPorIdCuentaBancaria", IdCuentaBancaria, Fecha);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 

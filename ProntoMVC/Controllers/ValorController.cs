@@ -147,7 +147,7 @@ namespace ProntoMVC.Controllers
             DateTime mFechaComprobante = DateTime.Today;
             DateTime mFechaUltimoCierre = DateTime.Today;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             mIdValor = o.IdValor;
             mIdMoneda = o.IdMoneda ?? 1;
@@ -224,7 +224,7 @@ namespace ProntoMVC.Controllers
 
                 DateTime mFechaInicioControl;
 
-                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
                 Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
                 mIdMonedaPesos = parametros.IdMoneda ?? 0;
@@ -488,7 +488,7 @@ namespace ProntoMVC.Controllers
             decimal mIva = 0;
             decimal mAplicacion = 0;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             //mIdCuentaCaja = parametros.IdCuentaCaja ?? 0;
@@ -608,7 +608,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult TraerUno(int IdValor)
         {
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Valores_TX_PorIdConDatos", IdValor);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -766,7 +766,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Bancos_TX_MovimientosPorCuenta", IdCuentaBancaria, FechaInicial, FechaFinal, 0, 2, ConfirmacionBanco);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -869,7 +869,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Valores_TX_MovimientosPorIdCaja", IdCaja, FechaInicial, FechaFinal, 0, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -962,7 +962,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Valores_TX_MovimientosPorIdTarjetaCredito", IdTarjetaCredito, FechaInicial, FechaFinal, 0, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1055,7 +1055,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Valores_TX_ChequesPendientes");
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1133,7 +1133,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Valores_TX_ChequesNoUsados", visto);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1272,7 +1272,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPagoCuentas_TXvalor", IdOrdenesPago1);
             //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 

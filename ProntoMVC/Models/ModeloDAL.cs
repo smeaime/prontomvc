@@ -17,7 +17,7 @@ namespace ProntoMVC.Models
         public static List<Object> GetStore(string nombrebase, string storeproc, SqlParameter[] parametros)
         {
             string spName = storeproc;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
 
 
             List<object> Lista = new List<object>();
@@ -227,7 +227,7 @@ namespace ProntoMVC.Models
             List<Tablas.Tree> TreeCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;
@@ -250,7 +250,7 @@ namespace ProntoMVC.Models
             List<Tablas.Tree> TreeCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;
@@ -293,7 +293,7 @@ namespace ProntoMVC.Models
             const string spName = "Tree_TX_Arbol";
             List<Tablas.Tree> TreeCollection;
 
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
             if (string.IsNullOrEmpty(connectionString))
                 return null;
@@ -320,7 +320,7 @@ namespace ProntoMVC.Models
             List<Articulo> articuloCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;

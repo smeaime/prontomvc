@@ -790,7 +790,7 @@ namespace ProntoMVC.Controllers
             //var q = (from i in db.DefinicionArticulos where (i.IdRubro == o.IdRubro && i.IdSubrubro == o.IdSubrubro) orderby i.Orden select i).ToList();
             //ViewBag.Mascara = q;
 
-            //var SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            //var SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService;
             //SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC);
 
             //foreach (DefinicionArticulo x in q)

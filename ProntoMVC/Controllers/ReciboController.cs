@@ -370,7 +370,7 @@ namespace ProntoMVC.Controllers
 
                 DateTime mFechaInicioControl;
 
-                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
                 Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
                 mIdMonedaPesos = parametros.IdMoneda ?? 1;
@@ -1090,7 +1090,7 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "ReciboNET_Hawk.docx";
@@ -1694,7 +1694,7 @@ namespace ProntoMVC.Controllers
             decimal mTotalValores = 0;
             decimal mOtros = 0;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var Parametros2 = db.Parametros2.Where(p => p.Campo == "IdCuentaRetencionIvaCobros").FirstOrDefault();
             if (Parametros2 != null) { mIdCuentaRetencionIVA = Convert.ToInt32(Parametros2.Valor); }

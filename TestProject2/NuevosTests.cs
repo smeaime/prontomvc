@@ -201,6 +201,103 @@ namespace ProntoMVC.Tests
         }
 
 
+        [TestMethod]
+        public void GrabaFacturaMoq()
+        {
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+            Factura o = db.Facturas.First();
+
+
+            var c = new FacturaController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.BatchUpdate(o);
+
+            // Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+        public void GrabaReciboMoq()
+        {
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+            Recibo o = db.Recibos.First();
+
+
+            var c = new ReciboController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.BatchUpdate(o);
+
+            // Assert.AreEqual(expected, actual);
+            //Assert.AreEqual(result, actual);
+        }
+
+
+
+        [TestMethod]
+        public void GrabaArticuloMoq()
+        {
+     
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+            Articulo o = db.Articulos.First();
+
+
+            var c = new ArticuloController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.BatchUpdate(o);
+
+            // Assert.AreEqual(expected, actual);
+            //Assert.AreEqual(result, actual);
+        }
+
+
+        [TestMethod]
+        public void GrabaClienteMoq()
+        {
+
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+            Cliente o = db.Clientes.First();
+
+
+            var c = new ClienteController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.BatchUpdate(o);
+
+            // Assert.AreEqual(expected, actual);
+            //Assert.AreEqual(result, actual);
+        }
+
+        [TestMethod]
+        public void GrabaProveedorMoq()
+        {
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+            Proveedor o = db.Proveedores.First();
+
+
+            var c = new ProveedorController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.BatchUpdate(o);
+
+            // Assert.AreEqual(expected, actual);
+            //Assert.AreEqual(result, actual);
+        }
+
+
+
 
         [TestMethod]
         public void MaestroPedidoMoq()
@@ -227,12 +324,68 @@ namespace ProntoMVC.Tests
 
         }
 
+        [TestMethod]
+        public void MaestroPresupuestosMoq()
+        {
+
+            var c = new PresupuestoController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Presupuestos_DynamicGridData("Numero", "desc", 0, 50, false, "");
+
+        }
+
+        [TestMethod]
+        public void MaestroComparativasMoq()
+        {
+
+            var c = new ComparativaController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Comparativas_DynamicGridData("NumeroComparativa", "desc", 0, 50, false, "", "", "", "");
+
+        }
 
 
+        [TestMethod]
+        public void MaestroClientesMoq()
+        {
+
+            var c = new ClienteController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Clientes_DynamicGridData("RazonSocial", "desc", 0, 50, false, "");
+
+        }
 
 
+        [TestMethod]
+        public void MaestroProveedoresMoq()
+        {
+            
+            var c = new ProveedorController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Proveedores_DynamicGridData("RazonSocial", "desc", 1, 50, false, "");
+
+        }
 
 
+        [TestMethod]
+        public void MaestroArticulosMoq()
+        {
+            
+            var c = new ArticuloController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.Articulos_DynamicGridData("Descripcion", "desc", 1, 50, false, "");
+
+        }
 
 
 
