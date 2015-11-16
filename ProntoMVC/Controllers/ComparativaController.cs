@@ -48,9 +48,9 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Edit(int id)
         {
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
                    ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -1136,13 +1136,13 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.Comparativas)) throw new Exception("No tenés permisos");
 
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
                 )
             {
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 //if (Comparativa.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a Comparativas tuyos");
                 ////throw new Exception("No tenés permisos");

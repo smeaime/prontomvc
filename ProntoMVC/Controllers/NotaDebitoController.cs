@@ -29,9 +29,9 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
             //    ) throw new Exception("No tenés permisos");
 
             return View();
@@ -39,9 +39,9 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
 
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
             //   ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -366,11 +366,11 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
-            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             //if (db.Facturas.Find(id).IdCliente != idcliente
-            //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
+            //     && !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") && 
+            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Comercial")
             //    ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
             string baseP = this.HttpContext.Session["BasePronto"].ToString();

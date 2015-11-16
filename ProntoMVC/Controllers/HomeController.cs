@@ -37,7 +37,7 @@ namespace ProntoMVC.Controllers
         {
 
 
-            var u = Membership.GetUser();
+            var u = oStaticMembershipService.GetUser();
             string SC = (this.Session["BasePronto"] ?? "").ToString();
 
             // verificar conexion si es la primera vez (solo en modo desarrollo)
@@ -775,11 +775,11 @@ namespace ProntoMVC.Controllers
 
 
             // q = TablaTree();
-            int idusuario = Generales.Val(collection["IdEmpleado"]); // 303; //= Membership.GetUser();
+            int idusuario = Generales.Val(collection["IdEmpleado"]); // 303; //= oStaticMembershipService.GetUser();
 
             if (idusuario == -1)
             {
-                var u = Membership.GetUser();
+                var u = oStaticMembershipService.GetUser();
                 string usuario = u.UserName;
                 idusuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
             }

@@ -32,9 +32,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+               !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
                 ) throw new Exception("No tenés permisos");
 
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -57,9 +57,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
 
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
             //   ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -74,10 +74,10 @@ namespace ProntoMVC.Controllers
             {
                 OrdenPago OrdenPago = db.OrdenesPago.Find(id);
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (OrdenPago.IdProveedor != idproveedor
-                //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+                //     && !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                //!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador")
                     ) throw new Exception("No tenés permisos para esa Orden de Pago");
 
 
@@ -107,9 +107,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+               !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+               !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
                ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -145,9 +145,9 @@ namespace ProntoMVC.Controllers
             {
                 OrdenPago OrdenPago = db.OrdenesPago.Find(id);
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-                if (OrdenPago.IdProveedor != idproveedor && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
+                if (OrdenPago.IdProveedor != idproveedor && !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador")) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
                 try
                 {
                     ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
@@ -333,7 +333,7 @@ namespace ProntoMVC.Controllers
                 Req = (from a in Req where a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta select a).AsQueryable();
             }
             
-            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             if (idproveedor > 0)
             {
                 string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
@@ -550,7 +550,7 @@ namespace ProntoMVC.Controllers
                 data = (from a in data where a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta select a).AsQueryable();
             }
             
-            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             if (idproveedor > 0)
             {
                 string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
@@ -642,7 +642,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (idproveedor > 0)
                 {
                     string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
