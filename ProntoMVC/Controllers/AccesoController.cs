@@ -746,7 +746,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult ArbolConNiveles(int IdUsuario)
         {
 
-            return Json(ArbolConNiveles_Tree(IdUsuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db));
+            return Json(ArbolConNiveles_Tree(IdUsuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db , oStaticMembershipService  ));
         }
 
 

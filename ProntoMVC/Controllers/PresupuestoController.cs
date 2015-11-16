@@ -180,7 +180,7 @@ namespace ProntoMVC.Controllers
                     db.wActualizacionesVariasPorComprobante(104, presupuesto.IdPresupuesto, tipomovimiento);
                     try
                     {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)
