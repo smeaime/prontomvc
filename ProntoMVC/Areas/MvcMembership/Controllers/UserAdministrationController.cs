@@ -798,7 +798,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                     {
 
                         // si el admin que modifica es externo, lo pongo en su grupo. Si no, le creo un grupo 
-                        string grupo = Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "AdminExterno") ?
+                        string grupo = oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "AdminExterno") ?
                                         DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey) :
                                         user.UserName;
 
