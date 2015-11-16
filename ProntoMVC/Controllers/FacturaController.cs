@@ -895,9 +895,9 @@ namespace ProntoMVC.Controllers
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             if (idcliente != 0 &&
                   db.Facturas.Find(id).IdCliente != idcliente
-                 && !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-            !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Comercial")
+                 && !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Comercial")
                 ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
@@ -940,9 +940,9 @@ namespace ProntoMVC.Controllers
         {
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             //if (db.Facturas.Find(id).IdCliente != idcliente
-            //     && !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-            //!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") && 
-            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Comercial")
+            //     && !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") && 
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Comercial")
             //    ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
 

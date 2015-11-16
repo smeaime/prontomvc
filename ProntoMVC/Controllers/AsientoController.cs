@@ -41,9 +41,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
 
-            //if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            //if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
             //    ) throw new Exception("No tenés permisos");
 
             //var Pedidos = db.Pedidos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -743,9 +743,9 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
             if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
-            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
              ) throw new Exception("No tenés permisos");
 
             if (id == -1)

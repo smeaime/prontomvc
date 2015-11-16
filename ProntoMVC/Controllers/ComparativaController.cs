@@ -48,9 +48,9 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Edit(int id)
         {
-            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-                   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                   !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                   !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                   !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                    ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -1136,9 +1136,9 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.Comparativas)) throw new Exception("No tenés permisos");
 
 
-            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 )
             {
 

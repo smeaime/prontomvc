@@ -176,9 +176,9 @@ namespace ProntoMVC.Controllers
 
 
             if (!(
-                   Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
-                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") ||
-                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
+                   oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
                 )
             {
                 throw new Exception("No tenés permisos");
@@ -278,9 +278,9 @@ namespace ProntoMVC.Controllers
 
             if (!
                 (
-                 Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
-                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") ||
-                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
+                 oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
                 )
             {
                 throw new Exception("No tenés permisos");

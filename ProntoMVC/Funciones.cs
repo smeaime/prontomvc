@@ -92,10 +92,18 @@ public static class Generales
         MembershipUser GetUser();
 
         void UpdateUser(MembershipUser user);
+
+        bool UsuarioTieneElRol(string username, string role);
+
     }
 
     public class StaticMembershipService : IStaticMembershipService
     {
+        public bool UsuarioTieneElRol(string username, string role)
+        {
+            return Roles.IsUserInRole(username, role);
+        }
+
         public bool EsSuperAdmin()
         {
             return Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
@@ -493,9 +501,9 @@ public static class Generales
                 //if (!System.Diagnostics.Debugger.IsAttached)
                 //{
                 // cómo llamo desde esta funcion al servicio ?
-                userGuid = (Guid) ServicioMembership.GetUser().ProviderUserKey;
+                userGuid = (Guid)ServicioMembership.GetUser().ProviderUserKey;
                 esSuperadmin = ServicioMembership.EsSuperAdmin();
-                //  Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin");
+                //  oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin");
                 ///}
                 //else esSuperadmin = true;
 
@@ -558,51 +566,9 @@ public static class Generales
             {
 
 
-                var sSQL = "SELECT * FROM BASES " +
-                                                          "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
-                                                          "where " +
-                                                          ((!esSuperadmin) ? "UserId='" + us + "' AND" : "") +
-                                                          " Descripcion='" + nombreEmpresa + "'   ";
 
-                System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
-                                                       sSQL);
+                return conexPorEmpresa(nombreEmpresa, sConexBDLMaster, us, esSuperadmin);
 
-                //TODO explota  porque superadmin no tiene acceso a capen en DetalleUserDB
-                // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
-                // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
-
-
-
-                // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
-
-
-                if (dt.Rows.Count == 1)
-                {
-                    s = dt.Rows[0]["StringConection"] as string;
-                }
-                else if (dt.Rows.Count > 1)
-                {
-                    // no debería pasar...
-                    s = dt.Rows[0]["StringConection"] as string;
-                }
-                else
-                {
-                    // está haciendo circularidades cuando creo el usuario por acá
-                    //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
-                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, oStaticMembershipService.GetUser().UserName);
-
-
-                    throw new Exception("Usuario logueado pero sin empresa elegida");
-
-                    using (BDLMasterEntities bdlmaster = new BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER()))
-                    {
-                        var q = bdlmaster.Bases.Where(x => x.Descripcion == nombreEmpresa).FirstOrDefault();
-                        return q.StringConection;
-                    }
-
-
-
-                }
 
             }
 
@@ -620,6 +586,63 @@ public static class Generales
         return s;
 
     }
+
+
+
+
+    public static string conexPorEmpresa(string nombreEmpresa, string sConexBDLMaster, string usuario, bool esSuperadmin)
+    {
+
+        string s;
+
+        var sSQL = "SELECT * FROM BASES " +
+                                                  "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
+                                                  "where " +
+                                                  ((!esSuperadmin) ? "UserId='" + usuario + "' AND" : "") +
+                                                  " Descripcion='" + nombreEmpresa + "'   ";
+
+        System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
+                                               sSQL);
+
+        //TODO explota  porque superadmin no tiene acceso a capen en DetalleUserDB
+        // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
+        // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
+
+
+
+        // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
+
+
+        if (dt.Rows.Count == 1)
+        {
+            s = dt.Rows[0]["StringConection"] as string;
+        }
+        else if (dt.Rows.Count > 1)
+        {
+            // no debería pasar...
+            s = dt.Rows[0]["StringConection"] as string;
+        }
+        else
+        {
+            // está haciendo circularidades cuando creo el usuario por acá
+            //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
+            //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, oStaticMembershipService.GetUser().UserName);
+
+
+            throw new Exception("Usuario logueado pero sin empresa elegida");
+
+            using (BDLMasterEntities bdlmaster = new BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER()))
+            {
+                var q = bdlmaster.Bases.Where(x => x.Descripcion == nombreEmpresa).FirstOrDefault();
+                return q.StringConection;
+            }
+
+        }
+
+        return s;
+    }
+
+
 
     public static string sCadenaConexSQL2(string nombreEmpresa, Guid userGuid)
     {
