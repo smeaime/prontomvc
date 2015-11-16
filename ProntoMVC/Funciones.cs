@@ -368,8 +368,8 @@ public static class Generales
         nombreEmpresa = nombreEmpresa ?? "";
         if (nombreEmpresa == "") return null;
 
-        if (userGuid == Guid.Empty) userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-        //string us = Membership.GetUser().UserName;
+        //if (userGuid == Guid.Empty) userGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+        //string us = oStaticMembershipService.GetUser().UserName;
         string us = userGuid.ToString();
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
@@ -436,7 +436,7 @@ public static class Generales
                 {
                     // está haciendo circularidades cuando creo el usuario por acá
                     //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
-                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, Membership.GetUser().UserName);
+                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, oStaticMembershipService.GetUser().UserName);
 
 
                     throw new Exception("Usuario logueado pero sin empresa elegida");
@@ -493,9 +493,9 @@ public static class Generales
                 //if (!System.Diagnostics.Debugger.IsAttached)
                 //{
                 // cómo llamo desde esta funcion al servicio ?
-                userGuid = (Guid)ServicioMembership.GetUser().ProviderUserKey;
+                userGuid = (Guid) ServicioMembership.GetUser().ProviderUserKey;
                 esSuperadmin = ServicioMembership.EsSuperAdmin();
-                //  Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+                //  Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin");
                 ///}
                 //else esSuperadmin = true;
 
@@ -525,10 +525,12 @@ public static class Generales
         }
         else
         {
+            // debería ir poniendo ServicioMembership como parametro obligatorio....
+
             sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-            //esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+            esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
         }
-        //string us = Membership.GetUser().UserName;
+        //string us = oStaticMembershipService.GetUser().UserName;
 
 
 
@@ -587,7 +589,7 @@ public static class Generales
                 {
                     // está haciendo circularidades cuando creo el usuario por acá
                     //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
-                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, Membership.GetUser().UserName);
+                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, oStaticMembershipService.GetUser().UserName);
 
 
                     throw new Exception("Usuario logueado pero sin empresa elegida");
@@ -626,7 +628,7 @@ public static class Generales
 
         //Guid userGuid = (Guid)Membership.FindUsersByName(nombreusuario)
         //    .GetUser().ProviderUserKey;
-        //string us = Membership.GetUser().UserName;
+        //string us = oStaticMembershipService.GetUser().UserName;
         string us = userGuid.ToString();
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
@@ -770,8 +772,8 @@ public static class Generales
     {
 
 
-        //= (Guid)Membership.GetUser().ProviderUserKey;
-        //string us = Membership.GetUser().UserName;
+        //= (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+        //string us = oStaticMembershipService.GetUser().UserName;
         string us = userGuid.ToString();
 
 

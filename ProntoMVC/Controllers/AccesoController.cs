@@ -176,9 +176,9 @@ namespace ProntoMVC.Controllers
 
 
             if (!(
-                   Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno"))
+                   Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
+                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") ||
+                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
                 )
             {
                 throw new Exception("No tenés permisos");
@@ -278,9 +278,9 @@ namespace ProntoMVC.Controllers
 
             if (!
                 (
-                 Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno"))
+                 Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
+                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") ||
+                Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
                 )
             {
                 throw new Exception("No tenés permisos");

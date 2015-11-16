@@ -29,8 +29,8 @@ namespace ProntoMVC.Controllers
         {
             //            if (!PuedeLeer(enumNodos.cuen)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador")
                 ) throw new Exception("No tenés permisos");
             return View();
         }
@@ -49,7 +49,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 50;
             int currentPage = page ?? 1;
 
-            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             //var Entidad = db.CuentasCorrientesAcreedores.AsQueryable();
             //Entidad = Entidad.Where(p => p.IdProveedor == idproveedor).AsQueryable();

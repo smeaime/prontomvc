@@ -41,9 +41,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
 
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
             //    ) throw new Exception("No tenés permisos");
 
             //var Pedidos = db.Pedidos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -743,9 +743,9 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
             if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
              ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -1500,7 +1500,7 @@ namespace ProntoMVC.Controllers
                 Pedido Pedido = db.Pedidos.Find(id);
 
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (idproveedor > 0 && Pedido.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a Pedidos tuyos");
 
 
@@ -1748,7 +1748,7 @@ namespace ProntoMVC.Controllers
             var Entidad = db.Pedidos.AsQueryable();
 
 
-            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             if (idproveedor > 0) Entidad = Entidad.Where(p => p.IdProveedor == idproveedor).AsQueryable();
 
