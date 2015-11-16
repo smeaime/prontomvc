@@ -333,7 +333,7 @@ namespace ProntoMVC.Controllers
             var ProntoIni = BuscarClaveINI("OTs desde Mantenimiento") ?? "";
             if (ProntoIni == "SI")
             {
-                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
                 var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "ProntoMantenimiento_TX_OTsPorEquipo", IdEquipoDestino);
                 IEnumerable<DataRow> Entidad = dt.AsEnumerable();

@@ -2168,7 +2168,7 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.xlsx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Comparativa.xlsx";
@@ -2978,7 +2978,7 @@ namespace ProntoMVC.Controllers
 
             a.IdComprobante = IdComprobante;
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
             var dt2 = EntidadManager.ExecDinamico(SC, "SELECT * FROM _TempAutorizaciones WHERE IdComprobante=" + IdComprobante);

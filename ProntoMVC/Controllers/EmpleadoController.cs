@@ -381,7 +381,7 @@ namespace ProntoMVC.Controllers
         {
             if (db == null) return null;
 
-            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
             var empleados = (from r in rows select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
