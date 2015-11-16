@@ -25,7 +25,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Proveedores", "Proveedor")',
+            url: '@Url.Action("Proveedores_DynamicGridData", "Proveedor")',
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdProveedor', 'Razon social', 'Codigo', 'Direccion', 'Localidad', 'Cod. postal', 'Provincia', 'Pais', 'Telefono', 'Telefono adic.', 'Fax', 'Email', 'Cuit',

@@ -1897,7 +1897,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         [HttpPost]
         public virtual ActionResult SubirPlantilla(System.Web.HttpPostedFileBase file)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             // Verify that the user selected a file
             if (file != null && file.ContentLength > 0)
             {
@@ -1931,7 +1931,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         public virtual FileResult BajarPlantilla()
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
 

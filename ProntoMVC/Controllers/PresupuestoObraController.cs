@@ -76,7 +76,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetPresupuestoObraEtapas(int IdObra)
         {
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "PresupuestoObrasNodos_TX_EtapasImputablesPorObraParaCombo", IdObra, "M");
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();

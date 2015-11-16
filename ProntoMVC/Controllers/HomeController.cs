@@ -1084,7 +1084,7 @@ namespace ProntoMVC.Controllers
 
 
             //var lista = EntidadManager.GetStoreProcedure("", enumSPs.wbusqueda, prefixText);
-            var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
+            var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString(), oStaticMembershipService);
             DataTable lista2 = new DataTable();
             try
             {

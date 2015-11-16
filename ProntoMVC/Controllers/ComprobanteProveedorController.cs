@@ -208,7 +208,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -257,7 +257,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -5929,7 +5929,7 @@ namespace ProntoMVC.Controllers
                 {
                     mProximaRendicion = (fondoFijoService.CuentasById(idcuentaFF).NumeroAuxiliar ?? 0) + 1;
                 }
-                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
                 EntidadManager.Tarea(SC, "Cuentas_IncrementarRendicionFF", idcuentaFF, mProximaRendicion);
 
                 return Json("Hecho  nueva rendicion:" + mProximaRendicion + " " + fondoFijoService.CuentasById(idcuentaFF).Descripcion, JsonRequestBehavior.AllowGet);
@@ -7854,7 +7854,7 @@ namespace ProntoMVC.Controllers
                 // extract only the fielname
                 nombre = System.IO.Path.GetFileName(file.FileName);
                 // store the file inside ~/App_Data/uploads folder
-                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
                 path = System.IO.Path.Combine(Server.MapPath("~/App_Data"), nombre); // "~/App_Data/uploads"
                 file.SaveAs(path);
             }
@@ -7862,7 +7862,7 @@ namespace ProntoMVC.Controllers
             else
             {
                 nombre = "F.F.- Omar Breton.xls";
-                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL("Autotrol"));
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL("Autotrol", oStaticMembershipService));
                 path = System.IO.Path.Combine(Server.MapPath("~/App_Data"), nombre); // "~/App_Data/uploads"
             }
 
@@ -7882,7 +7882,7 @@ namespace ProntoMVC.Controllers
 
             string nombre = "F.F.- Omar Breton.xls";
             // SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL("Autotrol"));
-            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             string path = System.IO.Path.Combine(Server.MapPath("~/App_Data"), nombre); // "~/App_Data/uploads"
             ImportarExcel(path, SC);
 
