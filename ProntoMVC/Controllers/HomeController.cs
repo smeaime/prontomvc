@@ -785,7 +785,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            q = ArbolConNiveles_Tree(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db);
+            q = ArbolConNiveles_Tree(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db, oStaticMembershipService);
 
             //var l = q.Where(n => n.Descripcion == "Bloqueado!" || n.Descripcion == "NO MOSTRAR" || n.Descripcion.StartsWith("por ")).ToList();
 

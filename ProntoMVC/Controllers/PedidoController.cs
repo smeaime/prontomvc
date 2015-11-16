@@ -60,7 +60,7 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.Pedidos)) throw new Exception("No tenés permisos");
 
-        
+
             if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
                 !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
                 !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
@@ -813,7 +813,7 @@ namespace ProntoMVC.Controllers
 
                     try
                     {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)
