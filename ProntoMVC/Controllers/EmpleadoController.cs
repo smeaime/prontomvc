@@ -390,7 +390,7 @@ namespace ProntoMVC.Controllers
 
         public string BuscarPass(int id, string pass)
         {
-            if (Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin")) return id.ToString();
+            if (oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin")) return id.ToString();
 
             var p = db.Empleados.Where(c => c.IdEmpleado == id).Where(c => c.Password == pass).FirstOrDefault();
             if (p != null)

@@ -27,9 +27,9 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
-            //if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            //if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
             //    ) throw new Exception("No tenés permisos");
 
             //var presupuestos = db.Presupuestos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -66,9 +66,9 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
 
-            //if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-            //    !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras"))
+            //if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras"))
             //{
 
             //    int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
@@ -235,9 +235,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -384,8 +384,8 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(Presupuesto presupuesto)
         {
 
-            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")
                ) throw new Exception("No tenés permisos");
 
             if (ModelState.IsValid)
