@@ -170,10 +170,10 @@ namespace ProntoMVC.Controllers
         {
             //if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras") &&
+                     !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                 )) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = fondoFijoService.ObtenerTodos().Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -946,14 +946,14 @@ namespace ProntoMVC.Controllers
 
 
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
                 )
             {
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
                 //throw new Exception("No tenés permisos");
@@ -1214,14 +1214,14 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
                 ))
             {
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
                 //throw new Exception("No tenés permisos");
@@ -1487,14 +1487,14 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras")
                 ))
             {
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
                 //throw new Exception("No tenés permisos");
@@ -1773,10 +1773,10 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras") &&
-                                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+             !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "Compras") &&
+                                     !Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                                      )
              ) throw new Exception("No tenés permisos");
 
@@ -4695,7 +4695,7 @@ namespace ProntoMVC.Controllers
             string usuarionombre;
 
             if (Debugger.IsAttached) usuarionombre = "Mariano";
-            else usuarionombre = Membership.GetUser().UserName;
+            else usuarionombre = oStaticMembershipService.GetUser().UserName;
 
 
             var mvarMontoMinimo = fondoFijoService.BuscarClaveINI("Monto minimo para registrar ComprobanteProveedor", usuarionombre);
@@ -5472,7 +5472,7 @@ namespace ProntoMVC.Controllers
             string usuarionombre;
 
             if (Debugger.IsAttached) usuarionombre = "Mariano";
-            else usuarionombre = Membership.GetUser().UserName;
+            else usuarionombre = oStaticMembershipService.GetUser().UserName;
 
 
             var mvarMontoMinimo = fondoFijoService.BuscarClaveINI("Monto minimo para registrar ComprobanteProveedor", usuarionombre);
@@ -6041,7 +6041,7 @@ namespace ProntoMVC.Controllers
                 ComprobanteProveedor ComprobanteProveedor = fondoFijoService.ObtenerPorId(id);
 
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (idproveedor > 0 && ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
 
 
@@ -7049,7 +7049,7 @@ namespace ProntoMVC.Controllers
             var Entidad = fondoFijoService.ObtenerTodos().AsQueryable();
 
 
-            int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             if (idproveedor > 0) Entidad = Entidad.Where(p => p.IdProveedor == idproveedor).AsQueryable();
 

@@ -78,6 +78,8 @@ namespace ProntoMVC.Tests
 
             var result = c.BatchUpdate(Pedido);
 
+            // Assert.AreEqual(expected, actual);
+
         }
 
 

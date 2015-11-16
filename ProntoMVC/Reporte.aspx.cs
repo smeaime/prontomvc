@@ -93,7 +93,7 @@ namespace ProntoMVC.Reportes
 
                 if (this.Session["BasePronto"].ToString() == "")
                 {
-                    // this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey); // NO! esto ya tiene que venir marcado! no puedo usar la default si el tipo eligió otra!
+                    // this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey); // NO! esto ya tiene que venir marcado! no puedo usar la default si el tipo eligió otra!
                 }
 
                 c.db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);

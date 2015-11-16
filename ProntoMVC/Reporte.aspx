@@ -526,7 +526,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                     http://stackoverflow.com/questions/491389/where-does-reporting-services-store-its-log-files
                                         C:\Program Files\Microsoft SQL Server\MSRS10_50.BDL\Reporting Services\LogFiles
 
-                <% if (Roles.IsUserInRole ( Membership.GetUser().UserName, "SuperAdmin")) %>
+                <% if (Roles.IsUserInRole ( oStaticMembershipService.GetUser().UserName, "SuperAdmin")) %>
                 <% { %}
                    
                 <% } %>--%>
