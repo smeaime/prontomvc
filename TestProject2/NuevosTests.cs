@@ -52,7 +52,8 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
-        const string nombreempresa = "Pronto"; // "DemoProntoWeb";
+        const string nombreempresa = "Pronto"; 
+        //const string nombreempresa = "DemoProntoWeb";
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
@@ -67,7 +68,7 @@ namespace ProntoMVC.Tests
         [TestInitialize]
         public void Initialize()
         {
-            string bldmastersql =  System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            string bldmastersql = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
             sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
         }
@@ -95,7 +96,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Pedido Pedido = db.Pedidos.First();
+            Pedido Pedido = db.Pedidos.OrderByDescending(x=>x.IdPedido).First();
 
             var c = new PedidoController();
 
@@ -112,7 +113,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Requerimiento o = db.Requerimientos.First();
+            Requerimiento o = db.Requerimientos.OrderByDescending(x=>x.IdRequerimiento).First();
 
             var c = new RequerimientoController();
 
@@ -129,7 +130,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Presupuesto o = db.Presupuestos.First();
+            Presupuesto o = db.Presupuestos.OrderByDescending(x=>x.IdPresupuesto).First();
 
             var c = new PresupuestoController();
 
@@ -146,7 +147,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Comparativa o = db.Comparativas.First();
+            Comparativa o = db.Comparativas.OrderByDescending(x=>x.IdComparativa).First();
 
             var c = new ComparativaController();
 
@@ -163,7 +164,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            ComprobanteProveedor o = db.ComprobantesProveedor.First();
+            ComprobanteProveedor o = db.ComprobantesProveedor.OrderByDescending(x=>x.IdComprobanteProveedor).First();
 
 
 
@@ -187,7 +188,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            OrdenPago o = db.OrdenesPago.First();
+            OrdenPago o = db.OrdenesPago.OrderByDescending(x=>x.IdOrdenPago).First();
 
 
             var c = new OrdenPagoController();
@@ -206,7 +207,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Factura o = db.Facturas.First();
+            Factura o = db.Facturas.OrderByDescending(x=>x.IdFactura).First();
 
 
             var c = new FacturaController();
@@ -224,7 +225,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Recibo o = db.Recibos.First();
+            Recibo o = db.Recibos.OrderByDescending(x=>x.IdRecibo).First();
 
 
             var c = new ReciboController();
@@ -242,10 +243,10 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaArticuloMoq()
         {
-     
+
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Articulo o = db.Articulos.First();
+            Articulo o = db.Articulos.OrderByDescending(x=>x.IdArticulo).First();
 
 
             var c = new ArticuloController();
@@ -265,7 +266,7 @@ namespace ProntoMVC.Tests
 
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Cliente o = db.Clientes.First();
+            Cliente o = db.Clientes.OrderByDescending(x=>x.IdCliente).First();
 
 
             var c = new ClienteController();
@@ -283,7 +284,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Proveedor o = db.Proveedores.First();
+            Proveedor o = db.Proveedores.OrderByDescending(x=>x.IdProveedor).First();
 
 
             var c = new ProveedorController();
@@ -365,7 +366,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void MaestroProveedoresMoq()
         {
-            
+
             var c = new ProveedorController();
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
@@ -378,7 +379,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void MaestroArticulosMoq()
         {
-            
+
             var c = new ArticuloController();
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
@@ -388,6 +389,19 @@ namespace ProntoMVC.Tests
         }
 
 
+
+
+        [TestMethod]
+        public void MaestroComprobanteProvMoq()
+        {
+
+            var c = new ComprobanteProveedorController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            var result = c.ComprobantesProveedor_DynamicGridData("NumeroReferencia", "desc", 1, 50, false, "", "", "");
+
+        }
 
 
 
