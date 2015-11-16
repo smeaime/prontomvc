@@ -477,7 +477,7 @@ public static class Generales
     }
 
     public static string sCadenaConexSQL(string nombreEmpresa
-                        , IStaticMembershipService ServicioMembership = null)
+                        , IStaticMembershipService ServicioMembership )
     {
         // string datos = HttpContext.Current.Request.Session["data"] as string;
         //var ss=ControllerContext.HttpContext.Session["{name}"];
@@ -513,20 +513,20 @@ public static class Generales
             catch (Exception)
             {
 
-                if (System.Diagnostics.Debugger.IsAttached)
-                {
-                    // por ahora no le encontré la vuelta a mockear el membership
-                    userGuid = new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9");
-                    esSuperadmin = true;
-                    // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
-                    // supervisor       1804B573-0439-4EA0-B631-712684B54473
-                    sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-                }
-                else
-                {
+                //if (System.Diagnostics.Debugger.IsAttached)
+                //{
+                //    // por ahora no le encontré la vuelta a mockear el membership
+                //    userGuid = new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9");
+                //    esSuperadmin = true;
+                //    // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+                //    // supervisor       1804B573-0439-4EA0-B631-712684B54473
+                //    sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+                //}
+                //else
+                //{
 
                     throw;
-                }
+                //}
 
 
             }

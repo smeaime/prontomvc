@@ -612,7 +612,7 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -680,7 +680,7 @@ namespace ProntoMVC.Controllers
             var q = (from i in db.DefinicionArticulos where (i.IdRubro == o.IdRubro && i.IdSubrubro == o.IdSubrubro) orderby i.Orden select i).ToList();
             ViewBag.Mascara = q;
 
-            var SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            var SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC);
 
             foreach (ProntoMVC.Data.Models.DefinicionArticulo x in q)
@@ -1665,7 +1665,7 @@ namespace ProntoMVC.Controllers
             //    mIdObra = (int)oRsx.Rows[0]["IdObra"];
             //}
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Articulos_TX_BD_ProntoMantenimientoTodos", IdObra);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
