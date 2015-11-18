@@ -44,7 +44,7 @@
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     <div class="row-fluid">
-                        <div class="span3 lightblue titulo">
+                        <div class="span6 lightblue titulo">
                             Recibo (Clientes)
                         </div>
                         <div class="span1 lightblue">
@@ -56,10 +56,7 @@
                             <div>@Html.Hidden("Tipo", Model.Tipo)</div>
                             <div>@Html.Hidden("IdCuenta", Model.IdCuenta)</div>
                         </div>
-                        <div class="span3 lightblue">
-                        </div>
-                        <div class="span4 lightblue">
-                        </div>
+                   
                     </div>
 
                     <div class="row-fluid">
@@ -92,7 +89,7 @@
                                 <span style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 0px; border-spacing: 0px; font-size: 15px; background-color: rgb(100%, 88%, 88%); ">ANULADO</span>
                             }
                         </div>
-                        <div class="span3 lightblue">
+                        <div class="span5 lightblue">
                             @Html.LabelFor(model => model.IdTipoRetencionGanancia, "Categoria retencion ganancias")
                             @Html.DropDownList("IdTipoRetencionGanancia", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                             @Html.ValidationMessageFor(model => model.IdTipoRetencionGanancia)
@@ -133,7 +130,7 @@
                             <label for="CondicionIva">Condicion Iva</label>
                             <input type="text" name="CondicionIva" id="CondicionIva" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span1 lightblue">
+                        <div class="span3 lightblue">
                             <label for="Cuit">Cuit</label>
                             <input type="text" name="Cuit" id="Cuit" style="font-size: 10px; text-align: center;" readonly="readonly" class="span12" />
                         </div>
@@ -156,11 +153,11 @@
                             <label for="Provincia">Provincia</label>
                             <input type="text" name="Provincia" id="Provincia" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span1 lightblue">
+                        <div class="span2 lightblue">
                             <label for="CodigoPostal">Codigo postal</label>
                             <input type="text" name="CodigoPostal" id="CodigoPostal" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span2 lightblue">
+                        <div class="span3 lightblue">
                             <label for="Telefono">Telefono</label>
                             <input type="text" name="Telefono" id="Telefono" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
@@ -171,7 +168,7 @@
                             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
                             <div id="ListaPager1" class="scroll" style="text-align: center; height: 30px"></div>
                         </div>
-                        <div class="span5 lightblue">
+                        <div class="span7 lightblue">
                             <table id="ListaContable" class="scroll" cellpadding="0" cellspacing="0"></table>
                             <div id="ListaPager2" class="scroll" style="text-align: center; height: 30px"></div>
                         </div>
@@ -479,7 +476,7 @@
                             <table id="ListaValores" class="scroll" cellpadding="0" cellspacing="0"></table>
                             <div id="ListaPager3" class="scroll" style="text-align: center; height: 30px"></div>
                         </div>
-                        <div class="span4 lightblue">
+                        <div class="span6 lightblue">
                             <table id="Totales" class="subtotales span12" width="" border="0" cellspacing="0" cellpadding="0"
                                    style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 0px; border-spacing: 0px; font-size: xx-small; background-color: #E0ECFF; ">
                                 <tr class="">
@@ -527,7 +524,7 @@
                     <br />
 
                     <div class="row-fluid">
-                        <div class="span4 lightblue">
+                        <div class="span6 lightblue">
                             <table id="ListaRubrosContables" class="scroll" cellpadding="0" cellspacing="0"></table>
                             <div id="ListaPager5" class="scroll" style="text-align: center; height: 30px"></div>
                         </div>
