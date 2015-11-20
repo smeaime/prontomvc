@@ -48,6 +48,7 @@ else
         /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
         font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
         font-size: 16px !important;
+        background-color:  rgb(250, 250, 250);
     }
 
     input, button, select, textarea {
@@ -55,11 +56,12 @@ else
         /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
         font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
     }
+
 </style>
 
 @* http://stackoverflow.com/questions/827905/asp-net-mvc-login-returnurl-always-null*@
 @*@using (Html.BeginForm(null, null, FormMethod.Post, new {id="formid",ReturnUrl = Request.QueryString["ReturnUrl"] }))*@
-@using (Html.BeginForm(null, null, FormMethod.Post, new { }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new {  }))
 {
 
     <div style="background: rgb(250, 250, 250)">
