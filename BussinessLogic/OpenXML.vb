@@ -1039,6 +1039,11 @@ Namespace Pronto.ERP.Bll
                                      If(oFac.Articulo4 IsNot Nothing, oFac.Articulo4.Descripcion + " " + oFac.Porcentaje4.ToString + "%" + vbCrLf, "") & _
                     "")
                 regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, If(oFac.FormaDespacho, 0)))
+
+
+                regexReplace(docText, "#Contrato#", oFac.Contrato)
+                regexReplace(docText, "#COT#", oFac.NumeroCotizacion)
+
                 regexReplace(docText, "#Bruto#", If(oFac.Bruto, 0))
                 regexReplace(docText, "#Tara#", If(oFac.Tara, 0))
                 regexReplace(docText, "#Neto#", If(oFac.Cantidad, 0))
