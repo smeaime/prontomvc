@@ -1,30 +1,48 @@
-﻿
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
+﻿BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
 ----------------------------------------------------------------------------------------
-
-Hay que ordenar estas cosas por importancia......
-
-Poder librarse de una vez del membership en testing
 
 Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
 	lo molesto de esta cuestion es que no todos los formularios aceptan regrabar uno existente.
 
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
+REVISAR LA PARTE DE VENTAS (hacer las prueba en la publicacion, y escribir, No programar)
 
-REVISAR LA PARTE DE VENTAS:
+SERVIDORES DORMILONES
+	Que el IIS no se ponga en modo suspendido por no usarlo. 
+	http://stackoverflow.com/questions/3883260/why-does-iis7-take-a-long-time
+	-Tambien pasa lo mismo con el servidor de informes!!!!
+	http://stackoverflow.com/questions/15656/ssrs-process-dies-goes-to-sleep-after-not-being-used
+	
+	
+arreglar la pestaña del panel izquierdo
+
+¿Hay alguna manera de que, en los listados maestros, mostremos la vista previa del formulario en el panel de la derecha?
 	
 RECIBO
+	Quedó desactualizado el formato del "recibo otros"
 	Puse recalcular en la grilla de registro contable, y tuve que esperar un minuto	 -Se debe permitir recalcular sin el cliente puesto?
+	No tiene el "volver al listado"
+	El font del CUIT es otro
+	botones a la derecha
 	
+FACTURA
+	No tiene el "volver al listado"
+	botones a la derecha
 	
 
+NOTA DE CREDITO
+	pie a la izquierda
+
+REMITO
+	chorro de optionbutton
+	no centrar el numerador
 	
+ORDEN DE COMPRA
+
+
+NOTA DE DEBITO
+	
+	
+EXPORTAR GRILLA A EXCEL
 	
 	
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +52,6 @@ RECIBO
 	
 Si está corriendo el debugger, poder elegir la cadena de conexion bdlmaster en el login
 
-Mensaje de "perdiste conexion"
 
 Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en Orden de compra)
 
@@ -110,7 +127,15 @@ EMPLEADOS -
 HECHO
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
+
+Poder librarse de una vez del membership en testing  -HECHO!
+
 HECHO- pie en el formulario de obra
+Mensaje de "perdiste conexion" -LISTO!
+
+
+
+
 
 
 
