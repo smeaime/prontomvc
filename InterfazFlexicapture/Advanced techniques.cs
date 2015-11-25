@@ -660,7 +660,7 @@ namespace Sample
 			return null;
 		}
 
-		static IField findField( IDocument document, string name )
+		static public IField findField( IDocument document, string name )
 		{
 			IField root = document as IField;
 			return recursiveFindField( root, name );
