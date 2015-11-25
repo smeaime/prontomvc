@@ -87,8 +87,10 @@ namespace ProntoMVC.Tests
         public void PruebaFlexicapture()
         {
 
-            string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-
+            //string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
+            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015";
+            //string plantilla =  @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl"
+            string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
 
             IEngine engine = null;
             IEngineLoader engineLoader;
@@ -103,7 +105,7 @@ namespace ProntoMVC.Tests
 
             //levantar todo un directorio
 
-            List<string> lista = new List<string>; // { SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg" , "" };
+            List<string> lista = new List<string>(); // { SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg" , "" };
 
             DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
             FileInfo[] Files = d.GetFiles("*.*");
@@ -115,7 +117,7 @@ namespace ProntoMVC.Tests
           
 
             ClassFlexicapture.ProcesarCartas(engine,
-                                        @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl",
+                                        plantilla ,
                                         lista);
         }
 

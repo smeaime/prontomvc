@@ -25,7 +25,7 @@ namespace ProntoFlexicapture
         public static void ProcesarCartas(IEngine engine, string plantilla, List<string> imagenes)
         {
             string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-
+     
 
             //trace("Create an instance of FlexiCapture processor...");
             IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
@@ -93,8 +93,12 @@ namespace ProntoFlexicapture
                 else
                 {
 
+                    IField field = Sample.AdvancedTechniques.findField(document, "TitularCUIT");
+                    IField field2 = Sample.AdvancedTechniques.findField(document, "BarcodeCEE");
 
-                    IField field = findField(document, "InvoiceNumber");
+                    IField field3 = Sample.AdvancedTechniques.findField(document, "BarraCEE");
+                    IField field4 = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
+                    IField field5 = Sample.AdvancedTechniques.findField(document, "CEE");
                 }
 
 
