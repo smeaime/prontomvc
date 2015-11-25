@@ -27,6 +27,8 @@ using ProntoFlexicapture;
 
 using System.Transactions;
 
+using System.IO;
+
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -90,22 +92,31 @@ namespace ProntoMVC.Tests
 
             IEngine engine = null;
             IEngineLoader engineLoader;
- 
+
             ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
             System.Diagnostics.PerformanceCounter performanceCounter;
 
             if (engine == null)
             {
-                engine =ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
             }
 
+            //levantar todo un directorio
 
-            List<string> lista = new List<string> { SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg",
-                                                    "" };
+            List<string> lista = new List<string>; // { SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg" , "" };
+
+            DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (FileInfo file in Files)
+            {
+                lista.Add(file.FullName);
+            }
+
+          
 
             ClassFlexicapture.ProcesarCartas(engine,
-                                        @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl", 
-                                        lista) ;
+                                        @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl",
+                                        lista);
         }
 
 

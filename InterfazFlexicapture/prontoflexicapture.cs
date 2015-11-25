@@ -13,22 +13,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
+
 namespace ProntoFlexicapture
 {
-    public class ClassFlexicapture
+    public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
     {
-      
+
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static void ProcesarCartas(IEngine engine, string plantilla, List<string> imagenes )
+        public static void ProcesarCartas(IEngine engine, string plantilla, List<string> imagenes)
         {
             string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
-            
+
             //trace("Create an instance of FlexiCapture processor...");
             IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
 
             //trace("Add required Document Definitions...");
-           
+
             //como hago para usar la exportacion del flexilayout .afl
 
             //IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(SamplesFolder + "\\cartaporte.afl", "Spanish");
@@ -41,7 +44,7 @@ namespace ProntoFlexicapture
             // Create and configure sample image source (see SampleImageSource class for details)
             SampleImageSource imageSource = new SampleImageSource();
             // The sample image source will use these files by reference:
-            foreach(string s in imagenes)
+            foreach (string s in imagenes)
             {
                 imageSource.AddImageFileByRef(s);
             }
@@ -80,7 +83,21 @@ namespace ProntoFlexicapture
                     //processNotMatched(document);
                 }
                 //trace("Export recognized document...");
-                processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
+
+                
+                if (false)
+                {
+                    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
+                }
+
+                else
+                {
+
+
+                    IField field = findField(document, "InvoiceNumber");
+                }
+
+
                 count++;
             }
             //traceEnd("OK");
@@ -99,7 +116,7 @@ namespace ProntoFlexicapture
         }
 
         static EngineLoadingMode engineLoadingMode;
-	
+
 
         public static IEngine loadEngine(EngineLoadingMode _engineLoadingMode, out IEngineLoader engineLoader)
         {
