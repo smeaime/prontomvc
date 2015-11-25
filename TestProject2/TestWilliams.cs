@@ -23,6 +23,7 @@ using ProntoMVC.ViewModels;
 
 using FCEngine;
 
+using ProntoFlexicapture;
 
 using System.Transactions;
 
@@ -84,18 +85,27 @@ namespace ProntoMVC.Tests
         public void PruebaFlexicapture()
         {
 
+            string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
+
+
             IEngine engine = null;
             IEngineLoader engineLoader;
  
-            ProntoFlexicapture.ClassFlexicapture.EngineLoadingMode engineLoadingMode = ProntoFlexicapture.ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
+            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
             System.Diagnostics.PerformanceCounter performanceCounter;
 
             if (engine == null)
             {
-                engine = ProntoFlexicapture.ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+                engine =ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
             }
 
-            ProntoFlexicapture.ClassFlexicapture.Using_a_custom_image_source_with_FlexiCapture_processor(engine);
+
+            List<string> lista = new List<string> { SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg",
+                                                    "" };
+
+            ClassFlexicapture.ProcesarCartas(engine,
+                                        @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl", 
+                                        lista) ;
         }
 
 

@@ -8,7 +8,6 @@ using System.Drawing.Imaging;
 
 using FCEngine;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +19,7 @@ namespace ProntoFlexicapture
     {
       
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static void Using_a_custom_image_source_with_FlexiCapture_processor(IEngine engine)
+        public static void ProcesarCartas(IEngine engine, string plantilla, List<string> imagenes )
         {
             string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
@@ -32,7 +31,8 @@ namespace ProntoFlexicapture
            
             //como hago para usar la exportacion del flexilayout .afl
 
-            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL( SamplesFolder + "\\cartaporte.afl", "English" );
+            //IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(SamplesFolder + "\\cartaporte.afl", "Spanish");
+            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(plantilla, "Spanish");
 
             processor.AddDocumentDefinition(newDocumentDefinition);
             //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
@@ -41,7 +41,11 @@ namespace ProntoFlexicapture
             // Create and configure sample image source (see SampleImageSource class for details)
             SampleImageSource imageSource = new SampleImageSource();
             // The sample image source will use these files by reference:
-            imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
+            foreach(string s in imagenes)
+            {
+                imageSource.AddImageFileByRef(s);
+            }
+            //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_3.tif");
             //// ... these files by value (files in memory):
