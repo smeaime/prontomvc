@@ -502,10 +502,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ClassLibrary1\InterfazFlexicapture.csproj">
-      <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
-      <Name>InterfazFlexicapture</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
       <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
       <Name>ProntoMVC.Data</Name>

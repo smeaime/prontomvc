@@ -86,6 +86,7 @@ namespace ProntoMVC.Tests
 
             IEngine engine = null;
             IEngineLoader engineLoader;
+ 
             ProntoFlexicapture.ClassFlexicapture.EngineLoadingMode engineLoadingMode = ProntoFlexicapture.ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
             System.Diagnostics.PerformanceCounter performanceCounter;
 
