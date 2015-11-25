@@ -56,6 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.4.0.4\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessLogic">
+      <HintPath>..\BussinessLogic\bin\Debug\BusinessLogic.dll</HintPath>
+    </Reference>
     <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BussinessLogic\bin\Debug\BusinessObject.dll</HintPath>
@@ -184,14 +187,6 @@
     <Content Include="Viejos.vb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ClassLibrary1\InterfazFlexicapture.csproj">
-      <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
-      <Name>InterfazFlexicapture</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
-      <Project>{ab8bb713-ffa1-4440-b49b-1857e61367c9}</Project>
-      <Name>BusinessLogic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
       <Project>{2F9B9020-304C-44A6-BCC4-9E434C687D31}</Project>
       <Name>ProntoMVC.Data</Name>
