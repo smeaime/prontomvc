@@ -13,7 +13,13 @@ SERVIDORES DORMILONES
 	http://stackoverflow.com/questions/15656/ssrs-process-dies-goes-to-sleep-after-not-being-used
 	
 	
-arreglar la pestaña del panel izquierdo
+Arreglar la pestaña del panel izquierdo
+
+Vistas parciales para poner un formulario a la derecha de la grilla
+
+Sacar negrita del titulo de grillas
+
+Usar siempre botones en lugar de drag&drop
 
 ¿Hay alguna manera de que, en los listados maestros, mostremos la vista previa del formulario en el panel de la derecha?
 	
