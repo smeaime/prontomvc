@@ -6,7 +6,7 @@
 {
     @Html.ValidationSummary(true)
 
-    <script src="@Url.Content("~/Scripts/ScriptRecibo.js?333")"  type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ScriptRecibo.js?333")" type="text/javascript"></script>
 
     <style>
         .subtotales input {
@@ -20,10 +20,12 @@
             font-weight: bold;
             background-color: #e8eef4;
         }
-        .subtotales input[readonly] {
-            background: transparent;
-            border: 0;
-        }
+
+            .subtotales input[readonly] {
+                background: transparent;
+                border: 0;
+            }
+
         .subtotales select {
             /* height : 16px; */
             min-height: 18px !important;
@@ -32,13 +34,14 @@
             margin: 0;
             font-size: 10px;
         }
+
         table td {
             padding: 0px;
             border: solid 1px;
             border-color: transparent;
         }
     </style>
-        
+
     <div id="principal" class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <form class="form-horizontal" style=" margin-bottom: 0px;">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
@@ -56,7 +59,7 @@
                             <div>@Html.Hidden("Tipo", Model.Tipo)</div>
                             <div>@Html.Hidden("IdCuenta", Model.IdCuenta)</div>
                         </div>
-                   
+
                     </div>
 
                     <div class="row-fluid">
@@ -539,7 +542,9 @@
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span8 lightblue">
+                        <div class="span6 lightblue">
+                        </div>
+                        <div class="span6 lightblue">
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
                             @if (Model.IdRecibo > 0)
                             {<input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />}
@@ -581,8 +586,8 @@
                                     }
                                 })
                             </script>
-                            @*<span>@Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })</span>*@
-                       </div>
+                            <span>@Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })</span>
+                        </div>
                     </div>
                 </div>
             </div>
