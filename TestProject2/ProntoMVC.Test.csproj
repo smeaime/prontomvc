@@ -191,6 +191,10 @@
       <Project>{2F9B9020-304C-44A6-BCC4-9E434C687D31}</Project>
       <Name>ProntoMVC.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InterfazFlexicapture\InterfazFlexicapture.csproj">
+      <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
+      <Name>InterfazFlexicapture</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProntoMVC\ProntoMVC.csproj">
       <Project>{17487390-6297-4D1C-8B73-57B636F0C114}</Project>
       <Name>ProntoMVC</Name>
