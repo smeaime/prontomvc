@@ -22,10 +22,10 @@ namespace ProntoFlexicapture
     {
 
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static void ProcesarCartas(IEngine engine, string plantilla, List<string> imagenes)
+        public static void ProcesarCartas(IEngine engine, string plantilla, List<string> imagenes, string SC)
         {
             string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-     
+
 
             //trace("Create an instance of FlexiCapture processor...");
             IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
@@ -84,7 +84,7 @@ namespace ProntoFlexicapture
                 }
                 //trace("Export recognized document...");
 
-                
+
                 if (false)
                 {
                     processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
@@ -93,12 +93,48 @@ namespace ProntoFlexicapture
                 else
                 {
 
-                    IField field = Sample.AdvancedTechniques.findField(document, "TitularCUIT");
-                    IField field2 = Sample.AdvancedTechniques.findField(document, "BarcodeCEE");
+                    IField TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT");
+                    IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
+                    IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
+                    IField NumeroCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
+                    IField CEE = Sample.AdvancedTechniques.findField(document, "CEE");
 
-                    IField field3 = Sample.AdvancedTechniques.findField(document, "BarraCEE");
-                    IField field4 = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
-                    IField field5 = Sample.AdvancedTechniques.findField(document, "CEE");
+                    if (NumeroCarta.Value.AsString != "" || BarraCP.Value.AsString != "")
+                    {
+                        Debug.Print(NumeroCarta.Value.AsString + " " + BarraCP.Value.AsString);
+
+
+                        long numeroCarta = BarraCP.Value.AsInteger;
+                        int vagon = 0;
+
+                        Pronto.ERP.BO.CartaDePorte cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1);
+                        if (cdp.Id == -1)
+                        {
+                            cdp.NumeroCartaDePorte = numeroCarta;
+                            cdp.SubnumeroVagon = vagon;
+
+                            cdp.SubnumeroDeFacturacion = -1;
+                        }
+
+                        cdp.Titular = BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
+
+                        string ms, warn;
+                        var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
+                        var id = CartaDePorteManager.Save(SC, cdp, 0, "");
+                        var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, 
+                                                    nombrenuevo, sError, DirApp(), bCodigoBarrasDetectado);
+
+
+
+                    }
+
+                    else
+                    {
+                        Debug.Print("nada documento " + count.ToString() + " " + document.Title);
+
+                    }
+
+
                 }
 
 
@@ -110,6 +146,11 @@ namespace ProntoFlexicapture
             //assert(count == 4);
         }
 
+
+        static int BuscarClientePorCUIT(string cuit, string SC)
+        {
+            return -1;
+        }
 
 
         public enum EngineLoadingMode
