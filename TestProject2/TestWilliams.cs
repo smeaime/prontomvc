@@ -115,11 +115,42 @@ namespace ProntoMVC.Tests
             }
 
           
+            string SC="";
 
             ClassFlexicapture.ProcesarCartas(engine,
                                         plantilla ,
-                                        lista);
+                                        lista, SC);
+
+
+            
+
         }
+
+
+
+        
+        [TestMethod]
+        public void procesarTiff() {
+
+            string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
+
+            DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (FileInfo file in Files)
+            {
+                lista.Add(file.FullName);
+            }
+
+            CartaDePorteManager.proces
+
+        }
+
+
+
+
+    }
+
+
 
 
         //Function test1_ReclamoN9066(ByVal sc As String) As String
