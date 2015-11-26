@@ -9101,42 +9101,22 @@ Public Class CartaDePorteManager
 
         'si es un .tiff paginado
         If archivoImagen.Contains(".tif") Then
-            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + oCarta.PathImagen)
-            dsfdf()
-            listapaginas(0).Save(DIRFTP + oCarta.PathImagen)
-            listapaginas(1).Save(DIRFTP + oCarta.PathImagen2)
-        End If
+            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivoImagen)
 
+            listapaginas(0).Save(archivoImagen)
+            listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
 
+            BorroArchivo(DIRFTP + oCarta.PathImagen)
+            BorroArchivo(DIRFTP + oCarta.PathImagen2)
 
+            oCarta.PathImagen = archivoImagen
+            oCarta.PathImagen2 = archivoImagen
 
-
-        If InStr(archivoImagen.ToUpper, "TK") Then
-            If oCarta.PathImagen2 <> "" Then
-                'qué hago con el archivo anterior? -por ahora lo conservo
-                Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen2)
-                Try
-                    If MyFile1.Exists Then
-                        MyFile1.Delete()
-                    End If
-                Catch ex As Exception
-                End Try
-
-            End If
+        ElseIf InStr(archivoImagen.ToUpper, "TK") Then
+            If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
             oCarta.PathImagen2 = archivoImagen
         ElseIf InStr(archivoImagen.ToUpper, "CP") Then
-            If oCarta.PathImagen <> "" Then
-                'qué hago con el archivo anterior? -por ahora lo conservo 
-                Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen)
-                Try
-                    If MyFile1.Exists Then
-                        MyFile1.Delete()
-                    End If
-                Catch ex As Exception
-                End Try
-
-            End If
-
+            If oCarta.PathImagen <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen)
             oCarta.PathImagen = archivoImagen
         Else
             If oCarta.PathImagen = "" Or bForzarCasillaCP Then
@@ -9161,7 +9141,16 @@ Public Class CartaDePorteManager
         Return archivoImagen
     End Function
 
-
+    Shared Sub BorroArchivo(file As String)
+        'qué hago con el archivo anterior? -por ahora lo conservo
+        Dim MyFile1 As New FileInfo(file)
+        Try
+            If MyFile1.Exists Then
+                MyFile1.Delete()
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
 
 
 
@@ -9416,19 +9405,16 @@ Public Class CartaDePorteManager
 
 
 
-        podria revisar en un bucle anterior cuales son los tif
-
-        For Each nombre As String In archivos
-            'si es un .tiff paginado
-            If archivoImagen.Contains(".tif") Then
-                Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + oCarta.PathImagen)
-                dsfdf()
-                listapaginas(0).Save(DIRFTP + oCarta.PathImagen)
-                listapaginas(1).Save(DIRFTP + oCarta.PathImagen2)
-            End If
-
-
-        Next
+        ''podria revisar en un bucle anterior cuales son los tif
+        'For Each nombre As String In archivos
+        '    'si es un .tiff paginado
+        '    If nombre.Contains(".tif") Then
+        '        Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + nombre)
+        '        dsfdf()
+        '        listapaginas(0).Save(DIRFTP + oCarta.PathImagen)
+        '        listapaginas(1).Save(DIRFTP + oCarta.PathImagen2)
+        '    End If
+        'Next
 
 
 
@@ -9442,7 +9428,7 @@ Public Class CartaDePorteManager
 
             'convierto los .tiff acá ? 
 
-            
+
 
 
             If Not nombre.Contains(".jpg") Then
@@ -9662,7 +9648,7 @@ Public Class CartaDePorteManager
 
 
 
-                Dim s = CartaDePorteManager.GrabarImagen(forzarID, SC, numeroCarta, vagon, nombrenuevo, sError, DirApp(), bCodigoBarrasDetectado)
+                Dim s = CartaDePorteManager.GrabarImagen(forzarID, SC, numeroCarta, vagon, nombrenuevo, sError, DirApp, bCodigoBarrasDetectado)
 
                 If s = "" Then
                     'hacer así: si la imagen no se pudo asignar, borrar el archivo del \DataBackupear\
