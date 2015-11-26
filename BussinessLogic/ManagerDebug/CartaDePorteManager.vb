@@ -56,6 +56,8 @@ Imports System.Net
 'Imports System.Configuration
 'Imports System.Web.Security
 
+Imports Inlite.ClearImageNet
+
 
 Imports CartaDePorteManager
 Imports CDPMailFiltrosManager2
@@ -5258,7 +5260,7 @@ Public Class CartaDePorteManager
 
         'ErrHandlerWriteErrorLogPronto(srr, )
 
-        
+
         Dim Body As String = sErr
 
         Dim direccion As String
@@ -9041,11 +9043,16 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, nombrenuevo As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
+
+
+
+    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagen As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
 
         If forzarID = -1 Then
+            'si no viene el ID,  busco por numero de carta
+
             Dim cdp As CartaDePorte
             Try
                 cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1) 'aca tira la bronca si estaba duplicada
@@ -9053,7 +9060,7 @@ Public Class CartaDePorteManager
                 If cdp.Id = -1 Then
                     sError &= numeroCarta & "/" & vagon & " no existe <br/> "
                     Return ""
-                    Return nombrenuevo
+                    Return archivoImagen
                     Exit Function
                     'cdp.NumeroCartaDePorte = numeroCarta
                     'cdp.SubnumeroVagon = vagon
@@ -9070,17 +9077,17 @@ Public Class CartaDePorteManager
                 If o Is Nothing Then
                     sError &= numeroCarta & "/" & vagon & " no existe <br/> "
                     Return ""
-                    Return nombrenuevo
+                    Return archivoImagen
                     Exit Function
                     'cdp.NumeroCartaDePorte = numeroCarta
                     'cdp.SubnumeroVagon = vagon
                 End If
                 forzarID = o.IdCartaDePorte
             End Try
-
-
-
         End If
+
+
+
 
 
 
@@ -9088,46 +9095,54 @@ Public Class CartaDePorteManager
         Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
 
-        'si es un tiff paginado
-        'getallpages()
+
+        Dim DIRFTP = DirApp & "\DataBackupear\"
 
 
-        If InStr(nombrenuevo.ToUpper, "TK") Then
+        'si es un .tiff paginado
+        If archivoImagen.Contains(".tif") Then
+            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + oCarta.PathImagen)
+            dsfdf()
+            listapaginas(0).Save(DIRFTP + oCarta.PathImagen)
+            listapaginas(1).Save(DIRFTP + oCarta.PathImagen2)
+        End If
+
+
+
+
+
+        If InStr(archivoImagen.ToUpper, "TK") Then
             If oCarta.PathImagen2 <> "" Then
                 'qué hago con el archivo anterior? -por ahora lo conservo
-                If True Then
-                    Dim DIRFTP = DirApp & "\DataBackupear\"
-                    Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen2)
-                    Try
-                        If MyFile1.Exists Then
-                            MyFile1.Delete()
-                        End If
-                    Catch ex As Exception
-                    End Try
-                End If
+                Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen2)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
             End If
-            oCarta.PathImagen2 = nombrenuevo
-        ElseIf InStr(nombrenuevo.ToUpper, "CP") Then
+            oCarta.PathImagen2 = archivoImagen
+        ElseIf InStr(archivoImagen.ToUpper, "CP") Then
             If oCarta.PathImagen <> "" Then
                 'qué hago con el archivo anterior? -por ahora lo conservo 
-                If True Then
-                    Dim DIRFTP = DirApp & "\DataBackupear\"
-                    Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen)
-                    Try
-                        If MyFile1.Exists Then
-                            MyFile1.Delete()
-                        End If
-                    Catch ex As Exception
-                    End Try
-                End If
+                Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
             End If
 
-            oCarta.PathImagen = nombrenuevo
+            oCarta.PathImagen = archivoImagen
         Else
             If oCarta.PathImagen = "" Or bForzarCasillaCP Then
-                oCarta.PathImagen = nombrenuevo 'nombrenuevo
+                oCarta.PathImagen = archivoImagen 'nombrenuevo
             ElseIf oCarta.PathImagen2 = "" Then
-                oCarta.PathImagen2 = nombrenuevo 'nombrenuevo
+                oCarta.PathImagen2 = archivoImagen 'nombrenuevo
             Else
                 sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a> tiene las dos imagenes ocupadas;  <br/> "
                 'sError &= vbCrLf & numeroCarta & " tiene las dos imagenes ocupadas  <br/>"
@@ -9135,32 +9150,20 @@ Public Class CartaDePorteManager
             End If
         End If
 
-        sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
+
 
         db.SubmitChanges()
 
-        Return nombrenuevo
+
+        sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
+
+
+        Return archivoImagen
     End Function
 
 
 
-    'private List<Image> GetAllPages(string file)
-    '    {
-    '        List<Image> images = new List<Image>();
-    '        Bitmap bitmap = (Bitmap)Image.FromFile(file);
-    '        int count = bitmap.GetFrameCount(FrameDimension.Page);
-    '        for (int idx = 0; idx < count; idx++)
-    '        {
-    '            // save each frame to a bytestream
-    '            bitmap.SelectActiveFrame(FrameDimension.Page, idx);
-    '            MemoryStream byteStream = new MemoryStream();
-    '            bitmap.Save(byteStream, ImageFormat.Tiff);
 
-    '            // and then create a new Image from it
-    '            images.Add(Image.FromStream(byteStream));
-    '        }
-    '        return images;
-    '    }
 
 
     Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
@@ -9256,6 +9259,499 @@ Public Class CartaDePorteManager
         wordDoc.Close()
 
     End Sub
+
+
+
+
+    Shared Function ReadBarcode1D_Spire(ByVal fileName As String, ByVal page As Integer) As String
+        'https://www.daniweb.com/software-development/csharp/code/481719/barcode-recognition-spire-barcode
+        'https://visualstudiogallery.msdn.microsoft.com/e4f65909-2b0a-4c4e-84b2-eccbcc547905
+        'la instalacion del paquete incluye unas demos con código 
+
+        Dim reader As New Spire.Barcode.BarcodeScanner
+
+
+        'scan the barcode
+        Dim datas() As String = Spire.Barcode.BarcodeScanner.Scan(fileName, Spire.Barcode.BarCodeType.Code128)
+        'JRD.Imaging.Barcode.Scan(JRD.Imaging.Barcode.GetBitmap(fileName), BarcodeType.Code128)
+
+
+        'show the scan result
+        For n = 0 To datas.Count - 1
+            If datas(n).Length <= 10 And datas(n).Length >= 7 Then
+                Return datas(n)
+            End If
+        Next
+
+        Return ""
+
+        'Return datas(0)
+
+
+
+
+
+        '        Spire.Barcode.da()
+
+        'Name of Property	Description
+        'Data	Stores the data that is to be encoded to one-dimension barcode.
+        'Data2D	Stores the data that is to be encoded to two-dimension barcode.
+        'Type	Indicates the type of barcode that is to be generated.
+        'HasBorder	Indicates whether barcode image has border.
+        'BorderDashStyle	Stores the type of border barcode image has.
+        'BarHeight	Stores the height of barcode image.
+        'CheckB_BarcodeText	Indicates whether to show the barcode text.
+        'TextFont	Stores the font of barcode text.
+        'ForeColor	Stores the fore color of barcode image.
+        'CheckB_Sum	Indicates whether to show the checksum digit in Code128 and EAN128 Barcodes.
+
+
+
+    End Function
+
+    Shared Function ReadBarcode1D_ClearImage(ByVal fileName As String, ByVal page As Integer) As String
+        'http://how-to.inliteresearch.com/barcode-reading-howto/read-barcodes-from-an-image-page/
+
+
+
+
+        Try
+            Dim reader As New BarcodeReader()
+            ' Select barcode type(s) to read
+            reader.Code128 = True
+            reader.Code39 = True
+
+
+            ' Find the most popular 1D Barcodes
+            'reader.Auto1D = True
+            '  Look only for Horizontal barcodes
+            'reader.Vertical = False
+            'reader.Diagonal = False
+            '   Set search zone to upper left corner
+            'Dim io As New ImageIO()
+            'Dim info As ImageInfo = io.Info(fileName, page)
+            'reader.Zone = New Rectangle(0, 0, info.Width / 2, info.Height / 2)
+            ' Read barcodes
+
+
+            Dim barcodes As Barcode() = reader.Read(fileName, page)
+            ' Process results
+            For Each bc As Barcode In barcodes
+                Console.Write(bc.Text) ' Use barcode text OR
+                ' ProcessBarcode(bc)     ' do other processing
+            Next
+
+            If barcodes.Count = 1 Then
+                Return barcodes(0).Text
+            ElseIf barcodes.Count = 0 Then
+                Return ""
+            Else
+                'Stop
+                If barcodes(0).Text.Length >= 14 Then
+                    Return barcodes(1).Text
+                Else
+                    Return barcodes(0).Text
+                End If
+            End If
+            Return ""
+
+        Catch ex As Exception
+            'ProcessException(ex)
+            'http://www.inliteresearch.com/homepage/support/pdk_vs_sdk.html
+            ErrHandler.WriteError(ex)
+        End Try
+    End Function
+
+
+    Shared Function ReadBarcode1D_ZXing(ByVal fileName As String, ByVal page As Integer) As String
+        'http://how-to.inliteresearch.com/barcode-reading-howto/read-barcodes-from-an-image-page/
+
+        Try
+
+
+            '// create a barcode reader instance
+            Dim reader As ZXing.IBarcodeReader = New ZXing.BarcodeReader()
+
+            reader.Options.TryHarder = True
+            'reader.Options.
+            '   var previousFormats = barcodeReader.Options.PossibleFormats;
+            '   if (possibleFormats != null)
+            '      barcodeReader.Options.PossibleFormats = possibleFormats;
+            '   if (tryMultipleBarcodes)
+            '      results = barcodeReader.DecodeMultiple(image);
+            '   else
+
+
+            '// load a bitmap
+            Dim barcodeBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(fileName)   '.LoadFrom(fileName)
+            '// detect and decode the barcode inside the bitmap
+            Dim result = reader.Decode(barcodeBitmap)
+            '// do something with the result
+            If (result IsNot Nothing) Then
+
+                'txtDecoderType.Text = result.BarcodeFormat.ToString()
+                'txtDecoderContent.Text = result.Text
+                Dim largo = Val(result.Text).ToString.Length
+                If largo = 9 Then
+                    Return result.Text
+                End If
+            End If
+
+        Catch ex As Exception
+            'ProcessException(ex)
+            'http://www.inliteresearch.com/homepage/support/pdk_vs_sdk.html
+            ErrHandler.WriteError(ex)
+        End Try
+    End Function
+
+
+
+    Shared Sub procesar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
+                            ByRef sError As String, DirApp As String)
+
+
+        Dim DIRTEMP = DirApp & "\Temp\"
+        Dim DIRFTP = DirApp & "\DataBackupear\"
+
+
+
+
+        podria revisar en un bucle anterior cuales son los tif
+
+        For Each nombre As String In archivos
+            'si es un .tiff paginado
+            If archivoImagen.Contains(".tif") Then
+                Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + oCarta.PathImagen)
+                dsfdf()
+                listapaginas(0).Save(DIRFTP + oCarta.PathImagen)
+                listapaginas(1).Save(DIRFTP + oCarta.PathImagen2)
+            End If
+
+
+        Next
+
+
+
+        For Each nombre As String In archivos
+
+
+
+
+            'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=13767
+            'http://stackoverflow.com/questions/1566188/converting-tiff-files-to-png-in-net
+
+            'convierto los .tiff acá ? 
+
+            
+
+
+            If Not nombre.Contains(".jpg") Then
+                'si no es un jpg
+                Try
+                    System.Drawing.Bitmap.FromFile(DIRTEMP + nombre).Save(DIRTEMP + nombre + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                    Continue For
+                End Try
+                'Path.GetFileNameWithoutExtension()
+                nombre += ".jpg"
+            End If
+
+
+            Dim origen = DIRTEMP + nombre
+
+
+
+
+            Dim bCodigoBarrasDetectado As Boolean = True
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+            Dim numeroCarta As Long = 0
+            Dim vagon As Long = 0
+
+            'In VB.NET, a variable that is declared inside a for loop keeps its value for the next itaration. This is by design: http://social.msdn.microsoft.com/Forums/en/vblanguage/thread/c9cb4c22-d40b-49ff-b535-19d47e4db38d but this is also dangerous pitfall for programmers.
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+            If numeroCarta = 0 And False Then
+
+                Try
+                    numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+                If numeroCarta <> 0 Then
+                    sError &= "Código de barras detectado con ClearImage. "
+                End If
+
+            End If
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+
+            If numeroCarta = 0 Then
+
+                Try
+                    numeroCarta = Val(ReadBarcode1D_ZXing(origen, 0))
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+                If numeroCarta <> 0 Then
+                    sError &= "Código de barras detectado con Zxing. "
+
+                Else
+                    'numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
+                    'If numeroCarta <> 0 Then
+                    '    sError &= "Código de barras detectado con ClearImage. "
+                    'End If
+                End If
+
+            End If
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            If numeroCarta = 0 And False Then
+
+
+                Try
+                    numeroCarta = Val(ReadBarcode1D_Spire(origen, 0))
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+                If numeroCarta <> 0 Then
+                    sError &= "Código de barras detectado con Spire. "
+
+                Else
+                    'numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
+                    'If numeroCarta <> 0 Then
+                    '    sError &= "Código de barras detectado con ClearImage. "
+                    'End If
+                End If
+
+            End If
+
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+
+
+            ErrHandler.WriteError((origen).ToString() & " " & numeroCarta)
+
+            If numeroCarta = 0 Or numeroCarta.ToString.Length > 9 Or numeroCarta.ToString.Length < 8 Then
+                sError &= "Código de barras no detectado en archivo " & nombre & "      "
+
+                bCodigoBarrasDetectado = False
+
+                CartaDePorteManager.ParseNombreCarta(nombre, numeroCarta, vagon)
+            End If
+
+            If numeroCarta = 0 Then
+                sError &= " Número no detectado en el nombre del archivo " & nombre & "<br/> "
+                Continue For
+            End If
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '/////////////  COPIAR AL DIRECTORIO DE ARCHIVOS
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+            Randomize()
+            Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+
+
+            'crear subdirectorio
+            Dim nuevodir = "\" + Left(numeroCarta, 2) + "\"
+            If Not IO.Directory.Exists(nuevodir) Then IO.Directory.CreateDirectory(nuevodir)
+            If False Then 'no está andando bien en produccion
+                nombrenuevo = nuevodir + nombrenuevo
+            End If
+
+
+            Dim destino = DIRFTP + nombrenuevo
+
+
+
+
+            Try
+                Dim MyFile1 As New FileInfo(destino)
+                If MyFile1.Exists Then
+                    MyFile1.Delete()
+                End If
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+
+            'copio el archivo cambiandole el nombre agregandole un sufijo
+            '-qué pasa si ya tenía una imagen la carta?
+            'de todas maneras, se esta copiando dos veces con distinto nombre en el mismo segundo
+
+            Try
+                Dim MyFile2 As New FileInfo(origen)
+
+
+                If MyFile2.Exists Then
+                    MyFile2.CopyTo(destino)
+                End If
+            Catch ex As Exception
+            End Try
+
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+
+            'hacer así: si la imagen no se pudo asignar, borrar el archivo del \DataBackupear\
+
+
+
+            If True Then
+
+
+
+
+                Dim s = CartaDePorteManager.GrabarImagen(forzarID, SC, numeroCarta, vagon, nombrenuevo, sError, DirApp(), bCodigoBarrasDetectado)
+
+                If s = "" Then
+                    'hacer así: si la imagen no se pudo asignar, borrar el archivo del \DataBackupear\
+
+                    Dim MyFile5 As New FileInfo(destino)
+                    Try
+                        If MyFile5.Exists Then
+                            MyFile5.Delete()
+                        End If
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex)
+                    End Try
+                End If
+
+                'borro la foto del temp para que no aparezca en el asignador manual
+
+                Dim MyFile6 As New FileInfo(origen)
+                Try
+                    If MyFile6.Exists Then
+                        System.GC.Collect()
+                        System.GC.WaitForPendingFinalizers()
+                        ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14955
+                        MyFile6.Delete() 'me está tirando que es usado por otro proceso
+                    End If
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                    MandarMailDeError("No pudo borrar la foto " & ex.ToString)
+                End Try
+
+
+                'si es un tiff paginado, tomar la 2da pagina y asignarla al ticket
+                'getallpages()
+
+            Else
+
+
+
+
+                Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
+                If cdp.Id = -1 Then
+                    sError &= numeroCarta & "/" & vagon & " no existe <br/> "
+
+                    Continue For
+                End If
+                forzarID = cdp.Id
+
+
+                Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+                Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
+
+
+                If InStr(nombrenuevo.ToUpper, "TK") Then
+                    oCarta.PathImagen2 = nombrenuevo
+                ElseIf InStr(nombrenuevo.ToUpper, "CP") Or bCodigoBarrasDetectado Then
+                    oCarta.PathImagen = nombrenuevo
+                Else
+                    If oCarta.PathImagen = "" Then
+                        oCarta.PathImagen = nombrenuevo 'nombrenuevo
+                    ElseIf oCarta.PathImagen2 = "" Then
+                        oCarta.PathImagen2 = nombrenuevo 'nombrenuevo
+                    Else
+                        sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a> tiene las dos imagenes ocupadas;  <br/> "
+                        'sError &= vbCrLf & numeroCarta & " tiene las dos imagenes ocupadas  <br/>"
+                        Continue For
+                    End If
+                End If
+
+                sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
+
+                db.SubmitChanges()
+
+
+
+
+
+            End If
+
+
+        Next
+
+    End Sub
+
+
+
+
+
+
+
+
 
 
     Shared Function insertarcodigobarras(wordDoc As WordprocessingDocument)
@@ -16156,7 +16652,7 @@ Public Class LogicaFacturacion
 
 
 
-                        
+
                         '.Fields("IdCorredorObservaciones").Value = IdCorredorObservaciones
                         Dim idcliobs = TodasLasCartasTienenElMismoClienteObsConCircuitoEspecial(SC, oListaCDP)
                         If idcliobs > 0 Then
@@ -23138,7 +23634,7 @@ Public Class CDPDestinosManager
         'ds.Tables.Add(dr.Table.Clone())
         'ds.Tables(0).ImportRow(dr)
 
-        Dim myConnection = New SqlConnection(encriptar(SC))
+        Dim myConnection = New SqlConnection(Encriptar(SC))
         myConnection.Open()
 
         Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
@@ -23186,7 +23682,7 @@ Public Class CDPDestinosManager
         'ds.Tables.Add(dr.Table.Clone())
         'ds.Tables(0).ImportRow(dr)
 
-        Dim myConnection = New SqlConnection(encriptar(SC))
+        Dim myConnection = New SqlConnection(Encriptar(SC))
         myConnection.Open()
 
         Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
