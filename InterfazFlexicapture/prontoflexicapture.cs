@@ -118,11 +118,14 @@ namespace ProntoFlexicapture
 
                         cdp.Titular = BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
 
-                        string ms, warn;
+
+                        string nombrenuevo = "", sError = "";
+                        bool bCodigoBarrasDetectado = false;
+                        string ms = "", warn = "";
                         var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
                         var id = CartaDePorteManager.Save(SC, cdp, 0, "");
-                        var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, 
-                                                    nombrenuevo, sError, DirApp(), bCodigoBarrasDetectado);
+                        var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon,
+                                                    nombrenuevo, ref sError, "", bCodigoBarrasDetectado);
 
 
 

@@ -176,6 +176,9 @@
     <Reference Include="OpenXmlPowerTools">
       <HintPath>bin\Debug\OpenXmlPowerTools.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.Barcode">
+      <HintPath>..\..\prontoweb\Bin\Spire.Barcode.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -200,6 +203,12 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WSAFIPFE">
       <HintPath>bin\Debug\WSAFIPFE.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing">
+      <HintPath>..\..\prontoweb\Bin\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation">
+      <HintPath>..\..\prontoweb\Bin\zxing.presentation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
