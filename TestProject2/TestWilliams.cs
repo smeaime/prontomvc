@@ -61,6 +61,12 @@ namespace ProntoMVC.Tests
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
         string sc;
+
+        string DirApp;
+        string SC;
+        string SamplesFolder;
+        string plantilla;
+
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
@@ -75,6 +81,17 @@ namespace ProntoMVC.Tests
             //    bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
             //    sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
             //
+
+
+            DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
+            SamplesFolder = DirApp + @"\Temp";
+            // string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
+
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
+                   @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
+
+            plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+
         }
 
 
@@ -90,7 +107,6 @@ namespace ProntoMVC.Tests
             //string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
             string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015";
             //string plantilla =  @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl"
-            string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
 
             IEngine engine = null;
             IEngineLoader engineLoader;
@@ -115,11 +131,11 @@ namespace ProntoMVC.Tests
             }
 
 
-            string SC = "";
+           
 
             ClassFlexicapture.ProcesarCartasConFlexicapture(engine,
                                         plantilla,
-                                        lista, SC);
+                                        lista, SC, DirApp);
 
 
 
@@ -132,13 +148,6 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void procesarTiff()
         {
-
-            string DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
-            string SamplesFolder = DirApp + @"\Temp";
-            // string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
-
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
-                    @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
 
             string sError = "";
 
