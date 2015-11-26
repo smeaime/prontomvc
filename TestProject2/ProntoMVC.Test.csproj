@@ -56,9 +56,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.4.0.4\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessLogic">
-      <HintPath>..\BussinessLogic\bin\Debug\BusinessLogic.dll</HintPath>
-    </Reference>
     <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BussinessLogic\bin\Debug\BusinessObject.dll</HintPath>
@@ -80,7 +77,6 @@
       <HintPath>..\packages\Lib.Web.Mvc.6.1.0\lib\net40\Lib.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.ReportViewer.WebForms" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -187,6 +183,10 @@
     <Content Include="Viejos.vb" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
+      <Project>{ab8bb713-ffa1-4440-b49b-1857e61367c9}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
       <Project>{2F9B9020-304C-44A6-BCC4-9E434C687D31}</Project>
       <Name>ProntoMVC.Data</Name>
