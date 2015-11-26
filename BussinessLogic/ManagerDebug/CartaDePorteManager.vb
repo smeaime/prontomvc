@@ -9101,16 +9101,21 @@ Public Class CartaDePorteManager
 
         'si es un .tiff paginado
         If archivoImagen.Contains(".tif") Then
-            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivoImagen)
+            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagen)
 
-            listapaginas(0).Save(archivoImagen)
-            listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
 
+
+            listapaginas(0).Save(DIRFTP + archivoImagen + ".jpg", Imaging.ImageFormat.Jpeg)
             BorroArchivo(DIRFTP + oCarta.PathImagen)
-            BorroArchivo(DIRFTP + oCarta.PathImagen2)
-
             oCarta.PathImagen = archivoImagen
-            oCarta.PathImagen2 = archivoImagen
+
+            If listapaginas.Count > 1 Then
+                'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
+                listapaginas(1).Save(DIRFTP + "TK_" + Path.GetFileName(archivoImagen) + ".jpg", Imaging.ImageFormat.Jpeg)
+                BorroArchivo(DIRFTP + oCarta.PathImagen2)
+                oCarta.PathImagen2 = archivoImagen
+
+            End If
 
         ElseIf InStr(archivoImagen.ToUpper, "TK") Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
@@ -9393,9 +9398,99 @@ Public Class CartaDePorteManager
         End Try
     End Function
 
+    Public Shared Function LeerNumeroDeCartaPorteUsandoCodigoDeBarra(fileImagen As String, ByRef sError As String) As Long
 
 
-    Shared Sub procesar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
+        Dim numeroCarta As Long = 0
+
+
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+
+        If numeroCarta = 0 And False Then
+
+            Try
+                numeroCarta = Val(ReadBarcode1D_ClearImage(fileImagen, 0))
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+
+            If numeroCarta <> 0 Then
+                sError &= "Código de barras detectado con ClearImage. "
+            End If
+
+        End If
+
+
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+
+
+
+        If numeroCarta = 0 Then
+
+            Try
+                numeroCarta = Val(ReadBarcode1D_ZXing(fileImagen, 0))
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+
+            If numeroCarta <> 0 Then
+                sError &= "Código de barras detectado con Zxing. "
+
+            Else
+                'numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
+                'If numeroCarta <> 0 Then
+                '    sError &= "Código de barras detectado con ClearImage. "
+                'End If
+            End If
+
+        End If
+
+
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        If numeroCarta = 0 And False Then
+
+
+            Try
+                numeroCarta = Val(ReadBarcode1D_Spire(fileImagen, 0))
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+
+            If numeroCarta <> 0 Then
+                sError &= "Código de barras detectado con Spire. "
+
+            Else
+                'numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
+                'If numeroCarta <> 0 Then
+                '    sError &= "Código de barras detectado con ClearImage. "
+                'End If
+            End If
+
+        End If
+
+
+
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+
+        Return numeroCarta
+
+    End Function
+
+
+    Shared Sub ProcesarImagenesConCodigosDeBarraYAdjuntar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
                             ByRef sError As String, DirApp As String)
 
 
@@ -9431,8 +9526,8 @@ Public Class CartaDePorteManager
 
 
 
-            If Not nombre.Contains(".jpg") Then
-                'si no es un jpg
+            If Not nombre.Contains(".jpg") And Not nombre.Contains(".tif") Then
+                'si no es un jpg ni tiff (los tif se dividen dentro de la llamada a GrabarImagen)
                 Try
                     System.Drawing.Bitmap.FromFile(DIRTEMP + nombre).Save(DIRTEMP + nombre + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
                 Catch ex As Exception
@@ -9461,86 +9556,9 @@ Public Class CartaDePorteManager
             'In VB.NET, a variable that is declared inside a for loop keeps its value for the next itaration. This is by design: http://social.msdn.microsoft.com/Forums/en/vblanguage/thread/c9cb4c22-d40b-49ff-b535-19d47e4db38d but this is also dangerous pitfall for programmers.
 
 
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-
-            If numeroCarta = 0 And False Then
-
-                Try
-                    numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
-                Catch ex As Exception
-                    ErrHandler.WriteError(ex)
-                End Try
-
-                If numeroCarta <> 0 Then
-                    sError &= "Código de barras detectado con ClearImage. "
-                End If
-
-            End If
 
 
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-
-
-
-            If numeroCarta = 0 Then
-
-                Try
-                    numeroCarta = Val(ReadBarcode1D_ZXing(origen, 0))
-                Catch ex As Exception
-                    ErrHandler.WriteError(ex)
-                End Try
-
-                If numeroCarta <> 0 Then
-                    sError &= "Código de barras detectado con Zxing. "
-
-                Else
-                    'numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
-                    'If numeroCarta <> 0 Then
-                    '    sError &= "Código de barras detectado con ClearImage. "
-                    'End If
-                End If
-
-            End If
-
-
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            If numeroCarta = 0 And False Then
-
-
-                Try
-                    numeroCarta = Val(ReadBarcode1D_Spire(origen, 0))
-                Catch ex As Exception
-                    ErrHandler.WriteError(ex)
-                End Try
-
-                If numeroCarta <> 0 Then
-                    sError &= "Código de barras detectado con Spire. "
-
-                Else
-                    'numeroCarta = Val(ReadBarcode1D_ClearImage(origen, 0))
-                    'If numeroCarta <> 0 Then
-                    '    sError &= "Código de barras detectado con ClearImage. "
-                    'End If
-                End If
-
-            End If
-
-
-
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
-            '////////////////////////////////////////////////////////////////////
+            numeroCarta = LeerNumeroDeCartaPorteUsandoCodigoDeBarra(origen, sError)
 
 
 
