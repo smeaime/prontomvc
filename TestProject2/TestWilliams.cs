@@ -114,38 +114,44 @@ namespace ProntoMVC.Tests
                 lista.Add(file.FullName);
             }
 
-          
-            string SC="";
 
-            ClassFlexicapture.ProcesarCartas(engine,
-                                        plantilla ,
+            string SC = "";
+
+            ClassFlexicapture.ProcesarCartasConFlexicapture(engine,
+                                        plantilla,
                                         lista, SC);
 
 
-            
+
 
         }
 
 
 
-        
+
         [TestMethod]
-        public void procesarTiff() {
+        public void procesarTiff()
+        {
 
-            string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
-            string DirApp="";
-            string SC="";
-            string sError="";
+            string DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
+            string SamplesFolder = DirApp + @"\Temp";
+            // string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
 
-            List<string> lista = new List<string>(); 
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
+                    @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
+
+            string sError = "";
+
+            List<string> lista = new List<string>();
             DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
             FileInfo[] Files = d.GetFiles("*.*");
             foreach (FileInfo file in Files)
             {
-                lista.Add(file.FullName);
+                //lista.Add(file.FullName);
+                lista.Add(file.Name);
             }
 
-            CartaDePorteManager (SC, lista, -1, sError, DirApp);
+            CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
         }
 
 
@@ -156,29 +162,25 @@ namespace ProntoMVC.Tests
 
 
 
-        //Function test1_ReclamoN9066(ByVal sc As String) As String
+    //Function test1_ReclamoN9066(ByVal sc As String) As String
 
-        //    Dim ds As New WillyInformesDataSet
-        //    Dim adapter As New WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter
+    //    Dim ds As New WillyInformesDataSet
+    //    Dim adapter As New WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter
 
-        //    '// Customize the connection string.
-        //    Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(sc)) ' Properties.Settings.Default.DistXsltDbConnectionString)
-        //    'builder.DataSource = builder.DataSource.Replace(".", Environment.MachineName)
-        //    Dim desiredConnectionString = builder.ConnectionString
+    //    '// Customize the connection string.
+    //    Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(sc)) ' Properties.Settings.Default.DistXsltDbConnectionString)
+    //    'builder.DataSource = builder.DataSource.Replace(".", Environment.MachineName)
+    //    Dim desiredConnectionString = builder.ConnectionString
 
-        //    '// Set it directly on the adapter.
-        //    adapter.Connection.ConnectionString = desiredConnectionString 'tenes que cambiar el ConnectionModifier=Public http://weblogs.asp.net/rajbk/archive/2007/05/26/changing-the-connectionstring-of-a-wizard-generated-tableadapter-at-runtime-from-an-objectdatasource.aspx
-        //    adapter.Fill(ds.wCartasDePorte_TX_InformesCorregido, -1, #4/1/2012#, #4/4/2012#)
+    //    '// Set it directly on the adapter.
+    //    adapter.Connection.ConnectionString = desiredConnectionString 'tenes que cambiar el ConnectionModifier=Public http://weblogs.asp.net/rajbk/archive/2007/05/26/changing-the-connectionstring-of-a-wizard-generated-tableadapter-at-runtime-from-an-objectdatasource.aspx
+    //    adapter.Fill(ds.wCartasDePorte_TX_InformesCorregido, -1, #4/1/2012#, #4/4/2012#)
 
-        //    Dim sWHERE = ""
-        //    ' Dim output As String = Sincronismo_Argencer(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+    //    Dim sWHERE = ""
+    //    ' Dim output As String = Sincronismo_Argencer(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
 
-        //    'Return output
-        //End Function
-
-
-    }
-
+    //    'Return output
+    //End Function
 
 
 
