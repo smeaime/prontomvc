@@ -108,7 +108,7 @@ namespace ProntoFlexicapture
 
 
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static void ProcesarCartasConFlexicapture(IEngine engine, string plantilla, List<string> imagenes, string SC)
+        public static void ProcesarCartasConFlexicapture(IEngine engine, string plantilla, List<string> imagenes, string SC, string DirApp)
         {
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
@@ -182,7 +182,7 @@ namespace ProntoFlexicapture
                     IField TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT");
                     IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
                     IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
-                    IField NumeroCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
+                    IField NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
                     IField CEE = Sample.AdvancedTechniques.findField(document, "CEE");
 
 
@@ -190,18 +190,20 @@ namespace ProntoFlexicapture
 
                     long numeroCarta;
                     int vagon = 0;
-                    string sError="";
+                    string sError = "";
 
-                    if (BarraCP.Value.AsString != "")
+
+                    
+                    // if (BarraCP.Value.AsString != ""   )
+                    
+                    if ( long.TryParse(BarraCP.Value.AsString, out numeroCarta) )
                     {
-                        Debug.Print(NumeroCarta.Value.AsString + " " + BarraCP.Value.AsString);
-
-
-                        numeroCarta = BarraCP.Value.AsInteger;
+                         //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
+                        // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
 
 
 
-                   }
+                    }
 
                     else
                     {
@@ -213,40 +215,50 @@ namespace ProntoFlexicapture
 
 
 
-                        Debug.Print("nada documento " + count.ToString() + " " + document.Title);
+                        //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
 
                     }
 
 
 
-
-
-
-
-                    Pronto.ERP.BO.CartaDePorte cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1);
-                    if (cdp.Id == -1)
+                    if (numeroCarta > 0)
                     {
-                        cdp.NumeroCartaDePorte = numeroCarta;
-                        cdp.SubnumeroVagon = vagon;
+                        Pronto.ERP.BO.CartaDePorte cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0);
+                        if (cdp.Id == -1)
+                        {
+                            cdp.NumeroCartaDePorte = numeroCarta;
+                            cdp.SubnumeroVagon = vagon;
 
-                        cdp.SubnumeroDeFacturacion = -1;
+                            cdp.SubnumeroDeFacturacion = 0;
+                        }
+
+
+                        cdp.Titular = BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
+
+                        bool bCodigoBarrasDetectado = false;
+                        string ms = "", warn = "";
+
+
+                        var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
+                        if (valid)
+                        {
+                            var id = CartaDePorteManager.Save(SC, cdp, 0, "");
+
+                            // la imagen tiene que estar ya en el directorio FTP
+                            // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
+                            if (false)
+                            {
+                                var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(imagenes[count])
+                                                              , ref sError, DirApp, bCodigoBarrasDetectado);
+                            }
+                        }
+
                     }
 
 
-                    cdp.Titular = BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
-
-                    string nombrenuevo = "";
-                    bool bCodigoBarrasDetectado = false;
-                    string ms = "", warn = "";
-                    var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
-                    var id = CartaDePorteManager.Save(SC, cdp, 0, "");
-                    var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon,
-                                                nombrenuevo, ref sError, "", bCodigoBarrasDetectado);
-
-
+                    Debug.Print("Documento " + count.ToString() + " numcarta " + numeroCarta.ToString());
 
                 }
-
 
                 count++;
             }
@@ -259,7 +271,7 @@ namespace ProntoFlexicapture
 
         static int BuscarClientePorCUIT(string cuit, string SC)
         {
-            return -1;
+            return 100;
         }
 
 
