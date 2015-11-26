@@ -55,6 +55,12 @@
     <Compile Include="Using FlexiCapture technology API.cs" />
     <Compile Include="Working with an existing FlexiCapture project.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
+      <Project>{ab8bb713-ffa1-4440-b49b-1857e61367c9}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
