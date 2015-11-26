@@ -133,7 +133,11 @@ namespace ProntoMVC.Tests
         public void procesarTiff() {
 
             string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
+            string DirApp="";
+            string SC="";
+            string sError="";
 
+            List<string> lista = new List<string>(); 
             DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
             FileInfo[] Files = d.GetFiles("*.*");
             foreach (FileInfo file in Files)
@@ -141,8 +145,7 @@ namespace ProntoMVC.Tests
                 lista.Add(file.FullName);
             }
 
-            CartaDePorteManager.proces
-
+            CartaDePorteManager (SC, lista, -1, sError, DirApp);
         }
 
 
