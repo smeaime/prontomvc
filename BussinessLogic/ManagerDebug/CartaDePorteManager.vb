@@ -9107,13 +9107,13 @@ Public Class CartaDePorteManager
 
             listapaginas(0).Save(DIRFTP + archivoImagenSinPath + ".jpg", Imaging.ImageFormat.Jpeg)
             BorroArchivo(DIRFTP + oCarta.PathImagen)
-            oCarta.PathImagen = archivoImagenSinPath
+            oCarta.PathImagen = archivoImagenSinPath + ".jpg"
 
             If listapaginas.Count > 1 Then
                 'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
                 listapaginas(1).Save(DIRFTP + "TK_" + Path.GetFileName(archivoImagenSinPath) + ".jpg", Imaging.ImageFormat.Jpeg)
                 BorroArchivo(DIRFTP + oCarta.PathImagen2)
-                oCarta.PathImagen2 = archivoImagenSinPath
+                oCarta.PathImagen2 = "TK_" + archivoImagenSinPath + ".jpg"
 
             End If
 
@@ -9136,6 +9136,7 @@ Public Class CartaDePorteManager
         End If
 
 
+        oCarta.FechaModificacion = Now
 
         db.SubmitChanges()
 

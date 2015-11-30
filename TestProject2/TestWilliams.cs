@@ -131,7 +131,7 @@ namespace ProntoMVC.Tests
             }
 
 
-           
+
 
             ClassFlexicapture.ProcesarCartasConFlexicapture(engine,
                                         plantilla,
@@ -146,12 +146,15 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void procesarTiff()
+        public void ProcesarTiffMultipagina_Reclamo14967()
         {
 
             string sError = "";
 
             List<string> lista = new List<string>();
+
+            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", SamplesFolder);
+
             DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
             FileInfo[] Files = d.GetFiles("*.*");
             foreach (FileInfo file in Files)
@@ -165,8 +168,18 @@ namespace ProntoMVC.Tests
 
 
 
+        static void Copy(string sourceDir, string targetDir)
+        {
+            Directory.CreateDirectory(targetDir);
 
+            foreach (var file in Directory.GetFiles(sourceDir))
+                File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)));
+
+            foreach (var directory in Directory.GetDirectories(sourceDir))
+                Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)));
+        }
     }
+
 
 
 
