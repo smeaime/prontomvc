@@ -64,7 +64,7 @@ namespace ProntoMVC.Tests
 
         string DirApp;
         string SC;
-        string SamplesFolder;
+        string TempFolder;
         string plantilla;
 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
@@ -84,7 +84,7 @@ namespace ProntoMVC.Tests
 
 
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
-            SamplesFolder = DirApp + @"\Temp";
+            TempFolder = DirApp + @"\Temp";
             // string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
 
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
@@ -107,6 +107,18 @@ namespace ProntoMVC.Tests
             //string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
             string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015";
             //string plantilla =  @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl"
+
+            try
+            {
+                Copy(SamplesFolder, TempFolder);
+
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+
 
             IEngine engine = null;
             IEngineLoader engineLoader;
@@ -153,9 +165,9 @@ namespace ProntoMVC.Tests
 
             List<string> lista = new List<string>();
 
-            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", SamplesFolder);
+            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
 
-            DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
             FileInfo[] Files = d.GetFiles("*.*");
             foreach (FileInfo file in Files)
             {

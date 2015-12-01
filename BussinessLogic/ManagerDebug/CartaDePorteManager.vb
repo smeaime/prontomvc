@@ -619,6 +619,26 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String) As Integer
+
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.Clientes Where c.Cuit = cuit.Replace("-", "")).FirstOrDefault()
+
+        If q Is Nothing Then Return 0
+
+        Return q.IdCliente
+
+
+    End Function
+
+
+
+
+
+
     ''' <summary>
     ''' el SQL de la funcion estrella
     ''' </summary>
@@ -9046,7 +9066,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPath As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
+    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
 
@@ -9060,7 +9080,7 @@ Public Class CartaDePorteManager
                 If cdp.Id = -1 Then
                     sError &= numeroCarta & "/" & vagon & " no existe <br/> "
                     Return ""
-                    Return archivoImagenSinPath
+                    Return archivoImagenSinPathUbicadaEnDATABACKUPEAR
                     Exit Function
                     'cdp.NumeroCartaDePorte = numeroCarta
                     'cdp.SubnumeroVagon = vagon
@@ -9077,7 +9097,7 @@ Public Class CartaDePorteManager
                 If o Is Nothing Then
                     sError &= numeroCarta & "/" & vagon & " no existe <br/> "
                     Return ""
-                    Return archivoImagenSinPath
+                    Return archivoImagenSinPathUbicadaEnDATABACKUPEAR
                     Exit Function
                     'cdp.NumeroCartaDePorte = numeroCarta
                     'cdp.SubnumeroVagon = vagon
@@ -9100,34 +9120,34 @@ Public Class CartaDePorteManager
 
 
         'si es un .tiff paginado
-        If archivoImagenSinPath.Contains(".tif") Then
-            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPath)
+        If archivoImagenSinPathUbicadaEnDATABACKUPEAR.Contains(".tif") Then
+            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
 
 
 
-            listapaginas(0).Save(DIRFTP + archivoImagenSinPath + ".jpg", Imaging.ImageFormat.Jpeg)
+            listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
             BorroArchivo(DIRFTP + oCarta.PathImagen)
-            oCarta.PathImagen = archivoImagenSinPath + ".jpg"
+            oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
 
             If listapaginas.Count > 1 Then
                 'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
-                listapaginas(1).Save(DIRFTP + "TK_" + Path.GetFileName(archivoImagenSinPath) + ".jpg", Imaging.ImageFormat.Jpeg)
+                listapaginas(1).Save(DIRFTP + "TK_" + Path.GetFileName(archivoImagenSinPathUbicadaEnDATABACKUPEAR) + ".jpg", Imaging.ImageFormat.Jpeg)
                 BorroArchivo(DIRFTP + oCarta.PathImagen2)
-                oCarta.PathImagen2 = "TK_" + archivoImagenSinPath + ".jpg"
+                oCarta.PathImagen2 = "TK_" + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
 
             End If
 
-        ElseIf InStr(archivoImagenSinPath.ToUpper, "TK") Then
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
-            oCarta.PathImagen2 = archivoImagenSinPath
-        ElseIf InStr(archivoImagenSinPath.ToUpper, "CP") Then
+            oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") Then
             If oCarta.PathImagen <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen)
-            oCarta.PathImagen = archivoImagenSinPath
+            oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR
         Else
             If oCarta.PathImagen = "" Or bForzarCasillaCP Then
-                oCarta.PathImagen = archivoImagenSinPath 'nombrenuevo
+                oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR 'nombrenuevo
             ElseIf oCarta.PathImagen2 = "" Then
-                oCarta.PathImagen2 = archivoImagenSinPath 'nombrenuevo
+                oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR 'nombrenuevo
             Else
                 sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a> tiene las dos imagenes ocupadas;  <br/> "
                 'sError &= vbCrLf & numeroCarta & " tiene las dos imagenes ocupadas  <br/>"
@@ -9144,7 +9164,7 @@ Public Class CartaDePorteManager
         sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
 
 
-        Return archivoImagenSinPath
+        Return archivoImagenSinPathUbicadaEnDATABACKUPEAR
     End Function
 
     Shared Sub BorroArchivo(file As String)
