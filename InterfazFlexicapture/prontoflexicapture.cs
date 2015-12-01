@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+using ProntoMVC.Data.Models;
 
 
 namespace ProntoFlexicapture
@@ -78,7 +79,7 @@ namespace ProntoFlexicapture
                         cdp.SubnumeroDeFacturacion = -1;
                     }
 
-                    cdp.Titular = BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
+                    cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
 
 
                     string nombrenuevo = "", sError = "";
@@ -108,7 +109,8 @@ namespace ProntoFlexicapture
 
 
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static void ProcesarCartasConFlexicapture(IEngine engine, string plantilla, List<string> imagenes, string SC, string DirApp)
+        public static void ProcesarCartasConFlexicapture(IEngine engine, string plantilla,
+                                                   List<string> imagenes, string SC, string DirApp)
         {
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
@@ -193,12 +195,12 @@ namespace ProntoFlexicapture
                     string sError = "";
 
 
-                    
+
                     // if (BarraCP.Value.AsString != ""   )
-                    
-                    if ( long.TryParse(BarraCP.Value.AsString, out numeroCarta) )
+
+                    if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
                     {
-                         //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
+                        //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
                         // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
 
 
@@ -233,7 +235,15 @@ namespace ProntoFlexicapture
                         }
 
 
-                        cdp.Titular = BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
+                        cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
+
+                        if (cdp.Titular != 0)
+                        {
+                            Debug.Print(cdp.Titular.ToString());
+
+                        }
+                        nbbmmb
+
 
                         bool bCodigoBarrasDetectado = false;
                         string ms = "", warn = "";
@@ -244,11 +254,28 @@ namespace ProntoFlexicapture
                         {
                             var id = CartaDePorteManager.Save(SC, cdp, 0, "");
 
-                            // la imagen tiene que estar ya en el directorio FTP
-                            // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
-                            if (false)
+                            if (true)
                             {
-                                var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(imagenes[count])
+                                // la imagen tiene que estar ya en el directorio FTP
+                                // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
+                                // - por qué las espera en databackupear en lugar de en el \temp\?
+                                // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
+
+                                string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(imagenes[count]);
+
+                                try
+                                {
+
+                                    File.Copy(imagenes[count], nuevodestino);
+                                }
+                                catch (Exception)
+                                {
+
+                                    //throw;
+                                }
+
+
+                                var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
                                                               , ref sError, DirApp, bCodigoBarrasDetectado);
                             }
                         }
@@ -269,10 +296,6 @@ namespace ProntoFlexicapture
         }
 
 
-        static int BuscarClientePorCUIT(string cuit, string SC)
-        {
-            return 100;
-        }
 
 
         public enum EngineLoadingMode
@@ -325,33 +348,6 @@ namespace ProntoFlexicapture
 
         [DllImport(FceConfig.DllPath, CharSet = CharSet.Unicode), PreserveSig]
         static extern int DeinitializeEngine();
-
-
-
-        class FceConfig
-        {
-            // full path to FCE dll
-            public const string DllPath = "C:\\Program Files (x86)\\ABBYY SDK\\11\\FlexiCapture Engine\\Bin\\FCEngine.dll";
-
-            // Return full path to FCE dll
-            public static string GetDllPath()
-            {
-                return "C:\\Program Files (x86)\\ABBYY SDK\\11\\FlexiCapture Engine\\Bin\\FCEngine.dll";
-            }
-
-            // Return developer serial number for FCE
-            public static string GetDeveloperSN()
-            {
-                return "SWTT11020005644444371584";
-            }
-
-            // Return full path to Samples directory
-            public static string GetSamplesFolder()
-            {
-                return "C:\\ProgramData\\ABBYY\\SDK\\11\\FlexiCapture Engine\\Samples";
-            }
-
-        }
 
     }
 

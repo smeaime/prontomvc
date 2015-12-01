@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bussinessobject\BusinessObject\bin\Debug\BusinessObject.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.FCEngine">
       <HintPath>..\..\..\..\..\..\ProgramData\ABBYY\SDK\11\FlexiCapture Engine\Samples\FlexiCapture Code Snippets (C#)\obj\Debug\Interop.FCEngine.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -60,6 +64,10 @@
     <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
       <Project>{ab8bb713-ffa1-4440-b49b-1857e61367c9}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
+      <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
+      <Name>ProntoMVC.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
