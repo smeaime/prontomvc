@@ -29,6 +29,10 @@ using System.Transactions;
 
 using System.IO;
 
+using Pronto.ERP.Bll;
+
+
+
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -115,7 +119,7 @@ namespace ProntoMVC.Tests
             }
             catch (Exception)
             {
-                
+
                 //throw;
             }
 
@@ -157,6 +161,11 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+
         [TestMethod]
         public void ProcesarTiffMultipagina_Reclamo14967()
         {
@@ -177,6 +186,88 @@ namespace ProntoMVC.Tests
 
             CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
         }
+
+
+
+
+
+        [TestMethod]
+        public void FormatoImpresionPlantillaFactura_14851()
+        {
+
+            var IdFactura = 222;
+            var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
+            //Copy to desktop
+        }
+
+
+        [TestMethod]
+        public void CrearDirectoriosParaLasImagenesAutomaticamente_15153()
+        {
+
+            string sError = "";
+
+            List<string> lista = new List<string>();
+
+            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
+
+            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (FileInfo file in Files)
+            {
+                //lista.Add(file.FullName);
+                lista.Add(file.Name);
+            }
+
+            CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void SincroFacturacionSyngenta_Reclamo15104()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada(SC,
+                "", "", "", 1, 300, CartaDePorteManager.enumCDPestado.Facturadas
+                   , "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 1),
+                0, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+
+            
+            var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
+
+            var sForzarNombreDescarga = "ENTREGADOR.CSV";
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

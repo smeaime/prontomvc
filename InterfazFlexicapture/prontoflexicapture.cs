@@ -242,7 +242,7 @@ namespace ProntoFlexicapture
                             Debug.Print(cdp.Titular.ToString());
 
                         }
-                        nbbmmb
+                        
 
 
                         bool bCodigoBarrasDetectado = false;
