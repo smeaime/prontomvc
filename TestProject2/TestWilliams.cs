@@ -197,7 +197,9 @@ namespace ProntoMVC.Tests
 
             var IdFactura = 222;
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
-            //Copy to desktop
+
+            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output));
+
         }
 
 
@@ -244,10 +246,11 @@ namespace ProntoMVC.Tests
                 new DateTime(2014, 1, 1), new DateTime(2014, 1, 1),
                 0, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
 
-            
+
             var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
 
             var sForzarNombreDescarga = "ENTREGADOR.CSV";
+            File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga);
 
 
         }
@@ -273,13 +276,25 @@ namespace ProntoMVC.Tests
 
         static void Copy(string sourceDir, string targetDir)
         {
-            Directory.CreateDirectory(targetDir);
 
-            foreach (var file in Directory.GetFiles(sourceDir))
-                File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)));
+            try
+            {
 
-            foreach (var directory in Directory.GetDirectories(sourceDir))
-                Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)));
+                Directory.CreateDirectory(targetDir);
+
+                foreach (var file in Directory.GetFiles(sourceDir))
+                    File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)));
+
+                foreach (var directory in Directory.GetDirectories(sourceDir))
+                    Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)));
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
         }
     }
 
