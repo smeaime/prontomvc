@@ -195,7 +195,13 @@ namespace ProntoMVC.Tests
         public void FormatoImpresionPlantillaFactura_14851()
         {
 
-            var IdFactura = 222;
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC y de ACA
+            var IdFactura = db.Facturas.OrderByDescending(x=>x.IdFactura).Where(x=>x.IdCliente==2775).FirstOrDefault().IdFactura;
+
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
 
             File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
