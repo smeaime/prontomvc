@@ -16224,7 +16224,7 @@ Public Class LogicaFacturacion
     Const IdAcopioSeeds = 2
 
 
-    Shared Function LeyendaAcopio(idfactura As Long, SC As String) As String
+    Shared Function LeyendaAcopio(idfactura As Integer, SC As String) As String
 
         '        Log Entry
         '12/09/2014 15:38:31
@@ -16362,6 +16362,8 @@ Public Class LogicaFacturacion
 
 
         '()
+
+   
         Try
             Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
