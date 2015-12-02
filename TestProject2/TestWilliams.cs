@@ -198,7 +198,7 @@ namespace ProntoMVC.Tests
             var IdFactura = 222;
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
 
-            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output));
+            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output),true);
 
         }
 
@@ -250,7 +250,7 @@ namespace ProntoMVC.Tests
             var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
 
             var sForzarNombreDescarga = "ENTREGADOR.CSV";
-            File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga);
+            File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga,true);
 
 
         }
@@ -283,7 +283,7 @@ namespace ProntoMVC.Tests
                 Directory.CreateDirectory(targetDir);
 
                 foreach (var file in Directory.GetFiles(sourceDir))
-                    File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)));
+                    File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)), true);
 
                 foreach (var directory in Directory.GetDirectories(sourceDir))
                     Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)));
