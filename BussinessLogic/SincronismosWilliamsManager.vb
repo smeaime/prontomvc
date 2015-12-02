@@ -1981,7 +1981,25 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & Int(dr("Kg.Netos")).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
 
-                sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)                           '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+
+
+                
+                '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+                'sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)
+                sb &= "&" & cero.ToString.PadLeft(14)
+
+                'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=13789
+                '                Se refieren a este campo:
+
+                '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+
+                'Que por lo que veo empieza en la posición 306 y en algunos casos estamos completando con un 2. Nosotros no tenemos dato de contrato de compra, con lo cual deberíamos estar enviando siempre un cero
+
+
+
+
+
+
 
                 sb &= "&" & cero.ToString.PadLeft(14)                          '31 -Número de Contrato de Venta	Numérico	14	Se completa con Cero por defecto.
 

@@ -198,7 +198,7 @@ namespace ProntoMVC.Tests
             var IdFactura = 222;
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
 
-            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output),true);
+            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
 
         }
 
@@ -227,6 +227,38 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void Pegatina_14744()
+        {
+            string archivoExcel;
+
+          //  FormatearExcelImportadoEnDLL(archivoExcel)
+
+          //proximoerror(TraerExcelDeBase(SC, m_IdMaestro))
+
+        }
+
+
+
+
+        [TestMethod]
+        public void Lartirigoyen_13789()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+
+            var s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" +  ProntoFuncionesGenerales.FechaANSI(  new DateTime(2014, 1, 1)  )    +
+                                 "'     AND   '" + ProntoFuncionesGenerales.FechaANSI( new DateTime(2014, 1, 1)) + "' )";
+            var dt = EntidadManager.ExecDinamico(SC, CartaDePorteManager.strSQLsincronismo() + " WHERE " + s);
+
+
+            var output = SincronismosWilliamsManager.Sincronismo_Lartirigoyen(dt, ref sErrores, sTitulo);
+
+            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+        }
+
 
         [TestMethod]
         public void SincroFacturacionSyngenta_Reclamo15104()
@@ -250,7 +282,7 @@ namespace ProntoMVC.Tests
             var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
 
             var sForzarNombreDescarga = "ENTREGADOR.CSV";
-            File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga,true);
+            File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga, true);
 
 
         }
