@@ -9630,8 +9630,8 @@ Public Class CartaDePorteManager
             '/////////////////////////////////////////////////////////////
             'crear subdirectorios para clasificar la parva de archivos
 
-            Dim nuevodir = "\" + Left(numeroCarta, 2) + "\"
-            If Not IO.Directory.Exists(nuevodir) Then IO.Directory.CreateDirectory(nuevodir)
+            Dim nuevodir = Left(numeroCarta, 2) + "\"
+            If Not IO.Directory.Exists(DIRFTP + nuevodir) Then IO.Directory.CreateDirectory(DIRFTP + nuevodir)
 
             If True Then 'no está andando bien en produccion. no está creando el subdirectorio -por un tema de permisos?
                 nombrenuevo = nuevodir + nombrenuevo
