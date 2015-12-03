@@ -6,7 +6,53 @@ BusinessLogic
 </name>
 </assembly>
 <members>
-<member name="M:Pronto.ERP.Bll.ReciboManager.ProximoNumeroReciboPorNumeroDePuntoVenta(System.String,System.Int32)">
+<member name="M:CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(System.String,System.String,System.String,System.String,System.Int64,System.Int64,CartaDePorteManager.enumCDPestado,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,CartaDePorteManager.FiltroANDOR,System.String,System.DateTime,System.DateTime,System.Int32,System.String@,System.String,System.Boolean,System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.Boolean,System.String,System.Boolean)">
+	<summary>
+ el SQL de la funcion estrella
+ </summary>
+	<param name="SC"></param>
+	<param name="ColumnaParaFiltrar"></param>
+	<param name="TextoParaFiltrar"></param>
+	<param name="sortExpression"></param>
+	<param name="startRowIndex"></param>
+	<param name="maximumRows"></param>
+	<param name="estado"></param>
+	<param name="QueContenga"> este cual es?????</param>
+	<param name="idVendedor"></param>
+	<param name="idCorredor"></param>
+	<param name="idDestinatario"></param>
+	<param name="idIntermediario"></param>
+	<param name="idRemComercial"></param>
+	<param name="idArticulo"></param>
+	<param name="idProcedencia"></param>
+	<param name="idDestino"></param>
+	<param name="AplicarANDuORalFiltro"></param>
+	<param name="ModoExportacion"></param>
+	<param name="fechadesde"></param>
+	<param name="fechahasta"></param>
+	<param name="puntoventa"></param>
+	<param name="sTituloFiltroUsado"></param>
+	<param name="optDivisionSyngenta"></param>
+	<param name="bTraerDuplicados"></param>
+	<param name="Contrato"></param>
+	<param name="QueContenga2">y este?????</param>
+	<param name="idClienteAuxiliar"></param>
+	<param name="AgrupadorDeTandaPeriodos"></param>
+	<param name="Vagon"></param>
+	<param name="Patente"></param>
+	<param name="bInsertarEnTablaTemporal"></param>
+	<param name="optCamionVagon"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CartaDePorteManager.Cotizacion(System.String,System.DateTime,System.Int64)">
+	<summary>
+ Por default trae la cotizacion del Dolar del dia de hoy
+ </summary>
+	<param name="Fecha"></param>
+	<param name="IdMoneda"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pronto.ERP.Bll.ReciboManager.ProximoNumeroReciboPorNumeroDePuntoVenta(System.String,System.Int32)">
 	<summary>
  ' OJO: es el numero, no el ID del punto de venta. El recibo es letra X, no necesita el IdCodigoIVA
  </summary>
@@ -20,6 +66,22 @@ BusinessLogic
  </summary>
 	<param name="SC"></param>
 	<param name="IdCodigoIva"></param>
+	<param name="NumeroDePuntoVenta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pronto.ERP.Bll.ComprobanteProveedorManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
+	<summary>
+ ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
+ </summary>
+	<param name="SC"></param>
+	<param name="NumeroDePuntoVenta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pronto.ERP.Bll.ComprobantePrvManagerFondoFijo.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
+	<summary>
+ ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
+ </summary>
+	<param name="SC"></param>
 	<param name="NumeroDePuntoVenta"></param>
 	<returns></returns>
 	<remarks></remarks>
@@ -39,6 +101,52 @@ BusinessLogic
 	<param name="Valor"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:Pronto.ERP.Bll.AsientoManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
+	<summary>
+ ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
+ </summary>
+	<param name="SC"></param>
+	<param name="NumeroDePuntoVenta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Numalet.Decimales">
+	<summary>
+ Indica la cantidad de decimales que se pasarán a entero para la conversión
+ </summary>
+	<remarks>Esta propiedad cambia al cambiar MascaraDecimal por un valor que empieze con '0'</remarks>
+</member><member name="P:Numalet.CultureInfo">
+	<summary>
+ Objeto CultureInfo utilizado para convertir las cadenas de entrada en números
+ </summary>
+</member><member name="P:Numalet.SeparadorDecimalSalida">
+	<summary>
+ Indica la cadena a intercalar entre la parte entera y la decimal del número
+ </summary>
+</member><member name="P:Numalet.MascaraSalidaDecimal">
+	<summary>
+ Indica el formato que se le dara a la parte decimal del número
+ </summary>
+</member><member name="P:Numalet.LetraCapital">
+	<summary>
+ Indica si la primera letra del resultado debe estár en mayúscula
+ </summary>
+</member><member name="P:Numalet.ConvertirDecimales">
+	<summary>
+ Indica si se deben convertir los decimales a su expresión nominal
+ </summary>
+</member><member name="P:Numalet.ApocoparUnoParteEntera">
+	<summary>
+ Indica si de debe cambiar "uno" por "un" en las unidades.
+ </summary>
+</member><member name="P:Numalet.ApocoparUnoParteDecimal">
+	<summary>
+ Determina si se debe apococopar el "uno" en la parte decimal
+ </summary>
+	<remarks>El valor de esta propiedad cambia al setear ConvertirDecimales</remarks>
+</member><member name="T:Numalet">
+	<summary>
+ Convierte números en su expresión numérica a su numeral cardinal
+ </summary>
 </member><member name="T:DataSetCDPmovimientos.CartasPorteMovimientosDataTable">
 	<summary>
 Represents the strongly named DataTable class.
@@ -155,6 +263,27 @@ Used to sort self-referenced table's rows
 	<summary>
 TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
 </summary>
+</member><member name="M:Pronto.ERP.Bll.RecepcionManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
+	<summary>
+ ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
+ </summary>
+	<param name="SC"></param>
+	<param name="NumeroDePuntoVenta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
 </member><member name="T:WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable">
 	<summary>
 Represents the strongly named DataTable class.
@@ -207,1331 +336,6 @@ Used to sort self-referenced table's rows
 	<summary>
 TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
 </summary>
-</member><member name="M:Pronto.ERP.Bll.AsientoManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
-	<summary>
- ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
- </summary>
-	<param name="SC"></param>
-	<param name="NumeroDePuntoVenta"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:Pronto.ERP.Bll.ComprobantePrvManagerFondoFijo.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
-	<summary>
- ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
- </summary>
-	<param name="SC"></param>
-	<param name="NumeroDePuntoVenta"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="M:Pronto.ERP.Bll.RecepcionManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
-	<summary>
- ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
- </summary>
-	<param name="SC"></param>
-	<param name="NumeroDePuntoVenta"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.#ctor">
-	<summary>
-Initializes a new wDemoWilliamsEntities object using the connection string found in the 'wDemoWilliamsEntities' section of the application configuration file.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.#ctor(System.String)">
-	<summary>
-Initialize a new wDemoWilliamsEntities object.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.#ctor(System.Data.EntityClient.EntityConnection)">
-	<summary>
-Initialize a new wDemoWilliamsEntities object.
-</summary>
-</member><member name="P:wDemoWilliamsModel.wDemoWilliamsEntities.DetalleRequerimientos">
-	<summary>
-There are no comments for DetalleRequerimientos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.wDemoWilliamsEntities.Requerimientos">
-	<summary>
-There are no comments for Requerimientos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.wDemoWilliamsEntities.ControlesCalidad">
-	<summary>
-There are no comments for ControlesCalidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.wDemoWilliamsEntities.Obras">
-	<summary>
-There are no comments for Obras in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.wDemoWilliamsEntities.Sectores">
-	<summary>
-There are no comments for Sectores in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.wDemoWilliamsEntities.Unidades">
-	<summary>
-There are no comments for Unidades in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.wDemoWilliamsEntities.Clientes">
-	<summary>
-There are no comments for Clientes in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.AddToDetalleRequerimientos(wDemoWilliamsModel.DetalleRequerimientos)">
-	<summary>
-There are no comments for DetalleRequerimientos in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.AddToRequerimientos(wDemoWilliamsModel.Requerimientos)">
-	<summary>
-There are no comments for Requerimientos in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.AddToControlesCalidad(wDemoWilliamsModel.ControlesCalidad)">
-	<summary>
-There are no comments for ControlesCalidad in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.AddToObras(wDemoWilliamsModel.Obras)">
-	<summary>
-There are no comments for Obras in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.AddToSectores(wDemoWilliamsModel.Sectores)">
-	<summary>
-There are no comments for Sectores in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.AddToUnidades(wDemoWilliamsModel.Unidades)">
-	<summary>
-There are no comments for Unidades in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.wDemoWilliamsEntities.AddToClientes(wDemoWilliamsModel.Clientes)">
-	<summary>
-There are no comments for Clientes in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.wDemoWilliamsEntities">
-	<summary>
-There are no comments for wDemoWilliamsEntities in the schema.
-</summary>
-</member><member name="M:wDemoWilliamsModel.DetalleRequerimientos.CreateDetalleRequerimientos(System.Int32)">
-	<summary>
-Create a new DetalleRequerimientos object.
-</summary>
-	<param name="idDetalleRequerimiento">Initial value of IdDetalleRequerimiento.</param>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdDetalleRequerimiento">
-	<summary>
-There are no comments for property IdDetalleRequerimiento in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdRequerimiento">
-	<summary>
-There are no comments for property IdRequerimiento in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.NumeroItem">
-	<summary>
-There are no comments for property NumeroItem in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Cantidad">
-	<summary>
-There are no comments for property Cantidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdUnidad">
-	<summary>
-There are no comments for property IdUnidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdArticulo">
-	<summary>
-There are no comments for property IdArticulo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaEntrega">
-	<summary>
-There are no comments for property FechaEntrega in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Observaciones">
-	<summary>
-There are no comments for property Observaciones in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Cantidad1">
-	<summary>
-There are no comments for property Cantidad1 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Cantidad2">
-	<summary>
-There are no comments for property Cantidad2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdDetalleLMateriales">
-	<summary>
-There are no comments for property IdDetalleLMateriales in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdControlCalidad">
-	<summary>
-There are no comments for property IdControlCalidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Adjunto">
-	<summary>
-There are no comments for property Adjunto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto">
-	<summary>
-There are no comments for property ArchivoAdjunto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdCentroCosto">
-	<summary>
-There are no comments for property IdCentroCosto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdComprador">
-	<summary>
-There are no comments for property IdComprador in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.NumeroFacturaCompra1">
-	<summary>
-There are no comments for property NumeroFacturaCompra1 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaFacturaCompra">
-	<summary>
-There are no comments for property FechaFacturaCompra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ImporteFacturaCompra">
-	<summary>
-There are no comments for property ImporteFacturaCompra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdProveedor">
-	<summary>
-There are no comments for property IdProveedor in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.NumeroFacturaCompra2">
-	<summary>
-There are no comments for property NumeroFacturaCompra2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.EsBienDeUso">
-	<summary>
-There are no comments for property EsBienDeUso in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdCuenta">
-	<summary>
-There are no comments for property IdCuenta in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Cumplido">
-	<summary>
-There are no comments for property Cumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Usuario1">
-	<summary>
-There are no comments for property Usuario1 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaIngreso1">
-	<summary>
-There are no comments for property FechaIngreso1 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto1">
-	<summary>
-There are no comments for property ArchivoAdjunto1 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto2">
-	<summary>
-There are no comments for property ArchivoAdjunto2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto3">
-	<summary>
-There are no comments for property ArchivoAdjunto3 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto4">
-	<summary>
-There are no comments for property ArchivoAdjunto4 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto5">
-	<summary>
-There are no comments for property ArchivoAdjunto5 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto6">
-	<summary>
-There are no comments for property ArchivoAdjunto6 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto7">
-	<summary>
-There are no comments for property ArchivoAdjunto7 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto8">
-	<summary>
-There are no comments for property ArchivoAdjunto8 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto9">
-	<summary>
-There are no comments for property ArchivoAdjunto9 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ArchivoAdjunto10">
-	<summary>
-There are no comments for property ArchivoAdjunto10 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Descripcionmanual">
-	<summary>
-There are no comments for property Descripcionmanual in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.EnviarEmail">
-	<summary>
-There are no comments for property EnviarEmail in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdRequerimientoOriginal">
-	<summary>
-There are no comments for property IdRequerimientoOriginal in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdDetalleRequerimientoOriginal">
-	<summary>
-There are no comments for property IdDetalleRequerimientoOriginal in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdOrigenTransmision">
-	<summary>
-There are no comments for property IdOrigenTransmision in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdLlamadoAProveedor">
-	<summary>
-There are no comments for property IdLlamadoAProveedor in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaLlamadoAProveedor">
-	<summary>
-There are no comments for property FechaLlamadoAProveedor in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdLlamadoRegistradoPor">
-	<summary>
-There are no comments for property IdLlamadoRegistradoPor in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaRegistracionLlamada">
-	<summary>
-There are no comments for property FechaRegistracionLlamada in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ObservacionesLlamada">
-	<summary>
-There are no comments for property ObservacionesLlamada in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdAutorizoCumplido">
-	<summary>
-There are no comments for property IdAutorizoCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdDioPorCumplido">
-	<summary>
-There are no comments for property IdDioPorCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaDadoPorCumplido">
-	<summary>
-There are no comments for property FechaDadoPorCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.ObservacionesCumplido">
-	<summary>
-There are no comments for property ObservacionesCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdAproboAlmacen">
-	<summary>
-There are no comments for property IdAproboAlmacen in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdEquipo">
-	<summary>
-There are no comments for property IdEquipo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaEntrega_Tel">
-	<summary>
-There are no comments for property FechaEntrega_Tel in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.PRESTOConcepto">
-	<summary>
-There are no comments for property PRESTOConcepto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Costo">
-	<summary>
-There are no comments for property Costo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.OrigenDescripcion">
-	<summary>
-There are no comments for property OrigenDescripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.TipoDesignacion">
-	<summary>
-There are no comments for property TipoDesignacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdLiberoParaCompras">
-	<summary>
-There are no comments for property IdLiberoParaCompras in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaLiberacionParaCompras">
-	<summary>
-There are no comments for property FechaLiberacionParaCompras in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Recepcionado">
-	<summary>
-There are no comments for property Recepcionado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Pagina">
-	<summary>
-There are no comments for property Pagina in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Item">
-	<summary>
-There are no comments for property Item in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Figura">
-	<summary>
-There are no comments for property Figura in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.CodigoDistribucion">
-	<summary>
-There are no comments for property CodigoDistribucion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdEquipoDestino">
-	<summary>
-There are no comments for property IdEquipoDestino in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.Entregado">
-	<summary>
-There are no comments for property Entregado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.FechaAsignacionComprador">
-	<summary>
-There are no comments for property FechaAsignacionComprador in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.MoP">
-	<summary>
-There are no comments for property MoP in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdDetalleObraDestino">
-	<summary>
-There are no comments for property IdDetalleObraDestino in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.DetalleRequerimientos.IdPresupuestoObraRubro">
-	<summary>
-There are no comments for property IdPresupuestoObraRubro in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.DetalleRequerimientos">
-	<summary>
-There are no comments for wDemoWilliamsModel.DetalleRequerimientos in the schema.
-</summary>
-	<KeyProperties>
-IdDetalleRequerimiento
-</KeyProperties>
-</member><member name="M:wDemoWilliamsModel.Requerimientos.CreateRequerimientos(System.Int32)">
-	<summary>
-Create a new Requerimientos object.
-</summary>
-	<param name="idRequerimiento">Initial value of IdRequerimiento.</param>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdRequerimiento">
-	<summary>
-There are no comments for property IdRequerimiento in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.NumeroRequerimiento">
-	<summary>
-There are no comments for property NumeroRequerimiento in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaRequerimiento">
-	<summary>
-There are no comments for property FechaRequerimiento in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.LugarEntrega">
-	<summary>
-There are no comments for property LugarEntrega in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Observaciones">
-	<summary>
-There are no comments for property Observaciones in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdObra">
-	<summary>
-There are no comments for property IdObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdCentroCosto">
-	<summary>
-There are no comments for property IdCentroCosto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdSolicito">
-	<summary>
-There are no comments for property IdSolicito in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdSector">
-	<summary>
-There are no comments for property IdSector in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.MontoPrevisto">
-	<summary>
-There are no comments for property MontoPrevisto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdComprador">
-	<summary>
-There are no comments for property IdComprador in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Aprobo">
-	<summary>
-There are no comments for property Aprobo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaAprobacion">
-	<summary>
-There are no comments for property FechaAprobacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.MontoParaCompra">
-	<summary>
-There are no comments for property MontoParaCompra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Cumplido">
-	<summary>
-There are no comments for property Cumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Consorcial">
-	<summary>
-There are no comments for property Consorcial in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.UsuarioAnulacion">
-	<summary>
-There are no comments for property UsuarioAnulacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaAnulacion">
-	<summary>
-There are no comments for property FechaAnulacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.MotivoAnulacion">
-	<summary>
-There are no comments for property MotivoAnulacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.EnviarEmail">
-	<summary>
-There are no comments for property EnviarEmail in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdRequerimientoOriginal">
-	<summary>
-There are no comments for property IdRequerimientoOriginal in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdOrigenTransmision">
-	<summary>
-There are no comments for property IdOrigenTransmision in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdAutorizoCumplido">
-	<summary>
-There are no comments for property IdAutorizoCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdDioPorCumplido">
-	<summary>
-There are no comments for property IdDioPorCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaDadoPorCumplido">
-	<summary>
-There are no comments for property FechaDadoPorCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.ObservacionesCumplido">
-	<summary>
-There are no comments for property ObservacionesCumplido in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdMoneda">
-	<summary>
-There are no comments for property IdMoneda in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Detalle">
-	<summary>
-There are no comments for property Detalle in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.DirectoACompras">
-	<summary>
-There are no comments for property DirectoACompras in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdAutorizoDirectoACompras">
-	<summary>
-There are no comments for property IdAutorizoDirectoACompras in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.PRESTOContrato">
-	<summary>
-There are no comments for property PRESTOContrato in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Confirmado">
-	<summary>
-There are no comments for property Confirmado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaImportacionTransmision">
-	<summary>
-There are no comments for property FechaImportacionTransmision in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdEquipoDestino">
-	<summary>
-There are no comments for property IdEquipoDestino in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Impresa">
-	<summary>
-There are no comments for property Impresa in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Recepcionado">
-	<summary>
-There are no comments for property Recepcionado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Entregado">
-	<summary>
-There are no comments for property Entregado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.TipoRequerimiento">
-	<summary>
-There are no comments for property TipoRequerimiento in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdOrdenTrabajo">
-	<summary>
-There are no comments for property IdOrdenTrabajo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Aprobo2">
-	<summary>
-There are no comments for property Aprobo2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaAprobacion2">
-	<summary>
-There are no comments for property FechaAprobacion2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdTipoCompra">
-	<summary>
-There are no comments for property IdTipoCompra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdImporto">
-	<summary>
-There are no comments for property IdImporto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaLlegadaImportacion">
-	<summary>
-There are no comments for property FechaLlegadaImportacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.CircuitoFirmasCompleto">
-	<summary>
-There are no comments for property CircuitoFirmasCompleto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdCuentaPresupuesto">
-	<summary>
-There are no comments for property IdCuentaPresupuesto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.MesPresupuesto">
-	<summary>
-There are no comments for property MesPresupuesto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.RequisitosSeguridad">
-	<summary>
-There are no comments for property RequisitosSeguridad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.Adjuntos">
-	<summary>
-There are no comments for property Adjuntos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.ConfirmadoPorWeb">
-	<summary>
-There are no comments for property ConfirmadoPorWeb in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.DetalleImputacion">
-	<summary>
-There are no comments for property DetalleImputacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdUsuarioDeslibero">
-	<summary>
-There are no comments for property IdUsuarioDeslibero in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaDesliberacion">
-	<summary>
-There are no comments for property FechaDesliberacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.NumeradorDesliberaciones">
-	<summary>
-There are no comments for property NumeradorDesliberaciones in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.IdUsuarioEliminoFirmas">
-	<summary>
-There are no comments for property IdUsuarioEliminoFirmas in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.FechaEliminacionFirmas">
-	<summary>
-There are no comments for property FechaEliminacionFirmas in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.NumeradorEliminacionesFirmas">
-	<summary>
-There are no comments for property NumeradorEliminacionesFirmas in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.NumeradorModificaciones">
-	<summary>
-There are no comments for property NumeradorModificaciones in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Requerimientos.ParaTaller">
-	<summary>
-There are no comments for property ParaTaller in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.Requerimientos">
-	<summary>
-There are no comments for wDemoWilliamsModel.Requerimientos in the schema.
-</summary>
-	<KeyProperties>
-IdRequerimiento
-</KeyProperties>
-</member><member name="M:wDemoWilliamsModel.ControlesCalidad.CreateControlesCalidad(System.Int32)">
-	<summary>
-Create a new ControlesCalidad object.
-</summary>
-	<param name="idControlCalidad">Initial value of IdControlCalidad.</param>
-</member><member name="P:wDemoWilliamsModel.ControlesCalidad.IdControlCalidad">
-	<summary>
-There are no comments for property IdControlCalidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.ControlesCalidad.Descripcion">
-	<summary>
-There are no comments for property Descripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.ControlesCalidad.Inspeccion">
-	<summary>
-There are no comments for property Inspeccion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.ControlesCalidad.Abreviatura">
-	<summary>
-There are no comments for property Abreviatura in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.ControlesCalidad.Detalle">
-	<summary>
-There are no comments for property Detalle in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.ControlesCalidad">
-	<summary>
-There are no comments for wDemoWilliamsModel.ControlesCalidad in the schema.
-</summary>
-	<KeyProperties>
-IdControlCalidad
-</KeyProperties>
-</member><member name="M:wDemoWilliamsModel.Obras.CreateObras(System.Int32)">
-	<summary>
-Create a new Obras object.
-</summary>
-	<param name="idObra">Initial value of IdObra.</param>
-</member><member name="P:wDemoWilliamsModel.Obras.IdObra">
-	<summary>
-There are no comments for property IdObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.NumeroObra">
-	<summary>
-There are no comments for property NumeroObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdCliente">
-	<summary>
-There are no comments for property IdCliente in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.FechaInicio">
-	<summary>
-There are no comments for property FechaInicio in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.FechaFinalizacion">
-	<summary>
-There are no comments for property FechaFinalizacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Observaciones">
-	<summary>
-There are no comments for property Observaciones in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.FechaEntrega">
-	<summary>
-There are no comments for property FechaEntrega in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Descripcion">
-	<summary>
-There are no comments for property Descripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdJefe">
-	<summary>
-There are no comments for property IdJefe in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.TipoObra">
-	<summary>
-There are no comments for property TipoObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.HorasEstimadas">
-	<summary>
-There are no comments for property HorasEstimadas in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Consorcial">
-	<summary>
-There are no comments for property Consorcial in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.EnviarEmail">
-	<summary>
-There are no comments for property EnviarEmail in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Activa">
-	<summary>
-There are no comments for property Activa in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ParaInformes">
-	<summary>
-There are no comments for property ParaInformes in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdUnidadOperativa">
-	<summary>
-There are no comments for property IdUnidadOperativa in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Jerarquia">
-	<summary>
-There are no comments for property Jerarquia in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto1">
-	<summary>
-There are no comments for property ArchivoAdjunto1 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto2">
-	<summary>
-There are no comments for property ArchivoAdjunto2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto3">
-	<summary>
-There are no comments for property ArchivoAdjunto3 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto4">
-	<summary>
-There are no comments for property ArchivoAdjunto4 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto5">
-	<summary>
-There are no comments for property ArchivoAdjunto5 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto6">
-	<summary>
-There are no comments for property ArchivoAdjunto6 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto7">
-	<summary>
-There are no comments for property ArchivoAdjunto7 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto8">
-	<summary>
-There are no comments for property ArchivoAdjunto8 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto9">
-	<summary>
-There are no comments for property ArchivoAdjunto9 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ArchivoAdjunto10">
-	<summary>
-There are no comments for property ArchivoAdjunto10 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.GeneraReservaStock">
-	<summary>
-There are no comments for property GeneraReservaStock in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdGrupoObra">
-	<summary>
-There are no comments for property IdGrupoObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdArticuloAsociado">
-	<summary>
-There are no comments for property IdArticuloAsociado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Observaciones2">
-	<summary>
-There are no comments for property Observaciones2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Observaciones3">
-	<summary>
-There are no comments for property Observaciones3 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdSubjefe">
-	<summary>
-There are no comments for property IdSubjefe in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Direccion">
-	<summary>
-There are no comments for property Direccion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdProvincia">
-	<summary>
-There are no comments for property IdProvincia in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdPais">
-	<summary>
-There are no comments for property IdPais in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.CodigoPostal">
-	<summary>
-There are no comments for property CodigoPostal in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Telefono">
-	<summary>
-There are no comments for property Telefono in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.LugarPago">
-	<summary>
-There are no comments for property LugarPago in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Responsable">
-	<summary>
-There are no comments for property Responsable in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Horario">
-	<summary>
-There are no comments for property Horario in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Turnos">
-	<summary>
-There are no comments for property Turnos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Operarios">
-	<summary>
-There are no comments for property Operarios in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Zona">
-	<summary>
-There are no comments for property Zona in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.Jurisdiccion">
-	<summary>
-There are no comments for property Jurisdiccion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdLocalidad">
-	<summary>
-There are no comments for property IdLocalidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdCuentaContableFF">
-	<summary>
-There are no comments for property IdCuentaContableFF in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ValorObra">
-	<summary>
-There are no comments for property ValorObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdMonedaValorObra">
-	<summary>
-There are no comments for property IdMonedaValorObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.IdJefeRegional">
-	<summary>
-There are no comments for property IdJefeRegional in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.EsPlantaDeProduccionInterna">
-	<summary>
-There are no comments for property EsPlantaDeProduccionInterna in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ActivarPresupuestoObra">
-	<summary>
-There are no comments for property ActivarPresupuestoObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.ProximoNumeroAutorizacionCompra">
-	<summary>
-There are no comments for property ProximoNumeroAutorizacionCompra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.AuxiliarDeMateriales">
-	<summary>
-There are no comments for property AuxiliarDeMateriales in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Obras.DiasLiquidacionCertificados">
-	<summary>
-There are no comments for property DiasLiquidacionCertificados in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.Obras">
-	<summary>
-There are no comments for wDemoWilliamsModel.Obras in the schema.
-</summary>
-	<KeyProperties>
-IdObra
-</KeyProperties>
-</member><member name="M:wDemoWilliamsModel.Sectores.CreateSectores(System.Int32)">
-	<summary>
-Create a new Sectores object.
-</summary>
-	<param name="idSector">Initial value of IdSector.</param>
-</member><member name="P:wDemoWilliamsModel.Sectores.IdSector">
-	<summary>
-There are no comments for property IdSector in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Sectores.Descripcion">
-	<summary>
-There are no comments for property Descripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Sectores.SectorDeObra">
-	<summary>
-There are no comments for property SectorDeObra in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Sectores.IdEncargado">
-	<summary>
-There are no comments for property IdEncargado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Sectores.SeUsaEnPresupuestos">
-	<summary>
-There are no comments for property SeUsaEnPresupuestos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Sectores.OrdenPresentacion">
-	<summary>
-There are no comments for property OrdenPresentacion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Sectores.EnviarEmail">
-	<summary>
-There are no comments for property EnviarEmail in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.Sectores">
-	<summary>
-There are no comments for wDemoWilliamsModel.Sectores in the schema.
-</summary>
-	<KeyProperties>
-IdSector
-</KeyProperties>
-</member><member name="M:wDemoWilliamsModel.Unidades.CreateUnidades(System.Int32)">
-	<summary>
-Create a new Unidades object.
-</summary>
-	<param name="idUnidad">Initial value of IdUnidad.</param>
-</member><member name="P:wDemoWilliamsModel.Unidades.IdUnidad">
-	<summary>
-There are no comments for property IdUnidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Unidades.Descripcion">
-	<summary>
-There are no comments for property Descripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Unidades.Abreviatura">
-	<summary>
-There are no comments for property Abreviatura in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Unidades.CodigoAFIP">
-	<summary>
-There are no comments for property CodigoAFIP in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Unidades.UnidadesPorPack">
-	<summary>
-There are no comments for property UnidadesPorPack in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Unidades.TaraEnKg">
-	<summary>
-There are no comments for property TaraEnKg in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.Unidades">
-	<summary>
-There are no comments for wDemoWilliamsModel.Unidades in the schema.
-</summary>
-	<KeyProperties>
-IdUnidad
-</KeyProperties>
-</member><member name="M:wDemoWilliamsModel.Clientes.CreateClientes(System.Int32)">
-	<summary>
-Create a new Clientes object.
-</summary>
-	<param name="idCliente">Initial value of IdCliente.</param>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdCliente">
-	<summary>
-There are no comments for property IdCliente in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.RazonSocial">
-	<summary>
-There are no comments for property RazonSocial in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Direccion">
-	<summary>
-There are no comments for property Direccion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdLocalidad">
-	<summary>
-There are no comments for property IdLocalidad in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.CodigoPostal">
-	<summary>
-There are no comments for property CodigoPostal in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdProvincia">
-	<summary>
-There are no comments for property IdProvincia in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdPais">
-	<summary>
-There are no comments for property IdPais in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Telefono">
-	<summary>
-There are no comments for property Telefono in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Fax">
-	<summary>
-There are no comments for property Fax in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Email">
-	<summary>
-There are no comments for property Email in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Cuit">
-	<summary>
-There are no comments for property Cuit in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdCodigoIva">
-	<summary>
-There are no comments for property IdCodigoIva in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.FechaAlta">
-	<summary>
-There are no comments for property FechaAlta in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Contacto">
-	<summary>
-There are no comments for property Contacto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.EnviarEmail">
-	<summary>
-There are no comments for property EnviarEmail in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.DireccionEntrega">
-	<summary>
-There are no comments for property DireccionEntrega in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdLocalidadEntrega">
-	<summary>
-There are no comments for property IdLocalidadEntrega in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdProvinciaEntrega">
-	<summary>
-There are no comments for property IdProvinciaEntrega in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.CodigoCliente">
-	<summary>
-There are no comments for property CodigoCliente in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdCuenta">
-	<summary>
-There are no comments for property IdCuenta in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Saldo">
-	<summary>
-There are no comments for property Saldo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SaldoDocumentos">
-	<summary>
-There are no comments for property SaldoDocumentos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Vendedor1">
-	<summary>
-There are no comments for property Vendedor1 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.CreditoMaximo">
-	<summary>
-There are no comments for property CreditoMaximo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IGCondicion">
-	<summary>
-There are no comments for property IGCondicion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdCondicionVenta">
-	<summary>
-There are no comments for property IdCondicionVenta in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdMoneda">
-	<summary>
-There are no comments for property IdMoneda in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IBNumeroInscripcion">
-	<summary>
-There are no comments for property IBNumeroInscripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IBCondicion">
-	<summary>
-There are no comments for property IBCondicion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.TipoCliente">
-	<summary>
-There are no comments for property TipoCliente in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Codigo">
-	<summary>
-There are no comments for property Codigo in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdListaPrecios">
-	<summary>
-There are no comments for property IdListaPrecios in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdIBCondicionPorDefecto">
-	<summary>
-There are no comments for property IdIBCondicionPorDefecto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Confirmado">
-	<summary>
-There are no comments for property Confirmado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.CodigoPresto">
-	<summary>
-There are no comments for property CodigoPresto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Observaciones">
-	<summary>
-There are no comments for property Observaciones in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Importaciones_NumeroInscripcion">
-	<summary>
-There are no comments for property Importaciones_NumeroInscripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Importaciones_DenominacionInscripcion">
-	<summary>
-There are no comments for property Importaciones_DenominacionInscripcion in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdCuentaMonedaExt">
-	<summary>
-There are no comments for property IdCuentaMonedaExt in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Cobrador">
-	<summary>
-There are no comments for property Cobrador in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.Auxiliar">
-	<summary>
-There are no comments for property Auxiliar in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdIBCondicionPorDefecto2">
-	<summary>
-There are no comments for property IdIBCondicionPorDefecto2 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdIBCondicionPorDefecto3">
-	<summary>
-There are no comments for property IdIBCondicionPorDefecto3 in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdEstado">
-	<summary>
-There are no comments for property IdEstado in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.NombreFantasia">
-	<summary>
-There are no comments for property NombreFantasia in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.EsAgenteRetencionIVA">
-	<summary>
-There are no comments for property EsAgenteRetencionIVA in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.BaseMinimaParaPercepcionIVA">
-	<summary>
-There are no comments for property BaseMinimaParaPercepcionIVA in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.PorcentajePercepcionIVA">
-	<summary>
-There are no comments for property PorcentajePercepcionIVA in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdUsuarioIngreso">
-	<summary>
-There are no comments for property IdUsuarioIngreso in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.FechaIngreso">
-	<summary>
-There are no comments for property FechaIngreso in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdUsuarioModifico">
-	<summary>
-There are no comments for property IdUsuarioModifico in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.FechaModifico">
-	<summary>
-There are no comments for property FechaModifico in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.PorcentajeIBDirecto">
-	<summary>
-There are no comments for property PorcentajeIBDirecto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.FechaInicioVigenciaIBDirecto">
-	<summary>
-There are no comments for property FechaInicioVigenciaIBDirecto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.FechaFinVigenciaIBDirecto">
-	<summary>
-There are no comments for property FechaFinVigenciaIBDirecto in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.GrupoIIBB">
-	<summary>
-There are no comments for property GrupoIIBB in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdBancoDebito">
-	<summary>
-There are no comments for property IdBancoDebito in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.CBU">
-	<summary>
-There are no comments for property CBU in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.PorcentajeIBDirectoCapital">
-	<summary>
-There are no comments for property PorcentajeIBDirectoCapital in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.FechaInicioVigenciaIBDirectoCapital">
-	<summary>
-There are no comments for property FechaInicioVigenciaIBDirectoCapital in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.FechaFinVigenciaIBDirectoCapital">
-	<summary>
-There are no comments for property FechaFinVigenciaIBDirectoCapital in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.GrupoIIBBCapital">
-	<summary>
-There are no comments for property GrupoIIBBCapital in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdBancoGestionador">
-	<summary>
-There are no comments for property IdBancoGestionador in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.ExpresionRegularNoAgruparFacturasConEstosVendedores">
-	<summary>
-There are no comments for property ExpresionRegularNoAgruparFacturasConEstosVendedores in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.ExigeDatosCompletosEnCartaDePorteQueLoUse">
-	<summary>
-There are no comments for property ExigeDatosCompletosEnCartaDePorteQueLoUse in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.DireccionDeCorreos">
-	<summary>
-There are no comments for property DireccionDeCorreos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdLocalidadDeCorreos">
-	<summary>
-There are no comments for property IdLocalidadDeCorreos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IdProvinciaDeCorreos">
-	<summary>
-There are no comments for property IdProvinciaDeCorreos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.CodigoPostalDeCorreos">
-	<summary>
-There are no comments for property CodigoPostalDeCorreos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.ObservacionesDeCorreos">
-	<summary>
-There are no comments for property ObservacionesDeCorreos in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.IncluyeTarifaEnFactura">
-	<summary>
-There are no comments for property IncluyeTarifaEnFactura in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SeLeFacturaCartaPorteComoTitular">
-	<summary>
-There are no comments for property SeLeFacturaCartaPorteComoTitular in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SeLeFacturaCartaPorteComoIntermediario">
-	<summary>
-There are no comments for property SeLeFacturaCartaPorteComoIntermediario in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SeLeFacturaCartaPorteComoRemcomercial">
-	<summary>
-There are no comments for property SeLeFacturaCartaPorteComoRemcomercial in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SeLeFacturaCartaPorteComoCorredor">
-	<summary>
-There are no comments for property SeLeFacturaCartaPorteComoCorredor in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SeLeFacturaCartaPorteComoDestinatario">
-	<summary>
-There are no comments for property SeLeFacturaCartaPorteComoDestinatario in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SeLeFacturaCartaPorteComoDestinatarioExportador">
-	<summary>
-There are no comments for property SeLeFacturaCartaPorteComoDestinatarioExportador in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.SeLeDerivaSuFacturaAlCorredorDeLaCarta">
-	<summary>
-There are no comments for property SeLeDerivaSuFacturaAlCorredorDeLaCarta in the schema.
-</summary>
-</member><member name="P:wDemoWilliamsModel.Clientes.HabilitadoParaCartaPorte">
-	<summary>
-There are no comments for property HabilitadoParaCartaPorte in the schema.
-</summary>
-</member><member name="T:wDemoWilliamsModel.Clientes">
-	<summary>
-There are no comments for wDemoWilliamsModel.Clientes in the schema.
-</summary>
-	<KeyProperties>
-IdCliente
-</KeyProperties>
-</member><member name="M:Pronto.ERP.Bll.ComprobanteProveedorManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
-	<summary>
- ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
- </summary>
-	<param name="SC"></param>
-	<param name="NumeroDePuntoVenta"></param>
-	<returns></returns>
-	<remarks></remarks>
 </member>
 </members>
 </doc>
