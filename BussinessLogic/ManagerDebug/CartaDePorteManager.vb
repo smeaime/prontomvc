@@ -10205,6 +10205,25 @@ Public Class CartaDePorteManager
             regexReplace(docText, "#LeyendaSyngenta#", SyngentaLeyenda)
 
 
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13220
+            '            - Generar Facturas separadas por acopio automáticamente y en la impresión agregar una
+            '  leyenda luego del detalle con el nombre del mismo
+            '            Con respecto a la impresión, prevalece siempre la del facturar a.
+            'Si tiene ese dato, no hay que darle importancia al de la CP propiamente dicha, tanto para filtrar la carta, como para la impresión.
+            'Con respecto al "cruce" de acopios, yo les pregunte y me dijeron que no es posible, que las cartas de un cliente nunca van a otro.
+
+
+            Dim LeyendaAcopio = ""
+            Try
+                LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+
+
+            regexReplace(docText, "#LeyendaAcopios#", LeyendaAcopio)
+
+            Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
 
             'regexReplace(docText, "#Observaciones#", oFac.Observaciones)
             'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
@@ -10481,6 +10500,7 @@ Public Class CartaDePorteManager
 
 
 
+
             ''Make a copy of the 2nd row (assumed that the 1st row is header) http://patrickyong.net/tags/openxml/
             'Dim rows = table.Elements(Of Wordprocessing.TableRow)()
             For Each i As FacturaItem In oFac.Detalles
@@ -10498,7 +10518,9 @@ Public Class CartaDePorteManager
                         '///////////////////////////
 
 
-                        CeldaReemplazosFactura_Williams(dupRow, CeldaColumna, i, oFac.Cliente.IncluyeTarifaEnFactura = "SI", SC, oFac.Id)
+
+
+                        CeldaReemplazosFactura_Williams(dupRow, CeldaColumna, i, oFac.Cliente.IncluyeTarifaEnFactura = "SI", SC, oFac.Id, EsElevacionLDC)
 
 
                         '///////////////////////////
@@ -10992,6 +11014,7 @@ Public Class CartaDePorteManager
 
 
 
+                Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
 
 
                 ''Make a copy of the 2nd row (assumed that the 1st row is header) http://patrickyong.net/tags/openxml/
@@ -11010,7 +11033,7 @@ Public Class CartaDePorteManager
                             'renglon 1
                             '///////////////////////////
 
-                            CeldaReemplazosFactura_Williams(dupRow, CeldaColumna, i, oFac.Cliente.IncluyeTarifaEnFactura = "SI", SC, oFac.Id)
+                            CeldaReemplazosFactura_Williams(dupRow, CeldaColumna, i, oFac.Cliente.IncluyeTarifaEnFactura = "SI", SC, oFac.Id, EsElevacionLDC)
 
 
                             '///////////////////////////
@@ -11129,7 +11152,7 @@ Public Class CartaDePorteManager
                                                                                 Run(New DocumentFormat.OpenXml.Wordprocessing.Break() With {.Type = DocumentFormat.OpenXml.Wordprocessing.BreakValues.Page})))
     End Sub
 
-    Shared Sub CeldaReemplazosFactura_Williams(ByRef row As Wordprocessing.TableRow, ByVal numcelda As Integer, ByVal itemFactura As Pronto.ERP.BO.FacturaItem, IncluyeTarifaEnFactura As Boolean, SC As String, idfactura As Integer)
+    Shared Sub CeldaReemplazosFactura_Williams(ByRef row As Wordprocessing.TableRow, ByVal numcelda As Integer, ByVal itemFactura As Pronto.ERP.BO.FacturaItem, IncluyeTarifaEnFactura As Boolean, SC As String, idfactura As Integer, EsElevacionLDC As Boolean)
 
 
         'METODO 2
@@ -11208,6 +11231,13 @@ Public Class CartaDePorteManager
         posx = InStr(mvarArticulo, "__")
         If posx > 2 Then mvarArticulo = Left(mvarArticulo, posx - 2)
         mvarArticulo = Trim(mvarArticulo)
+
+
+
+
+        If EsElevacionLDC Then mvarArticulo = "ELEVACION " & mvarArticulo
+
+
         regexReplace(texto, "#ObsItem#", mvarArticulo.Replace("&", ""))
 
 
@@ -11222,22 +11252,7 @@ Public Class CartaDePorteManager
 
         '///////////////////////////////////////////
 
-        'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13220
-        '            - Generar Facturas separadas por acopio automáticamente y en la impresión agregar una
-        '  leyenda luego del detalle con el nombre del mismo
-        '            Con respecto a la impresión, prevalece siempre la del facturar a.
-        'Si tiene ese dato, no hay que darle importancia al de la CP propiamente dicha, tanto para filtrar la carta, como para la impresión.
-        'Con respecto al "cruce" de acopios, yo les pregunte y me dijeron que no es posible, que las cartas de un cliente nunca van a otro.
 
-
-        Dim LeyendaAcopio = ""
-        Try
-            LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(idfactura, SC) 'oFac.Cliente.AutorizacionSyngenta
-        Catch ex As Exception
-            ErrHandler.WriteError(ex)
-        End Try
-
-        regexReplace(texto, "#LeyendaAcopios#", LeyendaAcopio)
 
         'si se hizo por Pronto, mostrar las observaciones al final
         'pero cómo sé? -mostrar si no tiene periodo
@@ -16273,10 +16288,12 @@ Public Class LogicaFacturacion
         '        __________________________()
 
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
 
         Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
-        Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+        Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
 
         Dim acopios = (From x In oListaCDP
@@ -16285,7 +16302,7 @@ Public Class LogicaFacturacion
                         }).ToList
 
 
-        Dim ccc = acopios.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6, x.AcopioFacturarleA}).Where(Function(x) If(x, 0) <> 0).Distinct.ToList
+        Dim ccc As List(Of Integer) = acopios.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6, x.AcopioFacturarleA}).Where(Function(x) If(x, 0) <> 0).Select(Function(x) If(x, 0)).Distinct.ToList
 
         'Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
         'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio1
@@ -16299,31 +16316,36 @@ Public Class LogicaFacturacion
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14851
 
 
-
-
         Dim s = ""
-        If acopios.Count > 1 Then
+
+
+
+        If ccc.Count > 1 Then
             'Return vbCrLf + "Acopios id" + nombreacopio(acopios(0), SC)
-            s = nombreacopio(ccc(0), SC)
+            s = "ACOPIO " & nombreacopio(ccc(0), SC)
 
+            Dim id As Integer = ccc(0)
+            Dim o = db.CartasPorteAcopios.Where(Function(x) x.IdAcopio = id).FirstOrDefault
 
-            Dim o = db.CartasPorteAcopios1.Where(Function(x) x.IdAcopio = ccc(0)).First
-
-            If o.IdCliente = 2775 And EsDeExportacion(idfactura, SC) Then s = "ELEVACION "
-        Else
+        ElseIf ccc.Count = 1 Then
+            s = "ACOPIO " & nombreacopio(ccc(0), SC)
             'Return ""
         End If
+
+        ' esto se lo paso al OBSITEM
+        ' If oFac.IdCliente = 2775 And EsDeExportacion(idfactura, SC) Then s = "ELEVACION " & s
 
         Return s
 
     End Function
 
 
-    Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+    Public Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
         Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
-        Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+        Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
         Dim expo = From x In oListaCDP
                     Where x.Exporta = "SI"
@@ -21382,7 +21404,8 @@ Public Class LogicaImportador
 
 
     End Function
-    Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
+
+    Public Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
                                     txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
                                     txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList, _
@@ -21564,13 +21587,23 @@ Public Class LogicaImportador
             '/////////////////////////////////////////
             '/////////////////////////////////////////
             '/////////////////////////////////////////
+
+            'verificar si la razon social no es ASOCIACION DE COOPERATIVAS ARGENTINAS COOPERATIVA LIMITADA
+            'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14744
+            'Creo que tienen razón, según la consulta 13220
+            ' Pegatina: las cartas de porte de ACA y LDC que ingresen por pegatina, ponerles siempre acopio "Otros"
+
+            Dim idaca = 10
+            Dim idldc = 2775
+
+
             Try
 
-                If (.Titular > 0 AndAlso InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0) _
+                If (.Titular > 0 AndAlso (.Titular = idaca Or .Titular = idldc Or InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0)) _
                     Or _
-                    (.CuentaOrden1 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0) _
+                    (.CuentaOrden1 > 0 AndAlso (.CuentaOrden1 = idaca Or .CuentaOrden1 = idldc Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0)) _
                     Or _
-                    (.CuentaOrden2 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0) Then
+                    (.CuentaOrden2 > 0 AndAlso (.CuentaOrden2 = idaca Or .CuentaOrden2 = idldc Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0)) Then
                     Dim excep = CartaDePorteManager.excepcionesAcopios(SC)
 
                     'Const otros = Array.FindIndex(excep, AddressOf EsOTROS)
@@ -21583,7 +21616,7 @@ Public Class LogicaImportador
                     Next
 
 
-                    .EnumSyngentaDivision = excep(otros).desc 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
+                    .EnumSyngentaDivision = excep(otros).desc
                     .Acopio1 = excep(otros).idacopio
                     .Acopio2 = excep(otros).idacopio
                     .Acopio3 = excep(otros).idacopio
@@ -22063,7 +22096,7 @@ Public Class LogicaImportador
 
 
 
-    Shared Function TraerExcelDeBase(SC, m_IdMaestro) As Data.DataTable
+    Public Shared Function TraerExcelDeBase(SC As String, ByRef m_IdMaestro As Integer) As Data.DataTable
 
 
         'Dim dtBase = ExcelImportadorManager.TraerMetadata(SC)

@@ -200,12 +200,25 @@ namespace ProntoMVC.Tests
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             // buscar factura de LDC y de ACA
-            var IdFactura = db.Facturas.OrderByDescending(x=>x.IdFactura).Where(x=>x.IdCliente==2775).FirstOrDefault().IdFactura;
+            int IdFactura = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                             where c.Exporta == "SI" && f.IdCliente == 2775
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+
+
+            //var IdFactura = db.Facturas.OrderByDescending(x=>x.IdFactura)
+            //                .Where(x=>x)
+            //                .Where(x=>x.IdCliente==2775).FirstOrDefault().IdFactura;
+
+            // buscar una de exportacion de LDC
+
 
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
-
-            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
         }
 
 
@@ -236,11 +249,20 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void Pegatina_14744()
         {
-            string archivoExcel;
+            string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
+            int m_IdMaestro = 0;
 
-          //  FormatearExcelImportadoEnDLL(archivoExcel)
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
 
-          //proximoerror(TraerExcelDeBase(SC, m_IdMaestro))
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
 
         }
 
@@ -255,8 +277,8 @@ namespace ProntoMVC.Tests
             LinqCartasPorteDataContext db = null;
 
 
-            var s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" +  ProntoFuncionesGenerales.FechaANSI(  new DateTime(2014, 1, 1)  )    +
-                                 "'     AND   '" + ProntoFuncionesGenerales.FechaANSI( new DateTime(2014, 1, 1)) + "' )";
+            var s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" + ProntoFuncionesGenerales.FechaANSI(new DateTime(2014, 1, 1)) +
+                                 "'     AND   '" + ProntoFuncionesGenerales.FechaANSI(new DateTime(2014, 1, 1)) + "' )";
             var dt = EntidadManager.ExecDinamico(SC, CartaDePorteManager.strSQLsincronismo() + " WHERE " + s);
 
 
