@@ -1181,12 +1181,18 @@ Namespace Pronto.ERP.Bll
                     Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
                     Dim oCliente As linqCliente = (From i In db.linqClientes Where i.IdCliente = id).SingleOrDefault
 
+                    'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+                    'Dim oCliente As ProntoMVC.Data.Models.Cliente = (From i In db.Clientes Where i.IdCliente = id).SingleOrDefault
+
                     Try
 
 
                         .ExpresionRegularNoAgruparFacturasConEstosVendedores = oCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores
                         .ExigeDatosCompletosEnCartaDePorteQueLoUse = oCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse
                         .IncluyeTarifaEnFactura = oCliente.IncluyeTarifaEnFactura
+
+                        .IdCondicionCompra = oCliente.IdCondicionVenta
+                        .IdCondicionVenta = oCliente.IdCondicionVenta
 
 
                         .DireccionDeCorreos = oCliente.DireccionDeCorreos
@@ -1409,6 +1415,7 @@ Namespace Pronto.ERP.Bll
                     .EsAcondicionadoraDeCartaPorte = myCliente.EsAcondicionadoraDeCartaPorte
 
 
+                    .IdCondicionVenta = myCliente.IdCondicionCompra
 
 
                     .Contactos = myCliente.Contactos

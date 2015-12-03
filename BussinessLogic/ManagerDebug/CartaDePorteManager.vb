@@ -19804,6 +19804,7 @@ Public Class PuntoVentaWilliams
             l.Add(a)
         Next
 
+        dt.Columns.Add("Nombre")
         dt.Rows.Clear()
         dt.Rows.Add()
         dt.Rows.Add()
@@ -19813,6 +19814,12 @@ Public Class PuntoVentaWilliams
         dt.Rows(1).Item("PuntoVenta") = 2
         dt.Rows(2).Item("PuntoVenta") = 3
         dt.Rows(3).Item("PuntoVenta") = 4
+
+
+        dt.Rows(0).Item("Nombre") = "1 - Buenos Aires"
+        dt.Rows(1).Item("Nombre") = "2 - San Lorenzo"
+        dt.Rows(2).Item("Nombre") = "3 - Arroyo Seco"
+        dt.Rows(3).Item("Nombre") = "4 - Bahía Blanca"
 
 
         'traer los depositos?  pv -> deposito(sucursal) -> obraocentrocosto
