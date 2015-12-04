@@ -241,7 +241,10 @@ namespace ProntoMVC.Tests
             }
 
             CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-
+        
+            //probar subida individual -qué diferencia hay entre AdjuntarImagen y GrabarImagen (esta ultima es la llamada por ProcesarIm...)
+            //CartaDePorteManager.AdjuntarImagen
+            //CartaDePorteManager.AdjuntarImagen2
         }
 
 
