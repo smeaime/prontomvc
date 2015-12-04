@@ -9013,6 +9013,29 @@ Public Class CartaDePorteManager
     End Sub
 
 
+    Shared Function CreaDirectorioParaImagenCartaPorte(nombrenuevo As String, DirApp As String) As String
+
+        Dim DIRFTP = DirApp & "\DataBackupear\"
+
+
+        '/////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////
+        'crear subdirectorios para clasificar la parva de archivos
+
+        'Dim nuevodir = Left(numeroCarta, 2) + "\"
+        Dim nuevodir = Left(nombrenuevo, 2) + "\"
+        If Not IO.Directory.Exists(DIRFTP + nuevodir) Then IO.Directory.CreateDirectory(DIRFTP + nuevodir)
+
+        If True Then 'no está andando bien en produccion. no está creando el subdirectorio -por un tema de permisos?
+            nombrenuevo = nuevodir + nombrenuevo
+        End If
+
+        '/////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////
+        Return nombrenuevo
+
+    End Function
+
 
     Shared Function AdjuntarImagen(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, _
                                    forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
@@ -9022,6 +9045,8 @@ Public Class CartaDePorteManager
         Dim nombre = NameOnlyFromFullPath '(AsyncFileUpload1.PostedFile.FileName)
         Randomize()
         Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+        nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
 
 
         Dim numeroCarta, vagon As Long
@@ -9073,7 +9098,73 @@ Public Class CartaDePorteManager
         Return nombrenuevo
     End Function
 
+    Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
 
+        Dim DIRFTP = DirApp & "\DataBackupear\"
+        Dim nombre = NameOnlyFromFullPath ' (AsyncFileUpload1.PostedFile.FileName)
+        Randomize()
+        Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+
+        nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
+
+
+
+        Dim numeroCarta = Val(nombre)
+        Dim vagon = 0
+
+
+
+        If (AsyncFileUpload1.HasFile) Then
+            Try
+
+
+                'Dim nombresolo As String = Mid(nombre, nombre.LastIndexOf("\"))
+
+                '    Session("NombreArchivoSubido") = DIRFTP + nombrenuevo
+
+                Dim MyFile1 As New FileInfo(DIRFTP + nombrenuevo)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
+
+                AsyncFileUpload1.SaveAs(DIRFTP + nombrenuevo)
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex.ToString)
+                Throw
+            End Try
+        Else
+            'FileUpLoad2.click 'estaría bueno que se pudiese hacer esto, es decir, llamar al click
+        End If
+
+
+
+        If forzarID = -1 Then
+            Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
+            If cdp.Id = -1 Then
+                sError = "No se encontró la carta " & numeroCarta
+                Return nombrenuevo
+                Exit Function
+            End If
+            forzarID = cdp.Id
+        End If
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
+        oCarta.PathImagen2 = nombrenuevo 'nombrenuevo
+        db.SubmitChanges()
+        sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "</a>; "
+
+
+        Return nombrenuevo
+
+
+    End Function
 
 
 
@@ -9192,68 +9283,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
 
-        Dim DIRFTP = DirApp & "\DataBackupear\"
-        Dim nombre = NameOnlyFromFullPath ' (AsyncFileUpload1.PostedFile.FileName)
-        Randomize()
-        Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
-
-        Dim numeroCarta = Val(nombre)
-        Dim vagon = 0
-
-
-
-        If (AsyncFileUpload1.HasFile) Then
-            Try
-
-
-                'Dim nombresolo As String = Mid(nombre, nombre.LastIndexOf("\"))
-
-                '    Session("NombreArchivoSubido") = DIRFTP + nombrenuevo
-
-                Dim MyFile1 As New FileInfo(DIRFTP + nombrenuevo)
-                Try
-                    If MyFile1.Exists Then
-                        MyFile1.Delete()
-                    End If
-                Catch ex As Exception
-                End Try
-
-
-                AsyncFileUpload1.SaveAs(DIRFTP + nombrenuevo)
-
-            Catch ex As Exception
-                ErrHandler.WriteError(ex.ToString)
-                Throw
-            End Try
-        Else
-            'FileUpLoad2.click 'estaría bueno que se pudiese hacer esto, es decir, llamar al click
-        End If
-
-
-
-        If forzarID = -1 Then
-            Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
-            If cdp.Id = -1 Then
-                sError = "No se encontró la carta " & numeroCarta
-                Return nombrenuevo
-                Exit Function
-            End If
-            forzarID = cdp.Id
-        End If
-
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
-        oCarta.PathImagen2 = nombrenuevo 'nombrenuevo
-        db.SubmitChanges()
-        sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "</a>; "
-
-
-        Return nombrenuevo
-
-
-    End Function
 
 
     ' How to add a new image part to a package.
@@ -9637,21 +9667,10 @@ Public Class CartaDePorteManager
 
 
 
-            '/////////////////////////////////////////////////////////////
-            '/////////////////////////////////////////////////////////////
-            'crear subdirectorios para clasificar la parva de archivos
 
-            Dim nuevodir = Left(numeroCarta, 2) + "\"
-            If Not IO.Directory.Exists(DIRFTP + nuevodir) Then IO.Directory.CreateDirectory(DIRFTP + nuevodir)
+            nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
 
-            If True Then 'no está andando bien en produccion. no está creando el subdirectorio -por un tema de permisos?
-                nombrenuevo = nuevodir + nombrenuevo
-            End If
-
-            '/////////////////////////////////////////////////////////////
-            '/////////////////////////////////////////////////////////////
-
-
+         
 
 
 
