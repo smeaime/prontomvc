@@ -17,12 +17,14 @@ using System.Threading.Tasks;
 using ProntoMVC.Data.Models;
 using ProntoMVC.Data;
 
+using ExtensionMethods;
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
     {
 
-        public static void ProcesarUnaCartaConFlexicapture(IEngine engine, string plantilla, string imagen, string SC)
+        public static void ProcesarUnaCartaConFlexicapture(IEngine engine, string plantilla, string imagen, string SC, string DirApp)
         {
 
 
@@ -56,49 +58,16 @@ namespace ProntoFlexicapture
             else
             {
 
-                IField TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT");
-                IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
-                IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
-                IField NumeroCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
-                IField CEE = Sample.AdvancedTechniques.findField(document, "CEE");
-
-                if (NumeroCarta.Value.AsString != "" || BarraCP.Value.AsString != "")
+                try
                 {
-                    Debug.Print(NumeroCarta.Value.AsString + " " + BarraCP.Value.AsString);
-
-
-                    long numeroCarta = BarraCP.Value.AsInteger;
-                    int vagon = 0;
-
-                    Pronto.ERP.BO.CartaDePorte cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1);
-                    if (cdp.Id == -1)
-                    {
-                        cdp.NumeroCartaDePorte = numeroCarta;
-                        cdp.SubnumeroVagon = vagon;
-
-                        cdp.SubnumeroDeFacturacion = -1;
-                    }
-
-                    cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
-
-
-                    string nombrenuevo = "", sError = "";
-                    bool bCodigoBarrasDetectado = false;
-                    string ms = "", warn = "";
-                    var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
-                    var id = CartaDePorteManager.Save(SC, cdp, 0, "");
-                    var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon,
-                                                nombrenuevo, ref sError, "", bCodigoBarrasDetectado);
-
-
-
+                    ProcesaCarta(document, SC, imagen, DirApp);
+                }
+                catch (Exception x)
+                {
+                    Debug.Print(x.ToString());
+                    // throw;
                 }
 
-                else
-                {
-                    Debug.Print("nada documento ");
-
-                }
 
 
             }
@@ -109,7 +78,7 @@ namespace ProntoFlexicapture
 
 
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static void ProcesarCartasConFlexicapture(IEngine engine, string plantilla,
+        public static void ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
                                                    List<string> imagenes, string SC, string DirApp)
         {
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
@@ -180,142 +149,16 @@ namespace ProntoFlexicapture
 
                 else
                 {
-
-                    IField TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT");
-                    IField RemitenteCUIT = Sample.AdvancedTechniques.findField(document, "RemitenteCUIT");
-                    IField IntermediarioCUIT = Sample.AdvancedTechniques.findField(document, "IntermediarioCUIT");
-                    IField DestinatarioCUIT = Sample.AdvancedTechniques.findField(document, "DestinatarioCUIT");
-                    IField CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT");
-                    IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
-                    IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
-                    IField NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
-                    IField CEE = Sample.AdvancedTechniques.findField(document, "CEE");
-
-
-
-
-                    long numeroCarta;
-                    int vagon = 0;
-                    string sError = "";
-
-
-
-                    // if (BarraCP.Value.AsString != ""   )
-
-                    if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+                    try
                     {
-                        //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
-                        // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
-
-
-
+                        ProcesaCarta(document, SC, imagenes[count], DirApp);
+                    }
+                    catch (Exception x)
+                    {
+                        Debug.Print(x.ToString());
+                        // throw;
                     }
 
-                    else
-                    {
-
-                        // detectar con lectores de codigo de barra
-
-
-                        numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(imagenes[count], ref sError);
-
-
-
-                        //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
-
-                    }
-
-
-
-                    if (numeroCarta > 0)
-                    {
-                        Pronto.ERP.BO.CartaDePorte cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0);
-                        if (cdp.Id == -1)
-                        {
-                            cdp.NumeroCartaDePorte = numeroCarta;
-                            cdp.SubnumeroVagon = vagon;
-
-                            cdp.SubnumeroDeFacturacion = 0;
-                        }
-
-
-                        string s;
-
-                        s = TitularCUIT.Value.AsString;
-                        FuncionesGenericasCSharp.mkf_validacuit(s);
-                        cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
-
-                        s = IntermediarioCUIT.Value.AsString;
-                        FuncionesGenericasCSharp.mkf_validacuit(s);
-                        cdp.CuentaOrden1 = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
-
-                        s = RemitenteCUIT.Value.AsString;
-                        FuncionesGenericasCSharp.mkf_validacuit(s);
-                        cdp.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
-
-                        s = CorredorCUIT.Value.AsString;
-                        FuncionesGenericasCSharp.mkf_validacuit(s);
-                        cdp.Corredor = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
-
-                        s = DestinatarioCUIT.Value.AsString;
-                        FuncionesGenericasCSharp.mkf_validacuit(s);
-                        cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
-
-
-
-                        if (cdp.Titular != 0)
-                        {
-                            Debug.Print(cdp.Titular.ToString());
-
-                        }
-
-
-
-
-
-
-
-
-
-                        bool bCodigoBarrasDetectado = false;
-                        string ms = "", warn = "";
-
-
-                        var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
-                        if (valid)
-                        {
-                            var id = CartaDePorteManager.Save(SC, cdp, 0, "");
-
-                            if (true)
-                            {
-                                // la imagen tiene que estar ya en el directorio FTP
-                                // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
-                                // - por qué las espera en databackupear en lugar de en el \temp\?
-                                // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
-
-                                string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(imagenes[count]);
-
-                                try
-                                {
-
-                                    File.Copy(imagenes[count], nuevodestino);
-                                }
-                                catch (Exception)
-                                {
-
-                                    //throw;
-                                }
-
-
-                                var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
-                                                              , ref sError, DirApp, bCodigoBarrasDetectado);
-                            }
-                        }
-
-                    }
-
-
-                    Debug.Print("Documento " + count.ToString() + " numcarta " + numeroCarta.ToString());
 
                 }
 
@@ -326,6 +169,160 @@ namespace ProntoFlexicapture
             //trace("Check the results...");
             //assert(count == 4);
         }
+
+
+
+
+
+
+        static void ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
+        {
+
+
+            IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
+            IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
+            IField NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
+            IField CEE = Sample.AdvancedTechniques.findField(document, "CEE");
+
+
+            string TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT").NullStringSafe();
+            string Titular = Sample.AdvancedTechniques.findField(document, "Titular").NullStringSafe();
+            string RemitenteCUIT = Sample.AdvancedTechniques.findField(document, "RemitenteCUIT").NullStringSafe();
+            string Remitente = Sample.AdvancedTechniques.findField(document, "Remitente").NullStringSafe();
+            string IntermediarioCUIT = Sample.AdvancedTechniques.findField(document, "IntermediarioCUIT").NullStringSafe();
+            string Intermediario = Sample.AdvancedTechniques.findField(document, "Intermediario").NullStringSafe();
+            string DestinatarioCUIT = Sample.AdvancedTechniques.findField(document, "DestinatarioCUIT").NullStringSafe();
+            string Destinatario = Sample.AdvancedTechniques.findField(document, "Destinatario").NullStringSafe();
+            string CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+
+
+
+
+            long numeroCarta;
+            int vagon = 0;
+            string sError = "";
+
+
+
+            // if (BarraCP.Value.AsString != ""   )
+
+            if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+            {
+                //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
+                // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
+
+
+
+            }
+
+            else
+            {
+
+                // detectar con lectores de codigo de barra
+
+
+                numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
+
+
+
+                //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
+
+            }
+
+
+
+            if (numeroCarta > 0)
+            {
+                Pronto.ERP.BO.CartaDePorte cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0);
+                if (cdp.Id == -1)
+                {
+                    cdp.NumeroCartaDePorte = numeroCarta;
+                    cdp.SubnumeroVagon = vagon;
+
+                    cdp.SubnumeroDeFacturacion = 0;
+                }
+
+
+                string s;
+
+                cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT, SC, Titular);
+
+                //s = IntermediarioCUIT.Value.AsString;
+                //FuncionesGenericasCSharp.mkf_validacuit(s);
+                cdp.CuentaOrden1 = CartaDePorteManager.BuscarClientePorCUIT(IntermediarioCUIT, SC, Intermediario);
+
+                //s = RemitenteCUIT.Value.AsString;
+                //FuncionesGenericasCSharp.mkf_validacuit(s);
+                cdp.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT(RemitenteCUIT, SC, Remitente);
+
+                //s = CorredorCUIT.Value.AsString;
+                //FuncionesGenericasCSharp.mkf_validacuit(s);
+                cdp.Corredor = CartaDePorteManager.BuscarClientePorCUIT(CorredorCUIT, SC, Corredor);
+
+                //s = DestinatarioCUIT.Value.AsString;
+                //FuncionesGenericasCSharp.mkf_validacuit(s);
+                cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
+
+
+
+                if (cdp.Titular != 0)
+                {
+                    Debug.Print(cdp.Titular.ToString());
+
+                }
+
+
+
+
+
+
+
+
+
+                bool bCodigoBarrasDetectado = false;
+                string ms = "", warn = "";
+
+
+                var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
+                if (valid)
+                {
+                    var id = CartaDePorteManager.Save(SC, cdp, 0, "");
+
+                    if (true)
+                    {
+                        // la imagen tiene que estar ya en el directorio FTP
+                        // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
+                        // - por qué las espera en databackupear en lugar de en el \temp\?
+                        // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
+
+                        string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
+
+                        try
+                        {
+
+                            File.Copy(archivoOriginal, nuevodestino);
+                        }
+                        catch (Exception)
+                        {
+
+                            //throw;
+                        }
+
+
+                        var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
+                                                      , ref sError, DirApp, bCodigoBarrasDetectado);
+                    }
+                }
+
+            }
+
+
+            Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
+
+
+        }
+
 
 
 
@@ -547,4 +544,33 @@ namespace ProntoFlexicapture
 
         #endregion
     };
+}
+
+
+
+namespace ExtensionMethods
+{
+    public static class MyExtensions
+    {
+        public static string NullStringSafe(this IField ifield)
+        {
+            try
+            {
+                if (ifield == null) return "";
+                return ifield.Value.AsString;
+            }
+            catch (Exception)
+            {
+
+                return "";
+            }
+
+        }
+
+        public static int WordCount(this String str)
+        {
+            return str.Split(new char[] { ' ', '.', '?' },
+                             StringSplitOptions.RemoveEmptyEntries).Length;
+        }
+    }
 }

@@ -100,3 +100,19 @@ namespace ProntoMVC.Data
 
     }
 }
+
+namespace ExtensionMethods
+{
+    public static class MyExtensions
+    {
+        // https://msdn.microsoft.com/en-us/library/bb383977.aspx
+        // tenes que agregar "using ExtensionMethods" donde la quieras usar
+
+
+        public static int WordCount(this String str)
+        {
+            return str.Split(new char[] { ' ', '.', '?' },
+                             StringSplitOptions.RemoveEmptyEntries).Length;
+        }
+    }
+}

@@ -630,7 +630,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String) As Integer
+    Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
         If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
 
@@ -640,14 +640,42 @@ Public Class CartaDePorteManager
 
         Dim q = (From c In db.Clientes Where c.Cuit = cuit.Replace("-", "")).FirstOrDefault()
 
-        If q Is Nothing Then Return 0
 
-        Return q.IdCliente
 
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.Cliente
+                q.RazonSocial = RazonSocial
+                q.Cuit = cuit
+                'acá había un insertonsubmit
+                db.Clientes.Add(q)
+                db.SaveChanges()
+                Return q.IdCliente
+            Else
+                Return 0
+            End If
+
+        Else
+            Return q.IdCliente
+        End If
+
+        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
+
+
+
+            
 
     End Function
 
 
+    Public Shared Function DarDeAltaClienteProvisorio(cuit As String, SC As String, RazonSocial As String) As Integer
+        'Dim oDet As ProntoMVC.Data.Models.Cliente = (From i In db.CartasDePorteDetalles _
+        '                            Where i.IdCartaDePorte = id _
+        '                            And i.Campo = nombrecampo
+        '                        ).SingleOrDefault
+
+    End Function
 
 
 
