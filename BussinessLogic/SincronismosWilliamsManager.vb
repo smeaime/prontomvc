@@ -2984,8 +2984,9 @@ Namespace Pronto.ERP.Bll
          
 
 
+
             Dim codigoBahiaBlanca As String
-            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
+            Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
                 codigoBahiaBlanca = (From x In db.WilliamsDestinos Where x.Descripcion = "Bahia Blanca" Select x.CodigoLosGrobo).FirstOrDefault
                 If codigoBahiaBlanca = "" Then Throw New Exception("Falta asignar código al destino 'Bahia Blanca'")
             End Using
@@ -3023,8 +3024,12 @@ Namespace Pronto.ERP.Bll
 
             Const cuitYPF = "30546689979"
 
-            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
 
+
+
+
+
+             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
                 For Each cdp As CartasConCalada In q
@@ -3049,7 +3054,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    Dim fac = db.linqFacturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
+                    Dim fac = db.Facturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
                     If fac.IdCliente <> 4333 Then Continue For 'tienen que ser de syngenta
                     sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
                     sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
