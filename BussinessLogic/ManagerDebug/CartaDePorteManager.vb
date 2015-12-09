@@ -632,6 +632,8 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String) As Integer
 
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
