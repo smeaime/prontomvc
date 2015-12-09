@@ -153,7 +153,7 @@ namespace ProntoMVC.Tests
 
             ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                         plantilla,
-                                        lista, SC, DirApp);
+                                        lista, SC, DirApp,false);
 
 
 

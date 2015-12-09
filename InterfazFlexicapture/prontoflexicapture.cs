@@ -79,7 +79,7 @@ namespace ProntoFlexicapture
 
         // USE CASE: Using a custom image source with FlexiCapture processor
         public static void ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
-                                                   List<string> imagenes, string SC, string DirApp)
+                                                   List<string> imagenes, string SC, string DirApp, bool bProcesar=true)
         {
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
@@ -147,7 +147,7 @@ namespace ProntoFlexicapture
                     //    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
                 }
 
-                else
+                else if (bProcesar)
                 {
                     try
                     {
