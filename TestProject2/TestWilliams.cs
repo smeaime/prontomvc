@@ -109,8 +109,10 @@ namespace ProntoMVC.Tests
         {
 
             //string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015";
+            //string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015";
+            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015\lotechico";
             //string plantilla =  @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl"
+
 
             try
             {
@@ -149,7 +151,7 @@ namespace ProntoMVC.Tests
 
 
 
-            ClassFlexicapture.ProcesarCartasConFlexicapture(engine,
+            ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                         plantilla,
                                         lista, SC, DirApp);
 
