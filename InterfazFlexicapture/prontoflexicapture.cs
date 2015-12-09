@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 
 using ProntoMVC.Data.Models;
-
+using ProntoMVC.Data;
 
 namespace ProntoFlexicapture
 {
@@ -182,6 +182,10 @@ namespace ProntoFlexicapture
                 {
 
                     IField TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT");
+                    IField RemitenteCUIT = Sample.AdvancedTechniques.findField(document, "RemitenteCUIT");
+                    IField IntermediarioCUIT = Sample.AdvancedTechniques.findField(document, "IntermediarioCUIT");
+                    IField DestinatarioCUIT = Sample.AdvancedTechniques.findField(document, "DestinatarioCUIT");
+                    IField CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT");
                     IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
                     IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
                     IField NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
@@ -235,14 +239,42 @@ namespace ProntoFlexicapture
                         }
 
 
-                        cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT.Value.AsString, SC);
+                        string s;
+
+                        s = TitularCUIT.Value.AsString;
+                        FuncionesGenericasCSharp.mkf_validacuit(s);
+                        cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
+
+                        s = IntermediarioCUIT.Value.AsString;
+                        FuncionesGenericasCSharp.mkf_validacuit(s);
+                        cdp.CuentaOrden1 = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
+
+                        s = RemitenteCUIT.Value.AsString;
+                        FuncionesGenericasCSharp.mkf_validacuit(s);
+                        cdp.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
+
+                        s = CorredorCUIT.Value.AsString;
+                        FuncionesGenericasCSharp.mkf_validacuit(s);
+                        cdp.Corredor = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
+
+                        s = DestinatarioCUIT.Value.AsString;
+                        FuncionesGenericasCSharp.mkf_validacuit(s);
+                        cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(s, SC);
+
+
 
                         if (cdp.Titular != 0)
                         {
                             Debug.Print(cdp.Titular.ToString());
 
                         }
-                        
+
+
+
+
+
+
+
 
 
                         bool bCodigoBarrasDetectado = false;
@@ -275,7 +307,7 @@ namespace ProntoFlexicapture
                                 }
 
 
-                                var s = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
+                                var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
                                                               , ref sError, DirApp, bCodigoBarrasDetectado);
                             }
                         }
