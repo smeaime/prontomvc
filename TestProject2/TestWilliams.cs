@@ -103,6 +103,21 @@ namespace ProntoMVC.Tests
         /// </summary>
 
 
+        [TestMethod]
+        public void PruebaFlexicapturessssss()
+        {
+
+            string zipFile=@"ADasdasd"
+
+             SuboElZip
+                 // 2 caminos
+             ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+             o
+             ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+        }
+
+
+
 
         [TestMethod]
         public void PruebaFlexicapture()
