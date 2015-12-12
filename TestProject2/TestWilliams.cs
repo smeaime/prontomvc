@@ -110,10 +110,17 @@ namespace ProntoMVC.Tests
             string zipFile=@"ADasdasd"
 
              SuboElZip
-                 // 2 caminos
-             ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
-             o
-             ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+               // 2 caminos
+             // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+             //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+                var resultado= ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
+                                        plantilla,
+                                        lista, SC, DirApp,false);
+
+
+            var html= GenerarHtmlConResultado(resultado);
+
         }
 
 
@@ -166,11 +173,12 @@ namespace ProntoMVC.Tests
 
 
 
-            ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
+            var resultado= ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                         plantilla,
                                         lista, SC, DirApp,false);
 
 
+            var html= GenerarHtmlConResultado(resultado);
 
 
         }
