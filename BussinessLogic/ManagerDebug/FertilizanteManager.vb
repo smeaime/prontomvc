@@ -532,7 +532,7 @@ Public Class FertilizanteManager
 
 
             dr.Item("Destino") = iisNull(dr.Item("Destino"))
-            If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") Then
+            If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") And Trim(dr.Item("Destino")) <> "" Then
                 .Destino = BuscaIdWilliamsDestinoPreciso(RTrim(dr.Item("Destino")), SC)
                 If .Destino = -1 Then .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Destino")), SC)
                 'dt.Rows(row).Item("IdDestino") = .Destino
@@ -551,7 +551,7 @@ Public Class FertilizanteManager
 
 
             dr.Item("Procedencia") = iisNull(dr.Item("Procedencia"))
-            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") Then
+            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") And Trim(dr.Item("Procedencia")) <> "" Then
                 .IdLocalidadTransportista = BuscaIdLocalidadPreciso(RTrim(dr.Item("Procedencia")), SC)
                 If .IdLocalidadTransportista = -1 Then .IdLocalidadTransportista = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Procedencia")), SC)
                 'dt.Rows(row).Item("IdProcedencia") = .Procedencia

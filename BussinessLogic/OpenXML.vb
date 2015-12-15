@@ -1027,8 +1027,8 @@ Namespace Pronto.ERP.Bll
 
                 regexReplace(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
                 regexReplace(docText, "#CUIT#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Cuit, ""))
-                regexReplace(docText, "#COrden#", If(oFac.Cliente2 IsNot Nothing, oFac.Cliente2.RazonSocial, ""))
-                regexReplace(docText, "#COrdenCUIT#", If(oFac.Cliente2 IsNot Nothing, oFac.Cliente2.Cuit, ""))
+                regexReplace(docText, "#COrden#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.RazonSocial, ""))
+                regexReplace(docText, "#COrdenCUIT#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.Cuit, ""))
 
 
 
@@ -1445,8 +1445,8 @@ Namespace Pronto.ERP.Bll
 
                 regexReplace(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
                 regexReplace(docText, "#CUIT#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Cuit, ""))
-                regexReplace(docText, "#COrden#", If(oFac.Cliente2 IsNot Nothing, oFac.Cliente2.RazonSocial, ""))
-                regexReplace(docText, "#COrdenCUIT#", If(oFac.Cliente2 IsNot Nothing, oFac.Cliente2.Cuit, ""))
+                regexReplace(docText, "#COrden#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.RazonSocial, ""))
+                regexReplace(docText, "#COrdenCUIT#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.Cuit, ""))
 
                 regexReplace(docText, "#Producto#", If(oFac.Articulo IsNot Nothing, oFac.Articulo.Descripcion, ""))
                 regexReplace(docText, "#Contrato#", oFac.Contrato)
