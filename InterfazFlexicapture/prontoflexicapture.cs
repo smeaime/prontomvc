@@ -110,14 +110,24 @@ namespace ProntoFlexicapture
             var l = new List<string>();
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.*"); //Getting Text files
+            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
 
             //foreach (FileInfo file in Files)
             //{
             //    l.Add(file.Name);
             //}
+           
 
-            var q = (from f in Files orderby f.LastWriteTime descending select f.Name).Take(cuantas) ;
+            //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
+            //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
+
+
+            var q = (from f in files
+                     where ((f.Name.EndsWith(".tif") || f.Name.EndsWith(".tiff") || f.Name.EndsWith(".jpg"))
+                            &&
+                            (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                     )
+                     orderby f.LastWriteTime descending select f.FullName).Take(cuantas);
 
 
             return q.ToList();
@@ -368,7 +378,6 @@ namespace ProntoFlexicapture
                         var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
                                                       , ref sError, DirApp, bCodigoBarrasDetectado);
 
-                        MarcarImagenComoProcesada(nuevodestino);
                     }
 
 
@@ -384,6 +393,7 @@ namespace ProntoFlexicapture
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
 
+            MarcarImagenComoProcesada(archivoOriginal);
 
             return o;
         }
@@ -391,12 +401,18 @@ namespace ProntoFlexicapture
 
         static int MarcarImagenComoProcesada(string archivo)
         {
+            //y si creo un archivo con extension?
+
+            CreateEmptyFile(archivo + ".bdl");
 
             return 0;
 
         }
 
-
+        public static void CreateEmptyFile(string filename)
+        {
+            File.Create(filename).Dispose();
+        }
 
 
 
