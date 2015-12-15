@@ -129,7 +129,7 @@ namespace ProntoMVC.Tests
 
             var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
                                     plantilla, 10,
-                                     SC, DirApp, false);
+                                     SC, DirApp, true);
 
 
             var html = ClassFlexicapture.GenerarHtmlConResultado(resultado);
