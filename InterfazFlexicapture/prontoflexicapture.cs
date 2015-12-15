@@ -106,18 +106,21 @@ namespace ProntoFlexicapture
         static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
-            string dir = DirApp + @"\databackupear\";
+            string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.txt"); //Getting Text files
-            string str = "";
-            foreach (FileInfo file in Files)
-            {
-                l.Add(file.Name);
-            }
+            FileInfo[] Files = d.GetFiles("*.*"); //Getting Text files
 
-            return l;
+            //foreach (FileInfo file in Files)
+            //{
+            //    l.Add(file.Name);
+            //}
+
+            var q = (from f in Files orderby f.LastWriteTime descending select f.Name).Take(cuantas) ;
+
+
+            return q.ToList();
 
         }
 
