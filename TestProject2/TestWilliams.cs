@@ -379,6 +379,27 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void PegatinaDeFertilizantes()
+        {
+            string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
+            int m_IdMaestro = 0;
+
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = FertilizanteManager.GrabaRenglonEnTablaFertilizantes(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+        }
+
+
+        [TestMethod]
         public void Lartirigoyen_13789()
         {
 
