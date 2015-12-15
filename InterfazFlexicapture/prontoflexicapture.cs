@@ -78,9 +78,9 @@ namespace ProntoFlexicapture
 
         public class Resultados
         {
-            int IdCarta;
-            string errores;
-            string advertencias;
+            public int IdCarta;
+            public string errores;
+            public string advertencias;
         }
 
         public static List<Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine engine, string plantilla,
@@ -97,18 +97,27 @@ namespace ProntoFlexicapture
         }
 
 
-        List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
+        public static string GenerarHtmlConResultado(List<Resultados> l)
+        {
+            return "";
+        }
+
+
+        static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
-            string dir = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
+            string dir = DirApp + @"\databackupear\";
+            var l = new List<string>();
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] Files = d.GetFiles("*.txt"); //Getting Text files
             string str = "";
             foreach (FileInfo file in Files)
             {
-                str = str + ", " + file.Name;
+                l.Add(file.Name);
             }
+
+            return l;
 
         }
 
@@ -121,6 +130,7 @@ namespace ProntoFlexicapture
         {
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
+            List<Resultados> r = new List<Resultados>();
 
             //trace("Create an instance of FlexiCapture processor...");
             IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
@@ -189,7 +199,7 @@ namespace ProntoFlexicapture
                 {
                     try
                     {
-                        ProcesaCarta(document, SC, imagenes[count], DirApp);
+                        r.Add(ProcesaCarta(document, SC, imagenes[count], DirApp));
 
                     }
                     catch (Exception x)
@@ -207,6 +217,7 @@ namespace ProntoFlexicapture
 
             //trace("Check the results...");
             //assert(count == 4);
+            return r;
         }
 
 
@@ -270,6 +281,8 @@ namespace ProntoFlexicapture
             }
 
 
+
+            var o = new Resultados();
 
             if (numeroCarta > 0)
             {
@@ -354,7 +367,13 @@ namespace ProntoFlexicapture
 
                         MarcarImagenComoProcesada(nuevodestino);
                     }
+
+
+                    o.IdCarta = id;
+                    o.errores = ms;
+                    o.advertencias = warn;
                 }
+
 
             }
 
@@ -362,13 +381,15 @@ namespace ProntoFlexicapture
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
 
+
+            return o;
         }
 
 
-        int MarcarImagenComoProcesada(string archivo)
+        static int MarcarImagenComoProcesada(string archivo)
         {
 
-            sasdasd
+            return 0;
 
         }
 
