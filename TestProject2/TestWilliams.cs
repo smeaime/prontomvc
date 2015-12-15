@@ -104,26 +104,43 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void PruebaFlexicapturessssss()
+        public void PruebaFlexicapture_sinListaexplicita()
         {
 
-            string zipFile=@"ADasdasd"
+            string zipFile = @"ADasdasd";
 
-             SuboElZip
-               // 2 caminos
-             // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
-             //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+            SuboElZip();
 
-                var resultado= ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
-                                        plantilla,
-                                        lista, SC, DirApp,false);
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader;
+
+            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
+            System.Diagnostics.PerformanceCounter performanceCounter;
+
+            if (engine == null)
+            {
+                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+            }
 
 
-            var html= GenerarHtmlConResultado(resultado);
+            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
+                                    plantilla, 10,
+                                     SC, DirApp, false);
+
+
+            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado);
 
         }
 
+        void SuboElZip()
+        {
 
+
+        }
 
 
         [TestMethod]
@@ -173,12 +190,12 @@ namespace ProntoMVC.Tests
 
 
 
-            var resultado= ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
+            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                         plantilla,
-                                        lista, SC, DirApp,false);
+                                        lista, SC, DirApp, false);
 
 
-            var html= GenerarHtmlConResultado(resultado);
+            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado);
 
 
         }
@@ -247,6 +264,70 @@ namespace ProntoMVC.Tests
         }
 
 
+
+
+        [TestMethod]
+        public void FormatoImpresionPlantillaRemitoLDC()
+        {
+
+
+
+            string plantilla = DirApp + @"\Documentos\" + "RemitoLDC.docx";
+            string output = DirApp + @"\Documentos\" + "remito_.docx";
+
+            var MyFile1 = new System.IO.FileInfo(output);
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            File.Copy(plantilla, output);
+
+            // var o = FertilizanteManager.GetItem(SC, IdCartaDePorte, True);
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC y de ACA
+            FertilizantesCupos cupofert = (from c in db.FertilizantesCupos
+                                           orderby c.FechaModificacion descending
+                                           select c).FirstOrDefault();
+
+            OpenXML_Pronto.RemitoParaLDC_XML_DOCX_Williams(output, cupofert, SC);
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+        [TestMethod]
+        public void FormatoImpresionPlantillaOrdenDeCarga()
+        {
+
+            string plantilla = DirApp + @"\Documentos\" + "OrdenDeCarga.docx";
+            string output = DirApp + @"\Documentos\" + "orden_.docx";
+
+            var MyFile1 = new System.IO.FileInfo(output);
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            File.Copy(plantilla, output);
+
+            // var o = FertilizanteManager.GetItem(SC, IdCartaDePorte, True);
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC y de ACA
+            FertilizantesCupos cupofert = (from c in db.FertilizantesCupos
+                                           orderby c.FechaModificacion descending
+                                           select c).FirstOrDefault();
+
+            OpenXML_Pronto.OrdenCarga_XML_DOCX_Williams(output, cupofert, SC);
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
         [TestMethod]
         public void CrearDirectoriosParaLasImagenesAutomaticamente_15153()
         {
@@ -266,7 +347,7 @@ namespace ProntoMVC.Tests
             }
 
             CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-        
+
             //probar subida individual -qué diferencia hay entre AdjuntarImagen y GrabarImagen (esta ultima es la llamada por ProcesarIm...)
             //CartaDePorteManager.AdjuntarImagen
             //CartaDePorteManager.AdjuntarImagen2
