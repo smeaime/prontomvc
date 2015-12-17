@@ -638,7 +638,7 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.Clientes Where c.Cuit = cuit.Replace("-", "")).FirstOrDefault()
+        Dim q = (From c In db.Clientes Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
 
 
 
