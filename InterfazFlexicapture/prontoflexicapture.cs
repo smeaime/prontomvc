@@ -61,6 +61,7 @@ namespace ProntoFlexicapture
                 try
                 {
                     ProcesaCarta(document, SC, imagen, DirApp);
+                    processor.ExportDocumentEx(document, Path.GetDirectoryName( imagen) , imagen + ".xml" , null);
                 }
                 catch (Exception x)
                 {
@@ -79,6 +80,7 @@ namespace ProntoFlexicapture
         public class Resultados
         {
             public int IdCarta;
+            public long numerocarta;
             public string errores;
             public string advertencias;
         }
@@ -90,6 +92,8 @@ namespace ProntoFlexicapture
 
             var Lista = ExtraerListaDeImagenesQueNoHanSidoProcesadas(cuantasImagenes, DirApp);
 
+             sefsadf
+            //guardar en Log los resultados
 
             return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar);
 
@@ -99,7 +103,17 @@ namespace ProntoFlexicapture
 
         public static string GenerarHtmlConResultado(List<Resultados> l)
         {
-            return "";
+            string stodo="";
+
+            foreach (Resultados x in l)
+            {
+                string sError="";
+
+                sError = "<a href=\"CartaDePorte.aspx?Id=" + x.IdCarta + "\" target=\"_blank\">" + "Carta " + x.numerocarta  + "   " + x.errores + "   " + x.advertencias + "</a>;  <br/> ";  // & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
+
+                stodo += sError;
+            }
+            return stodo;
         }
 
 
@@ -329,7 +343,7 @@ namespace ProntoFlexicapture
                 //FuncionesGenericasCSharp.mkf_validacuit(s);
                 cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
 
-
+                
 
                 if (cdp.Titular != 0)
                 {
@@ -382,7 +396,8 @@ namespace ProntoFlexicapture
 
 
                     o.IdCarta = id;
-                    o.errores = ms;
+                    o.numerocarta = numeroCarta;
+                    o.errores = sError + ms;
                     o.advertencias = warn;
                 }
 
@@ -392,12 +407,19 @@ namespace ProntoFlexicapture
 
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
+            GuardarLogEnBase(o);
+            
 
             MarcarImagenComoProcesada(archivoOriginal);
 
             return o;
         }
 
+
+        static void GuardarLogEnBase(Resultados o)
+        {
+
+        }
 
         static int MarcarImagenComoProcesada(string archivo)
         {
