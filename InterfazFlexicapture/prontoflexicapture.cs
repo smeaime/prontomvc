@@ -92,8 +92,22 @@ namespace ProntoFlexicapture
 
             var Lista = ExtraerListaDeImagenesQueNoHanSidoProcesadas(cuantasImagenes, DirApp);
 
-             sefsadf
+            
             //guardar en Log los resultados
+           
+
+            //Try
+            //    EntidadManager.Tarea(SC, "Log_InsertarRegistro", IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
+            //                              CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario, _
+            //                            DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+            //                            DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+            //                            DBNull.Value, DBNull.Value, DBNull.Value)
+            //    'GetStoreProcedure(SC, enumSPs.Log_InsertarRegistro, IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
+            //    '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
+
+            //Catch ex As Exception
+            //    ErrHandler.WriteError(ex)
+            //End Try
 
             return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar);
 
@@ -296,6 +310,8 @@ namespace ProntoFlexicapture
             else
             {
 
+                que pasa si no esta la licencia?
+
                 // detectar con lectores de codigo de barra
 
 
@@ -355,7 +371,7 @@ namespace ProntoFlexicapture
 
 
 
-
+ssssss
 
 
 
