@@ -664,7 +664,7 @@ Public Class CartaDePorteManager
 
 
 
-            
+
 
     End Function
 
@@ -9261,11 +9261,12 @@ Public Class CartaDePorteManager
             BorroArchivo(DIRFTP + oCarta.PathImagen)
             oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
 
+            'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
             If listapaginas.Count > 1 Then
                 'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
-                listapaginas(1).Save(DIRFTP + "TK_" + Path.GetFileName(archivoImagenSinPathUbicadaEnDATABACKUPEAR) + ".jpg", Imaging.ImageFormat.Jpeg)
+                listapaginas(1).Save(DIRFTP + Path.GetFileName(archivoImagenSinPathUbicadaEnDATABACKUPEAR) + "_TK" + ".jpg", Imaging.ImageFormat.Jpeg)
                 BorroArchivo(DIRFTP + oCarta.PathImagen2)
-                oCarta.PathImagen2 = "TK_" + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+                oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg"
 
             End If
 
@@ -9700,7 +9701,7 @@ Public Class CartaDePorteManager
 
             nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
 
-         
+
 
 
 
@@ -16434,7 +16435,7 @@ Public Class LogicaFacturacion
 
         '()
 
-   
+
         Try
             Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
