@@ -292,17 +292,99 @@
         editurl: ROOT + 'ResumenConciliacion/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleConciliacionNoContable', 'IdConciliacion', 'Detalle', 'Ingresos', 'Egresos', 'Fecha ingreso', 'Fecha caducidad', 'FechaRegistroContable'],
+        colNames: ['Acciones', 'IdDetalleConciliacionNoContable', 'IdConciliacion', 'Detalle', 'Ingresos', 'Egresos', 'Fecha ingreso', 'Fecha caducidad', 'Fecha reg. contable'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleConciliacionNoContable', index: 'IdDetalleConciliacionNoContable', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
                     { name: 'IdConciliacion', index: 'IdConciliacion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
-                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, hidden: false, label: 'TB' },
-                    { name: 'Ingresos', index: 'Ingresos', align: 'right', width: 100, editable: false, search: true, label: 'TB', searchoptions: { sopt: ['cn'] } },
-                    { name: 'Egresos', index: 'Egresos', align: 'right', width: 100, editable: false, search: true, label: 'TB', searchoptions: { sopt: ['cn'] } },
-                    { name: 'FechaIngreso', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, label: 'TB', formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'FechaCaducidad', index: 'FechaCaducidad', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, label: 'TB', formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'FechaRegistroContable', index: 'FechaRegistroContable', width: 80, align: 'center', sorttype: 'date', hidden: true, editable: false, label: 'TB', formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'Detalle', index: 'Detalle', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                    {
+                        name: 'Ingresos', index: 'Ingresos', formoptions: { rowpos: 2, colpos: 1 }, width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaNoContable').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'Egresos', index: 'Egresos', formoptions: { rowpos: 2, colpos: 2 }, width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaNoContable').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'FechaIngreso', index: 'FechaIngreso', formoptions: { rowpos: 3, colpos: 1 }, width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (elem) {
+                                $(elem).width(90);
+                            },
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    },
+                    {
+                        name: 'FechaCaducidad', index: 'FechaCaducidad', formoptions: { rowpos: 4, colpos: 1 }, width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (elem) {
+                                $(elem).width(90);
+                            },
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    },
+                    {
+                        name: 'FechaRegistroContable', index: 'FechaRegistroContable', formoptions: { rowpos: 5, colpos: 1 }, width: 100, sortable: false, hidden: true, align: 'right', editable: true, label: 'TB',
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (elem) {
+                                $(elem).width(90);
+                            },
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    }
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var $this = $(this);
@@ -349,13 +431,13 @@
         cellsubmit: 'clientArray'
     });
     jQuery("#ListaNoContable").jqGrid('navGrid', '#ListaPager3', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    //jQuery("#ListaNoContable").jqGrid('navButtonAdd', '#ListaPager3',
-    //                             {
-    //                                 caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
-    //                                 onClickButton: function () {
-    //                                     AgregarItemVacio(jQuery("#ListaNoContable"));
-    //                                 },
-    //                             });
+    jQuery("#ListaNoContable").jqGrid('navButtonAdd', '#ListaPager3',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                     onClickButton: function () {
+                                         AgregarItemVacio(jQuery("#ListaNoContable"));
+                                     },
+                                 });
     jQuery("#ListaNoContable").jqGrid('navButtonAdd', '#ListaPager3',
                                  {
                                      caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
@@ -375,7 +457,7 @@
                    'Cuenta banco', 'Numero conciliacion', 'Fecha conciliacion', 'Numero interno', 'Fecha valor', 'Fecha deposito', 'Numero deposito', 'Iva', 'Mon.', 'Banco', 'Tipo comp.',
                    'Numero Comprobante', 'Fecha origen', 'Cliente', 'Proveedor', 'Cuenta contable', 'Detalle', 'Numero asi. ch. dif.', 'Observaciones'],
         colModel: [
-                    { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                    { name: 'ver', index: 'ver', hidden: true, width: 50 },
                     { name: 'IdValor', index: 'IdValor', width: 80, sortable: false, editable: false, search: false, hidden: true },
                     { name: 'Tipo', index: 'Tipo', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false },
                     { name: 'NumeroValor', index: 'NumeroValor', align: 'left', width: 80, editable: false, hidden: false },
@@ -418,24 +500,25 @@
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
         pager: $('#ListaDragPager'),
-    rowNum: 15,
-    rowList: [10, 20, 50],
-    sortname: 'NumeroInterno', // 'FechaRecibo,NumeroRecibo',
-    sortorder: 'desc',
-    viewrecords: true,
-    emptyrecords: 'No hay registros para mostrar', //,
-    ///////////////////////////////
-    width: 'auto', // 'auto',
-    autowidth: true,
-    shrinkToFit: false,
-    //////////////////////////////
-    height: $(window).height() - ALTOLISTADO, // '100%'
-    altRows: false,
-    footerrow: false, //true,
-    userDataOnFooter: true,
-    gridview: true,
-    multiboxonly: true,
-    multipleSearch: true
+        rowNum: 15,
+        rowList: [10, 20, 50],
+        sortname: 'NumeroInterno', // 'FechaRecibo,NumeroRecibo',
+        sortorder: 'desc',
+        multiselect: true,
+        viewrecords: true,
+        emptyrecords: 'No hay registros para mostrar', //,
+        ///////////////////////////////
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        //////////////////////////////
+        height: $(window).height() - ALTOLISTADO, // '100%'
+        altRows: false,
+        footerrow: false, //true,
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
     })
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
      { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
@@ -446,6 +529,20 @@
         defaultSearch: 'cn',
         enableClear: false
     }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-arrowreturnthick-1-s", title: "Agregar a EN EXTRACTO",
+                                     onClickButton: function () {
+                                         AgregarAGrilla(jQuery("#ListaDrag"), "EnExtracto");
+                                     },
+                                 });
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-arrowreturnthick-1-n", title: "Agregar a FUERA DE EXTRACTO",
+                                     onClickButton: function () {
+                                         AgregarAGrilla(jQuery("#ListaDrag"), "FueraDeExtracto");
+                                     },
+                                 });
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Valores no confirmados');
@@ -556,6 +653,82 @@
         $("#gbox_grid2").css("border", "1px solid #aaaaaa");
     }
 
+    function AgregarAGrilla(grid,destino) {
+        var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+        var getdata, getdata2, $gridDestino, $gridDestino2, i, j, k, IdValor = 0, Ingreso = 0, Egreso = 0, tmpdata = {}, dataIds, data2, Id, Id2, esta = false, esta2 = false;
+
+        if (destino == "EnExtracto") { $gridDestino = $('#ListaEnExtracto'); } else { $gridDestino2 = $('#ListaEnExtracto'); }
+        if (destino == "FueraDeExtracto") { $gridDestino = $('#ListaFueraDeExtracto'); } else { $gridDestino2 = $('#ListaFueraDeExtracto'); }
+
+        for (i = selectedIds.length - 1; i >= 0; i--) {
+            getdata = grid.jqGrid('getRowData', selectedIds[i]);
+
+            IdValor = getdata['IdValor'];
+            Ingreso = getdata['Ingresos'];
+            Egreso = getdata['Egresos'];
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Valor/TraerUno/',
+                data: { IdValor: IdValor },
+                async: false,
+                dataType: "Json",
+                success: function (data) {
+                    var longitud = data.length;
+                    for (j = 0; j < data.length; j++) {
+                        Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
+
+                        dataIds = $gridDestino.jqGrid('getDataIDs');
+                        esta = false
+                        for (k = 0; k < dataIds.length; k++) {
+                            data2 = $gridDestino.jqGrid('getRowData', dataIds[k]);
+                            if (data2.IdValor == IdValor) { esta = true; }
+                        };
+
+                        dataIds = $gridDestino2.jqGrid('getDataIDs');
+                        esta2 = false
+                        for (k = 0; k < dataIds.length; k++) {
+                            data2 = $gridDestino2.jqGrid('getRowData', dataIds[k]);
+                            if (data2.IdValor == IdValor) { esta2 = true; }
+                        };
+
+                        if (!esta && !esta2) {
+                            tmpdata['IdDetalleConciliacion'] = Id2;
+                            tmpdata['IdValor'] = data[j].IdValor;
+                            tmpdata['TipoValor'] = data[j].Tipo;
+                            tmpdata['NumeroValor'] = data[j].NumeroValor;
+                            tmpdata['NumeroInterno'] = data[j].NumeroInterno;
+                            tmpdata['FechaValor'] = data[j].FechaValor;
+                            tmpdata['FechaDeposito'] = data[j].FechaDeposito;
+                            tmpdata['NumeroDeposito'] = data[j].NumeroDeposito;
+                            tmpdata['Iva'] = data[j].Iva;
+                            tmpdata['BancoOrigen'] = data[j].Banco;
+                            tmpdata['Tipo'] = data[j].TipoComprobante;
+                            tmpdata['NumeroComprobante'] = data[j].NumeroComprobante;
+                            tmpdata['FechaComprobante'] = data[j].FechaComprobante;
+                            tmpdata['Cliente'] = data[j].Cliente;
+                            tmpdata['Proveedor'] = data[j].Proveedor;
+                            tmpdata['Controlado'] = data[j].Controlado;
+                            tmpdata['ControladoNoConciliado'] = data[j].ControladoNoConciliado;
+                            tmpdata['Cuenta'] = "";
+
+                            tmpdata['Ingresos'] = Ingreso;
+                            tmpdata['Egresos'] = Egreso;
+                            tmpdata['TotalIngresos'] = Ingreso;
+                            tmpdata['TotalEgresos'] = Egreso;
+                            getdata = tmpdata;
+
+                            Id = Id2
+                            $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+                        }
+                    }
+                }
+            });
+        }
+        ActualizarDatos();
+    };
+
     ////////////////////////////////////////////////////////// CHANGES //////////////////////////////////////////////////////////
 
     //$("#Aprobo").change(function () {
@@ -583,7 +756,6 @@
         CalcularTotales()
     });
     
-
     $("#IdCuentaBancaria").change(function () {
         $("#ListaDrag").trigger("reloadGrid");
     });
