@@ -29,8 +29,8 @@ namespace ProntoMVC.Controllers
         {
             //            if (!PuedeLeer(enumNodos.cuen)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")
                 ) throw new Exception("No tenés permisos");
             return View();
         }
@@ -49,12 +49,12 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 50;
             int currentPage = page ?? 1;
 
-            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             //var Entidad = db.CuentasCorrientesAcreedores.AsQueryable();
             //Entidad = Entidad.Where(p => p.IdProveedor == idproveedor).AsQueryable();
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var pendiente = "S"; //hay que usar S para traer solo lo pendiente
             if (true)
             {
@@ -166,7 +166,7 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
             IdProveedor = IdProveedor ?? -1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var pendiente = "S";
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesA_TXPorTrs", IdProveedor, -1, DateTime.Now, null, null, pendiente);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
@@ -254,7 +254,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult TraerUno(int IdCtaCte)
         {
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesA_TX_PorIdConDatos", IdCtaCte);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -346,7 +346,7 @@ namespace ProntoMVC.Controllers
 
             string campo = String.Empty;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var pendiente = "S";
 
 
@@ -396,7 +396,7 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
             IdCliente = IdCliente ?? -1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var pendiente = "S";
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesD_TXPorTrs", IdCliente, -1, DateTime.Now, DateTime.Now, -1, pendiente);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
@@ -482,7 +482,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult TraerUnoDeudor(int IdCtaCte)
         {
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesD_TX_PorIdConDatos", IdCtaCte);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 

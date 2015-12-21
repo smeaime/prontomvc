@@ -15,9 +15,9 @@
 <script crossorigin="anonymous" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 @*<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/js/jquery-1.8.2.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/js/jquery-ui-1.9.0.custom.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery-1.8.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery-ui-1.9.0.custom.js")" type="text/javascript"></script>*@
 @*<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />*@
 @if (false)
 {
@@ -34,55 +34,68 @@ else
 {
     @*<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />*@
     @*<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css"
-          rel="stylesheet" type="text/css" />*@
+        rel="stylesheet" type="text/css" />*@
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.css"
           rel="stylesheet" type="text/css" />
-     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 }
 @*<script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>*@
 
 
 
 <style>
+    body {
+        /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+        font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+        font-size: 16px !important;
+        background-color:  rgb(250, 250, 250);
+    }
 
-    
-            body {
-                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-                font-size: 16px !important;
-            }
-               input, button, select, textarea {
-                font-size: 11pt;
-                /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
-                font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
-            }
+    input, button, select, textarea {
+        font-size: 11pt;
+        /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
+        font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+    }
+
 </style>
 
 @* http://stackoverflow.com/questions/827905/asp-net-mvc-login-returnurl-always-null*@
 @*@using (Html.BeginForm(null, null, FormMethod.Post, new {id="formid",ReturnUrl = Request.QueryString["ReturnUrl"] }))*@
-@using (Html.BeginForm(null, null, FormMethod.Post, new { }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new {  }))
 {
 
     <div style="background: rgb(250, 250, 250)">
         <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]" /> @* al final tuve que usar un hidden  *@
-        <input  type="hidden" id="empresa" name="empresa" value=@Request.QueryString["empresa"] />
+        <input type="hidden" id="empresa" name="empresa" value=@Request.QueryString["empresa"] />
 
         <div style="">
             <br />
             <br />
-            <div class="row-fluid  text-center" style="vertical-align: middle;">
-                <div class="span12">
-                    <img src="@Url.Content("~/Content/Images/Empresas/" +
+            @if (false)
+            {
+                <div class="row-fluid  text-center" style="vertical-align: middle;">
+                    <div class="span12">
+                        <img src="@Url.Content("~/Content/Images/Empresas/" +
                                 (
-                                    (Request.QueryString["empresa"] !=null)  ? 
-                                       ( Request.QueryString["empresa"].ToString() + ".png" ): 
-                                        (System.Configuration.ConfigurationManager.AppSettings["ImagenBienvenida"] ?? "DemoPronto.png") 
+                                    (Request.QueryString["empresa"] !=null)  ?
+                                       ( Request.QueryString["empresa"].ToString() + ".png" ):
+                                        (System.Configuration.ConfigurationManager.AppSettings["ImagenBienvenida"] ?? "DemoPronto.png")
                                  )
                                )"
-                          alt="" style="text-align:  center;
+                             alt="" style="text-align:  center;
                                 width: ; height: 150px;"></img>
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <br /><br /><br />
+                <div class="row-fluid  text-center" style="font-family: Times New Roman; font-size: 170px; color: #233DB1; font-weight: 300;  text-shadow: 4px 3px 9px gray;">
+                    Pronto
+
+                </div>
+    <br /><br /><br /><br />
+            }
             <br />
             <div class="row-fluid  text-center" style="vertical-align: middle; background: /* rgba(255, 255, 255, 0.58);
             */">
@@ -129,7 +142,8 @@ else
                     {
                         <a style="width: ; font-size: 14px; line-height: 46px;" href="RecuperarPassword">
                             ¿Olvidaste
-                            tu contraseña?</a><br /> }
+                            tu contraseña?
+                        </a><br /> }
                     <a style="width: ; font-size: 14px" href="Register" class="text-center  editor-label">¿No tenés cuenta? Registrate!</a><br />
                 </div>
             </div>
@@ -144,7 +158,7 @@ else
                 <div style="text-align: center">
                     <a id="lnkBDL" class="linkHoverSubrayado  text-center  editor-label" href="http://www.bdlconsultores.com.ar/"
                        style="text-shadow: 0 1px 0 white; color: #4F6AA3; font-size: Small; font-weight: normal;
-                    text-align: center; width: 100%; text-decoration: none;" >©2015 BDL</a>
+                    text-align: center; width: 100%; text-decoration: none;">©2015 BDL</a>
                 </div>
             </div>
             <script>            $('#UserName').focus();</script>

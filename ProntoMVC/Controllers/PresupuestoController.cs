@@ -27,9 +27,9 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
             //    ) throw new Exception("No tenés permisos");
 
             //var presupuestos = db.Presupuestos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -66,12 +66,12 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
 
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras"))
+            //if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras"))
             //{
 
-            //    int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            //    int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             //    if (presupuesto.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a presupuestos tuyos");
             //    //throw new Exception("No tenés permisos");
@@ -180,7 +180,7 @@ namespace ProntoMVC.Controllers
                     db.wActualizacionesVariasPorComprobante(104, presupuesto.IdPresupuesto, tipomovimiento);
                     try
                     {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)
@@ -235,9 +235,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -366,7 +366,7 @@ namespace ProntoMVC.Controllers
                 Presupuesto presupuesto = db.Presupuestos.Find(id);
 
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (idproveedor > 0 && presupuesto.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a presupuestos tuyos");
 
 
@@ -384,8 +384,8 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(Presupuesto presupuesto)
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")
                ) throw new Exception("No tenés permisos");
 
             if (ModelState.IsValid)
@@ -670,7 +670,7 @@ namespace ProntoMVC.Controllers
             var Entidad = db.Presupuestos.AsQueryable();
 
 
-            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             if (idproveedor > 0) Entidad = Entidad.Where(p => p.IdProveedor == idproveedor).AsQueryable();
 

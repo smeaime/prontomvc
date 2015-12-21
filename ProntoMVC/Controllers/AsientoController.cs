@@ -41,9 +41,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
 
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
             //    ) throw new Exception("No tenés permisos");
 
             //var Pedidos = db.Pedidos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -71,7 +71,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -743,9 +743,9 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
             if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
              ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -826,6 +826,8 @@ namespace ProntoMVC.Controllers
                     }
 
                     db.SaveChanges();
+
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
                     return Json(new { Success = 1, IdAsiento = Asiento.IdAsiento, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
                 }
@@ -976,8 +978,39 @@ namespace ProntoMVC.Controllers
 
 
         public virtual ActionResult Asientos_DynamicGridData
-    (string sidx, string sord, int page, int rows, bool _search, string filters)
+    (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
+
+            //            if (FechaInicial != string.Empty)
+            //          {
+
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaDesde = DateTime.MinValue;
+            }
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            //        }
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+
             string campo = String.Empty;
             int pageSize = rows; // ?? 20;
             int currentPage = page; // ?? 1;
@@ -985,18 +1018,27 @@ namespace ProntoMVC.Controllers
             int totalPages = 0;
 
 
-            var Req = db.Asientos.AsQueryable();
+            // var Req = db.Asientos.AsQueryable();
             //  Req = Req.Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI")).AsQueryable();
+            var q = (from a in db.Asientos where a.FechaAsiento >= FechaDesde && a.FechaAsiento <= FechaHasta select a).AsQueryable();
+
+
 
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Asiento>
-                                ("",
-                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
-                                 );
+            //var pagedQuery = Filters.FiltroGenerico<Data.Models.Asiento>
+            //                    ("",
+            //                    sidx, sord, page, rows, _search, filters, db, ref totalRecords
+            //                     );
+
+            List<Data.Models.Asiento> pagedQuery =
+    Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Asiento>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+
+
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
             //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1250,7 +1292,7 @@ namespace ProntoMVC.Controllers
             /////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////
-            //string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            //string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             //DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             //IEnumerable<DataRow> rows = dt.AsEnumerable();
             //var sq = (from r in rows select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
@@ -1393,8 +1435,6 @@ namespace ProntoMVC.Controllers
             if (o.DetalleAsientos.Count <= 0) sErrorMsg += "\n" + "El asiento no tiene items";
 
 
-
-
             foreach (ProntoMVC.Data.Models.DetalleAsiento x in o.DetalleAsientos)
             {
                 var c = db.Cuentas.Find(x.IdCuenta);
@@ -1405,6 +1445,7 @@ namespace ProntoMVC.Controllers
                 debe += x.Debe ?? 0;
                 haber += x.Haber ?? 0;
 
+                if ((x.Item ?? 0) <= 0) x.Item=o.DetalleAsientos.Select(y=>y.Item ?? 0 ).Max()  +1;
 
                 if (false && !PorObra)
                 {
@@ -1459,7 +1500,7 @@ namespace ProntoMVC.Controllers
                 Pedido Pedido = db.Pedidos.Find(id);
 
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (idproveedor > 0 && Pedido.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a Pedidos tuyos");
 
 
@@ -1484,8 +1525,8 @@ namespace ProntoMVC.Controllers
         [HttpPost, ActionName("Delete")]
         public virtual ActionResult DeleteConfirmed(int id)
         {
-            Pedido Pedido = db.Pedidos.Find(id);
-            db.Pedidos.Remove(Pedido);
+            Asiento asiento = db.Asientos.Find(id);
+            db.Asientos.Remove(asiento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -1707,7 +1748,7 @@ namespace ProntoMVC.Controllers
             var Entidad = db.Pedidos.AsQueryable();
 
 
-            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             if (idproveedor > 0) Entidad = Entidad.Where(p => p.IdProveedor == idproveedor).AsQueryable();
 

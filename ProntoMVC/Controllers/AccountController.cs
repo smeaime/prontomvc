@@ -8,7 +8,7 @@ using System.Web.Security;
 //using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 
-
+using System.Data.SqlClient;
 
 using Pronto.ERP.Bll;
 using System.Configuration;
@@ -19,6 +19,39 @@ namespace ProntoMVC.Controllers
 {
     public partial class AccountController : Controller // este no creo que deba heredar ProntoBaseController, no? -por qué?
     {
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual  bool DBConnectionStatus()
+        {
+
+            // var sc=   sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid());
+
+            var sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+
+            //var sConexSQL = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
+
+          
+            
+
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(sConexBDLMaster))
+                {
+                    sqlConn.Open();
+
+                    return (sqlConn.State == ConnectionState.Open);
+                }
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
 
 
 
@@ -424,7 +457,7 @@ namespace ProntoMVC.Controllers
                         if (b == 0)
                         {
 
-                            //Roles.GetRolesForUser(Membership.GetUser().UserName)
+                            //Roles.GetRolesForUser(oStaticMembershipService.GetUser().UserName)
                             if (Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin"))
                             {
                                 //    return RedirectToAction("Index", "Autorizacion", new { area = "" });
@@ -605,11 +638,11 @@ namespace ProntoMVC.Controllers
             string sc;
             try
             {
-                if (Membership.GetUser() != null) sc = Generales.sCadenaConex(rc);
+               // if (oStaticMembershipService.GetUser() != null) sc = Generales.sCadenaConex(rc);
 
                 //ViewData["BasePronto"] = sBasePronto;
                 ViewBag.BasePronto = this.Session["BasePronto"];
-                // this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                // this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey);
 
                 //}
                 // string sss = this.Session["BasePronto"].ToString();
@@ -1422,7 +1455,7 @@ namespace ProntoMVC.Controllers
 
 
             Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-            //string us = Membership.GetUser().UserName;
+            //string us = oStaticMembershipService.GetUser().UserName;
             string us = userGuid.ToString();
 
 
