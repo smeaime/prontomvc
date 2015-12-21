@@ -57,7 +57,7 @@ Imports System.Net
 Imports CartaDePorteManager
 Imports CDPMailFiltrosManager2
 '
-Imports LogicaImportador.FormatosDeExcel
+Imports LogicaImportador.FormatosDeExcelFertilizantes
 Imports LogicaImportador
 
 Imports ProntoMVC.Data.Models
@@ -300,7 +300,7 @@ Public Class FertilizanteManager
 
 
     Shared Function GrabaRenglonEnTablaFertilizantes(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
-                                    txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
+                                    cmbdespacho As System.Web.UI.WebControls.DropDownList, cmbpuntodespacho As System.Web.UI.WebControls.DropDownList, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
                                     txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList, _
                                     NoValidarColumnas As List(Of String) _
@@ -409,9 +409,11 @@ Public Class FertilizanteManager
             '    Return 0
             'End If
 
-            'LogicaImportador.actualizar(.Cantidad, dr.Item("NetoProc"))
-            .Cantidad = Val(dr.Item("NetoProc"))
-            .Contrato = Left(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString), 20)
+            '.Cantidad = Val(dr.Item("NetoProc"))
+            .KilosMaximo = Val(dr.Item("NetoProc"))
+
+
+            .Contrato = Left(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Auxiliar5.ToString).ToString, 20)
 
             .FechaIngreso = iisValidSqlDate(TextoAFecha(iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.FechaDescarga.ToString))))
 
@@ -427,16 +429,29 @@ Public Class FertilizanteManager
             .Porcentaje4 = StringToDecimal(iisNull(dr.Item("column20"))) * 100
 
 
-
-            Select Case iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Comprador)).ToString.Trim.ToUpper
+            Dim formadespacho As String = iisNull(dr.Item(enumColumnasDeGrillaFinalFertilizantes.Comprador.ToString)).ToString.Trim.ToUpper
+            Select Case formadespacho
                 Case "GRANEL"
                     .FormaDespacho = 1
                 Case "BOLSA", "BOLSAS"
                     .FormaDespacho = 2
                 Case "BIGBAG", "BIG BAGS (1000 KG)", "BIG BAGS (500 KG)"
                     .FormaDespacho = 3
+                Case Else
+                    If formadespacho.Contains("GRANEL") Then
+                        .FormaDespacho = 1
+                    ElseIf formadespacho.Contains("BOLSA") Then
+                        .FormaDespacho = 2
+                    ElseIf formadespacho.Contains("BIG") Then
+                        .FormaDespacho = 3
+                    Else
+                        .FormaDespacho = Nothing
+                    End If
             End Select
 
+
+            .Despacho = cmbdespacho.Text
+            .PuntoDespacho = cmbpuntodespacho.Text
 
 
 
@@ -517,13 +532,13 @@ Public Class FertilizanteManager
 
 
             dr.Item("Destino") = iisNull(dr.Item("Destino"))
-            If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") Then
+            If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") And Trim(dr.Item("Destino")) <> "" Then
                 .Destino = BuscaIdWilliamsDestinoPreciso(RTrim(dr.Item("Destino")), SC)
                 If .Destino = -1 Then .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Destino")), SC)
                 'dt.Rows(row).Item("IdDestino") = .Destino
                 If .Destino = -1 And dr.Item("Destino") = "" Then
                     'solo uso el default si está vacío el texto
-                    .Destino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, SC)
+                    '.Destino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, SC)
                 End If
                 If .Destino = -1 Then
                     Return "Destino"
@@ -536,7 +551,7 @@ Public Class FertilizanteManager
 
 
             dr.Item("Procedencia") = iisNull(dr.Item("Procedencia"))
-            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") Then
+            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") And Trim(dr.Item("Procedencia")) <> "" Then
                 .IdLocalidadTransportista = BuscaIdLocalidadPreciso(RTrim(dr.Item("Procedencia")), SC)
                 If .IdLocalidadTransportista = -1 Then .IdLocalidadTransportista = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Procedencia")), SC)
                 'dt.Rows(row).Item("IdProcedencia") = .Procedencia
@@ -631,6 +646,90 @@ Public Class FertilizanteManager
 
         Return 0
     End Function
+
+
+    Public Enum FormatosDeExcelFertilizantes
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        Autodetectar
+        Moviport
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+    End Enum
+
+    Shared Function FormatoDelArchivoFertilizantes(ByVal sNombreArchivoImportado As String, cmbFormato As System.Web.UI.WebControls.DropDownList) As FormatosDeExcelFertilizantes
+        '"Bunge Ramallo" 
+        '"Cargill Planta Quebracho"
+        '"Cargill Pta Alvear"
+        '"LDC Gral Lagos" 
+        '"LDC Planta Timbues"
+        '"Muelle Pampa"
+        '"Terminal 6"
+        '"Toepfer Pto El Transito"
+        '"Toepfer Destino"
+        '"VICENTIN"
+
+
+        If cmbFormato.SelectedIndex <> FormatosDeExcelFertilizantes.Autodetectar Then Return [Enum].Parse(GetType(FormatosDeExcelFertilizantes), cmbFormato.SelectedItem.Value.ToString)
+
+
+
+
+        'If InStr(sNombreArchivoImportado.ToString.ToUpper, ".TXT") > 0 Then
+        '    If InStr(sNombreArchivoImportado.ToString.ToUpper, "DESCAR") = 0 Then
+        '        cmbFormato.SelectedIndex = FormatosDeExcelFertilizantes.PuertoACA
+        '    Else
+        '        cmbFormato.SelectedIndex = FormatosDeExcelFertilizantes.Reyser
+        '    End If
+        'ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, ".RTF") > 0 Then
+        '    cmbFormato.SelectedIndex = FormatosDeExcelFertilizantes.Nidera
+        'ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "BUNGE") > 0 Then
+        '    cmbFormato.SelectedIndex = FormatosDeExcelFertilizantes.BungeRamallo
+        'ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "PAMPA") > 0 Then
+        '    cmbFormato.SelectedIndex = FormatosDeExcelFertilizantes.MuellePampa
+        'ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "TIMBUES") > 0 Or InStr(sNombreArchivoImportado.ToString.ToUpper, "LDC") > 0 Then
+        '    cmbFormato.SelectedIndex = FormatosDeExcelFertilizantes.LDCPlantaTimbues
+        'ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "VICENT") > 0 Then
+        '    cmbFormato.SelectedIndex = FormatosDeExcelFertilizantes.VICENTIN
+        'End If
+
+
+        'Return cmbFormato.SelectedIndex
+
+
+        ''http://stackoverflow.com/questions/1061228/c-sharp-explicit-cast-string-to-enum
+        ''http://stackoverflow.com/questions/424366/c-sharp-string-enums
+        ''return (T)Enum.Parse(typeof(T), str)
+
+        ''If cmbFormato.SelectedValue = "PuertoACA" Then 'formato CSV
+        ''    Return PuertoACA
+        ''ElseIf cmbFormato.SelectedValue = "AdmServPortuarios" Then
+
+        ''    Return -1
+
+        ''ElseIf cmbFormato.SelectedValue = "Toepfer Transito" Or InStr(nombre.ToUpper, "TRANSITO") Then
+
+        ''    ds = GetExcel(DIRFTP + nombre, 3) 'hoja 3
+
+        ''ElseIf InStr(nombre.ToUpper, "TOEPFER") Then
+
+        ''    ds = GetExcel(DIRFTP + nombre, 1)
+
+        ''ElseIf cmbFormato.SelectedValue = "Cargill" Or InStr(nombre.ToUpper, "CARGILL") Then
+
+        ''    ds = GetExcel(DIRFTP + nombre, 1) 'hoja 1
+
+        ''Else
+
+        ''    ds = GetExcel(DIRFTP + nombre)
+
+        ''End If
+    End Function
+
+
 
 
     <DataObjectMethod(DataObjectMethodType.Update, True)> _
@@ -789,7 +888,7 @@ Public Class FertilizanteManager
 
 
 
-    Shared Function ExcepcionHermanado(ByVal s As String, ByVal sNombreArchivoImportado As String, ByVal LetraColumna As Integer, ByVal FormatoDelArchivo As LogicaImportador.FormatosDeExcel) As enumColumnasDeGrillaFinalFertilizantes
+    Shared Function ExcepcionHermanado(ByVal s As String, ByVal sNombreArchivoImportado As String, ByVal LetraColumna As Integer, ByVal FormatoDelArchivo As FormatosDeExcelFertilizantes) As enumColumnasDeGrillaFinalFertilizantes
         'Consulta 5784
         '        Bunge
         'VENDEDOR es Destinatario (generalmente es Titular)
@@ -806,69 +905,69 @@ Public Class FertilizanteManager
         s = s.ToUpper.Trim
 
         Select Case FormatoDelArchivo
-            Case BungeRamallo
-                'cargador ----> titular
-                'vendedor ----> remitcomer
-                'http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultas1.php?recordid=11790
-                'CUANDO HAY CARGADOR Y VENDEDOR -> TITULAR, INTERMEDIARIO
-                'CUANDO HAY CARGADOR, VENDEDOR Y C/ORDEN -> TITULAR, REMITENTE E INTERMEDIARIO
+            'Case BungeRamallo
+            '    'cargador ----> titular
+            '    'vendedor ----> remitcomer
+            '    'http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultas1.php?recordid=11790
+            '    'CUANDO HAY CARGADOR Y VENDEDOR -> TITULAR, INTERMEDIARIO
+            '    'CUANDO HAY CARGADOR, VENDEDOR Y C/ORDEN -> TITULAR, REMITENTE E INTERMEDIARIO
 
-                'los reacomodo en FormatearColumnasDeCalidadesRamallo()
-                If s = "CARGADOR" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.Titular 'en lugar de vendedor/titular
-                ElseIf s = "VENDEDOR" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.Intermediario 'en lugar de intermediario
-                ElseIf s = "C/ORDEN 1" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.RComercial 'en lugar de intermediario
-                ElseIf s = "NETO" Then
-                    'en bunge muelle pampa usa "neto" para el netoproc
-                    Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
-                ElseIf s = "RUBROS" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.column15
-                ElseIf LetraColumna = 19 Then '"U" Then
-                    'Return enumColumnasDeGrillaFinalFertilizantes.column25
-                End If
-            Case MuellePampa, Terminal6, NobleLima
-                If s = "NETO" Then
-                    'en bunge muelle pampa usa "neto" para el netoproc
-                    Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
-                End If
-            Case LDCPlantaTimbues, LDCGralLagos
-                If s = "KGS." Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
-                ElseIf s = "PROC" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
-                ElseIf LetraColumna = 13 Then ' "N" Then
-                    'columna N en timbues (columna sin titulo) es OBSERVACIONES
-                    Return enumColumnasDeGrillaFinalFertilizantes.column25
-                End If
-            Case VICENTIN
+            '    'los reacomodo en FormatearColumnasDeCalidadesRamallo()
+            '    If s = "CARGADOR" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.Titular 'en lugar de vendedor/titular
+            '    ElseIf s = "VENDEDOR" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.Intermediario 'en lugar de intermediario
+            '    ElseIf s = "C/ORDEN 1" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.RComercial 'en lugar de intermediario
+            '    ElseIf s = "NETO" Then
+            '        'en bunge muelle pampa usa "neto" para el netoproc
+            '        Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
+            '    ElseIf s = "RUBROS" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.column15
+            '    ElseIf LetraColumna = 19 Then '"U" Then
+            '        'Return enumColumnasDeGrillaFinalFertilizantes.column25
+            '    End If
+            'Case MuellePampa, Terminal6, NobleLima
+            '    If s = "NETO" Then
+            '        'en bunge muelle pampa usa "neto" para el netoproc
+            '        Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
+            '    End If
+            'Case LDCPlantaTimbues, LDCGralLagos
+            '    If s = "KGS." Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
+            '    ElseIf s = "PROC" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
+            '    ElseIf LetraColumna = 13 Then ' "N" Then
+            '        'columna N en timbues (columna sin titulo) es OBSERVACIONES
+            '        Return enumColumnasDeGrillaFinalFertilizantes.column25
+            '    End If
+            'Case VICENTIN
 
-                If s = "DESC" Or s = "KILOS" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
-                End If
-            Case VICENTIN_ExcepcionTagRemitenteConflictivo
+            '    If s = "DESC" Or s = "KILOS" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
+            '    End If
+            'Case VICENTIN_ExcepcionTagRemitenteConflictivo
 
-                If s = "REMITENTE" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.Titular
-                End If
-                If s = "REMITENTE COMERCIAL" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.RComercial
-                End If
+            '    If s = "REMITENTE" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.Titular
+            '    End If
+            '    If s = "REMITENTE COMERCIAL" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.RComercial
+            '    End If
 
-            Case Renova
-                If s = "FECHA" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.column18
-                End If
-                If s = "NETO" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
-                End If
-                If s = "ACOPLADO" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.column24 'no te sirve poner _desconocido:  HermanarLeyenda() en ese caso se fija qué pasa. Lo mando entonces a una columna sin consecuencias (CUIT CHOFER)
-                End If
-                If s = "PATENTE" Then
-                    Return enumColumnasDeGrillaFinalFertilizantes.column24
-                End If
+            'Case Renova
+            '    If s = "FECHA" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.column18
+            '    End If
+            '    If s = "NETO" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.NetoProc
+            '    End If
+            '    If s = "ACOPLADO" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.column24 'no te sirve poner _desconocido:  HermanarLeyenda() en ese caso se fija qué pasa. Lo mando entonces a una columna sin consecuencias (CUIT CHOFER)
+            '    End If
+            '    If s = "PATENTE" Then
+            '        Return enumColumnasDeGrillaFinalFertilizantes.column24
+            '    End If
 
 
         End Select
@@ -881,7 +980,7 @@ Public Class FertilizanteManager
     End Function
 
 
-    Shared Function HermanarLeyendaConColumna(ByVal s As String, Optional ByVal sNombreArchivoImportado As String = "", Optional ByVal LetraColumna As Integer = -1, Optional ByVal formato As LogicaImportador.FormatosDeExcel = Nothing) As String
+    Shared Function HermanarLeyendaConColumna(ByVal s As String, Optional ByVal sNombreArchivoImportado As String = "", Optional ByVal LetraColumna As Integer = -1, Optional ByVal formato As FormatosDeExcelFertilizantes = Nothing) As String
         Dim sRet As String = HermanarLeyendaConColumna_aCadena(s, sNombreArchivoImportado, LetraColumna, formato)
 
         If sRet = "" Then sRet = "_Desconocido" 'trucheo. arreglar
@@ -895,7 +994,7 @@ Public Class FertilizanteManager
         Return reconversion
     End Function
 
-    Private Shared Function HermanarLeyendaConColumna_aCadena(ByVal s As String, Optional ByVal sNombreArchivoImportado As String = "", Optional ByVal LetraColumna As Integer = -1, Optional ByVal formato As LogicaImportador.FormatosDeExcel = Nothing) As String
+    Private Shared Function HermanarLeyendaConColumna_aCadena(ByVal s As String, Optional ByVal sNombreArchivoImportado As String = "", Optional ByVal LetraColumna As Integer = -1, Optional ByVal formato As FormatosDeExcelFertilizantes = Nothing) As String
         s = Trim(s)
 
         Dim excep = ExcepcionHermanado(s, sNombreArchivoImportado, LetraColumna, formato)
@@ -1041,6 +1140,34 @@ Public Class FertilizanteManager
                 ms = "El cupo debe tener una descripción"
                 Return False
             End If
+
+
+            'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=15079
+            'Por lo de los litros, tiene que funcionar así:
+
+            'En todos los camiones debe informarse en el remito el kilaje de la carga por un tema legal.
+            'Por otro lado, ellos deben controlar el máximo autorizado, pero en AgroQuimicos o Liquidos este dato va en litros.
+            'Por eso, en estos casos debe agregarse un campo "Litros Finales" y el control debe ser contra este dato (para Commodities y Especialidades debe ser contra Neto Final)
+
+
+
+            If .Despacho = "AGROQUIMICOS" Or .Despacho = "LIQUIDOS" Then
+                If .KilosMaximo < .LitrosFinal Then
+                    ms = "Litros Final supera el máximo autorizado"
+                    Return False
+                End If
+            Else
+                If .KilosMaximo < .Cantidad Then
+                    ms = "Kilos Final supera el máximo autorizado"
+                    Return False
+                End If
+            End If
+
+
+
+
+
+
 
             'If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
             '    sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf

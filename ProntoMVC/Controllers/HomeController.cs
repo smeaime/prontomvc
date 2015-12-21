@@ -37,7 +37,7 @@ namespace ProntoMVC.Controllers
         {
 
 
-            var u = Membership.GetUser();
+            var u = oStaticMembershipService.GetUser();
             string SC = (this.Session["BasePronto"] ?? "").ToString();
 
             // verificar conexion si es la primera vez (solo en modo desarrollo)
@@ -387,7 +387,8 @@ namespace ProntoMVC.Controllers
                 rows = (from child in q
                         select new
                         {
-                           descr=  ((child.Link ?? "")  =="") ?    child.Descripcion :  child.Link, // Correspond to the colmodel NAME in javascript
+                            descr = (new String('_', ((child.IdItem.Replace("-", "").Length) / 2 - 2) * 5)).Replace("_", "&nbsp;")  +
+                                    (((child.Link ?? "")  =="") ?    child.Descripcion :  child.Link ), // Correspond to the colmodel NAME in javascript
                             
                             // The next one correspond to the colmodel ID in javascript Id
                             // If we are are the root level the [nodeid] will be empty as i explained above
@@ -774,17 +775,17 @@ namespace ProntoMVC.Controllers
 
 
             // q = TablaTree();
-            int idusuario = Generales.Val(collection["IdEmpleado"]); // 303; //= Membership.GetUser();
+            int idusuario = Generales.Val(collection["IdEmpleado"]); // 303; //= oStaticMembershipService.GetUser();
 
             if (idusuario == -1)
             {
-                var u = Membership.GetUser();
+                var u = oStaticMembershipService.GetUser();
                 string usuario = u.UserName;
                 idusuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
             }
 
 
-            q = ArbolConNiveles_Tree(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db);
+            q = ArbolConNiveles_Tree(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db, oStaticMembershipService);
 
             //var l = q.Where(n => n.Descripcion == "Bloqueado!" || n.Descripcion == "NO MOSTRAR" || n.Descripcion.StartsWith("por ")).ToList();
 
@@ -1083,7 +1084,7 @@ namespace ProntoMVC.Controllers
 
 
             //var lista = EntidadManager.GetStoreProcedure("", enumSPs.wbusqueda, prefixText);
-            var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
+            var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString(), oStaticMembershipService);
             DataTable lista2 = new DataTable();
             try
             {

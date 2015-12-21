@@ -175,7 +175,7 @@ namespace ProntoMVC.Controllers
             //OrigenDescripcion en 3 cuando hay observaciones = SI
             string usuario = ViewBag.NombreUsuario;
             int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var idclav = db.ProntoIniClaves.Where(x => x.Clave == "OrigenDescripcion en 3 cuando hay observaciones").Select(x => x.IdProntoIniClave).FirstOrDefault();
             string idclava = db.ProntoIni.Where(x => x.IdProntoIniClave == idclav && x.IdUsuario == IdUsuario).Select(x => x.Valor).FirstOrDefault();
@@ -534,7 +534,7 @@ namespace ProntoMVC.Controllers
 
 
                         // esto tarda 30 segundos en autotrol!!!
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)
@@ -647,7 +647,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult SubirPlantilla(System.Web.HttpPostedFileBase file)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             // Verify that the user selected a file
             if (file != null && file.ContentLength > 0)
             {
@@ -845,7 +845,7 @@ namespace ProntoMVC.Controllers
             //End With
             int glbIdUsuario = Pedido.Aprobo ?? -1;
             if (glbIdUsuario <= 0) glbIdUsuario = -1;
-            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             Pronto.ERP.Bll.EntidadManager.Tarea(nSC, "AutorizacionesPorComprobante_EliminarFirmas",
                                                     (int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales,
                                                     Pedido.IdRequerimiento, -1, glbIdUsuario);  // idformulario,idcomprobante, orden autorizacion, idusuarioelimino
@@ -2482,7 +2482,7 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';

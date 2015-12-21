@@ -30,9 +30,9 @@ namespace ProntoMVC.Controllers
         public virtual ViewResult Index()
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                     !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                 ) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -42,9 +42,9 @@ namespace ProntoMVC.Controllers
         public virtual ViewResult IndexFF()
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                     !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                 ) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -60,7 +60,8 @@ namespace ProntoMVC.Controllers
             var filtereditems = (from item in db.Cuentas
                                  where ((
                                  (item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0))).StartsWith(term))
-                                     && item.IdTipoCuenta == 2 && (item.IdObra ?? 0) == 0
+                                     && item.IdTipoCuenta == 2  // las idtipocuenta 2 son las imputables, las otras son las madre o titulos
+                                     && (item.IdObra ?? 0) == 0 
                                      // && item.Descripcion.Trim().Length > 0
                                      )
                                  orderby item.Descripcion
@@ -841,7 +842,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult SaldoContablePorIdCuentaBancaria(int IdCuentaBancaria = 0, string Fecha = "")
         {
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Cuentas_TX_MayorPorIdCuentaBancaria", IdCuentaBancaria, Fecha);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 

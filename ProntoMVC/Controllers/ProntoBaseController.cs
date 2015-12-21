@@ -94,7 +94,7 @@ namespace ProntoMVC.Controllers
             var d = new dsEncrypt();
             d.KeyString = "EDS";
 
-            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService );
             return d.Encrypt(s);
 
 
@@ -106,10 +106,19 @@ namespace ProntoMVC.Controllers
 
             Guid uguid = (Guid)new Guid();
 
+
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
+
+
+                //if (!System.Diagnostics.Debugger.IsAttached) //si uso esto, anda hacer "Debug test", pero no "Run test".
+
+                if (this.Session["Usuario"].NullSafeToString() == "")
                     uguid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+                else
+                    uguid = new Guid("1804B573-0439-4EA0-B631-712684B54473");
+                // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+                // supervisor       1804B573-0439-4EA0-B631-712684B54473
 
             }
             catch (Exception)
@@ -118,9 +127,12 @@ namespace ProntoMVC.Controllers
                 throw new Exception("Falla la conexion a la bdlmaster para verficar el membership .net");
             }
 
+
+
+
             try
             {
-                sc = Generales.sCadenaConex(nombreEmpresa, uguid);
+                sc = Generales.sCadenaConex(nombreEmpresa, oStaticMembershipService);
             }
             catch (Exception)
             {
@@ -145,7 +157,7 @@ namespace ProntoMVC.Controllers
 
                 try
                 {
-                    if (Membership.GetUser() == null)
+                    if (oStaticMembershipService.GetUser() == null)
                     {
                         FormsAuthentication.SignOut();
                         Session.Abandon();
@@ -210,21 +222,21 @@ namespace ProntoMVC.Controllers
                     // return Redirect(returnUrl);
 
                     string sss2 = this.Session["BasePronto"].ToString();
-                    sc = Generales.sCadenaConex(sss2);
+                    sc = Generales.sCadenaConex(sss2, oStaticMembershipService);
                     if (sc == null)
                     {
                         // throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
-                        this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                        this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey);
                     }
                 }
                 else
                 {
 
-                    this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                    this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey);
                 }
 
                 string sss = this.Session["BasePronto"].ToString();
-                sc = Generales.sCadenaConex(sss);
+                sc = Generales.sCadenaConex(sss, oStaticMembershipService);
                 //    return RedirectToAction("Index", "Home");
                 if (sc == null) throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
             }
@@ -289,7 +301,7 @@ namespace ProntoMVC.Controllers
             {
                 base.Initialize(rc);
 
-                oStaticMembershipService = new StaticMembershipService();
+                oStaticMembershipService = new Generales.StaticMembershipService();
 
 
                 // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
@@ -297,7 +309,7 @@ namespace ProntoMVC.Controllers
                 ROOT = ConfigurationManager.AppSettings["Root"];
                 asignacadena((string)rc.HttpContext.Session["BasePronto"]);
 
-                string us = Membership.GetUser().ProviderUserKey.ToString();
+                string us = oStaticMembershipService.GetUser().ProviderUserKey.ToString();
 
                 string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
                 System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
@@ -461,8 +473,8 @@ namespace ProntoMVC.Controllers
 
 
 
-            //Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-            //string us = Membership.GetUser().UserName;
+            //Guid userGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+            //string us = oStaticMembershipService.GetUser().UserName;
             //string us = userGuid.ToString();
 
 
@@ -473,27 +485,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        StaticMembershipService oStaticMembershipService;
-
-        public interface IStaticMembershipService
-        {
-            MembershipUser GetUser();
-
-            void UpdateUser(MembershipUser user);
-        }
-
-        public class StaticMembershipService : IStaticMembershipService
-        {
-            public System.Web.Security.MembershipUser GetUser()
-            {
-                return Membership.GetUser();
-            }
-
-            public void UpdateUser(MembershipUser user)
-            {
-                Membership.UpdateUser(user);
-            }
-        }
+        public Generales.IStaticMembershipService oStaticMembershipService;
 
 
 
@@ -505,7 +497,7 @@ namespace ProntoMVC.Controllers
             {
                 string usuario = ViewBag.NombreUsuario;
                 IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             }
             else
             {
@@ -533,7 +525,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                ViewBag.NombreUsuario = Membership.GetUser().UserName;
+                ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
             }
             catch (Exception ex)
             {
@@ -1624,7 +1616,9 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                dest = Generales.sCadenaConex(nombrebasepronto);
+                
+
+                dest = Generales.sCadenaConex(nombrebasepronto, oStaticMembershipService);
                 dbDest = new ProntoMVC.Data.Models.DemoProntoEntities(dest);
 
 
@@ -1757,7 +1751,7 @@ namespace ProntoMVC.Controllers
             if (string.IsNullOrEmpty(connectionString)) return;
 
 
-            string nuevaconex = Generales.sCadenaConexSQL(nombrebaseoriginal).Replace(nombrebaseoriginal, nombrebasenueva);
+            string nuevaconex = Generales.sCadenaConexSQL(nombrebaseoriginal, oStaticMembershipService).Replace(nombrebaseoriginal, nombrebasenueva);
 
             CrearConexionlaEnLaTablaBases(nombrebasenueva, nuevaconex); // corregir. estoy pasando la conexion de la bdlmaster
 
@@ -2001,7 +1995,7 @@ namespace ProntoMVC.Controllers
 
             string usuario = ViewBag.NombreUsuario;
             //Guid guiduser = (Guid)Membership.GetUser(usuario).ProviderUserKey; // si no lo encontró en la base pronto, el usuario está en null
-            Guid guiduser = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid guiduser = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
 
 
             bool EsSuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
@@ -2268,7 +2262,7 @@ namespace ProntoMVC.Controllers
                 string nombreproveedor = "";
                 try
                 {
-                    Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                    Guid oGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
                     string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
                     int idproveedor = buscaridproveedorporcuit(cuit);
                     if (idproveedor <= 0)
@@ -2394,7 +2388,7 @@ namespace ProntoMVC.Controllers
             // return RedirectToAction("Arbol", "Acceso");
 
             //esta llamada tarda // y no se puede usar linqtosql acá??????
-            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString());
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
             List<Tablas.Tree> TreeDest2 = new List<Tablas.Tree>();
@@ -2422,7 +2416,7 @@ namespace ProntoMVC.Controllers
 
             TreeDest = new List<Tablas.Tree>(Tree); //la duplico
 
-            var archivoapp = LeerArchivoAPP(IdUsuario, this.Session["BasePronto"].ToString(), usuario, db, new Guid(Membership.GetUser().ProviderUserKey.ToString()));
+            var archivoapp = LeerArchivoAPP(IdUsuario, this.Session["BasePronto"].ToString(), usuario, db, new Guid(oStaticMembershipService.GetUser().ProviderUserKey.ToString()));
 
 
             bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
@@ -2592,7 +2586,7 @@ namespace ProntoMVC.Controllers
                 {
                     try
                     {
-                        Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                        Guid oGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
                         string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
                         int idproveedor = buscaridproveedorporcuit(cuit);
                         if (idproveedor <= 0)
@@ -2835,8 +2829,8 @@ namespace ProntoMVC.Controllers
             bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
             bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
 
-            string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
-            SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString());
+            string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
+            SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
             bool esfirma = Generales.TienePermisosDeFirma(SC, IdUsuario);
 
             foreach (Tablas.Tree o in Tree)
@@ -2966,10 +2960,10 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public List<Tablas.Tree> ArbolConNiveles_Tree(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid = new Guid())
+        public List<Tablas.Tree> ArbolConNiveles_Tree(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Generales.IStaticMembershipService ServicioMembership)
         {
 
-            List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase, userGuid);
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase, ServicioMembership);
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
 
             //string usuario = ViewBag.NombreUsuario;
@@ -2995,7 +2989,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            var archivoapp = LeerArchivoAPP(IdUsuario, sBase, usuario, dbcontext, userGuid);
+            var archivoapp = LeerArchivoAPP(IdUsuario, sBase, usuario, dbcontext, (Guid) ServicioMembership.GetUser().ProviderUserKey );
 
 
             var permisos = (from i in dbcontext.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();

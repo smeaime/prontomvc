@@ -170,10 +170,10 @@ namespace ProntoMVC.Controllers
         {
             //if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras") &&
+                     !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                 )) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = fondoFijoService.ObtenerTodos().Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -208,7 +208,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -257,7 +257,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -946,14 +946,14 @@ namespace ProntoMVC.Controllers
 
 
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 )
             {
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
                 //throw new Exception("No tenés permisos");
@@ -1123,7 +1123,7 @@ namespace ProntoMVC.Controllers
 
                     try
                     {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService );
 
                     }
                     catch (Exception ex)
@@ -1214,14 +1214,14 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 ))
             {
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
                 //throw new Exception("No tenés permisos");
@@ -1487,14 +1487,14 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 ))
             {
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
                 //throw new Exception("No tenés permisos");
@@ -1773,10 +1773,10 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
-            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras") &&
-                                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+             !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras") &&
+                                     !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos")
                                      )
              ) throw new Exception("No tenés permisos");
 
@@ -4695,7 +4695,7 @@ namespace ProntoMVC.Controllers
             string usuarionombre;
 
             if (Debugger.IsAttached) usuarionombre = "Mariano";
-            else usuarionombre = Membership.GetUser().UserName;
+            else usuarionombre = oStaticMembershipService.GetUser().UserName;
 
 
             var mvarMontoMinimo = fondoFijoService.BuscarClaveINI("Monto minimo para registrar ComprobanteProveedor", usuarionombre);
@@ -5472,7 +5472,7 @@ namespace ProntoMVC.Controllers
             string usuarionombre;
 
             if (Debugger.IsAttached) usuarionombre = "Mariano";
-            else usuarionombre = Membership.GetUser().UserName;
+            else usuarionombre = oStaticMembershipService.GetUser().UserName;
 
 
             var mvarMontoMinimo = fondoFijoService.BuscarClaveINI("Monto minimo para registrar ComprobanteProveedor", usuarionombre);
@@ -5929,7 +5929,7 @@ namespace ProntoMVC.Controllers
                 {
                     mProximaRendicion = (fondoFijoService.CuentasById(idcuentaFF).NumeroAuxiliar ?? 0) + 1;
                 }
-                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
                 EntidadManager.Tarea(SC, "Cuentas_IncrementarRendicionFF", idcuentaFF, mProximaRendicion);
 
                 return Json("Hecho  nueva rendicion:" + mProximaRendicion + " " + fondoFijoService.CuentasById(idcuentaFF).Descripcion, JsonRequestBehavior.AllowGet);
@@ -6041,7 +6041,7 @@ namespace ProntoMVC.Controllers
                 ComprobanteProveedor ComprobanteProveedor = fondoFijoService.ObtenerPorId(id);
 
 
-                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (idproveedor > 0 && ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
 
 
@@ -7049,7 +7049,7 @@ namespace ProntoMVC.Controllers
             var Entidad = fondoFijoService.ObtenerTodos().AsQueryable();
 
 
-            int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
             if (idproveedor > 0) Entidad = Entidad.Where(p => p.IdProveedor == idproveedor).AsQueryable();
 
@@ -7854,7 +7854,7 @@ namespace ProntoMVC.Controllers
                 // extract only the fielname
                 nombre = System.IO.Path.GetFileName(file.FileName);
                 // store the file inside ~/App_Data/uploads folder
-                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
                 path = System.IO.Path.Combine(Server.MapPath("~/App_Data"), nombre); // "~/App_Data/uploads"
                 file.SaveAs(path);
             }
@@ -7862,7 +7862,7 @@ namespace ProntoMVC.Controllers
             else
             {
                 nombre = "F.F.- Omar Breton.xls";
-                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL("Autotrol"));
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL("Autotrol", oStaticMembershipService));
                 path = System.IO.Path.Combine(Server.MapPath("~/App_Data"), nombre); // "~/App_Data/uploads"
             }
 
@@ -7882,7 +7882,7 @@ namespace ProntoMVC.Controllers
 
             string nombre = "F.F.- Omar Breton.xls";
             // SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL("Autotrol"));
-            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             string path = System.IO.Path.Combine(Server.MapPath("~/App_Data"), nombre); // "~/App_Data/uploads"
             ImportarExcel(path, SC);
 

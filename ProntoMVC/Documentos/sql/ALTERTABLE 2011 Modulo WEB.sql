@@ -1529,6 +1529,54 @@ alter table FertilizantesCupos ADD
 	PuntoDespacho	VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL
 go
 
+---------------------------------------------------------------------------
 
+
+alter table CartasDePorte ADD
+	ConDuplicados	INT				NULL
+go
+
+
+
+
+Update CartasDePorte  
+set ConDuplicados =    
+        (  
+        	select count(*) from cartasdeporte as Q2   
+        		where    
+        			Q2.NumeroCartaDePorte=NumeroCartaDePorte AND   
+        			Q2.NumeroSubFijo=NumeroSubFijo AND   
+        			Q2.SubNumeroVagon=SubNumeroVagon  
+        			and Anulada<>'SI'  
+        )
+select Q.NumeroCartaDePorte,Q.NumeroSubFijo,Q.SubNumeroVagon  
+        from  cartasdeporte as Q  
+        inner join    
+        (  
+        select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  
+        from cartasdeporte  
+        where Anulada<>'SI'  
+        group by NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  
+        having     COUNT(NumeroCartaDePorte) > 1  
+        ) as REPES on REPES.NumeroCartaDePorte=Q.NumeroCartaDePorte AND REPES.NumeroSubFijo=Q.NumeroSubFijo AND       
+        REPES.SubNumeroVagon=Q.SubNumeroVagon  
+go
+
+select conduplicados from cartasdeporte
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+alter table FertilizantesCupos ADD
+	LitrosFinal NUMERIC (12, 2) NULL
+go
+
+
+
+ALTER TABLE facturas alter column idcondicionventa int NULL
 
 

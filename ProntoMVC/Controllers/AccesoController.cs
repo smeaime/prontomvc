@@ -176,9 +176,9 @@ namespace ProntoMVC.Controllers
 
 
             if (!(
-                   Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno"))
+                   oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
                 )
             {
                 throw new Exception("No tenés permisos");
@@ -278,9 +278,9 @@ namespace ProntoMVC.Controllers
 
             if (!
                 (
-                 Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") ||
-                Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno"))
+                 oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") ||
+                oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "AdminExterno"))
                 )
             {
                 throw new Exception("No tenés permisos");
@@ -746,7 +746,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult ArbolConNiveles(int IdUsuario)
         {
 
-            return Json(ArbolConNiveles_Tree(IdUsuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db));
+            return Json(ArbolConNiveles_Tree(IdUsuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db , oStaticMembershipService  ));
         }
 
 
@@ -790,7 +790,7 @@ namespace ProntoMVC.Controllers
             //var q = (from i in db.DefinicionArticulos where (i.IdRubro == o.IdRubro && i.IdSubrubro == o.IdSubrubro) orderby i.Orden select i).ToList();
             //ViewBag.Mascara = q;
 
-            //var SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            //var SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService;
             //SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC);
 
             //foreach (DefinicionArticulo x in q)

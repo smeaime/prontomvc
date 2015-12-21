@@ -38,7 +38,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             try
             {
-                ViewBag.NombreUsuario = Membership.GetUser().UserName;
+                ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
             }
             catch (Exception e)
             {
@@ -114,7 +114,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             try
             {
                 //Guid guiduser = (Guid)Membership.GetUser(usuario).ProviderUserKey; // si no lo encontró en la base pronto, el usuario está en null
-                guiduser = (Guid)Membership.GetUser().ProviderUserKey;
+                guiduser = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
             }
             catch (Exception ex)
             {
@@ -253,7 +253,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             try
             {
                 //Guid guiduser = (Guid)Membership.GetUser(usuario).ProviderUserKey; // si no lo encontró en la base pronto, el usuario está en null
-                guiduser = (Guid)Membership.GetUser().ProviderUserKey;
+                guiduser = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
             }
             catch (Exception ex)
             {
@@ -386,8 +386,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         {
 
             string usuario = ViewBag.NombreUsuario;
-            //Guid guiduser = (Guid)Membership.GetUser().ProviderUserKey; // si no lo encontró en la base pronto, el usuario está en null
-            Guid guiduser = (Guid)Membership.GetUser().ProviderUserKey;
+            //Guid guiduser = (Guid)oStaticMembershipService.GetUser().ProviderUserKey; // si no lo encontró en la base pronto, el usuario está en null
+            Guid guiduser = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
 
             IDictionary<string, bool> s = BasesPorUsuarioColeccion2(guiduser, guiduser);
 
@@ -798,8 +798,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                     {
 
                         // si el admin que modifica es externo, lo pongo en su grupo. Si no, le creo un grupo 
-                        string grupo = Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno") ?
-                                        DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey) :
+                        string grupo = oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "AdminExterno") ?
+                                        DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey) :
                                         user.UserName;
 
                         using (BDLMasterEntities bdlmaster = new BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER()))
@@ -1205,7 +1205,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 string usuario = ViewBag.NombreUsuario;
 
                 ProntoFuncionesGenerales.MandaEmailSimple(
-                            user.Email + (Membership.GetUser() == null ? "" : "," + Membership.GetUser().Email) + "," + ConfigurationManager.AppSettings["ErrorMail"],
+                            user.Email + (oStaticMembershipService.GetUser() == null ? "" : "," + oStaticMembershipService.GetUser().Email) + "," + ConfigurationManager.AppSettings["ErrorMail"],
                                           ResetPasswordSubject,
                                      body,
                                       ConfigurationManager.AppSettings["SmtpUser"],
@@ -1221,7 +1221,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
                 ProntoFuncionesGenerales.MandaEmailSimple(ConfigurationManager.AppSettings["ErrorMail"],
                             "Error de mail en ResetPasswordWithAnswer",
-                            user.Email + (Membership.GetUser() == null ? "" : "," + Membership.GetUser().Email) + "," + ConfigurationManager.AppSettings["ErrorMail"],
+                            user.Email + (oStaticMembershipService.GetUser() == null ? "" : "," + oStaticMembershipService.GetUser().Email) + "," + ConfigurationManager.AppSettings["ErrorMail"],
                                 ConfigurationManager.AppSettings["SmtpUser"],
                                 ConfigurationManager.AppSettings["SmtpServer"],
                                 ConfigurationManager.AppSettings["SmtpUser"],
@@ -1293,7 +1293,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 {
 
                     ProntoFuncionesGenerales.MandaEmailSimple(
-                             ConfigurationManager.AppSettings["ErrorMail"] + "," + membershipUser.Email + (Membership.GetUser() == null ? "" : "," + Membership.GetUser().Email)
+                             ConfigurationManager.AppSettings["ErrorMail"] + "," + membershipUser.Email + (oStaticMembershipService.GetUser() == null ? "" : "," + oStaticMembershipService.GetUser().Email)
                              ,
                             "Reinicio de contraseña",
                             cuerpo,
@@ -1897,7 +1897,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         [HttpPost]
         public virtual ActionResult SubirPlantilla(System.Web.HttpPostedFileBase file)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             // Verify that the user selected a file
             if (file != null && file.ContentLength > 0)
             {
@@ -1931,7 +1931,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         public virtual FileResult BajarPlantilla()
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
 
