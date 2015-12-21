@@ -157,8 +157,17 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void InformeConAcopios_16451()
         {
+                  string sErrores = "", sTitulo = "";
 
-
+             string s=   CartaDePorteManager.EnviarMailFiltroPorId_DLL(SC ,
+                                             new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
+                                                0, 1234,
+                                                "" , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
+                                                     ByRef sError As String,  false, _
+                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
+                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+                                                     ByRef sError2 As String _
+                                                        );
         }
 
 
