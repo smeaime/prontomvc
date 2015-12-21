@@ -864,7 +864,7 @@ namespace ProntoMVC.Controllers
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -892,15 +892,15 @@ namespace ProntoMVC.Controllers
         {
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
-            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             if (idcliente != 0 &&
                   db.Facturas.Find(id).IdCliente != idcliente
-                 && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
+                 && !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Comercial")
                 ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             string plantilla;
@@ -938,11 +938,11 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
-            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             //if (db.Facturas.Find(id).IdCliente != idcliente
-            //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
-            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
+            //     && !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") && 
+            //    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Comercial")
             //    ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
 
@@ -950,7 +950,7 @@ namespace ProntoMVC.Controllers
             // baseP = "Vialagro";
             // baseP = "BDLConsultores";
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             string plantilla;
             if (db.Facturas.Find(id).TipoABC == "A")

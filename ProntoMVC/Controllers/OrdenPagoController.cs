@@ -32,9 +32,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 ) throw new Exception("No tenés permisos");
 
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
@@ -57,9 +57,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
 
-            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+            //   !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+            //   !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
             //   ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -74,10 +74,10 @@ namespace ProntoMVC.Controllers
             {
                 OrdenPago OrdenPago = db.OrdenesPago.Find(id);
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (OrdenPago.IdProveedor != idproveedor
-                //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+                //     && !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                //!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")
                     ) throw new Exception("No tenés permisos para esa Orden de Pago");
 
 
@@ -107,9 +107,9 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -145,9 +145,9 @@ namespace ProntoMVC.Controllers
             {
                 OrdenPago OrdenPago = db.OrdenesPago.Find(id);
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-                if (OrdenPago.IdProveedor != idproveedor && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
+                if (OrdenPago.IdProveedor != idproveedor && !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                    !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
                 try
                 {
                     ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
@@ -320,7 +320,7 @@ namespace ProntoMVC.Controllers
             int currentPage = page; //  ?? 1;
             int idproveedor;
 
-            //var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            //var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
             //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -333,7 +333,7 @@ namespace ProntoMVC.Controllers
                 Req = (from a in Req where a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta select a).AsQueryable();
             }
             
-            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             if (idproveedor > 0)
             {
                 string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
@@ -480,7 +480,7 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
             int idproveedor;
 
-            //var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            //var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
             //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -547,7 +547,7 @@ namespace ProntoMVC.Controllers
                 data = (from a in data where a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta select a).AsQueryable();
             }
             
-            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
             if (idproveedor > 0)
             {
                 string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
@@ -629,7 +629,7 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
             int idproveedor;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var pendiente = "S"; //hay que usar S para traer solo lo pendiente
 
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TX_EnCaja", "CA"); // "FI", "EN", "CA"
@@ -639,7 +639,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
                 if (idproveedor > 0)
                 {
                     string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
@@ -751,7 +751,7 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult ImprimirRetenciones(int id) //(int id)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "CertificadoRetencionGanancias.docx";
@@ -829,7 +829,7 @@ namespace ProntoMVC.Controllers
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 //.ToList();
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPago_TXOrdenPago", IdOrdenesPago1);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1015,7 +1015,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPagoCuentas_TXOrdenPago", IdOrdenesPago1);
             //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1115,7 +1115,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPagoImpuestos_TXOrdenPago", IdOrdenesPago1);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1427,7 +1427,7 @@ namespace ProntoMVC.Controllers
             bool mAplicarAlicuotaConvenio = false;
             bool mAplicarAlicuotaDirecta = false;
             
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mImporteComprobantesMParaRetencionGanancias = parametros.ImporteComprobantesMParaRetencionGanancias ?? 0;
@@ -1669,7 +1669,7 @@ namespace ProntoMVC.Controllers
 
             bool mProcesarSUSS = false;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mIdMonedaPesos = parametros.IdMoneda ?? 0;
@@ -1819,7 +1819,7 @@ namespace ProntoMVC.Controllers
             //   GoTo Salida
             //End If
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var Empresas = db.Empresas.Where(p => p.IdEmpresa == 1).FirstOrDefault();
             if ((Empresas.ActividadComercializacionGranos ?? "") == "SI") { mActividadComercializacionGranos = true; }
@@ -2082,7 +2082,7 @@ namespace ProntoMVC.Controllers
             string mChequeraPagoDiferido = "";
             string mActivarCircuitoChequesDiferidos = "";
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mIdCuentaRetencionGanancias = parametros.IdCuentaRetencionGanancias ?? 0;
@@ -2294,7 +2294,7 @@ namespace ProntoMVC.Controllers
 
             DataRow oRsAux1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             mIdOrdenPago = o.IdOrdenPago;
             mNumeroOrdenPago = o.NumeroOrdenPago ?? 0;
@@ -2511,7 +2511,7 @@ namespace ProntoMVC.Controllers
 
                 DateTime mFechaInicioControl;
                 
-                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
                 Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
                 mIdCuentaCajaTitulo = parametros.IdCuentaCajaTitulo ?? 0;

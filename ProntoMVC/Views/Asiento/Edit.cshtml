@@ -152,10 +152,8 @@
 
 
                             <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
-                                   style="font-size: 16px; 
-                                ">
-
-                            </table>
+                                   style="font-size: 16px;
+                                "></table>
                             <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
 
                         </div>
@@ -340,29 +338,50 @@
                 colNames: ['#',
 
                                 'IdDetalleAsiento',
-                           'IdCuenta', 'item',
+                           'IdCuenta', '#',
 
                            'Cuenta',
 
                             'Detalle de cuenta', 'Obra', 'Debe', 'Haber',
 
-                            'Registrar en analitico', 'Detalle',
+                            'Registra analítico', 'Detalle',
                             'Moneda destino', 'Cotiz. moneda destino', 'Importe mon destino',
 
                             'Enviar a libro',
                         'Pase IVA',
                         'Nro Comprobante',
-                        'Porcentaje de IVA', 'IdObra','IdMoneda'
+                        'Porcentaje de IVA', 'IdObra', 'IdMoneda'
                 ],
                 colModel: [
                                 { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdDetalleAsiento', label: 'TB', index: 'IdDetalleAsiento', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdCuenta', label: 'TB', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'Item', index: 'Item', align: 'left', width: 50, editable: true, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
-                                { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, hidden: false, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn', 'eq'] } },
+                                {
+                                    name: 'IdDetalleAsiento', label: 'TB',
+                                    index: 'IdDetalleAsiento', align: 'center', width: 80, key:true,
+                                    sortable: false, editable: false, search: false, hidden: true
+                                }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+
+                            
+                                 {
+                                     name: 'IdCuenta', formoptions: { rowpos: 3, colpos: 1 },
+                                     index: 'IdCuenta', label: 'TB', align: 'left', width: 85, editable: true,
+                                     hidden: true, editoptions: { disabled: 'disabled' },
+                                     editrules: { edithidden: true, required: true }
+                                 },
+
+
 
                                 {
-                                    name: 'Cuenta', formoptions: {  label: "Cuenta" }, index: 'Cuenta', align: 'left', width: 250,
+                                    name: 'Item', index: 'Item', label: 'TB', align: 'left', width: 30, editable: true,
+                                    search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] }
+                                },
+                                {
+                                    name: 'Codigo', index: 'Codigo', align: 'right', width: 90, hidden: false,
+                                    editable: true, search: true
+                                    ,editoptions: { disabled: 'disabled' }, editrules: { edithidden: false, required: true }
+                                },
+
+                                {
+                                    name: 'Cuenta', formoptions: { label: "Cuenta" }, index: 'Cuenta', align: 'left', width: 250,
                                     hidden: false,
                                     editable: true, edittype: 'text',
                                     editoptions: {
@@ -383,23 +402,30 @@
                                                     // cómo hago si la modificacion se hizo en modo inline??????
 
 
-                                                    //if ($($("#Lista").jqGrid("getInd", rowid, true)).attr("editable") === "1") {
-                                                    // the row having id=rowid is in editing mode
+                                                    if ($($("#Lista").jqGrid("getInd", rowid, true)).attr("editable") === "1") {
+                                                        // the row having id=rowid is in editing mode
 
+                                                        var rowid = $('#Lista').getGridParam('selrow');
+                                                        $('#Lista').jqGrid('setCell', rowid, 'IdCuenta', ui.item.id);
+                                                        $('#Lista').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
+                                                        $('#Lista').jqGrid('setCell', rowid, 'CuentaGasto', ui.item.title);
+                                                    }
+                                                    else {
+                                                        var rowid = $('#Lista').getGridParam('selrow');
+                                                        $('#Lista').jqGrid('setCell', rowid, 'IdCuenta', ui.item.id);
+                                                        $('#Lista').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
+                                                        $('#Lista').jqGrid('setCell', rowid, 'CuentaGasto', ui.item.title);
+                                                        if ($('#Lista').jqGrid('getCell', rowid, 'Item') == "") {
+                                                            var maxitem = ($("#Lista").jqGrid('getCol', 'Item', false, 'max') || 0) + 1;
+                                                            $('#Lista').jqGrid('setCell', rowid, 'Item', maxitem);
+                                                        }
 
-                                                    //                                            }
-                                                    //                                          else {
-
-
-
-                                                    //                                            $("#IdCuenta").val(ui.id);
-                                                    //                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
-                                                    //                                            $("#CuentaGasto").val(ui.title);
-
-                                                    $("#IdCuenta").val(ui.item.id);
-                                                    $("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
-                                                    $("#CuentaGasto").val(ui.item.title);
-                                                    //}
+                                                        $("#IdCuenta").val(ui.item.id);
+                                                        $("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                                        $("#CuentaGasto").val(ui.item.title);
+                                                        //$("#Item").val(maxitem);
+                                                        
+                                                    }
 
                                                 },
                                                 focus: function (event, ui) {
@@ -511,7 +537,8 @@
                                                     //                                            $("#IdCuenta").val(ui.id);
                                                     //                                            $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
                                                     //                                            $("#CuentaGasto").val(ui.title);
-
+                                                    var rowid = $('#Lista').getGridParam('selrow');
+                                                    $('#Lista').jqGrid('setCell', rowid, 'IdObra', ui.item.id);
                                                     $("#IdObra").val(ui.item.id);
                                                     //$("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
                                                     //$("#CuentaGasto").val(ui.item.title);
@@ -601,7 +628,7 @@
 
                                  {
                                      name: 'RegistrarEnAnalitico', label: 'TB', index: 'RegistrarEnAnalitico', align: 'center', width: 50,
-                                     editable: true, edittype: 'checkbox', editoptions: { value: "True:False" },
+                                     editable: true, edittype: 'checkbox', editoptions: { value: "SI:NO" },
                                      //formatter: "checkbox",
                                      formatter: "SiNoFormatter",
                                      formatoptions: { disabled: false }
@@ -619,7 +646,7 @@
                                     edittype: 'select', // formatter: 'select',
                                     editrules: { required: false },
                                     editoptions: {
-                                        dataUrl: ROOT +  'Moneda/GetMonedas',
+                                        dataUrl: ROOT + 'Moneda/GetMonedas',
                                         dataInit: function (elem) {
                                             $(elem).width(40);
                                         },
@@ -630,7 +657,7 @@
                                                     // form editing
                                                     $('#IdMonedaDestino').val(this.value);
                                                     Moneda_Cotizacion(null, this.value, function (cotiz) {
-                                                                    $('#CotizacionMoneda').val (cotiz);
+                                                        $('#CotizacionMoneda').val(cotiz);
                                                     });
                                                 } else {
                                                     $td = $this.closest("td");
@@ -639,9 +666,9 @@
                                                         var rowid = $('#Lista').getGridParam('selrow');
                                                         $('#Lista').jqGrid('setCell', rowid, 'IdMonedaDestino', this.value);
                                                         Moneda_Cotizacion(null, this.value, function (cotiz) {
-                                                                $('#Lista').jqGrid('setCell', rowid, 'CotizacionMoneda', cotiz);
+                                                            $('#Lista').jqGrid('setCell', rowid, 'CotizacionMoneda', cotiz);
                                                         });
-                                                        
+
                                                     } else {
                                                         // inline editing
                                                     }
@@ -664,8 +691,8 @@
                                         label: "Enviar a libros"
                                     }
                                     , index: 'Libro',
-                                    align: 'center', width: 100, editable: true, hidden: false,
-                                    edittype: 'select', formatter: 'select',
+                                     align: 'center', width: 100, editable: true, hidden: false,
+                                     edittype: 'select', formatter: 'select',
                                      // formatter: radioFormatter, unformat: unformatRadio,
                                      editrules: {
                                          required: false
@@ -675,7 +702,7 @@
                                          //                         readonly: true,
                                          //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
                                          //defaultValue: OrigenDescripcionDefault,
-                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro compras;" //, size: 3
+                                         value: "N:no enviar a los libros;V:enviar al libro ventas; C:enviar al libro compras;:" //, size: 3
                                          //,
                                          //     custom_element: myelem, custom_value: myvalue
                                      }
@@ -690,8 +717,8 @@
                                             label: "El pase es"
                                         }
                                         , index: 'TipoImporte',
-                                        align: 'center', width: 100, editable: true, hidden: false,
-                                        edittype: 'select', formatter: 'select',
+                                    align: 'center', width: 100, editable: true, hidden: false,
+                                    edittype: 'select', formatter: 'select',
                                     // edittype: 'custom',
                                     // formatter: radioFormatter, unformat: unformatRadio,
                                     editrules: {
@@ -715,7 +742,14 @@
                                 { name: 'PorcentajeIVA', label: 'TB', index: 'PorcentajeIVA', align: 'left', width: 70, editable: true, editoptions: {}, search: false, searchoptions: { sopt: ['cn'] }, hidden: false },
 
 
-                                { name: 'IdObra', label: 'TB', key: true, index: 'IdObra', align: 'left', width: 100, editable: false, hidden: true },
+
+                                 {
+                                     name: 'IdObra', index: 'IdObra', label: 'TB', align: 'left', width: 85, editable: true,
+                                     hidden: true, editoptions: { disabled: 'disabled' },
+                                     editrules: { edithidden: true, required: false }
+                                 },
+
+
                                 { name: 'IdMonedaDestino', label: 'TB', key: true, index: 'IdMonedaDestino', align: 'left', width: 100, editable: false, hidden: true },
 
 
@@ -727,6 +761,10 @@
 
                 loadComplete: function (data) {
                     calculateTotal();
+                    AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0", "RegistrarEnAnalitico": "NO" });
+
+                    ReajustarAlto($("#Lista"));
+
                 },
 
                 onSelectRow: function (id) {
@@ -945,7 +983,7 @@
 
                         var iddeta = data['IdDetalleAsiento'];
                         //alert(iddeta);
-                        if (!iddeta) continue;
+                        //if (!iddeta) continue;
 
 
 
@@ -1065,7 +1103,7 @@
 
 
 
-      
+
 
 
 
@@ -1168,6 +1206,18 @@
 
                     },
 
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+
+
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    },
 
                     error: function (xhr, textStatus, exceptionThrown) {
                         var errorData = $.parseJSON(xhr.responseText);
@@ -1176,10 +1226,29 @@
                         for (var key in errorData) {
                             errorMessages.push(errorData[key]);
                         }
+
+
+
                         $('#result').html(errorMessages.join("<br />"));
                         alert(errorMessages.join("\n").replace(/<br\/>/g, '\n'));
+
+
+
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        //alert(errorMessages.join("<br />"));
+
+                         $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
+                        //$('#result').html(errorMessages.join("<br />"));
+                        //$("#textoMensajeAlerta").html(xhr.responseText);
+                        //$("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        pageLayout.show('east');
+
                     }
 
+
+              
 
 
 
@@ -1428,7 +1497,6 @@
 
                     AgregarRenglonesEnBlanco({ "IdDetalleAsiento": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "", "IVAComprasPorcentaje1": "0", "RegistrarEnAnalitico": "NO" });
 
-
                 }
 
 
@@ -1580,18 +1648,25 @@
                 width: 800, reloadAfterSubmit: false, closeOnEscape: true, closeAfterAdd: true,
                 recreateForm: true,
                 beforeShowForm: function (form) {
-                    var dlgDiv = $("#editmod" + $("#Lista")[0].id);
-                    dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
-                    dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                    //var dlgDiv = $("#editmod" + $("#Lista")[0].id);
+                    //dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
+                    //dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                    $('#tr_IdCuenta', form).hide();
+                    $('#tr_IdObra', form).hide();
+
+                    PopupCentrar();
                 },
                 beforeInitData: function () {
                     inEdit = false;
                 },
                 afterComplete: function (response, postdata) {
                     calculateTotal();
+                    ReajustarAlto($("#Lista"));
+
                 },
                 onInitializeForm: function (form) {
                     $('#IdDetalleAsiento', form).val(0);
+
                     $('#Item', form).val(($("#Lista").jqGrid('getCol', 'Item', false, 'max') || 0) + 1);
                 }
                 //beforeShowForm: function (form) { $('#tr_IdDetalleFactura', form).hide(); }
@@ -1606,6 +1681,10 @@
                 closeAfterEdit: true, recreateForm: true, Top: 0,
                 beforeShowForm: function (form) {
                     // "editmodlist"
+                    $('#tr_IdCuenta', form).hide();
+                    $('#tr_IdObra', form).hide();
+
+
                     var dlgDiv = $("#editmod" + $("#Lista")[0].id);
                     var parentDiv = dlgDiv.parent(); // div#gbox_list
                     var dlgWidth = dlgDiv.width();
@@ -1614,6 +1693,9 @@
                     var parentHeight = parentDiv.height();
                     dlgDiv[0].style.top = 100 //Math.round((parentHeight-dlgHeight)/2) + "px";
                     dlgDiv[0].style.left = 200 //Math.round((parentWidth-dlgWidth)/2) + "px";
+
+                    PopupCentrar();
+
                 },
                 afterComplete: function (response, postdata) {
                     calculateTotal();

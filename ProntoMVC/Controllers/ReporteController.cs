@@ -40,7 +40,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "InformesContables_TX_ComprasYVentas", FechaInicial, FechaFinal);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -166,7 +166,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_SICORE", FechaInicial, FechaFinal);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -252,7 +252,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_RetencionesIVA", FechaInicial, FechaFinal, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -314,7 +314,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIVA", FechaInicial, FechaFinal, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -374,7 +374,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_SUSS", FechaInicial, FechaFinal, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -432,7 +432,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_SIRE", FechaInicial, FechaFinal, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -518,7 +518,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_RetencionesIIBB", FechaInicial, FechaFinal, 1, CodigoActividad, "SI");
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -642,7 +642,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIIBB_SIRCREB", FechaInicial, FechaFinal, TipoArchivo, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -708,7 +708,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIIBBConvenio", FechaInicial, FechaFinal, TipoArchivo, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -790,7 +790,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIIBB", FechaInicial, FechaFinal, TipoArchivo, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -876,7 +876,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Clientes_TX_RetencionesGanancias", FechaInicial, FechaFinal, "", 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -950,7 +950,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Clientes_TX_RetencionesIVA", FechaInicial, FechaFinal, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1016,7 +1016,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Clientes_TX_PercepcionesIVA", FechaInicial, FechaFinal, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1090,7 +1090,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Clientes_TX_PercepcionesIIBB", FechaInicial, FechaFinal, CodigoActividad, "SI");
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1192,7 +1192,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Clientes_TX_RetencionesIIBB_Cobranzas", FechaInicial, FechaFinal, TipoArchivo, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1270,7 +1270,7 @@ namespace ProntoMVC.Controllers
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Clientes_TX_RetencionesSUSS", FechaInicial, FechaFinal, 2);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 

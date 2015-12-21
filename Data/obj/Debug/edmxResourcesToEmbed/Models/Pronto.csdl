@@ -895,7 +895,7 @@
       <End Role="DetalleAsiento" EntitySet="DetalleAsientos" />
     </AssociationSet>
     <EntitySet Name="Conciliaciones" EntityType="DemoProntoModel.Conciliacione" />
-    <EntitySet Name="DetalleConciliaciones" EntityType="DemoProntoModel.DetalleConciliacione" />
+    <EntitySet Name="DetalleConciliacionesContables" EntityType="DemoProntoModel.DetalleConciliacione" />
     <EntitySet Name="DetalleConciliacionesNoContables" EntityType="DemoProntoModel.DetalleConciliacionesNoContable" />
     <AssociationSet Name="FK_Conciliaciones_CuentasBancarias" Association="DemoProntoModel.FK_Conciliaciones_CuentasBancarias">
       <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
@@ -903,7 +903,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_DetalleConciliaciones_Conciliaciones" Association="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones">
       <End Role="Conciliacione" EntitySet="Conciliaciones" />
-      <End Role="DetalleConciliacione" EntitySet="DetalleConciliaciones" />
+      <End Role="DetalleConciliacione" EntitySet="DetalleConciliacionesContables" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleConciliacionesNoContables_Conciliaciones" Association="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones">
       <End Role="Conciliacione" EntitySet="Conciliaciones" />
@@ -1559,6 +1559,60 @@
       <End Role="Valore" EntitySet="Valores" />
       <End Role="DetalleDepositosBancario" EntitySet="DetalleDepositosBancarios" />
     </AssociationSet>
+    <EntitySet Name="DetalleValoresCuentas" EntityType="DemoProntoModel.DetalleValoresCuenta" />
+    <EntitySet Name="DetalleValoresProvincias" EntityType="DemoProntoModel.DetalleValoresProvincia" />
+    <EntitySet Name="DetalleValoresRubrosContables" EntityType="DemoProntoModel.DetalleValoresRubrosContable" />
+    <AssociationSet Name="FK_DetalleValoresCuentas_Valores" Association="DemoProntoModel.FK_DetalleValoresCuentas_Valores">
+      <End Role="Valore" EntitySet="Valores" />
+      <End Role="DetalleValoresCuenta" EntitySet="DetalleValoresCuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleValoresProvincias_Valores" Association="DemoProntoModel.FK_DetalleValoresProvincias_Valores">
+      <End Role="Valore" EntitySet="Valores" />
+      <End Role="DetalleValoresProvincia" EntitySet="DetalleValoresProvincias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleValoresRubrosContables_Valores" Association="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores">
+      <End Role="Valore" EntitySet="Valores" />
+      <End Role="DetalleValoresRubrosContable" EntitySet="DetalleValoresRubrosContables" />
+    </AssociationSet>
+    <EntitySet Name="ValoresFaltantesVistos" EntityType="DemoProntoModel.ValoresFaltantesVisto" />
+    <EntitySet Name="DetallePlazosFijosRubrosContables" EntityType="DemoProntoModel.DetallePlazosFijosRubrosContable" />
+    <AssociationSet Name="FK_DetallePlazosFijosRubrosContables_PlazosFijos" Association="DemoProntoModel.FK_DetallePlazosFijosRubrosContables_PlazosFijos">
+      <End Role="PlazosFijo" EntitySet="PlazosFijos" />
+      <End Role="DetallePlazosFijosRubrosContable" EntitySet="DetallePlazosFijosRubrosContables" />
+    </AssociationSet>
+    <EntitySet Name="Calidades" EntityType="DemoProntoModel.Calidade" />
+    <EntitySet Name="CDPEstablecimientos" EntityType="DemoProntoModel.CDPEstablecimiento" />
+    <EntitySet Name="CDPHumedades" EntityType="DemoProntoModel.CDPHumedade" />
+    <EntitySet Name="WilliamsDestinos" EntityType="DemoProntoModel.WilliamsDestino" />
+    <EntitySet Name="WilliamsMailFiltrosColas" EntityType="DemoProntoModel.WilliamsMailFiltrosCola" />
+    <AssociationSet Name="FK__CDPHumeda__IdArt__48D19AF6" Association="DemoProntoModel.FK__CDPHumeda__IdArt__48D19AF6">
+      <End Role="Articulo" EntitySet="Articulos" />
+      <End Role="CDPHumedade" EntitySet="CDPHumedades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WilliamsD__Subco__0180086D" Association="DemoProntoModel.FK__WilliamsD__Subco__0180086D">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WilliamsD__Subco__02742CA6" Association="DemoProntoModel.FK__WilliamsD__Subco__02742CA6">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Fertiliza__Desti__4AD9DEF9" Association="DemoProntoModel.FK__Fertiliza__Desti__4AD9DEF9">
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+      <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Fertiliza__Desti__5833DA17" Association="DemoProntoModel.FK__Fertiliza__Desti__5833DA17">
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+      <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WilliamsD__IdLoc__3EDE1C68" Association="DemoProntoModel.FK__WilliamsD__IdLoc__3EDE1C68">
+      <End Role="Localidad" EntitySet="Localidades" />
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WilliamsD__IdPro__3DE9F82F" Association="DemoProntoModel.FK__WilliamsD__IdPro__3DE9F82F">
+      <End Role="Provincia" EntitySet="Provincias" />
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -1843,6 +1897,7 @@
     <NavigationProperty Name="FertilizantesCupos9" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__527B00C1" FromRole="Articulo" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos10" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__536F24FA" FromRole="Articulo" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos11" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__54634933" FromRole="Articulo" ToRole="FertilizantesCupos" />
+    <NavigationProperty Name="CDPHumedades" Relationship="DemoProntoModel.FK__CDPHumeda__IdArt__48D19AF6" FromRole="Articulo" ToRole="CDPHumedade" />
   </EntityType>
   <EntityType Name="ControlCalidad">
     <Key>
@@ -2697,6 +2752,8 @@
     <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__Clien__4DB64BA4" FromRole="Cliente" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos2" Relationship="DemoProntoModel.FK__Fertiliza__Cuent__415074BF" FromRole="Cliente" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos3" Relationship="DemoProntoModel.FK__Fertiliza__Cuent__4EAA6FDD" FromRole="Cliente" ToRole="FertilizantesCupos" />
+    <NavigationProperty Name="WilliamsDestinos" Relationship="DemoProntoModel.FK__WilliamsD__Subco__0180086D" FromRole="Cliente" ToRole="WilliamsDestino" />
+    <NavigationProperty Name="WilliamsDestinos1" Relationship="DemoProntoModel.FK__WilliamsD__Subco__02742CA6" FromRole="Cliente" ToRole="WilliamsDestino" />
   </EntityType>
   <EntityType Name="PuntosVenta">
     <Key>
@@ -3573,6 +3630,7 @@
     <Property Name="CodigoAfip" Type="Int32" />
     <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__49E5BAC0" FromRole="Localidad" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" FromRole="Localidad" ToRole="FertilizantesCupos" />
+    <NavigationProperty Name="WilliamsDestinos" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__3EDE1C68" FromRole="Localidad" ToRole="WilliamsDestino" />
   </EntityType>
   <EntityType Name="Moneda">
     <Key>
@@ -3659,6 +3717,7 @@
     <Property Name="ProximoNumeroCertificadoRetencionIIBB2" Type="Int32" />
     <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_IdProvinciaDestino" FromRole="Provincia" ToRole="NotasCredito" />
     <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_IdProvinciaDestino" FromRole="Provincia" ToRole="NotasDebito" />
+    <NavigationProperty Name="WilliamsDestinos" Relationship="DemoProntoModel.FK__WilliamsD__IdPro__3DE9F82F" FromRole="Provincia" ToRole="WilliamsDestino" />
   </EntityType>
   <EntityType Name="TiposComprobante">
     <Key>
@@ -6129,6 +6188,7 @@
     <Property Type="Int32" Name="IdUsuarioAnulo" />
     <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="DetalleComparativas" Relationship="DemoProntoModel.FK_DetalleComparativas" FromRole="Comparativa" ToRole="DetalleComparativa" />
+    <Property Name="Cumplida" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetalleComparativa">
     <Key>
@@ -6698,6 +6758,7 @@
     <Property Name="ArchivoAdjunto1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="ArchivoAdjunto2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Cuenta1" Relationship="DemoProntoModel.FK_ComprobantesProveedores_CuentaOtros" FromRole="ComprobanteProveedor" ToRole="Cuenta" />
+    <Property Name="NoTomarParaCalculoDeImpuestos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedore">
     <Key>
@@ -7065,6 +7126,7 @@
     <Property Type="Int32" Name="CodigoActividadIIBB" />
     <Property Type="String" Name="ActividadComercializacionGranos" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="TipoActividadComercializacionGranos" />
+    <Property Name="ConstitucionSocietaria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Formulario">
     <Key>
@@ -8243,6 +8305,9 @@
     <NavigationProperty Name="TiposComprobante1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="Valore" ToRole="TiposComprobante" />
     <NavigationProperty Name="Moneda1" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" FromRole="Valore" ToRole="Moneda" />
     <NavigationProperty Name="DetalleDepositosBancarios" Relationship="DemoProntoModel.FK_DetalleDepositosBancarios_Valores" FromRole="Valore" ToRole="DetalleDepositosBancario" />
+    <NavigationProperty Name="DetalleValoresCuentas" Relationship="DemoProntoModel.FK_DetalleValoresCuentas_Valores" FromRole="Valore" ToRole="DetalleValoresCuenta" />
+    <NavigationProperty Name="DetalleValoresProvincias" Relationship="DemoProntoModel.FK_DetalleValoresProvincias_Valores" FromRole="Valore" ToRole="DetalleValoresProvincia" />
+    <NavigationProperty Name="DetalleValoresRubrosContables" Relationship="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" FromRole="Valore" ToRole="DetalleValoresRubrosContable" />
   </EntityType>
   <Association Name="FK_Valores_Monedas_IdMoneda">
     <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
@@ -8501,7 +8566,7 @@
     <Property Name="IdRealizo" Type="Int32" />
     <Property Name="IdAprobo" Type="Int32" />
     <NavigationProperty Name="CuentasBancaria" Relationship="DemoProntoModel.FK_Conciliaciones_CuentasBancarias" FromRole="Conciliacione" ToRole="CuentasBancaria" />
-    <NavigationProperty Name="DetalleConciliaciones" Relationship="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacione" />
+    <NavigationProperty Name="DetalleConciliacionesContables" Relationship="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacione" />
     <NavigationProperty Name="DetalleConciliacionesNoContables" Relationship="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacionesNoContable" />
   </EntityType>
   <EntityType Name="DetalleConciliacione">
@@ -9065,6 +9130,7 @@
     <Property Name="Anulado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="AcreditarInteresesAlFinalizar" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="NoExigirRubroContable" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DetallePlazosFijosRubrosContables" Relationship="DemoProntoModel.FK_DetallePlazosFijosRubrosContables_PlazosFijos" FromRole="PlazosFijo" ToRole="DetallePlazosFijosRubrosContable" />
   </EntityType>
   <Association Name="FK_Proveedores_EstadosProveedores">
     <End Type="DemoProntoModel.Estados_Proveedore" Role="Estados_Proveedore" Multiplicity="0..1" />
@@ -11213,6 +11279,7 @@
     <NavigationProperty Name="CartasDePorteDetalles" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3" FromRole="CartasDePorte" ToRole="CartasDePorteDetalle" />
     <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" FromRole="CartasDePorte" ToRole="Vendedor" />
     <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="CartasDePorte" ToRole="DetalleFactura" />
+    <Property Name="ConDuplicados" Type="Int32" />
   </EntityType>
   <EntityType Name="CartasDePorteDetalle">
     <Key>
@@ -11488,6 +11555,9 @@
     <Property Name="Bruto" Type="Decimal" Precision="12" Scale="2" />
     <Property Name="Despacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="PuntoDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WilliamsDestino" Relationship="DemoProntoModel.FK__Fertiliza__Desti__4AD9DEF9" FromRole="FertilizantesCupos" ToRole="WilliamsDestino" />
+    <NavigationProperty Name="WilliamsDestino1" Relationship="DemoProntoModel.FK__Fertiliza__Desti__5833DA17" FromRole="FertilizantesCupos" ToRole="WilliamsDestino" />
+    <Property Name="LitrosFinal" Type="Decimal" Precision="12" Scale="2" />
   </EntityType>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -11935,6 +12005,295 @@
       </Principal>
       <Dependent Role="DetalleDepositosBancario">
         <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DetalleValoresCuenta">
+    <Key>
+      <PropertyRef Name="IdDetalleValorCuentas" />
+    </Key>
+    <Property Name="IdDetalleValorCuentas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="IdCuenta" Type="Int32" />
+    <Property Name="CodigoCuenta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Debe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Haber" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdCuentaGasto" Type="Int32" />
+    <Property Name="IdCuentaBancaria" Type="Int32" />
+    <Property Name="IdCaja" Type="Int32" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="CotizacionMonedaDestino" Type="Decimal" Precision="18" Scale="4" />
+    <NavigationProperty Name="Valore" Relationship="DemoProntoModel.FK_DetalleValoresCuentas_Valores" FromRole="DetalleValoresCuenta" ToRole="Valore" />
+  </EntityType>
+  <EntityType Name="DetalleValoresProvincia">
+    <Key>
+      <PropertyRef Name="IdDetalleValorProvincias" />
+    </Key>
+    <Property Name="IdDetalleValorProvincias" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="Porcentaje" Type="Decimal" Precision="6" Scale="2" />
+    <NavigationProperty Name="Valore" Relationship="DemoProntoModel.FK_DetalleValoresProvincias_Valores" FromRole="DetalleValoresProvincia" ToRole="Valore" />
+  </EntityType>
+  <EntityType Name="DetalleValoresRubrosContable">
+    <Key>
+      <PropertyRef Name="IdDetalleValorRubrosContables" />
+    </Key>
+    <Property Name="IdDetalleValorRubrosContables" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="IdRubroContable" Type="Int32" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Valore" Relationship="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" FromRole="DetalleValoresRubrosContable" ToRole="Valore" />
+  </EntityType>
+  <Association Name="FK_DetalleValoresCuentas_Valores">
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleValoresCuenta" Role="DetalleValoresCuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valore">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleValoresCuenta">
+        <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleValoresProvincias_Valores">
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleValoresProvincia" Role="DetalleValoresProvincia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valore">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleValoresProvincia">
+        <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleValoresRubrosContables_Valores">
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleValoresRubrosContable" Role="DetalleValoresRubrosContable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Valore">
+        <PropertyRef Name="IdValor" />
+      </Principal>
+      <Dependent Role="DetalleValoresRubrosContable">
+        <PropertyRef Name="IdValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ValoresFaltantesVisto">
+    <Key>
+      <PropertyRef Name="IdValorFaltanteVisto" />
+    </Key>
+    <Property Name="IdValorFaltanteVisto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBancoChequera" Type="Int32" />
+    <Property Name="NumeroCheque" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IdUsuarioMarco" Type="Int32" />
+    <Property Name="FechaMarcado" Type="DateTime" Precision="3" />
+    <Property Name="MotivoMarcado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DetallePlazosFijosRubrosContable">
+    <Key>
+      <PropertyRef Name="IdDetallePlazoFijoRubrosContables" />
+    </Key>
+    <Property Name="IdDetallePlazoFijoRubrosContables" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPlazoFijo" Type="Int32" />
+    <Property Name="IdRubroContable" Type="Int32" />
+    <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="PlazosFijo" Relationship="DemoProntoModel.FK_DetallePlazosFijosRubrosContables_PlazosFijos" FromRole="DetallePlazosFijosRubrosContable" ToRole="PlazosFijo" />
+  </EntityType>
+  <Association Name="FK_DetallePlazosFijosRubrosContables_PlazosFijos">
+    <End Type="DemoProntoModel.PlazosFijo" Role="PlazosFijo" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetallePlazosFijosRubrosContable" Role="DetallePlazosFijosRubrosContable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlazosFijo">
+        <PropertyRef Name="IdPlazoFijo" />
+      </Principal>
+      <Dependent Role="DetallePlazosFijosRubrosContable">
+        <PropertyRef Name="IdPlazoFijo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Calidade">
+    <Key>
+      <PropertyRef Name="IdCalidad" />
+    </Key>
+    <Property Name="IdCalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CDPEstablecimiento">
+    <Key>
+      <PropertyRef Name="IdEstablecimiento" />
+    </Key>
+    <Property Name="IdEstablecimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdLocalidad" Type="Int32" />
+    <Property Name="IdTitular" Type="Int32" />
+    <Property Name="CUIT" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="AuxiliarString1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AuxiliarString2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuxiliarString3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CDPHumedade">
+    <Key>
+      <PropertyRef Name="IdCDPHumedad" />
+    </Key>
+    <Property Name="IdCDPHumedad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="Humedad" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Merma" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK__CDPHumeda__IdArt__48D19AF6" FromRole="CDPHumedade" ToRole="Articulo" />
+  </EntityType>
+  <EntityType Name="WilliamsDestino">
+    <Key>
+      <PropertyRef Name="IdWilliamsDestino" />
+    </Key>
+    <Property Name="IdWilliamsDestino" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Subcontratista1" Type="Int32" />
+    <Property Name="Subcontratista2" Type="Int32" />
+    <Property Name="CodigoSAJPYA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoONCAA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SincronismoNoble1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SincronismoNoble2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AuxiliarString1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuxiliarString2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuxiliarString3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoWilliams" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CUIT" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoLosGrobo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoYPF" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="IdLocalidad" Type="Int32" />
+    <Property Name="PuntoVenta" Type="Int32" />
+    <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK__WilliamsD__Subco__0180086D" FromRole="WilliamsDestino" ToRole="Cliente" />
+    <NavigationProperty Name="Cliente1" Relationship="DemoProntoModel.FK__WilliamsD__Subco__02742CA6" FromRole="WilliamsDestino" ToRole="Cliente" />
+    <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__Desti__4AD9DEF9" FromRole="WilliamsDestino" ToRole="FertilizantesCupos" />
+    <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__Desti__5833DA17" FromRole="WilliamsDestino" ToRole="FertilizantesCupos" />
+    <NavigationProperty Name="Localidade" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__3EDE1C68" FromRole="WilliamsDestino" ToRole="Localidad" />
+    <NavigationProperty Name="Provincia" Relationship="DemoProntoModel.FK__WilliamsD__IdPro__3DE9F82F" FromRole="WilliamsDestino" ToRole="Provincia" />
+  </EntityType>
+  <EntityType Name="WilliamsMailFiltrosCola">
+    <Key>
+      <PropertyRef Name="IdWilliamsMailFiltroCola" />
+    </Key>
+    <Property Name="IdWilliamsMailFiltroCola" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdWilliamsMailFiltro" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Emails" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="FechaDesde" Type="DateTime" Precision="3" />
+    <Property Name="FechaHasta" Type="DateTime" Precision="3" />
+    <Property Name="EsPosicion" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Enviar" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="EsMailOesFax" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Modo" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="AplicarANDuORalFiltro" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Vendedor" Type="Int32" />
+    <Property Name="CuentaOrden1" Type="Int32" />
+    <Property Name="CuentaOrden2" Type="Int32" />
+    <Property Name="Corredor" Type="Int32" />
+    <Property Name="Entregador" Type="Int32" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="Contrato" Type="Int32" />
+    <Property Name="Destino" Type="Int32" />
+    <Property Name="Procedencia" Type="Int32" />
+    <Property Name="AuxiliarString1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuxiliarString2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UltimoResultado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PuntoVenta" Type="Int32" />
+    <Property Name="QueContenga" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EstadoDeCartaPorte" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuarioEncolo" Type="Int32" />
+    <Property Name="AgrupadorDeTandaPeriodos" Type="Int32" />
+    <Property Name="ModoImpresion" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Corredor2" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__CDPHumeda__IdArt__48D19AF6">
+    <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CDPHumedade" Role="CDPHumedade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulo">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="CDPHumedade">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WilliamsD__Subco__0180086D">
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="WilliamsDestino">
+        <PropertyRef Name="Subcontratista1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WilliamsD__Subco__02742CA6">
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="WilliamsDestino">
+        <PropertyRef Name="Subcontratista2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Fertiliza__Desti__4AD9DEF9">
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WilliamsDestino">
+        <PropertyRef Name="IdWilliamsDestino" />
+      </Principal>
+      <Dependent Role="FertilizantesCupos">
+        <PropertyRef Name="Destino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Fertiliza__Desti__5833DA17">
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.FertilizantesCupos" Role="FertilizantesCupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WilliamsDestino">
+        <PropertyRef Name="IdWilliamsDestino" />
+      </Principal>
+      <Dependent Role="FertilizantesCupos">
+        <PropertyRef Name="Destino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WilliamsD__IdLoc__3EDE1C68">
+    <End Type="DemoProntoModel.Localidad" Role="Localidad" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidad">
+        <PropertyRef Name="IdLocalidad" />
+      </Principal>
+      <Dependent Role="WilliamsDestino">
+        <PropertyRef Name="IdLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WilliamsD__IdPro__3DE9F82F">
+    <End Type="DemoProntoModel.Provincia" Role="Provincia" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="IdProvincia" />
+      </Principal>
+      <Dependent Role="WilliamsDestino">
+        <PropertyRef Name="IdProvincia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

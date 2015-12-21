@@ -498,7 +498,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "ValesSalida_TX_PendientesDetallado", -1);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 

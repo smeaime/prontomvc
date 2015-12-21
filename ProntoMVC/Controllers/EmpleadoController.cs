@@ -381,7 +381,7 @@ namespace ProntoMVC.Controllers
         {
             if (db == null) return null;
 
-            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
             var empleados = (from r in rows select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
@@ -390,7 +390,7 @@ namespace ProntoMVC.Controllers
 
         public string BuscarPass(int id, string pass)
         {
-            if (Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin")) return id.ToString();
+            if (oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin")) return id.ToString();
 
             var p = db.Empleados.Where(c => c.IdEmpleado == id).Where(c => c.Password == pass).FirstOrDefault();
             if (p != null)

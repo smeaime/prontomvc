@@ -124,20 +124,18 @@
     </Reference>
     <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\BussinessObject\bin\Debug\BusinessObject.dll</HintPath>
+      <HintPath>..\..\bussinessobject\BusinessObject\bin\Debug\BusinessObject.dll</HintPath>
     </Reference>
-    <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ClaseMigrar\obj\x86\Debug\ClaseMigrar.dll</HintPath>
+    <Reference Include="ClaseMigrar">
+      <HintPath>..\..\bussinessobject\ClaseMigrar\bin\Debug\ClaseMigrar.dll</HintPath>
     </Reference>
     <Reference Include="ClearImageNet.70, Version=7.0.0.0, Culture=neutral, PublicKeyToken=71e5888be264aae0, processorArchitecture=MSIL" />
     <Reference Include="CodeEngine.Framework.QueryBuilder, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\CodeEngine.Framework.QueryBuilder.dll</HintPath>
     </Reference>
-    <Reference Include="DataAccess, Version=1.0.0.27526, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DataAccess\obj\x86\Debug\DataAccess.dll</HintPath>
+    <Reference Include="DataAccess">
+      <HintPath>..\..\bussinessobject\DataAccess\bin\Debug\DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework">
@@ -179,6 +177,9 @@
     <Reference Include="OpenXmlPowerTools">
       <HintPath>bin\Debug\OpenXmlPowerTools.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.Barcode">
+      <HintPath>..\..\prontoweb\Bin\Spire.Barcode.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -199,10 +200,17 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WSAFIPFE">
       <HintPath>bin\Debug\WSAFIPFE.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing">
+      <HintPath>..\..\prontoweb\Bin\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation">
+      <HintPath>..\..\prontoweb\Bin\zxing.presentation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

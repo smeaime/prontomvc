@@ -58,7 +58,7 @@ namespace ProntoMVC.Controllers
             if (!PuedeLeer(enumNodos.MnuSeg2)) throw new Exception("No tenés permisos");
 
 
-            //string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            //string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService;
             string SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString());
             string usuario = ViewBag.NombreUsuario;
             int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -105,7 +105,7 @@ namespace ProntoMVC.Controllers
 
 
             // return RedirectToAction("Arbol", "Acceso");
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
             List<Tablas.Tree> Tree = new List<Tablas.Tree>();
@@ -165,7 +165,7 @@ namespace ProntoMVC.Controllers
 
         void resetear()
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string usuario = ViewBag.NombreUsuario;
             int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -249,7 +249,7 @@ namespace ProntoMVC.Controllers
         {
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
 
@@ -830,7 +830,7 @@ namespace ProntoMVC.Controllers
         public virtual FileResult Imprimir(int id) //(int id)
         {
 
-            //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             //string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.xlsx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Autorizacion.xlsx";
@@ -995,7 +995,7 @@ namespace ProntoMVC.Controllers
         {
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             try
             {
@@ -1055,7 +1055,7 @@ namespace ProntoMVC.Controllers
         {
 
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             try
             {
@@ -1118,7 +1118,7 @@ namespace ProntoMVC.Controllers
 
             a.IdComprobante = IdComprobante;
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
             // cuales son los idformulario o idcomprobante???

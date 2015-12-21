@@ -258,12 +258,14 @@ else {
             datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
             colModel: [
                 { name: "id", width: 1 },
-                { name: "descr", width: 150 },
-                { name: "Name2", width: 1 },
-                { name: "Name3", width: 1 },
-                { name: "Name4", width: 1 },
-                { name: "Name5", width: 1 },
+                { name: "descr", width: 400  , searchoptions: { sopt: ['cn', 'eq'] }  },
+                { name: "Name2", width: 1 , hidden:true },
+                { name: "Name3", width: 1, hidden: true },
+                { name: "Name4", width: 1, hidden: true },
+                { name: "Name5", width: 1, hidden: true },
             ],
+
+            ignoreCase: true,
 
             loadComplete: function (data) {
                 refrescarFondo_addtree();
@@ -279,7 +281,7 @@ else {
 
             },
 
-            pager: "#addtree2Pager",
+            // pager: "#addtree2Pager",
             rowNum: 500,
             //rowList: [1, 2, 10],
             viewrecords: true,
@@ -288,7 +290,17 @@ else {
             //gridview: true,
             //ignoreCase: true,
 
+            //treeGrid: true,
+            caption: ""
+
         });
+
+        jQuery("#addtree2").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
+
     }
 }
 ///////////////////////////////////////////
@@ -316,6 +328,7 @@ $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
 function refrescarFondo_addtree() {
 
     $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+    $('#addtree2 .ui-widget-content').addClass('jqgrid-widget-content');
 
 }
 

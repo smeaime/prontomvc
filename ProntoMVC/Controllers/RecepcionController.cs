@@ -622,7 +622,7 @@ namespace ProntoMVC.Controllers
 
                 bool mAnulada = false;
 
-                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
                 mAsignarPartidasAutomaticamente = db.Parametros2.Where(x => x.Campo == "AsignarPartidasAutomaticamente").Select(x => x.Valor).FirstOrDefault() ?? "";
                 mAuxS1 = db.Parametros2.Where(x => x.Campo == "IdDepositoCentral").Select(x => x.Valor).FirstOrDefault() ?? "0";

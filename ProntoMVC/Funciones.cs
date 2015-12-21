@@ -85,6 +85,44 @@ public static class StringExtensions
 public static class Generales
 {
 
+    public interface IStaticMembershipService
+    {
+        bool EsSuperAdmin();
+
+        MembershipUser GetUser();
+
+        void UpdateUser(MembershipUser user);
+
+        bool UsuarioTieneElRol(string username, string role);
+
+    }
+
+    public class StaticMembershipService : IStaticMembershipService
+    {
+        public bool UsuarioTieneElRol(string username, string role)
+        {
+            return Roles.IsUserInRole(username, role);
+        }
+
+        public bool EsSuperAdmin()
+        {
+            return Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+        }
+
+        public System.Web.Security.MembershipUser GetUser()
+        {
+            return Membership.GetUser();
+        }
+
+        public void UpdateUser(MembershipUser user)
+        {
+            Membership.UpdateUser(user);
+        }
+    }
+
+
+
+
     // http://stackoverflow.com/questions/7195846/how-can-i-make-html-checkboxfor-work-on-a-string-field
     public static MvcHtmlString CheckBoxStringFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, string>> expression)
     {
@@ -137,20 +175,22 @@ public static class Generales
     //}
 
 
-    public static string sCadenaConex(System.Web.Routing.RequestContext rc)
-    {
-        string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
-        return sCadenaConex(sBasePronto);
-    }
+    //public static string sCadenaConex(System.Web.Routing.RequestContext rc)
+    //{
+    //    string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
+    //    return sCadenaConex(sBasePronto,null);
+    //}
 
 
-    public static string sCadenaConex(string nombreEmpresa, Guid userGuid = new Guid())
+    public static string sCadenaConex(string nombreEmpresa, IStaticMembershipService ServicioMembership = null)
     {
         string s;
 
+        Guid userGuid = new Guid();
+
         try
         {
-            s = sCadenaConexSQL(nombreEmpresa, userGuid);
+            s = sCadenaConexSQL(nombreEmpresa, ServicioMembership);
         }
         catch (Exception ex)
         {
@@ -336,8 +376,8 @@ public static class Generales
         nombreEmpresa = nombreEmpresa ?? "";
         if (nombreEmpresa == "") return null;
 
-        if (userGuid == Guid.Empty) userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-        //string us = Membership.GetUser().UserName;
+        //if (userGuid == Guid.Empty) userGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+        //string us = oStaticMembershipService.GetUser().UserName;
         string us = userGuid.ToString();
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
@@ -404,7 +444,7 @@ public static class Generales
                 {
                     // está haciendo circularidades cuando creo el usuario por acá
                     //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
-                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, Membership.GetUser().UserName);
+                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, oStaticMembershipService.GetUser().UserName);
 
 
                     throw new Exception("Usuario logueado pero sin empresa elegida");
@@ -436,14 +476,15 @@ public static class Generales
 
     }
 
-    public static string sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid())
+    public static string sCadenaConexSQL(string nombreEmpresa
+                        , IStaticMembershipService ServicioMembership )
     {
         // string datos = HttpContext.Current.Request.Session["data"] as string;
         //var ss=ControllerContext.HttpContext.Session["{name}"];
         nombreEmpresa = nombreEmpresa ?? "";
         if (nombreEmpresa == "") return null;
 
-
+        Guid userGuid = new Guid();
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
         //usuario.Empresa = IdEmpresa
@@ -453,16 +494,18 @@ public static class Generales
 
 
 
-        if (userGuid == Guid.Empty)
+        if (ServicioMembership != null)
         {
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
-                {
-                    userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-                    esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
-                }
-                else esSuperadmin = true;
+                //if (!System.Diagnostics.Debugger.IsAttached)
+                //{
+                // cómo llamo desde esta funcion al servicio ?
+                userGuid = (Guid)ServicioMembership.GetUser().ProviderUserKey;
+                esSuperadmin = ServicioMembership.EsSuperAdmin();
+                //  oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin");
+                ///}
+                //else esSuperadmin = true;
 
                 sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
 
@@ -470,30 +513,32 @@ public static class Generales
             catch (Exception)
             {
 
-                if (System.Diagnostics.Debugger.IsAttached)
-                {
-                    // por ahora no le encontré la vuelta a mockear el membership
-                    userGuid = new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9");
-                    esSuperadmin = true;
-                    // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
-                    // supervisor       1804B573-0439-4EA0-B631-712684B54473
-                    sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-                }
-                else
-                {
+                //if (System.Diagnostics.Debugger.IsAttached)
+                //{
+                //    // por ahora no le encontré la vuelta a mockear el membership
+                //    userGuid = new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9");
+                //    esSuperadmin = true;
+                //    // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+                //    // supervisor       1804B573-0439-4EA0-B631-712684B54473
+                //    sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+                //}
+                //else
+                //{
+
                     throw;
-                }
+                //}
 
 
             }
         }
         else
         {
+            // debería ir poniendo ServicioMembership como parametro obligatorio....
 
             sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
         }
-        //string us = Membership.GetUser().UserName;
+        //string us = oStaticMembershipService.GetUser().UserName;
 
 
 
@@ -506,7 +551,7 @@ public static class Generales
 
         string us = "";
 
-        if (!System.Diagnostics.Debugger.IsAttached) us=  userGuid.ToString();
+        if (!System.Diagnostics.Debugger.IsAttached) us = userGuid.ToString();
 
 
         string s;
@@ -521,51 +566,9 @@ public static class Generales
             {
 
 
-                var sSQL = "SELECT * FROM BASES " +
-                                                          "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
-                                                          "where " +
-                                                          ((!esSuperadmin) ? "UserId='" + us + "' AND" : "") +
-                                                          " Descripcion='" + nombreEmpresa + "'   ";
 
-                System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
-                                                       sSQL);
+                return conexPorEmpresa(nombreEmpresa, sConexBDLMaster, us, esSuperadmin);
 
-                //TODO explota  porque superadmin no tiene acceso a capen en DetalleUserDB
-                // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
-                // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
-
-
-
-                // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
-
-
-                if (dt.Rows.Count == 1)
-                {
-                    s = dt.Rows[0]["StringConection"] as string;
-                }
-                else if (dt.Rows.Count > 1)
-                {
-                    // no debería pasar...
-                    s = dt.Rows[0]["StringConection"] as string;
-                }
-                else
-                {
-                    // está haciendo circularidades cuando creo el usuario por acá
-                    //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
-                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, Membership.GetUser().UserName);
-
-
-                    throw new Exception("Usuario logueado pero sin empresa elegida");
-
-                    using (BDLMasterEntities bdlmaster = new BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER()))
-                    {
-                        var q = bdlmaster.Bases.Where(x => x.Descripcion == nombreEmpresa).FirstOrDefault();
-                        return q.StringConection;
-                    }
-
-
-
-                }
 
             }
 
@@ -584,6 +587,63 @@ public static class Generales
 
     }
 
+
+
+
+    public static string conexPorEmpresa(string nombreEmpresa, string sConexBDLMaster, string usuario, bool esSuperadmin)
+    {
+
+        string s;
+
+        var sSQL = "SELECT * FROM BASES " +
+                                                  "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
+                                                  "where " +
+                                                  ((!esSuperadmin) ? "UserId='" + usuario + "' AND" : "") +
+                                                  " Descripcion='" + nombreEmpresa + "'   ";
+
+        System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
+                                               sSQL);
+
+        //TODO explota  porque superadmin no tiene acceso a capen en DetalleUserDB
+        // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
+        // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
+
+
+
+        // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
+
+
+        if (dt.Rows.Count == 1)
+        {
+            s = dt.Rows[0]["StringConection"] as string;
+        }
+        else if (dt.Rows.Count > 1)
+        {
+            // no debería pasar...
+            s = dt.Rows[0]["StringConection"] as string;
+        }
+        else
+        {
+            // está haciendo circularidades cuando creo el usuario por acá
+            //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
+            //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, oStaticMembershipService.GetUser().UserName);
+
+
+            throw new Exception("Usuario logueado pero sin empresa elegida");
+
+            using (BDLMasterEntities bdlmaster = new BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER()))
+            {
+                var q = bdlmaster.Bases.Where(x => x.Descripcion == nombreEmpresa).FirstOrDefault();
+                return q.StringConection;
+            }
+
+        }
+
+        return s;
+    }
+
+
+
     public static string sCadenaConexSQL2(string nombreEmpresa, Guid userGuid)
     {
         // string datos = HttpContext.Current.Request.Session["data"] as string;
@@ -591,7 +651,7 @@ public static class Generales
 
         //Guid userGuid = (Guid)Membership.FindUsersByName(nombreusuario)
         //    .GetUser().ProviderUserKey;
-        //string us = Membership.GetUser().UserName;
+        //string us = oStaticMembershipService.GetUser().UserName;
         string us = userGuid.ToString();
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
@@ -618,71 +678,6 @@ public static class Generales
     }
 
 
-    public static bool mkf_validacuit(string mk_p_nroTemp)
-    {
-        int mk_suma;
-        bool mk_valido;
-        string mk_p_nro = mk_p_nroTemp; // == null ? "" : mk_p_nroTemp;
-        mk_p_nro = mk_p_nro.Replace("-", "");
-
-        try
-        {
-
-
-            if (IsNumeric(mk_p_nro))
-            {
-                if (mk_p_nro.Length != 11)
-                {
-                    mk_valido = false;
-                }
-                else
-                {
-                    mk_suma = 0;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(0, 1)) * 5;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(1, 1)) * 4;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(2, 1)) * 3;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(3, 1)) * 2;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(4, 1)) * 7;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(5, 1)) * 6;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(6, 1)) * 5;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(7, 1)) * 4;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(8, 1)) * 3;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(9, 1)) * 2;
-                    mk_suma += Convert.ToInt32(mk_p_nro.Substring(10, 1)) * 1;
-
-                    if (Math.Round((double)mk_suma / 11, 0) == (mk_suma / 11))
-                    {
-                        mk_valido = true;
-                    }
-                    else
-                    {
-                        mk_valido = false;
-                    }
-                }
-            }
-            else
-            {
-                mk_valido = false;
-            }
-
-        }
-        catch (Exception)
-        {
-
-            mk_valido = false;
-        }
-
-        return (mk_valido);
-    }
-
-
-    public static bool IsNumeric(object Expression)
-    {
-        bool isNum;
-        double retNum;
-        isNum = Double.TryParse(Convert.ToString(Expression), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out retNum);
-        return isNum;
-    }
 
 
     public static bool TienePermisosDeFirma(string sc, int idUsuario)
@@ -735,8 +730,8 @@ public static class Generales
     {
 
 
-        //= (Guid)Membership.GetUser().ProviderUserKey;
-        //string us = Membership.GetUser().UserName;
+        //= (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+        //string us = oStaticMembershipService.GetUser().UserName;
         string us = userGuid.ToString();
 
 

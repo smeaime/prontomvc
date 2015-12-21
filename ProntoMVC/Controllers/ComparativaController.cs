@@ -48,9 +48,9 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Edit(int id)
         {
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                   !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                   !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                    ) throw new Exception("No tenés permisos");
 
             if (id == -1)
@@ -1136,13 +1136,13 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.Comparativas)) throw new Exception("No tenés permisos");
 
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 )
             {
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 //if (Comparativa.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a Comparativas tuyos");
                 ////throw new Exception("No tenés permisos");
@@ -1259,7 +1259,7 @@ namespace ProntoMVC.Controllers
 
                     try
                     {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)
@@ -2168,7 +2168,7 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.xlsx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Comparativa.xlsx";
@@ -2978,7 +2978,7 @@ namespace ProntoMVC.Controllers
 
             a.IdComprobante = IdComprobante;
 
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
             var dt2 = EntidadManager.ExecDinamico(SC, "SELECT * FROM _TempAutorizaciones WHERE IdComprobante=" + IdComprobante);
