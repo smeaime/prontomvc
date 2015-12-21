@@ -310,7 +310,7 @@ namespace ProntoFlexicapture
             else
             {
 
-                que pasa si no esta la licencia?
+                // qué pasa si no esta la licencia?
 
                 // detectar con lectores de codigo de barra
 
@@ -370,9 +370,7 @@ namespace ProntoFlexicapture
 
 
 
-
-ssssss
-
+                // qué pasa si no está la licencia del flexicapture?
 
 
                 bool bCodigoBarrasDetectado = false;
