@@ -411,9 +411,6 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-  //                      .OrderByDescending(x => x.FechaOrdenPago)
-                        //.OrderByDescending(x => x.NumeroOrdenPago)
-                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
                         .ToList();
 
             var jsonData = new jqGridJson()
