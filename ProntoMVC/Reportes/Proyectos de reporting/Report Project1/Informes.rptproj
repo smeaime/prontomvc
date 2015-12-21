@@ -83,6 +83,10 @@
       <FullPath>Creditos Vencidos a Fecha.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Cubo Balance.rdl</Name>
+      <FullPath>Cubo Balance.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Cubo Egresos Proyectados 2.rdl</Name>
       <FullPath>Cubo Egresos Proyectados 2.rdl</FullPath>
     </ProjectItem>
@@ -395,8 +399,8 @@
       <FullPath>Valores diferidos pendientes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Cubo Balance.rdl</Name>
-      <FullPath>Cubo Balance.rdl</FullPath>
+      <Name>Williams - Listado de Clientes incompletos.rdl</Name>
+      <FullPath>Williams - Listado de Clientes incompletos.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
