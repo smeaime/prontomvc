@@ -11,9 +11,6 @@
 {
     <style>
         /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-
-
-
         .ui-widget-content {
             border: 0px solid #aaaaaa;
         }
@@ -22,38 +19,23 @@
             border-right-width: 0px;
             border-left-width: 0px;
         }
-            /* If you need to remove all grid's borders you can use
-
-        .ui-jqgrid { border-width: 0px; }
-        If you want additionally remove vertical border between the cells in the grid you can use */
-
-            .ui-jqgrid tr.ui-row-ltr td {
-                border-right-color: #E4E4E4;
-            }
-
-
-            .ui-jqgrid tr.footrow-ltr td {
-                border-right-color: #E4E4E4 !important;
-            }
-
-            /*To remove horizontal border between the rows you can use */
-
-            .ui-jqgrid tr.ui-row-ltr td {
-                border-bottom-color: #E4E4E4;
-            }
-        /*To remove vertical borders between the column headers you can use */
-
+        .ui-jqgrid tr.ui-row-ltr td {
+            border-right-color: #E4E4E4;
+        }
+        .ui-jqgrid tr.footrow-ltr td {
+            border-right-color: #E4E4E4 !important;
+        }
+        .ui-jqgrid tr.ui-row-ltr td {
+            border-bottom-color: #E4E4E4;
+        }
         th.ui-th-column {
             border-right-color: #E4E4E4 !important;
         }
-        /* or alternatively (without the usage of !important) */
-
         .ui-jqgrid-labels .ui-th-column {
             border-right-color: #E4E4E4;
         }
     </style>
 }
-
 
 <div style=" padding-left: 15px;  padding-right: 15px ;">
     <div class="row-fluid">
@@ -96,7 +78,6 @@
                 </div>*@
             @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
             {
-
                 <button onclick="  " class="btn span1">
                     Excel
                 </button>
@@ -105,13 +86,7 @@
         <br />
         <br />
         <script>
-
-
-
             $("#BuscadorListado").change(function () {
-
-
-
                 var grid = jQuery("#Lista");
                 var postdata = grid.jqGrid('getGridParam', 'postData');
                 jQuery.extend(postdata,
@@ -123,18 +98,17 @@
                    });
                 grid.jqGrid('setGridParam', { search: true, postData: postdata });
                 grid.trigger("reloadGrid", [{ page: 1 }]);
-
-
                 //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
             });
         </script>
     </div>
+
     <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;"></table>
-    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
-    </div>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
     @*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
 </div>
-    <script type="text/javascript">
+
+<script type="text/javascript">
     $(document).ready(function () {
         var lastSelectedId;
         var inEdit;
@@ -148,31 +122,25 @@
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'Acciones', 'IdCuenta', 'Descripcion', 'codigo', 'Tipo cuenta',
-            'jerarquia', 'rubro contable', 'grupo', 'obra', 'ajusta por inflacion',
-            'codigo secundario', 'IdCuentaGasto', 'IdObra'
-
-            ],
+            colNames: ['Acciones', 'Acciones', 'IdCuenta', 'IdCuentaGasto', 'IdObra', 'Descripcion', 'Codigo', 'Tipo de cuenta', 'Jerarquia', 'Rubro contable', 'Rubro financiero', 'Grupo cuenta',
+                       'Grupo gasto', 'Obra / Centro de costo', 'Ajusta p/inflacion', 'Codigo secundario'],
             colModel: [
-
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdCuenta', index: 'IdCuenta', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaGasto', index: 'IdCuentaGasto', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdObra', index: 'IdObra', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'Codigo', index: 'Codigo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'TiposCuenta.Descripcion', index: 'TiposCuenta.Descripcion', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-
+                        { name: 'TipoCuenta', index: 'TipoCuenta', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Jerarquia', index: 'Jerarquia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RubrosContable.Descripcion', index: 'RubrosContable.Descripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'TiposCuentaGrupos.Descripcion', index: 'TiposCuentaGrupos.Descripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Obra.Descripcion', index: 'Obra.Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RubroContable', index: 'RubroContable', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RubroFinanciero', index: 'RubroFinanciero', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TipoCuentaGrupo', index: 'TipoCuentaGrupo', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaGasto', index: 'CuentaGasto', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obra', index: 'Obra', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'AjustaPorInflacion', index: 'AjustaPorInflacion', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-
-                        { name: 'CodigoSecundario', index: 'CodigoSecundario', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'IdCuentaGasto', index: 'IdCuentaGasto', align: 'right', width: 60, editable: false, search: true, hidden:true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'IdObra', index: 'IdObra', align: 'left', width: 100, editable: false, search: true, hidden: true, searchoptions: { sopt: ['cn'] } },
-
-
+                        { name: 'CodigoSecundario', index: 'CodigoSecundario', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -184,51 +152,32 @@
             },
             ondblClickRow: function (idrow) {
                 window.location.href = ROOT + 'Cuenta/Edit/' + idrow;
-
-
-                // $("#edtData").click();
-
-                //edicion inline
-                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){
-                //                    jQuery('#Lista').restoreRow(lastSel);
-                //                    lastSel=id;
-                //                }
-                //                jQuery('#Lista').editRow(id, true);
-                //
-
             },
             pager: $('#ListaPager'),
-            rowNum: 15,
+            rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'IdCuenta',
+            sortname: 'Jerarquia',
             sortorder: 'asc',
             viewrecords: true,
-
-
             ///////////////////////////////
             //width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
             //////////////////////////////
-
             height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
             userDataOnFooter: true
             // ,caption: '<b>PEDIDOS</b>'
         });
-
-
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-         {
-             //sopt: ["cn"]
-             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-         }
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
         );
-
         jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager', {
             caption: "",
             buttonicon: "ui-icon-calculator",
@@ -240,15 +189,12 @@
                     .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
             }
         });
-
-
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,
             defaultSearch: 'cn',
             enableClear: false
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
         //myGrid.filterToolbar({  });
-
         jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
             {
                 caption: "Filter", title: "Toggle Searching Toolbar",
@@ -256,14 +202,5 @@
                 onClickButton: function () { myGrid[0].toggleToolbar(); }
             });
 
-
-
-
-
-
     });
-
-
-
-
 </script>

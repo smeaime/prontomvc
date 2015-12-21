@@ -61,7 +61,13 @@ namespace ProntoMVC.Controllers
             if (!PuedeLeer(enumNodos.Valores)) throw new Exception("No tenés permisos");
             return View();
         }
-        
+
+        public virtual ViewResult IndexChequesSegunEmision()
+        {
+            if (!PuedeLeer(enumNodos.Valores)) throw new Exception("No tenés permisos");
+            return View();
+        }
+
         public virtual ViewResult Edit(int id)
         {
             Valore o;
@@ -619,7 +625,7 @@ namespace ProntoMVC.Controllers
                             Tipo = a["Tipo"],
                             NumeroInterno = a["NumeroInterno"],
                             NumeroValor = a["NumeroValor"],
-                            FechaValor = Convert.ToDateTime(a["FechaValor"].NullSafeToString()),
+                            FechaValor = a["FechaValor"], //Convert.ToDateTime(a["FechaValor"].NullSafeToString()),
                             Entidad = a["Banco"],
                             Importe = a["Importe"],
                             TipoComprobante = a["TipoComprobante"],
@@ -627,12 +633,10 @@ namespace ProntoMVC.Controllers
                             FechaComprobante = a["FechaComprobante"],
                             Cliente = a["Cliente"],
                             Moneda = a["Moneda"],
-                            FechaDeposito = Convert.ToDateTime(a["FechaDeposito"].NullSafeToString()),
+                            FechaDeposito = a["FechaDeposito"], //Convert.ToDateTime(a["FechaDeposito"].NullSafeToString()),
                             NumeroDeposito = a["NumeroDeposito"],
                             Iva = a["Iva"],
-                            Proveedor = a["Proveedor"],
-                            Controlado = a["Controlado"],
-                            ControladoNoConciliado = a["ControladoNoConciliado"],
+                            Proveedor = a["Proveedor"]
                         }).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -1176,6 +1180,92 @@ namespace ProntoMVC.Controllers
                             a.EmpleadoMarco.NullSafeToString(),
                             a.FechaMarcado.ToString(),
                             a.MotivoMarcado.ToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult ChequesSegunEmision(string sidx, string sord, int? page, int? rows, string emitido)
+        {
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Valores_TX_TodosEmitidos", emitido);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            int totalRecords = Entidad.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdValor = a[0],
+                            NumeroCheque = (a[1].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[1].NullSafeToString()),
+                            IdCuentaBancaria = a[3],
+                            NumeroInterno = (a[4].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[4].NullSafeToString()),
+                            FechaValor = a[5],
+                            Importe = (a[6].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[6].NullSafeToString()),
+                            Moneda = a[7],
+                            Proveedor = a[8],
+                            Beneficiario = a[9],
+                            NoALaOrden = a[10],
+                            BancoOrigen = a[11],
+                            CuentaBancaria = a[12],
+                            Estado = a[13],
+                            TipoComprobante = a[14],
+                            NumeroComprobante = (a[15].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[15].NullSafeToString()),
+                            FechaComprobante = a[16],
+                            BancoDeposito = a[17],
+                            NumeroDeposito = (a[18].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[18].NullSafeToString()),
+                            FechaDeposito = a[19],
+                            CuentaSalida = a[20],
+                            NumeroSalida = (a[21].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[21].NullSafeToString()),
+                            FechaSalida = a[22],
+                            Emitido = a[23],
+                            FechaEmision = a[24],
+                            Emitio = a[25]
+                        }).OrderBy(s => s.BancoOrigen).ThenBy(s => s.CuentaBancaria).ThenBy(s => s.NumeroInterno)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
+             
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdValor.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdValor.ToString(), 
+                            a.IdCuentaBancaria.ToString(), 
+                            a.NumeroCheque.ToString(), 
+                            a.NumeroInterno.NullSafeToString(),
+                            a.FechaValor.NullSafeToString(),
+                            a.Importe.NullSafeToString(),
+                            a.Moneda.NullSafeToString(),
+                            a.Proveedor.NullSafeToString(),
+                            a.Beneficiario.ToString(),
+                            a.NoALaOrden.ToString(),
+                            a.BancoOrigen.ToString(),
+                            a.CuentaBancaria.ToString(),
+                            a.Estado.ToString(),
+                            a.TipoComprobante.ToString(),
+                            a.NumeroComprobante.ToString(),
+                            a.FechaComprobante.ToString(),
+                            a.BancoDeposito.ToString(),
+                            a.NumeroDeposito.ToString(),
+                            a.FechaDeposito.ToString(),
+                            a.CuentaSalida.ToString(),
+                            a.NumeroSalida.ToString(),
+                            a.FechaSalida.ToString(),
+                            a.Emitido.ToString(),
+                            a.FechaEmision.ToString(),
+                            a.Emitio.ToString()
                             }
                         }).ToArray()
             };
