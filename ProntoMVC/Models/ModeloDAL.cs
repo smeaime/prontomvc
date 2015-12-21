@@ -17,7 +17,7 @@ namespace ProntoMVC.Models
         public static List<Object> GetStore(string nombrebase, string storeproc, SqlParameter[] parametros)
         {
             string spName = storeproc;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
 
 
             List<object> Lista = new List<object>();
@@ -221,13 +221,13 @@ namespace ProntoMVC.Models
 
         }
 
-        public static List<Tablas.Tree> Arbol(string nombrebase, Guid userGuid = new Guid())
+        public static List<Tablas.Tree> Arbol(string nombrebase, Generales.IStaticMembershipService ServicioMembership)
         {
             const string spName = "Tree_TX_Arbol";
             List<Tablas.Tree> TreeCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase, userGuid);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;
@@ -239,18 +239,18 @@ namespace ProntoMVC.Models
                 TreeCollection = FillTreeEntity(sqlCommand);
             }
 
-            if (TreeCollection.Count == 0) ArbolRegenerar(nombrebase);
+            if (TreeCollection.Count == 0) ArbolRegenerar(nombrebase, ServicioMembership);
  
             return TreeCollection;
         }
 
-        public static List<Tablas.Tree> ArbolRegenerar(string nombrebase)
+        public static List<Tablas.Tree> ArbolRegenerar(string nombrebase, Generales.IStaticMembershipService ServicioMembership)
         {
             const string spName = "Tree_TX_Generar";
             List<Tablas.Tree> TreeCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase, ServicioMembership);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;
@@ -293,7 +293,7 @@ namespace ProntoMVC.Models
             const string spName = "Tree_TX_Arbol";
             List<Tablas.Tree> TreeCollection;
 
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
             if (string.IsNullOrEmpty(connectionString))
                 return null;
@@ -320,7 +320,7 @@ namespace ProntoMVC.Models
             List<Articulo> articuloCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;

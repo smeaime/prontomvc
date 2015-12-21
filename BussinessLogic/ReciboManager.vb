@@ -1589,7 +1589,7 @@ Namespace Pronto.ERP.Bll
 
             'oCont = GetObjectContext
 
-            oDet = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
+            'oDet = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
 
             mvarCotizacionMoneda = 0
             mvarDebe = 0
@@ -1710,7 +1710,7 @@ Mal:
             Dim mvarIdMonedaPesos As Integer
             Dim mvarTotalMonedaLocal As Double, mvarTotalMonedaExtranjera As Double
 
-            oSrv = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
+            'oSrv = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
 
             oRs = ParametroManager.TraerRenglonUnicoDeTablaParametroOriginal(SC)
             mvarEjercicio = oRs.Item("EjercicioActual")

@@ -359,7 +359,7 @@ namespace ProntoMVC.Controllers
             int totalPages = 0;
 
 
-            var Req = db.Cuentas.AsQueryable();
+            //var Req = db.Cuentas.AsQueryable();
             //  Req = Req.Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI")).AsQueryable();
 
 
@@ -459,7 +459,7 @@ namespace ProntoMVC.Controllers
                             a.ArchivoAdjunto2,
                             a.ArchivoAdjunto3,
                             a.ArchivoAdjunto4
-                        }).Where(campo).AsQueryable();
+                        }).ToList();
 
            // int totalRecords = data.Count();
            // int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);

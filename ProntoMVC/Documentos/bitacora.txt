@@ -1,27 +1,114 @@
-﻿
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
+﻿BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
 ----------------------------------------------------------------------------------------
 
-se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
+Se graban todos los formularios??? meterte en un edit, y grabar. hacer con todos
+	lo molesto de esta cuestion es que no todos los formularios aceptan regrabar uno existente.
+
+REVISAR LA PARTE DE VENTAS (hacer las prueba en la publicacion, y escribir, No programar)
+
+SERVIDORES DORMILONES
+	Que el IIS no se ponga en modo suspendido por no usarlo. 
+	http://stackoverflow.com/questions/3883260/why-does-iis7-take-a-long-time
+	-Tambien pasa lo mismo con el servidor de informes!!!!
+	http://stackoverflow.com/questions/15656/ssrs-process-dies-goes-to-sleep-after-not-being-used
+	
+	
+Arreglar la pestaña del panel izquierdo
+
+Vistas parciales para poner un formulario a la derecha de la grilla
+
+Sacar negrita del titulo de grillas
+
+Usar siempre botones en lugar de drag&drop
+
+¿Hay alguna manera de que, en los listados maestros, mostremos la vista previa del formulario en el panel de la derecha?
+	
+RECIBO
+	Quedó desactualizado el formato del "recibo otros"
+	Puse recalcular en la grilla de registro contable, y tuve que esperar un minuto	 -Se debe permitir recalcular sin el cliente puesto?
+	No tiene el "volver al listado"
+	El font del CUIT es otro
+	botones a la derecha
+	
+FACTURA
+	No tiene el "volver al listado"
+	botones a la derecha
+	
+
+NOTA DE CREDITO
+	pie a la izquierda
+
+REMITO
+	chorro de optionbutton
+	no centrar el numerador
+	
+ORDEN DE COMPRA
+
+
+NOTA DE DEBITO
+	
+	
+EXPORTAR GRILLA A EXCEL
+	
+	
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+Si está corriendo el debugger, poder elegir la cadena de conexion bdlmaster en el login
+
 
 Revisar los filtros de fecha que salen de los nodos "Por Período" (no anda en Orden de compra)
 
+Los botones del pie, en algunos formularios, aparecen justificados a la izquierda
+
+Funciona el orden por columna en todos los listados?
+
+Hay formularios que en lugar de ocupar el span12 ocupan solo span8  (remito,nd,nc)
 
 PASEO general, que no le explote a Claudio en la mano:
+	meterse en el formulario y ver si graba
 	autofiltros (en maestros y grillas aux)
 		no funcionan las fechas en los autofiltros.
+
+PLANTILLAS
+
+GRILLAS AUX 
+	funciona el filtrador general ese?
+
+INFORMES
+	Queda choto que tenga otro layout por ser un webform.
+
+COMPARATIVAS
+	listado: falta columna link de "editar"
+
+
+PEDIDO
+	listado con todas las columnas angostísimas
+
+
+PRESUPUESTO
+	no graba la cadena "\\SERVER\Archivoadjunto" en adjunto (o en observaciones)
+	en el form, el subnumero no está pegado al número 
+
+
+ASIENTO
+	cuando deja de ser editable el asiento?
+	no anda bien el borrar de la grilla de dtalle
+	anda el eliminar asiento?
+	en modo inline, la modificacion del SI/NO del "registra analitico" se convierte en check, o en true/false -LISTO!
+	por qué "enviar a libro" tiene undefined, y "pase a iva" no? -LISTO!
+	cuando pasas de pagina en la grilla axu, agrega un renglon en blanco LISTO!
+
+
 
 Hay formularios donde no deberia estar habilitado el panel de grillas (en el de nota de debito, o en los maestros) -hacer una funcion que revise si hay grillas auxiliares, y si no, que deshabilite el panel y el boton de grillas
 
 Con la nueva tipografía, quedan angostas algunas columnas (las de fechas)
 
 
-ancho del div contenido en el panel izquierdo (el del arbol) -panelWestResize() no funciona -Hecho mas o menos: si el texto no entra, no hará wrap...
+Ancho del div contenido en el panel izquierdo (el del arbol) -panelWestResize() no funciona -Hecho mas o menos: si el texto no entra, no hará wrap...
 
 Recibo, NC, y ND, tienen un titulo con font distinto
 
@@ -46,7 +133,15 @@ EMPLEADOS -
 HECHO
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
+
+Poder librarse de una vez del membership en testing  -HECHO!
+
 HECHO- pie en el formulario de obra
+Mensaje de "perdiste conexion" -LISTO!
+
+
+
+
 
 
 

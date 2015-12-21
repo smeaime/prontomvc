@@ -533,7 +533,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/>Destinos sin código postal: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -1076,7 +1076,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -1576,11 +1576,13 @@ Namespace Pronto.ERP.Bll
                     'NECESITAN QUE SALGAN LOS CODIGOS DE ONNCA Y PROCEDENCIA.
                     sb &= "," & IntVal(.ProcedenciaCodigoONCAA).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
 
-                    sb &= "," & IntVal(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+
+                    sb &= "," & IntVal(.DestinoCodigoONCAA).ToString
+
 
                     sb &= "," & IntVal(.CTG).ToString
 
-                    
+
                     PrintLine(nF, sb)
                 End With
             Next
@@ -1979,7 +1981,25 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & Int(dr("Kg.Netos")).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
 
-                sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)                           '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+
+
+                
+                '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+                'sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)
+                sb &= "&" & cero.ToString.PadLeft(14)
+
+                'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=13789
+                '                Se refieren a este campo:
+
+                '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+
+                'Que por lo que veo empieza en la posición 306 y en algunos casos estamos completando con un 2. Nosotros no tenemos dato de contrato de compra, con lo cual deberíamos estar enviando siempre un cero
+
+
+
+
+
+
 
                 sb &= "&" & cero.ToString.PadLeft(14)                          '31 -Número de Contrato de Venta	Numérico	14	Se completa con Cero por defecto.
 
@@ -2163,7 +2183,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas & "Procedencias sin código:<br/> " & sErroresProcedencia & "<br/>Destinos sin código: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2397,7 +2417,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2632,7 +2652,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2939,7 +2959,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             'Return vFileName
             'Return TextToExcel(vFileName, titulo)
@@ -2964,8 +2984,9 @@ Namespace Pronto.ERP.Bll
          
 
 
+
             Dim codigoBahiaBlanca As String
-            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
+            Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
                 codigoBahiaBlanca = (From x In db.WilliamsDestinos Where x.Descripcion = "Bahia Blanca" Select x.CodigoLosGrobo).FirstOrDefault
                 If codigoBahiaBlanca = "" Then Throw New Exception("Falta asignar código al destino 'Bahia Blanca'")
             End Using
@@ -3003,8 +3024,12 @@ Namespace Pronto.ERP.Bll
 
             Const cuitYPF = "30546689979"
 
-            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
 
+
+
+
+
+             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
                 For Each cdp As CartasConCalada In q
@@ -3029,7 +3054,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    Dim fac = db.linqFacturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
+                    Dim fac = db.Facturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
                     If fac.IdCliente <> 4333 Then Continue For 'tienen que ser de syngenta
                     sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
                     sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
@@ -3068,7 +3093,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             FileClose(nF)
             Return vFileName
@@ -3312,7 +3337,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -3520,7 +3545,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If False Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -3752,7 +3777,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -3987,7 +4012,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -4401,7 +4426,7 @@ Namespace Pronto.ERP.Bll
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -7305,7 +7330,7 @@ Namespace Pronto.ERP.Bll
 
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = ""
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 
                 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
                 '-no hacerlo acá, que decida el front end
             End If
@@ -8336,7 +8361,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -9049,7 +9074,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -9825,7 +9850,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -10518,7 +10543,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -11039,7 +11064,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -11467,12 +11492,13 @@ Namespace Pronto.ERP.Bll
                     '                                         En caso que el cereal vaya a una acondicionadora, no hay que poner el CUIT de la Acondicionadora, siempre se toma la
                     '                           Procedencia de la mercadería, o sea el código del CDC o el CUIT de la Coop. o del Tercero (la Acondicionadora no figura
                     '                                         en los negocios de la ACA)
-                    If .CorredorCUIT.ToString.Replace("-", "") = "30500120882" Then
-                        sb &= CodigosACA_CodigoYNombre(.EnumSyngentaDivision)
-                    Else
-                        sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)  
-                        sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30)   'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
-                    End If
+                    'If .CorredorCUIT.ToString.Replace("-", "") = "30500120882" Then
+                    '    sb &= CodigosACA_CodigoYNombre(.EnumSyngentaDivision)
+                    'Else
+                    sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)  
+                    sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30)   'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
+                    'End If
+
 
 
 
@@ -11485,12 +11511,35 @@ Namespace Pronto.ERP.Bll
                     '100066:             CDC(c.M.NAON)
                     '100067:             CDC(PEHUAJO)
                     '                                        Si es una Cooperativa o un Tercero, va el CUIT.
-                    If .CorredorCUIT.ToString.Replace("-", "") = "30500120882" Then
-                        sb &= CodigosACA_CodigoYNombre(.EnumSyngentaDivision)
+
+
+                    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=15164
+                    'El campo VENDEDOR, en los casos el los que venda algún acopio de Aca no debe llevar el cuit si no el código correspondiente según la procedencia de 
+                    'la mercadería. 
+
+                    'cómo se si hay un acopio activado? y si vino, no tengo que mandar ese a la funcion CodigosACA_Planta_acopio?
+                    Dim x = db.CartasDePortes.Where(Function(c) c.IdCartaDePorte = .IdCartaDePorte).FirstOrDefault
+
+                    Dim idac As Integer
+                    If If(x.Acopio1, 0) > 0 Then idac = x.Acopio1
+                    If If(x.Acopio2, 0) > 0 Then idac = x.Acopio2
+                    If If(x.Acopio3, 0) > 0 Then idac = x.Acopio3
+                    'If If(x.Acopio4, 0) > 0 Then idac = x.Acopio4
+                    If If(x.Acopio5, 0) > 0 Then idac = x.Acopio5
+                    'If If(x.Acopio6, 0) > 0 Then idac = x.Acopio6
+
+
+                    If idac > 0 Then
+                        sb &= JustificadoIzquierda(CodigosACA_Planta_acopio(BuscarTextoAcopio(idac, SC)), 14) + JustificadoIzquierda(BuscarTextoAcopio(idac, SC), 30)
                     Else
-                        sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
-                        sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomVendedor	STRING(30)	Nombre Vendedor)    321)    350
+                        sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                        sb &= Left(.TitularDesc.ToString, 30).PadRight(30) 'NomVendedor	STRING(30)	Nombre Vendedor)    321)    350
                     End If
+
+
+
+
+
 
 
 
@@ -11504,40 +11553,94 @@ Namespace Pronto.ERP.Bll
                     'Campo 24 CUITCompEndo: Cuando el Comprador Endozo es ACA no va número de CUIT, va el código 100001 (Código de nuestros sistemas de ACA Export.)
                     '                                           Si el Comprador Endozo es un Tercero va el CUIT.
 
+
+                    If False Then
+
+                        If .CorredorCUIT.ToString.Replace("-", "") = "30500120882" Then .CorredorCUIT = 100002
+                        If .IntermediarioCUIT.ToString.Replace("-", "") = "30500120882" Then .IntermediarioCUIT = 100001
+
+                        sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrEndo	STRING(14)	CUIT  Corredor Endozo)    351)    364
+                        sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrEndo	STRING(30)	Nombre Corredor Endozo)    365)    394
+
+
+                        sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
+                        sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
+
+                    Else
+                        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=15164
+                        '• Los campos de corredor endoso y comprador endoso necesitamos que nos ingresen vacios (los tienen que completar con espacios, sin datos)
+                        sb &= Space(14 + 30 + 14 + 30)
+
+                    End If
+
+
+
+
                     'Campo 26 CUITCorrVend: Cuando el Corredor Vendedor es ACA no va número de CUIT, va el código 100002 (Código de nuestros sistemas de ACA Corredor)
                     '                                           Si el Corredor Vendedor es un Tercero va el CUIT.
-
-
-                    If .CorredorCUIT.ToString.Replace("-", "") = "30500120882" Then .CorredorCUIT = 100002
-                    If .IntermediarioCUIT.ToString.Replace("-", "") = "30500120882" Then .IntermediarioCUIT = 100001
-
-                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrEndo	STRING(14)	CUIT  Corredor Endozo)    351)    364
-                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrEndo	STRING(30)	Nombre Corredor Endozo)    365)    394
-
-
-                    sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
-                    sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
-
-
                     sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrVend	STRING(14)	CUIT Corredor Vendedor.)    439)    452
                     sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrVend	STRING(30)	Nombre Corredor Vendedor)    453)    482
 
 
 
-                    'Campo 28 CUITPlantaOrigen: Esta viniendo el CUIT y Nombre del Puerto de descarga, y tendría que venir si es un CDC de la A.C.A., el código de A.C.A. de la
+
+
+
+                    'Campo 28 CUITPlantaOrigen: 
+                    '   Esta viniendo el CUIT y Nombre del Puerto de descarga, y tendría que venir 
+                    ' si es un CDC de la A.C.A., el código de A.C.A. de la
                     '             Planta del CDC, en vuestro caso son:  
                     '100102 PLANTA CDC C. M. NAON
                     '100104 PLANTA CDC PEHUAJO
                     '        Si es una Cooperativa o un Tercero, va el CUIT.
 
                     '#8559 consulta
-                    If .IsEnumSyngentaDivisionNull Then .EnumSyngentaDivision = ""
-                    If .EnumSyngentaDivision <> "" Then
-                        sb &= CodigosACA_Planta(.EnumSyngentaDivision)
+                    If False Then
+
+                        If .IsEnumSyngentaDivisionNull Then .EnumSyngentaDivision = ""
+                        If .EnumSyngentaDivision <> "" Then
+                            sb &= JustificadoIzquierda(CodigosACA_Planta_acopio(.EnumSyngentaDivision), 14) + JustificadoIzquierda(.EnumSyngentaDivision.ToUpper, 30)
+                        Else
+                            sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
+                            sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPlantaOrigen	STRING(30)	Nombre Planta Origen)    497)    526
+                        End If
+
+
+
                     Else
-                        sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
-                        sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPlantaOrigen	STRING(30)	Nombre Planta Origen)    497)    526
+                        ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=15164
+                        '                    Si ACA con su acopio dentro de la CP está como Titular, Intermediario o Rte Comercial: debe ir el CUIT de ACA en PLANTA ORIGEN
+
+                        If .TitularCUIT.ToString.Replace("-", "") = "30500120882" Or _
+                           .IntermediarioCUIT.ToString.Replace("-", "") = "30500120882" Or _
+                           .RComercialCUIT.ToString.Replace("-", "") = "30500120882" Then
+
+                            sb &= JustificadoIzquierda("30500120882", 14) + JustificadoIzquierda("A.C.A. LTDA", 30)
+
+                        Else
+                            'está A.C.A como corredor
+                            If .RComercialCUIT.ToString.Replace("-", "") <> "" Then
+                                'Si no se cumple anterior, ACA viene como corredor y entonces hay que mandar el CUIT del Remitente Comercial
+                                sb &= Left(.RComercialCUIT.ToString.Replace("-", ""), 14).PadRight(14)
+                                sb &= Left(.RComercialDesc.ToString, 30).PadRight(30)
+                            Else
+                                'Si para el caso anterior NO HAY Remitente Comercial, se debe enviar el CUIT del Titular.
+                                sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14)
+                                sb &= Left(.TitularDesc.ToString, 30).PadRight(30)
+                            End If
+                        End If
+
+
+
                     End If
+
+
+
+
+
+
+
+
 
 
 
@@ -11841,7 +11944,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Destinos sin CUIT: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -11852,33 +11955,184 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Private Shared Function CodigosACA_Planta(EnumSygentaACA As String) As String
+        Private Shared Function CodigosACA_Planta_acopio(EnumSygentaACA As String) As String
+
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
 
 
-            Select Case EnumSygentaACA
-                Case "CDC Pehua.", "CDC Olavar", "CDC Naon", "CDC G.Vill", "CDC Iriart", "CDC Wright"
-                    Return "100102"
+
+            'Campo 28 CUITPlantaOrigen: Esta viniendo el CUIT y Nombre del Puerto de descarga, y tendría que venir si es un CDC de la A.C.A., el código de A.C.A. de la
+            '             Planta del CDC, en vuestro caso son:  
+            '100102 PLANTA CDC C. M. NAON
+            '100104 PLANTA CDC PEHUAJO
+            '        Si es una Cooperativa o un Tercero, va el CUIT.
+
+            'Consultas 8559 y 12807
+
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+
+
+            Select Case EnumSygentaACA.ToUpper
+                'Case "CDC Pehua.", "CDC Olavar", "CDC G.Vill", "CDC Iriart", "CDC Wright"
+                '    Return "100102"
+
+                'Case "CDC Naon"
+                '    Return "100104"
+
+
+                '100102 PLANTA CDC C. M. NAON
+                '100104 PLANTA CDC PEHUAJO
+
+
+
+                '100093 ACA Olavarria 100126 Planta Olavarria
+                '100073 ACA Huanguelen 100113 Planta Huanguelen
+                '100068 ACA Villegas 100106 Planta Villegas
+                '100079 ACA E. Castex 100116 Planta E. Castex (Bajo el mismo código entra Santa Rosa, Winifreda y Colonia Barón)
+                '100067 ACA Pehuajo 100104 Planta Pehuajo
+                '100078 ACA BB. A Dest Usa los puertos de destino donde recibe. 
+                '100001 ACA Exportación Usa los puertos de destino donde recibe.
+                '100002 ACA Corredor (Comprador y/o Vendedor)
+                '            Gualeguay 100089
+                '            Pehuajo 100067
+                '            Castex 100079
+                '            Naon 100067
+                '            Bragado 100067
+                '           Las flores 100067
+                '           16 de julio 100977
+                '            Villegas 100068
+                '            Iriarte 100056
+                '            Pergamino 100069
+                '            Olavarria 100093
+                '            Wheelwright 100063
+                '            Concepcion 100088
+                '           Venado Tuerto 100050
+                '            Huanguelen 100073
+                '            Levalle 100267
+                'Trenque Lauquen 100986
+
+
+
+                'sin identificar
+                Case "GLGUAYCHU"
+                    Return "100001"
+                Case "RUFINO"
+                    Return "100001"
+                Case "CANALS"
+                    Return "100001"
+                Case "OTROS"
+                    Return "100001"
+
+
+
+
+
+
+                Case "BRAGADO"
+                    Return "100067"
+                Case "WRIGHT"
+                    Return "100063"
+                Case "LEVALLE"
+                    Return "100267"
+                Case "PEHUA"
+                    Return "100104"
+                Case "OLAVARR"
+                    Return "100093"
+                Case "NAON"
+                    Return "100067"
+                Case "G.VILL"
+                    Return "100106"
+                Case "IRIARTE"
+                    Return "100056"
+
+                Case "GUALEGUAY"
+                    Return "100089"
+
+                Case "LAS FLORES"
+                    Return "100067"
+
+                Case "E.CASTEX"
+                    Return "100079"
+                Case "16DEJULIO"
+                    Return "100977"
+
+                Case "VEN.TUERTO"
+                    Return "100050"
+                Case "HUANGUELEN"
+                    Return "100073"
+                Case "TRENQUELAU"
+                    Return "100986"
+
+
                 Case Else
-                    Return ""
+                    Return "100001"
+
             End Select
+
+
+
+
+
+
+
             '100102 PLANTA CDC C. M. NAON
             '100104 PLANTA CDC PEHUAJO
 
 
 
+            '100093 ACA Olavarria 100126 Planta Olavarria
+            '100073 ACA Huanguelen 100113 Planta Huanguelen
+            '100068 ACA Villegas 100106 Planta Villegas
+            '100079 ACA E. Castex 100116 Planta E. Castex (Bajo el mismo código entra Santa Rosa, Winifreda y Colonia Barón)
+            '100067 ACA Pehuajo 100104 Planta Pehuajo
+            '100078 ACA BB. A Dest Usa los puertos de destino donde recibe. 
+            '100001 ACA Exportación Usa los puertos de destino donde recibe.
+            '100002 ACA Corredor (Comprador y/o Vendedor)
 
+
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            'habría que agregar el código de planta de ACA en la tabla CartaPorteAcopios
+            '            Localidad Dato a cargar en vendedor
+            '            Gualeguay 100089
+            '            Pehuajo 100067
+            '            Castex 100079
+            '            Naon 100067
+            '            Bragado 100067
+            'Las flores 100067
+            '16 de julio 100977
+            '            Villegas 100068
+            '            Iriarte 100056
+            '            Pergamino 100069
+            '            Olavarria 100093
+            '            Wheelwright 100063
+            '            Concepcion 100088
+            'Venado Tuerto 100050
+            '            Huanguelen 100073
+            '            Levalle 100267
+            'Trenque Lauquen 100986
         End Function
 
 
-        Private Shared Function CodigosACA_CodigoYNombre(EnumSygentaACA As String) As String
+        'Private Shared Function CodigosACA_CodigoYNombre(EnumSygentaACA As String) As String
+        '    sssss()
+        '    '100066:             CDC(c.M.NAON)
+        '    '100067:             CDC(PEHUAJO)
 
-            '100066:             CDC(c.M.NAON)
-            '100067:             CDC(PEHUAJO)
 
+        '    Return ""
 
-            Return ""
-
-        End Function
+        'End Function
 
 
 
@@ -14319,7 +14573,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -15787,7 +16041,7 @@ Namespace Pronto.ERP.Bll
 
             sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
             Sincronismo_NOBLEarchivoadicional(pDataTable, sWHERE)
@@ -17035,7 +17289,7 @@ Namespace Pronto.ERP.Bll
 
             sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
-            '  If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            '  If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
 
@@ -17128,7 +17382,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -17450,7 +17704,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -18606,7 +18860,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia ' & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
 

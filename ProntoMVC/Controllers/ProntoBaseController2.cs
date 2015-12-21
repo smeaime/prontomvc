@@ -67,7 +67,7 @@ namespace ProntoMVC.Controllers
             var d = new dsEncrypt();
             d.KeyString = "EDS";
 
-            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), null);
             return d.Encrypt(s);
 
 
@@ -348,8 +348,8 @@ namespace ProntoMVC.Controllers
 
 
 
-            //Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-            //string us = Membership.GetUser().UserName;
+            //Guid userGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
+            //string us = oStaticMembershipService.GetUser().UserName;
             //string us = userGuid.ToString();
 
 
@@ -1614,7 +1614,7 @@ namespace ProntoMVC.Controllers
             if (string.IsNullOrEmpty(connectionString)) return;
 
 
-            string nuevaconex = Generales.sCadenaConexSQL(nombrebaseoriginal).Replace(nombrebaseoriginal, nombrebasenueva);
+            string nuevaconex = Generales.sCadenaConexSQL(nombrebaseoriginal.Replace(nombrebaseoriginal, nombrebasenueva),null);
 
             CrearConexionlaEnLaTablaBases(nombrebasenueva, nuevaconex); // corregir. estoy pasando la conexion de la bdlmaster
 

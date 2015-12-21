@@ -1899,7 +1899,7 @@ Namespace Pronto.ERP.Bll
 
             'oCont = GetObjectContext
 
-            oDet = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
+            'oDet = ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearMTSpronto
 
 
             mvarCotizacionMoneda = 0
