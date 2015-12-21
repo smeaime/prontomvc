@@ -1,5 +1,3 @@
-D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csproj.App.config
-D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Pedido_Autotrol_PUNTONET.docx
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Factura_A_BaseNueva.dot
 D:\ProntoMVC3\ProntoMVC\bin\Documentos\Factura_A_BaseNueva_FA.dot
@@ -80,5 +78,7 @@ D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.Deployment.xml
 D:\ProntoMVC3\ProntoMVC\bin\System.Web.WebPages.Razor.xml
 D:\ProntoMVC3\ProntoMVC\bin\itextsharp.xml
+D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csproj.App.config
+D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.dll
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.pdb

@@ -420,17 +420,37 @@ namespace ProntoMVC.Controllers
 
             }
 
-            var data = (from a in pagedQuery
-                        select a )//.Where(campo).OrderBy(sidx + " " + sord)
-                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-                        .ToList();
+            var data = (
+                        from a in pagedQuery
+                        from b in db.RubrosContables.Where(o => o.IdRubroContable == a.IdRubroContable).DefaultIfEmpty()
+                        from c in db.RubrosContables.Where(o => o.IdRubroContable == a.IdRubroFinanciero).DefaultIfEmpty()
+                        from d in db.TiposCuentaGrupos.Where(o => o.IdTipoCuentaGrupo == a.IdTipoCuentaGrupo).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdCuenta,
+                            a.IdCuentaGasto,
+                            a.IdObra,
+                            a.Descripcion,
+                            a.Codigo,
+                            TipoCuenta = a.TiposCuenta.Descripcion,
+                            a.Jerarquia,
+                            RubroContable = b.Descripcion != null ? b.Descripcion : "",
+                            RubroFinanciero = c.Descripcion != null ? c.Descripcion : "",
+                            TipoCuentaGrupo = d.Descripcion != null ? d.Descripcion : "",
+                            CuentaGasto = a.CuentasGasto.Descripcion,
+                            Obra = a.Obra.Descripcion,
+                            a.AjustaPorInflacion,
+                            a.CodigoSecundario
+                        }).AsQueryable();
+
+            var data1 = (from a in data select a).ToList();
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in data1
                         select new jqGridRowJson
                         {
                             id = a.IdCuenta.ToString(),
@@ -438,28 +458,19 @@ namespace ProntoMVC.Controllers
                             "<a href="+ Url.Action("Edit",new {id = a.IdCuenta} ) + " target='' >Editar</>" ,
 							"<a href="+ Url.Action("Imprimir",new {id = a.IdCuenta} )  +">Imprimir</>" ,
                             a.IdCuenta.ToString(), 
-                            new String('.',  (a.Jerarquia==null ? 0 : a.Jerarquia.NullSafeToString().Split('.').ToArray().Where(x=> Generales.Val(x) >0).Count() -1) *5 )  +  a.Descripcion.NullSafeToString()   ,
+                            a.IdCuentaGasto.ToString(), 
+                            a.IdObra.ToString(), 
+                            new String('.',  (a.Jerarquia==null ? 0 : a.Jerarquia.NullSafeToString().Split('.').ToArray().Where(x=> Generales.Val(x) >0).Count() -1) *5 )  +  a.Descripcion.NullSafeToString(),
                             a.Codigo.NullSafeToString(),
-                            
-                            
-                            (a.TiposCuenta==null) ?  "" :  a.TiposCuenta.Descripcion,
-                            
+                            a.TipoCuenta.NullSafeToString(),
                             a.Jerarquia.NullSafeToString(),  
-                            
-                            (a.RubrosContable==null) ?  "" :  a.RubrosContable.Descripcion,
-                            
-                         
-                           
-                            (a.TiposCuentaGrupos==null) ?  "" :  a.TiposCuentaGrupos.Descripcion,
-                            (a.Obra==null) ?  "" :  a.Obra.Descripcion,
-                           
-                           // a.IdTipoCuentaGrupo==null  ? "" :  db.TiposCuentaGrupos.Find(a.IdTipoCuentaGrupo).Descripcion,  
-                           // a.IdObra==null ? "" :  db.Obras.Find(a.IdObra).Descripcion,  
-                           
-                            a.AjustaPorInflacion .NullSafeToString(),
-                            a.CodigoSecundario   .NullSafeToString(),
-                            a.IdCuentaGasto.NullSafeToString(),
-                            a.IdObra.NullSafeToString()
+                            a.RubroContable.NullSafeToString(),  
+                            a.RubroFinanciero.NullSafeToString(),  
+                            a.TipoCuentaGrupo.NullSafeToString(),  
+                            a.CuentaGasto.NullSafeToString(),  
+                            a.Obra.NullSafeToString(),  
+                            a.AjustaPorInflacion.NullSafeToString(),
+                            a.CodigoSecundario.NullSafeToString()
                             }
                         }).ToArray()
             };

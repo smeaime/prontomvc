@@ -1,5 +1,3 @@
-
-/////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 // http://stackoverflow.com/questions/7169227/javascript-best-practices-for-asp-net-mvc-developers
@@ -7,13 +5,8 @@
 // http://stackoverflow.com/questions/251814/jquery-and-organized-code?lq=1   una risa
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
 
 "use strict";
-
-///////////////////////////////////////////////////////////////////////////
-
-
 
 var UltimoIdUnidad
 var UltimoIdArticulo
@@ -26,38 +19,20 @@ var lastColIndex;
 var lastRowIndex;
 var lastSelectedId;
 
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function calculateTotal() {
     //        var totalCantidad = grid.jqGrid('getCol', 'Cantidad', false, 'sum') || 0;
 
     var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-
     var totalCantidad = 0;
 
     for (var i = 0; i < dataIds.length; i++) {
         var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
-
-
         var cant = parseFloat(data['Cantidad'].replace(",", ".")) || 0;
         totalCantidad += cant;
     }
 
-
-
     $('#Lista').jqGrid('footerData', 'set', { NumeroItem: 'TOTAL', Cantidad: totalCantidad });
-
 };
-
 
 function initDateEdit(elem) {
     setTimeout(function () {
@@ -74,14 +49,9 @@ function initDateEdit(elem) {
     }, 100);
 };
 
-
-
 function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
-
-
     //    alert('RefrescarRestoDelRenglon');
     /*
-
     ok, la cuestion es que, usando celledit (es decir, la edicion inline por celda, no por renglon entero), cuando cambio el valor
     dentro de un autocomplete, no puedo refrescar la celda adyacente de id porque no está en modo edicion. es decir, tendría que hacerlo
     una vez que pone enter, es decir, no en el evento 'select' del autocomplete creado dentro del editoptions de la columna, sino en el afterSaveCell general de la grilla. 
@@ -92,23 +62,16 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
     var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
     var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-
-
     var cm = jQuery("#Lista").jqGrid("getGridParam", "colModel");
     var colName = cm[iCol]['index'];
     //alert(colName);
 
-
     switch (colName) {
-
-
 
     }
 
-
     if (colName == "ControlCalidad") {
         //  alert(colName);
-
         data['IdControlCalidad'] = UltimoIdControlCalidad;
         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
@@ -161,13 +124,10 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
         //        );
     }
 
-
-
     else if (colName == "Codigo") {
 
         //alert(iCol);
         //  if (iCol == 12) {   // esto siempre y cuando el cambio haya sido del nombre de articulo
-
 
         $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
                 { term: val }, // JSON.stringify(val)},
@@ -175,17 +135,11 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                     if (data.length > 0) {
                         var ui = data[0];
                         //alert(ui.value);
-
-
-
                         //var data = $('#Lista').jqGrid('getRowData', iRow);
-
                         sacarDeEditMode(); // me salvó esto!! (porque en el caso de que aprieten TAB, no está bueno que quede una celda en edicion mientras estas grabando)
 
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                         var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-
-
 
                         data['IdArticulo'] = ui.id;
                         data['Codigo'] = ui.codigo;
@@ -197,29 +151,17 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         //alert(ui.title);
                         data['Descripcion'] = ui.title;
-
                         data['PorcentajeIVA'] = ui.iva;
                         data['IdUnidad'] = ui.IdUnidad;
                         data['Unidad'] = ui.Unidad;
-
-
                         //   data['Descripcion'] = "ASDASD";
-
                         data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
-
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
-
                         FinRefresco();
-
-
-
                     }
                     else {
-
-
-
                         alert("No existe el código"); // se está bancando que no sea identica la descripcion
                         var ui = data[0];
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
@@ -231,22 +173,14 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                         data['Cantidad'] = 0;
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-
-
                     }
                 }
         );
     }
 
-
     else if (colName == "Descripcion") {   // esto siempre y cuando el cambio haya sido del nombre de articulo
-
-
         //        data['IdArticulo'] = UltimoIdArticulo
-        //        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-
-
-
+       //        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
         $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
                 { term: val }, // JSON.stringify(val)},
@@ -254,13 +188,9 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                     if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
                         var ui = data[0];
 
-
-
                         sacarDeEditMode();
 
                         if (ui.value == "No se encontraron resultados") {
-
-
                             var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                             var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
 
@@ -274,14 +204,8 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                         }
 
                         //var data = $('#Lista').jqGrid('getRowData', iRow);
-
-
-
-
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                         var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-
-
 
                         data['IdArticulo'] = ui.id;
                         data['Codigo'] = ui.codigo;
@@ -289,19 +213,13 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                         data['PorcentajeIVA'] = ui.iva;
                         data['IdUnidad'] = ui.IdUnidad;
                         data['Unidad'] = ui.Unidad;
-
                         data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
-
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
                         FinRefresco();
-
-
-
                     }
                     else {
-
                         alert("No existe el artículo " + val); // se está bancando que no sea identica la descripcion
                         var ui = data[0];
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
@@ -322,50 +240,6 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                 }
         );
 
-
-
-
-
-
-
-        //        $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
-        //                {term: val }, // JSON.stringify(val)},
-        //                function (data) {
-        //                    if (data.length > 0) {
-        //                        var ui = data[0];
-        //                        // alert(ui.value);
-
-
-
-        //                        //var data = $('#Lista').jqGrid('getRowData', iRow);
-
-
-
-        //                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-        //                        var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-
-        //                        data['IdArticulo'] = ui.id;
-        //                        data['Codigo'] = ui.codigo;
-        //                        data['PorcentajeIVA'] = ui.iva;
-        //                        data['IdUnidad'] = ui.IdUnidad;
-        //                        data['Unidad'] = ui.Unidad;
-
-        //                        data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
-
-        //                        var now = new Date();
-        //                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-        //                        if (data['FechaEntrega'] == "") data['FechaEntrega'] = currentDate;
-
-        //                        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-        //                        FinRefresco();
-        //                    }
-        //                    else {
-
-        //                        // hay que cancelar la grabacion
-        //                    }
-        //                }
-        //        );
-
     }
     else if (colName == "Cantidad") { }
 
@@ -374,12 +248,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
         //   alert(colName);
     }
     /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
-    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
-    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
-
 }
-
-
 
 function FinRefresco() {
     calculateTotal();
@@ -388,37 +257,22 @@ function FinRefresco() {
 
 }
 
-
 function RefrescarRenglon(x) {
-
     //    if ($("#editmodLista").attr('aria-hidden') == undefined || $("#editmodLista").attr('aria-hidden') == 'true') {
     //        $("#Lista [aria-selected='true'] [name='IdUnidad']").val(x.value);
     //    }
     //    else {
     //        $('#IdUnidad').val(x.value);
     //    }
-
-
 }
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 function RefrescarOrigenDescripcion() {
 
     var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
 
-
     for (var i = 0; i < dataIds.length; i++) {
 
-
         var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
-
 
         if (!data['IdDetalleRequerimiento']) {
             //$("#Lista").jqGrid('delGridRow', dataIds[i]);
@@ -430,17 +284,10 @@ function RefrescarOrigenDescripcion() {
             continue;
         }
 
-
         // if (OrigenDescripcionDefault == 3) { data['OrigenDescripcion'] = 3 };
-
-
 
         var tipoDesc = data['OrigenDescripcion'] || 1;
         var sDesc = data['Descripcion'];
-        var sObs = data['Observaciones'];
-
-
-        ///////////////////////////////////////////
 
         // "0:Solo el material; 1:Solo las observaciones; 2:Material mas observaciones"
 
@@ -457,14 +304,7 @@ function RefrescarOrigenDescripcion() {
         $('#Lista').jqGrid('setRowData', dataIds[i], data); // vuelvo a grabar el renglon
         //$('#Lista').jqGrid('saveRow', dataIds[i]);
     }
-
 }
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function GrabarGrillaLocal() {
     var $this = $('#Lista')
@@ -480,14 +320,11 @@ function GrabarGrillaLocal() {
     }
 }
 
-
-
 function PopupCentrar() {
     var grid = $("#Lista");
     var dlgDiv = $("#editmod" + grid[0].id);
 
     $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
-
     //            $("#editmod" + grid[0].id + " [type=button]").attr("class", "btn btn-primary");
     //            $(":button").attr("class", "btn btn-primary");
     $("#editmod" + grid[0].id).find('#FechaEntrega').width(160);
@@ -518,34 +355,7 @@ function PopupCentrar() {
 
     dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
     dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
-
 }
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
 
 function SerializaForm() {
 
@@ -584,11 +394,9 @@ function SerializaForm() {
             }
 
             var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
-
             var iddeta = data['IdDetalleRequerimiento'];
             //alert(iddeta);
             if (!iddeta) continue;
-
 
             data1 = '{"IdRequerimiento":"' + $("#IdRequerimiento").val() + '",'
             for (var j = 0; j < colModel.length; j++) {
@@ -609,8 +417,6 @@ function SerializaForm() {
                         else {
                             //valor = 0;
                         }
-
-
                     }
 
                     if (cm.name.indexOf("Fecha") !== -1) valor = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", valor));
@@ -626,31 +432,20 @@ function SerializaForm() {
                     try {
                         // replace() solo reemplaza la primera aparicion !!!!!!!!
                         // http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
-
                         valor = replaceAll('"', '\\"', valor);
                         valor = replaceAll('\t', '\\t', valor);
                         valor = replaceAll('\n', '\\n', valor);
-                        //                                   valor = valor.replace('\t', '\\t');
-                        //                                   valor = valor.replace('\n', '\\n');
                         //                                   valor = valor.replace('\r', '\\r');
                         // http://stackoverflow.com/questions/983451/where-can-i-find-a-list-of-escape-characters-required-for-my-json-ajax-return-ty
                     } catch (e) {
                         //    
                     }
-                    //          
-
-
 
                     if (cm.name === 'Cumplido' && cabecera.Cumplido === 'AN') valor = 'AN'
 
-
                     // if (cm.name === 'IdControlCalidad') valor = 'AN'
 
-
-
                     data1 = data1 + '"' + cm.name + '":"' + valor + '",';
-
-
                 }
             }
             data1 = data1.substring(0, data1.length - 1) + '}';
@@ -664,46 +459,19 @@ function SerializaForm() {
             return;
         }
     }
-
-
     return cabecera;
 }
 
-
-
-
 $(function () {
-
-
-
-
-
-
-    //        $("body").on({
-    //            ajaxStart: function () {
-    //                $(this).addClass("loading");
-    //            },
-    //            ajaxStop: function () {
-    //                $(this).removeClass("loading");
-    //            }
-    //        });  
-
-
-
-
-
 
     var dobleclic
     var headerRow, rowHight, resizeSpanHeight;
     var grid = $("#Lista")
 
-
     pageLayout.show('east', true);
     pageLayout.open('east');
 
-
     pageLayout.options.center.onresize = function () { RefrescaAnchoGrillaDetalle(); };
-
 
     //Esto es para analizar los parametros de entrada via querystring
     var querystring = location.search.replace('?', '').split('&');
@@ -717,11 +485,6 @@ $(function () {
         $(":input").attr("disabled", "disabled");
         $(".boton").hide();
     }
-
-
-
-
-
 
     $("#FechaRequerimiento").datepicker({
         changeMonth: true,
@@ -750,14 +513,8 @@ $(function () {
         return value;
     }
 
-
-
     function Validar() {
-
-
-
         //quiz�s no est� esperando que vuelva la llamada.....
-
         /////////////////////////////////////////////////////////////////////////////////////////////////
         // valido el nuevo comprobante
 
@@ -824,46 +581,23 @@ $(function () {
 
                 var arraydemensajes = xhr.responseText;
                 QuitarRenglones(arraydemensajes);
-
             }
         });
 
     }
 
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////DEFINICION DE GRILLAS   ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     $('#Lista').jqGrid({
         url: ROOT + 'Requerimiento/DetRequerimientos/',
-        postData: {
-            'IdRequerimiento': function () {
-                return $("#IdRequerimiento").val();
-            }
-
-        },
+        postData: { 'IdRequerimiento': function () { return $("#IdRequerimiento").val(); } },
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['', 'IdDetalleRequerimiento', 'IdArticulo', 'IdUnidad', '#', 'Cant.', 'Un.', 'Codigo',
-                     'Artículo', 'Descripción', 'Entrega', 'Observaciones',
-                       'Cump', 'Adjunto', 'OrigenDescripcion', '', 'IdCalidad', 'Calidad'],
-        colModel: [
-                        {
-                            formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre',
-                            width: 30,
-                            hidden: true, sortable: false, editable: false
-
-                         , formatter: 'actions',
+        colNames: ['', 'IdDetalleRequerimiento', 'IdArticulo', 'IdUnidad', '#', 'Cant.', 'Un.', 'Codigo', 'Artículo', 'Descripción', 'Entrega', 'Observaciones', 'Cump', 'Adjunto',
+                   'OrigenDescripcion', '', 'IdCalidad', 'Calidad'],
+        colModel: [     { formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre', width: 30, hidden: true, sortable: false, editable: false, formatter: 'actions',
                             formatoptions: {
                                 editformbutton: true,
                                 editbutton: false,
@@ -871,46 +605,19 @@ $(function () {
                                 keys: false
                             }
                         },
-
                         { formoptions: { rowpos: 1, colpos: 2 }, name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false } },
                         { formoptions: { rowpos: 2, colpos: 1 }, name: 'IdArticulo', index: 'IdArticulo', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true } },
+                        { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdUnidad', index: 'IdUnidad', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false } },
+                        //{ name: 'Eliminado', index: 'Eliminado', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true} },
+                        { name: 'NumeroItem', formoptions: { rowpos: 3, colpos: 1 }, index: 'NumeroItem', label: 'TB', align: 'center', width: 30, editable: true, edittype: 'text', editoptions: { disabled: true }, editrules: { readonly: 'readonly' } },
+                        { name: 'Cantidad', formoptions: { rowpos: 9, colpos: 1 }, index: 'Cantidad', label: 'TB', align: 'right', width: 60, editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true } }, 
                         {
-                            formoptions: { rowpos: 2, colpos: 2 }, name: 'IdUnidad', index: 'IdUnidad', label: 'TB',
-                            align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
-                        },
-        //{ name: 'Eliminado', index: 'Eliminado', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true} },
-
-
-                        {
-                            name: 'NumeroItem'
-                            , formoptions: { rowpos: 3, colpos: 1 }
-                            , index: 'NumeroItem'
-                            , label: 'TB', align: 'center', width: 30,
-                            editable: true, edittype: 'text',
-                            editoptions: { disabled: true },
-                            editrules: { readonly: 'readonly' }
-                        },
-        ////////////////////////////////////////////
-        // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:predefined_formatter
-                        {
-                            name: 'Cantidad', formoptions: { rowpos: 9, colpos: 1 }, index: 'Cantidad', label: 'TB', align: 'right', width: 60,
-                            editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true }
-
-
-                            // formatter:'number', formatoptions: {decimalSeparator:".", thousandsSeparator: "", decimalPlaces: 4}
-                            //formatter:'currency', formatoptions:{decimalSeparator:",", thousandsSeparator: ",", decimalPlaces: 2, prefix: "$ ",defaultValue: '0.00'}
-                            // formatter: numFormat, unformat: numUnformat  
-                        }, //, unformat:numUnformat
-        ////////////////////////////////////////////
-                        {
-                            name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left',
-                            width: 60, editable: true, edittype: 'select', editrules: { required: true },
+                            name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left', width: 60, editable: true, edittype: 'select', editrules: { required: true },
                             editoptions: {
                                 dataUrl: ROOT + 'Articulo/Unidades',
                                 dataEvents: [{
                                     type: 'change',
                                     fn: function (e) {
-
                                         //alert('aasasd');
                                         RefrescarRenglon(this);
                                         //  UltimoIdArticulo=ui.item.id;
@@ -926,14 +633,9 @@ $(function () {
                                     }
                                 }]
                             }
-
                         },
-
-
-
                         {
-                            name: 'Codigo', formoptions: { rowpos: 5, colpos: 1 }, index: 'Codigo', align: 'left',
-                            width: 100, editable: true, edittype: 'text',
+                            name: 'Codigo', formoptions: { rowpos: 5, colpos: 1 }, index: 'Codigo', align: 'left', width: 100, editable: true, edittype: 'text',
                             editoptions: {
                                 dataInit: function (elem) {
                                     var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
@@ -947,19 +649,11 @@ $(function () {
                                             else {
                                                 $("#IdArticulo").val(ui.item.id);
                                                 $("#Descripcion").val(ui.item.title);
-                                                //                                                $("#IdUnidad").val(ui.item.idunidad || 1);
-                                                //                                                $("#Unidad").val(ui.item.idunidad || 1);
-
                                                 $("#IdUnidad").val(ui.item.IdUnidad);
                                                 $("#Unidad").val(ui.item.IdUnidad);
 
                                                 UltimoIdArticulo = ui.item.id;
                                                 UltimoIdUnidad = ui.item.IdUnidad;
-
-
-                                                // $("#IdUnidad").val(ui.item.IdUnidad|| 1);
-                                                // $("#Unidad").attr("value", ui.item.IdUnidad|| 1);
-
                                             }
                                         },
                                         focus: function (event, ui) {
@@ -975,20 +669,11 @@ $(function () {
                                             .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " " + item.title + "</b></span></a>")
                                             .appendTo(ul);
                                     };
-
-
-
-                                }
-
-                                ,
-
+                                },
                                 dataEvents: [{
                                     type: 'change',
                                     fn: function (e) {
-
-
                                         // alert('aasasd');
-
                                         $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
                                             { term: this.value },
                                             function (data) {
@@ -1005,10 +690,7 @@ $(function () {
                                                         $("#Codigo").val("");
                                                         return;
                                                     }
-
-
                                                     //alert('hay ' + data.length);
-
                                                     $("#IdArticulo").val(ui.id);
                                                     $("#Codigo").val(ui.value);
                                                     $("#Descripcion").val(ui.title);
@@ -1016,36 +698,20 @@ $(function () {
                                                     $("#Unidad").val(ui.IdUnidad);
                                                     UltimoIdArticulo = ui.id;
                                                     UltimoIdUnidad = ui.IdUnidad;
-
                                                 }
                                                 else {
-
                                                     alert("No existe el código"); // se está bancando que no sea identica la descripcion
                                                 }
                                             }
                                         );
-
-
-
                                     }
                                 }]
-
-
-
-
                             },
                             editrules: { required: false }
                         },
+                        { formoptions: { rowpos: 6, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, width: 400, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false } },
                         {
-                            formoptions: { rowpos: 6, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, width: 400
-                            , hidden: true //lo pongo en hidden porque edu me aclara que no juntamos la descripcion + observacion en el abm, solo en la impresion
-                            , editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
-                        },
-
-                        {
-                            name: 'Descripcion', formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 450,
-                            hidden: false,
-                            editable: true, edittype: 'text',
+                            name: 'Descripcion', formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
                             editoptions: {
                                 rows: '1', cols: '1',
                                 dataInit: function (elem) {
@@ -1053,15 +719,10 @@ $(function () {
                                     $(elem).autocomplete({
                                         source: ROOT + "Articulo/GetArticulosAutocomplete2", minLength: 0,
                                         select: function (event, ui) {
-
-                                            //alert(ui.item.value);
-
                                             if (ui.item.value === NoResultsLabel) {
                                                 event.preventDefault();
                                                 return;
                                             }
-
-
                                             $("#IdArticulo").val(ui.item.id);
                                             $("#Codigo").val(ui.item.codigo);
                                             $("#IdUnidad").val(ui.item.IdUnidad);
@@ -1070,40 +731,27 @@ $(function () {
 
                                             UltimoIdArticulo = ui.item.id;
                                             UltimoIdUnidad = ui.item.IdUnidad;
-
-
-                                            // if ($("#IdUnidad") == null) $("#Unidad").val(ui.item.IdUnidad);  mvarIdUnidadCU
-
-                                        }
-                                        ,
+                                        },
                                         focus: function (event, ui) {
                                             if (ui.item.value === NoResultsLabel) {
                                                 event.preventDefault();
                                             }
                                         }
-
                                     })
-
                                     .data("ui-autocomplete")._renderItem = function (ul, item) {
                                         return $("<li></li>")
                                             .data("ui-autocomplete-item", item)
                                             .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.codigo + "]</b></span></a>")
                                             .appendTo(ul);
                                     };
-                                }
-
-                                ,
+                                },
                                 dataEvents: [{
                                     type: 'change',
                                     fn: function (e) {
-
-                                        //alert(this.value);
-
                                         if (this.value == "No se encontraron resultados") {
                                             $("#Descripcion").val("");
                                             return;
                                         }
-
                                         $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
                                             { term: this.value },
                                             function (data) {
@@ -1115,13 +763,6 @@ $(function () {
                                                         $("#Descripcion").val("");
                                                         return;
                                                     }
-
-
-                                                    //alert('hay ' + data.length);
-
-
-
-
                                                     $("#IdArticulo").val(ui.id);
                                                     $("#Codigo").val(ui.codigo);
                                                     $("#IdUnidad").val(ui.IdUnidad);
@@ -1130,96 +771,24 @@ $(function () {
 
                                                     UltimoIdArticulo = ui.id;
                                                     UltimoIdUnidad = ui.IdUnidad;
-
-
                                                 }
                                                 else {
-
                                                     alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
                                                 }
                                             }
                                         );
-
-
-
                                     }
                                 }]
-
                             },
                             editrules: { required: true }
                         },
-        //{ name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Articulos")' }, editrules: { required: true} },
-                        {
-                            name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 },
-                            index: 'FechaEntrega', label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
-                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
-                            editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit },
-                            editrules: { required: false }
-
-
-
+                        { name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 }, index: 'FechaEntrega', label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
+                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
                         },
-        //                        { name: 'Adjunto', index: 'Adjunto', align: 'left', width: 67, align: 'center', formatter: 'checkbox', editable: true, edittype: 'checkbox', hidden: true, 
-        //                            editoptions: { value: "True:False", //value: 'Yes:No', defaultValue: 'Si', 
-        //                                            dataEvents: [{ type: 'change', fn: function (e) {
-        //                                                                var thisval=$(e.target).val();
-        //                                                                if( $(this).is(':checked')) {$("#ArchivoAdjunto1").show();}
-        //                                                                else {$("#ArchivoAdjunto1").hide();} 
-        //                                                                }
-        //                                                         }] 
-        //                                             }
-        //                        }, 
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-
-                        {
-                            formoptions: { rowpos: 11, colpos: 1, label: 'Obs' }, name: 'Observaciones', index: 'Observaciones',
-
-                            classes: "textInDiv", // http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only
-                            //                                formatter: function (v) {
-                            //                                    return '<div>' + $.jgrid.htmlEncode(v) + '</div>';
-                            //                                },
-                            label: 'TB', align: 'left', editable: true
-                            ///////////////////////////////////////////////////////////
-                            /////////////////////////////////////////////////////////
-                         , edittype: 'text'  // para que no deforme el inline, 
-                            // ,hidden: true  //aparecerá en el form pero no en la grilla, tal como la columna Descripcion
-                            ///////////////////////////////////////////////////////////
-                            // , edittype: 'textarea'
-                               , width: 300
-                            ///////////////////////////////////////////////////////////
-                            ///////////////////////////////////////////////////////////
-                        , editoptions: { rows: '4', cols: '40' }
-
-
-
-                        },
-
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
+                        { formoptions: { rowpos: 11, colpos: 1, label: 'Obs' }, name: 'Observaciones', index: 'Observaciones', classes: "textInDiv", label: 'TB', align: 'left', editable: true, edittype: 'text', width: 300, editoptions: { rows: '4', cols: '40' } },
                         { formoptions: { rowpos: 21, colpos: 1 }, name: 'Cumplido', index: 'Cumplido', label: 'TB', align: 'center', width: 50, sortable: false, editable: false },
                         {
-                            name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file',
-                            formoptions: { rowpos: 22, colpos: 1 },
+                            name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file', formoptions: { rowpos: 22, colpos: 1 },
                             editoptions: {
                                 enctype: "multipart/form-data", dataEvents: [{
                                     type: 'change', fn: function (e) {
@@ -1235,197 +804,70 @@ $(function () {
                                 }]
                             }
                         },
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-
-        // radio buttons en el popup del jqgrid
-        // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:common_rules#custom
                     {
-
-                        name: 'OrigenDescripcion', label: 'TB'
-                            , formoptions: { rowpos: 11, colpos: 2, label: "Tomar desc. de" }
-                            , index: 'OrigenDescripcion',
-                        align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
-                        // formatter: radioFormatter, unformat: unformatRadio,
+                        name: 'OrigenDescripcion', label: 'TB', formoptions: { rowpos: 11, colpos: 2, label: "Tomar desc. de" }, index: 'OrigenDescripcion', align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', 
                         editrules: {
                             required: true
-                            //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  )                , disabled: 'disabled'
                         },
                         editoptions: {
-                            //                         readonly: true,
-                            //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
                             defaultValue: OrigenDescripcionDefault,
                             value: "1:Solo el material; 2:Solo las observaciones; 3:Material mas observaciones", size: 3
-                            //,
-                            //     custom_element: myelem, custom_value: myvalue
                         }
-
-                    }
-
-
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-                , { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true }
-
-                , {
-                    formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true
-                    //                    align: 'left', width: 85, editable: true, hidden: true, 
-                    //                    editoptions: { disabled: 'disabled' }, 
-                    //                            editrules: { edithidden: true, required: true }
-                }
-
-               , {
-                   name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '',
-                   width: 150, editable: true, edittype: 'select', editrules: { required: false },
-                   editoptions: {
-                       dataUrl: ROOT + 'ControlCalidad/ControlCalidades', //  ROOT + 'ControlCalidad/ControlCalidadParaCombo',
-
-
-                       // $("#IdUnidad").val(ui.item.IdUnidad|| 1);
-                       // $("#Unidad").attr("value", ui.item.IdUnidad|| 1);
-
-
-
-                       dataEvents: [{
-                           type: 'change', fn: function (e) {
-
+                    },
+                    { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true }, 
+                    { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true }, 
+                    { name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '', width: 150, editable: true, edittype: 'select', editrules: { required: false },
+                        editoptions: { dataUrl: ROOT + 'ControlCalidad/ControlCalidades', 
+                        dataEvents: [{type: 'change', fn: function (e) {
                                $('#IdControlCalidad').val(this.value);
                                UltimoIdControlCalidad = this.value;
-
                                RefrescarRenglon(this);
-
                            }
-                       }]
-
-
+                        }]
                    }
-
                },
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-
-
-
         ],
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
         onSelectRow: function (id, status, e) {
             if (dobleclic) {
                 dobleclic = false;
                 return;
             }
-
-
             if (id && id !== lastSelectedId) {
                 if (typeof lastSelectedId !== "undefined") {
                     grid.jqGrid('restoreRow', lastSelectedId);
                 }
-
-
-                // sacarDeEditMode();
-
                 jQuery('#Lista').restoreRow(lastSelectedId);  // para inline
                 lastSelectedId = id;
             }
-
-            // ver qu� columna es
-            // jQuery('#Lista').editRow(id, true);  // para inline
-
-
         },
-
         beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
             lastRowIndex = iRow;
             lastColIndex = iCol;
         },
-
-
         ondblClickRow: function (id) {
-
-
-
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-            //            if (typeof lastSelectedId !== "undefined") {
-            //                // grid.jqGrid('saveRow', lastSelectedId);
-            //                grid.jqGrid('restoreRow', lastSelectedId);
-            //            }
-
-
-            // http://stackoverflow.com/questions/9508882/how-to-close-cell-editor
-            // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:cell_editing
-
-
-            // jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
-
             sacarDeEditMode();
-
-            //            var ids = jQuery("#Lista").getChangedCells('dirty'); // .jqGrid('getDataIDs');
-            //            for (var i = 0; i < ids.length; i++) {
-
-
-
-            //                grid.jqGrid('restoreRow', ids[i]);
-            //            }
-
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-
-
-
             dobleclic = true;
-            //$("#edtData").click();
-
             EditarItem(id);
         },
-
-
-
-
         afterEditCell: function (rowid, cellname, value, iRow, iCol) {
-
             var $input = $("#" + iRow + "_" + cellname);
             $input.select(); // acá me marca el texto
-
             //http://jsfiddle.net/ironicmuffin/7dGrp/
             //http://fiddle.jshell.net/qLQRA/show/
-
             // alert('hola'); 
         },
-
         afterSaveCell: function (rowid, name, val, iRow, iCol) {
-
-
             RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol);
         },
-
-
         beforeSaveCell: function (rowid, name, val, iRow, iCol) {
-
             // RefrescarRestoDelRenglon
         },
-
-
         onClose: function (data) {
             //alert('adfdfaafdafdsfdsa');
             RefrescarOrigenDescripcion();
         },
-
         beforeShowForm: function (form) {
-
-
             /// PopupCentrar()??????
-
             //            var dlgDiv = $("#editmod" + grid[0].id);
             //            var parentDiv = dlgDiv.parent(); // div#gbox_list
             //            var dlgWidth = dlgDiv.width();
@@ -1436,20 +878,10 @@ $(function () {
             //            //       is larger as the browser window
             //            dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
             //            dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
-
-
-
         },
-
-
         onclickSubmit: function (params, posdata) {
             //    alert('asdasdad');
         },
-
-
-
-
-
         gridComplete: function () {
             var ids = jQuery("#Lista").jqGrid('getDataIDs');
             for (var i = 0; i < ids.length; i++) {
@@ -1461,164 +893,121 @@ $(function () {
                 //                    jQuery("#Lista").jqGrid('editRow', ids[i], false);
                 calculateTotal();
             }
-
             RefrescarOrigenDescripcion();
-
-
-            //return;
-
-            //AgregarRenglonesEnBlanco();
-
             for (var i = 0; i < ids.length; i++) {
-                // http: //stackoverflow.com/questions/17818891/disable-a-row-in-jqgrid
                 var row = jQuery("#Lista").jqGrid('getRowData', ids[i]);
-
                 if (row.Cumplido == "SI") {
-                    //alert(row.Cumplido);
-                    // $(row).addClass('not-editable-row');
                     $('#' + ids[i]).addClass('not-editable-row');
                 }
-
             }
-
             return;
-
-
         },
-
         loadComplete: function (data) {
             //seleccionar primer renglon
-
             if (true) {
                 $("#Lista").jqGrid('setSelection', $("#Lista").getDataIDs()[0]);
                 AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
 
                 var $this = $(this), ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
                 for (i = 0; i < l; i++) {
-                    //       $this.jqGrid('editRow', ids[i], true);
                 }
             }
-
-            //            rows = $("#Lista").getGridParam("reccount");
-            //            if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
         },
-
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         cmTemplate: { sortable: false },
-
         rowNum: 100,
         rowList: [10, 20, 50, 100],
         sortname: 'NumeroItem',
         sortorder: 'asc',
         viewrecords: true,
-
-        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        //////////////////////////////
         height: '200px', // 'auto',
         altRows: false,
-
         footerrow: true,
-        userDataOnFooter: true
-
-           , rownumbers: false
-        , multiselect: true
-
-
-        , cellLayout: 10
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
-         ,
+        userDataOnFooter: true,
+        rownumbers: false,
+        multiselect: true,
+        cellLayout: 10,
         cellEdit: true,
-        cellsubmit: 'clientArray'
-        , editurl: ROOT + 'Requerimiento/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-        // , pager: $('#ListaPager')
-
-
+        cellsubmit: 'clientArray',
+        editurl: ROOT + 'Requerimiento/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
         //, recreateForm:false 
-
-        //,
         //loadonce: true,
         // caption: '<b>ITEMS DEL REQUERIMIENTO</b>'
     });
-
-    //        jQuery("#grid_id").jqGrid('navGrid',pagerid, {});
-    //jQuery("#grid_id").jqGrid('inlineNav',pagerid, parameters);
     $('#Lista').jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last" } });
+    jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////FIN DE DEFINICION DE GRILLALISTA   ////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-    //        http: //stackoverflow.com/questions/11387621/how-to-handle-resize-event-with-a-resize-bar
-
-
-    /*
-    myLayout = $('body').layout({
-    onresize: function () {
-    alert('whenever anything on layout is redrawn.')
-    }
+    $("#ListaDrag").jqGrid({
+        url: ROOT + 'Articulo/Articulos_DynamicGridData',
+        datatype: 'json',
+        mtype: 'POST',
+        postData: {'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); }},
+        colNames: ['', '', 'Codigo', 'Numero inventario', 'Descripcion', 'Rubro', 'Subrubro', '', '', '', '', '', '', '', '', 'Unidad'],
+        colModel: [
+                    { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false, hidden: true },
+                    { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+                    { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] } },
+                    { name: 'NumeroInventario', index: 'NumeroInventario', width: 130, align: 'left', stype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }, hidden: true },
+                    {
+                        name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }, 
+                        search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }
+                    },
+                    { name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 250, align: 'left', editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }, search: true, searchoptions: { } },
+                    { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text', hidden: true },
+                    { name: 'AlicuotaIVA', index: 'AlicuotaIVA', width: 50, align: 'left', search: true, stype: 'text', hidden: true },
+                    { name: 'CostoPPP', index: 'CostoPPP', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CostoPPPDolar', index: 'CostoPPPDolar', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CostoReposicion', index: 'CostoReposicion', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CostoReposicionDolar', index: 'CostoReposicionDolar', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'StockMinimo', index: 'StockMinimo', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'StockReposicion', index: 'StockReposicion', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CantidadUnidades', index: 'CantidadUnidades', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
+        ],
+        ondblClickRow: function (id) {
+            copiarArticulo(id);
+        },
+        loadComplete: function () {
+            grid = $("ListaDrag");
+        },
+        pager: '#ListaDragPager', // $(),
+        rowNum: 50,
+        rowList: [10, 20, 50, 100],
+        sortname: 'IdArticulo',
+        sortorder: "desc",
+        viewrecords: true,
+        //toppager: true,
+        emptyrecords: 'No hay registros para mostrar',
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        height: $(window).height() - ALTOLISTADO, // '100%'
+        altRows: false,
+        footerrow: false, //true,
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
     })
-    */
-
-
-
-
-
-
-    //    var table = $("#Lista")[0];
-    //    var r = table.rows[0], selftable = table;
-    //    if (r) {
-    //        $("td", r).each(function (k) {
-    //            $(this).css('width', selftable.grid.headers[k].width + 'px');
-    //        });
-    //        table.grid.cols = r.cells;
-    //    }
-
-
-
-
-
-
-
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false }
+    );
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', { caption: "", buttonicon: "ui-icon-calculator", title: "Choose columns",
+        onClickButton: function () {
+            $(this).jqGrid('columnChooser',
+                { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
+            $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
+                .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
+        }
+    });
+    jQuery("#ListaDrag").filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); 
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', { caption: "Filter", title: "Toggle Searching Toolbar", buttonicon: 'ui-icon-pin-s', onClickButton: function () { myGrid[0].toggleToolbar(); } });
 
 
     $("#BuscadorPanelDerecho").change(function () {
-
-
         var grid = jQuery("#ListaDrag");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
@@ -1631,7 +1020,6 @@ $(function () {
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
         grid.trigger("reloadGrid", [{ page: 1 }]);
 
-
         var grid = jQuery("#ListaDrag2");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
@@ -1643,19 +1031,11 @@ $(function () {
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
         grid.trigger("reloadGrid", [{ page: 1 }]);
-
     });
-
-
-
 
     $(window).bind('resize', function () {
         $("#Lista").setGridWidth($(window).width());
     }).trigger('resize');
-
-
-
-
 
     function myelem(value, options) {
         var el = document.createElement("input");
@@ -1680,106 +1060,41 @@ $(function () {
         return cellvalue.replace(".", ",");
     }
 
-
-    //    $("#Lista").jqGrid("inlineNav", "#pager", { addParams: { position: "last"} }); //para que los nuevos renglones aparezcan al final (MODO INLINE)
-    // $("#Lista").jqGrid('FormToGrid', rowid, formid, mode, position); //para que los nuevos renglones aparezcan al final (MODO FORM)
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////grabar///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
     $('#grabar2').click(function () {
-
         try {
             jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-        } catch (e) {
-
-        }
-
-
+        } catch (e) {     }
 
         var cabecera = SerializaForm();
-
 
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             url: ROOT + 'Requerimiento/BatchUpdate',   // '@Url.Action("BatchUpdate", "Requerimiento")',
             dataType: 'json',
-            data:  //  $.toJSON(cabecera),
-                        JSON.stringify(cabecera),
+            data: JSON.stringify(cabecera),
             success: function (result) {
                 if (result) {
                     $('#Lista').trigger('reloadGrid');
-
                     $('html, body').css('cursor', 'auto');
                     //  window.location = (ROOT + "Requerimiento/index");
                     window.location = (ROOT + "Requerimiento/Edit/" + result.IdRequerimiento);
-
                 } else {
-
-
                     alert('No se pudo grabar el comprobante.');
                     $('.loading').html('');
 
                     $('html, body').css('cursor', 'auto');
                     $('#grabar2').attr("disabled", false).val("Aceptar");
                 }
-
-
-
-
-
-
             },
-
-
-
             beforeSend: function () {
                 //$('.loading').html('some predefined loading img html');
                 $("#loading").show();
                 $('#grabar2').attr("disabled", true).val("Espere...");
-
-
-
-
             },
             complete: function () {
                 $("#loading").hide();
             },
-            //                error: function (xhr, textStatus, exceptionThrown) {
-            //                try {
-            //                    var errorData = $.parseJSON(xhr.responseText);
-            //                    var errorMessages = [];
-            //                    //this ugly loop is because List<> is serialized to an object instead of an array
-            //                    for (var key in errorData) {
-            //                        errorMessages.push(errorData[key]);
-            //                    }
-            //                    $('#result').html(errorMessages.join("<br />"));
-
-            //                    $('html, body').css('cursor', 'auto');
-            //                    $('#grabar2').attr("disabled", false).val("Aceptar");
-            //                    alert(errorMessages.join("<br />"));
-            //                } catch (e) {
-            //    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-            //                   // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-            //                    
-            //                    $('html, body').css('cursor', 'auto');
-            //                    $('#grabar2').attr("disabled", false).val("Aceptar");
-            //                    alert(xhr.responseText);
-            //                }
-            //                
-
-
-            //                }
-
-
-
             error: function (xhr, textStatus, exceptionThrown) {
                 try {
                     var errorData = $.parseJSON(xhr.responseText);
@@ -1789,62 +1104,27 @@ $(function () {
                         errorMessages.push(errorData[key]);
                     }
 
-
                     $('html, body').css('cursor', 'auto');
                     $('#grabar2').attr("disabled", false).val("Aceptar");
                     //alert(errorMessages.join("<br />"));
-
                     // $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
                     //$('#result').html(errorMessages.join("<br />"));
                     //$("#textoMensajeAlerta").html(xhr.responseText);
                     $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
                     $("#mensajeAlerta").show();
                 } catch (e) {
-                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
                     $('html, body').css('cursor', 'auto');
                     $('#grabar2').attr("disabled", false).val("Aceptar");
-
-
                     //alert(xhr.responseText);
-
-
                     $("#textoMensajeAlerta").html(xhr.responseText);
                     $("#mensajeAlerta").show();
                 }
-
-
-
-
-
-
-
             }
-
-
-
-
-
         });
     });
 
-    jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // para qué es esto???
-
     // get the header row which contains
-    headerRow = grid.closest("div.ui-jqgrid-view")
-            .find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
+    headerRow = grid.closest("div.ui-jqgrid-view").find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
 
     // increase the height of the resizing span
     resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
@@ -1859,321 +1139,8 @@ $(function () {
         ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
     });
 
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-    $("#ListaDrag").jqGrid({
-
-
-        //url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
-        url: ROOT + 'Articulo/Articulos_DynamicGridData',
-
-
-        datatype: 'json',
-        mtype: 'POST',
-        postData: {
-            'FechaInicial': function () { return $("#FechaInicial").val(); },
-            'FechaFinal': function () { return $("#FechaFinal").val(); },
-            'IdObra': function () { return $("#IdObra").val(); }
-        },
-
-
-
-        colNames: ['', '', 'Codigo', 'Descripcion'
-
-   , 'Rubro'
-
-   , 'Subrubro'
-   , 'Nro.inv.', '','', 'Unidad'
-
-
-        ],
-
-
-
-
-
-
-        colModel: [
-        { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
-        { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-        {
-            name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
-            search: true, searchoptions: {
-                clearSearch: true, searchOperators: true
-                , sopt: ['cn']
-            }
-        },
-        {
-            name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
-            editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
-
-            , search: true, searchoptions: {
-                clearSearch: true,
-                searchOperators: true
-                , sopt: ['cn']
-                //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
-            }
-        },
-        {
-            name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
-            editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
-            , search: true, searchoptions: {
-                //sopt: ['cn']
-            }
-        },
-
-
-        { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
-        { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
-
-        ,
-        { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
-        { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
-        { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
-
-
-        ],
-
-        ondblClickRow: function (id) {
-            copiarArticulo(id);
-        },
-        loadComplete: function () {
-            grid = $("ListaDrag");
-        },
-
-
-
-
-
-        pager: '#ListaDragPager', // $(),
-        rowNum: 50,
-        rowList: [10, 20, 50, 100],
-        sortname: 'IdArticulo',
-        sortorder: "desc",
-        viewrecords: true,
-        //toppager: true,
-
-        emptyrecords: 'No hay registros para mostrar',
-
-
-
-        ///////////////////////////////
-        width: 'auto', // 'auto',
-        autowidth: true,
-        shrinkToFit: false,
-        //////////////////////////////
-
-        height: $(window).height() - ALTOLISTADO, // '100%'
-        altRows: false,
-        footerrow: false, //true,
-        userDataOnFooter: true
-        // ,caption: '<b>PEDIDOS</b>'
-
-          , gridview: true
-
-          , multiboxonly: true
-
-          , multipleSearch: true
-        //,
-        //search : { caption: "Search...", Find: "Find", Reset: "Reset",
-        //odata : ['equal', 'not equal', 'less'],
-        //groupOps: [ { op: "AND", text: "all" },
-        //            { op: "OR", text: "any" }],
-        //matchText: " match",
-        //rulesText: " rules" },
-
-    })
-    //        .navGrid("#ListaPager",
-    //            { refresh: true, add: false, edit: false, del: false },
-    //                {}, // settings for edit
-    //                {}, // settings for add
-    //                {}, // settings for delete
-    //                {closeAfterSearch: true, closeOnEscape: true },
-    //                { sopt: ["cn"]} // Search options. Some options can be set on column level
-    //         );
-
-
-    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-
-    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
-     { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-     {
-         //sopt: ["cn"]
-         //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-         width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-     }
-    );
-
-
-
-    //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { add: false, edit: false, del: false },
-    //{}, {}, {}, { multipleSearch: true, overlay: false });
-
-    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', {
-        caption: "",
-        buttonicon: "ui-icon-calculator",
-        title: "Choose columns",
-        onClickButton: function () {
-            $(this).jqGrid('columnChooser',
-                { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
-            $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
-                .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
-        }
-    });
-
-
-
-    jQuery("#ListaDrag").filterToolbar({
-        stringResult: true, searchOnEnter: true,
-        defaultSearch: 'cn',
-        enableClear: false
-    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-    //myGrid.filterToolbar({  });
-
-    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager',
-        {
-            caption: "Filter", title: "Toggle Searching Toolbar",
-            buttonicon: 'ui-icon-pin-s',
-            onClickButton: function () { myGrid[0].toggleToolbar(); }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //var prmSearch = { multipleSearch: false, overlay: true, sopt: ["cn"], width: 500, closeOnEscape: true, closeAfterSearch: true };
-
-
-    //$("#ListaDrag2").jqGrid({
-    //    url: ROOT + 'Requerimiento/Requerimientos',
-    //    postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; }, 'IdObra': function () { return ""; } },
-    //    datatype: 'json',
-    //    mtype: 'POST',
-    //    cellEdit: false,
-    //    colNames: ['Acciones', 'Acciones', 'IdRequerimiento', 'N°', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
-    //                   'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario_anulo', 'Fecha_anulacion', 'Motivo_anulacion', 'Fechas_liberacion',
-    //                   'Observaciones', 'Lugar de necesidad', 'IdObra', 'IdSector'],
-    //    colModel: [
-    //                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-    //                    { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-    //                    { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-    //                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-    //                    { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 80, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-    //                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Entregado', index: 'Entregado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Impresa', index: 'Impresa', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-    //                    { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 155, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-    //                    { name: 'Presupuestos', index: 'Presupuestos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Recepciones', index: 'Recepciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Salidas', index: 'Salidas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Libero', index: 'Libero', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: [''] }, hidden: true },
-    //                    { name: 'Solicito', index: 'Solicito', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Sector', index: 'Sector', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-    //                    { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Fecha_anulacion', index: 'Fecha_anulacion', align: 'center', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Fechas_liberacion', index: 'Fechas_liberacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-    //                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-    //                    { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-    //                    { name: 'IdObra', index: 'IdObra', align: 'left', width: 200, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
-    //                    { name: 'IdSector', index: 'IdSector', align: 'left', width: 200, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } }
-    //    ],
-
-    //    ondblClickRow: function (id) {
-    //        //$("#ListaDrag2").jqGrid('gridDnD', 'ondrop');
-    //        // $('#ListaDrag2').trigger("ondrop");
-    //        copiarRM(id);
-    //    },
-    //    loadComplete: function () {
-    //        grid = $("ListaDrag2");
-    //        // $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
-
-    //        //AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-    //        // rows = $("#Lista").getGridParam("reccount");
-    //        //if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-    //    },
-
-    //    pager: $('#ListaDragPager2'),
-    //    rowNum: 15,
-    //    rowList: [10, 20, 50],
-    //    sortname: 'NumeroRequerimiento',
-    //    sortorder: "desc",
-    //    viewrecords: true,
-
-    //    width: 'auto', // 'auto',
-    //    autowidth: true,
-    //    shrinkToFit: false,
-
-    //    height: '100%',
-    //    altRows: false,
-    //    emptyrecords: 'No hay registros para mostrar'
-    //    //,            caption: '<b>REQUERIMIENTOS</b>'
-    //})
-
-    //jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
-    //     { refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-    //      prmSearch);
-
-    ////$("#ListaDrag2").filterToolbar();
-    //$("#ListaDrag2").setFrozenColumns();
-    //// jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
     $('#ListaDrag2').jqGrid({
         url: ROOT + 'Requerimiento/Requerimientos_DynamicGridData',
-
-
         postData: {
             'FechaInicial': function () { return $("#FechaInicial").val(); },
             'FechaFinal': function () { return $("#FechaFinal").val(); },
@@ -2185,22 +1152,16 @@ $(function () {
                 return $('#bALiberar').is(":checked");
             }
         },
-
-
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
-                   'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
-                   'Observaciones', 'Lugar de entrega', '', '', 'Web'],
+        colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas', 'Pedidos', 'Recepciones', 'Salidas',
+                   'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion', 'Observaciones', 'Lugar de entrega', '', '', 'Web'],
         colModel: [
-                    { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                     { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
                     { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                    {
-                        name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center',
-                        sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, frozen: false
-                    },
+                    { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, frozen: false },
                     { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Entregado', index: 'Entregado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -2226,36 +1187,12 @@ $(function () {
                     { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
 
         ],
-        //            onSelectRow: function (id) {
-        //                if (id && id !== lastSelectedId) {
-        //                    if (typeof lastSelectedId !== "undefined") {
-        //                        grid.jqGrid('restoreRow', lastSelectedId);
-        //                    }
-        //                    lastSelectedId = id;
-        //                }
-        //            },
-
-
-
-            ondblClickRow: function (id) {
-                //$("#ListaDrag2").jqGrid('gridDnD', 'ondrop');
-                // $('#ListaDrag2').trigger("ondrop");
-                copiarRM(id);
-            },
-            loadComplete: function () {
-                grid = $("ListaDrag2");
-                // $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
-
-                //AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-                // rows = $("#Lista").getGridParam("reccount");
-                //if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-            },
-
-
-
-
+        ondblClickRow: function (id) {
+            copiarRM(id);
+        },
+        loadComplete: function () {
+            grid = $("ListaDrag2");
+        },
         pager: $('#ListaDragPager2'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -2263,77 +1200,30 @@ $(function () {
         sortorder: 'desc',
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
-
-
-        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        //////////////////////////////
-
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
-        userDataOnFooter: true
-        // ,caption: '<b>FACTURAS</b>'
-
-, gridview: true
-, multiboxonly: true
-, multipleSearch: true
-
-
-
-
-
-
-        //imgpath: '/content/cupertino/images',
-        //loadonce: true,
-        //, caption: '<b>REQUERIMIENTOS</b>'
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
     });
     jQuery("#ListaDrag2").jqGrid('bindKeys');
-
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
-     { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-     {
-         //sopt: ["cn"]
-         //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-         width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-     }
+        { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false }
     );
-
-
     jQuery("#ListaDrag2").filterToolbar({
         stringResult: true, searchOnEnter: true,
         defaultSearch: 'cn',
         enableClear: false
     }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // buscador aparte
-
     var grid22 = $("#ListaDrag2")
-    //            // create the searching dialog
-    //        grid22.searchGrid(prmSearch);
-
-    //        // find the div which contain the searching dialog
     var searchDialog = $("#fbox_" + grid22[0].id);
-
-    //        // make the searching dialog non-popup
-    //        searchDialog.css({position:"relative", "z-index":"auto"})
-
     var dlgDiv = $("#fbox_" + grid22[0].id);
-
     var parentDiv = dlgDiv.parent(); // div#gbox_list
     var dlgWidth = dlgDiv.width();
     var parentWidth = parentDiv.width();
@@ -2351,25 +1241,9 @@ $(function () {
 
     }
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////      ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //    // make grid2 sortable
-    //    $("#Lista").jqGrid('sortableRows', {
-    //        update: function () {
-    //            //resetAltRows.call(this.parentNode);
-    //        }
-    //    });
-
-
     $("#IdSolicito").change(function () {
         // ActualizarSector();
     });
-
 
     function ActualizarSector() {
         var IdObra = $('#IdObra').val();
@@ -2394,18 +1268,6 @@ $(function () {
         calculateTotal();
     }
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
     $("#Aprobo").change(function () {
         var IdAprobo = $("#Aprobo > option:selected").attr("value");
         var Aprobo = $("#Aprobo > option:selected").html();
@@ -2427,14 +1289,6 @@ $(function () {
         $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
     });
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Artículos');
     $('a#a_panel_este_tab2').text('Requerimientos');
@@ -2450,16 +1304,7 @@ $(function () {
         ConectarGrillas2();
     });
 
-
-
-
-
-
-
-
     RefrescaAnchoGrillaDetalle();
-
-
 
     $.ajax({
         type: "GET",
@@ -2473,8 +1318,6 @@ $(function () {
                 $("#chk" + j).attr('checked', true);
                 $("#chk" + j).attr('title', data[i].Nombre);
             }
-
-
         }
     });
     Aprobado();
@@ -2492,7 +1335,6 @@ $(function () {
         }
     }
 
-
     // vuelvo a llenar el mySelect (se hace por primera vez en el Layout) porque no sé qué pasa que algo me lo vacía
     $.post(ROOT + 'Empleado/EmpleadosParaCombo/',
             function (data) {
@@ -2501,8 +1343,6 @@ $(function () {
                     select.append('<option value="' + data[i].IdEmpleado + '">' + data[i].Nombre + '</option>');
                 }
             }, "json");
-
-
 
     function pickdates(id) {
         jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
@@ -2521,13 +1361,6 @@ $(function () {
         //delete options
                 { url: '/Home/DeleteProduct/' });
     };
-
-
-
-
-
-
-
 
     function getColumnIndexByName(grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
@@ -2571,7 +1404,6 @@ $(function () {
         $("#ListaDrag").jqGrid('gridDnD', {
             connectWith: '#Lista', //drag_opts:{stop:null},
             onstart: function (ev, ui) {
-
                 sacarDeEditMode();
 
                 ui.helper.removeClass("ui-state-highlight myAltRowClass")
@@ -2594,15 +1426,11 @@ $(function () {
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
                 //var prox = ProximoNumeroItem();
 
-
                 var IdArticulo = getdata['IdArticulo'];
                 copiarArticulo(IdArticulo);
                 $("#gbox_grid2").css("border", "1px solid #aaaaaa");
 
-
                 return;
-
-
 
                 try {
                     //					for (var key in getdata) {
@@ -2633,16 +1461,9 @@ $(function () {
                 //resetAltRows.call(this);
                 $("#gbox_grid2").css("border", "1px solid #aaaaaa");
                 RefrescarOrigenDescripcion();
-
             }
         });
     }
-
-
-
-
-
-
 
     function ConectarGrillas2() {
         var grid = $("#ListaDrag2");
@@ -2661,17 +1482,10 @@ $(function () {
                 var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
                 var j = 0, tmpdata = {}, dropname, IdRequerimiento;
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-
-
-
                 IdRequerimiento = getdata['IdRequerimiento'];
                 copiarRM(IdRequerimiento);
                 $("#gbox_grid2").css("border", "1px solid #aaaaaa");
                 return;
-
-
-
-
 
                 var grid;
                 try {
@@ -2718,23 +1532,10 @@ $(function () {
                 } catch (e) { }
                 $("#gbox_grid2").css("border", "1px solid #aaaaaa");
             }
-
         });
     }
 
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     function copiarArticulo(id) {
-
-
         try {
             jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
         } catch (e) {
@@ -2744,8 +1545,6 @@ $(function () {
         sacarDeEditMode();
 
         GrabarGrillaLocal()
-
-
 
         var acceptId = id;
         var getdata = $("#ListaDrag").jqGrid('getRowData', acceptId);
@@ -2777,17 +1576,6 @@ $(function () {
 
         var idazar = Math.ceil(Math.random() * 1000000);
         // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-
-
-
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-
-
-
         ///////////////
         // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
         ///////////////
@@ -2800,12 +1588,9 @@ $(function () {
         }
         //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
         //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
-
-
         ///////////////
         // paso 2: agregar en el ultimo lugar antes de los renglones vacios
         ///////////////
-
         //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
 
         var pos = TraerPosicionLibre();
@@ -2818,39 +1603,17 @@ $(function () {
         //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
         // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
         // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
-
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-
-
-
-
         //resetAltRows.call(this);
         $("#gbox_grid2").css("border", "1px solid #aaaaaa");
         RefrescarOrigenDescripcion();
 
         AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-        //        rows = $("#Lista").getGridParam("reccount");
-        //        if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
     }
 
-
-
-
-
-
     function copiarRM(id) {
-
-
         jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
         sacarDeEditMode();
-
 
         GrabarGrillaLocal()
 
@@ -2896,15 +1659,6 @@ $(function () {
                         getdata = tmpdata;
                         var idazar = Math.ceil(Math.random() * 1000000);
 
-
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-
-
-
                         ///////////////
                         // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
                         ///////////////
@@ -2917,7 +1671,6 @@ $(function () {
                         }
                         //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                         //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
-
 
                         ///////////////
                         // paso 2: agregar en el ultimo lugar antes de los renglones vacios
@@ -2935,62 +1688,14 @@ $(function () {
                         //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
                         // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
                         // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
-
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////
-
-
-
-
                     }
                     RefrescarOrigenDescripcion();
 
                     AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-                    //                    rows = $("#Lista").getGridParam("reccount");
-                    //                    if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
                 }
             });
         } catch (e) { }
     }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
 
     $("#addData").click(function () {
         dobleclic = true;
@@ -3000,8 +1705,6 @@ $(function () {
         jQuery("#Lista").jqGrid('editGridRow', "new",
                 {
                     addCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
-
-                    // addParams: { position: "last"}, // esto va en el ListaPager
 
                     closeOnEscape: true,
                     closeAfterAdd: true,
@@ -3023,17 +1726,8 @@ $(function () {
                         $('#NumeroItem', form).val(ProximoNumeroItem());
                         $('#NumeroItem').attr('readonly', 'readonly');
 
-
-                        /////////////////////////////////////////////////////////////////////////////////
-
-
                         var now = new Date();
                         var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-
-                        //$('#OrigenDescripcion', form).val( OrigenDescripcionDefault);
-                        //                    $('#OrigenDescripcion', form).val('Material mas observaciones');
-                        //                    $('#OrigenDescripcion', form).val('3');
-
 
                         $('#FechaEntrega', form).val(currentDate);
                         $('#Cantidad', form).val(1);
@@ -3052,32 +1746,15 @@ $(function () {
                         PonerRenglonesInline();
 
                         AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-                        //jQuery('#Lista').saveRow(id, true); 
                     }
-
                 });
     });
 
-
     $("#edtData").click(function () {
-
         sacarDeEditMode();
-
-
-
-
         var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
         EditarItem(gr)
-
-
     });
-
-
-
-
-
-
 
     $("#delData").click(function () {
         //var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
@@ -3101,33 +1778,14 @@ $(function () {
                     return false;
                 }
 
-
                 for (var i = righe.length - 1; i >= 0; i--) {
                     $grid.delRowData(righe[i]);
                 }
-
-
             }
         }
         else alert("Debe seleccionar un item!");
     });
-
-
-
-
-
-
 });
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 function EditarItem(rowid) {
     var gr = rowid; // jQuery("#Lista").jqGrid('getGridParam',  'selrow');
@@ -3138,99 +1796,47 @@ function EditarItem(rowid) {
         return;
     }
 
-    if (gr != null) jQuery("#Lista")
-                                    .jqGrid('editGridRow', gr,
-                                                {
-                                                    editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800
-                                                    , reloadAfterSubmit: false, closeOnEscape: true,
-                                                    closeAfterEdit: true, recreateForm: true, Top: 0,
-                                                    beforeShowForm: function (form) {
-                                                        GrabarGrillaLocal();
+    if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr,
+        {
+            editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800
+            , reloadAfterSubmit: false, closeOnEscape: true,
+            closeAfterEdit: true, recreateForm: true, Top: 0,
+            beforeShowForm: function (form) {
+                GrabarGrillaLocal();
 
-                                                        PopupCentrar();
+                PopupCentrar();
 
-                                                        $('#NumeroItem').attr('readonly', 'readonly');
+                $('#NumeroItem').attr('readonly', 'readonly');
 
-                                                        $('#tr_IdDetalleRequerimiento', form).hide();
-                                                        $('#tr_IdArticulo', form).hide();
-                                                        $('#tr_IdUnidad', form).hide();
-                                                    },
-                                                    beforeInitData: function () {
-                                                        inEdit = true;
-                                                    }
-                                                 ,
-                                                    onClose: function (data) {
+                $('#tr_IdDetalleRequerimiento', form).hide();
+                $('#tr_IdArticulo', form).hide();
+                $('#tr_IdUnidad', form).hide();
+            },
+            beforeInitData: function () {
+                inEdit = true;
+            }
+            ,
+            onClose: function (data) {
 
-                                                        RefrescarOrigenDescripcion();
-                                                        AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+                RefrescarOrigenDescripcion();
+                AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
 
+                //var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                //data['Unidad'] = $("#Unidad").text(); ;
+                //$('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
-                                                        //var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-                                                        //data['Unidad'] = $("#Unidad").text(); ;
-                                                        //$('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                //PonerRenglonesInline();
+                // jQuery('#Lista').editRow(gr, true);
+            }
+            ,
+            beforeSubmit: function (postdata, formid) {
+                //alert(postdata.Unidad + " " + $("#Unidad").children("option").filter(":selected").text());
+                //postdata.Unidad es un numero?????
+                postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
+                postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
 
-                                                        //PonerRenglonesInline();
-                                                        // jQuery('#Lista').editRow(gr, true);
-                                                    }
-                                                    ,
-                                                    beforeSubmit: function (postdata, formid) {
-
-                                                        //alert(postdata.Unidad + " " + $("#Unidad").children("option").filter(":selected").text());
-                                                        //postdata.Unidad es un numero?????
-                                                        postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
-                                                        postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
-
-                                                        return [true, 'no se puede'];
-                                                    }
-
-
-                                                });
+                return [true, 'no se puede'];
+            }
+        });
     else alert("Debe seleccionar un item!");
-
 }
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
