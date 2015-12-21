@@ -348,7 +348,7 @@
         },
 
         loadComplete: function () { 
-            AgregarItemVacio(jQuery("#ListaArticulos"));
+            //AgregarItemVacio(jQuery("#ListaArticulos"));
         },
         pager: $('#ListaPager1'),
         rowNum: 100,
@@ -651,42 +651,29 @@
         url: ROOT + 'Articulo/Articulos_DynamicGridData',
         datatype: 'json',
         mtype: 'POST',
-        postData: {
-            'FechaInicial': function () { return $("#FechaInicial").val(); },
-            'FechaFinal': function () { return $("#FechaFinal").val(); },
-            'IdObra': function () { return $("#IdObra").val(); }
-        },
-        colNames: ['', '', 'Codigo', 'Descripcion', 'Rubro', 'Subrubro', 'Nro.inv.' ],
+        postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+        postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+        colNames: ['', '', 'Codigo', 'Numero inventario', 'Descripcion', 'Rubro', 'Subrubro', '', '', '', '', '', '', '', '', 'Unidad'],
         colModel: [
                     { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false, hidden: true },
                     { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+                    { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] } },
+                    { name: 'NumeroInventario', index: 'NumeroInventario', width: 130, align: 'left', stype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }, hidden: true },
                     {
-                        name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
-                        search: true, searchoptions: {
-                            clearSearch: true, searchOperators: true
-                            , sopt: ['cn']
-                        }
+                        name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true },
+                        search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }
                     },
-                    {
-                        name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
-                        editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
-
-                        , search: true, searchoptions: {
-                            clearSearch: true,
-                            searchOperators: true
-                            , sopt: ['cn']
-                        }
-                    },
-                    {
-                        name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
-                        editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
-                        , search: true, searchoptions: {
-                            //sopt: ['cn']
-                        }
-                    },
-                    { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
-                    { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
-
+                    { name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 250, align: 'left', editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }, search: true, searchoptions: {} },
+                    { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text', hidden: true },
+                    { name: 'AlicuotaIVA', index: 'AlicuotaIVA', width: 50, align: 'left', search: true, stype: 'text', hidden: true },
+                    { name: 'CostoPPP', index: 'CostoPPP', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CostoPPPDolar', index: 'CostoPPPDolar', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CostoReposicion', index: 'CostoReposicion', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CostoReposicionDolar', index: 'CostoReposicionDolar', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'StockMinimo', index: 'StockMinimo', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'StockReposicion', index: 'StockReposicion', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'CantidadUnidades', index: 'CantidadUnidades', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
         ],
         ondblClickRow: function (id) {
             Copiar3(id, "Dbl");

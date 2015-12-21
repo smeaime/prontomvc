@@ -1352,6 +1352,7 @@
     <Content Include="Views\PlazoFijo\Index.cshtml" />
     <Content Include="Views\ResumenConciliacion\Edit.cshtml" />
     <Content Include="Views\ResumenConciliacion\Index.cshtml" />
+    <Content Include="Views\Valor\IndexChequesSegunEmision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />

@@ -1,0 +1,238 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.Valore>
+@{
+    ViewBag.Title = "Emision de cheques";
+}
+
+<div><input id="emitido" name="emitido" type="hidden" value=@Request.QueryString["emitido"]></div>
+@*<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+    <div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>*@
+@*<div><input id="FechaMarcado" name="FechaMarcado" type="hidden" value=""></div>
+<div><input id="IdUsuarioMarco" name="IdUsuarioMarco" type="hidden" value=""></div>
+<div><input id="MotivoMarcado" name="MotivoMarcado" type="hidden" value=""></div>*@
+
+<br />
+
+<div style="padding-left: 15px; padding-right: 15px;">
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        function AgregarBotones() {
+            var selectedIds = $("#Lista").jqGrid('getDataIDs');
+            var i, Id;
+            for (i = selectedIds.length - 1; i >= 0; i--) {
+                Id = selectedIds[i];
+                if ($("#emitido").val() == "NO") {
+                    var se = "<input style='height:22px;width:50px;' type='button' value='Emitir' onclick=\"PedirConfirmacion('" + Id + "');\"  />";
+                } else {
+                    var se = "<input style='height:22px;width:75px;' type='button' value='Desmarcar' onclick=\"PedirConfirmacion('" + Id + "');\"  />";
+                }
+
+                $("#Lista").jqGrid('setRowData', Id, { act: se });
+            }
+        };
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("ChequesSegunEmision", "Valor")',
+            postData: { 'emitido': function () { return $("#emitido").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['', 'IdValor', 'IdCuentaBancaria', 'Numero cheque', 'Numero interno', 'Fecha valor', 'Importe', 'Mon.', 'Proveedor', 'Beneficiario', 'No a la orden', 'Banco origen',
+                       'Cuenta bancaria', 'Est.', 'Tipo comp.', 'Numero comprobante', 'Fecha comprobante', 'Banco deposito', 'Numero deposito', 'Fecha deposito', 'Cuenta salida',
+                       'Numero salida', 'Fecha salida', 'Emitido', 'Fecha emision', 'Emitio'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 80, editable: false, hidden: false },
+                        { name: 'IdValor', index: 'IdValor', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'NumeroCheque', index: 'NumeroCheque', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'NumeroInterno', index: 'NumeroInterno', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'FechaValor', index: 'FechaValor', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Importe', index: 'Importe', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'Beneficiario', index: 'Beneficiario', align: 'left', width: 250, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'NoALaOrden', index: 'NoALaOrden', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'BancoOrigen', index: 'BancoOrigen', align: 'left', width: 250, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'CuentaBancaria', index: 'CuentaBancaria', align: 'left', width: 150, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'Estado', index: 'Estado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TipoComprobante', index: 'TipoComprobante', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroComprobante', index: 'NumeroComprobante', align: 'left', width: 100, editable: false, hidden: false },
+                        { name: 'FechaComprobante', index: 'FechaComprobante', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'BancoDeposito', index: 'BancoDeposito', align: 'left', width: 250, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'NumeroDeposito', index: 'NumeroDeposito', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'FechaDeposito', index: 'FechaDeposito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'CuentaSalida', index: 'CuentaSalida', align: 'left', width: 250, sortable: false, editable: false, search: false, hidden: false },
+                        { name: 'NumeroSalida', index: 'NumeroSalida', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'FechaSalida', index: 'FechaSalida', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Emitido', index: 'Emitido', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'FechaEmision', index: 'FechaEmision', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Emitio', index: 'Emitio', align: 'left', width: 200, sortable: false, editable: false, search: false, hidden: false }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            gridComplete: function () {
+                AgregarBotones()
+            },
+            pager: $('#ListaPager'),
+            rowNum: 100,
+            rowList: [10, 20, 100, 20000],
+            sortname: 'BancoOrigen',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>EMISION DE CHEQUES</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+    });
+
+    //function PedirConfirmacion(gridId) {
+    //    if ($("#IdUsuarioMarco").val() == "") {
+    //        $("#dialog-password").dialog({
+    //            buttons: {
+    //                'Aceptar': function () {
+    //                    //window.location.href = ROOT + 'OrdenPago/Anular/' + $("#IdOrdenPago").val();
+    //                    validatePwdLocal();
+    //                    var idAux = $("#IdUsuarioMarco").val();
+    //                    $("#FechaMarcado").val(Hoy());
+    //                    $(this).dialog('close');
+    //                    PedirMotivo(gridId)
+    //                },
+    //                'Cancelar': function () {
+    //                    $(this).dialog('close');
+    //                }
+    //            },
+    //            open: function () {
+    //            }
+    //        });
+    //        $('#dialog-password').dialog('open');
+    //        $('#mySelect').prop("disabled", false);
+    //        CargarUsuarios();
+    //    } else {
+    //        EliminarFila(gridId)
+    //    }
+    //};
+
+    //function PedirMotivo(gridId) {
+    //    $("#dialog-motivo").dialog({
+    //        buttons: {
+    //            'Aceptar': function () {
+    //                var motivo = $("#motivo").val();
+    //                $("#MotivoMarcado").val(motivo);
+    //                $(this).dialog('close');
+    //                EliminarFila(gridId)
+    //            },
+    //            'Cancelar': function () {
+    //                $(this).dialog('close');
+    //            }
+    //        },
+    //        open: function () {
+    //        }
+    //    });
+    //    $('#dialog-motivo').dialog('open');
+    //};
+
+    //function EliminarFila(gridId) {
+    //    if ($("#IdUsuarioMarco").val() != "") {
+    //        var dataFromTheRow = $("#Lista").jqGrid('getRowData', gridId);
+    //        var idprincipal = dataFromTheRow['IdAux'];
+    //        var id1 = dataFromTheRow['IdBancoChequera'];
+    //        var id2 = dataFromTheRow['NumeroCheque'];
+    //        var id3 = $("#IdUsuarioMarco").val();
+    //        var id4 = $("#MotivoMarcado").val();
+    //        if (idprincipal <= 0) {
+    //            $("#Lista").jqGrid('delRowData', gridId);
+    //        } else {
+    //            $.ajax({
+    //                type: 'POST',
+    //                contentType: 'application/json; charset=utf-8',
+    //                url: ROOT + 'Valor/MarcarVisto',
+    //                dataType: 'json',
+    //                data: JSON.stringify({ IdBancoChequera: id1, NumeroCheque: id2, IdUsuarioMarco: id3, MotivoMarcado: id4 }),
+    //                success: function (result) {
+    //                    if (result) {
+    //                        $("#Lista").jqGrid('delRowData', gridId);
+    //                    } else {
+    //                        alert('No se pudo eliminar el registro.');
+    //                    }
+    //                },
+    //            });
+    //        };
+    //    }
+    //};
+
+    //function CargarUsuarios() {
+    //    var combo = $("#mySelect")
+    //    combo.find("option:gt(0)").remove();
+    //    combo.find("option:first").text("Cargando...");
+    //    $.getJSON(ROOT + 'Empleado/EmpleadosParaCombo', {
+    //    }, function (json) {
+    //        combo.find("option:first").text("");
+    //        for (var i = 0; i < json.length; i++) {
+    //            $("<option/>").attr("value", json[i].IdEmpleado).text(json[i].Nombre).appendTo(combo);
+    //        }
+    //    });
+    //}
+
+    //function validatePwdLocal() {
+    //    var pass = $("#password").val();
+    //    var idusuario = $("#mySelect").val();
+
+    //    if ($.isNumeric(idusuario)) {
+    //        $.ajax({
+    //            type: "GET",
+    //            contentType: "application/json; charset=utf-8",
+    //            url: ROOT + 'Empleado/BuscarPass/',
+    //            data: { id: idusuario, pass: pass },
+    //            dataType: "text",
+    //            async: false,
+    //            success: function (data) {
+    //                var combo = $("#Aux0").val();
+    //                if (data.length > 0) {
+    //                    //$("#usuario").html(data);
+    //                    var idusuario = $("#Aux1").val();
+    //                    $('#' + combo).val(idusuario);
+    //                    $("#IdUsuarioMarco").val(idusuario);
+    //                }
+    //                else {
+    //                    alert('Password incorrecta');
+    //                    //jAlert('Password incorrecta', 'Usuarios');
+    //                    $('#' + combo).val("");
+    //                    $("#IdUsuarioMarco").val("");
+    //                }
+    //            }
+    //        });
+    //    }
+    //    else {
+    //        alert('error usuario ' + idusuario);
+    //    }
+    //    $("#dialog-password").dialog('close');
+    //}
+</script>
