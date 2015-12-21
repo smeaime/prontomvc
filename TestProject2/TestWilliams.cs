@@ -169,9 +169,21 @@ namespace ProntoMVC.Tests
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
 
-            //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErr, bVistaPrevia)
+            // el _CONST_MAXROWS sale del app.config
 
-           // File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            var output = SincronismosWilliamsManager.GenerarSincro("PetroAgro", ref sErrores, SC, ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
+                0, "Ambas", false);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
         }
 
 
@@ -182,11 +194,24 @@ namespace ProntoMVC.Tests
         {
 
             string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
+            // LinqCartasPorteDataContext db = null;
 
-            //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErr, bVistaPrevia)
 
-           // File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti",  ref sErrores, SC, ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                    "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
+                0, "Ambas", false);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
         }
 
 
