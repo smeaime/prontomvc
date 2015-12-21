@@ -442,6 +442,7 @@ Public Class CartaDePorteManager
     End Function
 
 
+
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2645,7 +2646,279 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function RebindReportViewer_ServidorExcel2(SC As String, ByVal rdlFile As String, ByVal dt As DataTable, _
+                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = ""
+                                       ) As String
+        'http://forums.asp.net/t/1183208.aspx
 
+
+
+
+        Using oReportViewer = New Microsoft.Reporting.WebForms.ReportViewer
+
+
+
+            With oReportViewer
+                .Reset()
+                .ProcessingMode = ProcessingMode.Remote
+                .Visible = False
+
+
+
+
+
+
+
+                ' ReportViewerRemoto.ShowParameterPrompts = false
+
+
+
+                '               // ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://serversql1:82/ReportServer");
+                .ServerReport.ReportServerUrl = New Uri("http://localhost/ReportServer_MSSQLSERVER2")
+                '    .ServerReport.ReportServerUrl = new Uri(ConfigurationManager.AppSettings["ReportServer"]);
+
+
+                '
+                '               ReportViewerRemoto.ProcessingMode = ProcessingMode.Remote;
+                '            '              // IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+                '              IReportServerCredentials irsc = new CustomReportCredentials(ConfigurationManager.AppSettings["ReportUser"], ConfigurationManager.AppSettings["ReportPass"], ConfigurationManager.AppSettings["ReportDomain"]);
+                '              ReportViewerRemoto.ServerReport.ReportServerCredentials = irsc;
+                '             ReportViewerRemoto.ShowCredentialPrompts = false;
+
+
+
+
+                'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+                rdlFile = "/Pronto informes/" + "Listado general de Cartas de Porte (simulando original) con foto - Desde SQL"
+
+                With .ServerReport
+                    .ReportPath = rdlFile
+
+
+                    .ReportPath = rdlFile
+
+                    '.DataSources.Clear()
+
+                    '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
+                    '.DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+
+
+                    '.EnableHyperlinks = True
+
+                    '.DataSources.Clear()
+
+                    '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
+                    ' .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+                    ' If Not IsNothing(dt2) Then .DataSources.Add(New ReportDataSource("DataSet2", dt2))
+
+                    '.ReportEmbeddedResource = rdlFile
+
+
+
+                    '.EnableExternalImages = True
+
+
+                    '.DataSources.Add(New ReportDataSource("http://www.google.com/intl/en_ALL/images/logo.gif", "Image1"))
+                    'DataSource.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
+                    '.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
+
+
+
+                    '/////////////////////
+                    'parametros (no uses la @ delante del parametro!!!!)
+                    '/////////////////////
+                    If titulo <> "" Then
+                        Try
+                            If .GetParameters.Count = 1 Then
+                                If .GetParameters.Item(0).Name = "ReportParameter1" Then
+                                    Dim p1 = New ReportParameter("ReportParameter1", titulo)
+                                    'Dim p2 = New ReportParameter("FechaDesde", Today)
+                                    'Dim p3 = New ReportParameter("FechaHasta", Today)
+                                    '.SetParameters(New ReportParameter() {p1, p2, p3})
+                                    .SetParameters(New ReportParameter() {p1})
+
+                                Else
+                                    ErrHandler.WriteError("Error al buscar los parametros")
+                                End If
+                            ElseIf .GetParameters.Count = 2 Then
+                                If .GetParameters.Item(0).Name = "ReportParameter1" Then
+                                    Dim p1 = New ReportParameter("ReportParameter1", titulo)
+
+                                    Dim serv As String
+                                    If System.Diagnostics.Debugger.IsAttached() Then
+                                        serv = "http://localhost:48391/ProntoWeb"
+                                    Else
+                                        serv = "http://prontoclientes.williamsentregas.com.ar/"
+                                    End If
+                                    Dim p2 = New ReportParameter("sServidor", serv)
+
+                                    'Dim p2 = New ReportParameter("FechaDesde", Today)
+                                    'Dim p3 = New ReportParameter("FechaHasta", Today)
+                                    '.SetParameters(New ReportParameter() {p1, p2, p3})
+                                    .SetParameters(New ReportParameter() {p1, p2})
+
+                                Else
+                                    ErrHandler.WriteError("Error al buscar los parametros")
+                                End If
+                            Else
+                                ErrHandler.WriteError("Error al buscar los parametros")
+                            End If
+                        Catch ex As Exception
+                            ErrHandler.WriteError(ex.ToString)
+                            Dim inner As Exception = ex.InnerException
+                            While Not (inner Is Nothing)
+                                If System.Diagnostics.Debugger.IsAttached() Then
+                                    MsgBox(inner.Message)
+                                    'Stop
+                                End If
+                                ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                                inner = inner.InnerException
+                            End While
+                        End Try
+                    End If
+                    '/////////////////////
+                    '/////////////////////
+                    '/////////////////////
+                    '/////////////////////
+
+                End With
+
+
+                .DocumentMapCollapsed = True
+
+
+
+                '/////////////////////
+                '/////////////////////
+
+                .Visible = False
+
+                'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+                Dim warnings As Warning()
+                Dim streamids As String()
+                Dim mimeType, encoding, extension As String
+                Dim bytes As Byte()
+
+                'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
+                '             string mimeType;
+                '2 string encoding;
+                '3 Warning[] warnings;
+                '4 string[] streamids;
+                '5 string fileNameExtension;
+                '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
+                '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
+                '8 return reportHtml;
+
+                If False Then
+
+
+                    Try
+                        bytes = .ServerReport.Render( _
+                              "HTML4.0", Nothing, mimeType, encoding, _
+                                extension, _
+                               streamids, warnings)
+
+                    Catch e As System.Exception
+                        Dim inner As Exception = e.InnerException
+                        While Not (inner Is Nothing)
+                            If System.Diagnostics.Debugger.IsAttached() Then
+                                'MsgBox(inner.Message)
+                                'Stop
+                            End If
+                            ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                            inner = inner.InnerException
+                        End While
+                        Throw
+                    End Try
+
+                    Dim reportHtml As String = System.Text.Encoding.UTF8.GetString(bytes)
+                    'Return bytes
+                    Return reportHtml
+
+                Else
+
+                    .Visible = False
+
+                    Try
+                        bytes = .ServerReport.Render( _
+                              "Excel", Nothing, mimeType, encoding, _
+                                extension, _
+                               streamids, warnings)
+
+                    Catch e As System.Exception
+                        Dim inner As Exception = e.InnerException
+                        While Not (inner Is Nothing)
+                            If System.Diagnostics.Debugger.IsAttached() Then
+                                'MsgBox(inner.Message)
+                                'Stop
+                            End If
+                            ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                            inner = inner.InnerException
+                        End While
+                        Throw
+                    End Try
+
+
+                    ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+                    Try
+                        Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
+                        fs.Write(bytes, 0, bytes.Length)
+                        fs.Close()
+
+                    Catch ex As Exception
+
+                        ErrHandler.WriteAndRaiseError(ex)
+                    End Try
+
+
+
+
+                    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+
+
+
+
+
+
+
+
+
+                    Dim sHtml As String
+
+                    If False Then
+                        'ExcelToHtml(ArchivoExcelDestino)
+                    Else
+                        sHtml = ArchivoExcelDestino
+                    End If
+
+
+
+                    Return sHtml
+
+
+
+
+                    'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
+                    ''ExcelToCSV_SincroBLD
+
+                    'Return ArchivoCSVDestino
+
+
+
+                End If
+
+
+            End With
+
+            '////////////////////////////////////////////
+
+            'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+            'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+        End Using
+
+    End Function
 
     Shared Function generarNotasDeEntregaConReportViewer_ConServidorDeInformes(ByVal SC As String, ByVal fechadesde As Date, _
                                                          ByVal fechahasta As Date, ByVal dr As DataRow, _
@@ -10185,34 +10458,34 @@ Public Class CartaDePorteManager
                 oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
 
 
-                regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
-                regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
+                regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
 
 
-                regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+                regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                'regexReplace2(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
 
 
-                regexReplace(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
+                regexReplace2(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
 
-                regexReplace(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
-                regexReplace(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
+                regexReplace2(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
+                regexReplace2(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
 
-                regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
 
-            regexReplace(docText, "#NumeroFactura#", JustificadoDerecha(oFac.Numero, 8, "0"))
-            regexReplace(docText, "#PV#", JustificadoDerecha(oFac.PuntoVenta, 4, "0"))
-            regexReplace(docText, "#Fecha#", oFac.Fecha)
+            regexReplace2(docText, "#NumeroFactura#", JustificadoDerecha(oFac.Numero, 8, "0"))
+            regexReplace2(docText, "#PV#", JustificadoDerecha(oFac.PuntoVenta, 4, "0"))
+            regexReplace2(docText, "#Fecha#", oFac.Fecha)
 
 
             oFac.CondicionVentaDescripcion = NombreCondicionVenta_y_Compra(SC, oFac.IdCondicionVenta)
             oFac.CondicionIVADescripcion = NombreCondicionIVA(SC, oFac.IdCodigoIva)
 
-            regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-            regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+            regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+            regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
 
 
 
@@ -10232,9 +10505,9 @@ Public Class CartaDePorteManager
             End Try
 
             If numeroordencompra <> "" Then
-                regexReplace(docText, "#OrdenCompra#", "N° Orden Compra: " & numeroordencompra)
+                regexReplace2(docText, "#OrdenCompra#", "N° Orden Compra: " & numeroordencompra)
             Else
-                regexReplace(docText, "#OrdenCompra#", "")
+                regexReplace2(docText, "#OrdenCompra#", "")
             End If
 
 
@@ -10244,15 +10517,15 @@ Public Class CartaDePorteManager
             If posObs <= 0 Then posObs = 1
 
 
-            regexReplace(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
+            regexReplace2(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
 
 
-            regexReplace(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
+            regexReplace2(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
 
 
 
             Dim SyngentaLeyenda = LogicaFacturacion.LeyendaSyngenta(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
-            regexReplace(docText, "#LeyendaSyngenta#", SyngentaLeyenda)
+            regexReplace2(docText, "#LeyendaSyngenta#", SyngentaLeyenda)
 
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13220
@@ -10271,12 +10544,12 @@ Public Class CartaDePorteManager
             End Try
 
 
-            regexReplace(docText, "#LeyendaAcopios#", LeyendaAcopio)
+            regexReplace2(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
             Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
 
-            'regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-            'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+            'regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+            'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
 
 
@@ -10285,9 +10558,9 @@ Public Class CartaDePorteManager
             'NO USAR. El reemplazo del pie está al final de esta funcion
             'NO USAR. El reemplazo del pie está al final de esta funcion
             'NO USAR. El reemplazo del pie está al final de esta funcion
-            'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-            'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-            'regexReplace(docText, "#Total#", oFac.Total)
+            'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+            'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+            'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -10329,7 +10602,7 @@ Public Class CartaDePorteManager
                 formfield = wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.FormFieldData)().FirstOrDefault
             Catch ex As Exception
                 ErrHandler.WriteError("Ver si hay caracteres extraños. Error por el & en la razon social 'CAIO BABILONI & etc'  ")
-                ErrHandler.WriteError("archivo:" + document + "  IdFac:" + oFac.Id + "    Error: " + ex.ToString)
+                ErrHandler.WriteError("archivo:" & document & "  IdFac:" & oFac.Id & "    Error: " & ex.ToString)
                 Throw
             End Try
 
@@ -10618,22 +10891,22 @@ Public Class CartaDePorteManager
                     docText = sr.ReadToEnd
                 End Using
 
-                regexReplace(docText, "observaciones", oFac.Observaciones)
-                regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                regexReplace(docText, "libero", oFac.Aprobo)
-                regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                regexReplace(docText, "jefesector", "")
+                regexReplace2(docText, "observaciones", oFac.Observaciones)
+                regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                regexReplace2(docText, "libero", oFac.Aprobo)
+                regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                regexReplace2(docText, "jefesector", "")
 
-                regexReplace(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
-                regexReplace(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
-                regexReplace(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
-                regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                regexReplace(docText, "#Total#", "$ " + FF2(oFac.Total))
+                regexReplace2(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
+                regexReplace2(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
+                regexReplace2(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
+                regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                regexReplace2(docText, "#Total#", "$ " + FF2(oFac.Total))
 
-                regexReplace(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
+                regexReplace2(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
 
-                regexReplace(docText, "#CAE#", oFac.CAE)
-                regexReplace(docText, "#VenceCAE#", oFac.FechaVencimientoORechazoCAE)
+                regexReplace2(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#VenceCAE#", oFac.FechaVencimientoORechazoCAE)
 
 
 
@@ -10746,37 +11019,37 @@ Public Class CartaDePorteManager
                     oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
 
 
-                    regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
-                    regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
+                    regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
 
 
-                    regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+                    regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
 
 
-                    regexReplace(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
+                    regexReplace2(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
 
-                    regexReplace(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
-                    regexReplace(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
+                    regexReplace2(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
+                    regexReplace2(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
 
-                    regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
-                regexReplace(docText, "#NumeroFactura#", oFac.Numero)
-                regexReplace(docText, "#Fecha#", oFac.Fecha)
+                regexReplace2(docText, "#NumeroFactura#", oFac.Numero)
+                regexReplace2(docText, "#Fecha#", oFac.Fecha)
 
 
                 oFac.CondicionVentaDescripcion = NombreCondicionVenta_y_Compra(SC, oFac.IdCondicionVenta)
                 oFac.CondicionIVADescripcion = NombreCondicionIVA(SC, oFac.IdCodigoIva)
 
-                regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
 
 
 
-                regexReplace(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#CAE#", oFac.CAE)
 
 
 
@@ -10787,17 +11060,17 @@ Public Class CartaDePorteManager
                 If posObs <= 0 Then posObs = 1
 
 
-                regexReplace(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
+                regexReplace2(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
 
 
-                regexReplace(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
+                regexReplace2(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
                 'si se hizo por Pronto, mostrar las observaciones al final
                 'pero cómo sé? -mostrar si no tiene periodo
                 'If posObs <= 0 Then Selection.TypeText(Text:=oRs.Fields("Observaciones").Value)
 
 
-                'regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+                'regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
 
 
@@ -10806,9 +11079,9 @@ Public Class CartaDePorteManager
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-                'regexReplace(docText, "#Total#", oFac.Total)
+                'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -11131,19 +11404,19 @@ Public Class CartaDePorteManager
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "observaciones", oFac.Observaciones)
-                    regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                    regexReplace(docText, "libero", oFac.Aprobo)
-                    regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                    regexReplace(docText, "jefesector", "")
+                    regexReplace2(docText, "observaciones", oFac.Observaciones)
+                    regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                    regexReplace2(docText, "libero", oFac.Aprobo)
+                    regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                    regexReplace2(docText, "jefesector", "")
 
-                    regexReplace(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
-                    regexReplace(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
-                    regexReplace(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
-                    regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    regexReplace(docText, "#Total#", "$ " + FF2(oFac.Total))
+                    regexReplace2(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
+                    regexReplace2(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
+                    regexReplace2(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
+                    regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    regexReplace2(docText, "#Total#", "$ " + FF2(oFac.Total))
 
-                    regexReplace(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
+                    regexReplace2(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -11230,37 +11503,37 @@ Public Class CartaDePorteManager
 
         Dim texto As String = row.InnerXml
 
-        regexReplace(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
+        regexReplace2(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
 
 
 
         If iisNull(itemFactura.Articulo) <> "CAMBIO DE CARTA DE PORTE" Then
-            regexReplace(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad) * 1000)) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
+            regexReplace2(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad) * 1000)) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
         Else
-            regexReplace(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad))) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
+            regexReplace2(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad))) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
         End If
         'te mató lo del int!!!!!
 
 
 
 
-        regexReplace(texto, "Unidad", iisNull(itemFactura.Unidad))
-        regexReplace(texto, "Codigo", iisNull(itemFactura.Codigo))
+        regexReplace2(texto, "Unidad", iisNull(itemFactura.Unidad))
+        regexReplace2(texto, "Codigo", iisNull(itemFactura.Codigo))
 
 
         If IncluyeTarifaEnFactura Then
-            regexReplace(texto, "#Precio#", Math.Round(iisNull(itemFactura.Precio), 2))
+            regexReplace2(texto, "#Precio#", Math.Round(iisNull(itemFactura.Precio), 2))
         Else
-            regexReplace(texto, "#Precio#", "")
+            regexReplace2(texto, "#Precio#", "")
         End If
 
 
 
 
 
-        regexReplace(texto, "#Importe#", FF2(iisNull(itemFactura.Precio) * iisNull(itemFactura.Cantidad)))
-        regexReplace(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
-        regexReplace(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
+        regexReplace2(texto, "#Importe#", FF2(iisNull(itemFactura.Precio) * iisNull(itemFactura.Cantidad)))
+        regexReplace2(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
+        regexReplace2(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
 
 
 
@@ -11288,7 +11561,7 @@ Public Class CartaDePorteManager
         If EsElevacionLDC Then mvarArticulo = "ELEVACION " & mvarArticulo
 
 
-        regexReplace(texto, "#ObsItem#", mvarArticulo.Replace("&", ""))
+        regexReplace2(texto, "#ObsItem#", mvarArticulo.Replace("&", ""))
 
 
 

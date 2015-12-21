@@ -55,6 +55,18 @@ Namespace Pronto.ERP.Bll
 
 
 
+        Public Shared Sub regexReplace2(ByRef cadena As String, ByVal buscar As String, ByVal reemplazo As String)
+            'buscar = "\[" & buscar & "\]" 'agrego los corchetes
+
+            reemplazo = ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(reemplazo)
+
+            Dim regexText = New System.Text.RegularExpressions.Regex(buscar)
+            cadena = regexText.Replace(cadena, If(reemplazo, ""))
+
+        End Sub
+
+
+
         Public Shared Function IsValidEmail(email As String) As Boolean
             'http://stackoverflow.com/questions/1365407/c-sharp-code-to-validate-email-address
             Try
