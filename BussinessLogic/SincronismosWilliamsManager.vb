@@ -46,6 +46,7 @@ Namespace Pronto.ERP.Bll
 
         Shared Function GenerarSincro(sSincronismo As String, ByRef sErroresRef As String, _
                                       SC As String, _
+                                                          sUrlDominio As String, _
                     ByRef sTituloFiltroUsado As String, _
                     ByVal estado As CartaDePorteManager.enumCDPestado, _
                     ByVal QueContenga As String, _
@@ -496,14 +497,24 @@ Namespace Pronto.ERP.Bll
                             'FiltrarCopias(dt)
                             'dt = DataTableWHERE(dt, sWHERE)
 
-                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroDOW" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroDOW" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
+                            'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
                             Using rep As New ReportViewer
 
-                                output = RebindReportViewer_ServidorExcel(rep, sql, _
-                                            "ProntoWeb\Informes\Sincronismo DOW.rdl", SC, _
-                                                     ArchivoExcelDestino) 'sTitulo)
+
+                                Dim yourParams As ReportParameter() = New ReportParameter(3) {}
+
+
+                                yourParams(0) = New ReportParameter("CadenaConexionSQL", Encriptar(SC))
+                                yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
+                                yourParams(2) = New ReportParameter("SentenciaSQL", sql)
+
+                                output = RebindReportViewer_ServidorExcel(rep, _
+                                       "Sincronismo DOW2.rdl", _
+                                         yourParams, ArchivoExcelDestino) 'sTitulo)
+
 
                             End Using
 
@@ -1021,60 +1032,60 @@ Namespace Pronto.ERP.Bll
 
 
 
-            If sErroresRef <> "" Then
-                'También, ver de diferenciar el mensaje que salta cuando ninguna carta de porte cumple con 
-                'los filtros de cuando el sincro no sale porque alguna de las cartas no cumple con los requisitos.
-                Dim registrosGenerados = 0
-                Try
-                    Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
-                    If MyFile1.Exists Then
-                        registrosGenerados = File.ReadAllLines(output).Length
+                    If sErroresRef <> "" Then
+                        'También, ver de diferenciar el mensaje que salta cuando ninguna carta de porte cumple con 
+                        'los filtros de cuando el sincro no sale porque alguna de las cartas no cumple con los requisitos.
+                        Dim registrosGenerados = 0
+                        Try
+                            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+                            If MyFile1.Exists Then
+                                registrosGenerados = File.ReadAllLines(output).Length
+                            End If
+
+                        Catch ex As Exception
+                            ErrHandler.WriteError(ex)
+                        End Try
+
+                        Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
+                        'Dim renglonesEnDataset = dt.Rows.Count
+                        'output cantidad de renglones
+
+                        sErroresRef = "" & registrosFiltrados & " cartas filtradas<br/>" & registrosGenerados & " cartas exportadas al sincronismo <br/> <br/>" & sErroresRef
+                        'renglonesEnErrores & " errores en " &
+
+                        'si el archivo está vacío, no enviarlo
+
+
+
                     End If
-
-                Catch ex As Exception
-                    ErrHandler.WriteError(ex)
-                End Try
-
-                Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
-                'Dim renglonesEnDataset = dt.Rows.Count
-                'output cantidad de renglones
-
-                sErroresRef = "" & registrosFiltrados & " cartas filtradas<br/>" & registrosGenerados & " cartas exportadas al sincronismo <br/> <br/>" & sErroresRef
-                'renglonesEnErrores & " errores en " &
-
-                'si el archivo está vacío, no enviarlo
-
-
-
-            End If
 
 
                 Catch ex As OutOfMemoryException
-                MandarMailDeError(ex)
-                ErrHandler.WriteError(ex)
-                sErroresRef = "Disculpame, no pude manejar la cantidad de datos. Por favor, intentá achicando los filtros. Ya mandé un mail al administrador con el error."
-                Return ""
-            Catch ex As Exception
-                'ErrHandler.WriteAndRaiseError(ex)
-                ErrHandler.WriteError(ex)
-                Throw
-            End Try
+                    MandarMailDeError(ex)
+                    ErrHandler.WriteError(ex)
+                    sErroresRef = "Disculpame, no pude manejar la cantidad de datos. Por favor, intentá achicando los filtros. Ya mandé un mail al administrador con el error."
+                    Return ""
+                Catch ex As Exception
+                    'ErrHandler.WriteAndRaiseError(ex)
+                    ErrHandler.WriteError(ex)
+                    Throw
+                End Try
 
-            If output = "" Then
-                ErrHandler.WriteError("No se pudo generar nada " & sSincronismo)
-                'MsgBoxAjax(Me, "No se encontraron registros")
-                'Return ""
-            End If
+                If output = "" Then
+                    ErrHandler.WriteError("No se pudo generar nada " & sSincronismo)
+                    'MsgBoxAjax(Me, "No se encontraron registros")
+                    'Return ""
+                End If
 
 
-            '+ registrosFiltrados.ToString + " registros "
+                '+ registrosFiltrados.ToString + " registros "
 
-            sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + vbCrLf + "  <br/> " + sErroresRef + "<br/><br/><br/>"
+                sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + vbCrLf + "  <br/> " + sErroresRef + "<br/><br/><br/>"
 
-            If registrosFiltrados = 0 Then
-                sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + "SIN REGISTROS  <br/> <br/>"
-                output = ""
-            End If
+                If registrosFiltrados = 0 Then
+                    sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + "SIN REGISTROS  <br/> <br/>"
+                    output = ""
+                End If
 
 
             End Using
