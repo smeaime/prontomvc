@@ -292,13 +292,14 @@ namespace ProntoMVC.Tests
                 engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
             }
 
+            string sError="";
 
             var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
                                     plantilla, 10,
-                                     SC, DirApp, true);
+                                     SC, DirApp, true, ref sError);
 
 
-            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado);
+            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
 
         }
 
@@ -354,14 +355,14 @@ namespace ProntoMVC.Tests
             }
 
 
-
+            string sError = "";
 
             var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                         plantilla,
-                                        lista, SC, DirApp, false);
+                                        lista, SC, DirApp, false,  ref sError);
 
 
-            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado);
+            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
 
 
         }

@@ -61,7 +61,7 @@ namespace ProntoFlexicapture
                 try
                 {
                     ProcesaCarta(document, SC, imagen, DirApp);
-                    processor.ExportDocumentEx(document, Path.GetDirectoryName( imagen) , imagen + ".xml" , null);
+                    processor.ExportDocumentEx(document, Path.GetDirectoryName(imagen), imagen + ".xml", null);
                 }
                 catch (Exception x)
                 {
@@ -77,24 +77,18 @@ namespace ProntoFlexicapture
         }
 
 
-        public class Resultados
-        {
-            public int IdCarta;
-            public long numerocarta;
-            public string errores;
-            public string advertencias;
-        }
 
-        public static List<Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine engine, string plantilla,
-                                                int cuantasImagenes, string SC, string DirApp, bool bProcesar = true)
+
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine engine, string plantilla,
+                                                int cuantasImagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
 
             var Lista = ExtraerListaDeImagenesQueNoHanSidoProcesadas(cuantasImagenes, DirApp);
 
-            
+
             //guardar en Log los resultados
-           
+
 
             //Try
             //    EntidadManager.Tarea(SC, "Log_InsertarRegistro", IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
@@ -109,21 +103,23 @@ namespace ProntoFlexicapture
             //    ErrHandler.WriteError(ex)
             //End Try
 
-            return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar);
+            return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
 
 
         }
 
 
-        public static string GenerarHtmlConResultado(List<Resultados> l)
+        public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l , string err )
         {
-            string stodo="";
+            if (err != "") return err;
 
-            foreach (Resultados x in l)
+            string stodo = "";
+
+            foreach (ProntoMVC.Data.FuncionesGenericasCSharp.Resultados x in l)
             {
-                string sError="";
+                string sError = "";
 
-                sError = "<a href=\"CartaDePorte.aspx?Id=" + x.IdCarta + "\" target=\"_blank\">" + "Carta " + x.numerocarta  + "   " + x.errores + "   " + x.advertencias + "</a>;  <br/> ";  // & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
+                sError = "<a href=\"CartaDePorte.aspx?Id=" + x.IdCarta + "\" target=\"_blank\">" + "Carta " + x.numerocarta + "   " + x.errores + "   " + x.advertencias + "</a>;  <br/> ";  // & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
 
                 stodo += sError;
             }
@@ -144,7 +140,7 @@ namespace ProntoFlexicapture
             //{
             //    l.Add(file.Name);
             //}
-           
+
 
             //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
@@ -155,7 +151,8 @@ namespace ProntoFlexicapture
                             &&
                             (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                      )
-                     orderby f.LastWriteTime descending select f.FullName).Take(cuantas);
+                     orderby f.LastWriteTime descending
+                     select f.FullName).Take(cuantas);
 
 
             return q.ToList();
@@ -166,12 +163,29 @@ namespace ProntoFlexicapture
 
 
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static List<Resultados> ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
-                                                   List<string> imagenes, string SC, string DirApp, bool bProcesar = true)
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
+                                                   List<string> imagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
+
+            //engine.CurrentLicense
+            bool Licencia = false;
+            if (!Licencia) // no está la licencia del Flexicapture
+            {
+
+                var listasinpath = new List<string>();
+                foreach (string i in imagenes)
+                {
+                    listasinpath.Add(Path.GetFileName(i));
+                }
+                return  CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
+                
+            }
+
+
+
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
-            List<Resultados> r = new List<Resultados>();
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> r = new List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados>();
 
             //trace("Create an instance of FlexiCapture processor...");
             IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
@@ -266,7 +280,7 @@ namespace ProntoFlexicapture
 
 
 
-        static Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
+        static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
         {
 
 
@@ -325,7 +339,7 @@ namespace ProntoFlexicapture
 
 
 
-            var o = new Resultados();
+            var o = new ProntoMVC.Data.FuncionesGenericasCSharp.Resultados();
 
             if (numeroCarta > 0)
             {
@@ -359,7 +373,7 @@ namespace ProntoFlexicapture
                 //FuncionesGenericasCSharp.mkf_validacuit(s);
                 cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
 
-                
+
 
                 if (cdp.Titular != 0)
                 {
@@ -422,7 +436,7 @@ namespace ProntoFlexicapture
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
             GuardarLogEnBase(o);
-            
+
 
             MarcarImagenComoProcesada(archivoOriginal);
 
@@ -430,7 +444,7 @@ namespace ProntoFlexicapture
         }
 
 
-        static void GuardarLogEnBase(Resultados o)
+        static void GuardarLogEnBase(ProntoMVC.Data.FuncionesGenericasCSharp.Resultados o)
         {
 
         }

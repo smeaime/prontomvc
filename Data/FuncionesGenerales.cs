@@ -13,6 +13,14 @@ namespace ProntoMVC.Data
 
         // funciones C# usadas por businesslogic (hecha en VB.net). Migrar del .Data a una dll aparte
 
+        public class Resultados
+        {
+            public int IdCarta;
+            public long numerocarta;
+            public string errores;
+            public string advertencias;
+        }
+
 
         public static string RemoveSpecialCharacters(string str)
         {
