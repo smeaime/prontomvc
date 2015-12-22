@@ -32,6 +32,7 @@ using System.IO;
 using Pronto.ERP.Bll;
 
 
+using Microsoft.Reporting.WebForms;
 
 
 //test de java lopez
@@ -62,8 +63,8 @@ namespace ProntoMVC.Tests
         const string nombreempresa = "Williams";
         //const string nombreempresa = "DemoProntoWeb";
         const string usuario = "Mariano";
-        //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-        string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+        //string bdlmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+        string bdlmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
         string sc;
 
         string DirApp;
@@ -132,20 +133,43 @@ namespace ProntoMVC.Tests
         {
                
                
-//               Mariano,
-//Con estas columnas estaría bien (si puede ser con un link al cliente):
+            //               Mariano,
+            //Con estas columnas estaría bien (si puede ser con un link al cliente):
 
-//Codigo
-//Razón Social
-//CUIT
-//Dirección
-//Localidad
-//Provincia
+            //Codigo
+            //Razón Social
+            //CUIT
+            //Dirección
+            //Localidad
+            //Provincia
 
-//Solo un comentario, en la imagen incluyen el campo Autorizador Syngenta que no debe tenerse en cuenta porque casi ningun cliente lo tiene
+            //Solo un comentario, en la imagen incluyen el campo Autorizador Syngenta que no debe tenerse en cuenta porque casi ningun cliente lo tiene
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
+            
+            string ArchivoExcelDestino="";
+
+            //yourParams(0) = New ReportParameter("webservice", "")
+            //yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+            //yourParams(2) = New ReportParameter("idArticulo", -1)
+            //yourParams(3) = New ReportParameter("idDestino", -1)
+            //yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+            //yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+            //yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+            //yourParams(7) = New ReportParameter("Consulta", strSQL)
+            //yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel( ref rep, 
+                    "Williams - Listado de Clientes incompletos.rdl", 
+                            "", SC, false, ref ArchivoExcelDestino,sTitulo,false) ;
+
+            rep.Dispose();
+             
+
+            
 
             //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErrores, bVistaPrevia);
 
@@ -157,19 +181,45 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void InformeConAcopios_16451()
         {
-                  string sErrores = "", sTitulo = "";
+            string sErrores = "", sTitulo = "";
 
-             //string s=   CartaDePorteManager.EnviarMailFiltroPorId_DLL(SC ,
-             //                                new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
-             //                                   0, 1234,
-             //                                   "" , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
-             //                                        sError As String,  false, _
-             //                                        ByVal SmtpServer As String, ByVal SmtpUser As String, _
-             //                                        ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
-             //                                        ByRef sError2 As String _
-             //                                           );
+            //string s=   CartaDePorteManager.EnviarMailFiltroPorId_DLL(SC ,
+            //                                new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
+            //                                   0, 1234,
+            //                                   "" , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
+            //                                        sError As String,  false, _
+            //                                        ByVal SmtpServer As String, ByVal SmtpUser As String, _
+            //                                        ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+            //                                        ByRef sError2 As String _
+            //                                           );
+
         }
 
+
+
+        [TestMethod]
+        public void SincroDow()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+            
+            var output = SincronismosWilliamsManager.GenerarSincro("DOW", ref sErrores, SC,  "dominio" , ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                0, "Ambas", false);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
 
 
 
@@ -182,7 +232,8 @@ namespace ProntoMVC.Tests
 
             // el _CONST_MAXROWS sale del app.config
 
-            var output = SincronismosWilliamsManager.GenerarSincro("BLD", ref sErrores, SC, ref sTitulo
+            var output = SincronismosWilliamsManager.GenerarSincro("BLD", ref sErrores, SC, "dominio",
+            ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
@@ -207,13 +258,13 @@ namespace ProntoMVC.Tests
 
             // el _CONST_MAXROWS sale del app.config
 
-            var output = SincronismosWilliamsManager.GenerarSincro("PetroAgro", ref sErrores, SC, ref sTitulo
+            var output = SincronismosWilliamsManager.GenerarSincro("PetroAgro", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
                 0, "Ambas", false);
 
 
@@ -235,7 +286,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti",  ref sErrores, SC, ref sTitulo
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC,  "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                     "", -1, -1,
                 -1, -1,
@@ -292,7 +343,7 @@ namespace ProntoMVC.Tests
                 engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
             }
 
-            string sError="";
+            string sError = "";
 
             var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
                                     plantilla, 10,
@@ -359,7 +410,7 @@ namespace ProntoMVC.Tests
 
             var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                         plantilla,
-                                        lista, SC, DirApp, false,  ref sError);
+                                        lista, SC, DirApp, false, ref sError);
 
 
             var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
@@ -393,7 +444,8 @@ namespace ProntoMVC.Tests
                 lista.Add(file.Name);
             }
 
-            CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp);
         }
 
 

@@ -109,7 +109,7 @@ namespace ProntoFlexicapture
         }
 
 
-        public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l , string err )
+        public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
         {
             if (err != "") return err;
 
@@ -177,8 +177,8 @@ namespace ProntoFlexicapture
                 {
                     listasinpath.Add(Path.GetFileName(i));
                 }
-                return  CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
-                
+                return CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
+
             }
 
 
@@ -274,6 +274,9 @@ namespace ProntoFlexicapture
             //assert(count == 4);
             return r;
         }
+
+
+
 
 
 
@@ -463,6 +466,69 @@ namespace ProntoFlexicapture
         {
             File.Create(filename).Dispose();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        static public void ActivarMotor(string SC, List<string> archivos, ref string sError, string DirApp)
+        {
+            IEngine engine;
+            IEngineLoader engineLoader;
+
+            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
+
+            string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+
+            string e = "";
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado;
+
+            try
+            {
+
+
+                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+
+                resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
+                                                plantilla,
+                                                archivos, SC, DirApp, true, ref e);
+
+            }
+            catch (Exception)
+            {
+
+
+                var listasinpath = new List<string>();
+                foreach (string i in archivos)
+                {
+                    listasinpath.Add(Path.GetFileName(i));
+                }
+                resultado = CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
+
+            }
+
+
+
+
+            sError += ClassFlexicapture.GenerarHtmlConResultado(resultado, e);
+
+
+
+        }
+
+
+
+
+
+
+
 
 
 
