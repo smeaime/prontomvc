@@ -3071,7 +3071,7 @@ Public Class CartaDePorteManager
                 yourParams(3) = New ReportParameter("idDestino", -1)
                 yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
                 yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-                yourParams(6) = New ReportParameter("quecontenga", "")
+                yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
                 yourParams(7) = New ReportParameter("Consulta", strSQL)
 
                 If Diagnostics.Debugger.IsAttached And False Then
