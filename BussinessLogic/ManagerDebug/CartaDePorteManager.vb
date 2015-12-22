@@ -5400,7 +5400,8 @@ Public Class CartaDePorteManager
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
 "            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
 "			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
-"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP, " & _
+"			isnull(ACO.Descripcion,'') AS NombreAcopio " _
 )
 
 
@@ -5429,8 +5430,8 @@ Public Class CartaDePorteManager
         "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
         "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
         "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
-        "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
-
+        "            LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado " & _
+        "            LEFT OUTER JOIN CartasPorteAcopios ACO ON ACO.IdAcopio= (SELECT Max(v) FROM (VALUES (CDP.AcopioFacturarleA), (CDP.Acopio1), (CDP.Acopio2), (CDP.Acopio3), (CDP.Acopio4), (CDP.Acopio5)) AS value(v)) "
 
 
 

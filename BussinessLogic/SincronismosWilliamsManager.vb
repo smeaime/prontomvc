@@ -65,7 +65,7 @@ Namespace Pronto.ERP.Bll
                     Optional ByVal optDivisionSyngenta As String = "Ambas", _
                     Optional ByVal bTraerDuplicados As Boolean = False, _
                     Optional ByVal Contrato As String = "", _
-                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1 _
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, Optional ByRef registrosFiltrados As Integer = 0 _
             ) As String
 
 
@@ -217,7 +217,7 @@ Namespace Pronto.ERP.Bll
 
                 Dim sForzarNombreDescarga As String = ""
 
-                Dim registrosFiltrados As Integer
+
 
                 Try
 

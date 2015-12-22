@@ -131,8 +131,8 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void InformeDeClientesIncompletos_16492()
         {
-               
-               
+
+
             //               Mariano,
             //Con estas columnas estaría bien (si puede ser con un link al cliente):
 
@@ -147,8 +147,8 @@ namespace ProntoMVC.Tests
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
-            
-            string ArchivoExcelDestino="";
+
+            string ArchivoExcelDestino = "";
 
             //yourParams(0) = New ReportParameter("webservice", "")
             //yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
@@ -162,14 +162,14 @@ namespace ProntoMVC.Tests
 
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
-            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel( ref rep, 
-                    "Williams - Listado de Clientes incompletos.rdl", 
-                            "", SC, false, ref ArchivoExcelDestino,sTitulo,false) ;
+            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                    "Williams - Listado de Clientes incompletos.rdl",
+                            "", SC, false, ref ArchivoExcelDestino, sTitulo, false);
 
             rep.Dispose();
-             
 
-            
+
+
 
             //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErrores, bVistaPrevia);
 
@@ -183,17 +183,40 @@ namespace ProntoMVC.Tests
         {
             string sErrores = "", sTitulo = "";
 
-            //string s=   CartaDePorteManager.EnviarMailFiltroPorId_DLL(SC ,
-            //                                new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
-            //                                   0, 1234,
-            //                                   "" , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
-            //                                        sError As String,  false, _
-            //                                        ByVal SmtpServer As String, ByVal SmtpUser As String, _
-            //                                        ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
-            //                                        ByRef sError2 As String _
-            //                                           );
+            string sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,"",
+   "","",0,0          , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                0, ref sTitulo,  "Ambas", false);
+
+
+
+            //      var yourParams = new ReportParameter(3);
+
+
+            //                    yourParams(0) = New ReportParameter("CadenaConexionSQL", Encriptar(SC))
+            //                    yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
+            //                    yourParams(2) = New ReportParameter("SentenciaSQL", sql)
+
+            //var rep = new ReportViewer()
+
+            //var output = CartaDePorteManager.RebindReportViewer_ServidorExcel( ref rep, 
+            //        "Williams - Listado de Clientes incompletos.rdl", 
+            //                "", SC, false, ref ArchivoExcelDestino,sTitulo,false) ;
+
+            //rep.Dispose();
+
+
+
+
 
         }
+
+
+
 
 
 
@@ -205,15 +228,17 @@ namespace ProntoMVC.Tests
             LinqCartasPorteDataContext db = null;
 
             // el _CONST_MAXROWS sale del app.config
-            
-            var output = SincronismosWilliamsManager.GenerarSincro("DOW", ref sErrores, SC,  "dominio" , ref sTitulo
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("DOW", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                 new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, "Ambas", false);
+                0, "Ambas", false, "", "", -1, ref registrosf);
 
 
 
@@ -232,6 +257,8 @@ namespace ProntoMVC.Tests
 
             // el _CONST_MAXROWS sale del app.config
 
+            int registrosf = 0;
+
             var output = SincronismosWilliamsManager.GenerarSincro("BLD", ref sErrores, SC, "dominio",
             ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
@@ -240,7 +267,7 @@ namespace ProntoMVC.Tests
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                 new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, "Ambas", false);
+                 0, "Ambas", false, "", "", -1, ref registrosf);
 
 
 
@@ -258,6 +285,8 @@ namespace ProntoMVC.Tests
 
             // el _CONST_MAXROWS sale del app.config
 
+            int registrosf = 0;
+
             var output = SincronismosWilliamsManager.GenerarSincro("PetroAgro", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
@@ -265,7 +294,7 @@ namespace ProntoMVC.Tests
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                 new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, "Ambas", false);
+                  0, "Ambas", false, "", "", -1, ref registrosf);
 
 
 
@@ -286,14 +315,16 @@ namespace ProntoMVC.Tests
 
 
 
-            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC,  "dominio", ref sTitulo
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                     "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                 new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
-                0, "Ambas", false);
+                0, "Ambas", false, "", "", -1, ref registrosf);
 
 
 
