@@ -3017,9 +3017,174 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
+                                                                ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
+                                    ByRef ArchivoExcelDestino As String) As String
+
+
+        With oReportViewer
+            .Reset()
+            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
+            .Visible = False
 
 
 
+            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
+            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
+            .ProcessingMode = ProcessingMode.Remote
+            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
+            .ServerReport.ReportServerCredentials = irsc
+            .ShowCredentialPrompts = False
+
+
+
+
+            'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+            'Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+            If rdlFile = "" Then
+
+            End If
+            rdlFile = rdlFile.Replace(".rdl", "")
+            rdlFile = "/Pronto informes/" & rdlFile
+
+
+
+            With .ServerReport
+                .ReportPath = rdlFile
+
+
+
+
+
+
+                Try
+
+                    oReportViewer.ServerReport.SetParameters(parametros)
+
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex.ToString)
+                    Dim inner As Exception = ex.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            MsgBox(inner.Message)
+                            Stop
+                        End If
+                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        inner = inner.InnerException
+                    End While
+                End Try
+
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+
+            '/////////////////////
+            '/////////////////////
+
+            .Visible = False
+
+            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType, encoding, extension As String
+            Dim bytes As Byte()
+
+            'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
+            '             string mimeType;
+            '2 string encoding;
+            '3 Warning[] warnings;
+            '4 string[] streamids;
+            '5 string fileNameExtension;
+            '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
+            '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
+            '8 return reportHtml;
+
+
+            .Visible = False
+
+            Try
+                bytes = .ServerReport.Render( _
+                      "Excel", Nothing, mimeType, encoding, _
+                        extension, _
+                       streamids, warnings)
+
+            Catch e As System.Exception
+                Dim inner As Exception = e.InnerException
+                While Not (inner Is Nothing)
+                    If System.Diagnostics.Debugger.IsAttached() Then
+                        'MsgBox(inner.Message)
+                        'Stop
+                    End If
+                    ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                    inner = inner.InnerException
+                End While
+                Throw
+            End Try
+
+
+            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+            Try
+                Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+
+            Catch ex As Exception
+
+                ErrHandler.WriteAndRaiseError(ex)
+            End Try
+
+
+
+
+            '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Return ArchivoExcelDestino
+
+
+
+
+            'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
+            ''ExcelToCSV_SincroBLD
+
+            'Return ArchivoCSVDestino
+
+
+
+
+
+
+        End With
+
+        '////////////////////////////////////////////
+
+        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+
+    End Function
 
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
                                                                 ByVal rdlFile As String, strSQL As String, SC As String, _
@@ -9285,23 +9450,32 @@ Public Class CartaDePorteManager
 
 
         'si es un .tiff paginado
-        If archivoImagenSinPathUbicadaEnDATABACKUPEAR.Contains(".tif") Then
-            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
+        If archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tif") Or archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tiff") Then
+            Try
+
+
+                Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
 
 
 
-            listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
-            BorroArchivo(DIRFTP + oCarta.PathImagen)
-            oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+                listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                BorroArchivo(DIRFTP + oCarta.PathImagen)
+                oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
 
-            'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
-            If listapaginas.Count > 1 Then
-                'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
-                listapaginas(1).Save(DIRFTP + Path.GetFileName(archivoImagenSinPathUbicadaEnDATABACKUPEAR) + "_TK" + ".jpg", Imaging.ImageFormat.Jpeg)
-                BorroArchivo(DIRFTP + oCarta.PathImagen2)
-                oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg"
+                'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
+                If listapaginas.Count > 1 Then
+                    'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
+                    listapaginas(1).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRFTP + oCarta.PathImagen2)
+                    oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg"
 
-            End If
+                End If
+
+            Catch ex As Exception
+                sError &= ex.ToString
+                Return ""
+            End Try
+
 
         ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
@@ -9343,6 +9517,7 @@ Public Class CartaDePorteManager
         Catch ex As Exception
         End Try
     End Sub
+
 
 
 
