@@ -583,8 +583,9 @@ Namespace Pronto.ERP.Bll
                                 ErrHandler.WriteError("Error en el sincro BLD" & ex.ToString)
                                 ErrHandler.WriteError(ex)
                             End Try
-                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
+                            'registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+                            registrosFiltrados = 1 ' para que no aborte. tendría que hacer el count de GetDataTableFiltradoYPaginado_CadenaSQL
 
 
                         Case "BLD (POSICIÓN DEMORADOS)"
