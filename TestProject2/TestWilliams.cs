@@ -159,15 +159,42 @@ namespace ProntoMVC.Tests
         {
                   string sErrores = "", sTitulo = "";
 
-             string s=   CartaDePorteManager.EnviarMailFiltroPorId_DLL(SC ,
-                                             new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
-                                                0, 1234,
-                                                "" , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
-                                                     ByRef sError As String,  false, _
-                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
-                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
-                                                     ByRef sError2 As String _
-                                                        );
+             //string s=   CartaDePorteManager.EnviarMailFiltroPorId_DLL(SC ,
+             //                                new DateTime(2014,  1, 1), new DateTime(2014, 1, 2),
+             //                                   0, 1234,
+             //                                   "" , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
+             //                                        sError As String,  false, _
+             //                                        ByVal SmtpServer As String, ByVal SmtpUser As String, _
+             //                                        ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+             //                                        ByRef sError2 As String _
+             //                                           );
+        }
+
+
+
+
+        [TestMethod]
+        public void SincroBLD()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            var output = SincronismosWilliamsManager.GenerarSincro("BLD", ref sErrores, SC, ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                0, "Ambas", false);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
         }
 
 

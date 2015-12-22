@@ -402,6 +402,30 @@
       <Name>Williams - Listado de Clientes incompletos.rdl</Name>
       <FullPath>Williams - Listado de Clientes incompletos.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo BLD.rdl</Name>
+      <FullPath>Sincronismo BLD.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo BLD demorados.rdl</Name>
+      <FullPath>Sincronismo BLD demorados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo DOW.rdl</Name>
+      <FullPath>Sincronismo DOW.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo DOW2.rdl</Name>
+      <FullPath>Sincronismo DOW2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo YPF.rdl</Name>
+      <FullPath>Sincronismo YPF.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -410,7 +434,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://bdlconsultores.sytes.net/ReportServer</TargetServerURL>
+        <TargetServerURL>http://bdlconsultores.sytes.net:10080/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
@@ -437,7 +461,7 @@
       <Options>
         <OutputPath>bin\Release</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://bdlconsultores.sytes.net/ReportServer</TargetServerURL>
+        <TargetServerURL>http://bdlconsultores.sytes.net:10080/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
