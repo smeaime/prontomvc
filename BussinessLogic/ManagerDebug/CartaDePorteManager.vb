@@ -9616,8 +9616,8 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Sub ProcesarImagenesConCodigosDeBarraYAdjuntar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
-                            ByRef sError As String, DirApp As String)
+    Shared Function ProcesarImagenesConCodigosDeBarraYAdjuntar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
+                            ByRef sError As String, DirApp As String) As Generic.List(Of ProntoMVC.Data.FuncionesGenericasCSharp.Resultados)
 
 
         Dim DIRTEMP = DirApp & "\Temp\"
@@ -9636,6 +9636,11 @@ Public Class CartaDePorteManager
         '        listapaginas(1).Save(DIRFTP + oCarta.PathImagen2)
         '    End If
         'Next
+
+        Dim output As New Generic.List(Of ProntoMVC.Data.FuncionesGenericasCSharp.Resultados)()
+
+
+
 
 
 
@@ -9845,6 +9850,16 @@ Public Class CartaDePorteManager
                 Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
 
+
+                Dim o As New ProntoMVC.Data.FuncionesGenericasCSharp.Resultados()
+                o.IdCarta = oCarta.IdCartaDePorte
+                o.numerocarta = oCarta.NumeroCartaDePorte
+                o.errores = sError
+                o.advertencias = ""
+                output.Add(o)
+
+
+
                 If InStr(nombrenuevo.ToUpper, "TK") Then
                     oCarta.PathImagen2 = nombrenuevo
                 ElseIf InStr(nombrenuevo.ToUpper, "CP") Or bCodigoBarrasDetectado Then
@@ -9868,13 +9883,17 @@ Public Class CartaDePorteManager
 
 
 
+               
+
 
             End If
 
 
         Next
 
-    End Sub
+        Return output
+
+    End Function
 
 
 
