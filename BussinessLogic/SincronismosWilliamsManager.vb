@@ -487,23 +487,25 @@ Namespace Pronto.ERP.Bll
                             'output = Sincronismo_DOW(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
 
                             sTitulo = ""
-                            Dim dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, _
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
                                             "", "", "", 1, 0, _
                                             CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor, _
                                             idDestinatario, idIntermediario, _
                                             idRComercial, idArticulo, idProcedencia, idDestino, "1", ModoExportacion, Convert.ToDateTime(sDesde), Convert.ToDateTime(sHasta), Val(puntoventa), sTitulo, , , , , idClienteAuxiliar)
 
-                            FiltrarCopias(dt)
+                            'FiltrarCopias(dt)
                             'dt = DataTableWHERE(dt, sWHERE)
 
                             Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroDOW" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
-                            output = RebindReportViewer_ServidorExcel2(SC, _
-                                        "ProntoWeb\Informes\Sincronismo DOW.rdl", _
-                                                dt, ArchivoExcelDestino) 'sTitulo)
+                            Using rep As New ReportViewer
 
+                                output = RebindReportViewer_ServidorExcel(rep, sql, _
+                                            "ProntoWeb\Informes\Sincronismo DOW.rdl", SC, _
+                                                     ArchivoExcelDestino) 'sTitulo)
 
+                            End Using
 
                             'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
                             '            "ProntoWeb\Informes\Sincronismo DOW.rdl", _
@@ -514,7 +516,7 @@ Namespace Pronto.ERP.Bll
 
                             CambiarElNombreDeLaPrimeraHojaDeDow(output)
 
-                            registrosFiltrados = dt.Rows.Count
+                            'registrosFiltrados = dt.Rows.Count
 
 
 
@@ -530,7 +532,7 @@ Namespace Pronto.ERP.Bll
 
 
                                 sTitulo = ""
-                                Dim dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, _
+                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
                                                 "", "", "", 1, 0, _
                                                 CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
                                                 idDestinatario, idIntermediario, _
@@ -542,10 +544,10 @@ Namespace Pronto.ERP.Bll
 
 
 
-                                ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
+                                'ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
 
 
-                                FiltrarCopias(dt)
+                                'FiltrarCopias(dt)
 
                                 Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroBLD" & Now.ToString("ddMMMyyyy_HHmmss") & ".pronto" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
@@ -553,10 +555,12 @@ Namespace Pronto.ERP.Bll
 
                                 Try
 
+                                    Using rep As New ReportViewer
+                                        output = RebindReportViewer_ServidorExcel(rep, _
+                                                   "Sincronismo BLD.rdl", _
+                                                         sql, SC, , ArchivoExcelDestino) 'sTitulo)
+                                    End Using
 
-                                    output = RebindReportViewer_ServidorExcel2(SC, _
-                                               "ProntoWeb\Informes\Sincronismo BLD.rdl", _
-                                                      dt, ArchivoExcelDestino) 'sTitulo)
 
                                     'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
                                     '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
@@ -587,14 +591,15 @@ Namespace Pronto.ERP.Bll
 
                             sTitulo = ""
 
-                            Dim dt As DataTable
+                            'Dim dt As DataTable
+                            Dim sql As String
 
                             Try
                                 'cmbEstado.Text = "Posición"
                                 estado = CartaDePorteManager.enumCDPestado.Posicion
 
 
-                                dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, _
+                                sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
                                                 "", "", "", 1, 0, _
                                                 estado, "", idVendedor, idCorredor, _
                                                 idDestinatario, idIntermediario, _
@@ -603,7 +608,7 @@ Namespace Pronto.ERP.Bll
                                                 Convert.ToDateTime(sDesde), _
                                                 Convert.ToDateTime(sHasta), _
                                                 puntoventa, sTitulo, optDivisionSyngenta, , , , idClienteAuxiliar)
-                                FiltrarCopias(dt)
+                                'FiltrarCopias(dt)
                             Catch ex As Exception
                                 ErrHandler.WriteError(ex)
                                 ErrHandler.WriteError(sTitulo)
@@ -616,16 +621,19 @@ Namespace Pronto.ERP.Bll
 
                             Dim ArchivoExcelDestino = IO.Path.GetTempPath & "DemoradosBLD" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
-                            output = RebindReportViewer_ServidorExcel2(SC, _
-                                        "ProntoWeb\Informes\Posiciones BLD demorados.rdl", _
-                                                dt, ArchivoExcelDestino) 'sTitulo)
+
+                            Using rep As New ReportViewer
+                                output = RebindReportViewer_ServidorExcel(rep, _
+                                            "Posiciones BLD demorados.rdl", sql, _
+                                                     SC, ArchivoExcelDestino) 'sTitulo)
+                            End Using
 
 
                             'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
                             '            "ProntoWeb\Informes\Posiciones BLD demorados.rdl", _
                             '                    dt, ArchivoExcelDestino)
 
-                            registrosFiltrados = dt.Rows.Count
+                            'registrosFiltrados = dt.Rows.Count
 
                         Case "BLD (CALIDADES)"
                             output = Sincronismo_BLDCalidades(SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
@@ -637,7 +645,7 @@ Namespace Pronto.ERP.Bll
 
 
                                 sTitulo = ""
-                                Dim dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, _
+                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
                                                 "", "", "", 1, 0, _
                                                 CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
                                                 idDestinatario, idIntermediario, _
@@ -649,23 +657,26 @@ Namespace Pronto.ERP.Bll
 
 
 
-                                ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
+                                'ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
 
 
-                                FiltrarCopias(dt)
+                                'FiltrarCopias(dt)
 
                                 Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroPSA" & Now.ToString("ddMMMyyyy_HHmmss") & ".pronto" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
                                 ErrHandler.WriteError(" generar en " & ArchivoExcelDestino & " Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
 
                                 Try
-                                    output = RebindReportViewer_ServidorExcel2(SC, _
-                                         "ProntoWeb\Informes\Sincronismo BLD.rdl", _
-                                                dt, ArchivoExcelDestino) 'sTitulo)
+                                    Using rep As New ReportViewer
 
-                                    'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
-                                    '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
-                                    '                   dt, ArchivoExcelDestino) 'sTitulo)
+                                        output = RebindReportViewer_ServidorExcel(rep, _
+                                             "Sincronismo BLD.rdl", _
+                                              sql, SC, ArchivoExcelDestino) 'sTitulo)
+                                        'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
+                                        '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
+                                        '                   dt, ArchivoExcelDestino) 'sTitulo)
+                                    End Using
+
                                 Catch ex As Exception
                                     ErrHandler.WriteError("No se pudo generar el informe de bld! ")
 
@@ -1009,60 +1020,60 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    If sErroresRef <> "" Then
-                        'También, ver de diferenciar el mensaje que salta cuando ninguna carta de porte cumple con 
-                        'los filtros de cuando el sincro no sale porque alguna de las cartas no cumple con los requisitos.
-                        Dim registrosGenerados = 0
-                        Try
-                            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
-                            If MyFile1.Exists Then
-                                registrosGenerados = File.ReadAllLines(output).Length
-                            End If
-
-                        Catch ex As Exception
-                            ErrHandler.WriteError(ex)
-                        End Try
-
-                        Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
-                        'Dim renglonesEnDataset = dt.Rows.Count
-                        'output cantidad de renglones
-
-                        sErroresRef = "" & registrosFiltrados & " cartas filtradas<br/>" & registrosGenerados & " cartas exportadas al sincronismo <br/> <br/>" & sErroresRef
-                        'renglonesEnErrores & " errores en " &
-
-                        'si el archivo está vacío, no enviarlo
-
-
-
+            If sErroresRef <> "" Then
+                'También, ver de diferenciar el mensaje que salta cuando ninguna carta de porte cumple con 
+                'los filtros de cuando el sincro no sale porque alguna de las cartas no cumple con los requisitos.
+                Dim registrosGenerados = 0
+                Try
+                    Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+                    If MyFile1.Exists Then
+                        registrosGenerados = File.ReadAllLines(output).Length
                     End If
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+                Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
+                'Dim renglonesEnDataset = dt.Rows.Count
+                'output cantidad de renglones
+
+                sErroresRef = "" & registrosFiltrados & " cartas filtradas<br/>" & registrosGenerados & " cartas exportadas al sincronismo <br/> <br/>" & sErroresRef
+                'renglonesEnErrores & " errores en " &
+
+                'si el archivo está vacío, no enviarlo
+
+
+
+            End If
 
 
                 Catch ex As OutOfMemoryException
-                    MandarMailDeError(ex)
-                    ErrHandler.WriteError(ex)
-                    sErroresRef = "Disculpame, no pude manejar la cantidad de datos. Por favor, intentá achicando los filtros. Ya mandé un mail al administrador con el error."
-                    Return ""
-                Catch ex As Exception
-                    'ErrHandler.WriteAndRaiseError(ex)
-                    ErrHandler.WriteError(ex)
-                    Throw
-                End Try
+                MandarMailDeError(ex)
+                ErrHandler.WriteError(ex)
+                sErroresRef = "Disculpame, no pude manejar la cantidad de datos. Por favor, intentá achicando los filtros. Ya mandé un mail al administrador con el error."
+                Return ""
+            Catch ex As Exception
+                'ErrHandler.WriteAndRaiseError(ex)
+                ErrHandler.WriteError(ex)
+                Throw
+            End Try
 
-                If output = "" Then
-                    ErrHandler.WriteError("No se pudo generar nada " & sSincronismo)
-                    'MsgBoxAjax(Me, "No se encontraron registros")
-                    'Return ""
-                End If
+            If output = "" Then
+                ErrHandler.WriteError("No se pudo generar nada " & sSincronismo)
+                'MsgBoxAjax(Me, "No se encontraron registros")
+                'Return ""
+            End If
 
 
-                '+ registrosFiltrados.ToString + " registros "
+            '+ registrosFiltrados.ToString + " registros "
 
-                sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + vbCrLf + "  <br/> " + sErroresRef + "<br/><br/><br/>"
+            sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + vbCrLf + "  <br/> " + sErroresRef + "<br/><br/><br/>"
 
-                If registrosFiltrados = 0 Then
-                    sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + "SIN REGISTROS  <br/> <br/>"
-                    output = ""
-                End If
+            If registrosFiltrados = 0 Then
+                sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + "SIN REGISTROS  <br/> <br/>"
+                output = ""
+            End If
 
 
             End Using
@@ -2642,7 +2653,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -3549,7 +3560,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                
+
                 '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
                 'sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)
                 sb &= "&" & cero.ToString.PadLeft(14)
@@ -3749,7 +3760,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas & "Procedencias sin código:<br/> " & sErroresProcedencia & "<br/>Destinos sin código: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -3983,7 +3994,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -4218,7 +4229,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -4797,7 +4808,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             'Return vFileName
             'Return TextToExcel(vFileName, titulo)
@@ -4819,7 +4830,7 @@ Namespace Pronto.ERP.Bll
 
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14979
 
-         
+
 
 
 
@@ -4867,7 +4878,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+            Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
                 For Each cdp As CartasConCalada In q
@@ -4931,7 +4942,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             FileClose(nF)
             Return vFileName
@@ -5175,7 +5186,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -5383,7 +5394,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If False Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -5615,7 +5626,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -5850,7 +5861,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -6264,7 +6275,7 @@ Namespace Pronto.ERP.Bll
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -9168,7 +9179,7 @@ Namespace Pronto.ERP.Bll
 
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""
                 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
                 '-no hacerlo acá, que decida el front end
             End If
@@ -10199,7 +10210,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -10912,7 +10923,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -11688,7 +11699,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -12381,7 +12392,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -12902,7 +12913,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -16411,7 +16422,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -17879,7 +17890,7 @@ Namespace Pronto.ERP.Bll
 
             sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
             Sincronismo_NOBLEarchivoadicional(pDataTable, sWHERE)
@@ -19102,7 +19113,7 @@ Namespace Pronto.ERP.Bll
 
 
                     sb &= SEPARADOR & .CTG.ToString
-                    
+
 
 
 
@@ -19221,7 +19232,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -19543,7 +19554,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -20699,7 +20710,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia ' & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
 
