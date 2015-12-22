@@ -2646,280 +2646,6 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function RebindReportViewer_ServidorExcel2(SC As String, ByVal rdlFile As String, ByVal dt As DataTable, _
-                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = ""
-                                       ) As String
-        'http://forums.asp.net/t/1183208.aspx
-
-
-
-
-        Using oReportViewer = New Microsoft.Reporting.WebForms.ReportViewer
-
-
-
-            With oReportViewer
-                .Reset()
-                .ProcessingMode = ProcessingMode.Remote
-                .Visible = False
-
-
-
-
-
-
-
-                ' ReportViewerRemoto.ShowParameterPrompts = false
-
-
-
-                '               // ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://serversql1:82/ReportServer");
-                .ServerReport.ReportServerUrl = New Uri("http://localhost/ReportServer_MSSQLSERVER2")
-                '    .ServerReport.ReportServerUrl = new Uri(ConfigurationManager.AppSettings["ReportServer"]);
-
-
-                '
-                '               ReportViewerRemoto.ProcessingMode = ProcessingMode.Remote;
-                '            '              // IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
-                '              IReportServerCredentials irsc = new CustomReportCredentials(ConfigurationManager.AppSettings["ReportUser"], ConfigurationManager.AppSettings["ReportPass"], ConfigurationManager.AppSettings["ReportDomain"]);
-                '              ReportViewerRemoto.ServerReport.ReportServerCredentials = irsc;
-                '             ReportViewerRemoto.ShowCredentialPrompts = false;
-
-
-
-
-                'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
-                rdlFile = "/Pronto informes/" + "Listado general de Cartas de Porte (simulando original) con foto - Desde SQL"
-
-                With .ServerReport
-                    .ReportPath = rdlFile
-
-
-                    .ReportPath = rdlFile
-
-                    '.DataSources.Clear()
-
-                    '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                    '.DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
-
-
-                    '.EnableHyperlinks = True
-
-                    '.DataSources.Clear()
-
-                    '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                    ' .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
-                    ' If Not IsNothing(dt2) Then .DataSources.Add(New ReportDataSource("DataSet2", dt2))
-
-                    '.ReportEmbeddedResource = rdlFile
-
-
-
-                    '.EnableExternalImages = True
-
-
-                    '.DataSources.Add(New ReportDataSource("http://www.google.com/intl/en_ALL/images/logo.gif", "Image1"))
-                    'DataSource.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
-                    '.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
-
-
-
-                    '/////////////////////
-                    'parametros (no uses la @ delante del parametro!!!!)
-                    '/////////////////////
-                    If titulo <> "" Then
-                        Try
-                            If .GetParameters.Count = 1 Then
-                                If .GetParameters.Item(0).Name = "ReportParameter1" Then
-                                    Dim p1 = New ReportParameter("ReportParameter1", titulo)
-                                    'Dim p2 = New ReportParameter("FechaDesde", Today)
-                                    'Dim p3 = New ReportParameter("FechaHasta", Today)
-                                    '.SetParameters(New ReportParameter() {p1, p2, p3})
-                                    .SetParameters(New ReportParameter() {p1})
-
-                                Else
-                                    ErrHandler.WriteError("Error al buscar los parametros")
-                                End If
-                            ElseIf .GetParameters.Count = 2 Then
-                                If .GetParameters.Item(0).Name = "ReportParameter1" Then
-                                    Dim p1 = New ReportParameter("ReportParameter1", titulo)
-
-                                    Dim serv As String
-                                    If System.Diagnostics.Debugger.IsAttached() Then
-                                        serv = "http://localhost:48391/ProntoWeb"
-                                    Else
-                                        serv = "http://prontoclientes.williamsentregas.com.ar/"
-                                    End If
-                                    Dim p2 = New ReportParameter("sServidor", serv)
-
-                                    'Dim p2 = New ReportParameter("FechaDesde", Today)
-                                    'Dim p3 = New ReportParameter("FechaHasta", Today)
-                                    '.SetParameters(New ReportParameter() {p1, p2, p3})
-                                    .SetParameters(New ReportParameter() {p1, p2})
-
-                                Else
-                                    ErrHandler.WriteError("Error al buscar los parametros")
-                                End If
-                            Else
-                                ErrHandler.WriteError("Error al buscar los parametros")
-                            End If
-                        Catch ex As Exception
-                            ErrHandler.WriteError(ex.ToString)
-                            Dim inner As Exception = ex.InnerException
-                            While Not (inner Is Nothing)
-                                If System.Diagnostics.Debugger.IsAttached() Then
-                                    MsgBox(inner.Message)
-                                    'Stop
-                                End If
-                                ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
-                                inner = inner.InnerException
-                            End While
-                        End Try
-                    End If
-                    '/////////////////////
-                    '/////////////////////
-                    '/////////////////////
-                    '/////////////////////
-
-                End With
-
-
-                .DocumentMapCollapsed = True
-
-
-
-                '/////////////////////
-                '/////////////////////
-
-                .Visible = False
-
-                'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-                Dim warnings As Warning()
-                Dim streamids As String()
-                Dim mimeType, encoding, extension As String
-                Dim bytes As Byte()
-
-                'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
-                '             string mimeType;
-                '2 string encoding;
-                '3 Warning[] warnings;
-                '4 string[] streamids;
-                '5 string fileNameExtension;
-                '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
-                '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
-                '8 return reportHtml;
-
-                If False Then
-
-
-                    Try
-                        bytes = .ServerReport.Render( _
-                              "HTML4.0", Nothing, mimeType, encoding, _
-                                extension, _
-                               streamids, warnings)
-
-                    Catch e As System.Exception
-                        Dim inner As Exception = e.InnerException
-                        While Not (inner Is Nothing)
-                            If System.Diagnostics.Debugger.IsAttached() Then
-                                'MsgBox(inner.Message)
-                                'Stop
-                            End If
-                            ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
-                            inner = inner.InnerException
-                        End While
-                        Throw
-                    End Try
-
-                    Dim reportHtml As String = System.Text.Encoding.UTF8.GetString(bytes)
-                    'Return bytes
-                    Return reportHtml
-
-                Else
-
-                    .Visible = False
-
-                    Try
-                        bytes = .ServerReport.Render( _
-                              "Excel", Nothing, mimeType, encoding, _
-                                extension, _
-                               streamids, warnings)
-
-                    Catch e As System.Exception
-                        Dim inner As Exception = e.InnerException
-                        While Not (inner Is Nothing)
-                            If System.Diagnostics.Debugger.IsAttached() Then
-                                'MsgBox(inner.Message)
-                                'Stop
-                            End If
-                            ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
-                            inner = inner.InnerException
-                        End While
-                        Throw
-                    End Try
-
-
-                    ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
-                    Try
-                        Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
-                        fs.Write(bytes, 0, bytes.Length)
-                        fs.Close()
-
-                    Catch ex As Exception
-
-                        ErrHandler.WriteAndRaiseError(ex)
-                    End Try
-
-
-
-
-                    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
-
-
-
-
-
-
-
-
-
-                    Dim sHtml As String
-
-                    If False Then
-                        'ExcelToHtml(ArchivoExcelDestino)
-                    Else
-                        sHtml = ArchivoExcelDestino
-                    End If
-
-
-
-                    Return sHtml
-
-
-
-
-                    'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
-                    ''ExcelToCSV_SincroBLD
-
-                    'Return ArchivoCSVDestino
-
-
-
-                End If
-
-
-            End With
-
-            '////////////////////////////////////////////
-
-            'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
-
-            'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
-        End Using
-
-    End Function
-
     Shared Function generarNotasDeEntregaConReportViewer_ConServidorDeInformes(ByVal SC As String, ByVal fechadesde As Date, _
                                                          ByVal fechahasta As Date, ByVal dr As DataRow, _
                                                          ByVal estado As CartaDePorteManager.enumCDPestado, _
@@ -3276,6 +3002,25 @@ Public Class CartaDePorteManager
 
 
 
+
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////'//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
                                                                 ByVal rdlFile As String, strSQL As String, SC As String, _
                                      Optional ByVal bDescargaExcel As Boolean = False, _
@@ -3500,6 +3245,202 @@ Public Class CartaDePorteManager
 
         'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
     End Function
+
+
+
+
+
+
+
+
+
+    Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
+                                                                ByVal rdlFile As String, strSQL As String, SC As String, _
+                                    ByRef ArchivoExcelDestino As String,
+                                    IdFactura As Integer) As String
+        'http://forums.asp.net/t/1183208.aspx
+
+
+        With oReportViewer
+            .Reset()
+            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
+            .Visible = False
+
+
+
+            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
+            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
+            .ProcessingMode = ProcessingMode.Remote
+            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
+            .ServerReport.ReportServerCredentials = irsc
+            .ShowCredentialPrompts = False
+
+
+
+            If rdlFile = "" Then
+                'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+                Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+                rdlFile = "/Pronto informes/" & reportName
+            End If
+
+
+            With .ServerReport
+                .ReportPath = rdlFile
+
+
+
+
+
+                Dim yourParams As ReportParameter() = New ReportParameter(3) {}
+
+                yourParams(0) = New ReportParameter("RenglonesPorBoleta", 8)
+                yourParams(1) = New ReportParameter("IdFactura", IdFactura)
+                yourParams(2) = New ReportParameter("Consulta", strSQL)
+
+                If Diagnostics.Debugger.IsAttached Then
+                    SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
+                    'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
+                End If
+                yourParams(3) = New ReportParameter("sServidorSQL", Encriptar(SC))
+
+
+                Try
+
+                    oReportViewer.ServerReport.SetParameters(yourParams)
+
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex.ToString)
+                    Dim inner As Exception = ex.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            MsgBox(inner.Message)
+                            'Stop
+                        End If
+                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        inner = inner.InnerException
+                    End While
+                End Try
+
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+
+            '/////////////////////
+            '/////////////////////
+
+            .Visible = False
+
+            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType, encoding, extension As String
+            Dim bytes As Byte()
+
+            'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
+            '             string mimeType;
+            '2 string encoding;
+            '3 Warning[] warnings;
+            '4 string[] streamids;
+            '5 string fileNameExtension;
+            '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
+            '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
+            '8 return reportHtml;
+
+            .Visible = False
+
+            Try
+                bytes = .ServerReport.Render( _
+                      "Excel", Nothing, mimeType, encoding, _
+                        extension, _
+                       streamids, warnings)
+
+            Catch e As System.Exception
+                Dim inner As Exception = e.InnerException
+                While Not (inner Is Nothing)
+                    If System.Diagnostics.Debugger.IsAttached() Then
+                        'MsgBox(inner.Message)
+                        'Stop
+                    End If
+                    ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                    inner = inner.InnerException
+                End While
+                Throw
+            End Try
+
+
+
+            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+            Try
+                Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+
+            Catch ex As Exception
+
+                ErrHandler.WriteAndRaiseError(ex)
+            End Try
+
+
+
+
+            '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+
+
+
+
+
+
+
+
+
+            Dim sHtml As String
+
+            If False Then
+                'ExcelToHtml(ArchivoExcelDestino)
+            Else
+                sHtml = ArchivoExcelDestino
+            End If
+
+
+
+            Return sHtml
+
+
+
+
+            'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
+            ''ExcelToCSV_SincroBLD
+
+            'Return ArchivoCSVDestino
+
+
+
+
+
+        End With
+
+        '////////////////////////////////////////////
+
+        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+    End Function
+
+
+
+
+
 
 
 
@@ -8393,188 +8334,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
-                                                                ByVal rdlFile As String, strSQL As String, SC As String, _
-                                    ByRef ArchivoExcelDestino As String,
-                                    IdFactura As Integer) As String
-        'http://forums.asp.net/t/1183208.aspx
 
-
-        With oReportViewer
-            .Reset()
-            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
-            .Visible = False
-
-
-
-            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
-            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
-            .ProcessingMode = ProcessingMode.Remote
-            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
-            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
-            .ServerReport.ReportServerCredentials = irsc
-            .ShowCredentialPrompts = False
-
-
-
-            If rdlFile = "" Then
-                'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
-                Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
-                rdlFile = "/Pronto informes/" & reportName
-            End If
-
-
-            With .ServerReport
-                .ReportPath = rdlFile
-
-
-
-
-
-                Dim yourParams As ReportParameter() = New ReportParameter(3) {}
-
-                yourParams(0) = New ReportParameter("RenglonesPorBoleta", 8)
-                yourParams(1) = New ReportParameter("IdFactura", IdFactura)
-                yourParams(2) = New ReportParameter("Consulta", strSQL)
-
-                If Diagnostics.Debugger.IsAttached Then
-                    SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
-                    'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
-                End If
-                yourParams(3) = New ReportParameter("sServidorSQL", Encriptar(SC))
-
-
-                Try
-
-                    oReportViewer.ServerReport.SetParameters(yourParams)
-
-
-                Catch ex As Exception
-                    ErrHandler.WriteError(ex.ToString)
-                    Dim inner As Exception = ex.InnerException
-                    While Not (inner Is Nothing)
-                        If System.Diagnostics.Debugger.IsAttached() Then
-                            MsgBox(inner.Message)
-                            'Stop
-                        End If
-                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
-                        inner = inner.InnerException
-                    End While
-                End Try
-
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-
-            End With
-
-
-            .DocumentMapCollapsed = True
-
-
-
-            '/////////////////////
-            '/////////////////////
-
-            .Visible = False
-
-            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-            Dim warnings As Warning()
-            Dim streamids As String()
-            Dim mimeType, encoding, extension As String
-            Dim bytes As Byte()
-
-            'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
-            '             string mimeType;
-            '2 string encoding;
-            '3 Warning[] warnings;
-            '4 string[] streamids;
-            '5 string fileNameExtension;
-            '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
-            '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
-            '8 return reportHtml;
-
-            .Visible = False
-
-            Try
-                bytes = .ServerReport.Render( _
-                      "Excel", Nothing, mimeType, encoding, _
-                        extension, _
-                       streamids, warnings)
-
-            Catch e As System.Exception
-                Dim inner As Exception = e.InnerException
-                While Not (inner Is Nothing)
-                    If System.Diagnostics.Debugger.IsAttached() Then
-                        'MsgBox(inner.Message)
-                        'Stop
-                    End If
-                    ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
-                    inner = inner.InnerException
-                End While
-                Throw
-            End Try
-
-
-
-            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
-            Try
-                Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
-                fs.Write(bytes, 0, bytes.Length)
-                fs.Close()
-
-            Catch ex As Exception
-
-                ErrHandler.WriteAndRaiseError(ex)
-            End Try
-
-
-
-
-            '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
-
-
-
-
-
-
-
-
-
-            Dim sHtml As String
-
-            If False Then
-                'ExcelToHtml(ArchivoExcelDestino)
-            Else
-                sHtml = ArchivoExcelDestino
-            End If
-
-
-
-            Return sHtml
-
-
-
-
-            'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
-            ''ExcelToCSV_SincroBLD
-
-            'Return ArchivoCSVDestino
-
-
-
-
-
-        End With
-
-        '////////////////////////////////////////////
-
-        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
-
-        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
-    End Function
 
 
 
