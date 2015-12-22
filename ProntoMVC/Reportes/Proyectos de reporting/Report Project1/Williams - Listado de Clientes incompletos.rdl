@@ -9,7 +9,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Listado de Clientes incompletos</Value>
+                <Value>Clientes incompletos</Value>
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
                   <FontSize>20pt</FontSize>
@@ -22,7 +22,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
-        <Left>5.87715cm</Left>
+        <Top>0.50271cm</Top>
+        <Left>0.58487cm</Left>
         <Height>0.40167in</Height>
         <Width>5.77644in</Width>
         <Style>
@@ -45,7 +46,7 @@
               <Width>3.10355cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.59542cm</Width>
+              <Width>2.78604cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -60,7 +61,7 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>4.27271cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -77,39 +78,36 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>2.20073cm</Height>
+              <Height>0.69261cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox3">
+                    <Textbox Name="Textbox13">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>link</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
                               <Value />
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <rd:DefaultName>Textbox13</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
+                          <Color>#e6eefc</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -127,11 +125,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>razonsocial</Value>
-                              <Style />
+                              <Value>Cliente</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox8</rd:DefaultName>
@@ -158,10 +160,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Direccion</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox10</rd:DefaultName>
@@ -187,11 +193,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>cuit</Value>
-                              <Style />
+                              <Value>CUIT</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox12</rd:DefaultName>
@@ -217,11 +227,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>localidad</Value>
-                              <Style />
+                              <Value>Localidad</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox2</rd:DefaultName>
@@ -247,11 +261,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>provincia</Value>
-                              <Style />
+                              <Value>Provincia</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox4</rd:DefaultName>
@@ -277,11 +295,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>telefono</Value>
-                              <Style />
+                              <Value>Telefono</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox7</rd:DefaultName>
@@ -307,11 +329,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>email</Value>
-                              <Style />
+                              <Value>Correo</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox11</rd:DefaultName>
@@ -337,11 +363,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Direccion De Correos</Value>
-                              <Style />
+                              <Value>Direccion de Correos</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox14</rd:DefaultName>
@@ -368,10 +398,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Codigo Postal</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox16</rd:DefaultName>
@@ -398,10 +432,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Nombre Fantasia</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox18</rd:DefaultName>
@@ -427,11 +465,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>pais</Value>
-                              <Style />
+                              <Value>Pais</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox23</rd:DefaultName>
@@ -457,11 +499,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>descripcion</Value>
-                              <Style />
+                              <Value>Descripcion</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
@@ -481,7 +527,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>2.20073cm</Height>
+              <Height>0.90427cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -928,8 +974,8 @@
         <DataSetName>Clientes</DataSetName>
         <Top>2.2987cm</Top>
         <Left>0.44367cm</Left>
-        <Height>4.40146cm</Height>
-        <Width>33.62273cm</Width>
+        <Height>1.59688cm</Height>
+        <Width>36.58606cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -941,7 +987,7 @@
     <Height>6.48046in</Height>
     <Style />
   </Body>
-  <Width>13.41197in</Width>
+  <Width>14.57864in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
