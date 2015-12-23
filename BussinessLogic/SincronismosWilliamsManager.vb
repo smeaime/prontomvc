@@ -312,7 +312,8 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = dt.Rows.Count
 
 
-                        Case "PETROAGRO"
+
+                        Case "PETROAGRO", "ARECO"
                             Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
                                          "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
