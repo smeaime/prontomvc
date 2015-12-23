@@ -5356,19 +5356,19 @@ Public Class CartaDePorteManager
 " 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	 " & _
 " 			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	 " & _
 " 			ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 " & _
-"			isnull(CLIVEN.Razonsocial,'') AS TitularDesc, " & _
+"			isnull(CLIVEN.Razonsocial,'') + isnull(' - ' + ACO1.Descripcion,'')  AS TitularDesc, " & _
 "            isnull(CLIVEN.cuit,'') AS TitularCUIT, " & _
-"			isnull(CLICO1.Razonsocial,'') AS IntermediarioDesc, " & _
+"			isnull(CLICO1.Razonsocial,'') + isnull(' - ' + ACO2.Descripcion,'')  AS IntermediarioDesc, " & _
 "            isnull(CLICO1.cuit,'') AS IntermediarioCUIT, " & _
-"			isnull(CLICO2.Razonsocial,'') AS RComercialDesc, " & _
+"			isnull(CLICO2.Razonsocial,'') + isnull(' - ' + ACO3.Descripcion,'')  AS RComercialDesc, " & _
 "            isnull(CLICO2.cuit,'') AS RComercialCUIT, " & _
 "			isnull(CLICOR.Nombre,'') AS CorredorDesc, " & _
 "            isnull(CLICOR.cuit,'') AS CorredorCUIT, " & _
-"			isnull(CLIENT.Razonsocial,'') AS DestinatarioDesc, " & _
+"			isnull(CLIENT.Razonsocial,'') + isnull(' - ' + ACO5.Descripcion,'')  AS DestinatarioDesc, " & _
 "			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " & _
 "            isnull(CLIENT.cuit,'') AS DestinatarioCUIT, " & _
 "			isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, " & _
-"			isnull(CLIAUX.cuit,'') AS ClienteAuxiliarCUIT, " & _
+"			isnull(CLIAUX.cuit,'') + isnull(' - ' + ACO6.Descripcion,'')   AS ClienteAuxiliarCUIT, " & _
 "			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc, " & _
 "            isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc, " & _
 "             isnull(Articulos.Descripcion,'') AS Producto, " & _
@@ -5400,14 +5400,13 @@ Public Class CartaDePorteManager
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
 "            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
 "			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
-"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP, " & _
-"			isnull(ACO.Descripcion,'') AS NombreAcopio " _
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
 )
 
 
         Dim strFROM = _
         "   FROM    CartasDePorte CDP " & _
-        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
@@ -5416,23 +5415,26 @@ Public Class CartaDePorteManager
         "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
         "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
         "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
-        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
-        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
-        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
-        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
-        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
-        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
-        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
-        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
-        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
-        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
-        "            LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado " & _
-        "            LEFT OUTER JOIN CartasPorteAcopios ACO ON ACO.IdAcopio= (SELECT Max(v) FROM (VALUES (CDP.AcopioFacturarleA), (CDP.Acopio1), (CDP.Acopio2), (CDP.Acopio3), (CDP.Acopio4), (CDP.Acopio5)) AS value(v)) "
-
+        "       LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
+        "       LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+        "       LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
+        "       LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
+        "		LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
+        "       LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+        "       LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
+        "       LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+        "       LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
+        "       LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
+        "       LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
+        "       LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
+        "       LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
+        "       LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO1 ON ACO1.IdAcopio= CDP.Acopio1 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO2 ON ACO2.IdAcopio= CDP.Acopio2 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO6 ON ACO6.IdAcopio= CDP.Acopio6 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO3 ON ACO3.IdAcopio= CDP.Acopio3 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO5 ON ACO5.IdAcopio= CDP.Acopio5 "
 
 
         strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
