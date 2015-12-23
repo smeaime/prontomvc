@@ -148,7 +148,7 @@ namespace ProntoMVC.Tests
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
 
-            string ArchivoExcelDestino = "";
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
 
             //yourParams(0) = New ReportParameter("webservice", "")
             //yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
@@ -164,7 +164,7 @@ namespace ProntoMVC.Tests
 
             var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
                     "Williams - Listado de Clientes incompletos.rdl",
-                            "", SC, false, ref ArchivoExcelDestino, sTitulo, false);
+                             "", SC, false, ref ArchivoExcelDestino, sTitulo, false);
 
             rep.Dispose();
 
@@ -183,7 +183,7 @@ namespace ProntoMVC.Tests
         {
             string sErrores = "", sTitulo = "";
 
-            string sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,"",
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC,"",
    "","",0,0          , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
