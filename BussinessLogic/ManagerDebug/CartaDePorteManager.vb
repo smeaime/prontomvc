@@ -835,6 +835,72 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount( _
+           ByVal SC As String, _
+           ByVal ColumnaParaFiltrar As String, _
+           ByVal TextoParaFiltrar As String, _
+           ByVal sortExpression As String, _
+           ByVal startRowIndex As Long, _
+           ByVal maximumRows As Long, _
+           ByVal estado As CartaDePorteManager.enumCDPestado, _
+           ByVal QueContenga As String, _
+           ByVal idVendedor As Integer, _
+           ByVal idCorredor As Integer, _
+           ByVal idDestinatario As Integer, _
+           ByVal idIntermediario As Integer, _
+           ByVal idRemComercial As Integer, _
+           ByVal idArticulo As Integer, _
+           ByVal idProcedencia As Integer, _
+           ByVal idDestino As Integer, _
+           ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+           ByVal ModoExportacion As String, _
+           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+           ByVal puntoventa As Integer,
+           ByRef sqlCount As Long, _
+            Optional ByRef sTituloFiltroUsado As String = "", _
+           Optional ByVal optDivisionSyngenta As String = "Ambas", _
+           Optional ByVal bTraerDuplicados As Boolean = False, _
+           Optional ByVal Contrato As String = "", _
+           Optional ByVal QueContenga2 As String = "", _
+           Optional ByVal idClienteAuxiliar As Integer = -1, _
+           Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
+           Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+           Optional bInsertarEnTablaTemporal As Boolean = False, _
+           Optional ByVal optCamionVagon As String = "Ambas" _
+                   ) As String
+
+
+
+
+        Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                     ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, _
+                      estado, QueContenga, idVendedor, idCorredor, _
+                      idDestinatario, idIntermediario, _
+                      idRemComercial, idArticulo, idProcedencia, idDestino, _
+               AplicarANDuORalFiltro, ModoExportacion,
+                     fechadesde, fechahasta, _
+                     puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , Contrato, , idClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , True)
+
+
+        Dim dt = EntidadManager.ExecDinamico(SC, count)
+        sqlCount = dt.Rows(0).Item(0)
+        If sqlCount = 0 Then Return -1
+
+
+        Return CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+               ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, _
+                estado, QueContenga, idVendedor, idCorredor, _
+                idDestinatario, idIntermediario, _
+                idRemComercial, idArticulo, idProcedencia, idDestino, _
+         AplicarANDuORalFiltro, ModoExportacion,
+               fechadesde, fechahasta, _
+               puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , Contrato, , idClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , False)
+
+
+    End Function
+
+
+
 
     'ReadOnly s_compQuery = CompiledQuery.Compile(Of CartasDePortes, Decimal, IQueryable(Of CartasDePorte))( _
     '        Function(cdp, mySearchParams) _
@@ -2701,7 +2767,7 @@ Public Class CartaDePorteManager
                 Dim idProcedencia As Long = iisNull(.Item("Procedencia"), -1)
                 Dim idDestino As Long = iisNull(.Item("Destino"), -1)
 
-                Dim contrato As String = iisNull(.Item("Contrato"), -1)
+                Dim contrato As String = iisNull(.Item("Contrato"), "")
 
                 Dim EnumSyngentaDivision As String = iisNull(.Item("EnumSyngentaDivision"), "")
 
@@ -2980,6 +3046,9 @@ Public Class CartaDePorteManager
             ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel+Html" Then
+                'este es de servidor, así que saco el path
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
             Else
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
@@ -3020,6 +3089,12 @@ Public Class CartaDePorteManager
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
                                     ByRef ArchivoExcelDestino As String) As String
+
+        For Each i In parametros
+            If i Is Nothing Then
+                Throw New Exception("Te falta por lo menos un parametro. Recordá que el array que pasás se dimensiona con un elemento de más")
+            End If
+        Next
 
 
         With oReportViewer
@@ -27112,6 +27187,449 @@ Public Class CDPMailFiltrosManager2
 
 
 
+    Public Shared Function AgregarFirmaHtml(puntoventa As Integer) As String
+
+
+        Dim logo = "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\n/Tfimth/I/4H/IqMrS7KwMAAAAAASUVORK5CYII="
+
+        Dim html = "" '" <img src=""data:image/jpg;base64, " + logo + """ />"""
+        Dim a = ""
+
+
+        Select Case puntoventa
+            Case 1
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Buenos Aires<br/>" + vbCrLf + _
+                        "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf + _
+                        "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
+
+
+            Case 2
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina San Lorenzo<br/>" + vbCrLf + _
+                        "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf + _
+                        "Tel: 03476 - 430234 / 430158<br/>sanlorenzo@williamsentregas.com.ar" + vbCrLf
+
+            Case 3
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Arroyo Seco<br/>" + vbCrLf + _
+                        "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf + _
+                        "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
+
+            Case 4
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Bahia Blanca<br/>" + vbCrLf + _
+                        "Playa el Triangulo<br/>" + vbCrLf + _
+                        "Tel: 0291 - 4007928 / 4816778<br/>bahiablanca@williamsentregas.com.ar" + vbCrLf
+
+
+            Case Else
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Buenos Aires<br/>" + vbCrLf + _
+                        "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf + _
+                        "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
+
+        End Select
+
+
+        html &= "<br/><a href=""http://williamsentregas.com.ar/""> <img src=""cid:Image""></a>" + a +
+               "<br/><a href=""https://twitter.com/WEntregas?lang=es""><img src=""cid:Image2""></a>"
+
+
+
+
+        Return html
+
+
+
+
+        'Return "<p> Firma </p> Williams Entregas S. A. "
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n: =
+        '            Descripci = F3n
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina San Lorenzo
+
+        'Santiago del Estero 1177 (San Lorenzo)
+
+        'Tel: 03476 =96 430234 / 430158
+
+        '            sanlorenzo@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'Descripci=F3n: C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+        '=20
+
+        '=20
+
+        '=20
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n:
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina Arroyo Seco
+
+        'Rene Favaloro 726 (Arroyo Seco)
+
+        'Tel: 0291 =96 4007928 / 4816778
+
+        '            arroyoseco@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+        '=20
+
+        '=20
+
+        '=20
+
+        '=20
+
+        '=20
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n:
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina Bahia Blanca
+
+        'Playa el Triangulo
+
+        'Tel: 0291 =96 4007928 / 4816778
+
+        '            bahiablanca@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'Descripci=F3n: C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+        '=20
+
+        '=20
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n: =
+        '            Descripci = F3n
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina Buenos Aires
+
+        'Moreno 584. Piso 12=B0A ( C.A.B.A)
+
+        'Tel: (011) 4322-4805 / 4393-9762
+
+        '            buenosaires@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'Descripci=F3n: C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+
+
+    End Function
+
+
+
+
+
+
+    Public Shared Function EnviarMailFiltroPorRegistro_DLL(ByVal SC As String, ByVal fechadesde As Date, _
+                                                  ByVal fechahasta As Date, ByVal puntoventa As Integer, _
+                                                  ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                  ByRef dr As DataRow, _
+                                                  ByRef sError As String, ByVal bVistaPrevia As Boolean, _
+                                                  ByVal SmtpServer As String, ByVal SmtpUser As String, _
+                                                  ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+                                                  ByRef sError2 As String _
+                                                     ) As String
+
+
+
+
+        Dim output As String
+        'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
+        With dr
+            Dim l As Long
+
+
+
+            'If Not chkConLocalReport.Checked Then
+            '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
+            '                                iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
+            '                                iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
+            '    output = generarNotasDeEntrega(sc, dr, estado, l, titulo, sWHERE, Server.MapPath("~/Imagenes/Williams.bmp"))
+            'Else
+
+
+
+
+            If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
+                fechadesde = #1/1/1753#
+                fechahasta = #1/1/2100#
+
+            ElseIf estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha Then
+                'saqué esto. justamente, si uso rangofecha, las fechas tienen que estar
+                'pero quizas estas usando otra cosa en el enviarya....
+                ' fechadesde = #1/1/1753#
+                ' fechahasta = #1/1/2100#
+
+
+            End If
+
+
+            Try
+                Dim sWHERE = generarWHEREparaDataset(SC, dr, titulo, estado, _
+                                            iisValidSqlDate(fechadesde, #1/1/1753#), _
+                                            iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
+
+            Catch ex As Exception
+                'logear el idfiltro con problemas
+
+                ErrHandler.WriteError(ex.ToString)
+                dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló: " & ex.ToString, 100)
+                Throw
+            End Try
+
+
+            ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
+            Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+
+            Dim tiempoinforme, tiemposql As Integer
+
+            If Debugger.IsAttached And False Then
+                'output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            Else
+                output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            End If
+
+
+            'End If
+
+
+
+
+
+            If output <> "-1" And output <> "-2" Then
+                'MandaEmail("mscalella911@gmail.com", "Mailing Williams", "", , , , , "C:\ProntoWeb\doc\williams\Excels de salida\NE Descargas para el corredor Intagro.xls")
+
+                'Dim mails() As String = Split(.Item("EMails"), ",")
+                'For Each s As String In mails
+                'ErrHandler.WriteError("asdasde")
+                Dim De As String
+
+                Select Case puntoventa
+                    Case 1
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                    Case 2
+                        De = "sanlorenzo@williamsentregas.com.ar"
+                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+                    Case 3
+                        De = "arroyoseco@williamsentregas.com.ar"
+                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+                    Case 4
+                        De = "bahiablanca@williamsentregas.com.ar"
+                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+                    Case Else
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                End Select
+
+                Try
+                    Dim destinatario As String
+                    Dim truquito As String '= "    <img src =""http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & "/Pronto/mailPage.aspx?q=" & iisNull(UsuarioSesion.Mail(sc, Session)) & "&e=" & .Item("EMails") & "_" & tit & """/>" 'imagen para que llegue respuesta cuando sea leido
+                    Dim cuerpo As String
+
+                    If bVistaPrevia Then ' chkVistaPrevia.Checked Then
+                        'lo manda a la casilla del usuario
+                        'ver cómo crear una regla en Outlook para forwardearlo a la casilla correspondiente
+                        'http://www.eggheadcafe.com/software/aspnet/34183421/question-on-rules-on-unattended-mailbox.aspx
+                        destinatario = .Item("AuxiliarString2") ' UsuarioSesion.Mail(sc, Session)
+                        cuerpo = .Item("EMails") & truquito
+                    Else
+                        'lo manda a la casilla del destino
+                        destinatario = .Item("EMails")
+
+                        'destinatario &= "," & De
+
+                        cuerpo = truquito
+                    End If
+
+
+                    Dim stopWatch As New Stopwatch()
+                    stopWatch.Start()
+
+
+
+                    cuerpo &= AgregarFirmaHtml(puntoventa)
+
+
+
+
+
+
+
+
+
+
+
+                    Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
+                    Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
+                    Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
+                    Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
+                    Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
+                    Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
+                    Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
+                    Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
+
+
+
+                    Dim AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR = iisNull(.Item("AplicarANDuORalFiltro"), 0)
+                    Dim ModoExportacion As String = .Item("modo").ToString
+                    Dim optDivisionSyngenta As String = "Ambas"
+
+
+                    Dim asunto As String
+
+                    Try
+
+                        'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
+                        'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
+
+
+                        asunto = CartaDePorteManager.FormatearAsunto(SC, _
+                             "", _
+                           estado, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRemComercial, idArticulo, idProcedencia, idDestino, _
+                           AplicarANDuORalFiltro, ModoExportacion, _
+                          fechadesde, fechahasta, _
+                           puntoventa, optDivisionSyngenta, False, "", "", -1)
+                    Catch ex As Exception
+                        asunto = "mal formateado"
+                        ErrHandler.WriteError(ex.ToString + " asunto mal formateado")
+                    End Try
+
+
+
+                    If bDescargaHtml Then
+
+
+
+                        MandaEmail_Nuevo(destinatario, _
+                                    asunto, _
+                                  cuerpo + output, _
+                               De, _
+                               SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                         "", _
+                                        SmtpPort, _
+                                , _
+                                CCOaddress, )
+
+
+                        'MandaEmail(destinatario, _
+                        '                    asunto, _
+                        '                  cuerpo + output, _
+                        '                   De, _
+                        '                 SmtpServer, _
+                        '                SmtpUser, _
+                        '                SmtpPass, _
+                        '                "", _
+                        '                SmtpPort, _
+                        '                 , _
+                        '                 CCOaddress, _
+                        '                    truquito _
+                        '                    , "Williams Entregas" _
+                        '               )
+                    Else
+
+                        MandaEmail_Nuevo(destinatario, _
+                                            asunto, _
+                                          cuerpo, _
+                                           De, _
+                                         SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                        output, _
+                                        SmtpPort, _
+                                         , _
+                                         CCOaddress, _
+                                            truquito _
+                                            , "Williams Entregas" _
+                                       )
+
+                    End If
+
+
+                    stopWatch.Stop()
+                    Dim tiempomail = stopWatch.Elapsed.Milliseconds
+
+
+                    Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
+
+                    dr.Item("UltimoResultado") = s
+
+                Catch ex As Exception
+                    'Verificar Mails rechazados en la cuenta que los envió
+                    '        http://www.experts-exchange.com/Programming/Languages/C_Sharp/Q_23268068.html
+                    'TheLearnedOne:
+                    'The only way that I know of is to look in the Inbox for rejected messages.
+
+                    '        Bob
+
+
+
+                    ErrHandler.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
+                    'dddd()
+                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
+                    'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
+                End Try
+
+                'Next
+            ElseIf output = "-1" Then
+                sError += "El filtro genera un informe vacío." & vbCrLf
+
+                dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+            ElseIf output = "-2" Then
+
+                sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
+
+                dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+            End If
+
+
+
+
+        End With
+
+        Try
+            sError2 = dr.Item("UltimoResultado")
+        Catch ex As Exception
+
+        End Try
+
+        Return output
+
+
+    End Function
 
 
 
