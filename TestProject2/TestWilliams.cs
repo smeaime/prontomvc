@@ -34,6 +34,7 @@ using Pronto.ERP.Bll;
 
 using Microsoft.Reporting.WebForms;
 
+using System.Configuration;
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -183,14 +184,14 @@ namespace ProntoMVC.Tests
         {
             string sErrores = "", sTitulo = "";
 
-            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC,"",
-   "","",0,0          , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+   "", "", 0, 0, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                 new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, ref sTitulo,  "Ambas", false);
+                0, ref sTitulo, "Ambas", false);
 
 
 
@@ -216,6 +217,122 @@ namespace ProntoMVC.Tests
         }
 
 
+
+        [TestMethod]
+        public void InformeMultigrain_14861()
+        {
+            /*
+            Ahi veo tu mail. El tema es que el dato que envía el sistema es el que está en la pestaña de Calidad (no en la pestaña de Descarga).
+Esto es porque el que está en la pestaña Calidad es el número (1, 2, 3; que es lo que piden ellos) y lo que está en en la pestaña de descarga es un texto (que puede ser "GRADO 1" o "FUERA DE BASE" o "COND. CAMARA" por ejemplo).
+Por eso es el dato del Grado de la pestaña Calidad el que se envía.
+            
+            solo desde el formulario? o tambien en las pegatinas? todavia sirve para algo ese campo?
+
+                El campo lo siguen usando porque tienen otras opciones de calidad que no se reflejan en ningun otro lado de la CP.
+
+Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vienen casos de que está en un lugar y no en otro y tenemos que rastrear por que.
+            */
+
+
+            // enviarfiltroid
+
+        }
+
+
+
+
+        [TestMethod]
+        public void MailDeInformeConHtmlyConExcelAdjunto_16455()
+        {
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+            dr["ModoImpresion"] = "Excel+Html";
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output;
+            string sError = "", sError2 = "";
+
+
+
+            output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                   pventa, "", estado,
+                                                ref dr, ref sError, false,
+                                               ConfigurationManager.AppSettings["SmtpServer"],
+                                                 ConfigurationManager.AppSettings["SmtpUser"],
+                                                 ConfigurationManager.AppSettings["SmtpPass"],
+                                                 Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                   "", ref sError2);
+
+
+
+        }
+
+
+
+        [TestMethod]
+        public void MandarmeLosSincrosAutomaticos()
+        {
+            //aaaaaa
+
+
+
+        }
+
+
+        [TestMethod]
+        public void SincroBunge()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Bunge", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
 
 
 
