@@ -884,7 +884,7 @@ Public Class CartaDePorteManager
 
         Dim dt = EntidadManager.ExecDinamico(SC, count)
         sqlCount = dt.Rows(0).Item(0)
-        If sqlCount = 0 Then Return -1
+        'If sqlCount = 0 Then Return -1
 
 
         Return CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
@@ -3200,7 +3200,7 @@ Public Class CartaDePorteManager
                         'MsgBox(inner.Message)
                         'Stop
                     End If
-                    ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                    ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message)
                     inner = inner.InnerException
                 End While
                 Throw
