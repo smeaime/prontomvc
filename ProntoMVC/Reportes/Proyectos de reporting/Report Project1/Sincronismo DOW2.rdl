@@ -5317,8 +5317,8 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0mm</Top>
         <Left>0mm</Left>
-        <Height>23.2918mm</Height>
-        <Width>1560.33622mm</Width>
+        <Height>23.29181mm</Height>
+        <Width>1560.33621mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5359,9 +5359,9 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>=Parameters!CadenaConexionSQL.Value</ConnectString>
-        <Prompt>Specify a user name and password for data source DataSource1.</Prompt>
+        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>e9e4095a-349d-42c1-ab0f-15d7faaff1dd</rd:DataSourceID>
     </DataSource>
   </DataSources>

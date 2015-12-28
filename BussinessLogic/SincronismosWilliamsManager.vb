@@ -489,11 +489,14 @@ Namespace Pronto.ERP.Bll
                             'output = Sincronismo_DOW(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
 
                             sTitulo = ""
-                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
                                             "", "", "", 1, 0, _
                                             CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor, _
                                             idDestinatario, idIntermediario, _
-                                            idRComercial, idArticulo, idProcedencia, idDestino, "1", ModoExportacion, Convert.ToDateTime(sDesde), Convert.ToDateTime(sHasta), Val(puntoventa), sTitulo, , , , , idClienteAuxiliar)
+                                            idRComercial, idArticulo, idProcedencia, idDestino, "1", ModoExportacion, Convert.ToDateTime(sDesde), Convert.ToDateTime(sHasta), Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
+
+
+
 
                             'FiltrarCopias(dt)
                             'dt = DataTableWHERE(dt, sWHERE)
@@ -502,34 +505,41 @@ Namespace Pronto.ERP.Bll
                             'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
-                            Using rep As New ReportViewer
+                            Try
 
 
-                                Dim yourParams As ReportParameter() = New ReportParameter(3) {}
+                                Using rep As New ReportViewer
 
 
-                                yourParams(0) = New ReportParameter("CadenaConexionSQL", Encriptar(SC))
-                                yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
-                                yourParams(2) = New ReportParameter("SentenciaSQL", sql)
-
-                                output = RebindReportViewer_ServidorExcel(rep, _
-                                       "Sincronismo DOW2.rdl", _
-                                         yourParams, ArchivoExcelDestino) 'sTitulo)
+                                    Dim yourParams As ReportParameter() = New ReportParameter(2) {}
 
 
-                            End Using
+                                    yourParams(0) = New ReportParameter("CadenaConexionSQL", Encriptar(SC))
+                                    yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
+                                    yourParams(2) = New ReportParameter("SentenciaSQL", sql)
 
-                            'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
-                            '            "ProntoWeb\Informes\Sincronismo DOW.rdl", _
-                            '                    dt, ArchivoExcelDestino) 'sTitulo)
+                                    output = RebindReportViewer_ServidorExcel(rep, _
+                                           "Sincronismo DOW2.rdl", _
+                                             yourParams, ArchivoExcelDestino) 'sTitulo)
 
+
+                                End Using
+
+                                'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
+                                '            "ProntoWeb\Informes\Sincronismo DOW.rdl", _
+                                '                    dt, ArchivoExcelDestino) 'sTitulo)
+
+                            Catch ex As Exception
+                                'no se por qué se queja (al final del using) de que el rep ya fue disposed, si en la funcion no lo libero...
+                                ErrHandler.WriteError(ex)
+
+                            End Try
 
 
 
                             CambiarElNombreDeLaPrimeraHojaDeDow(output)
 
-                            'registrosFiltrados = dt.Rows.Count
-
+                         
 
 
                         Case "BLD x"
