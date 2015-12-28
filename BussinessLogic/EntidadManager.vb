@@ -57,8 +57,12 @@ Namespace Pronto.ERP.Bll
 
         Public Shared Sub regexReplace2(ByRef cadena As String, ByVal buscar As String, ByVal reemplazo As String)
             'buscar = "\[" & buscar & "\]" 'agrego los corchetes
-
-            reemplazo = ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(reemplazo)
+            Try
+                reemplazo = ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(reemplazo)
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+                reemplazo = ""
+            End Try
 
             Dim regexText = New System.Text.RegularExpressions.Regex(buscar)
             cadena = regexText.Replace(cadena, If(reemplazo, ""))
