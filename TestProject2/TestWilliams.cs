@@ -255,7 +255,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
-            dr["ModoImpresion"] = "Excel+Html";
+            dr["ModoImpresion"] = "ExcHtm";
             dr["Emails"] = "mscalella911@gmail.com";
 
             dr["Vendedor"] = -1;
@@ -280,9 +280,13 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             string output;
             string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
 
 
 
+
+            dr["ModoImpresion"] = "ExcHtm";
             output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
                                                    pventa, "", estado,
                                                 ref dr, ref sError, false,
@@ -290,9 +294,39 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
                                                  ConfigurationManager.AppSettings["SmtpUser"],
                                                  ConfigurationManager.AppSettings["SmtpPass"],
                                                  Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
-                                                   "", ref sError2);
+                                                   "", ref sError2, inlinePNG, inlinePNG2);
 
 
+            if (false)
+            {
+                // no anda todavía con los informes locales...
+
+                dr["ModoImpresion"] = "Excel";
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+                dr["ModoImpresion"] = "Html";
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+            }
+
+
+
+            //System.Diagnostics.Process.Start(output);
 
         }
 
@@ -308,7 +342,25 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         }
 
 
+        [TestMethod]
+        public void ZipdePDFsReducidos()
+        {
 
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                 "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2015, 10, 1), new DateTime(2015, 12, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, SC, false);
+            System.Diagnostics.Process.Start(output);
+
+        }
 
         [TestMethod]
         public void PDFdeCartaPorte()
@@ -316,7 +368,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             //aaaaaa
 
 
-            
+
             var idorig = 2165737;
             var sDirFTP = DirApp + @"\DataBackupear\";
             string output = DirApp + @"\DataBackupear\lala.pdf";

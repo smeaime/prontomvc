@@ -3,6 +3,8 @@ Option Explicit On
 
 Option Infer On
 
+Imports System.Data.OleDb
+
 Imports System.Reflection
 Imports System
 Imports System.Web
@@ -2422,294 +2424,330 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function EnviarMailFiltroPorId_DLL(ByVal SC As String, ByVal fechadesde As Date, _
-                                                     ByVal fechahasta As Date, ByVal puntoventa As Integer, _
-                                                     ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                     ByRef sError As String, ByVal bVistaPrevia As Boolean, _
-                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
-                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
-                                                     ByRef sError2 As String _
-                                                        ) As String
+    
 
 
+    Shared Function ExcelToHtml(ArchivoExcelDestino As String, Optional grid As GridView = Nothing) As String
 
+        Dim ds As DataSet = New DataSet()
 
-
-
-        'Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
-        Dim dt = CDPMailFiltrosManager2.TraerMetadata(SC, id)
-        Dim dr = dt.Rows(0)
-
-
-
-        Dim output As String
-        'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
-        With dr
-            Dim l As Long
-
-
-
-            'If Not chkConLocalReport.Checked Then
-            '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
-            '                                iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-            '                                iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
-            '    output = generarNotasDeEntrega(sc, dr, estado, l, titulo, sWHERE, Server.MapPath("~/Imagenes/Williams.bmp"))
-            'Else
-
-
-
-
-            If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
-                fechadesde = #1/1/1753#
-                fechahasta = #1/1/2100#
-
-            ElseIf estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha Then
-                fechadesde = #1/1/1753#
-                fechahasta = #1/1/2100#
-
-            End If
-
-
-            Try
-                Dim sWHERE = CDPMailFiltrosManager2.generarWHEREparaDataset(SC, dr, titulo, estado, _
-                                            iisValidSqlDate(fechadesde, #1/1/1753#), _
-                                            iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
-
-            Catch ex As Exception
-                'logear el idfiltro con problemas
-
-                ErrHandler.WriteError(ex.ToString)
-                ErrHandler.WriteError("Error en llamada a generarWHEREparaDataset().   IdFiltro " + id.ToString())
-                'dddd()
-                dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Fallo al enviar. Tope de filas? " & ex.ToString, 100)
-                Throw
-            End Try
-
-
-            ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
-            Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
-
-
-            Dim tiempoinforme, tiemposql As Integer
-
-            If Debugger.IsAttached Then
-                output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
-            Else
-                'output = generarNotasDeEntregaConReportViewer(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
-            End If
-
-
-            'End If
-
-
-
-
-
-            If output <> "-1" And output <> "-2" Then
-                'MandaEmail("mscalella911@gmail.com", "Mailing Williams", "", , , , , "C:\ProntoWeb\doc\williams\Excels de salida\NE Descargas para el corredor Intagro.xls")
-
-                'Dim mails() As String = Split(.Item("EMails"), ",")
-                'For Each s As String In mails
-                'ErrHandler.WriteError("asdasde")
-                Dim De As String
-
-                Select Case puntoventa
-                    Case 1
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                    Case 2
-                        De = "sanlorenzo@williamsentregas.com.ar"
-                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
-                    Case 3
-                        De = "arroyoseco@williamsentregas.com.ar"
-                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
-                    Case 4
-                        De = "bahiablanca@williamsentregas.com.ar"
-                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
-                    Case Else
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                End Select
-
-                Try
-                    Dim destinatario As String
-                    Dim truquito As String '= "    <img src =""http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & "/Pronto/mailPage.aspx?q=" & iisNull(UsuarioSesion.Mail(sc, Session)) & "&e=" & .Item("EMails") & "_" & tit & """/>" 'imagen para que llegue respuesta cuando sea leido
-                    Dim cuerpo As String
-
-                    If bVistaPrevia Then ' chkVistaPrevia.Checked Then
-                        'lo manda a la casilla del usuario
-                        'ver cómo crear una regla en Outlook para forwardearlo a la casilla correspondiente
-                        'http://www.eggheadcafe.com/software/aspnet/34183421/question-on-rules-on-unattended-mailbox.aspx
-                        destinatario = .Item("AuxiliarString2") ' UsuarioSesion.Mail(sc, Session)
-                        cuerpo = .Item("EMails") & truquito
-                    Else
-                        'lo manda a la casilla del destino
-                        destinatario = .Item("EMails")
-
-                        'destinatario &= "," & De
-
-                        cuerpo = truquito
-                    End If
-
-
-                    Dim stopWatch As New Stopwatch()
-                    stopWatch.Start()
-
-
-
-
-
-                    Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
-                    Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
-                    Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
-                    Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
-                    Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
-                    Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
-                    Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
-                    Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
-
-
-
-                    Dim AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR = iisNull(.Item("AplicarANDuORalFiltro"), 0)
-                    Dim ModoExportacion As String = .Item("modo").ToString
-                    Dim optDivisionSyngenta As String = "Ambas"
-
-
-                    Dim asunto As String
-
-                    Try
-
-                        'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
-                        'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
-
-
-                        asunto = CartaDePorteManager.FormatearAsunto(SC, _
-                             "", _
-                           estado, "", idVendedor, idCorredor, _
-                          idDestinatario, idIntermediario, _
-                          idRemComercial, idArticulo, idProcedencia, idDestino, _
-                           AplicarANDuORalFiltro, ModoExportacion, _
-                          fechadesde, fechahasta, _
-                           puntoventa, optDivisionSyngenta, False, "", "", -1)
-                    Catch ex As Exception
-                        asunto = "mal formateado"
-                        ErrHandler.WriteError(ex.ToString + " asunto mal formateado")
-                    End Try
-
-
-
-                    If bDescargaHtml Then
-
-
-
-                        MandaEmailSimple(destinatario, _
-                                    asunto, _
-                                  cuerpo + output, _
-                               De, _
-                               SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                         "", _
-                                        SmtpPort, _
-                                , _
-                                CCOaddress, )
-
-
-                        'MandaEmail(destinatario, _
-                        '                    asunto, _
-                        '                  cuerpo + output, _
-                        '                   De, _
-                        '                 SmtpServer, _
-                        '                SmtpUser, _
-                        '                SmtpPass, _
-                        '                "", _
-                        '                SmtpPort, _
-                        '                 , _
-                        '                 CCOaddress, _
-                        '                    truquito _
-                        '                    , "Williams Entregas" _
-                        '               )
-                    Else
-
-                        MandaEmail(destinatario, _
-                                            asunto, _
-                                          cuerpo, _
-                                           De, _
-                                         SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                        output, _
-                                        SmtpPort, _
-                                         , _
-                                         CCOaddress, _
-                                            truquito _
-                                             , "Williams Entregas" _
-                                       )
-
-                    End If
-
-
-                    stopWatch.Stop()
-                    Dim tiempomail = stopWatch.Elapsed.Milliseconds
-
-
-                    Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
-
-                    If False Then
-                        ErrHandler.WriteError("IdFiltro(no de cola)=" & id & " Enviado con éxito a las " & Now.ToString & ". CDPs filtradas: " & l)
-                    End If
-
-                    dr.Item("UltimoResultado") = s
-
-                    CDPMailFiltrosManager2.Update(SC, dt)
-
-                Catch ex As Exception
-                    'Verificar Mails rechazados en la cuenta que los envió
-                    '        http://www.experts-exchange.com/Programming/Languages/C_Sharp/Q_23268068.html
-                    'TheLearnedOne:
-                    'The only way that I know of is to look in the Inbox for rejected messages.
-
-                    '        Bob
-
-
-
-                    ErrHandler.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
-                    'dddd()
-                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Fallo al enviar. Tope de filas? " & ex.ToString, 100)
-                    CDPMailFiltrosManager2.Update(SC, dt)
-                    'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
-                End Try
-
-                'Next
-            ElseIf output = "-1" Then
-                sError += "El filtro " & id & " genera un informe vacío." & vbCrLf
-
-                dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
-                CDPMailFiltrosManager2.Update(SC, dt)
-            ElseIf output = "-2" Then
-
-                sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
-
-                dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
-                CDPMailFiltrosManager2.Update(SC, dt)
-            End If
-
-
-
-
-        End With
-
+        Dim err As String
+        Dim firstSheetName As String
+        'Dim connString As String = ConfigurationManager.ConnectionStrings("xls").ConnectionString
+        ' Create the connection object
+        Dim oledbConn As OleDbConnection
         Try
-            sError2 = dr.Item("UltimoResultado")
-        Catch ex As Exception
+            'Microsoft.Jet.OLEDB.4.0 to Microsoft.ACE.OLEDB.12.0
+            'oledbConn = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ArchivoExcelDestino + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1';")
+            oledbConn = New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ArchivoExcelDestino + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1';")
+            ' Open connection
+            oledbConn.Open()
 
+
+
+
+
+
+            '                          // Get the name of the first worksheet:
+            Dim dbSchema As DataTable = oledbConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, Nothing)
+            If (dbSchema Is Nothing Or dbSchema.Rows.Count < 1) Then
+
+                Throw New Exception("Error: Could not determine the name of the first worksheet.")
+            End If
+
+            firstSheetName = dbSchema.Rows(0)("TABLE_NAME").ToString()
+
+
+            ErrHandler.WriteError("Nombre  " & firstSheetName)
+
+            ' Create OleDbCommand object and select data from worksheet Sheet1
+            Dim cmd As OleDbCommand = New OleDbCommand("SELECT * FROM [Listado general de Cartas de Po$]", oledbConn)
+
+            ' Create new OleDbDataAdapter
+            Dim oleda As OleDbDataAdapter = New OleDbDataAdapter()
+
+            oleda.SelectCommand = cmd
+
+            ' Create a DataSet which will hold the data extracted from the worksheet.
+
+            ' Fill the DataSet from the data extracted from the worksheet.
+            oleda.Fill(ds, "Employees")
+
+            ' Bind the data to the GridView
+            'GridView1.DataSource = ds.Tables(0).DefaultView
+            'GridView1.DataBind()
+        Catch e As Exception
+
+
+            'http://stackoverflow.com/questions/96150/oledbconnection-open-generates-unspecified-error
+            'http://stackoverflow.com/questions/472079/c-asp-net-oledb-ms-excel-read-unspecified-error
+            'http://stackoverflow.com/questions/15828/reading-excel-files-from-c-sharp
+
+            err = e.ToString
+            ErrHandler.WriteError(err)
+            Throw
+        Finally
+            ' Close connection
+            oledbConn.Close()
         End Try
 
-        Return output
 
+
+        Dim s As String
+        Try
+            If ds.Tables.Count = 0 Then Return "NoSeConvirtieronTablas" & "_" & firstSheetName & "_" & ArchivoExcelDestino & "_" & err
+            ErrHandler.WriteError("Tablas  " & ds.Tables.Count.ToString())
+            ErrHandler.WriteError("Convertido " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString())
+            s = DatatableToHtmlUsandoGridview(ds.Tables(0), grid)
+            's = DatatableToHtml(ds.Tables(0))
+
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+            Return "ErrorHtml" + ex.ToString + "          " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString()
+        End Try
+
+
+        Return s
     End Function
 
 
+    Shared Function DatatableToHtmlUsandoGridview(dt As DataTable, Optional gridView As GridView = Nothing) As String
+        'http://stackoverflow.com/questions/1018785/asp-net-shortest-way-to-render-datatable-to-a-string-html
+        'http://stackoverflow.com/questions/8908363/exporting-gridview-to-xls-paging-issue
+
+
+
+        Const maxrows = 400
+        Const constwidth = 3000
+        Const fontsize = 6
+        Const padding = 2
+
+
+
+
+
+        dt.Rows.RemoveAt(3)
+        dt.Rows.RemoveAt(2)
+        dt.Rows.RemoveAt(1)
+        dt.Rows.RemoveAt(0)
+        dt.Columns.RemoveAt(0)
+
+
+
+        dt.Rows.RemoveAt(dt.Rows.Count - 1)
+
+
+
+        If gridView Is Nothing Or True Then
+            gridView = New GridView()
+
+            gridView.AutoGenerateColumns = False
+
+
+
+            gridView.Font.Size = fontsize
+
+            Dim bf1 = New BoundField()
+            bf1.DataField = "F2"
+            bf1.HeaderText = "Date"
+            bf1.ItemStyle.VerticalAlign = VerticalAlign.Middle
+            bf1.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+            bf1.ItemStyle.Font.Bold = True
+            bf1.ItemStyle.ForeColor = System.Drawing.Color.Blue
+
+            '  bf1.ItemStyle.BackColor = System.Drawing.Color.LightBlue 'System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+            '.AlternatingRowStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+            gridView.Columns.Add(bf1)
+
+
+
+            'http://forums.asp.net/t/1086879.aspx
+
+            Dim comienzo As Integer
+            If iisNull(dt.Rows(0).Item(2)) = "Imágenes" Or iisNull(dt.Rows(1).Item(2)) = "Imágenes" Then
+                Dim bf12 = New HyperLinkField()
+                bf12.DataNavigateUrlFields = New String() {"F3"}
+                bf12.DataTextField = "F4"
+                'bf12.DataNavigateUrlFormatString = "userProfile.aspx?ID={0}"
+                'bf12.HeaderText = "User Name"
+                bf12.ItemStyle.VerticalAlign = VerticalAlign.Middle
+                bf12.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+                'bf12.ItemStyle.Font.Bold = True
+                '.AlternatingRowStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+                gridView.Columns.Add(bf12)
+
+                comienzo = 5
+            Else
+                comienzo = 3
+            End If
+
+
+
+
+            Dim cols As Integer() = {10, 11, 12, 16, 17, 18, 19, 20}
+
+            For n = comienzo To dt.Columns.Count
+
+                Dim bf2 = New BoundField()
+                bf2.DataField = "F" + n.ToString
+                bf2.HeaderText = "Description"
+                bf2.ItemStyle.VerticalAlign = VerticalAlign.Middle
+                bf2.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+
+
+                'If cols.Contains(n) Then bf2.ItemStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#eef6fd")
+
+                gridView.Columns.Add(bf2)
+            Next
+
+
+        End If
+        Dim result = New StringBuilder()
+        Dim writer = New StringWriter(result)
+        Dim htmlWriter = New System.Web.UI.HtmlTextWriter(writer)
+
+        gridView.Width = constwidth
+
+        'gridView.PageSize = 100
+        'gridView.AllowPaging = True
+
+        For n = maxrows To dt.Rows.Count - 1
+            Try
+                dt.Rows.RemoveAt(n)
+            Catch ex As Exception
+                ErrHandler.WriteError("error html row " & n.ToString)
+                'Exit For
+            End Try
+        Next
+
+        gridView.DataSource = dt
+        gridView.DataBind()
+
+        If True Then
+            'Hay un tema con el Wrap: si lo uso, con el Gmail lo formatea bien, pero a Andy en el Outlook se le angostan muchisimo las columnas
+            gridView.HeaderStyle.Wrap = False
+            gridView.RowStyle.Wrap = False
+            gridView.FooterStyle.Wrap = False
+        End If
+
+        'gridView.Columns(0).Visible = False
+
+        gridView.HeaderRow.Visible = False
+        gridView.FooterRow.Visible = False
+        'gridView.Rows(0).Style.
+        gridView.ShowHeader = False
+        gridView.AlternatingRowStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#e4effd") 'System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+
+
+
+
+        gridView.CellPadding = padding
+        gridView.GridLines = GridLines.Both
+        'gridView.BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e5e5")
+        gridView.BorderColor = System.Drawing.Color.LightGray
+
+        'http://stackoverflow.com/questions/11974039/gridview-column-headers-autowrap-how-to-prevent
+        'http://stackoverflow.com/questions/782428/asp-net-gridview-prevent-word-wrapping-in-column
+        Dim classcss = "        .myGrid th             {              white-space: nowrap !important;      }     "
+
+        '<ItemStyle Wrap="False" />
+
+        For ii As Integer = 0 To gridView.Rows.Count - 1
+            'gridView.Rows(i).Attributes.Add("style", "white-space: nowrap;")
+
+            gridView.Rows(ii).Attributes.Add("style", "white-space: nowrap !important;")
+
+            'word-break:keep-all; word-wrap:normal;table-layout: fixed;
+
+
+            ' gridView.Rows(i).Attributes.Add("class", "textmode")
+        Next
+
+        '   for (int i = 0; i < e.Row.Cells.Count; i++)
+        '{
+        '    e.Row.Cells[i].Attributes.Add("style", "white-space: nowrap;");
+        '}
+
+        '          Since auto generated column is built-in and difficult to change its style, you have two choices:
+
+        '1. Set your GridView's width wide enough.
+
+        '2. Use ItemTemplate  instead, it's more flexible.
+        'If you still have this problem, please inform us.
+
+        'gridView.HeaderStyle.Width = "10%"
+        'gridView.RowStyle.Width = "10%"
+        'gridView.FooterStyle.Width = "10%"
+
+        gridView.HorizontalAlign = HorizontalAlign.Center
+
+        'http://stackoverflow.com/questions/55828/how-does-one-parse-xml-files
+
+        gridView.RenderControl(htmlWriter)
+
+
+        'http://stackoverflow.com/questions/15970660/html-email-in-outlook-table-width-issue
+        'http://stackoverflow.com/questions/9304920/html-email-tables-broken-in-outlook-2007-2010
+
+        'http://putsmail.com/tests/15a674822a291db54828a92a63fdf6
+
+
+        Dim outlook As String
+        outlook = result.ToString
+        If dt.Rows.Count > maxrows Then outlook = "Sólo se muestran las primeras " + maxrows.ToString + " líneas de un total de " + dt.Rows.Count.ToString + "<br/><br/>" + outlook
+
+        's = "<div style=""overflow-x:scroll; width: 20000px"">mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmholaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaquuuuuuuuuuuuuuueeeeeeeeeeeeeeeeeeeeetallllllllllllllllllllllllllllllllllllllllllllllllllllllltevaaaaaaaaaaaaaaaaaaaaaaa" + s + "</div>"
+        'jugar con constwidth. Cuando me queda bien en Outlook, se me caga en Gmail. Buscar equilibrio, o quizas mandar los dos formatos.
+
+        Dim gmail = outlook
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+        'outlook = "Formato Outlook" + outlook
+        outlook = outlook.Replace("table ", "table width=""" + (constwidth * 30).ToString + """  ") 'problemas para que outlook no me haga angostas las columnas 
+        'outlook = outlook.Replace("<td ", "<td  width=""" + constwidth.ToString + """  style=""width:" + constwidth.ToString + "   px;mso-line-height-rule: exactly;line-height:; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding: 2""  ")
+        'outlook = outlook.Replace("style=""border-color:#E5E5E5", "style=""border-color:#E5E5E5;	line-height: ;")
+        'The path I used was Tools>Options>Mail Format>Editor Options>Advanced
+
+
+
+        'outlook = "<!--[if mso]><v:shape>" & outlook & "</v:shape><![endif]-->"
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+        gmail = "Formato Gmail" + gmail
+        gmail = gmail.Replace("table ", "table width=""" + constwidth.ToString + """  ") 'problemas para que outlook no me haga angostas las columnas 
+
+
+        gmail = "<!--[if !mso]><!-->" & gmail & "<!--<![endif]-->" 'http://stackoverflow.com/a/5983063/1054200
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+        'http://stackoverflow.com/questions/18254711/html-emails-fallback-for-mso-conditional
+        'http://stackoverflow.com/questions/5982364/is-there-a-html-conditional-statement-for-everything-not-outlook
+
+        'Return "<br/><br/>" + gmail + "<br/><br/>" + outlook
+
+
+
+        Return outlook
+        'Console.WriteLine(result)
+    End Function
 
 
     Shared Function generarNotasDeEntregaConReportViewer_ConServidorDeInformes(ByVal SC As String, ByVal fechadesde As Date, _
@@ -2965,10 +3003,39 @@ Public Class CartaDePorteManager
 
             ReportViewerEscondido = New Microsoft.Reporting.WebForms.ReportViewer
 
-            strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
-                        rdl, _
-                          strSQL, SC, True, sExcelFileName, titulo, bDescargaHtml)
 
+
+
+            If False Then
+                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
+                            rdl, _
+                              strSQL, SC, True, sExcelFileName, titulo, bDescargaHtml)
+            Else
+
+                Dim yourParams As ReportParameter() = New ReportParameter(9) {}
+
+                yourParams(0) = New ReportParameter("webservice", "")
+                yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+                yourParams(2) = New ReportParameter("idArticulo", -1)
+                yourParams(3) = New ReportParameter("idDestino", -1)
+                yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+                yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+                yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+                yourParams(7) = New ReportParameter("Consulta", strSQL)
+                yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+                yourParams(9) = New ReportParameter("titulo", titulo)
+
+
+
+                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
+                            rdl, yourParams, sExcelFileName, bDescargaHtml)
+
+
+            End If
+
+
+
+            
 
 
 
@@ -3046,7 +3113,7 @@ Public Class CartaDePorteManager
             ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
-            ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel+Html" Then
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
                 'este es de servidor, así que saco el path
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
             Else
@@ -3088,7 +3155,7 @@ Public Class CartaDePorteManager
 
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
-                                    ByRef ArchivoExcelDestino As String) As String
+                                    ByRef ArchivoExcelDestino As String, bDescargaHtml As Boolean) As String
 
         For Each i In parametros
             If i Is Nothing Then
@@ -3188,10 +3255,23 @@ Public Class CartaDePorteManager
             .Visible = False
 
             Try
-                bytes = .ServerReport.Render( _
-                      "Excel", Nothing, mimeType, encoding, _
-                        extension, _
-                       streamids, warnings)
+                If bDescargaHtml And False Then
+
+                    'por ahora usar ExcelToHtml(strRet, grid)
+
+                    bytes = .ServerReport.Render( _
+                            "HTML4.0", Nothing, mimeType, encoding, _
+                              extension, _
+                             streamids, warnings)
+
+                Else
+
+
+                    bytes = .ServerReport.Render( _
+                          "Excel", Nothing, mimeType, encoding, _
+                            extension, _
+                           streamids, warnings)
+                End If
 
             Catch e As System.Exception
                 Dim inner As Exception = e.InnerException
@@ -3223,11 +3303,6 @@ Public Class CartaDePorteManager
 
             '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
-
-
-
-
-
 
 
 
@@ -4205,9 +4280,12 @@ Public Class CartaDePorteManager
             If System.Diagnostics.Debugger.IsAttached() Then
                 sDirFTP = "~/" + "DataBackupear\"
 
+
+
+
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
 
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
@@ -4215,8 +4293,8 @@ Public Class CartaDePorteManager
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
-                                   HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + "temp_" + myCartaDePorte.PathImagen, _
-                                 HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + "temp_" + myCartaDePorte.PathImagen2 _
+                                   HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), _
+                                 HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2) _
                                 , 5)
             Else
 
@@ -4226,14 +4304,14 @@ Public Class CartaDePorteManager
                 sDirFTP = "E:\Sites\Pronto\DataBackupear\"
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
@@ -4244,8 +4322,8 @@ Public Class CartaDePorteManager
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
-                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen, ""), _
-                                IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen2, "") _
+                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP & myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), ""), _
+                                IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP & myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), "") _
                                 , 1)
 
 
@@ -27436,6 +27514,36 @@ Public Class CDPMailFiltrosManager2
 
 
 
+    Public Shared Function EnviarMailFiltroPorId_DLL(ByVal SC As String, ByVal fechadesde As Date, _
+                                                     ByVal fechahasta As Date, ByVal puntoventa As Integer, _
+                                                     ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                     ByRef sError As String, ByVal bVistaPrevia As Boolean, _
+                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
+                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+                                                     ByRef sError2 As String _
+                                                        ) As String
+
+
+
+
+
+
+        'Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
+        Dim dt = CDPMailFiltrosManager2.TraerMetadata(SC, id)
+        Dim dr = dt.Rows(0)
+
+
+        Return EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
+
+
+
+    End Function
+
+
+
+
+
+
 
 
     Public Shared Function EnviarMailFiltroPorRegistro_DLL(ByVal SC As String, ByVal fechadesde As Date, _
@@ -27445,7 +27553,8 @@ Public Class CDPMailFiltrosManager2
                                                   ByRef sError As String, ByVal bVistaPrevia As Boolean, _
                                                   ByVal SmtpServer As String, ByVal SmtpUser As String, _
                                                   ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
-                                                  ByRef sError2 As String _
+                                                  ByRef sError2 As String, Optional inlinePNG As String = "" _
+                                                , Optional inlinePNG2 As String = "" _
                                                      ) As String
 
 
@@ -27618,21 +27727,42 @@ Public Class CDPMailFiltrosManager2
 
 
 
-                    If bDescargaHtml Then
+                    If iisNull(.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
+
+                        Dim grid As New GridView
+                        Dim html = ExcelToHtml(output, grid)
+
+                        MandaEmail_Nuevo(destinatario, _
+                                                          asunto, _
+                                                        cuerpo + html, _
+                                                     De, _
+                                                     SmtpServer, _
+                                                              SmtpUser, _
+                                                              SmtpPass, _
+                                                                output, _
+                                                              SmtpPort, _
+                                                      , _
+                                                      CCOaddress, , , , , inlinePNG, inlinePNG2)
 
 
+                    ElseIf bDescargaHtml Then
+
+
+
+                        Dim grid As New GridView
+                        Dim html = ExcelToHtml(output, grid)
 
                         MandaEmail_Nuevo(destinatario, _
                                     asunto, _
-                                  cuerpo + output, _
+                                  cuerpo + html, _
                                De, _
                                SmtpServer, _
                                         SmtpUser, _
                                         SmtpPass, _
-                                         "", _
+                                          "", _
                                         SmtpPort, _
                                 , _
-                                CCOaddress, )
+                                CCOaddress, , , , , inlinePNG, inlinePNG2)
 
 
                         'MandaEmail(destinatario, _
@@ -27663,7 +27793,7 @@ Public Class CDPMailFiltrosManager2
                                          , _
                                          CCOaddress, _
                                             truquito _
-                                            , "Williams Entregas" _
+                                            , "Williams Entregas", , , inlinePNG, inlinePNG2 _
                                        )
 
                     End If
