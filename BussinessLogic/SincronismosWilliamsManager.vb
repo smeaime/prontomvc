@@ -520,7 +520,7 @@ Namespace Pronto.ERP.Bll
 
                                     output = RebindReportViewer_ServidorExcel(rep, _
                                            "Sincronismo DOW2.rdl", _
-                                             yourParams, ArchivoExcelDestino) 'sTitulo)
+                                             yourParams, ArchivoExcelDestino, False) 'sTitulo)
 
 
                                 End Using
@@ -648,7 +648,7 @@ Namespace Pronto.ERP.Bll
                             Using rep As New ReportViewer
                                 output = RebindReportViewer_ServidorExcel(rep, _
                                             "Posiciones BLD demorados.rdl", sql, _
-                                                     SC, ArchivoExcelDestino) 'sTitulo)
+                                                     SC, False, ArchivoExcelDestino) 'sTitulo)
                             End Using
 
 
@@ -694,7 +694,7 @@ Namespace Pronto.ERP.Bll
 
                                         output = RebindReportViewer_ServidorExcel(rep, _
                                              "Sincronismo BLD.rdl", _
-                                              sql, SC, ArchivoExcelDestino) 'sTitulo)
+                                              sql, SC, False, ArchivoExcelDestino) 'sTitulo)
                                         'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
                                         '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
                                         '                   dt, ArchivoExcelDestino) 'sTitulo)
