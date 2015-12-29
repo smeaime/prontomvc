@@ -4373,7 +4373,7 @@ Public Class CartaDePorteManager
         Dim sDir As String
 
         If System.Diagnostics.Debugger.IsAttached() Then
-            sDirVirtual = "~/DataBackupear\"
+            'sDirVirtual = "~/DataBackupear\"
             sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
             ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
