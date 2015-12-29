@@ -1,797 +1,155 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=MARIANO-PC\SQLEXPRESS;Initial Catalog=wDemoWilliams</ConnectString>
-        <IntegratedSecurity>true</IntegratedSecurity>
-      </ConnectionProperties>
-      <rd:DataSourceID>e9e4095a-349d-42c1-ab0f-15d7faaff1dd</rd:DataSourceID>
-      <rd:SecurityType>Windows</rd:SecurityType>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="NumeroCartaDePorte">
-          <DataField>NumeroCartaDePorte</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
-        </Field>
-        <Field Name="Observaciones">
-          <DataField>Observaciones</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdUsuarioIngreso">
-          <DataField>IdUsuarioIngreso</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Vendedor">
-          <DataField>Vendedor</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Anulada">
-          <DataField>Anulada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CuentaOrden2">
-          <DataField>CuentaOrden2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="IdUsuarioAnulo">
-          <DataField>IdUsuarioAnulo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Corredor">
-          <DataField>Corredor</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FechaAnulacion">
-          <DataField>FechaAnulacion</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Entregador">
-          <DataField>Entregador</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Procedencia">
-          <DataField>Procedencia</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaTimeStamp">
-          <DataField>FechaTimeStamp</DataField>
-          <rd:TypeName>System.Byte[]</rd:TypeName>
-        </Field>
-        <Field Name="IdArticulo">
-          <DataField>IdArticulo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CuentaOrden1">
-          <DataField>CuentaOrden1</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="NetoPto">
-          <DataField>NetoPto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Humedad">
-          <DataField>Humedad</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NetoFinal">
-          <DataField>NetoFinal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Destino">
-          <DataField>Destino</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FechaDescarga">
-          <DataField>FechaDescarga</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Exporta">
-          <DataField>Exporta</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BrutoPto">
-          <DataField>BrutoPto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="IdStock">
-          <DataField>IdStock</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="TaraPto">
-          <DataField>TaraPto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Patente">
-          <DataField>Patente</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Partida">
-          <DataField>Partida</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="HumedadDesnormalizada">
-          <DataField>HumedadDesnormalizada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="IdUnidad">
-          <DataField>IdUnidad</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="IdUbicacion">
-          <DataField>IdUbicacion</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="puntoventa">
-          <DataField>PuntoVenta</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Cantidad">
-          <DataField>Cantidad</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Acoplado">
-          <DataField>Acoplado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NRecibo">
-          <DataField>NRecibo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Cupo">
-          <DataField>Cupo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Hora">
-          <DataField>Hora</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Merma">
-          <DataField>Merma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TaraFinal">
-          <DataField>TaraFinal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="BrutoFinal">
-          <DataField>BrutoFinal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NetoProc">
-          <DataField>NetoProc</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Contrato">
-          <DataField>Contrato</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Calidad">
-          <DataField>Calidad</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaDeCarga">
-          <DataField>FechaDeCarga</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="CorredorDesc">
-          <DataField>CorredorDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaArribo">
-          <DataField>FechaArribo</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="IdTransportista">
-          <DataField>IdTransportista</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Subcontr1Desc">
-          <DataField>Subcontr1Desc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TransportistaCUITdesnormalizado">
-          <DataField>TransportistaCUITdesnormalizado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Subcontr2Desc">
-          <DataField>Subcontr2Desc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdChofer">
-          <DataField>IdChofer</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ChoferCUITdesnormalizado">
-          <DataField>ChoferCUITdesnormalizado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Producto">
-          <DataField>Producto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Mes">
-          <DataField>Mes</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedenciaDesc">
-          <DataField>ProcedenciaDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Ano">
-          <DataField>Ano</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DestinoDesc">
-          <DataField>DestinoDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Subcontr1">
-          <DataField>Subcontr1</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Subcontr2">
-          <DataField>Subcontr2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Contrato1">
-          <DataField>Contrato1</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="IdCartaDePorte">
-          <DataField>IdCartaDePorte</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FechaModificacion">
-          <DataField>FechaModificacion</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="contrato2">
-          <DataField>contrato2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="TransportistaDesc">
-          <DataField>TransportistaDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="KmARecorrer">
-          <DataField>KmARecorrer</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Tarifa">
-          <DataField>Tarifa</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="SubnumeroVagon">
-          <DataField>SubnumeroVagon</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="NumeroSubfijo">
-          <DataField>NumeroSubfijo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CalidadDe">
-          <DataField>CalidadDe</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="UsuarioIngreso">
-          <DataField>UsuarioIngreso</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedenciaCodigoONCAA">
-          <DataField>ProcedenciaCodigoONCAA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoCodigoONCAA">
-          <DataField>DestinoCodigoONCAA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Fumigada">
-          <DataField>Fumigada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CEE">
-          <DataField>CEE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Secada">
-          <DataField>Secada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="FechaIngreso">
-          <DataField>FechaIngreso</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="FechaVencimiento">
-          <DataField>FechaVencimiento</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="NobleExtranos">
-          <DataField>NobleExtranos</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="ctg">
-          <DataField>CTG</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="NobleNegros">
-          <DataField>NobleNegros</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleQuebrados">
-          <DataField>NobleQuebrados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleDaniados">
-          <DataField>NobleDaniados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleChamico">
-          <DataField>NobleChamico</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleChamico2">
-          <DataField>NobleChamico2</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleRevolcado">
-          <DataField>NobleRevolcado</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleObjetables">
-          <DataField>NobleObjetables</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleAmohosados">
-          <DataField>NobleAmohosados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleHectolitrico">
-          <DataField>NobleHectolitrico</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleCarbon">
-          <DataField>NobleCarbon</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NoblePanzaBlanca">
-          <DataField>NoblePanzaBlanca</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NoblePicados">
-          <DataField>NoblePicados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleMGrasa">
-          <DataField>NobleMGrasa</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleAcidezGrasa">
-          <DataField>NobleAcidezGrasa</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleVerdes">
-          <DataField>NobleVerdes</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="NobleGrado">
-          <DataField>NobleGrado</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="NobleConforme">
-          <DataField>NobleConforme</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleACamara">
-          <DataField>NobleACamara</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Cosecha">
-          <DataField>Cosecha</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Factor">
-          <DataField>Factor</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="EstaArchivada">
-          <DataField>EstaArchivada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NumeroCompleto">
-          <DataField>NumeroCompleto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ExcluirDeSubcontratistas">
-          <DataField>ExcluirDeSubcontratistas</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdFacturaImputada">
-          <DataField>IdFacturaImputada</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="IdTipoMovimiento">
-          <DataField>IdTipoMovimiento</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="MinutosModifico">
-          <DataField>MinutosModifico</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="IdClienteAFacturarle">
-          <DataField>IdClienteAFacturarle</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="SubnumeroDeFacturacion">
-          <DataField>SubnumeroDeFacturacion</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="TarifaFacturada">
-          <DataField>TarifaFacturada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TarifaSubcontratista1">
-          <DataField>TarifaSubcontratista1</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="AgregaItemDeGastosAdministrativos">
-          <DataField>AgregaItemDeGastosAdministrativos</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGranosQuemados">
-          <DataField>CalidadGranosQuemados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TarifaSubcontratista2">
-          <DataField>TarifaSubcontratista2</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Version">
-          <DataField>Version</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGranosQuemadosBonifica_o_Rebaja">
-          <DataField>CalidadGranosQuemadosBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="MotivoAnulacion">
-          <DataField>MotivoAnulacion</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadTierra">
-          <DataField>CalidadTierra</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="IdEstablecimiento">
-          <DataField>IdEstablecimiento</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CalidadTierraBonifica_o_Rebaja">
-          <DataField>CalidadTierraBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaChamico">
-          <DataField>CalidadMermaChamico</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="EnumSyngentaDivision">
-          <DataField>EnumSyngentaDivision</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaChamicoBonifica_o_Rebaja">
-          <DataField>CalidadMermaChamicoBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Corredor2">
-          <DataField>Corredor2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="IdUsuarioModifico">
-          <DataField>IdUsuarioModifico</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaZarandeo">
-          <DataField>CalidadMermaZarandeo</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaZarandeoBonifica_o_Rebaja">
-          <DataField>CalidadMermaZarandeoBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaEmision">
-          <DataField>FechaEmision</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="FueraDeEstandar">
-          <DataField>FueraDeEstandar</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CodigoSAJPYA">
-          <DataField>CodigoSAJPYA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TitularDesc">
-          <DataField>TitularDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPuntaSombreada">
-          <DataField>CalidadPuntaSombreada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TitularCUIT">
-          <DataField>TitularCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TransportistaCUIT">
-          <DataField>TransportistaCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IntermediarioDesc">
-          <DataField>IntermediarioDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EspecieONCAA">
-          <DataField>EspecieONCAA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IntermediarioCUIT">
-          <DataField>IntermediarioCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="txtCodigoZeni">
-          <DataField>txtCodigoZeni</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ChoferCUIT">
-          <DataField>ChoferCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RComercialDesc">
-          <DataField>RComercialDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ChoferDesc">
-          <DataField>ChoferDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RComercialCUIT">
-          <DataField>RComercialCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CorredorCUIT">
-          <DataField>CorredorCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinatarioDesc">
-          <DataField>DestinatarioDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinatarioCUIT">
-          <DataField>DestinatarioCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedenciaCodigoPostal">
-          <DataField>ProcedenciaCodigoPostal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoCodigoPostal">
-          <DataField>DestinoCodigoPostal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Factura">
-          <DataField>Factura</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaFactura">
-          <DataField>FechaFactura</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="ClienteFacturado">
-          <DataField>ClienteFacturado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ClienteFacturadoCUIT">
-          <DataField>ClienteFacturadoCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadDesc">
-          <DataField>CalidadDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EstablecimientoDesc">
-          <DataField>EstablecimientoDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ClienteAuxiliarDesc">
-          <DataField>ClienteAuxiliarDesc</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="PathImagen">
-          <DataField>PathImagen</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="PathImagen2">
-          <DataField>PathImagen2</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ClaveEncriptada">
-          <DataField>ClaveEncriptada</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="EntregadorDesc">
-          <DataField>EntregadorDesc</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CorredorDesc2">
-          <DataField>CorredorDesc2</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CorredorCUIT2">
-          <DataField>CorredorCUIT2</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>wCartasDePorte_TX_Todas</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix3">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.0104in</Width>
+              <Width>25.66416mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.65025in</Width>
+              <Width>16.51635mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.60925in</Width>
+              <Width>15.47495mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.54298in</Width>
+              <Width>13.79169mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.50509in</Width>
+              <Width>12.82929mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.61362in</Width>
+              <Width>15.58595mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.82806in</Width>
+              <Width>21.03272mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.73779in</Width>
+              <Width>18.73987mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.80717in</Width>
+              <Width>20.50212mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.68217in</Width>
+              <Width>17.32712mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.828in</Width>
+              <Width>21.0312mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.70235in</Width>
+              <Width>17.83969mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.70747in</Width>
+              <Width>17.96974mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.63185in</Width>
+              <Width>16.04899mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.49397in</Width>
+              <Width>12.54684mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.61153in</Width>
+              <Width>15.53286mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.48057in</Width>
+              <Width>12.20648mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91493in</Width>
+              <Width>23.23922mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.16133in</Width>
+              <Width>29.49778mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.60925in</Width>
+              <Width>15.47495mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.56758in</Width>
+              <Width>65.21653mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>24.99995mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.56758in</Width>
+              <Width>39.81653mm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>5.99999mm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2427,7 +1785,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.21539in</Height>
+              <Height>5.47091mm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3258,7 +2616,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -4029,7 +3386,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>5.99999mm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5730,7 +5087,7 @@
         <Top>43.05329mm</Top>
         <Left>3.12769mm</Left>
         <Height>17.47088mm</Height>
-        <Width>1088.88358mm</Width>
+        <Width>1088.88378mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5790,7 +5147,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!ReportParameter1.Value</Value>
+                <Value>=Parameters!titulo.Value</Value>
                 <Style>
                   <FontFamily>Verdana</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -5932,25 +5289,6 @@
       <BackgroundColor>White</BackgroundColor>
     </Style>
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="ReportParameter1">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="sServidor">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value>http:\\prontoclientes.williamsentregas.com.ar</Value>
-        </Values>
-      </DefaultValue>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter2</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <Width>1115.83215mm</Width>
   <Page>
     <PageFooter>
@@ -5969,6 +5307,700 @@
     <BottomMargin>25.4mm</BottomMargin>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!sServidorSQL.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>e9e4095a-349d-42c1-ab0f-15d7faaff1dd</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>=Parameters!Consulta.Value</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="NumeroCartaDePorte">
+          <DataField>NumeroCartaDePorte</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="Observaciones">
+          <DataField>Observaciones</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdUsuarioIngreso">
+          <DataField>IdUsuarioIngreso</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Vendedor">
+          <DataField>Vendedor</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Anulada">
+          <DataField>Anulada</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CuentaOrden2">
+          <DataField>CuentaOrden2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdUsuarioAnulo">
+          <DataField>IdUsuarioAnulo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Corredor">
+          <DataField>Corredor</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaAnulacion">
+          <DataField>FechaAnulacion</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Entregador">
+          <DataField>Entregador</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Procedencia">
+          <DataField>Procedencia</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaTimeStamp">
+          <DataField>FechaTimeStamp</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="IdArticulo">
+          <DataField>IdArticulo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CuentaOrden1">
+          <DataField>CuentaOrden1</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NetoPto">
+          <DataField>NetoPto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Humedad">
+          <DataField>Humedad</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NetoFinal">
+          <DataField>NetoFinal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Destino">
+          <DataField>Destino</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaDescarga">
+          <DataField>FechaDescarga</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Exporta">
+          <DataField>Exporta</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BrutoPto">
+          <DataField>BrutoPto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IdStock">
+          <DataField>IdStock</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TaraPto">
+          <DataField>TaraPto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Patente">
+          <DataField>Patente</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Partida">
+          <DataField>Partida</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HumedadDesnormalizada">
+          <DataField>HumedadDesnormalizada</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IdUnidad">
+          <DataField>IdUnidad</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdUbicacion">
+          <DataField>IdUbicacion</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="puntoventa">
+          <DataField>PuntoVenta</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Cantidad">
+          <DataField>Cantidad</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Acoplado">
+          <DataField>Acoplado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NRecibo">
+          <DataField>NRecibo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Cupo">
+          <DataField>Cupo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Hora">
+          <DataField>Hora</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Merma">
+          <DataField>Merma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TaraFinal">
+          <DataField>TaraFinal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="BrutoFinal">
+          <DataField>BrutoFinal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NetoProc">
+          <DataField>NetoProc</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Contrato">
+          <DataField>Contrato</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Calidad">
+          <DataField>Calidad</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaDeCarga">
+          <DataField>FechaDeCarga</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="CorredorDesc">
+          <DataField>CorredorDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaArribo">
+          <DataField>FechaArribo</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="IdTransportista">
+          <DataField>IdTransportista</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Subcontr1Desc">
+          <DataField>Subcontr1Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TransportistaCUITdesnormalizado">
+          <DataField>TransportistaCUITdesnormalizado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Subcontr2Desc">
+          <DataField>Subcontr2Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdChofer">
+          <DataField>IdChofer</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ChoferCUITdesnormalizado">
+          <DataField>ChoferCUITdesnormalizado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Producto">
+          <DataField>Producto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Mes">
+          <DataField>Mes</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProcedenciaDesc">
+          <DataField>ProcedenciaDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Ano">
+          <DataField>Ano</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DestinoDesc">
+          <DataField>DestinoDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Subcontr1">
+          <DataField>Subcontr1</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Subcontr2">
+          <DataField>Subcontr2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Contrato1">
+          <DataField>Contrato1</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdCartaDePorte">
+          <DataField>IdCartaDePorte</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaModificacion">
+          <DataField>FechaModificacion</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="contrato2">
+          <DataField>contrato2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TransportistaDesc">
+          <DataField>TransportistaDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="KmARecorrer">
+          <DataField>KmARecorrer</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Tarifa">
+          <DataField>Tarifa</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="SubnumeroVagon">
+          <DataField>SubnumeroVagon</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NumeroSubfijo">
+          <DataField>NumeroSubfijo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CalidadDe">
+          <DataField>CalidadDe</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="UsuarioIngreso">
+          <DataField>UsuarioIngreso</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProcedenciaCodigoONCAA">
+          <DataField>ProcedenciaCodigoONCAA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DestinoCodigoONCAA">
+          <DataField>DestinoCodigoONCAA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fumigada">
+          <DataField>Fumigada</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CEE">
+          <DataField>CEE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Secada">
+          <DataField>Secada</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="FechaIngreso">
+          <DataField>FechaIngreso</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="FechaVencimiento">
+          <DataField>FechaVencimiento</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="NobleExtranos">
+          <DataField>NobleExtranos</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ctg">
+          <DataField>CTG</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NobleNegros">
+          <DataField>NobleNegros</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleQuebrados">
+          <DataField>NobleQuebrados</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleDaniados">
+          <DataField>NobleDaniados</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleChamico">
+          <DataField>NobleChamico</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleChamico2">
+          <DataField>NobleChamico2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleRevolcado">
+          <DataField>NobleRevolcado</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleObjetables">
+          <DataField>NobleObjetables</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleAmohosados">
+          <DataField>NobleAmohosados</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleHectolitrico">
+          <DataField>NobleHectolitrico</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleCarbon">
+          <DataField>NobleCarbon</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NoblePanzaBlanca">
+          <DataField>NoblePanzaBlanca</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NoblePicados">
+          <DataField>NoblePicados</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleMGrasa">
+          <DataField>NobleMGrasa</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleAcidezGrasa">
+          <DataField>NobleAcidezGrasa</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleVerdes">
+          <DataField>NobleVerdes</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NobleGrado">
+          <DataField>NobleGrado</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NobleConforme">
+          <DataField>NobleConforme</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NobleACamara">
+          <DataField>NobleACamara</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Cosecha">
+          <DataField>Cosecha</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Factor">
+          <DataField>Factor</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="EstaArchivada">
+          <DataField>EstaArchivada</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NumeroCompleto">
+          <DataField>NumeroCompleto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExcluirDeSubcontratistas">
+          <DataField>ExcluirDeSubcontratistas</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdFacturaImputada">
+          <DataField>IdFacturaImputada</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdTipoMovimiento">
+          <DataField>IdTipoMovimiento</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MinutosModifico">
+          <DataField>MinutosModifico</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdClienteAFacturarle">
+          <DataField>IdClienteAFacturarle</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SubnumeroDeFacturacion">
+          <DataField>SubnumeroDeFacturacion</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TarifaFacturada">
+          <DataField>TarifaFacturada</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TarifaSubcontratista1">
+          <DataField>TarifaSubcontratista1</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="AgregaItemDeGastosAdministrativos">
+          <DataField>AgregaItemDeGastosAdministrativos</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadGranosQuemados">
+          <DataField>CalidadGranosQuemados</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TarifaSubcontratista2">
+          <DataField>TarifaSubcontratista2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Version">
+          <DataField>Version</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CalidadGranosQuemadosBonifica_o_Rebaja">
+          <DataField>CalidadGranosQuemadosBonifica_o_Rebaja</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MotivoAnulacion">
+          <DataField>MotivoAnulacion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadTierra">
+          <DataField>CalidadTierra</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IdEstablecimiento">
+          <DataField>IdEstablecimiento</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CalidadTierraBonifica_o_Rebaja">
+          <DataField>CalidadTierraBonifica_o_Rebaja</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadMermaChamico">
+          <DataField>CalidadMermaChamico</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="EnumSyngentaDivision">
+          <DataField>EnumSyngentaDivision</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadMermaChamicoBonifica_o_Rebaja">
+          <DataField>CalidadMermaChamicoBonifica_o_Rebaja</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Corredor2">
+          <DataField>Corredor2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdUsuarioModifico">
+          <DataField>IdUsuarioModifico</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CalidadMermaZarandeo">
+          <DataField>CalidadMermaZarandeo</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadMermaZarandeoBonifica_o_Rebaja">
+          <DataField>CalidadMermaZarandeoBonifica_o_Rebaja</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaEmision">
+          <DataField>FechaEmision</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="FueraDeEstandar">
+          <DataField>FueraDeEstandar</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CodigoSAJPYA">
+          <DataField>CodigoSAJPYA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TitularDesc">
+          <DataField>TitularDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadPuntaSombreada">
+          <DataField>CalidadPuntaSombreada</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TitularCUIT">
+          <DataField>TitularCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TransportistaCUIT">
+          <DataField>TransportistaCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IntermediarioDesc">
+          <DataField>IntermediarioDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EspecieONCAA">
+          <DataField>EspecieONCAA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IntermediarioCUIT">
+          <DataField>IntermediarioCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="txtCodigoZeni">
+          <DataField>txtCodigoZeni</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ChoferCUIT">
+          <DataField>ChoferCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RComercialDesc">
+          <DataField>RComercialDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ChoferDesc">
+          <DataField>ChoferDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RComercialCUIT">
+          <DataField>RComercialCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CorredorCUIT">
+          <DataField>CorredorCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DestinatarioDesc">
+          <DataField>DestinatarioDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DestinatarioCUIT">
+          <DataField>DestinatarioCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProcedenciaCodigoPostal">
+          <DataField>ProcedenciaCodigoPostal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DestinoCodigoPostal">
+          <DataField>DestinoCodigoPostal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Factura">
+          <DataField>Factura</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaFactura">
+          <DataField>FechaFactura</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ClienteFacturado">
+          <DataField>ClienteFacturado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClienteFacturadoCUIT">
+          <DataField>ClienteFacturadoCUIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadDesc">
+          <DataField>CalidadDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EstablecimientoDesc">
+          <DataField>EstablecimientoDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClienteAuxiliarDesc">
+          <DataField>ClienteAuxiliarDesc</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="PathImagen">
+          <DataField>PathImagen</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="PathImagen2">
+          <DataField>PathImagen2</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="ClaveEncriptada">
+          <DataField>ClaveEncriptada</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="EntregadorDesc">
+          <DataField>EntregadorDesc</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="CorredorDesc2">
+          <DataField>CorredorDesc2</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="CorredorCUIT2">
+          <DataField>CorredorCUIT2</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="webservice">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>webservice</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="sServidor">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>http:\\prontoclientes.williamsentregas.com.ar</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter2</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idArticulo">
+      <DataType>Integer</DataType>
+      <Prompt>idArticulo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idDestino">
+      <DataType>Integer</DataType>
+      <Prompt>idDestino</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="desde">
+      <DataType>DateTime</DataType>
+      <Prompt>desde</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="hasta">
+      <DataType>DateTime</DataType>
+      <Prompt>hasta</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="quecontenga">
+      <DataType>String</DataType>
+      <Prompt>quecontenga</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Consulta">
+      <DataType>String</DataType>
+      <Prompt>Consulta</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="sServidorSQL">
+      <DataType>String</DataType>
+      <Prompt>sServidorSQL</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="titulo">
+      <DataType>String</DataType>
+      <Prompt>titulo</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <EmbeddedImages>
     <EmbeddedImage Name="williams">
       <MIMEType>image/bmp</MIMEType>
@@ -6193,6 +6225,6 @@ dTwq5NDA///79//5+P/89v3/9Pz/+fv//v3////6vZuGXSsJay4Ae1Ey3tfQ///8///92srFbEpHTCMh
       <ImageData>iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9oFCBcqC5P1kiMAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAGnRFWHRTb2Z0d2FyZQBQYWludC5ORVQgdjMuNS4xMDD0cqEAAAE/SURBVDhPY/j//z8DtTADCDx485+qmGzDkH2F7CiSDAQZAtIMpEuAnvsPwzBxkByKgfdf/2PAhYGaGEFyyAZhM5QoA9ENA/K1YV5GNpQoF2IxTATNZVIwPkEDsRhmg+5loBpFogzEYpgkUiSoI7F1CRqIxTB5JAM8kdj2yIZh9TIWw/yRDLBCYqvA2KDYhyUdlFjGYpgMkgF+SGwFbIZhdSGSJrg3z567EIvNm7ef/wK5DJw+YbkFxYVImliQ2MEw9p8/f5RhbGTDsBoItCkfyRBREPvfv3+yMDEgG548rtz/BHcZLGdhuBA5X4K8AcQSMLG/f/8qwdinrjzDMAyrC5ENRE68tS39QC6kIMBlGF4DkQ3LyCsHuYZp5qL1DHuOXcPqMpxehhZLyaCsBMSSVQ3dOEsebCUS1limRukNAN9MsZ6EM/84AAAAAElFTkSuQmCC</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportID>8060956b-abd2-43d7-b3e9-36a0424ad91b</rd:ReportID>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
+  <rd:ReportID>8060956b-abd2-43d7-b3e9-36a0424ad91b</rd:ReportID>
 </Report>
