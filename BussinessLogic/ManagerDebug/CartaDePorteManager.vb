@@ -4206,8 +4206,8 @@ Public Class CartaDePorteManager
                 sDirFTP = "~/" + "DataBackupear\"
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
 
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
@@ -4226,14 +4226,14 @@ Public Class CartaDePorteManager
                 sDirFTP = "E:\Sites\Pronto\DataBackupear\"
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
@@ -4365,7 +4365,7 @@ Public Class CartaDePorteManager
 
 
     'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
-    Public Shared Sub ResizeImage(image As String, Okey As String, key As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
+    Public Shared Sub ResizeImage(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
         'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
         'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
 
@@ -4373,6 +4373,7 @@ Public Class CartaDePorteManager
         Dim sDir As String
 
         If System.Diagnostics.Debugger.IsAttached() Then
+            sDirVirtual = "~/DataBackupear\"
             sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
             ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
@@ -4411,22 +4412,43 @@ Public Class CartaDePorteManager
         oGraphic.DrawImage(oImg, oRectangle)
 
 
+        Try
 
 
 
-        If newimagename = "" Then
-            If image.Substring(image.LastIndexOf(".")) <> ".png" Then
-                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+            If newimagename = "" Then
+                If image.Substring(image.LastIndexOf(".")) <> ".png" Then
+                    ErrHandler.WriteError("resize 1")
+                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+                Else
+                    ErrHandler.WriteError("resize 2")
+                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+                End If
             Else
-                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+                If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
+                    ErrHandler.WriteError("resize 3")
+                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
+                Else
+                    ErrHandler.WriteError("resize 4")
+                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
+                End If
             End If
-        Else
-            If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
-                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
-            Else
-                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
-            End If
-        End If
+
+        Catch ex As Exception
+            'acá está pasando lo del gdi
+            'A generic error occurred in GDI+.
+            'parece ser que el archivo ya existe?
+            'NO!!!! es por el subdirectorio de destino!!! 
+            'http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream
+            'If you are getting that error , then I can say that your application doesn't have a write permission on some directory.
+            ErrHandler.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
+            ErrHandler.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
+            ErrHandler.WriteError(ex)
+            ErrHandler.WriteError(sDir & "---" & image & "---" & newimagename)
+        End Try
+
+
+
         oImg.Dispose()
     End Sub
 
