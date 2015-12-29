@@ -308,6 +308,31 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         }
 
 
+
+
+        [TestMethod]
+        public void PDFdeCartaPorte()
+        {
+            //aaaaaa
+
+
+            
+            var idorig = 2165737;
+            var sDirFTP = DirApp + @"\DataBackupear\";
+            string output = DirApp + @"\DataBackupear\lala.pdf";
+
+            var myCartaDePorte = CartaDePorteManager.GetItem(SC, idorig);
+
+            CartaDePorteManager.PDFcon_iTextSharp(output,
+                        (myCartaDePorte.PathImagen != "") ? sDirFTP + myCartaDePorte.PathImagen : "",
+                        (myCartaDePorte.PathImagen2 != "") ? sDirFTP + myCartaDePorte.PathImagen2 : ""
+                );
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
         [TestMethod]
         public void SincroBunge()
         {
