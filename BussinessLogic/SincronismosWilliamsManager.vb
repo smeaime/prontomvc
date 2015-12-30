@@ -598,7 +598,7 @@ Namespace Pronto.ERP.Bll
 
                                 'como hacer para que no agregue las columnas vacias?
 
-                                output = ExcelToCSV_SincroBLD(output, 55)
+                                output = ExcelToCSV_SincroBLD(output, 58)
                                 'output = ExcelToCSV_SincroBLD2(output, 55)
 
                             Catch ex As Exception
