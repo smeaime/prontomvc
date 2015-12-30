@@ -1063,7 +1063,10 @@ Public Class ConsultasLinq
                    And cli.RazonSocial IsNot Nothing _
                    And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
                   And (cdp.Anulada <> "SI") _
-                                      And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                    And ((ModoExportacion = "Ambos") _
+                          Or (ModoExportacion = "Todos") _
+                          Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
+                          Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
                     And (pv = -1 Or cdp.PuntoVenta = pv) _
                 Group cdp By _
                             Producto = art.Descripcion, _
@@ -1121,7 +1124,7 @@ Public Class ConsultasLinq
 
         Dim x = q.ToList()
 
-        If ModoExportacion = "Buques" Then
+        If ModoExportacion = "Buques" Or ModoExportacion = "Todos" Then
 
 
             Dim q2 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
