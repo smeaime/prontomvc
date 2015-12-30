@@ -8055,11 +8055,19 @@ Public Class CartaDePorteManager
             End If
 
 
+
+
+
             If .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC) And .NobleGrado <> 1 Then
                 .NobleGrado = 1
                 sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 1- puesto en la calidad de descarga" & vbCrLf
+            ElseIf .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC) And .NobleGrado <> 2 Then
+                .NobleGrado = 2
+                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 2- puesto en la calidad de descarga" & vbCrLf
+            ElseIf .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 3", SC) And .NobleGrado <> 3 Then
+                .NobleGrado = 3
+                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 3- puesto en la calidad de descarga" & vbCrLf
             End If
-
 
 
 
