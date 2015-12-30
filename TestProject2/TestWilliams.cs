@@ -222,19 +222,32 @@ namespace ProntoMVC.Tests
         public void InformeMultigrain_14861()
         {
             /*
-            Ahi veo tu mail. El tema es que el dato que envía el sistema es el que está en la pestaña de Calidad (no en la pestaña de Descarga).
-Esto es porque el que está en la pestaña Calidad es el número (1, 2, 3; que es lo que piden ellos) y lo que está en en la pestaña de descarga es un texto (que puede ser "GRADO 1" o "FUERA DE BASE" o "COND. CAMARA" por ejemplo).
-Por eso es el dato del Grado de la pestaña Calidad el que se envía.
+            * Ahi veo tu mail. El tema es que el dato que envía el sistema es el que está en la pestaña de Calidad (no en 
+             la pestaña de Descarga).
+             Esto es porque el que está en la pestaña Calidad es el número (1, 2, 3; que es lo que piden ellos) y lo 
+             que está en en la pestaña de descarga es un texto (que puede ser "GRADO 1" o "FUERA DE BASE" o "COND. CAMARA" por ejemplo).
+                Por eso es el dato del Grado de la pestaña Calidad el que se envía.
             
+             * 
+             * Piden que cuando cargan "GRADO 1", el sistema ponga 1 en grado en la pestaña de calidad
+             * 
             solo desde el formulario? o tambien en las pegatinas? todavia sirve para algo ese campo?
 
                 El campo lo siguen usando porque tienen otras opciones de calidad que no se reflejan en ningun otro lado de la CP.
 
-Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vienen casos de que está en un lugar y no en otro y tenemos que rastrear por que.
+Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vienen casos 
+              de que está en un lugar y no en otro y tenemos que rastrear por que.
             */
 
+            string ms = "", warn = "";
+            var carta = CartaDePorteManager.GetItem(SC, 4444);
 
-            // enviarfiltroid
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            Assert.AreEqual(1, carta.NobleGrado);
 
         }
 
