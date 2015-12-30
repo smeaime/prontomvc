@@ -247,8 +247,21 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
             Assert.AreEqual(1, carta.NobleGrado);
 
+            carta = null;
+            carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            carta.NobleGrado = 3;
+            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            Assert.AreEqual(3, carta.NobleGrado);
+
+        
         }
 
 
