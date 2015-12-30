@@ -13,6 +13,28 @@ namespace ProntoMVC.Data
 
         // funciones C# usadas por businesslogic (hecha en VB.net). Migrar del .Data a una dll aparte
 
+        public class Resultados
+        {
+            public int IdCarta;
+            public long numerocarta;
+            public string errores;
+            public string advertencias;
+        }
+
+
+        public static string RemoveSpecialCharacters(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_' || c == ' ' || c == '-' || c == '&')
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
+
 
         static public List<Image> GetAllPages(string file) // sacar las paginas de un tiff
         {
@@ -108,6 +130,7 @@ namespace ExtensionMethods
         // https://msdn.microsoft.com/en-us/library/bb383977.aspx
         // tenes que agregar "using ExtensionMethods" donde la quieras usar
 
+    
 
         public static int WordCount(this String str)
         {

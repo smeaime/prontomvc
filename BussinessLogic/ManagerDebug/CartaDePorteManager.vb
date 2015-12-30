@@ -3,6 +3,8 @@ Option Explicit On
 
 Option Infer On
 
+Imports System.Data.OleDb
+
 Imports System.Reflection
 Imports System
 Imports System.Web
@@ -442,6 +444,7 @@ Public Class CartaDePorteManager
     End Function
 
 
+
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -828,6 +831,72 @@ Public Class CartaDePorteManager
 
 
 
+
+
+    End Function
+
+
+
+    Public Shared Function GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount( _
+           ByVal SC As String, _
+           ByVal ColumnaParaFiltrar As String, _
+           ByVal TextoParaFiltrar As String, _
+           ByVal sortExpression As String, _
+           ByVal startRowIndex As Long, _
+           ByVal maximumRows As Long, _
+           ByVal estado As CartaDePorteManager.enumCDPestado, _
+           ByVal QueContenga As String, _
+           ByVal idVendedor As Integer, _
+           ByVal idCorredor As Integer, _
+           ByVal idDestinatario As Integer, _
+           ByVal idIntermediario As Integer, _
+           ByVal idRemComercial As Integer, _
+           ByVal idArticulo As Integer, _
+           ByVal idProcedencia As Integer, _
+           ByVal idDestino As Integer, _
+           ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+           ByVal ModoExportacion As String, _
+           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+           ByVal puntoventa As Integer,
+           ByRef sqlCount As Long, _
+            Optional ByRef sTituloFiltroUsado As String = "", _
+           Optional ByVal optDivisionSyngenta As String = "Ambas", _
+           Optional ByVal bTraerDuplicados As Boolean = False, _
+           Optional ByVal Contrato As String = "", _
+           Optional ByVal QueContenga2 As String = "", _
+           Optional ByVal idClienteAuxiliar As Integer = -1, _
+           Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
+           Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+           Optional bInsertarEnTablaTemporal As Boolean = False, _
+           Optional ByVal optCamionVagon As String = "Ambas" _
+                   ) As String
+
+
+
+
+        Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                     ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, _
+                      estado, QueContenga, idVendedor, idCorredor, _
+                      idDestinatario, idIntermediario, _
+                      idRemComercial, idArticulo, idProcedencia, idDestino, _
+               AplicarANDuORalFiltro, ModoExportacion,
+                     fechadesde, fechahasta, _
+                     puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , Contrato, , idClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , True)
+
+
+        Dim dt = EntidadManager.ExecDinamico(SC, count)
+        sqlCount = dt.Rows(0).Item(0)
+        'If sqlCount = 0 Then Return -1
+
+
+        Return CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+               ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, _
+                estado, QueContenga, idVendedor, idCorredor, _
+                idDestinatario, idIntermediario, _
+                idRemComercial, idArticulo, idProcedencia, idDestino, _
+         AplicarANDuORalFiltro, ModoExportacion,
+               fechadesde, fechahasta, _
+               puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , Contrato, , idClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , False)
 
 
     End Function
@@ -2355,296 +2424,330 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function EnviarMailFiltroPorId_DLL(ByVal SC As String, ByVal fechadesde As Date, _
-                                                     ByVal fechahasta As Date, ByVal puntoventa As Integer, _
-                                                     ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                     ByRef sError As String, ByVal bVistaPrevia As Boolean, _
-                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
-                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
-                                                     ByRef sError2 As String _
-                                                        ) As String
+    
 
 
+    Shared Function ExcelToHtml(ArchivoExcelDestino As String, Optional grid As GridView = Nothing) As String
 
+        Dim ds As DataSet = New DataSet()
 
-
-
-        'Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
-        Dim dt = CDPMailFiltrosManager2.TraerMetadata(SC, id)
-        Dim dr = dt.Rows(0)
-
-
-
-        Dim output As String
-        'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
-        With dr
-            Dim l As Long
-
-
-
-            'If Not chkConLocalReport.Checked Then
-            '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
-            '                                iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-            '                                iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
-            '    output = generarNotasDeEntrega(sc, dr, estado, l, titulo, sWHERE, Server.MapPath("~/Imagenes/Williams.bmp"))
-            'Else
-
-
-
-
-            If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
-                fechadesde = #1/1/1753#
-                fechahasta = #1/1/2100#
-
-            ElseIf estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha Then
-                fechadesde = #1/1/1753#
-                fechahasta = #1/1/2100#
-
-            End If
-
-
-            Try
-                Dim sWHERE = CDPMailFiltrosManager2.generarWHEREparaDataset(SC, dr, titulo, estado, _
-                                            iisValidSqlDate(fechadesde, #1/1/1753#), _
-                                            iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
-
-            Catch ex As Exception
-                'logear el idfiltro con problemas
-
-                ErrHandler.WriteError(ex.ToString)
-                ErrHandler.WriteError("Error en llamada a generarWHEREparaDataset().   IdFiltro " + id.ToString())
-                'dddd()
-                dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Fallo al enviar. Tope de filas? " & ex.ToString, 100)
-                Throw
-            End Try
-
-
-            ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
-            Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
-
-
-            Dim tiempoinforme, tiemposql As Integer
-
-            If Debugger.IsAttached Then
-                output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
-            Else
-                'output = generarNotasDeEntregaConReportViewer(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
-            End If
-
-
-            'End If
-
-
-
-
-
-            If output <> "-1" And output <> "-2" Then
-                'MandaEmail("mscalella911@gmail.com", "Mailing Williams", "", , , , , "C:\ProntoWeb\doc\williams\Excels de salida\NE Descargas para el corredor Intagro.xls")
-
-                'Dim mails() As String = Split(.Item("EMails"), ",")
-                'For Each s As String In mails
-                'ErrHandler.WriteError("asdasde")
-                Dim De As String
-
-                Select Case puntoventa
-                    Case 1
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                    Case 2
-                        De = "sanlorenzo@williamsentregas.com.ar"
-                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
-                    Case 3
-                        De = "arroyoseco@williamsentregas.com.ar"
-                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
-                    Case 4
-                        De = "bahiablanca@williamsentregas.com.ar"
-                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
-                    Case Else
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                End Select
-
-                Try
-                    Dim destinatario As String
-                    Dim truquito As String '= "    <img src =""http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & "/Pronto/mailPage.aspx?q=" & iisNull(UsuarioSesion.Mail(sc, Session)) & "&e=" & .Item("EMails") & "_" & tit & """/>" 'imagen para que llegue respuesta cuando sea leido
-                    Dim cuerpo As String
-
-                    If bVistaPrevia Then ' chkVistaPrevia.Checked Then
-                        'lo manda a la casilla del usuario
-                        'ver cómo crear una regla en Outlook para forwardearlo a la casilla correspondiente
-                        'http://www.eggheadcafe.com/software/aspnet/34183421/question-on-rules-on-unattended-mailbox.aspx
-                        destinatario = .Item("AuxiliarString2") ' UsuarioSesion.Mail(sc, Session)
-                        cuerpo = .Item("EMails") & truquito
-                    Else
-                        'lo manda a la casilla del destino
-                        destinatario = .Item("EMails")
-
-                        'destinatario &= "," & De
-
-                        cuerpo = truquito
-                    End If
-
-
-                    Dim stopWatch As New Stopwatch()
-                    stopWatch.Start()
-
-
-
-
-
-                    Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
-                    Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
-                    Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
-                    Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
-                    Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
-                    Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
-                    Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
-                    Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
-
-
-
-                    Dim AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR = iisNull(.Item("AplicarANDuORalFiltro"), 0)
-                    Dim ModoExportacion As String = .Item("modo").ToString
-                    Dim optDivisionSyngenta As String = "Ambas"
-
-
-                    Dim asunto As String
-
-                    Try
-
-                        'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
-                        'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
-
-
-                        asunto = CartaDePorteManager.FormatearAsunto(SC, _
-                             "", _
-                           estado, "", idVendedor, idCorredor, _
-                          idDestinatario, idIntermediario, _
-                          idRemComercial, idArticulo, idProcedencia, idDestino, _
-                           AplicarANDuORalFiltro, ModoExportacion, _
-                          fechadesde, fechahasta, _
-                           puntoventa, optDivisionSyngenta, False, "", "", -1)
-                    Catch ex As Exception
-                        asunto = "mal formateado"
-                        ErrHandler.WriteError(ex.ToString + " asunto mal formateado")
-                    End Try
-
-
-
-                    If bDescargaHtml Then
-
-
-
-                        MandaEmailSimple(destinatario, _
-                                    asunto, _
-                                  cuerpo + output, _
-                               De, _
-                               SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                         "", _
-                                        SmtpPort, _
-                                , _
-                                CCOaddress, )
-
-
-                        'MandaEmail(destinatario, _
-                        '                    asunto, _
-                        '                  cuerpo + output, _
-                        '                   De, _
-                        '                 SmtpServer, _
-                        '                SmtpUser, _
-                        '                SmtpPass, _
-                        '                "", _
-                        '                SmtpPort, _
-                        '                 , _
-                        '                 CCOaddress, _
-                        '                    truquito _
-                        '                    , "Williams Entregas" _
-                        '               )
-                    Else
-
-                        MandaEmail(destinatario, _
-                                            asunto, _
-                                          cuerpo, _
-                                           De, _
-                                         SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                        output, _
-                                        SmtpPort, _
-                                         , _
-                                         CCOaddress, _
-                                            truquito _
-                                             , "Williams Entregas" _
-                                       )
-
-                    End If
-
-
-                    stopWatch.Stop()
-                    Dim tiempomail = stopWatch.Elapsed.Milliseconds
-
-
-                    Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
-
-                    If False Then
-                        ErrHandler.WriteError("IdFiltro(no de cola)=" & id & " Enviado con éxito a las " & Now.ToString & ". CDPs filtradas: " & l)
-                    End If
-
-                    dr.Item("UltimoResultado") = s
-
-                    CDPMailFiltrosManager2.Update(SC, dt)
-
-                Catch ex As Exception
-                    'Verificar Mails rechazados en la cuenta que los envió
-                    '        http://www.experts-exchange.com/Programming/Languages/C_Sharp/Q_23268068.html
-                    'TheLearnedOne:
-                    'The only way that I know of is to look in the Inbox for rejected messages.
-
-                    '        Bob
-
-
-
-                    ErrHandler.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
-                    'dddd()
-                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Fallo al enviar. Tope de filas? " & ex.ToString, 100)
-                    CDPMailFiltrosManager2.Update(SC, dt)
-                    'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
-                End Try
-
-                'Next
-            ElseIf output = "-1" Then
-                sError += "El filtro " & id & " genera un informe vacío." & vbCrLf
-
-                dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
-                CDPMailFiltrosManager2.Update(SC, dt)
-            ElseIf output = "-2" Then
-
-                sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
-
-                dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
-                CDPMailFiltrosManager2.Update(SC, dt)
-            End If
-
-
-
-
-        End With
-
+        Dim err As String
+        Dim firstSheetName As String
+        'Dim connString As String = ConfigurationManager.ConnectionStrings("xls").ConnectionString
+        ' Create the connection object
+        Dim oledbConn As OleDbConnection
         Try
-            sError2 = dr.Item("UltimoResultado")
-        Catch ex As Exception
+            'Microsoft.Jet.OLEDB.4.0 to Microsoft.ACE.OLEDB.12.0
+            'oledbConn = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ArchivoExcelDestino + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1';")
+            oledbConn = New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ArchivoExcelDestino + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1';")
+            ' Open connection
+            oledbConn.Open()
 
+
+
+
+
+
+            '                          // Get the name of the first worksheet:
+            Dim dbSchema As DataTable = oledbConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, Nothing)
+            If (dbSchema Is Nothing Or dbSchema.Rows.Count < 1) Then
+
+                Throw New Exception("Error: Could not determine the name of the first worksheet.")
+            End If
+
+            firstSheetName = dbSchema.Rows(0)("TABLE_NAME").ToString()
+
+
+            ErrHandler.WriteError("Nombre  " & firstSheetName)
+
+            ' Create OleDbCommand object and select data from worksheet Sheet1
+            Dim cmd As OleDbCommand = New OleDbCommand("SELECT * FROM [Listado general de Cartas de Po$]", oledbConn)
+
+            ' Create new OleDbDataAdapter
+            Dim oleda As OleDbDataAdapter = New OleDbDataAdapter()
+
+            oleda.SelectCommand = cmd
+
+            ' Create a DataSet which will hold the data extracted from the worksheet.
+
+            ' Fill the DataSet from the data extracted from the worksheet.
+            oleda.Fill(ds, "Employees")
+
+            ' Bind the data to the GridView
+            'GridView1.DataSource = ds.Tables(0).DefaultView
+            'GridView1.DataBind()
+        Catch e As Exception
+
+
+            'http://stackoverflow.com/questions/96150/oledbconnection-open-generates-unspecified-error
+            'http://stackoverflow.com/questions/472079/c-asp-net-oledb-ms-excel-read-unspecified-error
+            'http://stackoverflow.com/questions/15828/reading-excel-files-from-c-sharp
+
+            err = e.ToString
+            ErrHandler.WriteError(err)
+            Throw
+        Finally
+            ' Close connection
+            oledbConn.Close()
         End Try
 
-        Return output
 
+
+        Dim s As String
+        Try
+            If ds.Tables.Count = 0 Then Return "NoSeConvirtieronTablas" & "_" & firstSheetName & "_" & ArchivoExcelDestino & "_" & err
+            ErrHandler.WriteError("Tablas  " & ds.Tables.Count.ToString())
+            ErrHandler.WriteError("Convertido " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString())
+            s = DatatableToHtmlUsandoGridview(ds.Tables(0), grid)
+            's = DatatableToHtml(ds.Tables(0))
+
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+            Return "ErrorHtml" + ex.ToString + "          " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString()
+        End Try
+
+
+        Return s
     End Function
 
 
+    Shared Function DatatableToHtmlUsandoGridview(dt As DataTable, Optional gridView As GridView = Nothing) As String
+        'http://stackoverflow.com/questions/1018785/asp-net-shortest-way-to-render-datatable-to-a-string-html
+        'http://stackoverflow.com/questions/8908363/exporting-gridview-to-xls-paging-issue
 
 
+
+        Const maxrows = 400
+        Const constwidth = 3000
+        Const fontsize = 6
+        Const padding = 2
+
+
+
+
+
+        dt.Rows.RemoveAt(3)
+        dt.Rows.RemoveAt(2)
+        dt.Rows.RemoveAt(1)
+        dt.Rows.RemoveAt(0)
+        dt.Columns.RemoveAt(0)
+
+
+
+        dt.Rows.RemoveAt(dt.Rows.Count - 1)
+
+
+
+        If gridView Is Nothing Or True Then
+            gridView = New GridView()
+
+            gridView.AutoGenerateColumns = False
+
+
+
+            gridView.Font.Size = fontsize
+
+            Dim bf1 = New BoundField()
+            bf1.DataField = "F2"
+            bf1.HeaderText = "Date"
+            bf1.ItemStyle.VerticalAlign = VerticalAlign.Middle
+            bf1.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+            bf1.ItemStyle.Font.Bold = True
+            bf1.ItemStyle.ForeColor = System.Drawing.Color.Blue
+
+            '  bf1.ItemStyle.BackColor = System.Drawing.Color.LightBlue 'System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+            '.AlternatingRowStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+            gridView.Columns.Add(bf1)
+
+
+
+            'http://forums.asp.net/t/1086879.aspx
+
+            Dim comienzo As Integer
+            If iisNull(dt.Rows(0).Item(2)) = "Imágenes" Or iisNull(dt.Rows(1).Item(2)) = "Imágenes" Then
+                Dim bf12 = New HyperLinkField()
+                bf12.DataNavigateUrlFields = New String() {"F3"}
+                bf12.DataTextField = "F4"
+                'bf12.DataNavigateUrlFormatString = "userProfile.aspx?ID={0}"
+                'bf12.HeaderText = "User Name"
+                bf12.ItemStyle.VerticalAlign = VerticalAlign.Middle
+                bf12.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+                'bf12.ItemStyle.Font.Bold = True
+                '.AlternatingRowStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+                gridView.Columns.Add(bf12)
+
+                comienzo = 5
+            Else
+                comienzo = 3
+            End If
+
+
+
+
+            Dim cols As Integer() = {10, 11, 12, 16, 17, 18, 19, 20}
+
+            For n = comienzo To dt.Columns.Count
+
+                Dim bf2 = New BoundField()
+                bf2.DataField = "F" + n.ToString
+                bf2.HeaderText = "Description"
+                bf2.ItemStyle.VerticalAlign = VerticalAlign.Middle
+                bf2.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+
+
+                'If cols.Contains(n) Then bf2.ItemStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#eef6fd")
+
+                gridView.Columns.Add(bf2)
+            Next
+
+
+        End If
+        Dim result = New StringBuilder()
+        Dim writer = New StringWriter(result)
+        Dim htmlWriter = New System.Web.UI.HtmlTextWriter(writer)
+
+        gridView.Width = constwidth
+
+        'gridView.PageSize = 100
+        'gridView.AllowPaging = True
+
+        For n = maxrows To dt.Rows.Count - 1
+            Try
+                dt.Rows.RemoveAt(n)
+            Catch ex As Exception
+                ErrHandler.WriteError("error html row " & n.ToString)
+                'Exit For
+            End Try
+        Next
+
+        gridView.DataSource = dt
+        gridView.DataBind()
+
+        If True Then
+            'Hay un tema con el Wrap: si lo uso, con el Gmail lo formatea bien, pero a Andy en el Outlook se le angostan muchisimo las columnas
+            gridView.HeaderStyle.Wrap = False
+            gridView.RowStyle.Wrap = False
+            gridView.FooterStyle.Wrap = False
+        End If
+
+        'gridView.Columns(0).Visible = False
+
+        gridView.HeaderRow.Visible = False
+        gridView.FooterRow.Visible = False
+        'gridView.Rows(0).Style.
+        gridView.ShowHeader = False
+        gridView.AlternatingRowStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#e4effd") 'System.Drawing.ColorTranslator.FromHtml("#EAEAEA")
+
+
+
+
+        gridView.CellPadding = padding
+        gridView.GridLines = GridLines.Both
+        'gridView.BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e5e5")
+        gridView.BorderColor = System.Drawing.Color.LightGray
+
+        'http://stackoverflow.com/questions/11974039/gridview-column-headers-autowrap-how-to-prevent
+        'http://stackoverflow.com/questions/782428/asp-net-gridview-prevent-word-wrapping-in-column
+        Dim classcss = "        .myGrid th             {              white-space: nowrap !important;      }     "
+
+        '<ItemStyle Wrap="False" />
+
+        For ii As Integer = 0 To gridView.Rows.Count - 1
+            'gridView.Rows(i).Attributes.Add("style", "white-space: nowrap;")
+
+            gridView.Rows(ii).Attributes.Add("style", "white-space: nowrap !important;")
+
+            'word-break:keep-all; word-wrap:normal;table-layout: fixed;
+
+
+            ' gridView.Rows(i).Attributes.Add("class", "textmode")
+        Next
+
+        '   for (int i = 0; i < e.Row.Cells.Count; i++)
+        '{
+        '    e.Row.Cells[i].Attributes.Add("style", "white-space: nowrap;");
+        '}
+
+        '          Since auto generated column is built-in and difficult to change its style, you have two choices:
+
+        '1. Set your GridView's width wide enough.
+
+        '2. Use ItemTemplate  instead, it's more flexible.
+        'If you still have this problem, please inform us.
+
+        'gridView.HeaderStyle.Width = "10%"
+        'gridView.RowStyle.Width = "10%"
+        'gridView.FooterStyle.Width = "10%"
+
+        gridView.HorizontalAlign = HorizontalAlign.Center
+
+        'http://stackoverflow.com/questions/55828/how-does-one-parse-xml-files
+
+        gridView.RenderControl(htmlWriter)
+
+
+        'http://stackoverflow.com/questions/15970660/html-email-in-outlook-table-width-issue
+        'http://stackoverflow.com/questions/9304920/html-email-tables-broken-in-outlook-2007-2010
+
+        'http://putsmail.com/tests/15a674822a291db54828a92a63fdf6
+
+
+        Dim outlook As String
+        outlook = result.ToString
+        If dt.Rows.Count > maxrows Then outlook = "Sólo se muestran las primeras " + maxrows.ToString + " líneas de un total de " + dt.Rows.Count.ToString + "<br/><br/>" + outlook
+
+        's = "<div style=""overflow-x:scroll; width: 20000px"">mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmholaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaquuuuuuuuuuuuuuueeeeeeeeeeeeeeeeeeeeetallllllllllllllllllllllllllllllllllllllllllllllllllllllltevaaaaaaaaaaaaaaaaaaaaaaa" + s + "</div>"
+        'jugar con constwidth. Cuando me queda bien en Outlook, se me caga en Gmail. Buscar equilibrio, o quizas mandar los dos formatos.
+
+        Dim gmail = outlook
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+        'outlook = "Formato Outlook" + outlook
+        outlook = outlook.Replace("table ", "table width=""" + (constwidth * 30).ToString + """  ") 'problemas para que outlook no me haga angostas las columnas 
+        'outlook = outlook.Replace("<td ", "<td  width=""" + constwidth.ToString + """  style=""width:" + constwidth.ToString + "   px;mso-line-height-rule: exactly;line-height:; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding: 2""  ")
+        'outlook = outlook.Replace("style=""border-color:#E5E5E5", "style=""border-color:#E5E5E5;	line-height: ;")
+        'The path I used was Tools>Options>Mail Format>Editor Options>Advanced
+
+
+
+        'outlook = "<!--[if mso]><v:shape>" & outlook & "</v:shape><![endif]-->"
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+        gmail = "Formato Gmail" + gmail
+        gmail = gmail.Replace("table ", "table width=""" + constwidth.ToString + """  ") 'problemas para que outlook no me haga angostas las columnas 
+
+
+        gmail = "<!--[if !mso]><!-->" & gmail & "<!--<![endif]-->" 'http://stackoverflow.com/a/5983063/1054200
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+        'http://stackoverflow.com/questions/18254711/html-emails-fallback-for-mso-conditional
+        'http://stackoverflow.com/questions/5982364/is-there-a-html-conditional-statement-for-everything-not-outlook
+
+        'Return "<br/><br/>" + gmail + "<br/><br/>" + outlook
+
+
+
+        Return outlook
+        'Console.WriteLine(result)
+    End Function
 
 
     Shared Function generarNotasDeEntregaConReportViewer_ConServidorDeInformes(ByVal SC As String, ByVal fechadesde As Date, _
@@ -2702,7 +2805,7 @@ Public Class CartaDePorteManager
                 Dim idProcedencia As Long = iisNull(.Item("Procedencia"), -1)
                 Dim idDestino As Long = iisNull(.Item("Destino"), -1)
 
-                Dim contrato As String = iisNull(.Item("Contrato"), -1)
+                Dim contrato As String = iisNull(.Item("Contrato"), "")
 
                 Dim EnumSyngentaDivision As String = iisNull(.Item("EnumSyngentaDivision"), "")
 
@@ -2900,10 +3003,39 @@ Public Class CartaDePorteManager
 
             ReportViewerEscondido = New Microsoft.Reporting.WebForms.ReportViewer
 
-            strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
-                        rdl, _
-                          strSQL, SC, True, sExcelFileName, titulo, bDescargaHtml)
 
+
+
+            If False Then
+                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
+                            rdl, _
+                              strSQL, SC, True, sExcelFileName, titulo, bDescargaHtml)
+            Else
+
+                Dim yourParams As ReportParameter() = New ReportParameter(9) {}
+
+                yourParams(0) = New ReportParameter("webservice", "")
+                yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+                yourParams(2) = New ReportParameter("idArticulo", -1)
+                yourParams(3) = New ReportParameter("idDestino", -1)
+                yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+                yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+                yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+                yourParams(7) = New ReportParameter("Consulta", strSQL)
+                yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+                yourParams(9) = New ReportParameter("titulo", titulo)
+
+
+
+                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
+                            rdl, yourParams, sExcelFileName, bDescargaHtml)
+
+
+            End If
+
+
+
+            
 
 
 
@@ -2981,6 +3113,9 @@ Public Class CartaDePorteManager
             ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
+                'este es de servidor, así que saco el path
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
             Else
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
@@ -3003,6 +3138,204 @@ Public Class CartaDePorteManager
 
 
 
+
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////'//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
+                                                                ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
+                                    ByRef ArchivoExcelDestino As String, bDescargaHtml As Boolean) As String
+
+        For Each i In parametros
+            If i Is Nothing Then
+                Throw New Exception("Te falta por lo menos un parametro. Recordá que el array que pasás se dimensiona con un elemento de más")
+            End If
+        Next
+
+
+        With oReportViewer
+            .Reset()
+            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
+            .Visible = False
+
+
+
+            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
+            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
+            .ProcessingMode = ProcessingMode.Remote
+            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
+            .ServerReport.ReportServerCredentials = irsc
+            .ShowCredentialPrompts = False
+
+
+
+
+            'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+            'Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+            If rdlFile = "" Then
+
+            End If
+            rdlFile = rdlFile.Replace(".rdl", "")
+            rdlFile = "/Pronto informes/" & rdlFile
+
+
+
+            With .ServerReport
+                .ReportPath = rdlFile
+
+
+
+
+
+
+                Try
+
+                    oReportViewer.ServerReport.SetParameters(parametros)
+
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex.ToString)
+                    Dim inner As Exception = ex.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            MsgBox(inner.Message)
+                            Stop
+                        End If
+                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        inner = inner.InnerException
+                    End While
+                End Try
+
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+
+            '/////////////////////
+            '/////////////////////
+
+            .Visible = False
+
+            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType, encoding, extension As String
+            Dim bytes As Byte()
+
+            'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
+            '             string mimeType;
+            '2 string encoding;
+            '3 Warning[] warnings;
+            '4 string[] streamids;
+            '5 string fileNameExtension;
+            '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
+            '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
+            '8 return reportHtml;
+
+
+            .Visible = False
+
+            Try
+                If bDescargaHtml And False Then
+
+                    'por ahora usar ExcelToHtml(strRet, grid)
+
+                    bytes = .ServerReport.Render( _
+                            "HTML4.0", Nothing, mimeType, encoding, _
+                              extension, _
+                             streamids, warnings)
+
+                Else
+
+
+                    bytes = .ServerReport.Render( _
+                          "Excel", Nothing, mimeType, encoding, _
+                            extension, _
+                           streamids, warnings)
+                End If
+
+            Catch e As System.Exception
+                Dim inner As Exception = e.InnerException
+                While Not (inner Is Nothing)
+                    If System.Diagnostics.Debugger.IsAttached() Then
+                        'MsgBox(inner.Message)
+                        'Stop
+                    End If
+                    ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message)
+                    inner = inner.InnerException
+                End While
+                Throw
+            End Try
+
+
+            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+            Try
+                Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+
+            Catch ex As Exception
+
+                ErrHandler.WriteAndRaiseError(ex)
+            End Try
+
+
+
+
+            '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+
+
+
+
+
+
+
+
+            Return ArchivoExcelDestino
+
+
+
+
+            'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
+            ''ExcelToCSV_SincroBLD
+
+            'Return ArchivoCSVDestino
+
+
+
+
+
+
+        End With
+
+        '////////////////////////////////////////////
+
+        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+
+    End Function
+
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
                                                                 ByVal rdlFile As String, strSQL As String, SC As String, _
                                      Optional ByVal bDescargaExcel As Boolean = False, _
@@ -3010,6 +3343,49 @@ Public Class CartaDePorteManager
                                     Optional ByVal bDescargaHtml As Boolean = False) As String
         'http://forums.asp.net/t/1183208.aspx
 
+
+
+
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        'http://stackoverflow.com/questions/12199995/programmatically-exporting-reports-from-sql-2012-reporting-services
+        'cómo usar ReportExecutionService ?
+        Dim rsExec As ReportingService.ReportingService2010Soap
+        Dim rs As ReportExecutionService.ReportExecutionServiceSoap
+        'reporte ReportExecution2005.ReportExecutionService = New ReportExecution2005.ReportExecutionService()
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+        
         With oReportViewer
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
@@ -3053,7 +3429,7 @@ Public Class CartaDePorteManager
                 yourParams(3) = New ReportParameter("idDestino", -1)
                 yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
                 yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-                yourParams(6) = New ReportParameter("quecontenga", "")
+                yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
                 yourParams(7) = New ReportParameter("Consulta", strSQL)
 
                 If Diagnostics.Debugger.IsAttached And False Then
@@ -3066,6 +3442,31 @@ Public Class CartaDePorteManager
                     '-hagamos así: pasá la base que te interesa del server1 al 3, y listo
                 End If
                 yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+
+
+                If oReportViewer.ServerReport.GetParameters().Count <> yourParams.Count() Then
+                    Throw New Exception("Distinta cantidad de parámetros: " & oReportViewer.ServerReport.GetParameters().Count & " y " & yourParams.Count())
+                End If
+
+
+
+
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                'verificar que todos los datasource esten como "windows credential"
+                Dim x = oReportViewer.ServerReport.GetDataSources()
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
                 Try
@@ -3227,6 +3628,202 @@ Public Class CartaDePorteManager
 
         'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
     End Function
+
+
+
+
+
+
+
+
+
+    Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
+                                                                ByVal rdlFile As String, strSQL As String, SC As String, _
+                                    ByRef ArchivoExcelDestino As String,
+                                    IdFactura As Integer) As String
+        'http://forums.asp.net/t/1183208.aspx
+
+
+        With oReportViewer
+            .Reset()
+            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
+            .Visible = False
+
+
+
+            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
+            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
+            .ProcessingMode = ProcessingMode.Remote
+            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
+            .ServerReport.ReportServerCredentials = irsc
+            .ShowCredentialPrompts = False
+
+
+
+            If rdlFile = "" Then
+                'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+                Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+                rdlFile = "/Pronto informes/" & reportName
+            End If
+
+
+            With .ServerReport
+                .ReportPath = rdlFile
+
+
+
+
+
+                Dim yourParams As ReportParameter() = New ReportParameter(3) {}
+
+                yourParams(0) = New ReportParameter("RenglonesPorBoleta", 8)
+                yourParams(1) = New ReportParameter("IdFactura", IdFactura)
+                yourParams(2) = New ReportParameter("Consulta", strSQL)
+
+                If Diagnostics.Debugger.IsAttached Then
+                    SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
+                    'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
+                End If
+                yourParams(3) = New ReportParameter("sServidorSQL", Encriptar(SC))
+
+
+                Try
+
+                    oReportViewer.ServerReport.SetParameters(yourParams)
+
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex.ToString)
+                    Dim inner As Exception = ex.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            MsgBox(inner.Message)
+                            'Stop
+                        End If
+                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        inner = inner.InnerException
+                    End While
+                End Try
+
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+
+            '/////////////////////
+            '/////////////////////
+
+            .Visible = False
+
+            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType, encoding, extension As String
+            Dim bytes As Byte()
+
+            'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
+            '             string mimeType;
+            '2 string encoding;
+            '3 Warning[] warnings;
+            '4 string[] streamids;
+            '5 string fileNameExtension;
+            '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
+            '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
+            '8 return reportHtml;
+
+            .Visible = False
+
+            Try
+                bytes = .ServerReport.Render( _
+                      "Excel", Nothing, mimeType, encoding, _
+                        extension, _
+                       streamids, warnings)
+
+            Catch e As System.Exception
+                Dim inner As Exception = e.InnerException
+                While Not (inner Is Nothing)
+                    If System.Diagnostics.Debugger.IsAttached() Then
+                        'MsgBox(inner.Message)
+                        'Stop
+                    End If
+                    ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                    inner = inner.InnerException
+                End While
+                Throw
+            End Try
+
+
+
+            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+            Try
+                Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+
+            Catch ex As Exception
+
+                ErrHandler.WriteAndRaiseError(ex)
+            End Try
+
+
+
+
+            '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+
+
+
+
+
+
+
+
+
+            Dim sHtml As String
+
+            If False Then
+                'ExcelToHtml(ArchivoExcelDestino)
+            Else
+                sHtml = ArchivoExcelDestino
+            End If
+
+
+
+            Return sHtml
+
+
+
+
+            'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
+            ''ExcelToCSV_SincroBLD
+
+            'Return ArchivoCSVDestino
+
+
+
+
+
+        End With
+
+        '////////////////////////////////////////////
+
+        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+    End Function
+
+
+
+
+
 
 
 
@@ -3683,9 +4280,12 @@ Public Class CartaDePorteManager
             If System.Diagnostics.Debugger.IsAttached() Then
                 sDirFTP = "~/" + "DataBackupear\"
 
+
+
+
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
 
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
@@ -3693,8 +4293,8 @@ Public Class CartaDePorteManager
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
-                                   HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + "temp_" + myCartaDePorte.PathImagen, _
-                                 HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + "temp_" + myCartaDePorte.PathImagen2 _
+                                   HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), _
+                                 HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2) _
                                 , 5)
             Else
 
@@ -3704,14 +4304,14 @@ Public Class CartaDePorteManager
                 sDirFTP = "E:\Sites\Pronto\DataBackupear\"
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
@@ -3722,8 +4322,8 @@ Public Class CartaDePorteManager
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
-                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen, ""), _
-                                IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen2, "") _
+                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP & myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), ""), _
+                                IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP & myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), "") _
                                 , 1)
 
 
@@ -3843,7 +4443,7 @@ Public Class CartaDePorteManager
 
 
     'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
-    Public Shared Sub ResizeImage(image As String, Okey As String, key As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
+    Public Shared Sub ResizeImage(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
         'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
         'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
 
@@ -3851,6 +4451,7 @@ Public Class CartaDePorteManager
         Dim sDir As String
 
         If System.Diagnostics.Debugger.IsAttached() Then
+            'sDirVirtual = "~/DataBackupear\"
             sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
             ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
@@ -3889,22 +4490,43 @@ Public Class CartaDePorteManager
         oGraphic.DrawImage(oImg, oRectangle)
 
 
+        Try
 
 
 
-        If newimagename = "" Then
-            If image.Substring(image.LastIndexOf(".")) <> ".png" Then
-                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+            If newimagename = "" Then
+                If image.Substring(image.LastIndexOf(".")) <> ".png" Then
+                    ErrHandler.WriteError("resize 1")
+                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+                Else
+                    ErrHandler.WriteError("resize 2")
+                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+                End If
             Else
-                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+                If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
+                    ErrHandler.WriteError("resize 3")
+                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
+                Else
+                    ErrHandler.WriteError("resize 4")
+                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
+                End If
             End If
-        Else
-            If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
-                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
-            Else
-                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
-            End If
-        End If
+
+        Catch ex As Exception
+            'acá está pasando lo del gdi
+            'A generic error occurred in GDI+.
+            'parece ser que el archivo ya existe?
+            'NO!!!! es por el subdirectorio de destino!!! 
+            'http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream
+            'If you are getting that error , then I can say that your application doesn't have a write permission on some directory.
+            ErrHandler.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
+            ErrHandler.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
+            ErrHandler.WriteError(ex)
+            ErrHandler.WriteError(sDir & "---" & image & "---" & newimagename)
+        End Try
+
+
+
         oImg.Dispose()
     End Sub
 
@@ -4977,19 +5599,19 @@ Public Class CartaDePorteManager
 " 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	 " & _
 " 			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	 " & _
 " 			ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 " & _
-"			isnull(CLIVEN.Razonsocial,'') AS TitularDesc, " & _
+"			isnull(CLIVEN.Razonsocial,'') + isnull(' - ' + ACO1.Descripcion,'')  AS TitularDesc, " & _
 "            isnull(CLIVEN.cuit,'') AS TitularCUIT, " & _
-"			isnull(CLICO1.Razonsocial,'') AS IntermediarioDesc, " & _
+"			isnull(CLICO1.Razonsocial,'') + isnull(' - ' + ACO2.Descripcion,'')  AS IntermediarioDesc, " & _
 "            isnull(CLICO1.cuit,'') AS IntermediarioCUIT, " & _
-"			isnull(CLICO2.Razonsocial,'') AS RComercialDesc, " & _
+"			isnull(CLICO2.Razonsocial,'') + isnull(' - ' + ACO3.Descripcion,'')  AS RComercialDesc, " & _
 "            isnull(CLICO2.cuit,'') AS RComercialCUIT, " & _
 "			isnull(CLICOR.Nombre,'') AS CorredorDesc, " & _
 "            isnull(CLICOR.cuit,'') AS CorredorCUIT, " & _
-"			isnull(CLIENT.Razonsocial,'') AS DestinatarioDesc, " & _
+"			isnull(CLIENT.Razonsocial,'') + isnull(' - ' + ACO5.Descripcion,'')  AS DestinatarioDesc, " & _
 "			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " & _
 "            isnull(CLIENT.cuit,'') AS DestinatarioCUIT, " & _
 "			isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, " & _
-"			isnull(CLIAUX.cuit,'') AS ClienteAuxiliarCUIT, " & _
+"			isnull(CLIAUX.cuit,'') + isnull(' - ' + ACO6.Descripcion,'')   AS ClienteAuxiliarCUIT, " & _
 "			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc, " & _
 "            isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc, " & _
 "             isnull(Articulos.Descripcion,'') AS Producto, " & _
@@ -5025,9 +5647,10 @@ Public Class CartaDePorteManager
 )
 
 
+
         Dim strFROM = _
         "   FROM    CartasDePorte CDP " & _
-        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
@@ -5036,23 +5659,26 @@ Public Class CartaDePorteManager
         "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
         "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
         "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
-        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
-        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
-        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
-        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
-        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
-        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
-        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
-        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
-        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
-        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
-        "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
-
-
+        "       LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
+        "       LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+        "       LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
+        "       LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
+        "		LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
+        "       LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+        "       LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
+        "       LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+        "       LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
+        "       LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
+        "       LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
+        "       LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
+        "       LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
+        "       LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO1 ON ACO1.IdAcopio= CDP.Acopio1 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO2 ON ACO2.IdAcopio= CDP.Acopio2 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO6 ON ACO6.IdAcopio= CDP.Acopio6 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO3 ON ACO3.IdAcopio= CDP.Acopio3 " & _
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO5 ON ACO5.IdAcopio= CDP.Acopio5 "
 
 
         strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
@@ -5254,8 +5880,12 @@ Public Class CartaDePorteManager
 "   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " & _
 "  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " & _
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
-"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2 " _
-        )
+"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
+"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
+)
+
+
 
 
         Dim strFROM = _
@@ -7383,7 +8013,6 @@ Public Class CartaDePorteManager
                 Return False
             End If
 
-
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
@@ -7424,6 +8053,23 @@ Public Class CartaDePorteManager
             If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
                 sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
             End If
+
+
+
+
+
+            If .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC) And .NobleGrado <> 1 Then
+                .NobleGrado = 1
+                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 1- puesto en la calidad de descarga" & vbCrLf
+            ElseIf .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC) And .NobleGrado <> 2 Then
+                .NobleGrado = 2
+                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 2- puesto en la calidad de descarga" & vbCrLf
+            ElseIf .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 3", SC) And .NobleGrado <> 3 Then
+                .NobleGrado = 3
+                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 3- puesto en la calidad de descarga" & vbCrLf
+            End If
+
+
 
 
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14488
@@ -8120,188 +8766,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
-                                                                ByVal rdlFile As String, strSQL As String, SC As String, _
-                                    ByRef ArchivoExcelDestino As String,
-                                    IdFactura As Integer) As String
-        'http://forums.asp.net/t/1183208.aspx
 
-
-        With oReportViewer
-            .Reset()
-            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
-            .Visible = False
-
-
-
-            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
-            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
-            .ProcessingMode = ProcessingMode.Remote
-            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
-            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
-            .ServerReport.ReportServerCredentials = irsc
-            .ShowCredentialPrompts = False
-
-
-
-            If rdlFile = "" Then
-                'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
-                Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
-                rdlFile = "/Pronto informes/" & reportName
-            End If
-
-
-            With .ServerReport
-                .ReportPath = rdlFile
-
-
-
-
-
-                Dim yourParams As ReportParameter() = New ReportParameter(3) {}
-
-                yourParams(0) = New ReportParameter("RenglonesPorBoleta", 8)
-                yourParams(1) = New ReportParameter("IdFactura", IdFactura)
-                yourParams(2) = New ReportParameter("Consulta", strSQL)
-
-                If Diagnostics.Debugger.IsAttached Then
-                    SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
-                    'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
-                End If
-                yourParams(3) = New ReportParameter("sServidorSQL", Encriptar(SC))
-
-
-                Try
-
-                    oReportViewer.ServerReport.SetParameters(yourParams)
-
-
-                Catch ex As Exception
-                    ErrHandler.WriteError(ex.ToString)
-                    Dim inner As Exception = ex.InnerException
-                    While Not (inner Is Nothing)
-                        If System.Diagnostics.Debugger.IsAttached() Then
-                            MsgBox(inner.Message)
-                            'Stop
-                        End If
-                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
-                        inner = inner.InnerException
-                    End While
-                End Try
-
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-
-            End With
-
-
-            .DocumentMapCollapsed = True
-
-
-
-            '/////////////////////
-            '/////////////////////
-
-            .Visible = False
-
-            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-            Dim warnings As Warning()
-            Dim streamids As String()
-            Dim mimeType, encoding, extension As String
-            Dim bytes As Byte()
-
-            'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
-            '             string mimeType;
-            '2 string encoding;
-            '3 Warning[] warnings;
-            '4 string[] streamids;
-            '5 string fileNameExtension;
-            '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
-            '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
-            '8 return reportHtml;
-
-            .Visible = False
-
-            Try
-                bytes = .ServerReport.Render( _
-                      "Excel", Nothing, mimeType, encoding, _
-                        extension, _
-                       streamids, warnings)
-
-            Catch e As System.Exception
-                Dim inner As Exception = e.InnerException
-                While Not (inner Is Nothing)
-                    If System.Diagnostics.Debugger.IsAttached() Then
-                        'MsgBox(inner.Message)
-                        'Stop
-                    End If
-                    ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
-                    inner = inner.InnerException
-                End While
-                Throw
-            End Try
-
-
-
-            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
-            Try
-                Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
-                fs.Write(bytes, 0, bytes.Length)
-                fs.Close()
-
-            Catch ex As Exception
-
-                ErrHandler.WriteAndRaiseError(ex)
-            End Try
-
-
-
-
-            '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
-
-
-
-
-
-
-
-
-
-            Dim sHtml As String
-
-            If False Then
-                'ExcelToHtml(ArchivoExcelDestino)
-            Else
-                sHtml = ArchivoExcelDestino
-            End If
-
-
-
-            Return sHtml
-
-
-
-
-            'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
-            ''ExcelToCSV_SincroBLD
-
-            'Return ArchivoCSVDestino
-
-
-
-
-
-        End With
-
-        '////////////////////////////////////////////
-
-        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
-
-        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
-    End Function
 
 
 
@@ -9252,23 +9717,32 @@ Public Class CartaDePorteManager
 
 
         'si es un .tiff paginado
-        If archivoImagenSinPathUbicadaEnDATABACKUPEAR.Contains(".tif") Then
-            Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
+        If archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tif") Or archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tiff") Then
+            Try
+
+
+                Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
 
 
 
-            listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
-            BorroArchivo(DIRFTP + oCarta.PathImagen)
-            oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+                listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                BorroArchivo(DIRFTP + oCarta.PathImagen)
+                oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
 
-            'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
-            If listapaginas.Count > 1 Then
-                'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
-                listapaginas(1).Save(DIRFTP + Path.GetFileName(archivoImagenSinPathUbicadaEnDATABACKUPEAR) + "_TK" + ".jpg", Imaging.ImageFormat.Jpeg)
-                BorroArchivo(DIRFTP + oCarta.PathImagen2)
-                oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg"
+                'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
+                If listapaginas.Count > 1 Then
+                    'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
+                    listapaginas(1).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRFTP + oCarta.PathImagen2)
+                    oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg"
 
-            End If
+                End If
+
+            Catch ex As Exception
+                sError &= ex.ToString
+                Return ""
+            End Try
+
 
         ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
@@ -9310,6 +9784,7 @@ Public Class CartaDePorteManager
         Catch ex As Exception
         End Try
     End Sub
+
 
 
 
@@ -9583,8 +10058,8 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Sub ProcesarImagenesConCodigosDeBarraYAdjuntar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
-                            ByRef sError As String, DirApp As String)
+    Shared Function ProcesarImagenesConCodigosDeBarraYAdjuntar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
+                            ByRef sError As String, DirApp As String) As Generic.List(Of ProntoMVC.Data.FuncionesGenericasCSharp.Resultados)
 
 
         Dim DIRTEMP = DirApp & "\Temp\"
@@ -9603,6 +10078,11 @@ Public Class CartaDePorteManager
         '        listapaginas(1).Save(DIRFTP + oCarta.PathImagen2)
         '    End If
         'Next
+
+        Dim output As New Generic.List(Of ProntoMVC.Data.FuncionesGenericasCSharp.Resultados)()
+
+
+
 
 
 
@@ -9812,6 +10292,16 @@ Public Class CartaDePorteManager
                 Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
 
+
+                Dim o As New ProntoMVC.Data.FuncionesGenericasCSharp.Resultados()
+                o.IdCarta = oCarta.IdCartaDePorte
+                o.numerocarta = oCarta.NumeroCartaDePorte
+                o.errores = sError
+                o.advertencias = ""
+                output.Add(o)
+
+
+
                 If InStr(nombrenuevo.ToUpper, "TK") Then
                     oCarta.PathImagen2 = nombrenuevo
                 ElseIf InStr(nombrenuevo.ToUpper, "CP") Or bCodigoBarrasDetectado Then
@@ -9835,13 +10325,17 @@ Public Class CartaDePorteManager
 
 
 
+               
+
 
             End If
 
 
         Next
 
-    End Sub
+        Return output
+
+    End Function
 
 
 
@@ -10185,34 +10679,34 @@ Public Class CartaDePorteManager
                 oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
 
 
-                regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
-                regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
+                regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
 
 
-                regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+                regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                'regexReplace2(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
 
 
-                regexReplace(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
+                regexReplace2(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
 
-                regexReplace(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
-                regexReplace(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
+                regexReplace2(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
+                regexReplace2(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
 
-                regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
 
-            regexReplace(docText, "#NumeroFactura#", JustificadoDerecha(oFac.Numero, 8, "0"))
-            regexReplace(docText, "#PV#", JustificadoDerecha(oFac.PuntoVenta, 4, "0"))
-            regexReplace(docText, "#Fecha#", oFac.Fecha)
+            regexReplace2(docText, "#NumeroFactura#", JustificadoDerecha(oFac.Numero, 8, "0"))
+            regexReplace2(docText, "#PV#", JustificadoDerecha(oFac.PuntoVenta, 4, "0"))
+            regexReplace2(docText, "#Fecha#", oFac.Fecha)
 
 
             oFac.CondicionVentaDescripcion = NombreCondicionVenta_y_Compra(SC, oFac.IdCondicionVenta)
             oFac.CondicionIVADescripcion = NombreCondicionIVA(SC, oFac.IdCodigoIva)
 
-            regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-            regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+            regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+            regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
 
 
 
@@ -10232,9 +10726,9 @@ Public Class CartaDePorteManager
             End Try
 
             If numeroordencompra <> "" Then
-                regexReplace(docText, "#OrdenCompra#", "N° Orden Compra: " & numeroordencompra)
+                regexReplace2(docText, "#OrdenCompra#", "N° Orden Compra: " & numeroordencompra)
             Else
-                regexReplace(docText, "#OrdenCompra#", "")
+                regexReplace2(docText, "#OrdenCompra#", "")
             End If
 
 
@@ -10244,15 +10738,15 @@ Public Class CartaDePorteManager
             If posObs <= 0 Then posObs = 1
 
 
-            regexReplace(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
+            regexReplace2(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
 
 
-            regexReplace(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
+            regexReplace2(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
 
 
 
             Dim SyngentaLeyenda = LogicaFacturacion.LeyendaSyngenta(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
-            regexReplace(docText, "#LeyendaSyngenta#", SyngentaLeyenda)
+            regexReplace2(docText, "#LeyendaSyngenta#", SyngentaLeyenda)
 
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13220
@@ -10271,12 +10765,12 @@ Public Class CartaDePorteManager
             End Try
 
 
-            regexReplace(docText, "#LeyendaAcopios#", LeyendaAcopio)
+            regexReplace2(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
             Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
 
-            'regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-            'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+            'regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+            'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
 
 
@@ -10285,9 +10779,9 @@ Public Class CartaDePorteManager
             'NO USAR. El reemplazo del pie está al final de esta funcion
             'NO USAR. El reemplazo del pie está al final de esta funcion
             'NO USAR. El reemplazo del pie está al final de esta funcion
-            'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-            'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-            'regexReplace(docText, "#Total#", oFac.Total)
+            'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+            'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+            'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -10329,7 +10823,7 @@ Public Class CartaDePorteManager
                 formfield = wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.FormFieldData)().FirstOrDefault
             Catch ex As Exception
                 ErrHandler.WriteError("Ver si hay caracteres extraños. Error por el & en la razon social 'CAIO BABILONI & etc'  ")
-                ErrHandler.WriteError("archivo:" + document + "  IdFac:" + oFac.Id + "    Error: " + ex.ToString)
+                ErrHandler.WriteError("archivo:" & document & "  IdFac:" & oFac.Id & "    Error: " & ex.ToString)
                 Throw
             End Try
 
@@ -10618,22 +11112,22 @@ Public Class CartaDePorteManager
                     docText = sr.ReadToEnd
                 End Using
 
-                regexReplace(docText, "observaciones", oFac.Observaciones)
-                regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                regexReplace(docText, "libero", oFac.Aprobo)
-                regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                regexReplace(docText, "jefesector", "")
+                regexReplace2(docText, "observaciones", oFac.Observaciones)
+                regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                regexReplace2(docText, "libero", oFac.Aprobo)
+                regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                regexReplace2(docText, "jefesector", "")
 
-                regexReplace(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
-                regexReplace(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
-                regexReplace(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
-                regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                regexReplace(docText, "#Total#", "$ " + FF2(oFac.Total))
+                regexReplace2(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
+                regexReplace2(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
+                regexReplace2(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
+                regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                regexReplace2(docText, "#Total#", "$ " + FF2(oFac.Total))
 
-                regexReplace(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
+                regexReplace2(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
 
-                regexReplace(docText, "#CAE#", oFac.CAE)
-                regexReplace(docText, "#VenceCAE#", oFac.FechaVencimientoORechazoCAE)
+                regexReplace2(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#VenceCAE#", oFac.FechaVencimientoORechazoCAE)
 
 
 
@@ -10746,37 +11240,37 @@ Public Class CartaDePorteManager
                     oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
 
 
-                    regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
-                    regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial.Replace("&", "Y"))
+                    regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
 
 
-                    regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+                    regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
 
 
-                    regexReplace(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
+                    regexReplace2(docText, "#Localidad#", NombreLocalidad(SC, oFac.Cliente.IdLocalidad)) 'oFac.Domicilio)
 
-                    regexReplace(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
-                    regexReplace(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
+                    regexReplace2(docText, "#CodPostal#", oFac.Cliente.CodigoPostal)
+                    regexReplace2(docText, "#Provincia#", NombreProvincia(SC, oFac.Cliente.IdProvincia))
 
-                    regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
-                regexReplace(docText, "#NumeroFactura#", oFac.Numero)
-                regexReplace(docText, "#Fecha#", oFac.Fecha)
+                regexReplace2(docText, "#NumeroFactura#", oFac.Numero)
+                regexReplace2(docText, "#Fecha#", oFac.Fecha)
 
 
                 oFac.CondicionVentaDescripcion = NombreCondicionVenta_y_Compra(SC, oFac.IdCondicionVenta)
                 oFac.CondicionIVADescripcion = NombreCondicionIVA(SC, oFac.IdCodigoIva)
 
-                regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
 
 
 
-                regexReplace(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#CAE#", oFac.CAE)
 
 
 
@@ -10787,17 +11281,17 @@ Public Class CartaDePorteManager
                 If posObs <= 0 Then posObs = 1
 
 
-                regexReplace(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
+                regexReplace2(docText, "#CorredorEnObservaciones#", Left(oFac.Observaciones, posObs).Replace("&", " "))
 
 
-                regexReplace(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
+                regexReplace2(docText, "#ObservacionesSinIncluirCorredor#", Mid(oFac.Observaciones, posObs))
                 'si se hizo por Pronto, mostrar las observaciones al final
                 'pero cómo sé? -mostrar si no tiene periodo
                 'If posObs <= 0 Then Selection.TypeText(Text:=oRs.Fields("Observaciones").Value)
 
 
-                'regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+                'regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
 
 
@@ -10806,9 +11300,9 @@ Public Class CartaDePorteManager
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-                'regexReplace(docText, "#Total#", oFac.Total)
+                'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -11131,19 +11625,19 @@ Public Class CartaDePorteManager
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "observaciones", oFac.Observaciones)
-                    regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                    regexReplace(docText, "libero", oFac.Aprobo)
-                    regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                    regexReplace(docText, "jefesector", "")
+                    regexReplace2(docText, "observaciones", oFac.Observaciones)
+                    regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                    regexReplace2(docText, "libero", oFac.Aprobo)
+                    regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                    regexReplace2(docText, "jefesector", "")
 
-                    regexReplace(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
-                    regexReplace(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
-                    regexReplace(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
-                    regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    regexReplace(docText, "#Total#", "$ " + FF2(oFac.Total))
+                    regexReplace2(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
+                    regexReplace2(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
+                    regexReplace2(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
+                    regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    regexReplace2(docText, "#Total#", "$ " + FF2(oFac.Total))
 
-                    regexReplace(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
+                    regexReplace2(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -11230,37 +11724,37 @@ Public Class CartaDePorteManager
 
         Dim texto As String = row.InnerXml
 
-        regexReplace(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
+        regexReplace2(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
 
 
 
         If iisNull(itemFactura.Articulo) <> "CAMBIO DE CARTA DE PORTE" Then
-            regexReplace(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad) * 1000)) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
+            regexReplace2(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad) * 1000)) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
         Else
-            regexReplace(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad))) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
+            regexReplace2(texto, "#Cant#", Int(iisNull(itemFactura.Cantidad))) 'dfdfdfdf  ehhhh? no se graban los decimales.... no tengo tantos decimales para la cantidad
         End If
         'te mató lo del int!!!!!
 
 
 
 
-        regexReplace(texto, "Unidad", iisNull(itemFactura.Unidad))
-        regexReplace(texto, "Codigo", iisNull(itemFactura.Codigo))
+        regexReplace2(texto, "Unidad", iisNull(itemFactura.Unidad))
+        regexReplace2(texto, "Codigo", iisNull(itemFactura.Codigo))
 
 
         If IncluyeTarifaEnFactura Then
-            regexReplace(texto, "#Precio#", Math.Round(iisNull(itemFactura.Precio), 2))
+            regexReplace2(texto, "#Precio#", Math.Round(iisNull(itemFactura.Precio), 2))
         Else
-            regexReplace(texto, "#Precio#", "")
+            regexReplace2(texto, "#Precio#", "")
         End If
 
 
 
 
 
-        regexReplace(texto, "#Importe#", FF2(iisNull(itemFactura.Precio) * iisNull(itemFactura.Cantidad)))
-        regexReplace(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
-        regexReplace(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
+        regexReplace2(texto, "#Importe#", FF2(iisNull(itemFactura.Precio) * iisNull(itemFactura.Cantidad)))
+        regexReplace2(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
+        regexReplace2(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
 
 
 
@@ -11288,7 +11782,7 @@ Public Class CartaDePorteManager
         If EsElevacionLDC Then mvarArticulo = "ELEVACION " & mvarArticulo
 
 
-        regexReplace(texto, "#ObsItem#", mvarArticulo.Replace("&", ""))
+        regexReplace2(texto, "#ObsItem#", mvarArticulo.Replace("&", ""))
 
 
 
@@ -26882,6 +27376,501 @@ Public Class CDPMailFiltrosManager2
 
 
 
+    Public Shared Function AgregarFirmaHtml(puntoventa As Integer) As String
+
+
+        Dim logo = "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\n/Tfimth/I/4H/IqMrS7KwMAAAAAASUVORK5CYII="
+
+        Dim html = "" '" <img src=""data:image/jpg;base64, " + logo + """ />"""
+        Dim a = ""
+
+
+        Select Case puntoventa
+            Case 1
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Buenos Aires<br/>" + vbCrLf + _
+                        "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf + _
+                        "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
+
+
+            Case 2
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina San Lorenzo<br/>" + vbCrLf + _
+                        "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf + _
+                        "Tel: 03476 - 430234 / 430158<br/>sanlorenzo@williamsentregas.com.ar" + vbCrLf
+
+            Case 3
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Arroyo Seco<br/>" + vbCrLf + _
+                        "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf + _
+                        "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
+
+            Case 4
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Bahia Blanca<br/>" + vbCrLf + _
+                        "Playa el Triangulo<br/>" + vbCrLf + _
+                        "Tel: 0291 - 4007928 / 4816778<br/>bahiablanca@williamsentregas.com.ar" + vbCrLf
+
+
+            Case Else
+                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                        "Oficina Buenos Aires<br/>" + vbCrLf + _
+                        "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf + _
+                        "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
+
+        End Select
+
+
+        html &= "<br/><a href=""http://williamsentregas.com.ar/""> <img src=""cid:Image""></a>" + a +
+               "<br/><a href=""https://twitter.com/WEntregas?lang=es""><img src=""cid:Image2""></a>"
+
+
+
+
+        Return html
+
+
+
+
+        'Return "<p> Firma </p> Williams Entregas S. A. "
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n: =
+        '            Descripci = F3n
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina San Lorenzo
+
+        'Santiago del Estero 1177 (San Lorenzo)
+
+        'Tel: 03476 =96 430234 / 430158
+
+        '            sanlorenzo@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'Descripci=F3n: C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+        '=20
+
+        '=20
+
+        '=20
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n:
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina Arroyo Seco
+
+        'Rene Favaloro 726 (Arroyo Seco)
+
+        'Tel: 0291 =96 4007928 / 4816778
+
+        '            arroyoseco@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+        '=20
+
+        '=20
+
+        '=20
+
+        '=20
+
+        '=20
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n:
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina Bahia Blanca
+
+        'Playa el Triangulo
+
+        'Tel: 0291 =96 4007928 / 4816778
+
+        '            bahiablanca@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'Descripci=F3n: C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+        '=20
+
+        '=20
+
+        ' <http://williamsentregas.com.ar/> Descripci=F3n: Descripci=F3n: =
+        '            Descripci = F3n
+        'C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image001.png
+
+        'Williams Entregas S.A=20
+
+        'Oficina Buenos Aires
+
+        'Moreno 584. Piso 12=B0A ( C.A.B.A)
+
+        'Tel: (011) 4322-4805 / 4393-9762
+
+        '            buenosaires@ williamsentregas.com.ar
+
+        ' <https://twitter.com/WEntregas?lang=3Des> Descripci=F3n: Descripci=F3n:
+        'Descripci=F3n: C:\Users\Tomas\AppData\Roaming\Microsoft\Firmas\tomas
+        'williams_files\Image002.png
+
+
+
+    End Function
+
+
+
+
+    Public Shared Function EnviarMailFiltroPorId_DLL(ByVal SC As String, ByVal fechadesde As Date, _
+                                                     ByVal fechahasta As Date, ByVal puntoventa As Integer, _
+                                                     ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                     ByRef sError As String, ByVal bVistaPrevia As Boolean, _
+                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
+                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+                                                     ByRef sError2 As String _
+                                                        ) As String
+
+
+
+
+
+
+        'Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
+        Dim dt = CDPMailFiltrosManager2.TraerMetadata(SC, id)
+        Dim dr = dt.Rows(0)
+
+
+        Return EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
+
+
+
+    End Function
+
+
+
+
+
+
+
+
+    Public Shared Function EnviarMailFiltroPorRegistro_DLL(ByVal SC As String, ByVal fechadesde As Date, _
+                                                  ByVal fechahasta As Date, ByVal puntoventa As Integer, _
+                                                  ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                  ByRef dr As DataRow, _
+                                                  ByRef sError As String, ByVal bVistaPrevia As Boolean, _
+                                                  ByVal SmtpServer As String, ByVal SmtpUser As String, _
+                                                  ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+                                                  ByRef sError2 As String, Optional inlinePNG As String = "" _
+                                                , Optional inlinePNG2 As String = "" _
+                                                     ) As String
+
+
+
+
+        Dim output As String
+        'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
+        With dr
+            Dim l As Long
+
+
+
+            'If Not chkConLocalReport.Checked Then
+            '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
+            '                                iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
+            '                                iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
+            '    output = generarNotasDeEntrega(sc, dr, estado, l, titulo, sWHERE, Server.MapPath("~/Imagenes/Williams.bmp"))
+            'Else
+
+
+
+
+            If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
+                fechadesde = #1/1/1753#
+                fechahasta = #1/1/2100#
+
+            ElseIf estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha Then
+                'saqué esto. justamente, si uso rangofecha, las fechas tienen que estar
+                'pero quizas estas usando otra cosa en el enviarya....
+                ' fechadesde = #1/1/1753#
+                ' fechahasta = #1/1/2100#
+
+
+            End If
+
+
+            Try
+                Dim sWHERE = generarWHEREparaDataset(SC, dr, titulo, estado, _
+                                            iisValidSqlDate(fechadesde, #1/1/1753#), _
+                                            iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
+
+            Catch ex As Exception
+                'logear el idfiltro con problemas
+
+                ErrHandler.WriteError(ex.ToString)
+                dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló: " & ex.ToString, 100)
+                Throw
+            End Try
+
+
+            ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
+            Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+
+            Dim tiempoinforme, tiemposql As Integer
+
+            If Debugger.IsAttached And False Then
+                'output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            Else
+                output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            End If
+
+
+            'End If
+
+
+
+
+
+            If output <> "-1" And output <> "-2" Then
+                'MandaEmail("mscalella911@gmail.com", "Mailing Williams", "", , , , , "C:\ProntoWeb\doc\williams\Excels de salida\NE Descargas para el corredor Intagro.xls")
+
+                'Dim mails() As String = Split(.Item("EMails"), ",")
+                'For Each s As String In mails
+                'ErrHandler.WriteError("asdasde")
+                Dim De As String
+
+                Select Case puntoventa
+                    Case 1
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                    Case 2
+                        De = "sanlorenzo@williamsentregas.com.ar"
+                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+                    Case 3
+                        De = "arroyoseco@williamsentregas.com.ar"
+                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+                    Case 4
+                        De = "bahiablanca@williamsentregas.com.ar"
+                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+                    Case Else
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                End Select
+
+                Try
+                    Dim destinatario As String
+                    Dim truquito As String '= "    <img src =""http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & "/Pronto/mailPage.aspx?q=" & iisNull(UsuarioSesion.Mail(sc, Session)) & "&e=" & .Item("EMails") & "_" & tit & """/>" 'imagen para que llegue respuesta cuando sea leido
+                    Dim cuerpo As String
+
+                    If bVistaPrevia Then ' chkVistaPrevia.Checked Then
+                        'lo manda a la casilla del usuario
+                        'ver cómo crear una regla en Outlook para forwardearlo a la casilla correspondiente
+                        'http://www.eggheadcafe.com/software/aspnet/34183421/question-on-rules-on-unattended-mailbox.aspx
+                        destinatario = .Item("AuxiliarString2") ' UsuarioSesion.Mail(sc, Session)
+                        cuerpo = .Item("EMails") & truquito
+                    Else
+                        'lo manda a la casilla del destino
+                        destinatario = .Item("EMails")
+
+                        'destinatario &= "," & De
+
+                        cuerpo = truquito
+                    End If
+
+
+                    Dim stopWatch As New Stopwatch()
+                    stopWatch.Start()
+
+
+
+                    cuerpo &= AgregarFirmaHtml(puntoventa)
+
+
+
+
+
+
+
+
+
+
+
+                    Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
+                    Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
+                    Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
+                    Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
+                    Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
+                    Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
+                    Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
+                    Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
+
+
+
+                    Dim AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR = iisNull(.Item("AplicarANDuORalFiltro"), 0)
+                    Dim ModoExportacion As String = .Item("modo").ToString
+                    Dim optDivisionSyngenta As String = "Ambas"
+
+
+                    Dim asunto As String
+
+                    Try
+
+                        'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
+                        'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
+
+
+                        asunto = CartaDePorteManager.FormatearAsunto(SC, _
+                             "", _
+                           estado, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRemComercial, idArticulo, idProcedencia, idDestino, _
+                           AplicarANDuORalFiltro, ModoExportacion, _
+                          fechadesde, fechahasta, _
+                           puntoventa, optDivisionSyngenta, False, "", "", -1)
+                    Catch ex As Exception
+                        asunto = "mal formateado"
+                        ErrHandler.WriteError(ex.ToString + " asunto mal formateado")
+                    End Try
+
+
+
+                    If iisNull(.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
+
+                        Dim grid As New GridView
+                        Dim html = ExcelToHtml(output, grid)
+
+                        MandaEmail_Nuevo(destinatario, _
+                                                          asunto, _
+                                                        cuerpo + html, _
+                                                     De, _
+                                                     SmtpServer, _
+                                                              SmtpUser, _
+                                                              SmtpPass, _
+                                                                output, _
+                                                              SmtpPort, _
+                                                      , _
+                                                      CCOaddress, , , , , inlinePNG, inlinePNG2)
+
+
+                    ElseIf bDescargaHtml Then
+
+
+
+                        Dim grid As New GridView
+                        Dim html = ExcelToHtml(output, grid)
+
+                        MandaEmail_Nuevo(destinatario, _
+                                    asunto, _
+                                  cuerpo + html, _
+                               De, _
+                               SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                          "", _
+                                        SmtpPort, _
+                                , _
+                                CCOaddress, , , , , inlinePNG, inlinePNG2)
+
+
+                        'MandaEmail(destinatario, _
+                        '                    asunto, _
+                        '                  cuerpo + output, _
+                        '                   De, _
+                        '                 SmtpServer, _
+                        '                SmtpUser, _
+                        '                SmtpPass, _
+                        '                "", _
+                        '                SmtpPort, _
+                        '                 , _
+                        '                 CCOaddress, _
+                        '                    truquito _
+                        '                    , "Williams Entregas" _
+                        '               )
+                    Else
+
+                        MandaEmail_Nuevo(destinatario, _
+                                            asunto, _
+                                          cuerpo, _
+                                           De, _
+                                         SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                        output, _
+                                        SmtpPort, _
+                                         , _
+                                         CCOaddress, _
+                                            truquito _
+                                            , "Williams Entregas", , , inlinePNG, inlinePNG2 _
+                                       )
+
+                    End If
+
+
+                    stopWatch.Stop()
+                    Dim tiempomail = stopWatch.Elapsed.Milliseconds
+
+
+                    Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
+
+                    dr.Item("UltimoResultado") = s
+
+                Catch ex As Exception
+                    'Verificar Mails rechazados en la cuenta que los envió
+                    '        http://www.experts-exchange.com/Programming/Languages/C_Sharp/Q_23268068.html
+                    'TheLearnedOne:
+                    'The only way that I know of is to look in the Inbox for rejected messages.
+
+                    '        Bob
+
+
+
+                    ErrHandler.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
+                    'dddd()
+                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
+                    'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
+                End Try
+
+                'Next
+            ElseIf output = "-1" Then
+                sError += "El filtro genera un informe vacío." & vbCrLf
+
+                dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+            ElseIf output = "-2" Then
+
+                sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
+
+                dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+            End If
+
+
+
+
+        End With
+
+        Try
+            sError2 = dr.Item("UltimoResultado")
+        Catch ex As Exception
+
+        End Try
+
+        Return output
+
+
+    End Function
 
 
 
