@@ -5647,6 +5647,7 @@ Public Class CartaDePorteManager
 )
 
 
+
         Dim strFROM = _
         "   FROM    CartasDePorte CDP " & _
         "       LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
@@ -5879,8 +5880,12 @@ Public Class CartaDePorteManager
 "   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " & _
 "  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " & _
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
-"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2 " _
-        )
+"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
+"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
+)
+
+
 
 
         Dim strFROM = _
@@ -8008,7 +8013,6 @@ Public Class CartaDePorteManager
                 Return False
             End If
 
-
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
@@ -8049,6 +8053,15 @@ Public Class CartaDePorteManager
             If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
                 sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
             End If
+
+
+            If .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC) And .NobleGrado <> 1 Then
+                .NobleGrado = 1
+                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 1- puesto en la calidad de descarga" & vbCrLf
+            End If
+
+
+
 
 
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14488
