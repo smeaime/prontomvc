@@ -1,4 +1,4 @@
-b---<<<<<<<<<<<<<<<<<<<<<<<<<<<<<AlterTable 2007>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>---
+---<<<<<<<<<<<<<<<<<<<<<<<<<<<<<AlterTable 2007>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>---
 /*
   PROCEDIMIENTO QUE SE AGREGARA PARA PODER VALIDAR EXISTENCIA DE CAMPOS
   EN LAS TABLAS RESPECTIVAS

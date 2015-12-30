@@ -95,32 +95,32 @@ Namespace Pronto.ERP.Bll
                 'Localidad=
 
 
-                regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial)
-                regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
-                regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
-                regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial)
+                regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
 
-                regexReplace(docText, "#Vendedor#", oFac.VendedorNombre_Descripcion)
-                'regexReplace(docText, "#CUIT#", oFac.ClienteCUIT)
+                regexReplace2(docText, "#Vendedor#", oFac.VendedorNombre_Descripcion)
+                'regexReplace2(docText, "#CUIT#", oFac.ClienteCUIT)
 
-                regexReplace(docText, "#Numero#", oFac.Numero)
-                regexReplace(docText, "#Fecha#", oFac.Fecha)
-                regexReplace(docText, "#CondicionIVA#", oFac.CodigoIVA_Descripcion)
-                regexReplace(docText, "#CondicionVenta#", oFac.CondicionVenta_Descripcion)
-                regexReplace(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#Numero#", oFac.Numero)
+                regexReplace2(docText, "#Fecha#", oFac.Fecha)
+                regexReplace2(docText, "#CondicionIVA#", oFac.CodigoIVA_Descripcion)
+                regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVenta_Descripcion)
+                regexReplace2(docText, "#CAE#", oFac.CAE)
 
-                regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+                regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
 
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-                'regexReplace(docText, "#Total#", oFac.Total)
+                'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -415,16 +415,16 @@ Namespace Pronto.ERP.Bll
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "observaciones", oFac.Observaciones)
-                    regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                    regexReplace(docText, "libero", oFac.Aprobo)
-                    regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                    regexReplace(docText, "jefesector", "")
+                    regexReplace2(docText, "observaciones", oFac.Observaciones)
+                    regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                    regexReplace2(docText, "libero", oFac.Aprobo)
+                    regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                    regexReplace2(docText, "jefesector", "")
 
-                    regexReplace(docText, "#Subtotal#", FF2(oFac.SubTotal))
-                    regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
-                    regexReplace(docText, "#PorcIVA#", oFac.PorcentajeIva1)
-                    regexReplace(docText, "#Total#", FF2(oFac.ImporteTotal))
+                    regexReplace2(docText, "#Subtotal#", FF2(oFac.SubTotal))
+                    regexReplace2(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    regexReplace2(docText, "#PorcIVA#", oFac.PorcentajeIva1)
+                    regexReplace2(docText, "#Total#", FF2(oFac.ImporteTotal))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -572,28 +572,28 @@ Namespace Pronto.ERP.Bll
 
                 Try
                     oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
-                    regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial)
-                    regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial)
+                    regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
 
 
-                    regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+                    regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
 
 
-                    regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
-                    regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
-                regexReplace(docText, "#NumeroFactura#", oFac.Numero)
-                regexReplace(docText, "#Fecha#", oFac.Fecha)
-                regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
-                regexReplace(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#NumeroFactura#", oFac.Numero)
+                regexReplace2(docText, "#Fecha#", oFac.Fecha)
+                regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                regexReplace2(docText, "#CAE#", oFac.CAE)
 
-                regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+                regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
 
 
@@ -602,9 +602,9 @@ Namespace Pronto.ERP.Bll
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-                'regexReplace(docText, "#Total#", oFac.Total)
+                'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -915,20 +915,20 @@ Namespace Pronto.ERP.Bll
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "observaciones", oFac.Observaciones)
-                    regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                    regexReplace(docText, "libero", oFac.Aprobo)
-                    regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                    regexReplace(docText, "jefesector", "")
+                    regexReplace2(docText, "observaciones", oFac.Observaciones)
+                    regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                    regexReplace2(docText, "libero", oFac.Aprobo)
+                    regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                    regexReplace2(docText, "jefesector", "")
 
-                    'regexReplace(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
-                    'regexReplace(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
+                    'regexReplace2(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
+                    'regexReplace2(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
                     'Subtotal = (FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos) * (100 - oFac.PorcentajeBonificacion) / 100
 
-                    regexReplace(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
-                    regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
-                    regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    regexReplace(docText, "#Total#", FF2(oFac.Total))
+                    regexReplace2(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
+                    regexReplace2(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    regexReplace2(docText, "#Total#", FF2(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -999,60 +999,60 @@ Namespace Pronto.ERP.Bll
 
                 Try
                     'oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
-                    'regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial)
-                    'regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    'regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial)
+                    'regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
 
 
-                    'regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
 
 
-                    'regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
-                    'regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    'regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
-                regexReplace(docText, "#NumeroFactura#", oFac.NumeradorTexto)
-                'regexReplace(docText, "#Fecha#", oFac.Fecha)
-                'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
-                'regexReplace(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#NumeroFactura#", oFac.NumeradorTexto)
+                'regexReplace2(docText, "#Fecha#", oFac.Fecha)
+                'regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                'regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                'regexReplace2(docText, "#CAE#", oFac.CAE)
 
-                regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-
-
-                regexReplace(docText, "#Fecha#", Convert.ToDateTime(If(oFac.FechaIngreso, DateTime.MinValue)).ToShortDateString)
-
-                regexReplace(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
-                regexReplace(docText, "#CUIT#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Cuit, ""))
-                regexReplace(docText, "#COrden#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.RazonSocial, ""))
-                regexReplace(docText, "#COrdenCUIT#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.Cuit, ""))
+                regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
 
+                regexReplace2(docText, "#Fecha#", Convert.ToDateTime(If(oFac.FechaIngreso, DateTime.MinValue)).ToShortDateString)
 
-                regexReplace(docText, "#Direccion#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Direccion, ""))
-                regexReplace(docText, "#IVA#", 0)
-                regexReplace(docText, "#Transportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.RazonSocial, ""))
-                regexReplace(docText, "#CUIT_Transportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.Cuit, ""))
-                regexReplace(docText, "#DomicilioTransportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.Direccion, ""))
-                regexReplace(docText, "#Producto#", If(oFac.Transportista1 IsNot Nothing, oFac.Articulo.Descripcion, ""))
-                regexReplace(docText, "#Composicion#",
+                regexReplace2(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
+                regexReplace2(docText, "#CUIT#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Cuit, ""))
+                regexReplace2(docText, "#COrden#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.RazonSocial, ""))
+                regexReplace2(docText, "#COrdenCUIT#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.Cuit, ""))
+
+
+
+                regexReplace2(docText, "#Direccion#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Direccion, ""))
+                regexReplace2(docText, "#IVA#", 0)
+                regexReplace2(docText, "#Transportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.RazonSocial, ""))
+                regexReplace2(docText, "#CUIT_Transportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.Cuit, ""))
+                regexReplace2(docText, "#DomicilioTransportista#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.Direccion, ""))
+                regexReplace2(docText, "#Producto#", If(oFac.Transportista1 IsNot Nothing, oFac.Articulo.Descripcion, ""))
+                regexReplace2(docText, "#Composicion#",
                                      If(oFac.Articulo1 IsNot Nothing, oFac.Articulo1.Descripcion + " " + oFac.Porcentaje1.ToString + "%" + vbCrLf, "") & _
                                      If(oFac.Articulo2 IsNot Nothing, oFac.Articulo2.Descripcion + " " + oFac.Porcentaje2.ToString + "%" + vbCrLf, "") & _
                                      If(oFac.Articulo3 IsNot Nothing, oFac.Articulo3.Descripcion + " " + oFac.Porcentaje3.ToString + "%" + vbCrLf, "") & _
                                      If(oFac.Articulo4 IsNot Nothing, oFac.Articulo4.Descripcion + " " + oFac.Porcentaje4.ToString + "%" + vbCrLf, "") & _
                     "")
-                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, If(oFac.FormaDespacho, 0)))
+                regexReplace2(docText, "#FormaDespacho#", NombreFormaDespacho(SC, If(oFac.FormaDespacho, 0)))
 
 
-                regexReplace(docText, "#Contrato#", oFac.Contrato)
-                regexReplace(docText, "#COT#", oFac.NumeroCotizacion)
+                regexReplace2(docText, "#Contrato#", oFac.Contrato)
+                regexReplace2(docText, "#COT#", oFac.NumeroCotizacion)
 
-                regexReplace(docText, "#Bruto#", If(oFac.Bruto, 0))
-                regexReplace(docText, "#Tara#", If(oFac.Tara, 0))
-                regexReplace(docText, "#Neto#", If(oFac.Cantidad, 0))
+                regexReplace2(docText, "#Bruto#", If(oFac.Bruto, 0))
+                regexReplace2(docText, "#Tara#", If(oFac.Tara, 0))
+                regexReplace2(docText, "#Neto#", If(oFac.Cantidad, 0))
 
 
 
@@ -1060,9 +1060,9 @@ Namespace Pronto.ERP.Bll
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-                'regexReplace(docText, "#Total#", oFac.Total)
+                'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -1326,26 +1326,26 @@ Namespace Pronto.ERP.Bll
                     End Using
 
 
-                    regexReplace(docText, "#transporte#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.RazonSocial, ""))
-                    regexReplace(docText, "#patente#", oFac.Chasis)
-                    regexReplace(docText, "#acoplado#", oFac.Acoplado)
-                    regexReplace(docText, "#chofer#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Nombre, ""))
-                    regexReplace(docText, "#CUIL#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Cuil, ""))
+                    regexReplace2(docText, "#transporte#", If(oFac.Transportista1 IsNot Nothing, oFac.Transportista1.RazonSocial, ""))
+                    regexReplace2(docText, "#patente#", oFac.Chasis)
+                    regexReplace2(docText, "#acoplado#", oFac.Acoplado)
+                    regexReplace2(docText, "#chofer#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Nombre, ""))
+                    regexReplace2(docText, "#CUIL#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Cuil, ""))
 
 
-                    'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                    'regexReplace(docText, "libero", oFac.Aprobo)
-                    'regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                    'regexReplace(docText, "jefesector", "")
+                    'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                    'regexReplace2(docText, "libero", oFac.Aprobo)
+                    'regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                    'regexReplace2(docText, "jefesector", "")
 
-                    ''regexReplace(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
-                    ''regexReplace(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
+                    ''regexReplace2(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
+                    ''regexReplace2(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
                     ''Subtotal = (FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos) * (100 - oFac.PorcentajeBonificacion) / 100
 
-                    'regexReplace(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
-                    'regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
-                    'regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    'regexReplace(docText, "#Total#", FF2(oFac.Total))
+                    'regexReplace2(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
+                    'regexReplace2(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    'regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    'regexReplace2(docText, "#Total#", FF2(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -1416,57 +1416,57 @@ Namespace Pronto.ERP.Bll
 
                 Try
                     'oFac.Cliente = ClienteManager.GetItem(SC, oFac.IdCliente)
-                    'regexReplace(docText, "#Cliente#", oFac.Cliente.RazonSocial)
-                    'regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    'regexReplace2(docText, "#Cliente#", oFac.Cliente.RazonSocial)
+                    'regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
 
 
-                    'regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#DomicilioRenglon2#", oFac.Domicilio) 'oFac.Domicilio)
 
 
-                    'regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
-                    'regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    'regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
 
-                regexReplace(docText, "#NumeroFactura#", oFac.NumeradorTexto)
-                'regexReplace(docText, "#Fecha#", oFac.Fecha)
-                'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
-                'regexReplace(docText, "#CAE#", oFac.CAE)
+                regexReplace2(docText, "#NumeroFactura#", oFac.NumeradorTexto)
+                'regexReplace2(docText, "#Fecha#", oFac.Fecha)
+                'regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                'regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                'regexReplace2(docText, "#CAE#", oFac.CAE)
 
-                regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
+                regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
 
-                regexReplace(docText, "#Fecha#", Convert.ToDateTime(oFac.FechaIngreso).ToShortDateString)
-                regexReplace(docText, "#cupo#", oFac.NumeradorTexto)
-                regexReplace(docText, "#despacho#", oFac.Despacho)
+                regexReplace2(docText, "#Fecha#", Convert.ToDateTime(oFac.FechaIngreso).ToShortDateString)
+                regexReplace2(docText, "#cupo#", oFac.NumeradorTexto)
+                regexReplace2(docText, "#despacho#", oFac.Despacho)
 
-                regexReplace(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
-                regexReplace(docText, "#CUIT#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Cuit, ""))
-                regexReplace(docText, "#COrden#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.RazonSocial, ""))
-                regexReplace(docText, "#COrdenCUIT#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.Cuit, ""))
+                regexReplace2(docText, "#Cliente#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.RazonSocial, ""))
+                regexReplace2(docText, "#CUIT#", If(oFac.Cliente1 IsNot Nothing, oFac.Cliente1.Cuit, ""))
+                regexReplace2(docText, "#COrden#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.RazonSocial, ""))
+                regexReplace2(docText, "#COrdenCUIT#", If(oFac.Cliente3 IsNot Nothing, oFac.Cliente3.Cuit, ""))
 
-                regexReplace(docText, "#Producto#", If(oFac.Articulo IsNot Nothing, oFac.Articulo.Descripcion, ""))
-                regexReplace(docText, "#Contrato#", oFac.Contrato)
-                regexReplace(docText, "#FormaDespacho#", NombreFormaDespacho(SC, If(oFac.FormaDespacho, 0)))
-                regexReplace(docText, "#Cantidad#", If(oFac.Cantidad, 0))
-                regexReplace(docText, "#Maximo#", If(oFac.KilosMaximo, 0))
-                regexReplace(docText, "#Chofer#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Nombre, ""))
-                regexReplace(docText, "#CUIL#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Cuil, ""))
-                regexReplace(docText, "#chasis#", oFac.Chasis)
-                regexReplace(docText, "#acoplado#", oFac.Acoplado)
-                regexReplace(docText, "#destino#", NombreDestino(SC, oFac.Destino))
+                regexReplace2(docText, "#Producto#", If(oFac.Articulo IsNot Nothing, oFac.Articulo.Descripcion, ""))
+                regexReplace2(docText, "#Contrato#", oFac.Contrato)
+                regexReplace2(docText, "#FormaDespacho#", NombreFormaDespacho(SC, If(oFac.FormaDespacho, 0)))
+                regexReplace2(docText, "#Cantidad#", If(oFac.Cantidad, 0))
+                regexReplace2(docText, "#Maximo#", If(oFac.KilosMaximo, 0))
+                regexReplace2(docText, "#Chofer#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Nombre, ""))
+                regexReplace2(docText, "#CUIL#", If(oFac.Chofere IsNot Nothing, oFac.Chofere.Cuil, ""))
+                regexReplace2(docText, "#chasis#", oFac.Chasis)
+                regexReplace2(docText, "#acoplado#", oFac.Acoplado)
+                regexReplace2(docText, "#destino#", NombreDestino(SC, oFac.Destino))
 
 
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
                 'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
-                'regexReplace(docText, "#IVA#", oFac.ImporteIva1)
-                'regexReplace(docText, "#Total#", oFac.Total)
+                'regexReplace2(docText, "#Subtotal#", oFac.SubTotal)  'NO USAR. El reemplazo del pie está al final de esta funcion
+                'regexReplace2(docText, "#IVA#", oFac.ImporteIva1)
+                'regexReplace2(docText, "#Total#", oFac.Total)
 
 
 
@@ -1738,21 +1738,21 @@ Namespace Pronto.ERP.Bll
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "observaciones", oFac.Observaciones)
-                    'regexReplace(docText, "lugarentrega", oFac.LugarEntrega)
-                    'regexReplace(docText, "libero", oFac.Aprobo)
-                    'regexReplace(docText, "fecharecepcion", oFac.Fecha)
-                    regexReplace(docText, "jefesector", "")
+                    regexReplace2(docText, "observaciones", oFac.Observaciones)
+                    'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)
+                    'regexReplace2(docText, "libero", oFac.Aprobo)
+                    'regexReplace2(docText, "fecharecepcion", oFac.Fecha)
+                    regexReplace2(docText, "jefesector", "")
 
 
-                    'regexReplace(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
-                    'regexReplace(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
+                    'regexReplace2(docText, "#PorB#", FF2(oFac.PorcentajeBonificacion))
+                    'regexReplace2(docText, "#MontoBonif#", FF2(oFac.ImporteBonificacion))
                     'Subtotal = (FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos) * (100 - oFac.PorcentajeBonificacion) / 100
 
-                    'regexReplace(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
-                    'regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
-                    'regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    'regexReplace(docText, "#Total#", FF2(oFac.Total))
+                    'regexReplace2(docText, "#Subtotal#", FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos)
+                    'regexReplace2(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    'regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    'regexReplace2(docText, "#Total#", FF2(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -1821,33 +1821,33 @@ Namespace Pronto.ERP.Bll
                 '/////////////////////////////
                 With oFac
 
-                    regexReplace(docText, "#Cliente#", oFac.Sector)
-                    'regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
-                    'regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    regexReplace2(docText, "#Cliente#", oFac.Sector)
+                    'regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    'regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
 
 
 
-                    'regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    'regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
 
-                    regexReplace(docText, "#Numero#", oFac.Numero)
-                    regexReplace(docText, "#Fecha#", oFac.Fecha)
-                    'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                    'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
-                    'regexReplace(docText, "#CAE#", oFac.CAE)
+                    regexReplace2(docText, "#Numero#", oFac.Numero)
+                    regexReplace2(docText, "#Fecha#", oFac.Fecha)
+                    'regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                    'regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                    'regexReplace2(docText, "#CAE#", oFac.CAE)
 
-                    regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-
-
-                    regexReplace(docText, "#Detalle#", oFac.Detalle)
+                    regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
 
 
-                    regexReplace(docText, "#Solicito#", oFac.Solicito)
-                    regexReplace(docText, "#Sector#", oFac.Sector)
+                    regexReplace2(docText, "#Detalle#", oFac.Detalle)
 
-                    regexReplace(docText, "#Tipo#", "Obra") ' oFac.tipo) obra
-                    regexReplace(docText, "#TipoDes#", NombreObra(SC, .IdObra)) ' oFac.TipoDes) codigo obra
-                    regexReplace(docText, "#TipoDes1#", "") ' NombreObr(SC, .IdObra)) 'oFac.TipoDes1) nombre obra
+
+                    regexReplace2(docText, "#Solicito#", oFac.Solicito)
+                    regexReplace2(docText, "#Sector#", oFac.Sector)
+
+                    regexReplace2(docText, "#Tipo#", "Obra") ' oFac.tipo) obra
+                    regexReplace2(docText, "#TipoDes#", NombreObra(SC, .IdObra)) ' oFac.TipoDes) codigo obra
+                    regexReplace2(docText, "#TipoDes1#", "") ' NombreObr(SC, .IdObra)) 'oFac.TipoDes1) nombre obra
 
                 End With
 
@@ -1976,35 +1976,35 @@ Namespace Pronto.ERP.Bll
 
                             Dim texto As String = dupRow.InnerXml
                             With i
-                                regexReplace(texto, "#item#", iisNull(.NumeroItem))
-                                regexReplace(texto, "#Cant#", iisNull(.Cantidad))
-                                regexReplace(texto, "#Unidad#", iisNull(.Unidad))
-                                regexReplace(texto, "#Codigo#", iisNull(.Codigo))
-                                '                regexReplace(texto, "#Precio#", iisNull(itemFactura.Precio))
-                                '              regexReplace(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
+                                regexReplace2(texto, "#item#", iisNull(.NumeroItem))
+                                regexReplace2(texto, "#Cant#", iisNull(.Cantidad))
+                                regexReplace2(texto, "#Unidad#", iisNull(.Unidad))
+                                regexReplace2(texto, "#Codigo#", iisNull(.Codigo))
+                                '                regexReplace2(texto, "#Precio#", iisNull(itemFactura.Precio))
+                                '              regexReplace2(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
 
 
                                 Dim desc As String = IIf(.OrigenDescripcion <> 2, .Articulo, "") & " " & IIf(.OrigenDescripcion <> 1, .Observaciones, "")
-                                regexReplace(texto, "#Descripcion#", desc)
+                                regexReplace2(texto, "#Descripcion#", desc)
 
 
-                                regexReplace(texto, "#FechaEntrega#", iisNull(.FechaEntrega))
+                                regexReplace2(texto, "#FechaEntrega#", iisNull(.FechaEntrega))
 
-                                regexReplace(texto, "#FechaRecepcion#", "")
+                                regexReplace2(texto, "#FechaRecepcion#", "")
 
 
 
-                                regexReplace(texto, "#FechaNecesidad#", iisNull(.FechaNecesidad))
-                                regexReplace(texto, "#ListaMat#", iisNull(.ListaMateriales))
-                                regexReplace(texto, "#itLM#", iisNull(.ItemListaMaterial))
-                                regexReplace(texto, "#Equipo#", iisNull(.Equipo))
-                                regexReplace(texto, "#CentrocostoCuenta#", iisNull(.centrocosto))
-                                regexReplace(texto, "#BienUso#", IIf(iisNull(.bien_o_uso, False) = True, "SI", "NO"))
-                                regexReplace(texto, "#controlcalidad#", iisNull(.ControlDeCalidad))
-                                regexReplace(texto, "#adj#", iisNull(.Adjunto))
-                                regexReplace(texto, "#Proveedor#", iisNull(.proveedor))
-                                regexReplace(texto, "#nroFactPedido#", iisNull(.NumeroFacturaCompra1))
-                                regexReplace(texto, "#FechaFact#", "") 'iisNull(.FechaFacturaCompra))
+                                regexReplace2(texto, "#FechaNecesidad#", iisNull(.FechaNecesidad))
+                                regexReplace2(texto, "#ListaMat#", iisNull(.ListaMateriales))
+                                regexReplace2(texto, "#itLM#", iisNull(.ItemListaMaterial))
+                                regexReplace2(texto, "#Equipo#", iisNull(.Equipo))
+                                regexReplace2(texto, "#CentrocostoCuenta#", iisNull(.centrocosto))
+                                regexReplace2(texto, "#BienUso#", IIf(iisNull(.bien_o_uso, False) = True, "SI", "NO"))
+                                regexReplace2(texto, "#controlcalidad#", iisNull(.ControlDeCalidad))
+                                regexReplace2(texto, "#adj#", iisNull(.Adjunto))
+                                regexReplace2(texto, "#Proveedor#", iisNull(.proveedor))
+                                regexReplace2(texto, "#nroFactPedido#", iisNull(.NumeroFacturaCompra1))
+                                regexReplace2(texto, "#FechaFact#", "") 'iisNull(.FechaFacturaCompra))
                             End With
 
                             dupRow.InnerXml = texto
@@ -2061,22 +2061,22 @@ Namespace Pronto.ERP.Bll
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                    regexReplace(docText, "#LugarEntrega#", oFac.LugarEntrega)
-                    regexReplace(docText, "#Liberado#", IIf(Val(oFac.IdAprobo) > 0, EntidadManager.GetInitialsFromString(oFac.Aprobo) & " " & oFac.FechaAprobacion, ""))  'iniciales + fecha + hora
-                    regexReplace(docText, "#JefeSector#", "")
-                    regexReplace(docText, "#Calidad#", "")
-                    regexReplace(docText, "#Planeamiento#", "")
-                    regexReplace(docText, "#GerenciaSector#", "")
+                    regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                    regexReplace2(docText, "#LugarEntrega#", oFac.LugarEntrega)
+                    regexReplace2(docText, "#Liberado#", IIf(Val(oFac.IdAprobo) > 0, EntidadManager.GetInitialsFromString(oFac.Aprobo) & " " & oFac.FechaAprobacion, ""))  'iniciales + fecha + hora
+                    regexReplace2(docText, "#JefeSector#", "")
+                    regexReplace2(docText, "#Calidad#", "")
+                    regexReplace2(docText, "#Planeamiento#", "")
+                    regexReplace2(docText, "#GerenciaSector#", "")
 
 
-                    regexReplace(docText, "#Total#", FF2(0))
-                    regexReplace(docText, "#Total2#", FF2(0))
+                    regexReplace2(docText, "#Total#", FF2(0))
+                    regexReplace2(docText, "#Total2#", FF2(0))
 
-                    'regexReplace(docText, "#Subtotal#", FF2(oFac.SubTotal))
-                    'regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
-                    'regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    'regexReplace(docText, "#Total#", FF2(oFac.Total))
+                    'regexReplace2(docText, "#Subtotal#", FF2(oFac.SubTotal))
+                    'regexReplace2(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    'regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    'regexReplace2(docText, "#Total#", FF2(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -2144,33 +2144,33 @@ Namespace Pronto.ERP.Bll
                 '/////////////////////////////
                 With oFac
 
-                    'regexReplace(docText, "#Cliente#", oFac.Sector)
-                    'regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
-                    'regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#Cliente#", oFac.Sector)
+                    'regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    'regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
 
 
 
-                    'regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    'regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
 
-                    regexReplace(docText, "#Numero#", oFac.Numero)
-                    regexReplace(docText, "#Fecha#", oFac.Fecha)
-                    'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                    'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
-                    'regexReplace(docText, "#CAE#", oFac.CAE)
+                    regexReplace2(docText, "#Numero#", oFac.Numero)
+                    regexReplace2(docText, "#Fecha#", oFac.Fecha)
+                    'regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                    'regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                    'regexReplace2(docText, "#CAE#", oFac.CAE)
 
-                    regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-
-
-                    'regexReplace(docText, "#Detalle#", oFac.Detalle)
+                    regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
 
 
-                    'regexReplace(docText, "#Solicito#", oFac.Solicito)
-                    'regexReplace(docText, "#Sector#", oFac.Sector)
+                    'regexReplace2(docText, "#Detalle#", oFac.Detalle)
 
-                    regexReplace(docText, "#Tipo#", "Obra") ' oFac.tipo) obra
-                    'regexReplace(docText, "#TipoDes#", NombreObra(SC, .IdObra)) ' oFac.TipoDes) codigo obra
-                    regexReplace(docText, "#TipoDes1#", "") ' NombreObr(SC, .IdObra)) 'oFac.TipoDes1) nombre obra
+
+                    'regexReplace2(docText, "#Solicito#", oFac.Solicito)
+                    'regexReplace2(docText, "#Sector#", oFac.Sector)
+
+                    regexReplace2(docText, "#Tipo#", "Obra") ' oFac.tipo) obra
+                    'regexReplace2(docText, "#TipoDes#", NombreObra(SC, .IdObra)) ' oFac.TipoDes) codigo obra
+                    regexReplace2(docText, "#TipoDes1#", "") ' NombreObr(SC, .IdObra)) 'oFac.TipoDes1) nombre obra
 
                 End With
 
@@ -2299,35 +2299,35 @@ Namespace Pronto.ERP.Bll
 
                             Dim texto As String = dupRow.InnerXml
                             With i
-                                regexReplace(texto, "#item#", iisNull(.NumeroItem))
-                                regexReplace(texto, "#Cant#", iisNull(.Cantidad))
-                                regexReplace(texto, "#Unidad#", iisNull(.Unidad))
-                                regexReplace(texto, "#Codigo#", iisNull(.Codigo))
-                                '                regexReplace(texto, "#Precio#", iisNull(itemFactura.Precio))
-                                '              regexReplace(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
+                                regexReplace2(texto, "#item#", iisNull(.NumeroItem))
+                                regexReplace2(texto, "#Cant#", iisNull(.Cantidad))
+                                regexReplace2(texto, "#Unidad#", iisNull(.Unidad))
+                                regexReplace2(texto, "#Codigo#", iisNull(.Codigo))
+                                '                regexReplace2(texto, "#Precio#", iisNull(itemFactura.Precio))
+                                '              regexReplace2(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
 
 
                                 Dim desc As String = IIf(.OrigenDescripcion <> 2, .Articulo, "") & " " & IIf(.OrigenDescripcion <> 1, .Observaciones, "")
-                                regexReplace(texto, "#Descripcion#", desc)
+                                regexReplace2(texto, "#Descripcion#", desc)
 
 
-                                regexReplace(texto, "#FechaEntrega#", iisNull(.FechaEntrega))
+                                regexReplace2(texto, "#FechaEntrega#", iisNull(.FechaEntrega))
 
-                                regexReplace(texto, "#FechaRecepcion#", "")
+                                regexReplace2(texto, "#FechaRecepcion#", "")
 
 
 
-                                regexReplace(texto, "#FechaNecesidad#", iisNull(.FechaNecesidad))
-                                'regexReplace(texto, "#ListaMat#", iisNull(.ListaMateriales))
-                                'regexReplace(texto, "#itLM#", iisNull(.ItemListaMaterial))
-                                'regexReplace(texto, "#Equipo#", iisNull(.Equipo))
-                                'regexReplace(texto, "#CentrocostoCuenta#", iisNull(.centrocosto))
-                                'regexReplace(texto, "#BienUso#", IIf(iisNull(.bien_o_uso, False) = True, "SI", "NO"))
-                                'regexReplace(texto, "#controlcalidad#", iisNull(.ControlDeCalidad))
-                                'regexReplace(texto, "#adj#", iisNull(.Adjunto))
-                                'regexReplace(texto, "#Proveedor#", iisNull(.proveedor))
-                                'regexReplace(texto, "#nroFactPedido#", iisNull(.NumeroFacturaCompra1))
-                                regexReplace(texto, "#FechaFact#", "") 'iisNull(.FechaFacturaCompra))
+                                regexReplace2(texto, "#FechaNecesidad#", iisNull(.FechaNecesidad))
+                                'regexReplace2(texto, "#ListaMat#", iisNull(.ListaMateriales))
+                                'regexReplace2(texto, "#itLM#", iisNull(.ItemListaMaterial))
+                                'regexReplace2(texto, "#Equipo#", iisNull(.Equipo))
+                                'regexReplace2(texto, "#CentrocostoCuenta#", iisNull(.centrocosto))
+                                'regexReplace2(texto, "#BienUso#", IIf(iisNull(.bien_o_uso, False) = True, "SI", "NO"))
+                                'regexReplace2(texto, "#controlcalidad#", iisNull(.ControlDeCalidad))
+                                'regexReplace2(texto, "#adj#", iisNull(.Adjunto))
+                                'regexReplace2(texto, "#Proveedor#", iisNull(.proveedor))
+                                'regexReplace2(texto, "#nroFactPedido#", iisNull(.NumeroFacturaCompra1))
+                                regexReplace2(texto, "#FechaFact#", "") 'iisNull(.FechaFacturaCompra))
                             End With
 
                             dupRow.InnerXml = texto
@@ -2384,22 +2384,22 @@ Namespace Pronto.ERP.Bll
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                    regexReplace(docText, "#LugarEntrega#", oFac.LugarEntrega)
-                    regexReplace(docText, "#Liberado#", IIf(Val(oFac.IdAprobo) > 0, EntidadManager.GetInitialsFromString(oFac.Aprobo) & " " & oFac.FechaAprobacion, ""))  'iniciales + fecha + hora
-                    regexReplace(docText, "#JefeSector#", "")
-                    regexReplace(docText, "#Calidad#", "")
-                    regexReplace(docText, "#Planeamiento#", "")
-                    regexReplace(docText, "#GerenciaSector#", "")
+                    regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                    regexReplace2(docText, "#LugarEntrega#", oFac.LugarEntrega)
+                    regexReplace2(docText, "#Liberado#", IIf(Val(oFac.IdAprobo) > 0, EntidadManager.GetInitialsFromString(oFac.Aprobo) & " " & oFac.FechaAprobacion, ""))  'iniciales + fecha + hora
+                    regexReplace2(docText, "#JefeSector#", "")
+                    regexReplace2(docText, "#Calidad#", "")
+                    regexReplace2(docText, "#Planeamiento#", "")
+                    regexReplace2(docText, "#GerenciaSector#", "")
 
 
-                    regexReplace(docText, "#Total#", FF2(0))
-                    regexReplace(docText, "#Total2#", FF2(0))
+                    regexReplace2(docText, "#Total#", FF2(0))
+                    regexReplace2(docText, "#Total2#", FF2(0))
 
-                    'regexReplace(docText, "#Subtotal#", FF2(oFac.SubTotal))
-                    'regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
-                    'regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    'regexReplace(docText, "#Total#", FF2(oFac.Total))
+                    'regexReplace2(docText, "#Subtotal#", FF2(oFac.SubTotal))
+                    'regexReplace2(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    'regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    'regexReplace2(docText, "#Total#", FF2(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -2468,30 +2468,30 @@ Namespace Pronto.ERP.Bll
                 '/////////////////////////////
                 With oFac
 
-                    regexReplace(docText, "#Cliente#", oFac.IdConfecciono)
-                    'regexReplace(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
-                    'regexReplace(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
-                    'regexReplace(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
+                    regexReplace2(docText, "#Cliente#", oFac.IdConfecciono)
+                    'regexReplace2(docText, "#CodigoCliente#", oFac.Cliente.CodigoCliente)
+                    'regexReplace2(docText, "#Direccion#", oFac.Cliente.Direccion) 'oFac.Domicilio)
+                    'regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
 
 
 
-                    'regexReplace(docText, "#CUIT#", oFac.Cliente.Cuit)
+                    'regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
 
-                    regexReplace(docText, "#Numero#", oFac.Numero)
-                    regexReplace(docText, "#Fecha#", oFac.Fecha)
-                    'regexReplace(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
-                    'regexReplace(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
-                    'regexReplace(docText, "#CAE#", oFac.CAE)
+                    regexReplace2(docText, "#Numero#", oFac.Numero)
+                    regexReplace2(docText, "#Fecha#", oFac.Fecha)
+                    'regexReplace2(docText, "#CondicionIVA#", oFac.CondicionIVADescripcion)
+                    'regexReplace2(docText, "#CondicionVenta#", oFac.CondicionVentaDescripcion)
+                    'regexReplace2(docText, "#CAE#", oFac.CAE)
 
-                    regexReplace(docText, "#Observaciones#", oFac.Observaciones)
+                    regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
 
 
-                    'regexReplace(docText, "#Solicito#", oFac.Solicito)
-                    'regexReplace(docText, "#Sector#", oFac.Sector)
+                    'regexReplace2(docText, "#Solicito#", oFac.Solicito)
+                    'regexReplace2(docText, "#Sector#", oFac.Sector)
 
-                    regexReplace(docText, "#Tipo#", "Obra") ' oFac.tipo) obra
-                    'regexReplace(docText, "#TipoDes#", NombreObra(SC, .IdObra)) ' oFac.TipoDes) codigo obra
-                    regexReplace(docText, "#TipoDes1#", "") ' NombreObr(SC, .IdObra)) 'oFac.TipoDes1) nombre obra
+                    regexReplace2(docText, "#Tipo#", "Obra") ' oFac.tipo) obra
+                    'regexReplace2(docText, "#TipoDes#", NombreObra(SC, .IdObra)) ' oFac.TipoDes) codigo obra
+                    regexReplace2(docText, "#TipoDes1#", "") ' NombreObr(SC, .IdObra)) 'oFac.TipoDes1) nombre obra
 
                 End With
 
@@ -2620,33 +2620,33 @@ Namespace Pronto.ERP.Bll
 
                             Dim texto As String = dupRow.InnerXml
                             With i
-                                'regexReplace(texto, "#item#", iisNull(.NumeroItem))
-                                regexReplace(texto, "#Cant#", iisNull(.Cantidad))
-                                regexReplace(texto, "#Unidad#", iisNull(.Unidad))
-                                regexReplace(texto, "#Codigo#", iisNull(.Codigo))
-                                '                regexReplace(texto, "#Precio#", iisNull(itemFactura.Precio))
-                                '              regexReplace(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
+                                'regexReplace2(texto, "#item#", iisNull(.NumeroItem))
+                                regexReplace2(texto, "#Cant#", iisNull(.Cantidad))
+                                regexReplace2(texto, "#Unidad#", iisNull(.Unidad))
+                                regexReplace2(texto, "#Codigo#", iisNull(.Codigo))
+                                '                regexReplace2(texto, "#Precio#", iisNull(itemFactura.Precio))
+                                '              regexReplace2(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
 
 
                                 Dim desc As String = IIf(.OrigenDescripcion <> 2, .Articulo, "") & " " & IIf(.OrigenDescripcion <> 1, .Observaciones, "")
-                                regexReplace(texto, "#Descripcion#", desc)
+                                regexReplace2(texto, "#Descripcion#", desc)
 
 
-                                'regexReplace(texto, "#FechaEntrega#", iisNull(.FechaEntrega))
+                                'regexReplace2(texto, "#FechaEntrega#", iisNull(.FechaEntrega))
 
 
 
-                                'regexReplace(texto, "#FechaNecesidad#", iisNull(.FechaNecesidad))
-                                'regexReplace(texto, "#ListaMat#", iisNull(.ListaMateriales))
-                                'regexReplace(texto, "#itLM#", iisNull(.ItemListaMaterial))
-                                'regexReplace(texto, "#Equipo#", iisNull(.Equipo))
-                                'regexReplace(texto, "#CentrocostoCuenta#", iisNull(.centrocosto))
-                                'regexReplace(texto, "#BienUso#", IIf(iisNull(.bien_o_uso, False) = True, "SI", "NO"))
-                                'regexReplace(texto, "#controlcalidad#", iisNull(.ControlDeCalidad))
-                                'regexReplace(texto, "#adj#", iisNull(.Adjunto))
-                                'regexReplace(texto, "#Proveedor#", iisNull(.proveedor))
-                                'regexReplace(texto, "#nroFactPedido#", iisNull(.NumeroFacturaCompra1))
-                                'regexReplace(texto, "#FechaFact#", "") 'iisNull(.FechaFacturaCompra))
+                                'regexReplace2(texto, "#FechaNecesidad#", iisNull(.FechaNecesidad))
+                                'regexReplace2(texto, "#ListaMat#", iisNull(.ListaMateriales))
+                                'regexReplace2(texto, "#itLM#", iisNull(.ItemListaMaterial))
+                                'regexReplace2(texto, "#Equipo#", iisNull(.Equipo))
+                                'regexReplace2(texto, "#CentrocostoCuenta#", iisNull(.centrocosto))
+                                'regexReplace2(texto, "#BienUso#", IIf(iisNull(.bien_o_uso, False) = True, "SI", "NO"))
+                                'regexReplace2(texto, "#controlcalidad#", iisNull(.ControlDeCalidad))
+                                'regexReplace2(texto, "#adj#", iisNull(.Adjunto))
+                                'regexReplace2(texto, "#Proveedor#", iisNull(.proveedor))
+                                'regexReplace2(texto, "#nroFactPedido#", iisNull(.NumeroFacturaCompra1))
+                                'regexReplace2(texto, "#FechaFact#", "") 'iisNull(.FechaFacturaCompra))
                             End With
 
                             dupRow.InnerXml = texto
@@ -2703,22 +2703,22 @@ Namespace Pronto.ERP.Bll
                         docText = sr.ReadToEnd
                     End Using
 
-                    regexReplace(docText, "#Observaciones#", oFac.Observaciones)
-                    'regexReplace(docText, "#LugarEntrega#", oFac.LugarEntrega)
-                    ' regexReplace(docText, "#Liberado#", IIf(Val(oFac.IdAprobo) > 0, EntidadManager.GetInitialsFromString(oFac.Aprobo) & " " & oFac.FechaAprobacion, ""))  'iniciales + fecha + hora
-                    regexReplace(docText, "#JefeSector#", "")
-                    regexReplace(docText, "#Calidad#", "")
-                    regexReplace(docText, "#Planeamiento#", "")
-                    regexReplace(docText, "#GerenciaSector#", "")
+                    regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
+                    'regexReplace2(docText, "#LugarEntrega#", oFac.LugarEntrega)
+                    ' regexReplace2(docText, "#Liberado#", IIf(Val(oFac.IdAprobo) > 0, EntidadManager.GetInitialsFromString(oFac.Aprobo) & " " & oFac.FechaAprobacion, ""))  'iniciales + fecha + hora
+                    regexReplace2(docText, "#JefeSector#", "")
+                    regexReplace2(docText, "#Calidad#", "")
+                    regexReplace2(docText, "#Planeamiento#", "")
+                    regexReplace2(docText, "#GerenciaSector#", "")
 
 
-                    regexReplace(docText, "#Total#", FF2(0))
-                    regexReplace(docText, "#Total2#", FF2(0))
+                    regexReplace2(docText, "#Total#", FF2(0))
+                    regexReplace2(docText, "#Total2#", FF2(0))
 
-                    'regexReplace(docText, "#Subtotal#", FF2(oFac.SubTotal))
-                    'regexReplace(docText, "#IVA#", FF2(oFac.ImporteIva1))
-                    'regexReplace(docText, "#IIBB#", oFac.IBrutos)
-                    'regexReplace(docText, "#Total#", FF2(oFac.Total))
+                    'regexReplace2(docText, "#Subtotal#", FF2(oFac.SubTotal))
+                    'regexReplace2(docText, "#IVA#", FF2(oFac.ImporteIva1))
+                    'regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                    'regexReplace2(docText, "#Total#", FF2(oFac.Total))
 
 
                     sw = New StreamWriter(pie.GetStream(FileMode.Create))
@@ -2780,14 +2780,14 @@ Namespace Pronto.ERP.Bll
 
 
                 Dim texto As String = text.Text
-                regexReplace(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
-                regexReplace(texto, "#Cant#", iisNull(itemFactura.Cantidad))
-                regexReplace(texto, "Unidad", iisNull(itemFactura.Unidad))
-                regexReplace(texto, "Codigo", iisNull(itemFactura.Codigo))
-                regexReplace(texto, "#Precio#", FF2(iisNull(itemFactura.Precio)))
-                regexReplace(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
-                regexReplace(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
-                regexReplace(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
+                regexReplace2(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
+                regexReplace2(texto, "#Cant#", iisNull(itemFactura.Cantidad))
+                regexReplace2(texto, "Unidad", iisNull(itemFactura.Unidad))
+                regexReplace2(texto, "Codigo", iisNull(itemFactura.Codigo))
+                regexReplace2(texto, "#Precio#", FF2(iisNull(itemFactura.Precio)))
+                regexReplace2(texto, "#Importe#", iisNull(itemFactura.ImporteTotalItem))
+                regexReplace2(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
+                regexReplace2(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
 
                 text.Text = texto
 
@@ -2817,14 +2817,14 @@ Namespace Pronto.ERP.Bll
 
                 Dim texto As String = row.InnerXml
 
-                regexReplace(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
-                regexReplace(texto, "#Cant#", iisNull(itemFactura.Cantidad))
-                regexReplace(texto, "Unidad", iisNull(itemFactura.Unidad))
-                regexReplace(texto, "Codigo", iisNull(itemFactura.Codigo))
-                regexReplace(texto, "#Precio#", iisNull(itemFactura.Precio))
-                regexReplace(texto, "#Importe#", iisNull(itemFactura.Precio) * iisNull(itemFactura.Cantidad))
-                regexReplace(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
-                regexReplace(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
+                regexReplace2(texto, "#Numero#", iisNull(itemFactura.NumeroItem))
+                regexReplace2(texto, "#Cant#", iisNull(itemFactura.Cantidad))
+                regexReplace2(texto, "Unidad", iisNull(itemFactura.Unidad))
+                regexReplace2(texto, "Codigo", iisNull(itemFactura.Codigo))
+                regexReplace2(texto, "#Precio#", iisNull(itemFactura.Precio))
+                regexReplace2(texto, "#Importe#", iisNull(itemFactura.Precio) * iisNull(itemFactura.Cantidad))
+                regexReplace2(texto, "#Descripcion#", iisNull(itemFactura.Articulo))
+                regexReplace2(texto, "FechaEntrega", iisNull(itemFactura.FechaEntrega))
 
                 row.InnerXml = texto
 
@@ -2861,14 +2861,14 @@ Namespace Pronto.ERP.Bll
                 With itemNC
 
                     Dim texto As String = text.Text
-                    'regexReplace(texto, "#Numero#", iisNull(.NumeroItem))
-                    'regexReplace(texto, "#Cant#", iisNull(.))
-                    'regexReplace(texto, "Unidad", iisNull(.Unidad))
-                    'regexReplace(texto, "Codigo", iisNull(.Codigo))
-                    'regexReplace(texto, "#Precio#", iisNull(.Precio))
-                    regexReplace(texto, "#Importe#", iisNull(.ImporteTotalItem))
-                    regexReplace(texto, "#Descripcion#", iisNull(.Concepto))
-                    'regexReplace(texto, "FechaEntrega", iisNull(.FechaEntrega))
+                    'regexReplace2(texto, "#Numero#", iisNull(.NumeroItem))
+                    'regexReplace2(texto, "#Cant#", iisNull(.))
+                    'regexReplace2(texto, "Unidad", iisNull(.Unidad))
+                    'regexReplace2(texto, "Codigo", iisNull(.Codigo))
+                    'regexReplace2(texto, "#Precio#", iisNull(.Precio))
+                    regexReplace2(texto, "#Importe#", iisNull(.ImporteTotalItem))
+                    regexReplace2(texto, "#Descripcion#", iisNull(.Concepto))
+                    'regexReplace2(texto, "FechaEntrega", iisNull(.FechaEntrega))
 
                     text.Text = texto
                 End With
@@ -2900,15 +2900,15 @@ Namespace Pronto.ERP.Bll
                 Dim texto As String = row.InnerXml
 
                 With itemNC
-                    'regexReplace(texto, "#Numero#", iisNull(.NumeroItem))
-                    'regexReplace(texto, "#Cant#", iisNull(.Cantidad))
-                    'regexReplace(texto, "Unidad", iisNull(.Unidad))
-                    'regexReplace(texto, "Codigo", iisNull(.Codigo))
-                    'regexReplace(texto, "#Precio#", iisNull(.Precio))
-                    regexReplace(texto, "#Importe#", iisNull(.ImporteTotalItem))
-                    regexReplace(texto, "#Descripcion#", iisNull(.Concepto))
-                    'regexReplace(texto, "#Descripcion#", iisNull(.Articulo))
-                    'regexReplace(texto, "FechaEntrega", iisNull(.FechaEntrega))
+                    'regexReplace2(texto, "#Numero#", iisNull(.NumeroItem))
+                    'regexReplace2(texto, "#Cant#", iisNull(.Cantidad))
+                    'regexReplace2(texto, "Unidad", iisNull(.Unidad))
+                    'regexReplace2(texto, "Codigo", iisNull(.Codigo))
+                    'regexReplace2(texto, "#Precio#", iisNull(.Precio))
+                    regexReplace2(texto, "#Importe#", iisNull(.ImporteTotalItem))
+                    regexReplace2(texto, "#Descripcion#", iisNull(.Concepto))
+                    'regexReplace2(texto, "#Descripcion#", iisNull(.Articulo))
+                    'regexReplace2(texto, "FechaEntrega", iisNull(.FechaEntrega))
 
                 End With
                 row.InnerXml = texto
@@ -3139,15 +3139,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-
-        Public Shared Sub regexReplace(ByRef cadena As String, ByVal buscar As String, ByVal reemplazo As String)
-            'buscar = "\[" & buscar & "\]" 'agrego los corchetes
-            buscar = buscar
-
-            Dim regexText = New System.Text.RegularExpressions.Regex(buscar)
-            cadena = regexText.Replace(cadena, If(reemplazo, ""))
-
-        End Sub
     End Class
 
 
@@ -3235,30 +3226,30 @@ Namespace Pronto.ERP.Bll
     '            '/////////////////////////////
 
 
-    '            regexReplace(docText, "TAGobracodigo", "") 'myRM.Obra)
-    '            regexReplace(docText, "TAGobradescripcion", myRM.Obra) ' cmbObra.SelectedItem.Text)
+    '            regexReplace2(docText, "TAGobracodigo", "") 'myRM.Obra)
+    '            regexReplace2(docText, "TAGobradescripcion", myRM.Obra) ' cmbObra.SelectedItem.Text)
 
-    '            regexReplace(docText, "TAGnumero", myRM.Numero)
-    '            regexReplace(docText, "TAGsolicito", myRM.Solicito)
-    '            regexReplace(docText, "TAGfecha", myRM.Fecha)
-    '            regexReplace(docText, "TAGdetalle", myRM.Detalle)
-    '            regexReplace(docText, "TAGsector", myRM.Sector)
+    '            regexReplace2(docText, "TAGnumero", myRM.Numero)
+    '            regexReplace2(docText, "TAGsolicito", myRM.Solicito)
+    '            regexReplace2(docText, "TAGfecha", myRM.Fecha)
+    '            regexReplace2(docText, "TAGdetalle", myRM.Detalle)
+    '            regexReplace2(docText, "TAGsector", myRM.Sector)
 
-    '            regexReplace(docText, "observaciones", myRM.Observaciones)
-    '            regexReplace(docText, "lugarentrega", myRM.LugarEntrega)
-    '            regexReplace(docText, "libero", myRM.Aprobo)
-    '            regexReplace(docText, "jefesector", "")
+    '            regexReplace2(docText, "observaciones", myRM.Observaciones)
+    '            regexReplace2(docText, "lugarentrega", myRM.LugarEntrega)
+    '            regexReplace2(docText, "libero", myRM.Aprobo)
+    '            regexReplace2(docText, "jefesector", "")
 
 
 
 
     '            'For Each i In myRM.Detalles
-    '            '    regexReplace(docText, "R0" & i.NumeroItem & "cant", i.Cantidad)
-    '            '    regexReplace(docText, "R0" & i.NumeroItem & "unid", i.Unidad)
-    '            '    regexReplace(docText, "R0" & i.NumeroItem & "codigo", i.Codigo)
-    '            '    regexReplace(docText, "R0" & i.NumeroItem & "descripcion", i.Articulo)
-    '            '    regexReplace(docText, "R0" & i.NumeroItem & "observaciones", i.Observaciones)
-    '            '    regexReplace(docText, "R0" & i.NumeroItem & "fechanecesidad", i.FechaEntrega)
+    '            '    regexReplace2(docText, "R0" & i.NumeroItem & "cant", i.Cantidad)
+    '            '    regexReplace2(docText, "R0" & i.NumeroItem & "unid", i.Unidad)
+    '            '    regexReplace2(docText, "R0" & i.NumeroItem & "codigo", i.Codigo)
+    '            '    regexReplace2(docText, "R0" & i.NumeroItem & "descripcion", i.Articulo)
+    '            '    regexReplace2(docText, "R0" & i.NumeroItem & "observaciones", i.Observaciones)
+    '            '    regexReplace2(docText, "R0" & i.NumeroItem & "fechanecesidad", i.FechaEntrega)
     '            'Next
 
     '            'como limpiar 
@@ -3307,12 +3298,12 @@ Namespace Pronto.ERP.Bll
     '            For Each i In myRM.Detalles
     '                Dim dupRow = row1.CloneNode(True) ' rows(4).CloneNode(True)
 
-    '                'regexReplace(docText, "R01cant", i.Cantidad)
-    '                'regexReplace(docText, "R01unid", i.Unidad)
-    '                'regexReplace(docText, "R01codigo", i.Codigo)
-    '                'regexReplace(docText, "R01descripcion", i.Articulo)
-    '                'regexReplace(docText, "R01observaciones", i.Observaciones)
-    '                'regexReplace(docText, "R01fechanecesidad", i.FechaEntrega)
+    '                'regexReplace2(docText, "R01cant", i.Cantidad)
+    '                'regexReplace2(docText, "R01unid", i.Unidad)
+    '                'regexReplace2(docText, "R01codigo", i.Codigo)
+    '                'regexReplace2(docText, "R01descripcion", i.Articulo)
+    '                'regexReplace2(docText, "R01observaciones", i.Observaciones)
+    '                'regexReplace2(docText, "R01fechanecesidad", i.FechaEntrega)
 
 
     '                CeldaTexto(dupRow, 0, i.NumeroItem)
@@ -3357,11 +3348,11 @@ Namespace Pronto.ERP.Bll
     '                    docText = sr.ReadToEnd
     '                End Using
 
-    '                regexReplace(docText, "observaciones", myRM.Observaciones)
-    '                regexReplace(docText, "lugarentrega", myRM.LugarEntrega)
-    '                regexReplace(docText, "libero", myRM.Aprobo)
-    '                regexReplace(docText, "fecharecepcion", myRM.Fecha)
-    '                regexReplace(docText, "jefesector", "")
+    '                regexReplace2(docText, "observaciones", myRM.Observaciones)
+    '                regexReplace2(docText, "lugarentrega", myRM.LugarEntrega)
+    '                regexReplace2(docText, "libero", myRM.Aprobo)
+    '                regexReplace2(docText, "fecharecepcion", myRM.Fecha)
+    '                regexReplace2(docText, "jefesector", "")
 
     '                sw = New StreamWriter(pie.GetStream(FileMode.Create))
     '                Using (sw)
@@ -3397,7 +3388,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-    '    Shared Sub regexReplace(ByRef cadena As String, ByVal buscar As String, ByVal reemplazo As String)
+    '    Shared Sub regexReplace2(ByRef cadena As String, ByVal buscar As String, ByVal reemplazo As String)
     '        'buscar = "\[" & buscar & "\]" 'agrego los corchetes
     '        buscar = buscar
 
