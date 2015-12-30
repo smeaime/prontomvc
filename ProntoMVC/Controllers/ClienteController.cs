@@ -173,7 +173,7 @@ namespace ProntoMVC.Controllers
             string s = "asdasd";
             s = o.Cuit.NullSafeToString().Replace("-", "").PadLeft(11);
             o.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
-            if (!Generales.mkf_validacuit(o.Cuit.NullSafeToString())) { sErrorMsg += "\n" + "El CUIT es incorrecto"; }
+            if (!ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(o.Cuit.NullSafeToString())) { sErrorMsg += "\n" + "El CUIT es incorrecto"; }
 
             if (sErrorMsg != "") return false;
             else return true;
