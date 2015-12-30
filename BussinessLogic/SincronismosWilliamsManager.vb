@@ -39,6 +39,1606 @@ Namespace Pronto.ERP.Bll
 
     Public Class SincronismosWilliamsManager
 
+
+
+
+
+
+        Shared Function GenerarSincro(sSincronismo As String, ByRef sErroresRef As String, _
+                                      SC As String, _
+                                                          sUrlDominio As String, _
+                    ByRef sTituloFiltroUsado As String, _
+                    ByVal estado As CartaDePorteManager.enumCDPestado, _
+                    ByVal QueContenga As String, _
+                    ByVal idVendedor As Integer, _
+                    ByVal idCorredor As Integer, _
+                    ByVal idDestinatario As Integer, _
+                    ByVal idIntermediario As Integer, _
+                    ByVal idRComercial As Integer, _
+                    ByVal idArticulo As Integer, _
+                    ByVal idProcedencia As Integer, _
+                    ByVal idDestino As Integer, _
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+                    ByVal ModoExportacion As String, _
+                    sDesde As Date, sHasta As Date, _
+                    ByVal puntoventa As Integer, _
+                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
+                    Optional ByVal bTraerDuplicados As Boolean = False, _
+                    Optional ByVal Contrato As String = "", _
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, Optional ByRef registrosFiltrados As Integer = 0 _
+            ) As String
+
+
+            Dim output As String = ""
+
+
+            'Dim dt = EntidadManager.ExecDinamicoConStrongTypedDataset(SC, strSQLsincronismo)
+
+            ' cómo le digo al dataset tipado a qué base conectarse?
+            'http://blogs.msdn.com/b/marcelolr/archive/2010/04/06/changing-the-connection-string-for-typed-datasets.aspx
+
+            'Interesante!!! Uso una RuntimeConnectionString !!! -mmmm, cambiar esos datos en tiempo
+            'de ejecucion???? No pinta muy bueno.... -Bueno! es un hack....
+            'http://rajmsdn.wordpress.com/2009/12/09/strongly-typed-dataset-connection-string/
+            'http://stackoverflow.com/questions/695491/best-way-to-set-strongly-typed-dataset-connection-string-at-runtime
+            'http://forums.asp.net/p/1068777/1553283.aspx
+
+
+            ErrHandler.WriteError("Generando sincro para " & sSincronismo)
+
+            Dim sTitulo As String = ""
+
+
+
+            Dim titulo As String = FormatearTitulo(SC, _
+                                                 "", CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", _
+                                                 idVendedor, idCorredor, _
+                                                idDestinatario, idIntermediario, _
+                                                idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                AplicarANDuORalFiltro, ModoExportacion, _
+                                                 Convert.ToDateTime(sDesde), _
+                                                 Convert.ToDateTime(sHasta), _
+                                                 puntoventa, optDivisionSyngenta, , , , idClienteAuxiliar)
+
+            titulo = "" ' " " + sDesde + " " + sHasta + " " + sDesde + " " + sHasta + "      " + titulo
+
+
+
+
+
+            Using ds As New WillyInformesDataSet
+
+                If sSincronismo.ToUpper <> "YPF" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
+
+                    '// Customize the connection string.
+                    Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(SC)) ' Properties.Settings.Default.DistXsltDbConnectionString)
+                    'builder.DataSource = builder.DataSource.Replace(".", Environment.MachineName)
+                    Dim desiredConnectionString = builder.ConnectionString
+
+                    '// Set it directly on the adapter.
+
+                    'esta seria la cuestion, aca llega con 30 segs nada mas de timeout, diferente del timeout de la conexion
+                    Try
+
+                        Using adapter As New WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter
+
+                            'http://blogs.msdn.com/b/smartclientdata/archive/2005/08/16/increasetableadapterquerytimeout.aspx
+                            adapter.SetCommandTimeOut(100)
+
+                            adapter.Connection.ConnectionString = desiredConnectionString 'tenes que cambiar el ConnectionModifier=Public http://weblogs.asp.net/rajbk/archive/2007/05/26/changing-the-connectionstring-of-a-wizard-generated-tableadapter-at-runtime-from-an-objectdatasource.aspx
+                            'adapter.Connection..Adapter.SelectCommand.CommandTimeout = 60
+
+
+                            'limitar el fill  -supongo que tendrías que poner el top en wCartasDePorte_TX_InformesCorregido
+                            'limitar el fill  -supongo que tendrías que poner el top en wCartasDePorte_TX_InformesCorregido
+                            'limitar el fill  -supongo que tendrías que poner el top en wCartasDePorte_TX_InformesCorregido
+                            'limitar el fill  -supongo que tendrías que poner el top en wCartasDePorte_TX_InformesCorregido
+
+
+
+                            adapter.Fill(ds.wCartasDePorte_TX_InformesCorregido, -1, _
+                                         Convert.ToDateTime(sDesde), _
+                                         Convert.ToDateTime(sHasta), _
+                                        idVendedor, idCorredor, idDestinatario, idIntermediario, _
+                                        idRComercial, idArticulo, idProcedencia, idDestino, CartaDePorteManager._CONST_MAXROWS, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
+
+
+
+
+
+                            '     using(SqlDataAdapter dataAdapter = new SqlDataAdapter(strSQL, strConnStr))
+                            '{
+                            '   using(SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter))
+                            '   {
+
+
+                            '            }
+
+                            '            }
+
+                        End Using
+
+                    Catch ex As OutOfMemoryException
+
+                        ErrHandler.WriteAndRaiseError(ex)
+                        MandarMailDeError(ex)
+
+                    Catch ex As Exception
+                        ErrHandler.WriteAndRaiseError(ex)
+                        '    'Dim conn = New SqlConnection(builder.ConnectionString)
+                        '    'conn.Open()
+
+                        '    'Dim sampleCMD As SqlCommand = New SqlCommand("wCartasDePorte_TX_InformesCorregido", conn)
+                        '    'sampleCMD.CommandType = CommandType.StoredProcedure
+                        '    'sampleCMD.CommandTimeout = 60
+
+                        '    'Dim da = New SqlDataAdapter(sampleCMD)
+                        '    'da.Fill(ds.wCartasDePorte_TX_InformesCorregido)
+
+                        MandarMailDeError(ex)
+
+                    End Try
+
+                End If
+
+
+                Dim sWHERE As String
+
+                Try
+
+
+                    sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales(SC, _
+                                                sTitulo, _
+                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
+                                                idDestinatario, idIntermediario, _
+                                                idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                AplicarANDuORalFiltro, ModoExportacion, _
+                                                Convert.ToDateTime(sDesde), _
+                                                Convert.ToDateTime(sHasta), _
+                                                puntoventa, optDivisionSyngenta)
+                    sWHERE = sWHERE.Replace("CDP.", "")
+
+
+                    For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In ds.wCartasDePorte_TX_InformesCorregido
+                        With cdp
+                            .Observaciones = .Observaciones.Replace(vbLf, "").Replace(vbCr, "")
+                        End With
+                    Next
+
+                    FiltrarCopias(ds.wCartasDePorte_TX_InformesCorregido) 'ds.wCartasDePorte_TX_InformesCorregido)
+
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+
+
+                End Try
+
+
+                Dim sForzarNombreDescarga As String = ""
+
+
+
+                Try
+
+                    Select Case sSincronismo.ToUpper
+                        Case "A.C.A."
+                            '        el sincro de A.C.A toma de varios clientes (ACA NAON, ACA SARASA). en lugar de usar CUIT, se les pasa un numero de cuenta
+                            '100001: A.C.A.EXPORTACION()
+                            '100002: A.C.A.CORREDOR()
+                            '100005: A.C.A.PTA.SAN(NICOLAS)
+
+                            ' en Williams los meten en los campos de cliente (los vi en el remcomercial y intermediario, y tambien en el titular)
+                            '-sí, pero no hay necesidad de hacerse drama, porque en esos casos tambien ponen el corredor en A.C.A LMTDA
+
+                            'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+                            'Dim clientesACA = From i In db.linqClientes Where i.RazonSocial Like "A.C.A" Select i.IdCliente, i.RazonSocial
+
+
+
+                            Try
+
+
+                                sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales(SC, _
+                                                            sTitulo, _
+                                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "A.C.A", idVendedor, idCorredor, _
+                                                            idDestinatario, idIntermediario, _
+                                                            idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                           AplicarANDuORalFiltro, ModoExportacion, _
+                                                            Convert.ToDateTime(sDesde), _
+                                                            Convert.ToDateTime(sHasta), _
+                                                          Val(puntoventa), optDivisionSyngenta)
+                                sWHERE = sWHERE.Replace("CDP.", "")
+
+
+                                For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In ds.wCartasDePorte_TX_InformesCorregido
+                                    With cdp
+                                        .Observaciones = .Observaciones.Replace(vbLf, "").Replace(vbCr, "")
+                                    End With
+                                Next
+
+                                FiltrarCopias(ds)
+                            Catch ex As Exception
+                                ErrHandler.WriteError(ex)
+                            End Try
+
+
+
+                            Dim sErrores As String
+
+                            output = Sincronismo_ACA(SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                            sErroresRef = sErrores
+
+
+
+
+                        Case "LOS GROBO"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                         "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
+                            'dt = DataTableWHERE(dt, "Titular='LOS GROBO  AGROPECUARIA S.A.'") '30-60445647-5
+                            'TODO: cnflicto por el where a puntoventa?
+                            'Log Entry : 
+                            '08/10/2012 18:34:28
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Generando sincro para Los Grobo
+                            '__________________________'''
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Error en DataTableWHERECannot perform '=' operation on System.String and System.Int32.1=1  AND (1=0              OR 'CuentaOrden2=2871             OR  Entregador=3749  )               AND Destino=14 AND NOT (Vendedor IS NULL OR Corredor IS NULL 'OR Entregador IS NULL OR IdArticulo IS NULL) AND ISNULL(NetoProc,0)>0 AND ISNULL(Anulada,'NO')<>'SI'    AND isnull(FechaDescarga, 'FechaArribo) >= #2012/08/01#     AND isnull(FechaDescarga, FechaArribo) <= #2012/08/31#   AND ISNULL(Exporta,'NO')='NO'  AND '(PuntoVenta=1)
+                            '__________________________'
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:System.Data.EvaluateException
+
+                            'estoy usando "destino=16" como filtro, pero strSQLsincronismo me devuelve una cadena ahi...
+                            Try
+                                dt = DataTableWHERE(dt, sWHERE)
+                            Catch ex As Exception
+                                ErrHandler.WriteAndRaiseError("Error al filtrar destino")
+                            End Try
+
+                            FiltrarCopias(dt)
+                            'dt = ProntoFuncionesGenerales.DataTableWHERE(dt, generarWHERE())
+                            Dim sErrores As String
+                            output = Sincronismo_LosGrobo(dt, sErrores, "", SC)
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = dt.Rows.Count
+
+
+
+                        Case "PETROAGRO", "ARECO"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                         "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
+                            'dt = DataTableWHERE(dt, "Titular='LOS GROBO  AGROPECUARIA S.A.'") '30-60445647-5
+                            'TODO: cnflicto por el where a puntoventa?
+                            'Log Entry : 
+                            '08/10/2012 18:34:28
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Generando sincro para Los Grobo
+                            '__________________________'''
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Error en DataTableWHERECannot perform '=' operation on System.String and System.Int32.1=1  AND (1=0              OR 'CuentaOrden2=2871             OR  Entregador=3749  )               AND Destino=14 AND NOT (Vendedor IS NULL OR Corredor IS NULL 'OR Entregador IS NULL OR IdArticulo IS NULL) AND ISNULL(NetoProc,0)>0 AND ISNULL(Anulada,'NO')<>'SI'    AND isnull(FechaDescarga, 'FechaArribo) >= #2012/08/01#     AND isnull(FechaDescarga, FechaArribo) <= #2012/08/31#   AND ISNULL(Exporta,'NO')='NO'  AND '(PuntoVenta=1)
+                            '__________________________'
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:System.Data.EvaluateException
+
+                            'estoy usando "destino=16" como filtro, pero strSQLsincronismo me devuelve una cadena ahi...
+                            Try
+                                dt = DataTableWHERE(dt, sWHERE)
+                            Catch ex As Exception
+                                ErrHandler.WriteAndRaiseError("Error al filtrar destino")
+                            End Try
+
+                            FiltrarCopias(dt)
+                            'dt = ProntoFuncionesGenerales.DataTableWHERE(dt, generarWHERE())
+                            Dim sErrores As String
+                            output = Sincronismo_PetroAgro(dt, sErrores, "", SC)
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = dt.Rows.Count
+
+
+
+                        Case "AGROSUR"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(iisValidSqlDate(sDesde, #1/1/1753#)) & _
+                                         "'     AND   '" & FechaANSI(iisValidSqlDate(sHasta, #1/1/2100#)) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
+                            'dt = DataTableWHERE(dt, "Titular='LOS GROBO  AGROPECUARIA S.A.'") '30-60445647-5
+                            'TODO: cnflicto por el where a puntoventa?
+                            'Log Entry : 
+                            '08/10/2012 18:34:28
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Generando sincro para Los Grobo
+                            '__________________________'''
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Error en DataTableWHERECannot perform '=' operation on System.String and System.Int32.1=1  AND (1=0              OR 'CuentaOrden2=2871             OR  Entregador=3749  )               AND Destino=14 AND NOT (Vendedor IS NULL OR Corredor IS NULL 'OR Entregador IS NULL OR IdArticulo IS NULL) AND ISNULL(NetoProc,0)>0 AND ISNULL(Anulada,'NO')<>'SI'    AND isnull(FechaDescarga, 'FechaArribo) >= #2012/08/01#     AND isnull(FechaDescarga, FechaArribo) <= #2012/08/31#   AND ISNULL(Exporta,'NO')='NO'  AND '(PuntoVenta=1)
+                            '__________________________'
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:System.Data.EvaluateException
+
+                            'estoy usando "destino=16" como filtro, pero strSQLsincronismo me devuelve una cadena ahi...
+                            Try
+                                dt = DataTableWHERE(dt, sWHERE)
+                            Catch ex As Exception
+                                ErrHandler.WriteAndRaiseError("Error al filtrar destino")
+                            End Try
+
+                            FiltrarCopias(dt)
+                            'dt = ProntoFuncionesGenerales.DataTableWHERE(dt, generarWHERE())
+                            Dim sErrores As String
+                            output = Sincronismo_Agrosur(dt, sErrores, "", SC)
+
+                            sErroresRef = sErrores
+                            'UpdatePanel2.Update()
+
+                            registrosFiltrados = dt.Rows.Count
+
+                        Case "OJEDA"
+                            'An Error Has Occurred! System.InvalidOperationException: The null value cannot be assigned to a member with 
+                            'type System.Double which is a non-nullable value type. at Read_CartasConCalada(ObjectMaterializer`1 ) 
+                            'at System.Data.Linq.SqlClient.ObjectReaderCompiler.ObjectReader`2.MoveNext() at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection) 
+                            'at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source) at SincronismosAutomaticos.GenerarSincro(String sSincronismo, String& err, DateTime sDesde, DateTime sHasta) 
+                            'at SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia)
+
+                            Dim sErrores As String
+
+                            Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(SC, _
+                               "", "", "", 1, 3000, _
+                               estado, "", idVendedor, idCorredor, _
+                               idDestinatario, idIntermediario, _
+                               idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                                 AplicarANDuORalFiltro, ModoExportacion, _
+                               Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)), _
+                               Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)), _
+                               puntoventa, sTitulo, optDivisionSyngenta, , Contrato).ToList
+
+                            registrosFiltrados = q.Count
+                            output = Sincronismo_Ojeda(q, "", sWHERE, sErrores, SC)
+                        Case "ARGENCER"
+
+                            Dim sErrores As String
+
+                            output = Sincronismo_Argencer(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, SC)
+                            sErroresRef = sErrores
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "ZENI"
+                            Dim sErrores As String
+
+                            output = Sincronismo_ZENI(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores)
+                            sErroresRef = sErrores
+
+                            'If iisNull(sErrores, "") <> "" Then Exit Sub
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
+                        Case "ANDREOLI"
+
+
+                            Dim sErrores As String
+
+                            output = Sincronismo_AndreoliDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "BTG PACTUAL [BIT]"
+
+
+                            Dim sErrores As String
+
+                            output = Sincronismo_BTGDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+
+
+                            sErroresRef = sErrores
+                            'UpdatePanel2.Update()
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                        Case "AMAGGI (DESCARGAS)"
+
+
+                            Dim sErrores As String
+
+                            output = Sincronismo_AmaggiDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
+                        Case "AMAGGI (CALIDADES)"
+
+
+                            output = Sincronismo_AmaggiCalidades(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, SC)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "DOW"
+
+                            'If ds.wCartasDePorte_TX_InformesCorregido.Rows.Count = 0 Then
+                            '    MsgBoxAjax(Me, "No hay cartas que cumplan los filtros")
+                            '    Return
+                            'End If
+
+                            'output = Sincronismo_DOW(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+
+                            sTitulo = ""
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
+                                            "", "", "", 1, 0, _
+                                            CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor, _
+                                            idDestinatario, idIntermediario, _
+                                            idRComercial, idArticulo, idProcedencia, idDestino, "1", ModoExportacion, Convert.ToDateTime(sDesde), Convert.ToDateTime(sHasta), Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
+
+
+
+
+                            'FiltrarCopias(dt)
+                            'dt = DataTableWHERE(dt, sWHERE)
+
+                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroDOW" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
+                            'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+
+                            Try
+
+
+                                Using rep As New ReportViewer
+
+
+                                    Dim yourParams As ReportParameter() = New ReportParameter(2) {}
+
+
+                                    yourParams(0) = New ReportParameter("CadenaConexionSQL", Encriptar(SC))
+                                    yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
+                                    yourParams(2) = New ReportParameter("SentenciaSQL", sql)
+
+                                    output = RebindReportViewer_ServidorExcel(rep, _
+                                           "Sincronismo DOW2.rdl", _
+                                             yourParams, ArchivoExcelDestino, False) 'sTitulo)
+
+
+                                End Using
+
+                                'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
+                                '            "ProntoWeb\Informes\Sincronismo DOW.rdl", _
+                                '                    dt, ArchivoExcelDestino) 'sTitulo)
+
+                            Catch ex As Exception
+                                'no se por qué se queja (al final del using) de que el rep ya fue disposed, si en la funcion no lo libero...
+                                ErrHandler.WriteError(ex)
+
+                            End Try
+
+
+
+                            CambiarElNombreDeLaPrimeraHojaDeDow(output)
+
+                         
+
+
+                        Case "BLD x"
+                            'output = Sincronismo_BLD(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "BLD"
+                            ErrHandler.WriteError("Generando sincro BLD")
+                            Try
+
+
+                                sTitulo = ""
+                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                                                "", "", "", 1, 0, _
+                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
+                                                idDestinatario, idIntermediario, _
+                                                idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                                                    "1", ModoExportacion, _
+                                                Convert.ToDateTime(sDesde), _
+                                                Convert.ToDateTime(sHasta), _
+                                              Val(puntoventa), sTitulo, , , , , idClienteAuxiliar)
+
+
+
+                                'ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
+
+
+                                'FiltrarCopias(dt)
+
+                                Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroBLD" & Now.ToString("ddMMMyyyy_HHmmss") & ".pronto" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+                                ErrHandler.WriteError(" generar en " & ArchivoExcelDestino & " Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
+
+                                Try
+
+                                    Using rep As New ReportViewer
+                                        output = RebindReportViewer_ServidorExcel(rep, _
+                                                   "Sincronismo BLD.rdl", _
+                                                         sql, SC, , ArchivoExcelDestino) 'sTitulo)
+                                    End Using
+
+
+                                    'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
+                                    '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
+                                    '                   dt, ArchivoExcelDestino) 'sTitulo)
+                                Catch ex As Exception
+                                    ErrHandler.WriteError("No se pudo generar el informe de bld! ")
+
+                                End Try
+
+
+                                ErrHandler.WriteError("Se generó el reporte en " & output)
+
+
+                                'como hacer para que no agregue las columnas vacias?
+
+                                output = ExcelToCSV_SincroBLD(output, 58)
+                                'output = ExcelToCSV_SincroBLD2(output, 55)
+
+                            Catch ex As Exception
+                                ErrHandler.WriteError("Error en el sincro BLD" & ex.ToString)
+                                ErrHandler.WriteError(ex)
+                            End Try
+
+                            'registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+                            registrosFiltrados = 1 ' para que no aborte. tendría que hacer el count de GetDataTableFiltradoYPaginado_CadenaSQL
+
+
+                        Case "BLD (POSICIÓN DEMORADOS)"
+
+                            sTitulo = ""
+
+                            'Dim dt As DataTable
+                            Dim sql As String
+
+                            Try
+                                'cmbEstado.Text = "Posición"
+                                estado = CartaDePorteManager.enumCDPestado.Posicion
+
+
+                                sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                                                "", "", "", 1, 0, _
+                                                estado, "", idVendedor, idCorredor, _
+                                                idDestinatario, idIntermediario, _
+                                                idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                                                      AplicarANDuORalFiltro, ModoExportacion, _
+                                                Convert.ToDateTime(sDesde), _
+                                                Convert.ToDateTime(sHasta), _
+                                                puntoventa, sTitulo, optDivisionSyngenta, , , , idClienteAuxiliar)
+                                'FiltrarCopias(dt)
+                            Catch ex As Exception
+                                ErrHandler.WriteError(ex)
+                                ErrHandler.WriteError(sTitulo)
+                                MandarMailDeError(ex)
+                                'ErrHandler.WriteErrorYMandarMail(sTitulo)
+                                sErroresRef = "Hubo un error al generar el informe. " & ex.ToString & " " & " Filtro usado: " & sTitulo
+                                Return ""
+                            End Try
+
+
+                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "DemoradosBLD" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+
+                            Using rep As New ReportViewer
+                                output = RebindReportViewer_ServidorExcel(rep, _
+                                            "Posiciones BLD demorados.rdl", sql, _
+                                                     SC, False, ArchivoExcelDestino) 'sTitulo)
+                            End Using
+
+
+                            'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
+                            '            "ProntoWeb\Informes\Posiciones BLD demorados.rdl", _
+                            '                    dt, ArchivoExcelDestino)
+
+                            'registrosFiltrados = dt.Rows.Count
+
+                        Case "BLD (CALIDADES)"
+                            output = Sincronismo_BLDCalidades(SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                        Case "PSA LA CALIFORNIA"
+                            ErrHandler.WriteError("Generando sincro PSA La California")
+                            Try
+
+
+                                sTitulo = ""
+                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                                                "", "", "", 1, 0, _
+                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
+                                                idDestinatario, idIntermediario, _
+                                                idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                                                    "1", ModoExportacion, _
+                                                Convert.ToDateTime(sDesde), _
+                                                Convert.ToDateTime(sHasta), _
+                                                Val(puntoventa), sTitulo, , , , , idClienteAuxiliar)
+
+
+
+                                'ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
+
+
+                                'FiltrarCopias(dt)
+
+                                Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroPSA" & Now.ToString("ddMMMyyyy_HHmmss") & ".pronto" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+                                ErrHandler.WriteError(" generar en " & ArchivoExcelDestino & " Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
+
+                                Try
+                                    Using rep As New ReportViewer
+
+                                        output = RebindReportViewer_ServidorExcel(rep, _
+                                             "Sincronismo BLD.rdl", _
+                                              sql, SC, False, ArchivoExcelDestino) 'sTitulo)
+                                        'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
+                                        '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
+                                        '                   dt, ArchivoExcelDestino) 'sTitulo)
+                                    End Using
+
+                                Catch ex As Exception
+                                    ErrHandler.WriteError("No se pudo generar el informe de bld! ")
+
+                                End Try
+
+
+                                ErrHandler.WriteError("Se generó el reporte en " & output)
+
+
+                                'como hacer para que no agregue las columnas vacias?
+
+                                output = ExcelToCSV_SincroBLD(output, 46)
+
+                            Catch ex As Exception
+                                ErrHandler.WriteError("Error en el sincro BLD" & ex.ToString)
+                                ErrHandler.WriteError(ex)
+                            End Try
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
+                        Case "PSA LA CALIFORNIA (CALIDADES)"
+                            output = Sincronismo_PSALaCalifornia_Calidades(SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                        Case "BUNGE"
+                            Dim sErr As String
+
+                            output = Sincronismo_Bunge(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErr) 'AbrirSegunTipoComprobante (SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            sErroresRef = sErr
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "DIAZ RIGANTI"
+                            output = Sincronismo_DiazRiganti(SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
+                        Case "FYO"
+                            'txtCorredor.Text = "FUTUROS Y OPCIONES .COM"
+                            'Dim dttemp As wCartasDePorte_TX_InformesCorregidoDataTable
+                            'ds.wCartasDePorte_TX_InformesCorregido
+                            'dttemp = DataTableWHERE(ds.wCartasDePorte_TX_InformesCorregido, generarWHERE())
+                            'ds.wCartasDePorte_TX_InformesCorregido.Select(generarWHERE())
+                            output = Sincronismo_FYO(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                        Case "FYO (POSICIÓN)"
+
+
+                            output = Sincronismo_FYO_Posicion(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "GRANOS DEL LITORAL"
+
+                            output = Sincronismo_GranosDelLitoral(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "GRANOS DEL PARANA"
+                            output = Sincronismo_GranosDelParana(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "TOMAS HNOS"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                           "'     AND   '" & FechaANSI(sHasta) & "' )"
+
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            FiltrarCopias(dt)
+                            output = Sincronismo_TomasHnos(dt)
+                            registrosFiltrados = dt.Rows.Count
+
+                        Case "SANTA CATALINA"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                           "'     AND   '" & FechaANSI(sHasta) & "' )"
+
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            FiltrarCopias(dt)
+                            output = Sincronismo_SantaCatalina(dt)
+                            registrosFiltrados = dt.Rows.Count
+
+                        Case "ALABERN (CALIDADES)"
+                            Dim sErrores As String
+
+                            output = Sincronismo_AlabernCalidades(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores)
+
+                            sErroresRef = sErrores
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                            Select Case puntoventa
+                                Case 1
+                                    sForzarNombreDescarga = "AnalisisW_BA.txt"
+                                Case 2
+                                    sForzarNombreDescarga = "AnalisisW_SL.txt"
+                                Case 3
+                                    sForzarNombreDescarga = "AnalisisW_AS.txt"
+                                Case 4
+                                    sForzarNombreDescarga = "AnalisisW_BB.txt"
+                                Case Else
+                                    sForzarNombreDescarga = "AnalisisW.txt"
+                            End Select
+
+
+                        Case "ALABERN"
+                            Dim sErrores As String
+
+                            output = Sincronismo_Alabern(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores)
+                            sErroresRef = sErrores
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                            Select Case puntoventa
+                                Case 1
+                                    sForzarNombreDescarga = "DescargasW_BA.txt"
+                                Case 2
+                                    sForzarNombreDescarga = "DescargasW_SL.txt"
+                                Case 3
+                                    sForzarNombreDescarga = "DescargasW_AS.txt"
+                                Case 4
+                                    sForzarNombreDescarga = "DescargasW_BB.txt"
+                                Case Else
+                                    sForzarNombreDescarga = "DescargasW.txt"
+                            End Select
+
+                        Case "LARTIRIGOYEN"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                     "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
+                            'dt = DataTableWHERE(dt, "Titular='LOS GROBO  AGROPECUARIA S.A.'") '30-60445647-5
+                            'TODO: cnflicto por el where a puntoventa?
+                            'Log Entry : 
+                            '08/10/2012 18:34:28
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Generando sincro para Los Grobo
+                            '__________________________'''
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Error en DataTableWHERECannot perform '=' operation on System.String and System.Int32.1=1  AND (1=0              OR 'CuentaOrden2=2871             OR  Entregador=3749  )               AND Destino=14 AND NOT (Vendedor IS NULL OR Corredor IS NULL 'OR Entregador IS NULL OR IdArticulo IS NULL) AND ISNULL(NetoProc,0)>0 AND ISNULL(Anulada,'NO')<>'SI'    AND isnull(FechaDescarga, 'FechaArribo) >= #2012/08/01#     AND isnull(FechaDescarga, FechaArribo) <= #2012/08/31#   AND ISNULL(Exporta,'NO')='NO'  AND '(PuntoVenta=1)
+                            '__________________________'
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:System.Data.EvaluateException
+
+                            dt = DataTableWHERE(dt, sWHERE)
+                            FiltrarCopias(dt)
+                            'dt = ProntoFuncionesGenerales.DataTableWHERE(dt, generarWHERE())
+                            Dim sErrores As String
+                            output = Sincronismo_Lartirigoyen(dt, sErrores, "")
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = dt.Rows.Count
+
+                        Case "EL ENLACE"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                           "'     AND   '" & FechaANSI(sHasta) & "' )"
+
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            FiltrarCopias(dt)
+                            output = Sincronismo_ElEnlace(dt)
+                            registrosFiltrados = dt.Rows.Count
+
+                        Case "MIGUEL CINQUE"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                           "'     AND   '" & FechaANSI(sHasta) & "' )"
+
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            FiltrarCopias(dt)
+                            output = Sincronismo_MiguelCinque(dt)
+                            registrosFiltrados = dt.Rows.Count
+
+
+                        Case "DUKAREVICH"
+                            output = Sincronismo_Dukarevich(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "GRIMALDI GRASSI"
+                            If False Then
+                                output = Path.GetTempPath & "lala" & Now.ToString("ddMMMyyyy_HHmmss") & ".csv"
+                                'WriteToXmllocal(output, SC, "SELECT * FROM CartasDePorte")
+                                'sForzarNombreDescarga = output
+                                Exit Function
+
+                            Else
+                                output = Sincronismo_GrimaldiGrassi(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            End If
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "NOBLE"
+                            Dim sErrores As String
+                            output = Sincronismo_NOBLE(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores)
+
+                            sErroresRef = sErrores
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
+                        Case "NOBLE (ANEXO CALIDADES)"
+                            output = Sincronismo_NOBLEarchivoadicional(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "SYNGENTA"
+                            Dim sErrores As String
+
+                            output = Sincronismo_Syngenta(ds.wCartasDePorte_TX_InformesCorregido, sTitulo, sWHERE, sErrores, SC)
+                            sForzarNombreDescarga = "HPESA.TXT"
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "LELFUN"
+                            Dim sErrores As String
+                            output = Sincronismo_Lelfun(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+                            'sForzarNombreDescarga = "HPESA.TXT"
+                            sErroresRef = sErrores
+                            'UpdatePanel2.Update()
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                        Case "TECNOCAMPO"
+
+
+
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
+
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            FiltrarCopias(dt)
+                            'txtDestinatario.Text = "NIDERA S.A."
+                            dt = DataTableWHERE(dt, sWHERE)
+                            'dt = DataTableWHERE(dt, "Destinatario='NIDERA S.A.'") '30-60445647-5
+
+
+                            output = Sincronismo_TecnoCampo(dt)
+                            'UpdatePanelResumen.Update()
+
+                            registrosFiltrados = dt.Rows.Count
+
+
+                        Case "RIVARA"
+
+
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+
+                            FiltrarCopias(dt)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            Dim sErrores As String
+                            output = Sincronismo_Rivara(dt, sErrores, "")
+
+                            sErroresRef = sErrores
+
+
+                            registrosFiltrados = dt.Rows.Count
+
+
+                            'sForzarNombreDescarga = "HPESA.TXT"
+
+
+                        Case "ALEA"
+
+
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+
+                            FiltrarCopias(dt)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            Dim sErrores As String
+                            output = Sincronismo_Alea(dt, sErrores, "")
+
+                            sErroresRef = sErrores
+
+
+
+                            'sForzarNombreDescarga = "HPESA.TXT"
+
+                            registrosFiltrados = dt.Rows.Count
+
+
+                        Case "AIBAL"
+
+
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+
+                            FiltrarCopias(dt)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            Dim sErrores As String
+                            output = Sincronismo_Aibal(dt, sErrores, "")
+
+                            sErroresRef = sErrores
+                            registrosFiltrados = dt.Rows.Count
+
+
+
+                            'sForzarNombreDescarga = "HPESA.TXT"
+
+
+
+                        Case "LA BRAGADENSE"
+
+
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+
+                            FiltrarCopias(dt)
+                            dt = DataTableWHERE(dt, sWHERE)
+                            Dim sErrores As String
+                            output = Sincronismo_LaBragadense(dt, sErrores, "")
+
+                            sErroresRef = sErrores
+                            registrosFiltrados = dt.Rows.Count
+
+
+
+                            'sForzarNombreDescarga = "HPESA.TXT"
+
+
+
+                        Case Else
+                            ErrHandler.WriteError("No se está eligiendo bien el sincro" & sSincronismo)
+                            sErroresRef = "Elija un sincronismo. " + sSincronismo
+                            Return ""
+                    End Select
+
+
+
+
+                    If sErroresRef <> "" Then
+                        'También, ver de diferenciar el mensaje que salta cuando ninguna carta de porte cumple con 
+                        'los filtros de cuando el sincro no sale porque alguna de las cartas no cumple con los requisitos.
+                        Dim registrosGenerados = 0
+                        Try
+                            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+                            If MyFile1.Exists Then
+                                registrosGenerados = File.ReadAllLines(output).Length
+                            End If
+
+                        Catch ex As Exception
+                            ErrHandler.WriteError(ex)
+                        End Try
+
+                        Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
+                        'Dim renglonesEnDataset = dt.Rows.Count
+                        'output cantidad de renglones
+
+                        sErroresRef = "" & registrosFiltrados & " cartas filtradas<br/>" & registrosGenerados & " cartas exportadas al sincronismo <br/> <br/>" & sErroresRef
+                        'renglonesEnErrores & " errores en " &
+
+                        'si el archivo está vacío, no enviarlo
+
+
+
+                    End If
+
+
+                Catch ex As OutOfMemoryException
+                    MandarMailDeError(ex)
+                    ErrHandler.WriteError(ex)
+                    sErroresRef = "Disculpame, no pude manejar la cantidad de datos. Por favor, intentá achicando los filtros. Ya mandé un mail al administrador con el error."
+                    Return ""
+                Catch ex As Exception
+                    'ErrHandler.WriteAndRaiseError(ex)
+                    ErrHandler.WriteError(ex)
+                    Throw
+                End Try
+
+                If output = "" Then
+                    ErrHandler.WriteError("No se pudo generar nada " & sSincronismo)
+                    'MsgBoxAjax(Me, "No se encontraron registros")
+                    'Return ""
+                End If
+
+
+                '+ registrosFiltrados.ToString + " registros "
+
+                sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + vbCrLf + "  <br/> " + sErroresRef + "<br/><br/><br/>"
+
+                If registrosFiltrados = 0 Then
+                    sErroresRef = vbCrLf + vbCrLf + "<hr/><strong>" + sSincronismo + titulo + "</strong><br/>" + "SIN REGISTROS  <br/> <br/>"
+                    output = ""
+                End If
+
+
+            End Using
+
+
+            Return output
+
+
+
+        End Function
+
+
+
+
+
+
+        Public Shared Function ExcelToCSV_SincroBLD(ByVal fileExcelName As String, ByVal MAXCOLS As Integer) As String
+            'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+            'ErrHandler.WriteError("huyo sin hacer nada")
+            'Return ""
+
+            Dim oXL As Excel.Application
+            Dim oWB As Excel.Workbook
+            Dim oSheet As Excel.Worksheet
+            Dim oRng As Excel.Range
+            Dim oWBs As Excel.Workbooks
+
+
+
+
+            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+            'la mitad de la normal, naturalmente los 80 clasicos)
+            'Notas de Entrega: 160 ancho x 36 alt
+            'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+
+            Const MAXFILAS = 2000
+            Const MAXSHEETS = 1
+            Const SEPARADOR = ";"
+
+            Try
+                '  creat a Application object
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
+                '   get   WorkBook  object
+                oWBs = oXL.Workbooks
+
+
+
+                Try
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value)
+                Catch ex As Exception
+
+                    'problemas al abrir T6
+
+                    ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                    'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+                    ErrHandler.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+
+                    ErrHandler.WriteError(ex)
+
+                End Try
+
+                Dim nf = FreeFile()
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                Dim output As String = fileExcelName + ".csv" 'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                FileOpen(nf, output, OpenMode.Output)
+
+
+
+                Dim maxsht = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+                For sht As Integer = 1 To maxsht
+
+                    'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                    oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+
+
+                    Dim dt As New Data.DataTable("dtExcel")
+
+                    '  creo las columnas
+                    For j As Integer = 1 To MAXCOLS
+                        dt.Columns.Add("column" & j, _
+                                       System.Type.GetType("System.String"))
+                    Next j
+
+
+                    Dim ds As New DataSet()
+                    ds.Tables.Add(dt)
+                    Dim dr As DataRow
+
+
+                    Dim NumeroFilas As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+                    NumeroFilas -= 1 'el ReportBuilder parece que agrega un renglon al final
+
+
+
+
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '  get data in cell
+                    'copio los datos nomás
+
+                    For i As Integer = 1 To NumeroFilas
+                        dr = ds.Tables("dtExcel").NewRow()
+                        Dim sb As String = ""
+
+                        For j As Integer = 1 To MAXCOLS
+
+                            'traigo la celda y la pongo en una variable Range (no sé por qué)
+                            oRng = CType(oSheet.Cells(i, j), Microsoft.Office.Interop.Excel.Range)
+
+
+
+                            'Range.Text << Formatted value - datatype is always "string"
+                            'Range.Value << actual datatype ex: double, datetime etc
+                            'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+                            If IsNumeric(oRng.Value) And False Then 'me fijo si es numerica, por el asuntillo de la coma
+                                sb &= oRng.Value.ToString.Replace(SEPARADOR, "_") & SEPARADOR
+                            Else
+
+                                Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+                                sb &= Left(strValue, 50).Replace(SEPARADOR, "_") & SEPARADOR
+                            End If
+
+
+
+                        Next j
+
+                        If InStr(sb, ";;;;;;;;;;;;;;") > 0 Then Continue For 'saltar renglones invalidos
+                        sb = sb.Replace(vbCrLf, "").Replace(vbCr, "").Replace(vbLf, "")
+
+                        PrintLine(nf, sb)
+                    Next i
+
+                Next sht
+
+                FileClose(nf)
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+
+
+                Return output
+
+
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                Return Nothing
+
+
+                '            1. In DCOMCNFG, right click on the My Computer and select properties.
+                '2. Choose the COM Securities tab
+                '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+                '  \Users.
+                '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. 
+                '   Do the same for <Machine_name>
+                '    \Users
+                '   Press OK and thats it. i can run my application now
+            Finally
+                Try
+                    'The service (excel.exe) will continue to run
+                    If Not oWB Is Nothing Then oWB.Close(False)
+                    NAR(oWB)
+                    oWBs.Close()
+                    NAR(oWBs)
+                    'quit and dispose app
+                    oXL.Quit()
+                    NAR(oXL)
+                    'VERY IMPORTANT
+                    GC.Collect()
+
+                    'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+                Catch ex As Exception
+                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                End Try
+            End Try
+        End Function
+
+        Public Shared Function ExcelToCSV(ByVal fileExcelName As String, Optional ByVal MAXCOLS As Integer = 60) As String
+            'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+            Dim oXL As Excel.Application
+            Dim oWB As Excel.Workbook
+            Dim oSheet As Excel.Worksheet
+            Dim oRng As Excel.Range
+            Dim oWBs As Excel.Workbooks
+
+
+
+
+            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+            'la mitad de la normal, naturalmente los 80 clasicos)
+            'Notas de Entrega: 160 ancho x 36 alt
+            'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+
+            Const MAXFILAS = 2000
+            Const MAXSHEETS = 1
+            Const SEPARADOR = ";"
+
+            Try
+                '  creat a Application object
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
+                '   get   WorkBook  object
+                oWBs = oXL.Workbooks
+
+
+
+                Try
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value)
+                Catch ex As Exception
+
+                    'problemas al abrir T6
+
+                    ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                    'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+
+                End Try
+
+                Dim nf = FreeFile()
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                Dim output As String = fileExcelName + ".csv" 'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                FileOpen(nf, output, OpenMode.Output)
+
+
+
+                Dim maxsht As Integer = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+                For sht As Integer = 1 To maxsht
+
+                    'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                    oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+
+
+                    Dim dt As New Data.DataTable("dtExcel")
+
+                    '  creo las columnas
+                    For j As Integer = 1 To MAXCOLS
+                        dt.Columns.Add("column" & j, _
+                                       System.Type.GetType("System.String"))
+                    Next j
+
+
+                    Dim ds As New DataSet()
+                    ds.Tables.Add(dt)
+                    Dim dr As DataRow
+
+
+                    Dim NumeroFilas As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+                    NumeroFilas -= 1 'el ReportBuilder parece que agrega un renglon al final
+
+
+
+
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '  get data in cell
+                    'copio los datos nomás
+
+                    For i As Integer = 1 To NumeroFilas
+                        dr = ds.Tables("dtExcel").NewRow()
+                        Dim sb As String = ""
+
+                        For j As Integer = 1 To MAXCOLS
+
+                            'traigo la celda y la pongo en una variable Range (no sé por qué)
+                            oRng = CType(oSheet.Cells(i, j), Microsoft.Office.Interop.Excel.Range)
+
+
+
+                            'Range.Text << Formatted value - datatype is always "string"
+                            'Range.Value << actual datatype ex: double, datetime etc
+                            'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+                            If IsNumeric(oRng.Value) And False Then 'me fijo si es numerica, por el asuntillo de la coma
+                                sb &= oRng.Value.ToString.Replace(SEPARADOR, "_") & SEPARADOR
+                            Else
+
+                                Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+                                sb &= Left(strValue, 50).Replace(SEPARADOR, "_") & SEPARADOR
+                            End If
+
+
+
+                        Next j
+
+
+                        PrintLine(nf, sb)
+                    Next i
+
+                Next sht
+
+                FileClose(nf)
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+
+
+                Return output
+
+
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                Return Nothing
+
+
+                '            1. In DCOMCNFG, right click on the My Computer and select properties.
+                '2. Choose the COM Securities tab
+                '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+                '  \Users.
+                '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. Do the same for <Machine_name>
+                '    \Users
+                '   Press OK and thats it. i can run my application now
+            Finally
+                Try
+                    'The service (excel.exe) will continue to run
+                    If Not oWB Is Nothing Then oWB.Close(False)
+                    NAR(oWB)
+                    oWBs.Close()
+                    NAR(oWBs)
+                    'quit and dispose app
+                    oXL.Quit()
+                    NAR(oXL)
+                    'VERY IMPORTANT
+                    GC.Collect()
+
+                    'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+                Catch ex As Exception
+                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                End Try
+            End Try
+        End Function
+
+
+
+
+
+        Public Shared Function ExcelToCSV_SincroBLD_SalidaAString(ByVal fileExcelName As String, ByVal MAXCOLS As Integer) As String
+            'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+            Dim oXL As Excel.Application
+            Dim oWB As Excel.Workbook
+            Dim oSheet As Excel.Worksheet
+            Dim oRng As Excel.Range
+            Dim oWBs As Excel.Workbooks
+
+
+
+
+            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+            'la mitad de la normal, naturalmente los 80 clasicos)
+            'Notas de Entrega: 160 ancho x 36 alt
+            'Facturas y Adjuntos: 160 ancho x 78 alto
+
+            Dim sOut As String
+
+            Const MAXFILAS = 2000
+            Const MAXSHEETS = 1
+            Const SEPARADOR = ";"
+
+            Try
+                '  creat a Application object
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
+                '   get   WorkBook  object
+                oWBs = oXL.Workbooks
+
+
+
+                Try
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value)
+                Catch ex As Exception
+
+                    'problemas al abrir T6
+
+                    ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                    'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+                    ErrHandler.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+
+                    ErrHandler.WriteError(ex)
+
+                End Try
+
+
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+
+
+
+                Dim maxsht = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+                For sht As Integer = 1 To maxsht
+
+                    'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                    oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+
+
+                    Dim dt As New Data.DataTable("dtExcel")
+
+                    '  creo las columnas
+                    For j As Integer = 1 To MAXCOLS
+                        dt.Columns.Add("column" & j, _
+                                       System.Type.GetType("System.String"))
+                    Next j
+
+
+                    Dim ds As New DataSet()
+                    ds.Tables.Add(dt)
+                    Dim dr As DataRow
+
+
+                    Dim NumeroFilas As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+                    NumeroFilas -= 1 'el ReportBuilder parece que agrega un renglon al final
+
+
+
+
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '  get data in cell
+                    'copio los datos nomás
+
+                    For i As Integer = 1 To NumeroFilas
+                        dr = ds.Tables("dtExcel").NewRow()
+                        Dim sb As String = ""
+
+                        For j As Integer = 1 To MAXCOLS
+
+                            'traigo la celda y la pongo en una variable Range (no sé por qué)
+                            oRng = CType(oSheet.Cells(i, j), Microsoft.Office.Interop.Excel.Range)
+
+
+
+                            'Range.Text << Formatted value - datatype is always "string"
+                            'Range.Value << actual datatype ex: double, datetime etc
+                            'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+                            If IsNumeric(oRng.Value) And False Then 'me fijo si es numerica, por el asuntillo de la coma
+                                sb &= oRng.Value.ToString.Replace(SEPARADOR, "_") & SEPARADOR
+                            Else
+
+                                Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+                                sb &= Left(strValue, 50).Replace(SEPARADOR, "_") & SEPARADOR
+                            End If
+
+
+
+                        Next j
+
+                        If InStr(sb, ";;;;;;;;;;;;;;") > 0 Then Continue For 'saltar renglones invalidos
+                        sb = sb.Replace(vbCrLf, "").Replace(vbCr, "").Replace(vbLf, "")
+
+                        sOut &= sb & vbCrLf
+                    Next i
+
+                Next sht
+
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+
+
+                ErrHandler.WriteError(sOut)
+                Return sOut
+
+
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                Return Nothing
+
+
+                '            1. In DCOMCNFG, right click on the My Computer and select properties.
+                '2. Choose the COM Securities tab
+                '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+                '  \Users.
+                '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. 
+                '   Do the same for <Machine_name>
+                '    \Users
+                '   Press OK and thats it. i can run my application now
+            Finally
+                Try
+                    'The service (excel.exe) will continue to run
+                    If Not oWB Is Nothing Then oWB.Close(False)
+                    NAR(oWB)
+                    oWBs.Close()
+                    NAR(oWBs)
+                    'quit and dispose app
+                    oXL.Quit()
+                    NAR(oXL)
+                    'VERY IMPORTANT
+                    GC.Collect()
+
+                    'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+                Catch ex As Exception
+                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                End Try
+            End Try
+        End Function
+
+
+
+
+
+
+
+
+
         Shared Sub CambiarElNombreDeLaPrimeraHojaDeDow(ByVal fileName As String)
             'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
 
@@ -1076,7 +2676,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -1983,7 +3583,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                
+
                 '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
                 'sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)
                 sb &= "&" & cero.ToString.PadLeft(14)
@@ -2183,7 +3783,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas & "Procedencias sin código:<br/> " & sErroresProcedencia & "<br/>Destinos sin código: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2417,7 +4017,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2652,7 +4252,279 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            End If
+
+            Return vFileName
+            'Return TextToExcel(vFileName, titulo)
+        End Function
+
+        Public Shared Function Sincronismo_PetroAgro(ByVal pDataTable As DataTable, ByRef sErrores As String, ByVal titulo As String, SC As String) As String
+
+
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+
+            Dim codigoBahiaBlanca As String
+            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
+                codigoBahiaBlanca = (From x In db.WilliamsDestinos Where x.Descripcion = "Bahia Blanca" Select x.CodigoLosGrobo).FirstOrDefault
+                If codigoBahiaBlanca = "" Then Throw New Exception("Falta asignar código al destino 'Bahia Blanca'")
+            End Using
+            Dim l As String = iisNull(ParametroManager.TraerValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo"), "")
+            'la dichosa tabla Parametros no tiene los campos de valor muy largos
+            If l = "" Or True Then
+                l = "CANGREJALES;LDC - PUERTO GALVAN;CARGILL BAHIA BLANCA;TERMINAL BAHIA BLANCA SA;ACTIAR SRL;PUERTO GALVAN. O.M.H.S.A"  '"LDC - PUERTO GALVAN"
+                ParametroManager.GuardarValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo", l)
+            End If
+            Dim bahiablanca = Split(l, ";").ToList
+
+
+
+
+
+            Dim sErroresProcedencia, sErroresDestinos As String
+
+            Dim sErroresOtros As String
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroPetroAgro " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+            For Each dc In pDataTable.Columns
+                sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+            Next
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+            For Each dr In pDataTable.Rows
+                i = 0 : sb = ""
+
+
+
+
+
+
+
+
+                '                                                           Descripción	Tipo de Dato	Longitud        Observaciones()
+
+                'Agregar un control para que no salgan cartas de porte con titulares y destinatarios sin cuit
+                If dr("TitularCUIT").ToString = "" Then
+                    sErroresOtros &= "<br/> Cliente " & dr("Titular").ToString & " sin CUIT. Carta " & dr("C.Porte").ToString
+                End If
+
+                If dr("DestinatarioCUIT").ToString = "" Then
+                    sErroresOtros &= "<br/> Cliente " & dr("Destinatario").ToString & " sin CUIT. Carta " & dr("C.Porte").ToString
+                End If
+
+
+                Dim cero = 0
+                sb &= "30707386076"                                           '1 - CUIT Williams (Entregador	Numérico	11	Código de SoftCereal ó CUIT del Entregador.
+                sb &= "&" & dr("TitularCUIT").ToString.Replace("-", "").PadLeft(11)                        '2 - Productor	Numérico	11	Código de SoftCereal ó CUIT del Productor.
+
+                ForzarPrefijo5(dr("C.Porte"))
+                sb &= "&" & Left(dr("C.Porte").ToString, IIf(Len(dr("C.Porte").ToString) > 8, Len(dr("C.Porte").ToString) - 8, 0)).PadLeft(4, "0")
+
+                sb &= "&" & Right(dr("C.Porte").ToString, 8).PadLeft(8, "0")                      '4 - Número Carta de Porte	Numérico	8	Siguientes 8 posiciones del número de CP
+                sb &= "&" & cero.ToString.PadLeft(10)                         '5 -Sucursal Ticket Entrada	Numérico	10	Se completa con Cero si no esta.
+                sb &= "&" & cero.ToString.PadLeft(10)                         '6 - Número Ticket Entrada	Numérico	10	Se completa con Cero si no esta.)
+                sb &= "&" & cero.ToString.PadLeft(10)                         '7 - Sucursal Ticket Salida	Numérico	10	Se completa con Cero si no esta.
+                sb &= "&" & cero.ToString.PadLeft(10)                         '8 - Número Ticket Salida	Numérico	10	Se completa con Cero si no esta.
+                sb &= "&" & dr("R. ComercialCUIT").ToString.Replace("-", "").PadLeft(11)                          '9 - Remitente	Numérico	11	Código de SoftCereal ó CUIT del Remitente. Por defecto se toma al Productor como Remitente.
+
+
+
+                sb &= "&" & Left("11111111111111", 14).PadLeft(14)                         '10 - Número de CAU	Numérico	14	Se completa con valor defecto informado a la Oncca (99999999999999) o Ceros. (1) Código de Autorización de Uso (C.A.U.) 
+                '2-	Completar N° de CEE con todos 1
+
+
+                '3-	Completar fecha de vencimiento de CEE, con la fecha del dia.
+                Dim stringFechaVencimiento As String
+                'If iisValidSqlDate(dr("Vencim.CP")) Then
+                stringFechaVencimiento = FechaANSI(Date.Today) '11 - Fecha Vencimiento CAU	Numérico	8	Se completa con Cero si no esta. Formato AAAAMMDD (1)
+                'Else
+                'stringFechaVencimiento = Space(8)
+                'End If
+                sb &= "&" & IIf(stringFechaVencimiento = "00010101", Space(8), stringFechaVencimiento)
+
+
+
+
+
+
+
+                sb &= "&" & dr("CUIT Transp.").ToString.Replace("-", "").PadLeft(11)           '12 - Código Empresa de Transporte	Numérico	11	Código de SoftCereal ó CUIT de la E.T. (2)
+                sb &= "&" & Left(dr("Trasportista").ToString, 30).PadLeft(30).Replace("&", " ")                          '13 - Nombre Empresa de Transporte	Alfa	30	Razón Social del Transportista.
+                sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
+
+
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+
+
+                sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
+                sb &= "&" & Int(dr("Kg.Bruto Desc.")).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
+                sb &= "&" & Int(dr("Kg.Tara Desc.")).ToString.PadLeft(10)                         '19 - Kilos Tara	Numérico	10	Se completa con la Tara registrada en la Balanza. Valor entero. Cero por defecto.
+                sb &= "&" & Int(dr("Kg.Neto Desc.")).ToString.PadLeft(10)                         '20 - Kilos Descargados	Numérico	10	Se completa con Peso Bruto – Tara. Valor entero. Cero por defecto.
+                sb &= "&" & FechaANSI(iisValidSqlDate(dr("Desc.")))     '21 - Fecha Descarga	Numérico	8	Se completa con la fecha de Descarga – Formato AAAAMMDD
+
+
+                sb &= "&" & DecimalToString(dr("H.%")).PadLeft(5)                         '22 -Porcentaje Humedad	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Mer.Kg."), 0)).ToString.PadLeft(10)                         '23 -Kilos Merma Humedad	Alfa	10	Kilos de Merma registrados por Secada. Valor entero. Cero por defecto.
+                sb &= "&" & cero.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+                sb &= "&" & cero.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+
+                sb &= "&" & cero.ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
+                sb &= "&" & cero.ToString.PadLeft(10)                        '27 -Kilos Merma Volátil	Numérico	10	Kilos de Merma registrados por Manipuleo. Valor entero. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
+                sb &= "&" & Int(dr("Kg.Netos")).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
+
+                sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)                           '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+
+                sb &= "&" & cero.ToString.PadLeft(14)                          '31 -Número de Contrato de Venta	Numérico	14	Se completa con Cero por defecto.
+
+
+                'sb &= "& " & Left(dr("LocalidadProcedenciaCodigoLosGrobo").ToString, 5).PadLeft(5)                         '32 -Código Localidad ONCCA	Numérico	5	Se obtiene en base a la procedencia indicada en la Descarga.
+                sb &= "&" & Left(iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString, 6).PadLeft(6)
+
+
+                sb &= "&" & Int(dr("Km")).ToString.PadLeft(10)                        '33 -Kilómetros	Numérico	10	Valor entero. Se completa con Cero por defecto.
+
+
+
+                Dim especie As String
+                Select Case dr("Producto").ToString
+                    Case "MAIZ"
+                        especie = "Maiz"
+                    Case "SOJA"
+                        especie = "Soja"
+                    Case "TRIGO"
+                        especie = "Trig"
+                    Case "CEBADA"
+                        especie = "Ceba"
+                    Case Else
+                        especie = Left(dr("Producto").ToString, 4)
+                End Select
+
+                sb &= "&" & especie.ToUpper.PadLeft(4, " ")                         '34 -Especie  	Numérico	3	SOJA/MAIZ/TRIG.(3)
+
+
+
+
+                sb &= "&" & Right(dr("Cosecha"), 5).Replace("/", "").PadLeft(4)                         '35 –Cosecha	Numérico	4	Se completa con Formato NNNN Por ej 0607 para 2006/2007. (3)
+
+
+                sb &= "&" & IIf(dr("CorredorCUIT").ToString.Replace("-", "") = "88000000122", "0", dr("CorredorCUIT")).ToString.Replace("-", "").PadLeft(11)                        '36 - Codigo Corredor	Numérico	11	Se completa con el código  de SoftCereal ó CUIT del Corredor o 0 Si no existe el Dato.
+
+
+                sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                        '37 -Codigo Comprador/Vendedor 	Numérico	11	Se completa con el Código de SoftCereal ó CUIT de Comprador del Contrato de Venta al que se aplicará la Carta de Porte o 0 Si no existe el Dato. (4)
+
+
+
+
+
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultas1.php?recordid=11337
+
+                If bahiablanca.Contains(dr("DestinoDesc").ToString.ToUpper) Then
+                    dr("LocalidadDestinoCodigoLosGrobo") = codigoBahiaBlanca ' codigo "Bahia Blanca"
+                End If
+
+                sb &= "&" & LeftMasPadLeft(dr("LocalidadDestinoCodigoLosGrobo").ToString, 5)                         '38 -Localidad ONCCA Destino	Numérico	5	Se completa con la Localidad ONCCA asociada al Puerto (Destino)
+                sb &= "&" & LeftMasPadLeft(dr("LocalidadProcedenciaCodigoLosGrobo").ToString, 5)                       '39 –Localidad ONCCA Procedencia 	Numérico	5	Se completa con la Localidad ONCCA asociada al Campo (Procedencia)
+
+
+
+                'If dr("LocalidadProcedenciaCodigoONCAA").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
+                If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
+                    'si no tiene codigo ni está ya en sErrores, lo meto
+
+                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
+                End If
+
+                'If dr("LocalidadDestinoCodigoONCAA").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
+                If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
+                    'si no tiene codigo ni está ya en sErrores, lo meto
+
+                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
+                End If
+
+
+
+
+
+
+                sb &= "&" & dr("SufijoCartaDePorte").ToString.PadLeft(4)                         '40 – Sufijo Carta de Porte	Numérico	4	Sufijo de la carta de Porte.
+                sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                          '41 – Destinatario CP	Numérico	11	Se completa con el Código de SoftCereal ó CUIT del destinatario de la Carta de Porte o 0 Si no existe el Dato.
+                sb &= "&" & dr("CTG").ToString.PadLeft(8)                         '42 – Numero de CTG	Numérico	8	Número de CTG presente en la CP.
+                sb &= "&" & Left(dr("Cal.-Observaciones").ToString.Replace(vbCrLf, "").Replace(vbLf, "").Replace(vbCr, "").Replace("&", " "), 125).PadRight(125)                      '43 – Comentario	Alfa	125	Campo que permita indicar algún mensaje de datos faltantes.
+
+                sb &= "&" & cero.ToString.PadLeft(6) '44 – Código de Establecimiento  Destino	Numérico	6	Código de Establecimiento Destino
+
+                sb &= "&" & iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString.PadLeft(6)   '45 - Código de Establecimiento  Procedencia	Numérico	6	Código de Establecimiento Procedencia
+                sb &= "&" & iisNull(dr("IdTipoMovimiento"), "").ToString.PadLeft(4) '46 – Código de Tipo de Movimiento	Numérico	4	Código de Tipo de Movimiento
+                '                                                       1.	Egresos contratos de Venta
+                '                                                       2.	Egreso Directo a Destino Productor
+                '                                                       3.	Directo Destino contrato de Compra
+                '                                                       4.	Ingreso Entregado Productor
+                '                                                       5.	Ingreso Contrato de Compra
+                '                                                       6.	Reingreso de Mercadería
+                '                                                       7.	Transferencia desde otra Planta
+
+
+                sb = sb.Replace(".", ",") 'solucion cabeza por los decimales
+
+
+
+                'For Each dc In pDataTable.Columns
+                '    If Not IsDBNull(dr(i)) Then
+                '        Try
+                '            If IsNumeric(dr(i)) Then
+                '                sb &= DecimalToString(dr(i)) & Microsoft.VisualBasic.ControlChars.Tab
+                '            Else
+                '                sb &= CStr(dr(i)) & Microsoft.VisualBasic.ControlChars.Tab
+                '            End If
+                '        Catch x As Exception
+                '            sb &= "" & Microsoft.VisualBasic.ControlChars.Tab
+                '        End Try
+                '    Else
+                '        sb &= Microsoft.VisualBasic.ControlChars.Tab
+                '    End If
+                '    i += 1
+                'Next
+
+
+
+
+
+
+                PrintLine(nF, sb)
+            Next
+
+
+
+            FileClose(nF)
+
+
+            ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
+            sErrores &= sErroresOtros
+
+            If True Then
+                'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -2959,7 +4831,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             'Return vFileName
             'Return TextToExcel(vFileName, titulo)
@@ -2981,7 +4853,7 @@ Namespace Pronto.ERP.Bll
 
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14979
 
-         
+
 
 
 
@@ -3029,7 +4901,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+            Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
                 For Each cdp As CartasConCalada In q
@@ -3093,7 +4965,7 @@ Namespace Pronto.ERP.Bll
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             'sErrores &= sErroresOtros
 
-            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErrores <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             FileClose(nF)
             Return vFileName
@@ -3337,7 +5209,7 @@ Namespace Pronto.ERP.Bll
 
             If True Then
                 'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
-                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -3545,7 +5417,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If False Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -3777,7 +5649,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -4012,7 +5884,7 @@ Namespace Pronto.ERP.Bll
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
-            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
             Return vFileName
 
@@ -4426,7 +6298,7 @@ Namespace Pronto.ERP.Bll
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresHumedad <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -7330,7 +9202,7 @@ Namespace Pronto.ERP.Bll
 
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = ""
                 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
                 '-no hacerlo acá, que decida el front end
             End If
@@ -8361,7 +10233,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -9074,7 +10946,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -9850,7 +11722,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -10543,7 +12415,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -11064,7 +12936,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -14573,7 +16445,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & "<br/> Procedencias sin código ONCCA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCCA: <br/>" & sErroresDestinos
 
             If True Then
-                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresPrefijo <> "" Or sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName
@@ -16041,7 +17913,7 @@ Namespace Pronto.ERP.Bll
 
             sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
             Sincronismo_NOBLEarchivoadicional(pDataTable, sWHERE)
@@ -17263,6 +19135,7 @@ Namespace Pronto.ERP.Bll
                     '//////////////////////////////////////////////////////////////////////////////////////////////
 
 
+                    sb &= SEPARADOR & .CTG.ToString
 
 
 
@@ -17382,7 +19255,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -17704,7 +19577,7 @@ Namespace Pronto.ERP.Bll
             sErrores = sErroresCartas
 
             If True Then
-                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
 
@@ -18860,7 +20733,7 @@ Namespace Pronto.ERP.Bll
             sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia ' & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = ""  'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
 

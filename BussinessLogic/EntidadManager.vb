@@ -55,6 +55,22 @@ Namespace Pronto.ERP.Bll
 
 
 
+        Public Shared Sub regexReplace2(ByRef cadena As String, ByVal buscar As String, ByVal reemplazo As String)
+            'buscar = "\[" & buscar & "\]" 'agrego los corchetes
+            Try
+                reemplazo = ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(reemplazo)
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+                reemplazo = ""
+            End Try
+
+            Dim regexText = New System.Text.RegularExpressions.Regex(buscar)
+            cadena = regexText.Replace(cadena, If(reemplazo, ""))
+
+        End Sub
+
+
+
         Public Shared Function IsValidEmail(email As String) As Boolean
             'http://stackoverflow.com/questions/1365407/c-sharp-code-to-validate-email-address
             Try
@@ -69,7 +85,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function MandaEmail_Nuevo(ByVal Para As String, ByVal Asunto As String, ByVal Cuerpo As String, ByVal De As String, ByVal SmtpServer As String, ByVal SmtpUser As String, ByVal SmtpPass As String, Optional ByVal sFileNameAdjunto As String = "", Optional ByVal SmtpPort As Long = 587, Optional ByVal EnableSSL As Integer = 1, Optional ByVal CCO As String = "", Optional ByVal img As String = "", Optional friendlyname As String = "", Optional replyTo As String = "", Optional isHtml As Boolean = True) As Boolean
+        Public Shared Function MandaEmail_Nuevo(ByVal Para As String, ByVal Asunto As String, ByVal Cuerpo As String, ByVal De As String, ByVal SmtpServer As String, ByVal SmtpUser As String, ByVal SmtpPass As String, Optional ByVal sFileNameAdjunto As String = "", Optional ByVal SmtpPort As Long = 587, Optional ByVal EnableSSL As Integer = 1, Optional ByVal CCO As String = "", Optional ByVal img As String = "", Optional friendlyname As String = "", Optional replyTo As String = "", Optional isHtml As Boolean = True, Optional inlinePNG As String = "", Optional inlinePNG2 As String = "") As Boolean
 
 
             Para = Para.Replace(";", ",").Trim
@@ -189,10 +205,13 @@ Namespace Pronto.ERP.Bll
 
                 'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
 
-                Dim log = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\Unnamed.png" '  Server.MapPath("~/Imagenes/williams.gif")
+                If inlinePNG = "" Then
+                    inlinePNG = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\Unnamed.png" '  Server.MapPath("~/Imagenes/williams.gif")
+                End If
+
 
                 'message.IsBodyHtml = True
-                Dim inlineLogo As Attachment = New Attachment(log)
+                Dim inlineLogo As Attachment = New Attachment(inlinePNG)
                 message.Attachments.Add(inlineLogo)
                 Dim contentID As String = "Image"
                 inlineLogo.ContentId = contentID
@@ -216,9 +235,15 @@ Namespace Pronto.ERP.Bll
 
                 'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
 
-                Dim pp = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\twitterwilliams.jpg" '  Server.MapPath("~/Imagenes/williams.gif")
+
+                If inlinePNG2 = "" Then
+                    inlinePNG2 = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\twitterwilliams.jpg" '  Server.MapPath("~/Imagenes/williams.gif")
+                End If
+
+
+
                 'message.IsBodyHtml = True
-                Dim twLogo As Attachment = New Attachment(pp)
+                Dim twLogo As Attachment = New Attachment(inlinePNG2)
                 message.Attachments.Add(twLogo)
                 Dim contentIDtw As String = "Image2"
                 twLogo.ContentId = contentIDtw
