@@ -3161,7 +3161,7 @@ namespace oxNameSpace
             {
                 cell = GetCell(ws, columnName, (uint)rowIndex);
 
-                if (Generales.IsNumeric(text))
+                if (ProntoMVC.Data.FuncionesGenericasCSharp.IsNumeric(text))
                 {
                     try
                     {
