@@ -10758,12 +10758,13 @@ Public Class CartaDePorteManager
 
 
             Dim LeyendaAcopio = ""
-            Try
-                LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
-            Catch ex As Exception
-                ErrHandler.WriteError(ex)
-            End Try
-
+            If oFac.IdCliente = 2775 Or oFac.IdCliente = 10 Then 'LDC o ACA
+                Try
+                    LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+            End If
 
             regexReplace2(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
@@ -27586,7 +27587,7 @@ Public Class CDPMailFiltrosManager2
         With dr
             Dim l As Long
 
-
+            Dim s = ""
 
             'If Not chkConLocalReport.Checked Then
             '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
@@ -27824,7 +27825,7 @@ Public Class CDPMailFiltrosManager2
                     Dim tiempomail = stopWatch.Elapsed.Milliseconds
 
 
-                    Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
+                    s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
 
                     dr.Item("UltimoResultado") = s
 
@@ -27840,32 +27841,30 @@ Public Class CDPMailFiltrosManager2
 
                     ErrHandler.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
                     'dddd()
-                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
+                    s = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
+                    dr.Item("UltimoResultado") = s
                     'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
                 End Try
 
                 'Next
             ElseIf output = "-1" Then
                 sError += "El filtro genera un informe vacío." & vbCrLf
-
-                dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+                s = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+                dr.Item("UltimoResultado") = s
             ElseIf output = "-2" Then
 
                 sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
-
-                dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+                s = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+                dr.Item("UltimoResultado") = s
             End If
 
 
+            sError2 = s
 
 
         End With
 
-        Try
-            sError2 = dr.Item("UltimoResultado")
-        Catch ex As Exception
 
-        End Try
 
         Return output
 
@@ -27873,6 +27872,70 @@ Public Class CDPMailFiltrosManager2
     End Function
 
 
+
+
+
+
+
+
+
+
+
+
+    Public Shared Function AgruparPorPeriodo(sc, estado, AgrupadorDeTandaPeriodos, fechadesde, fechahasta)
+        'Dim db As New LinqCartasPorteDataContext(HFSC.Value) 'no uses linq, porque necesitas más bien hacer updates
+        Try
+
+            Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(sc, _
+                                   "", _
+                                  estado, "", -1, -1, _
+                                  -1, -1, _
+                                  -1, -1, -1, -1, _
+                                   CartaDePorteManager.FiltroANDOR.FiltroOR, "", _
+                                  fechadesde, fechahasta, _
+                                   -1, , , , , )
+
+
+            If False Then
+                'metodo 1
+                'limpio anterior
+                EntidadManager.ExecDinamico(sc, "UPDATE CartasDePorte  SET AgrupadorDeTandaPeriodos=NULL  where not AgrupadorDeTandaPeriodos is NULL")
+                'elijo de nuevo
+                EntidadManager.ExecDinamico(sc, "UPDATE CartasDePorte  SET AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & " FROM CartasDePorte CDP  WHERE " & sWHERE)
+            Else
+                'metodo 2 usando tabla adicional (CartasDePorteMailClusters)
+
+                EntidadManager.ExecDinamico(sc, "truncate table CartasDePorteMailClusters")
+                EntidadManager.ExecDinamico(sc, "insert into CartasDePorteMailClusters select idcartadeporte,AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & _
+                                            " FROM CartasDePorte CDP  WHERE " _
+                                            & sWHERE)
+            End If
+
+        Catch ex As Exception
+            ErrHandler.WriteAndRaiseError("Falló el AgrupadorDeTandaPeriodos. " & ex.ToString)
+        End Try
+    End Function
+
+
+
+    Shared Function MinutosDiferencia(a As Object) As Long
+        Try
+            Return DateDiff(DateInterval.Minute, CDate(Mid(a, 13)), Now)
+        Catch ex As Exception
+            Return -1
+        End Try
+    End Function
+
+
+
+
+    Public Shared Function PurgarColaDeMails(ByVal SC As String)
+
+        'ok, qué hacemos entonces con los que quedan con la marca de "procesandose"?????
+        'me podría mandar un mail de error avisandome que quedaron mails marcados con "procesandose"....
+        ExecDinamico(SC, "IF (select COUNT (*) from WilliamsMailFiltrosCola) > 20000 BEGIN   DELETE from WilliamsMailFiltrosCola where UltimoResultado<>'En Cola'    END ")
+
+    End Function
 
 
 End Class
@@ -27892,6 +27955,96 @@ End Class
 
 
 
+
+Public Class ColaMails
+
+    Public Shared Function CancelarTrabajos(ByVal SC As String, Optional ByVal IdUsuario As Integer = -1) As DataTable
+        If IdUsuario = -1 Then
+            Return ExecDinamico(SC, "update WilliamsMailFiltrosCola set UltimoResultado='Cancelado a las " & Now.ToString & "'  where (UltimoResultado='En Cola'  OR UltimoResultado like 'Procesandose%' ) ")
+        Else
+            Return ExecDinamico(SC, "update WilliamsMailFiltrosCola set UltimoResultado='Cancelado a las " & Now.ToString & "'  where (UltimoResultado='En Cola'   OR UltimoResultado like 'Procesandose%')  AND IdUsuarioEncolo=" & IdUsuario)
+        End If
+    End Function
+
+    Public Shared Function TraerMetadata(ByVal SC As String, Optional ByVal id As Integer = -1) As DataTable
+        If id = -1 Then
+            Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where 1=0")
+        Else
+            Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where idWilliamsMailFiltroCola=" & id)
+        End If
+    End Function
+
+    Public Shared Function TraerEncolados(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where UltimoResultado='En Cola' order by AgrupadorDeTandaPeriodos DESC")
+    End Function
+
+    Public Shared Function TraerEncoladosCount(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select count(*) from WilliamsMailFiltrosCola where UltimoResultado='En Cola'")
+    End Function
+
+    Public Shared Function TraerPrimerEncolado(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select TOP 1 * from WilliamsMailFiltrosCola where UltimoResultado='En Cola' order by AgrupadorDeTandaPeriodos DESC ")
+    End Function
+
+    Public Shared Function TraerPrimerAtrasado(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select TOP 1 * from WilliamsMailFiltrosCola where UltimoResultado LIKE 'Procesando%' order by AgrupadorDeTandaPeriodos DESC ")
+    End Function
+
+    Public Shared Function TraerAtrasados(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where UltimoResultado LIKE 'Procesando%' order by AgrupadorDeTandaPeriodos DESC ")
+    End Function
+
+    Public Shared Function TraerAtrasadosCount(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select count(*) from WilliamsMailFiltrosCola where UltimoResultado LIKE 'Procesando%' ")
+    End Function
+
+    Public Shared Function TraerUno(ByVal SC As String, ByVal id As Integer) As DataTable
+        Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where idWilliamsMailFiltroCola=" & id)
+    End Function
+
+
+
+
+
+    Public Shared Function Insert_o_Update(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(Encriptar(SC))
+
+        Try
+            myConnection.Open()
+
+            Dim adapterForTable1 = New SqlDataAdapter("select * from WilliamsMailFiltrosCola", myConnection)
+            Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+            'si te tira error acá, ojito con estar usando el dataset q usaste para el 
+            'insert. Mejor, luego del insert, llamá al Traer para actualizar los datos, y recien ahí llamar al update
+            adapterForTable1.Update(dt)
+            Return 0
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+            Insert_o_Update = -1
+        Finally
+            myConnection.Close()
+        End Try
+
+    End Function
+
+
+
+
+
+End Class
 
 
 
