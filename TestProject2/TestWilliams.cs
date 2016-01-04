@@ -261,7 +261,25 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
             Assert.AreEqual(2, carta.NobleGrado);
 
-        
+
+        }
+
+        [TestMethod]
+        public void RemoveSpecialCharacterstest()
+        {
+            string original = "ássss/46";
+            var s = ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(original); ;
+
+            Assert.AreEqual(s, original);
+
+        }
+
+        [TestMethod]
+        public void MailDeInformeConHtmlyConExcelAdjunto_16455_2()
+        {
+
+            //MailLoopWork // no puedo llamar a esta funcion, porque usa la dll del appcode
+
         }
 
 
@@ -701,8 +719,6 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
-
-
         [TestMethod]
         public void FormatoImpresionPlantillaFactura_14851()
         {
@@ -711,7 +727,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
-            // buscar factura de LDC y de ACA
+            // buscar factura de LDC (id2775) y de ACA (id10)
             int IdFactura = (from c in db.CartasDePortes
                              from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
                              where c.Exporta == "SI" && f.IdCliente == 2775
@@ -728,9 +744,27 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
+
+            
+            
+            
             //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
             //File.Copy(output,copia, true);
             System.Diagnostics.Process.Start(output);
+
+
+            int IdFactura2 = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                              where c.Exporta == "SI" && f.IdCliente != 2775 && f.IdCliente != 10
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura2, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
         }
 
 
