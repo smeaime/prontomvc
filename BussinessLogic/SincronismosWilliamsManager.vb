@@ -32,12 +32,272 @@ Imports LogicaInformesWilliamsGerenc
 
 
 
-
+Imports System.Web.UI.WebControls
 
 
 Namespace Pronto.ERP.Bll
 
     Public Class SincronismosWilliamsManager
+
+
+
+
+        Public Shared Sub ElegirCombosSegunParametro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList)
+
+            'ReportViewer2.Visible = False
+            cmbEstado.Text = "Descargas"
+            txtTitular.Text = ""
+            txtCorredor.Text = ""
+            txtDestinatario.Text = ""
+
+
+            'deshabilitar txt de clientes/corredor
+            cmbEstado.Text = "Descargas"
+            txtTitular.Text = ""
+            txtCorredor.Text = ""
+            txtIntermediario.Text = ""
+            txtDestinatario.Text = ""
+            txtRcomercial.Text = ""
+            txtPopClienteAuxiliar.Text = ""
+            cmbCriterioWHERE.SelectedValue = "alguno"
+            DropDownList2.Text = "Entregas" 'selected item
+            'ojo, en sincro automaticos, cuales puedo filtrar?
+
+
+
+            'ACA:    CORREDOR()
+            'ALABERN: CORREDOR()
+            'AIBAL : TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
+            'AMAGGI TITULAR / INTERMEDIARIO / RTTE COMERCIAL / DESTINATARIO
+            'ARGENCER: CORREDOR()
+            'BLD:    CORREDOR()
+            '        BUNGE: INTERMEDIARIO / RTTE COMERCIAL / DESTINATARIO 
+            'DOW:    RTTE(COMERCIAL / DESTINATARIO)
+            '        DIAZ(RIGANTI) : CORREDOR()
+            'DUKAREVICH: CORREDOR()
+            '        LARTIRIGOYEN: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES 
+            '        LA BRAGADENSE: TITULAR / INTERMEDIARIO / RTTE COMERCIAL 
+            'FYO:    CORREDOR()
+            '        GRANOS DEL PARANA : CORREDOR
+            '        GRANOS DEL LITORAL: CORREDOR
+            '        GRIMALDI(GRASSI) : CORREDOR()
+            '        NOBLE ARG: INTERMEDIARIO / RTTE COMERCIAL / DESTINATARIO
+            '        PSA LA CALIFORNIA: CORREDOR
+            '        RIVARA : TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
+            '        SYNGENTA : TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
+            '        TECNOCAMPO: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
+            'ZENI:   CORREDOR()
+            Select Case sSincronismo.ToUpper
+                Case "LIMPIAR"
+                    txtTitular.Text = ""
+                    txtCorredor.Text = ""
+                    txtDestinatario.Text = ""
+                    txtRcomercial.Text = ""
+                    txtPopClienteAuxiliar.Text = ""
+                Case "A.C.A."
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "A.C.A. LTDA"
+                Case "AIBAL"
+                    txtTitular.Text = "AIBAL SERVICIOS AGROPECUARIOS  S.A."
+                    txtIntermediario.Text = "AIBAL SERVICIOS AGROPECUARIOS  S.A."
+                    txtRcomercial.Text = "AIBAL SERVICIOS AGROPECUARIOS  S.A."
+                    txtPopClienteAuxiliar.Text = "AIBAL SERVICIOS AGROPECUARIOS  S.A."
+
+                Case "ALABERN", "ALABERN (CALIDADES)"
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "ALABERN, FABREGA & CIA S.A."
+                Case "ALEA"
+                    txtTitular.Text = "ALEA Y CIA. SA"
+                Case "ARGENCER"
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "ARGENCER SA"
+
+                Case "ANDREOLI"
+                    txtTitular.Text = "ANDREOLI S.A."
+                    txtIntermediario.Text = "ANDREOLI S.A."
+                    txtRcomercial.Text = "ANDREOLI S.A."
+                    txtPopClienteAuxiliar.Text = "ANDREOLI S.A."
+                Case "ANDREOLI EXPORTACION"
+                    txtDestinatario.Text = "ANDREOLI S.A."
+                    DropDownList2.Text = "Export"
+                Case "AMAGGI (CALIDADES)", "AMAGGI (DESCARGAS)"
+                    txtCorredor.Text = ""
+                    txtDestinatario.Text = "AMAGGI ARGENTINA S.A."
+
+                Case "BTG PACTUAL [BIT]"
+
+                    txtIntermediario.Text = "BTG PACTUAL COMMODITIES S.A."
+                    txtRcomercial.Text = "BTG PACTUAL COMMODITIES S.A."
+                    txtDestinatario.Text = "BTG PACTUAL COMMODITIES S.A."
+                Case "BLD", "BLD 2", "BLD (CALIDADES)"
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "BLD S.A"
+                    'txtPopClienteAuxiliar.Text = "BLD S.A"
+                Case "BLD (POSICIÓN DEMORADOS)"
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "BLD S.A"
+                    txtDestinatario.Text = ""
+                    cmbEstado.Text = "Posición"
+
+                    'txtPopClienteAuxiliar.Text = "BLD S.A"
+                Case "BUNGE"
+                    'BUNGE: INTERMEDIARIO / RTTE COMERCIAL / DESTINATARIO 
+                    'txtTitular.Text = "BUNGE ARGENTINA S.A."
+
+                    txtIntermediario.Text = "BUNGE ARGENTINA S.A."
+                    txtRcomercial.Text = "BUNGE ARGENTINA S.A."
+                    txtDestinatario.Text = "BUNGE ARGENTINA S.A."
+                Case "DIAZ RIGANTI"
+                    '               DIAZ(RIGANTI) : CORREDOR()
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "DIAZ RIGANTI CEREALES S.R.L."
+                Case "DOW"
+                    'DOW:            RTTE(COMERCIAL / DESTINATARIO)
+                    txtRcomercial.Text = "DOW AGROSCIENCES ARG. SA"
+                    txtDestinatario.Text = "DOW AGROSCIENCES ARG. SA"
+                Case "DUKAREVICH"
+                    'DUKAREVICH:     CORREDOR()
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "DUKAREVICH S.A"
+                Case "EL ENLACE"
+                    txtTitular.Text = "EL ENLACE S.A."
+                Case "LARTIRIGOYEN"
+                    'LARTIRIGOYEN: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES 
+                    txtTitular.Text = "LARTIRIGOYEN S.A."
+                    txtIntermediario.Text = "LARTIRIGOYEN S.A."
+                    txtRcomercial.Text = "LARTIRIGOYEN S.A."
+                    txtPopClienteAuxiliar.Text = "LARTIRIGOYEN S.A."
+                Case "FYO"
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "FUTUROS Y OPCIONES .COM"
+                Case "FYO (POSICIÓN)"
+                    'FYO:            CORREDOR()
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "FUTUROS Y OPCIONES .COM"
+                    cmbEstado.Text = "Posición"
+                Case "GRANOS DEL LITORAL"
+                    'GRANOS DEL LITORAL: CORREDOR
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "GRANOS DEL LITORAL S.A."
+                Case "GRANOS DEL PARANA"
+                    'GRANOS DEL PARANA : CORREDOR
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "GRANOS DEL PARANA S.A."
+                Case "NOBLE", "NOBLE (ANEXO CALIDADES)"
+                    'NOBLE ARG: INTERMEDIARIO / RTTE COMERCIAL / DESTINATARIO
+                    txtDestinatario.Text = "NOBLE ARGENTINA S.A."
+                    txtIntermediario.Text = "NOBLE ARGENTINA S.A."
+                    txtRcomercial.Text = "NOBLE ARGENTINA S.A."
+                Case "GRIMALDI GRASSI"
+                    'GRIMALDI(GRASSI) : CORREDOR()
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "GRIMALDI GRASSI S.A."
+                Case "LA BRAGADENSE"
+                    'LA BRAGADENSE: TITULAR / INTERMEDIARIO / RTTE COMERCIAL 
+                    txtTitular.Text = "LA BRAGADENSE S.A"
+                    txtTitular.Text = "LA BRAGADENSE S.A"
+                    txtIntermediario.Text = "LA BRAGADENSE S.A"
+                    txtRcomercial.Text = "LA BRAGADENSE S.A"
+
+                Case "LOS GROBO"
+                    txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
+                    txtCorredor.Text = ""
+                Case "SYNGENTA"
+                    'SYNGENTA : TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
+                    txtRcomercial.Text = "SYNGENTA AGRO S.A."
+                    'txtIntermediario.Text = "SYNGENTA AGRO S.A."
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "SYNGENTA AGRO S.A."
+                    txtIntermediario.Text = "SYNGENTA AGRO S.A."
+                    txtRcomercial.Text = "SYNGENTA AGRO S.A."
+                    txtPopClienteAuxiliar.Text = "SYNGENTA AGRO S.A."
+                Case "PSA LA CALIFORNIA", "PSA LA CALIFORNIA (CALIDADES)"
+                    'PSA LA CALIFORNIA: CORREDOR
+                    txtCorredor.Text = "PSA LA CALIFORNIA SA"
+                Case "RIVARA"
+                    ' RIVARA : TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
+                    txtTitular.Text = "RIVARA S.A"
+                    txtRcomercial.Text = "RIVARA S.A"
+                    txtTitular.Text = "RIVARA S.A"
+                    txtIntermediario.Text = "RIVARA S.A"
+                    txtRcomercial.Text = "RIVARA S.A"
+                    txtPopClienteAuxiliar.Text = "RIVARA S.A"
+                Case "MIGUEL CINQUE"
+                    txtTitular.Text = "CINQUE MIGUEL MARTIN"
+                Case "SANTA CATALINA"
+                    txtTitular.Text = "SANTA CATALINA SA"
+                Case "TOMAS HNOS"
+                    txtTitular.Text = "TOMAS HNOS Y CIA. S.A."
+                    txtIntermediario.Text = "TOMAS HNOS Y CIA. S.A."
+                    txtRcomercial.Text = "TOMAS HNOS Y CIA. S.A."
+                    txtPopClienteAuxiliar.Text = "TOMAS HNOS Y CIA. S.A."
+                Case "TOMAS HNOS EXPORTACION"
+                    txtDestinatario.Text = "TOMAS HNOS Y CIA. S.A."
+                    DropDownList2.Text = "Export"
+                Case "TECNOCAMPO"
+                    ' TECNOCAMPO: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
+                    txtTitular.Text = "TECNOCAMPO SA"
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "TECNOCAMPO SA"
+                    txtIntermediario.Text = "TECNOCAMPO SA"
+                    txtRcomercial.Text = "TECNOCAMPO SA"
+                    txtPopClienteAuxiliar.Text = "TECNOCAMPO SA"
+
+                Case "ZENI"
+                    'ZENI:           CORREDOR()
+                    txtTitular.Text = ""
+                    txtCorredor.Text = "ZENI ENRIQUE y CIA SACIAF e I"
+
+
+                Case "YPF"
+                    'txtIntermediario.Text = "Y.P.F. S.A"
+                    'txtRcomercial.Text = "Y.P.F. S.A"
+                    'txtDestinatario.Text = "Y.P.F. S.A"
+
+                Case "OJEDA"
+                    txtCorredor.Text = "OJEDA ARIEL RUBEN"
+
+
+                Case "LELFUN"
+                    '                ENTREGAS: titular, Intermediario, Rte comercial y cliente Obs.
+                    'EXPORTACION:    Destinatario()
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "LELFUN S.A."
+                    txtIntermediario.Text = "LELFUN S.A."
+                    txtRcomercial.Text = "LELFUN S.A."
+                    txtPopClienteAuxiliar.Text = "LELFUN S.A."
+
+                Case "ARECO"
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "ARECO SEMILLAS SA"
+                    txtIntermediario.Text = "ARECO SEMILLAS SA"
+                    txtRcomercial.Text = "ARECO SEMILLAS SA"
+                    txtPopClienteAuxiliar.Text = "ARECO SEMILLAS SA"
+
+
+                Case "PETROAGRO"
+
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "PETROAGRO SA"
+                    txtIntermediario.Text = "PETROAGRO SA"
+                    txtRcomercial.Text = "PETROAGRO SA"
+                    txtPopClienteAuxiliar.Text = "PETROAGRO SA"
+
+
+                Case "AGROSUR"
+                    '                ENTREGAS: titular, Intermediario, Rte comercial y cliente Obs.
+                    'EXPORTACION:    Destinatario()
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "AGROSUR S.A"
+                    txtIntermediario.Text = "AGROSUR S.A"
+                    txtRcomercial.Text = "AGROSUR S.A"
+                    txtPopClienteAuxiliar.Text = "AGROSUR S.A"
+
+                Case Else
+                    Throw New Exception(sSincronismo.ToUpper + " No existe ese sincro")
+
+            End Select
+        End Sub
 
 
 
