@@ -8057,17 +8057,22 @@ Public Class CartaDePorteManager
 
 
 
-
-            If NombreCalidad(SC, .CalidadDe).Contains("GRADO 1") And .NobleGrado <> 1 Then
-                .NobleGrado = 1
-                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 1"" puesto en la calidad de descarga" & vbCrLf
-            ElseIf NombreCalidad(SC, .CalidadDe).Contains("GRADO 2") And .NobleGrado <> 2 Then
-                .NobleGrado = 2
-                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 2"" puesto en la calidad de descarga" & vbCrLf
-            ElseIf NombreCalidad(SC, .CalidadDe).Contains("GRADO 3") And .NobleGrado <> 3 Then
-                .NobleGrado = 3
-                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 3"" puesto en la calidad de descarga" & vbCrLf
-            End If
+            Try
+                If .CalidadDe > 0 Then
+                    If NombreCalidad(SC, .CalidadDe).Contains("GRADO 1") And .NobleGrado <> 1 Then
+                        .NobleGrado = 1
+                        'sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 1"" puesto en la calidad de descarga" & vbCrLf
+                    ElseIf NombreCalidad(SC, .CalidadDe).Contains("GRADO 2") And .NobleGrado <> 2 Then
+                        .NobleGrado = 2
+                        'sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 2"" puesto en la calidad de descarga" & vbCrLf
+                    ElseIf NombreCalidad(SC, .CalidadDe).Contains("GRADO 3") And .NobleGrado <> 3 Then
+                        .NobleGrado = 3
+                        'sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 3"" puesto en la calidad de descarga" & vbCrLf
+                    End If
+                End If
+            Catch ex As Exception
+                ErrHandler.WriteError("calidad invalida" & .CalidadDe & " " & ex.ToString)
+            End Try
 
 
 
