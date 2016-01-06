@@ -812,7 +812,7 @@ namespace ProntoMVC.Controllers
             {
 
 
-                if (!Generales.mkf_validacuit(model.Grupo.NullSafeToString()) && model.Grupo.NullSafeToString() != "") // (si no se informa, solo se podrá autorizar por un Administrador)
+                if (!ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(model.Grupo.NullSafeToString()) && model.Grupo.NullSafeToString() != "") // (si no se informa, solo se podrá autorizar por un Administrador)
                 {
 
                     //  como devuelvo los errores del ModelState si uso un JsonResult en lugar de una View(ViewResult)???
