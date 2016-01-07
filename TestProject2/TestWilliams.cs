@@ -66,8 +66,7 @@ namespace ProntoMVC.Tests
         const string usuario = "Mariano";
         //string bdlmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bdlmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-        string sc;
-
+        
         string DirApp;
         string SC;
         string TempFolder;
@@ -125,8 +124,29 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void movimientos_17679()
+        {
 
 
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+
+            var ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario);
+            ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario);
+            ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario);
+             ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario);
+            ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario);
+
+
+        }
+
+        [TestMethod]
+        public void CartaPorteFuncionalidadBasica()
+        {
+            //adasdas
+        }
 
 
         [TestMethod]
@@ -745,19 +765,19 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
 
-            
-            
-            
+
+
+
             //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
             //File.Copy(output,copia, true);
             System.Diagnostics.Process.Start(output);
 
 
             int IdFactura2 = (from c in db.CartasDePortes
-                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                              from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
                               where c.Exporta == "SI" && f.IdCliente != 2775 && f.IdCliente != 10
-                             orderby f.IdFactura descending
-                             select f.IdFactura).FirstOrDefault();
+                              orderby f.IdFactura descending
+                              select f.IdFactura).FirstOrDefault();
 
 
             var output2 = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura2, false, SC, DirApp);
