@@ -32,6 +32,8 @@ using System.IO;
 using Pronto.ERP.Bll;
 
 
+using System.Diagnostics;
+
 using Microsoft.Reporting.WebForms;
 
 using System.Configuration;
@@ -133,20 +135,103 @@ namespace ProntoMVC.Tests
             int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
             int destinatario = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
 
-            var ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario);
-            ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario);
-            ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario);
-             ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario);
-            ex = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario);
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario);
+            var ex3 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario);
+            var ex4 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario);
+            var ex5 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario);
 
 
         }
+
+
 
         [TestMethod]
         public void CartaPorteFuncionalidadBasica()
         {
             //adasdas
+
+            string ms = "", warn = "";
+            var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            Assert.AreEqual(1, carta.NobleGrado);
+
+            carta = null;
+            carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            carta.NobleGrado = 3;
+            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            Assert.AreEqual(2, carta.NobleGrado);
+        
         }
+
+
+
+
+
+        [TestMethod]
+        public void RecibidorOficial_15188()
+        {
+            /*
+            	- Se agregan 4 campos:
+Recibidor Oficial (Tilde)
+Estado: Combo con las opciones "Recibo" (por defecto) y "Rechazo"
+Motivo Rechazo: VACIO / REGRESA ORIGEN / ACONDICIONA / CAMBIA CP 
+Nombre de acondicionador: listado de clientes de Williams
+
+- Los campos tienen que quedar habilitados si el camion está rechazado
+
+- Si se rechaza el camion debe exigir una opción en Motivo Rechazo (distinta de vacio)
+
+- Armar un informe igual al de Listado General, agregando al final estos 4 datos
+
+- A parte de sobre el reporte, el completar alguno de estos datos no tiene que influir en el resto 
+             * del sistema (inclusive los pueden cargar antes de rechazarlo)
+            */
+
+
+            string ms = "", warn = "";
+            var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            //carta.TieneRecibidorOficial
+            //carta.EstadoRecibidor
+            //carta.MotivoRechazo
+            //carta.ClienteAcondicionador
+
+
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            
+            // la validacion me lo tiene que bochar 
+
+
+            
+
+            carta = null;
+            carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            carta.NobleGrado = 3;
+            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            Assert.AreEqual(2, carta.NobleGrado);
+
+
+        }
+
 
 
         [TestMethod]
