@@ -297,7 +297,11 @@ Namespace Pronto.ERP.BO
         Public CalidadTalCualVicentinRebaja As Double = 0
 
 
-
+        Public TieneRecibidorOficial As Boolean
+        Public EstadoRecibidor As Integer
+        Public MotivoRechazo As String
+        Public Acondicionador As Integer
+      
 
 
         'Public CartaLINQ As New CartasDePorte 'probar poniendo el "Serialization Mode" del .dbml en "Unidirectional" (porque explota al intentar meterlo en el Viewstate)

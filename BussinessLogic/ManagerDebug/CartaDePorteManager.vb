@@ -28365,23 +28365,25 @@ Public Class LogicaInformesWilliams
         'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
 
 
-        dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
+        'dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
+        '        "", "", "", 1, 0, _
+        '        enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+        '        iddestinatario, -1, _
+        '        -1, IdArticulo, -1, idDestino, _
+        '        "1", "Export", _
+        '         desde, hasta, -1, sTitulo, , , , , , , , , )
+
+
+        Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc, _
                 "", "", "", 1, 0, _
                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
                 iddestinatario, -1, _
-                -1, IdArticulo, -1, idDestino, _
+                -1, IdArticulo, -1, IdDestinoWilliams, _
                 "1", "Export", _
-                 desde, hasta, -1, sTitulo, , , , , , , , , )
+                 #1/1/1980#, Fecha, -1)
 
 
-        CartasLINQlocalSimplificadoTipadoConCalada(sc, _
-                "", "", "", 1, 0, _
-                enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-                iddestinatario, -1, _
-                -1, IdArticulo, -1, idDestino, _
-                "1", "Export", _
-                 desde, hasta, -1, sTitulo, , , , , , , , , )
-
+        entradasCDP = q.Sum(Function(x) x.NetoProc)
 
         'Dim q = Aggregate i In db.CartasDePortes _
         '        Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
@@ -28392,7 +28394,7 @@ Public Class LogicaInformesWilliams
         '            And If(i.Entregador, 0) = iddestinatario _
         '        Into Sum(CType(i.NetoProc, Decimal?))
 
-        entradasCDP = iisNull(q, 0)
+        'entradasCDP = iisNull(q, 0)
 
 
         '///////////////////////////////////////////////
