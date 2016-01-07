@@ -120,7 +120,7 @@ Namespace Pronto.ERP.Bll
                 Case "ANDREOLI EXPORTACION"
                     txtDestinatario.Text = "ANDREOLI S.A."
                     DropDownList2.Text = "Export"
-                Case "AMAGGI (CALIDADES)", "AMAGGI (DESCARGAS)"
+                Case "AMAGGI (CALIDADES)", "AMAGGI (DESCARGAS)", "AMAGGI (CALIDADES) [BIT]", "AMAGGI (DESCARGAS) [BIT]"
                     txtCorredor.Text = ""
                     txtDestinatario.Text = "AMAGGI ARGENTINA S.A."
 
@@ -151,7 +151,7 @@ Namespace Pronto.ERP.Bll
                     '               DIAZ(RIGANTI) : CORREDOR()
                     txtTitular.Text = ""
                     txtCorredor.Text = "DIAZ RIGANTI CEREALES S.R.L."
-                Case "DOW"
+                Case "DOW", "DOW FORMATO ANTERIOR"
                     'DOW:            RTTE(COMERCIAL / DESTINATARIO)
                     txtRcomercial.Text = "DOW AGROSCIENCES ARG. SA"
                     txtDestinatario.Text = "DOW AGROSCIENCES ARG. SA"
@@ -199,7 +199,7 @@ Namespace Pronto.ERP.Bll
                     txtIntermediario.Text = "LA BRAGADENSE S.A"
                     txtRcomercial.Text = "LA BRAGADENSE S.A"
 
-                Case "LOS GROBO"
+                Case "LOS GROBO", "LOS GROBO [ALGORITMO]"
                     txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
                     txtCorredor.Text = ""
                 Case "SYNGENTA"
