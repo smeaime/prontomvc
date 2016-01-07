@@ -28374,6 +28374,15 @@ Public Class LogicaInformesWilliams
                  desde, hasta, -1, sTitulo, , , , , , , , , )
 
 
+        CartasLINQlocalSimplificadoTipadoConCalada(sc, _
+                "", "", "", 1, 0, _
+                enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+                iddestinatario, -1, _
+                -1, IdArticulo, -1, idDestino, _
+                "1", "Export", _
+                 desde, hasta, -1, sTitulo, , , , , , , , , )
+
+
         'Dim q = Aggregate i In db.CartasDePortes _
         '        Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
         '        And If(i.SubnumeroDeFacturacion, 0) <= 0 _
