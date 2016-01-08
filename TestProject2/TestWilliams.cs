@@ -275,6 +275,10 @@ Nombre de acondicionador: listado de clientes de Williams
             // Assert.AreEqual(2, carta.NobleGrado);
 
 
+            var carta2 = CartaDePorteManager.GetItem(SC, 4444);
+
+
+
         }
 
 

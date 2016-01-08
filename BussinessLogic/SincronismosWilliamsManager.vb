@@ -202,7 +202,7 @@ Namespace Pronto.ERP.Bll
                 Case "LOS GROBO", "LOS GROBO [ALGORITMO]"
                     txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
                     txtCorredor.Text = ""
-                Case "SYNGENTA"
+                Case "SYNGENTA", "SYNGENTA FACTURACIÓN"
                     'SYNGENTA : TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES
                     txtRcomercial.Text = "SYNGENTA AGRO S.A."
                     'txtIntermediario.Text = "SYNGENTA AGRO S.A."
@@ -5114,8 +5114,7 @@ Namespace Pronto.ERP.Bll
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14979
 
 
-
-
+            ErrHandler.WriteError("en el sincro syngfac")
 
             Dim codigoBahiaBlanca As String
             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
@@ -5131,6 +5130,9 @@ Namespace Pronto.ERP.Bll
             Dim bahiablanca = Split(l, ";").ToList
 
 
+
+
+            ErrHandler.WriteError("en el sincro syngfac 2")
 
 
 
@@ -5157,6 +5159,8 @@ Namespace Pronto.ERP.Bll
             Const cuitYPF = "30546689979"
 
 
+
+            ErrHandler.WriteError("en el sincro syngfac 3")
 
 
 
@@ -5185,8 +5189,10 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(cdp.NetoProc).ToString & ";"
 
 
-
+                    'esta cosita linda... creo que es lo que explota
                     Dim fac = db.Facturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
+
+
                     If fac.IdCliente <> 4333 Then Continue For 'tienen que ser de syngenta
                     sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
                     sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
@@ -5220,6 +5226,8 @@ Namespace Pronto.ERP.Bll
 
 
             End Using
+
+            ErrHandler.WriteError("en el sincro syngfac 4")
 
 
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
