@@ -96,6 +96,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaVencimientoRegistro { get; set; }
         public string LimitarUbicacionesAsignadas { get; set; }
         public string PermitirAccesoATodasLasObras { get; set; }
+        public string PuntosVentaAsociados { get; set; }
     
         public virtual Cargo Cargo { get; set; }
         public virtual ICollection<Cliente> Clientes { get; set; }

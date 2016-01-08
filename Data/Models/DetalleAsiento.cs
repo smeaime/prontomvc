@@ -42,6 +42,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdValor { get; set; }
         public Nullable<int> IdProvinciaDestino { get; set; }
         public Nullable<int> IdDetalleComprobanteProveedor { get; set; }
+        public Nullable<int> IdEntidadOrigen { get; set; }
     
         public virtual Asiento Asiento { get; set; }
         public virtual Cuenta Cuenta { get; set; }
