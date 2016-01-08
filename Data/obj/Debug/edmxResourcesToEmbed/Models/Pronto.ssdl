@@ -655,6 +655,10 @@
     <Property Name="CalidadGastosFumigacionResultado" Type="numeric" Precision="18" Scale="2" />
     <Property Name="Acopio6" Type="int" />
     <Property Name="ConDuplicados" Type="int" />
+    <Property Name="TieneRecibidorOficial" Type="varchar" MaxLength="2" />
+    <Property Name="EstadoRecibidor" Type="int" />
+    <Property Name="ClienteAcondicionador" Type="int" />
+    <Property Name="MotivoRechazo" Type="int" />
   </EntityType>
   <EntityType Name="CartasDePorteDetalle">
     <Key>
@@ -1161,6 +1165,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="200" />
     <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="200" />
     <Property Name="NoTomarParaCalculoDeImpuestos" Type="varchar" MaxLength="2" />
+    <Property Name="IdPuntoVenta" Type="int" />
+    <Property Name="PuntoVenta" Type="int" />
   </EntityType>
   <EntityType Name="Conceptos">
     <Key>
@@ -1313,6 +1319,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="TextoAuxiliar3" Type="varchar" MaxLength="100" />
     <Property Name="ImputarAPresupuestoDeObra" Type="varchar" MaxLength="2" />
     <Property Name="Activa" Type="varchar" MaxLength="2" />
+    <Property Name="CodigoRubroContable" Type="int" />
   </EntityType>
   <EntityType Name="CuentasBancarias">
     <Key>
@@ -1659,6 +1666,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="IdValor" Type="int" />
     <Property Name="IdProvinciaDestino" Type="int" />
     <Property Name="IdDetalleComprobanteProveedor" Type="int" />
+    <Property Name="IdEntidadOrigen" Type="int" />
   </EntityType>
   <EntityType Name="DetalleAutorizaciones">
     <Key>
@@ -2183,6 +2191,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="IdCaja" Type="int" />
     <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
     <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="OrigenDescripcion" Type="int" />
   </EntityType>
   <EntityType Name="DetalleNotasCreditoImputaciones">
     <Key>
@@ -2227,6 +2237,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="IdCaja" Type="int" />
     <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
     <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="OrigenDescripcion" Type="int" />
   </EntityType>
   <EntityType Name="DetalleNotasDebitoProvincias">
     <Key>
@@ -3125,6 +3137,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="FechaVencimientoRegistro" Type="datetime" />
     <Property Name="LimitarUbicacionesAsignadas" Type="varchar" MaxLength="2" />
     <Property Name="PermitirAccesoATodasLasObras" Type="varchar" MaxLength="2" />
+    <Property Name="PuntosVentaAsociados" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="EmpleadosAccesos">
     <Key>
@@ -3921,6 +3934,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="FechaReversionContablePorAnulacion" Type="datetime" />
     <Property Name="IdTipoRetencionGanancia" Type="int" />
     <Property Name="CuitOpcional" Type="varchar" MaxLength="13" />
+    <Property Name="IdPuntoVenta" Type="int" />
+    <Property Name="PuntoVenta" Type="int" />
   </EntityType>
   <EntityType Name="OrdenesTrabajo">
     <Key>
@@ -4277,6 +4292,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="ProximoNumeroOrdenTrabajo" Type="int" />
     <Property Name="BasePRONTOMantenimiento" Type="varchar" MaxLength="50" />
     <Property Name="ProximaOrdenPagoFF" Type="int" />
+    <Property Name="PedidosSubcontratos" Type="ntext" />
   </EntityType>
   <EntityType Name="Parametros2">
     <Key>
@@ -4326,16 +4342,16 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="UsuarioAnulacion" Type="varchar" MaxLength="6" />
     <Property Name="FechaAnulacion" Type="datetime" />
     <Property Name="MotivoAnulacion" Type="ntext" />
-    <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="100" />
-    <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="200" />
+    <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="200" />
     <Property Name="ImprimeImportante" Type="varchar" MaxLength="2" />
     <Property Name="ImprimePlazoEntrega" Type="varchar" MaxLength="2" />
     <Property Name="ImprimeLugarEntrega" Type="varchar" MaxLength="2" />
@@ -4384,6 +4400,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="FechaEnvioProveedor" Type="datetime" />
     <Property Name="IdUsuarioEnvioProveedor" Type="int" />
     <Property Name="IdPlazoEntrega" Type="int" />
+    <Property Name="Inspecciones" Type="ntext" />
+    <Property Name="Subcontratos" Type="ntext" />
+    <Property Name="ImprimeSubcontratos" Type="varchar" MaxLength="2" />
+    <Property Name="NotasSeguimiento" Type="ntext" />
   </EntityType>
   <EntityType Name="PlazosEntrega">
     <Key>
@@ -5769,6 +5789,18 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Principal>
       <Dependent Role="CartasDePorte">
         <PropertyRef Name="Acopio6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartasDeP__Clien__25735020">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="CartasDePorte">
+        <PropertyRef Name="ClienteAcondicionador" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -8937,8 +8969,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Parameter Name="IdAutorizacionPorComprobante" Type="int" Mode="InOut" />
   </Function>
   <Function Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdComprobante" Type="int" Mode="In" />
     <Parameter Name="IdFormulario" Type="int" Mode="In" />
+    <Parameter Name="IdComprobante" Type="int" Mode="In" />
   </Function>
   <Function Name="Cotizaciones_TX_PorFechaMoneda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Fecha" Type="datetime" Mode="In" />
@@ -9392,6 +9424,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     </EntitySet>
     <AssociationSet Name="FK__CartasDeP__Acopi__5498535D" Association="Self.FK__CartasDeP__Acopi__5498535D">
       <End Role="CartasPorteAcopios" EntitySet="CartasPorteAcopios" />
+      <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartasDeP__Clien__25735020" Association="Self.FK__CartasDeP__Clien__25735020">
+      <End Role="Clientes" EntitySet="Clientes" />
       <End Role="CartasDePorte" EntitySet="CartasDePorte" />
     </AssociationSet>
     <AssociationSet Name="FK__CartasDeP__IdCar__5A512CB3" Association="Self.FK__CartasDeP__IdCar__5A512CB3">

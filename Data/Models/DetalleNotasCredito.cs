@@ -25,6 +25,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdCaja { get; set; }
         public Nullable<decimal> PorcentajeIva { get; set; }
         public Nullable<decimal> ImporteIva { get; set; }
+        public string Observaciones { get; set; }
+        public Nullable<int> OrigenDescripcion { get; set; }
     
         public virtual Concepto Concepto { get; set; }
         public virtual NotasCredito NotasCredito { get; set; }

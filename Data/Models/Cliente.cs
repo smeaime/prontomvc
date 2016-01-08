@@ -35,6 +35,7 @@ namespace ProntoMVC.Data.Models
             this.FertilizantesCupos3 = new HashSet<FertilizantesCupos>();
             this.WilliamsDestinos = new HashSet<WilliamsDestino>();
             this.WilliamsDestinos1 = new HashSet<WilliamsDestino>();
+            this.CartasDePortes = new HashSet<CartasDePorte>();
         }
     
         public int IdCliente { get; set; }
@@ -174,5 +175,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<FertilizantesCupos> FertilizantesCupos3 { get; set; }
         public virtual ICollection<WilliamsDestino> WilliamsDestinos { get; set; }
         public virtual ICollection<WilliamsDestino> WilliamsDestinos1 { get; set; }
+        public virtual ICollection<CartasDePorte> CartasDePortes { get; set; }
     }
 }
