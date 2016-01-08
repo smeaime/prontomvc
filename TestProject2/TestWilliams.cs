@@ -49,6 +49,10 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
     [TestClass]
     public class TestsWilliams
     {
@@ -68,7 +72,7 @@ namespace ProntoMVC.Tests
         const string usuario = "Mariano";
         //string bdlmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bdlmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-        
+
         string DirApp;
         string SC;
         string TempFolder;
@@ -124,29 +128,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-        [TestMethod]
-        public void movimientos_17679()
-        {
-
-
-            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
-            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
-            int destinatario = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
-
-            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario);
-            Debug.Print(ex1.ToString());
-            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario);
-            var ex3 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario);
-            var ex4 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario);
-            var ex5 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario);
-
-
-        }
-
-
-
         [TestMethod]
         public void CartaPorteFuncionalidadBasica()
         {
@@ -173,8 +154,56 @@ namespace ProntoMVC.Tests
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
             Assert.AreEqual(2, carta.NobleGrado);
-        
+
         }
+
+
+
+
+
+
+
+
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        [TestMethod]
+        public void movimientos_17679()
+        {
+
+
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario);
+            var ex3 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario);
+            var ex4 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario);
+            var ex5 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario);
+
+
+        }
+
+
+
 
 
 
@@ -202,32 +231,48 @@ Nombre de acondicionador: listado de clientes de Williams
 
 
             string ms = "", warn = "";
-            var carta = CartaDePorteManager.GetItem(SC, 4444);
+            Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
+            // var carta = CartaDePorteManager.GetItem(SC, 4444);
 
-            //carta.TieneRecibidorOficial
-            //carta.EstadoRecibidor
-            //carta.MotivoRechazo
-            //carta.ClienteAcondicionador
+            carta.Id = -1;
+            carta.SubnumeroDeFacturacion = -1;
 
+            carta.NumeroCartaDePorte = new Random().Next(51234567);
+            carta.FechaArribo = DateTime.Now;
+            carta.PuntoVenta = 1;
+            carta.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            carta.Titular = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+            carta.Corredor = SQLdinamico.BuscaIdVendedorPreciso("BLD S.A", SC);
+            carta.Entregador = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+            carta.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso("GONZALEZ CATAN", SC);
+            carta.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
+
+            
+
+
+            carta.TieneRecibidorOficial = true;
+            carta.EstadoRecibidor = Pronto.ERP.BO.enumEstadosDeRecibidor.Recibo;
+            carta.MotivoRechazo = Pronto.ERP.BO.enumRechazosDeRecibidor.VACIO;
+            carta.ClienteAcondicionador = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+
+            //carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            //carta.NobleGrado = 3;
 
 
             //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
-            
+
             // la validacion me lo tiene que bochar 
 
 
+
+            bool esvalido = CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            Assert.AreEqual(true, esvalido);
+            int id = CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            Assert.AreNotEqual(-1, id);
             
 
-            carta = null;
-            carta = CartaDePorteManager.GetItem(SC, 4444);
-
-            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
-            carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
-
-            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
-            Assert.AreEqual(2, carta.NobleGrado);
+            // Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            // Assert.AreEqual(2, carta.NobleGrado);
 
 
         }

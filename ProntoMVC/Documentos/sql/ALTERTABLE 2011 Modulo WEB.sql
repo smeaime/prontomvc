@@ -1589,11 +1589,18 @@ ALTER TABLE facturas alter column idcondicionventa int NULL
 alter table cartasdeporte ADD
 	TieneRecibidorOficial varchar(2),
 	EstadoRecibidor INT NULL,
-	MotivoRechazo VARCHAR (100)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
-	ClienteAcondicionador NUMERIC (12, 2) NULL REFERENCES Clientes(IdCliente)
+	ClienteAcondicionador INT NULL REFERENCES Clientes(IdCliente),
+	MotivoRechazo INT NULL
 go
 
 
+
+--alter table cartasdeporte drop column 
+--	MotivoRechazo 
+--go
+
+--alter table cartasdeporte ADD
+--	MotivoRechazo INT NULL
 
 
 

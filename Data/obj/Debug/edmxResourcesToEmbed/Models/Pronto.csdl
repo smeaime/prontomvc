@@ -46,8 +46,8 @@
     <EntitySet Name="Clientes" EntityType="DemoProntoModel.Cliente" />
     <EntitySet Name="PuntosVentas" EntityType="DemoProntoModel.PuntosVenta" />
     <FunctionImport Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" ReturnType="Collection(DemoProntoModel.AutorizacionesPorComprobante)">
-      <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
       <Parameter Name="IdFormulario" Mode="In" Type="Int32" />
+      <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="Condiciones_Compras" EntityType="DemoProntoModel.Condiciones_Compra" />
     <EntitySet Name="Ganancias" EntityType="DemoProntoModel.Ganancia" />
@@ -1613,6 +1613,10 @@
       <End Role="Provincia" EntitySet="Provincias" />
       <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
     </AssociationSet>
+    <AssociationSet Name="FK__CartasDeP__Clien__25735020" Association="DemoProntoModel.FK__CartasDeP__Clien__25735020">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="CartasDePorte" EntitySet="CartasDePortes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -2576,6 +2580,7 @@
     <Property Type="Int32" Name="ProximoNumeroOrdenTrabajo" />
     <Property Type="String" Name="BasePRONTOMantenimiento" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="ProximaOrdenPagoFF" />
+    <Property Name="PedidosSubcontratos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Parametros2">
     <Key>
@@ -2754,6 +2759,7 @@
     <NavigationProperty Name="FertilizantesCupos3" Relationship="DemoProntoModel.FK__Fertiliza__Cuent__4EAA6FDD" FromRole="Cliente" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="WilliamsDestinos" Relationship="DemoProntoModel.FK__WilliamsD__Subco__0180086D" FromRole="Cliente" ToRole="WilliamsDestino" />
     <NavigationProperty Name="WilliamsDestinos1" Relationship="DemoProntoModel.FK__WilliamsD__Subco__02742CA6" FromRole="Cliente" ToRole="WilliamsDestino" />
+    <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="Cliente" ToRole="CartasDePorte" />
   </EntityType>
   <EntityType Name="PuntosVenta">
     <Key>
@@ -3009,6 +3015,7 @@
     <NavigationProperty Name="TiposCuenta" Relationship="DemoProntoModel.FK_Cuentas_IdTipoCuenta" FromRole="Cuenta" ToRole="TiposCuenta" />
     <NavigationProperty Name="RubrosContable1" Relationship="DemoProntoModel.FK_Cuentas_IdRubroFinanciero" FromRole="Cuenta" ToRole="RubrosContable" />
     <NavigationProperty Name="DetalleAsientos" Relationship="DemoProntoModel.FK_DetalleAsientos_IdCuenta" FromRole="Cuenta" ToRole="DetalleAsiento" />
+    <Property Name="CodigoRubroContable" Type="Int32" />
   </EntityType>
   <EntityType Name="DetallePedido">
     <Key>
@@ -3169,16 +3176,16 @@
     <Property Type="String" Name="UsuarioAnulacion" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Type="DateTime" Name="FechaAnulacion" Precision="3" />
     <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="ArchivoAdjunto1" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto2" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto3" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto4" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto5" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto6" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto7" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto8" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto9" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto10" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto1" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto2" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto3" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto4" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto5" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto6" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto7" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto8" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto9" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto10" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ImprimeImportante" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ImprimePlazoEntrega" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ImprimeLugarEntrega" MaxLength="2" FixedLength="false" Unicode="false" />
@@ -3233,6 +3240,10 @@
     <NavigationProperty Name="Comprador" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoComprador" FromRole="Pedido" ToRole="Empleado" />
     <NavigationProperty Name="Empleado2" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Pedido" ToRole="Empleado" />
     <Property Name="IdPlazoEntrega" Type="Int32" />
+    <Property Name="Inspecciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Subcontratos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImprimeSubcontratos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="NotasSeguimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Presupuesto">
     <Key>
@@ -6544,6 +6555,8 @@
     <NavigationProperty Name="OrdenesPago2" Relationship="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" FromRole="OrdenPago1" ToRole="OrdenPago" />
     <Property Name="IdTipoRetencionGanancia" Type="Int32" />
     <Property Name="CuitOpcional" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="IdPuntoVenta" Type="Int32" />
+    <Property Name="PuntoVenta" Type="Int32" />
   </EntityType>
   <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
     <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -6759,6 +6772,8 @@
     <Property Name="ArchivoAdjunto2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Cuenta1" Relationship="DemoProntoModel.FK_ComprobantesProveedores_CuentaOtros" FromRole="ComprobanteProveedor" ToRole="Cuenta" />
     <Property Name="NoTomarParaCalculoDeImpuestos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdPuntoVenta" Type="Int32" />
+    <Property Name="PuntoVenta" Type="Int32" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedore">
     <Key>
@@ -7011,6 +7026,8 @@
     <NavigationProperty Name="NotasCredito" Relationship="DemoProntoModel.FK_DetalleNotasCredito_NotasCredito" FromRole="DetalleNotasCredito" ToRole="NotasCredito" />
     <Property Name="PorcentajeIva" Type="Decimal" Precision="6" Scale="2" />
     <Property Name="ImporteIva" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrigenDescripcion" Type="Int32" />
   </EntityType>
   <EntityType Name="DetalleNotasCreditoImputacione">
     <Key>
@@ -7060,6 +7077,8 @@
     <NavigationProperty Name="NotasDebito" Relationship="DemoProntoModel.FK_DetalleNotasDebito_NotasDebito" FromRole="DetalleNotasDebito" ToRole="NotasDebito" />
     <Property Name="PorcentajeIva" Type="Decimal" Precision="6" Scale="2" />
     <Property Name="ImporteIva" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrigenDescripcion" Type="Int32" />
   </EntityType>
   <EntityType Name="DetalleNotasDebitoProvincia">
     <Key>
@@ -7959,6 +7978,7 @@
     <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__4CC2276B" FromRole="Empleado" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos2" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__5927FE50" FromRole="Empleado" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos3" Relationship="DemoProntoModel.FK__Fertiliza__IdUsu__5A1C2289" FromRole="Empleado" ToRole="FertilizantesCupos" />
+    <Property Name="PuntosVentaAsociados" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Empleados_Cargos">
     <End Type="DemoProntoModel.Cargo" Role="Cargo" Multiplicity="0..1" />
@@ -8536,6 +8556,7 @@
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_DetalleAsientos_IdMoneda" FromRole="DetalleAsiento" ToRole="Moneda" />
     <NavigationProperty Name="Moneda1" Relationship="DemoProntoModel.FK_DetalleAsientos_IdMonedaDestino" FromRole="DetalleAsiento" ToRole="Moneda" />
     <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_DetalleAsientos_IdObra" FromRole="DetalleAsiento" ToRole="Obra" />
+    <Property Name="IdEntidadOrigen" Type="Int32" />
   </EntityType>
   <Association Name="FK_DetalleAsientos_Asientos">
     <End Type="DemoProntoModel.Asiento" Role="Asiento" Multiplicity="0..1" />
@@ -11280,6 +11301,11 @@
     <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" FromRole="CartasDePorte" ToRole="Vendedor" />
     <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="CartasDePorte" ToRole="DetalleFactura" />
     <Property Name="ConDuplicados" Type="Int32" />
+    <Property Name="TieneRecibidorOficial" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="EstadoRecibidor" Type="Int32" />
+    <Property Name="ClienteAcondicionador" Type="Int32" />
+    <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="CartasDePorte" ToRole="Cliente" />
+    <Property Name="MotivoRechazo" Type="Int32" />
   </EntityType>
   <EntityType Name="CartasDePorteDetalle">
     <Key>
@@ -12294,6 +12320,18 @@
       </Principal>
       <Dependent Role="WilliamsDestino">
         <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartasDeP__Clien__25735020">
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CartasDePorte" Role="CartasDePorte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="CartasDePorte">
+        <PropertyRef Name="ClienteAcondicionador" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -151,6 +151,8 @@ namespace ProntoMVC.Data.Models
         public string ArchivoAdjunto1 { get; set; }
         public string ArchivoAdjunto2 { get; set; }
         public string NoTomarParaCalculoDeImpuestos { get; set; }
+        public Nullable<int> IdPuntoVenta { get; set; }
+        public Nullable<int> PuntoVenta { get; set; }
     
         public virtual ICollection<DetalleComprobantesProveedore> DetalleComprobantesProveedores { get; set; }
         public virtual Proveedor Proveedor { get; set; }

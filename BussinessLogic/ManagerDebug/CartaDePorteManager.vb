@@ -308,6 +308,8 @@ Public Class CartaDePorteManager
 
 
 
+
+
     Enum enumCDPestado
         Todas
         TodasMenosLasRechazadas
@@ -2424,7 +2426,7 @@ Public Class CartaDePorteManager
 
 
 
-    
+
 
 
     Shared Function ExcelToHtml(ArchivoExcelDestino As String, Optional grid As GridView = Nothing) As String
@@ -3035,7 +3037,7 @@ Public Class CartaDePorteManager
 
 
 
-            
+
 
 
 
@@ -3385,7 +3387,7 @@ Public Class CartaDePorteManager
 
 
 
-        
+
         With oReportViewer
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
@@ -7094,6 +7096,12 @@ Public Class CartaDePorteManager
                 .CalidadGastosFumigacionResultado = iisNull(oCarta.CalidadGastosFumigacionResultado, 0)
 
 
+                .TieneRecibidorOficial = (oCarta.TieneRecibidorOficial = "SI")
+                .EstadoRecibidor = iisNull(oCarta.EstadoRecibidor, 0)
+                .MotivoRechazo = iisNull(oCarta.MotivoRechazo, 0)
+                .ClienteAcondicionador = iisNull(oCarta.ClienteAcondicionador, -1)
+
+
 
 
                 Try
@@ -7522,6 +7530,10 @@ Public Class CartaDePorteManager
                     oCarta.CalidadGastosFumigacionResultado = .CalidadGastosFumigacionResultado
 
 
+                    oCarta.TieneRecibidorOficial = IIf(.TieneRecibidorOficial, "SI", "NO")
+                    oCarta.EstadoRecibidor = .EstadoRecibidor
+                    oCarta.MotivoRechazo = .MotivoRechazo
+                    oCarta.ClienteAcondicionador = .ClienteAcondicionador
 
 
 
@@ -8010,7 +8022,8 @@ Public Class CartaDePorteManager
             'validarUnicidad()
 
             If iisNull(.SubnumeroVagon, 0) < 0 Then
-                Return False
+                ms &= "El numero de vagón es menor que 0"
+                ms &= vbCrLf   'return false
             End If
 
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
@@ -8021,14 +8034,35 @@ Public Class CartaDePorteManager
 
 
             'If iisNull(.NumeroCartaDePorte, 0) < 100000000 Or iisNull(.NumeroCartaDePorte, 0) > 9999999999 Then
-            '    ms = "El número de CDP debe tener 9 o 10 dígitos"
-            '    Return False
+            '    ms &= "El número de CDP debe tener 9 o 10 dígitos"
+            '    ms &=vbCrLf   'return false
             'End If
 
             'If .NumeroCartaDePorte > 1999999999 Then ' > Int32.MaxValue Then
-            '    ms = "El número de CDP debe ser menor que 2.000.000.000"
-            '    Return False
+            '    ms &= "El número de CDP debe ser menor que 2.000.000.000"
+            '    ms &=vbCrLf   'return false
             'End If
+
+
+            Dim cdp As Pronto.ERP.BO.CartaDePorte
+            Try
+                cdp = CartaDePorteManager.GetItemPorNumero(SC, .NumeroCartaDePorte, .SubnumeroVagon, -1)
+
+                If cdp.Id <> -1 And myCartaDePorte.SubnumeroDeFacturacion < 1 Then 'ya existe ese numero
+                    If .Id = -1 Then 'estoy haciendo un alta
+                        ms &= "El numero/vagon ya existe, " & cdp.NumeroCartaDePorte & "/" & cdp.SubnumeroVagon
+                        ms &= vbCrLf
+                    Else
+                        If .Id <> cdp.Id Then 'esta editando esa ahora? si no...
+                            ms &= "El numero/vagon ya existe, " & cdp.NumeroCartaDePorte & "/" & cdp.SubnumeroVagon
+                            ms &= vbCrLf
+                        End If
+                    End If
+                End If
+            Catch ex As Exception
+                'a veces llega acá porque ya existe una pero con distinto subnumero de facturacion
+                ErrHandler.WriteError(ex)
+            End Try
 
 
 
@@ -8036,14 +8070,14 @@ Public Class CartaDePorteManager
 
 
             If IsNothing(.FechaArribo) Or .FechaArribo = #12:00:00 AM# Then
-                ms = "Falta la fecha de arribo"
-                Return False
+                ms &= "Falta la fecha de arribo"
+                ms &= vbCrLf   'return false
             End If
 
             If iisNull(.FechaDescarga, #12:00:00 AM#) <> #12:00:00 AM# Then
                 If iisNull(.FechaDescarga) < iisNull(.FechaArribo) Then
-                    ms = "La fecha de la descarga es anterior a la de arribo"
-                    Return False
+                    ms &= "La fecha de la descarga es anterior a la de arribo"
+                    ms &= vbCrLf   'return false
                 End If
             End If
 
@@ -8107,7 +8141,7 @@ Public Class CartaDePorteManager
                 If .Corredor = idBLD And (.Titular = idCCI Or .CuentaOrden1 = idCCI Or .CuentaOrden2 = idCCI) And .IdClienteEntregador <> idWilliams Then
                     If Not .Exporta And Not .ObviarAdvertencias Then
                         sWarnings &= "Con CCI de cliente y BLD de corredor, se recomienda poner la carta como exportación" & vbCrLf
-                        'Return False
+                        'return false
                     End If
                 End If
                 '///////////////////////////////////////////////////////////////////////////////////
@@ -8118,8 +8152,8 @@ Public Class CartaDePorteManager
 
             If .NetoFinalIncluyendoMermas > 0 Then
                 If .FechaDescarga = #12:00:00 AM# Then
-                    ms = "Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)"
-                    Return False
+                    ms &= "Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)"
+                    ms &= vbCrLf   'return false
                 End If
 
 
@@ -8133,8 +8167,8 @@ Public Class CartaDePorteManager
                 '    que pusieron explicitamente otro Entregador), entonces no dejar grabar hasta que no pongan el tilde de Exportación
 
                 If iisNull(.IdClienteEntregador, 0) > 0 And Not iisNull(NombreCliente(SC, iisNull(.IdClienteEntregador, 0)), "").ToUpper.Contains("WILLIAMS") And Not .Exporta Then
-                    ms = "Una carta porte con entregador debe tener el tilde de exportación"
-                    Return False
+                    ms &= "Una carta porte con entregador debe tener el tilde de exportación"
+                    'ms &=vbCrLf   'return false
                 End If
 
             End If
@@ -8145,16 +8179,16 @@ Public Class CartaDePorteManager
             If False Then
                 If iisNull(.SubnumeroDeFacturacion, 0) > 0 Then
                     If .IdClienteAFacturarle <= 0 Then
-                        ms = "Las cartas duplicadas exigen el cliente a facturarsele"
-                        Return False
+                        ms &= "Las cartas duplicadas exigen el cliente a facturarsele"
+                        'ms &=vbCrLf   'return false
                     End If
 
                     If iisNull(.SubnumeroDeFacturacion, 0) >= 1 Then
                         'VerificarQueElOriginalTieneExplicitadoElClienteFacturado
                         Try
                             If CartaDePorteManager.GetItemPorNumero(SC, .NumeroCartaDePorte, .SubnumeroVagon, .SubnumeroDeFacturacion).IdClienteAFacturarle <= 0 Then
-                                ms = "El original de este duplicado no tiene marcado el cliente al que se factura"
-                                Return False
+                                ms &= "El original de este duplicado no tiene marcado el cliente al que se factura"
+                                ms &= vbCrLf   'return false
                             End If
                         Catch ex As Exception
                             ErrHandler.WriteError(ex) 'probablemente se queja de que hay copias de subfacturacion. Justo en este caso, no importa
@@ -8166,15 +8200,15 @@ Public Class CartaDePorteManager
 
 
             If .NobleACamara And .NobleConforme Then
-                ms = "No pueden estar tildados Conforme y A camara en Noble"
-                Return False
+                ms &= "No pueden estar tildados Conforme y A camara en Noble"
+                ms &= vbCrLf   'return false
             End If
 
             If .Titular > 0 Then
                 If InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "SYNGENTA") > 0 And .EnumSyngentaDivision = "" Then
                     If Not (.bSeLeFactura_a_SyngentaDivisionAgro Xor .bSeLeFactura_a_SyngentaDivisionAgro) Then
-                        ms = "Debe elegir a cuál de las divisiones de Syngenta se le facturará (a división Agro o a división Seeds)"
-                        Return False
+                        ms &= "Debe elegir a cuál de las divisiones de Syngenta se le facturará (a división Agro o a división Seeds)"
+                        ms &= vbCrLf   'return false
                     End If
                 End If
 
@@ -8184,8 +8218,8 @@ Public Class CartaDePorteManager
 
 
                     If (CartaDePorteManager.excepcionesAcopios(SC, .Titular).Count > 1 And .Acopio1 <= 0) Then
-                        ms = "Falta elegir a qué acopio corresponde el titular"
-                        Return False
+                        ms &= "Falta elegir a qué acopio corresponde el titular"
+                        ms &= vbCrLf   'return false
                     End If
 
                 End If
@@ -8196,8 +8230,8 @@ Public Class CartaDePorteManager
                         If (.CuentaOrden2 > 0) Then
                             If (CartaDePorteManager.excepcionesAcopios(SC, .CuentaOrden2).Count > 1 And .Acopio3 <= 0) Then
                                 'rcomercial
-                                ms = "Falta elegir a qué acopio corresponde el remitente comercial"
-                                Return False
+                                ms &= "Falta elegir a qué acopio corresponde el remitente comercial"
+                                ms &= vbCrLf   'ms &=vbCrLf   'return false
                             End If
                         End If
 
@@ -8210,8 +8244,8 @@ Public Class CartaDePorteManager
                         If (.CuentaOrden1 > 0) Then
                             If (CartaDePorteManager.excepcionesAcopios(SC, .CuentaOrden1).Count > 1 And .Acopio2 <= 0) Then
                                 'intermediario
-                                ms = "Falta elegir a qué acopio corresponde el intermediario"
-                                Return False
+                                ms &= "Falta elegir a qué acopio corresponde el intermediario"
+                                ms &= vbCrLf   'return false
                             End If
                         End If
 
@@ -8220,23 +8254,23 @@ Public Class CartaDePorteManager
 
 
                 'If (InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0 And .Acopio1 <= 0) Then
-                '    ms = "Falta elegir a qué acopio de A.C.A corresponde el titular"
-                '    Return False
+                '    ms &= "Falta elegir a qué acopio de A.C.A corresponde el titular"
+                '    ms &=vbCrLf   'ms &=vbCrLf   'return false
                 'End If
 
                 'If (.CuentaOrden2 > 0) Then
                 '    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden2).ToUpper, "A.C.A") > 0 And .Acopio3 <= 0) Then
                 '        'rcomercial
-                '        ms = "Falta elegir a qué acopio de A.C.A corresponde el remitente comercial"
-                '        Return False
+                '        ms &= "Falta elegir a qué acopio de A.C.A corresponde el remitente comercial"
+                '        ms &=vbCrLf   'return false
                 '    End If
                 'End If
 
                 'If (.CuentaOrden1 > 0) Then
                 '    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden1).ToUpper, "A.C.A") > 0 And .Acopio2 <= 0) Then
                 '        'intermediario
-                '        ms = "Falta elegir a qué acopio de A.C.A corresponde el intermediario"
-                '        Return False
+                '        ms &= "Falta elegir a qué acopio de A.C.A corresponde el intermediario"
+                '        ms &=vbCrLf   'return false
                 '    End If
                 'End If
                 'Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0 _
@@ -8257,8 +8291,8 @@ Public Class CartaDePorteManager
 
 
                 If cli.Count > 0 Then
-                    ms = "El cliente no está habilitado para cartas de porte " & Join(cli, ",")
-                    Return False
+                    ms &= "El cliente no está habilitado para cartas de porte " & Join(cli, ",")
+                    ms &= vbCrLf   'return false
                 End If
 
 
@@ -8272,8 +8306,8 @@ Public Class CartaDePorteManager
 
 
             If .PuntoVenta < 1 Or .PuntoVenta > 4 Then
-                ms = "El punto de venta debe estar entre 1 y 4"
-                Return False
+                ms &= "El punto de venta debe estar entre 1 y 4"
+                ms &= vbCrLf   'return false
             End If
 
 
@@ -8289,8 +8323,8 @@ Public Class CartaDePorteManager
 
                 Dim sClientesCobranzas As String
                 If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
-                    ms = "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
-                    Return False
+                    ms &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+                    ms &= vbCrLf   'return false
                 End If
             End If
 
@@ -8313,16 +8347,16 @@ Public Class CartaDePorteManager
                 If .Titular = 0 Or .Entregador = 0 Or .CuentaOrden1 = 0 Or .Corredor = 0 Then
 
 
-                    ms = "Hay que completar Titular, Destinatario, Intermediario y Corredor. " & K
-                    Return False
+                    ms &= "Hay que completar Titular, Destinatario, Intermediario y Corredor. " & K
+                    ms &= vbCrLf   'return false
 
                 End If
 
 
                 If .Destino = 0 Or .Procedencia = 0 Or .IdChofer = 0 Or .IdTransportista = 0 Then
 
-                    ms = "Hace falta completar Procedencia, Destino, Tranportista y Chofer. " & K
-                    Return False
+                    ms &= "Hace falta completar Procedencia, Destino, Tranportista y Chofer. " & K
+                    ms &= vbCrLf   'return false
 
                 End If
 
@@ -8334,8 +8368,8 @@ Public Class CartaDePorteManager
                     iisNull(.NetoPto, 0) <= 0 Or _
                     iisNull(.NetoFinalSinMermas, 0) <= 0 Then
 
-                    ms = "Hay pesajes sin completar. " & K
-                    Return False
+                    ms &= "Hay pesajes sin completar. " & K
+                    ms &= vbCrLf   'return false
                 End If
 
 
@@ -8350,8 +8384,8 @@ Public Class CartaDePorteManager
                     .NRecibo = 0 Or _
                     .CalidadDe = 0 Then
 
-                    ms = "Hace falta CEE, CTG, Fechas de carga/vencimiento/descarga,Contrato, Patente, Recibo y Calidad. " & K
-                    Return False
+                    ms &= "Hace falta CEE, CTG, Fechas de carga/vencimiento/descarga,Contrato, Patente, Recibo y Calidad. " & K
+                    ms &= vbCrLf   'return false
 
                 End If
 
@@ -8375,9 +8409,10 @@ Public Class CartaDePorteManager
         '    Next
 
         '    If myCartaDePorte.Detalles.Count = eliminados Or myCartaDePorte.Detalles.Count = 0 Then
-        '        'Return False
+        '        'ms &=vbCrLf   'return false
         '    End If
         'End If
+        If ms <> "" Then ms &= vbCrLf 'return false
 
         Return True
     End Function
@@ -10330,7 +10365,7 @@ Public Class CartaDePorteManager
 
 
 
-               
+
 
 
             End If

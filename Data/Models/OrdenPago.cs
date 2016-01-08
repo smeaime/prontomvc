@@ -102,6 +102,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaReversionContablePorAnulacion { get; set; }
         public Nullable<int> IdTipoRetencionGanancia { get; set; }
         public string CuitOpcional { get; set; }
+        public Nullable<int> IdPuntoVenta { get; set; }
+        public Nullable<int> PuntoVenta { get; set; }
     
         public virtual Proveedor Proveedore { get; set; }
         public virtual ICollection<DetalleOrdenesPago> DetalleOrdenesPagoes { get; set; }
