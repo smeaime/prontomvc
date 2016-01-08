@@ -9764,11 +9764,18 @@ Public Class CartaDePorteManager
                 Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
 
 
+                'primera pagina del tiff
+                If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
+                    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRFTP + oCarta.PathImagen)
+                    oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+                Else
+                    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRFTP + oCarta.PathImagen2)
+                    oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+                End If
 
-                listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
-                BorroArchivo(DIRFTP + oCarta.PathImagen)
-                oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
-
+                'segunda pagina del tiff
                 'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
                 If listapaginas.Count > 1 Then
                     'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
@@ -9784,10 +9791,10 @@ Public Class CartaDePorteManager
             End Try
 
 
-        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") Then
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
             oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR
-        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") Then
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") > 0 Then
             If oCarta.PathImagen <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen)
             oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR
         Else
@@ -16927,16 +16934,29 @@ Public Class LogicaFacturacion
 
     Public Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
         'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        Try
 
-        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
-        Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+            Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Dim expo = From x In oListaCDP
-                    Where x.Exporta = "SI"
+            Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
+            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+
+            Dim expo = From x In oListaCDP
+                        Where x.Exporta = "SI"
 
 
-        Return expo.Count > 0
+            Return expo.Count > 0
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+            Try
+                ErrHandler.WriteError(ex.InnerException.ToString)
+                ErrHandler.WriteError(idfactura.ToString)
+            Catch ex2 As Exception
+            End Try
+
+
+            Return False
+        End Try
 
     End Function
 
@@ -16977,7 +16997,7 @@ Public Class LogicaFacturacion
             'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
             Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura).ToList()
-            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault() 'explota acá
 
 
             Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
@@ -17018,7 +17038,15 @@ Public Class LogicaFacturacion
 
             End If
         Catch ex As Exception
+
             ErrHandler.WriteError(ex)
+            Try
+                ErrHandler.WriteError(ex.InnerException.ToString)
+                ErrHandler.WriteError(idfactura.ToString)
+            Catch ex2 As Exception
+            End Try
+
+
             Return ""
 
         End Try
@@ -28408,28 +28436,32 @@ Public Class LogicaInformesWilliams
         '        "1", "Export", _
         '         desde, hasta, -1, sTitulo, , , , , , , , , )
 
+        If False Then
 
-        Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc, _
-                "", "", "", 1, 0, _
-                enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-                iddestinatario, -1, _
-                -1, IdArticulo, -1, IdDestinoWilliams, _
-                "1", "Export", _
-                 #1/1/1980#, Fecha, -1)
+            Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc, _
+                    "", "", "", 1, 0, _
+                    enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+                    iddestinatario, -1, _
+                    -1, IdArticulo, -1, IdDestinoWilliams, _
+                    "1", "Export", _
+                     #1/1/1980#, Fecha, -1)
 
 
-        entradasCDP = q.Sum(Function(x) x.NetoProc)
+            entradasCDP = q.Sum(Function(x) x.NetoProc)
 
-        'Dim q = Aggregate i In db.CartasDePortes _
-        '        Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
-        '        And If(i.SubnumeroDeFacturacion, 0) <= 0 _
-        '            And i.Exporta = "SI" And i.Anulada <> "SI" _
-        '            And If(i.Destino, 0) = IdDestinoWilliams _
-        '            And If(i.IdArticulo, 0) = IdArticulo _
-        '            And If(i.Entregador, 0) = iddestinatario _
-        '        Into Sum(CType(i.NetoProc, Decimal?))
+        Else
 
-        'entradasCDP = iisNull(q, 0)
+            Dim q = Aggregate i In db.CartasDePortes _
+                    Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
+                    And If(i.SubnumeroDeFacturacion, 0) <= 0 _
+                        And i.Exporta = "SI" And i.Anulada <> "SI" _
+                        And If(i.Destino, 0) = IdDestinoWilliams _
+                        And If(i.IdArticulo, 0) = IdArticulo _
+                        And If(i.Entregador, 0) = iddestinatario _
+                    Into Sum(CType(i.NetoProc, Decimal?))
+
+            entradasCDP = iisNull(q, 0)
+        End If
 
 
         '///////////////////////////////////////////////
