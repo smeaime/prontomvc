@@ -195,10 +195,15 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> CalidadGastosFumigacionResultado { get; set; }
         public Nullable<int> Acopio6 { get; set; }
         public Nullable<int> ConDuplicados { get; set; }
+        public string TieneRecibidorOficial { get; set; }
+        public Nullable<int> EstadoRecibidor { get; set; }
+        public Nullable<int> ClienteAcondicionador { get; set; }
+        public Nullable<int> MotivoRechazo { get; set; }
     
         public virtual CartasPorteAcopio CartasPorteAcopio { get; set; }
         public virtual ICollection<CartasDePorteDetalle> CartasDePorteDetalles { get; set; }
         public virtual Vendedor Vendedore { get; set; }
         public virtual DetalleFactura DetalleFactura { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }
