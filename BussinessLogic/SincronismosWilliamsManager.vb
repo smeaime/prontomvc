@@ -799,7 +799,7 @@ Namespace Pronto.ERP.Bll
 
                             CambiarElNombreDeLaPrimeraHojaDeDow(output)
 
-                         
+
 
 
                         Case "BLD x"
@@ -5189,14 +5189,33 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(cdp.NetoProc).ToString & ";"
 
 
+                    If cdp.IdFacturaImputada <= 0 Then
+                        ErrHandler.WriteError("cartaid " & cdp.IdCartaDePorte & "  cartaimputada " & cdp.IdFacturaImputada.ToString)
+                        Continue For
+                    End If
+
                     'esta cosita linda... creo que es lo que explota
                     Dim fac = db.Facturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
 
+                    Try
 
-                    If fac.IdCliente <> 4333 Then Continue For 'tienen que ser de syngenta
-                    sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
-                    sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
-                    'sb &= "6508001111;WILLIAMS ENTREGAS S. A.;"
+                        If fac.IdCliente <> 4333 Then Continue For 'tienen que ser de syngenta
+
+
+
+
+                        sb &= JustificadoDerecha(fac.PuntoVenta, 4, "0") & JustificadoDerecha(fac.NumeroFactura, 8, "0") & ";"
+                        sb &= Convert.ToDateTime(fac.FechaFactura).ToString("dd/MM/yyyy") & ";"
+                        'sb &= "6508001111;WILLIAMS ENTREGAS S. A.;"
+
+
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex.ToString)
+                        ErrHandler.WriteAndRaiseError(ex)
+
+                    End Try
+
+
                     Dim wilycuit = "30707386076"
                     sb &= wilycuit & ";WILLIAMS ENTREGAS S. A.;"
 
