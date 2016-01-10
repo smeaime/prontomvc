@@ -16939,7 +16939,7 @@ Public Class LogicaFacturacion
             Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
             Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
-            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault() 'explota aca con la 79074. q tiene esa factura de particular?
 
             Dim expo = From x In oListaCDP
                         Where x.Exporta = "SI"
