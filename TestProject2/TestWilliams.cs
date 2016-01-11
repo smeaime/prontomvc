@@ -138,7 +138,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -149,7 +149,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
@@ -265,7 +265,7 @@ Nombre de acondicionador: listado de clientes de Williams
 
 
 
-            bool esvalido = CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            bool esvalido = CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             Assert.AreEqual(true, esvalido);
             int id = CartaDePorteManager.Save(SC, carta, 1, "lalala");
             Assert.AreNotEqual(-1, id);
@@ -398,7 +398,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -409,7 +409,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
