@@ -22341,6 +22341,7 @@ Public Class LogicaImportador
 
 
 
+            .ClienteAcondicionador = Nothing
 
             .Patente = iisNull(dr.Item("Patente"))
             .Acoplado = iisNull(dr.Item("Acoplado"))
