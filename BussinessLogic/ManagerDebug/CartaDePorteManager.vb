@@ -8016,7 +8016,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Public Shared Function IsValid(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean
+    Public Shared Function IsValid(ByVal SC As String, ByRef myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean 'esta funcion no solo está validando, tambien corrige cosas menores...
 
         With myCartaDePorte
             'validarUnicidad()
@@ -8299,6 +8299,10 @@ Public Class CartaDePorteManager
 
 
             End If
+
+
+
+            If .ClienteAcondicionador <= 0 Then .ClienteAcondicionador = Nothing
 
 
 
