@@ -392,7 +392,7 @@ namespace ProntoFlexicapture
                 string ms = "", warn = "";
 
 
-                var valid = CartaDePorteManager.IsValid(SC, cdp, ref ms, ref warn);
+                var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid)
                 {
                     var id = CartaDePorteManager.Save(SC, cdp, 0, "");
