@@ -416,9 +416,16 @@ Namespace Pronto.ERP.Dal
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("Corredor")) Then
                         myCartaDePorte.Corredor = myDataRecord.GetInt32(myDataRecord.GetOrdinal("Corredor"))
                     End If
-                    If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("Procedencia")) Then
-                        myCartaDePorte.Procedencia = myDataRecord.GetString(myDataRecord.GetOrdinal("Procedencia"))
-                    End If
+
+                    Try
+                        If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("Procedencia")) Then
+                            myCartaDePorte.Procedencia = myDataRecord.GetInt32(myDataRecord.GetOrdinal("Procedencia"))
+                        End If
+                    Catch ex As Exception
+                        myCartaDePorte.Procedencia = 0
+                    End Try
+
+
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("Patente")) Then
                         myCartaDePorte.Patente = myDataRecord.GetString(myDataRecord.GetOrdinal("Patente"))
                     End If
@@ -671,7 +678,9 @@ Namespace Pronto.ERP.Dal
 
             Catch e As Exception
                 'Debug.Print(e.Message)
-                Throw New ApplicationException("Error en la carga " + e.Message, e)
+                ErrHandler.WriteError("Error en la carga " & e.ToString)
+                Throw
+                'Throw New ApplicationException("Error en la carga " + e.Message, e)
             Finally
             End Try
 
