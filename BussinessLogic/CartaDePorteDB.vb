@@ -419,7 +419,7 @@ Namespace Pronto.ERP.Dal
 
                     Try
                         If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("Procedencia")) Then
-                            myCartaDePorte.Procedencia = myDataRecord.GetInt32(myDataRecord.GetOrdinal("Procedencia"))
+                            myCartaDePorte.Procedencia = Val(myDataRecord.GetString(myDataRecord.GetOrdinal("Procedencia")))
                         End If
                     Catch ex As Exception
                         myCartaDePorte.Procedencia = 0
