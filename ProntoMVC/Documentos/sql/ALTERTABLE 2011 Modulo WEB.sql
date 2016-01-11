@@ -1606,7 +1606,7 @@ go
 
 
 
-
+alter table wTempCartasPorteFacturacionAutomatica alter column TarifaFacturada money
 
 
 
