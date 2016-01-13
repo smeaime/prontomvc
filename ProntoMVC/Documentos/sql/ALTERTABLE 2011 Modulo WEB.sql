@@ -1607,6 +1607,46 @@ go
 
 
 alter table wTempCartasPorteFacturacionAutomatica alter column TarifaFacturada money
+go
+
+
+
+
+
+
+
+------------------------------------------------------------------------
+
+create table FertilizantesPuntosDespacho (
+	IdFertilizantesPuntosDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	Nombre varchar(50)
+)
+go
+
+create table UsuariosRelacionFertilizantesPuntosDespacho (
+	IdFertilizantesTiposDespacho INT REFERENCES Clientes(IdCliente),
+	UsuarioEnBaseBDLMaster UNIQUEIDENTIFIER 
+)
+
+create table FertilizantesTiposDespacho (
+	IdFertilizantesTiposDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	Nombre varchar(50)
+)
+go
+
+create table UsuariosRelacionFertilizantesPuntosDespacho (
+	IdFertilizantesTiposDespacho INT REFERENCES Clientes(IdCliente),
+	UsuarioEnBaseBDLMaster UNIQUEIDENTIFIER 
+)
+
+
+go
+
+
+
+
+
+
 
 
 

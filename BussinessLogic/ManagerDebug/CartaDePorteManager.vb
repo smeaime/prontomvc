@@ -5645,8 +5645,16 @@ Public Class CartaDePorteManager
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
 "            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
 "			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
-"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP,  " & _
+"		TieneRecibidorOficial,  " & _
+"		EstadoRecibidor,  " & _
+"		MotivoRechazo,  " & _
+"		isnull(CLIENTACOND.Razonsocial,'') AS ClienteAcondicionadorDesc   " _
 )
+
+
+
+
 
 
 
@@ -5658,6 +5666,7 @@ Public Class CartaDePorteManager
         "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTACOND ON CDP.ClienteAcondicionador= CLIENTACOND.IdCliente " & _
         "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
         "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
         "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
@@ -8301,6 +8310,10 @@ Public Class CartaDePorteManager
             End If
 
 
+            If .EstadoRecibidor = 1 And .MotivoRechazo = 0 Then
+                ms &= "Se debe elegir un motivo de rechazo"
+                ms &= vbCrLf   'return false
+            End If
 
             If .ClienteAcondicionador <= 0 Then .ClienteAcondicionador = Nothing
 
