@@ -308,7 +308,12 @@ Public Class CartaDePorteManager
 
 
 
-
+    Enum enumCDPexportacion
+        Entregas
+        Export
+        Ambas
+    End Enum
+        
 
     Enum enumCDPestado
         Todas
@@ -1939,6 +1944,77 @@ Public Class CartaDePorteManager
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    Shared Function CartasLINQlocalSimplificadoTipadoConCalada2(ByVal SC As String, _
+      ByVal ColumnaParaFiltrar As String, _
+      ByVal TextoParaFiltrar As String, _
+      ByVal sortExpression As String, _
+      ByVal startRowIndex As Long, _
+      ByVal maximumRows As Long, _
+      ByVal estado As enumCDPestado, _
+      ByVal QueContenga As String, _
+      ByVal idVendedor As Integer, _
+      ByVal idCorredor As Integer, _
+      ByVal idDestinatario As Integer, _
+      ByVal idIntermediario As Integer, _
+      ByVal idRemComercial As Integer, _
+      ByVal idArticulo As Integer, _
+      ByVal idProcedencia As Integer, _
+      ByVal idDestino As Integer, _
+      ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+      ByVal ModoExportacion As enumCDPexportacion, _
+      ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+      ByVal puntoventa As Integer, _
+      Optional ByRef sTituloFiltroUsado As String = "", _
+      Optional ByVal optDivisionSyngenta As String = "Ambas", _
+      Optional ByVal bTraerDuplicados As Boolean = False, _
+      Optional ByVal Contrato As String = "", _
+      Optional ByRef db2 As LinqCartasPorteDataContext = Nothing, _
+        Optional ByVal QueContenga2 As String = "", _
+        Optional ByVal idClienteAuxiliar As Integer = -1, _
+        Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
+        Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+        Optional ByVal optCamionVagon As String = "Ambas" _
+) As IQueryable(Of CartasConCalada)
+
+
+        Dim s As String = [Enum].GetName(ModoExportacion.GetType(), ModoExportacion)
+
+
+        Return CartasLINQlocalSimplificadoTipadoConCalada(SC, _
+       ColumnaParaFiltrar, _
+       TextoParaFiltrar, _
+     sortExpression, _
+     startRowIndex, _
+     maximumRows, _
+     estado, _
+     QueContenga, _
+     idVendedor, _
+     idCorredor, _
+     idDestinatario, _
+     idIntermediario, _
+     idRemComercial, _
+     idArticulo, _
+     idProcedencia, _
+     idDestino, _
+     AplicarANDuORalFiltro, _
+     s, _
+     fechadesde, fechahasta, _
+     puntoventa, _
+        sTituloFiltroUsado, _
+      optDivisionSyngenta, _
+      bTraerDuplicados, _
+      Contrato, _
+        db2, _
+        QueContenga2, _
+        idClienteAuxiliar, _
+        AgrupadorDeTandaPeriodos, _
+        Vagon, Patente, _
+        optCamionVagon)
+
+    End Function
+
+
+
 
     Shared Function CartasLINQlocalSimplificadoTipadoConCalada(ByVal SC As String, _
           ByVal ColumnaParaFiltrar As String, _
@@ -1957,7 +2033,7 @@ Public Class CartaDePorteManager
           ByVal idProcedencia As Integer, _
           ByVal idDestino As Integer, _
           ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-          ByVal ModoExportacion As String, _
+          ByVal ModoExportacionString As String, _
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
           ByVal puntoventa As Integer, _
           Optional ByRef sTituloFiltroUsado As String = "", _
@@ -1973,12 +2049,32 @@ Public Class CartaDePorteManager
 ) As IQueryable(Of CartasConCalada)
 
 
+        'con entityframework
+        'Dim db As DemoProntoEntities
+        'If db2 Is Nothing Then db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC))) Else db = db2
+
+        'con linqtosql
         Dim db As LinqCartasPorteDataContext
         If db2 Is Nothing Then db = New LinqCartasPorteDataContext(Encriptar(SC)) Else db = db2
-
         db.ObjectTrackingEnabled = False
 
-        If System.Diagnostics.Debugger.IsAttached Then maximumRows = 300
+
+        Dim ModoExportacion As enumCDPexportacion
+        Select Case ModoExportacionString
+            Case "Entregas"
+                ModoExportacion = enumCDPexportacion.Entregas
+            Case "Export"
+                ModoExportacion = enumCDPexportacion.Export
+            Case "Ambas"
+                ModoExportacion = enumCDPexportacion.Ambas
+            Case Else
+                Throw New Exception("Exportacion desconocida")
+        End Select
+
+
+
+        'If System.Diagnostics.Debugger.IsAttached Then maximumRows = 300
+
 
         '       Remember, the query is nothing more than an object which represents the query. Think of it 
         'like a SQL query string, just way smarter. Passing a query string around doesn't execute the query; executing 
@@ -2012,8 +2108,10 @@ Public Class CartaDePorteManager
             cdp.Vendedor > 0 _
             And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
             And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
-            And (cdp.Anulada <> "SI") _
-            And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
+            And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
+            And (ModoExportacion = enumCDPexportacion.Ambas _
+                    Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
+                    Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
             And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
             And ( _
                   (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
@@ -28445,33 +28543,46 @@ Public Class LogicaInformesWilliams
 
         'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
 
-
-        'dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
-        '        "", "", "", 1, 0, _
-        '        enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-        '        iddestinatario, -1, _
-        '        -1, IdArticulo, -1, idDestino, _
-        '        "1", "Export", _
-        '         desde, hasta, -1, sTitulo, , , , , , , , , )
-
         If False Then
+
+            'no puedo usar esto, porque necesito traer cartas desde el principio de los tiempos
+
+            'Dim dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
+            '        "", "", "", 1, 0, _
+            '        enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+            '        iddestinatario, -1, _
+            '        -1, IdArticulo, -1, idDestino, _
+            '        "1", "Export", _
+            '          #1/1/1980#, hasta, -1, sTitulo, , , , , , , , , )
+
+
+
+        ElseIf False Then
 
             Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc, _
                     "", "", "", 1, 0, _
                     enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-                    iddestinatario, -1, _
+                     iddestinatario, -1, _
                     -1, IdArticulo, -1, IdDestinoWilliams, _
-                    "1", "Export", _
+                    FiltroANDOR.FiltroOR, enumCDPexportacion.Export, _
                      #1/1/1980#, Fecha, -1)
 
-
-            entradasCDP = q.Sum(Function(x) x.NetoProc)
+            Dim c = q.Count
+            If c = 0 Then
+                entradasCDP = 0
+            Else
+                'parece que si no trae registros, me explota el sum
+                entradasCDP = q.DefaultIfEmpty.Sum(Function(x) x.NetoProc)
+            End If
 
         Else
 
+            'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
+
+
             Dim q = Aggregate i In db.CartasDePortes _
                     Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
-                    And If(i.SubnumeroDeFacturacion, 0) <= 0 _
+                    And (True Or If(i.SubnumeroDeFacturacion, 0) <= 0) _
                         And i.Exporta = "SI" And i.Anulada <> "SI" _
                         And If(i.Destino, 0) = IdDestinoWilliams _
                         And If(i.IdArticulo, 0) = IdArticulo _

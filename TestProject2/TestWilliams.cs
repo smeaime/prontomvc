@@ -186,6 +186,23 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void movimientos_17679()
         {
+            /*
+            Mariano, yo me estoy tirando los reportes y me salen igual que a ellos.
+
+Lo que dicen es que cuando sacan los reportes, salen así:
+
+Fecha: del 27/7 al 31/10
+Saldo Inicial: 19.999.120 kg
+Movimientos: hay cinco en el período que suman 147.940 kg entre el 27/7 y el 1/9
+Saldo Final: 20.147.060 kg
+
+Fecha: del 31/10 al 31/10
+Saldo Inicial: 19.999.120 kg
+Movimientos: no hay movimientos ese día
+Saldo Final: 19.999.120 kg
+
+Entiendo que está mal el saldo inicial en el segundo caso.
+            */
 
 
             int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
@@ -1085,12 +1102,12 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada(SC,
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada2(SC,
                 "", "", "", 1, 300, CartaDePorteManager.enumCDPestado.Facturadas
                    , "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
                 new DateTime(2014, 1, 1), new DateTime(2014, 1, 1),
                 0, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
 
