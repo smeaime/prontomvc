@@ -1036,6 +1036,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
             int m_IdMaestro = 0;
 
+            //hay que pasar el formato como parametro 
+
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
 
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
@@ -1058,6 +1060,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         {
             string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
             int m_IdMaestro = 0;
+
+            //hay que pasar el formato como parametro
 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
 
