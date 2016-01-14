@@ -25354,11 +25354,35 @@ Public Class ExcelImportadorManager
     End Function
 
 
+
+
+
+
+
+
     Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, cmbFormato As System.Web.UI.WebControls.DropDownList, _
                                                         SC As String, _
          cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, txtLogErrores As System.Web.UI.WebControls.TextBox, txtFechaArribo As System.Web.UI.WebControls.TextBox, glbIdUsuario As Integer, UserName As String) As Integer
 
 
+
+
+
+
+
+        FormatearExcelImportadoEnDLL(m_IdMaestro, archivoExcel, LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato), SC, cmbPuntoVenta, txtLogErrores, txtFechaArribo, glbIdUsuario, UserName)
+            )
+
+    End Function
+
+
+
+
+    Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, Formato As LogicaImportador.FormatosDeExcel, _
+                                                     SC As String, _
+      puntoventa As Integer, ByRef LogErrores As String, txtFechaArribo As String, glbIdUsuario As Integer, UserName As String) As Integer
+
+        'FormatearExcelImportadoEnDLL()
 
         Dim ds As DataSet
 
@@ -25371,7 +25395,7 @@ Public Class ExcelImportadorManager
 
         'Identificar el formato
 
-        Select Case LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato)
+        Select Case Formato
             Case Nidera
 
                 ds = NideraToDataset(archivoExcel)
