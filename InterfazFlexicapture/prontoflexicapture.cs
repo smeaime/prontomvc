@@ -160,7 +160,11 @@ namespace ProntoFlexicapture
         }
 
 
+        public static bool bEstaLaLicenciadelFlexicapture()
+        {
+            return true;
 
+        }
 
         // USE CASE: Using a custom image source with FlexiCapture processor
         public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
@@ -168,8 +172,7 @@ namespace ProntoFlexicapture
         {
 
             //engine.CurrentLicense
-            bool Licencia = false;
-            if (!Licencia) // no está la licencia del Flexicapture
+            if (!bEstaLaLicenciadelFlexicapture()) // no está la licencia del Flexicapture
             {
 
                 var listasinpath = new List<string>();
@@ -467,10 +470,16 @@ namespace ProntoFlexicapture
 
 
 
+        public static void BuscarLicenciasDisponibles()
+        {
 
 
+            //    engineLoader = Engine.CreateEngineOutprocLoader();
+            //    engine = engineLoader.GetEngineObject(null);
+            //    licenses = engine.GetAvailableLicenses( [PROJECT ID], null);
 
 
+        }
 
 
 
@@ -499,9 +508,9 @@ namespace ProntoFlexicapture
                                                 archivos, SC, DirApp, true, ref e);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                ErrHandler.WriteError(ex.ToString());
 
                 var listasinpath = new List<string>();
                 foreach (string i in archivos)
@@ -553,6 +562,8 @@ namespace ProntoFlexicapture
                         Marshal.ThrowExceptionForHR(hresult);
                         //assert(engine != null);
                         return engine;
+
+
                     }
                 case EngineLoadingMode.LoadAsInprocServer:
                     {

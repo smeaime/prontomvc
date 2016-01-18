@@ -13837,6 +13837,24 @@ Public Class LogicaFacturacion
                         End Try
 
                         .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
+
+
+                        '                        buenosaires@ williamsentregas.com.ar
+                        'Archivos adjuntos10:43 (hace 7 minutos)
+
+                        '                        para(mí, soporte)
+
+                        'Hubo un error!
+
+                        '_
+                        'URL:	/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados
+                        'User:                   dberzoni()
+                        '                        Exception Type : System.InvalidCastException()
+                        'Message:	Conversion from string "" to type 'Date' is not valid.
+                        'Stack Trace:	at Microsoft.VisualBasic.CompilerServices.Conversions.ToDate(String Value)
+                        'at Microsoft.VisualBasic.CompilerServices.Conversions.ToDate(Object Value)
+                        'TO DO 
+
                         .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
                         .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
                         .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
@@ -22761,7 +22779,8 @@ Public Class LogicaImportador
 
 
 
-    Public Shared Function FormatoDelArchivo(ByVal sNombreArchivoImportado As String, cmbFormato As System.Web.UI.WebControls.DropDownList) As FormatosDeExcel
+    Public Shared Function FormatoDelArchivo(ByVal sNombreArchivoImportado As String,
+                                             cmbFormato As System.Web.UI.WebControls.DropDownList) As FormatosDeExcel
         '"Bunge Ramallo" 
         '"Cargill Planta Quebracho"
         '"Cargill Pta Alvear"
@@ -23595,6 +23614,13 @@ Public Class ExcelImportadorManager
     Public Shared Function ReyserToDataset(ByVal pFileName As String) As Data.DataSet
 
 
+        '7:41 (hace 13 minutos)
+
+        '        para(mí, soporte)
+        'System.ArgumentNullException: Argument cannot be Nothing. Parameter name: path at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) STACKTRACE: at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e)
+
+
+
         '/////////////////////////////////////////////////
         '/////////////////////////////////////////////////
         '/////////////////////////////////////////////////
@@ -24176,7 +24202,7 @@ Public Class ExcelImportadorManager
     End Function
 
 
-    Public Shared Function Unidad6CalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, txtLogErrores As System.Web.UI.WebControls.TextBox, txtFechaArribo As System.Web.UI.WebControls.TextBox, glbIdUsuario As Integer, UserName As String) As Data.DataSet
+    Public Shared Function Unidad6CalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As Integer, ByRef txtLogErrores As String, txtFechaArribo As DateTime, glbIdUsuario As Integer, UserName As String) As Data.DataSet
         '/////////////////////////////////////////////////
         '/////////////////////////////////////////////////
         '/////////////////////////////////////////////////
@@ -24443,7 +24469,7 @@ Public Class ExcelImportadorManager
                             '	85	Insectos vivos 	INS.V
                             '	502	Granos clorados 	G.CLO
                         Case Else
-                            If False Then txtLogErrores.Text &= "No se pudo importar rubro " & Rubro & vbCrLf
+                            If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
 
                             Continue For
                     End Select
@@ -24451,7 +24477,7 @@ Public Class ExcelImportadorManager
                     c += 1
 
 
-                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo.Text)
+                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo)
                 End With
 
 
@@ -24461,22 +24487,22 @@ Public Class ExcelImportadorManager
                     ', IdUsuario As Integer, UserName As String
                     'If CartaDePorteManager.Save(SC, cdp, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName)) = -1 Then
                     If CartaDePorteManager.Save(SC, cdp, glbIdUsuario, UserName) = -1 Then
-                        txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                        txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
                         Debug.Print("No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf)
                         ErrHandler.WriteError("Error al grabar CDP importada")
-                        txtLogErrores.Text &= ms
+                        txtLogErrores &= ms
                     Else
                         'dr.Item("URLgenerada") = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
                     End If
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
-                    txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
-                    txtLogErrores.Text &= ex.ToString
+                    txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                    txtLogErrores &= ex.ToString
 
                 End Try
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
-                txtLogErrores.Text &= ex.ToString
+                txtLogErrores &= ex.ToString
             End Try
 
         Next
@@ -24516,8 +24542,8 @@ Public Class ExcelImportadorManager
 
         'panelEquivalencias.Visible = True
         'MsgBoxAjax(Me, "Análisis Unidad6 importación terminada") ' . Analisis importados " & c)
-        txtLogErrores.Text = "Análisis Unidad6 importación terminada." & vbCrLf & txtLogErrores.Text
-        txtLogErrores.Visible = True
+        txtLogErrores = "Análisis Unidad6 importación terminada." & vbCrLf & txtLogErrores
+        'txtLogErrores.Visible = True
 
 
         Return ds
@@ -24571,7 +24597,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function ReyserCalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, txtLogErrores As System.Web.UI.WebControls.TextBox, txtFechaArribo As System.Web.UI.WebControls.TextBox, glbIdUsuario As Integer, UserName As String) As Data.DataSet
+    Public Shared Function ReyserCalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As Integer, ByRef txtLogErrores As String, txtFechaArribo As DateTime, glbIdUsuario As Integer, UserName As String) As Data.DataSet
 
 
         '/////////////////////////////////////////////////
@@ -24713,7 +24739,7 @@ Public Class ExcelImportadorManager
                     cdp.SubnumeroDeFacturacion = -1
                 End If
 
-                cdp.PuntoVenta = cmbPuntoVenta.SelectedValue
+                cdp.PuntoVenta = cmbPuntoVenta
 
                 With cdp
                     Select Case Rubro
@@ -24852,7 +24878,7 @@ Public Class ExcelImportadorManager
                             '	85	Insectos vivos 	INS.V
                             '	502	Granos clorados 	G.CLO
                         Case Else
-                            If False Then txtLogErrores.Text &= "No se pudo importar rubro " & Rubro & vbCrLf
+                            If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
 
                             Continue For
                     End Select
@@ -24860,7 +24886,7 @@ Public Class ExcelImportadorManager
                     c += 1
 
 
-                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo.Text)
+                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo)
                 End With
 
 
@@ -24880,22 +24906,22 @@ Public Class ExcelImportadorManager
                     End If
 
                     If CartaDePorteManager.Save(SC, cdp, glbIdUsuario, UserName) = -1 Then
-                        txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                        txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
                         Debug.Print("No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf)
                         ErrHandler.WriteError("Error al grabar CDP importada")
-                        txtLogErrores.Text &= ms
+                        txtLogErrores &= ms
                     Else
                         'dr.Item("URLgenerada") = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
                     End If
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
-                    txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
-                    txtLogErrores.Text &= ex.ToString
+                    txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                    txtLogErrores &= ex.ToString
 
                 End Try
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
-                txtLogErrores.Text &= ex.ToString
+                txtLogErrores &= ex.ToString
             End Try
 
         Next
@@ -24935,8 +24961,8 @@ Public Class ExcelImportadorManager
 
         'panelEquivalencias.Visible = True
         'MsgBoxAjax(Me, "Análisis Reyser importación terminada") ' . Analisis importados " & c)
-        txtLogErrores.Text = "Análisis Reyser importación terminada." & vbCrLf & txtLogErrores.Text
-        txtLogErrores.Visible = True
+        txtLogErrores = "Análisis Reyser importación terminada." & vbCrLf & txtLogErrores
+        'txtLogErrores.Visible = True
 
 
         Return ds
@@ -25370,8 +25396,8 @@ Public Class ExcelImportadorManager
 
 
 
-        FormatearExcelImportadoEnDLL(m_IdMaestro, archivoExcel, LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato), SC, cmbPuntoVenta, txtLogErrores, txtFechaArribo, glbIdUsuario, UserName)
-            )
+        FormatearExcelImportadoEnDLL(m_IdMaestro, archivoExcel, LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato), SC, cmbPuntoVenta.SelectedValue, txtLogErrores.Text, txtFechaArribo.Text, glbIdUsuario, UserName)
+
 
     End Function
 
@@ -25380,7 +25406,7 @@ Public Class ExcelImportadorManager
 
     Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, Formato As LogicaImportador.FormatosDeExcel, _
                                                      SC As String, _
-      puntoventa As Integer, ByRef LogErrores As String, txtFechaArribo As String, glbIdUsuario As Integer, UserName As String) As Integer
+      cmbPuntoVenta As Integer, ByRef txtLogErrores As String, txtFechaArribo As String, glbIdUsuario As Integer, UserName As String) As Integer
 
         'FormatearExcelImportadoEnDLL()
 
@@ -25471,10 +25497,10 @@ Public Class ExcelImportadorManager
         'busco el renglon de titulos
 
         Dim renglonDeTitulos As Integer
-        If LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato) = Unidad6 Then
+        If Formato = Unidad6 Then
             renglonDeTitulos = 0 'la pegatina de Unidad6 no tiene renglon de títulos
         Else
-            renglonDeTitulos = RenglonTitulos(dtOrigen, archivoExcel, LogicaImportador.FormatoDelArchivo("", cmbFormato))
+            renglonDeTitulos = RenglonTitulos(dtOrigen, archivoExcel, Formato)
         End If
 
 
@@ -25507,7 +25533,7 @@ Public Class ExcelImportadorManager
 
         'excepcion BUNGE / RAMALLO: calidades en minicolumnas improvisadas para cada renglon
         '-pero esto no tiene que estar en postproduccion, sino en preproduccion
-        If LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato) = BungeRamallo Or LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato) = Unidad6Prefijo_NroCarta Then
+        If Formato = BungeRamallo Or Formato = Unidad6Prefijo_NroCarta Then
             FormatearColumnasDeCalidadesRamallo(dtOrigen)
             'FormatearColumnasDeCalidadesRamallo()
         End If
@@ -25527,7 +25553,7 @@ Public Class ExcelImportadorManager
 
         Dim errorEncabezadoTag As String = ""
 
-        Dim f = LogicaImportador.FormatoDelArchivo("", cmbFormato)
+        Dim f = Formato
 
         For i = dtOrigen.Columns.Count - 1 To 0 Step -1
 
@@ -25570,7 +25596,7 @@ Public Class ExcelImportadorManager
         '//////////////////////////////////////////
 
 
-        Dim fa = LogicaImportador.FormatoDelArchivo("", cmbFormato)
+        Dim fa = Formato
 
         For j = renglonDeTitulos - 1 To 0 Step -1
             row = dtOrigen.Rows(j)
@@ -25624,7 +25650,7 @@ Public Class ExcelImportadorManager
         End If
 
 
-        Select Case LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato)
+        Select Case Formato
 
             Case BungeRamallo
                 'remapeos de clientes
@@ -25697,7 +25723,7 @@ Public Class ExcelImportadorManager
 
         Dim renglonesAntesDeFiltrarPorWilliams = dtDestino.Rows.Count
 
-        If LogicaImportador.FormatoDelArchivo("", cmbFormato) <> NobleLima And LogicaImportador.FormatoDelArchivo("", cmbFormato) <> Renova Then
+        If Formato <> NobleLima And Formato <> Renova Then
 
             For j = dtDestino.Rows.Count - 1 To 0 Step -1
                 row = dtDestino.Rows(j)
