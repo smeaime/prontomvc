@@ -120,14 +120,14 @@ Namespace Pronto.ERP.Bll
                     If cmbBuscarEsteCampo = "NumeroPedido" Then busq = Val(txtBuscar) Else busq = txtBuscar
                     Dim nombrecampo As String = cmbBuscarEsteCampo.Replace("[", "").Replace("]", "")
                     Try
-                        linqDinamico = db.wVistaPedidos.Where("" & nombrecampo & ".Contains(@0) ", busq)
+                        'linqDinamico = db.wVistaPedidos.Where("" & nombrecampo & ".Contains(@0) ", busq)
                         'linqDinamico = db.wVistaPedidos.Where("Convert.ToString(" & nombrecampo & ").Contains(@0) ", busq)
 
                         'linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)  'el filtro de columna lo hago con linq dinamico
                     Catch ex As Exception
                         ' MsgBoxAjax(Me, "No se puede usar ese filtro")
                         Try
-                            linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)
+                            'linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)
                         Catch ex2 As Exception
                             linqDinamico = db.wVistaPedidos
                         End Try
@@ -236,7 +236,7 @@ Namespace Pronto.ERP.Bll
                         If cmbBuscarEsteCampo Is Nothing Then cmbBuscarEsteCampo = "Numero_Req_"
                         If cmbBuscarEsteCampo = "Numero_Req_" Then busq = Val(txtBuscar) Else busq = txtBuscar
                         Dim nombrecampo As String = cmbBuscarEsteCampo.Replace("[", "").Replace("]", "")
-                        linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)  'el filtro de columna lo hago con linq dinamico
+                        ' linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)  'el filtro de columna lo hago con linq dinamico
                     Catch ex As Exception
                         ' MsgBoxAjax(Me, "No se puede usar ese filtro")
                         linqDinamico = db.wVistaPedidos
