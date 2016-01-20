@@ -180,6 +180,91 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        [TestMethod]
+        public void ProcesarSuperTiff_17748()
+        {
+
+            string sError = "";
+
+            List<string> lista = new List<string>();
+
+            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
+
+            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (FileInfo file in Files)
+            {
+                //lista.Add(file.FullName);
+                lista.Add(file.Name);
+            }
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp);
+        }
+
+
+
+
+        [TestMethod]
+        public void InformeFacturacionBLD_17587()
+        {
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            int IdFactura = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                             where c.Exporta == "SI" && f.IdCliente == 2775
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+
+
+            // var output = CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel(SC, IdFactura, "", ReporteLocal);
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+        [TestMethod]
+        public void AlertaMailFertilizante()
+        {
+
+            // Alerta por mail al Despachante. 2h
+            // -El mail se dispararía solo cuando se hace el alta de un cupo? O tambien cuando se modifica?
+            // -Esto serían mails para todos los despachantes de ese PUNTO de despacho
+            //   El mail de alerta a los operadores de despacho, se dispara unicamente en el alta. Tiene que salir un mail para cada operador de despacho de ese punto de despacho
+
+
+
+
+            // ponerme como despachante
+            var cupo = FertilizanteManager.GetItem(SC, 412424);
+
+
+
+            //   grabar el cupo
+
+
+
+            //       verificar el envio
+
+
+
+
+
+        }
+
+
+
 
         [TestMethod]
         public void TraerPanelDeFertilizantes()
@@ -192,6 +277,8 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void MaestroDeFertilzantes()
         {
+            // Tendrá que filtrar según los TIPOS/PUNTOS de despacho. 
+            // filtrar el listado por sus TIPOS de despacho
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -217,10 +304,10 @@ namespace ProntoMVC.Tests
 
             // escribir descarga de una carta
             carta = null;
-            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066,0,0);
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas );
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
 
 
 
@@ -228,7 +315,7 @@ namespace ProntoMVC.Tests
             string log = "";
             //hay que pasar el formato como parametro 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.ReyserCargillPosicion, SC, 0, ref log,  "" , 0, "");
+                                    LogicaImportador.FormatosDeExcel.ReyserCargillPosicion, SC, 0, ref log, "", 0, "");
 
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
 
@@ -343,7 +430,7 @@ Nombre de acondicionador: listado de clientes de Williams
             carta.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso("GONZALEZ CATAN", SC);
             carta.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
 
-            
+
 
 
             carta.TieneRecibidorOficial = true;
@@ -365,7 +452,7 @@ Nombre de acondicionador: listado de clientes de Williams
             Assert.AreEqual(true, esvalido);
             int id = CartaDePorteManager.Save(SC, carta, 1, "lalala");
             Assert.AreNotEqual(-1, id);
-            
+
 
             // Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
             // Assert.AreEqual(2, carta.NobleGrado);
