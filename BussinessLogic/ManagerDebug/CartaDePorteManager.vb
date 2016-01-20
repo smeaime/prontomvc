@@ -23767,6 +23767,11 @@ Public Class ExcelImportadorManager
 
 
 
+
+        no guardar datos de descarga
+
+
+
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
             'REYSER VA SEPARADO CON TABS!
             'REYSER VA SEPARADO CON TABS!
@@ -25431,6 +25436,10 @@ Public Class ExcelImportadorManager
                 ds = ReyserToDataset(archivoExcel)
             Case Reyser
                 ds = ReyserToDataset(archivoExcel)
+
+            Case ReyserCargillPosicion
+                ds = ReyserToDataset(archivoExcel)
+                sssss()
             Case Reyser2
                 ds = ReyserToDataset(archivoExcel)
 
