@@ -648,6 +648,8 @@ Public Class FertilizanteManager
     End Function
 
 
+
+
     Public Enum FormatosDeExcelFertilizantes
         'esta enumeracion debe tener el mismo orden que el combo
         'esta enumeracion debe tener el mismo orden que el combo
@@ -1177,6 +1179,19 @@ Public Class FertilizanteManager
 
         Return True
     End Function
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 End Class
 
