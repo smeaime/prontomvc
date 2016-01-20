@@ -21958,6 +21958,7 @@ Public Class LogicaImportador
         VICENTIN
         VICENTIN_ExcepcionTagRemitenteConflictivo
         Reyser
+        ReyserCargillPosicion
         Reyser2
         ReyserAnalisis
         CerealnetToepfer
