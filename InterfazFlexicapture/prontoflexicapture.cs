@@ -308,6 +308,7 @@ namespace ProntoFlexicapture
             string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
 
 
+            ErrHandler.WriteError("Procesó carta: titular " + Titular);
 
 
             long numeroCarta;
@@ -323,7 +324,7 @@ namespace ProntoFlexicapture
                 //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
                 // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
 
-
+                   ErrHandler.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString() );
 
             }
 
@@ -333,9 +334,11 @@ namespace ProntoFlexicapture
                 // qué pasa si no esta la licencia?
                 // detectar con lectores de codigo de barra
 
+                ErrHandler.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
 
                 numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
 
+                ErrHandler.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
 
 
                 //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
@@ -395,6 +398,8 @@ namespace ProntoFlexicapture
                 string ms = "", warn = "";
 
 
+                ErrHandler.WriteError("Llamo a IsValid y Save");
+
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid)
                 {
@@ -421,6 +426,8 @@ namespace ProntoFlexicapture
                         }
 
 
+                        ErrHandler.WriteError("Llamo a GrabarImagen");
+
                         var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
                                                       , ref sError, DirApp, bCodigoBarrasDetectado);
 
@@ -437,6 +444,7 @@ namespace ProntoFlexicapture
             }
 
 
+            ErrHandler.WriteError("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
             GuardarLogEnBase(o);
@@ -492,20 +500,33 @@ namespace ProntoFlexicapture
 
             ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
 
-            string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+            
+                // esto esta mal. tiene que usar el path de la aplicacion
+            string plantilla = DirApp  + @"\Documentos\cartaporte.afl";
+                         // string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+            
+
+
+
+
 
             string e = "";
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado;
 
             try
             {
-
+                ErrHandler.WriteError("Arranca motor");
 
                 engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+
+                ErrHandler.WriteError("Reconoció la licencia");
 
                 resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                                 plantilla,
                                                 archivos, SC, DirApp, true, ref e);
+
+                ErrHandler.WriteError("Termina motor");
+
 
             }
             catch (Exception ex)
