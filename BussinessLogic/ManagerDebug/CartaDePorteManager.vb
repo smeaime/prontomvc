@@ -9821,6 +9821,7 @@ Public Class CartaDePorteManager
     Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
+        ErrHandler.WriteError("GrabarImagen 1")
 
         If forzarID = -1 Then
             'si no viene el ID,  busco por numero de carta
@@ -9862,7 +9863,6 @@ Public Class CartaDePorteManager
 
 
 
-
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
         Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
@@ -9870,6 +9870,9 @@ Public Class CartaDePorteManager
 
         Dim DIRFTP = DirApp & "\DataBackupear\"
 
+
+
+        ErrHandler.WriteError("GrabarImagen 2")
 
         'si es un .tiff paginado
         If archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tif") Or archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tiff") Then
@@ -9901,6 +9904,7 @@ Public Class CartaDePorteManager
                 End If
 
             Catch ex As Exception
+                ErrHandler.WriteError(ex)
                 sError &= ex.ToString
                 Return ""
             End Try
@@ -9927,14 +9931,20 @@ Public Class CartaDePorteManager
 
         oCarta.FechaModificacion = Now
 
+        ErrHandler.WriteError("grabo en base")
+
         db.SubmitChanges()
 
+        ErrHandler.WriteError("grabado")
 
         sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
 
 
         Return archivoImagenSinPathUbicadaEnDATABACKUPEAR
     End Function
+
+
+
 
     Shared Sub BorroArchivo(file As String)
         'qué hago con el archivo anterior? -por ahora lo conservo

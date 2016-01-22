@@ -105,8 +105,131 @@ namespace ProntoFlexicapture
 
             return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
 
-
         }
+
+
+
+
+        // USE CASE: Using a custom image source with FlexiCapture processor
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
+                                                   List<string> imagenes, string SC, string DirApp, bool bProcesar, ref string sError)
+        {
+
+
+
+            //engine.CurrentLicense
+            if (!bEstaLaLicenciadelFlexicapture()) // no está la licencia del Flexicapture
+            {
+
+                var listasinpath = new List<string>();
+                foreach (string i in imagenes)
+                {
+                    listasinpath.Add(Path.GetFileName(i));
+                }
+                return CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
+
+            }
+
+
+
+            ErrHandler.WriteError("Cargo la plantilla");
+
+            // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
+
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> r = new List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados>();
+
+            //trace("Create an instance of FlexiCapture processor...");
+            IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
+
+            //trace("Add required Document Definitions...");
+
+            //como hago para usar la exportacion del flexilayout .afl
+
+            //IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(SamplesFolder + "\\cartaporte.afl", "Spanish");
+            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(plantilla, "Spanish");
+
+            processor.AddDocumentDefinition(newDocumentDefinition);
+            //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
+
+            //trace("Set up a custom image source...");
+            // Create and configure sample image source (see SampleImageSource class for details)
+            SampleImageSource imageSource = new SampleImageSource();
+            // The sample image source will use these files by reference:
+            foreach (string s in imagenes)
+            {
+                imageSource.AddImageFileByRef(s);
+            }
+            //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
+            //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
+            //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_3.tif");
+            //// ... these files by value (files in memory):
+            //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_1.tif");
+            //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
+            //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_3.tif");
+            // Configure the processor to use the new image source
+            processor.SetCustomImageSource(imageSource);
+
+            //traceBegin("Run processing loop...");
+            int count = 0;
+            while (true)
+            {
+                Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
+
+                //trace("Recognize next document...");
+                IDocument document = processor.RecognizeNextDocument();
+                if (document == null)
+                {
+                    IProcessingError error = processor.GetLastProcessingError();
+                    if (error != null)
+                    {
+                        //processError(error, processor, ErrorHandlingStrategy.LogAndContinue);
+                        continue;
+                    }
+                    else
+                    {
+                        //trace("No more images");
+                        break;
+                    }
+                }
+                else if (document.DocumentDefinition == null)
+                {
+                    //processNotMatched(document);
+                }
+                //trace("Export recognized document...");
+
+
+                if (false)
+                {
+                    //    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
+                }
+
+                else if (bProcesar)
+                {
+                    try
+                    {
+                        r.Add(ProcesaCarta(document, SC, imagenes[count], DirApp));
+
+                    }
+                    catch (Exception x)
+                    {
+                        Debug.Print(x.ToString());
+                        // throw;
+                    }
+
+
+                }
+
+                count++;
+            }
+            //traceEnd("OK");
+
+            //trace("Check the results...");
+            //assert(count == 4);
+            return r;
+        }
+
+
+
 
 
         public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
@@ -166,117 +289,6 @@ namespace ProntoFlexicapture
 
         }
 
-        // USE CASE: Using a custom image source with FlexiCapture processor
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
-                                                   List<string> imagenes, string SC, string DirApp, bool bProcesar, ref string sError)
-        {
-
-            //engine.CurrentLicense
-            if (!bEstaLaLicenciadelFlexicapture()) // no está la licencia del Flexicapture
-            {
-
-                var listasinpath = new List<string>();
-                foreach (string i in imagenes)
-                {
-                    listasinpath.Add(Path.GetFileName(i));
-                }
-                return CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
-
-            }
-
-
-
-            // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-
-            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> r = new List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados>();
-
-            //trace("Create an instance of FlexiCapture processor...");
-            IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
-
-            //trace("Add required Document Definitions...");
-
-            //como hago para usar la exportacion del flexilayout .afl
-
-            //IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(SamplesFolder + "\\cartaporte.afl", "Spanish");
-            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(plantilla, "Spanish");
-
-            processor.AddDocumentDefinition(newDocumentDefinition);
-            //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
-
-            //trace("Set up a custom image source...");
-            // Create and configure sample image source (see SampleImageSource class for details)
-            SampleImageSource imageSource = new SampleImageSource();
-            // The sample image source will use these files by reference:
-            foreach (string s in imagenes)
-            {
-                imageSource.AddImageFileByRef(s);
-            }
-            //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
-            //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
-            //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_3.tif");
-            //// ... these files by value (files in memory):
-            //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_1.tif");
-            //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
-            //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_3.tif");
-            // Configure the processor to use the new image source
-            processor.SetCustomImageSource(imageSource);
-
-            //traceBegin("Run processing loop...");
-            int count = 0;
-            while (true)
-            {
-                //trace("Recognize next document...");
-                IDocument document = processor.RecognizeNextDocument();
-                if (document == null)
-                {
-                    IProcessingError error = processor.GetLastProcessingError();
-                    if (error != null)
-                    {
-                        //processError(error, processor, ErrorHandlingStrategy.LogAndContinue);
-                        continue;
-                    }
-                    else
-                    {
-                        //trace("No more images");
-                        break;
-                    }
-                }
-                else if (document.DocumentDefinition == null)
-                {
-                    //processNotMatched(document);
-                }
-                //trace("Export recognized document...");
-
-
-                if (false)
-                {
-                    //    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
-                }
-
-                else if (bProcesar)
-                {
-                    try
-                    {
-                        r.Add(ProcesaCarta(document, SC, imagenes[count], DirApp));
-
-                    }
-                    catch (Exception x)
-                    {
-                        Debug.Print(x.ToString());
-                        // throw;
-                    }
-
-
-                }
-
-                count++;
-            }
-            //traceEnd("OK");
-
-            //trace("Check the results...");
-            //assert(count == 4);
-            return r;
-        }
 
 
 
@@ -324,7 +336,7 @@ namespace ProntoFlexicapture
                 //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
                 // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
 
-                   ErrHandler.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString() );
+                ErrHandler.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
 
             }
 
@@ -527,6 +539,10 @@ namespace ProntoFlexicapture
 
                 ErrHandler.WriteError("Termina motor");
 
+                ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+
+                ErrHandler.WriteError("Proceso cerrado");
+
 
             }
             catch (Exception ex)
@@ -568,6 +584,25 @@ namespace ProntoFlexicapture
         }
 
         static EngineLoadingMode engineLoadingMode;
+
+
+        public static void unloadEngine(ref IEngine engine, ref IEngineLoader engineLoader)
+        {
+            if (engine != null)
+            {
+                if (engineLoader == null)
+                {
+                    int hresult = DeinitializeEngine();
+                    Marshal.ThrowExceptionForHR(hresult);
+                }
+                else
+                {
+                    engineLoader.Unload();
+                    engineLoader = null;
+                }
+                engine = null;
+            }
+        }
 
 
         public static IEngine loadEngine(EngineLoadingMode _engineLoadingMode, out IEngineLoader engineLoader)
