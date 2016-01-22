@@ -180,6 +180,35 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        [TestMethod]
+        public void NuevoLote()
+        {
+
+            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
+
+            string sError = "";
+
+            List<string> lista = new List<string>();
+
+            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
+
+            Copy(SamplesFolder, TempFolder);
+
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (FileInfo file in Files)
+            {
+                //lista.Add(file.FullName);
+                lista.Add(file.Name);
+            }
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp);
+        }
+
+
+
+
         [TestMethod]
         public void ProcesarSuperTiff_17748()
         {
