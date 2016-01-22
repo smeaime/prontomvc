@@ -23767,8 +23767,8 @@ Public Class ExcelImportadorManager
 
 
 
-
-        no guardar datos de descarga
+        'to do
+        'no guardar datos de descarga
 
 
 
@@ -25439,7 +25439,7 @@ Public Class ExcelImportadorManager
 
             Case ReyserCargillPosicion
                 ds = ReyserToDataset(archivoExcel)
-                sssss()
+                'to do
             Case Reyser2
                 ds = ReyserToDataset(archivoExcel)
 
