@@ -228,7 +228,7 @@ namespace ProntoMVC.Tests
 
             //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
             //File.Copy(output,copia, true);
-            System.Diagnostics.Process.Start(output);
+            //System.Diagnostics.Process.Start(output);
 
         }
 
@@ -247,7 +247,7 @@ namespace ProntoMVC.Tests
 
 
             // ponerme como despachante
-            var cupo = FertilizanteManager.GetItem(SC, 412424);
+           // var cupo = FertilizanteManager.GetItem(SC, 412424);
 
 
 
@@ -972,8 +972,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         {
 
             //string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-            //string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015";
-            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015\lotechico";
+            //string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015\lotechico";
+            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
             //string plantilla =  @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl"
 
 
@@ -1016,7 +1016,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                         plantilla,
-                                        lista, SC, DirApp, false, ref sError);
+                                        lista, SC, DirApp, true, ref sError);
 
 
             var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
