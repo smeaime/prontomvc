@@ -285,6 +285,7 @@ namespace ProntoFlexicapture
 
         public static bool bEstaLaLicenciadelFlexicapture()
         {
+
             return true;
 
         }
@@ -505,49 +506,72 @@ namespace ProntoFlexicapture
 
 
 
-        static public void ActivarMotor(string SC, List<string> archivos, ref string sError, string DirApp)
+        static public void ActivarMotor(string SC, List<string> archivos, ref string sError, string DirApp, string ConfigurationManager_UsarFlexicapture)
         {
-            IEngine engine;
-            IEngineLoader engineLoader;
-
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-
-            
-                // esto esta mal. tiene que usar el path de la aplicacion
-            string plantilla = DirApp  + @"\Documentos\cartaporte.afl";
-                         // string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
-            
-
-
-
-
 
             string e = "";
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado;
 
-            try
+
+            if (ConfigurationManager_UsarFlexicapture == "SI")
             {
-                ErrHandler.WriteError("Arranca motor");
 
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+                IEngine engine;
+                IEngineLoader engineLoader;
 
-                ErrHandler.WriteError("Reconoció la licencia");
+                ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
 
-                resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
-                                                plantilla,
-                                                archivos, SC, DirApp, true, ref e);
 
-                ErrHandler.WriteError("Termina motor");
+                // esto esta mal. tiene que usar el path de la aplicacion
+                string plantilla = DirApp + @"\Documentos\cartaporte.afl";
+                // string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
 
-                ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
 
-                ErrHandler.WriteError("Proceso cerrado");
+
+
+
+
+
+                try
+                {
+                    ErrHandler.WriteError("Arranca motor");
+
+                    engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+
+                    ErrHandler.WriteError("Reconoció la licencia");
+
+                    resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
+                                                    plantilla,
+                                                    archivos, SC, DirApp, true, ref e);
+
+                    ErrHandler.WriteError("Termina motor");
+
+                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+
+                    ErrHandler.WriteError("Proceso cerrado");
+
+
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler.WriteError(ex.ToString());
+
+                    var listasinpath = new List<string>();
+                    foreach (string i in archivos)
+                    {
+                        listasinpath.Add(Path.GetFileName(i));
+                    }
+                    resultado = CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
+
+                }
 
 
             }
-            catch (Exception ex)
+
+
+
+            else
             {
-                ErrHandler.WriteError(ex.ToString());
 
                 var listasinpath = new List<string>();
                 foreach (string i in archivos)
@@ -560,10 +584,7 @@ namespace ProntoFlexicapture
 
 
 
-
             sError += ClassFlexicapture.GenerarHtmlConResultado(resultado, e);
-
-
 
         }
 
