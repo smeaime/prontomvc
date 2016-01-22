@@ -203,7 +203,7 @@ namespace ProntoMVC.Tests
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp,"SI");
         }
 
 
@@ -228,7 +228,7 @@ namespace ProntoMVC.Tests
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp,"SI");
         }
 
 
@@ -1080,7 +1080,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp,"SI");
         }
 
 
