@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,43 +8,28 @@ using ProntoFlexicapture;
 using FCEngine;
 
 
-namespace ProntoWindowsService
+namespace ConsoleApplication1
 {
-    public partial class Service1 : ServiceBase
+    class Program
     {
 
-        string DirApp;
-        string SC;
-        string TempFolder;
-        string plantilla;
+
+        static string DirApp;
+        static string SC;
+        static string plantilla;
 
 
-        public Service1()
+        static void Main(string[] args)
         {
-            InitializeComponent();
+            Initialize();
+            DoWork();
         }
 
-        
-        
-        protected override void OnStart(string[] args)
+        static public void Initialize()
         {
-            var worker = new System.Threading.Thread(DoWork);
-            worker.Name = "MyWorker";
-            worker.IsBackground = false;
-            worker.Start();
-        }
 
-
-        protected override void OnStop()
-        {
-        }
-
-
-        public void Initialize()
-        {
-            
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
-            
+
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
                    @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
 
@@ -56,8 +37,7 @@ namespace ProntoWindowsService
 
         }
 
-
-        void DoWork()
+        static void DoWork()
         {
 
 
@@ -82,10 +62,6 @@ namespace ProntoWindowsService
             {
                 // wait for the event to be signaled
                 // or for the configured delay
-                //bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-
-                // if we were signaled to shutdow, exit the loop
-                //if (bSignaled == true)                    break;
 
                 // let's do some work
                 var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
@@ -93,7 +69,8 @@ namespace ProntoWindowsService
                                      SC, DirApp, true, ref sError);
 
 
-                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+                string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+                Console.WriteLine(html);
             }
 
 
@@ -101,6 +78,6 @@ namespace ProntoWindowsService
 
         }
 
-
     }
+
 }
