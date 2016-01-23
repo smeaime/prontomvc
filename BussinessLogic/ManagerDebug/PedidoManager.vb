@@ -60,7 +60,7 @@ Namespace Pronto.ERP.Bll
                         .Obra = RequerimientoItemManager.GetItem(SC, .IdDetalleRequerimiento).centrocosto
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
                 End With
             Next
@@ -301,7 +301,7 @@ Namespace Pronto.ERP.Bll
                 Dim a = EntidadManager.ExecDinamico(sc, String.Format("SELECT NumeroPedido FROM Pedidos WHERE NumeroPedido={0} AND Isnull(SubNumero,{2})={2} AND IdPedido<>{1}", n, Id, subnumero)).Rows(0).Item(0)
                 If a IsNot Nothing Then Return True
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
             Return False
         End Function

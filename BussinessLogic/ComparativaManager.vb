@@ -1118,7 +1118,7 @@ Namespace Pronto.ERP.Bll
                             j.Item("M" & .SubNumero) = IIf(.Estado = "MR", True, False)
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
 
