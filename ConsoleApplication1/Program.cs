@@ -9,7 +9,7 @@ using FCEngine;
 
 using System.Configuration;
 
-
+using ProntoMVC.Data.Models;
 
 namespace ConsoleApplication1
 {
@@ -53,7 +53,7 @@ namespace ConsoleApplication1
             plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
             */
 
-            
+
             DirApp = ConfigurationManager.AppSettings["DirApp"];
 
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
@@ -66,6 +66,22 @@ namespace ConsoleApplication1
 
         static void DoWork()
         {
+
+            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            Console.WriteLine("CONEXION: " + cadena);
+
+            try
+            {
+                DemoProntoEntities db = new DemoProntoEntities(cadena);
+                var q = db.Clientes.Take(1).ToList();
+
+            }
+            catch (Exception x)
+            {
+                Console.WriteLine(x.ToString());
+                return;
+            }
+
 
 
 
@@ -96,7 +112,7 @@ namespace ConsoleApplication1
                                      SC, DirApp, true, ref sError);
 
                 string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-               if ((html ?? "") !="" ) Console.WriteLine(html);
+                if ((html ?? "") != "") Console.WriteLine(html);
             }
 
 
