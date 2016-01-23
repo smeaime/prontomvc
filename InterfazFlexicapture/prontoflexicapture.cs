@@ -174,6 +174,7 @@ namespace ProntoFlexicapture
             while (true)
             {
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
+                Console.WriteLine("reconocer imagen");
 
                 //trace("Recognize next document...");
                 IDocument document = processor.RecognizeNextDocument();
