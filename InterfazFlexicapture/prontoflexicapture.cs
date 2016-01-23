@@ -19,6 +19,8 @@ using ProntoMVC.Data;
 
 using ExtensionMethods;
 
+using Pronto.ERP.Bll;
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
@@ -100,10 +102,10 @@ namespace ProntoFlexicapture
             //    '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
 
             //Catch ex As Exception
-            //    ErrHandler.WriteError(ex)
+            //    ErrHandler2.WriteError(ex)
             //End Try
 
-            Console.WriteLine("Imagenes encoladas " + Lista.Count);
+            //Console.WriteLine("Imagenes encoladas " + Lista.Count);
 
             return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
 
@@ -135,7 +137,7 @@ namespace ProntoFlexicapture
 
 
 
-            ErrHandler.WriteError("Cargo la plantilla");
+            ErrHandler2.WriteError("Cargo la plantilla");
 
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
@@ -328,7 +330,7 @@ namespace ProntoFlexicapture
             string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
 
 
-            ErrHandler.WriteError("Procesó carta: titular " + Titular);
+            ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
 
             long numeroCarta;
@@ -344,7 +346,7 @@ namespace ProntoFlexicapture
                 //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
                 // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
 
-                ErrHandler.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
+                ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
 
             }
 
@@ -354,11 +356,11 @@ namespace ProntoFlexicapture
                 // qué pasa si no esta la licencia?
                 // detectar con lectores de codigo de barra
 
-                ErrHandler.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
+                ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
 
                 numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
 
-                ErrHandler.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
+                ErrHandler2.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
 
 
                 //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
@@ -418,7 +420,7 @@ namespace ProntoFlexicapture
                 string ms = "", warn = "";
 
 
-                ErrHandler.WriteError("Llamo a IsValid y Save");
+                ErrHandler2.WriteError("Llamo a IsValid y Save");
 
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid)
@@ -446,7 +448,7 @@ namespace ProntoFlexicapture
                         }
 
 
-                        ErrHandler.WriteError("Llamo a GrabarImagen");
+                        ErrHandler2.WriteError("Llamo a GrabarImagen");
 
                         var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
                                                       , ref sError, DirApp, bCodigoBarrasDetectado);
@@ -464,7 +466,7 @@ namespace ProntoFlexicapture
             }
 
 
-            ErrHandler.WriteError("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
+            ErrHandler2.WriteError("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
             GuardarLogEnBase(o);
@@ -541,27 +543,27 @@ namespace ProntoFlexicapture
 
                 try
                 {
-                    ErrHandler.WriteError("Arranca motor");
+                    ErrHandler2.WriteError("Arranca motor");
 
                     engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
 
-                    ErrHandler.WriteError("Reconoció la licencia");
+                    ErrHandler2.WriteError("Reconoció la licencia");
 
                     resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
                                                     plantilla,
                                                     archivos, SC, DirApp, true, ref e);
 
-                    ErrHandler.WriteError("Termina motor");
+                    ErrHandler2.WriteError("Termina motor");
 
                     ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
 
-                    ErrHandler.WriteError("Proceso cerrado");
+                    ErrHandler2.WriteError("Proceso cerrado");
 
 
                 }
                 catch (Exception ex)
                 {
-                    ErrHandler.WriteError(ex.ToString());
+                    ErrHandler2.WriteError(ex.ToString());
 
                     var listasinpath = new List<string>();
                     foreach (string i in archivos)
