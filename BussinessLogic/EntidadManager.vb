@@ -3006,6 +3006,9 @@ Salida:
                         Dim YSOD = Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm")
                     End If
                 End If
+
+
+                Console.Write(lastErrorMessage)
             Catch ex As Exception
                 'acá no pasó nada.... (para cuidarse de circularidades en el logueo de errores)
             End Try
@@ -3021,6 +3024,10 @@ Salida:
             'http://www.dotnetcurry.com/ShowArticle.aspx?ID=94
             Dim nombre, nombreLargo As String
             Try
+
+                Console.Write(errorMessage)
+
+
                 nombre = DirectorioErrores & DateTime.Today.ToString("dd-MM-yy") & ".txt"
                 nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre)
 
