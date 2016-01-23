@@ -76,7 +76,7 @@ Public Module ProntoFuncionesInterop
         Dim MyFile1 As New FileInfo(plant)
         Try
             If Not MyFile1.Exists Then 'busca la plantilla
-                ErrHandler.WriteError("No se encuentra la plantilla " & plant)
+                ErrHandler2.WriteError("No se encuentra la plantilla " & plant)
                 Err.Raise(234234, , "No se encuentra la plantilla " & plant)
                 Return ""
             End If
@@ -87,7 +87,7 @@ Public Module ProntoFuncionesInterop
             End If
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex.ToString)
+            ErrHandler2.WriteError(ex.ToString)
             'MsgBoxAjax(Yo, ex.ToString)
             Throw
             'Return ""
@@ -119,7 +119,7 @@ Public Module ProntoFuncionesInterop
             Try
                 oDoc = oW.Documents.Add(DirectCast(plant, Object))
             Catch ex As Exception
-                ErrHandler.WriteError(ex.ToString & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO).   Verificar el directorio de plantillas")
+                ErrHandler2.WriteError(ex.ToString & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO).   Verificar el directorio de plantillas")
                 Throw
                 'MsgBoxAjax(Yo, ex.ToString & "Explota en el oW.Documents.Add(plant)")
             End Try
@@ -182,7 +182,7 @@ Public Module ProntoFuncionesInterop
                 'Try
 
                 'Debug.Print("Emision """ & DebugCadenaImprimible(ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing"))
-                'ErrHandler.WriteError("Emision """ & DebugCadenaImprimible(ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing"))
+                'ErrHandler2.WriteError("Emision """ & DebugCadenaImprimible(ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing"))
 
 
                 '                *Plantillas
@@ -218,26 +218,26 @@ Public Module ProntoFuncionesInterop
 
                 Try
                     If Arg7 IsNot Nothing Then
-                        ErrHandler.WriteError("6 argumento")
+                        ErrHandler2.WriteError("6 argumento")
                         oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5, Arg6, Arg7)
                     ElseIf Arg6 IsNot Nothing Then
-                        ErrHandler.WriteError("5 argumento")
+                        ErrHandler2.WriteError("5 argumento")
                         oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5, Arg6)
                     ElseIf Arg5 IsNot Nothing Then
-                        ErrHandler.WriteError("4 argumento")
+                        ErrHandler2.WriteError("4 argumento")
                         oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5)
                     ElseIf Arg4 IsNot Nothing Then
-                        ErrHandler.WriteError("3 argumento")
+                        ErrHandler2.WriteError("3 argumento")
                         oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4)
                     ElseIf Arg3 IsNot Nothing Then
-                        ErrHandler.WriteError("2 argumento")
+                        ErrHandler2.WriteError("2 argumento")
                         oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3)
                     Else
-                        ErrHandler.WriteError("1 argumento")
+                        ErrHandler2.WriteError("1 argumento")
                         oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id)
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError("Explota en la llamada a Emision ()" & ex.ToString & "")
+                    ErrHandler2.WriteError("Explota en la llamada a Emision ()" & ex.ToString & "")
                     Throw
                 End Try
 
@@ -250,7 +250,7 @@ Public Module ProntoFuncionesInterop
 
 
                 'Catch ex As Exception
-                '    ErrHandler.WriteError(ex.ToString & "Explota en la llamada a la macro. Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro")
+                '    ErrHandler2.WriteError(ex.ToString & "Explota en la llamada a la macro. Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro")
                 '    'MsgBoxAjax(Yo, ex.ToString & "Explota en la llamada a la macro.")
                 'End Try
 
@@ -296,7 +296,7 @@ Public Module ProntoFuncionesInterop
                 'and added it to the saveas command. The extn (.doc) decides on what format
                 'the document is saved as.
                 Const wrdFormatDocument As Long = 0 '(save in default format)
-                ErrHandler.WriteError("Pudo ejecutar el Emision(), ahora tratará de grabar")
+                ErrHandler2.WriteError("Pudo ejecutar el Emision(), ahora tratará de grabar")
                 .SaveAs(DirectCast(output, Object), wrdFormatDocument) 'adherir extension ".doc"
 
                 'oEx.SaveWorkspace(output) 'no usar esto, usar el del workbook
@@ -310,7 +310,7 @@ Public Module ProntoFuncionesInterop
             'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex.ToString & " Archivo Plantilla: " & plant & vbCrLf & _
+            ErrHandler2.WriteError(ex.ToString & " Archivo Plantilla: " & plant & vbCrLf & _
             "Verificar que la DLL ComPronto esté bien referenciada en la " & _
             "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " & _
             ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " & _
@@ -356,12 +356,12 @@ Public Module ProntoFuncionesInterop
                 Response.TransmitFile(output)
                 Response.End()
             Else
-                ErrHandler.WriteError("No se pudo generar el informe. Consulte al administrador")
+                ErrHandler2.WriteError("No se pudo generar el informe. Consulte al administrador")
                 'MsgBoxAjax(Yo, "No se pudo generar el informe. Consulte al administrador")
                 Return ""
             End If
         Catch ex As Exception
-            ErrHandler.WriteError(ex.ToString)
+            ErrHandler2.WriteError(ex.ToString)
             Throw
             'MsgBoxAjax(Yo, ex.ToString)
             'Return ""

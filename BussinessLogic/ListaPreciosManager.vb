@@ -450,7 +450,7 @@ Namespace Pronto.ERP.Bll
                     Try
                         idListaPrecio = CrearleListaAlCliente(SC, IdCliente)
                     Catch ex As Exception
-                        ErrHandler.WriteError("No se pudo crear la lista de precios al facturar. " & ex.Message)
+                        ErrHandler2.WriteError("No se pudo crear la lista de precios al facturar. " & ex.Message)
                     End Try
 
                 End If
@@ -458,8 +458,8 @@ Namespace Pronto.ERP.Bll
                 Try
                     idListaPrecio = CrearleListaAlCliente(SC, IdCliente)
                 Catch ex As Exception
-                    ErrHandler.WriteError("Existe ese cliente?")
-                    ErrHandler.WriteAndRaiseError(ex)
+                    ErrHandler2.WriteError("Existe ese cliente?")
+                    ErrHandler2.WriteAndRaiseError(ex)
                 End Try
 
             End If

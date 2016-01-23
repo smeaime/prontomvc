@@ -1170,7 +1170,7 @@ Namespace Pronto.ERP.Bll
                     myCliente.SeLeFacturaCartaPorteComoCorredor = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoCorredor ", "Clientes", "IdCliente", id)
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
             End If
 
@@ -1208,7 +1208,7 @@ Namespace Pronto.ERP.Bll
                         .SeLeFacturaCartaPorteComoCorredor = oCliente.SeLeFacturaCartaPorteComoCorredor
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -1236,7 +1236,7 @@ Namespace Pronto.ERP.Bll
 
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -1250,7 +1250,7 @@ Namespace Pronto.ERP.Bll
 
                         If oDet IsNot Nothing Then .EmailFacturacionElectronica = oDet.Email
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -1262,7 +1262,7 @@ Namespace Pronto.ERP.Bll
 
                         If oDet IsNot Nothing Then .AutorizacionSyngenta = oDet.Contacto
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -1274,7 +1274,7 @@ Namespace Pronto.ERP.Bll
 
                         If oDet IsNot Nothing Then .EsClienteExportador = oDet.Contacto
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -1288,7 +1288,7 @@ Namespace Pronto.ERP.Bll
 
                         If oDet IsNot Nothing Then .UsaGastosAdmin = oDet.Contacto Else .UsaGastosAdmin = "SI"
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -1302,7 +1302,7 @@ Namespace Pronto.ERP.Bll
 
                         If oDet IsNot Nothing Then .DeshabilitadoPorCobranzas = oDet.Contacto Else .DeshabilitadoPorCobranzas = "SI"
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -1315,14 +1315,14 @@ Namespace Pronto.ERP.Bll
 
                         If oDet IsNot Nothing Then .EsClienteObservacionesFacturadoComoCorredor = oDet.Contacto Else .EsClienteObservacionesFacturadoComoCorredor = "SI"
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
 
                 End With
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
 
             End Try
 
@@ -1346,7 +1346,7 @@ Namespace Pronto.ERP.Bll
         '        myCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores = EntidadManager.TablaSelect(SC, "ExpresionRegularNoAgruparFacturasConEstosVendedores", "Clientes", "IdCliente", id)
         '        myCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse = EntidadManager.TablaSelect(SC, "ExigeDatosCompletosEnCartaDePorteQueLoUse", "Clientes", "IdCliente", id)
         '    Catch ex As Exception
-        '        ErrHandler.WriteError(ex)
+        '        ErrHandler2.WriteError(ex)
         '    End Try
         '    Return myCliente
         'End Function
@@ -1462,7 +1462,7 @@ Namespace Pronto.ERP.Bll
                         oDet.Email = myCliente.EmailFacturacionElectronica
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 Try
@@ -1481,7 +1481,7 @@ Namespace Pronto.ERP.Bll
                         oDet.Contacto = myCliente.AutorizacionSyngenta
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 Try
@@ -1500,7 +1500,7 @@ Namespace Pronto.ERP.Bll
                         oDet.Contacto = myCliente.EsClienteExportador
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -1521,7 +1521,7 @@ Namespace Pronto.ERP.Bll
                         oDet.Contacto = myCliente.UsaGastosAdmin
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -1542,7 +1542,7 @@ Namespace Pronto.ERP.Bll
                         oDet.Contacto = myCliente.DeshabilitadoPorCobranzas
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -1565,7 +1565,7 @@ Namespace Pronto.ERP.Bll
                         oDet.Contacto = myCliente.EsClienteObservacionesFacturadoComoCorredor
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -1573,7 +1573,7 @@ Namespace Pronto.ERP.Bll
                 db.SubmitChanges()
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
@@ -2023,7 +2023,7 @@ Namespace Pronto.ERP.Bll
 
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -2151,7 +2151,7 @@ Namespace Pronto.ERP.Bll
 
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -2220,7 +2220,7 @@ Namespace Pronto.ERP.Bll
                 myConnection.Close()
             Catch e As Exception
                 Transaccion.Rollback()
-                ErrHandler.WriteAndRaiseError(e)
+                ErrHandler2.WriteAndRaiseError(e)
                 'Return -1 'qué conviene usar? disparar errores o devolver -1?
             Finally
                 CType(myConnection, IDisposable).Dispose()
