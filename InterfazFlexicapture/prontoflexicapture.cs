@@ -221,6 +221,7 @@ namespace ProntoFlexicapture
                     catch (Exception x)
                     {
                         Debug.Print(x.ToString());
+                        ErrHandler2.WriteError(x);
                         // throw;
                     }
 
@@ -464,7 +465,12 @@ namespace ProntoFlexicapture
 
 
             }
+            else
+            {
 
+                ErrHandler2.WriteError("No se detecto por ningun medio el numero de carta");
+
+            }
 
             ErrHandler2.WriteError("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());

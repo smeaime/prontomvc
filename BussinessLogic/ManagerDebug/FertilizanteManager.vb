@@ -201,7 +201,7 @@ Public Class FertilizanteManager
 
         Else
             'OJO:  puede ser una con otro subnumerodefacturacion...
-            'ErrHandler.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
+            'ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
 
 
 
@@ -213,7 +213,7 @@ Public Class FertilizanteManager
             'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:System.Exception
             'Application-defined or object-defined error.
             '   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
-            '   at ErrHandler.WriteAndRaiseError(String errorMessage) in E:\Backup\BDL\ProntoWeb\BusinessObject\ErrHandler.vb:line 120
+            '   at ErrHandler2.WriteAndRaiseError(String errorMessage) in E:\Backup\BDL\ProntoWeb\BusinessObject\ErrHandler2.vb:line 120
             '   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon)
             '   at CartaDePorteManager.validarUnicidad(String SC, String txtNumeroCDP, String txtSubNumeroVagon, Int32 IdEntity, CartaDePorte actualCartaDePorte)
             '            at(CartadeporteABM.RefrescarValidadorDuplicidad())
@@ -266,7 +266,7 @@ Public Class FertilizanteManager
                 AsyncFileUpload1.SaveAs(DIRFTP + nombrenuevo)
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.ToString)
+                ErrHandler2.WriteError(ex.ToString)
                 Throw
             End Try
         Else
@@ -342,7 +342,7 @@ Public Class FertilizanteManager
 
             'If .IdFacturaImputada > 0 Then
             '    'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
-            '    ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque ya existe como facturada")
+            '    ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque ya existe como facturada")
             '    Return 0
             'End If
 
@@ -350,13 +350,13 @@ Public Class FertilizanteManager
             'If .NetoFinalSinMermas > 0 Or .NetoFinalIncluyendoMermas > 0 Then
             '    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
             '    'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
-            '    ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
+            '    ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
             '    Return 0
             'End If
 
 
             'If .Anulada = "SI" Then
-            '    ErrHandler.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
+            '    ErrHandler2.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
             '    LogPronto(SC, .Id, "IMPANU", Session(SESSIONPRONTO_UserName))
             '    CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
 
@@ -372,7 +372,7 @@ Public Class FertilizanteManager
 
             '    If q.Count > 1 Then
             '        'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
-            '        ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
+            '        ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
             '        Return 0
             '    End If
 
@@ -617,13 +617,13 @@ Public Class FertilizanteManager
                     '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
                 If Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName)) = -1 Then
                     'Debug.Print("No se pudo grabar el renglon n° " & myCartaDePorte.NumeroCartaDePorte)
-                    'ErrHandler.WriteError("Error al grabar CDP importada")
+                    'ErrHandler2.WriteError("Error al grabar CDP importada")
                 Else
                     'poner url hacia el ABM
                     'Response.Redirect(String.Format("CartaDePorte.aspx?Id={0}", IdCartaDePorte.ToString))
@@ -636,7 +636,7 @@ Public Class FertilizanteManager
 
             Else
                 'Dim sError = "Error al validar CDP importada: " & myCartaDePorte.NumeroCartaDePorte & " " & ms
-                'ErrHandler.WriteError(sError)
+                'ErrHandler2.WriteError(sError)
                 'txtLogErrores.Visible = True
                 'If txtLogErrores.Text = "" Then txtLogErrores.Text = "Errores: " & vbCrLf
                 'txtLogErrores.Text &= sError & vbCrLf
@@ -744,7 +744,7 @@ Public Class FertilizanteManager
 
             Dim ms As String
             If Not IsValid(SC, cupoFertilizante, ms) Then
-                ErrHandler.WriteError(ms)
+                ErrHandler2.WriteError(ms)
                 Return -1
             End If
 
@@ -797,7 +797,7 @@ Public Class FertilizanteManager
 
         Catch ex As Exception
             'ContextUtil.SetAbort()
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Debug.Print(ex.ToString)
             Throw New ApplicationException("Error en la grabacion " + ex.ToString, ex)
             'Return -1
