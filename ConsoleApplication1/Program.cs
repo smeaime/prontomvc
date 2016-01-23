@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using ProntoFlexicapture;
 using FCEngine;
 
+using System.Configuration;
+
+
 
 namespace ConsoleApplication1
 {
@@ -40,12 +43,24 @@ namespace ConsoleApplication1
         static public void Initialize()
         {
 
-            DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
+            /*
 
+            DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
+            
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
                    @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
 
             plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+            */
+
+            
+            DirApp = ConfigurationManager.AppSettings["DirApp"];
+
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
+
+            plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
+
+
 
         }
 
@@ -68,6 +83,8 @@ namespace ConsoleApplication1
 
             // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
 
+            Console.WriteLine("Busca imagenes Pendientes");
+
             while (true)
             {
                 // wait for the event to be signaled
@@ -78,9 +95,8 @@ namespace ConsoleApplication1
                                     plantilla, 5,
                                      SC, DirApp, true, ref sError);
 
-
                 string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-                Console.WriteLine(html);
+               if ((html ?? "") !="" ) Console.WriteLine(html);
             }
 
 
