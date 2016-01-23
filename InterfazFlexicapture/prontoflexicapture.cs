@@ -103,6 +103,8 @@ namespace ProntoFlexicapture
             //    ErrHandler.WriteError(ex)
             //End Try
 
+            Console.WriteLine("Imagenes encoladas " + Lista.Count);
+
             return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
 
         }
@@ -116,6 +118,7 @@ namespace ProntoFlexicapture
         {
 
 
+            if (imagenes.Count <= 0) return null;
 
             //engine.CurrentLicense
             if (!bEstaLaLicenciadelFlexicapture()) // no está la licencia del Flexicapture
@@ -173,8 +176,10 @@ namespace ProntoFlexicapture
             int count = 0;
             while (true)
             {
+                if (count > imagenes.Count - 1) break; 
+
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
-                Console.WriteLine("reconocer imagen");
+                Console.WriteLine("reconocer imagen " + imagenes[count]);
 
                 //trace("Recognize next document...");
                 IDocument document = processor.RecognizeNextDocument();
@@ -236,6 +241,7 @@ namespace ProntoFlexicapture
         public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
         {
             if (err != "") return err;
+            if (l==null) return null;
 
             string stodo = "";
 
