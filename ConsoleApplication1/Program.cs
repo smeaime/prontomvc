@@ -18,11 +18,23 @@ namespace ConsoleApplication1
         static string SC;
         static string plantilla;
 
+        static IEngine engine = null;
+        static IEngineLoader engineLoader;
+
 
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
             Initialize();
             DoWork();
+
+
+        }
+
+        static void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            Console.WriteLine("exit");
+            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
         }
 
         static public void Initialize()
@@ -42,8 +54,6 @@ namespace ConsoleApplication1
 
 
 
-            IEngine engine = null;
-            IEngineLoader engineLoader;
 
             ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
             System.Diagnostics.PerformanceCounter performanceCounter;
@@ -74,7 +84,6 @@ namespace ConsoleApplication1
             }
 
 
-            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
 
         }
 
