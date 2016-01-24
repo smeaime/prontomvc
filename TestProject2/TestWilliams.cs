@@ -968,19 +968,15 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
 
             IEngine engine = null;
-            IEngineLoader engineLoader;
+            IEngineLoader engineLoader=null;
+            IFlexiCaptureProcessor processor = null;
 
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-            System.Diagnostics.PerformanceCounter performanceCounter;
 
-            if (engine == null)
-            {
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
-            }
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
 
             string sError = "";
 
-            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
+            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
                                     plantilla, 10,
                                      SC, DirApp, true, ref sError);
 
@@ -1019,15 +1015,10 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
             IEngine engine = null;
-            IEngineLoader engineLoader;
+            IEngineLoader engineLoader=null;
+            IFlexiCaptureProcessor processor = null;
+       
 
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-            System.Diagnostics.PerformanceCounter performanceCounter;
-
-            if (engine == null)
-            {
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
-            }
 
             //levantar todo un directorio
 
@@ -1043,7 +1034,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             string sError = "";
 
-            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
+            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(ref engine, ref processor,
                                         plantilla,
                                         lista, SC, DirApp, true, ref sError);
 

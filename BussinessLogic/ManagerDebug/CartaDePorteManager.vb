@@ -8155,7 +8155,7 @@ Public Class CartaDePorteManager
 
             Dim cdp As Pronto.ERP.BO.CartaDePorte
             Try
-                cdp = CartaDePorteManager.GetItemPorNumero(SC, .NumeroCartaDePorte, .SubnumeroVagon, -1)
+                cdp = CartaDePorteManager.GetItemPorNumero(SC, .NumeroCartaDePorte, .SubnumeroVagon, 0)
 
                 If cdp.Id <> -1 And myCartaDePorte.SubnumeroDeFacturacion < 1 Then 'ya existe ese numero
                     If .Id = -1 Then 'estoy haciendo un alta
@@ -10220,6 +10220,29 @@ Public Class CartaDePorteManager
 
 
 
+
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+
+
+        If numeroCarta = 0 Then
+            CartaDePorteManager.ParseNombreCarta(fileImagen, numeroCarta, 0)
+
+            
+            If numeroCarta <> 0 Then
+                sError &= " Codigo de barras no detectado. Se usa el numero del nombre del archivo"
+
+            Else
+
+                sError &= " Numero no detectado por ningun medio"
+            End If
+        End If
+
+
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
@@ -10321,6 +10344,7 @@ Public Class CartaDePorteManager
             End If
 
             If numeroCarta = 0 Then
+                'despues de usar ParseNombreCarta tampoco lo detecta
                 sError &= " Número no detectado en el nombre del archivo " & nombre & "<br/> "
                 Continue For
             End If

@@ -83,16 +83,15 @@ namespace ConsoleApplication1
             }
 
 
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+            ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
 
 
 
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-            System.Diagnostics.PerformanceCounter performanceCounter;
 
-            if (engine == null)
-            {
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
-            }
+
 
             string sError = "";
 
@@ -107,12 +106,23 @@ namespace ConsoleApplication1
                 // or for the configured delay
 
                 // let's do some work
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
+                //no volver a cargar planilla!!!!
+
+
+
+
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                     plantilla, 5,
                                      SC, DirApp, true, ref sError);
 
                 string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
                 if ((html ?? "") != "") Console.WriteLine(html);
+
+                if (resultado == null)
+                {
+                    System.Threading.Thread.Sleep(1000 * 30);
+                    Console.Write(".");
+                }
             }
 
 
