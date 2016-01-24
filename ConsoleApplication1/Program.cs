@@ -110,19 +110,30 @@ namespace ConsoleApplication1
 
 
 
-
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                                    plantilla, 5,
-                                     SC, DirApp, true, ref sError);
-
-                string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-                if ((html ?? "") != "") Console.WriteLine(html);
-
-                if (resultado == null)
+                try
                 {
-                    System.Threading.Thread.Sleep(1000 * 30);
-                    Console.Write(".");
+                    var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
+                                        plantilla, 5,
+                                         SC, DirApp, true, ref sError);
+
+
+                    string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+                    if ((html ?? "") != "") Console.WriteLine(html);
+
+                    if (resultado == null)
+                    {
+                        System.Threading.Thread.Sleep(1000 * 30);
+                        Console.Write(".");
+                    }
+
                 }
+                catch (Exception x)
+                {
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(x);
+                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                    return;
+                }
+
             }
 
 

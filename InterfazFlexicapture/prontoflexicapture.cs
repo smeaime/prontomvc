@@ -140,7 +140,6 @@ namespace ProntoFlexicapture
 
 
 
-            ErrHandler2.WriteError("Cargo la plantilla");
 
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
@@ -170,7 +169,17 @@ namespace ProntoFlexicapture
             //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
             //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_3.tif");
             // Configure the processor to use the new image source
-            processor.SetCustomImageSource(imageSource);
+            try
+            {
+                // processor.ResetProcessing();
+                processor.SetCustomImageSource(imageSource);
+            }
+            catch (Exception)
+            {
+                //tirar la Lista de imagenes sospechosas
+                throw;
+            }
+
 
             //traceBegin("Run processing loop...");
             int count = 0;
@@ -232,6 +241,9 @@ namespace ProntoFlexicapture
 
             //trace("Check the results...");
             //assert(count == 4);
+            
+            processor.ResetProcessing();
+
             return r;
         }
 
@@ -278,7 +290,7 @@ namespace ProntoFlexicapture
 
 
             var q = (from f in files
-                     where ((f.Name.EndsWith(".tif") || f.Name.EndsWith(".tiff") || f.Name.EndsWith(".jpg"))
+                     where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff") || f.Name.ToLower().EndsWith(".jpg"))
                             &&
                             (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                      )
@@ -332,7 +344,7 @@ namespace ProntoFlexicapture
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
 
-            long numeroCarta;
+            long numeroCarta=0;
             int vagon = 0;
             string sError = "";
 
@@ -340,16 +352,20 @@ namespace ProntoFlexicapture
 
             // if (BarraCP.Value.AsString != ""   )
 
-            if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+
+            if (BarraCP!=null)
             {
-                //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
-                // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
-
-                ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
-
+                if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+                {
+                    //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
+                    // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
+                    ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
+                }
             }
 
-            else
+
+
+            if (numeroCarta==0)
             {
 
                 // qué pasa si no esta la licencia?
