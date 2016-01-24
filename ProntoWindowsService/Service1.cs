@@ -28,8 +28,8 @@ namespace ProntoWindowsService
             InitializeComponent();
         }
 
-        
-        
+
+
         protected override void OnStart(string[] args)
         {
             var worker = new System.Threading.Thread(DoWork);
@@ -46,9 +46,9 @@ namespace ProntoWindowsService
 
         public void Initialize()
         {
-            
+
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
-            
+
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
                    @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
 
@@ -63,7 +63,9 @@ namespace ProntoWindowsService
 
 
             IEngine engine = null;
-            IEngineLoader engineLoader;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
 
             ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
             System.Diagnostics.PerformanceCounter performanceCounter;
@@ -88,7 +90,7 @@ namespace ProntoWindowsService
                 //if (bSignaled == true)                    break;
 
                 // let's do some work
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                     plantilla, 5,
                                      SC, DirApp, true, ref sError);
 
