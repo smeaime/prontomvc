@@ -81,7 +81,8 @@ namespace ProntoFlexicapture
 
 
 
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine engine, string plantilla,
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(
+            ref IEngine engine, ref IFlexiCaptureProcessor processor, string plantilla,
                                                 int cuantasImagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
@@ -107,7 +108,7 @@ namespace ProntoFlexicapture
 
             //Console.WriteLine("Imagenes encoladas " + Lista.Count);
 
-            return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
+            return ProcesarCartasBatchConFlexicapture(ref engine, ref  processor, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
 
         }
 
@@ -115,7 +116,9 @@ namespace ProntoFlexicapture
 
 
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(ref IEngine engine,
+                                                    ref  IFlexiCaptureProcessor processor,
+                                                    string plantilla,
                                                    List<string> imagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
@@ -141,19 +144,14 @@ namespace ProntoFlexicapture
 
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
 
+
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> r = new List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados>();
 
-            //trace("Create an instance of FlexiCapture processor...");
-            IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
 
-            //trace("Add required Document Definitions...");
 
-            //como hago para usar la exportacion del flexilayout .afl
 
-            //IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(SamplesFolder + "\\cartaporte.afl", "Spanish");
-            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(plantilla, "Spanish");
 
-            processor.AddDocumentDefinition(newDocumentDefinition);
+
             //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
 
             //trace("Set up a custom image source...");
@@ -178,7 +176,7 @@ namespace ProntoFlexicapture
             int count = 0;
             while (true)
             {
-                if (count > imagenes.Count - 1) break; 
+                if (count > imagenes.Count - 1) break;
 
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
@@ -244,7 +242,7 @@ namespace ProntoFlexicapture
         public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
         {
             if (err != "") return err;
-            if (l==null) return null;
+            if (l == null) return null;
 
             string stodo = "";
 
@@ -520,6 +518,40 @@ namespace ProntoFlexicapture
 
 
 
+        static public void IniciaMotor(ref IEngine engine, ref  IEngineLoader engineLoader, ref  IFlexiCaptureProcessor processor, string plantilla)
+        {
+
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+
+            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
+
+            ErrHandler2.WriteError("Arranca motor");
+
+            if (engine == null)
+                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+
+
+            ErrHandler2.WriteError("Reconoció la licencia");
+
+
+            processor = engine.CreateFlexiCaptureProcessor();
+
+            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(plantilla, "Spanish");
+
+            processor.AddDocumentDefinition(newDocumentDefinition);
+
+
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+
+
+        }
+
 
         static public void ActivarMotor(string SC, List<string> archivos, ref string sError, string DirApp, string ConfigurationManager_UsarFlexicapture)
         {
@@ -531,16 +563,14 @@ namespace ProntoFlexicapture
             if (ConfigurationManager_UsarFlexicapture == "SI")
             {
 
-                IEngine engine;
-                IEngineLoader engineLoader;
-
-                ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
 
 
                 // esto esta mal. tiene que usar el path de la aplicacion
                 string plantilla = DirApp + @"\Documentos\cartaporte.afl";
+                IEngine engine = null;
+                IEngineLoader engineLoader = null;
+                IFlexiCaptureProcessor processor = null;
                 // string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
-
 
 
 
@@ -549,13 +579,19 @@ namespace ProntoFlexicapture
 
                 try
                 {
-                    ErrHandler2.WriteError("Arranca motor");
 
-                    engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
 
-                    ErrHandler2.WriteError("Reconoció la licencia");
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
+                    IniciaMotor(ref engine, ref  engineLoader,ref  processor, plantilla);
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
 
-                    resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
+
+
+
+
+                    resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(ref engine, ref processor,
                                                     plantilla,
                                                     archivos, SC, DirApp, true, ref e);
 
