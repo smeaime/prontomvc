@@ -22872,8 +22872,12 @@ Public Class LogicaImportador
         '"Toepfer Destino"
         '"VICENTIN"
 
+        'if (cmbFormato Is Nothing) Then FormatosDeExcel.Autodetectar()
 
-        If cmbFormato.SelectedIndex <> FormatosDeExcel.Autodetectar Then Return [Enum].Parse(GetType(FormatosDeExcel), cmbFormato.SelectedItem.Value.ToString)
+        If cmbFormato.SelectedIndex <> FormatosDeExcel.Autodetectar Then
+            Return [Enum].Parse(GetType(FormatosDeExcel), cmbFormato.SelectedItem.Value.ToString)
+        End If
+
 
 
 
