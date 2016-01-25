@@ -344,7 +344,7 @@ Namespace Pronto.ERP.Bll
             'http://forums.asp.net/p/1068777/1553283.aspx
 
 
-            ErrHandler.WriteError("Generando sincro para " & sSincronismo)
+            ErrHandler2.WriteError("Generando sincro para " & sSincronismo)
 
             Dim sTitulo As String = ""
 
@@ -420,11 +420,11 @@ Namespace Pronto.ERP.Bll
 
                     Catch ex As OutOfMemoryException
 
-                        ErrHandler.WriteAndRaiseError(ex)
+                        ErrHandler2.WriteAndRaiseError(ex)
                         MandarMailDeError(ex)
 
                     Catch ex As Exception
-                        ErrHandler.WriteAndRaiseError(ex)
+                        ErrHandler2.WriteAndRaiseError(ex)
                         '    'Dim conn = New SqlConnection(builder.ConnectionString)
                         '    'conn.Open()
 
@@ -469,7 +469,7 @@ Namespace Pronto.ERP.Bll
 
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
 
 
                 End Try
@@ -519,7 +519,7 @@ Namespace Pronto.ERP.Bll
 
                                 FiltrarCopias(ds)
                             Catch ex As Exception
-                                ErrHandler.WriteError(ex)
+                                ErrHandler2.WriteError(ex)
                             End Try
 
 
@@ -559,7 +559,7 @@ Namespace Pronto.ERP.Bll
                             Try
                                 dt = DataTableWHERE(dt, sWHERE)
                             Catch ex As Exception
-                                ErrHandler.WriteAndRaiseError("Error al filtrar destino")
+                                ErrHandler2.WriteAndRaiseError("Error al filtrar destino")
                             End Try
 
                             FiltrarCopias(dt)
@@ -598,7 +598,7 @@ Namespace Pronto.ERP.Bll
                             Try
                                 dt = DataTableWHERE(dt, sWHERE)
                             Catch ex As Exception
-                                ErrHandler.WriteAndRaiseError("Error al filtrar destino")
+                                ErrHandler2.WriteAndRaiseError("Error al filtrar destino")
                             End Try
 
                             FiltrarCopias(dt)
@@ -637,7 +637,7 @@ Namespace Pronto.ERP.Bll
                             Try
                                 dt = DataTableWHERE(dt, sWHERE)
                             Catch ex As Exception
-                                ErrHandler.WriteAndRaiseError("Error al filtrar destino")
+                                ErrHandler2.WriteAndRaiseError("Error al filtrar destino")
                             End Try
 
                             FiltrarCopias(dt)
@@ -791,7 +791,7 @@ Namespace Pronto.ERP.Bll
 
                             Catch ex As Exception
                                 'no se por qué se queja (al final del using) de que el rep ya fue disposed, si en la funcion no lo libero...
-                                ErrHandler.WriteError(ex)
+                                ErrHandler2.WriteError(ex)
 
                             End Try
 
@@ -809,7 +809,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case "BLD"
-                            ErrHandler.WriteError("Generando sincro BLD")
+                            ErrHandler2.WriteError("Generando sincro BLD")
                             Try
 
 
@@ -826,14 +826,14 @@ Namespace Pronto.ERP.Bll
 
 
 
-                                'ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
+                                'ErrHandler2.WriteError("filas bld sincro " & dt.Rows.Count)
 
 
                                 'FiltrarCopias(dt)
 
                                 Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroBLD" & Now.ToString("ddMMMyyyy_HHmmss") & ".pronto" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
-                                ErrHandler.WriteError(" generar en " & ArchivoExcelDestino & " Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
+                                ErrHandler2.WriteError(" generar en " & ArchivoExcelDestino & " Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
 
                                 Try
 
@@ -848,12 +848,12 @@ Namespace Pronto.ERP.Bll
                                     '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
                                     '                   dt, ArchivoExcelDestino) 'sTitulo)
                                 Catch ex As Exception
-                                    ErrHandler.WriteError("No se pudo generar el informe de bld! ")
+                                    ErrHandler2.WriteError("No se pudo generar el informe de bld! ")
 
                                 End Try
 
 
-                                ErrHandler.WriteError("Se generó el reporte en " & output)
+                                ErrHandler2.WriteError("Se generó el reporte en " & output)
 
 
                                 'como hacer para que no agregue las columnas vacias?
@@ -862,8 +862,8 @@ Namespace Pronto.ERP.Bll
                                 'output = ExcelToCSV_SincroBLD2(output, 55)
 
                             Catch ex As Exception
-                                ErrHandler.WriteError("Error en el sincro BLD" & ex.ToString)
-                                ErrHandler.WriteError(ex)
+                                ErrHandler2.WriteError("Error en el sincro BLD" & ex.ToString)
+                                ErrHandler2.WriteError(ex)
                             End Try
 
                             'registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
@@ -893,10 +893,10 @@ Namespace Pronto.ERP.Bll
                                                 puntoventa, sTitulo, optDivisionSyngenta, , , , idClienteAuxiliar)
                                 'FiltrarCopias(dt)
                             Catch ex As Exception
-                                ErrHandler.WriteError(ex)
-                                ErrHandler.WriteError(sTitulo)
+                                ErrHandler2.WriteError(ex)
+                                ErrHandler2.WriteError(sTitulo)
                                 MandarMailDeError(ex)
-                                'ErrHandler.WriteErrorYMandarMail(sTitulo)
+                                'ErrHandler2.WriteErrorYMandarMail(sTitulo)
                                 sErroresRef = "Hubo un error al generar el informe. " & ex.ToString & " " & " Filtro usado: " & sTitulo
                                 Return ""
                             End Try
@@ -923,7 +923,7 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
                         Case "PSA LA CALIFORNIA"
-                            ErrHandler.WriteError("Generando sincro PSA La California")
+                            ErrHandler2.WriteError("Generando sincro PSA La California")
                             Try
 
 
@@ -940,14 +940,14 @@ Namespace Pronto.ERP.Bll
 
 
 
-                                'ErrHandler.WriteError("filas bld sincro " & dt.Rows.Count)
+                                'ErrHandler2.WriteError("filas bld sincro " & dt.Rows.Count)
 
 
                                 'FiltrarCopias(dt)
 
                                 Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroPSA" & Now.ToString("ddMMMyyyy_HHmmss") & ".pronto" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
-                                ErrHandler.WriteError(" generar en " & ArchivoExcelDestino & " Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
+                                ErrHandler2.WriteError(" generar en " & ArchivoExcelDestino & " Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
 
                                 Try
                                     Using rep As New ReportViewer
@@ -961,12 +961,12 @@ Namespace Pronto.ERP.Bll
                                     End Using
 
                                 Catch ex As Exception
-                                    ErrHandler.WriteError("No se pudo generar el informe de bld! ")
+                                    ErrHandler2.WriteError("No se pudo generar el informe de bld! ")
 
                                 End Try
 
 
-                                ErrHandler.WriteError("Se generó el reporte en " & output)
+                                ErrHandler2.WriteError("Se generó el reporte en " & output)
 
 
                                 'como hacer para que no agregue las columnas vacias?
@@ -974,8 +974,8 @@ Namespace Pronto.ERP.Bll
                                 output = ExcelToCSV_SincroBLD(output, 46)
 
                             Catch ex As Exception
-                                ErrHandler.WriteError("Error en el sincro BLD" & ex.ToString)
-                                ErrHandler.WriteError(ex)
+                                ErrHandler2.WriteError("Error en el sincro BLD" & ex.ToString)
+                                ErrHandler2.WriteError(ex)
                             End Try
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
@@ -1295,7 +1295,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case Else
-                            ErrHandler.WriteError("No se está eligiendo bien el sincro" & sSincronismo)
+                            ErrHandler2.WriteError("No se está eligiendo bien el sincro" & sSincronismo)
                             sErroresRef = "Elija un sincronismo. " + sSincronismo
                             Return ""
                     End Select
@@ -1314,7 +1314,7 @@ Namespace Pronto.ERP.Bll
                             End If
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                         Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
@@ -1333,17 +1333,17 @@ Namespace Pronto.ERP.Bll
 
                 Catch ex As OutOfMemoryException
                     MandarMailDeError(ex)
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     sErroresRef = "Disculpame, no pude manejar la cantidad de datos. Por favor, intentá achicando los filtros. Ya mandé un mail al administrador con el error."
                     Return ""
                 Catch ex As Exception
-                    'ErrHandler.WriteAndRaiseError(ex)
-                    ErrHandler.WriteError(ex)
+                    'ErrHandler2.WriteAndRaiseError(ex)
+                    ErrHandler2.WriteError(ex)
                     Throw
                 End Try
 
                 If output = "" Then
-                    ErrHandler.WriteError("No se pudo generar nada " & sSincronismo)
+                    ErrHandler2.WriteError("No se pudo generar nada " & sSincronismo)
                     'MsgBoxAjax(Me, "No se encontraron registros")
                     'Return ""
                 End If
@@ -1376,7 +1376,7 @@ Namespace Pronto.ERP.Bll
         Public Shared Function ExcelToCSV_SincroBLD(ByVal fileExcelName As String, ByVal MAXCOLS As Integer) As String
             'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
 
-            'ErrHandler.WriteError("huyo sin hacer nada")
+            'ErrHandler2.WriteError("huyo sin hacer nada")
             'Return ""
 
             Dim oXL As Excel.Application
@@ -1421,9 +1421,9 @@ Namespace Pronto.ERP.Bll
 
                     ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
                     'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
-                    ErrHandler.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
 
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
 
                 End Try
 
@@ -1517,7 +1517,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
                 Return Nothing
 
 
@@ -1544,7 +1544,7 @@ Namespace Pronto.ERP.Bll
 
                     'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
                 Catch ex As Exception
-                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
                 End Try
             End Try
         End Function
@@ -1685,7 +1685,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
                 Return Nothing
 
 
@@ -1711,7 +1711,7 @@ Namespace Pronto.ERP.Bll
 
                     'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
                 Catch ex As Exception
-                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
                 End Try
             End Try
         End Function
@@ -1765,9 +1765,9 @@ Namespace Pronto.ERP.Bll
 
                     ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
                     'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
-                    ErrHandler.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
 
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
 
                 End Try
 
@@ -1854,12 +1854,12 @@ Namespace Pronto.ERP.Bll
                 '///////////////////////////////////////////////////////////////////////////////////
 
 
-                ErrHandler.WriteError(sOut)
+                ErrHandler2.WriteError(sOut)
                 Return sOut
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
                 Return Nothing
 
 
@@ -1886,7 +1886,7 @@ Namespace Pronto.ERP.Bll
 
                     'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
                 Catch ex As Exception
-                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
                 End Try
             End Try
         End Function
@@ -1938,7 +1938,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
             Finally
                 Try
                     'The service (excel.exe) will continue to run
@@ -1954,7 +1954,7 @@ Namespace Pronto.ERP.Bll
 
                     'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
                 Catch ex As Exception
-                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
                 End Try
             End Try
 
@@ -2004,7 +2004,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
             Finally
                 Try
                     'The service (excel.exe) will continue to run
@@ -2020,7 +2020,7 @@ Namespace Pronto.ERP.Bll
 
                     'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
                 Catch ex As Exception
-                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
                 End Try
             End Try
 
@@ -2223,8 +2223,8 @@ Namespace Pronto.ERP.Bll
                     If .ProcedenciaCodigoPostal.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
-                        'ErrHandler.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
+                        ErrHandler2.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
+                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
 
                         'sErroresProcedencia &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
 
@@ -2235,9 +2235,9 @@ Namespace Pronto.ERP.Bll
                     If .DestinoCodigoPostal.ToString = "" And InStr(sErroresDestinos, .DestinoDesc.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        'ErrHandler.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de destino")
+                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de destino")
                         'sErroresDestinos &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
-                        ErrHandler.WriteError("El destino " & .DestinoDesc.ToString & " no tiene codigo postal")
+                        ErrHandler2.WriteError("El destino " & .DestinoDesc.ToString & " no tiene codigo postal")
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
@@ -2648,8 +2648,8 @@ Namespace Pronto.ERP.Bll
                             sCalidad = "FE"
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Sincro alabern")
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError("Sincro alabern")
+                        ErrHandler2.WriteError(ex)
                     End Try
                     If .IsCalidadDescNull Then sCalidad = "3"
                     sb &= "|" & sCalidad.PadRight(3) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
@@ -2764,8 +2764,8 @@ Namespace Pronto.ERP.Bll
                     If .ProcedenciaCodigoONCAA.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo oncca")
-                        'ErrHandler.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
+                        ErrHandler2.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo oncca")
+                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
 
                         'sErroresProcedencia &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
 
@@ -2779,9 +2779,9 @@ Namespace Pronto.ERP.Bll
                     If .DestinoCodigoONCAA.ToString = "" And InStr(sErroresDestinos, .DestinoDesc.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        'ErrHandler.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de destino")
+                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de destino")
                         'sErroresDestinos &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
-                        ErrHandler.WriteError("El destino " & .DestinoDesc.ToString & " no tiene codigo oncca")
+                        ErrHandler2.WriteError("El destino " & .DestinoDesc.ToString & " no tiene codigo oncca")
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
 
@@ -3924,7 +3924,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -3933,7 +3933,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -4201,7 +4201,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de Agrosur y no tiene codigo Algoritmo (Grobo)")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de Agrosur y no tiene codigo Algoritmo (Grobo)")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -4210,7 +4210,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -4436,7 +4436,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -4445,7 +4445,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -4708,7 +4708,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -4717,7 +4717,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -5042,11 +5042,11 @@ Namespace Pronto.ERP.Bll
                 If cdp.ProcedenciaLocalidadONCCA_SAGPYA = "" Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
+                    'ErrHandler2.WriteError("El establecimiento " & cdp.Establecimiento)
 
                     'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
 
-                    'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    'ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Código</a>; <br/>"
                 End If
@@ -5055,11 +5055,11 @@ Namespace Pronto.ERP.Bll
                 If cdp.ProcedenciaPartidoONCCA = "" Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
+                    'ErrHandler2.WriteError("El establecimiento " & cdp.Establecimiento)
 
                     'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
 
-                    'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    'ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Partido con código asignado</a>; <br/>"
                 End If
@@ -5114,7 +5114,7 @@ Namespace Pronto.ERP.Bll
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14979
 
 
-            ErrHandler.WriteError("en el sincro syngfac")
+            ErrHandler2.WriteError("en el sincro syngfac")
 
             Dim codigoBahiaBlanca As String
             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
@@ -5132,7 +5132,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-            ErrHandler.WriteError("en el sincro syngfac 2")
+            ErrHandler2.WriteError("en el sincro syngfac 2")
 
 
 
@@ -5160,7 +5160,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-            ErrHandler.WriteError("en el sincro syngfac 3")
+            ErrHandler2.WriteError("en el sincro syngfac 3")
 
 
 
@@ -5190,7 +5190,7 @@ Namespace Pronto.ERP.Bll
 
 
                     If cdp.IdFacturaImputada <= 0 Then
-                        ErrHandler.WriteError("cartaid " & cdp.IdCartaDePorte & "  cartaimputada " & cdp.IdFacturaImputada.ToString)
+                        ErrHandler2.WriteError("cartaid " & cdp.IdCartaDePorte & "  cartaimputada " & cdp.IdFacturaImputada.ToString)
                         Continue For
                     End If
 
@@ -5210,8 +5210,8 @@ Namespace Pronto.ERP.Bll
 
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex.ToString)
-                        ErrHandler.WriteAndRaiseError(ex)
+                        ErrHandler2.WriteError(ex.ToString)
+                        ErrHandler2.WriteAndRaiseError(ex)
 
                     End Try
 
@@ -5229,11 +5229,11 @@ Namespace Pronto.ERP.Bll
                     If cdp.ProcedenciaPartidoONCCA = "" And False Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
+                        'ErrHandler2.WriteError("El establecimiento " & cdp.Establecimiento)
 
                         'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
 
-                        'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                        'ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                         sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Partido con código asignado</a>; <br/>"
                     End If
@@ -5246,7 +5246,7 @@ Namespace Pronto.ERP.Bll
 
             End Using
 
-            ErrHandler.WriteError("en el sincro syngfac 4")
+            ErrHandler2.WriteError("en el sincro syngfac 4")
 
 
             ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
@@ -5420,7 +5420,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -5429,7 +5429,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -5625,7 +5625,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -5634,7 +5634,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -5851,7 +5851,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -5860,7 +5860,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -6086,7 +6086,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -6095,7 +6095,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -6498,7 +6498,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " no tiene codigo LosGrobo")
 
                     sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
                 End If
@@ -6507,7 +6507,7 @@ Namespace Pronto.ERP.Bll
                 If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    ErrHandler.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " no tiene codigo LosGrobo")
 
                     sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
                 End If
@@ -8782,7 +8782,7 @@ Namespace Pronto.ERP.Bll
 
             Dim selec As DataRow() = pDataTable.Select(sWHERE)
 
-            ErrHandler.WriteError("Syngenta renglones sincro " & selec.Count)
+            ErrHandler2.WriteError("Syngenta renglones sincro " & selec.Count)
 
 
             'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
@@ -9027,7 +9027,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -9036,7 +9036,7 @@ Namespace Pronto.ERP.Bll
                             .IntermediarioCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -9045,7 +9045,7 @@ Namespace Pronto.ERP.Bll
                             .RComercialCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -9066,7 +9066,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -9080,7 +9080,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -9359,8 +9359,8 @@ Namespace Pronto.ERP.Bll
                             sCalidad = "FE"
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Sincro amaggi")
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError("Sincro amaggi")
+                        ErrHandler2.WriteError(ex)
                     End Try
                     If .IsCalidadDescNull Then sCalidad = "FE"
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
@@ -9457,7 +9457,7 @@ Namespace Pronto.ERP.Bll
                     If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+                        ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
@@ -10057,7 +10057,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10066,7 +10066,7 @@ Namespace Pronto.ERP.Bll
                             .IntermediarioCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10075,7 +10075,7 @@ Namespace Pronto.ERP.Bll
                             .RComercialCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10085,7 +10085,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10096,7 +10096,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -10390,8 +10390,8 @@ Namespace Pronto.ERP.Bll
                             sCalidad = "FE"
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Sincro amaggi")
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError("Sincro amaggi")
+                        ErrHandler2.WriteError(ex)
                     End Try
                     If .IsCalidadDescNull Then sCalidad = "FE"
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
@@ -10490,7 +10490,7 @@ Namespace Pronto.ERP.Bll
                     If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+                        ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
@@ -10771,7 +10771,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10780,7 +10780,7 @@ Namespace Pronto.ERP.Bll
                             .IntermediarioCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10789,7 +10789,7 @@ Namespace Pronto.ERP.Bll
                             .RComercialCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10799,7 +10799,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -10810,7 +10810,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -10917,8 +10917,8 @@ Namespace Pronto.ERP.Bll
                     If .ProcedenciaCodigoPostal.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
-                        'ErrHandler.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
+                        ErrHandler2.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
+                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
 
                         'sErroresProcedencia &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
 
@@ -11103,8 +11103,8 @@ Namespace Pronto.ERP.Bll
                             sCalidad = "FE"
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Sincro amaggi")
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError("Sincro amaggi")
+                        ErrHandler2.WriteError(ex)
                     End Try
                     'If .IsCalidadDescNull Then sCalidad = "FE"
                     'sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
@@ -11201,7 +11201,7 @@ Namespace Pronto.ERP.Bll
                     'If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
                     '    'si no tiene codigo ni está ya en sErrores, lo meto
 
-                    '    ErrHandler.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+                    '    ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
 
                     '    sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     'End If
@@ -11547,7 +11547,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -11556,7 +11556,7 @@ Namespace Pronto.ERP.Bll
                             .IntermediarioCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -11565,7 +11565,7 @@ Namespace Pronto.ERP.Bll
                             .RComercialCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -11575,7 +11575,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -11586,7 +11586,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -11693,8 +11693,8 @@ Namespace Pronto.ERP.Bll
                     If .ProcedenciaCodigoPostal.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
-                        'ErrHandler.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
+                        ErrHandler2.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
+                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
 
                         'sErroresProcedencia &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
 
@@ -11879,8 +11879,8 @@ Namespace Pronto.ERP.Bll
                             sCalidad = "FE"
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Sincro amaggi")
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError("Sincro amaggi")
+                        ErrHandler2.WriteError(ex)
                     End Try
                     If .IsCalidadDescNull Then sCalidad = "FE"
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
@@ -11977,7 +11977,7 @@ Namespace Pronto.ERP.Bll
                     If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+                        ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
@@ -12256,7 +12256,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -12265,7 +12265,7 @@ Namespace Pronto.ERP.Bll
                             .IntermediarioCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -12274,7 +12274,7 @@ Namespace Pronto.ERP.Bll
                             .RComercialCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -12284,7 +12284,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     Try
@@ -12295,7 +12295,7 @@ Namespace Pronto.ERP.Bll
                         End If
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -12574,8 +12574,8 @@ Namespace Pronto.ERP.Bll
                             sCalidad = "FE"
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Sincro amaggi")
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError("Sincro amaggi")
+                        ErrHandler2.WriteError(ex)
                     End Try
                     If .IsCalidadDescNull Then sCalidad = "FE"
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
@@ -12672,7 +12672,7 @@ Namespace Pronto.ERP.Bll
                     If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+                        ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
@@ -13193,7 +13193,7 @@ Namespace Pronto.ERP.Bll
                     If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+                        ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
@@ -13584,7 +13584,7 @@ Namespace Pronto.ERP.Bll
                             .DestinatarioCUIT = ""
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
 
@@ -13597,7 +13597,7 @@ Namespace Pronto.ERP.Bll
                     If If(.IsDestinoCUITNull, "", .DestinoCUIT) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("Falta el CUIT del destino " & .DestinoDesc)
+                        ErrHandler2.WriteError("Falta el CUIT del destino " & .DestinoDesc)
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
@@ -14628,7 +14628,7 @@ Namespace Pronto.ERP.Bll
         Public Shared Function Sincronismo_BLD_ExcelToCSV_SincroBLD2(ByVal fileExcelName As String, ByVal MAXCOLS As Integer) As String
             'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
 
-            'ErrHandler.WriteError("huyo sin hacer nada")
+            'ErrHandler2.WriteError("huyo sin hacer nada")
             'Return ""
 
             Dim oXL As Excel.Application
@@ -14673,9 +14673,9 @@ Namespace Pronto.ERP.Bll
 
                     ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
                     'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
-                    ErrHandler.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
 
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
 
                 End Try
 
@@ -14771,7 +14771,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
                 Return Nothing
 
 
@@ -14798,7 +14798,7 @@ Namespace Pronto.ERP.Bll
 
                     'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
                 Catch ex As Exception
-                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                    ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
                 End Try
             End Try
         End Function
@@ -18118,7 +18118,7 @@ Namespace Pronto.ERP.Bll
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
 
-                        ErrHandler.WriteError("La localidad " & .ProcedenciaDesc.ToString & " es usada en el sincro de LosGrobo y no tiene codigo ONCAA")
+                        ErrHandler2.WriteError("La localidad " & .ProcedenciaDesc.ToString & " es usada en el sincro de LosGrobo y no tiene codigo ONCAA")
 
                         sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & .Procedencia & """ target=""_blank"">" & .ProcedenciaDesc.ToString & "</a>; "
                     End If
@@ -19714,7 +19714,7 @@ Namespace Pronto.ERP.Bll
                                 sErroresCartas &= "<a href=""CDPEstablecimientos.aspx?Id=" & .IdEstablecimiento & """ target=""_blank"">Falta código del establecimiento de procedencia. " & CodigoEstablecimientoProcedencia.AuxiliarString1 & "</a>; " & "<br/>"
                             End If
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex.ToString)
+                            ErrHandler2.WriteError(ex.ToString)
 
                         End Try
 
@@ -19831,8 +19831,8 @@ Namespace Pronto.ERP.Bll
                                 sCalidad = "A"
                             End If
                         Catch ex As Exception
-                            ErrHandler.WriteError("Sincro amaggi")
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError("Sincro amaggi")
+                            ErrHandler2.WriteError(ex)
                         End Try
                         If .IsCalidadDescNull Then sCalidad = "FE"
                         sb &= SEP & sCalidad
@@ -20128,8 +20128,8 @@ Namespace Pronto.ERP.Bll
                             sCalidad = "A"
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Sincro amaggi")
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError("Sincro amaggi")
+                        ErrHandler2.WriteError(ex)
                     End Try
                     If .IsCalidadDescNull Then sCalidad = "FE"
                     sb &= SEP & sCalidad
@@ -20591,7 +20591,7 @@ Namespace Pronto.ERP.Bll
                     If Val(.ProcedenciaCodigoPostal) = 0 And InStr(sErroresProcedencia, .Procedencia.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
-                        ErrHandler.WriteError("La localidad " & .ProcedenciaDesc & " es usada en el sincro  y no tiene codigo postal")
+                        ErrHandler2.WriteError("La localidad " & .ProcedenciaDesc & " es usada en el sincro  y no tiene codigo postal")
 
                         sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & .Procedencia & """ target=""_blank"">" & .ProcedenciaDesc & "</a>; "
                     End If

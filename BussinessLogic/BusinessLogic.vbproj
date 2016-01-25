@@ -277,7 +277,6 @@
     <Compile Include="ManagerDebug\CartaDePorteManager.vb" />
     <Compile Include="ManagerDebug\CDPStockMovimientoManager.vb" />
     <Compile Include="ManagerDebug\ConsultasLinq.vb" />
-    <Compile Include="ManagerDebug\Dynamic.vb" />
     <Compile Include="ManagerDebug\FuncionesInterop.vb" />
     <Compile Include="ManagerDebug\Numalet.vb" />
     <Compile Include="ManagerDebug\PedidoItemManager.vb" />

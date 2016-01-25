@@ -60,7 +60,7 @@ Namespace Pronto.ERP.Bll
                         .Obra = RequerimientoItemManager.GetItem(SC, .IdDetalleRequerimiento).centrocosto
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
                 End With
             Next
@@ -120,14 +120,14 @@ Namespace Pronto.ERP.Bll
                     If cmbBuscarEsteCampo = "NumeroPedido" Then busq = Val(txtBuscar) Else busq = txtBuscar
                     Dim nombrecampo As String = cmbBuscarEsteCampo.Replace("[", "").Replace("]", "")
                     Try
-                        linqDinamico = db.wVistaPedidos.Where("" & nombrecampo & ".Contains(@0) ", busq)
+                        'linqDinamico = db.wVistaPedidos.Where("" & nombrecampo & ".Contains(@0) ", busq)
                         'linqDinamico = db.wVistaPedidos.Where("Convert.ToString(" & nombrecampo & ").Contains(@0) ", busq)
 
                         'linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)  'el filtro de columna lo hago con linq dinamico
                     Catch ex As Exception
                         ' MsgBoxAjax(Me, "No se puede usar ese filtro")
                         Try
-                            linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)
+                            'linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)
                         Catch ex2 As Exception
                             linqDinamico = db.wVistaPedidos
                         End Try
@@ -236,7 +236,7 @@ Namespace Pronto.ERP.Bll
                         If cmbBuscarEsteCampo Is Nothing Then cmbBuscarEsteCampo = "Numero_Req_"
                         If cmbBuscarEsteCampo = "Numero_Req_" Then busq = Val(txtBuscar) Else busq = txtBuscar
                         Dim nombrecampo As String = cmbBuscarEsteCampo.Replace("[", "").Replace("]", "")
-                        linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)  'el filtro de columna lo hago con linq dinamico
+                        ' linqDinamico = db.wVistaPedidos.Where(nombrecampo & " = @0 ", busq)  'el filtro de columna lo hago con linq dinamico
                     Catch ex As Exception
                         ' MsgBoxAjax(Me, "No se puede usar ese filtro")
                         linqDinamico = db.wVistaPedidos
@@ -301,7 +301,7 @@ Namespace Pronto.ERP.Bll
                 Dim a = EntidadManager.ExecDinamico(sc, String.Format("SELECT NumeroPedido FROM Pedidos WHERE NumeroPedido={0} AND Isnull(SubNumero,{2})={2} AND IdPedido<>{1}", n, Id, subnumero)).Rows(0).Item(0)
                 If a IsNot Nothing Then Return True
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
             Return False
         End Function

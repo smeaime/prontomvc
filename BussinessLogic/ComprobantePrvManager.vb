@@ -61,7 +61,7 @@ Namespace Pronto.ERP.Bll
 
             'Catch ex As Exception
             '    'ContextUtil.SetAbort()
-            '    ErrHandler.WriteError(ex)
+            '    ErrHandler2.WriteError(ex)
             '    'Debug.Print(ex.Message)
             '    Return -1
             'Finally
@@ -850,7 +850,7 @@ Namespace Pronto.ERP.Bll
                 Dim oPto = EntidadManager.GetItem(SC, "PuntosVenta", IdPuntoVenta)
                 Return oPto.Item("ProximoNumero")
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 Return -1
             End Try
 

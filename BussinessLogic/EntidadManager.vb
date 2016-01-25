@@ -60,7 +60,7 @@ Namespace Pronto.ERP.Bll
             Try
                 reemplazo = ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(reemplazo)
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 reemplazo = ""
             End Try
 
@@ -363,7 +363,7 @@ Namespace Pronto.ERP.Bll
 
                 'LabelError.Text = "Mensaje enviado satisfactoriamente"
                 'Catch ex As Exception
-                '    ErrHandler.WriteError(ex.Message)
+                '    ErrHandler2.WriteError(ex.Message)
                 '    Debug.Print(ex.Message)
                 '    'LabelError.Text = "ERROR: " & ex.Message
                 '    Return False
@@ -423,9 +423,9 @@ Namespace Pronto.ERP.Bll
 
                 Return True
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
-                ErrHandler.WriteError(De)
-                ErrHandler.WriteError(Para)
+                ErrHandler2.WriteError(ex)
+                ErrHandler2.WriteError(De)
+                ErrHandler2.WriteError(Para)
                 Throw
 
             End Try
@@ -509,9 +509,9 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function ErrHandlerWriteErrorLogPronto(ByVal mensaje As String, ByVal SC As String, ByVal sNombreUsuario As String)
+        Public Shared Function ErrHandler2WriteErrorLogPronto(ByVal mensaje As String, ByVal SC As String, ByVal sNombreUsuario As String)
             LogPronto(SC, -999, mensaje, sNombreUsuario)
-            ErrHandler.WriteError(mensaje)
+            ErrHandler2.WriteError(mensaje)
         End Function
 
 
@@ -583,7 +583,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
         End Function
 
@@ -756,7 +756,7 @@ Namespace Pronto.ERP.Bll
                 Try
                     Return GeneralDB.TraerDatos(SC, "w" & sStoreProcedure, Parametros).Tables(0).Rows(0)
                 Catch x As Exception
-                    ErrHandler.WriteError(ex.Message)
+                    ErrHandler2.WriteError(ex.Message)
                     Throw
                 End Try
             End Try
@@ -786,10 +786,10 @@ Namespace Pronto.ERP.Bll
                         MsgBox("verificar que no falte alguna actualizacion de columna...")
                     End If
 
-                    ErrHandler.WriteError("verificar que no falte alguna actualizacion de columna...")
+                    ErrHandler2.WriteError("verificar que no falte alguna actualizacion de columna...")
                 End If
 
-                ErrHandler.WriteError(ex.Message)
+                ErrHandler2.WriteError(ex.Message)
                 Throw
             End Try
         End Function
@@ -810,7 +810,7 @@ Namespace Pronto.ERP.Bll
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.Message)
+                ErrHandler2.WriteError(ex.Message)
                 Throw
             End Try
         End Function
@@ -860,7 +860,7 @@ Namespace Pronto.ERP.Bll
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.Message)
+                ErrHandler2.WriteError(ex.Message)
                 Throw
 
                 'Return -1
@@ -877,7 +877,7 @@ Namespace Pronto.ERP.Bll
                 ExecDinamico(sc, String.Format("UPDATE {0} SET {1}={2} WHERE {3}={4}", Tabla, SetCampo, SetValor, WhereCampo, WhereValor))
                 Return 0
             Catch ex As Exception
-                ErrHandler.WriteError(ex.Message)
+                ErrHandler2.WriteError(ex.Message)
                 Throw
                 'Return -1
             End Try
@@ -1114,7 +1114,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 Return ""
             End Try
         End Function
@@ -2179,7 +2179,7 @@ Salida:
             Dim MyFile1 As New FileInfo(plant)
             Try
                 If Not MyFile1.Exists Then 'busca la plantilla
-                    ErrHandler.WriteError("No se encuentra la plantilla " & plant)
+                    ErrHandler2.WriteError("No se encuentra la plantilla " & plant)
                     '  MsgBoxAjax(Yo, "No se encuentra la plantilla " & plant)
                     Return ""
                 End If
@@ -2190,7 +2190,7 @@ Salida:
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.Message)
+                ErrHandler2.WriteError(ex.Message)
                 'MsgBoxAjax(Yo, ex.Message)
                 Throw
                 'Return ""
@@ -2221,7 +2221,7 @@ Salida:
                 Try
                     oDoc = oW.Documents.Add(plant)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
+                    ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
                                           "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " & _
                                           "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                     Throw
@@ -2234,7 +2234,7 @@ Salida:
                     'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
                     'http://social.msdn.microsoft.com/Forums/en/vbgeneral/thread/5deb3d3a-552c-4dfd-8d94-236b8a441daf
                     'http://forums.asp.net/t/1232621.aspx
-                    ErrHandler.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
+                    ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
                                           "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
                                           "usuario y el pass) " & IsNothing(oW) & "  Plantilla: " & plant & "")
 
@@ -2250,7 +2250,7 @@ Salida:
                         'VERY IMPORTANT
                         GC.Collect()
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                         'COM object that has been separated from its underlying RCW cannot be used.?????
                     End Try
 
@@ -2277,7 +2277,7 @@ Salida:
                     Dim sStringVBA = "Emision """ & DebugCadenaImprimible(ClaseMigrar.ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing")
 
                     Debug.Print(sStringVBA)
-                    ErrHandler.WriteError(sStringVBA)
+                    ErrHandler2.WriteError(sStringVBA)
 
 
 
@@ -2302,26 +2302,26 @@ Salida:
 
                     Try
                         If Arg7 IsNot Nothing Then
-                            ErrHandler.WriteError("6 argumento")
+                            ErrHandler2.WriteError("6 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5, Arg6, Arg7)
                         ElseIf Arg6 IsNot Nothing Then
-                            ErrHandler.WriteError("5 argumento")
+                            ErrHandler2.WriteError("5 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5, Arg6)
                         ElseIf Arg5 IsNot Nothing Then
-                            ErrHandler.WriteError("4 argumento")
+                            ErrHandler2.WriteError("4 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5)
                         ElseIf Arg4 IsNot Nothing Then
-                            ErrHandler.WriteError("3 argumento")
+                            ErrHandler2.WriteError("3 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4)
                         ElseIf Arg3 IsNot Nothing Then
-                            ErrHandler.WriteError("2 argumento")
+                            ErrHandler2.WriteError("2 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3)
                         Else
-                            ErrHandler.WriteError("1 argumento")
+                            ErrHandler2.WriteError("1 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id)
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Explota en la llamada a Emision ()" & ex.Message & "")
+                        ErrHandler2.WriteError("Explota en la llamada a Emision ()" & ex.Message & "")
                         'Throw
                     End Try
 
@@ -2346,13 +2346,13 @@ Salida:
                     'and added it to the saveas command. The extn (.doc) decides on what format
                     'the document is saved as.
                     Const wrdFormatDocument As Object = 0 '(save in default format)
-                    ErrHandler.WriteError("Pudo ejecutar el Emision(), ahora tratará de grabar")
+                    ErrHandler2.WriteError("Pudo ejecutar el Emision(), ahora tratará de grabar")
 
                     Try
                         'verificar q la ruta existe, sino se queda muy colgado
                         .SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
                     Catch ex As Exception
-                        ErrHandler.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message & _
+                        ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message & _
                             "Tiró 'El comando falló' o 'Command fail'? " & _
                             "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" & _
                             "y http://support.microsoft.com/default.aspx?scid=kb;EN-US;244264")
@@ -2370,7 +2370,7 @@ Salida:
                 'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf & _
+                ErrHandler2.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf & _
                 "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " & _
                 "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " & _
                 ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " & _
@@ -2394,28 +2394,28 @@ Salida:
                 'MAKE SURE TO KILL ALL INSTANCES BEFORE QUITING! if you fail to do this
                 'The service (excel.exe) will continue to run
                 Try
-                    ErrHandler.WriteError("cerrando...")
+                    ErrHandler2.WriteError("cerrando...")
                     If Not oDoc Is Nothing Then oDoc.Close(False)
-                    ErrHandler.WriteError("oDoc.Close(False) exito")
+                    ErrHandler2.WriteError("oDoc.Close(False) exito")
                     NAR(oDoc)
-                    ErrHandler.WriteError("NAR(oDoc) exito")
+                    ErrHandler2.WriteError("NAR(oDoc) exito")
                     'quit and dispose app
                     oW.Quit()
-                    ErrHandler.WriteError("oW.Quit() exito")
+                    ErrHandler2.WriteError("oW.Quit() exito")
 
                     NAR(oW) 'pinta q es acá donde se trula
 
-                    ErrHandler.WriteError(" NAR(oW) exito")
+                    ErrHandler2.WriteError(" NAR(oW) exito")
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 Try
                     'VERY IMPORTANT
                     GC.Collect()
-                    ErrHandler.WriteError("Se llamó con exito a GC.Collect")
+                    ErrHandler2.WriteError("Se llamó con exito a GC.Collect")
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -2490,7 +2490,7 @@ Salida:
             Dim MyFile1 As New FileInfo(plant)
             Try
                 If Not MyFile1.Exists Then 'busca la plantilla
-                    ErrHandler.WriteError("No se encuentra la plantilla " & plant)
+                    ErrHandler2.WriteError("No se encuentra la plantilla " & plant)
                     '  MsgBoxAjax(Yo, "No se encuentra la plantilla " & plant)
                     Return ""
                 End If
@@ -2501,7 +2501,7 @@ Salida:
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.Message)
+                ErrHandler2.WriteError(ex.Message)
                 'MsgBoxAjax(Yo, ex.Message)
                 Throw
                 'Return ""
@@ -2525,7 +2525,7 @@ Salida:
                     oW = CreateObject("Word.Application")
                     oW.Visible = False
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex.Message & "Explota al crear el word.Application. Verificar permisos) " & _
+                    ErrHandler2.WriteError(ex.Message & "Explota al crear el word.Application. Verificar permisos) " & _
                         " 8)	Habilitar permisos para Interop Office (en IIS7 en lugar de usar la cuenta 'Network Service'  usa() 'IIS APPPOOL\DefaultAppPool') " & _
                         "a.	1. In DCOMCNFG, right click on the My Computer and select properties.  " & _
                         "b.	2. Choose the COM Securities tab " & _
@@ -2546,7 +2546,7 @@ Salida:
                 Try
                     oDoc = oW.Documents.Add(plant)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
+                    ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
                                           "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " & _
                                           "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                     Throw
@@ -2559,7 +2559,7 @@ Salida:
                     'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
                     'http://social.msdn.microsoft.com/Forums/en/vbgeneral/thread/5deb3d3a-552c-4dfd-8d94-236b8a441daf
                     'http://forums.asp.net/t/1232621.aspx
-                    ErrHandler.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
+                    ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
                                           "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
                                           "usuario y el pass)  " & _
 " no impersones desde el web.config, hacelo en el IIS con el ApplicationPool correspondiente, y cambiale la cuenta de  " & _
@@ -2585,7 +2585,7 @@ Salida:
                         'VERY IMPORTANT
                         GC.Collect()
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                         'COM object that has been separated from its underlying RCW cannot be used.?????
                     End Try
 
@@ -2612,7 +2612,7 @@ Salida:
                     Dim sStringVBA = "Emision """ & DebugCadenaImprimible(ClaseMigrar.ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing")
 
                     Debug.Print(sStringVBA)
-                    ErrHandler.WriteError(sStringVBA)
+                    ErrHandler2.WriteError(sStringVBA)
 
 
 
@@ -2637,26 +2637,26 @@ Salida:
 
                     Try
                         If Arg7 IsNot Nothing Then
-                            ErrHandler.WriteError("6 argumento")
+                            ErrHandler2.WriteError("6 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5, Arg6, Arg7)
                         ElseIf Arg6 IsNot Nothing Then
-                            ErrHandler.WriteError("5 argumento")
+                            ErrHandler2.WriteError("5 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5, Arg6)
                         ElseIf Arg5 IsNot Nothing Then
-                            ErrHandler.WriteError("4 argumento")
+                            ErrHandler2.WriteError("4 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4, Arg5)
                         ElseIf Arg4 IsNot Nothing Then
-                            ErrHandler.WriteError("3 argumento")
+                            ErrHandler2.WriteError("3 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3, Arg4)
                         ElseIf Arg3 IsNot Nothing Then
-                            ErrHandler.WriteError("2 argumento")
+                            ErrHandler2.WriteError("2 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id, Arg3)
                         Else
-                            ErrHandler.WriteError("1 argumento")
+                            ErrHandler2.WriteError("1 argumento")
                             oW.Application.Run("Emision", ClaseMigrar.ReEncriptaParaPronto(SC), Id)
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError("Explota en la llamada a Emision ()" & ex.Message & "")
+                        ErrHandler2.WriteError("Explota en la llamada a Emision ()" & ex.Message & "")
                         'Throw
                     End Try
 
@@ -2685,13 +2685,13 @@ Salida:
                     If Right(output, 3) <> "pdf" Then Throw New Exception("La extension debe ser pdf")
 
 
-                    ErrHandler.WriteError("Pudo ejecutar el Emision(), ahora tratará de grabar")
+                    ErrHandler2.WriteError("Pudo ejecutar el Emision(), ahora tratará de grabar")
 
                     Try
                         'verificar q la ruta existe, sino se queda muy colgado
                         .SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
                     Catch ex As Exception
-                        ErrHandler.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message & _
+                        ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message & _
                             "Tiró 'El comando falló' o 'Command fail'? " & _
                             "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" & _
                             "y http://support.microsoft.com/default.aspx?scid=kb;EN-US;244264")
@@ -2709,7 +2709,7 @@ Salida:
                 'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf & _
+                ErrHandler2.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf & _
                 "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " & _
                 "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " & _
                 ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " & _
@@ -2733,28 +2733,28 @@ Salida:
                 'MAKE SURE TO KILL ALL INSTANCES BEFORE QUITING! if you fail to do this
                 'The service (excel.exe) will continue to run
                 Try
-                    ErrHandler.WriteError("cerrando...")
+                    ErrHandler2.WriteError("cerrando...")
                     If Not oDoc Is Nothing Then oDoc.Close(False)
-                    ErrHandler.WriteError("oDoc.Close(False) exito")
+                    ErrHandler2.WriteError("oDoc.Close(False) exito")
                     NAR(oDoc)
-                    ErrHandler.WriteError("NAR(oDoc) exito")
+                    ErrHandler2.WriteError("NAR(oDoc) exito")
                     'quit and dispose app
                     oW.Quit()
-                    ErrHandler.WriteError("oW.Quit() exito")
+                    ErrHandler2.WriteError("oW.Quit() exito")
 
                     NAR(oW) 'pinta q es acá donde se trula
 
-                    ErrHandler.WriteError(" NAR(oW) exito")
+                    ErrHandler2.WriteError(" NAR(oW) exito")
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 Try
                     'VERY IMPORTANT
                     GC.Collect()
-                    ErrHandler.WriteError("Se llamó con exito a GC.Collect")
+                    ErrHandler2.WriteError("Se llamó con exito a GC.Collect")
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -2968,4 +2968,111 @@ Salida:
         End Function
 
     End Class
+
+
+
+    Public Class ErrHandler2
+
+        ''' Handles error by accepting the error message
+        ''' Displays the page on which the error occured
+        ''' 
+        Public Const DirectorioErrores = "~/Error/"
+
+        Public Shared Function WriteError(ByVal e As Exception) As String
+
+
+            'Dim lastErrorWrapper As HttpException = Server.GetLastError()
+            Dim lastErrorWrapper As Exception = e
+
+            'copiado del Global.asax
+
+            Dim lastError As Exception = e
+
+            Dim lastErrorTypeName = lastError.GetType().ToString()
+            Dim lastErrorMessage = lastError.Message
+            Dim lastErrorStackTrace = lastError.StackTrace
+
+
+            ' Attach the Yellow Screen of Death for this error   
+            Dim YSODmarkup As String
+            Dim lastErrorWrapperHttp As System.Web.HttpException
+            Try
+                If InStr(lastErrorWrapper.GetType.FullName, "HttpException") > 0 Then
+                    lastErrorWrapperHttp = lastErrorWrapper
+
+                    YSODmarkup = lastErrorWrapperHttp.GetHtmlErrorMessage()
+                    If (Not String.IsNullOrEmpty(YSODmarkup)) Then
+
+                        Dim YSOD = Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm")
+                    End If
+                End If
+
+
+                Console.WriteLine(lastErrorMessage)
+            Catch ex As Exception
+                'acá no pasó nada.... (para cuidarse de circularidades en el logueo de errores)
+            End Try
+
+
+            '///////////////////////////////////////////////////////////
+            Return WriteError(lastErrorTypeName & vbCrLf & lastErrorMessage & vbCrLf & lastErrorStackTrace & vbCrLf & lastError.Source)
+        End Function
+
+
+
+        Public Shared Function WriteError(ByVal errorMessage As String) As String
+            'http://www.dotnetcurry.com/ShowArticle.aspx?ID=94
+            Dim nombre, nombreLargo As String
+            Try
+
+                Console.WriteLine(errorMessage)
+
+
+                nombre = DirectorioErrores & DateTime.Today.ToString("dd-MM-yy") & ".txt"
+                nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre)
+
+                If (Not File.Exists(nombreLargo)) Then
+                    Try
+                        File.Create(nombreLargo).Close()
+                    Catch ex As Exception
+                        'si no está creado el directorio "Error", lo graba en el de la aplicacion, pero con hora, por si ya existe otro
+                        nombreLargo = System.Web.HttpContext.Current.Server.MapPath("~/" & DateTime.Now.ToString & ".txt")
+                        File.Create(nombreLargo).Close()
+                    End Try
+                End If
+
+
+                Using w As StreamWriter = File.AppendText(nombreLargo)
+                    w.WriteLine(Constants.vbCrLf & "Log Entry : ")
+                    w.WriteLine("{0}", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture))
+                    Dim err As String = "Error in: " & System.Web.HttpContext.Current.Request.Url.ToString() & ". Error Message:" & errorMessage
+                    w.WriteLine(err)
+                    w.WriteLine("__________________________")
+                    w.Flush()
+                    w.Close()
+
+                    Debug.Print(err)
+                End Using
+
+            Catch ex As Exception
+                'Excepción del tipo 'System.UnauthorizedAccessException'
+                Return Nothing 'WriteError(ex.Message) 'si es recursivo, se puede trular....
+            End Try
+            Return nombreLargo
+
+        End Function
+
+        Public Shared Sub WriteAndRaiseError(ByVal errorMessage As String)
+            WriteError(errorMessage)
+            Err.Raise(22001, errorMessage)
+            'Throw New ApplicationException("Error en la ejecucion del SP: " + Nombre, ex)
+        End Sub
+
+        Public Shared Sub WriteAndRaiseError(ByVal e As Exception)
+            WriteError(e.Message)
+            Err.Raise(22001, e.Message)
+            'Throw New ApplicationException("Error en la ejecucion del SP: " + Nombre, ex)
+        End Sub
+    End Class
+
 End Namespace
