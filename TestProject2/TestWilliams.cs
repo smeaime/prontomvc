@@ -203,7 +203,7 @@ namespace ProntoMVC.Tests
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp,"SI");
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
         }
 
 
@@ -228,7 +228,7 @@ namespace ProntoMVC.Tests
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp,"SI");
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
         }
 
 
@@ -276,7 +276,7 @@ namespace ProntoMVC.Tests
 
 
             // ponerme como despachante
-           // var cupo = FertilizanteManager.GetItem(SC, 412424);
+            // var cupo = FertilizanteManager.GetItem(SC, 412424);
 
 
 
@@ -286,8 +286,15 @@ namespace ProntoMVC.Tests
 
             //       verificar el envio
 
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
+            //db.us
 
+            
+
+            //AsociarUsuarioConPuntoDespacho()
+            //AsociarUsuarioConTipoDespacho()
 
 
         }
@@ -961,6 +968,10 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             string zipFile = @"ADasdasd";
 
+            //usuario 1 
+            //    usuario2 sube lote2
+
+
             SuboElZip();
 
             // 2 caminos
@@ -983,12 +994,17 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
 
+
+           // mostrar info del lote1
+
+
         }
 
         void SuboElZip()
         {
 
-
+           // List<String> archivos = CartaDePorteManager.Extraer(destzip, DIRTEMP);
+            
         }
 
 
@@ -1015,9 +1031,9 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
             IEngine engine = null;
-            IEngineLoader engineLoader=null;
+            IEngineLoader engineLoader = null;
             IFlexiCaptureProcessor processor = null;
-       
+
 
 
             //levantar todo un directorio
@@ -1071,7 +1087,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp,"SI");
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
         }
 
 

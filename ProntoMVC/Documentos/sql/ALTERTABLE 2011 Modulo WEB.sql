@@ -1624,7 +1624,8 @@ create table FertilizantesPuntosDespacho (
 go
 
 create table UsuariosRelacionFertilizantesPuntosDespacho (
-	IdFertilizantesTiposDespacho INT REFERENCES Clientes(IdCliente),
+	IdUsuariosRelacionFertilizantesPuntosDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	IdFertilizantesPuntosDespacho INT REFERENCES FertilizantesPuntosDespacho(IdFertilizantesPuntosDespacho),
 	UsuarioEnBaseBDLMaster UNIQUEIDENTIFIER 
 )
 
@@ -1634,8 +1635,9 @@ create table FertilizantesTiposDespacho (
 )
 go
 
-create table UsuariosRelacionFertilizantesPuntosDespacho (
-	IdFertilizantesTiposDespacho INT REFERENCES Clientes(IdCliente),
+create table UsuariosRelacionFertilizantesTiposDespacho (
+	IdUsuariosRelacionFertilizantesTiposDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	IdFertilizantesTiposDespacho INT REFERENCES FertilizantesTiposDespacho(IdFertilizantesTiposDespacho),
 	UsuarioEnBaseBDLMaster UNIQUEIDENTIFIER 
 )
 

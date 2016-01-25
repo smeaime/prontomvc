@@ -529,6 +529,12 @@
     <Compile Include="Models\FertilizantesCupos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FertilizantesPuntosDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FertilizantesTiposDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Formulario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -830,6 +836,12 @@
     </Compile>
     <Compile Include="Models\UserDatosExtendidos.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsuariosRelacionFertilizantesPuntosDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsuariosRelacionFertilizantesTiposDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValesSalida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
