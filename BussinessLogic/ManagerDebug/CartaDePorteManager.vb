@@ -313,7 +313,7 @@ Public Class CartaDePorteManager
         Export
         Ambas
     End Enum
-        
+
 
     Enum enumCDPestado
         Todas
@@ -9250,6 +9250,34 @@ Public Class CartaDePorteManager
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Public Shared Function Extraer(ZipAExtraer As String, DirectorioExtraccion As String) As Generic.List(Of String)
+
+
+
+
+        Dim archivos As New Generic.List(Of String)
+
+        Using zip1 As Ionic.Zip.ZipFile = Ionic.Zip.ZipFile.Read(ZipAExtraer)
+            Dim e As Ionic.Zip.ZipEntry
+            For Each e In zip1
+                Try
+                    archivos.Add(DirectorioExtraccion + e.FileName)
+                    e.Extract(DirectorioExtraccion, Ionic.Zip.ExtractExistingFileAction.OverwriteSilently)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+            Next
+        End Using
+
+
+
+
+
+        Return archivos
+    End Function
+
+
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10232,7 +10260,7 @@ Public Class CartaDePorteManager
         If numeroCarta = 0 Then
             CartaDePorteManager.ParseNombreCarta(fileImagen, numeroCarta, 0)
 
-            
+
             If numeroCarta <> 0 Then
                 sError &= " Codigo de barras no detectado. Se usa el numero del nombre del archivo"
 
@@ -13891,8 +13919,21 @@ Public Class LogicaFacturacion
                         'at Microsoft.VisualBasic.CompilerServices.Conversions.ToDate(Object Value)
                         'TO DO 
 
-                        .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
-                        .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
+                        Try
+                            .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
+                        Catch ex As Exception
+                            .FechaArribo = Nothing
+                            ErrHandler2.WriteError(ex)
+                        End Try
+
+                        Try
+                            .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
+                        Catch ex As Exception
+                            .FechaDescarga = Nothing
+                            ErrHandler2.WriteError(ex)
+                        End Try
+
+
                         .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
                         .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
                         .Confirmado = iisNull(cdp("Confirmado"))
@@ -22707,6 +22748,8 @@ Public Class LogicaImportador
 
         End With
 
+        txtLogErrores.Visible = True
+
         Return 0
     End Function
 
@@ -25716,6 +25759,8 @@ Public Class ExcelImportadorManager
             Case CerealnetToepfer
                 ReasignoExportacion_CerealnetParaToepfer(dtDestino)
 
+            Case ReyserCargillPosicion
+                DejarSoloDatosDePosicion(dtDestino)
 
 
             Case Else
@@ -26214,6 +26259,24 @@ Public Class ExcelImportadorManager
 
 
         Next
+    End Sub
+
+
+    Public Shared Sub DejarSoloDatosDePosicion(ByRef dt As Data.DataTable)
+
+
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=17734
+
+        For r = 0 To dt.Rows.Count - 1
+
+            Dim dr = dt.Rows(r)
+
+            dr.Item(enumColumnasDeGrillaFinal.column17.ToString()) = "0"
+            dr.Item(enumColumnasDeGrillaFinal.column14.ToString()) = "0"
+        Next
+
+
+
     End Sub
 
 

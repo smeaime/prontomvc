@@ -2440,6 +2440,12 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK__WilliamsD__IdLoc__3EDE1C68" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__WilliamsD__IdPro__3DE9F82F" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__Clien__25735020" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.FertilizantesPuntosDespacho" Width="1.5" PointX="28.375" PointY="11.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.FertilizantesTiposDespacho" Width="1.5" PointX="28.375" PointY="14.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.UsuariosRelacionFertilizantesPuntosDespacho" Width="1.5" PointX="30.625" PointY="11.625" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.UsuariosRelacionFertilizantesTiposDespacho" Width="1.5" PointX="30.625" PointY="14.625" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__UsuariosR__IdFer__4303B307" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__UsuariosR__IdFer__47C86824" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
