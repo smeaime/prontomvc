@@ -24,14 +24,14 @@ Namespace Pronto.ERP.Bll
                 Try
                     empresa = ParametroManager.TraerValorParametro2(conexionBase, ParametroManager.eParam2.WebConfiguracionEmpresa)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     empresa = ""
                 End Try
 
                 ' If empresa = "" Then empresa = EmpresaDefaultDel_webconfig()
                 Return empresa
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
         End Function
 
@@ -111,7 +111,7 @@ Namespace Pronto.ERP.Bll
 
             If empresaList Is Nothing Then
                 'MandarMailDeError()
-                'ErrHandler.WriteError("No se encontró 
+                'ErrHandler2.WriteError("No se encontró 
                 Err.Raise("No se encontró empresa para el usuario " & UserId)
                 Return Nothing
             End If

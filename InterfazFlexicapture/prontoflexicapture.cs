@@ -19,6 +19,8 @@ using ProntoMVC.Data;
 
 using ExtensionMethods;
 
+using Pronto.ERP.Bll;
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
@@ -79,7 +81,8 @@ namespace ProntoFlexicapture
 
 
 
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine engine, string plantilla,
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(
+            ref IEngine engine, ref IFlexiCaptureProcessor processor, string plantilla,
                                                 int cuantasImagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
@@ -100,62 +103,12 @@ namespace ProntoFlexicapture
             //    '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
 
             //Catch ex As Exception
-            //    ErrHandler.WriteError(ex)
+            //    ErrHandler2.WriteError(ex)
             //End Try
 
-            return ProcesarCartasBatchConFlexicapture(engine, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
+            //Console.WriteLine("Imagenes encoladas " + Lista.Count);
 
-
-        }
-
-
-        public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
-        {
-            if (err != "") return err;
-
-            string stodo = "";
-
-            foreach (ProntoMVC.Data.FuncionesGenericasCSharp.Resultados x in l)
-            {
-                string sError = "";
-
-                sError = "<a href=\"CartaDePorte.aspx?Id=" + x.IdCarta + "\" target=\"_blank\">" + "Carta " + x.numerocarta + "   " + x.errores + "   " + x.advertencias + "</a>;  <br/> ";  // & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
-
-                stodo += sError;
-            }
-            return stodo;
-        }
-
-
-        static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
-        {
-
-            string dir = DirApp + @"\Temp\";
-            var l = new List<string>();
-
-            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
-
-            //foreach (FileInfo file in Files)
-            //{
-            //    l.Add(file.Name);
-            //}
-
-
-            //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
-            //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
-
-
-            var q = (from f in files
-                     where ((f.Name.EndsWith(".tif") || f.Name.EndsWith(".tiff") || f.Name.EndsWith(".jpg"))
-                            &&
-                            (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
-                     )
-                     orderby f.LastWriteTime descending
-                     select f.FullName).Take(cuantas);
-
-
-            return q.ToList();
+            return ProcesarCartasBatchConFlexicapture(ref engine, ref  processor, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
 
         }
 
@@ -163,13 +116,17 @@ namespace ProntoFlexicapture
 
 
         // USE CASE: Using a custom image source with FlexiCapture processor
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(IEngine engine, string plantilla,
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(ref IEngine engine,
+                                                    ref  IFlexiCaptureProcessor processor,
+                                                    string plantilla,
                                                    List<string> imagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
+
+            if (imagenes.Count <= 0) return null;
+
             //engine.CurrentLicense
-            bool Licencia = false;
-            if (!Licencia) // no está la licencia del Flexicapture
+            if (!bEstaLaLicenciadelFlexicapture()) // no está la licencia del Flexicapture
             {
 
                 var listasinpath = new List<string>();
@@ -183,21 +140,17 @@ namespace ProntoFlexicapture
 
 
 
+
             // string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
+
 
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> r = new List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados>();
 
-            //trace("Create an instance of FlexiCapture processor...");
-            IFlexiCaptureProcessor processor = engine.CreateFlexiCaptureProcessor();
 
-            //trace("Add required Document Definitions...");
 
-            //como hago para usar la exportacion del flexilayout .afl
 
-            //IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(SamplesFolder + "\\cartaporte.afl", "Spanish");
-            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(plantilla, "Spanish");
 
-            processor.AddDocumentDefinition(newDocumentDefinition);
+
             //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
 
             //trace("Set up a custom image source...");
@@ -216,12 +169,27 @@ namespace ProntoFlexicapture
             //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
             //imageSource.AddImageFileByValue(SamplesFolder + "\\SampleImages\\Invoices_3.tif");
             // Configure the processor to use the new image source
-            processor.SetCustomImageSource(imageSource);
+            try
+            {
+                // processor.ResetProcessing();
+                processor.SetCustomImageSource(imageSource);
+            }
+            catch (Exception)
+            {
+                //tirar la Lista de imagenes sospechosas
+                throw;
+            }
+
 
             //traceBegin("Run processing loop...");
             int count = 0;
             while (true)
             {
+                if (count > imagenes.Count - 1) break;
+
+                Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
+                Console.WriteLine("reconocer imagen " + imagenes[count]);
+
                 //trace("Recognize next document...");
                 IDocument document = processor.RecognizeNextDocument();
                 if (document == null)
@@ -260,6 +228,7 @@ namespace ProntoFlexicapture
                     catch (Exception x)
                     {
                         Debug.Print(x.ToString());
+                        ErrHandler2.WriteError(x);
                         // throw;
                     }
 
@@ -272,8 +241,75 @@ namespace ProntoFlexicapture
 
             //trace("Check the results...");
             //assert(count == 4);
+            
+            processor.ResetProcessing();
+
             return r;
         }
+
+
+
+
+
+        public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
+        {
+            if (err != "") return err;
+            if (l == null) return null;
+
+            string stodo = "";
+
+            foreach (ProntoMVC.Data.FuncionesGenericasCSharp.Resultados x in l)
+            {
+                string sError = "";
+
+                sError = "<a href=\"CartaDePorte.aspx?Id=" + x.IdCarta + "\" target=\"_blank\">" + "Carta " + x.numerocarta + "   " + x.errores + "   " + x.advertencias + "</a>;  <br/> ";  // & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
+
+                stodo += sError;
+            }
+            return stodo;
+        }
+
+
+        static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
+        {
+
+            string dir = DirApp + @"\Temp\";
+            var l = new List<string>();
+
+            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+
+            //foreach (FileInfo file in Files)
+            //{
+            //    l.Add(file.Name);
+            //}
+
+
+            //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
+            //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
+
+
+            var q = (from f in files
+                     where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff") || f.Name.ToLower().EndsWith(".jpg"))
+                            &&
+                            (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                     )
+                     orderby f.LastWriteTime descending
+                     select f.FullName).Take(cuantas);
+
+
+            return q.ToList();
+
+        }
+
+
+        public static bool bEstaLaLicenciadelFlexicapture()
+        {
+
+            return true;
+
+        }
+
 
 
 
@@ -305,9 +341,10 @@ namespace ProntoFlexicapture
             string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
 
 
+            ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
 
-            long numeroCarta;
+            long numeroCarta=0;
             int vagon = 0;
             string sError = "";
 
@@ -315,24 +352,30 @@ namespace ProntoFlexicapture
 
             // if (BarraCP.Value.AsString != ""   )
 
-            if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+
+            if (BarraCP!=null)
             {
-                //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
-                // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
-
-
-
+                if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+                {
+                    //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
+                    // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
+                    ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
+                }
             }
 
-            else
+
+
+            if (numeroCarta==0)
             {
 
                 // qué pasa si no esta la licencia?
                 // detectar con lectores de codigo de barra
 
+                ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
 
                 numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
 
+                ErrHandler2.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
 
 
                 //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
@@ -392,6 +435,8 @@ namespace ProntoFlexicapture
                 string ms = "", warn = "";
 
 
+                ErrHandler2.WriteError("Llamo a IsValid y Save");
+
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid)
                 {
@@ -418,6 +463,8 @@ namespace ProntoFlexicapture
                         }
 
 
+                        ErrHandler2.WriteError("Llamo a GrabarImagen");
+
                         var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
                                                       , ref sError, DirApp, bCodigoBarrasDetectado);
 
@@ -432,8 +479,14 @@ namespace ProntoFlexicapture
 
 
             }
+            else
+            {
 
+                ErrHandler2.WriteError("No se detecto por ningun medio el numero de carta");
 
+            }
+
+            ErrHandler2.WriteError("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
             GuardarLogEnBase(o);
@@ -467,41 +520,125 @@ namespace ProntoFlexicapture
 
 
 
-
-
-
-
-
-
-
-
-
-        static public void ActivarMotor(string SC, List<string> archivos, ref string sError, string DirApp)
+        public static void BuscarLicenciasDisponibles()
         {
-            IEngine engine;
-            IEngineLoader engineLoader;
+
+
+            //    engineLoader = Engine.CreateEngineOutprocLoader();
+            //    engine = engineLoader.GetEngineObject(null);
+            //    licenses = engine.GetAvailableLicenses( [PROJECT ID], null);
+
+
+        }
+
+
+
+
+        static public void IniciaMotor(ref IEngine engine, ref  IEngineLoader engineLoader, ref  IFlexiCaptureProcessor processor, string plantilla)
+        {
+
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
 
             ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
 
-            string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+            ErrHandler2.WriteError("Arranca motor");
+
+            if (engine == null)
+                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+
+
+            ErrHandler2.WriteError("Reconoció la licencia");
+
+
+            processor = engine.CreateFlexiCaptureProcessor();
+
+            IDocumentDefinition newDocumentDefinition = engine.CreateDocumentDefinitionFromAFL(plantilla, "Spanish");
+
+            processor.AddDocumentDefinition(newDocumentDefinition);
+
+
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+
+
+        }
+
+
+        static public void ActivarMotor(string SC, List<string> archivos, ref string sError, string DirApp, string ConfigurationManager_UsarFlexicapture)
+        {
 
             string e = "";
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado;
 
-            try
+
+            if (ConfigurationManager_UsarFlexicapture == "SI")
             {
 
 
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
 
-                resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
-                                                plantilla,
-                                                archivos, SC, DirApp, true, ref e);
+                // esto esta mal. tiene que usar el path de la aplicacion
+                string plantilla = DirApp + @"\Documentos\cartaporte.afl";
+                IEngine engine = null;
+                IEngineLoader engineLoader = null;
+                IFlexiCaptureProcessor processor = null;
+                // string plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+
+
+
+
+
+
+                try
+                {
+
+
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
+                    IniciaMotor(ref engine, ref  engineLoader,ref  processor, plantilla);
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
+
+
+
+
+
+                    resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(ref engine, ref processor,
+                                                    plantilla,
+                                                    archivos, SC, DirApp, true, ref e);
+
+                    ErrHandler2.WriteError("Termina motor");
+
+                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+
+                    ErrHandler2.WriteError("Proceso cerrado");
+
+
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler2.WriteError(ex.ToString());
+
+                    var listasinpath = new List<string>();
+                    foreach (string i in archivos)
+                    {
+                        listasinpath.Add(Path.GetFileName(i));
+                    }
+                    resultado = CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, listasinpath, -1, ref sError, DirApp);
+
+                }
+
 
             }
-            catch (Exception)
-            {
 
+
+
+            else
+            {
 
                 var listasinpath = new List<string>();
                 foreach (string i in archivos)
@@ -514,10 +651,7 @@ namespace ProntoFlexicapture
 
 
 
-
             sError += ClassFlexicapture.GenerarHtmlConResultado(resultado, e);
-
-
 
         }
 
@@ -540,6 +674,25 @@ namespace ProntoFlexicapture
         static EngineLoadingMode engineLoadingMode;
 
 
+        public static void unloadEngine(ref IEngine engine, ref IEngineLoader engineLoader)
+        {
+            if (engine != null)
+            {
+                if (engineLoader == null)
+                {
+                    int hresult = DeinitializeEngine();
+                    Marshal.ThrowExceptionForHR(hresult);
+                }
+                else
+                {
+                    engineLoader.Unload();
+                    engineLoader = null;
+                }
+                engine = null;
+            }
+        }
+
+
         public static IEngine loadEngine(EngineLoadingMode _engineLoadingMode, out IEngineLoader engineLoader)
         {
             engineLoadingMode = _engineLoadingMode;
@@ -553,6 +706,8 @@ namespace ProntoFlexicapture
                         Marshal.ThrowExceptionForHR(hresult);
                         //assert(engine != null);
                         return engine;
+
+
                     }
                 case EngineLoadingMode.LoadAsInprocServer:
                     {

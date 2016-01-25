@@ -237,6 +237,10 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<CDPHumedade> CDPHumedades { get; set; }
         public virtual DbSet<WilliamsDestino> WilliamsDestinos { get; set; }
         public virtual DbSet<WilliamsMailFiltrosCola> WilliamsMailFiltrosColas { get; set; }
+        public virtual DbSet<FertilizantesPuntosDespacho> FertilizantesPuntosDespachoes { get; set; }
+        public virtual DbSet<FertilizantesTiposDespacho> FertilizantesTiposDespachoes { get; set; }
+        public virtual DbSet<UsuariosRelacionFertilizantesPuntosDespacho> UsuariosRelacionFertilizantesPuntosDespachoes { get; set; }
+        public virtual DbSet<UsuariosRelacionFertilizantesTiposDespacho> UsuariosRelacionFertilizantesTiposDespachoes { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

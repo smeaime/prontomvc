@@ -1617,6 +1617,18 @@
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="CartasDePorte" EntitySet="CartasDePortes" />
     </AssociationSet>
+    <EntitySet Name="FertilizantesPuntosDespachoes" EntityType="DemoProntoModel.FertilizantesPuntosDespacho" />
+    <EntitySet Name="FertilizantesTiposDespachoes" EntityType="DemoProntoModel.FertilizantesTiposDespacho" />
+    <EntitySet Name="UsuariosRelacionFertilizantesPuntosDespachoes" EntityType="DemoProntoModel.UsuariosRelacionFertilizantesPuntosDespacho" />
+    <EntitySet Name="UsuariosRelacionFertilizantesTiposDespachoes" EntityType="DemoProntoModel.UsuariosRelacionFertilizantesTiposDespacho" />
+    <AssociationSet Name="FK__UsuariosR__IdFer__4303B307" Association="DemoProntoModel.FK__UsuariosR__IdFer__4303B307">
+      <End Role="FertilizantesPuntosDespacho" EntitySet="FertilizantesPuntosDespachoes" />
+      <End Role="UsuariosRelacionFertilizantesPuntosDespacho" EntitySet="UsuariosRelacionFertilizantesPuntosDespachoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsuariosR__IdFer__47C86824" Association="DemoProntoModel.FK__UsuariosR__IdFer__47C86824">
+      <End Role="FertilizantesTiposDespacho" EntitySet="FertilizantesTiposDespachoes" />
+      <End Role="UsuariosRelacionFertilizantesTiposDespacho" EntitySet="UsuariosRelacionFertilizantesTiposDespachoes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -1945,16 +1957,16 @@
     <Property Name="Cumplido" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
     <Property Name="Usuario1" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
     <Property Name="FechaIngreso1" Type="DateTime" Precision="3" />
-    <Property Name="ArchivoAdjunto1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto2" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto3" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto4" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto5" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto6" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto7" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto8" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto9" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="ArchivoAdjunto10" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto1" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto2" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto3" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto4" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto5" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto6" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto7" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto8" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto9" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArchivoAdjunto10" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
     <Property Name="Descripcionmanual" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
     <Property Name="EnviarEmail" Type="Byte" />
     <Property Name="IdRequerimientoOriginal" Type="Int32" />
@@ -3045,16 +3057,16 @@
     <Property Type="Int32" Name="IdDetalleLMateriales" />
     <Property Type="Int32" Name="IdCuenta" />
     <Property Type="Int32" Name="OrigenDescripcion" />
-    <Property Type="String" Name="ArchivoAdjunto1" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto2" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto3" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto4" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto5" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto6" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto7" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto8" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto9" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto10" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto1" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto2" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto3" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto4" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto5" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto6" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto7" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto8" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto9" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ArchivoAdjunto10" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="IdAutorizoCumplido" />
     <Property Type="Int32" Name="IdDioPorCumplido" />
     <Property Type="DateTime" Name="FechaDadoPorCumplido" Precision="3" />
@@ -3244,6 +3256,8 @@
     <Property Name="Subcontratos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ImprimeSubcontratos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="NotasSeguimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CoeficienteCompra" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Presupuesto">
     <Key>
@@ -4432,6 +4446,7 @@
     <Property Name="FechaInicialControlComprobantes" Type="DateTime" Precision="3" />
     <Property Name="ResolucionAfip3668" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Estados_Proveedores" Relationship="DemoProntoModel.FK_Proveedores_EstadosProveedores" FromRole="Proveedor" ToRole="Estados_Proveedore" />
+    <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>
@@ -6329,6 +6344,7 @@
     <Property Type="Int32" Name="PersonalObra6" />
     <Property Type="String" Name="ADesignar" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="IdsTipoCompra" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Excluyente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetalleAutorizacionesCompra">
     <Key>
@@ -6355,6 +6371,7 @@
     <Property Type="Decimal" Name="ImporteDesde" Precision="18" Scale="2" />
     <Property Type="Decimal" Name="ImporteHasta" Precision="18" Scale="2" />
     <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdPuntoVenta" Type="Int32" />
   </EntityType>
   <EntityType Name="ProntoIni">
     <Key>
@@ -12332,6 +12349,64 @@
       </Principal>
       <Dependent Role="CartasDePorte">
         <PropertyRef Name="ClienteAcondicionador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FertilizantesPuntosDespacho">
+    <Key>
+      <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+    </Key>
+    <Property Name="IdFertilizantesPuntosDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UsuariosRelacionFertilizantesPuntosDespachoes" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__4303B307" FromRole="FertilizantesPuntosDespacho" ToRole="UsuariosRelacionFertilizantesPuntosDespacho" />
+  </EntityType>
+  <EntityType Name="FertilizantesTiposDespacho">
+    <Key>
+      <PropertyRef Name="IdFertilizantesTiposDespacho" />
+    </Key>
+    <Property Name="IdFertilizantesTiposDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UsuariosRelacionFertilizantesTiposDespachoes" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__47C86824" FromRole="FertilizantesTiposDespacho" ToRole="UsuariosRelacionFertilizantesTiposDespacho" />
+  </EntityType>
+  <EntityType Name="UsuariosRelacionFertilizantesPuntosDespacho">
+    <Key>
+      <PropertyRef Name="IdUsuariosRelacionFertilizantesPuntosDespacho" />
+    </Key>
+    <Property Name="IdUsuariosRelacionFertilizantesPuntosDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFertilizantesPuntosDespacho" Type="Int32" />
+    <Property Name="UsuarioEnBaseBDLMaster" Type="Guid" />
+    <NavigationProperty Name="FertilizantesPuntosDespacho" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__4303B307" FromRole="UsuariosRelacionFertilizantesPuntosDespacho" ToRole="FertilizantesPuntosDespacho" />
+  </EntityType>
+  <EntityType Name="UsuariosRelacionFertilizantesTiposDespacho">
+    <Key>
+      <PropertyRef Name="IdUsuariosRelacionFertilizantesTiposDespacho" />
+    </Key>
+    <Property Name="IdUsuariosRelacionFertilizantesTiposDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFertilizantesTiposDespacho" Type="Int32" />
+    <Property Name="UsuarioEnBaseBDLMaster" Type="Guid" />
+    <NavigationProperty Name="FertilizantesTiposDespacho" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__47C86824" FromRole="UsuariosRelacionFertilizantesTiposDespacho" ToRole="FertilizantesTiposDespacho" />
+  </EntityType>
+  <Association Name="FK__UsuariosR__IdFer__4303B307">
+    <End Type="DemoProntoModel.FertilizantesPuntosDespacho" Role="FertilizantesPuntosDespacho" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.UsuariosRelacionFertilizantesPuntosDespacho" Role="UsuariosRelacionFertilizantesPuntosDespacho" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FertilizantesPuntosDespacho">
+        <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+      </Principal>
+      <Dependent Role="UsuariosRelacionFertilizantesPuntosDespacho">
+        <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsuariosR__IdFer__47C86824">
+    <End Type="DemoProntoModel.FertilizantesTiposDespacho" Role="FertilizantesTiposDespacho" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.UsuariosRelacionFertilizantesTiposDespacho" Role="UsuariosRelacionFertilizantesTiposDespacho" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FertilizantesTiposDespacho">
+        <PropertyRef Name="IdFertilizantesTiposDespacho" />
+      </Principal>
+      <Dependent Role="UsuariosRelacionFertilizantesTiposDespacho">
+        <PropertyRef Name="IdFertilizantesTiposDespacho" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
