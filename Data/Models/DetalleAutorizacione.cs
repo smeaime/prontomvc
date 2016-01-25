@@ -61,5 +61,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> PersonalObra6 { get; set; }
         public string ADesignar { get; set; }
         public string IdsTipoCompra { get; set; }
+        public string Excluyente { get; set; }
     }
 }

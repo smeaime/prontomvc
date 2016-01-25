@@ -1724,6 +1724,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="PersonalObra6" Type="int" />
           <Property Name="ADesignar" Type="varchar" MaxLength="2" />
           <Property Name="IdsTipoCompra" Type="varchar" MaxLength="100" />
+          <Property Name="Excluyente" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="DetalleAutorizacionesCompra">
           <Key>
@@ -1750,6 +1751,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="ImporteDesde" Type="numeric" Precision="18" Scale="2" />
           <Property Name="ImporteHasta" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IdObra" Type="int" />
+          <Property Name="IdPuntoVenta" Type="int" />
         </EntityType>
         <EntityType Name="DetalleClientes">
           <Key>
@@ -2498,16 +2500,16 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="IdDetalleLMateriales" Type="int" />
           <Property Name="IdCuenta" Type="int" />
           <Property Name="OrigenDescripcion" Type="int" />
-          <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="100" />
+          <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="200" />
           <Property Name="IdAutorizoCumplido" Type="int" />
           <Property Name="IdDioPorCumplido" Type="int" />
           <Property Name="FechaDadoPorCumplido" Type="datetime" />
@@ -2815,16 +2817,16 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="Cumplido" Type="varchar" MaxLength="2" />
           <Property Name="Usuario1" Type="varchar" MaxLength="6" />
           <Property Name="FechaIngreso1" Type="datetime" />
-          <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="100" />
+          <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="200" />
           <Property Name="Descripcionmanual" Type="varchar" MaxLength="250" />
           <Property Name="EnviarEmail" Type="tinyint" />
           <Property Name="IdRequerimientoOriginal" Type="int" />
@@ -3398,6 +3400,20 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="PuntoDespacho" Type="varchar" MaxLength="50" />
           <Property Name="LitrosFinal" Type="numeric" Precision="12" Scale="2" />
         </EntityType>
+        <EntityType Name="FertilizantesPuntosDespacho">
+          <Key>
+            <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+          </Key>
+          <Property Name="IdFertilizantesPuntosDespacho" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FertilizantesTiposDespacho">
+          <Key>
+            <PropertyRef Name="IdFertilizantesTiposDespacho" />
+          </Key>
+          <Property Name="IdFertilizantesTiposDespacho" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Formularios">
           <Key>
             <PropertyRef Name="IdFormulario" />
@@ -3565,6 +3581,31 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdPartido" Type="int" />
           <Property Name="CodigoAfip" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Pronto.dbo.Log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Log">
+          <Property Name="Tipo" Type="varchar" MaxLength="5" />
+          <Property Name="IdComprobante" Type="int" />
+          <Property Name="IdDetalleComprobante" Type="int" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Detalle" Type="varchar" MaxLength="100" />
+          <Property Name="AuxString1" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString2" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString3" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString4" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString5" Type="varchar" MaxLength="50" />
+          <Property Name="AuxDate1" Type="datetime" />
+          <Property Name="AuxDate2" Type="datetime" />
+          <Property Name="AuxDate3" Type="datetime" />
+          <Property Name="AuxDate4" Type="datetime" />
+          <Property Name="AuxDate5" Type="datetime" />
+          <Property Name="AuxNum1" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum3" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum4" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum5" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>-->
         <EntityType Name="LogComprobantesElectronicos">
           <Key>
             <PropertyRef Name="IdLog" />
@@ -3579,6 +3620,26 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Enviado" Type="ntext" />
           <Property Name="Recibido" Type="ntext" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LogImpuestos">
+          <Property Name="FechaProceso" Type="datetime" />
+          <Property Name="ArchivoProcesado" Type="varchar" MaxLength="12" />
+          <Property Name="IdProveedor" Type="int" />
+          <Property Name="IGCondicion" Type="int" />
+          <Property Name="FechaLimiteExentoGanancias" Type="datetime" />
+          <Property Name="IvaExencionRetencion" Type="varchar" MaxLength="2" />
+          <Property Name="IvaPorcentajeExencion" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IvaFechaCaducidadExencion" Type="datetime" />
+          <Property Name="CodigoSituacionRetencionIVA" Type="int" />
+          <Property Name="FechaLog" Type="datetime" />
+          <Property Name="SUSSFechaCaducidadExencion" Type="datetime" />
+          <Property Name="PorcentajeIBDirecto" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="FechaInicioVigenciaIBDirecto" Type="datetime" />
+          <Property Name="FechaFinVigenciaIBDirecto" Type="datetime" />
+          <Property Name="GrupoIIBB" Type="int" />
+          <Property Name="IdCliente" Type="int" />
+        </EntityType>-->
         <EntityType Name="Marcas">
           <Key>
             <PropertyRef Name="IdMarca" />
@@ -4409,6 +4470,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Subcontratos" Type="ntext" />
           <Property Name="ImprimeSubcontratos" Type="varchar" MaxLength="2" />
           <Property Name="NotasSeguimiento" Type="ntext" />
+          <Property Name="CoeficienteCompra" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="Detalle" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="PlazosEntrega">
           <Key>
@@ -4744,6 +4807,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="CodigoCategoriaIIBBAlternativo" Type="varchar" MaxLength="1" />
           <Property Name="FechaInicialControlComprobantes" Type="datetime" />
           <Property Name="ResolucionAfip3668" Type="varchar" MaxLength="2" />
+          <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5578,6 +5642,22 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="EnviarEmail" Type="tinyint" />
           <Property Name="Codigo" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="UsuariosRelacionFertilizantesPuntosDespacho">
+          <Key>
+            <PropertyRef Name="IdUsuariosRelacionFertilizantesPuntosDespacho" />
+          </Key>
+          <Property Name="IdUsuariosRelacionFertilizantesPuntosDespacho" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFertilizantesPuntosDespacho" Type="int" />
+          <Property Name="UsuarioEnBaseBDLMaster" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="UsuariosRelacionFertilizantesTiposDespacho">
+          <Key>
+            <PropertyRef Name="IdUsuariosRelacionFertilizantesTiposDespacho" />
+          </Key>
+          <Property Name="IdUsuariosRelacionFertilizantesTiposDespacho" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFertilizantesTiposDespacho" Type="int" />
+          <Property Name="UsuarioEnBaseBDLMaster" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="ValesSalida">
           <Key>
             <PropertyRef Name="IdValeSalida" />
@@ -6226,6 +6306,30 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             </Principal>
             <Dependent Role="FertilizantesCupos">
               <PropertyRef Name="IdUsuarioAnulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsuariosR__IdFer__4303B307">
+          <End Role="FertilizantesPuntosDespacho" Type="Self.FertilizantesPuntosDespacho" Multiplicity="0..1" />
+          <End Role="UsuariosRelacionFertilizantesPuntosDespacho" Type="Self.UsuariosRelacionFertilizantesPuntosDespacho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FertilizantesPuntosDespacho">
+              <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+            </Principal>
+            <Dependent Role="UsuariosRelacionFertilizantesPuntosDespacho">
+              <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsuariosR__IdFer__47C86824">
+          <End Role="FertilizantesTiposDespacho" Type="Self.FertilizantesTiposDespacho" Multiplicity="0..1" />
+          <End Role="UsuariosRelacionFertilizantesTiposDespacho" Type="Self.UsuariosRelacionFertilizantesTiposDespacho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FertilizantesTiposDespacho">
+              <PropertyRef Name="IdFertilizantesTiposDespacho" />
+            </Principal>
+            <Dependent Role="UsuariosRelacionFertilizantesTiposDespacho">
+              <PropertyRef Name="IdFertilizantesTiposDespacho" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9193,6 +9297,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FertilizantesCupos" EntityType="Self.FertilizantesCupos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FertilizantesPuntosDespacho" EntityType="Self.FertilizantesPuntosDespacho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FertilizantesTiposDespacho" EntityType="Self.FertilizantesTiposDespacho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GruposObras" EntityType="Self.GruposObras" Schema="dbo" store:Type="Tables" />
@@ -9267,6 +9373,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnidadesOperativas" EntityType="Self.UnidadesOperativas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuariosRelacionFertilizantesPuntosDespacho" EntityType="Self.UsuariosRelacionFertilizantesPuntosDespacho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuariosRelacionFertilizantesTiposDespacho" EntityType="Self.UsuariosRelacionFertilizantesTiposDespacho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValesSalida" EntityType="Self.ValesSalida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValoresFaltantesVistos" EntityType="Self.ValoresFaltantesVistos" Schema="dbo" store:Type="Tables" />
@@ -9574,6 +9682,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <AssociationSet Name="FK__Fertiliza__IdUsu__5A1C2289" Association="Self.FK__Fertiliza__IdUsu__5A1C2289">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsuariosR__IdFer__4303B307" Association="Self.FK__UsuariosR__IdFer__4303B307">
+            <End Role="FertilizantesPuntosDespacho" EntitySet="FertilizantesPuntosDespacho" />
+            <End Role="UsuariosRelacionFertilizantesPuntosDespacho" EntitySet="UsuariosRelacionFertilizantesPuntosDespacho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsuariosR__IdFer__47C86824" Association="Self.FK__UsuariosR__IdFer__47C86824">
+            <End Role="FertilizantesTiposDespacho" EntitySet="FertilizantesTiposDespacho" />
+            <End Role="UsuariosRelacionFertilizantesTiposDespacho" EntitySet="UsuariosRelacionFertilizantesTiposDespacho" />
           </AssociationSet>
           <AssociationSet Name="FK__WilliamsD__IdLoc__3EDE1C68" Association="Self.FK__WilliamsD__IdLoc__3EDE1C68">
             <End Role="Localidades" EntitySet="Localidades" />
@@ -12105,6 +12221,18 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="CartasDePorte" EntitySet="CartasDePortes" />
           </AssociationSet>
+          <EntitySet Name="FertilizantesPuntosDespachoes" EntityType="DemoProntoModel.FertilizantesPuntosDespacho" />
+          <EntitySet Name="FertilizantesTiposDespachoes" EntityType="DemoProntoModel.FertilizantesTiposDespacho" />
+          <EntitySet Name="UsuariosRelacionFertilizantesPuntosDespachoes" EntityType="DemoProntoModel.UsuariosRelacionFertilizantesPuntosDespacho" />
+          <EntitySet Name="UsuariosRelacionFertilizantesTiposDespachoes" EntityType="DemoProntoModel.UsuariosRelacionFertilizantesTiposDespacho" />
+          <AssociationSet Name="FK__UsuariosR__IdFer__4303B307" Association="DemoProntoModel.FK__UsuariosR__IdFer__4303B307">
+            <End Role="FertilizantesPuntosDespacho" EntitySet="FertilizantesPuntosDespachoes" />
+            <End Role="UsuariosRelacionFertilizantesPuntosDespacho" EntitySet="UsuariosRelacionFertilizantesPuntosDespachoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsuariosR__IdFer__47C86824" Association="DemoProntoModel.FK__UsuariosR__IdFer__47C86824">
+            <End Role="FertilizantesTiposDespacho" EntitySet="FertilizantesTiposDespachoes" />
+            <End Role="UsuariosRelacionFertilizantesTiposDespacho" EntitySet="UsuariosRelacionFertilizantesTiposDespachoes" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -12436,16 +12564,16 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Cumplido" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
           <Property Name="Usuario1" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
           <Property Name="FechaIngreso1" Type="DateTime" Precision="3" />
-          <Property Name="ArchivoAdjunto1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto2" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto3" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto4" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto5" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto6" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto7" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto8" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto9" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ArchivoAdjunto10" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto1" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto2" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto3" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto4" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto5" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto6" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto7" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto8" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto9" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ArchivoAdjunto10" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="Descripcionmanual" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
           <Property Name="EnviarEmail" Type="Byte" />
           <Property Name="IdRequerimientoOriginal" Type="Int32" />
@@ -13539,16 +13667,16 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Type="Int32" Name="IdDetalleLMateriales" />
           <Property Type="Int32" Name="IdCuenta" />
           <Property Type="Int32" Name="OrigenDescripcion" />
-          <Property Type="String" Name="ArchivoAdjunto1" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto2" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto3" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto4" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto5" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto6" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto7" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto8" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto9" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto10" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto1" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto2" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto3" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto4" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto5" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto6" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto7" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto8" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto9" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto10" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdAutorizoCumplido" />
           <Property Type="Int32" Name="IdDioPorCumplido" />
           <Property Type="DateTime" Name="FechaDadoPorCumplido" Precision="3" />
@@ -13739,6 +13867,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Subcontratos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImprimeSubcontratos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="NotasSeguimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CoeficienteCompra" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Presupuesto">
           <Key>
@@ -14931,6 +15061,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="FechaInicialControlComprobantes" Type="DateTime" Precision="3" />
           <Property Name="ResolucionAfip3668" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Estados_Proveedores" Relationship="DemoProntoModel.FK_Proveedores_EstadosProveedores" FromRole="Proveedor" ToRole="Estados_Proveedore" />
+          <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -16828,6 +16959,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Type="Int32" Name="PersonalObra6" />
           <Property Type="String" Name="ADesignar" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="IdsTipoCompra" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Excluyente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DetalleAutorizacionesCompra">
           <Key>
@@ -16854,6 +16986,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Type="Decimal" Name="ImporteDesde" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="ImporteHasta" Precision="18" Scale="2" />
           <Property Name="IdObra" Type="Int32" />
+          <Property Name="IdPuntoVenta" Type="Int32" />
         </EntityType>
         <EntityType Name="ProntoIni">
           <Key>
@@ -22834,6 +22967,64 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FertilizantesPuntosDespacho">
+          <Key>
+            <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+          </Key>
+          <Property Name="IdFertilizantesPuntosDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UsuariosRelacionFertilizantesPuntosDespachoes" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__4303B307" FromRole="FertilizantesPuntosDespacho" ToRole="UsuariosRelacionFertilizantesPuntosDespacho" />
+        </EntityType>
+        <EntityType Name="FertilizantesTiposDespacho">
+          <Key>
+            <PropertyRef Name="IdFertilizantesTiposDespacho" />
+          </Key>
+          <Property Name="IdFertilizantesTiposDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UsuariosRelacionFertilizantesTiposDespachoes" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__47C86824" FromRole="FertilizantesTiposDespacho" ToRole="UsuariosRelacionFertilizantesTiposDespacho" />
+        </EntityType>
+        <EntityType Name="UsuariosRelacionFertilizantesPuntosDespacho">
+          <Key>
+            <PropertyRef Name="IdUsuariosRelacionFertilizantesPuntosDespacho" />
+          </Key>
+          <Property Name="IdUsuariosRelacionFertilizantesPuntosDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFertilizantesPuntosDespacho" Type="Int32" />
+          <Property Name="UsuarioEnBaseBDLMaster" Type="Guid" />
+          <NavigationProperty Name="FertilizantesPuntosDespacho" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__4303B307" FromRole="UsuariosRelacionFertilizantesPuntosDespacho" ToRole="FertilizantesPuntosDespacho" />
+        </EntityType>
+        <EntityType Name="UsuariosRelacionFertilizantesTiposDespacho">
+          <Key>
+            <PropertyRef Name="IdUsuariosRelacionFertilizantesTiposDespacho" />
+          </Key>
+          <Property Name="IdUsuariosRelacionFertilizantesTiposDespacho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFertilizantesTiposDespacho" Type="Int32" />
+          <Property Name="UsuarioEnBaseBDLMaster" Type="Guid" />
+          <NavigationProperty Name="FertilizantesTiposDespacho" Relationship="DemoProntoModel.FK__UsuariosR__IdFer__47C86824" FromRole="UsuariosRelacionFertilizantesTiposDespacho" ToRole="FertilizantesTiposDespacho" />
+        </EntityType>
+        <Association Name="FK__UsuariosR__IdFer__4303B307">
+          <End Type="DemoProntoModel.FertilizantesPuntosDespacho" Role="FertilizantesPuntosDespacho" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.UsuariosRelacionFertilizantesPuntosDespacho" Role="UsuariosRelacionFertilizantesPuntosDespacho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FertilizantesPuntosDespacho">
+              <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+            </Principal>
+            <Dependent Role="UsuariosRelacionFertilizantesPuntosDespacho">
+              <PropertyRef Name="IdFertilizantesPuntosDespacho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsuariosR__IdFer__47C86824">
+          <End Type="DemoProntoModel.FertilizantesTiposDespacho" Role="FertilizantesTiposDespacho" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.UsuariosRelacionFertilizantesTiposDespacho" Role="UsuariosRelacionFertilizantesTiposDespacho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FertilizantesTiposDespacho">
+              <PropertyRef Name="IdFertilizantesTiposDespacho" />
+            </Principal>
+            <Dependent Role="UsuariosRelacionFertilizantesTiposDespacho">
+              <PropertyRef Name="IdFertilizantesTiposDespacho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -24085,6 +24276,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySetMapping Name="Pedidos">
             <EntityTypeMapping TypeName="DemoProntoModel.Pedido">
               <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="CoeficienteCompra" ColumnName="CoeficienteCompra" />
                 <ScalarProperty Name="NotasSeguimiento" ColumnName="NotasSeguimiento" />
                 <ScalarProperty Name="ImprimeSubcontratos" ColumnName="ImprimeSubcontratos" />
                 <ScalarProperty Name="Subcontratos" ColumnName="Subcontratos" />
@@ -24593,6 +24786,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="ExcluirDelCircuitoDeFirmasComprobantes" ColumnName="ExcluirDelCircuitoDeFirmasComprobantes" />
                 <ScalarProperty Name="ResolucionAfip3668" ColumnName="ResolucionAfip3668" />
                 <ScalarProperty Name="FechaInicialControlComprobantes" ColumnName="FechaInicialControlComprobantes" />
                 <ScalarProperty Name="CodigoCategoriaIIBBAlternativo" ColumnName="CodigoCategoriaIIBBAlternativo" />
@@ -25867,6 +26061,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySetMapping Name="DetalleAutorizaciones">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleAutorizacione">
               <MappingFragment StoreEntitySet="DetalleAutorizaciones">
+                <ScalarProperty Name="Excluyente" ColumnName="Excluyente" />
                 <ScalarProperty Name="IdsTipoCompra" ColumnName="IdsTipoCompra" />
                 <ScalarProperty Name="ADesignar" ColumnName="ADesignar" />
                 <ScalarProperty Name="PersonalObra6" ColumnName="PersonalObra6" />
@@ -25932,6 +26127,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <EntitySetMapping Name="DetalleAutorizacionesFirmantes">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleAutorizacionesFirmante">
               <MappingFragment StoreEntitySet="DetalleAutorizacionesFirmantes">
+                <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
                 <ScalarProperty Name="IdObra" ColumnName="IdObra" />
                 <ScalarProperty Name="ImporteHasta" ColumnName="ImporteHasta" />
                 <ScalarProperty Name="ImporteDesde" ColumnName="ImporteDesde" />
@@ -29185,6 +29381,40 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdWilliamsMailFiltro" ColumnName="IdWilliamsMailFiltro" />
                 <ScalarProperty Name="IdWilliamsMailFiltroCola" ColumnName="IdWilliamsMailFiltroCola" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FertilizantesPuntosDespachoes">
+            <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesPuntosDespacho">
+              <MappingFragment StoreEntitySet="FertilizantesPuntosDespacho">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdFertilizantesPuntosDespacho" ColumnName="IdFertilizantesPuntosDespacho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FertilizantesTiposDespachoes">
+            <EntityTypeMapping TypeName="DemoProntoModel.FertilizantesTiposDespacho">
+              <MappingFragment StoreEntitySet="FertilizantesTiposDespacho">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdFertilizantesTiposDespacho" ColumnName="IdFertilizantesTiposDespacho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuariosRelacionFertilizantesPuntosDespachoes">
+            <EntityTypeMapping TypeName="DemoProntoModel.UsuariosRelacionFertilizantesPuntosDespacho">
+              <MappingFragment StoreEntitySet="UsuariosRelacionFertilizantesPuntosDespacho">
+                <ScalarProperty Name="UsuarioEnBaseBDLMaster" ColumnName="UsuarioEnBaseBDLMaster" />
+                <ScalarProperty Name="IdFertilizantesPuntosDespacho" ColumnName="IdFertilizantesPuntosDespacho" />
+                <ScalarProperty Name="IdUsuariosRelacionFertilizantesPuntosDespacho" ColumnName="IdUsuariosRelacionFertilizantesPuntosDespacho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuariosRelacionFertilizantesTiposDespachoes">
+            <EntityTypeMapping TypeName="DemoProntoModel.UsuariosRelacionFertilizantesTiposDespacho">
+              <MappingFragment StoreEntitySet="UsuariosRelacionFertilizantesTiposDespacho">
+                <ScalarProperty Name="UsuarioEnBaseBDLMaster" ColumnName="UsuarioEnBaseBDLMaster" />
+                <ScalarProperty Name="IdFertilizantesTiposDespacho" ColumnName="IdFertilizantesTiposDespacho" />
+                <ScalarProperty Name="IdUsuariosRelacionFertilizantesTiposDespacho" ColumnName="IdUsuariosRelacionFertilizantesTiposDespacho" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

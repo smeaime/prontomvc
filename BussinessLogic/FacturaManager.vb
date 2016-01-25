@@ -96,14 +96,14 @@ Namespace Pronto.ERP.Bll
             'CtaCteDeudorManager..Fetch(idcomprobante,)
             'If CtaCteDeudorManager.importeoriginal <> CtaCteDeudorManager.Saldo Then
             '    'quizas tiene una nota de credito parcial asignada. no se puede anular así nomas
-            '    ErrHandler.WriteAndRaiseError("La factura está parcialmente cancelada. No se puede anular")
+            '    ErrHandler2.WriteAndRaiseError("La factura está parcialmente cancelada. No se puede anular")
             '    Exit Sub
             'End If
 
 
             If myFactura.Fecha <= ParametroManager.ParametroOriginal(SC, ParametroManager.ePmOrg.FechaUltimoCierre) Then
                 '   es decir que la fecha de cierre contable actual lo que hace es no permitirte tocar nada de la contabilidad anterior a esa fecha
-                ErrHandler.WriteAndRaiseError("La factura está parcialmente cancelada. No se puede anular")
+                ErrHandler2.WriteAndRaiseError("La factura está parcialmente cancelada. No se puede anular")
                 Exit Sub
             End If
 
@@ -197,7 +197,7 @@ Namespace Pronto.ERP.Bll
                 Catch ex As Exception
                     'ContextUtil.SetAbort()
                     'Debug.Print(ex.Message)
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     Return -1
                 Finally
                     'CType(myTransactionScope, IDisposable).Dispose()
@@ -471,7 +471,7 @@ Namespace Pronto.ERP.Bll
                     Try
                         Resp = ClienteManager.Save(SC, DatosCliente)
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
                 End If
 
@@ -599,7 +599,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteAndRaiseError(ex)
+                ErrHandler2.WriteAndRaiseError(ex)
             End Try
 
 
@@ -2008,7 +2008,7 @@ Mal:
                 Dim oPto = EntidadManager.GetItem(SC, "PuntosVenta", IdPuntoVenta)
                 Return oPto.Item("ProximoNumero")
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 Return -1
             End Try
 
@@ -2037,7 +2037,7 @@ Mal:
                 Dim oPto = EntidadManager.GetItem(SC, "PuntosVenta", IdPuntoVenta)
                 Return oPto.Item("ProximoNumero")
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 Return -1
             End Try
 

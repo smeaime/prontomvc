@@ -146,6 +146,7 @@ namespace ProntoMVC.Data.Models
         public string CodigoCategoriaIIBBAlternativo { get; set; }
         public Nullable<System.DateTime> FechaInicialControlComprobantes { get; set; }
         public string ResolucionAfip3668 { get; set; }
+        public string ExcluirDelCircuitoDeFirmasComprobantes { get; set; }
     
         public virtual ICollection<DetalleProveedor> DetalleProveedoresContactos { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }
