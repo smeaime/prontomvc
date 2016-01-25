@@ -3576,6 +3576,31 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdPartido" Type="int" />
     <Property Name="CodigoAfip" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Pronto.dbo.Log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Log">
+          <Property Name="Tipo" Type="varchar" MaxLength="5" />
+          <Property Name="IdComprobante" Type="int" />
+          <Property Name="IdDetalleComprobante" Type="int" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Detalle" Type="varchar" MaxLength="100" />
+          <Property Name="AuxString1" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString2" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString3" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString4" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString5" Type="varchar" MaxLength="50" />
+          <Property Name="AuxDate1" Type="datetime" />
+          <Property Name="AuxDate2" Type="datetime" />
+          <Property Name="AuxDate3" Type="datetime" />
+          <Property Name="AuxDate4" Type="datetime" />
+          <Property Name="AuxDate5" Type="datetime" />
+          <Property Name="AuxNum1" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum3" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum4" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AuxNum5" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>-->
   <EntityType Name="LogComprobantesElectronicos">
     <Key>
       <PropertyRef Name="IdLog" />
@@ -3590,6 +3615,26 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="Enviado" Type="ntext" />
     <Property Name="Recibido" Type="ntext" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LogImpuestos">
+          <Property Name="FechaProceso" Type="datetime" />
+          <Property Name="ArchivoProcesado" Type="varchar" MaxLength="12" />
+          <Property Name="IdProveedor" Type="int" />
+          <Property Name="IGCondicion" Type="int" />
+          <Property Name="FechaLimiteExentoGanancias" Type="datetime" />
+          <Property Name="IvaExencionRetencion" Type="varchar" MaxLength="2" />
+          <Property Name="IvaPorcentajeExencion" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IvaFechaCaducidadExencion" Type="datetime" />
+          <Property Name="CodigoSituacionRetencionIVA" Type="int" />
+          <Property Name="FechaLog" Type="datetime" />
+          <Property Name="SUSSFechaCaducidadExencion" Type="datetime" />
+          <Property Name="PorcentajeIBDirecto" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="FechaInicioVigenciaIBDirecto" Type="datetime" />
+          <Property Name="FechaFinVigenciaIBDirecto" Type="datetime" />
+          <Property Name="GrupoIIBB" Type="int" />
+          <Property Name="IdCliente" Type="int" />
+        </EntityType>-->
   <EntityType Name="Marcas">
     <Key>
       <PropertyRef Name="IdMarca" />
