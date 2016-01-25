@@ -342,7 +342,7 @@ Namespace Pronto.ERP.Dal
                 Catch e As Exception
                     Transaccion.Rollback()
                     'Debug.Print(e.Message)
-                    ErrHandler.WriteError(e)
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(e)
                     Throw New ApplicationException("Error en la grabacion " + e.Message, e)
                 Finally
                     CType(myConnection, IDisposable).Dispose()
@@ -678,7 +678,7 @@ Namespace Pronto.ERP.Dal
 
             Catch e As Exception
                 'Debug.Print(e.Message)
-                ErrHandler.WriteError("Error en la carga " & e.ToString)
+                Pronto.ERP.Bll.ErrHandler2.WriteError("Error en la carga " & e.ToString)
                 Throw
                 'Throw New ApplicationException("Error en la carga " + e.Message, e)
             Finally

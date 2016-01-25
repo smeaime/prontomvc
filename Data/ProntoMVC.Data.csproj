@@ -62,8 +62,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -525,6 +529,12 @@
     <Compile Include="Models\FertilizantesCupos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FertilizantesPuntosDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FertilizantesTiposDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Formulario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -827,6 +837,12 @@
     <Compile Include="Models\UserDatosExtendidos.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsuariosRelacionFertilizantesPuntosDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsuariosRelacionFertilizantesTiposDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ValesSalida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -854,6 +870,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Filtros.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
