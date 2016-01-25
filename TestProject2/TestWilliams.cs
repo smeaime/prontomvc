@@ -184,8 +184,10 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void NuevoLote()
         {
+            string SamplesFolder;
+            SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
+            SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote";
 
-            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
 
             string sError = "";
 
@@ -198,8 +200,8 @@ namespace ProntoMVC.Tests
             FileInfo[] Files = d.GetFiles("*.*");
             foreach (FileInfo file in Files)
             {
-                //lista.Add(file.FullName);
-                lista.Add(file.Name);
+                lista.Add(file.FullName);
+                //lista.Add(file.Name);
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
@@ -291,7 +293,7 @@ namespace ProntoMVC.Tests
 
             //db.us
 
-            
+
 
             //AsociarUsuarioConPuntoDespacho()
             //AsociarUsuarioConTipoDespacho()
@@ -770,7 +772,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2015, 10, 1), new DateTime(2015, 12, 30),
+                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
                 0, ref titulo, "Ambas", false);
 
 
@@ -972,14 +974,14 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             //    usuario2 sube lote2
 
 
-            SuboElZip();
+            int ticket = SuboElZip("");
 
             // 2 caminos
             // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
             //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
 
             IEngine engine = null;
-            IEngineLoader engineLoader=null;
+            IEngineLoader engineLoader = null;
             IFlexiCaptureProcessor processor = null;
 
 
@@ -995,17 +997,44 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
 
 
-           // mostrar info del lote1
+            // mostrar info del lote1
+            VerInfoDelLote(ticket);
 
 
         }
 
-        void SuboElZip()
+        int SuboElZip(string archivo)
+        {
+            // "C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote"
+            //List<String> archivos = CartaDePorteManager.Extraer(destzip, DIRTEMP, out ticket);
+
+            //return ticket;
+            return 0;
+        }
+
+
+        string VerInfoDelLote(int ticket)
         {
 
-           // List<String> archivos = CartaDePorteManager.Extraer(destzip, DIRTEMP);
-            
+            // buscar la informacion en el log?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            //int IdFactura = from l in db.log
+
+            //sssss
+
+            return "";
+
         }
+
+
+
+
 
 
         [TestMethod]
@@ -1237,10 +1266,12 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         {
             string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
             int m_IdMaestro = 0;
+            string logerror = "";
 
             //hay que pasar el formato como parametro 
 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                            LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref logerror, "1/1/2014", 0, "");
 
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
 
