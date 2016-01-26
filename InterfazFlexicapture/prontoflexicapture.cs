@@ -411,6 +411,18 @@ namespace ProntoFlexicapture
             string CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT").NullStringSafe();
             string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
 
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+
+
+
+
 
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
