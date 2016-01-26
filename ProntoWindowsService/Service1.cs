@@ -1,4 +1,4 @@
-﻿#define DEBUG_SERVICE
+﻿//#define DEBUG_SERVICE
 
 using System;
 using System.Collections.Generic;
@@ -119,11 +119,14 @@ namespace ProntoWindowsService
             }
             catch (Exception x)
             {
+                Log(x.ToString());
                 Console.WriteLine(x.ToString());
                 return;
             }
 
 
+            Log("llamo a iniciamotor");
+            
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
 
 
@@ -131,6 +134,7 @@ namespace ProntoWindowsService
 
 
 
+            Log("Motor iniciado");
             string sError = "";
 
 
@@ -156,7 +160,11 @@ namespace ProntoWindowsService
 
 
                     string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-                    if ((html ?? "") != "") Console.WriteLine(html);
+                    if ((html ?? "") != "")
+                    {
+                        Console.WriteLine(html);
+                        Log(html);
+                    }
 
                     if (resultado == null)
                     {
@@ -167,6 +175,7 @@ namespace ProntoWindowsService
                 }
                 catch (Exception x)
                 {
+                    Log(x.ToString());
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x);
                     ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                     return;

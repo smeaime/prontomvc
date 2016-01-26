@@ -41,6 +41,8 @@ namespace ProntoWindowsService
                         ManagedInstallerClass.InstallHelper(new string[] { "/u", Assembly.GetExecutingAssembly().Location });
                         break;
                     case "": // depuracion
+                            //http://stackoverflow.com/questions/125964/easier-way-to-debug-a-c-sharp-windows-service
+
                         RunInteractive(servicesToRun);
                         break;
 
@@ -49,7 +51,6 @@ namespace ProntoWindowsService
             else
             {
                 //System.Diagnostics.Debugger.Break();
-
                 ServiceBase.Run(servicesToRun);
             }
 
@@ -59,6 +60,8 @@ namespace ProntoWindowsService
 
         static void RunInteractive(ServiceBase[] servicesToRun)
         {
+            // http://stackoverflow.com/questions/125964/easier-way-to-debug-a-c-sharp-windows-service
+
             Console.WriteLine("Services running in interactive mode.");
             Console.WriteLine();
 
@@ -75,7 +78,8 @@ namespace ProntoWindowsService
             Console.WriteLine();
             Console.WriteLine(
                 "Press any key to stop the services and end the process...");
-            Console.ReadKey();
+            //Console.ReadKey();
+            Console.Read();
             Console.WriteLine();
 
             MethodInfo onStopMethod = typeof(ServiceBase).GetMethod("OnStop",
