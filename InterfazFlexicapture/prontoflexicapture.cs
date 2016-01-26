@@ -235,8 +235,7 @@ namespace ProntoFlexicapture
 
                 }
 
-
-                processor.ExportDocument(document, Path.GetPathRoot(imagenes[count]));
+                processor.ExportDocumentEx(document, Path.GetDirectoryName(imagenes[count]), imagenes[count] + ".xml", null);
 
                 count++;
             }
