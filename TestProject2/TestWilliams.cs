@@ -962,6 +962,19 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
         /// </summary>
+        [TestMethod]
+        public void ImagenesPendientesListados()
+        {
+
+            var irrec= ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp).ToList();
+
+            var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
+            var encola = (from i in lista select new { nombre = i }).ToList(); 
+
+            var termin= ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp).ToList();
+
+        }
+
 
 
         [TestMethod]
