@@ -270,7 +270,7 @@ namespace ProntoFlexicapture
         }
 
 
-        static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
+        public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
             string dir = DirApp + @"\Temp\";
@@ -303,18 +303,19 @@ namespace ProntoFlexicapture
         }
 
 
-        class procesGrilla
+        public class procesGrilla
         {
             public string nombreImagen { get; set; }
             public DateTime fecha { get; set; }
             public string resultado { get; set; }
             public string usuario { get; set; }
             public int idcartaporte { get; set; }
+            public int numerocartaporte { get; set; }
         }
 
 
 
-        static IQueryable<procesGrilla> ExtraerListaDeImagenesProcesadas(string DirApp)
+        public static IQueryable<procesGrilla> ExtraerListaDeImagenesProcesadas(string DirApp)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
@@ -395,7 +396,16 @@ namespace ProntoFlexicapture
                 {
                     //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
                     // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
-                    ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
+                    if (numeroCarta.ToString().Length == 9)
+                    {
+                        ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
+
+                    }
+                    else
+                    {
+
+                        numeroCarta = 0;
+                    }
                 }
             }
 
@@ -578,7 +588,9 @@ namespace ProntoFlexicapture
             ///////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////
 
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
+            // ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
+            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadDirectlyUseNakedInterfaces;
+
 
             ErrHandler2.WriteError("Arranca motor");
 
@@ -731,6 +743,97 @@ namespace ProntoFlexicapture
 
         public static IEngine loadEngine(EngineLoadingMode _engineLoadingMode, out IEngineLoader engineLoader)
         {
+
+
+            /*
+             * en la documentacion
+             * 
+            ABBYY FlexiCapture Engine 11 Guided Tour: Advanced Techniques 
+Different Ways to Load the Engine Object
+There are three ways to load the Engine object in ABBYY FlexiCapture Engine 11. Each of the loading methods has its own specifics affecting the use of the object in different circumstances. The first two methods are most suitable for use in interactive applications which are not intended for simultaneous processing of multiple requests. The third method is most suitable for server solutions.
+
+Loading FCEngine.dll manually and working with “naked” interfaces
+This is the standard method to load the Engine object, which was also used in the previous version of ABBYY FlexiCapture Engine. To get a reference to the Engine object, call the InitializeEngine (InitializeEngineEx) method. This object loading method is described in detail in the Tutorial, Step 1: Load FlexiCapture Engine.
+
+Advantages
+
+Results in maximum performance. 
+
+Does not require registration of FCEngine.dll. 
+   Limitations
+
+Imposes restriction on working with multi-threaded applications (see Using ABBYY FlexiCapture Engine in Multi-Threaded Server Applications). 
+
+When working with high-level languages (e.g. .Net), low-level means must be used to load dynamic libraries and to call functions published in them. 
+ 
+
+Loading the Engine object by means of COM into the current process
+The Engine is loaded as an in-process server into the same process where the application is running. The Engine object is loaded using the InprocLoader object, which implements the IEngineLoader interface.
+
+Please note that you must keep the reference to the loader object until you finish working with the Engine. You can then call the Unload method of the loader object to deinitialize the Engine, and then destroy the loader object.
+
+Advantages
+
+All ABBYY FlexiCapture Engine objects are completely thread-safe and can be created and used in different threads. 
+When working from the Мain STA apartment, performance is the same as when working with the naked interfaces. When accessing from different threads, some marshalling losses may occur, which are negligible in most scenarios. 
+   Limitations
+
+Registration of FCEngine.dll is required when installing the final application on an end user's computer. 
+ 
+
+ C# code 
+
+
+IEngineLoader engineLoader = new FCEngine.InprocLoader();
+IEngine engine = engineLoader.Load(…);
+try {
+	…
+} finally {
+	engineLoader.Unload();
+}
+
+ Note: To register FCEngine.dll when installing your application on an end-user computer, use the following command line: regsvr32.exe /s /n /i:"<Path to the Inc folder>" "<Path to the FCEngine.dll>"
+
+
+Loading the Engine object by means of COM into a separate process
+The Engine is loaded as an out-of-process server into a separate process. The Engine object is loaded by means of the OutprocLoader object, which implements a IEngineLoader interface.
+
+Please note that you must keep the reference to the loader object until you finish working with the Engine. You can then call the Unload method of the loader object to deinitialize the Engine, and then destroy the loader object.
+
+Advantages
+
+All ABBYY FlexiCapture Engine objects are completely thread-safe. Each instance of the Engine runs in a separate process parallel to the others. 
+A pool of processors can be organized to make full use of the computer's CPU power. 
+   Limitations
+
+There are some small marshalling losses. 
+Registration of FCEngine.dll is required when installing the final application on an end user's computer. 
+When working under accounts with limited permissions, the necessary permissions must be granted. 
+It is impossible to access a page image as HBITMAP without marshalling. 
+Cannot be used with Visual Components, as they do not work with multiple processes. 
+ 
+
+ C# code 
+
+IEngineLoader engineLoader = new FCEngine.OutprocLoader();
+IEngine engine = engineLoader.Load(…);
+try {
+	…
+} finally {
+	engineLoader.Unload();
+}
+
+ Note:
+
+Account permissions can be set up using the DCOM Config utility (either type DCOMCNFG in the command line, or select Control Panel > Administrative Tools > Component Services). In the console tree, locate the Component Services > Computers > My Computer > DCOM Config folder, right-click ABBYY FlexiCapture 11 Engine Loader (Local Server), and click Properties. A dialog box will open. Click the Security tab. Under Launch Permissions, click Customize, and then click Edit to specify the accounts that can launch the application.
+Note that on a 64-bit operating system the registered DCOM-application is available in the 32-bit MMC console, which can be run using the following command line: "mmc comexp.msc /32" 
+To register FCEngine.dll when installing your application on the server, use the following command line: regsvr32.exe /s /n /i:"<Path to the Inc folder>" "<Path to the FCEngine.dll>" 
+We recommend that you use a Network license both for debugging of your server application and for running it. 
+Additionally you can manage the priority of work processes and control whether their parent process is alive and terminate if it is not. Use the IWorkProcessControl interface.
+
+    */
+
+
             engineLoadingMode = _engineLoadingMode;
             switch (engineLoadingMode)
             {
