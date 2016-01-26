@@ -235,12 +235,17 @@ namespace ProntoFlexicapture
 
                 }
 
+
+                processor.ExportDocument(document, Path.GetPathRoot(imagenes[count]));
+
                 count++;
             }
             //traceEnd("OK");
 
             //trace("Check the results...");
             //assert(count == 4);
+
+            
 
             processor.ResetProcessing();
 
@@ -323,7 +328,7 @@ namespace ProntoFlexicapture
                             &&
                             (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                      )
-                     orderby f.LastWriteTime descending
+                     orderby f.LastWriteTime ascending
                      select f.FullName).Take(cuantas);
 
 
@@ -564,6 +569,10 @@ namespace ProntoFlexicapture
 
             ErrHandler2.WriteError("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
+
+
+
+            //exportar al .bdl
 
             GuardarLogEnBase(o);
 
