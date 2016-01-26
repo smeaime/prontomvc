@@ -241,7 +241,7 @@ namespace ProntoFlexicapture
 
             //trace("Check the results...");
             //assert(count == 4);
-            
+
             processor.ResetProcessing();
 
             return r;
@@ -303,6 +303,42 @@ namespace ProntoFlexicapture
         }
 
 
+        class procesGrilla
+        {
+            public string nombreImagen { get; set; }
+            public DateTime fecha { get; set; }
+            public string resultado { get; set; }
+            public string usuario { get; set; }
+            public int idcartaporte { get; set; }
+        }
+
+
+
+        static IQueryable<procesGrilla> ExtraerListaDeImagenesProcesadas(string DirApp)
+        {
+            string dir = DirApp + @"\Temp\";
+            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+
+
+            IQueryable<procesGrilla> q = (from f in files
+                                          where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff") || f.Name.ToLower().EndsWith(".jpg"))
+                                                 &&
+                                                 (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                                          )
+                                          orderby f.LastWriteTime descending
+                                          select new procesGrilla() { nombreImagen = "" }).AsQueryable();
+
+
+
+            return q;
+            //sacar info del log o de los archivos????
+        }
+
+
+
+
+
         public static bool bEstaLaLicenciadelFlexicapture()
         {
 
@@ -344,7 +380,7 @@ namespace ProntoFlexicapture
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
 
-            long numeroCarta=0;
+            long numeroCarta = 0;
             int vagon = 0;
             string sError = "";
 
@@ -353,7 +389,7 @@ namespace ProntoFlexicapture
             // if (BarraCP.Value.AsString != ""   )
 
 
-            if (BarraCP!=null)
+            if (BarraCP != null)
             {
                 if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
                 {
@@ -365,7 +401,7 @@ namespace ProntoFlexicapture
 
 
 
-            if (numeroCarta==0)
+            if (numeroCarta == 0)
             {
 
                 // qué pasa si no esta la licencia?
@@ -599,7 +635,7 @@ namespace ProntoFlexicapture
 
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
-                    IniciaMotor(ref engine, ref  engineLoader,ref  processor, plantilla);
+                    IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
 
