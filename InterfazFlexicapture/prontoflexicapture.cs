@@ -505,9 +505,9 @@ namespace ProntoFlexicapture
 
                             File.Copy(archivoOriginal, nuevodestino);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
-
+                            ErrHandler2.WriteError(ex);
                             //throw;
                         }
 
