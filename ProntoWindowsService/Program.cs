@@ -5,6 +5,17 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
+using System.Collections.Generic;
+using System.Configuration.Install; 
+using System.IO;
+using System.Linq;
+using System.Reflection; 
+using System.ServiceProcess;
+using System.Text;
+using System.Reflection;
+
+
 namespace ProntoWindowsService
 {
     static class Program
@@ -12,14 +23,34 @@ namespace ProntoWindowsService
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        static void Main()
+        static void Main(string[] args)
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-            { 
-                new Service1() 
-            };
-            ServiceBase.Run(ServicesToRun);
+
+            // cosa piola para no tener que instalar el servicio con algo aparte http://stackoverflow.com/questions/1449994/inno-setup-for-windows-service
+
+            if (System.Environment.UserInteractive)
+            {
+                string parameter = string.Concat(args);
+                switch (parameter)
+                {
+                    case "--install":
+                        ManagedInstallerClass.InstallHelper(new string[] { Assembly.GetExecutingAssembly().Location });
+                        break;
+                    case "--uninstall":
+                        ManagedInstallerClass.InstallHelper(new string[] { "/u", Assembly.GetExecutingAssembly().Location });
+                        break;
+                }
+            }
+            else
+            {
+                ServiceBase.Run(new Service1());
+            }
+
+
         }
+
+
+       
     }
+
 }

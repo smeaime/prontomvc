@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 using ProntoFlexicapture;
 using FCEngine;
+using ProntoMVC.Data.Models;
 
 
 namespace ProntoWindowsService
@@ -17,15 +18,19 @@ namespace ProntoWindowsService
     public partial class Service1 : ServiceBase
     {
 
-        string DirApp;
-        string SC;
-        string TempFolder;
-        string plantilla;
+        static string DirApp;
+        static string SC;
+        static string TempFolder;
+        static string plantilla;
+        
+        static IEngine engine = null;
+        static IEngineLoader engineLoader = null;
+        static IFlexiCaptureProcessor processor = null;
 
 
         public Service1()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
 
@@ -41,10 +46,12 @@ namespace ProntoWindowsService
 
         protected override void OnStop()
         {
+            Console.WriteLine("exit");
+            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
         }
 
 
-        public void Initialize()
+       static public void Initialize()
         {
 
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
@@ -57,52 +64,111 @@ namespace ProntoWindowsService
         }
 
 
-        void DoWork()
+        static void DoWork()
         {
+            Initialize();
 
+            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            Console.WriteLine("CONEXION: " + cadena);
 
-
-            IEngine engine = null;
-            IEngineLoader engineLoader = null;
-            IFlexiCaptureProcessor processor = null;
-
-
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-            System.Diagnostics.PerformanceCounter performanceCounter;
-
-            if (engine == null)
+            try
             {
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+                DemoProntoEntities db = new DemoProntoEntities(cadena);
+                var q = db.Clientes.Take(1).ToList();
+
             }
+            catch (Exception x)
+            {
+                Console.WriteLine(x.ToString());
+                return;
+            }
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
+
+
+
+
+
 
             string sError = "";
 
 
             // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
 
+            Console.WriteLine("Busca imagenes Pendientes");
+
             while (true)
             {
                 // wait for the event to be signaled
                 // or for the configured delay
-                //bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-
-                // if we were signaled to shutdow, exit the loop
-                //if (bSignaled == true)                    break;
 
                 // let's do some work
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                                    plantilla, 5,
-                                     SC, DirApp, true, ref sError);
+                //no volver a cargar planilla!!!!
 
 
-                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+
+                try
+                {
+                    var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
+                                        plantilla, 5,
+                                         SC, DirApp, true, ref sError);
+
+
+                    string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+                    if ((html ?? "") != "") Console.WriteLine(html);
+
+                    if (resultado == null)
+                    {
+                        System.Threading.Thread.Sleep(1000 * 30);
+                        Console.Write(".");
+                    }
+
+                }
+                catch (Exception x)
+                {
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(x);
+                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                    return;
+                }
+
             }
 
 
-            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
 
         }
 
 
+
+    }
+
+
+
+
+    [RunInstaller(true)]
+    public class Installer : System.Configuration.Install.Installer
+    {
+        private ServiceInstaller serviceInstaller;
+        private ServiceProcessInstaller processInstaller;
+
+        public Installer()
+        {
+            // Instantiate installers for process and services.
+            processInstaller = new ServiceProcessInstaller();
+            serviceInstaller = new ServiceInstaller();
+
+            // The services run under the system account.
+            processInstaller.Account = ServiceAccount.LocalSystem;
+
+            // The services are started manually.
+            serviceInstaller.StartType = ServiceStartMode.Manual;
+
+            // ServiceName must equal those on ServiceBase derived classes.
+            serviceInstaller.ServiceName = "Pronto Agente";
+
+            // Add installers to collection. Order is not important.
+            Installers.Add(serviceInstaller);
+            Installers.Add(processInstaller);
+        }
     }
 }
