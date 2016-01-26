@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define DEBUG_SERVICE
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +12,11 @@ using System.Threading.Tasks;
 
 using ProntoFlexicapture;
 using FCEngine;
+
 using ProntoMVC.Data.Models;
+
+using System.Configuration;
+
 
 
 namespace ProntoWindowsService
@@ -22,10 +28,19 @@ namespace ProntoWindowsService
         static string SC;
         static string TempFolder;
         static string plantilla;
-        
+
         static IEngine engine = null;
         static IEngineLoader engineLoader = null;
         static IFlexiCaptureProcessor processor = null;
+
+
+        [Conditional("DEBUG_SERVICE")]
+        private static void DebugMode()
+        {
+            Debugger.Break();
+        }
+
+
 
 
         public Service1()
@@ -37,6 +52,8 @@ namespace ProntoWindowsService
 
         protected override void OnStart(string[] args)
         {
+            DebugMode();
+
             var worker = new System.Threading.Thread(DoWork);
             worker.Name = "MyWorker";
             worker.IsBackground = false;
@@ -51,24 +68,47 @@ namespace ProntoWindowsService
         }
 
 
-       static public void Initialize()
+        static public void Initialize()
         {
 
-            DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
+            /*
+             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
 
-            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
-                   @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
+             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
+                    @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
 
-            plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+             plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
+            */
+
+
+            DirApp = ConfigurationManager.AppSettings["DirApp"];
+
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
+
+            plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
 
         }
 
 
-        static void DoWork()
+        static void Log(string s)
         {
+
+            using (EventLog eventLog = new EventLog("Application"))
+            {
+                eventLog.Source = "Application";
+                eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
+            }
+        }
+
+        static public void DoWork()
+        {
+            Log("Empieza");
+
             Initialize();
 
             string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            Log("CONEXION: " + cadena);
             Console.WriteLine("CONEXION: " + cadena);
 
             try
@@ -164,7 +204,7 @@ namespace ProntoWindowsService
             serviceInstaller.StartType = ServiceStartMode.Manual;
 
             // ServiceName must equal those on ServiceBase derived classes.
-            serviceInstaller.ServiceName = "Pronto Agente";
+            serviceInstaller.ServiceName = "ProntoAgente";
 
             // Add installers to collection. Order is not important.
             Installers.Add(serviceInstaller);
