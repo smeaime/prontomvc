@@ -2014,6 +2014,47 @@ Public Class CartaDePorteManager
     End Function
 
 
+    Shared Function AdjuntarImagenEnZip2(SC As String, nombrearchivo As String, DirApp As String) As String
+
+
+        Dim DIRTEMP As String = DirApp & "\Temp\"
+        Dim DIRFTP As String = DirApp & "\DataBackupear\"
+
+
+
+
+        Dim destzip = DIRTEMP + "zipeado.zip"
+        Dim MyFile3 As New FileInfo(destzip)
+        Try
+            If MyFile3.Exists Then
+                MyFile3.Delete()
+            End If
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+        If False Then
+            'no borrar todos los archivos
+
+            Dim files = Directory.GetFiles(DIRTEMP)
+            For Each file As String In files
+                IO.File.SetAttributes(file, FileAttributes.Normal)
+                Try
+                    IO.File.Delete(file)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+            Next
+
+        End If
+
+
+        Dim archivos As Generic.List(Of String) = Extraer(destzip, DIRTEMP)
+
+    End Function
+
 
 
     Shared Function CartasLINQlocalSimplificadoTipadoConCalada(ByVal SC As String, _
@@ -9263,6 +9304,7 @@ Public Class CartaDePorteManager
             For Each e In zip1
                 Try
                     archivos.Add(DirectorioExtraccion + e.FileName)
+                    'archivos.Add(DirectorioExtraccion + e..FileName) me incluye los nombres de subdirectorios?
                     e.Extract(DirectorioExtraccion, Ionic.Zip.ExtractExistingFileAction.OverwriteSilently)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -9691,6 +9733,25 @@ Public Class CartaDePorteManager
         End Try
 
     End Sub
+
+
+
+    Shared Function CrearDirectorioParaLoteImagenes(DirApp As String, nombreusuario As String) As String
+
+
+        Dim DIRTEMP As String = DirApp & "\Temp\"
+
+        '/////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////
+        'crear subdirectorios para clasificar la parva de archivos
+
+        Dim nuevodir = "Lote " & DateTime.Now.ToString("ddMMMHHmmss") & " " & nombreusuario + "\"
+        If Not IO.Directory.Exists(DIRTEMP + nuevodir) Then IO.Directory.CreateDirectory(DIRTEMP + nuevodir)
+
+        Return nuevodir
+
+
+    End Function
 
 
     Shared Function CreaDirectorioParaImagenCartaPorte(nombrenuevo As String, DirApp As String) As String
