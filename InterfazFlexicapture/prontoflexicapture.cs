@@ -277,7 +277,9 @@ namespace ProntoFlexicapture
             var l = new List<string>();
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
+            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
 
             //foreach (FileInfo file in Files)
             //{
@@ -320,6 +322,7 @@ namespace ProntoFlexicapture
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+
 
 
             IQueryable<procesGrilla> q = (from f in files
