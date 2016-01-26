@@ -270,6 +270,33 @@ namespace ProntoFlexicapture
         }
 
 
+
+   
+
+        public static IQueryable<procesGrilla> ExtraerListaDeImagenesIrreconocibles(string DirApp)
+        {
+            string dir = DirApp + @"\Temp\";
+            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+
+
+
+            IQueryable<procesGrilla> q = (from f in files
+                                          where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff") || f.Name.ToLower().EndsWith(".jpg"))
+                                                 &&
+                                                 (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                                          )
+                                          orderby f.LastWriteTime descending
+                                          select new procesGrilla() { nombreImagen = "" }).AsQueryable();
+
+
+
+            return q;
+            //sacar info del log o de los archivos????
+        }
+
+
+
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
