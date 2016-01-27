@@ -21,11 +21,14 @@ using ExtensionMethods;
 
 using Pronto.ERP.Bll;
 
+using Microsoft.VisualBasic;
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
     {
-
+        /*
+        
         public static void ProcesarUnaCartaConFlexicapture(IEngine engine, string plantilla, string imagen, string SC, string DirApp)
         {
 
@@ -78,6 +81,8 @@ namespace ProntoFlexicapture
 
         }
 
+
+        */
 
 
 
@@ -244,7 +249,7 @@ namespace ProntoFlexicapture
             //trace("Check the results...");
             //assert(count == 4);
 
-            
+
 
             processor.ResetProcessing();
 
@@ -275,7 +280,7 @@ namespace ProntoFlexicapture
 
 
 
-   
+
 
         public static IQueryable<procesGrilla> ExtraerListaDeImagenesIrreconocibles(string DirApp)
         {
@@ -441,9 +446,6 @@ namespace ProntoFlexicapture
             string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe();
             string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe();
             string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
-     
-
-
 
 
 
@@ -537,6 +539,30 @@ namespace ProntoFlexicapture
                 cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
 
 
+                try
+                {
+                    cdp.Acoplado = Acoplado;
+                    cdp.Patente = Camión;
+                    cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", ""));
+                    cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", ""));
+                    cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", ""));
+                    cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", ""));
+                    cdp.Observaciones = Observaciones;
+                    cdp.IdChofer = SQLdinamico.BuscaIdChoferPrecisoConCUIT(ChoferCUIT, SC);
+                    cdp.IdTransportista = SQLdinamico.BuscaIdTransportistaPrecisoConCUIT(TransportistaCUIT, SC);
+                    cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
+                    cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
+                    cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+
+                    cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
+                    cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
+                    cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler2.WriteError(ex);
+                }
+
 
                 if (cdp.Titular != 0)
                 {
@@ -608,6 +634,8 @@ namespace ProntoFlexicapture
             Debug.Print("Archivo " + archivoOriginal + " numcarta " + numeroCarta.ToString());
 
 
+
+            EntidadManager.LogPronto(SC, o.IdCarta, "OCR", "", "", o.errores, "", int.Parse(o.numerocarta.ToString()), 0, 0);
 
             //exportar al .bdl
 
@@ -774,8 +802,16 @@ namespace ProntoFlexicapture
             }
 
 
-
+            string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, e);
             sError += ClassFlexicapture.GenerarHtmlConResultado(resultado, e);
+
+
+            using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.WriteLine(html);
+            }
+
 
         }
 
