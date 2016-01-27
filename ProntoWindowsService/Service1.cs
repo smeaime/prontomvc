@@ -17,7 +17,7 @@ using ProntoMVC.Data.Models;
 
 using System.Configuration;
 
-
+using System.IO;
 
 namespace ProntoWindowsService
 {
@@ -165,7 +165,9 @@ namespace ProntoWindowsService
                         Console.WriteLine(html);
                         Log(html);
                     }
+              
                     
+      
             using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
