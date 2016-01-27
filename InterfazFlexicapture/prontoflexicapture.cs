@@ -393,6 +393,7 @@ namespace ProntoFlexicapture
         static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
         {
 
+            Pronto.ERP.BO.CartaDePorte cdp;
 
             IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
             IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
@@ -411,14 +412,39 @@ namespace ProntoFlexicapture
             string CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT").NullStringSafe();
             string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
 
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe();
+            string CTG = Sample.AdvancedTechniques.findField(document, "CTG").NullStringSafe();
+            string FechaCarga = Sample.AdvancedTechniques.findField(document, "FechaCarga").NullStringSafe();
+            string FechaVencimiento = Sample.AdvancedTechniques.findField(document, "FechaVencimiento").NullStringSafe();
+            string Destino = Sample.AdvancedTechniques.findField(document, "Destino").NullStringSafe();
+            string DestinoCUIT = Sample.AdvancedTechniques.findField(document, "DestinoCUIT").NullStringSafe();
+            string Chofer = Sample.AdvancedTechniques.findField(document, "Chofer").NullStringSafe();
+            string ChoferCUIT = Sample.AdvancedTechniques.findField(document, "ChoferCUIT").NullStringSafe();
+            string Transportista = Sample.AdvancedTechniques.findField(document, "Transportista").NullStringSafe();
+            string TransportistaCUIT = Sample.AdvancedTechniques.findField(document, "TransportistaCUIT").NullStringSafe();
+            string ContratoNro = Sample.AdvancedTechniques.findField(document, "ContratoNro").NullStringSafe();
+            string LaCargaSeráPesadaEnDestino = Sample.AdvancedTechniques.findField(document, "LaCargaSeráPesadaEnDestino").NullStringSafe();
+            string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe();
+            string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe();
+            string Condicional = Sample.AdvancedTechniques.findField(document, "Condicional").NullStringSafe();
+            string PesoBruto = Sample.AdvancedTechniques.findField(document, "PesoBruto").NullStringSafe();
+            string PesoTara = Sample.AdvancedTechniques.findField(document, "PesoTara").NullStringSafe();
+            string PesoNeto = Sample.AdvancedTechniques.findField(document, "PesoNeto").NullStringSafe();
+            string Observaciones = Sample.AdvancedTechniques.findField(document, "Observaciones").NullStringSafe();
+            string Esablecimiento = Sample.AdvancedTechniques.findField(document, "Esablecimiento").NullStringSafe();
+            string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe();
+            string Localidad1 = Sample.AdvancedTechniques.findField(document, "Localidad1").NullStringSafe();
+            string Direccion2 = Sample.AdvancedTechniques.findField(document, "Direccion2").NullStringSafe();
+            string Provincia2 = Sample.AdvancedTechniques.findField(document, "Provincia2").NullStringSafe();
+            string Camión = Sample.AdvancedTechniques.findField(document, "Camión").NullStringSafe();
+            string Acoplado = Sample.AdvancedTechniques.findField(document, "Acoplado").NullStringSafe();
+            string KmARecorrer = Sample.AdvancedTechniques.findField(document, "KmARecorrer").NullStringSafe();
+            string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe();
+            string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe();
+            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
+     
+
+
+
 
 
 
@@ -480,7 +506,7 @@ namespace ProntoFlexicapture
 
             if (numeroCarta > 0)
             {
-                Pronto.ERP.BO.CartaDePorte cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0);
+                cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0);
                 if (cdp.Id == -1)
                 {
                     cdp.NumeroCartaDePorte = numeroCarta;
