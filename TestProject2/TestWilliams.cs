@@ -966,19 +966,19 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         public void ImagenesPendientesListados()
         {
 
-            var irrec= ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp).ToList();
+            var irrec = ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp).ToList();
 
             var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
-            var encola = (from i in lista select new { nombre = i }).ToList(); 
+            var encola = (from i in lista select new { nombre = i }).ToList();
 
-            var termin= ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp).ToList();
+            var termin = ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp).ToList();
 
         }
 
 
 
         [TestMethod]
-        public void PruebaFlexicapture_sinListaexplicita()
+        public void PruebaFlexicaptureConZip()
         {
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -988,6 +988,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote.zip";
+
 
             //usuario 1 
             //    usuario2 sube lote2
@@ -996,7 +998,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, "Mariano");
             string destarchivo = nuevosubdir + Path.GetFileName(zipFile);
             File.Copy(zipFile, destarchivo, true);
-            CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
+            var l= CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1019,12 +1021,20 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             string sError = "";
 
-            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
-                                    plantilla, 10,
-                                     SC, DirApp, true, ref sError);
+
+            if (true)
+            {
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+            }
+            else
+            {
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                                        plantilla, 30,
+                                         SC, DirApp, true, ref sError);
+                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+            }
 
 
-            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
 
 
             // mostrar info del lote1
