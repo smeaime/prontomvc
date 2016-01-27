@@ -13408,8 +13408,14 @@ Public Class LogicaFacturacion
                         End Try
 
                         .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
-                        .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
-                        .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
+
+
+
+                        .FechaArribo = CDate(iisNull(cdp("FechaArribo"), Today))
+                        .FechaDescarga = CDate(iisNull(cdp("FechaDescarga"), Today))
+
+
+
                         .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
                         .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
                         .Confirmado = iisNull(cdp("Confirmado"))
@@ -13717,8 +13723,12 @@ Public Class LogicaFacturacion
                     End Try
 
                     .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
-                    .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
-                    .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
+
+               
+                    .FechaArribo = CDate(iisNull(cdp("FechaArribo"), Today))
+                    .FechaDescarga = CDate(iisNull(cdp("FechaDescarga"), Today))
+
+
                     .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
                     .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
                     .Confirmado = iisNull(cdp("Confirmado"))
@@ -13980,19 +13990,9 @@ Public Class LogicaFacturacion
                         'at Microsoft.VisualBasic.CompilerServices.Conversions.ToDate(Object Value)
                         'TO DO 
 
-                        Try
-                            .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
-                        Catch ex As Exception
-                            .FechaArribo = Nothing
-                            ErrHandler2.WriteError(ex)
-                        End Try
+                        .FechaArribo = CDate(iisNull(cdp("FechaArribo"), Today))
+                        .FechaDescarga = CDate(iisNull(cdp("FechaDescarga"), Today))
 
-                        Try
-                            .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
-                        Catch ex As Exception
-                            .FechaDescarga = Nothing
-                            ErrHandler2.WriteError(ex)
-                        End Try
 
 
                         .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))

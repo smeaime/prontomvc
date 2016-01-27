@@ -1077,60 +1077,6 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
-        [TestMethod]
-        public void PruebaFlexicapture()
-        {
-
-            //string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-            //string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015\lotechico";
-            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
-            //string plantilla =  @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl"
-
-
-            try
-            {
-                Copy(SamplesFolder, TempFolder);
-
-            }
-            catch (Exception)
-            {
-
-                //throw;
-            }
-
-
-            IEngine engine = null;
-            IEngineLoader engineLoader = null;
-            IFlexiCaptureProcessor processor = null;
-
-
-
-            //levantar todo un directorio
-
-            List<string> lista = new List<string>(); // { SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg" , "" };
-
-            DirectoryInfo d = new DirectoryInfo(SamplesFolder);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.*");
-            foreach (FileInfo file in Files)
-            {
-                lista.Add(file.FullName);
-            }
-
-
-            string sError = "";
-
-            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(ref engine, ref processor,
-                                        plantilla,
-                                        lista, SC, DirApp, true, ref sError);
-
-
-            var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-
-
-        }
-
-
-
 
 
 
