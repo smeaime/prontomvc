@@ -240,7 +240,23 @@ namespace ProntoFlexicapture
 
                 }
 
+
+
+
+                string dir = DirApp + @"\Temp\";
+
                 processor.ExportDocumentEx(document, Path.GetDirectoryName(imagenes[count]), imagenes[count] + ".xml", null);
+
+                IFileExportParams exportParams = engine.CreateFileExportParams();
+                exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
+                processor.ExportDocumentEx(document, dir + "\\FCEExport", "ExportToXLS", exportParams);
+                exportParams.FileFormat = FileExportFormatEnum.FEF_CSV;
+                processor.ExportDocumentEx(document, dir + "\\FCEExport", "ExportToCSV", exportParams);
+
+
+
+
+
 
                 count++;
             }
