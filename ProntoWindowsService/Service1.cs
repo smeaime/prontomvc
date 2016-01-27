@@ -126,7 +126,7 @@ namespace ProntoWindowsService
 
 
             Log("llamo a iniciamotor");
-            
+
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
 
 
@@ -157,7 +157,7 @@ namespace ProntoWindowsService
                     var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                         plantilla, 5,
                                          SC, DirApp, true, ref sError);
-                    
+
 
                     string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
                     if ((html ?? "") != "")
@@ -165,14 +165,14 @@ namespace ProntoWindowsService
                         Console.WriteLine(html);
                         Log(html);
                     }
-              
-                    
-      
-            using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.WriteLine(html);
-            }
+
+
+
+                    using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
+                    using (StreamWriter sw = new StreamWriter(fs))
+                    {
+                        sw.WriteLine(html);
+                    }
 
 
                     if (resultado == null)
