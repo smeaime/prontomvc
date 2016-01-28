@@ -510,6 +510,7 @@ namespace ProntoFlexicapture
             string Transportista = Sample.AdvancedTechniques.findField(document, "Transportista").NullStringSafe();
             string TransportistaCUIT = Sample.AdvancedTechniques.findField(document, "TransportistaCUIT").NullStringSafe();
             string ContratoNro = Sample.AdvancedTechniques.findField(document, "ContratoNro").NullStringSafe();
+
             string LaCargaSeráPesadaEnDestino = Sample.AdvancedTechniques.findField(document, "LaCargaSeráPesadaEnDestino").NullStringSafe();
             string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe();
             string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe();
@@ -531,6 +532,7 @@ namespace ProntoFlexicapture
             string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
 
 
+            string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe();
 
 
 
@@ -615,7 +617,7 @@ namespace ProntoFlexicapture
 
                 //s = CorredorCUIT.Value.AsString;
                 //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.Corredor = CartaDePorteManager.BuscarClientePorCUIT(CorredorCUIT, SC, Corredor);
+                cdp.Corredor = CartaDePorteManager.BuscarVendedorPorCUIT(CorredorCUIT, SC, Corredor);
 
                 //s = DestinatarioCUIT.Value.AsString;
                 //FuncionesGenericasCSharp.mkf_validacuit(s);
@@ -631,15 +633,51 @@ namespace ProntoFlexicapture
                     cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", ""));
                     cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", ""));
                     cdp.Observaciones = Observaciones;
-                    cdp.IdChofer = SQLdinamico.BuscaIdChoferPrecisoConCUIT(ChoferCUIT, SC);
-                    cdp.IdTransportista = SQLdinamico.BuscaIdTransportistaPrecisoConCUIT(TransportistaCUIT, SC);
-                    cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                    cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
-                    cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+
+
+                    cdp.Contrato = ContratoNro;
+                    cdp.KmARecorrer = Conversion.Val(KmARecorrer);
+                    cdp.TarifaTransportista = Conversion.Val(Tarifa);
 
                     cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
-                    cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
-                    cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
+                    try
+                    {
+                        cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
+                        cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
+                    }
+                    catch (Exception ex2)
+                    {
+
+                        ErrHandler2.WriteError(ex2);
+                    }
+
+                    cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
+                    cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
+
+                    
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
+
+                    
+                    cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
+                    if (cdp.IdArticulo == 1)
+                    {
+                        GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie);
+                        cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
+                    }
+
+                    cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
+                    Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
+
+                    cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
+                    Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1);
+
+                    cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+                    Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento);
+
+
+
                 }
                 catch (Exception ex)
                 {
