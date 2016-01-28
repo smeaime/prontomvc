@@ -32,6 +32,8 @@ using System.IO;
 using Pronto.ERP.Bll;
 
 
+using System.Diagnostics;
+
 using Microsoft.Reporting.WebForms;
 
 using System.Configuration;
@@ -43,6 +45,10 @@ namespace ProntoMVC.Tests
 {
     using System.Web.Mvc;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+
+
+
 
 
 
@@ -66,7 +72,6 @@ namespace ProntoMVC.Tests
         const string usuario = "Mariano";
         //string bdlmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bdlmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-        string sc;
 
         string DirApp;
         string SC;
@@ -123,9 +128,379 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void CartaPorteFuncionalidadBasica()
+        {
+            //adasdas
+
+            string ms = "", warn = "";
+            var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            Assert.AreEqual(1, carta.NobleGrado);
+
+            carta = null;
+            carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            carta.NobleGrado = 3;
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            Assert.AreEqual(2, carta.NobleGrado);
+
+        }
 
 
 
+
+
+
+
+
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        [TestMethod]
+        public void NuevoLote()
+        {
+            string SamplesFolder;
+            SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
+            SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote";
+
+
+            string sError = "";
+
+            List<string> lista = new List<string>();
+
+            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
+
+            Copy(SamplesFolder, TempFolder);
+
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (FileInfo file in Files)
+            {
+                lista.Add(file.FullName);
+                //lista.Add(file.Name);
+            }
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
+        }
+
+
+
+
+        [TestMethod]
+        public void ProcesarSuperTiff_17748()
+        {
+
+            string sError = "";
+
+            List<string> lista = new List<string>();
+
+            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
+
+            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (FileInfo file in Files)
+            {
+                //lista.Add(file.FullName);
+                lista.Add(file.Name);
+            }
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
+        }
+
+
+
+
+        [TestMethod]
+        public void InformeFacturacionBLD_17587()
+        {
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            int IdFactura = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                             where c.Exporta == "SI" && f.IdCliente == 2775
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+
+
+            // var output = CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel(SC, IdFactura, "", ReporteLocal);
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            //System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+        [TestMethod]
+        public void AlertaMailFertilizante()
+        {
+
+            // Alerta por mail al Despachante. 2h
+            // -El mail se dispararía solo cuando se hace el alta de un cupo? O tambien cuando se modifica?
+            // -Esto serían mails para todos los despachantes de ese PUNTO de despacho
+            //   El mail de alerta a los operadores de despacho, se dispara unicamente en el alta. Tiene que salir un mail para cada operador de despacho de ese punto de despacho
+
+
+
+
+            // ponerme como despachante
+            // var cupo = FertilizanteManager.GetItem(SC, 412424);
+
+
+
+            //   grabar el cupo
+
+
+
+            //       verificar el envio
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            //db.us
+
+
+
+            //AsociarUsuarioConPuntoDespacho()
+            //AsociarUsuarioConTipoDespacho()
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void TraerPanelDeFertilizantes()
+        {
+
+            //         Agregar panel informativo al despachante. -En donde? en el listado de cupos?
+        }
+
+
+        [TestMethod]
+        public void MaestroDeFertilzantes()
+        {
+            // Tendrá que filtrar según los TIPOS/PUNTOS de despacho. 
+            // filtrar el listado por sus TIPOS de despacho
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var result = ProntoMVC.Data.FuncionesGenericasCSharp.Fertilizantes_DynamicGridData(db, "NumeroPedido", "desc", 0, 50, false, "");
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void Pegatina_17734()
+        {
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\30488_Posi19.txt";
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.ReyserCargillPosicion, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void movimientos_17679()
+        {
+            /*
+            Mariano, yo me estoy tirando los reportes y me salen igual que a ellos.
+
+Lo que dicen es que cuando sacan los reportes, salen así:
+
+Fecha: del 27/7 al 31/10
+Saldo Inicial: 19.999.120 kg
+Movimientos: hay cinco en el período que suman 147.940 kg entre el 27/7 y el 1/9
+Saldo Final: 20.147.060 kg
+
+Fecha: del 31/10 al 31/10
+Saldo Inicial: 19.999.120 kg
+Movimientos: no hay movimientos ese día
+Saldo Final: 19.999.120 kg
+
+Entiendo que está mal el saldo inicial en el segundo caso.
+            */
+
+
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario);
+            var ex3 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario);
+            var ex4 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario);
+            var ex5 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario);
+
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void RecibidorOficial_15188()
+        {
+            /*
+            	- Se agregan 4 campos:
+Recibidor Oficial (Tilde)
+Estado: Combo con las opciones "Recibo" (por defecto) y "Rechazo"
+Motivo Rechazo: VACIO / REGRESA ORIGEN / ACONDICIONA / CAMBIA CP 
+Nombre de acondicionador: listado de clientes de Williams
+
+- Los campos tienen que quedar habilitados si el camion está rechazado
+
+- Si se rechaza el camion debe exigir una opción en Motivo Rechazo (distinta de vacio)
+
+- Armar un informe igual al de Listado General, agregando al final estos 4 datos
+
+- A parte de sobre el reporte, el completar alguno de estos datos no tiene que influir en el resto 
+             * del sistema (inclusive los pueden cargar antes de rechazarlo)
+            */
+
+
+            string ms = "", warn = "";
+            Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
+            // var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.Id = -1;
+            carta.SubnumeroDeFacturacion = -1;
+
+            carta.NumeroCartaDePorte = new Random().Next(51234567);
+            carta.FechaArribo = DateTime.Now;
+            carta.PuntoVenta = 1;
+            carta.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            carta.Titular = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+            carta.Corredor = SQLdinamico.BuscaIdVendedorPreciso("BLD S.A", SC);
+            carta.Entregador = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+            carta.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso("GONZALEZ CATAN", SC);
+            carta.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
+
+
+
+
+            carta.TieneRecibidorOficial = true;
+            carta.EstadoRecibidor = Pronto.ERP.BO.enumEstadosDeRecibidor.Recibo;
+            carta.MotivoRechazo = Pronto.ERP.BO.enumRechazosDeRecibidor.VACIO;
+            carta.ClienteAcondicionador = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
+
+            //carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            //carta.NobleGrado = 3;
+
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+
+            // la validacion me lo tiene que bochar 
+
+
+
+            bool esvalido = CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            Assert.AreEqual(true, esvalido);
+            int id = CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            Assert.AreNotEqual(-1, id);
+
+
+            // Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            // Assert.AreEqual(2, carta.NobleGrado);
+
+
+            var carta2 = CartaDePorteManager.GetItem(SC, 4444);
+
+
+
+        }
 
 
 
@@ -244,7 +619,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -255,13 +630,31 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, carta, ref ms, ref warn);
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
-            Assert.AreEqual(3, carta.NobleGrado);
+            Assert.AreEqual(2, carta.NobleGrado);
 
-        
+
+        }
+
+        [TestMethod]
+        public void RemoveSpecialCharacterstest()
+        {
+            string original = "ássss/46";
+            var s = ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(original); ;
+
+            Assert.AreEqual(s, original);
+
+        }
+
+        [TestMethod]
+        public void MailDeInformeConHtmlyConExcelAdjunto_16455_2()
+        {
+
+            //MailLoopWork // no puedo llamar a esta funcion, porque usa la dll del appcode
+
         }
 
 
@@ -379,7 +772,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2015, 10, 1), new DateTime(2015, 12, 30),
+                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
                 0, ref titulo, "Ambas", false);
 
 
@@ -577,39 +970,71 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             string zipFile = @"ADasdasd";
 
-            SuboElZip();
+            //usuario 1 
+            //    usuario2 sube lote2
+
+
+            int ticket = SuboElZip("");
 
             // 2 caminos
             // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
             //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
 
             IEngine engine = null;
-            IEngineLoader engineLoader;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
 
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-            System.Diagnostics.PerformanceCounter performanceCounter;
 
-            if (engine == null)
-            {
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
-            }
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
 
             string sError = "";
 
-            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(engine,
+            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
                                     plantilla, 10,
                                      SC, DirApp, true, ref sError);
 
 
             var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
 
+
+            // mostrar info del lote1
+            VerInfoDelLote(ticket);
+
+
         }
 
-        void SuboElZip()
+        int SuboElZip(string archivo)
+        {
+            // "C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote"
+            //List<String> archivos = CartaDePorteManager.Extraer(destzip, DIRTEMP, out ticket);
+
+            //return ticket;
+            return 0;
+        }
+
+
+        string VerInfoDelLote(int ticket)
         {
 
+            // buscar la informacion en el log?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            //int IdFactura = from l in db.log
+
+            //sssss
+
+            return "";
 
         }
+
+
+
+
 
 
         [TestMethod]
@@ -617,8 +1042,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         {
 
             //string SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos";
-            //string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015";
-            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015\lotechico";
+            //string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\17-3-2015\lotechico";
+            string SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
             //string plantilla =  @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl"
 
 
@@ -635,15 +1060,10 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
             IEngine engine = null;
-            IEngineLoader engineLoader;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
 
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-            System.Diagnostics.PerformanceCounter performanceCounter;
 
-            if (engine == null)
-            {
-                engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
-            }
 
             //levantar todo un directorio
 
@@ -659,9 +1079,9 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             string sError = "";
 
-            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(engine,
+            var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture(ref engine, ref processor,
                                         plantilla,
-                                        lista, SC, DirApp, false, ref sError);
+                                        lista, SC, DirApp, true, ref sError);
 
 
             var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
@@ -696,10 +1116,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             }
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
         }
-
-
 
 
 
@@ -711,7 +1129,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
-            // buscar factura de LDC y de ACA
+            // buscar factura de LDC (id2775) y de ACA (id10)
             int IdFactura = (from c in db.CartasDePortes
                              from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
                              where c.Exporta == "SI" && f.IdCliente == 2775
@@ -728,9 +1146,27 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
+
+
+
+
             //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
             //File.Copy(output,copia, true);
             System.Diagnostics.Process.Start(output);
+
+
+            int IdFactura2 = (from c in db.CartasDePortes
+                              from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                              where c.Exporta == "SI" && f.IdCliente != 2775 && f.IdCliente != 10
+                              orderby f.IdFactura descending
+                              select f.IdFactura).FirstOrDefault();
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura2, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
         }
 
 
@@ -830,8 +1266,12 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         {
             string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
             int m_IdMaestro = 0;
+            string logerror = "";
 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
+            //hay que pasar el formato como parametro 
+
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                            LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref logerror, "1/1/2014", 0, "");
 
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
 
@@ -853,6 +1293,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         {
             string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
             int m_IdMaestro = 0;
+
+            //hay que pasar el formato como parametro
 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
 
@@ -897,12 +1339,12 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada(SC,
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada2(SC,
                 "", "", "", 1, 300, CartaDePorteManager.enumCDPestado.Facturadas
                    , "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
                 new DateTime(2014, 1, 1), new DateTime(2014, 1, 1),
                 0, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
 

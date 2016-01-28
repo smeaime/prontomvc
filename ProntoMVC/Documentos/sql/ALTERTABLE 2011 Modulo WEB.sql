@@ -1,4 +1,5 @@
 
+
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
@@ -1578,5 +1579,86 @@ go
 
 
 ALTER TABLE facturas alter column idcondicionventa int NULL
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+alter table cartasdeporte ADD
+	TieneRecibidorOficial varchar(2),
+	EstadoRecibidor INT NULL,
+	ClienteAcondicionador INT NULL REFERENCES Clientes(IdCliente),
+	MotivoRechazo INT NULL
+go
+
+
+
+--alter table cartasdeporte drop column 
+--	MotivoRechazo 
+--go
+
+--alter table cartasdeporte ADD
+--	MotivoRechazo INT NULL
+
+
+
+
+alter table wTempCartasPorteFacturacionAutomatica alter column TarifaFacturada money
+go
+
+
+
+
+
+
+
+------------------------------------------------------------------------
+
+create table FertilizantesPuntosDespacho (
+	IdFertilizantesPuntosDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	Nombre varchar(50)
+)
+go
+
+create table UsuariosRelacionFertilizantesPuntosDespacho (
+	IdUsuariosRelacionFertilizantesPuntosDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	IdFertilizantesPuntosDespacho INT REFERENCES FertilizantesPuntosDespacho(IdFertilizantesPuntosDespacho),
+	UsuarioEnBaseBDLMaster UNIQUEIDENTIFIER 
+)
+
+create table FertilizantesTiposDespacho (
+	IdFertilizantesTiposDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	Nombre varchar(50)
+)
+go
+
+create table UsuariosRelacionFertilizantesTiposDespacho (
+	IdUsuariosRelacionFertilizantesTiposDespacho int IDENTITY (1, 1) PRIMARY KEY,
+	IdFertilizantesTiposDespacho INT REFERENCES FertilizantesTiposDespacho(IdFertilizantesTiposDespacho),
+	UsuarioEnBaseBDLMaster UNIQUEIDENTIFIER 
+)
+
+
+go
+
+
+
+
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+alter table Log ADD
+	IdLog int IDENTITY (1, 1) PRIMARY KEY
+go
+
+
+
+
+
+
 
 

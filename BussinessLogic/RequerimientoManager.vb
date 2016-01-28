@@ -215,7 +215,7 @@ Namespace Pronto.ERP.Bll
                                 .bien_o_uso = iisNull(o.EsBienDeUso, "NO") <> "NO"
                                 .ControlDeCalidad = o.IdControlCalidad
                             Catch ex As Exception
-                                ErrHandler.WriteError(ex)
+                                ErrHandler2.WriteError(ex)
                             End Try
                         End With
 
@@ -291,7 +291,7 @@ Namespace Pronto.ERP.Bll
                                     o.ArchivoAdjunto9 = ""
                                     o.ArchivoAdjunto10 = ""
                                 Catch ex As Exception
-                                    ErrHandler.WriteError(ex)
+                                    ErrHandler2.WriteError(ex)
                                 End Try
                             End With
 
@@ -301,7 +301,7 @@ Namespace Pronto.ERP.Bll
                         db.SubmitChanges()
                     End Using
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -314,7 +314,7 @@ Namespace Pronto.ERP.Bll
                 Return RequerimientoId
             Catch ex As Exception
                 'ContextUtil.SetAbort()
-                ErrHandler.WriteError(ex.Message)
+                ErrHandler2.WriteError(ex.Message)
                 Return -1
             Finally
                 'CType(myTransactionScope, IDisposable).Dispose()

@@ -308,6 +308,13 @@ Public Class CartaDePorteManager
 
 
 
+    Enum enumCDPexportacion
+        Entregas
+        Export
+        Ambas
+    End Enum
+
+
     Enum enumCDPestado
         Todas
         TodasMenosLasRechazadas
@@ -612,7 +619,7 @@ Public Class CartaDePorteManager
 
             MandarMailDeError(s)
 
-            ErrHandler.WriteAndRaiseError(s)
+            ErrHandler2.WriteAndRaiseError(s)
 
             'nohay manera de saber qué instancia lo tiró, si el de clientes o el normal? no hay manera de saber (en el mail) si fue desde un sincro, un informe,
             '    o la facturacion, etc?
@@ -1924,7 +1931,7 @@ Public Class CartaDePorteManager
 
         Catch ex As Exception
             s = "mal formateado " + ex.ToString
-            ErrHandler.WriteError(ex.ToString + " asunto mal formateado")
+            ErrHandler2.WriteError(ex.ToString + " asunto mal formateado")
         End Try
 
 
@@ -1935,6 +1942,77 @@ Public Class CartaDePorteManager
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    Shared Function CartasLINQlocalSimplificadoTipadoConCalada2(ByVal SC As String, _
+      ByVal ColumnaParaFiltrar As String, _
+      ByVal TextoParaFiltrar As String, _
+      ByVal sortExpression As String, _
+      ByVal startRowIndex As Long, _
+      ByVal maximumRows As Long, _
+      ByVal estado As enumCDPestado, _
+      ByVal QueContenga As String, _
+      ByVal idVendedor As Integer, _
+      ByVal idCorredor As Integer, _
+      ByVal idDestinatario As Integer, _
+      ByVal idIntermediario As Integer, _
+      ByVal idRemComercial As Integer, _
+      ByVal idArticulo As Integer, _
+      ByVal idProcedencia As Integer, _
+      ByVal idDestino As Integer, _
+      ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+      ByVal ModoExportacion As enumCDPexportacion, _
+      ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+      ByVal puntoventa As Integer, _
+      Optional ByRef sTituloFiltroUsado As String = "", _
+      Optional ByVal optDivisionSyngenta As String = "Ambas", _
+      Optional ByVal bTraerDuplicados As Boolean = False, _
+      Optional ByVal Contrato As String = "", _
+      Optional ByRef db2 As LinqCartasPorteDataContext = Nothing, _
+        Optional ByVal QueContenga2 As String = "", _
+        Optional ByVal idClienteAuxiliar As Integer = -1, _
+        Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
+        Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+        Optional ByVal optCamionVagon As String = "Ambas" _
+) As IQueryable(Of CartasConCalada)
+
+
+        Dim s As String = [Enum].GetName(ModoExportacion.GetType(), ModoExportacion)
+
+
+        Return CartasLINQlocalSimplificadoTipadoConCalada(SC, _
+       ColumnaParaFiltrar, _
+       TextoParaFiltrar, _
+     sortExpression, _
+     startRowIndex, _
+     maximumRows, _
+     estado, _
+     QueContenga, _
+     idVendedor, _
+     idCorredor, _
+     idDestinatario, _
+     idIntermediario, _
+     idRemComercial, _
+     idArticulo, _
+     idProcedencia, _
+     idDestino, _
+     AplicarANDuORalFiltro, _
+     s, _
+     fechadesde, fechahasta, _
+     puntoventa, _
+        sTituloFiltroUsado, _
+      optDivisionSyngenta, _
+      bTraerDuplicados, _
+      Contrato, _
+        db2, _
+        QueContenga2, _
+        idClienteAuxiliar, _
+        AgrupadorDeTandaPeriodos, _
+        Vagon, Patente, _
+        optCamionVagon)
+
+    End Function
+
 
 
 
@@ -1955,7 +2033,7 @@ Public Class CartaDePorteManager
           ByVal idProcedencia As Integer, _
           ByVal idDestino As Integer, _
           ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-          ByVal ModoExportacion As String, _
+          ByVal ModoExportacionString As String, _
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
           ByVal puntoventa As Integer, _
           Optional ByRef sTituloFiltroUsado As String = "", _
@@ -1971,12 +2049,32 @@ Public Class CartaDePorteManager
 ) As IQueryable(Of CartasConCalada)
 
 
+        'con entityframework
+        'Dim db As DemoProntoEntities
+        'If db2 Is Nothing Then db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC))) Else db = db2
+
+        'con linqtosql
         Dim db As LinqCartasPorteDataContext
         If db2 Is Nothing Then db = New LinqCartasPorteDataContext(Encriptar(SC)) Else db = db2
-
         db.ObjectTrackingEnabled = False
 
-        If System.Diagnostics.Debugger.IsAttached Then maximumRows = 300
+
+        Dim ModoExportacion As enumCDPexportacion
+        Select Case ModoExportacionString
+            Case "Entregas"
+                ModoExportacion = enumCDPexportacion.Entregas
+            Case "Export"
+                ModoExportacion = enumCDPexportacion.Export
+            Case "Ambas"
+                ModoExportacion = enumCDPexportacion.Ambas
+            Case Else
+                Throw New Exception("Exportacion desconocida")
+        End Select
+
+
+
+        'If System.Diagnostics.Debugger.IsAttached Then maximumRows = 300
+
 
         '       Remember, the query is nothing more than an object which represents the query. Think of it 
         'like a SQL query string, just way smarter. Passing a query string around doesn't execute the query; executing 
@@ -2010,8 +2108,10 @@ Public Class CartaDePorteManager
             cdp.Vendedor > 0 _
             And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
             And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
-            And (cdp.Anulada <> "SI") _
-            And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
+            And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
+            And (ModoExportacion = enumCDPexportacion.Ambas _
+                    Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
+                    Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
             And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
             And ( _
                   (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
@@ -2424,7 +2524,7 @@ Public Class CartaDePorteManager
 
 
 
-    
+
 
 
     Shared Function ExcelToHtml(ArchivoExcelDestino As String, Optional grid As GridView = Nothing) As String
@@ -2458,7 +2558,7 @@ Public Class CartaDePorteManager
             firstSheetName = dbSchema.Rows(0)("TABLE_NAME").ToString()
 
 
-            ErrHandler.WriteError("Nombre  " & firstSheetName)
+            ErrHandler2.WriteError("Nombre  " & firstSheetName)
 
             ' Create OleDbCommand object and select data from worksheet Sheet1
             Dim cmd As OleDbCommand = New OleDbCommand("SELECT * FROM [Listado general de Cartas de Po$]", oledbConn)
@@ -2484,7 +2584,9 @@ Public Class CartaDePorteManager
             'http://stackoverflow.com/questions/15828/reading-excel-files-from-c-sharp
 
             err = e.ToString
-            ErrHandler.WriteError(err)
+
+
+            ErrHandler2.WriteError(err)
             Throw
         Finally
             ' Close connection
@@ -2496,13 +2598,13 @@ Public Class CartaDePorteManager
         Dim s As String
         Try
             If ds.Tables.Count = 0 Then Return "NoSeConvirtieronTablas" & "_" & firstSheetName & "_" & ArchivoExcelDestino & "_" & err
-            ErrHandler.WriteError("Tablas  " & ds.Tables.Count.ToString())
-            ErrHandler.WriteError("Convertido " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString())
+            ErrHandler2.WriteError("Tablas  " & ds.Tables.Count.ToString())
+            ErrHandler2.WriteError("Convertido " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString())
             s = DatatableToHtmlUsandoGridview(ds.Tables(0), grid)
             's = DatatableToHtml(ds.Tables(0))
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Return "ErrorHtml" + ex.ToString + "          " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString()
         End Try
 
@@ -2615,7 +2717,7 @@ Public Class CartaDePorteManager
             Try
                 dt.Rows.RemoveAt(n)
             Catch ex As Exception
-                ErrHandler.WriteError("error html row " & n.ToString)
+                ErrHandler2.WriteError("error html row " & n.ToString)
                 'Exit For
             End Try
         Next
@@ -2993,7 +3095,7 @@ Public Class CartaDePorteManager
                 ' LogPronto(SC, dr.Item(0), Mid(logtexto), , , , "logMails")
 
             Catch ex As Exception
-                ErrHandlerWriteErrorLogPronto("no se pudo hacer log del informe", SC, "")
+                ErrHandler2WriteErrorLogPronto("no se pudo hacer log del informe", SC, "")
             End Try
 
 
@@ -3035,7 +3137,7 @@ Public Class CartaDePorteManager
 
 
 
-            
+
 
 
 
@@ -3047,7 +3149,7 @@ Public Class CartaDePorteManager
 
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
 
         End Try
 
@@ -3206,14 +3308,14 @@ Public Class CartaDePorteManager
 
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex.ToString)
+                    ErrHandler2.WriteError(ex.ToString)
                     Dim inner As Exception = ex.InnerException
                     While Not (inner Is Nothing)
                         If System.Diagnostics.Debugger.IsAttached() Then
                             MsgBox(inner.Message)
                             Stop
                         End If
-                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        ErrHandler2.WriteError("Error al buscar los parametros.  " & inner.Message)
                         inner = inner.InnerException
                     End While
                 End Try
@@ -3280,14 +3382,14 @@ Public Class CartaDePorteManager
                         'MsgBox(inner.Message)
                         'Stop
                     End If
-                    ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message)
+                    ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message)
                     inner = inner.InnerException
                 End While
                 Throw
             End Try
 
 
-            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+            ErrHandler2.WriteError("Por generar el archivo " + ArchivoExcelDestino)
             Try
                 Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
                 fs.Write(bytes, 0, bytes.Length)
@@ -3295,14 +3397,14 @@ Public Class CartaDePorteManager
 
             Catch ex As Exception
 
-                ErrHandler.WriteAndRaiseError(ex)
+                ErrHandler2.WriteAndRaiseError(ex)
             End Try
 
 
 
 
             '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+            ErrHandler2.WriteError("Archivo generado " + ArchivoExcelDestino)
 
 
 
@@ -3385,7 +3487,7 @@ Public Class CartaDePorteManager
 
 
 
-        
+
         With oReportViewer
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
@@ -3475,14 +3577,14 @@ Public Class CartaDePorteManager
 
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex.ToString)
+                    ErrHandler2.WriteError(ex.ToString)
                     Dim inner As Exception = ex.InnerException
                     While Not (inner Is Nothing)
                         If System.Diagnostics.Debugger.IsAttached() Then
                             MsgBox(inner.Message)
                             Stop
                         End If
-                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        ErrHandler2.WriteError("Error al buscar los parametros.  " & inner.Message)
                         inner = inner.InnerException
                     End While
                 End Try
@@ -3536,7 +3638,7 @@ Public Class CartaDePorteManager
                             'MsgBox(inner.Message)
                             'Stop
                         End If
-                        'ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        'ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                         inner = inner.InnerException
                     End While
                     Throw
@@ -3563,14 +3665,14 @@ Public Class CartaDePorteManager
                             'MsgBox(inner.Message)
                             'Stop
                         End If
-                        ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        ' ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                         inner = inner.InnerException
                     End While
                     Throw
                 End Try
 
 
-                ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+                ErrHandler2.WriteError("Por generar el archivo " + ArchivoExcelDestino)
                 Try
                     Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
                     fs.Write(bytes, 0, bytes.Length)
@@ -3578,14 +3680,14 @@ Public Class CartaDePorteManager
 
                 Catch ex As Exception
 
-                    ErrHandler.WriteAndRaiseError(ex)
+                    ErrHandler2.WriteAndRaiseError(ex)
                 End Try
 
 
 
 
                 '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+                ErrHandler2.WriteError("Archivo generado " + ArchivoExcelDestino)
 
 
 
@@ -3694,14 +3796,14 @@ Public Class CartaDePorteManager
 
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex.ToString)
+                    ErrHandler2.WriteError(ex.ToString)
                     Dim inner As Exception = ex.InnerException
                     While Not (inner Is Nothing)
                         If System.Diagnostics.Debugger.IsAttached() Then
                             MsgBox(inner.Message)
                             'Stop
                         End If
-                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        ErrHandler2.WriteError("Error al buscar los parametros.  " & inner.Message)
                         inner = inner.InnerException
                     End While
                 End Try
@@ -3754,7 +3856,7 @@ Public Class CartaDePorteManager
                         'MsgBox(inner.Message)
                         'Stop
                     End If
-                    ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                    ' ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                     inner = inner.InnerException
                 End While
                 Throw
@@ -3762,7 +3864,7 @@ Public Class CartaDePorteManager
 
 
 
-            ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+            ErrHandler2.WriteError("Por generar el archivo " + ArchivoExcelDestino)
             Try
                 Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
                 fs.Write(bytes, 0, bytes.Length)
@@ -3770,14 +3872,14 @@ Public Class CartaDePorteManager
 
             Catch ex As Exception
 
-                ErrHandler.WriteAndRaiseError(ex)
+                ErrHandler2.WriteAndRaiseError(ex)
             End Try
 
 
 
 
             '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+            ErrHandler2.WriteError("Archivo generado " + ArchivoExcelDestino)
 
 
 
@@ -3950,7 +4052,7 @@ Public Class CartaDePorteManager
                     wordFiles.Add(nombrecp)
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(imagenpathcp + " " + nombrecp)
+                    ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
                 End Try
             End If
 
@@ -3966,7 +4068,7 @@ Public Class CartaDePorteManager
                     End If
                     wordFiles.Add(nombretk)
                 Catch ex As Exception
-                    ErrHandler.WriteError(imagenpathtk + " " + nombretk)
+                    ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
                 End Try
             End If
 
@@ -4011,7 +4113,7 @@ Public Class CartaDePorteManager
 
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
             End If
 
@@ -4039,8 +4141,8 @@ Public Class CartaDePorteManager
                 Try
                     zip.AddFile(s, "")
                 Catch ex As Exception
-                    ErrHandler.WriteError(s)
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(s)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
             End If
@@ -4167,8 +4269,8 @@ Public Class CartaDePorteManager
             End If
 
         Catch ex As Exception
-            ErrHandler.WriteError(output)
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(output)
+            ErrHandler2.WriteError(ex)
             Throw
         End Try
 
@@ -4176,15 +4278,15 @@ Public Class CartaDePorteManager
         For Each s In wordFiles
             If s = "" Then Continue For
 
-            ErrHandler.WriteError("agrego " & s)
+            ErrHandler2.WriteError("agrego " & s)
             's = sDirFTP + s
 
             Dim MyFile2 As FileInfo
             Try
                 MyFile2 = New FileInfo(s)
             Catch ex2 As Exception
-                ErrHandler.WriteError(s)
-                ErrHandler.WriteError(ex2)
+                ErrHandler2.WriteError(s)
+                ErrHandler2.WriteError(ex2)
                 Throw
             End Try
 
@@ -4192,8 +4294,8 @@ Public Class CartaDePorteManager
                 Try
                     zip.AddFile(s, "")
                 Catch ex As Exception
-                    ErrHandler.WriteError(s)
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(s)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
             End If
@@ -4202,7 +4304,7 @@ Public Class CartaDePorteManager
 
         zip.Save()
 
-        ErrHandler.WriteError(output)
+        ErrHandler2.WriteError(output)
         Return output
 
     End Function
@@ -4260,7 +4362,7 @@ Public Class CartaDePorteManager
 
         If myCartaDePorte.PathImagen = "" And myCartaDePorte.PathImagen2 = "" Then
 
-            ErrHandler.WriteError("sin imagenes")
+            ErrHandler2.WriteError("sin imagenes")
             Return ""
         End If
 
@@ -4288,7 +4390,7 @@ Public Class CartaDePorteManager
                     CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -4306,14 +4408,14 @@ Public Class CartaDePorteManager
                 Try
                     CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
                 Try
                     CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -4332,7 +4434,7 @@ Public Class CartaDePorteManager
 
         Catch ex As Exception
 
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             'MsgBoxAjax(Me, "La carta " & myCartaDePorte.Numero & " fue modificada y ya no tiene imágenes adjuntas")
             Return ""
 
@@ -4350,7 +4452,7 @@ Public Class CartaDePorteManager
     Shared Function PDFcon_iTextSharp(filepdf As String, filejpg As String, filejpg2 As String, Optional propor As Decimal = 1)
 
 
-        ErrHandler.WriteError("PDFcon_iTextSharp " & filepdf & "  " & filejpg & "   " & filejpg2)
+        ErrHandler2.WriteError("PDFcon_iTextSharp " & filepdf & "  " & filejpg & "   " & filejpg2)
 
 
 
@@ -4387,7 +4489,7 @@ Public Class CartaDePorteManager
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
 
             End Try
 
@@ -4407,7 +4509,7 @@ Public Class CartaDePorteManager
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
 
             End Try
 
@@ -4427,7 +4529,7 @@ Public Class CartaDePorteManager
                 'ok, en ese caso el responsable es ImagenPDF()
 
                 'MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
-                ErrHandler.WriteError(ex.ToString + " " + filejpg + " " + filejpg2)
+                ErrHandler2.WriteError(ex.ToString + " " + filejpg + " " + filejpg2)
                 'MsgBoxAjax(Me, "No se pudo generar el documento PDF. Quizas las cartas fueron modificadas y ya no tienen imágenes adjuntas")
                 Throw
             End Try
@@ -4461,7 +4563,7 @@ Public Class CartaDePorteManager
         End If
 
 
-        ErrHandler.WriteError("ResizeImage " & sDir & image)
+        ErrHandler2.WriteError("ResizeImage " & sDir & image)
 
 
 
@@ -4496,18 +4598,18 @@ Public Class CartaDePorteManager
 
             If newimagename = "" Then
                 If image.Substring(image.LastIndexOf(".")) <> ".png" Then
-                    ErrHandler.WriteError("resize 1")
+                    ErrHandler2.WriteError("resize 1")
                     oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
                 Else
-                    ErrHandler.WriteError("resize 2")
+                    ErrHandler2.WriteError("resize 2")
                     oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
                 End If
             Else
                 If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
-                    ErrHandler.WriteError("resize 3")
+                    ErrHandler2.WriteError("resize 3")
                     oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
                 Else
-                    ErrHandler.WriteError("resize 4")
+                    ErrHandler2.WriteError("resize 4")
                     oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
                 End If
             End If
@@ -4519,10 +4621,10 @@ Public Class CartaDePorteManager
             'NO!!!! es por el subdirectorio de destino!!! 
             'http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream
             'If you are getting that error , then I can say that your application doesn't have a write permission on some directory.
-            ErrHandler.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
-            ErrHandler.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
-            ErrHandler.WriteError(ex)
-            ErrHandler.WriteError(sDir & "---" & image & "---" & newimagename)
+            ErrHandler2.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
+            ErrHandler2.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
+            ErrHandler2.WriteError(ex)
+            ErrHandler2.WriteError(sDir & "---" & image & "---" & newimagename)
         End Try
 
 
@@ -5643,8 +5745,16 @@ Public Class CartaDePorteManager
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
 "            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
 "			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
-"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP,  " & _
+"		TieneRecibidorOficial,  " & _
+"		EstadoRecibidor,  " & _
+"		MotivoRechazo,  " & _
+"		isnull(CLIENTACOND.Razonsocial,'') AS ClienteAcondicionadorDesc   " _
 )
+
+
+
+
 
 
 
@@ -5656,6 +5766,7 @@ Public Class CartaDePorteManager
         "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
         "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTACOND ON CDP.ClienteAcondicionador= CLIENTACOND.IdCliente " & _
         "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
         "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
         "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
@@ -5703,7 +5814,7 @@ Public Class CartaDePorteManager
 
             Catch ex As Exception
                 'seguramente timeout
-                ErrHandler.WriteError("GetListDataTableDinamicoConWHERE_2. Seguramente timeout. Aumentar el tiempo maximo de timeout o limitar la cantidad de renglones " & ex.ToString)
+                ErrHandler2.WriteError("GetListDataTableDinamicoConWHERE_2. Seguramente timeout. Aumentar el tiempo maximo de timeout o limitar la cantidad de renglones " & ex.ToString)
                 Throw
             End Try
 
@@ -5721,7 +5832,7 @@ Public Class CartaDePorteManager
 
                 End Try
 
-                ErrHandler.WriteError(" GetListDataTableDinamicoConWHERE_2 llegó al máximo de renglones  " & strSQL)
+                ErrHandler2.WriteError(" GetListDataTableDinamicoConWHERE_2 llegó al máximo de renglones  " & strSQL)
 
 
                 Dim tipo As String = ConfigurationManager.AppSettings("AvisoTipoDeSitioDesarrolloDebugTestReleaseExterno")
@@ -5949,7 +6060,7 @@ Public Class CartaDePorteManager
 
     Shared Function MandarMailDeError(ByVal sErr As String) As String
 
-        'ErrHandlerWriteErrorLogPronto(srr, )
+        'ErrHandler2WriteErrorLogPronto(srr, )
 
 
         Dim Body As String = sErr
@@ -5987,7 +6098,7 @@ Public Class CartaDePorteManager
                             ConfigurationManager.AppSettings("SmtpPort"), , , )
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
 
@@ -6027,7 +6138,7 @@ Public Class CartaDePorteManager
                             ConfigurationManager.AppSettings("SmtpPort"), , , )
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
     End Function
@@ -6297,7 +6408,7 @@ Public Class CartaDePorteManager
                     .TarifaSubcontratista1 = iisNull(dr1.Item(nombreColumna1), 0)
                 End If
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             Try
@@ -6309,7 +6420,7 @@ Public Class CartaDePorteManager
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
             '////////////////////////////////////////////////////////////////////////
             '////////////////////////////////////////////////////////////////////////
@@ -6343,7 +6454,7 @@ Public Class CartaDePorteManager
 
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
         Return False
     End Function
@@ -6390,8 +6501,8 @@ Public Class CartaDePorteManager
             'como evitar la recursion?
             CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
         Catch ex As Exception
-            ErrHandler.WriteError("ya existía un duplicado 1 probablemente")
-            ErrHandler.WriteError(ex) 'ya existía un duplicado probablemente
+            ErrHandler2.WriteError("ya existía un duplicado 1 probablemente")
+            ErrHandler2.WriteError(ex) 'ya existía un duplicado probablemente
         End Try
 
         'y si este tempid es -1?
@@ -6405,8 +6516,8 @@ Public Class CartaDePorteManager
 
             CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
         Catch ex As Exception
-            ErrHandler.WriteError("ya existía un duplicado 0 probablemente")
-            ErrHandler.WriteError(ex) 'ya existía un duplicado probablemente
+            ErrHandler2.WriteError("ya existía un duplicado 0 probablemente")
+            ErrHandler2.WriteError(ex) 'ya existía un duplicado probablemente
         End Try
 
 
@@ -6613,7 +6724,7 @@ Public Class CartaDePorteManager
                         " from cartasdeporte where IdCartaDePorte=" & IdCartaPorte
             ExecDinamico(SC, sSql)
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
         LogPronto(SC, IdCartaPorte, "CARTAPORTE", "")
@@ -7094,6 +7205,12 @@ Public Class CartaDePorteManager
                 .CalidadGastosFumigacionResultado = iisNull(oCarta.CalidadGastosFumigacionResultado, 0)
 
 
+                .TieneRecibidorOficial = (oCarta.TieneRecibidorOficial = "SI")
+                .EstadoRecibidor = iisNull(oCarta.EstadoRecibidor, 0)
+                .MotivoRechazo = iisNull(oCarta.MotivoRechazo, 0)
+                .ClienteAcondicionador = iisNull(oCarta.ClienteAcondicionador, -1)
+
+
 
 
                 Try
@@ -7105,7 +7222,7 @@ Public Class CartaDePorteManager
 
                     If oDet IsNot Nothing Then .CalidadGastoDeSecada = oDet.Valor Else .CalidadGastoDeSecada = 0
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -7141,7 +7258,7 @@ Public Class CartaDePorteManager
 
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
         End With
@@ -7168,7 +7285,7 @@ Public Class CartaDePorteManager
                 Return 0
             End If
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
     End Function
@@ -7196,7 +7313,7 @@ Public Class CartaDePorteManager
                 oDet.Valor = valor
             End If
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
 
@@ -7245,7 +7362,7 @@ Public Class CartaDePorteManager
         If SubnumeroFacturacion > 0 Then Return New CartaDePorte
         If familia.Count = 1 Then Return CartaDePorteDB.GetItem(SC, familia(0).IdCartaDePorte)
 
-        ErrHandler.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
+        ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
 
 
 
@@ -7267,7 +7384,7 @@ Public Class CartaDePorteManager
 
         ElseIf ds.Tables(0).Rows.Count > 1 Then
             'OJO:  puede ser una con otro subnumerodefacturacion...
-            ErrHandler.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
+            ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
 
 
 
@@ -7279,7 +7396,7 @@ Public Class CartaDePorteManager
             'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:System.Exception
             'Application-defined or object-defined error.
             '   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
-            '   at ErrHandler.WriteAndRaiseError(String errorMessage) in E:\Backup\BDL\ProntoWeb\BusinessObject\ErrHandler.vb:line 120
+            '   at ErrHandler2.WriteAndRaiseError(String errorMessage) in E:\Backup\BDL\ProntoWeb\BusinessObject\ErrHandler2.vb:line 120
             '   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon)
             '   at CartaDePorteManager.validarUnicidad(String SC, String txtNumeroCDP, String txtSubNumeroVagon, Int32 IdEntity, CartaDePorte actualCartaDePorte)
             '            at(CartadeporteABM.RefrescarValidadorDuplicidad())
@@ -7343,7 +7460,7 @@ Public Class CartaDePorteManager
 
             Dim ms As String
             If Not IsValid(SC, myCartaDePorte, ms) Then
-                ErrHandler.WriteError(ms)
+                ErrHandler2.WriteError(ms)
                 Return -1
             End If
 
@@ -7522,6 +7639,10 @@ Public Class CartaDePorteManager
                     oCarta.CalidadGastosFumigacionResultado = .CalidadGastosFumigacionResultado
 
 
+                    oCarta.TieneRecibidorOficial = IIf(.TieneRecibidorOficial, "SI", "NO")
+                    oCarta.EstadoRecibidor = .EstadoRecibidor
+                    oCarta.MotivoRechazo = .MotivoRechazo
+                    oCarta.ClienteAcondicionador = .ClienteAcondicionador
 
 
 
@@ -7541,7 +7662,7 @@ Public Class CartaDePorteManager
                     '        oDet.Valor = .CalidadGastoDeSecada
                     '    End If
                     'Catch ex As Exception
-                    '    ErrHandler.WriteError(ex)
+                    '    ErrHandler2.WriteError(ex)
                     'End Try
 
 
@@ -7659,7 +7780,7 @@ Public Class CartaDePorteManager
 
                             Catch ex As Exception
 
-                                ErrHandler.WriteError(ex)
+                                ErrHandler2.WriteError(ex)
 
                             End Try
 
@@ -7674,7 +7795,7 @@ Public Class CartaDePorteManager
                     db.SaveChanges()
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     MandarMailDeError("Error al grabar carta con linq - " & ex.ToString)
                 End Try
 
@@ -7781,7 +7902,7 @@ Public Class CartaDePorteManager
                 '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
@@ -7797,7 +7918,7 @@ Public Class CartaDePorteManager
             Return CartaDePorteId
         Catch ex As Exception
             'ContextUtil.SetAbort()
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Debug.Print(ex.ToString)
             Throw New ApplicationException("Error en la grabacion " + ex.ToString, ex)
             'Return -1
@@ -7935,7 +8056,7 @@ Public Class CartaDePorteManager
                 ms += " " & corredor.RazonSocial
             End If
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
 
@@ -7984,7 +8105,7 @@ Public Class CartaDePorteManager
                     ms += " " & corredor.RazonSocial
                 End If
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
@@ -8004,13 +8125,14 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Public Shared Function IsValid(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean
+    Public Shared Function IsValid(ByVal SC As String, ByRef myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean 'esta funcion no solo está validando, tambien corrige cosas menores...
 
         With myCartaDePorte
             'validarUnicidad()
 
             If iisNull(.SubnumeroVagon, 0) < 0 Then
-                Return False
+                ms &= "El numero de vagón es menor que 0"
+                ms &= vbCrLf   'return false
             End If
 
             'si manotearon la unicidad (numerocdp, vagon) tambien debería loguearse el cambio (lo ideal sería que no pudiesen cambiarlo...)
@@ -8021,14 +8143,35 @@ Public Class CartaDePorteManager
 
 
             'If iisNull(.NumeroCartaDePorte, 0) < 100000000 Or iisNull(.NumeroCartaDePorte, 0) > 9999999999 Then
-            '    ms = "El número de CDP debe tener 9 o 10 dígitos"
-            '    Return False
+            '    ms &= "El número de CDP debe tener 9 o 10 dígitos"
+            '    ms &=vbCrLf   'return false
             'End If
 
             'If .NumeroCartaDePorte > 1999999999 Then ' > Int32.MaxValue Then
-            '    ms = "El número de CDP debe ser menor que 2.000.000.000"
-            '    Return False
+            '    ms &= "El número de CDP debe ser menor que 2.000.000.000"
+            '    ms &=vbCrLf   'return false
             'End If
+
+
+            Dim cdp As Pronto.ERP.BO.CartaDePorte
+            Try
+                cdp = CartaDePorteManager.GetItemPorNumero(SC, .NumeroCartaDePorte, .SubnumeroVagon, 0)
+
+                If cdp.Id <> -1 And myCartaDePorte.SubnumeroDeFacturacion < 1 Then 'ya existe ese numero
+                    If .Id = -1 Then 'estoy haciendo un alta
+                        ms &= "El numero/vagon ya existe, " & cdp.NumeroCartaDePorte & "/" & cdp.SubnumeroVagon
+                        ms &= vbCrLf
+                    Else
+                        If .Id <> cdp.Id Then 'esta editando esa ahora? si no...
+                            ms &= "El numero/vagon ya existe, " & cdp.NumeroCartaDePorte & "/" & cdp.SubnumeroVagon
+                            ms &= vbCrLf
+                        End If
+                    End If
+                End If
+            Catch ex As Exception
+                'a veces llega acá porque ya existe una pero con distinto subnumero de facturacion
+                ErrHandler2.WriteError(ex)
+            End Try
 
 
 
@@ -8036,14 +8179,14 @@ Public Class CartaDePorteManager
 
 
             If IsNothing(.FechaArribo) Or .FechaArribo = #12:00:00 AM# Then
-                ms = "Falta la fecha de arribo"
-                Return False
+                ms &= "Falta la fecha de arribo"
+                ms &= vbCrLf   'return false
             End If
 
             If iisNull(.FechaDescarga, #12:00:00 AM#) <> #12:00:00 AM# Then
                 If iisNull(.FechaDescarga) < iisNull(.FechaArribo) Then
-                    ms = "La fecha de la descarga es anterior a la de arribo"
-                    Return False
+                    ms &= "La fecha de la descarga es anterior a la de arribo"
+                    ms &= vbCrLf   'return false
                 End If
             End If
 
@@ -8057,17 +8200,22 @@ Public Class CartaDePorteManager
 
 
 
-
-            If .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC) And .NobleGrado <> 1 Then
-                .NobleGrado = 1
-                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 1- puesto en la calidad de descarga" & vbCrLf
-            ElseIf .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC) And .NobleGrado <> 2 Then
-                .NobleGrado = 2
-                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 2- puesto en la calidad de descarga" & vbCrLf
-            ElseIf .CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 3", SC) And .NobleGrado <> 3 Then
-                .NobleGrado = 3
-                sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al -GRADO 3- puesto en la calidad de descarga" & vbCrLf
-            End If
+            Try
+                If .CalidadDe > 0 Then
+                    If NombreCalidad(SC, .CalidadDe).Contains("GRADO 1") And .NobleGrado <> 1 Then
+                        .NobleGrado = 1
+                        'sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 1"" puesto en la calidad de descarga" & vbCrLf
+                    ElseIf NombreCalidad(SC, .CalidadDe).Contains("GRADO 2") And .NobleGrado <> 2 Then
+                        .NobleGrado = 2
+                        'sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 2"" puesto en la calidad de descarga" & vbCrLf
+                    ElseIf NombreCalidad(SC, .CalidadDe).Contains("GRADO 3") And .NobleGrado <> 3 Then
+                        .NobleGrado = 3
+                        'sWarnings &= "Se corrigió el grado de la pestaña de calidad para que sea igual al ""GRADO 3"" puesto en la calidad de descarga" & vbCrLf
+                    End If
+                End If
+            Catch ex As Exception
+                ErrHandler2.WriteError("calidad invalida" & .CalidadDe & " " & ex.ToString)
+            End Try
 
 
 
@@ -8102,7 +8250,7 @@ Public Class CartaDePorteManager
                 If .Corredor = idBLD And (.Titular = idCCI Or .CuentaOrden1 = idCCI Or .CuentaOrden2 = idCCI) And .IdClienteEntregador <> idWilliams Then
                     If Not .Exporta And Not .ObviarAdvertencias Then
                         sWarnings &= "Con CCI de cliente y BLD de corredor, se recomienda poner la carta como exportación" & vbCrLf
-                        'Return False
+                        'return false
                     End If
                 End If
                 '///////////////////////////////////////////////////////////////////////////////////
@@ -8113,8 +8261,8 @@ Public Class CartaDePorteManager
 
             If .NetoFinalIncluyendoMermas > 0 Then
                 If .FechaDescarga = #12:00:00 AM# Then
-                    ms = "Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)"
-                    Return False
+                    ms &= "Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)"
+                    ms &= vbCrLf   'return false
                 End If
 
 
@@ -8128,8 +8276,8 @@ Public Class CartaDePorteManager
                 '    que pusieron explicitamente otro Entregador), entonces no dejar grabar hasta que no pongan el tilde de Exportación
 
                 If iisNull(.IdClienteEntregador, 0) > 0 And Not iisNull(NombreCliente(SC, iisNull(.IdClienteEntregador, 0)), "").ToUpper.Contains("WILLIAMS") And Not .Exporta Then
-                    ms = "Una carta porte con entregador debe tener el tilde de exportación"
-                    Return False
+                    ms &= "Una carta porte con entregador debe tener el tilde de exportación"
+                    'ms &=vbCrLf   'return false
                 End If
 
             End If
@@ -8140,19 +8288,19 @@ Public Class CartaDePorteManager
             If False Then
                 If iisNull(.SubnumeroDeFacturacion, 0) > 0 Then
                     If .IdClienteAFacturarle <= 0 Then
-                        ms = "Las cartas duplicadas exigen el cliente a facturarsele"
-                        Return False
+                        ms &= "Las cartas duplicadas exigen el cliente a facturarsele"
+                        'ms &=vbCrLf   'return false
                     End If
 
                     If iisNull(.SubnumeroDeFacturacion, 0) >= 1 Then
                         'VerificarQueElOriginalTieneExplicitadoElClienteFacturado
                         Try
                             If CartaDePorteManager.GetItemPorNumero(SC, .NumeroCartaDePorte, .SubnumeroVagon, .SubnumeroDeFacturacion).IdClienteAFacturarle <= 0 Then
-                                ms = "El original de este duplicado no tiene marcado el cliente al que se factura"
-                                Return False
+                                ms &= "El original de este duplicado no tiene marcado el cliente al que se factura"
+                                ms &= vbCrLf   'return false
                             End If
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex) 'probablemente se queja de que hay copias de subfacturacion. Justo en este caso, no importa
+                            ErrHandler2.WriteError(ex) 'probablemente se queja de que hay copias de subfacturacion. Justo en este caso, no importa
                         End Try
                     End If
                 End If
@@ -8161,15 +8309,15 @@ Public Class CartaDePorteManager
 
 
             If .NobleACamara And .NobleConforme Then
-                ms = "No pueden estar tildados Conforme y A camara en Noble"
-                Return False
+                ms &= "No pueden estar tildados Conforme y A camara en Noble"
+                ms &= vbCrLf   'return false
             End If
 
             If .Titular > 0 Then
                 If InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "SYNGENTA") > 0 And .EnumSyngentaDivision = "" Then
                     If Not (.bSeLeFactura_a_SyngentaDivisionAgro Xor .bSeLeFactura_a_SyngentaDivisionAgro) Then
-                        ms = "Debe elegir a cuál de las divisiones de Syngenta se le facturará (a división Agro o a división Seeds)"
-                        Return False
+                        ms &= "Debe elegir a cuál de las divisiones de Syngenta se le facturará (a división Agro o a división Seeds)"
+                        ms &= vbCrLf   'return false
                     End If
                 End If
 
@@ -8179,8 +8327,8 @@ Public Class CartaDePorteManager
 
 
                     If (CartaDePorteManager.excepcionesAcopios(SC, .Titular).Count > 1 And .Acopio1 <= 0) Then
-                        ms = "Falta elegir a qué acopio corresponde el titular"
-                        Return False
+                        ms &= "Falta elegir a qué acopio corresponde el titular"
+                        ms &= vbCrLf   'return false
                     End If
 
                 End If
@@ -8191,8 +8339,8 @@ Public Class CartaDePorteManager
                         If (.CuentaOrden2 > 0) Then
                             If (CartaDePorteManager.excepcionesAcopios(SC, .CuentaOrden2).Count > 1 And .Acopio3 <= 0) Then
                                 'rcomercial
-                                ms = "Falta elegir a qué acopio corresponde el remitente comercial"
-                                Return False
+                                ms &= "Falta elegir a qué acopio corresponde el remitente comercial"
+                                ms &= vbCrLf   'ms &=vbCrLf   'return false
                             End If
                         End If
 
@@ -8205,8 +8353,8 @@ Public Class CartaDePorteManager
                         If (.CuentaOrden1 > 0) Then
                             If (CartaDePorteManager.excepcionesAcopios(SC, .CuentaOrden1).Count > 1 And .Acopio2 <= 0) Then
                                 'intermediario
-                                ms = "Falta elegir a qué acopio corresponde el intermediario"
-                                Return False
+                                ms &= "Falta elegir a qué acopio corresponde el intermediario"
+                                ms &= vbCrLf   'return false
                             End If
                         End If
 
@@ -8215,23 +8363,23 @@ Public Class CartaDePorteManager
 
 
                 'If (InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0 And .Acopio1 <= 0) Then
-                '    ms = "Falta elegir a qué acopio de A.C.A corresponde el titular"
-                '    Return False
+                '    ms &= "Falta elegir a qué acopio de A.C.A corresponde el titular"
+                '    ms &=vbCrLf   'ms &=vbCrLf   'return false
                 'End If
 
                 'If (.CuentaOrden2 > 0) Then
                 '    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden2).ToUpper, "A.C.A") > 0 And .Acopio3 <= 0) Then
                 '        'rcomercial
-                '        ms = "Falta elegir a qué acopio de A.C.A corresponde el remitente comercial"
-                '        Return False
+                '        ms &= "Falta elegir a qué acopio de A.C.A corresponde el remitente comercial"
+                '        ms &=vbCrLf   'return false
                 '    End If
                 'End If
 
                 'If (.CuentaOrden1 > 0) Then
                 '    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden1).ToUpper, "A.C.A") > 0 And .Acopio2 <= 0) Then
                 '        'intermediario
-                '        ms = "Falta elegir a qué acopio de A.C.A corresponde el intermediario"
-                '        Return False
+                '        ms &= "Falta elegir a qué acopio de A.C.A corresponde el intermediario"
+                '        ms &=vbCrLf   'return false
                 '    End If
                 'End If
                 'Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0 _
@@ -8252,8 +8400,8 @@ Public Class CartaDePorteManager
 
 
                 If cli.Count > 0 Then
-                    ms = "El cliente no está habilitado para cartas de porte " & Join(cli, ",")
-                    Return False
+                    ms &= "El cliente no está habilitado para cartas de porte " & Join(cli, ",")
+                    ms &= vbCrLf   'return false
                 End If
 
 
@@ -8262,13 +8410,21 @@ Public Class CartaDePorteManager
             End If
 
 
+            If .EstadoRecibidor = 1 And .MotivoRechazo = 0 Then
+                ms &= "Se debe elegir un motivo de rechazo"
+                ms &= vbCrLf   'return false
+            End If
+
+            If .ClienteAcondicionador <= 0 Then .ClienteAcondicionador = Nothing
+
+
 
 
 
 
             If .PuntoVenta < 1 Or .PuntoVenta > 4 Then
-                ms = "El punto de venta debe estar entre 1 y 4"
-                Return False
+                ms &= "El punto de venta debe estar entre 1 y 4"
+                ms &= vbCrLf   'return false
             End If
 
 
@@ -8284,8 +8440,8 @@ Public Class CartaDePorteManager
 
                 Dim sClientesCobranzas As String
                 If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
-                    ms = "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
-                    Return False
+                    ms &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+                    ms &= vbCrLf   'return false
                 End If
             End If
 
@@ -8308,16 +8464,16 @@ Public Class CartaDePorteManager
                 If .Titular = 0 Or .Entregador = 0 Or .CuentaOrden1 = 0 Or .Corredor = 0 Then
 
 
-                    ms = "Hay que completar Titular, Destinatario, Intermediario y Corredor. " & K
-                    Return False
+                    ms &= "Hay que completar Titular, Destinatario, Intermediario y Corredor. " & K
+                    ms &= vbCrLf   'return false
 
                 End If
 
 
                 If .Destino = 0 Or .Procedencia = 0 Or .IdChofer = 0 Or .IdTransportista = 0 Then
 
-                    ms = "Hace falta completar Procedencia, Destino, Tranportista y Chofer. " & K
-                    Return False
+                    ms &= "Hace falta completar Procedencia, Destino, Tranportista y Chofer. " & K
+                    ms &= vbCrLf   'return false
 
                 End If
 
@@ -8329,8 +8485,8 @@ Public Class CartaDePorteManager
                     iisNull(.NetoPto, 0) <= 0 Or _
                     iisNull(.NetoFinalSinMermas, 0) <= 0 Then
 
-                    ms = "Hay pesajes sin completar. " & K
-                    Return False
+                    ms &= "Hay pesajes sin completar. " & K
+                    ms &= vbCrLf   'return false
                 End If
 
 
@@ -8345,8 +8501,8 @@ Public Class CartaDePorteManager
                     .NRecibo = 0 Or _
                     .CalidadDe = 0 Then
 
-                    ms = "Hace falta CEE, CTG, Fechas de carga/vencimiento/descarga,Contrato, Patente, Recibo y Calidad. " & K
-                    Return False
+                    ms &= "Hace falta CEE, CTG, Fechas de carga/vencimiento/descarga,Contrato, Patente, Recibo y Calidad. " & K
+                    ms &= vbCrLf   'return false
 
                 End If
 
@@ -8370,9 +8526,10 @@ Public Class CartaDePorteManager
         '    Next
 
         '    If myCartaDePorte.Detalles.Count = eliminados Or myCartaDePorte.Detalles.Count = 0 Then
-        '        'Return False
+        '        'ms &=vbCrLf   'return false
         '    End If
         'End If
+        If ms <> "" Then ms &= vbCrLf 'return false
 
         Return True
     End Function
@@ -8534,7 +8691,7 @@ Public Class CartaDePorteManager
     Public Shared Function InformeAdjuntoDeFacturacionWilliamsEPSON(ByVal SC As String, ByVal IdFactura As Integer, ArchivoExcelDestino As String, ByRef ReportViewer2 As ReportViewer) As String
 
 
-        ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON Idfactura=" & IdFactura)
+        ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON Idfactura=" & IdFactura)
 
 
         If CartaDePorteManager.UsaAcondicionadoras(SC, IdFactura) Then
@@ -8624,7 +8781,7 @@ Public Class CartaDePorteManager
 
 
 
-        ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON_A4 Idfactura=" & IdFactura)
+        ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON_A4 Idfactura=" & IdFactura)
 
         If CartaDePorteManager.UsaAcondicionadoras(SC, IdFactura) And False Then
             Return CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsAcondicionadorasEPSON_A4(SC, IdFactura, ReportViewer2, "")
@@ -8636,8 +8793,8 @@ Public Class CartaDePorteManager
             dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
 
         Catch ex As Exception
-            ErrHandler.WriteError("tiene muchas cartas imputadas? falta un índice?")
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError("tiene muchas cartas imputadas? falta un índice?")
+            ErrHandler2.WriteError(ex)
             'timeout en https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=70318 porque tiene muchas imputadas
             '    está muy bloqueada la tabla de cartas?
             '    exec wCartasDePorte_TX_PorIdFactura @IdFactura=70318 tardó 20 segundos!!!!
@@ -8723,7 +8880,7 @@ Public Class CartaDePorteManager
                             'MsgBox(inner.Message)
                             'Stop
                         End If
-                        ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                         inner = inner.InnerException
                     End While
                     Throw
@@ -8772,7 +8929,7 @@ Public Class CartaDePorteManager
 
     Public Shared Function InformeAdjuntoDeFacturacionWilliamsAcondicionadorasEPSON(ByVal SC As String, ByVal IdFactura As Integer, ByRef ReportViewer2 As ReportViewer, ByRef ArchivoExcelDestino As String) As String
 
-        ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsAcondicionadorasEPSON Idfactura=" & IdFactura)
+        ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsAcondicionadorasEPSON Idfactura=" & IdFactura)
 
 
         Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
@@ -8872,7 +9029,7 @@ Public Class CartaDePorteManager
     Public Shared Function InformeAdjuntoDeFacturacionWilliamsAcondicionadorasEPSON_A4(ByVal SC As String, ByVal IdFactura As Integer, ByRef ReportViewer2 As ReportViewer, ByRef ArchivoExcelDestino As String) As String
 
 
-        ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsAcondicionadorasEPSON_A4 Idfactura=" & IdFactura)
+        ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsAcondicionadorasEPSON_A4 Idfactura=" & IdFactura)
 
         Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
 
@@ -8955,7 +9112,7 @@ Public Class CartaDePorteManager
                             'MsgBox(inner.Message)
                             'Stop
                         End If
-                        ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                         inner = inner.InnerException
                     End While
                     Throw
@@ -9005,7 +9162,7 @@ Public Class CartaDePorteManager
 
     Public Shared Function InformeAdjuntoDeFacturacionWilliamsExcel(ByVal SC As String, ByVal IdFactura As Integer, ByRef ArchivoExcelDestino As String, ByRef ReportViewer2 As ReportViewer) As String
 
-        ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsExcel Idfactura=" & IdFactura)
+        ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsExcel Idfactura=" & IdFactura)
 
 
         Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
@@ -9093,6 +9250,34 @@ Public Class CartaDePorteManager
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Public Shared Function Extraer(ZipAExtraer As String, DirectorioExtraccion As String) As Generic.List(Of String)
+
+
+
+
+        Dim archivos As New Generic.List(Of String)
+
+        Using zip1 As Ionic.Zip.ZipFile = Ionic.Zip.ZipFile.Read(ZipAExtraer)
+            Dim e As Ionic.Zip.ZipEntry
+            For Each e In zip1
+                Try
+                    archivos.Add(DirectorioExtraccion + e.FileName)
+                    e.Extract(DirectorioExtraccion, Ionic.Zip.ExtractExistingFileAction.OverwriteSilently)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+            Next
+        End Using
+
+
+
+
+
+        Return archivos
+    End Function
+
+
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -9200,8 +9385,8 @@ Public Class CartaDePorteManager
             EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCartaPorte" & oCDP.Id & "CDP:" & oCDP.NumeroCartaDePorte & " " & oCDP.SubnumeroVagon & "  IdFacturaImputada=" & idfactura & "   IdDetalleFactura=" & iddetallefact, , nombreUsuario)
 
         Catch ex As Exception
-            'ErrHandler.WriteError("Ya tiene una factura imputada")
-            ErrHandler.WriteError("Explota la imputacion")
+            'ErrHandler2.WriteError("Ya tiene una factura imputada")
+            ErrHandler2.WriteError("Explota la imputacion")
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=13368
 
@@ -9254,7 +9439,7 @@ Public Class CartaDePorteManager
             Next
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex.ToString)
+            ErrHandler2.WriteError(ex.ToString)
         End Try
 
         Return 0
@@ -9290,7 +9475,7 @@ Public Class CartaDePorteManager
             Next
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex.ToString)
+            ErrHandler2.WriteError(ex.ToString)
         End Try
 
         Return 0
@@ -9343,8 +9528,8 @@ Public Class CartaDePorteManager
             Next
 
         Catch ex As Exception
-            If idCorredor = -1 Then ErrHandler.WriteError("Sin Corredor")
-            ErrHandler.WriteError(" EsteCorredorSeleFacturaAlClientePorSeparadoId(). " & ex.ToString & "Quizas es un buque (sin corredor). ")
+            If idCorredor = -1 Then ErrHandler2.WriteError("Sin Corredor")
+            ErrHandler2.WriteError(" EsteCorredorSeleFacturaAlClientePorSeparadoId(). " & ex.ToString & "Quizas es un buque (sin corredor). ")
         End Try
 
         Return 0
@@ -9436,7 +9621,7 @@ Public Class CartaDePorteManager
         '(ByVal Para As String, ByVal Asunto As String, ByVal Cuerpo As String, ByVal De As String, ByVal SmtpServer As String, ByVal SmtpUser As String, ByVal SmtpPass As String, Optional ByVal sFileNameAdjunto As String = "", Optional ByVal SmtpPort As Long = 587, Optional ByVal EnableSSL As Integer = 1, Optional ByVal CCO As String = "", Optional ByVal img As String = "", Optional ByVal FriendlyName As String = "") As Boolean
 
 
-        ErrHandler.WriteError("EnviarEmailDeAdjuntosDeWilliams Idfactura=" & idfactura)
+        ErrHandler2.WriteError("EnviarEmailDeAdjuntosDeWilliams Idfactura=" & idfactura)
 
 
 
@@ -9502,7 +9687,7 @@ Public Class CartaDePorteManager
         Try
             If no.Count > 1 Then vagon = Val(no(1)) ' Val(Mid(nombre, InStr(nombre, " ")))
         Catch ex As Exception
-            ErrHandler.WriteError("ParseNombreCarta " + nombre + " " + ex.ToString)
+            ErrHandler2.WriteError("ParseNombreCarta " + nombre + " " + ex.ToString)
         End Try
 
     End Sub
@@ -9571,7 +9756,7 @@ Public Class CartaDePorteManager
                 AsyncFileUpload1.SaveAs(DIRFTP + nombrenuevo)
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.ToString)
+                ErrHandler2.WriteError(ex.ToString)
                 Throw
             End Try
         Else
@@ -9630,7 +9815,7 @@ Public Class CartaDePorteManager
                 AsyncFileUpload1.SaveAs(DIRFTP + nombrenuevo)
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex.ToString)
+                ErrHandler2.WriteError(ex.ToString)
                 Throw
             End Try
         Else
@@ -9666,6 +9851,7 @@ Public Class CartaDePorteManager
     Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
+        ErrHandler2.WriteError("GrabarImagen 1")
 
         If forzarID = -1 Then
             'si no viene el ID,  busco por numero de carta
@@ -9685,7 +9871,7 @@ Public Class CartaDePorteManager
                 forzarID = cdp.Id
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
 
                 Dim db2 As New LinqCartasPorteDataContext(Encriptar(SC))
                 Dim o = (From i In db2.CartasDePortes Where i.NumeroCartaDePorte = numeroCarta And i.SubnumeroVagon = vagon And i.SubnumeroDeFacturacion <= 0).SingleOrDefault
@@ -9707,7 +9893,6 @@ Public Class CartaDePorteManager
 
 
 
-
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
         Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
@@ -9715,6 +9900,9 @@ Public Class CartaDePorteManager
 
         Dim DIRFTP = DirApp & "\DataBackupear\"
 
+
+
+        ErrHandler2.WriteError("GrabarImagen 2")
 
         'si es un .tiff paginado
         If archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tif") Or archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tiff") Then
@@ -9724,11 +9912,18 @@ Public Class CartaDePorteManager
                 Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
 
 
+                'primera pagina del tiff
+                If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
+                    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRFTP + oCarta.PathImagen)
+                    oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+                Else
+                    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRFTP + oCarta.PathImagen2)
+                    oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+                End If
 
-                listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
-                BorroArchivo(DIRFTP + oCarta.PathImagen)
-                oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
-
+                'segunda pagina del tiff
                 'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
                 If listapaginas.Count > 1 Then
                     'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
@@ -9739,15 +9934,16 @@ Public Class CartaDePorteManager
                 End If
 
             Catch ex As Exception
+                ErrHandler2.WriteError(ex)
                 sError &= ex.ToString
                 Return ""
             End Try
 
 
-        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") Then
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
             oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR
-        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") Then
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") > 0 Then
             If oCarta.PathImagen <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen)
             oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR
         Else
@@ -9765,14 +9961,20 @@ Public Class CartaDePorteManager
 
         oCarta.FechaModificacion = Now
 
+        ErrHandler2.WriteError("grabo en base")
+
         db.SubmitChanges()
 
+        ErrHandler2.WriteError("grabado")
 
         sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
 
 
         Return archivoImagenSinPathUbicadaEnDATABACKUPEAR
     End Function
+
+
+
 
     Shared Sub BorroArchivo(file As String)
         'qué hago con el archivo anterior? -por ahora lo conservo
@@ -9920,7 +10122,7 @@ Public Class CartaDePorteManager
         Catch ex As Exception
             'ProcessException(ex)
             'http://www.inliteresearch.com/homepage/support/pdk_vs_sdk.html
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
     End Function
 
@@ -9962,7 +10164,7 @@ Public Class CartaDePorteManager
         Catch ex As Exception
             'ProcessException(ex)
             'http://www.inliteresearch.com/homepage/support/pdk_vs_sdk.html
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
     End Function
 
@@ -9982,7 +10184,7 @@ Public Class CartaDePorteManager
             Try
                 numeroCarta = Val(ReadBarcode1D_ClearImage(fileImagen, 0))
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             If numeroCarta <> 0 Then
@@ -10003,7 +10205,7 @@ Public Class CartaDePorteManager
             Try
                 numeroCarta = Val(ReadBarcode1D_ZXing(fileImagen, 0))
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             If numeroCarta <> 0 Then
@@ -10029,7 +10231,7 @@ Public Class CartaDePorteManager
             Try
                 numeroCarta = Val(ReadBarcode1D_Spire(fileImagen, 0))
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             If numeroCarta <> 0 Then
@@ -10044,6 +10246,29 @@ Public Class CartaDePorteManager
 
         End If
 
+
+
+
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////
+
+
+        If numeroCarta = 0 Then
+            CartaDePorteManager.ParseNombreCarta(fileImagen, numeroCarta, 0)
+
+
+            If numeroCarta <> 0 Then
+                sError &= " Codigo de barras no detectado. Se usa el numero del nombre del archivo"
+
+            Else
+
+                sError &= " Numero no detectado por ningun medio"
+            End If
+        End If
 
 
         '////////////////////////////////////////////////////////////////////
@@ -10104,7 +10329,7 @@ Public Class CartaDePorteManager
                 Try
                     System.Drawing.Bitmap.FromFile(DIRTEMP + nombre).Save(DIRTEMP + nombre + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     Continue For
                 End Try
                 'Path.GetFileNameWithoutExtension()
@@ -10136,7 +10361,7 @@ Public Class CartaDePorteManager
 
 
 
-            ErrHandler.WriteError((origen).ToString() & " " & numeroCarta)
+            ErrHandler2.WriteError((origen).ToString() & " " & numeroCarta)
 
             If numeroCarta = 0 Or numeroCarta.ToString.Length > 9 Or numeroCarta.ToString.Length < 8 Then
                 sError &= "Código de barras no detectado en archivo " & nombre & "      "
@@ -10147,6 +10372,7 @@ Public Class CartaDePorteManager
             End If
 
             If numeroCarta = 0 Then
+                'despues de usar ParseNombreCarta tampoco lo detecta
                 sError &= " Número no detectado en el nombre del archivo " & nombre & "<br/> "
                 Continue For
             End If
@@ -10197,7 +10423,7 @@ Public Class CartaDePorteManager
                     MyFile1.Delete()
                 End If
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             'copio el archivo cambiandole el nombre agregandole un sufijo
@@ -10251,7 +10477,7 @@ Public Class CartaDePorteManager
                             MyFile5.Delete()
                         End If
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
                 End If
 
@@ -10266,7 +10492,7 @@ Public Class CartaDePorteManager
                         MyFile6.Delete() 'me está tirando que es usado por otro proceso
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     MandarMailDeError("No pudo borrar la foto " & ex.ToString)
                 End Try
 
@@ -10325,7 +10551,7 @@ Public Class CartaDePorteManager
 
 
 
-               
+
 
 
             End If
@@ -10435,7 +10661,7 @@ Public Class CartaDePorteManager
 
     Public Shared Function ImprimirFacturaElectronica(IdFactura As Integer, bMostrarPDF As Boolean, SC As String, DirApp As String) As String
 
-        ErrHandler.WriteError("ImprimirFacturaElectronica idfac " & IdFactura) ' & " " & Encriptar(SC))
+        ErrHandler2.WriteError("ImprimirFacturaElectronica idfac " & IdFactura) ' & " " & Encriptar(SC))
 
         Dim ofac = FacturaManager.GetItem(SC, IdFactura, True)
         Dim output As String
@@ -10457,16 +10683,16 @@ Public Class CartaDePorteManager
             System.IO.File.Copy(p, output) 'http://stackoverflow.com/questions/1233228/saving-an-openxml-document-word-generated-from-a-template 
 
         Catch ex As Exception
-            ErrHandler.WriteError("Problema de acceso en el directorio de plantillas. Verificar permisos. " & ex.ToString)
+            ErrHandler2.WriteError("Problema de acceso en el directorio de plantillas. Verificar permisos. " & ex.ToString)
             Throw
         End Try
 
-        ErrHandler.WriteError("Creando docx")
+        ErrHandler2.WriteError("Creando docx")
 
 
         CartaDePorteManager.FacturaXML_DOCX_Williams(output, ofac, SC)
 
-        ErrHandler.WriteError("docx creado")
+        ErrHandler2.WriteError("docx creado")
 
         Dim ocli = ClienteManager.GetItem(SC, ofac.IdCliente)
 
@@ -10478,7 +10704,7 @@ Public Class CartaDePorteManager
         'Dim barras As String = "202675653930240016120303473904220110529"
 
 
-        ErrHandler.WriteError("Creando codigo barras")
+        ErrHandler2.WriteError("Creando codigo barras")
 
         Dim imagen = barras.crear(ocli.Cuit.Replace("-", ""), _
                                   JustificadoDerecha(tipoafip, 2, "0"), _
@@ -10486,10 +10712,10 @@ Public Class CartaDePorteManager
                                   JustificadoDerecha(ofac.CAE, 14, "0"), _
                                   ofac.FechaVencimientoORechazoCAE.Date.ToString("yyyyMMdd"))
 
-        ErrHandler.WriteError("Creando pdf")
+        ErrHandler2.WriteError("Creando pdf")
         output = ConvertirEnPDF_y_PonerCodigoDeBarras(output, imagen, bMostrarPDF)
 
-        ErrHandler.WriteError("salgo")
+        ErrHandler2.WriteError("salgo")
 
         Return output
 
@@ -10572,7 +10798,7 @@ Public Class CartaDePorteManager
             oDoc.Close(False)
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         Finally
 
             'Huyo. Pero antes cierro todo
@@ -10584,7 +10810,7 @@ Public Class CartaDePorteManager
                 'VERY IMPORTANT
                 GC.Collect()
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 'COM object that has been separated from its underlying RCW cannot be used.?????
             End Try
 
@@ -10612,7 +10838,7 @@ Public Class CartaDePorteManager
         If If(oFac.RechazoCAE, "").ToString() <> "" And Not Diagnostics.Debugger.IsAttached Then Throw New Exception("El CAE está rechazado")
         If If(oFac.CAE, "").ToString() = "" And Not Diagnostics.Debugger.IsAttached Then Throw New Exception("Falta el CAE")
         'Catch ex As Exception
-        '    ErrHandler.WriteError(ex)
+        '    ErrHandler2.WriteError(ex)
         'End Try
 
 
@@ -10653,7 +10879,7 @@ Public Class CartaDePorteManager
             Try
                 ' insertarcodigobarras(wordDoc)
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
@@ -10694,7 +10920,7 @@ Public Class CartaDePorteManager
 
                 regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             regexReplace2(docText, "#NumeroFactura#", JustificadoDerecha(oFac.Numero, 8, "0"))
@@ -10722,7 +10948,7 @@ Public Class CartaDePorteManager
                 numeroordencompra = EntidadManager.ExecDinamico(SC, "SELECT numeroordencompraexterna from facturas where idfactura=" & oFac.Id.ToString).Rows(0).Item(0).ToString()
             Catch ex As Exception
 
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             If numeroordencompra <> "" Then
@@ -10758,12 +10984,13 @@ Public Class CartaDePorteManager
 
 
             Dim LeyendaAcopio = ""
-            Try
-                LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
-            Catch ex As Exception
-                ErrHandler.WriteError(ex)
-            End Try
-
+            If oFac.IdCliente = 2775 Or oFac.IdCliente = 10 Then 'LDC o ACA
+                Try
+                    LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+            End If
 
             regexReplace2(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
@@ -10822,8 +11049,8 @@ Public Class CartaDePorteManager
             Try
                 formfield = wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.FormFieldData)().FirstOrDefault
             Catch ex As Exception
-                ErrHandler.WriteError("Ver si hay caracteres extraños. Error por el & en la razon social 'CAIO BABILONI & etc'  ")
-                ErrHandler.WriteError("archivo:" & document & "  IdFac:" & oFac.Id & "    Error: " & ex.ToString)
+                ErrHandler2.WriteError("Ver si hay caracteres extraños. Error por el & en la razon social 'CAIO BABILONI & etc'  ")
+                ErrHandler2.WriteError("archivo:" & document & "  IdFac:" & oFac.Id & "    Error: " & ex.ToString)
                 Throw
             End Try
 
@@ -10886,7 +11113,7 @@ Public Class CartaDePorteManager
                     End If
                 End If
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
@@ -11077,7 +11304,7 @@ Public Class CartaDePorteManager
 
 
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                 Next
@@ -11255,7 +11482,7 @@ Public Class CartaDePorteManager
 
                     regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 regexReplace2(docText, "#NumeroFactura#", oFac.Numero)
@@ -11339,8 +11566,8 @@ Public Class CartaDePorteManager
                 Try
                     formfield = wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.FormFieldData)().FirstOrDefault
                 Catch ex As Exception
-                    ErrHandler.WriteError("Ver si hay caracteres extraños. Error por el & en la razon social 'CAIO BABILONI & etc'  ")
-                    ErrHandler.WriteError("archivo:" + document + "  IdFac:" + oFac.Id + "    Error: " + ex.ToString)
+                    ErrHandler2.WriteError("Ver si hay caracteres extraños. Error por el & en la razon social 'CAIO BABILONI & etc'  ")
+                    ErrHandler2.WriteError("archivo:" + document + "  IdFac:" + oFac.Id + "    Error: " + ex.ToString)
                     Throw
                 End Try
 
@@ -11403,7 +11630,7 @@ Public Class CartaDePorteManager
                         End If
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -11590,7 +11817,7 @@ Public Class CartaDePorteManager
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                     Next
@@ -11838,8 +12065,8 @@ Public Class CartaDePorteManager
         Try
             row.InnerXml = texto
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
-            ErrHandler.WriteError(texto)
+            ErrHandler2.WriteError(ex)
+            ErrHandler2.WriteError(texto)
         End Try
 
 
@@ -11998,7 +12225,7 @@ Public Class LogicaFacturacion
 
 
 
-        ErrHandler.WriteError("CorrectorParcheSubnumeroFacturacion 1ra etapa:  " & q2.Count)
+        ErrHandler2.WriteError("CorrectorParcheSubnumeroFacturacion 1ra etapa:  " & q2.Count)
 
 
         Try
@@ -12029,7 +12256,7 @@ Public Class LogicaFacturacion
                     'ccc.SubnumeroDeFacturacion = -2
                     MandarMailDeError("Se intentará emparchar. Error en CorrectorSubnumeroFacturacion: Carta Porte " & ccc.IdCartaDePorte & " numero " & _
                                         ccc.NumeroCartaDePorte & " " & ccc.SubnumeroVagon & " " & ex.ToString)
-                    ErrHandler.WriteError(ex.ToString)
+                    ErrHandler2.WriteError(ex.ToString)
                     Dim ccorig = db.CartasDePortes.Where(Function(x) x.NumeroCartaDePorte = ccc.NumeroCartaDePorte And x.SubnumeroVagon = ccc.SubnumeroVagon And x.SubnumeroDeFacturacion = -1).FirstOrDefault()
                     ccorig.SubnumeroDeFacturacion = 0
                     ccc.SubnumeroDeFacturacion = 1
@@ -12037,7 +12264,7 @@ Public Class LogicaFacturacion
                         db.SubmitChanges()
                     Catch ex2 As Exception
                         MandarMailDeError("Falló el parche")
-                        ErrHandler.WriteError(ex.ToString)
+                        ErrHandler2.WriteError(ex.ToString)
                     End Try
 
                 End Try
@@ -12047,7 +12274,7 @@ Public Class LogicaFacturacion
 
             Next
         Catch ex As Exception
-            ErrHandler.WriteError(ex.ToString)
+            ErrHandler2.WriteError(ex.ToString)
         End Try
 
         db = Nothing
@@ -12082,7 +12309,7 @@ Public Class LogicaFacturacion
                 .subnumerovagon = subnumerovagon, _
                 .CantCartas = g.Count _
             }).Where(Function(i) i.CantCartas > 2).Distinct()
-            ErrHandler.WriteError("Fuera de 2da etapa: faltan " & q10.Count)
+            ErrHandler2.WriteError("Fuera de 2da etapa: faltan " & q10.Count)
 
 
 
@@ -12112,7 +12339,7 @@ Public Class LogicaFacturacion
 
 
 
-            ErrHandler.WriteError("Corrector: faltan " & q3.Count)
+            ErrHandler2.WriteError("Corrector: faltan " & q3.Count)
 
             Dim q4 = q3.ToList.Take(100)
 
@@ -12135,7 +12362,7 @@ Public Class LogicaFacturacion
             Catch ex As Exception
 
                 MandarMailDeError("Falló el parche 2da etapa " + ex.ToString) ' + cdp.numerocartadeporte.ToString + " " + cdp.subnumerovagon.ToString + " " + ex.ToString)
-                ErrHandler.WriteError(ex.ToString)
+                ErrHandler2.WriteError(ex.ToString)
 
             End Try
         End If
@@ -12159,12 +12386,12 @@ Public Class LogicaFacturacion
                         .IdCartaDePorte = g.Sum(Function(x) x.IdCartaDePorte) _
                     }).Select(Function(i) i.IdCartaDePorte).Distinct().ToList.Take(100)
 
-            ErrHandler.WriteError("Corrector2: faltan " & q5.Count)
+            ErrHandler2.WriteError("Corrector2: faltan " & q5.Count)
 
 
             Dim a5 = From x In q5 Order By x Select CStr(x)
 
-            ErrHandler.WriteError(vbCrLf & Join(a5.ToArray, vbCrLf))
+            ErrHandler2.WriteError(vbCrLf & Join(a5.ToArray, vbCrLf))
         End If
 
 
@@ -12653,7 +12880,7 @@ Public Class LogicaFacturacion
         Try
             EntidadManager.ExecDinamico(sc, " IF object_id('tempdb..#TEMPTAB') IS NOT NULL    BEGIN     DROP TABLE #TEMPTAB    END")
         Catch ex As Exception
-            ErrHandler.WriteError("explota el drop table. guarda!, porque tarda mucho tiempo en revisar esto!!!")
+            ErrHandler2.WriteError("explota el drop table. guarda!, porque tarda mucho tiempo en revisar esto!!!")
         End Try
 
 
@@ -12824,7 +13051,7 @@ Public Class LogicaFacturacion
 
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Throw
         End Try
 
@@ -12838,7 +13065,7 @@ Public Class LogicaFacturacion
             EntidadManager.ExecDinamico(sc, "IF object_id('tempdb..#TEMPTAB') IS NOT NULL    BEGIN     DROP TABLE #TEMPTAB    END")
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
 
@@ -12854,13 +13081,13 @@ Public Class LogicaFacturacion
         '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
         'Tomar el cereal, la cantidad de Kg y el Destinatario para facturar.
 
-        ErrHandler.WriteError("entro a Preprocesos " & lista.Count())
+        ErrHandler2.WriteError("entro a Preprocesos " & lista.Count())
 
 
 
         AgregarEmbarques(lista, SC, desde, hasta, -1, puntoVenta)
 
-        ErrHandler.WriteError("despues de AgregarEmbarques" & lista.Count())
+        ErrHandler2.WriteError("despues de AgregarEmbarques" & lista.Count())
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
 
@@ -12868,7 +13095,7 @@ Public Class LogicaFacturacion
 
 
         ExcluirDeGastosAdministrativos(lista, SC)
-        ErrHandler.WriteError("despues de ExcluirDeGastosAdministrativos" & lista.Count())
+        ErrHandler2.WriteError("despues de ExcluirDeGastosAdministrativos" & lista.Count())
 
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
@@ -12881,7 +13108,7 @@ Public Class LogicaFacturacion
 
         '* Nueva función en Facturación Automática: "Facturarle al Corredor". Agregar un tilde en los clientes con ese nombre. En el Automático, las Cartas de Porte que corresponda facturarle a estos clientes se le facturarán al Corredor de cada Carta de Porte
         ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor(lista, SC)
-        ErrHandler.WriteError("despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor" & lista.Count())
+        ErrHandler2.WriteError("despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor" & lista.Count())
 
 
         'hay que hacer un update de la lista por si se derivó a un corredor?
@@ -12901,11 +13128,11 @@ Public Class LogicaFacturacion
 
         Try
             CasosSyngenta_y_Acopios(lista, SC)
-            ErrHandler.WriteError("despues de CasosSyngenta_y_Acopios" & lista.Count())
+            ErrHandler2.WriteError("despues de CasosSyngenta_y_Acopios" & lista.Count())
 
         Catch ex As Exception
-            ErrHandler.WriteError("CasosSyngenta_y_Acopios")
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError("CasosSyngenta_y_Acopios")
+            ErrHandler2.WriteError(ex)
         End Try
 
         '///////////////////////////////////////////////////////////////////////////////
@@ -12937,19 +13164,19 @@ Public Class LogicaFacturacion
                                         optFacturarA As String, agruparArticulosPor As String, sc As String)
 
 
-        ErrHandler.WriteError("entro en PostProcesos " & lista.Count())
+        ErrHandler2.WriteError("entro en PostProcesos " & lista.Count())
 
         EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, sc)
-        ErrHandler.WriteError("despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado " & lista.Count())
+        ErrHandler2.WriteError("despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado " & lista.Count())
 
         EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones(lista, optFacturarA, agruparArticulosPor, sc, "")
-        ErrHandler.WriteError("despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones " & lista.Count())
+        ErrHandler2.WriteError("despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones " & lista.Count())
 
         SepararAcopiosLDCyACA(lista, sc)
-        ErrHandler.WriteError("despues de SepararAcopiosLDCyACA " & lista.Count())
+        ErrHandler2.WriteError("despues de SepararAcopiosLDCyACA " & lista.Count())
 
         PostProcesoFacturacion_ReglaExportadores(lista, sc)
-        ErrHandler.WriteError("despues de PostProcesoFacturacion_ReglaExportadores " & lista.Count())
+        ErrHandler2.WriteError("despues de PostProcesoFacturacion_ReglaExportadores " & lista.Count())
 
     End Sub
 
@@ -13092,7 +13319,7 @@ Public Class LogicaFacturacion
                                                  Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
 
 
-            ErrHandler.WriteError("Cartas sin automatico encontrado (pero este es el modo no automatico!!!)" & IdcartasSinAutomaticoEncontrado.Count)
+            ErrHandler2.WriteError("Cartas sin automatico encontrado (pero este es el modo no automatico!!!)" & IdcartasSinAutomaticoEncontrado.Count)
 
 
             If IdcartasSinAutomaticoEncontrado.Count > 0 Then
@@ -13116,7 +13343,7 @@ Public Class LogicaFacturacion
                             .SubNumeroVagon = CInt(iisNull(cdp("SubNumeroVagon")))
                         Catch ex As Exception
                             'raro
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                         .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
@@ -13364,8 +13591,8 @@ Public Class LogicaFacturacion
             'ViewState("filas") = dtlista.Rows.Count
 
         Catch ex As Exception
-            ErrHandler.WriteError("GenerarTablaparamodosnoautomaticos")
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError("GenerarTablaparamodosnoautomaticos")
+            ErrHandler2.WriteError(ex)
             Throw
         End Try
 
@@ -13389,12 +13616,12 @@ Public Class LogicaFacturacion
 
 
 
-        ErrHandler.WriteError("punto 3. tanda " & sesionId)
+        ErrHandler2.WriteError("punto 3. tanda " & sesionId)
 
 
 
 
-        ErrHandler.WriteError("Cartas sin automatico encontrado " & IdcartasSinAutomaticoEncontrado.Count)
+        ErrHandler2.WriteError("Cartas sin automatico encontrado " & IdcartasSinAutomaticoEncontrado.Count)
 
 
 
@@ -13411,7 +13638,7 @@ Public Class LogicaFacturacion
             'ineficiente
             Dim dtForzadasAlTitular = SQLSTRING_FacturacionCartas_por_Titular(sWhere, SC, sesionIdposta)
 
-            ErrHandler.WriteError("punto 4. tanda " & sesionId)
+            ErrHandler2.WriteError("punto 4. tanda " & sesionId)
             'ineficiente
             For Each cdp In dtForzadasAlTitular.Rows
                 Dim x As New wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult
@@ -13425,7 +13652,7 @@ Public Class LogicaFacturacion
                         .SubNumeroVagon = CInt(iisNull(cdp("SubNumeroVagon")))
                     Catch ex As Exception
                         'raro
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                     .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
@@ -13516,7 +13743,7 @@ Public Class LogicaFacturacion
                     bulkCopy.WriteToServer(dt)
                 Catch ex As Exception
                     Console.WriteLine(ex.ToString)  'que no te confunda el orden de los colid. Por ejemplo, Titular era el 11. Es decir, depende del datatable. No?
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     Throw
                 End Try
 
@@ -13535,7 +13762,7 @@ Public Class LogicaFacturacion
                             optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, _
                             ByRef slinks As Object, sesionIdposta As String)
 
-        ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId.ToString)
+        ErrHandler2.WriteError("entrando en generar tabla. tanda " & sesionId.ToString)
 
         Try
             Dim tildadosEnPrimerPaso As String() = Split(sLista, ",")
@@ -13613,7 +13840,7 @@ Public Class LogicaFacturacion
 
 
 
-            ErrHandler.WriteError("punto 2. tanda " & sesionId)
+            ErrHandler2.WriteError("punto 2. tanda " & sesionId)
 
             'ejecutar inmediatamente LINQ usando la conversion a .ToList()
             'http://blogs.msdn.com/b/charlie/archive/2007/12/09/deferred-execution.aspx
@@ -13634,12 +13861,12 @@ Public Class LogicaFacturacion
 
 
 
-            ErrHandler.WriteError("punto 3. tanda " & sesionId)
+            ErrHandler2.WriteError("punto 3. tanda " & sesionId)
 
 
 
 
-            ErrHandler.WriteError("Cartas sin automatico encontrado " & IdcartasSinAutomaticoEncontrado.Count)
+            ErrHandler2.WriteError("Cartas sin automatico encontrado " & IdcartasSinAutomaticoEncontrado.Count)
 
 
 
@@ -13656,7 +13883,7 @@ Public Class LogicaFacturacion
                 'ineficiente
                 Dim dtForzadasAlTitular = SQLSTRING_FacturacionCartas_por_Titular(sWhere, SC, sesionIdposta)
 
-                ErrHandler.WriteError("punto 4. tanda " & sesionId)
+                ErrHandler2.WriteError("punto 4. tanda " & sesionId)
                 'ineficiente
                 For Each cdp In dtForzadasAlTitular.Rows
                     Dim x As New wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult
@@ -13670,12 +13897,43 @@ Public Class LogicaFacturacion
                             .SubNumeroVagon = CInt(iisNull(cdp("SubNumeroVagon")))
                         Catch ex As Exception
                             'raro
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                         .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
-                        .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
-                        .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
+
+
+                        '                        buenosaires@ williamsentregas.com.ar
+                        'Archivos adjuntos10:43 (hace 7 minutos)
+
+                        '                        para(mí, soporte)
+
+                        'Hubo un error!
+
+                        '_
+                        'URL:	/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados
+                        'User:                   dberzoni()
+                        '                        Exception Type : System.InvalidCastException()
+                        'Message:	Conversion from string "" to type 'Date' is not valid.
+                        'Stack Trace:	at Microsoft.VisualBasic.CompilerServices.Conversions.ToDate(String Value)
+                        'at Microsoft.VisualBasic.CompilerServices.Conversions.ToDate(Object Value)
+                        'TO DO 
+
+                        Try
+                            .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
+                        Catch ex As Exception
+                            .FechaArribo = Nothing
+                            ErrHandler2.WriteError(ex)
+                        End Try
+
+                        Try
+                            .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
+                        Catch ex As Exception
+                            .FechaDescarga = Nothing
+                            ErrHandler2.WriteError(ex)
+                        End Try
+
+
                         .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
                         .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
                         .Confirmado = iisNull(cdp("Confirmado"))
@@ -13755,7 +14013,7 @@ Public Class LogicaFacturacion
             '///////////////////////////////////////////////////////////////////////////////
             '///////////////////////////////////////////////////////////////////////////////
 
-            ErrHandler.WriteError("punto 5. tanda " & sesionId)
+            ErrHandler2.WriteError("punto 5. tanda " & sesionId)
 
 
 
@@ -13778,7 +14036,7 @@ Public Class LogicaFacturacion
             '//////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////
 
-            ErrHandler.WriteError("punto 6. tanda " & sesionId)
+            ErrHandler2.WriteError("punto 6. tanda " & sesionId)
             Randomize()
             pag = 1
             sesionId = CInt(Rnd() * 10000)
@@ -13884,7 +14142,7 @@ Public Class LogicaFacturacion
             '    r("IdSesion") = ViewState("sesionId")
             'Next
 
-            ErrHandler.WriteError("punto 7. tanda " & sesionId)
+            ErrHandler2.WriteError("punto 7. tanda " & sesionId)
 
             BulkCopy(dtlista, SC)
 
@@ -13892,11 +14150,11 @@ Public Class LogicaFacturacion
             filas = dtlista.Rows.Count
 
 
-            ErrHandler.WriteError("salgo. tanda " & sesionId)
+            ErrHandler2.WriteError("salgo. tanda " & sesionId)
 
         Catch ex As Exception
-            ErrHandler.WriteError("generarTabla")
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError("generarTabla")
+            ErrHandler2.WriteError(ex)
             Throw
         End Try
 
@@ -13931,7 +14189,7 @@ Public Class LogicaFacturacion
         'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
         'esa posición se le debe facturar, entonces se le facturará al 
 
-        ErrHandler.WriteError("entrando en GetDatatableAsignacionAutomatica . tanda " & sesionId)
+        ErrHandler2.WriteError("entrando en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
 
         '        por qué puede ser que no haya sesionId???
@@ -13976,7 +14234,7 @@ Public Class LogicaFacturacion
 
 
 
-            ErrHandler.WriteError("punto 2 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
+            ErrHandler2.WriteError("punto 2 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
@@ -13997,13 +14255,13 @@ Public Class LogicaFacturacion
             'RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal()
 
 
-            ErrHandler.WriteError("punto 3 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
+            ErrHandler2.WriteError("punto 3 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
             Dim dtlistaAuto As DataTable = ToDataTableNull(o)
             dtlistaAuto.Columns.Remove("IdTempCartasPorteFacturacionAutomatica") 'parece q tengo q incluirla en LINQ porque sql2000 llora si no incluyo el ID al usa Skip
             'dtlistaAuto.Columns.Remove("IdSesion")
 
-            ErrHandler.WriteError("punto 4 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
+            ErrHandler2.WriteError("punto 4 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
             Return dtlistaAuto
 
@@ -14012,7 +14270,7 @@ Public Class LogicaFacturacion
             '/////////////////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////////////////
         Catch ex As Exception
-            ErrHandler.WriteError("explota en GetDatatableAsignacionAutomatica")
+            ErrHandler2.WriteError("explota en GetDatatableAsignacionAutomatica")
             Throw
 
         End Try
@@ -14123,7 +14381,7 @@ Public Class LogicaFacturacion
             '/////////////////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////////////////
         Catch ex As Exception
-            ErrHandler.WriteError("explota en GetDatatableAsignacionAutomatica")
+            ErrHandler2.WriteError("explota en GetDatatableAsignacionAutomatica")
             Throw
 
         End Try
@@ -14149,7 +14407,7 @@ Public Class LogicaFacturacion
 
         Dim r = 0
         Dim total = dt.Rows.Count
-        ErrHandler.WriteError("ActualizarCampoClienteSeparador " & total & " filas")
+        ErrHandler2.WriteError("ActualizarCampoClienteSeparador " & total & " filas")
 
         Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", sc)
 
@@ -14293,7 +14551,7 @@ Public Class LogicaFacturacion
                 Dim cartamapeada = (From x In db.CartasDePortes Where x.IdCartaDePorte = c.IdCartaDePorte).FirstOrDefault
 
                 If cartamapeada Is Nothing Then
-                    ErrHandlerWriteErrorLogPronto("casossyngenta_y_acopios: no encontró la carta " & c.IdCartaDePorte, SC, Membership.GetUser.UserName)
+                    ErrHandler2WriteErrorLogPronto("casossyngenta_y_acopios: no encontró la carta " & c.IdCartaDePorte, SC, Membership.GetUser.UserName)
                     Continue For
                 End If
 
@@ -14332,10 +14590,10 @@ Public Class LogicaFacturacion
             Next
 
         Catch ex As OutOfMemoryException
-            ErrHandler.WriteError("Problema de linq en CasosSyngenta!!!!!")
+            ErrHandler2.WriteError("Problema de linq en CasosSyngenta!!!!!")
             Throw
         Catch ex As Exception
-            ErrHandler.WriteError("CasosSyngenta")
+            ErrHandler2.WriteError("CasosSyngenta")
             Throw
         End Try
 
@@ -14421,7 +14679,7 @@ Public Class LogicaFacturacion
         Try
             montomax = ParametroManager.TraerValorParametro2(SC, "MontoMaximoFacturaDeCartaPorte")
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
         If montomax = 0 Then
             ParametroManager.GuardarValorParametro2(SC, "MontoMaximoFacturaDeCartaPorte", "150")
@@ -14517,7 +14775,7 @@ Public Class LogicaFacturacion
         Try
             montomax = ParametroManager.TraerValorParametro2(SC, "MontoMaximoFacturaDeCartaPorte")
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
         If montomax = 0 Then
             ParametroManager.GuardarValorParametro2(SC, "MontoMaximoFacturaDeCartaPorte", "150")
@@ -14746,17 +15004,17 @@ Public Class LogicaFacturacion
             Next
 
         Catch ex As OutOfMemoryException
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
-            ErrHandler.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
+            ErrHandler2.WriteError("Problema de linq en ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor!!!!!")
             Throw
         Catch ex As Exception
-            ErrHandler.WriteError("ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor")
+            ErrHandler2.WriteError("ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor")
             Throw
         End Try
 
@@ -14891,7 +15149,7 @@ Public Class LogicaFacturacion
             Next
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
 
@@ -14946,7 +15204,7 @@ Public Class LogicaFacturacion
                     bulkCopy.WriteToServer(dt)
                 Catch ex As Exception
                     Console.WriteLine(ex.ToString)  'que no te confunda el orden de los colid. Por ejemplo, Titular era el 11. Es decir, depende del datatable. No?
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     Throw
                 End Try
 
@@ -15036,7 +15294,7 @@ Public Class LogicaFacturacion
         'at LogicaFacturacion.MostrarConflictivasEnPaginaAparte(List`1 l, String sc)
 
 
-        ErrHandler.WriteError("punto 1 en MostrarConflictivasEnPaginaAparte .")
+        ErrHandler2.WriteError("punto 1 en MostrarConflictivasEnPaginaAparte .")
 
         Dim cartasrepetidasaa = (From i In l _
                 Group By Id = i.IdCartaDePorte, _
@@ -15059,7 +15317,7 @@ Public Class LogicaFacturacion
         Dim cartasrepetidas = cartasrepetidaso.Take(200).ToList
 
         If True Then
-            ErrHandler.WriteError("punto 2 en MostrarConflictivasEnPaginaAparte .")
+            ErrHandler2.WriteError("punto 2 en MostrarConflictivasEnPaginaAparte .")
 
             Dim cartasconflic = (From i In l _
                          Where cartasrepetidas.Contains(i.IdCartaDePorte) _
@@ -15073,7 +15331,7 @@ Public Class LogicaFacturacion
             Dim ultimoid As Long
 
 
-            ErrHandler.WriteError("punto 3 en MostrarConflictivasEnPaginaAparte .")
+            ErrHandler2.WriteError("punto 3 en MostrarConflictivasEnPaginaAparte .")
 
             Dim linksconflic As String
 
@@ -15106,7 +15364,7 @@ Public Class LogicaFacturacion
             End If
 
 
-            ErrHandler.WriteError("punto 4 en MostrarConflictivasEnPaginaAparte . " & l.Count & " " & cartasrepetidasaa.Count & " " & cartasrepetidaso.Count & " " & cartasrepetidas.Count & " " & cartasconflic.Count)
+            ErrHandler2.WriteError("punto 4 en MostrarConflictivasEnPaginaAparte . " & l.Count & " " & cartasrepetidasaa.Count & " " & cartasrepetidaso.Count & " " & cartasrepetidas.Count & " " & cartasconflic.Count)
 
         End If
 
@@ -15369,7 +15627,7 @@ Public Class LogicaFacturacion
     '    'Acá hago un DISTINCT (en el ToTable) para saber las distintas facturas que tengo que armar
     '    '/////////////////////////////////////////////////////////////////////////////
 
-    '    ErrHandler.WriteError("Separo las facturas que se generan en el lote." & Now.ToString)
+    '    ErrHandler2.WriteError("Separo las facturas que se generan en el lote." & Now.ToString)
 
     '    Dim dtf = grilla.Copy ' dtDatasourcePaso2.Copy
     '    'If optFacturarA >= 4 Then
@@ -15381,7 +15639,7 @@ Public Class LogicaFacturacion
 
     '    If dtf.Rows.Count < 1 Then
 
-    '        ErrHandler.WriteError("No hay cartas seleccionadas para facturar")
+    '        ErrHandler2.WriteError("No hay cartas seleccionadas para facturar")
 
     '        Throw New Exception("No hay cartas seleccionadas para facturar")
 
@@ -15417,7 +15675,7 @@ Public Class LogicaFacturacion
     '            r("IdTitular") = dtlotecitoordenado("IdTitular") 'a proposito le meto Idtitular=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
     '            r("IdCorredor") = dtlotecitoordenado("IdCorredor") 'a proposito le meto IdCorredor=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
     '        Catch ex As Exception
-    '            ErrHandler.WriteError("Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion. " & ex.ToString)
+    '            ErrHandler2.WriteError("Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion. " & ex.ToString)
     '            'MsgBoxAjax(Me, "Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion")
     '            'Return
     '        End Try
@@ -15443,7 +15701,7 @@ Public Class LogicaFacturacion
     '    '/////////////////////////////////////////////////////////////////////////////
     '    '/////////////////////////////////////////////////////////////////////////////
 
-    '    ErrHandler.WriteError("Empiezo a facturar en serio." & Now.ToString)
+    '    ErrHandler2.WriteError("Empiezo a facturar en serio." & Now.ToString)
 
     '    Dim n = 0
     '    tTemp = Now
@@ -15473,12 +15731,12 @@ Public Class LogicaFacturacion
     '            If Len(owhere("Cliente").ToString) = 50 Then
     '                Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdCliente FROM Clientes WHERE RazonSocial like '" & Replace(owhere("Cliente"), "'", "''") & "%'")
     '                If ds.Rows.Count < 1 Then
-    '                    ErrHandler.WriteError("No se encuentra el cliente " & owhere("Cliente"))
+    '                    ErrHandler2.WriteError("No se encuentra el cliente " & owhere("Cliente"))
     '                    Continue For
     '                End If
     '                idClienteAfacturarle = ds.Rows(0).Item("IdCliente")
     '            Else
-    '                ErrHandler.WriteError("No se encuentra el cliente " & owhere("Cliente"))
+    '                ErrHandler2.WriteError("No se encuentra el cliente " & owhere("Cliente"))
     '                Continue For
     '            End If
     '        End If
@@ -15533,7 +15791,7 @@ Public Class LogicaFacturacion
     '                        'ocdp = CartaDePorteManager.DuplicarCartaporteConOtroSubnumeroDeFacturacion(sc, ocdp)
     '                        Dim sErr = "Esta carta ya está imputada. No se permite la duplicación automatica de cartas. " & ocdp.Id & " " & ocdp.NumeroCartaDePorte & " " & ocdp.SubnumeroVagon & " " & ocdp.SubnumeroDeFacturacion
     '                        'Err.Raise(64646, , sErr)
-    '                        ErrHandler.WriteError(sErr)
+    '                        ErrHandler2.WriteError(sErr)
     '                        Continue For
     '                    Else
     '                        'tiene q haber algun error. Solo debería haber cartasporte sin facturar si no se usó la facturacion automatica
@@ -15643,9 +15901,9 @@ Public Class LogicaFacturacion
     '                " verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no " & _
     '                " se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre" & vbCrLf
     '            Catch ex As Exception
-    '                ErrHandler.WriteError(ex)
+    '                ErrHandler2.WriteError(ex)
     '            End Try
-    '            ErrHandler.WriteError(errLog)
+    '            ErrHandler2.WriteError(errLog)
     '        End If
 
 
@@ -15678,7 +15936,7 @@ Public Class LogicaFacturacion
     '    ' FacturaManager.GetItemComPronto(sc, primera, False).Numero
     '    '& FacturaManager.GetItemComPronto(sc, ultima, False).Numero
     '    If primera = 0 Then
-    '        ErrHandler.WriteError("No se han podido generar facturas")
+    '        ErrHandler2.WriteError("No se han podido generar facturas")
     '        Throw New Exception("No se han podido generar facturas")
 
     '    End If
@@ -15706,14 +15964,14 @@ Public Class LogicaFacturacion
 
 
     '        tHoraTermina = Now
-    '        ErrHandler.WriteError("Fin facturacion." & primera & " " & ultima & "  Tiempo usado: " & DateDiff(DateInterval.Second, tHoraEmpieza, tHoraTermina) & " segundos. ")
+    '        ErrHandler2.WriteError("Fin facturacion." & primera & " " & ultima & "  Tiempo usado: " & DateDiff(DateInterval.Second, tHoraEmpieza, tHoraTermina) & " segundos. ")
 
 
 
 
 
     '    Catch ex As Exception
-    '        ErrHandler.WriteError("Error al buscar facturas generadas. " & ex.ToString)
+    '        ErrHandler2.WriteError("Error al buscar facturas generadas. " & ex.ToString)
     '    End Try
 
     '    'lblMensaje.Text = errLog ' "Creadas facturas de la " & primera & " a la " & ultima & ". Facturacion terminada"
@@ -15826,7 +16084,7 @@ Public Class LogicaFacturacion
         'Acá hago un DISTINCT (en el ToTable) para saber las distintas facturas que tengo que armar
         '/////////////////////////////////////////////////////////////////////////////
 
-        ErrHandler.WriteError("Separo las facturas que se generan en el lote." & Now.ToString)
+        ErrHandler2.WriteError("Separo las facturas que se generan en el lote." & Now.ToString)
 
         Dim dtf = grilla.Copy ' dtDatasourcePaso2.Copy
         'If optFacturarA >= 4 Then
@@ -15838,7 +16096,7 @@ Public Class LogicaFacturacion
 
         If dtf.Rows.Count < 1 Then
 
-            ErrHandler.WriteError("No hay cartas seleccionadas para facturar")
+            ErrHandler2.WriteError("No hay cartas seleccionadas para facturar")
 
             Throw New Exception("No hay cartas seleccionadas para facturar")
 
@@ -15874,7 +16132,7 @@ Public Class LogicaFacturacion
                 r("IdTitular") = dtlotecitoordenado("IdTitular") 'a proposito le meto Idtitular=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
                 r("IdCorredor") = dtlotecitoordenado("IdCorredor") 'a proposito le meto IdCorredor=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
             Catch ex As Exception
-                ErrHandler.WriteError("Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion. " & ex.ToString)
+                ErrHandler2.WriteError("Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion. " & ex.ToString)
                 'MsgBoxAjax(Me, "Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion")
                 'Return
             End Try
@@ -15916,7 +16174,7 @@ Public Class LogicaFacturacion
         '/////////////////////////////////////////////////////////////////////////////
         '/////////////////////////////////////////////////////////////////////////////
 
-        ErrHandler.WriteError("Empiezo a facturar en serio." & Now.ToString)
+        ErrHandler2.WriteError("Empiezo a facturar en serio." & Now.ToString)
 
         Dim n = 0
         tTemp = Now
@@ -15945,7 +16203,7 @@ Public Class LogicaFacturacion
 
 
         'Catch ex As Exception
-        ' ErrHandler.WriteError("Explota el tablaEditadaDeFacturasParaGenerarComoLista")
+        ' ErrHandler2.WriteError("Explota el tablaEditadaDeFacturasParaGenerarComoLista")
         ' throw
         ' End Try
 
@@ -16029,12 +16287,12 @@ Public Class LogicaFacturacion
                 If Len(owhere.Cliente.ToString) = 50 Then
                     Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdCliente FROM Clientes WHERE RazonSocial like '" & Replace(owhere.Cliente, "'", "''") & "%'")
                     If ds.Rows.Count < 1 Then
-                        ErrHandler.WriteError("No se encuentra el cliente " & owhere.Cliente)
+                        ErrHandler2.WriteError("No se encuentra el cliente " & owhere.Cliente)
                         Continue For
                     End If
                     idClienteAfacturarle = ds.Rows(0).Item("IdCliente")
                 Else
-                    ErrHandler.WriteError("No se encuentra el cliente " & owhere.Cliente)
+                    ErrHandler2.WriteError("No se encuentra el cliente " & owhere.Cliente)
                     Continue For
                 End If
             End If
@@ -16089,7 +16347,7 @@ Public Class LogicaFacturacion
                     Next
                     If renglons > MAXRENGLONES Then
                         Dim s2 = "La factura para " & idClienteAfacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
-                        ErrHandler.WriteAndRaiseError(s2)
+                        ErrHandler2.WriteAndRaiseError(s2)
                         'Throw New Exception(s2)
                         ' Return -12
                     End If
@@ -16162,7 +16420,7 @@ Public Class LogicaFacturacion
                             'ocdp = CartaDePorteManager.DuplicarCartaporteConOtroSubnumeroDeFacturacion(sc, ocdp)
                             Dim sErr = "Esta carta ya está imputada. No se permite la duplicación automatica de cartas. " & ocdp.Id & " " & ocdp.NumeroCartaDePorte & " " & ocdp.SubnumeroVagon & " " & ocdp.SubnumeroDeFacturacion
                             'Err.Raise(64646, , sErr)
-                            ErrHandler.WriteError(sErr)
+                            ErrHandler2.WriteError(sErr)
                             Continue For
                         Else
                             'tiene q haber algun error. Solo debería haber cartasporte sin facturar si no se usó la facturacion automatica
@@ -16211,7 +16469,7 @@ Public Class LogicaFacturacion
                             Dim strwhere = "IdCartaDePorte <-1 AND SubNumeroVagon=" & (i.idCartaDePorte * -1) & " And FacturarselaA = " & _c(owhere.Cliente) & " And [ClienteSeparado] = " & _c(owhere.IdClienteSeparado)
                             Dim dtbuque = DataTableWHERE(tablaEditadaDeFacturasParaGenerar, strwhere)
                             If dtbuque.Rows.Count <> 1 Then
-                                ErrHandler.WriteAndRaiseError("Se repite un buque")
+                                ErrHandler2.WriteAndRaiseError("Se repite un buque")
                             Else
 
                                 Dim r As DataRow = dtbuque.Rows(0)
@@ -16220,7 +16478,7 @@ Public Class LogicaFacturacion
                                 'como pudo agregarlo dos veces? es un bug que está sucediendo
 
                                 If listEmbarques.Contains(r) Then
-                                    ErrHandler.WriteAndRaiseError("Se repite un buque")
+                                    ErrHandler2.WriteAndRaiseError("Se repite un buque")
                                 Else
                                     listEmbarques.Add(r)
                                 End If
@@ -16228,8 +16486,8 @@ Public Class LogicaFacturacion
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError("No se pudo incrustar el renglon de buque")
-                            ErrHandler.WriteAndRaiseError(ex)
+                            ErrHandler2.WriteError("No se pudo incrustar el renglon de buque")
+                            ErrHandler2.WriteAndRaiseError(ex)
                         End Try
 
                     Else
@@ -16250,14 +16508,14 @@ Public Class LogicaFacturacion
 
 
                             If dtaa.Rows.Count > 1 Then
-                                ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Más de un renglon cumple el filtro. " & strwhere)
+                                ErrHandler2.WriteAndRaiseError("No se pudo incrustar el renglon manual. Más de un renglon cumple el filtro. " & strwhere)
                             ElseIf dtaa.Rows.Count < 1 Then
 
 
                                 'si hay acopios (por ejemplo, el renglon dice en ClienteSeparado="acopiosepara 7") no tengo manera de
                                 'saber a qué agrupamiento le corresponde el item manual........
 
-                                ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Ningún renglon cumple el filtro. " & strwhere)
+                                ErrHandler2.WriteAndRaiseError("No se pudo incrustar el renglon manual. Ningún renglon cumple el filtro. " & strwhere)
                             End If
 
                             Dim r As DataRow = dtaa.Rows(0)
@@ -16265,8 +16523,8 @@ Public Class LogicaFacturacion
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError("No se pudo incrustar el renglon manual")
-                            ErrHandler.WriteAndRaiseError(ex)
+                            ErrHandler2.WriteError("No se pudo incrustar el renglon manual")
+                            ErrHandler2.WriteAndRaiseError(ex)
                         End Try
                     End If
                 End If
@@ -16406,10 +16664,10 @@ Public Class LogicaFacturacion
                     " verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no " & _
                     " se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>" & vbCrLf
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                     MandarMailDeError(ex)
                 End Try
-                ErrHandler.WriteError(errLog)
+                ErrHandler2.WriteError(errLog)
             End If
 
 
@@ -16442,7 +16700,7 @@ Public Class LogicaFacturacion
         ' FacturaManager.GetItemComPronto(sc, primera, False).Numero
         '& FacturaManager.GetItemComPronto(sc, ultima, False).Numero
         If primera = 0 Then
-            ErrHandler.WriteError("No se han podido generar facturas. " & vbCrLf & errLog)
+            ErrHandler2.WriteError("No se han podido generar facturas. " & vbCrLf & errLog)
             Throw New Exception("No se han podido generar facturas. " & vbCrLf & errLog)
 
         End If
@@ -16473,7 +16731,7 @@ Public Class LogicaFacturacion
 
 
             tHoraTermina = Now
-            ErrHandler.WriteError("Fin facturacion." & primera & " " & ultima & "  Tiempo usado: " & DateDiff(DateInterval.Second, tHoraEmpieza, tHoraTermina) & " segundos. ")
+            ErrHandler2.WriteError("Fin facturacion." & primera & " " & ultima & "  Tiempo usado: " & DateDiff(DateInterval.Second, tHoraEmpieza, tHoraTermina) & " segundos. ")
 
 
             MarcarFacturasConOrdenDeCompra(Val(numeroOrdenCompra), PrimeraIdFacturaGenerada, UltimaIdFacturaGenerada, SC)
@@ -16481,7 +16739,7 @@ Public Class LogicaFacturacion
 
 
         Catch ex As Exception
-            ErrHandler.WriteError("Error al buscar facturas generadas. " & ex.ToString)
+            ErrHandler2.WriteError("Error al buscar facturas generadas. " & ex.ToString)
             MandarMailDeError(ex)
 
         End Try
@@ -16495,7 +16753,7 @@ Public Class LogicaFacturacion
         Try
 
             Dim s = "UPDATE    Facturas  SET numeroordencompraexterna=" & numeroorden.ToString() & "   WHERE idFactura>= " & idfactpri.ToString() & "  AND    idFactura <= " & idfactult.ToString()
-            ErrHandler.WriteError(s)
+            ErrHandler2.WriteError(s)
             If numeroorden > 0 Then
 
                 EntidadManager.ExecDinamico(SC, s)
@@ -16763,7 +17021,7 @@ Public Class LogicaFacturacion
         Next
 
 
-        If errores <> "" Then ErrHandler.WriteAndRaiseError(errores)
+        If errores <> "" Then ErrHandler2.WriteAndRaiseError(errores)
     End Function
 
 
@@ -16886,16 +17144,29 @@ Public Class LogicaFacturacion
 
     Public Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
         'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        Try
 
-        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
-        Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+            Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Dim expo = From x In oListaCDP
-                    Where x.Exporta = "SI"
+            Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
+            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault() 'explota aca con la 79074. q tiene esa factura de particular?
+
+            Dim expo = From x In oListaCDP
+                        Where x.Exporta = "SI"
 
 
-        Return expo.Count > 0
+            Return expo.Count > 0
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Try
+                ErrHandler2.WriteError(ex.InnerException.ToString)
+                ErrHandler2.WriteError(idfactura.ToString)
+            Catch ex2 As Exception
+            End Try
+
+
+            Return False
+        End Try
 
     End Function
 
@@ -16936,7 +17207,7 @@ Public Class LogicaFacturacion
             'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
             Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura).ToList()
-            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+            Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault() 'explota acá
 
 
             Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
@@ -16950,7 +17221,7 @@ Public Class LogicaFacturacion
                                         Or If(c.Acopio5, -1) = IdAcopioAgro Or If(c.Acopio6, -1) = IdAcopioAgro) Then
 
                     'quienautoriza()
-                    ErrHandler.WriteError("LeyendaSyngenta Agro")
+                    ErrHandler2.WriteError("LeyendaSyngenta Agro")
 
                     Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
                     'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
@@ -16959,7 +17230,7 @@ Public Class LogicaFacturacion
 
                 ElseIf oListaCDP.Exists(Function(xc) If(xc.Acopio1, -1) = IdAcopioSeeds Or If(xc.Acopio2, -1) = IdAcopioSeeds Or If(xc.Acopio3, -1) = IdAcopioSeeds Or If(xc.Acopio4, -1) = IdAcopioSeeds Or If(xc.Acopio5, -1) = IdAcopioSeeds Or If(xc.Acopio6, -1) = IdAcopioSeeds) Then
 
-                    ErrHandler.WriteError("LeyendaSyngenta Seeds")
+                    ErrHandler2.WriteError("LeyendaSyngenta Seeds")
 
                     'quienautoriza()
                     Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
@@ -16971,13 +17242,21 @@ Public Class LogicaFacturacion
                 End If
 
 
-                'ErrHandler.WriteError("LeyendaSyngenta Nada")
+                'ErrHandler2.WriteError("LeyendaSyngenta Nada")
                 Return ""
 
 
             End If
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+
+            ErrHandler2.WriteError(ex)
+            Try
+                ErrHandler2.WriteError(ex.InnerException.ToString)
+                ErrHandler2.WriteError(idfactura.ToString)
+            Catch ex2 As Exception
+            End Try
+
+
             Return ""
 
         End Try
@@ -16992,7 +17271,7 @@ Public Class LogicaFacturacion
 
         If IdClienteAFacturarle = idSyngentaAGRO Then
             If oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioAgro Or c.Acopio2 = IdAcopioAgro Or c.Acopio3 = IdAcopioAgro Or c.Acopio4 = IdAcopioAgro Or c.Acopio5 = IdAcopioAgro Or c.Acopio6 = IdAcopioAgro) Then
-                ErrHandler.WriteError("LeyendaSyngenta Agro")
+                ErrHandler2.WriteError("LeyendaSyngenta Agro")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
 
@@ -17004,7 +17283,7 @@ Public Class LogicaFacturacion
 
 
             ElseIf oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioSeeds Or c.Acopio2 = IdAcopioSeeds Or c.Acopio3 = IdAcopioSeeds Or c.Acopio4 = IdAcopioSeeds Or c.Acopio5 = IdAcopioSeeds Or c.Acopio6 = IdAcopioSeeds) Then
-                ErrHandler.WriteError("LeyendaSyngenta Seeds")
+                ErrHandler2.WriteError("LeyendaSyngenta Seeds")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
                 'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
@@ -17016,7 +17295,7 @@ Public Class LogicaFacturacion
         End If
 
 
-        'ErrHandler.WriteError("LeyendaSyngenta Nada")
+        'ErrHandler2.WriteError("LeyendaSyngenta Nada")
         Return ""
 
     End Function
@@ -17092,7 +17371,7 @@ Public Class LogicaFacturacion
             If (oListaCDP Is Nothing Or oListaCDP.Count < 1) And _
                     (dtRenglonesManuales Is Nothing Or dtRenglonesManuales.Rows.Count < 1) And _
                     (listEmbarques Is Nothing Or listEmbarques.Count < 1) Then
-                ErrHandler.WriteError("oListaCDP vacía")
+                ErrHandler2.WriteError("oListaCDP vacía")
                 Return -1
             End If
 
@@ -17145,7 +17424,7 @@ Public Class LogicaFacturacion
             oRs.Close()
 
             If mIdCuenta = 0 Then
-                ErrHandler.WriteError("No definio en parametros la cuenta contable deudores varios")
+                ErrHandler2.WriteError("No definio en parametros la cuenta contable deudores varios")
                 Return -1
             End If
 
@@ -17158,7 +17437,7 @@ Public Class LogicaFacturacion
             mIdConceptoParaImportacionNDNC = IIf(IsNull(mAux1), 0, mAux1)
 
             If mIdArticuloParaImportacionFacturas = 0 Then
-                ErrHandler.WriteError("No definio en parametros el articulo generico para importar las facturas")
+                ErrHandler2.WriteError("No definio en parametros el articulo generico para importar las facturas")
                 Return -1
             End If
 
@@ -17187,7 +17466,7 @@ Public Class LogicaFacturacion
                     'Try
                     '    .Guardar() 'para ver si genera un type mismatch
                     'Catch ex As Exception
-                    '    ErrHandler.WriteError("Primer Guardar trucho. " & ex.ToString)
+                    '    ErrHandler2.WriteError("Primer Guardar trucho. " & ex.ToString)
                     'End Try
 
 
@@ -17259,7 +17538,7 @@ Public Class LogicaFacturacion
                             .Fields("IdObra").Value = IdObra
 
                         Catch ex As Exception
-                            ErrHandler.WriteError("Problema al poner el punto de venta/centro de costo")
+                            ErrHandler2.WriteError("Problema al poner el punto de venta/centro de costo")
                         End Try
                         '//////////////////////////////////////////////////////////////////////////
                         '//////////////////////////////////////////////////////////////////////////
@@ -17396,11 +17675,11 @@ Public Class LogicaFacturacion
                     'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
 
                     If renglons > MAXRENGLONES Then
-                        'ErrHandler.WriteError("No definio en parametros la cuenta contable deudores varios")
+                        'ErrHandler2.WriteError("No definio en parametros la cuenta contable deudores varios")
 
                         'si tiro una excepcion acá, la captura el try de esta funcion
                         Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
-                        ErrHandler.WriteError(s2)
+                        ErrHandler2.WriteError(s2)
                         'Throw New Exception(s2)
                         Return -12
                     End If
@@ -17669,7 +17948,7 @@ Public Class LogicaFacturacion
                             End If
                             If PrecioArticuloGastoAdministrativo = 0 Then
                                 'tanto la lista de precios como el default estan en 0
-                                EntidadManager.ErrHandlerWriteErrorLogPronto("No se pudo asignar la tarifa de gasto administrativo para " & IdClienteAFacturarle, SC, "")
+                                EntidadManager.ErrHandler2WriteErrorLogPronto("No se pudo asignar la tarifa de gasto administrativo para " & IdClienteAFacturarle, SC, "")
                             End If
 
 
@@ -17713,7 +17992,7 @@ Public Class LogicaFacturacion
                     Try
                         CalculaFacturaSimplificado(oFac, SC, Session, numeropuntoVenta, IdPuntoVenta) 'recien ahi se asigna la letra de la factura...
                     Catch ex As Exception
-                        ErrHandler.WriteError("Error en CalculaFacturaSimplificado. " & ex.ToString)
+                        ErrHandler2.WriteError("Error en CalculaFacturaSimplificado. " & ex.ToString)
                         MandarMailDeError(ex)
                         Return -1
                     End Try
@@ -17776,7 +18055,7 @@ Public Class LogicaFacturacion
 
 
                     If IdPuntoVenta = 0 Then
-                        ErrHandler.WriteError("No hay talonario de facturas para el punto de venta " & numeropuntoVenta & " Letra " & oFac.Registro.Fields("TipoABC").Value)
+                        ErrHandler2.WriteError("No hay talonario de facturas para el punto de venta " & numeropuntoVenta & " Letra " & oFac.Registro.Fields("TipoABC").Value)
                         Return -1
                     End If
 
@@ -17827,15 +18106,15 @@ Public Class LogicaFacturacion
                             Case ICompMTSManager.MisEstados.Correcto
                             Case ICompMTSManager.MisEstados.ModificadoPorOtro
                                 'MsgBox("El Regsitro ha sido modificado")
-                                ErrHandler.WriteError("El Regsitro ha sido modificado")
+                                ErrHandler2.WriteError("El Regsitro ha sido modificado")
                                 Return -1
                             Case ICompMTSManager.MisEstados.NoExiste
                                 'MsgBox("El registro ha sido eliminado")
-                                ErrHandler.WriteError("El registro ha sido eliminado")
+                                ErrHandler2.WriteError("El registro ha sido eliminado")
                                 Return -1
                             Case ICompMTSManager.MisEstados.ErrorDeDatos
                                 'MsgBox("Error de ingreso de datos")
-                                ErrHandler.WriteError("Error de ingreso de datos")
+                                ErrHandler2.WriteError("Error de ingreso de datos")
                                 Return -1
                         End Select
 
@@ -17857,7 +18136,7 @@ Public Class LogicaFacturacion
                                 " así que por Pronto hay que intentar facturarle al mismo cliente Y TAMBIEN ver si se puede editar y grabar el formulario de cliente. " & _
                                 "-Por qué fue que tuvimos un problema así en Capen? Qué era lo que tenía el Clientes_M, mal el largo de un campo? " & _
                                                 ex.ToString
-                        ErrHandler.WriteError(s)
+                        ErrHandler2.WriteError(s)
                         MandarMailDeError(s)
 
                         Return -1  'si la factura se creó, no puedo devolver lo mismo que en los otros casos
@@ -17872,7 +18151,7 @@ Public Class LogicaFacturacion
                 Try
                     EntidadManager.LogPronto(SC, idFacturaCreada, "Factura por ProntoWeb", Session(SESSIONPRONTO_glbIdUsuario))
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -17883,7 +18162,7 @@ Public Class LogicaFacturacion
 
         Catch ex As Exception
 
-            ErrHandler.WriteError("Error en la llamada a CreaFacturaCOMpronto. " & ex.ToString)
+            ErrHandler2.WriteError("Error en la llamada a CreaFacturaCOMpronto. " & ex.ToString)
             MandarMailDeError(ex)
         End Try
 
@@ -17931,7 +18210,7 @@ Public Class LogicaFacturacion
         Try
             id = EntidadManager.ExecDinamico(SC, "SELECT MAX(IdFactura) FROM Facturas").Rows(0).Item(0)
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
         Return id
@@ -18031,7 +18310,7 @@ Public Class LogicaFacturacion
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("Error al actualizar la tarifa. " & ex.ToString)
+                ErrHandler2.WriteError("Error al actualizar la tarifa. " & ex.ToString)
             End Try
 
         End If
@@ -18136,8 +18415,8 @@ Public Class LogicaFacturacion
 
         Catch ex As Exception
             'no trae el IdFacturarselaA si es "a Terceros"
-            ErrHandler.WriteError("Ojo, no trae el IdFacturarselaA si es a Terceros")
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError("Ojo, no trae el IdFacturarselaA si es a Terceros")
+            ErrHandler2.WriteError(ex)
         End Try
 
 
@@ -18248,7 +18527,7 @@ Public Class LogicaFacturacion
         Dim mvarTipoIVA = cli.IdCodigoIva
 
         If mvarTipoIVA = 0 Then
-            ErrHandler.WriteAndRaiseError("No se encuentra el IdCodigoIVA para el cliente " & oFac.Registro.Fields("IdCliente").Value)
+            ErrHandler2.WriteAndRaiseError("No se encuentra el IdCodigoIVA para el cliente " & oFac.Registro.Fields("IdCliente").Value)
         End If
 
         mvarTipoABC = LetraSegunTipoIVA(mvarTipoIVA)
@@ -18312,7 +18591,7 @@ Public Class LogicaFacturacion
                     mvarSubTotal += cant_X_precio_redondeado
 
                     If False Then
-                        ErrHandler.WriteError("cant*precio " & cant_X_precio_redondeado & " mvarSubTotal " & mvarSubTotal & " = + " & .Fields("Cantidad").Value & " *  " & mvarPrecio & "redond  * " & mAlicuotaIVA_Material & "/ 100")
+                        ErrHandler2.WriteError("cant*precio " & cant_X_precio_redondeado & " mvarSubTotal " & mvarSubTotal & " = + " & .Fields("Cantidad").Value & " *  " & mvarPrecio & "redond  * " & mAlicuotaIVA_Material & "/ 100")
                     End If
 
 
@@ -18374,7 +18653,7 @@ Public Class LogicaFacturacion
                 Dim ccc = ExecDinamico(sc, "Select AgentePercepcionIIBB from PuntosVenta  where  IdPuntoVenta=" & IdPuntoVenta)
                 mvarIBrutos = PercepcionIngresosBrutos(oFac, sc, session, cli, mvarNetoGravado, True, "SI" = iisNull(ccc.Rows(0).Item("AgentePercepcionIIBB"), "NO")) '(puntoventa = 2 Or puntoventa = 3))
             Catch ex As Exception
-                ErrHandler.WriteError("Error al calcular ingresos brutos. " & ex.ToString)
+                ErrHandler2.WriteError("Error al calcular ingresos brutos. " & ex.ToString)
             End Try
         End If
 
@@ -18407,11 +18686,11 @@ Public Class LogicaFacturacion
 
         If False Then
 
-            ErrHandler.WriteError("mTotal       " & mTotal)
-            ErrHandler.WriteError("mvarSubTotal " & mvarSubTotal)
-            ErrHandler.WriteError("mvarIBrutos  " & mvarIBrutos)
-            ErrHandler.WriteError("totIVA       " & totIVA)
-            ErrHandler.WriteError("ImporteTotal " & Math.Round(mvarSubTotal + mvarIBrutos + Math.Round(totIVA, 2), 2))
+            ErrHandler2.WriteError("mTotal       " & mTotal)
+            ErrHandler2.WriteError("mvarSubTotal " & mvarSubTotal)
+            ErrHandler2.WriteError("mvarIBrutos  " & mvarIBrutos)
+            ErrHandler2.WriteError("totIVA       " & totIVA)
+            ErrHandler2.WriteError("ImporteTotal " & Math.Round(mvarSubTotal + mvarIBrutos + Math.Round(totIVA, 2), 2))
         End If
 
 
@@ -18447,7 +18726,7 @@ Public Class LogicaFacturacion
 
 
         Catch ex As Exception
-            ErrHandler.WriteAndRaiseError("Error al calcular totales. " & ex.ToString)
+            ErrHandler2.WriteAndRaiseError("Error al calcular totales. " & ex.ToString)
         End Try
 
 
@@ -18667,7 +18946,7 @@ Public Class LogicaFacturacion
 
                 .Fields("NumeroCertificadoPercepcionIIBB").Value = numcertif
             Catch ex As Exception
-                ErrHandlerWriteErrorLogPronto(ex.ToString, sc, "")
+                ErrHandler2WriteErrorLogPronto(ex.ToString, sc, "")
             End Try
 
             '//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18786,7 +19065,7 @@ Public Class LogicaFacturacion
             Return CAIsegunPuntoVenta
 
         Catch ex As Exception
-            ErrHandler.WriteError("No se encontró el CAI para PuntoVenta=" & puntoVenta & " AND Letra='" & Letra & "'")
+            ErrHandler2.WriteError("No se encontró el CAI para PuntoVenta=" & puntoVenta & " AND Letra='" & Letra & "'")
             Return ""
         End Try
 
@@ -19937,14 +20216,14 @@ Public Class barras
 
             Dim bMarcar As Boolean = True
 
-            ErrHandler.WriteError("idfac " & idfac)
+            ErrHandler2.WriteError("idfac " & idfac)
 
 
 
             Dim fac = FacturaManager.GetItem(SC, idfac)
 
             If fac Is Nothing Then
-                ErrHandler.WriteError("idfac " & idfac & " no existe")
+                ErrHandler2.WriteError("idfac " & idfac & " no existe")
                 Continue For
             End If
 
@@ -19975,11 +20254,11 @@ Public Class barras
                 destinatario = If(cli.EmailFacturacionElectronica, "")
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
-            ErrHandler.WriteError("cli " & idcli & " " & destinatario & " " & fac.IdVendedor & " " & fac.IdCliente)
+            ErrHandler2.WriteError("cli " & idcli & " " & destinatario & " " & fac.IdVendedor & " " & fac.IdCliente)
 
             Try
 
@@ -19997,8 +20276,8 @@ Public Class barras
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
-                ErrHandler.WriteError("cli está en null???? -NO. el problema es que destinatario ( que es un string) puede ser nothing " & sErr)
+                ErrHandler2.WriteError(ex)
+                ErrHandler2.WriteError("cli está en null???? -NO. el problema es que destinatario ( que es un string) puede ser nothing " & sErr)
             End Try
 
             If Not bVistaPrevia And destinatario = "" Then
@@ -20114,7 +20393,7 @@ Public Class barras
         Try
             If iisNull(dt(0).Item("FueEnviadoCorreoConFacturaElectronica")) = "SI" Then Return True Else Return False
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Return False
         End Try
 
@@ -20177,7 +20456,7 @@ Public Class PuntoVentaWilliams
         Select Case SucursalWilliams
             Case 0
                 ' PuntoVenta = 0
-                ErrHandler.WriteError("Problema al poner el punto de venta/centro de costo")
+                ErrHandler2.WriteError("Problema al poner el punto de venta/centro de costo")
             Case PuntoVentaWilliams.enumWilliamsPuntoVenta.BuenosAires
                 'PuntoVenta = 10
                 descripcion = "BUENOS"
@@ -20193,7 +20472,7 @@ Public Class PuntoVentaWilliams
             Case Else
                 'PuntoVenta = 0
 
-                ErrHandler.WriteError("Problema al poner el punto de venta/centro de costo")
+                ErrHandler2.WriteError("Problema al poner el punto de venta/centro de costo")
         End Select
 
 
@@ -20245,7 +20524,7 @@ Public Class PuntoVentaWilliams
         Select Case SucursalWilliams
             Case 0
                 IdObra2 = 0
-                ErrHandler.WriteError("Problema al poner el punto de venta/centro de costo")
+                ErrHandler2.WriteError("Problema al poner el punto de venta/centro de costo")
             Case PuntoVentaWilliams.enumWilliamsPuntoVenta.BuenosAires
                 IdObra2 = 6
             Case enumWilliamsPuntoVenta.SanLorenzo
@@ -20256,7 +20535,7 @@ Public Class PuntoVentaWilliams
                 IdObra2 = 10
             Case Else
                 IdObra2 = 0
-                ErrHandler.WriteError("Problema al poner el punto de venta/centro de costo")
+                ErrHandler2.WriteError("Problema al poner el punto de venta/centro de costo")
         End Select
 
         Return IdObra2
@@ -20270,7 +20549,7 @@ Public Class PuntoVentaWilliams
         Try
             Return [Enum].GetName(GetType(enumWilliamsPuntoVenta), pv)
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Return ""
         End Try
     End Function
@@ -20313,7 +20592,7 @@ Public Class PuntoVentaWilliams
             End Select
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Return ""
         End Try
     End Function
@@ -20450,7 +20729,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
                     'pero y si es una tanda de clientes distintos???????
                     incluirtarifa = IIf(ClienteManager.GetItem(sc, ClaseMigrar.GetItemComProntoFactura(sc, DesdeIdFactura + i, False).IdCliente).IncluyeTarifaEnFactura = "SI", True, False)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -20584,7 +20863,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex.ToString & " Error al hacer el merge de docs")
+            ErrHandler2.WriteError(ex.ToString & " Error al hacer el merge de docs")
             Throw
             'MsgBoxAjax(Me, ex.ToString & ". Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro.    Emision """ & DebugCadenaImprimible(Encriptar(HFSC.Value)) & "," & ID)
         Finally
@@ -20742,7 +21021,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
         Catch ex As Exception
-            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
             Return Nothing
 
 
@@ -20768,7 +21047,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
             End Try
         End Try
     End Function
@@ -20962,7 +21241,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
         Catch ex As Exception
-            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
             Return Nothing
 
 
@@ -20988,7 +21267,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
             End Try
         End Try
     End Function
@@ -21045,7 +21324,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
                 ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
                 'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
 
-                ErrHandler.WriteError("error en el open. " + fileExcelName + "   " + ex.ToString)
+                ErrHandler2.WriteError("error en el open. " + fileExcelName + "   " + ex.ToString)
 
             End Try
 
@@ -21243,7 +21522,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
         Catch ex As Exception
-            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
             Return Nothing
 
 
@@ -21269,7 +21548,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
             End Try
         End Try
     End Function
@@ -21382,7 +21661,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
             Dim maxsht = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
             If oWB.Worksheets.Count > MAXSHEETS Then
-                ErrHandler.WriteError("Limite de Notas de entrega " & oWB.Worksheets.Count)
+                ErrHandler2.WriteError("Limite de Notas de entrega " & oWB.Worksheets.Count)
             End If
 
             Dim iCuentaRenglones = 0
@@ -21659,7 +21938,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
         Catch ex As Exception
-            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
             Return Nothing
 
 
@@ -21685,7 +21964,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
             End Try
         End Try
     End Function
@@ -21756,6 +22035,7 @@ Public Class LogicaImportador
         VICENTIN
         VICENTIN_ExcepcionTagRemitenteConflictivo
         Reyser
+        ReyserCargillPosicion
         Reyser2
         ReyserAnalisis
         CerealnetToepfer
@@ -21920,7 +22200,7 @@ Public Class LogicaImportador
 
 
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    ErrHandler.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
                 End Try
             End While
         End Using
@@ -21999,7 +22279,7 @@ Public Class LogicaImportador
 
             If .IdFacturaImputada > 0 Then
                 'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
-                ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque ya existe como facturada")
+                ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque ya existe como facturada")
                 Return 0
             End If
 
@@ -22007,13 +22287,13 @@ Public Class LogicaImportador
             If .NetoFinalSinMermas > 0 Or .NetoFinalIncluyendoMermas > 0 Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
                 'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
-                ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
+                ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
                 Return 0
             End If
 
 
             If .Anulada = "SI" Then
-                ErrHandler.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
+                ErrHandler2.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
                 LogPronto(SC, .Id, "IMPANU", Session(SESSIONPRONTO_UserName))
                 CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
 
@@ -22029,7 +22309,7 @@ Public Class LogicaImportador
 
                 If q.Count > 1 Then
                     'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
-                    ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
+                    ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
                     Return 0
                 End If
 
@@ -22178,8 +22458,8 @@ Public Class LogicaImportador
 
                 End If
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
-                ErrHandler.WriteError("Falta el titular, o cuentaorden1 o cuentaorden2")
+                ErrHandler2.WriteError(ex)
+                ErrHandler2.WriteError("Falta el titular, o cuentaorden1 o cuentaorden2")
             End Try
 
 
@@ -22272,6 +22552,7 @@ Public Class LogicaImportador
 
 
 
+            .ClienteAcondicionador = Nothing
 
             .Patente = iisNull(dr.Item("Patente"))
             .Acoplado = iisNull(dr.Item("Acoplado"))
@@ -22440,13 +22721,13 @@ Public Class LogicaImportador
                     '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
                 If CartaDePorteManager.Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName)) = -1 Then
                     Debug.Print("No se pudo grabar el renglon n° " & myCartaDePorte.NumeroCartaDePorte)
-                    ErrHandler.WriteError("Error al grabar CDP importada")
+                    ErrHandler2.WriteError("Error al grabar CDP importada")
                 Else
                     'poner url hacia el ABM
                     'Response.Redirect(String.Format("CartaDePorte.aspx?Id={0}", IdCartaDePorte.ToString))
@@ -22459,13 +22740,15 @@ Public Class LogicaImportador
 
             Else
                 Dim sError = "Error al validar CDP importada: " & myCartaDePorte.NumeroCartaDePorte & " " & ms
-                ErrHandler.WriteError(sError)
+                ErrHandler2.WriteError(sError)
                 txtLogErrores.Visible = True
                 If txtLogErrores.Text = "" Then txtLogErrores.Text = "Errores: " & vbCrLf
                 txtLogErrores.Text &= sError & vbCrLf
             End If
 
         End With
+
+        txtLogErrores.Visible = True
 
         Return 0
     End Function
@@ -22576,7 +22859,8 @@ Public Class LogicaImportador
 
 
 
-    Public Shared Function FormatoDelArchivo(ByVal sNombreArchivoImportado As String, cmbFormato As System.Web.UI.WebControls.DropDownList) As FormatosDeExcel
+    Public Shared Function FormatoDelArchivo(ByVal sNombreArchivoImportado As String,
+                                             cmbFormato As System.Web.UI.WebControls.DropDownList) As FormatosDeExcel
         '"Bunge Ramallo" 
         '"Cargill Planta Quebracho"
         '"Cargill Pta Alvear"
@@ -22588,8 +22872,12 @@ Public Class LogicaImportador
         '"Toepfer Destino"
         '"VICENTIN"
 
+        'if (cmbFormato Is Nothing) Then FormatosDeExcel.Autodetectar()
 
-        If cmbFormato.SelectedIndex <> FormatosDeExcel.Autodetectar Then Return [Enum].Parse(GetType(FormatosDeExcel), cmbFormato.SelectedItem.Value.ToString)
+        If cmbFormato.SelectedIndex <> FormatosDeExcel.Autodetectar Then
+            Return [Enum].Parse(GetType(FormatosDeExcel), cmbFormato.SelectedItem.Value.ToString)
+        End If
+
 
 
 
@@ -22656,7 +22944,7 @@ Public Class LogicaImportador
         Try
             dtBase = ExcelImportadorManager.TraerMetadataPorIdMaestro(SC, m_IdMaestro)
         Catch ex As Exception
-            ErrHandler.WriteError("Problemas con IdMaestro? Quizas no pude importar filas. " & ex.ToString)
+            ErrHandler2.WriteError("Problemas con IdMaestro? Quizas no pude importar filas. " & ex.ToString)
             'esta explotando porque no encuentra el idmaestro? por qué?
             '-en el unico lugar donde se asigna el IdMaestro es al final de FormatearExcel. Quizas 
             'no llega a ejecutarse porque no se pudieron importar filas
@@ -23069,7 +23357,7 @@ Public Class ExcelImportadorManager
                 'Stop
                 If renglonDeTitulos = -1 Then
 
-                    ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
+                    ErrHandler2.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
 
 
                     If Debugger.IsAttached() Then Stop
@@ -23081,7 +23369,7 @@ Public Class ExcelImportadorManager
 
 
         Catch ex As Exception
-            ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
+            ErrHandler2.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
             If Debugger.IsAttached() Then Stop
 
             Return -1 'me rindo
@@ -23327,7 +23615,7 @@ Public Class ExcelImportadorManager
         Try
             articulo = arraytxt(0).Substring(1, 1)
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
 
 
@@ -23408,6 +23696,13 @@ Public Class ExcelImportadorManager
     End Function
 
     Public Shared Function ReyserToDataset(ByVal pFileName As String) As Data.DataSet
+
+
+        '7:41 (hace 13 minutos)
+
+        '        para(mí, soporte)
+        'System.ArgumentNullException: Argument cannot be Nothing. Parameter name: path at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) STACKTRACE: at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e)
+
 
 
         '/////////////////////////////////////////////////
@@ -23555,6 +23850,11 @@ Public Class ExcelImportadorManager
 
 
 
+        'to do
+        'no guardar datos de descarga
+
+
+
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
             'REYSER VA SEPARADO CON TABS!
             'REYSER VA SEPARADO CON TABS!
@@ -23582,7 +23882,7 @@ Public Class ExcelImportadorManager
 
 
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    ErrHandler.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
                 End Try
             End While
         End Using
@@ -23928,7 +24228,7 @@ Public Class ExcelImportadorManager
 
 
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    ErrHandler.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
                 End Try
             End While
         End Using
@@ -23991,7 +24291,7 @@ Public Class ExcelImportadorManager
     End Function
 
 
-    Public Shared Function Unidad6CalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, txtLogErrores As System.Web.UI.WebControls.TextBox, txtFechaArribo As System.Web.UI.WebControls.TextBox, glbIdUsuario As Integer, UserName As String) As Data.DataSet
+    Public Shared Function Unidad6CalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As Integer, ByRef txtLogErrores As String, txtFechaArribo As DateTime, glbIdUsuario As Integer, UserName As String) As Data.DataSet
         '/////////////////////////////////////////////////
         '/////////////////////////////////////////////////
         '/////////////////////////////////////////////////
@@ -24085,7 +24385,7 @@ Public Class ExcelImportadorManager
 
 
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    ErrHandler.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
                 End Try
             End While
         End Using
@@ -24258,7 +24558,7 @@ Public Class ExcelImportadorManager
                             '	85	Insectos vivos 	INS.V
                             '	502	Granos clorados 	G.CLO
                         Case Else
-                            If False Then txtLogErrores.Text &= "No se pudo importar rubro " & Rubro & vbCrLf
+                            If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
 
                             Continue For
                     End Select
@@ -24266,7 +24566,7 @@ Public Class ExcelImportadorManager
                     c += 1
 
 
-                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo.Text)
+                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo)
                 End With
 
 
@@ -24276,22 +24576,22 @@ Public Class ExcelImportadorManager
                     ', IdUsuario As Integer, UserName As String
                     'If CartaDePorteManager.Save(SC, cdp, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName)) = -1 Then
                     If CartaDePorteManager.Save(SC, cdp, glbIdUsuario, UserName) = -1 Then
-                        txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                        txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
                         Debug.Print("No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf)
-                        ErrHandler.WriteError("Error al grabar CDP importada")
-                        txtLogErrores.Text &= ms
+                        ErrHandler2.WriteError("Error al grabar CDP importada")
+                        txtLogErrores &= ms
                     Else
                         'dr.Item("URLgenerada") = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
-                    txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
-                    txtLogErrores.Text &= ex.ToString
+                    ErrHandler2.WriteError(ex)
+                    txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                    txtLogErrores &= ex.ToString
 
                 End Try
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
-                txtLogErrores.Text &= ex.ToString
+                ErrHandler2.WriteError(ex)
+                txtLogErrores &= ex.ToString
             End Try
 
         Next
@@ -24331,8 +24631,8 @@ Public Class ExcelImportadorManager
 
         'panelEquivalencias.Visible = True
         'MsgBoxAjax(Me, "Análisis Unidad6 importación terminada") ' . Analisis importados " & c)
-        txtLogErrores.Text = "Análisis Unidad6 importación terminada." & vbCrLf & txtLogErrores.Text
-        txtLogErrores.Visible = True
+        txtLogErrores = "Análisis Unidad6 importación terminada." & vbCrLf & txtLogErrores
+        'txtLogErrores.Visible = True
 
 
         Return ds
@@ -24386,7 +24686,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function ReyserCalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, txtLogErrores As System.Web.UI.WebControls.TextBox, txtFechaArribo As System.Web.UI.WebControls.TextBox, glbIdUsuario As Integer, UserName As String) As Data.DataSet
+    Public Shared Function ReyserCalidadesToDataset(ByVal pFileName As String, SC As String, cmbPuntoVenta As Integer, ByRef txtLogErrores As String, txtFechaArribo As DateTime, glbIdUsuario As Integer, UserName As String) As Data.DataSet
 
 
         '/////////////////////////////////////////////////
@@ -24482,7 +24782,7 @@ Public Class ExcelImportadorManager
 
 
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    ErrHandler.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
                 End Try
             End While
         End Using
@@ -24528,7 +24828,7 @@ Public Class ExcelImportadorManager
                     cdp.SubnumeroDeFacturacion = -1
                 End If
 
-                cdp.PuntoVenta = cmbPuntoVenta.SelectedValue
+                cdp.PuntoVenta = cmbPuntoVenta
 
                 With cdp
                     Select Case Rubro
@@ -24667,7 +24967,7 @@ Public Class ExcelImportadorManager
                             '	85	Insectos vivos 	INS.V
                             '	502	Granos clorados 	G.CLO
                         Case Else
-                            If False Then txtLogErrores.Text &= "No se pudo importar rubro " & Rubro & vbCrLf
+                            If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
 
                             Continue For
                     End Select
@@ -24675,7 +24975,7 @@ Public Class ExcelImportadorManager
                     c += 1
 
 
-                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo.Text)
+                    LogicaImportador.actualizar(.FechaArribo, txtFechaArribo)
                 End With
 
 
@@ -24695,22 +24995,22 @@ Public Class ExcelImportadorManager
                     End If
 
                     If CartaDePorteManager.Save(SC, cdp, glbIdUsuario, UserName) = -1 Then
-                        txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                        txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
                         Debug.Print("No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf)
-                        ErrHandler.WriteError("Error al grabar CDP importada")
-                        txtLogErrores.Text &= ms
+                        ErrHandler2.WriteError("Error al grabar CDP importada")
+                        txtLogErrores &= ms
                     Else
                         'dr.Item("URLgenerada") = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
                     End If
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
-                    txtLogErrores.Text &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
-                    txtLogErrores.Text &= ex.ToString
+                    ErrHandler2.WriteError(ex)
+                    txtLogErrores &= "No se pudo grabar la carta n° " & cdp.NumeroCartaDePorte & vbCrLf
+                    txtLogErrores &= ex.ToString
 
                 End Try
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
-                txtLogErrores.Text &= ex.ToString
+                ErrHandler2.WriteError(ex)
+                txtLogErrores &= ex.ToString
             End Try
 
         Next
@@ -24750,8 +25050,8 @@ Public Class ExcelImportadorManager
 
         'panelEquivalencias.Visible = True
         'MsgBoxAjax(Me, "Análisis Reyser importación terminada") ' . Analisis importados " & c)
-        txtLogErrores.Text = "Análisis Reyser importación terminada." & vbCrLf & txtLogErrores.Text
-        txtLogErrores.Visible = True
+        txtLogErrores = "Análisis Reyser importación terminada." & vbCrLf & txtLogErrores
+        'txtLogErrores.Visible = True
 
 
         Return ds
@@ -24923,7 +25223,7 @@ Public Class ExcelImportadorManager
 
 
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    ErrHandler.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
                 End Try
             End While
         End Using
@@ -25057,7 +25357,7 @@ Public Class ExcelImportadorManager
                 '            ResetCurrentCulture()
                 '        End Try
 
-                ErrHandler.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+                ErrHandler2.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
 
 
             End Try
@@ -25137,7 +25437,7 @@ Public Class ExcelImportadorManager
 
 
         Catch ex As Exception
-            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
             Return Nothing
 
 
@@ -25163,10 +25463,16 @@ Public Class ExcelImportadorManager
 
                 'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
             Catch ex As Exception
-                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
             End Try
         End Try
     End Function
+
+
+
+
+
+
 
 
     Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, cmbFormato As System.Web.UI.WebControls.DropDownList, _
@@ -25174,6 +25480,24 @@ Public Class ExcelImportadorManager
          cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, txtLogErrores As System.Web.UI.WebControls.TextBox, txtFechaArribo As System.Web.UI.WebControls.TextBox, glbIdUsuario As Integer, UserName As String) As Integer
 
 
+
+
+
+
+
+        FormatearExcelImportadoEnDLL(m_IdMaestro, archivoExcel, LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato), SC, cmbPuntoVenta.SelectedValue, txtLogErrores.Text, txtFechaArribo.Text, glbIdUsuario, UserName)
+
+
+    End Function
+
+
+
+
+    Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, Formato As LogicaImportador.FormatosDeExcel, _
+                                                     SC As String, _
+      cmbPuntoVenta As Integer, ByRef txtLogErrores As String, txtFechaArribo As String, glbIdUsuario As Integer, UserName As String) As Integer
+
+        'FormatearExcelImportadoEnDLL()
 
         Dim ds As DataSet
 
@@ -25186,7 +25510,7 @@ Public Class ExcelImportadorManager
 
         'Identificar el formato
 
-        Select Case LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato)
+        Select Case Formato
             Case Nidera
 
                 ds = NideraToDataset(archivoExcel)
@@ -25195,6 +25519,10 @@ Public Class ExcelImportadorManager
                 ds = ReyserToDataset(archivoExcel)
             Case Reyser
                 ds = ReyserToDataset(archivoExcel)
+
+            Case ReyserCargillPosicion
+                ds = ReyserToDataset(archivoExcel)
+                'to do
             Case Reyser2
                 ds = ReyserToDataset(archivoExcel)
 
@@ -25262,10 +25590,10 @@ Public Class ExcelImportadorManager
         'busco el renglon de titulos
 
         Dim renglonDeTitulos As Integer
-        If LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato) = Unidad6 Then
+        If Formato = Unidad6 Then
             renglonDeTitulos = 0 'la pegatina de Unidad6 no tiene renglon de títulos
         Else
-            renglonDeTitulos = RenglonTitulos(dtOrigen, archivoExcel, LogicaImportador.FormatoDelArchivo("", cmbFormato))
+            renglonDeTitulos = RenglonTitulos(dtOrigen, archivoExcel, Formato)
         End If
 
 
@@ -25298,7 +25626,7 @@ Public Class ExcelImportadorManager
 
         'excepcion BUNGE / RAMALLO: calidades en minicolumnas improvisadas para cada renglon
         '-pero esto no tiene que estar en postproduccion, sino en preproduccion
-        If LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato) = BungeRamallo Or LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato) = Unidad6Prefijo_NroCarta Then
+        If Formato = BungeRamallo Or Formato = Unidad6Prefijo_NroCarta Then
             FormatearColumnasDeCalidadesRamallo(dtOrigen)
             'FormatearColumnasDeCalidadesRamallo()
         End If
@@ -25318,7 +25646,7 @@ Public Class ExcelImportadorManager
 
         Dim errorEncabezadoTag As String = ""
 
-        Dim f = LogicaImportador.FormatoDelArchivo("", cmbFormato)
+        Dim f = Formato
 
         For i = dtOrigen.Columns.Count - 1 To 0 Step -1
 
@@ -25342,7 +25670,7 @@ Public Class ExcelImportadorManager
 
 
         If errorEncabezadoTag <> "" Then
-            ErrHandler.WriteError("Los encabezados de columna " & errorEncabezadoTag & " no son reconocidos. " & _
+            ErrHandler2.WriteError("Los encabezados de columna " & errorEncabezadoTag & " no son reconocidos. " & _
                                   "Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.")
         End If
 
@@ -25361,7 +25689,7 @@ Public Class ExcelImportadorManager
         '//////////////////////////////////////////
 
 
-        Dim fa = LogicaImportador.FormatoDelArchivo("", cmbFormato)
+        Dim fa = Formato
 
         For j = renglonDeTitulos - 1 To 0 Step -1
             row = dtOrigen.Rows(j)
@@ -25415,7 +25743,7 @@ Public Class ExcelImportadorManager
         End If
 
 
-        Select Case LogicaImportador.FormatoDelArchivo(archivoExcel, cmbFormato)
+        Select Case Formato
 
             Case BungeRamallo
                 'remapeos de clientes
@@ -25435,6 +25763,8 @@ Public Class ExcelImportadorManager
             Case CerealnetToepfer
                 ReasignoExportacion_CerealnetParaToepfer(dtDestino)
 
+            Case ReyserCargillPosicion
+                DejarSoloDatosDePosicion(dtDestino)
 
 
             Case Else
@@ -25471,7 +25801,7 @@ Public Class ExcelImportadorManager
 
 
         If dtDestino.Rows.Count = 0 Then
-            ErrHandler.WriteError("renglones antes de revisar numero de cartadeporte:" & renglonesOriginales & " Renglones despues:" & dtDestino.Rows.Count)
+            ErrHandler2.WriteError("renglones antes de revisar numero de cartadeporte:" & renglonesOriginales & " Renglones despues:" & dtDestino.Rows.Count)
 
             If Debugger.IsAttached Then Stop
         End If
@@ -25488,7 +25818,7 @@ Public Class ExcelImportadorManager
 
         Dim renglonesAntesDeFiltrarPorWilliams = dtDestino.Rows.Count
 
-        If LogicaImportador.FormatoDelArchivo("", cmbFormato) <> NobleLima And LogicaImportador.FormatoDelArchivo("", cmbFormato) <> Renova Then
+        If Formato <> NobleLima And Formato <> Renova Then
 
             For j = dtDestino.Rows.Count - 1 To 0 Step -1
                 row = dtDestino.Rows(j)
@@ -25510,7 +25840,7 @@ Public Class ExcelImportadorManager
 
 
         If dtDestino.Rows.Count = 0 Then
-            ErrHandler.WriteError("Filtrando renglones de colegas.  renglones antes de revisar numero de cartadeporte:" & renglonesAntesDeFiltrarPorWilliams & " Renglones despues:" & dtDestino.Rows.Count)
+            ErrHandler2.WriteError("Filtrando renglones de colegas.  renglones antes de revisar numero de cartadeporte:" & renglonesAntesDeFiltrarPorWilliams & " Renglones despues:" & dtDestino.Rows.Count)
 
             If Debugger.IsAttached Then Stop
             'MsgBoxAjax(Me, "No se pudieron importar filas")
@@ -25544,8 +25874,8 @@ Public Class ExcelImportadorManager
             GrabaExcelEnBase(dtDestino, SC, m_IdMaestro)
 
         Catch ex As Exception
-            ErrHandler.WriteError("Error al llamar GrabaExcelEnBase")
-            ErrHandler.WriteAndRaiseError(ex)
+            ErrHandler2.WriteError("Error al llamar GrabaExcelEnBase")
+            ErrHandler2.WriteAndRaiseError(ex)
         End Try
 
         Return dtDestino.Rows.Count
@@ -25688,7 +26018,7 @@ Public Class ExcelImportadorManager
                 dr.Item("MERMAXHUMEDAD") = mermaxhumedad
                 dr.Item("OTRASMERMAS") = otrasmermas
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
@@ -25740,7 +26070,7 @@ Public Class ExcelImportadorManager
 
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
             Next
@@ -25936,6 +26266,24 @@ Public Class ExcelImportadorManager
     End Sub
 
 
+    Public Shared Sub DejarSoloDatosDePosicion(ByRef dt As Data.DataTable)
+
+
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=17734
+
+        For r = 0 To dt.Rows.Count - 1
+
+            Dim dr = dt.Rows(r)
+
+            dr.Item(enumColumnasDeGrillaFinal.column17.ToString()) = "0"
+            dr.Item(enumColumnasDeGrillaFinal.column14.ToString()) = "0"
+        Next
+
+
+
+    End Sub
+
+
     Public Shared Sub ReasignoExportacion_CerealnetParaToepfer(ByRef dt As Data.DataTable)
 
 
@@ -26034,7 +26382,7 @@ Public Class ExcelImportadorManager
             Next
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         End Try
     End Sub
 
@@ -26425,7 +26773,7 @@ Public Class ExcelImportadorManager
         Try
             adapterForTable1.Update(dt)
         Catch ex As Exception
-            ErrHandler.WriteError("ExcelImportadorManager.Insert()  " & ex.ToString)
+            ErrHandler2.WriteError("ExcelImportadorManager.Insert()  " & ex.ToString)
             'Stop
             Throw
         End Try
@@ -26556,7 +26904,7 @@ Public Class CDPMailFiltrosManager2
             Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
             adapterForTable1.Update(dt)
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         Finally
             myConnection.Close()
 
@@ -26805,7 +27153,7 @@ Public Class CDPMailFiltrosManager2
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError("Sector 1")
+                ErrHandler2.WriteError("Sector 1")
                 Throw
             End Try
 
@@ -26878,7 +27226,7 @@ Public Class CDPMailFiltrosManager2
 
 
             Catch ex As Exception
-                ErrHandler.WriteError("Sector 2")
+                ErrHandler2.WriteError("Sector 2")
                 Throw
             End Try
 
@@ -27056,7 +27404,7 @@ Public Class CDPMailFiltrosManager2
             adapterForTable1.Update(dt)
 
         Catch ex As Exception
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
         Finally
             myConnection.Close()
         End Try
@@ -27112,7 +27460,7 @@ Public Class CDPMailFiltrosManager2
 
 
 
-        'ErrHandler.WriteError("Este reportviewer EXPORTA a excel, pueden andar los mails y esto no. " & _
+        'ErrHandler2.WriteError("Este reportviewer EXPORTA a excel, pueden andar los mails y esto no. " & _
         '                      "-Eh? la otra función RebindReportViewer tambien exporta a EXCEL con un flag. Quizas lo hace con otro usuario... " & _
         '                      "-En fin. Puede llegar a explotar sin rastro. Fijate en los permisos de NETWORK SERVICE para " & _
         '                      "usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
@@ -27165,7 +27513,7 @@ Public Class CDPMailFiltrosManager2
                             'MsgBox(inner.Message)
                             Stop
                         End If
-                        ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
                         inner = inner.InnerException
                     End While
                     Throw
@@ -27586,7 +27934,7 @@ Public Class CDPMailFiltrosManager2
         With dr
             Dim l As Long
 
-
+            Dim s = ""
 
             'If Not chkConLocalReport.Checked Then
             '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
@@ -27620,7 +27968,7 @@ Public Class CDPMailFiltrosManager2
             Catch ex As Exception
                 'logear el idfiltro con problemas
 
-                ErrHandler.WriteError(ex.ToString)
+                ErrHandler2.WriteError(ex.ToString)
                 dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló: " & ex.ToString, 100)
                 Throw
             End Try
@@ -27650,7 +27998,7 @@ Public Class CDPMailFiltrosManager2
 
                 'Dim mails() As String = Split(.Item("EMails"), ",")
                 'For Each s As String In mails
-                'ErrHandler.WriteError("asdasde")
+                'ErrHandler2.WriteError("asdasde")
                 Dim De As String
 
                 Select Case puntoventa
@@ -27743,7 +28091,7 @@ Public Class CDPMailFiltrosManager2
                            puntoventa, optDivisionSyngenta, False, "", "", -1)
                     Catch ex As Exception
                         asunto = "mal formateado"
-                        ErrHandler.WriteError(ex.ToString + " asunto mal formateado")
+                        ErrHandler2.WriteError(ex.ToString + " asunto mal formateado")
                     End Try
 
 
@@ -27824,7 +28172,7 @@ Public Class CDPMailFiltrosManager2
                     Dim tiempomail = stopWatch.Elapsed.Milliseconds
 
 
-                    Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
+                    s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
 
                     dr.Item("UltimoResultado") = s
 
@@ -27838,34 +28186,32 @@ Public Class CDPMailFiltrosManager2
 
 
 
-                    ErrHandler.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
+                    ErrHandler2.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
                     'dddd()
-                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
+                    s = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
+                    dr.Item("UltimoResultado") = s
                     'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
                 End Try
 
                 'Next
             ElseIf output = "-1" Then
                 sError += "El filtro genera un informe vacío." & vbCrLf
-
-                dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+                s = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+                dr.Item("UltimoResultado") = s
             ElseIf output = "-2" Then
 
                 sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
-
-                dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+                s = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+                dr.Item("UltimoResultado") = s
             End If
 
 
+            sError2 = s
 
 
         End With
 
-        Try
-            sError2 = dr.Item("UltimoResultado")
-        Catch ex As Exception
 
-        End Try
 
         Return output
 
@@ -27873,6 +28219,70 @@ Public Class CDPMailFiltrosManager2
     End Function
 
 
+
+
+
+
+
+
+
+
+
+
+    Public Shared Function AgruparPorPeriodo(sc, estado, AgrupadorDeTandaPeriodos, fechadesde, fechahasta)
+        'Dim db As New LinqCartasPorteDataContext(HFSC.Value) 'no uses linq, porque necesitas más bien hacer updates
+        Try
+
+            Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(sc, _
+                                   "", _
+                                  estado, "", -1, -1, _
+                                  -1, -1, _
+                                  -1, -1, -1, -1, _
+                                   CartaDePorteManager.FiltroANDOR.FiltroOR, "", _
+                                  fechadesde, fechahasta, _
+                                   -1, , , , , )
+
+
+            If False Then
+                'metodo 1
+                'limpio anterior
+                EntidadManager.ExecDinamico(sc, "UPDATE CartasDePorte  SET AgrupadorDeTandaPeriodos=NULL  where not AgrupadorDeTandaPeriodos is NULL")
+                'elijo de nuevo
+                EntidadManager.ExecDinamico(sc, "UPDATE CartasDePorte  SET AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & " FROM CartasDePorte CDP  WHERE " & sWHERE)
+            Else
+                'metodo 2 usando tabla adicional (CartasDePorteMailClusters)
+
+                EntidadManager.ExecDinamico(sc, "truncate table CartasDePorteMailClusters")
+                EntidadManager.ExecDinamico(sc, "insert into CartasDePorteMailClusters select idcartadeporte,AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & _
+                                            " FROM CartasDePorte CDP  WHERE " _
+                                            & sWHERE)
+            End If
+
+        Catch ex As Exception
+            ErrHandler2.WriteAndRaiseError("Falló el AgrupadorDeTandaPeriodos. " & ex.ToString)
+        End Try
+    End Function
+
+
+
+    Shared Function MinutosDiferencia(a As Object) As Long
+        Try
+            Return DateDiff(DateInterval.Minute, CDate(Mid(a, 13)), Now)
+        Catch ex As Exception
+            Return -1
+        End Try
+    End Function
+
+
+
+
+    Public Shared Function PurgarColaDeMails(ByVal SC As String)
+
+        'ok, qué hacemos entonces con los que quedan con la marca de "procesandose"?????
+        'me podría mandar un mail de error avisandome que quedaron mails marcados con "procesandose"....
+        ExecDinamico(SC, "IF (select COUNT (*) from WilliamsMailFiltrosCola) > 20000 BEGIN   DELETE from WilliamsMailFiltrosCola where UltimoResultado<>'En Cola'    END ")
+
+    End Function
 
 
 End Class
@@ -27892,6 +28302,96 @@ End Class
 
 
 
+
+Public Class ColaMails
+
+    Public Shared Function CancelarTrabajos(ByVal SC As String, Optional ByVal IdUsuario As Integer = -1) As DataTable
+        If IdUsuario = -1 Then
+            Return ExecDinamico(SC, "update WilliamsMailFiltrosCola set UltimoResultado='Cancelado a las " & Now.ToString & "'  where (UltimoResultado='En Cola'  OR UltimoResultado like 'Procesandose%' ) ")
+        Else
+            Return ExecDinamico(SC, "update WilliamsMailFiltrosCola set UltimoResultado='Cancelado a las " & Now.ToString & "'  where (UltimoResultado='En Cola'   OR UltimoResultado like 'Procesandose%')  AND IdUsuarioEncolo=" & IdUsuario)
+        End If
+    End Function
+
+    Public Shared Function TraerMetadata(ByVal SC As String, Optional ByVal id As Integer = -1) As DataTable
+        If id = -1 Then
+            Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where 1=0")
+        Else
+            Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where idWilliamsMailFiltroCola=" & id)
+        End If
+    End Function
+
+    Public Shared Function TraerEncolados(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where UltimoResultado='En Cola' order by AgrupadorDeTandaPeriodos DESC")
+    End Function
+
+    Public Shared Function TraerEncoladosCount(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select count(*) from WilliamsMailFiltrosCola where UltimoResultado='En Cola'")
+    End Function
+
+    Public Shared Function TraerPrimerEncolado(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select TOP 1 * from WilliamsMailFiltrosCola where UltimoResultado='En Cola' order by AgrupadorDeTandaPeriodos DESC ")
+    End Function
+
+    Public Shared Function TraerPrimerAtrasado(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select TOP 1 * from WilliamsMailFiltrosCola where UltimoResultado LIKE 'Procesando%' order by AgrupadorDeTandaPeriodos DESC ")
+    End Function
+
+    Public Shared Function TraerAtrasados(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where UltimoResultado LIKE 'Procesando%' order by AgrupadorDeTandaPeriodos DESC ")
+    End Function
+
+    Public Shared Function TraerAtrasadosCount(ByVal SC As String) As DataTable
+        Return ExecDinamico(SC, "select count(*) from WilliamsMailFiltrosCola where UltimoResultado LIKE 'Procesando%' ")
+    End Function
+
+    Public Shared Function TraerUno(ByVal SC As String, ByVal id As Integer) As DataTable
+        Return ExecDinamico(SC, "select * from WilliamsMailFiltrosCola where idWilliamsMailFiltroCola=" & id)
+    End Function
+
+
+
+
+
+    Public Shared Function Insert_o_Update(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(Encriptar(SC))
+
+        Try
+            myConnection.Open()
+
+            Dim adapterForTable1 = New SqlDataAdapter("select * from WilliamsMailFiltrosCola", myConnection)
+            Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+            'si te tira error acá, ojito con estar usando el dataset q usaste para el 
+            'insert. Mejor, luego del insert, llamá al Traer para actualizar los datos, y recien ahí llamar al update
+            adapterForTable1.Update(dt)
+            Return 0
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Insert_o_Update = -1
+        Finally
+            myConnection.Close()
+        End Try
+
+    End Function
+
+
+
+
+
+End Class
 
 
 
@@ -28075,7 +28575,282 @@ Public Class CDPDestinosManager
         ExecDinamico(SC, String.Format("DELETE  " & Tabla & "  WHERE {1}={0}", Id, IdTabla))
     End Function
 
+
+
 End Class
 
+
+
+Public Class LogicaInformesWilliams
+
+
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    Shared Sub GeneroDataTablesDeMovimientosDeStock(ByRef dtCDPs As DataTable, ByRef dtRenglonUnicoConLasExistencias As Object, _
+                                             ByRef dtMOVs As Object, _
+                                             ByVal idDestinatario As Integer, ByVal idDestino As Integer, ByVal idarticulo As Integer, _
+                                             ByVal desde As Date, ByVal hasta As Date, ByVal sc As String)
+
+
+        'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10263  rechazadas están saliendo en el informe de existencias
+        'no tengo que incluir los rechazos!, ni los duplicados
+
+        'aca uso el _informes, y en el .rdl uso _informescorregido ....
+        'efectivamente, ahí usa VendedorDesc en lugar de TitularDesc....
+
+
+        Dim sTitulo As String = ""
+
+        dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
+                "", "", "", 1, 0, _
+                enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+                idDestinatario, -1, _
+                -1, idarticulo, -1, idDestino, _
+                "1", "Export", _
+                 desde, hasta, -1, sTitulo, , , , , , , , , )
+
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+        Dim movs = (From i In db.CartasPorteMovimientos _
+                    Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente _
+                    Where _
+                        (i.FechaIngreso >= desde And i.FechaIngreso <= hasta) _
+                        And (i.IdArticulo = idarticulo) _
+                        And (i.Puerto = idDestino) _
+                        And ( _
+                                (i.IdExportadorOrigen = idDestinatario) _
+                                Or (i.IdExportadorDestino = idDestinatario) _
+                        ) _
+                        And If(i.Anulada, "NO") <> "SI" _
+                    Select Tipo = f(i.Tipo), _
+                                ExportadorOrigen = c.RazonSocial, i.FechaIngreso, _
+                                i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero _
+                ).ToList
+
+
+
+
+
+
+
+        dtMOVs = movs
+
+        'Dim dsVistaMOVS = CDPStockMovimientoManager.GetList(sc)
+
+
+
+
+
+
+
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        'mejunje: le estoy pasando un segundo dataset con las existencias calculadas
+        'en VBasic. Tambien se podría usar la funcion SQL wExistencias......, pero es mas
+        'piola calcularlo por visual. -Sí, pero así haces al informe dependiente del codigo... qué
+        'se hace en un caso así?
+        '/////////////////////////////////////////////////////
+
+        'dt2 = New DataTable
+        'dt2.Columns.Add("Existencias", GetType(Double))
+        'dt2.Rows.Add(dt2.NewRow)
+        ''dt2 = EntidadManager.ExecDinamico(HFSC.Value, "SELECT dbo.wExistenciasCartaPorteMovimientos (null,null,null) as Existencias")
+        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario)
+
+        dtRenglonUnicoConLasExistencias = (From i In db.CartasDePortes.Take(1) Select Existencias = ex, CampoDummyParaQueGuardeElNombre = 0).ToList
+
+
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+
+
+
+
+
+
+    End Sub
+
+    Shared Function f(ByVal i As Integer) As String
+        Dim TiposMovs() As String = {"Préstamo", "Transferencia", "Devolución", "Embarque", "Venta"}
+        Try
+            Return TiposMovs(i - 1)
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
+
+
+    Shared Function ExistenciasAlDiaPorPuerto(ByVal sc As String, ByVal Fecha As DateTime, _
+                                              ByVal IdArticulo As Integer, ByVal IdDestinoWilliams As Integer, _
+                                              ByVal iddestinatario As Integer) As Double
+
+        Dim entradasMOV, entradasCDP, salidasMOV As Double
+        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+        '///////////////////////////////////////////////
+        'entradas por cartas de porte
+        '///////////////////////////////////////////////
+
+        'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
+
+        If False Then
+
+            'no puedo usar esto, porque necesito traer cartas desde el principio de los tiempos
+
+            'Dim dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
+            '        "", "", "", 1, 0, _
+            '        enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+            '        iddestinatario, -1, _
+            '        -1, IdArticulo, -1, idDestino, _
+            '        "1", "Export", _
+            '          #1/1/1980#, hasta, -1, sTitulo, , , , , , , , , )
+
+
+
+        ElseIf False Then
+
+            Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc, _
+                    "", "", "", 1, 0, _
+                    enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+                     iddestinatario, -1, _
+                    -1, IdArticulo, -1, IdDestinoWilliams, _
+                    FiltroANDOR.FiltroOR, enumCDPexportacion.Export, _
+                     #1/1/1980#, Fecha, -1)
+
+            Dim c = q.Count
+            If c = 0 Then
+                entradasCDP = 0
+            Else
+                'parece que si no trae registros, me explota el sum
+                entradasCDP = q.DefaultIfEmpty.Sum(Function(x) x.NetoProc)
+            End If
+
+        Else
+
+            'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
+
+
+            Dim q = Aggregate i In db.CartasDePortes _
+                    Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
+                    And (True Or If(i.SubnumeroDeFacturacion, 0) <= 0) _
+                        And i.Exporta = "SI" And i.Anulada <> "SI" _
+                        And If(i.Destino, 0) = IdDestinoWilliams _
+                        And If(i.IdArticulo, 0) = IdArticulo _
+                        And If(i.Entregador, 0) = iddestinatario _
+                    Into Sum(CType(i.NetoProc, Decimal?))
+
+            entradasCDP = iisNull(q, 0)
+        End If
+
+
+        '///////////////////////////////////////////////
+        'movimientos:
+        '///////////////////////////////////////////////
+
+
+        Dim temp = From i In db.CartasPorteMovimientos _
+                   Where _
+                        (i.FechaIngreso < Fecha) _
+                    And (i.IdArticulo = IdArticulo) _
+                    And (i.Puerto = IdDestinoWilliams) _
+                    And ( _
+                            (i.IdExportadorOrigen = iddestinatario) _
+                            Or (i.IdExportadorDestino = iddestinatario) _
+                        ) _
+                    And If(i.Anulada, "NO") <> "SI"
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+        'Throw New Exception("revisar este asunto, porque lo de entrada salida confunde")
+
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=12386
+
+
+
+
+
+        Dim etemp = temp.Where(Function(i) ( _
+                                                ( _
+                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorDestino = iddestinatario) _
+                                                        Or _
+                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorOrigen = iddestinatario) _
+                                                ) _
+                                                And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+        etemp = temp.Where(Function(i) ((i.Entrada_o_Salida = 1) And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+        Debug.Print(etemp.Count)
+        entradasMOV = etemp.Sum(Function(i) If(i.Cantidad, 0))
+
+
+
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+        Dim stemp = temp.Where(Function(i) ( _
+                                                ( _
+                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorDestino = iddestinatario) _
+                                                        Or _
+                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorOrigen = iddestinatario) _
+                                                ) _
+                                                And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+
+        stemp = temp.Where(Function(i) ((i.Entrada_o_Salida = 2) And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+
+
+        Debug.Print(stemp.Count)
+        salidasMOV = stemp.Sum(Function(i) If(i.Cantidad, 0))
+
+
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+
+        ErrHandler2.WriteError("entradasCDP: " & entradasCDP)
+        ErrHandler2.WriteError("entradasMOV: " & entradasMOV)
+        ErrHandler2.WriteError("salidas: " & salidasMOV)
+        ErrHandler2.WriteError("total: " & (entradasCDP + entradasMOV - salidasMOV))
+
+
+        Dim a5 = From x In stemp Order By x.IdCDPMovimiento Select CStr(x.IdCDPMovimiento)
+
+        ErrHandler2.WriteError(vbCrLf & Join(a5.ToArray, vbCrLf))
+
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+
+
+
+        Return entradasCDP + entradasMOV - salidasMOV
+
+    End Function
+
+
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+End Class
 
 
