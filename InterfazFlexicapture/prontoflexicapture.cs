@@ -259,7 +259,8 @@ namespace ProntoFlexicapture
                 var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
                 var ccc = imagenes[count].Substring(0, sd + w + 6);
 
-                processor.ExportDocumentEx(document, ccc + "\\FCEExport", "ExportToXLS", exportParams);
+
+                processor.ExportDocumentEx(document, ccc  , "ExportToXLS", exportParams);
 
 
 
