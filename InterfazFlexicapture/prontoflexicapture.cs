@@ -484,9 +484,10 @@ namespace ProntoFlexicapture
             Pronto.ERP.BO.CartaDePorte cdp;
 
             IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
-            IField BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE");
-            IField NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta");
-            IField CEE = Sample.AdvancedTechniques.findField(document, "CEE");
+
+            string BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE").NullStringSafe();
+            string NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta").NullStringSafe();
+            string CEE = Sample.AdvancedTechniques.findField(document, "CEE").NullStringSafe();
 
 
             string TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT").NullStringSafe();
@@ -640,7 +641,7 @@ namespace ProntoFlexicapture
                     cdp.TarifaTransportista = Conversion.Val(Tarifa);
 
                     cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
-                    cdp.cee
+                    cdp.CEE = BarraCEE;
 
                     try
                     {
@@ -670,14 +671,27 @@ namespace ProntoFlexicapture
                     }
 
                     cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                    Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
+                    if (cdp.Destino == -1)
+                    {
+                        Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
+                        cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
+                    } 
+
 
                     cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
-                    Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1);
+                    if (cdp.Procedencia == -1)
+                    {
+                        Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1);
+                        cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
+                    }
+
 
                     cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
-                    Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento);
-
+                    if (cdp.IdEstablecimiento == -1)
+                    {
+                        Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento);
+                        cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+                    }
 
 
                 }
