@@ -237,6 +237,10 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<CDPHumedade> CDPHumedades { get; set; }
         public virtual DbSet<WilliamsDestino> WilliamsDestinos { get; set; }
         public virtual DbSet<WilliamsMailFiltrosCola> WilliamsMailFiltrosColas { get; set; }
+        public virtual DbSet<FertilizantesPuntosDespacho> FertilizantesPuntosDespachoes { get; set; }
+        public virtual DbSet<FertilizantesTiposDespacho> FertilizantesTiposDespachoes { get; set; }
+        public virtual DbSet<UsuariosRelacionFertilizantesPuntosDespacho> UsuariosRelacionFertilizantesPuntosDespachoes { get; set; }
+        public virtual DbSet<UsuariosRelacionFertilizantesTiposDespacho> UsuariosRelacionFertilizantesTiposDespachoes { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
@@ -251,17 +255,17 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_ActualizarEstado", idRequerimientoParameter, idDetalleRequerimientoParameter);
         }
     
-        public virtual ObjectResult<AutorizacionesPorComprobante> AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante(Nullable<int> idComprobante, Nullable<int> idFormulario)
+        public virtual ObjectResult<AutorizacionesPorComprobante> AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante(Nullable<int> idFormulario, Nullable<int> idComprobante)
         {
-            var idComprobanteParameter = idComprobante.HasValue ?
-                new ObjectParameter("IdComprobante", idComprobante) :
-                new ObjectParameter("IdComprobante", typeof(int));
-    
             var idFormularioParameter = idFormulario.HasValue ?
                 new ObjectParameter("IdFormulario", idFormulario) :
                 new ObjectParameter("IdFormulario", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizacionesPorComprobante>("AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante", idComprobanteParameter, idFormularioParameter);
+            var idComprobanteParameter = idComprobante.HasValue ?
+                new ObjectParameter("IdComprobante", idComprobante) :
+                new ObjectParameter("IdComprobante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizacionesPorComprobante>("AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante", idFormularioParameter, idComprobanteParameter);
         }
     
         public virtual int Cotizaciones_TX_PorFechaMoneda(Nullable<System.DateTime> fecha, Nullable<int> idMoneda)

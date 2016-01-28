@@ -424,7 +424,7 @@ Public Shared Function GetCopyOfItem(ByVal SC As String, ByVal id As Integer) As
                 Dim oPto = EntidadManager.GetItem(SC, "PuntosVenta", IdPuntoVenta)
                 Return oPto.Item("ProximoNumero")
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 Return -1
             End Try
 

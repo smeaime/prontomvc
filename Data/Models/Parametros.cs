@@ -314,5 +314,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> ProximoNumeroOrdenTrabajo { get; set; }
         public string BasePRONTOMantenimiento { get; set; }
         public Nullable<int> ProximaOrdenPagoFF { get; set; }
+        public string PedidosSubcontratos { get; set; }
     }
 }

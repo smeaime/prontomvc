@@ -81,6 +81,7 @@ namespace ProntoMVC.Data.Models
         public string TextoAuxiliar3 { get; set; }
         public string ImputarAPresupuestoDeObra { get; set; }
         public string Activa { get; set; }
+        public Nullable<int> CodigoRubroContable { get; set; }
     
         public virtual ICollection<Articulo> Articulos { get; set; }
         public virtual ICollection<Articulo> Articulos1 { get; set; }

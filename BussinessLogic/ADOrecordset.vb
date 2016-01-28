@@ -4787,7 +4787,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 '        Try
 '            oW.ActiveDocument.SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
 '        Catch ex As Exception
-'            ErrHandler.WriteError("Explotó el .SaveAs()  ") ' & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
+'            ErrHandler2.WriteError("Explotó el .SaveAs()  ") ' & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
 '            'MsgBoxAjax(Me, "No se generó el certificado")
 
 '        End Try
@@ -5278,7 +5278,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 '        Try
 '            oW.ActiveDocument.SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
 '        Catch ex As Exception
-'            ErrHandler.WriteError("Explotó el .SaveAs()  " & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
+'            ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
 '            Throw
 '        End Try
 
@@ -5420,7 +5420,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 '        Try
 '            oW.ActiveDocument.SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
 '        Catch ex As Exception
-'            ErrHandler.WriteError("Explotó el .SaveAs()  " & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
+'            ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
 '            Throw
 '        End Try
 
@@ -5559,7 +5559,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 '        Try
 '            oW.ActiveDocument.SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
 '        Catch ex As Exception
-'            'ErrHandler.WriteError("Explotó el .SaveAs()  " & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
+'            'ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oW.ActiveDocument) & " " & output & " " & wrdFormatDocument & ex.Message)
 '            'Throw
 '        End Try
 

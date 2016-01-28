@@ -546,7 +546,7 @@ Public Class ConsultasLinq
 
         Catch ex As Exception
 
-            ErrHandler.WriteError(ex)
+            ErrHandler2.WriteError(ex)
             Try
                 ExecDinamico(SC, sSQL)
                 ', 300) si le pongo 300 me chifla que no está preparada la cadena de conexion para ese timeout
@@ -555,11 +555,11 @@ Public Class ConsultasLinq
 
                 'ah mira vos es este el que suele explotar por timeout
 
-                '    ErrHandler()
+                '    ErrHandler2()
                 '    mandamailerror()
 
             Catch ex2 As Exception
-                ErrHandler.WriteError(ex2)
+                ErrHandler2.WriteError(ex2)
                 Throw
             End Try
         End Try
