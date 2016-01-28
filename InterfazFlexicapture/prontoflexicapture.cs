@@ -640,6 +640,8 @@ namespace ProntoFlexicapture
                     cdp.TarifaTransportista = Conversion.Val(Tarifa);
 
                     cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
+                    cdp.cee
+
                     try
                     {
                         cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
@@ -661,7 +663,7 @@ namespace ProntoFlexicapture
 
                     
                     cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
-                    if (cdp.IdArticulo == 1)
+                    if (cdp.IdArticulo == -1)
                     {
                         GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie);
                         cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
