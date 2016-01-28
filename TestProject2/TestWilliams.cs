@@ -989,6 +989,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\LoteDe10.zip";
 
 
             //usuario 1 
@@ -1024,6 +1025,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             if (true)
             {
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
                 ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
             }
             else
@@ -1035,8 +1038,11 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             }
 
 
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
 
+            System.Diagnostics.Process.Start(excels[0]);
 
+            
             // mostrar info del lote1
             //VerInfoDelLote(ticket);
 
