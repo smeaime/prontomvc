@@ -253,15 +253,26 @@ namespace ProntoFlexicapture
                 string dir = DirApp + @"\Temp\";
                 IFileExportParams exportParams = engine.CreateFileExportParams();
                 exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
-                processor.ExportDocumentEx(document, dir + "\\FCEExport", "ExportToXLS", exportParams);
+
+
+                var w = imagenes[count].IndexOf(@"\Temp\");
+                var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
+                var ccc = imagenes[count].Substring(0, sd + w + 6);
+
+                processor.ExportDocumentEx(document, ccc + "\\FCEExport", "ExportToXLS", exportParams);
+
+
 
                 if (false)
                 {
                     processor.ExportDocumentEx(document, Path.GetDirectoryName(imagenes[count]), imagenes[count] + ".xml", null);
 
                     exportParams.FileFormat = FileExportFormatEnum.FEF_CSV;
-                    processor.ExportDocumentEx(document, dir + "\\FCEExport", "ExportToCSV", exportParams);
+                    // processor.ExportDocumentEx(document, Path.GetPathRoot(imagenes[count])   dir + "\\FCEExport", "ExportToCSV", exportParams);
                 }
+
+
+
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
@@ -275,7 +286,7 @@ namespace ProntoFlexicapture
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
-                
+
 
 
 
@@ -329,7 +340,7 @@ namespace ProntoFlexicapture
 
 
             IQueryable<procesGrilla> q = (from f in files
-                                          where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff") 
+                                          where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
                                                 || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
                                                  &&
                                                  (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
@@ -343,6 +354,37 @@ namespace ProntoFlexicapture
             //sacar info del log o de los archivos????
         }
 
+
+
+        public static List<string> BuscarExcelsGenerados(string DirApp)
+        {
+
+            string dir = DirApp + @"\Temp\";
+            var l = new List<string>();
+
+            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
+            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+
+            //foreach (FileInfo file in Files)
+            //{
+            //    l.Add(file.Name);
+            //}
+
+
+            //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
+            //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
+
+
+            var q = (from f in files
+                     orderby f.LastWriteTime descending
+                     select f.FullName);
+
+
+            return q.ToList();
+
+        }
 
 
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
@@ -367,7 +409,7 @@ namespace ProntoFlexicapture
 
 
             var q = (from f in files
-                     where ((    f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff") 
+                     where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
                               || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
                             &&
                             (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
@@ -402,7 +444,7 @@ namespace ProntoFlexicapture
 
 
             IQueryable<procesGrilla> q = (from f in files
-                                          where !((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff") 
+                                          where !((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
                                                 || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
                                                  &&
                                                  (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
