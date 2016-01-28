@@ -639,6 +639,83 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function BuscarTransportistaPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.Transportistas Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+
+
+
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.Transportista
+                q.RazonSocial = RazonSocial
+                q.Cuit = cuit
+                'acá había un insertonsubmit
+                db.Transportistas.Add(q)
+                db.SaveChanges()
+                Return q.IdTransportista
+            Else
+                Return 0
+            End If
+
+        Else
+            Return q.IdTransportista
+        End If
+
+        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
+
+
+
+
+
+    End Function
+
+
+
+    Public Shared Function BuscarChoferPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.Choferes Where c.Cuil.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+
+
+
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.Chofere
+                q.Nombre = RazonSocial
+                q.Cuil = cuit
+                'acá había un insertonsubmit
+                db.Choferes.Add(q)
+                db.SaveChanges()
+                Return q.IdChofer
+            Else
+                Return 0
+            End If
+
+        Else
+            Return q.IdChofer
+        End If
+
+        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
+
+
+
+
+
+    End Function
 
     Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
@@ -678,6 +755,43 @@ Public Class CartaDePorteManager
 
     End Function
 
+    Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+
+
+
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.Vendedor
+                q.Nombre = RazonSocial
+                q.Cuit = cuit
+                'acá había un insertonsubmit
+                db.Vendedores.Add(q)
+                db.SaveChanges()
+                Return q.IdVendedor
+            Else
+                Return 0
+            End If
+
+        Else
+            Return q.IdVendedor
+        End If
+
+        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
+
+
+
+
+
+    End Function
 
     Public Shared Function DarDeAltaClienteProvisorio(cuit As String, SC As String, RazonSocial As String) As Integer
         'Dim oDet As ProntoMVC.Data.Models.Cliente = (From i In db.CartasDePorteDetalles _
