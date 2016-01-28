@@ -194,7 +194,7 @@ Namespace Pronto.ERP.Bll
                     End If
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -381,7 +381,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                     Next
@@ -583,7 +583,7 @@ Namespace Pronto.ERP.Bll
                     regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
                     regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 regexReplace2(docText, "#NumeroFactura#", oFac.Numero)
@@ -695,7 +695,7 @@ Namespace Pronto.ERP.Bll
                     End If
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -881,7 +881,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                     Next
@@ -1010,7 +1010,7 @@ Namespace Pronto.ERP.Bll
                     'regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
                     'regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 regexReplace2(docText, "#NumeroFactura#", oFac.NumeradorTexto)
@@ -1153,7 +1153,7 @@ Namespace Pronto.ERP.Bll
                     End If
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -1427,7 +1427,7 @@ Namespace Pronto.ERP.Bll
                     'regexReplace2(docText, "#Localidad#", oFac.Cliente.Localidad) 'oFac.Domicilio)
                     'regexReplace2(docText, "#CUIT#", oFac.Cliente.Cuit)
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
                 regexReplace2(docText, "#NumeroFactura#", oFac.NumeradorTexto)
@@ -1557,7 +1557,7 @@ Namespace Pronto.ERP.Bll
                     End If
 
                 Catch ex As Exception
-                    ErrHandler.WriteError(ex)
+                    ErrHandler2.WriteError(ex)
                 End Try
 
 
@@ -2023,7 +2023,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                     Next
@@ -2346,7 +2346,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                     Next
@@ -2665,7 +2665,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Catch ex As Exception
-                            ErrHandler.WriteError(ex)
+                            ErrHandler2.WriteError(ex)
                         End Try
 
                     Next
@@ -3025,7 +3025,7 @@ Namespace Pronto.ERP.Bll
 
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
             Return nombreArchivoDestino

@@ -22,7 +22,7 @@ Namespace Pronto.ERP.BO
         Private _CuentaOrden1 As Integer = 0
         Private _CuentaOrden2 As Integer = 0
         Private _Corredor As Integer = 0
-        Private _Procedencia As String = String.Empty
+        Private _Procedencia As Integer = 0
         Private _Patente As String = String.Empty
 
         Private _IdArticulo As Integer = 0
@@ -297,6 +297,10 @@ Namespace Pronto.ERP.BO
         Public CalidadTalCualVicentinRebaja As Double = 0
 
 
+        Public TieneRecibidorOficial As Boolean = False
+        Public EstadoRecibidor As enumEstadosDeRecibidor
+        Public MotivoRechazo As enumRechazosDeRecibidor
+        Public ClienteAcondicionador As Integer? = 0
 
 
 
@@ -423,11 +427,11 @@ Namespace Pronto.ERP.BO
                 _Corredor = value
             End Set
         End Property
-        Public Property Procedencia() As String
+        Public Property Procedencia() As Integer
             Get
                 Return _Procedencia
             End Get
-            Set(ByVal value As String)
+            Set(ByVal value As Integer)
                 _Procedencia = value
             End Set
         End Property
@@ -661,5 +665,18 @@ Namespace Pronto.ERP.BO
         End Property
 
     End Class
+
+
+    Public Enum enumEstadosDeRecibidor
+        Recibo
+        Rechazo
+    End Enum
+
+    Public Enum enumRechazosDeRecibidor
+        VACIO
+        REGRESA_ORIGEN
+        ACONDICIONA
+        CAMBIA_CP
+    End Enum
 
 End Namespace

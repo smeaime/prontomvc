@@ -193,11 +193,11 @@ Namespace Pronto.ERP.Bll
                 End If
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
 
-            If Save(SC, mov) = -1 Then ErrHandler.WriteAndRaiseError("No es valido el movimiento que genera la carta")
+            If Save(SC, mov) = -1 Then ErrHandler2.WriteAndRaiseError("No es valido el movimiento que genera la carta")
 
         End Function
 
@@ -234,7 +234,7 @@ Namespace Pronto.ERP.Bll
                     Try
                         'ClaseMigrar.GrabarAjusteStockConCompronto(SC, .IdAjusteStock, .IdArticulo, IIf(.Entrada_o_Salida = 1, .Cantidad, .Cantidad * -1))
                     Catch ex As Exception
-                        ErrHandler.WriteError(ex)
+                        ErrHandler2.WriteError(ex)
                     End Try
 
                 End With
@@ -247,7 +247,7 @@ Namespace Pronto.ERP.Bll
                 Return CDPStockMovimientoId
             Catch ex As Exception
                 'ContextUtil.SetAbort()
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
                 Debug.Print(ex.ToString)
                 Return -1
             Finally
