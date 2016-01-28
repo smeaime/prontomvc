@@ -100,8 +100,15 @@ namespace ProntoWindowsService
             }
         }
 
+
+
+
+
         static public void DoWork()
         {
+
+            kjhkjhk
+
             Log("Empieza");
 
             Initialize();
