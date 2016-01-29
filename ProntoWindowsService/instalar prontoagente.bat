@@ -1,3 +1,5 @@
+cd E:\Sites\ProntoAgente\
+
 net stop prontoagente 
 pause 
 
