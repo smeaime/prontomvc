@@ -83,9 +83,11 @@ namespace ProntoWindowsService
             // wait for the thread to stop giving it 10 seconds
             m_thread.Join(20000);
 
+            // Temillas con la parada del servicio
+        //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
+        //http://stackoverflow.com/questions/1528209/how-to-properly-stop-a-multi-threaded-net-windows-service
 
             Console.WriteLine("exit");
-            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
         }
 
 
@@ -188,10 +190,10 @@ namespace ProntoWindowsService
                 {
 
 
+                    if (bSignaled == true) break;
                     bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
                     if (bSignaled == true) break;
-
-
+        
                     var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                         plantilla, 3,
                                          SC, DirApp, true, ref sError);
@@ -217,8 +219,9 @@ namespace ProntoWindowsService
                     {
                         bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
                         if (bSignaled == true) break;
-
-                        System.Threading.Thread.Sleep(1000 * 30);
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        if (bSignaled == true) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
                         Console.Write(".");
                     }
 
@@ -227,13 +230,12 @@ namespace ProntoWindowsService
                 {
                     Log(x.ToString());
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x);
-                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-                    return;
                 }
 
             }
 
             ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+            Log("Se apagó el motor");
 
         }
 
