@@ -11,3 +11,9 @@ pause
 
 net start prontoagente 
 pause
+
+net stop prontoagente 
+pause 
+
+net start prontoagente 
+pause
