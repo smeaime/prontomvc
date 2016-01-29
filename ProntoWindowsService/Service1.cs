@@ -18,11 +18,18 @@ using ProntoMVC.Data.Models;
 using System.Configuration;
 
 using System.IO;
+using System.Threading;
+
 
 namespace ProntoWindowsService
 {
     public partial class Service1 : ServiceBase
     {
+
+        protected Thread m_thread;
+        static protected ManualResetEvent m_shutdownEvent;
+        static protected TimeSpan m_delay;
+
 
         static string DirApp;
         static string SC;
@@ -52,17 +59,31 @@ namespace ProntoWindowsService
 
         protected override void OnStart(string[] args)
         {
+
+
+            // create the manual reset event and
+            // set it to an initial state of unsignaled
+            m_shutdownEvent = new ManualResetEvent(false);
+
+
             DebugMode();
 
-            var worker = new System.Threading.Thread(DoWork);
-            worker.Name = "MyWorker";
-            worker.IsBackground = false;
-            worker.Start();
+            m_thread = new System.Threading.Thread(DoWork);
+            m_thread.Name = "MyWorker";
+            m_thread.IsBackground = false;
+            m_thread.Start();
         }
 
 
         protected override void OnStop()
         {
+            // signal the event to shutdown
+            m_shutdownEvent.Set();
+
+            // wait for the thread to stop giving it 10 seconds
+            m_thread.Join(20000);
+
+
             Console.WriteLine("exit");
             ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
         }
@@ -104,10 +125,11 @@ namespace ProntoWindowsService
 
 
 
+
         static public void DoWork()
         {
 
-            kjhkjhk
+
 
             Log("Empieza");
 
@@ -149,6 +171,9 @@ namespace ProntoWindowsService
 
             Console.WriteLine("Busca imagenes Pendientes");
 
+
+            bool bSignaled = false;
+
             while (true)
             {
                 // wait for the event to be signaled
@@ -161,8 +186,14 @@ namespace ProntoWindowsService
 
                 try
                 {
+
+
+                    bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                    if (bSignaled == true) break;
+
+
                     var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                                        plantilla, 5,
+                                        plantilla, 3,
                                          SC, DirApp, true, ref sError);
 
 
@@ -184,6 +215,9 @@ namespace ProntoWindowsService
 
                     if (resultado == null)
                     {
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if (bSignaled == true) break;
+
                         System.Threading.Thread.Sleep(1000 * 30);
                         Console.Write(".");
                     }
@@ -199,7 +233,7 @@ namespace ProntoWindowsService
 
             }
 
-
+            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
 
         }
 
