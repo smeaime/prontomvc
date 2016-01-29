@@ -23,6 +23,13 @@ using Pronto.ERP.Bll;
 
 using Microsoft.VisualBasic;
 
+using Excel = Microsoft.Office.Interop.Excel;
+
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using  DocumentFormat.OpenXml.Spreadsheet;
+
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
@@ -251,8 +258,13 @@ namespace ProntoFlexicapture
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
                 string dir = DirApp + @"\Temp\";
+
                 IFileExportParams exportParams = engine.CreateFileExportParams();
                 exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
+                exportParams.ExportOriginalImages = true;
+                IExcelExportParams excelParametros;
+                //exportParams.ExcelParams = excelParametros;
+
 
 
                 var w = imagenes[count].IndexOf(@"\Temp\");
@@ -260,7 +272,10 @@ namespace ProntoFlexicapture
                 var ccc = imagenes[count].Substring(0, sd + w + 6);
 
 
-                processor.ExportDocumentEx(document, ccc  , "ExportToXLS", exportParams);
+                processor.ExportDocumentEx(document, ccc, "ExportToXLS", exportParams);
+
+                // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
+                ManotearExcel(imagenes[count]);
 
 
 
@@ -307,7 +322,30 @@ namespace ProntoFlexicapture
         }
 
 
+        static void ManotearExcel(string nombre){
 
+            Microsoft.Office.Interop.Excel.Application a;
+                                   
+            Excel.XlRangeAutoFormat vFormato;
+            Excel.Application  Exc  =  new Microsoft.Office.Interop.Excel.Application();
+            Exc.Visible = false;
+            Exc.DisplayAlerts = false;
+
+       
+            //Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".")
+
+            //Dim Wb As Excel.Workbook = Exc.ActiveWorkbook
+            //Dim Ws As Excel.Worksheet = CType(Wb.ActiveSheet, Excel.Worksheet)
+
+
+
+            //    Ws.Range(Ws.Cells(1, 1), Ws.Cells(Ws.UsedRange.Rows.Count, Ws.UsedRange.Columns.Count)).AutoFormat(vFormato) 'le hace autoformato
+
+
+
+            //        oWB.Save
+
+        }
 
 
         public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
@@ -341,8 +379,7 @@ namespace ProntoFlexicapture
 
 
             IQueryable<procesGrilla> q = (from f in files
-                                          where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
-                                                || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
+                                          where (EsArchivoDeImagen(f.Name)
                                                  &&
                                                  (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                                           )
@@ -388,6 +425,20 @@ namespace ProntoFlexicapture
         }
 
 
+
+
+        static bool EsArchivoDeImagen(string f)
+        {
+
+
+            if (f.ToLower().StartsWith("exporttoxls") || f.ToLower().EndsWith(".tif") || f.ToLower().EndsWith(".tiff")
+                || f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".pdf")) return true;
+
+            return false;
+
+        }
+
+
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
@@ -410,8 +461,7 @@ namespace ProntoFlexicapture
 
 
             var q = (from f in files
-                     where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
-                              || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
+                     where (EsArchivoDeImagen(f.Name)
                             &&
                             (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                      )
@@ -445,8 +495,7 @@ namespace ProntoFlexicapture
 
 
             IQueryable<procesGrilla> q = (from f in files
-                                          where !((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
-                                                || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
+                                          where !(EsArchivoDeImagen(f.Name)
                                                  &&
                                                  (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                                           )
@@ -539,6 +588,7 @@ namespace ProntoFlexicapture
 
 
 
+
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
 
@@ -587,7 +637,20 @@ namespace ProntoFlexicapture
 
                 //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
 
+
             }
+
+
+
+            ///////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////
+            /////////////////////// tratando de contrabandear, en la exportacion del excel, el nombre del archivo
+            //IField campoAdicional = Sample.AdvancedTechniques.findField(document, "CEE");
+            //campoAdicional.Value = numeroCarta.ToString() + " " + archivoOriginal;
+            //document.Title = "saasafaf";
+            ///////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -658,12 +721,12 @@ namespace ProntoFlexicapture
                     cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
                     cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
-                    
+
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
 
-                    
+
                     cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
                     if (cdp.IdArticulo == -1)
                     {
@@ -676,7 +739,7 @@ namespace ProntoFlexicapture
                     {
                         Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
                         cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                    } 
+                    }
 
 
                     cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
@@ -1128,6 +1191,99 @@ Additionally you can manage the priority of work processes and control whether t
     }
 
 
+
+
+
+
+    public class OpenXMLWindowsApp
+    {
+        public void UpdateSheet()
+        {
+            UpdateCell("Chart.xlsx", "20", 2, "B");
+            UpdateCell("Chart.xlsx", "80", 3, "B");
+            UpdateCell("Chart.xlsx", "80", 2, "C");
+            UpdateCell("Chart.xlsx", "20", 3, "C");
+
+            ProcessStartInfo startInfo = new ProcessStartInfo("Chart.xlsx");
+            startInfo.WindowStyle = ProcessWindowStyle.Normal;
+            Process.Start(startInfo);
+        }
+
+        public static void UpdateCell(string docName, string text,
+            uint rowIndex, string columnName)
+        {
+            // Open the document for editing.
+            using (SpreadsheetDocument spreadSheet = 
+                     SpreadsheetDocument.Open(docName, true))
+            {
+                WorksheetPart worksheetPart = 
+                      GetWorksheetPartByName(spreadSheet, "Sheet1");
+
+                if (worksheetPart != null)
+                {
+                    Cell cell = GetCell(worksheetPart.Worksheet, 
+                                             columnName, rowIndex);
+
+                    cell.CellValue = new CellValue(text);
+                    cell.DataType = 
+                        new EnumValue<CellValues>(CellValues.Number);
+
+
+                    
+                    // Save the worksheet.
+                    worksheetPart.Worksheet.Save();
+                }
+            }
+
+        }
+
+        private static WorksheetPart 
+             GetWorksheetPartByName(SpreadsheetDocument document, 
+             string sheetName)
+        {
+            IEnumerable<Sheet> sheets =
+               document.WorkbookPart.Workbook.GetFirstChild<Sheets>().
+               Elements<Sheet>().Where(s => s.Name == sheetName);
+
+            if (sheets.Count() == 0)
+            {
+                // The specified worksheet does not exist.
+
+                return null;
+            }
+
+            string relationshipId = sheets.First().Id.Value;
+            WorksheetPart worksheetPart = (WorksheetPart)
+                 document.WorkbookPart.GetPartById(relationshipId);
+            return worksheetPart;
+
+        }
+
+        // Given a worksheet, a column name, and a row index, 
+        // gets the cell at the specified column and 
+        private static Cell GetCell(Worksheet worksheet, 
+                  string columnName, uint rowIndex)
+        {
+            Row row = GetRow(worksheet, rowIndex);
+
+            if (row == null)
+                return null;
+
+            return row.Elements<Cell>().Where(c => string.Compare
+                   (c.CellReference.Value, columnName + 
+                   rowIndex, true) == 0).First();
+        }
+
+
+        // Given a worksheet and a row index, return the row.
+        private static Row GetRow(Worksheet worksheet, uint rowIndex)
+        {
+            return worksheet.GetFirstChild<SheetData>().
+              Elements<Row>().Where(r => r.RowIndex == rowIndex).First();
+        } 
+    }
+
+
     // Custom Image Source ///////////////////////////////////////////////////////////
 
 
@@ -1321,3 +1477,7 @@ namespace ExtensionMethods
         }
     }
 }
+
+
+
+
