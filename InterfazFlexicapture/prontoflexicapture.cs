@@ -27,7 +27,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
-using  DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 
 namespace ProntoFlexicapture
@@ -275,7 +275,7 @@ namespace ProntoFlexicapture
                 processor.ExportDocumentEx(document, ccc, "ExportToXLS", exportParams);
 
                 // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
-                ManotearExcel(imagenes[count]);
+                ManotearExcel(Path.GetDirectoryName(imagenes[count]) + @"\ExportToXLS.xls", imagenes[count]);
 
 
 
@@ -322,16 +322,22 @@ namespace ProntoFlexicapture
         }
 
 
-        static void ManotearExcel(string nombre){
+        static void ManotearExcel(string nombreexcel, string dato)
+        {
+
+
+            OpenXMLWindowsApp.UpdateCell(nombreexcel, dato, 2, "BB");
+            return;
+
 
             Microsoft.Office.Interop.Excel.Application a;
-                                   
+
             Excel.XlRangeAutoFormat vFormato;
-            Excel.Application  Exc  =  new Microsoft.Office.Interop.Excel.Application();
+            Excel.Application Exc = new Microsoft.Office.Interop.Excel.Application();
             Exc.Visible = false;
             Exc.DisplayAlerts = false;
 
-       
+
             //Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".")
 
             //Dim Wb As Excel.Workbook = Exc.ActiveWorkbook
@@ -626,10 +632,6 @@ namespace ProntoFlexicapture
             {
 
                 // qué pasa si no esta la licencia?
-<<<<<<< HEAD
-
-=======
->>>>>>> 11379f133345c86781c2c04bc0979fc18ec2f144
                 // detectar con lectores de codigo de barra
 
                 ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
@@ -1217,23 +1219,23 @@ Additionally you can manage the priority of work processes and control whether t
             uint rowIndex, string columnName)
         {
             // Open the document for editing.
-            using (SpreadsheetDocument spreadSheet = 
+            using (SpreadsheetDocument spreadSheet =
                      SpreadsheetDocument.Open(docName, true))
             {
-                WorksheetPart worksheetPart = 
+                WorksheetPart worksheetPart =
                       GetWorksheetPartByName(spreadSheet, "Sheet1");
 
                 if (worksheetPart != null)
                 {
-                    Cell cell = GetCell(worksheetPart.Worksheet, 
+                    Cell cell = GetCell(worksheetPart.Worksheet,
                                              columnName, rowIndex);
 
                     cell.CellValue = new CellValue(text);
-                    cell.DataType = 
+                    cell.DataType =
                         new EnumValue<CellValues>(CellValues.Number);
 
 
-                    
+
                     // Save the worksheet.
                     worksheetPart.Worksheet.Save();
                 }
@@ -1241,8 +1243,8 @@ Additionally you can manage the priority of work processes and control whether t
 
         }
 
-        private static WorksheetPart 
-             GetWorksheetPartByName(SpreadsheetDocument document, 
+        private static WorksheetPart
+             GetWorksheetPartByName(SpreadsheetDocument document,
              string sheetName)
         {
             IEnumerable<Sheet> sheets =
@@ -1265,7 +1267,7 @@ Additionally you can manage the priority of work processes and control whether t
 
         // Given a worksheet, a column name, and a row index, 
         // gets the cell at the specified column and 
-        private static Cell GetCell(Worksheet worksheet, 
+        private static Cell GetCell(Worksheet worksheet,
                   string columnName, uint rowIndex)
         {
             Row row = GetRow(worksheet, rowIndex);
@@ -1274,7 +1276,7 @@ Additionally you can manage the priority of work processes and control whether t
                 return null;
 
             return row.Elements<Cell>().Where(c => string.Compare
-                   (c.CellReference.Value, columnName + 
+                   (c.CellReference.Value, columnName +
                    rowIndex, true) == 0).First();
         }
 
@@ -1284,7 +1286,7 @@ Additionally you can manage the priority of work processes and control whether t
         {
             return worksheet.GetFirstChild<SheetData>().
               Elements<Row>().Where(r => r.RowIndex == rowIndex).First();
-        } 
+        }
     }
 
 
