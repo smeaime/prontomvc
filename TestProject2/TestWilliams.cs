@@ -990,6 +990,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\LoteDe10.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\LoteDe4.zip";
 
 
             //usuario 1 
