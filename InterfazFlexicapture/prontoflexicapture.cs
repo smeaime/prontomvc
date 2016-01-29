@@ -197,6 +197,9 @@ namespace ProntoFlexicapture
             int count = 0;
             while (true)
             {
+
+                FuncionesGenericasCSharp.Resultados output = null;
+
                 if (count > imagenes.Count - 1) break;
 
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
@@ -234,7 +237,8 @@ namespace ProntoFlexicapture
                 {
                     try
                     {
-                        r.Add(ProcesaCarta(document, SC, imagenes[count], DirApp));
+                        output = ProcesaCarta(document, SC, imagenes[count], DirApp);
+                        r.Add(output);
 
                     }
                     catch (Exception x)
@@ -275,7 +279,7 @@ namespace ProntoFlexicapture
                 processor.ExportDocumentEx(document, ccc, "ExportToXLS", exportParams);
 
                 // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
-                ManotearExcel(Path.GetDirectoryName(imagenes[count]) + @"\ExportToXLS.xls", imagenes[count]);
+                ManotearExcel(Path.GetDirectoryName(imagenes[count]) + @"\ExportToXLS.xls", "numero " + output.numerocarta + " archivo: " + imagenes[count] + " id" + output.IdCarta);
 
 
 
@@ -352,7 +356,7 @@ namespace ProntoFlexicapture
             var c = workBook.ActiveSheet.UsedRange.Columns.Count;
 
             //Excel.Range row1 = sheet.Rows.Cells[1, 1];
-            Excel.Range row2 = sheet.Rows.Cells[r, 46]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
+            Excel.Range row2 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
 
             //row1.Value = "Test100";
             row2.Value = dato;
