@@ -352,7 +352,7 @@ namespace ProntoFlexicapture
             var c = workBook.ActiveSheet.UsedRange.Columns.Count;
 
             //Excel.Range row1 = sheet.Rows.Cells[1, 1];
-            Excel.Range row2 = sheet.Rows.Cells[r, 46];
+            Excel.Range row2 = sheet.Rows.Cells[r, 46]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
 
             //row1.Value = "Test100";
             row2.Value = dato;
@@ -728,8 +728,8 @@ namespace ProntoFlexicapture
 
                     try
                     {
-                        cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
                         cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
+                        cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
                     }
                     catch (Exception ex2)
                     {
