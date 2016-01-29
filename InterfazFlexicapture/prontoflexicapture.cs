@@ -326,30 +326,43 @@ namespace ProntoFlexicapture
         {
 
 
-            OpenXMLWindowsApp.UpdateCell(nombreexcel, dato, 2, "BB");
-            return;
-
-
-            Microsoft.Office.Interop.Excel.Application a;
-
-            Excel.XlRangeAutoFormat vFormato;
-            Excel.Application Exc = new Microsoft.Office.Interop.Excel.Application();
-            Exc.Visible = false;
-            Exc.DisplayAlerts = false;
-
-
-            //Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".")
-
-            //Dim Wb As Excel.Workbook = Exc.ActiveWorkbook
-            //Dim Ws As Excel.Worksheet = CType(Wb.ActiveSheet, Excel.Worksheet)
+            //OpenXMLWindowsApp.UpdateCell(nombreexcel, dato, 2, "BB");
+            //return;
 
 
 
-            //    Ws.Range(Ws.Cells(1, 1), Ws.Cells(Ws.UsedRange.Rows.Count, Ws.UsedRange.Columns.Count)).AutoFormat(vFormato) 'le hace autoformato
+            Excel.Application excel = new Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workBook = excel.Workbooks.Open(nombreexcel);
+            Microsoft.Office.Interop.Excel.Worksheet sheet = workBook.ActiveSheet;
+            Microsoft.Office.Interop.Excel.Range range = sheet.UsedRange;
+
+            excel.Visible = false;
+            excel.DisplayAlerts = false;
 
 
+            //string address = range.get_Address();
+            //string[] cells = address.Split(new char[] { ':' });
+            //string beginCell = cells[0].Replace("$", "");
+            //string endCell = cells[1].Replace("$", "");
 
-            //        oWB.Save
+            //int lastColumn = range.Columns.Count;
+            //int lastRow = range.Rows.Count;
+
+            var r = workBook.ActiveSheet.UsedRange.Rows.Count;
+            var c = workBook.ActiveSheet.UsedRange.Columns.Count;
+
+            //Excel.Range row1 = sheet.Rows.Cells[1, 1];
+            Excel.Range row2 = sheet.Rows.Cells[r, 46];
+
+            //row1.Value = "Test100";
+            row2.Value = dato;
+
+
+            excel.Application.ActiveWorkbook.SaveAs(nombreexcel);
+            excel.Application.Quit();
+            excel.Quit();
+
+
 
         }
 
