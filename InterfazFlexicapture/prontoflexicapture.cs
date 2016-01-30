@@ -454,8 +454,15 @@ namespace ProntoFlexicapture
         {
 
 
-            if (f.ToLower().StartsWith("exporttoxls") || f.ToLower().EndsWith(".tif") || f.ToLower().EndsWith(".tiff")
-                || f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".pdf")) return true;
+            if (!f.ToLower().Contains("exporttoxls")  &&
+                (
+                    f.ToLower().EndsWith(".tif") 
+                    || f.ToLower().EndsWith(".tiff")
+                    || f.ToLower().EndsWith(".jpg") 
+                    || f.ToLower().EndsWith(".pdf")
+                )
+               )
+               return true;
 
             return false;
 
