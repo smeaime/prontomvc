@@ -16513,20 +16513,20 @@ Public Class LogicaFacturacion
             '-igual que haces para el tope de monto!!!
             'resolverlo en EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones()
             If False Then
-                For Each i In dtlotecito
-                    Dim q = AgruparItemsDeLaFactura(lote, optFacturarA, agruparArticulosPor, SC, txtBuscar)
+                'For Each i In dtlotecito
+                '    Dim q = AgruparItemsDeLaFactura(lote, optFacturarA, agruparArticulosPor, SC, txtBuscar)
 
-                    Dim renglons As Integer = 0
-                    For Each o In q
-                        renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
-                    Next
-                    If renglons > MAXRENGLONES Then
-                        Dim s2 = "La factura para " & idClienteAfacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
-                        ErrHandler2.WriteAndRaiseError(s2)
-                        'Throw New Exception(s2)
-                        ' Return -12
-                    End If
-                Next
+                '    Dim renglons As Integer = 0
+                '    For Each o In q
+                '        renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
+                '    Next
+                '    If renglons > MAXRENGLONES Then
+                '        Dim s2 = "La factura para " & idClienteAfacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
+                '        ErrHandler2.WriteAndRaiseError(s2)
+                '        'Throw New Exception(s2)
+                '        ' Return -12
+                '    End If
+                'Next
             End If
 
 
@@ -17848,7 +17848,7 @@ Public Class LogicaFacturacion
                     Next
 
                     'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
-
+                    .....
                     If renglons > MAXRENGLONES Then
                         'ErrHandler2.WriteError("No definio en parametros la cuenta contable deudores varios")
 
