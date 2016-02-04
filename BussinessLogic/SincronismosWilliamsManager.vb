@@ -4142,8 +4142,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -4377,8 +4377,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -4628,8 +4628,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -5361,8 +5361,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -5569,8 +5569,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -5788,8 +5788,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -6019,8 +6019,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -6420,8 +6420,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
@@ -18343,8 +18343,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & JustificadoDerecha(dr("Trasportista").ToString, 30).Replace("&", " ")                         '13 - Nombre Empresa de Transporte	Alfa	30	Razón Social del Transportista.
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
                 sb &= "&" & Int(dr("Kg.Bruto Desc.")).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
@@ -18569,8 +18569,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & JustificadoDerecha(dr("Trasportista").ToString, 30).Replace("&", " ")                         '13 - Nombre Empresa de Transporte	Alfa	30	Razón Social del Transportista.
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
                 sb &= "&" & Int(dr("Kg.Bruto Desc.")).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
@@ -18794,8 +18794,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & JustificadoDerecha(dr("Trasportista").ToString, 30).Replace("&", " ")                         '13 - Nombre Empresa de Transporte	Alfa	30	Razón Social del Transportista.
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
                 sb &= "&" & Int(dr("Kg.Bruto Desc.")).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
@@ -19019,8 +19019,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & JustificadoDerecha(dr("Trasportista").ToString, 30).Replace("&", " ")                         '13 - Nombre Empresa de Transporte	Alfa	30	Razón Social del Transportista.
                 sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
 
-                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "No")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
-                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "No")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
                 sb &= "&" & Int(dr("Kg.Bruto Desc.")).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
