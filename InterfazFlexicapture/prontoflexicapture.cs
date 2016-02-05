@@ -397,7 +397,7 @@ namespace ProntoFlexicapture
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
 
@@ -499,6 +499,7 @@ namespace ProntoFlexicapture
                      select f.FullName).Take(cuantas);
 
 
+
             return q.ToList();
 
         }
@@ -520,7 +521,7 @@ namespace ProntoFlexicapture
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
 
@@ -532,6 +533,8 @@ namespace ProntoFlexicapture
                                           orderby f.LastWriteTime descending
                                           select new procesGrilla() { nombreImagen = "" }).AsQueryable();
 
+
+            como me traigo la info de las id, etc?
 
 
             return q;
