@@ -454,15 +454,15 @@ namespace ProntoFlexicapture
         {
 
 
-            if (!f.ToLower().Contains("exporttoxls")  &&
+            if (!f.ToLower().Contains("exporttoxls") &&
                 (
-                    f.ToLower().EndsWith(".tif") 
+                    f.ToLower().EndsWith(".tif")
                     || f.ToLower().EndsWith(".tiff")
-                    || f.ToLower().EndsWith(".jpg") 
+                    || f.ToLower().EndsWith(".jpg")
                     || f.ToLower().EndsWith(".pdf")
                 )
                )
-               return true;
+                return true;
 
             return false;
 
@@ -517,24 +517,39 @@ namespace ProntoFlexicapture
 
 
 
-        public static IQueryable<procesGrilla> ExtraerListaDeImagenesProcesadas(string DirApp)
+        public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
+        {
+
+            cdp.CalidadTierra = -1;
+        }
+
+        public static List<int> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
+            DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
+
+
+            List<int> q = (from CartasDePorte i in db.CartasDePortes where (i.CalidadTierra == -1) select i.IdCartaDePorte).ToList();
+
+
+            /*
             IQueryable<procesGrilla> q = (from f in files
-                                          where !(EsArchivoDeImagen(f.Name)
-                                                 &&
-                                                 (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
-                                          )
-                                          orderby f.LastWriteTime descending
-                                          select new procesGrilla() { nombreImagen = "" }).AsQueryable();
+                                      where !(EsArchivoDeImagen(f.Name)
+                                             &&
+                                             (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                                      )
+                                      orderby f.LastWriteTime descending
+                                      select new procesGrilla() { nombreImagen = f.Name }).AsQueryable();
+            */
 
 
-            como me traigo la info de las id, etc?
+
+            // como me traigo la info de las id, etc?
 
 
             return q;
@@ -703,6 +718,9 @@ namespace ProntoFlexicapture
 
                 string s;
 
+                //marco la imagen como procesada por la OCR
+                MarcarCartaComoProcesada(ref cdp);
+
                 cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT, SC, Titular);
 
                 //s = IntermediarioCUIT.Value.AsString;
@@ -815,8 +833,10 @@ namespace ProntoFlexicapture
 
                 ErrHandler2.WriteError("Llamo a IsValid y Save");
 
+
+
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
-                if (valid)
+                if (valid && (numeroCarta >= 10000000 && numeroCarta < 999000999))
                 {
                     var id = CartaDePorteManager.Save(SC, cdp, 0, "");
 

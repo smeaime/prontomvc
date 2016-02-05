@@ -5163,8 +5163,6 @@ Namespace Pronto.ERP.Bll
             ErrHandler2.WriteError("en el sincro syngfac 3")
 
 
-
-
             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
@@ -5194,8 +5192,32 @@ Namespace Pronto.ERP.Bll
                         Continue For
                     End If
 
+
+
+
+                    Dim fac As ProntoMVC.Data.Models.Factura
                     'esta cosita linda... creo que es lo que explota
-                    Dim fac = db.Facturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
+                    Try
+
+                        fac = db.Facturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
+                        'quizas se esta quejando de algun campo de una tabla dependiente que no entra en un int
+                        '                   Error Message:System.Data.Entity.Core.EntityCommandExecutionException: 
+                        ' An error occurred while reading from the store providers data reader. See the inner exception for details. 
+                        '---> System.Data.SqlClient.SqlException: Arithmetic overflow error converting expression to data type int.
+                        '       at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+                        '       at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(ex)
+                        ErrHandler2.WriteError(ex.InnerException)
+                        Throw
+                    End Try
+
+
+
+
+
+
 
                     Try
 
