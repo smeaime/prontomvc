@@ -112,7 +112,7 @@ namespace ProntoMVC.Tests
             */
 
             TempFolder = DirApp + @"\Temp";
-            
+
         }
 
 
@@ -981,7 +981,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
             var encola = (from i in lista select new { nombre = i }).ToList();
 
-            var termin = ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp).ToList();
+            var termin = ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp, SC).ToList();
 
         }
 
@@ -1010,7 +1010,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, "Mariano");
             string destarchivo = nuevosubdir + Path.GetFileName(zipFile);
             File.Copy(zipFile, destarchivo, true);
-            var l= CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
+            var l = CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1053,7 +1053,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             System.Diagnostics.Process.Start(excels[0]);
 
-            
+
             // mostrar info del lote1
             //VerInfoDelLote(ticket);
 
@@ -1348,7 +1348,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 1),
+                new DateTime(2015, 10, 1), new DateTime(2015, 10, 1),
                 0, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
 
 

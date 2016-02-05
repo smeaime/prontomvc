@@ -1656,6 +1656,20 @@ alter table Log ADD
 go
 
 
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+
+
+--create table CartasDePorteLog
+--(	
+--	IdUsuariosRelacionFertilizantesTiposDespacho int IDENTITY (1, 1) PRIMARY KEY,
+--	IdCartaDePorte  int REFERENCES CartasDePorte(IdCartaDePorte),
+--	nombrearchivo  
+--	AgrupadorDeTandaPeriodos  int 
+--)
+--go
+
 
 
 
