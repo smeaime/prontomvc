@@ -17848,7 +17848,7 @@ Public Class LogicaFacturacion
                     Next
 
                     'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
-                    .....
+
                     If renglons > MAXRENGLONES Then
                         'ErrHandler2.WriteError("No definio en parametros la cuenta contable deudores varios")
 

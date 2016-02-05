@@ -93,9 +93,15 @@ namespace ProntoMVC.Tests
             //    sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
             //
 
+            DirApp = ConfigurationManager.AppSettings["DirApp"];
+
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
+
+            plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
+
+            /*
 
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
-            TempFolder = DirApp + @"\Temp";
             // string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
 
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
@@ -103,6 +109,10 @@ namespace ProntoMVC.Tests
 
             // plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
             plantilla = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl";
+            */
+
+            TempFolder = DirApp + @"\Temp";
+            
         }
 
 

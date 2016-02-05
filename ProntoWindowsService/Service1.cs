@@ -84,8 +84,8 @@ namespace ProntoWindowsService
             m_thread.Join(20000);
 
             // Temillas con la parada del servicio
-        //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
-        //http://stackoverflow.com/questions/1528209/how-to-properly-stop-a-multi-threaded-net-windows-service
+            //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
+            //http://stackoverflow.com/questions/1528209/how-to-properly-stop-a-multi-threaded-net-windows-service
 
             Console.WriteLine("exit");
         }
@@ -193,10 +193,13 @@ namespace ProntoWindowsService
                     if (bSignaled == true) break;
                     bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
                     if (bSignaled == true) break;
-        
+
                     var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                         plantilla, 3,
                                          SC, DirApp, true, ref sError);
+
+
+
 
 
                     string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
@@ -226,6 +229,33 @@ namespace ProntoWindowsService
                     }
 
                 }
+
+                catch (System.Runtime.InteropServices.COMException x2)
+                {
+                    /*
+System.Runtime.InteropServices.COMException (0x80004005): Error communicating with ABBYY Product 
+     *                  Licensing Service on 186.18.248.116: The RPC server is unavailable.
+        Diagnostic Message: 1710(0x000006BA) 1442(0x000006BA) 323(0x000006BA) 313(0x000004D5) 311(0x0000274C) 318(0x0000274C)
+at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
+at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 209
+at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 123
+at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
+    */
+
+                    Log(x2.ToString());
+                    Log("Problemas con la licencia? Paro y reinicio");
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(x2);
+
+                    //hacer un unload y cargar de nuevo?
+
+                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                    processor=null;
+                    ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
+
+                    Log("funciona?");
+
+                }
+
                 catch (Exception x)
                 {
                     Log(x.ToString());
