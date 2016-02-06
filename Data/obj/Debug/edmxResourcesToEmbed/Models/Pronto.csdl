@@ -4141,7 +4141,7 @@
     <Property Type="String" Name="CuitClienteExterno" MaxLength="13" FixedLength="false" Unicode="false" />
     <Property Type="Decimal" Name="ComisionDiferenciada" Precision="6" Scale="2" />
     <Property Type="Int32" Name="IdTipoNegocioVentas" />
-    <Property Type="Int32" Name="NumeroOrdenCompraExterna" />
+    <Property Type="Int64" Name="NumeroOrdenCompraExterna" />
     <Property Name="IdTipoOperacion" Type="Int32" />
     <NavigationProperty Name="PuntosVenta" Relationship="DemoProntoModel.FK_Facturas_PuntosVenta" FromRole="Factura" ToRole="PuntosVenta" />
     <Property Name="FueEnviadoCorreoConFacturaElectronica" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
