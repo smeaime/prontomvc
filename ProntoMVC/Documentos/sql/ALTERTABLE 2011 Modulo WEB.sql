@@ -1671,8 +1671,9 @@ go
 --go
 
 
+sp_help facturas
 
-
+select * from facturas where idfactura>79302 and idfactura < 79306
 
 
 
