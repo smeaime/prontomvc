@@ -5160,10 +5160,26 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+
+
+
             ErrHandler2.WriteError("en el sincro syngfac 3")
 
 
             Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+
+                ErrHandler2.WriteError("esto tambien explota?")
+                Try
+
+                    Dim c = db.Facturas.FirstOrDefault
+
+                Catch ex As Exception
+                    ErrHandler2.WriteError("explotó")
+                    ErrHandler2.WriteError(ex)
+                End Try
+
 
 
                 For Each cdp As CartasConCalada In q
@@ -5194,10 +5210,10 @@ Namespace Pronto.ERP.Bll
 
 
 
-
                     Dim fac As ProntoMVC.Data.Models.Factura
-                    'esta cosita linda... creo que es lo que explota
+
                     Try
+                        'esta cosita linda... creo que es lo que explota
 
                         fac = db.Facturas.Where(Function(x) x.IdFactura = cdp.IdFacturaImputada).FirstOrDefault
                         'quizas se esta quejando de algun campo de una tabla dependiente que no entra en un int
@@ -5208,8 +5224,11 @@ Namespace Pronto.ERP.Bll
                         '       at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
 
                     Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
                         ErrHandler2.WriteError(ex.InnerException)
+                        ErrHandler2.WriteError("esa es la innerexception")
+                        ErrHandler2.WriteError("cartaid " & cdp.IdCartaDePorte & "  cartaimputada " & cdp.IdFacturaImputada.ToString)
+
+                        ErrHandler2.WriteError(ex)
                         Throw
                     End Try
 

@@ -1342,14 +1342,14 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada2(SC,
-                "", "", "", 1, 300, CartaDePorteManager.enumCDPestado.Facturadas
-                   , "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
+             var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada2(SC,
+                "", "", "",  0, 1000, CartaDePorteManager.enumCDPestado.Facturadas
+                   , "", 4333, -1,
+                -1, 4333, 4333,
+                -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
-                new DateTime(2015, 10, 1), new DateTime(2015, 10, 1),
-                0, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                 -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
 
 
             var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
