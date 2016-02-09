@@ -1677,3 +1677,9 @@ select * from facturas where idfactura>79302 and idfactura < 79306
 
 
 
+CREATE nonclustered INDEX IDX_Cartasdeporte_CalidadTierra on CartasDePorte(CalidadTierra)
+go
+
+
+select * from cartasdeporte where calidadtierra<0
+
