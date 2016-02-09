@@ -172,6 +172,7 @@ namespace ProntoFlexicapture
             foreach (string s in imagenes)
             {
                 imageSource.AddImageFileByRef(s);
+                MarcarImagenComoProcesandose(archivoOriginal);
             }
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
@@ -517,35 +518,49 @@ namespace ProntoFlexicapture
 
 
 
+        static int MarcarImagenComoProcesada(string archivo)
+        {
+            //y si creo un archivo con extension?
+
+            CreateEmptyFile(archivo + ".bdl");
+
+            return 0;
+
+        }
+
+
+        static int MarcarImagenComoProcesada(string archivo)
+        {
+            return 0;
+
+        }
+
+
         public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
         {
 
             cdp.CalidadTierra = -1;
         }
 
-        public static List<int> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
+
+        public static List<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
-            DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                    new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
 
 
-            List<int> q = (from CartasDePorte i in db.CartasDePortes where (i.CalidadTierra == -1) select i.IdCartaDePorte).ToList();
+            List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
+                           where (i.CalidadTierra == -1)
+                           orderby i.FechaModificacion
+                           select i).Take(100).ToList();
 
-
-            /*
-            IQueryable<procesGrilla> q = (from f in files
-                                      where !(EsArchivoDeImagen(f.Name)
-                                             &&
-                                             (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
-                                      )
-                                      orderby f.LastWriteTime descending
-                                      select new procesGrilla() { nombreImagen = f.Name }).AsQueryable();
-            */
+            //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
 
 
 
@@ -907,15 +922,6 @@ namespace ProntoFlexicapture
 
         }
 
-        static int MarcarImagenComoProcesada(string archivo)
-        {
-            //y si creo un archivo con extension?
-
-            CreateEmptyFile(archivo + ".bdl");
-
-            return 0;
-
-        }
 
         public static void CreateEmptyFile(string filename)
         {
