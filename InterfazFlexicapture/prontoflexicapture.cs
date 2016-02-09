@@ -787,7 +787,22 @@ namespace ProntoFlexicapture
                     cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
                     cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
+
+
+
+
+
+
+
+
+
+
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
+
                     cdp.Cosecha = "2015/16";
+                    cdp.FechaArribo = DateTime.Today;
+
 
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
