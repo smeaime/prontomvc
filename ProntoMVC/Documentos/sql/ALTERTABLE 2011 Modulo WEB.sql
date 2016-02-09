@@ -1681,5 +1681,5 @@ CREATE nonclustered INDEX IDX_Cartasdeporte_CalidadTierra on CartasDePorte(Calid
 go
 
 
-select * from cartasdeporte where calidadtierra<0
+select top 10 cosecha  from cartasdeporte where idcartadeporte>1000000
 

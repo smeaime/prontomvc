@@ -1,5 +1,8 @@
 cd C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug
 
+net start prontoagente 
+pause
+
 net stop prontoagente 
 pause 
 

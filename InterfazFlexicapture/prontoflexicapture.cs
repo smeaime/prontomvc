@@ -172,7 +172,7 @@ namespace ProntoFlexicapture
             foreach (string s in imagenes)
             {
                 imageSource.AddImageFileByRef(s);
-                MarcarImagenComoProcesandose(archivoOriginal);
+                MarcarImagenComoProcesandose(s);
             }
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
@@ -518,7 +518,7 @@ namespace ProntoFlexicapture
 
 
 
-        static int MarcarImagenComoProcesada(string archivo)
+        static int MarcarImagenComoProcesandose(string archivo)
         {
             //y si creo un archivo con extension?
 
@@ -557,7 +557,7 @@ namespace ProntoFlexicapture
 
             List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
                            where (i.CalidadTierra == -1)
-                           orderby i.FechaModificacion
+                           orderby i.FechaModificacion descending
                            select i).Take(100).ToList();
 
             //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
@@ -787,6 +787,7 @@ namespace ProntoFlexicapture
                     cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
                     cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
+                    cdp.Cosecha = "2015/16";
 
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
