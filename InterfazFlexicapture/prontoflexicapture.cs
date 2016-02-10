@@ -539,7 +539,12 @@ namespace ProntoFlexicapture
         public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
         {
 
-            cdp.CalidadTierra = -1;
+            //cdp.CalidadTierra = -1;
+            
+            
+            //cdp.Corredor2
+              //  cdp.
+            
         }
 
 
@@ -556,7 +561,7 @@ namespace ProntoFlexicapture
 
 
             List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                           where (i.CalidadTierra == -1)
+                                                           where (i.PathImagen != "" || i.PathImagen2 != "")
                                                            orderby i.FechaModificacion descending
                                                            select i).Take(100).ToList();
 
@@ -877,119 +882,131 @@ namespace ProntoFlexicapture
 
                 // quizas no era valido y no lo dejó grabar
 
-
+                int id;
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999000999))
                 {
-                    var id = CartaDePorteManager.Save(SC, cdp, 0, "");
+                    id = CartaDePorteManager.Save(SC, cdp, 0, "");
 
-                    if (true)
+
+                }
+                else
+                {
+                    id = cdp.Id;
+
+                }
+
+
+
+                if ((numeroCarta >= 10000000 && numeroCarta < 999000999))
+                {
+                    // la imagen tiene que estar ya en el directorio FTP
+                    // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
+                    // - por qué las espera en databackupear en lugar de en el \temp\?
+                    // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
+
+
+
+
+                    //y el directorio clasificador?
+
+                    //        string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
+
+                    //        try
+                    //        {
+
+                    //            File.Copy(archivoOriginal, nuevodestino);
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
+                    //            ErrHandler2.WriteError(ex);
+                    //            //throw;
+                    //        }
+
+
+
+                    Random rnd = new Random();
+                    string nombrenuevo = rnd.Next(1, 99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(archivoOriginal);
+
+
+
+
+                    nombrenuevo = CartaDePorteManager.CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp);
+
+
+                    string DIRFTP = DirApp + @"\DataBackupear\";
+                    string destino = DIRFTP + nombrenuevo;
+
+
+                    try
                     {
-                        // la imagen tiene que estar ya en el directorio FTP
-                        // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
-                        // - por qué las espera en databackupear en lugar de en el \temp\?
-                        // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
+                        FileInfo MyFile1 = new FileInfo(destino);
+                        if (MyFile1.Exists) MyFile1.Delete();
+
+                        File.Copy(archivoOriginal, destino);
+                    }
+                    catch (Exception x)
+                    {
+                        ErrHandler2.WriteError(x);
+                    }
 
 
-
-
-                        //y el directorio clasificador?
-
-                        //        string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
-
-                        //        try
-                        //        {
-
-                        //            File.Copy(archivoOriginal, nuevodestino);
-                        //        }
-                        //        catch (Exception ex)
-                        //        {
-                        //            ErrHandler2.WriteError(ex);
-                        //            //throw;
-                        //        }
-
-
-
-                        Random rnd = new Random();
-                        string nombrenuevo = rnd.Next(1,99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName( archivoOriginal);
-
-
-
-
-                        nombrenuevo = CartaDePorteManager.CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp);
-
-
-                        string DIRFTP = DirApp + @"\DataBackupear\";
-                        string destino = DIRFTP + nombrenuevo;
-
-
+                    //'copio el archivo cambiandole el nombre agregandole un sufijo
+                    //'-qué pasa si ya tenía una imagen la carta?
+                    //'de todas maneras, se esta copiando dos veces con distinto nombre en el mismo segundo
+                    if (false)
+                    {
                         try
                         {
-                            FileInfo MyFile1 = new FileInfo(destino);
-                            if (MyFile1.Exists) MyFile1.Delete();
 
-                            File.Copy(archivoOriginal, destino);
+                            FileInfo MyFile2 = new FileInfo(archivoOriginal);
+                            if (MyFile2.Exists) MyFile2.Delete();
+
                         }
-                        catch (Exception x)
+                        catch (Exception e2)
                         {
-                            ErrHandler2.WriteError(x);
+                            ErrHandler2.WriteError(e2);
                         }
-
-
-                        //'copio el archivo cambiandole el nombre agregandole un sufijo
-                        //'-qué pasa si ya tenía una imagen la carta?
-                        //'de todas maneras, se esta copiando dos veces con distinto nombre en el mismo segundo
-                        if (false)
-                        {
-                            try
-                            {
-
-                                FileInfo MyFile2 = new FileInfo(archivoOriginal);
-                                if (MyFile2.Exists) MyFile2.Delete();
-
-                            }
-                            catch (Exception e2)
-                            {
-                                ErrHandler2.WriteError(e2);
-                            }
-
-                        }
-
-                        /*'////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////
-                        '////////////////////////////////////////////////////////////////////*/
-
-
-
-
-
-
-
-
-                        ErrHandler2.WriteError("Llamo a GrabarImagen");
-
-                        //se da cuenta si es un ticket? no lo esta poniendo en 2 posicion?
-
-                        var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
-                                                      , ref sError, DirApp, bCodigoBarrasDetectado);
 
                     }
+
+                    /*'////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+                    ErrHandler2.WriteError("Llamo a GrabarImagen");
+
+                    //se da cuenta si es un ticket? no lo esta poniendo en 2 posicion?
+
+                    var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
+                                                  , ref sError, DirApp, bCodigoBarrasDetectado);
+
 
 
                     o.IdCarta = id;
                     o.numerocarta = numeroCarta;
                     o.errores = sError + ms;
                     o.advertencias = warn;
+
                 }
+
+
 
 
             }
