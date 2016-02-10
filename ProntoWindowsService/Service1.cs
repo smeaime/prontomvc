@@ -31,10 +31,11 @@ namespace ProntoWindowsService
         static protected TimeSpan m_delay;
 
 
-        static string DirApp;
-        static string SC;
-        static string TempFolder;
+        static string DirApp1, DirApp2;
+        static string SC1, SC2;
         static string plantilla;
+
+        ///static string TempFolder;
 
         static IEngine engine = null;
         static IEngineLoader engineLoader = null;
@@ -104,11 +105,16 @@ namespace ProntoWindowsService
             */
 
 
-            DirApp = ConfigurationManager.AppSettings["DirApp"];
-
-            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
-
             plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
+
+            DirApp1 = ConfigurationManager.AppSettings["DirApp"];
+            SC1 = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
+
+            DirApp2 = ConfigurationManager.AppSettings["DirApp_Test"];
+            SC2 = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC_Test"]);
+
+
+
 
         }
 
@@ -137,7 +143,15 @@ namespace ProntoWindowsService
 
             Initialize();
 
-            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
 
             Log("CONEXION: " + cadena);
             Console.WriteLine("CONEXION: " + cadena);
@@ -156,6 +170,16 @@ namespace ProntoWindowsService
             }
 
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
             Log("llamo a iniciamotor");
 
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
@@ -166,7 +190,6 @@ namespace ProntoWindowsService
 
 
             Log("Motor iniciado");
-            string sError = "";
 
 
             // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
@@ -175,6 +198,8 @@ namespace ProntoWindowsService
 
 
             bool bSignaled = false;
+
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado;
 
             while (true)
             {
@@ -194,30 +219,21 @@ namespace ProntoWindowsService
                     bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
                     if (bSignaled == true) break;
 
-                    var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                                        plantilla, 3,
-                                         SC, DirApp, true, ref sError);
-
-
-
-
-
-                    string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-                    if ((html ?? "") != "")
+                    resultado = null;
+                    resultado = Tanda(SC1, DirApp1);
+                    if (resultado == null)
                     {
-                        Console.WriteLine(html);
-                        Log(html);
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if (bSignaled == true) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        if (bSignaled == true) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        Console.Write(".");
                     }
 
 
-
-                    using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
-                    using (StreamWriter sw = new StreamWriter(fs))
-                    {
-                        sw.WriteLine(html);
-                    }
-
-
+                    resultado = null;
+                    resultado = Tanda(SC2, DirApp2);
                     if (resultado == null)
                     {
                         bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
@@ -249,7 +265,7 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
                     //hacer un unload y cargar de nuevo?
 
                     ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-                    processor=null;
+                    processor = null;
                     ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
 
                     Log("funciona?");
@@ -271,7 +287,53 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
 
 
 
+        static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> Tanda(string SC, string DirApp)
+        {
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado=null;
+
+            try
+            {
+
+                string sError = "";
+
+                resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
+                               plantilla, 3,
+                                SC, DirApp, true, ref sError);
+
+
+
+
+
+                string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+                if ((html ?? "") != "")
+                {
+                    Console.WriteLine(html);
+                    Log(html);
+                }
+
+
+
+                using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(html);
+                }
+
+
+            }
+            catch (Exception x)
+            {
+
+                Log(x.ToString());
+            }
+
+            return resultado;
+
+        }
+
+
     }
+
 
 
 
