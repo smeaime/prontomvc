@@ -7513,9 +7513,9 @@ Public Class CartaDePorteManager
 
 
         If familia.Count = 0 Then Return New CartaDePorte
-        If sss IsNot Nothing Then Return CartaDePorteDB.GetItem(SC, sss.IdCartaDePorte)
+        If sss IsNot Nothing Then Return CartaDePorteManager.GetItem(SC, sss.IdCartaDePorte)
         If SubnumeroFacturacion > 0 Then Return New CartaDePorte
-        If familia.Count = 1 Then Return CartaDePorteDB.GetItem(SC, familia(0).IdCartaDePorte)
+        If familia.Count = 1 Then Return CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
 
         ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
 
@@ -7530,7 +7530,7 @@ Public Class CartaDePorteManager
 
             'devuelvo la primera que encontré -está MAL. si hay mas de uno, es un error
             Dim myCartaDePorte As CartaDePorte
-            myCartaDePorte = CartaDePorteDB.GetItem(SC, ds.Tables(0).Rows(0).Item("IdCartaDePorte"))
+            myCartaDePorte = CartaDePorteManager.GetItem(SC, ds.Tables(0).Rows(0).Item("IdCartaDePorte"))
 
             'es un error. si estoy buscando un subnumero de facturacion especifico, me va a cagar
             If SubnumeroFacturacion > 0 And myCartaDePorte.SubnumeroDeFacturacion <> SubnumeroFacturacion Then Return New CartaDePorte

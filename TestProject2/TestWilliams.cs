@@ -197,7 +197,7 @@ namespace ProntoMVC.Tests
             string SamplesFolder;
             SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
             SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote";
-
+            SamplesFolder = @"C:\Users\Administrador\Documents\bdl\New folder\repetido";
 
             string sError = "";
 
@@ -216,6 +216,18 @@ namespace ProntoMVC.Tests
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
             ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
+
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var cdp= CartaDePorteManager.GetItemPorNumero(SC, 550867628, 0, 0);
+            Assert.AreNotEqual(cdp.PathImagen ?? "" , "");
+            Assert.AreNotEqual(cdp.PathImagen2 ?? "", "");
+
+        
+
         }
 
 
