@@ -556,9 +556,9 @@ namespace ProntoFlexicapture
 
 
             List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                           where (i.CalidadTierra == -1)
-                           orderby i.FechaModificacion descending
-                           select i).Take(100).ToList();
+                                                           where (i.CalidadTierra == -1)
+                                                           orderby i.FechaModificacion descending
+                                                           select i).Take(100).ToList();
 
             //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
 
@@ -733,61 +733,67 @@ namespace ProntoFlexicapture
 
                 string s;
 
-                //marco la imagen como procesada por la OCR
                 MarcarCartaComoProcesada(ref cdp);
 
-                cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT, SC, Titular);
+                bool bPisar = true;
 
-                //s = IntermediarioCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.CuentaOrden1 = CartaDePorteManager.BuscarClientePorCUIT(IntermediarioCUIT, SC, Intermediario);
+                if (cdp.Titular > 0) bPisar = false;
 
-                //s = RemitenteCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT(RemitenteCUIT, SC, Remitente);
-
-                //s = CorredorCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.Corredor = CartaDePorteManager.BuscarVendedorPorCUIT(CorredorCUIT, SC, Corredor);
-
-                //s = DestinatarioCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
-
-
-                try
+                // no pisar si ya esta la info
+                if (bPisar)
                 {
-                    cdp.Acoplado = Acoplado;
-                    cdp.Patente = Camión;
-                    cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", ""));
-                    cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", ""));
-                    cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", ""));
-                    cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", ""));
-                    cdp.Observaciones = Observaciones;
+                    //marco la imagen como procesada por la OCR
 
+                    cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT, SC, Titular);
 
-                    cdp.Contrato = ContratoNro;
-                    cdp.KmARecorrer = Conversion.Val(KmARecorrer);
-                    cdp.TarifaTransportista = Conversion.Val(Tarifa);
+                    //s = IntermediarioCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.CuentaOrden1 = CartaDePorteManager.BuscarClientePorCUIT(IntermediarioCUIT, SC, Intermediario);
 
-                    cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
-                    cdp.CEE = BarraCEE;
+                    //s = RemitenteCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT(RemitenteCUIT, SC, Remitente);
+
+                    //s = CorredorCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.Corredor = CartaDePorteManager.BuscarVendedorPorCUIT(CorredorCUIT, SC, Corredor);
+
+                    //s = DestinatarioCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
+
 
                     try
                     {
-                        cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
-                        cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
-                    }
-                    catch (Exception ex2)
-                    {
-
-                        ErrHandler2.WriteError(ex2);
-                    }
-
-                    cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
-                    cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
+                        cdp.Acoplado = Acoplado;
+                        cdp.Patente = Camión;
+                        cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", ""));
+                        cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", ""));
+                        cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", ""));
+                        cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", ""));
+                        cdp.Observaciones = Observaciones;
 
 
+                        cdp.Contrato = ContratoNro;
+                        cdp.KmARecorrer = Conversion.Val(KmARecorrer);
+                        cdp.TarifaTransportista = Conversion.Val(Tarifa);
+
+                        cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
+                        cdp.CEE = BarraCEE;
+
+                        try
+                        {
+                            cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
+                            cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
+                        }
+                        catch (Exception ex2)
+                        {
+
+                            ErrHandler2.WriteError(ex2);
+                        }
+
+                        cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
+                        cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
 
 
@@ -797,54 +803,58 @@ namespace ProntoFlexicapture
 
 
 
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
-
-                    cdp.Cosecha = "2015/16";
-                    cdp.FechaArribo = DateTime.Today;
 
 
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+
+                        cdp.Cosecha = "2015/16";
+                        cdp.FechaArribo = DateTime.Today;
 
 
-                    cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
-                    if (cdp.IdArticulo == -1)
-                    {
-                        GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie);
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+
+
                         cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
-                    }
+                        if (cdp.IdArticulo == -1)
+                        {
+                            GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie);
+                            cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
+                        }
 
-                    cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                    if (cdp.Destino == -1)
-                    {
-                        Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
                         cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                    }
+                        if (cdp.Destino == -1)
+                        {
+                            Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
+                            cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
+                        }
 
 
-                    cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
-                    if (cdp.Procedencia == -1)
-                    {
-                        Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1);
                         cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
-                    }
+                        if (cdp.Procedencia == -1)
+                        {
+                            Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1);
+                            cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
+                        }
 
 
-                    cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
-                    if (cdp.IdEstablecimiento == -1)
-                    {
-                        Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento);
                         cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+                        if (cdp.IdEstablecimiento == -1)
+                        {
+                            Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento);
+                            cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+                        }
+
+
                     }
-
-
+                    catch (Exception ex)
+                    {
+                        ErrHandler2.WriteError(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    ErrHandler2.WriteError(ex);
-                }
+
 
 
                 if (cdp.Titular != 0)
@@ -865,6 +875,8 @@ namespace ProntoFlexicapture
                 ErrHandler2.WriteError("Llamo a IsValid y Save");
 
 
+                // quizas no era valido y no lo dejó grabar
+
 
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999000999))
@@ -878,23 +890,96 @@ namespace ProntoFlexicapture
                         // - por qué las espera en databackupear en lugar de en el \temp\?
                         // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
 
-                        string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
+
+
+
+                        //y el directorio clasificador?
+
+                        //        string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
+
+                        //        try
+                        //        {
+
+                        //            File.Copy(archivoOriginal, nuevodestino);
+                        //        }
+                        //        catch (Exception ex)
+                        //        {
+                        //            ErrHandler2.WriteError(ex);
+                        //            //throw;
+                        //        }
+
+
+
+                        Random rnd = new Random();
+                        string nombrenuevo = rnd.Next(1,99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName( archivoOriginal);
+
+
+
+
+                        nombrenuevo = CartaDePorteManager.CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp);
+
+
+                        string DIRFTP = DirApp + @"\DataBackupear\";
+                        string destino = DIRFTP + nombrenuevo;
+
 
                         try
                         {
+                            FileInfo MyFile1 = new FileInfo(destino);
+                            if (MyFile1.Exists) MyFile1.Delete();
 
-                            File.Copy(archivoOriginal, nuevodestino);
+                            File.Copy(archivoOriginal, destino);
                         }
-                        catch (Exception ex)
+                        catch (Exception x)
                         {
-                            ErrHandler2.WriteError(ex);
-                            //throw;
+                            ErrHandler2.WriteError(x);
                         }
+
+
+                        //'copio el archivo cambiandole el nombre agregandole un sufijo
+                        //'-qué pasa si ya tenía una imagen la carta?
+                        //'de todas maneras, se esta copiando dos veces con distinto nombre en el mismo segundo
+                        if (false)
+                        {
+                            try
+                            {
+
+                                FileInfo MyFile2 = new FileInfo(archivoOriginal);
+                                if (MyFile2.Exists) MyFile2.Delete();
+
+                            }
+                            catch (Exception e2)
+                            {
+                                ErrHandler2.WriteError(e2);
+                            }
+
+                        }
+
+                        /*'////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////
+                        '////////////////////////////////////////////////////////////////////*/
+
+
+
+
+
+
 
 
                         ErrHandler2.WriteError("Llamo a GrabarImagen");
 
-                        var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
+                        //se da cuenta si es un ticket? no lo esta poniendo en 2 posicion?
+
+                        var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
                                                       , ref sError, DirApp, bCodigoBarrasDetectado);
 
                     }
