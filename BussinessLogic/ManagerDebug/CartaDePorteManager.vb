@@ -10502,7 +10502,7 @@ Public Class CartaDePorteManager
             If Not nombre.Contains(".jpg") And Not nombre.Contains(".tif") Then
                 'si no es un jpg ni tiff (los tif se dividen dentro de la llamada a GrabarImagen)
                 Try
-                    System.Drawing.Bitmap.FromFile(DIRTEMP + nombre).Save(DIRTEMP + nombre + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
+                    System.Drawing.Bitmap.FromFile(nombre).Save(nombre + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                     Continue For
@@ -10512,7 +10512,7 @@ Public Class CartaDePorteManager
             End If
 
 
-            Dim origen = DIRTEMP + nombre
+            Dim origen = nombre
 
 
 
@@ -10574,7 +10574,7 @@ Public Class CartaDePorteManager
 
 
             Randomize()
-            Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+            Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(nombre)
 
 
 
@@ -10664,7 +10664,7 @@ Public Class CartaDePorteManager
                         System.GC.Collect()
                         System.GC.WaitForPendingFinalizers()
                         ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14955
-                        MyFile6.Delete() 'me está tirando que es usado por otro proceso
+                        'MyFile6.Delete() 'me está tirando que es usado por otro proceso
                     End If
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -13838,7 +13838,7 @@ Public Class LogicaFacturacion
 
                     .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
 
-               
+
                     .FechaArribo = CDate(iisNull(cdp("FechaArribo"), Today))
                     .FechaDescarga = CDate(iisNull(cdp("FechaDescarga"), Today))
 
