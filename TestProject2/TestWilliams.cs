@@ -217,6 +217,7 @@ namespace ProntoMVC.Tests
 
 
             VaciarDirectorioTemp();
+            CartaDePorteManager.PreprocesarImagenesTiff();
 
             string DIRTEMP = DirApp + @"\Temp\";
             string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, "Mariano");

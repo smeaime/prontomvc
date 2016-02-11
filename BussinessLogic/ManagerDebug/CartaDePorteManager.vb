@@ -637,6 +637,21 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function PreprocesarImagenesTiff()
+        'Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
+
+
+        ''primera pagina del tiff
+        'If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
+        '    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+        '    BorroArchivo(DIRFTP + oCarta.PathImagen)
+        '    oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
+        'Else
+
+    End Function
+
+
+
 
 
     Public Shared Function BuscarTransportistaPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
@@ -716,6 +731,11 @@ Public Class CartaDePorteManager
 
 
     End Function
+
+
+
+
+
 
     Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
