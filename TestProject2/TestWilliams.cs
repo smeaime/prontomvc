@@ -194,7 +194,6 @@ namespace ProntoMVC.Tests
 
 
 
-
         [TestMethod]
         public void PruebaFlexicaptureConZip()
         {
@@ -208,8 +207,8 @@ namespace ProntoMVC.Tests
             string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\LoteDe10.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02102016173229.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\Nueva carpeta.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02102016173229.zip";
 
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,25 +216,8 @@ namespace ProntoMVC.Tests
 
 
             VaciarDirectorioTemp();
-            CartaDePorteManager.PreprocesarImagenesTiff();
 
-            string DIRTEMP = DirApp + @"\Temp\";
-            string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, "Mariano");
-            string destarchivo = nuevosubdir + Path.GetFileName(zipFile);
-            File.Copy(zipFile, destarchivo, true);
-            
-            bool esZip=true;
-            List<string> l;
-
-            if (esZip)
-            {
-                l = CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
-            }
-            else
-            {
-                l=new List<string>();
-                l.Add(destarchivo);
-            }
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -289,19 +271,20 @@ namespace ProntoMVC.Tests
 
 
 
-         void VaciarDirectorioTemp() {
+        void VaciarDirectorioTemp()
+        {
 
-             System.IO.DirectoryInfo di = new DirectoryInfo( @"C:\Users\Administrador\Documents\bdl\prontoweb\Temp");
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Administrador\Documents\bdl\prontoweb\Temp");
 
-             foreach (FileInfo file in di.GetFiles())
-             {
-                 file.Delete();
-             }
-             foreach (DirectoryInfo dir in di.GetDirectories())
-             {
-                 dir.Delete(true);
-             }
-         }
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+        }
 
 
 
