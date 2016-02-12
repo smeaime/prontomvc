@@ -229,30 +229,6 @@ namespace ProntoFlexicapture
                 //trace("Export recognized document...");
 
 
-                if (false)
-                {
-                    //    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
-                }
-
-                else if (bProcesar)
-                {
-                    try
-                    {
-                        output = ProcesaCarta(document, SC, imagenes[count], DirApp);
-                        r.Add(output);
-
-                    }
-                    catch (Exception x)
-                    {
-                        Debug.Print(x.ToString());
-                        ErrHandler2.WriteError(x);
-                        // throw;
-                    }
-
-
-                }
-
-
 
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
@@ -267,7 +243,8 @@ namespace ProntoFlexicapture
                 IFileExportParams exportParams = engine.CreateFileExportParams();
                 exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
                 exportParams.ExportOriginalImages = true;
-                IExcelExportParams excelParametros;
+                exportParams.ImageExportParams.Prefix = "ExportToXLS_" + Path.GetFileName(imagenes[count]);
+                //IExcelExportParams excelParametros;
                 //exportParams.ExcelParams = excelParametros;
 
 
@@ -279,8 +256,6 @@ namespace ProntoFlexicapture
 
                 processor.ExportDocumentEx(document, ccc, "ExportToXLS", exportParams);
 
-                // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
-                ManotearExcel(Path.GetDirectoryName(imagenes[count]) + @"\ExportToXLS.xls", "numero " + output.numerocarta + " archivo: " + imagenes[count] + " id" + output.IdCarta);
 
 
 
@@ -296,6 +271,42 @@ namespace ProntoFlexicapture
 
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+
+
+                //document.DocumentDefinition.Name
+
+                if (false)
+                {
+                    //    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
+                }
+
+                else if (bProcesar)
+                {
+                    try
+                    {
+                        output = ProcesaCarta(document, SC, exportParams.ImageExportParams.Prefix + ".tif", DirApp);
+                        r.Add(output);
+
+                    }
+                    catch (Exception x)
+                    {
+                        Debug.Print(x.ToString());
+                        ErrHandler2.WriteError(x);
+                        // throw;
+                    }
+
+
+                }
+
+
+                // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
+                ManotearExcel(Path.GetDirectoryName(imagenes[count]) + @"\ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif " + " id" + output.IdCarta);
+
+
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
@@ -490,11 +501,12 @@ namespace ProntoFlexicapture
             //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
 
+            // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
 
             var q = (from f in files
                      where (EsArchivoDeImagen(f.Name)
                             &&
-                            (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                            files.Any(x => x.FullName == (f.FullName + ".bdl"))
                      )
                      orderby f.LastWriteTime ascending
                      select f.FullName).Take(cuantas);
@@ -558,11 +570,11 @@ namespace ProntoFlexicapture
             ProntoMVC.Data.Models.DemoProntoEntities db =
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
-             
+
             // where (i.PathImagen != "" || i.PathImagen2 != "")
 
             List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                           where (i.CalidadTierra==-1)
+                                                           where (i.CalidadTierra == -1)
                                                            orderby i.FechaModificacion descending
                                                            select i).Take(100).ToList();
 
@@ -602,7 +614,7 @@ namespace ProntoFlexicapture
             List<string> l, ext;
             List<string> l2 = new List<string>();
 
-            if  (Path.GetExtension(destarchivo).ToLower().Contains("zip"))
+            if (Path.GetExtension(destarchivo).ToLower().Contains("zip"))
             {
                 l = CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
             }
