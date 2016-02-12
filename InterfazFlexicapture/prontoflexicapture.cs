@@ -539,12 +539,12 @@ namespace ProntoFlexicapture
         public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
         {
 
-            //cdp.CalidadTierra = -1;
-            
-            
+            cdp.CalidadTierra = -1;
+
+
             //cdp.Corredor2
-              //  cdp.
-            
+            //  cdp.
+
         }
 
 
@@ -558,10 +558,11 @@ namespace ProntoFlexicapture
             ProntoMVC.Data.Models.DemoProntoEntities db =
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
-
+             
+            // where (i.PathImagen != "" || i.PathImagen2 != "")
 
             List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                           where (i.PathImagen != "" || i.PathImagen2 != "")
+                                                           where (i.CalidadTierra==-1)
                                                            orderby i.FechaModificacion descending
                                                            select i).Take(100).ToList();
 
@@ -588,6 +589,49 @@ namespace ProntoFlexicapture
         }
 
 
+
+        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp)
+        {
+
+            string DIRTEMP = DirApp + @"\Temp\";
+            string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, nombreusuario);
+            string destarchivo = nuevosubdir + Path.GetFileName(zipFile);
+            File.Copy(zipFile, destarchivo, true);
+
+            bool esZip = true;
+            List<string> l, ext;
+            List<string> l2 = new List<string>();
+
+            if  (Path.GetExtension(destarchivo).ToLower().Contains("zip"))
+            {
+                l = CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
+            }
+            else
+            {
+                l = new List<string>();
+                l.Add(destarchivo);
+            }
+
+
+            foreach (string f in l)
+            {
+                ext = CartaDePorteManager.PreprocesarImagenesTiff(f);
+
+                foreach (string ff in ext)
+                {
+                    l2.Add(ff);
+                }
+            }
+
+
+            foreach (string f in l2)
+            {
+                l.Add(f);
+            }
+
+
+            return l;
+        }
 
 
 
@@ -709,6 +753,11 @@ namespace ProntoFlexicapture
             }
 
 
+            var rnd = new Random();
+            if (numeroCarta == 0)
+            {
+                numeroCarta = 999000000 + rnd.Next(1, 1000000);
+            }
 
             ///////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////
@@ -726,7 +775,11 @@ namespace ProntoFlexicapture
 
             if (numeroCarta > 0)
             {
+
                 cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0);
+
+
+
                 if (cdp.Id == -1)
                 {
                     cdp.NumeroCartaDePorte = numeroCarta;
@@ -742,7 +795,7 @@ namespace ProntoFlexicapture
 
                 bool bPisar = true;
 
-                if (cdp.Titular > 0) bPisar = false;
+                // if (cdp.Titular > 0) bPisar = false;
 
                 // no pisar si ya esta la info
                 if (bPisar)
@@ -884,11 +937,11 @@ namespace ProntoFlexicapture
 
                 int id;
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
-                if (valid && (numeroCarta >= 10000000 && numeroCarta < 999000999))
+                if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
                     id = CartaDePorteManager.Save(SC, cdp, 0, "");
 
-
+                    if (numeroCarta > 999000000) CartaDePorteManager.Anular(SC, cdp, 1, "");
                 }
                 else
                 {
@@ -898,7 +951,7 @@ namespace ProntoFlexicapture
 
 
 
-                if ((numeroCarta >= 10000000 && numeroCarta < 999000999))
+                if ((numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
                     // la imagen tiene que estar ya en el directorio FTP
                     // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
@@ -925,7 +978,7 @@ namespace ProntoFlexicapture
 
 
 
-                    Random rnd = new Random();
+
                     string nombrenuevo = rnd.Next(1, 99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(archivoOriginal);
 
 
