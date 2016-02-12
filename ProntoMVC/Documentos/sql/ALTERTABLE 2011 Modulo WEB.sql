@@ -1680,6 +1680,10 @@ select * from facturas where idfactura>79302 and idfactura < 79306
 CREATE nonclustered INDEX IDX_Cartasdeporte_CalidadTierra on CartasDePorte(CalidadTierra)
 go
 
+CREATE nonclustered INDEX IDX_Cartasdeporte_PathImagen2 on CartasDePorte(PathImagen, PathImagen2,FechaModificacion)
+go
+CREATE nonclustered INDEX IDX_Cartasdeporte_PathImagen3 on CartasDePorte(PathImagen2,FechaModificacion)
+go
 
 select top 10 cosecha  from cartasdeporte where idcartadeporte>1000000
 
