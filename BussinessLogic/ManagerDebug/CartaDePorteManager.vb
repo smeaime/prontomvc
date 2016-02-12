@@ -637,16 +637,26 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function PreprocesarImagenesTiff()
-        'Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
+    Public Shared Function PreprocesarImagenesTiff(archivo As String) As List (of String)
 
+        If Not Path.GetExtension(archivo).ToLower.Contains("tif") Then Return Nothing
 
-        ''primera pagina del tiff
-        'If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
-        '    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
-        '    BorroArchivo(DIRFTP + oCarta.PathImagen)
-        '    oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
-        'Else
+        Dim listapaginas As List(Of System.Drawing.Image) = _
+                    ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo)
+
+        Dim l As New List(Of String)
+
+        If listapaginas.Count > 1 Then
+            For n = 0 To listapaginas.Count - 1
+                Dim nombre = archivo + "_pag" + n.ToString + ".tif"
+                listapaginas(n).Save(nombre, Imaging.ImageFormat.Tiff)
+                l.Add(nombre)
+            Next
+        End If
+
+        'BorroArchivo(DIRFTP + oCarta.PathImagen)
+
+        Return l
 
     End Function
 
