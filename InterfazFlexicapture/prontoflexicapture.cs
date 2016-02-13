@@ -238,12 +238,14 @@ namespace ProntoFlexicapture
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
-                string dir = DirApp + @"\Temp\";
+                string dirtemp = DirApp + @"\Temp\";
+
+                Random rnd=new Random();
 
                 IFileExportParams exportParams = engine.CreateFileExportParams();
                 exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
                 exportParams.ExportOriginalImages = true;
-                exportParams.ImageExportParams.Prefix = "ExportToXLS_" + Path.GetFileName(imagenes[count]);
+                exportParams.ImageExportParams.Prefix = "ExportToXLS_" +  rnd.Next(100000,999999).ToString() ; // en realidad las imagenes exportadas deberían ir a parar todas al raiz, porque no hay manera de saber a qué imagen corresponden. Entonces las dejo todas en el mismo lugar, y genero un random al prefijo para asegurarme de que ese nombre es exclusivo
                 //IExcelExportParams excelParametros;
                 //exportParams.ExcelParams = excelParametros;
 
@@ -251,10 +253,10 @@ namespace ProntoFlexicapture
 
                 var w = imagenes[count].IndexOf(@"\Temp\");
                 var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
-                var ccc = imagenes[count].Substring(0, sd + w + 6);
+                var dirExport = imagenes[count].Substring(0, sd + w + 6) + @"\";
 
 
-                processor.ExportDocumentEx(document, ccc, "ExportToXLS", exportParams);
+                processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
 
 
 
@@ -288,7 +290,7 @@ namespace ProntoFlexicapture
                 {
                     try
                     {
-                        output = ProcesaCarta(document, SC, exportParams.ImageExportParams.Prefix + ".tif", DirApp);
+                        output = ProcesaCarta(document, SC, dirExport + exportParams.ImageExportParams.Prefix + ".tif", DirApp);
                         r.Add(output);
 
                     }
@@ -304,7 +306,7 @@ namespace ProntoFlexicapture
 
 
                 // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
-                ManotearExcel(Path.GetDirectoryName(imagenes[count]) + @"\ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif " + " id" + output.IdCarta);
+                ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta);
 
 
                 ///////////////////////////////////////////////////////////////////////////////
@@ -506,7 +508,7 @@ namespace ProntoFlexicapture
             var q = (from f in files
                      where (EsArchivoDeImagen(f.Name)
                             &&
-                            files.Any(x => x.FullName == (f.FullName + ".bdl"))
+                            !files.Any(x => x.FullName == (f.FullName + ".bdl"))
                      )
                      orderby f.LastWriteTime ascending
                      select f.FullName).Take(cuantas);
