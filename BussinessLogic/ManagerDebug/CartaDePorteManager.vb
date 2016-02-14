@@ -654,7 +654,7 @@ Public Class CartaDePorteManager
             Next
         End If
 
-        'BorroArchivo(DIRFTP + oCarta.PathImagen)
+        BorroArchivo(archivo)
 
         Return l
 
@@ -745,6 +745,45 @@ Public Class CartaDePorteManager
 
 
 
+
+
+    Public Shared Function BuscarDestinoPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.WilliamsDestinos Where c.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+
+
+
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.WilliamsDestino
+                q.Descripcion = RazonSocial
+                q.Cuit = cuit
+                'acá había un insertonsubmit
+                db.WilliamsDestinos.Add(q)
+                db.SaveChanges()
+                Return q.IdWilliamsDestino
+            Else
+                Return 0
+            End If
+
+        Else
+            Return q.IdWilliamsDestino
+        End If
+
+        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
+
+
+
+
+
+    End Function
 
 
     Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
