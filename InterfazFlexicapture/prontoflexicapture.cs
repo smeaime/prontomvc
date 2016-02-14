@@ -240,12 +240,12 @@ namespace ProntoFlexicapture
                 ///////////////////////////////////////////////////////////////////////////////
                 string dirtemp = DirApp + @"\Temp\";
 
-                Random rnd=new Random();
+                Random rnd = new Random();
 
                 IFileExportParams exportParams = engine.CreateFileExportParams();
                 exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
                 exportParams.ExportOriginalImages = true;
-                exportParams.ImageExportParams.Prefix = "ExportToXLS_" +  rnd.Next(100000,999999).ToString() ; // en realidad las imagenes exportadas deberían ir a parar todas al raiz, porque no hay manera de saber a qué imagen corresponden. Entonces las dejo todas en el mismo lugar, y genero un random al prefijo para asegurarme de que ese nombre es exclusivo
+                exportParams.ImageExportParams.Prefix = "ExportToXLS_" + rnd.Next(100000, 999999).ToString(); // en realidad las imagenes exportadas deberían ir a parar todas al raiz, porque no hay manera de saber a qué imagen corresponden. Entonces las dejo todas en el mismo lugar, y genero un random al prefijo para asegurarme de que ese nombre es exclusivo
                 //IExcelExportParams excelParametros;
                 //exportParams.ExcelParams = excelParametros;
 
@@ -631,20 +631,22 @@ namespace ProntoFlexicapture
             {
                 ext = CartaDePorteManager.PreprocesarImagenesTiff(f);
 
-                foreach (string ff in ext)
+                if (ext != null && ext.Count>0)
                 {
-                    l2.Add(ff);
+                    foreach (string ff in ext)
+                    {
+                        l2.Add(ff);
+                    }
+                }
+                else
+                {
+                    l2.Add(f);
                 }
             }
 
 
-            foreach (string f in l2)
-            {
-                l.Add(f);
-            }
 
-
-            return l;
+            return l2;
         }
 
 
@@ -814,6 +816,11 @@ namespace ProntoFlexicapture
                 // no pisar si ya esta la info
                 if (bPisar)
                 {
+
+                    cdp.PuntoVenta = 1;
+
+
+
                     //marco la imagen como procesada por la OCR
 
                     cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT, SC, Titular);
@@ -835,14 +842,21 @@ namespace ProntoFlexicapture
                     cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
 
 
+                    cdp.Destino = CartaDePorteManager.BuscarDestinoPorCUIT(DestinoCUIT, SC, Destino);
+
+
+
+
+
+
                     try
                     {
                         cdp.Acoplado = Acoplado;
                         cdp.Patente = Camión;
-                        cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", ""));
-                        cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", ""));
-                        cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", ""));
-                        cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", ""));
+                        cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
+                        cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", "").Replace(",", ""));
+                        cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", "").Replace(",", ""));
+                        cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
                         cdp.Observaciones = Observaciones;
 
 
@@ -894,13 +908,6 @@ namespace ProntoFlexicapture
                         {
                             GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie);
                             cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
-                        }
-
-                        cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                        if (cdp.Destino == -1)
-                        {
-                            Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
-                            cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
                         }
 
 
