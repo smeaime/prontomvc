@@ -30,6 +30,10 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
 
+using System.Drawing;
+
+using BitMiracle.LibTiff.Classic;
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
@@ -121,7 +125,7 @@ namespace ProntoFlexicapture
             //Console.WriteLine("Imagenes encoladas " + Lista.Count);
 
             return ProcesarCartasBatchConFlexicapture(ref engine, ref  processor, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
-            si no esta la licencia, recibe la excepcion 
+            //si no esta la licencia, recibe la excepcion 
 
         }
 
@@ -208,8 +212,8 @@ namespace ProntoFlexicapture
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
                 //trace("Recognize next document...");
-                IDocument document = processor.RecognizeNextDocument();
-                si no esta la licencia, acá explota
+                IDocument document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
+
 
 
 
@@ -609,6 +613,89 @@ namespace ProntoFlexicapture
 
 
 
+
+
+
+        public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK)
+        {
+
+            if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
+                return null;
+
+            List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
+
+            List<string> l = new List<string>();
+            int n = 0;
+            if (listapaginas.Count > 1)
+            {
+                for (n = 0; n <= listapaginas.Count - 1; n++)
+                {
+                    var nombre = archivo + "_pag" + n.ToString() + ".tif";
+                    listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
+
+                    if (true)
+                    {
+                        var rotado = nombre + "_rotado.tif";
+                        OrientarImagen(nombre, rotado);
+                        CartaDePorteManager.BorroArchivo(nombre);
+                        nombre = rotado;
+                    }
+
+                    l.Add(nombre);
+                }
+            }
+
+
+            if ((bEsFormatoCPTK))
+            {
+
+                for (n = 0; n <= listapaginas.Count - 1; n += 2)
+                {
+                    var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
+                    var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
+                    var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
+
+                    string[] arguments = {
+				pagina1,
+				pagina2,
+				final
+			};
+
+                    BitMiracle.TiffCP.Program.Main(arguments);
+
+
+                    //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
+                    //p.StartInfo.UseShellExecute = False
+                    //p.StartInfo.RedirectStandardOutput = True
+                    //p.StartInfo.FileName = @"C:\PathToExe\TiffCP.exe"
+                    //Dim path1 = @"C:\PathToImage\image.tiff"
+                    //dim path2 = @"C:\PathToImage\imagePage1.tiff"
+                    //p.StartInfo.Arguments = "\"" + path1 + " \ "" + ",0 \"" + path2 + " \ ""
+                    //p.Start()
+                    //string t = p.StandardOutput.ReadToEnd()
+
+                    CartaDePorteManager.BorroArchivo(pagina1);
+                    CartaDePorteManager.BorroArchivo(pagina2);
+
+
+
+                    l.Remove(pagina1);
+                    l.Remove(pagina2);
+                    l.Add(final);
+                }
+
+
+
+            }
+
+
+            CartaDePorteManager.BorroArchivo(archivo);
+
+            return l;
+
+        }
+
+
         public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK)
         {
 
@@ -634,9 +721,9 @@ namespace ProntoFlexicapture
 
             foreach (string f in l)
             {
-                ext = CartaDePorteManager.PreprocesarImagenesTiff(f, bEsFormatoCPTK);
+                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK);
 
-                if (ext != null && ext.Count>0)
+                if (ext != null && ext.Count > 0)
                 {
                     foreach (string ff in ext)
                     {
@@ -658,6 +745,87 @@ namespace ProntoFlexicapture
 
 
 
+        static void OrientarImagen(string origen, string destino)
+        {
+
+            List<Image> images = new List<Image>();
+            Bitmap bitmap = (Bitmap)Image.FromFile(origen);
+            int count = bitmap.GetFrameCount(FrameDimension.Page);
+
+            // save each frame to a bytestream
+            bitmap.SelectActiveFrame(FrameDimension.Page, 0);
+            MemoryStream byteStream = new MemoryStream();
+
+            bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+
+            bitmap.Save(byteStream, ImageFormat.Tiff);
+            // and then create a new Image from it
+            Image.FromStream(byteStream).Save(destino, System.Drawing.Imaging.ImageFormat.Tiff);
+            return; // images;
+
+
+
+
+            using (Tiff input = Tiff.Open(origen, "r"))
+            {
+                int width = input.GetField(TiffTag.IMAGEWIDTH)[0].ToInt();
+                int height = input.GetField(TiffTag.IMAGELENGTH)[0].ToInt();
+                int samplesPerPixel = input.GetField(TiffTag.SAMPLESPERPIXEL)[0].ToInt();
+                int bitsPerSample = input.GetField(TiffTag.BITSPERSAMPLE)[0].ToInt();
+                int photo = input.GetField(TiffTag.PHOTOMETRIC)[0].ToInt();
+
+                int scanlineSize = input.ScanlineSize();
+                byte[][] buffer = new byte[height][];
+                for (int i = 0; i < height; ++i)
+                {
+                    buffer[i] = new byte[scanlineSize];
+                    input.ReadScanline(buffer[i], i);
+                }
+
+                using (Tiff output = Tiff.Open(destino, "w"))
+                {
+                    output.SetField(TiffTag.IMAGEWIDTH, width);
+                    output.SetField(TiffTag.IMAGELENGTH, height);
+                    output.SetField(TiffTag.SAMPLESPERPIXEL, samplesPerPixel);
+                    output.SetField(TiffTag.BITSPERSAMPLE, bitsPerSample);
+                    output.SetField(TiffTag.ROWSPERSTRIP, output.DefaultStripSize(0));
+                    output.SetField(TiffTag.PHOTOMETRIC, photo);
+                    output.SetField(TiffTag.PLANARCONFIG, PlanarConfig.CONTIG);
+
+                    // change orientation of the image
+                    output.SetField(TiffTag.ORIENTATION, Orientation.RIGHTBOT);
+
+                    for (int i = 0; i < height; ++i)
+                        output.WriteScanline(buffer[i], i);
+                }
+            }
+
+
+            /*
+            // http://forum.ocrsdk.com/questions/2145/orientation-detection-and-correction-in-flexicapture-sdk
+
+            // get rotation type
+            RotationTypeEnum rotationTypeEnum = imageProcessor.DetectOrientationByText(_page, language);
+
+            // rotate image according to rotation type
+            if (rotationTypeEnum == RotationTypeEnum.RT_Clockwise)
+            {
+                _page = imageProcessor.RotateImageByRotationType(_page, RotationTypeEnum.RT_Counterclockwise);
+            }
+            else
+                if (rotationTypeEnum == RotationTypeEnum.RT_Counterclockwise)
+                {
+                    _page = imageProcessor.RotateImageByRotationType(_page, RotationTypeEnum.RT_Clockwise);
+                }
+                else
+                    if (rotationTypeEnum == RotationTypeEnum.RT_Upsidedown)
+                    {
+                        _page = imageProcessor.RotateImageByRotationType(_page, RotationTypeEnum.RT_Upsidedown);
+                    }
+
+           // If you want to save the rotated image, you could use Image::WriteToFile method.
+             */
+        }
 
 
 
@@ -773,11 +941,14 @@ namespace ProntoFlexicapture
 
             }
 
+            const long numprefijo = 999000000;
 
             var rnd = new Random();
             if (numeroCarta == 0)
             {
-                numeroCarta = 999000000 + rnd.Next(1, 1000000);
+
+                // por qué no te mandas el lance usando el numero de carta leido en numeros?
+                numeroCarta = numprefijo + rnd.Next(1, 1000000);
             }
 
             ///////////////////////////////////////////////////////////////////////////////
@@ -966,8 +1137,8 @@ namespace ProntoFlexicapture
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
                     id = CartaDePorteManager.Save(SC, cdp, 0, "");
-                    cdp.MotivoRechazo="numero de carta porte en codigo de barra no detectado";
-                    if (numeroCarta > 999000000) CartaDePorteManager.Anular(SC, cdp, 1, "");
+                    cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
+                    if (numeroCarta > numprefijo) CartaDePorteManager.Anular(SC, cdp, 1, "");
                 }
                 else
                 {
