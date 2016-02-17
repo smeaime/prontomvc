@@ -315,7 +315,7 @@ namespace ProntoFlexicapture
 
 
                 // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
-                ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta);
+                ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, output.numerocarta.ToString());
 
 
                 ///////////////////////////////////////////////////////////////////////////////
@@ -349,7 +349,7 @@ namespace ProntoFlexicapture
         }
 
 
-        static void ManotearExcel(string nombreexcel, string dato)
+        static void ManotearExcel(string nombreexcel, string dato, string numerocarta)
         {
 
 
@@ -378,10 +378,10 @@ namespace ProntoFlexicapture
             var r = workBook.ActiveSheet.UsedRange.Rows.Count;
             var c = workBook.ActiveSheet.UsedRange.Columns.Count;
 
-            //Excel.Range row1 = sheet.Rows.Cells[1, 1];
             Excel.Range row2 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
+            row2.Value = numerocarta;
 
-            //row1.Value = "Test100";
+            row2 = sheet.Rows.Cells[r, 53];
             row2.Value = dato;
 
 
@@ -616,7 +616,7 @@ namespace ProntoFlexicapture
 
 
 
-        public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK)
+        public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados)
         {
 
             if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
@@ -633,7 +633,7 @@ namespace ProntoFlexicapture
                     var nombre = archivo + "_pag" + n.ToString() + ".tif";
                     listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
 
-                    if (true)
+                    if (bGirar180grados)
                     {
                         var rotado = nombre + "_rotado.tif";
                         OrientarImagen(nombre, rotado);
@@ -696,7 +696,7 @@ namespace ProntoFlexicapture
         }
 
 
-        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK)
+        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK, bool bGirar180grados)
         {
 
             string DIRTEMP = DirApp + @"\Temp\";
@@ -721,7 +721,7 @@ namespace ProntoFlexicapture
 
             foreach (string f in l)
             {
-                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK);
+                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados );
 
                 if (ext != null && ext.Count > 0)
                 {
