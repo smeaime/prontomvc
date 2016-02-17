@@ -637,67 +637,6 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function PreprocesarImagenesTiff(archivo As String, bEsFormatoCPTK As Boolean) As List(Of String)
-
-        If Not Path.GetExtension(archivo).ToLower.Contains("tif") Then Return Nothing
-
-        Dim listapaginas As List(Of System.Drawing.Image) = _
-                    ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo)
-
-        Dim l As New List(Of String)
-
-        If listapaginas.Count > 1 Then
-            For n = 0 To listapaginas.Count - 1
-                Dim nombre = archivo + "_pag" + n.ToString + ".tif"
-                listapaginas(n).Save(nombre, Imaging.ImageFormat.Tiff)
-                l.Add(nombre)
-            Next
-        End If
-
-
-        If (bEsFormatoCPTK) Then
-            For n = 0 To listapaginas.Count - 1 Step 2
-                Dim pagina1 = archivo + "_pag" + n.ToString + ".tif"
-                Dim pagina2 = archivo + "_pag" + (n + 1).ToString + ".tif"
-                Dim final = archivo + "_pag" + (n).ToString + "_unido.tif"
-
-                Dim arguments As String() = {pagina1, pagina2, final}
-
-                BitMiracle.TiffCP.Program.Main(arguments)
-
-
-                'Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
-                'p.StartInfo.UseShellExecute = False
-                'p.StartInfo.RedirectStandardOutput = True
-                'p.StartInfo.FileName = @"C:\PathToExe\TiffCP.exe"
-                'Dim path1 = @"C:\PathToImage\image.tiff"
-                'dim path2 = @"C:\PathToImage\imagePage1.tiff"
-                'p.StartInfo.Arguments = "\"" + path1 + " \ "" + ",0 \"" + path2 + " \ ""
-                'p.Start()
-                'string t = p.StandardOutput.ReadToEnd()
-
-                BorroArchivo(pagina1)
-                BorroArchivo(pagina2)
-
-
-
-                l.Remove(pagina1)
-                l.Remove(pagina2)
-                l.Add(final)
-            Next
-
-
-
-        End If
-
-
-        BorroArchivo(archivo)
-
-        Return l
-
-    End Function
-
-
 
 
 
