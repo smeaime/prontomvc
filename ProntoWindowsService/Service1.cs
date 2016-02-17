@@ -358,7 +358,7 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
             processInstaller.Account = ServiceAccount.LocalSystem;
 
             // The services are started manually.
-            serviceInstaller.StartType = ServiceStartMode.Manual;
+            serviceInstaller.StartType = ServiceStartMode.Automatic;
 
             // ServiceName must equal those on ServiceBase derived classes.
             serviceInstaller.ServiceName = "ProntoAgente";

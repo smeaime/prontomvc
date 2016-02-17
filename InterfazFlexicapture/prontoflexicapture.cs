@@ -907,11 +907,11 @@ namespace ProntoFlexicapture
                         ///////////////////////////////////////////////////////////////////
                         ///////////////////////////////////////////////////////////////////
 
-
+                        //tanto le cuesta? sera porque tenes  que pasarlo  a mayuscula?
                         cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
                         if (cdp.IdArticulo == -1)
                         {
-                            GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie);
+                            GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie.ToUpper());
                             cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
                         }
 
@@ -919,7 +919,7 @@ namespace ProntoFlexicapture
                         cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
                         if (cdp.Procedencia == -1)
                         {
-                            Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1);
+                            Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1.ToUpper());
                             cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
                         }
 
@@ -927,7 +927,7 @@ namespace ProntoFlexicapture
                         cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
                         if (cdp.IdEstablecimiento == -1)
                         {
-                            Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento);
+                            Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento.ToUpper());
                             cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
                         }
 
@@ -966,7 +966,7 @@ namespace ProntoFlexicapture
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
                     id = CartaDePorteManager.Save(SC, cdp, 0, "");
-
+                    cdp.MotivoRechazo="numero de carta porte en codigo de barra no detectado";
                     if (numeroCarta > 999000000) CartaDePorteManager.Anular(SC, cdp, 1, "");
                 }
                 else
