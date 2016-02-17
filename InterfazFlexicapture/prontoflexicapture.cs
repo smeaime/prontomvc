@@ -121,6 +121,7 @@ namespace ProntoFlexicapture
             //Console.WriteLine("Imagenes encoladas " + Lista.Count);
 
             return ProcesarCartasBatchConFlexicapture(ref engine, ref  processor, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
+            si no esta la licencia, recibe la excepcion 
 
         }
 
@@ -208,6 +209,10 @@ namespace ProntoFlexicapture
 
                 //trace("Recognize next document...");
                 IDocument document = processor.RecognizeNextDocument();
+                si no esta la licencia, acá explota
+
+
+
                 if (document == null)
                 {
                     IProcessingError error = processor.GetLastProcessingError();
@@ -604,7 +609,7 @@ namespace ProntoFlexicapture
 
 
 
-        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp)
+        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK)
         {
 
             string DIRTEMP = DirApp + @"\Temp\";
@@ -618,7 +623,7 @@ namespace ProntoFlexicapture
 
             if (Path.GetExtension(destarchivo).ToLower().Contains("zip"))
             {
-                l = CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
+                l = CartaDePorteManager.ExtraerZip(destarchivo, nuevosubdir);
             }
             else
             {
@@ -629,7 +634,7 @@ namespace ProntoFlexicapture
 
             foreach (string f in l)
             {
-                ext = CartaDePorteManager.PreprocesarImagenesTiff(f);
+                ext = CartaDePorteManager.PreprocesarImagenesTiff(f, bEsFormatoCPTK);
 
                 if (ext != null && ext.Count>0)
                 {

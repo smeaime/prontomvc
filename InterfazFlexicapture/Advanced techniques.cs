@@ -24,6 +24,7 @@ namespace Sample
         // USE CASE: Creating a Document Definition by training on a set of images
 		public static void Creating_a_Document_Definition_by_training_on_a_set_of_images( IEngine engine )
 		{
+            
             string rootFolder = SamplesFolder + "\\SampleImages\\Training\\ISBN";
 			string batchFolder = rootFolder + "\\_TrainingBatch";
             if( System.IO.Directory.Exists( batchFolder ) ) {

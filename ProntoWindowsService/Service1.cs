@@ -321,10 +321,14 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
 
 
             }
+               
             catch (Exception x)
             {
-
+                 //System.Runtime.InteropServices.COMException (0x80004005):
+                // que pasa si salto el error de la licencia? diferenciar si saltó por un archivo que no existe u otro error
                 Log(x.ToString());
+                throw
+
             }
 
             return resultado;
