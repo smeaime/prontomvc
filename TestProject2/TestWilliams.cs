@@ -207,7 +207,7 @@ namespace ProntoMVC.Tests
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false);
 
 
             string sError = "";
@@ -240,13 +240,15 @@ namespace ProntoMVC.Tests
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02152016123436.zip";
             zipFile = @"C:\Users\Administrador\Desktop\bien giradas\bien giradas.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016094547.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016135519.tif";
+            
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
