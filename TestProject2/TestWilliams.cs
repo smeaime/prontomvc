@@ -241,6 +241,7 @@ namespace ProntoMVC.Tests
             zipFile = @"C:\Users\Administrador\Desktop\bien giradas\bien giradas.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016094547.tif";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016135519.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\patasarriba.zip";
             
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
