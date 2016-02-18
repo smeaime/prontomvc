@@ -315,7 +315,7 @@ namespace ProntoFlexicapture
 
 
                 // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
-                ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, output.numerocarta.ToString());
+                ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString() );
 
 
                 ///////////////////////////////////////////////////////////////////////////////
