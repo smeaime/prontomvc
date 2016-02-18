@@ -1032,6 +1032,9 @@ namespace ProntoFlexicapture
 
                     try
                     {
+                        cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
+                        cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
+
                         cdp.Acoplado = Acoplado;
                         cdp.Patente = Camión;
                         cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
@@ -1043,25 +1046,9 @@ namespace ProntoFlexicapture
 
                         cdp.Contrato = ContratoNro;
                         cdp.KmARecorrer = Conversion.Val(KmARecorrer);
-                        cdp.TarifaTransportista = Conversion.Val(Tarifa);
 
                         cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
                         cdp.CEE = BarraCEE;
-
-                        try
-                        {
-                            cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
-                            cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
-                        }
-                        catch (Exception ex2)
-                        {
-
-                            ErrHandler2.WriteError(ex2);
-                        }
-
-                        cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
-                        cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
-
 
 
 
@@ -1107,6 +1094,28 @@ namespace ProntoFlexicapture
                             Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento.ToUpper());
                             cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
                         }
+
+
+
+
+
+
+                        DateTime fecha;
+                        DateTime.TryParse(FechaVencimiento, out fecha);
+                        cdp.FechaVencimiento = fecha;
+
+                        try
+                        {
+                            cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
+                        }
+                        catch (Exception ex2)
+                        {
+
+                            ErrHandler2.WriteError(ex2);
+                        }
+
+                        double.TryParse(Tarifa, out cdp.TarifaTransportista);
+          
 
 
                     }
