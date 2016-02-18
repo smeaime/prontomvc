@@ -239,9 +239,9 @@ namespace ProntoMVC.Tests
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\tandabuena.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02152016123436.zip";
             zipFile = @"C:\Users\Administrador\Desktop\bien giradas\bien giradas.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016094547.tif";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016135519.tif";
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\patasarriba.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016135519.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016094547.tif";
             
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -281,6 +281,8 @@ namespace ProntoMVC.Tests
 
                 // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
                 ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+                // ProntoWindowsService.Service1.Initialize();
             }
             else
             {
