@@ -766,7 +766,7 @@ Public Class CartaDePorteManager
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
-        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000") Then
+        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000000") Then
             Dim id = (From c In db.Clientes Where c.RazonSocial = "DIRECTO" Select c.IdCliente).FirstOrDefault()
             Return id
         End If
@@ -814,7 +814,7 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000") Then
+        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000000") Then
             Dim id = (From c In db.Vendedores Where c.Nombre = "DIRECTO" Select c.IdVendedor).FirstOrDefault()
             Return id
         End If

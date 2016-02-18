@@ -3029,6 +3029,15 @@ Salida:
 
 
                 nombre = DirectorioErrores & DateTime.Today.ToString("dd-MM-yy") & ".txt"
+
+
+                If System.Web.HttpContext.Current Is Nothing Then
+                    'esta funcion tendría que recibir el DirApp?
+                    'Path.GetTempPath()
+                    Return Nothing 'donde escribo el archivo????????
+                End If
+
+
                 nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre)
 
                 If (Not File.Exists(nombreLargo)) Then
