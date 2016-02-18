@@ -288,23 +288,21 @@ namespace ProntoFlexicapture
                 ///////////////////////////////////////////////////////////////////////////////
 
 
-                //document.DocumentDefinition.Name
-
-                if (false)
-                {
-                    //    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
-                }
-
-                else if (bProcesar)
+                if (bProcesar)
                 {
                     try
                     {
                         output = ProcesaCarta(document, SC, dirExport + exportParams.ImageExportParams.Prefix + ".tif", DirApp);
                         r.Add(output);
 
+                        // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
+                        //explota aca con la carta invalida
+                        ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString());
+
                     }
                     catch (Exception x)
                     {
+                        Log(x.ToString());
                         Debug.Print(x.ToString());
                         ErrHandler2.WriteError(x);
                         // throw;
@@ -314,8 +312,6 @@ namespace ProntoFlexicapture
                 }
 
 
-                // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
-                ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString() );
 
 
                 ///////////////////////////////////////////////////////////////////////////////
@@ -378,13 +374,13 @@ namespace ProntoFlexicapture
             var r = workBook.ActiveSheet.UsedRange.Rows.Count;
             var c = workBook.ActiveSheet.UsedRange.Columns.Count;
 
-            Excel.Range row2,row1;
-            
-            row1 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
-            row1.Value = numerocarta;
+            Excel.Range row2, row1;
 
-            //row2 = sheet.Rows.Cells[r, 52];
-            //row2.Value = dato;
+            //row1 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
+            //row1.Value = numerocarta;
+
+            row2 = sheet.Rows.Cells[r, 52];
+            row2.Value = dato;
 
 
             excel.Application.ActiveWorkbook.SaveAs(nombreexcel);
@@ -429,8 +425,8 @@ namespace ProntoFlexicapture
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
             IQueryable<ProntoMVC.Data.Models.CartasDePorte> q2 = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                                 where i.NumeroCartaDePorte >= 900000000
-                                                                 orderby i.FechaModificacion descending
+                                                                  where i.NumeroCartaDePorte >= 900000000
+                                                                  orderby i.FechaModificacion descending
                                                                   select i).AsQueryable();
 
             IQueryable<procesGrilla> q = (from f in files
@@ -631,7 +627,10 @@ namespace ProntoFlexicapture
             if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
                 return null;
 
+            if (bGirar180grados) MarcarImagenComoProcesada(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
+
             List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
+
 
             List<string> l = new List<string>();
             int n = 0;
@@ -640,6 +639,9 @@ namespace ProntoFlexicapture
                 for (n = 0; n <= listapaginas.Count - 1; n++)
                 {
                     var nombre = archivo + "_pag" + n.ToString() + ".tif";
+
+                    if (bGirar180grados) nombre += ".temp"; // para que no lo tome el servicio
+
                     listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
 
                     if (bGirar180grados)
@@ -730,7 +732,7 @@ namespace ProntoFlexicapture
 
             foreach (string f in l)
             {
-                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados );
+                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados);
 
                 if (ext != null && ext.Count > 0)
                 {
@@ -959,7 +961,7 @@ namespace ProntoFlexicapture
             {
 
                 // por qué no te mandas el lance usando el numero de carta leido en numeros?
-                if (false || Conversion.Val(NCarta) > 0) numeroCarta = numprefijo + int.Parse(NCarta);
+                if (false && Conversion.Val(NCarta) > 0) numeroCarta = numprefijo + int.Parse(NCarta);
                 else numeroCarta = numprefijo + rnd.Next(1, 1000000);
             }
 
@@ -1122,7 +1124,7 @@ namespace ProntoFlexicapture
                         }
 
                         double.TryParse(Tarifa, out cdp.TarifaTransportista);
-          
+
 
 
                     }
@@ -1503,6 +1505,17 @@ namespace ProntoFlexicapture
         }
 
 
+        public static void Log(string s)
+        {
+
+            using (EventLog eventLog = new EventLog("Application"))
+            {
+                eventLog.Source = "Application";
+                eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
+            }
+        }
+
+
         public static IEngine loadEngine(EngineLoadingMode _engineLoadingMode, out IEngineLoader engineLoader)
         {
 
@@ -1597,34 +1610,51 @@ Additionally you can manage the priority of work processes and control whether t
 
 
             engineLoadingMode = _engineLoadingMode;
-            switch (engineLoadingMode)
+            int hresult = 0;
+            try
             {
-                case EngineLoadingMode.LoadDirectlyUseNakedInterfaces:
-                    {
-                        engineLoader = null; // Not used
-                        IEngine engine = null;
-                        int hresult = InitializeEngine(FceConfig.GetDeveloperSN(), out engine);
-                        Marshal.ThrowExceptionForHR(hresult);
-                        //assert(engine != null);
-                        return engine;
+
+                switch (engineLoadingMode)
+                {
+                    case EngineLoadingMode.LoadDirectlyUseNakedInterfaces:
+                        {
+                            engineLoader = null; // Not used
+                            IEngine engine = null;
+                            hresult = InitializeEngine(FceConfig.GetDeveloperSN(), out engine);
+                            Marshal.ThrowExceptionForHR(hresult); // por qué está esto? antes tambien pasaba y no me daba cuenta porque la capturaba? -no, lo que pasa es que ahora hresult está viniendo con algo.
+                            //assert(engine != null);
+                            return engine;
 
 
-                    }
-                case EngineLoadingMode.LoadAsInprocServer:
-                    {
-                        engineLoader = new FCEngine.InprocLoader();
-                        IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
-                        //assert(engine != null);
-                        return engine;
-                    }
-                case EngineLoadingMode.LoadAsWorkprocess:
-                    {
-                        engineLoader = new FCEngine.OutprocLoader();
-                        IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
-                        //assert(engine != null);
-                        return engine;
-                    }
+                        }
+                    case EngineLoadingMode.LoadAsInprocServer:
+                        {
+                            engineLoader = new FCEngine.InprocLoader();
+                            IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
+                            //assert(engine != null);
+                            return engine;
+                        }
+                    case EngineLoadingMode.LoadAsWorkprocess:
+                        {
+                            engineLoader = new FCEngine.OutprocLoader();
+                            IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
+                            //assert(engine != null);
+                            return engine;
+                        }
+                }
             }
+            catch (Exception)
+            {
+                /*
+                CLASS_E_NOTLICENSED	-2147221230 (&H80040112L)	This copy of ABBYY FineReader Engine is not registered.
+                era porque la ip cambió
+                    probá hacer "telnet 186.18.248.116 3011" o lo que figure en el LicenseSettings.xml
+                 * 190.16.100.211
+              * */
+                Log(" probá hacer \"telnet 186.18.248.116 3011\". El hresult fue: " + hresult.ToString());
+                throw;
+            }
+
             //assert(false);
             engineLoader = null;
             return null;
