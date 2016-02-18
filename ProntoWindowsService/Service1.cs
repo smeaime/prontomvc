@@ -119,16 +119,6 @@ namespace ProntoWindowsService
         }
 
 
-        static void Log(string s)
-        {
-
-            using (EventLog eventLog = new EventLog("Application"))
-            {
-                eventLog.Source = "Application";
-                eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
-            }
-        }
-
 
 
 
@@ -139,7 +129,7 @@ namespace ProntoWindowsService
 
 
 
-            Log("Empieza");
+            ClassFlexicapture.Log("Empieza");
 
             Initialize();
 
@@ -153,7 +143,7 @@ namespace ProntoWindowsService
 
             string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
 
-            Log("CONEXION: " + cadena);
+            ClassFlexicapture.Log("CONEXION: " + cadena);
             Console.WriteLine("CONEXION: " + cadena);
 
             try
@@ -164,7 +154,7 @@ namespace ProntoWindowsService
             }
             catch (Exception x)
             {
-                Log(x.ToString());
+                ClassFlexicapture.Log(x.ToString());
                 Console.WriteLine(x.ToString());
                 return;
             }
@@ -180,7 +170,7 @@ namespace ProntoWindowsService
 
 
 
-            Log("llamo a iniciamotor");
+            ClassFlexicapture.Log("llamo a iniciamotor");
 
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
 
@@ -189,7 +179,7 @@ namespace ProntoWindowsService
 
 
 
-            Log("Motor iniciado");
+            ClassFlexicapture.Log("Motor iniciado");
 
 
             // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
@@ -258,30 +248,30 @@ at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_Sacan
 at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
     */
 
-                    Log(x2.ToString());
-                    Log("Problemas con la licencia? Paro y reinicio");
+                    ClassFlexicapture.Log(x2.ToString());
+                    ClassFlexicapture.Log("Problemas con la licencia? Paro y reinicio");
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x2);
 
                     //hacer un unload y cargar de nuevo?
 
                     ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                     processor = null;
-                    ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
+                    ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
 
-                    Log("funciona?");
+                    ClassFlexicapture.Log("funciona?");
 
                 }
 
                 catch (Exception x)
                 {
-                    Log(x.ToString());
+                    ClassFlexicapture.Log(x.ToString());
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x);
                 }
 
             }
 
             ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-            Log("Se apagó el motor");
+            ClassFlexicapture.Log("Se apagó el motor");
 
         }
 
@@ -289,7 +279,7 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
 
         static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> Tanda(string SC, string DirApp)
         {
-            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado=null;
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
 
             try
             {
@@ -308,7 +298,7 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
                 if ((html ?? "") != "")
                 {
                     Console.WriteLine(html);
-                    Log(html);
+                    ClassFlexicapture.Log(html);
                 }
 
 
@@ -321,12 +311,12 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
 
 
             }
-               
+
             catch (Exception x)
             {
-                 //System.Runtime.InteropServices.COMException (0x80004005):
+                //System.Runtime.InteropServices.COMException (0x80004005):
                 // que pasa si salto el error de la licencia? diferenciar si saltó por un archivo que no existe u otro error
-                Log(x.ToString());
+                ClassFlexicapture.Log(x.ToString());
                 throw;
 
             }
