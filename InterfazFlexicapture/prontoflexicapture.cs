@@ -418,13 +418,20 @@ namespace ProntoFlexicapture
 
 
 
-        public static IQueryable<procesGrilla> ExtraerListaDeImagenesIrreconocibles(string DirApp)
+        public static IQueryable<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                    new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+            IQueryable<ProntoMVC.Data.Models.CartasDePorte> q2 = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
+                                                                 where i.NumeroCartaDePorte >= 900000000
+                                                                 orderby i.FechaModificacion descending
+                                                                  select i).AsQueryable();
 
             IQueryable<procesGrilla> q = (from f in files
                                           where (EsArchivoDeImagen(f.Name)
@@ -436,7 +443,7 @@ namespace ProntoFlexicapture
 
 
 
-            return q;
+            return q2;
             //sacar info del log o de los archivos????
         }
 
@@ -952,7 +959,7 @@ namespace ProntoFlexicapture
             {
 
                 // por qué no te mandas el lance usando el numero de carta leido en numeros?
-                if (Conversion.Val(NCarta) > 0) numeroCarta = numprefijo;
+                if (false || Conversion.Val(NCarta) > 0) numeroCarta = numprefijo + int.Parse(NCarta);
                 else numeroCarta = numprefijo + rnd.Next(1, 1000000);
             }
 
