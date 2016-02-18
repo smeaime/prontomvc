@@ -1121,7 +1121,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         public void ImagenesPendientesListados()
         {
 
-            var irrec = ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp).ToList();
+            var irrec = ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp,SC).ToList();
 
             var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
             var encola = (from i in lista select new { nombre = i }).ToList();
