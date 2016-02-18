@@ -378,11 +378,13 @@ namespace ProntoFlexicapture
             var r = workBook.ActiveSheet.UsedRange.Rows.Count;
             var c = workBook.ActiveSheet.UsedRange.Columns.Count;
 
-            Excel.Range row2 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
-            row2.Value = numerocarta;
+            Excel.Range row2,row1;
+            
+            row1 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
+            row1.Value = numerocarta;
 
-            row2 = sheet.Rows.Cells[r, 53];
-            row2.Value = dato;
+            //row2 = sheet.Rows.Cells[r, 52];
+            //row2.Value = dato;
 
 
             excel.Application.ActiveWorkbook.SaveAs(nombreexcel);
@@ -883,6 +885,8 @@ namespace ProntoFlexicapture
             string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe();
             string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
 
+            string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe();
+
 
             string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe();
 
@@ -941,14 +945,15 @@ namespace ProntoFlexicapture
 
             }
 
-            const long numprefijo = 999000000;
+            const long numprefijo = 900000000;
 
             var rnd = new Random();
             if (numeroCarta == 0)
             {
 
                 // por qué no te mandas el lance usando el numero de carta leido en numeros?
-                numeroCarta = numprefijo + rnd.Next(1, 1000000);
+                if (Conversion.Val(NCarta) > 0) numeroCarta = numprefijo;
+                else numeroCarta = numprefijo + rnd.Next(1, 1000000);
             }
 
             ///////////////////////////////////////////////////////////////////////////////
@@ -1069,8 +1074,9 @@ namespace ProntoFlexicapture
 
                         ///////////////////////////////////////////////////////////////////
                         ///////////////////////////////////////////////////////////////////
+                        Cosecha = Cosecha.Replace("20", "").Replace("-", "/").Replace(" ", "");
+                        cdp.Cosecha = "20" + Cosecha;
 
-                        cdp.Cosecha = "2015/16";
                         cdp.FechaArribo = DateTime.Today;
 
 

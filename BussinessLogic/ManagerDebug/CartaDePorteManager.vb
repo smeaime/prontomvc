@@ -740,7 +740,7 @@ Public Class CartaDePorteManager
             If RazonSocial.Trim.Length > 4 Then
                 q = New ProntoMVC.Data.Models.WilliamsDestino
                 q.Descripcion = RazonSocial
-                q.Cuit = cuit
+                q.CUIT = cuit
                 'acá había un insertonsubmit
                 db.WilliamsDestinos.Add(q)
                 db.SaveChanges()
@@ -764,10 +764,18 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000") Then
+            Dim id = (From c In db.Clientes Where c.RazonSocial = "DIRECTO" Select c.IdCliente).FirstOrDefault()
+            Return id
+        End If
+
+
         If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
 
 
-        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
 
 
         Dim q = (From c In db.Clientes Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
@@ -802,10 +810,18 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
-
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000") Then
+            Dim id = (From c In db.Vendedores Where c.Nombre = "DIRECTO" Select c.IdVendedor).FirstOrDefault()
+            Return id
+        End If
+
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
 
 
         Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
