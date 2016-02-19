@@ -10278,10 +10278,28 @@ Public Class CartaDePorteManager
 
         'show the scan result
         For n = 0 To datas.Count - 1
-            If datas(n).Length <= 10 And datas(n).Length >= 7 Then
+            Dim largo = Val(datas(n)).ToString.Length
+            If largo = 9 Then
                 Return datas(n)
             End If
         Next
+
+
+        Dim datas2() As String = Spire.Barcode.BarcodeScanner.Scan(fileName, Spire.Barcode.BarCodeType.Code39)
+        'JRD.Imaging.Barcode.Scan(JRD.Imaging.Barcode.GetBitmap(fileName), BarcodeType.Code128)
+
+
+        'show the scan result
+       
+
+        For n = 0 To datas2.Count - 1
+            Dim largo = Val(datas2(n)).ToString.Length
+            If largo = 9 Then
+                Return datas2(n)
+            End If
+        Next
+
+
 
         Return ""
 
@@ -10461,7 +10479,7 @@ Public Class CartaDePorteManager
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
-        If numeroCarta = 0 And False Then
+        If numeroCarta = 0 And True Then
 
 
             Try
