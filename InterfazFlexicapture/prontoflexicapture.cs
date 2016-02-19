@@ -710,7 +710,7 @@ namespace ProntoFlexicapture
             }
 
 
-            CartaDePorteManager.BorroArchivo(archivo);
+            // CartaDePorteManager.BorroArchivo(archivo);  //no borrar el original, total ya está marcado como procesado
 
             return l;
 
