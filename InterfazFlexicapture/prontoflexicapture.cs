@@ -546,6 +546,16 @@ namespace ProntoFlexicapture
 
 
 
+        static int DesmarcarImagenComoProcesandose(string archivo)
+        {
+            //y si creo un archivo con extension?
+
+            CartaDePorteManager.BorroArchivo(archivo + ".bdl");
+
+            return 0;
+
+        }
+
         static int MarcarImagenComoProcesandose(string archivo)
         {
             //y si creo un archivo con extension?
@@ -627,7 +637,7 @@ namespace ProntoFlexicapture
             if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
                 return null;
 
-            if (bGirar180grados) MarcarImagenComoProcesada(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
+            if (bGirar180grados) MarcarImagenComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
 
             List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
 
@@ -732,6 +742,11 @@ namespace ProntoFlexicapture
 
             foreach (string f in l)
             {
+                MarcarImagenComoProcesandose(f);
+            }
+
+            foreach (string f in l)
+            {
                 ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados);
 
                 if (ext != null && ext.Count > 0)
@@ -744,6 +759,7 @@ namespace ProntoFlexicapture
                 else
                 {
                     l2.Add(f);
+                    DesmarcarImagenComoProcesandose(f);
                 }
             }
 
@@ -954,17 +970,26 @@ namespace ProntoFlexicapture
 
             }
 
-            const long numprefijo = 900000000;
 
-            var rnd = new Random();
             if (numeroCarta == 0)
             {
 
                 // por qué no te mandas el lance usando el numero de carta leido en numeros?
-                if (false && Conversion.Val(NCarta) > 0) numeroCarta = numprefijo + int.Parse(NCarta);
-                else numeroCarta = numprefijo + rnd.Next(1, 1000000);
+                if (NCarta != "")
+                {
+                    long n = 0;
+                    long.TryParse(NCarta.Replace(" ", ""), out n);
+                    if (n.ToString().Length == 9) numeroCarta = n;
+                }
             }
 
+
+            const long numprefijo = 900000000;
+            var rnd = new Random();
+            if (numeroCarta == 0)
+            {
+                numeroCarta = numprefijo + rnd.Next(1, 1000000);
+            }
             ///////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////
             /////////////////////// tratando de contrabandear, en la exportacion del excel, el nombre del archivo
@@ -1317,7 +1342,15 @@ namespace ProntoFlexicapture
 
         public static void CreateEmptyFile(string filename)
         {
-            File.Create(filename).Dispose();
+            try
+            {
+                File.Create(filename).Dispose();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
 
