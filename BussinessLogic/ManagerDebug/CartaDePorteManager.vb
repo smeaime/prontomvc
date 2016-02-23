@@ -10278,8 +10278,9 @@ Public Class CartaDePorteManager
 
         'show the scan result
         For n = 0 To datas.Count - 1
-            Dim largo = Val(datas(n)).ToString.Length
-            If largo = 9 Then
+            Dim largo = Val(datas(n).Trim).ToString.Length
+            Dim num As Long = Val(datas(n).Trim)
+            If largo = 9 And num >= 500000000 And num < 600000000 Then
                 Return datas(n)
             End If
         Next
@@ -10293,7 +10294,8 @@ Public Class CartaDePorteManager
        
 
         For n = 0 To datas2.Count - 1
-            Dim largo = Val(datas2(n)).ToString.Length
+            Dim largo = Val(datas2(n).Trim).ToString.Length
+            Dim num As Long = Val(datas2(n).Trim)
             If largo = 9 Then
                 Return datas2(n)
             End If
@@ -10409,8 +10411,9 @@ Public Class CartaDePorteManager
 
                 'txtDecoderType.Text = result.BarcodeFormat.ToString()
                 'txtDecoderContent.Text = result.Text
-                Dim largo = Val(result.Text).ToString.Length
-                If largo = 9 Then
+                Dim largo = Val(result.Text.Trim).ToString.Length
+                Dim num As Long = Val(result.Text.Trim)
+                If largo = 9 And num >= 500000000 And num < 600000000 Then
                     Return result.Text
                 End If
             End If
