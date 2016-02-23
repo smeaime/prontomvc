@@ -15175,95 +15175,103 @@ Namespace Pronto.ERP.Bll
 
 
                         'Else
-                        sb = RenglonBLDCalidad(cdp, 1, .NobleExtranos, carta.CalidadGranosExtranosRebaja, carta.CalidadGranosExtranosRebaja, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma, _
-                                                _TipoMerma(s.Extranos, carta.Secada))
 
-                        sb = RenglonBLDCalidad(cdp, 2, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadQuebradosRebaja, nF, "01", "Quebrados", carta.CalidadQuebradosMerma, _TipoMerma(s.Quebrados, carta.Secada))
-
-                        sb = RenglonBLDCalidad(cdp, 3, .NobleDaniados, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadDanadosMerma, _TipoMerma(s.Daniados, carta.Secada))
+                        Try
 
 
-                        sb = RenglonBLDCalidad(cdp, 4, .NobleChamico, carta.CalidadGranosDanadosRebaja, carta.NobleChamico2, nF, "01", "Chamico", carta.CalidadChamicoMerma, _TipoMerma(s.Chamico, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 1, .NobleExtranos, carta.CalidadGranosExtranosRebaja, carta.CalidadGranosExtranosRebaja, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma, _
+                                                    _TipoMerma(s.Extranos, carta.Secada))
 
-                        sb = RenglonBLDCalidad(cdp, 5, .NobleRevolcado, carta.CalidadGranosDanadosRebaja, carta.CalidadRevolcadosRebaja, nF, "01", "Revolcados", carta.CalidadRevolcadosMerma, _TipoMerma(s.Revolcado, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 2, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadQuebradosRebaja, nF, "01", "Quebrados", carta.CalidadQuebradosMerma, _TipoMerma(s.Quebrados, carta.Secada))
+
+                            sb = RenglonBLDCalidad(cdp, 3, .NobleDaniados, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadDanadosMerma, _TipoMerma(s.Daniados, carta.Secada))
 
 
+                            sb = RenglonBLDCalidad(cdp, 4, .NobleChamico, carta.CalidadGranosDanadosRebaja, carta.NobleChamico2, nF, "01", "Chamico", carta.CalidadChamicoMerma, _TipoMerma(s.Chamico, carta.Secada))
 
-                        sb = RenglonBLDCalidad(cdp, 6, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadObjetablesRebaja, nF, "01", "Objetables", carta.CalidadObjetablesMerma, _TipoMerma(s.Objetables, carta.Secada))
-
-                        sb = RenglonBLDCalidad(cdp, 7, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadAmohosadosRebaja, nF, "01", "Amohosados", carta.CalidadAmohosadosMerma, _TipoMerma(s.Amohosados, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 5, .NobleRevolcado, carta.CalidadGranosDanadosRebaja, carta.CalidadRevolcadosRebaja, nF, "01", "Revolcados", carta.CalidadRevolcadosMerma, _TipoMerma(s.Revolcado, carta.Secada))
 
 
 
-                        sb = RenglonBLDCalidad(cdp, 8, .CalidadPuntaSombreada, carta.CalidadGranosDanadosRebaja, carta.CalidadPuntaSombreadaRebaja, nF, "01", "PuntaSombreada", carta.CalidadPuntaSombreadaMerma, _TipoMerma(s.PuntaSombreada, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 6, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadObjetablesRebaja, nF, "01", "Objetables", carta.CalidadObjetablesMerma, _TipoMerma(s.Objetables, carta.Secada))
 
-                        sb = RenglonBLDCalidad(cdp, 9, .NobleHectolitrico, carta.CalidadGranosDanadosRebaja, carta.CalidadHectolitricoRebaja, nF, "01", "Hectolítrico", carta.CalidadHectolitricoMerma, _TipoMerma(s.Hectolictrico, carta.Secada))
-
-                        sb = RenglonBLDCalidad(cdp, 10, .NobleCarbon, carta.CalidadGranosDanadosRebaja, carta.CalidadCarbonRebaja, nF, "01", "Carbon", carta.CalidadCarbonMerma, _TipoMerma(s.Carbon, carta.Secada))
-
-                        sb = RenglonBLDCalidad(cdp, 11, .NoblePanzaBlanca, carta.CalidadGranosDanadosRebaja, carta.CalidadPanzaBlancaRebaja, nF, "01", "PanzaBlanca", carta.CalidadPanzaBlancaMerma, _TipoMerma(s.PanzaBlanca, carta.Secada))
-
-                        sb = RenglonBLDCalidad(cdp, 12, .NoblePicados, carta.CalidadGranosDanadosRebaja, carta.CalidadPicadosRebaja, nF, "01", "Picados", carta.CalidadPicadosMerma, _TipoMerma(s.Picados, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 7, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadAmohosadosRebaja, nF, "01", "Amohosados", carta.CalidadAmohosadosMerma, _TipoMerma(s.Amohosados, carta.Secada))
 
 
 
-                        sb = RenglonBLDCalidad(cdp, 13, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadVerdesRebaja, nF, "01", "Granos Verdes", carta.CalidadVerdesMerma, _TipoMerma(s.Verdes, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 8, .CalidadPuntaSombreada, carta.CalidadGranosDanadosRebaja, carta.CalidadPuntaSombreadaRebaja, nF, "01", "PuntaSombreada", carta.CalidadPuntaSombreadaMerma, _TipoMerma(s.PuntaSombreada, carta.Secada))
 
+                            sb = RenglonBLDCalidad(cdp, 9, .NobleHectolitrico, carta.CalidadGranosDanadosRebaja, carta.CalidadHectolitricoRebaja, nF, "01", "Hectolítrico", carta.CalidadHectolitricoMerma, _TipoMerma(s.Hectolictrico, carta.Secada))
 
-                        sb = RenglonBLDCalidad(cdp, 14, .CalidadGranosQuemados, carta.CalidadGranosDanadosRebaja, carta.CalidadQuemadosRebaja, nF, "01", "Quemados", carta.CalidadQuemadosMerma, _TipoMerma(s.Quemados, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 10, .NobleCarbon, carta.CalidadGranosDanadosRebaja, carta.CalidadCarbonRebaja, nF, "01", "Carbon", carta.CalidadCarbonMerma, _TipoMerma(s.Carbon, carta.Secada))
 
+                            sb = RenglonBLDCalidad(cdp, 11, .NoblePanzaBlanca, carta.CalidadGranosDanadosRebaja, carta.CalidadPanzaBlancaRebaja, nF, "01", "PanzaBlanca", carta.CalidadPanzaBlancaMerma, _TipoMerma(s.PanzaBlanca, carta.Secada))
 
-                        sb = RenglonBLDCalidad(cdp, 15, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadTierraRebaja, nF, "01", "Tierra", carta.CalidadTierraMerma, _TipoMerma(s.Tierra, carta.Secada))
-
-                        sb = RenglonBLDCalidad(cdp, 16, .CalidadMermaZarandeo, carta.CalidadGranosDanadosRebaja, carta.CalidadZarandeoRebaja, nF, "01", "Zarandeo", carta.CalidadZarandeoMerma, _TipoMerma(s.Zarandeo, carta.Secada))
-
-
-                        sb = RenglonBLDCalidad(cdp, 17, .CalidadDescuentoFinal, carta.CalidadGranosDanadosRebaja, carta.CalidadDescuentoFinalRebaja, nF, "01", "DescuentoFinal", carta.CalidadDescuentoFinalMerma, _TipoMerma(s.DescuentoFinal, carta.Secada))
-
-
-                        sb = RenglonBLDCalidad(cdp, 18, carta.CalidadHumedadResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadHumedadRebaja, nF, "01", "Humedad", carta.CalidadHumedadMerma, _TipoMerma(s.Humedad, carta.Secada))
-
-                        sb = RenglonBLDCalidad(cdp, 19, carta.CalidadGastosFumigacionResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "GastosFumigacion", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Fumigacion, carta.Secada))
+                            sb = RenglonBLDCalidad(cdp, 12, .NoblePicados, carta.CalidadGranosDanadosRebaja, carta.CalidadPicadosRebaja, nF, "01", "Picados", carta.CalidadPicadosMerma, _TipoMerma(s.Picados, carta.Secada))
 
 
 
-                        Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
-
-                        sb = RenglonBLDCalidad(cdp, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, nF, "01", "GastoDeSecada", cc.CalidadGastoDeSecadaMerma, cc.TipoMermaGastoDeSecada <> 0)
-
-                        sb = RenglonBLDCalidad(cdp, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, nF, "01", "MermaVolatil", cc.CalidadMermaVolatilMerma, cc.TipoMermaVolatil <> 0)
-
-                        sb = RenglonBLDCalidad(cdp, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, nF, "01", "FondoNidera", cc.CalidadFondoNideraMerma, cc.TipoMermaFondoNidera <> 0)
-
-                        sb = RenglonBLDCalidad(cdp, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, nF, "01", "MermaConvenida", cc.CalidadMermaConvenidaMerma, cc.TipoMermaConvenida <> 0)
-
-                        sb = RenglonBLDCalidad(cdp, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, nF, "01", "TalCualVicentin", cc.CalidadTalCualVicentinMerma, cc.TipoMermaTalCualVicentin <> 0)
+                            sb = RenglonBLDCalidad(cdp, 13, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadVerdesRebaja, nF, "01", "Granos Verdes", carta.CalidadVerdesMerma, _TipoMerma(s.Verdes, carta.Secada))
 
 
+                            sb = RenglonBLDCalidad(cdp, 14, .CalidadGranosQuemados, carta.CalidadGranosDanadosRebaja, carta.CalidadQuemadosRebaja, nF, "01", "Quemados", carta.CalidadQuemadosMerma, _TipoMerma(s.Quemados, carta.Secada))
 
 
-                        Dim codgrado As Integer
-                        Dim nombre As String
+                            sb = RenglonBLDCalidad(cdp, 15, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadTierraRebaja, nF, "01", "Tierra", carta.CalidadTierraMerma, _TipoMerma(s.Tierra, carta.Secada))
 
-                        If carta.NobleGrado = 1 Then
-                            codgrado = 25
-                            nombre = "Grado_1"
-                        ElseIf carta.NobleGrado = 2 Then
-                            codgrado = 26
-                            nombre = "Grado_2"
-                        ElseIf carta.NobleGrado = 3 Then
-                            codgrado = 27
-                            nombre = "Grado_3"
-                        End If
+                            sb = RenglonBLDCalidad(cdp, 16, .CalidadMermaZarandeo, carta.CalidadGranosDanadosRebaja, carta.CalidadZarandeoRebaja, nF, "01", "Zarandeo", carta.CalidadZarandeoMerma, _TipoMerma(s.Zarandeo, carta.Secada))
 
-                        sb = RenglonBLDCalidad(cdp, codgrado, carta.NobleGrado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", nombre, carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Grado, carta.Secada))
+
+                            sb = RenglonBLDCalidad(cdp, 17, .CalidadDescuentoFinal, carta.CalidadGranosDanadosRebaja, carta.CalidadDescuentoFinalRebaja, nF, "01", "DescuentoFinal", carta.CalidadDescuentoFinalMerma, _TipoMerma(s.DescuentoFinal, carta.Secada))
+
+
+                            sb = RenglonBLDCalidad(cdp, 18, carta.CalidadHumedadResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadHumedadRebaja, nF, "01", "Humedad", carta.CalidadHumedadMerma, _TipoMerma(s.Humedad, carta.Secada))
+
+                            sb = RenglonBLDCalidad(cdp, 19, carta.CalidadGastosFumigacionResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "GastosFumigacion", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Fumigacion, carta.Secada))
+
+
+
+                            Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
+
+                            sb = RenglonBLDCalidad(cdp, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, nF, "01", "GastoDeSecada", cc.CalidadGastoDeSecadaMerma, cc.TipoMermaGastoDeSecada <> 0)
+
+                            sb = RenglonBLDCalidad(cdp, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, nF, "01", "MermaVolatil", cc.CalidadMermaVolatilMerma, cc.TipoMermaVolatil <> 0)
+
+                            sb = RenglonBLDCalidad(cdp, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, nF, "01", "FondoNidera", cc.CalidadFondoNideraMerma, cc.TipoMermaFondoNidera <> 0)
+
+                            sb = RenglonBLDCalidad(cdp, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, nF, "01", "MermaConvenida", cc.CalidadMermaConvenidaMerma, cc.TipoMermaConvenida <> 0)
+
+                            sb = RenglonBLDCalidad(cdp, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, nF, "01", "TalCualVicentin", cc.CalidadTalCualVicentinMerma, cc.TipoMermaTalCualVicentin <> 0)
 
 
 
 
+                            Dim codgrado As Integer
+                            Dim nombre As String
 
-                        'End If
+                            If carta.NobleGrado = 1 Then
+                                codgrado = 25
+                                nombre = "Grado_1"
+                            ElseIf carta.NobleGrado = 2 Then
+                                codgrado = 26
+                                nombre = "Grado_2"
+                            ElseIf carta.NobleGrado = 3 Then
+                                codgrado = 27
+                                nombre = "Grado_3"
+                            End If
 
+                            sb = RenglonBLDCalidad(cdp, codgrado, carta.NobleGrado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", nombre, carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Grado, carta.Secada))
+
+
+
+
+
+                            'End If
+
+                        Catch ex As Exception
+                            ErrHandler2.WriteError(ex)
+
+                        End Try
 
 
 
@@ -15797,122 +15805,127 @@ Namespace Pronto.ERP.Bll
 
             Dim SEPARADOR = ";"
 
-
-            With cdp
-
-
-                '            CartaPorte	IdRubro	DRubro	ResFinal
-                '18383242	151	Grado 1	1
-                '17960754	55	Grado 1	1
-                '18230959	55	Grado 1	1
-                '18126000	55	Grado 1	1
-                '18424881	54	Cuerpos Extraños	-0.6
-                '17835569	55	Grado 1	1
-                '18488771	169	Grado 2	0
-                '18488770	169	Grado 2	0
+            Try
 
 
-                'CartaPorte	IdRubro	TipoRubro	DRubro	                ResFinal	 DescuentoFinal 	 KilosMerma 
-                '43818919	181 	Arbitrado	Grado 2		                                       -   	 -   
-                '43818918	181	    Arbitrado	Grado 2		                                       -   	 -   
-                '43716160	122	    Merma FísicaGranos amohosados MF		                      -4.00 	 1176 
-                '43716160	75	    Arbitrado	Grado 3		                                      -1.50 	 -   
+                With cdp
 
 
+                    '            CartaPorte	IdRubro	DRubro	ResFinal
+                    '18383242	151	Grado 1	1
+                    '17960754	55	Grado 1	1
+                    '18230959	55	Grado 1	1
+                    '18126000	55	Grado 1	1
+                    '18424881	54	Cuerpos Extraños	-0.6
+                    '17835569	55	Grado 1	1
+                    '18488771	169	Grado 2	0
+                    '18488770	169	Grado 2	0
 
 
-
-                If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Then
-
-
-                    Dim cero = 0
-
-
-                    ForzarPrefijo5(.NumeroCartaDePorte)
-
-
-                    sb &= LeftMasPadLeft(.NumeroCartaDePorte, 11) & SEPARADOR   'Carta de porte			11	7	17	N	
-                    'sb &= LeftMasPadLeft(CodigoRubroBLD(.Calidad, .Producto), 2) & SEPARADOR                 'Cereal 				2	39	40	N
-                    sb &= LeftMasPadLeft(CodigoEnsayo, 2) & SEPARADOR
-
-                    'Dim tiporubro As String = IIf(descripcion.ToUpper.Contains("GRADO"), "Arbitrado", "Merma_Física")
-                    Dim tiporubro As String = IIf(Arbitrado, "Arbitrado", "Merma_Física")
-
-                    sb &= tiporubro & SEPARADOR
-
-                    sb &= descripcion & SEPARADOR
+                    'CartaPorte	IdRubro	TipoRubro	DRubro	                ResFinal	 DescuentoFinal 	 KilosMerma 
+                    '43818919	181 	Arbitrado	Grado 2		                                       -   	 -   
+                    '43818918	181	    Arbitrado	Grado 2		                                       -   	 -   
+                    '43716160	122	    Merma FísicaGranos amohosados MF		                      -4.00 	 1176 
+                    '43716160	75	    Arbitrado	Grado 3		                                      -1.50 	 -   
 
 
 
 
 
-                    'Dim desc As Double
-                    'If Not .IsCalidadDescuentoFinalNull Then
-                    '    desc = .CalidadDescuentoFinal
-                    'Else
-                    '    desc = 0
-                    'End If
+                    If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Then
 
 
-                    If descripcion = "DescuentoFinal" Then
+                        Dim cero = 0
 
-                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
 
-                    ElseIf descripcion.StartsWith("Grado") Then
+                        ForzarPrefijo5(.NumeroCartaDePorte)
 
-                        'sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
-                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
 
-                    Else
+                        sb &= LeftMasPadLeft(.NumeroCartaDePorte, 11) & SEPARADOR   'Carta de porte			11	7	17	N	
+                        'sb &= LeftMasPadLeft(CodigoRubroBLD(.Calidad, .Producto), 2) & SEPARADOR                 'Cereal 				2	39	40	N
+                        sb &= LeftMasPadLeft(CodigoEnsayo, 2) & SEPARADOR
 
-                        sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
+                        'Dim tiporubro As String = IIf(descripcion.ToUpper.Contains("GRADO"), "Arbitrado", "Merma_Física")
+                        Dim tiporubro As String = IIf(Arbitrado, "Arbitrado", "Merma_Física")
 
-                        sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
+                        sb &= tiporubro & SEPARADOR
+
+                        sb &= descripcion & SEPARADOR
 
 
 
-                        Dim kilosmerma As Decimal
-                        If descripcion.ToUpper.Contains("HUM") Then
-                            kilosmerma = .HumedadDesnormalizada
+
+
+                        'Dim desc As Double
+                        'If Not .IsCalidadDescuentoFinalNull Then
+                        '    desc = .CalidadDescuentoFinal
+                        'Else
+                        '    desc = 0
+                        'End If
+
+
+                        If descripcion = "DescuentoFinal" Then
+
+                            sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
+
+                        ElseIf descripcion.StartsWith("Grado") Then
+
+                            'sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
+                            sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
+
                         Else
-                            kilosmerma = .Merma
+
+                            sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
+
+                            sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
+
+
+
+                            Dim kilosmerma As Decimal
+                            If descripcion.ToUpper.Contains("HUM") Then
+                                kilosmerma = .HumedadDesnormalizada
+                            Else
+                                kilosmerma = .Merma
+                            End If
+
+                            sb &= Merma & SEPARADOR
+
                         End If
 
-                        sb &= Merma & SEPARADOR
+                        'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
+                        'sb &= .FechaDescarga.ToString("ddMMyy")         'Fecha	de descarga		6	1	6	N	ddmmaa
+                        'sb &= LeftMasPadLeft(numresultado, 2)                   'Número de resultado	2	18	19	N  "01,02,03,04"
+                        'sb &= LeftMasPadLeft(CodigoEnsayo, 5)                   'Código de ensayo		5	20	24	N
+                        'sb &= LeftMasPadLeft(Int(.NetoFinal), 7)             'Kilos  				7	32	38	N
+                        'sb &= LeftMasPadLeft(.SubnumeroVagon, 8)        'Número de Vagón		8	41	48	N
+                        'sb &= LeftMasPadLeft(cero, 9)                   'Importe de honorarios	9	49	57	N
+                        'sb &= IIf(iisNull(bonif_O_rebaja, 0) = 0, "B", "R")                       'Bonifica o Rebaja		1	58	58	A	B-Bonifica	R-Rebaja
+                        'sb &= LeftMasPadLeft((0).ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5)                   'Total de bonif/rebaj	5	59	63	N	
+                        'sb &= IIf(.FueraDeEstandar <> "SI", "N", "S")                       'Fuera de standard		1	64	64	A	S-Si	N-No
+                        'sb &= LeftMasPadLeft(.IdCartaDePorte, 7)                   'Número de certif   	7	65	71	N	
+                        'sb &= LeftMasPadLeft(.DestinoCodigoONCAA, 5)
 
+
+                        sb = Replace(sb, " ", "0")
+                        sb = Replace(sb, "_", " ")
+                        sb = Replace(sb, "Merma_Física", "Merma Física")
+
+                        'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9829
+                        'Solicitan agregar al sincronismo de Calidad de BLD una ultima columna, donde se envíe el Destino de la Carta de Porte
+
+                        sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
+
+
+
+
+
+                        PrintLine(nf, sb)
                     End If
-
-                    'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
-                    'sb &= .FechaDescarga.ToString("ddMMyy")         'Fecha	de descarga		6	1	6	N	ddmmaa
-                    'sb &= LeftMasPadLeft(numresultado, 2)                   'Número de resultado	2	18	19	N  "01,02,03,04"
-                    'sb &= LeftMasPadLeft(CodigoEnsayo, 5)                   'Código de ensayo		5	20	24	N
-                    'sb &= LeftMasPadLeft(Int(.NetoFinal), 7)             'Kilos  				7	32	38	N
-                    'sb &= LeftMasPadLeft(.SubnumeroVagon, 8)        'Número de Vagón		8	41	48	N
-                    'sb &= LeftMasPadLeft(cero, 9)                   'Importe de honorarios	9	49	57	N
-                    'sb &= IIf(iisNull(bonif_O_rebaja, 0) = 0, "B", "R")                       'Bonifica o Rebaja		1	58	58	A	B-Bonifica	R-Rebaja
-                    'sb &= LeftMasPadLeft((0).ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5)                   'Total de bonif/rebaj	5	59	63	N	
-                    'sb &= IIf(.FueraDeEstandar <> "SI", "N", "S")                       'Fuera de standard		1	64	64	A	S-Si	N-No
-                    'sb &= LeftMasPadLeft(.IdCartaDePorte, 7)                   'Número de certif   	7	65	71	N	
-                    'sb &= LeftMasPadLeft(.DestinoCodigoONCAA, 5)
-
-
-                    sb = Replace(sb, " ", "0")
-                    sb = Replace(sb, "_", " ")
-                    sb = Replace(sb, "Merma_Física", "Merma Física")
-
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9829
-                    'Solicitan agregar al sincronismo de Calidad de BLD una ultima columna, donde se envíe el Destino de la Carta de Porte
-
-                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
-
-
-
-
-
-                    PrintLine(nf, sb)
-                End If
-            End With
-            Return sb
+                End With
+                Return sb
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
 
         End Function
 

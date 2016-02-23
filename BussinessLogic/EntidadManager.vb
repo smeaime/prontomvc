@@ -3078,7 +3078,7 @@ Salida:
         End Sub
 
         Public Shared Sub WriteAndRaiseError(ByVal e As Exception)
-            WriteError(e.Message)
+            WriteError(e.ToString)
             Err.Raise(22001, e.Message)
             'Throw New ApplicationException("Error en la ejecucion del SP: " + Nombre, ex)
         End Sub
