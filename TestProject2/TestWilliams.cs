@@ -200,6 +200,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
             zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\CPTKCPTK.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\3333.tif";
             
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -386,6 +387,8 @@ namespace ProntoMVC.Tests
                 //lista.Add(file.FullName);
                 lista.Add(file.Name);
             }
+
+
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
             ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
