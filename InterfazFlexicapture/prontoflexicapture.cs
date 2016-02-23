@@ -670,17 +670,17 @@ namespace ProntoFlexicapture
             if ((bEsFormatoCPTK))
             {
 
-                for (n = 0; n <= listapaginas.Count - 1; n += 2)
+                for (n = 0; n +1  <= listapaginas.Count - 1; n += 2)
                 {
                     var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
                     var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
                     var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
 
                     string[] arguments = {
-				pagina1,
-				pagina2,
-				final
-			};
+				        pagina1,
+				        pagina2,
+				        final
+			        };
 
                     BitMiracle.TiffCP.Program.Main(arguments);
 
