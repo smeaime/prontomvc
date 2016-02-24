@@ -1703,6 +1703,17 @@ SELECT  dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS'), DiccionarioEqu
 WHERE ltrim(palabra)<>'' AND dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS')<10
 order by dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS') asc
 
+SELECT traduccion,palabra FROM DiccionarioEquivalencias WHERE 
+ltrim(palabra)<>'' AND 
+dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BS. AS.') < 7  
+order by dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BS. AS.')  asc
+
+
+
+drop  INDEX IDX_DiccionarioEquivalencias_Traduccion on DiccionarioEquivalencias
+go
+CREATE nonclustered INDEX IDX_DiccionarioEquivalencias_Palabra2 on DiccionarioEquivalencias(palabra,traduccion)
+go
 
 
 
