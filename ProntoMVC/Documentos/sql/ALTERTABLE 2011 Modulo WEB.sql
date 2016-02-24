@@ -1661,15 +1661,6 @@ go
 
 
 
---create table CartasDePorteLog
---(	
---	IdUsuariosRelacionFertilizantesTiposDespacho int IDENTITY (1, 1) PRIMARY KEY,
---	IdCartaDePorte  int REFERENCES CartasDePorte(IdCartaDePorte),
---	nombrearchivo  
---	AgrupadorDeTandaPeriodos  int 
---)
---go
-
 
 sp_help facturas
 
@@ -1686,4 +1677,34 @@ CREATE nonclustered INDEX IDX_Cartasdeporte_PathImagen3 on CartasDePorte(PathIma
 go
 
 select top 10 cosecha  from cartasdeporte where idcartadeporte>1000000
+
+
+
+
+create table CartasDePorteLog
+(	
+	IdCartasDePorteLog int IDENTITY (1, 1) PRIMARY KEY,
+	numero  
+	IdCartaDePorte  int REFERENCES CartasDePorte(IdCartaDePorte),
+	fecha
+	usuario
+	error
+)
+go
+
+
+
+SELECT  dbo.LevenshteinDistance(nombre,'IRENEO PORTELA - BSAS'), Localidades.* FROM Localidades 
+WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'IRENEO PORTELA - BSAS')<10
+order by dbo.LevenshteinDistance(nombre,'IRENEO PORTELA - BSAS') asc
+
+
+SELECT  dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS'), DiccionarioEquivalencias.* FROM DiccionarioEquivalencias 
+WHERE ltrim(palabra)<>'' AND dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS')<10
+order by dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS') asc
+
+
+
+
+
 
