@@ -1081,7 +1081,7 @@ namespace ProntoFlexicapture
                         cdp.Contrato = ContratoNro;
                         cdp.KmARecorrer = Conversion.Val(KmARecorrer);
 
-                        cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
+                        cdp.CTG = Convert.ToInt32(Conversion.Val(CTG.Replace(".", "")));
                         cdp.CEE = BarraCEE;
 
 
@@ -1117,9 +1117,9 @@ namespace ProntoFlexicapture
                         cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
                         if (cdp.Procedencia == -1)
                         {
-                            Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1.ToUpper());
-                            cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
+                            cdp.Procedencia = SQLdinamico.BuscaIdLocalidadAproximado(Localidad1, SC, 7);
                         }
+
 
 
                         cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
