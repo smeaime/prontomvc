@@ -213,7 +213,7 @@ namespace ProntoMVC.Tests
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false,false);
 
 
             string sError = "";
@@ -276,7 +276,7 @@ namespace ProntoMVC.Tests
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

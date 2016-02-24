@@ -631,7 +631,7 @@ namespace ProntoFlexicapture
 
 
 
-        public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados)
+        public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
         {
 
             if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
@@ -684,6 +684,7 @@ namespace ProntoFlexicapture
 
                     BitMiracle.TiffCP.Program.Main(arguments);
 
+                    if (!bProcesarConOCR) MarcarImagenComoProcesandose(final);
 
                     //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
                     //p.StartInfo.UseShellExecute = False
@@ -717,7 +718,7 @@ namespace ProntoFlexicapture
         }
 
 
-        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK, bool bGirar180grados)
+        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
         {
 
             string DIRTEMP = DirApp + @"\Temp\";
@@ -747,7 +748,7 @@ namespace ProntoFlexicapture
 
             foreach (string f in l)
             {
-                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados);
+                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados, bProcesarConOCR);
 
                 if (ext != null && ext.Count > 0)
                 {
