@@ -9911,7 +9911,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function CrearDirectorioParaLoteImagenes(DirApp As String, nombreusuario As String) As String
+    Shared Function CrearDirectorioParaLoteImagenes(DirApp As String, nombreusuario As String, puntoventa As Integer) As String
 
 
         Dim DIRTEMP As String = DirApp & "\Temp\"
@@ -9920,7 +9920,7 @@ Public Class CartaDePorteManager
         '/////////////////////////////////////////////////////////////
         'crear subdirectorios para clasificar la parva de archivos
 
-        Dim nuevodir = "Lote " & DateTime.Now.ToString("ddMMMHHmmss") & " " & nombreusuario + "\"
+        Dim nuevodir = "Lote " & DateTime.Now.ToString("ddMMMHHmmss") & " " & nombreusuario + " PV" & puntoventa & "\"
         If Not IO.Directory.Exists(DIRTEMP + nuevodir) Then IO.Directory.CreateDirectory(DIRTEMP + nuevodir)
 
         Return nuevodir
