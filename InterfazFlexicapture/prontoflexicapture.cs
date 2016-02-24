@@ -670,7 +670,7 @@ namespace ProntoFlexicapture
             if ((bEsFormatoCPTK))
             {
 
-                for (n = 0; n +1  <= listapaginas.Count - 1; n += 2)
+                for (n = 0; n + 1 <= listapaginas.Count - 1; n += 2)
                 {
                     var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
                     var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
@@ -718,11 +718,11 @@ namespace ProntoFlexicapture
         }
 
 
-        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
+        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR, int puntoventa)
         {
 
             string DIRTEMP = DirApp + @"\Temp\";
-            string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, nombreusuario);
+            string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, nombreusuario, puntoventa);
             string destarchivo = nuevosubdir + Path.GetFileName(zipFile);
             File.Copy(zipFile, destarchivo, true);
 
@@ -1033,7 +1033,9 @@ namespace ProntoFlexicapture
                 if (bPisar)
                 {
 
-                    cdp.PuntoVenta = 1;
+
+                    int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
+                    cdp.PuntoVenta = pv;
 
 
 
@@ -1349,7 +1351,7 @@ namespace ProntoFlexicapture
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
