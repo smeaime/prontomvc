@@ -551,7 +551,8 @@ public static class Generales
 
         string us = "";
 
-        if (!System.Diagnostics.Debugger.IsAttached) us = userGuid.ToString();
+      //  if (!System.Diagnostics.Debugger.IsAttached) 
+            us = userGuid.ToString();
 
 
         string s;
