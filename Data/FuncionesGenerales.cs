@@ -47,6 +47,9 @@ namespace ProntoMVC.Data
                 // save each frame to a bytestream
                 bitmap.SelectActiveFrame(FrameDimension.Page, idx);
                 MemoryStream byteStream = new MemoryStream();
+                
+                //bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+
                 bitmap.Save(byteStream, ImageFormat.Tiff);
                 // and then create a new Image from it
                 images.Add(Image.FromStream(byteStream));

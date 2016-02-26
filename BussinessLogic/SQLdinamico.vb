@@ -152,6 +152,46 @@ Public Module SQLdinamico
     End Function
 
 
+
+    Function BuscaIdLocalidadAproximado(ByVal ClienteRazonSocial As String, ByVal SC As String, ByVal distancia As Integer) As Integer
+
+        If ClienteRazonSocial = "" Then Return -1
+
+
+        
+
+        Dim ds2 = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 traduccion,palabra FROM DiccionarioEquivalencias WHERE ltrim(palabra)<>'' AND dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
+          & "  order by dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
+
+
+    
+        If ds2.Rows.Count > 0 Then
+
+            Dim equivalencia As String = ds2.Rows(0).Item("traduccion")
+
+            Dim id = BuscaIdLocalidadPreciso(equivalencia, SC)
+            If id > 0 Then Return id
+        End If
+
+
+
+        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 IdLocalidad, nombre FROM Localidades WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
+              & "  order by dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
+
+
+
+        If ds.Rows.Count > 0 Then Return ds.Rows(0).Item("IdLocalidad")
+
+
+
+
+        Return -1
+    End Function
+
+
+
+
+
     Public Function BuscaIdClientePreciso(ByVal ClienteRazonSocial As String, ByVal SC As String) As Integer
 
         If ClienteRazonSocial = "" Then Return -1
@@ -253,7 +293,7 @@ Public Module SQLdinamico
     Public Function BuscaIdEstablecimientoWilliams(ByVal Nombre As String, ByVal SC As String) As Integer
         If Nombre = "" Then Return -1
 
-        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdEstablecimiento FROM CDPEstablecimientos WHERE Descripcion='" & Nombre & "'")
+        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdEstablecimiento FROM CDPEstablecimientos WHERE Descripcion='" & Replace(Nombre, "'", "''") & "'")
 
 
         If ds.Rows.Count < 1 Then
@@ -265,7 +305,7 @@ Public Module SQLdinamico
                                                  " isnull(Descripcion,'')  COLLATE SQL_Latin1_General_CP1_CI_AS  + ' ' " & _
                                                  " + isnull(Clientes.RazonSocial,'')  COLLATE SQL_Latin1_General_CP1_CI_AS  + ' ' " & _
                                                  " + Convert(varchar(200),isnull(AuxiliarString1,'')  COLLATE SQL_Latin1_General_CP1_CI_AS)+ ' ' " & _
-                                                 " + Convert(varchar(200),isnull(AuxiliarString2,'')  COLLATE SQL_Latin1_General_CP1_CI_AS)    ='" & Nombre & "'")
+                                                 " + Convert(varchar(200),isnull(AuxiliarString2,'')  COLLATE SQL_Latin1_General_CP1_CI_AS)    ='" & Replace(Nombre, "'", "''") & "'")
                 If ds.Rows.Count < 1 Then Return -1
             Else
                 Return -1
@@ -277,7 +317,7 @@ Public Module SQLdinamico
         Return ds.Rows(0).Item("IdEstablecimiento")
     End Function
 
-    
+
 
 
 
@@ -288,7 +328,7 @@ Public Module SQLdinamico
     Public Function BuscaIdCalidadPreciso(ByVal Nombre As String, ByVal SC As String) As Integer
         If Nombre = "" Then Return -1
 
-        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdCalidad FROM Calidades WHERE Descripcion='" & Nombre & "'")
+        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdCalidad FROM Calidades WHERE Descripcion='" & Replace(Nombre, "'", "''") & "'")
 
         If ds.Rows.Count < 1 Then Return -1
 
@@ -298,7 +338,7 @@ Public Module SQLdinamico
     Public Function BuscaIdLocalidadPreciso(ByVal Nombre As String, ByVal SC As String) As Integer
         If Nombre = "" Then Return -1
 
-        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdLocalidad FROM Localidades WHERE Nombre='" & Nombre & "'")
+        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdLocalidad FROM Localidades WHERE Nombre='" & Replace(Nombre, "'", "''") & "'")
 
         If ds.Rows.Count < 1 Then
 

@@ -27,6 +27,7 @@ namespace ProntoWindowsService
             servicesToRun = new ServiceBase[] 
                     {
                         new Service1()
+                        // , new Service1()  // disparo dos hilos
                     };
 
             if (System.Environment.UserInteractive)

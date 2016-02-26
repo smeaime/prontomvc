@@ -68,7 +68,7 @@ Imports CDPMailFiltrosManager2
 Imports LogicaImportador.FormatosDeExcel
 
 
-
+Imports BitMiracle
 
 
 
@@ -639,6 +639,7 @@ Public Class CartaDePorteManager
 
 
 
+
     Public Shared Function BuscarTransportistaPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
         If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
@@ -717,12 +718,64 @@ Public Class CartaDePorteManager
 
     End Function
 
-    Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+
+
+
+
+
+    Public Shared Function BuscarDestinoPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
         If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
 
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.WilliamsDestinos Where c.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+
+
+
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.WilliamsDestino
+                q.Descripcion = RazonSocial
+                q.CUIT = cuit
+                'acá había un insertonsubmit
+                db.WilliamsDestinos.Add(q)
+                db.SaveChanges()
+                Return q.IdWilliamsDestino
+            Else
+                Return 0
+            End If
+
+        Else
+            Return q.IdWilliamsDestino
+        End If
+
+        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
+
+
+
+
+
+    End Function
+
+
+    Public Shared Function BuscarClientePorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000000") Then
+            Dim id = (From c In db.Clientes Where c.RazonSocial = "DIRECTO" Select c.IdCliente).FirstOrDefault()
+            Return id
+        End If
+
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
+
+
 
 
         Dim q = (From c In db.Clientes Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
@@ -757,10 +810,18 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
-
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000000") Then
+            Dim id = (From c In db.Vendedores Where c.Nombre = "DIRECTO" Select c.IdVendedor).FirstOrDefault()
+            Return id
+        End If
+
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+
 
 
         Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
@@ -2165,7 +2226,7 @@ Public Class CartaDePorteManager
         End If
 
 
-        Dim archivos As Generic.List(Of String) = Extraer(destzip, DIRTEMP)
+        Dim archivos As Generic.List(Of String) = ExtraerZip(destzip, DIRTEMP)
 
     End Function
 
@@ -4707,7 +4768,7 @@ Public Class CartaDePorteManager
 
         Dim sDir As String
 
-        If System.Diagnostics.Debugger.IsAttached() Then
+        If System.Diagnostics.Debugger.IsAttached() And HttpContext.Current IsNot Nothing Then
             'sDirVirtual = "~/DataBackupear\"
             sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
@@ -7513,9 +7574,9 @@ Public Class CartaDePorteManager
 
 
         If familia.Count = 0 Then Return New CartaDePorte
-        If sss IsNot Nothing Then Return CartaDePorteDB.GetItem(SC, sss.IdCartaDePorte)
+        If sss IsNot Nothing Then Return CartaDePorteManager.GetItem(SC, sss.IdCartaDePorte)
         If SubnumeroFacturacion > 0 Then Return New CartaDePorte
-        If familia.Count = 1 Then Return CartaDePorteDB.GetItem(SC, familia(0).IdCartaDePorte)
+        If familia.Count = 1 Then Return CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
 
         ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
 
@@ -7530,7 +7591,7 @@ Public Class CartaDePorteManager
 
             'devuelvo la primera que encontré -está MAL. si hay mas de uno, es un error
             Dim myCartaDePorte As CartaDePorte
-            myCartaDePorte = CartaDePorteDB.GetItem(SC, ds.Tables(0).Rows(0).Item("IdCartaDePorte"))
+            myCartaDePorte = CartaDePorteManager.GetItem(SC, ds.Tables(0).Rows(0).Item("IdCartaDePorte"))
 
             'es un error. si estoy buscando un subnumero de facturacion especifico, me va a cagar
             If SubnumeroFacturacion > 0 And myCartaDePorte.SubnumeroDeFacturacion <> SubnumeroFacturacion Then Return New CartaDePorte
@@ -9406,7 +9467,7 @@ Public Class CartaDePorteManager
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    Public Shared Function Extraer(ZipAExtraer As String, DirectorioExtraccion As String) As Generic.List(Of String)
+    Public Shared Function ExtraerZip(ZipAExtraer As String, DirectorioExtraccion As String) As Generic.List(Of String)
 
 
 
@@ -9850,7 +9911,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function CrearDirectorioParaLoteImagenes(DirApp As String, nombreusuario As String) As String
+    Shared Function CrearDirectorioParaLoteImagenes(DirApp As String, nombreusuario As String, puntoventa As Integer) As String
 
 
         Dim DIRTEMP As String = DirApp & "\Temp\"
@@ -9859,7 +9920,7 @@ Public Class CartaDePorteManager
         '/////////////////////////////////////////////////////////////
         'crear subdirectorios para clasificar la parva de archivos
 
-        Dim nuevodir = "Lote " & DateTime.Now.ToString("ddMMMHHmmss") & " " & nombreusuario + "\"
+        Dim nuevodir = "Lote " & DateTime.Now.ToString("ddMMMHHmmss") & " " & nombreusuario + " PV" & puntoventa & "\"
         If Not IO.Directory.Exists(DIRTEMP + nuevodir) Then IO.Directory.CreateDirectory(DIRTEMP + nuevodir)
 
         Return nuevodir
@@ -10217,10 +10278,30 @@ Public Class CartaDePorteManager
 
         'show the scan result
         For n = 0 To datas.Count - 1
-            If datas(n).Length <= 10 And datas(n).Length >= 7 Then
+            Dim largo = Val(datas(n).Trim).ToString.Length
+            Dim num As Long = Val(datas(n).Trim)
+            If largo = 9 And num >= 500000000 And num < 600000000 Then
                 Return datas(n)
             End If
         Next
+
+
+        Dim datas2() As String = Spire.Barcode.BarcodeScanner.Scan(fileName, Spire.Barcode.BarCodeType.Code39)
+        'JRD.Imaging.Barcode.Scan(JRD.Imaging.Barcode.GetBitmap(fileName), BarcodeType.Code128)
+
+
+        'show the scan result
+       
+
+        For n = 0 To datas2.Count - 1
+            Dim largo = Val(datas2(n).Trim).ToString.Length
+            Dim num As Long = Val(datas2(n).Trim)
+            If largo = 9 Then
+                Return datas2(n)
+            End If
+        Next
+
+
 
         Return ""
 
@@ -10330,8 +10411,9 @@ Public Class CartaDePorteManager
 
                 'txtDecoderType.Text = result.BarcodeFormat.ToString()
                 'txtDecoderContent.Text = result.Text
-                Dim largo = Val(result.Text).ToString.Length
-                If largo = 9 Then
+                Dim largo = Val(result.Text.Trim).ToString.Length
+                Dim num As Long = Val(result.Text.Trim)
+                If largo = 9 And num >= 500000000 And num < 600000000 Then
                     Return result.Text
                 End If
             End If
@@ -10400,7 +10482,7 @@ Public Class CartaDePorteManager
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
-        If numeroCarta = 0 And False Then
+        If numeroCarta = 0 And True Then
 
 
             Try
@@ -10502,7 +10584,7 @@ Public Class CartaDePorteManager
             If Not nombre.Contains(".jpg") And Not nombre.Contains(".tif") Then
                 'si no es un jpg ni tiff (los tif se dividen dentro de la llamada a GrabarImagen)
                 Try
-                    System.Drawing.Bitmap.FromFile(DIRTEMP + nombre).Save(DIRTEMP + nombre + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
+                    System.Drawing.Bitmap.FromFile(nombre).Save(nombre + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                     Continue For
@@ -10512,7 +10594,7 @@ Public Class CartaDePorteManager
             End If
 
 
-            Dim origen = DIRTEMP + nombre
+            Dim origen = nombre
 
 
 
@@ -10574,7 +10656,7 @@ Public Class CartaDePorteManager
 
 
             Randomize()
-            Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+            Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(nombre)
 
 
 
@@ -10664,7 +10746,7 @@ Public Class CartaDePorteManager
                         System.GC.Collect()
                         System.GC.WaitForPendingFinalizers()
                         ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14955
-                        MyFile6.Delete() 'me está tirando que es usado por otro proceso
+                        'MyFile6.Delete() 'me está tirando que es usado por otro proceso
                     End If
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -13838,7 +13920,7 @@ Public Class LogicaFacturacion
 
                     .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
 
-               
+
                     .FechaArribo = CDate(iisNull(cdp("FechaArribo"), Today))
                     .FechaDescarga = CDate(iisNull(cdp("FechaDescarga"), Today))
 
@@ -16513,20 +16595,20 @@ Public Class LogicaFacturacion
             '-igual que haces para el tope de monto!!!
             'resolverlo en EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones()
             If False Then
-                For Each i In dtlotecito
-                    Dim q = AgruparItemsDeLaFactura(lote, optFacturarA, agruparArticulosPor, SC, txtBuscar)
+                'For Each i In dtlotecito
+                '    Dim q = AgruparItemsDeLaFactura(lote, optFacturarA, agruparArticulosPor, SC, txtBuscar)
 
-                    Dim renglons As Integer = 0
-                    For Each o In q
-                        renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
-                    Next
-                    If renglons > MAXRENGLONES Then
-                        Dim s2 = "La factura para " & idClienteAfacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
-                        ErrHandler2.WriteAndRaiseError(s2)
-                        'Throw New Exception(s2)
-                        ' Return -12
-                    End If
-                Next
+                '    Dim renglons As Integer = 0
+                '    For Each o In q
+                '        renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
+                '    Next
+                '    If renglons > MAXRENGLONES Then
+                '        Dim s2 = "La factura para " & idClienteAfacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
+                '        ErrHandler2.WriteAndRaiseError(s2)
+                '        'Throw New Exception(s2)
+                '        ' Return -12
+                '    End If
+                'Next
             End If
 
 
@@ -25752,7 +25834,6 @@ Public Class ExcelImportadorManager
         '//////////////////////////////////////////////////////////////////////
 
 
-
         Dim dtOrigen = ds.Tables(0)
 
         Dim dtDestino As Data.DataTable = TablaFormato(SC)
@@ -25783,6 +25864,29 @@ Public Class ExcelImportadorManager
 
 
 
+        '        Log Entry
+        '02/25/2016 00:49:39
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:No se encontró el renglon de titulos. Renglones totales:49
+        '        __________________________()
+
+        '        Log Entry
+        '02/25/2016 00:49:39
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.IndexOutOfRangeException
+        'There is no row at position -1.
+        '   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+        '   at System.Data.DataRowCollection.get_Item(Int32 index)
+        '   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32& m_IdMaestro, String archivoExcel, FormatosDeExcel Formato, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, String txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 25869
+        '   at CartasDePorteImportador.FormatearExcelImportado(String nombre)
+        '   at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e)
+        '        System.Data()
+        '        ________________()
+
+
+        If renglonDeTitulos = -1 Then
+            Throw New Exception("No se encontró el renglon de titulos. Falta elegir el formato del archivo?")
+        ElseIf renglonDeTitulos > dtOrigen.Rows.Count - 1 Then
+            Throw New Exception("No se encontró el renglon de titulos. Falta elegir el formato del archivo?")asdasd
+        End If
 
         row = dtOrigen.Rows(renglonDeTitulos)
 

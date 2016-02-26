@@ -142,7 +142,7 @@ namespace ProntoMVC.Data.Models
         public string CuitClienteExterno { get; set; }
         public Nullable<decimal> ComisionDiferenciada { get; set; }
         public Nullable<int> IdTipoNegocioVentas { get; set; }
-        public Nullable<int> NumeroOrdenCompraExterna { get; set; }
+        public Nullable<long> NumeroOrdenCompraExterna { get; set; }
         public Nullable<int> IdTipoOperacion { get; set; }
         public string FueEnviadoCorreoConFacturaElectronica { get; set; }
         public Nullable<int> IdClienteObservaciones { get; set; }

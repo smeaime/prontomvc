@@ -3029,6 +3029,15 @@ Salida:
 
 
                 nombre = DirectorioErrores & DateTime.Today.ToString("dd-MM-yy") & ".txt"
+
+
+                If System.Web.HttpContext.Current Is Nothing Then
+                    'esta funcion tendría que recibir el DirApp?
+                    'Path.GetTempPath()
+                    Return Nothing 'donde escribo el archivo????????
+                End If
+
+
                 nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre)
 
                 If (Not File.Exists(nombreLargo)) Then
@@ -3069,7 +3078,7 @@ Salida:
         End Sub
 
         Public Shared Sub WriteAndRaiseError(ByVal e As Exception)
-            WriteError(e.Message)
+            WriteError(e.ToString)
             Err.Raise(22001, e.Message)
             'Throw New ApplicationException("Error en la ejecucion del SP: " + Nombre, ex)
         End Sub
