@@ -576,9 +576,11 @@ namespace ProntoFlexicapture
 
         public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
         {
+            pasar id
 
             cdp.CalidadTierra = -1;
 
+            cdp.
 
             //cdp.Corredor2
             //  cdp.
@@ -629,6 +631,146 @@ namespace ProntoFlexicapture
 
 
 
+        private static Bitmap GetBitmapFormTiff(Tiff tif)
+        {
+            FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
+            int width = value[0].ToInt();
+
+            value = tif.GetField(TiffTag.IMAGELENGTH);
+            int height = value[0].ToInt();
+
+            //Read the image into the memory buffer
+            var raster = new int[height * width];
+            if (!tif.ReadRGBAImage(width, height, raster))
+            {
+                return null;
+            }
+
+            var bmp = new Bitmap(width, height, PixelFormat.Format32bppRgb);
+
+            var rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            BitmapData bmpdata = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
+            var bits = new byte[bmpdata.Stride * bmpdata.Height];
+
+            for (int y = 0; y < bmp.Height; y++)
+            {
+                int rasterOffset = y * bmp.Width;
+                int bitsOffset = (bmp.Height - y - 1) * bmpdata.Stride;
+
+                for (int x = 0; x < bmp.Width; x++)
+                {
+                    int rgba = raster[rasterOffset++];
+                    bits[bitsOffset++] = (byte)((rgba >> 16) & 0xff);
+                    bits[bitsOffset++] = (byte)((rgba >> 8) & 0xff);
+                    bits[bitsOffset++] = (byte)(rgba & 0xff);
+                    bits[bitsOffset++] = (byte)((rgba >> 24) & 0xff);
+                }
+            }
+
+            System.Runtime.InteropServices.Marshal.Copy(bits, 0, bmpdata.Scan0, bits.Length);
+            bmp.UnlockBits(bmpdata);
+
+            return bmp;
+        }
+
+
+        public static List<string> PreprocesarImagenesTiff2(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
+        {
+
+            if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
+                return null;
+
+            if (bGirar180grados) MarcarImagenComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
+
+            //  List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
+            //open tif file
+            var tif = Tiff.Open(archivo, "r");
+            //get number of pages
+            var num = tif.NumberOfDirectories();
+       // http://stackoverflow.com/questions/13178185/how-to-split-multipage-tiff-using-libtiff-net
+
+
+            List<string> l = new List<string>();
+            int n = 0;
+            if (num > 1)
+            {
+                //for (n = 0; n <= listapaginas.Count - 1; n++)
+                for (short i = 0; i < num; i++)
+                {
+                    var nombre = archivo + "_pag" + n.ToString() + ".tif";
+
+                    if (bGirar180grados) nombre += ".temp"; // para que no lo tome el servicio
+
+
+                    //listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
+                    tif.SetDirectory(i);
+                    Bitmap bmp = GetBitmapFormTiff(tif);
+                    bmp.Save(string.Format(@"newfile{0}.bmp", i));
+
+
+                    if (bGirar180grados)
+                    {
+                        var rotado = nombre + "_rotado.tif";
+                        OrientarImagen(nombre, rotado);
+                        CartaDePorteManager.BorroArchivo(nombre);
+                        nombre = rotado;
+                    }
+
+                    l.Add(nombre);
+                }
+            }
+
+
+            if ((bEsFormatoCPTK))
+            {
+
+                for (n = 0; n + 1 <= num - 1; n += 2)
+                {
+                    var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
+                    var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
+                    var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
+
+                    string[] arguments = {
+				        pagina1,
+				        pagina2,
+				        final
+			        };
+
+                    BitMiracle.TiffCP.Program.Main(arguments);
+
+                    if (!bProcesarConOCR) MarcarImagenComoProcesandose(final);
+
+                    //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
+                    //p.StartInfo.UseShellExecute = False
+                    //p.StartInfo.RedirectStandardOutput = True
+                    //p.StartInfo.FileName = @"C:\PathToExe\TiffCP.exe"
+                    //Dim path1 = @"C:\PathToImage\image.tiff"
+                    //dim path2 = @"C:\PathToImage\imagePage1.tiff"
+                    //p.StartInfo.Arguments = "\"" + path1 + " \ "" + ",0 \"" + path2 + " \ ""
+                    //p.Start()
+                    //string t = p.StandardOutput.ReadToEnd()
+
+                    CartaDePorteManager.BorroArchivo(pagina1);
+                    CartaDePorteManager.BorroArchivo(pagina2);
+
+
+
+                    l.Remove(pagina1);
+                    l.Remove(pagina2);
+                    l.Add(final);
+                }
+
+
+
+            }
+
+
+            // CartaDePorteManager.BorroArchivo(archivo);  //no borrar el original, total ya está marcado como procesado
+
+            return l;
+
+        }
 
 
         public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
