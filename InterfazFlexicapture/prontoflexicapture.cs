@@ -369,10 +369,7 @@ namespace ProntoFlexicapture
             {
 
                 // qué pasa si no esta la licencia?
-<<<<<<< HEAD
 
-=======
->>>>>>> 11379f133345c86781c2c04bc0979fc18ec2f144
                 // detectar con lectores de codigo de barra
 
                 ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
