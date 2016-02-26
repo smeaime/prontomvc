@@ -1656,7 +1656,64 @@ alter table Log ADD
 go
 
 
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
+
+
+
+sp_help facturas
+
+select * from facturas where idfactura>79302 and idfactura < 79306
+
+
+
+CREATE nonclustered INDEX IDX_Cartasdeporte_CalidadTierra on CartasDePorte(CalidadTierra)
+go
+
+CREATE nonclustered INDEX IDX_Cartasdeporte_PathImagen2 on CartasDePorte(PathImagen, PathImagen2,FechaModificacion)
+go
+CREATE nonclustered INDEX IDX_Cartasdeporte_PathImagen3 on CartasDePorte(PathImagen2,FechaModificacion)
+go
+
+select top 10 cosecha  from cartasdeporte where idcartadeporte>1000000
+
+
+
+
+create table CartasDePorteLog
+(	
+	IdCartasDePorteLog int IDENTITY (1, 1) PRIMARY KEY,
+	numero  
+	IdCartaDePorte  int REFERENCES CartasDePorte(IdCartaDePorte),
+	fecha
+	usuario
+	error
+)
+go
+
+
+
+SELECT  dbo.LevenshteinDistance(nombre,'IRENEO PORTELA - BSAS'), Localidades.* FROM Localidades 
+WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'IRENEO PORTELA - BSAS')<10
+order by dbo.LevenshteinDistance(nombre,'IRENEO PORTELA - BSAS') asc
+
+
+SELECT  dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS'), DiccionarioEquivalencias.* FROM DiccionarioEquivalencias 
+WHERE ltrim(palabra)<>'' AND dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS')<10
+order by dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BSAS') asc
+
+SELECT traduccion,palabra FROM DiccionarioEquivalencias WHERE 
+ltrim(palabra)<>'' AND 
+dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BS. AS.') < 7  
+order by dbo.LevenshteinDistance(palabra,'IRENEO PORTELA - BS. AS.')  asc
+
+
+
+drop  INDEX IDX_DiccionarioEquivalencias_Traduccion on DiccionarioEquivalencias
+go
+CREATE nonclustered INDEX IDX_DiccionarioEquivalencias_Palabra2 on DiccionarioEquivalencias(palabra,traduccion)
+go
 
 
 

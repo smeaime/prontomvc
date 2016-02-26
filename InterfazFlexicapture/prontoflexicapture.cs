@@ -23,6 +23,17 @@ using Pronto.ERP.Bll;
 
 using Microsoft.VisualBasic;
 
+using Excel = Microsoft.Office.Interop.Excel;
+
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+
+
+using System.Drawing;
+
+using BitMiracle.LibTiff.Classic;
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
@@ -114,6 +125,7 @@ namespace ProntoFlexicapture
             //Console.WriteLine("Imagenes encoladas " + Lista.Count);
 
             return ProcesarCartasBatchConFlexicapture(ref engine, ref  processor, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
+            //si no esta la licencia, recibe la excepcion 
 
         }
 
@@ -165,6 +177,7 @@ namespace ProntoFlexicapture
             foreach (string s in imagenes)
             {
                 imageSource.AddImageFileByRef(s);
+                MarcarImagenComoProcesandose(s);
             }
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
@@ -190,13 +203,20 @@ namespace ProntoFlexicapture
             int count = 0;
             while (true)
             {
+
+                FuncionesGenericasCSharp.Resultados output = null;
+
                 if (count > imagenes.Count - 1) break;
 
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
                 //trace("Recognize next document...");
-                IDocument document = processor.RecognizeNextDocument();
+                IDocument document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
+
+
+
+
                 if (document == null)
                 {
                     IProcessingError error = processor.GetLastProcessingError();
@@ -218,29 +238,6 @@ namespace ProntoFlexicapture
                 //trace("Export recognized document...");
 
 
-                if (false)
-                {
-                    //    processor.ExportDocumentEx(document, SamplesFolder + "\\FCEExport", "NextDocument_" + count, null);
-                }
-
-                else if (bProcesar)
-                {
-                    try
-                    {
-                        r.Add(ProcesaCarta(document, SC, imagenes[count], DirApp));
-
-                    }
-                    catch (Exception x)
-                    {
-                        Debug.Print(x.ToString());
-                        ErrHandler2.WriteError(x);
-                        // throw;
-                    }
-
-
-                }
-
-
 
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
@@ -250,17 +247,26 @@ namespace ProntoFlexicapture
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
-                string dir = DirApp + @"\Temp\";
+                string dirtemp = DirApp + @"\Temp\";
+
+                Random rnd = new Random();
+
                 IFileExportParams exportParams = engine.CreateFileExportParams();
                 exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
+                exportParams.ExportOriginalImages = true;
+                exportParams.ImageExportParams.Prefix = "ExportToXLS_" + rnd.Next(100000, 999999).ToString(); // en realidad las imagenes exportadas deberían ir a parar todas al raiz, porque no hay manera de saber a qué imagen corresponden. Entonces las dejo todas en el mismo lugar, y genero un random al prefijo para asegurarme de que ese nombre es exclusivo
+                //IExcelExportParams excelParametros;
+                //exportParams.ExcelParams = excelParametros;
+
 
 
                 var w = imagenes[count].IndexOf(@"\Temp\");
                 var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
-                var ccc = imagenes[count].Substring(0, sd + w + 6);
+                var dirExport = imagenes[count].Substring(0, sd + w + 6) + @"\";
 
 
-                processor.ExportDocumentEx(document, ccc  , "ExportToXLS", exportParams);
+                processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
+
 
 
 
@@ -276,6 +282,38 @@ namespace ProntoFlexicapture
 
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+
+
+                if (bProcesar)
+                {
+                    try
+                    {
+                        output = ProcesaCarta(document, SC, dirExport + exportParams.ImageExportParams.Prefix + ".tif", DirApp);
+                        r.Add(output);
+
+                        // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
+                        //explota aca con la carta invalida
+                        ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString());
+
+                    }
+                    catch (Exception x)
+                    {
+                        Log(x.ToString());
+                        Debug.Print(x.ToString());
+                        ErrHandler2.WriteError(x);
+                        // throw;
+                    }
+
+
+                }
+
+
+
+
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////
@@ -307,7 +345,51 @@ namespace ProntoFlexicapture
         }
 
 
+        static void ManotearExcel(string nombreexcel, string dato, string numerocarta)
+        {
 
+
+            //OpenXMLWindowsApp.UpdateCell(nombreexcel, dato, 2, "BB");
+            //return;
+
+
+
+            Excel.Application excel = new Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workBook = excel.Workbooks.Open(nombreexcel);
+            Microsoft.Office.Interop.Excel.Worksheet sheet = workBook.ActiveSheet;
+            Microsoft.Office.Interop.Excel.Range range = sheet.UsedRange;
+
+            excel.Visible = false;
+            excel.DisplayAlerts = false;
+
+
+            //string address = range.get_Address();
+            //string[] cells = address.Split(new char[] { ':' });
+            //string beginCell = cells[0].Replace("$", "");
+            //string endCell = cells[1].Replace("$", "");
+
+            //int lastColumn = range.Columns.Count;
+            //int lastRow = range.Rows.Count;
+
+            var r = workBook.ActiveSheet.UsedRange.Rows.Count;
+            var c = workBook.ActiveSheet.UsedRange.Columns.Count;
+
+            Excel.Range row2, row1;
+
+            //row1 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
+            //row1.Value = numerocarta;
+
+            row2 = sheet.Rows.Cells[r, 52];
+            row2.Value = dato;
+
+
+            excel.Application.ActiveWorkbook.SaveAs(nombreexcel);
+            excel.Application.Quit();
+            excel.Quit();
+
+
+
+        }
 
 
         public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
@@ -332,17 +414,23 @@ namespace ProntoFlexicapture
 
 
 
-        public static IQueryable<procesGrilla> ExtraerListaDeImagenesIrreconocibles(string DirApp)
+        public static IQueryable<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                    new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+            IQueryable<ProntoMVC.Data.Models.CartasDePorte> q2 = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
+                                                                  where i.NumeroCartaDePorte >= 900000000
+                                                                  orderby i.FechaModificacion descending
+                                                                  select i).AsQueryable();
 
             IQueryable<procesGrilla> q = (from f in files
-                                          where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
-                                                || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
+                                          where (EsArchivoDeImagen(f.Name)
                                                  &&
                                                  (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                                           )
@@ -351,7 +439,7 @@ namespace ProntoFlexicapture
 
 
 
-            return q;
+            return q2;
             //sacar info del log o de los archivos????
         }
 
@@ -388,6 +476,27 @@ namespace ProntoFlexicapture
         }
 
 
+
+
+        static bool EsArchivoDeImagen(string f)
+        {
+
+
+            if (!f.ToLower().Contains("exporttoxls") &&
+                (
+                    f.ToLower().EndsWith(".tif")
+                    || f.ToLower().EndsWith(".tiff")
+                    || f.ToLower().EndsWith(".jpg")
+                    || f.ToLower().EndsWith(".pdf")
+                )
+               )
+                return true;
+
+            return false;
+
+        }
+
+
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
@@ -408,15 +517,16 @@ namespace ProntoFlexicapture
             //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
 
+            // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
 
             var q = (from f in files
-                     where ((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
-                              || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
+                     where (EsArchivoDeImagen(f.Name)
                             &&
-                            (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                            !files.Any(x => x.FullName == (f.FullName + ".bdl"))
                      )
                      orderby f.LastWriteTime ascending
                      select f.FullName).Take(cuantas);
+
 
 
             return q.ToList();
@@ -436,23 +546,71 @@ namespace ProntoFlexicapture
 
 
 
-        public static IQueryable<procesGrilla> ExtraerListaDeImagenesProcesadas(string DirApp)
+        static int DesmarcarImagenComoProcesandose(string archivo)
+        {
+            //y si creo un archivo con extension?
+
+            CartaDePorteManager.BorroArchivo(archivo + ".bdl");
+
+            return 0;
+
+        }
+
+        static int MarcarImagenComoProcesandose(string archivo)
+        {
+            //y si creo un archivo con extension?
+
+            CreateEmptyFile(archivo + ".bdl");
+
+            return 0;
+
+        }
+
+
+        static int MarcarImagenComoProcesada(string archivo)
+        {
+            return 0;
+
+        }
+
+
+        public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
+        {
+            pasar id
+
+            cdp.CalidadTierra = -1;
+
+            cdp.
+
+            //cdp.Corredor2
+            //  cdp.
+
+        }
+
+
+        public static List<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*"); //Getting Text files
+            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                    new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            // where (i.PathImagen != "" || i.PathImagen2 != "")
+
+            List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
+                                                           where (i.CalidadTierra == -1)
+                                                           orderby i.FechaModificacion descending
+                                                           select i).Take(100).ToList();
+
+            //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
 
 
 
-            IQueryable<procesGrilla> q = (from f in files
-                                          where !((f.Name.ToLower().EndsWith(".tif") || f.Name.ToLower().EndsWith(".tiff")
-                                                || f.Name.ToLower().EndsWith(".jpg") || f.Name.ToLower().EndsWith(".pdf"))
-                                                 &&
-                                                 (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
-                                          )
-                                          orderby f.LastWriteTime descending
-                                          select new procesGrilla() { nombreImagen = "" }).AsQueryable();
-
+            // como me traigo la info de las id, etc?
 
 
             return q;
@@ -473,9 +631,371 @@ namespace ProntoFlexicapture
 
 
 
+        private static Bitmap GetBitmapFormTiff(Tiff tif)
+        {
+            FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
+            int width = value[0].ToInt();
+
+            value = tif.GetField(TiffTag.IMAGELENGTH);
+            int height = value[0].ToInt();
+
+            //Read the image into the memory buffer
+            var raster = new int[height * width];
+            if (!tif.ReadRGBAImage(width, height, raster))
+            {
+                return null;
+            }
+
+            var bmp = new Bitmap(width, height, PixelFormat.Format32bppRgb);
+
+            var rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            BitmapData bmpdata = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
+            var bits = new byte[bmpdata.Stride * bmpdata.Height];
+
+            for (int y = 0; y < bmp.Height; y++)
+            {
+                int rasterOffset = y * bmp.Width;
+                int bitsOffset = (bmp.Height - y - 1) * bmpdata.Stride;
+
+                for (int x = 0; x < bmp.Width; x++)
+                {
+                    int rgba = raster[rasterOffset++];
+                    bits[bitsOffset++] = (byte)((rgba >> 16) & 0xff);
+                    bits[bitsOffset++] = (byte)((rgba >> 8) & 0xff);
+                    bits[bitsOffset++] = (byte)(rgba & 0xff);
+                    bits[bitsOffset++] = (byte)((rgba >> 24) & 0xff);
+                }
+            }
+
+            System.Runtime.InteropServices.Marshal.Copy(bits, 0, bmpdata.Scan0, bits.Length);
+            bmp.UnlockBits(bmpdata);
+
+            return bmp;
+        }
+
+
+        public static List<string> PreprocesarImagenesTiff2(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
+        {
+
+            if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
+                return null;
+
+            if (bGirar180grados) MarcarImagenComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
+
+            //  List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
+            //open tif file
+            var tif = Tiff.Open(archivo, "r");
+            //get number of pages
+            var num = tif.NumberOfDirectories();
+       // http://stackoverflow.com/questions/13178185/how-to-split-multipage-tiff-using-libtiff-net
+
+
+            List<string> l = new List<string>();
+            int n = 0;
+            if (num > 1)
+            {
+                //for (n = 0; n <= listapaginas.Count - 1; n++)
+                for (short i = 0; i < num; i++)
+                {
+                    var nombre = archivo + "_pag" + n.ToString() + ".tif";
+
+                    if (bGirar180grados) nombre += ".temp"; // para que no lo tome el servicio
+
+
+                    //listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
+                    tif.SetDirectory(i);
+                    Bitmap bmp = GetBitmapFormTiff(tif);
+                    bmp.Save(string.Format(@"newfile{0}.bmp", i));
+
+
+                    if (bGirar180grados)
+                    {
+                        var rotado = nombre + "_rotado.tif";
+                        OrientarImagen(nombre, rotado);
+                        CartaDePorteManager.BorroArchivo(nombre);
+                        nombre = rotado;
+                    }
+
+                    l.Add(nombre);
+                }
+            }
+
+
+            if ((bEsFormatoCPTK))
+            {
+
+                for (n = 0; n + 1 <= num - 1; n += 2)
+                {
+                    var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
+                    var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
+                    var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
+
+                    string[] arguments = {
+				        pagina1,
+				        pagina2,
+				        final
+			        };
+
+                    BitMiracle.TiffCP.Program.Main(arguments);
+
+                    if (!bProcesarConOCR) MarcarImagenComoProcesandose(final);
+
+                    //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
+                    //p.StartInfo.UseShellExecute = False
+                    //p.StartInfo.RedirectStandardOutput = True
+                    //p.StartInfo.FileName = @"C:\PathToExe\TiffCP.exe"
+                    //Dim path1 = @"C:\PathToImage\image.tiff"
+                    //dim path2 = @"C:\PathToImage\imagePage1.tiff"
+                    //p.StartInfo.Arguments = "\"" + path1 + " \ "" + ",0 \"" + path2 + " \ ""
+                    //p.Start()
+                    //string t = p.StandardOutput.ReadToEnd()
+
+                    CartaDePorteManager.BorroArchivo(pagina1);
+                    CartaDePorteManager.BorroArchivo(pagina2);
 
 
 
+                    l.Remove(pagina1);
+                    l.Remove(pagina2);
+                    l.Add(final);
+                }
+
+
+
+            }
+
+
+            // CartaDePorteManager.BorroArchivo(archivo);  //no borrar el original, total ya está marcado como procesado
+
+            return l;
+
+        }
+
+
+        public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
+        {
+
+            if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
+                return null;
+
+            if (bGirar180grados) MarcarImagenComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
+
+            List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
+
+
+            List<string> l = new List<string>();
+            int n = 0;
+            if (listapaginas.Count > 1)
+            {
+                for (n = 0; n <= listapaginas.Count - 1; n++)
+                {
+                    var nombre = archivo + "_pag" + n.ToString() + ".tif";
+
+                    if (bGirar180grados) nombre += ".temp"; // para que no lo tome el servicio
+
+                    listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
+
+                    if (bGirar180grados)
+                    {
+                        var rotado = nombre + "_rotado.tif";
+                        OrientarImagen(nombre, rotado);
+                        CartaDePorteManager.BorroArchivo(nombre);
+                        nombre = rotado;
+                    }
+
+                    l.Add(nombre);
+                }
+            }
+
+
+            if ((bEsFormatoCPTK))
+            {
+
+                for (n = 0; n + 1 <= listapaginas.Count - 1; n += 2)
+                {
+                    var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
+                    var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
+                    var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
+
+                    string[] arguments = {
+				        pagina1,
+				        pagina2,
+				        final
+			        };
+
+                    BitMiracle.TiffCP.Program.Main(arguments);
+
+                    if (!bProcesarConOCR) MarcarImagenComoProcesandose(final);
+
+                    //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
+                    //p.StartInfo.UseShellExecute = False
+                    //p.StartInfo.RedirectStandardOutput = True
+                    //p.StartInfo.FileName = @"C:\PathToExe\TiffCP.exe"
+                    //Dim path1 = @"C:\PathToImage\image.tiff"
+                    //dim path2 = @"C:\PathToImage\imagePage1.tiff"
+                    //p.StartInfo.Arguments = "\"" + path1 + " \ "" + ",0 \"" + path2 + " \ ""
+                    //p.Start()
+                    //string t = p.StandardOutput.ReadToEnd()
+
+                    CartaDePorteManager.BorroArchivo(pagina1);
+                    CartaDePorteManager.BorroArchivo(pagina2);
+
+
+
+                    l.Remove(pagina1);
+                    l.Remove(pagina2);
+                    l.Add(final);
+                }
+
+
+
+            }
+
+
+            // CartaDePorteManager.BorroArchivo(archivo);  //no borrar el original, total ya está marcado como procesado
+
+            return l;
+
+        }
+
+
+        public static List<string> PreprocesarArchivoSubido(string zipFile, string nombreusuario, string DirApp, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR, int puntoventa)
+        {
+
+            string DIRTEMP = DirApp + @"\Temp\";
+            string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, nombreusuario, puntoventa);
+            string destarchivo = nuevosubdir + Path.GetFileName(zipFile);
+            File.Copy(zipFile, destarchivo, true);
+
+            bool esZip = true;
+            List<string> l, ext;
+            List<string> l2 = new List<string>();
+
+            if (Path.GetExtension(destarchivo).ToLower().Contains("zip"))
+            {
+                l = CartaDePorteManager.ExtraerZip(destarchivo, nuevosubdir);
+            }
+            else
+            {
+                l = new List<string>();
+                l.Add(destarchivo);
+            }
+
+
+            foreach (string f in l)
+            {
+                MarcarImagenComoProcesandose(f);
+            }
+
+            foreach (string f in l)
+            {
+                ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados, bProcesarConOCR);
+
+                if (ext != null && ext.Count > 0)
+                {
+                    foreach (string ff in ext)
+                    {
+                        l2.Add(ff);
+                    }
+                }
+                else
+                {
+                    l2.Add(f);
+                    DesmarcarImagenComoProcesandose(f);
+                }
+            }
+
+
+
+            return l2;
+        }
+
+
+
+
+
+        static void OrientarImagen(string origen, string destino)
+        {
+
+            List<Image> images = new List<Image>();
+            Bitmap bitmap = (Bitmap)Image.FromFile(origen);
+            int count = bitmap.GetFrameCount(FrameDimension.Page);
+
+            // save each frame to a bytestream
+            bitmap.SelectActiveFrame(FrameDimension.Page, 0);
+            MemoryStream byteStream = new MemoryStream();
+
+            bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+
+            bitmap.Save(byteStream, ImageFormat.Tiff);
+            // and then create a new Image from it
+            Image.FromStream(byteStream).Save(destino, System.Drawing.Imaging.ImageFormat.Tiff);
+            return; // images;
+
+
+
+
+            using (Tiff input = Tiff.Open(origen, "r"))
+            {
+                int width = input.GetField(TiffTag.IMAGEWIDTH)[0].ToInt();
+                int height = input.GetField(TiffTag.IMAGELENGTH)[0].ToInt();
+                int samplesPerPixel = input.GetField(TiffTag.SAMPLESPERPIXEL)[0].ToInt();
+                int bitsPerSample = input.GetField(TiffTag.BITSPERSAMPLE)[0].ToInt();
+                int photo = input.GetField(TiffTag.PHOTOMETRIC)[0].ToInt();
+
+                int scanlineSize = input.ScanlineSize();
+                byte[][] buffer = new byte[height][];
+                for (int i = 0; i < height; ++i)
+                {
+                    buffer[i] = new byte[scanlineSize];
+                    input.ReadScanline(buffer[i], i);
+                }
+
+                using (Tiff output = Tiff.Open(destino, "w"))
+                {
+                    output.SetField(TiffTag.IMAGEWIDTH, width);
+                    output.SetField(TiffTag.IMAGELENGTH, height);
+                    output.SetField(TiffTag.SAMPLESPERPIXEL, samplesPerPixel);
+                    output.SetField(TiffTag.BITSPERSAMPLE, bitsPerSample);
+                    output.SetField(TiffTag.ROWSPERSTRIP, output.DefaultStripSize(0));
+                    output.SetField(TiffTag.PHOTOMETRIC, photo);
+                    output.SetField(TiffTag.PLANARCONFIG, PlanarConfig.CONTIG);
+
+                    // change orientation of the image
+                    output.SetField(TiffTag.ORIENTATION, Orientation.RIGHTBOT);
+
+                    for (int i = 0; i < height; ++i)
+                        output.WriteScanline(buffer[i], i);
+                }
+            }
+
+
+            /*
+            // http://forum.ocrsdk.com/questions/2145/orientation-detection-and-correction-in-flexicapture-sdk
+
+            // get rotation type
+            RotationTypeEnum rotationTypeEnum = imageProcessor.DetectOrientationByText(_page, language);
+
+            // rotate image according to rotation type
+            if (rotationTypeEnum == RotationTypeEnum.RT_Clockwise)
+            {
+                _page = imageProcessor.RotateImageByRotationType(_page, RotationTypeEnum.RT_Counterclockwise);
+            }
+            else
+                if (rotationTypeEnum == RotationTypeEnum.RT_Counterclockwise)
+                {
+                    _page = imageProcessor.RotateImageByRotationType(_page, RotationTypeEnum.RT_Clockwise);
+                }
+                else
+                    if (rotationTypeEnum == RotationTypeEnum.RT_Upsidedown)
+                    {
+                        _page = imageProcessor.RotateImageByRotationType(_page, RotationTypeEnum.RT_Upsidedown);
+                    }
+
+           // If you want to save the rotated image, you could use Image::WriteToFile method.
+             */
+        }
 
 
 
@@ -533,8 +1053,11 @@ namespace ProntoFlexicapture
             string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe();
             string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
 
+            string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe();
+
 
             string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe();
+
 
 
 
@@ -587,7 +1110,38 @@ namespace ProntoFlexicapture
 
                 //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
 
+
             }
+
+
+            if (numeroCarta == 0)
+            {
+
+                // por qué no te mandas el lance usando el numero de carta leido en numeros?
+                if (NCarta != "")
+                {
+                    long n = 0;
+                    long.TryParse(NCarta.Replace(" ", ""), out n);
+                    if (n.ToString().Length == 9) numeroCarta = n;
+                }
+            }
+
+
+            const long numprefijo = 900000000;
+            var rnd = new Random();
+            if (numeroCarta == 0)
+            {
+                numeroCarta = numprefijo + rnd.Next(1, 1000000);
+            }
+            ///////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////
+            /////////////////////// tratando de contrabandear, en la exportacion del excel, el nombre del archivo
+            //IField campoAdicional = Sample.AdvancedTechniques.findField(document, "CEE");
+            //campoAdicional.Value = numeroCarta.ToString() + " " + archivoOriginal;
+            //document.Title = "saasafaf";
+            ///////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -595,7 +1149,11 @@ namespace ProntoFlexicapture
 
             if (numeroCarta > 0)
             {
+
                 cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0);
+
+
+
                 if (cdp.Id == -1)
                 {
                     cdp.NumeroCartaDePorte = numeroCarta;
@@ -607,99 +1165,145 @@ namespace ProntoFlexicapture
 
                 string s;
 
-                cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT, SC, Titular);
+                MarcarCartaComoProcesada(ref cdp);
 
-                //s = IntermediarioCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.CuentaOrden1 = CartaDePorteManager.BuscarClientePorCUIT(IntermediarioCUIT, SC, Intermediario);
+                bool bPisar = true;
 
-                //s = RemitenteCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT(RemitenteCUIT, SC, Remitente);
+                // if (cdp.Titular > 0) bPisar = false;
 
-                //s = CorredorCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.Corredor = CartaDePorteManager.BuscarVendedorPorCUIT(CorredorCUIT, SC, Corredor);
-
-                //s = DestinatarioCUIT.Value.AsString;
-                //FuncionesGenericasCSharp.mkf_validacuit(s);
-                cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
-
-
-                try
+                // no pisar si ya esta la info
+                if (bPisar)
                 {
-                    cdp.Acoplado = Acoplado;
-                    cdp.Patente = Camión;
-                    cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", ""));
-                    cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", ""));
-                    cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", ""));
-                    cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", ""));
-                    cdp.Observaciones = Observaciones;
 
 
-                    cdp.Contrato = ContratoNro;
-                    cdp.KmARecorrer = Conversion.Val(KmARecorrer);
-                    cdp.TarifaTransportista = Conversion.Val(Tarifa);
+                    int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
+                    cdp.PuntoVenta = pv;
 
-                    cdp.CTG = Convert.ToInt32(Conversion.Val(CTG));
-                    cdp.CEE = BarraCEE;
+
+
+                    //marco la imagen como procesada por la OCR
+
+                    cdp.Titular = CartaDePorteManager.BuscarClientePorCUIT(TitularCUIT, SC, Titular);
+
+                    //s = IntermediarioCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.CuentaOrden1 = CartaDePorteManager.BuscarClientePorCUIT(IntermediarioCUIT, SC, Intermediario);
+
+                    //s = RemitenteCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT(RemitenteCUIT, SC, Remitente);
+
+                    //s = CorredorCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.Corredor = CartaDePorteManager.BuscarVendedorPorCUIT(CorredorCUIT, SC, Corredor);
+
+                    //s = DestinatarioCUIT.Value.AsString;
+                    //FuncionesGenericasCSharp.mkf_validacuit(s);
+                    cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
+
+
+                    cdp.Destino = CartaDePorteManager.BuscarDestinoPorCUIT(DestinoCUIT, SC, Destino);
+
+
+
+
+
 
                     try
                     {
-                        cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
-                        cdp.FechaVencimiento = Convert.ToDateTime(FechaVencimiento);
-                    }
-                    catch (Exception ex2)
-                    {
+                        cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
+                        cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
-                        ErrHandler2.WriteError(ex2);
-                    }
+                        cdp.Acoplado = Acoplado;
+                        cdp.Patente = Camión;
+                        cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
+                        cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", "").Replace(",", ""));
+                        cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", "").Replace(",", ""));
+                        cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
+                        cdp.Observaciones = Observaciones;
 
-                    cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
-                    cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
-                    
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
+                        cdp.Contrato = ContratoNro;
+                        cdp.KmARecorrer = Conversion.Val(KmARecorrer);
 
-                    
-                    cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
-                    if (cdp.IdArticulo == -1)
-                    {
-                        GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie);
+                        cdp.CTG = Convert.ToInt32(Conversion.Val(CTG.Replace(".", "")));
+                        cdp.CEE = BarraCEE;
+
+
+
+
+
+
+
+
+
+
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+                        Cosecha = Cosecha.Replace("20", "").Replace("-", "/").Replace(" ", "");
+                        cdp.Cosecha = "20" + Cosecha;
+
+                        cdp.FechaArribo = DateTime.Today;
+
+
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+
+                        //tanto le cuesta? sera porque tenes  que pasarlo  a mayuscula?
                         cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
-                    }
-
-                    cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                    if (cdp.Destino == -1)
-                    {
-                        Destino = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Destino);
-                        cdp.Destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso(Destino, SC);
-                    } 
+                        if (cdp.IdArticulo == -1)
+                        {
+                            GranoEspecie = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, GranoEspecie.ToUpper());
+                            cdp.IdArticulo = SQLdinamico.BuscaIdArticuloPreciso(GranoEspecie, SC);
+                        }
 
 
-                    cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
-                    if (cdp.Procedencia == -1)
-                    {
-                        Localidad1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Localidad1);
                         cdp.Procedencia = SQLdinamico.BuscaIdLocalidadPreciso(Localidad1, SC);
-                    }
+                        if (cdp.Procedencia == -1)
+                        {
+                            cdp.Procedencia = SQLdinamico.BuscaIdLocalidadAproximado(Localidad1, SC, 7);
+                        }
 
 
-                    cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
-                    if (cdp.IdEstablecimiento == -1)
-                    {
-                        Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento);
+
                         cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+                        if (cdp.IdEstablecimiento == -1)
+                        {
+                            Esablecimiento = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Esablecimiento.ToUpper());
+                            cdp.IdEstablecimiento = SQLdinamico.BuscaIdEstablecimientoWilliams(Esablecimiento, SC);
+                        }
+
+
+
+
+
+
+                        DateTime fecha;
+                        DateTime.TryParse(FechaVencimiento, out fecha);
+                        cdp.FechaVencimiento = fecha;
+
+                        try
+                        {
+                            cdp.FechaDeCarga = Convert.ToDateTime(FechaCarga);
+                        }
+                        catch (Exception ex2)
+                        {
+
+                            ErrHandler2.WriteError(ex2);
+                        }
+
+                        double.TryParse(Tarifa, out cdp.TarifaTransportista);
+
+
+
                     }
-
-
+                    catch (Exception ex)
+                    {
+                        ErrHandler2.WriteError(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    ErrHandler2.WriteError(ex);
-                }
+
 
 
                 if (cdp.Titular != 0)
@@ -719,45 +1323,134 @@ namespace ProntoFlexicapture
 
                 ErrHandler2.WriteError("Llamo a IsValid y Save");
 
+
+                // quizas no era valido y no lo dejó grabar
+
+                int id;
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
-                if (valid)
+                if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
-                    var id = CartaDePorteManager.Save(SC, cdp, 0, "");
+                    id = CartaDePorteManager.Save(SC, cdp, 0, "");
+                    cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
+                    if (numeroCarta > numprefijo) CartaDePorteManager.Anular(SC, cdp, 1, "");
+                }
+                else
+                {
+                    id = cdp.Id;
 
-                    if (true)
+                }
+
+
+
+                if ((numeroCarta >= 10000000 && numeroCarta < 999999999))
+                {
+                    // la imagen tiene que estar ya en el directorio FTP
+                    // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
+                    // - por qué las espera en databackupear en lugar de en el \temp\?
+                    // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
+
+
+
+
+                    //y el directorio clasificador?
+
+                    //        string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
+
+                    //        try
+                    //        {
+
+                    //            File.Copy(archivoOriginal, nuevodestino);
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
+                    //            ErrHandler2.WriteError(ex);
+                    //            //throw;
+                    //        }
+
+
+
+
+                    string nombrenuevo = rnd.Next(1, 99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(archivoOriginal);
+
+
+
+
+                    nombrenuevo = CartaDePorteManager.CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp);
+
+
+                    string DIRFTP = DirApp + @"\DataBackupear\";
+                    string destino = DIRFTP + nombrenuevo;
+
+
+                    try
                     {
-                        // la imagen tiene que estar ya en el directorio FTP
-                        // -se queja porque no encuentra las imagenes del test, usan un directorio distinto que el \databackupear\
-                        // - por qué las espera en databackupear en lugar de en el \temp\?
-                        // -porque grabarimagen ya sabe a qué carta encajarsela. en temp están las que se tienen que detectar con codigo de barras
+                        FileInfo MyFile1 = new FileInfo(destino);
+                        if (MyFile1.Exists) MyFile1.Delete();
 
-                        string nuevodestino = DirApp + @"\databackupear\" + Path.GetFileName(archivoOriginal);
+                        File.Copy(archivoOriginal, destino);
+                    }
+                    catch (Exception x)
+                    {
+                        ErrHandler2.WriteError(x);
+                    }
 
+
+                    //'copio el archivo cambiandole el nombre agregandole un sufijo
+                    //'-qué pasa si ya tenía una imagen la carta?
+                    //'de todas maneras, se esta copiando dos veces con distinto nombre en el mismo segundo
+                    if (false)
+                    {
                         try
                         {
 
-                            File.Copy(archivoOriginal, nuevodestino);
+                            FileInfo MyFile2 = new FileInfo(archivoOriginal);
+                            if (MyFile2.Exists) MyFile2.Delete();
+
                         }
-                        catch (Exception ex)
+                        catch (Exception e2)
                         {
-                            ErrHandler2.WriteError(ex);
-                            //throw;
+                            ErrHandler2.WriteError(e2);
                         }
-
-
-                        ErrHandler2.WriteError("Llamo a GrabarImagen");
-
-                        var x = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, Path.GetFileName(nuevodestino)
-                                                      , ref sError, DirApp, bCodigoBarrasDetectado);
 
                     }
+
+                    /*'////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+                    ErrHandler2.WriteError("Llamo a GrabarImagen");
+
+                    //se da cuenta si es un ticket? no lo esta poniendo en 2 posicion?
+
+                    var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
+                                                  , ref sError, DirApp, bCodigoBarrasDetectado);
+
 
 
                     o.IdCarta = id;
                     o.numerocarta = numeroCarta;
                     o.errores = sError + ms;
                     o.advertencias = warn;
+
                 }
+
+
 
 
             }
@@ -791,19 +1484,18 @@ namespace ProntoFlexicapture
 
         }
 
-        static int MarcarImagenComoProcesada(string archivo)
-        {
-            //y si creo un archivo con extension?
-
-            CreateEmptyFile(archivo + ".bdl");
-
-            return 0;
-
-        }
 
         public static void CreateEmptyFile(string filename)
         {
-            File.Create(filename).Dispose();
+            try
+            {
+                File.Create(filename).Dispose();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
@@ -991,6 +1683,17 @@ namespace ProntoFlexicapture
         }
 
 
+        public static void Log(string s)
+        {
+
+            using (EventLog eventLog = new EventLog("Application"))
+            {
+                eventLog.Source = "Application";
+                eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
+            }
+        }
+
+
         public static IEngine loadEngine(EngineLoadingMode _engineLoadingMode, out IEngineLoader engineLoader)
         {
 
@@ -1085,34 +1788,51 @@ Additionally you can manage the priority of work processes and control whether t
 
 
             engineLoadingMode = _engineLoadingMode;
-            switch (engineLoadingMode)
+            int hresult = 0;
+            try
             {
-                case EngineLoadingMode.LoadDirectlyUseNakedInterfaces:
-                    {
-                        engineLoader = null; // Not used
-                        IEngine engine = null;
-                        int hresult = InitializeEngine(FceConfig.GetDeveloperSN(), out engine);
-                        Marshal.ThrowExceptionForHR(hresult);
-                        //assert(engine != null);
-                        return engine;
+
+                switch (engineLoadingMode)
+                {
+                    case EngineLoadingMode.LoadDirectlyUseNakedInterfaces:
+                        {
+                            engineLoader = null; // Not used
+                            IEngine engine = null;
+                            hresult = InitializeEngine(FceConfig.GetDeveloperSN(), out engine);
+                            Marshal.ThrowExceptionForHR(hresult); // por qué está esto? antes tambien pasaba y no me daba cuenta porque la capturaba? -no, lo que pasa es que ahora hresult está viniendo con algo.
+                            //assert(engine != null);
+                            return engine;
 
 
-                    }
-                case EngineLoadingMode.LoadAsInprocServer:
-                    {
-                        engineLoader = new FCEngine.InprocLoader();
-                        IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
-                        //assert(engine != null);
-                        return engine;
-                    }
-                case EngineLoadingMode.LoadAsWorkprocess:
-                    {
-                        engineLoader = new FCEngine.OutprocLoader();
-                        IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
-                        //assert(engine != null);
-                        return engine;
-                    }
+                        }
+                    case EngineLoadingMode.LoadAsInprocServer:
+                        {
+                            engineLoader = new FCEngine.InprocLoader();
+                            IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
+                            //assert(engine != null);
+                            return engine;
+                        }
+                    case EngineLoadingMode.LoadAsWorkprocess:
+                        {
+                            engineLoader = new FCEngine.OutprocLoader();
+                            IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
+                            //assert(engine != null);
+                            return engine;
+                        }
+                }
             }
+            catch (Exception)
+            {
+                /*
+                CLASS_E_NOTLICENSED	-2147221230 (&H80040112L)	This copy of ABBYY FineReader Engine is not registered.
+                era porque la ip cambió
+                    probá hacer "telnet 186.18.248.116 3011" o lo que figure en el LicenseSettings.xml
+                 * 190.16.100.211
+              * */
+                Log(" probá hacer \"telnet 186.18.248.116 3011\". El hresult fue: " + hresult.ToString());
+                throw;
+            }
+
             //assert(false);
             engineLoader = null;
             return null;
@@ -1125,6 +1845,99 @@ Additionally you can manage the priority of work processes and control whether t
         [DllImport(FceConfig.DllPath, CharSet = CharSet.Unicode), PreserveSig]
         static extern int DeinitializeEngine();
 
+    }
+
+
+
+
+
+
+    public class OpenXMLWindowsApp
+    {
+        public void UpdateSheet()
+        {
+            UpdateCell("Chart.xlsx", "20", 2, "B");
+            UpdateCell("Chart.xlsx", "80", 3, "B");
+            UpdateCell("Chart.xlsx", "80", 2, "C");
+            UpdateCell("Chart.xlsx", "20", 3, "C");
+
+            ProcessStartInfo startInfo = new ProcessStartInfo("Chart.xlsx");
+            startInfo.WindowStyle = ProcessWindowStyle.Normal;
+            Process.Start(startInfo);
+        }
+
+        public static void UpdateCell(string docName, string text,
+            uint rowIndex, string columnName)
+        {
+            // Open the document for editing.
+            using (SpreadsheetDocument spreadSheet =
+                     SpreadsheetDocument.Open(docName, true))
+            {
+                WorksheetPart worksheetPart =
+                      GetWorksheetPartByName(spreadSheet, "Sheet1");
+
+                if (worksheetPart != null)
+                {
+                    Cell cell = GetCell(worksheetPart.Worksheet,
+                                             columnName, rowIndex);
+
+                    cell.CellValue = new CellValue(text);
+                    cell.DataType =
+                        new EnumValue<CellValues>(CellValues.Number);
+
+
+
+                    // Save the worksheet.
+                    worksheetPart.Worksheet.Save();
+                }
+            }
+
+        }
+
+        private static WorksheetPart
+             GetWorksheetPartByName(SpreadsheetDocument document,
+             string sheetName)
+        {
+            IEnumerable<Sheet> sheets =
+               document.WorkbookPart.Workbook.GetFirstChild<Sheets>().
+               Elements<Sheet>().Where(s => s.Name == sheetName);
+
+            if (sheets.Count() == 0)
+            {
+                // The specified worksheet does not exist.
+
+                return null;
+            }
+
+            string relationshipId = sheets.First().Id.Value;
+            WorksheetPart worksheetPart = (WorksheetPart)
+                 document.WorkbookPart.GetPartById(relationshipId);
+            return worksheetPart;
+
+        }
+
+        // Given a worksheet, a column name, and a row index, 
+        // gets the cell at the specified column and 
+        private static Cell GetCell(Worksheet worksheet,
+                  string columnName, uint rowIndex)
+        {
+            Row row = GetRow(worksheet, rowIndex);
+
+            if (row == null)
+                return null;
+
+            return row.Elements<Cell>().Where(c => string.Compare
+                   (c.CellReference.Value, columnName +
+                   rowIndex, true) == 0).First();
+        }
+
+
+        // Given a worksheet and a row index, return the row.
+        private static Row GetRow(Worksheet worksheet, uint rowIndex)
+        {
+            return worksheet.GetFirstChild<SheetData>().
+              Elements<Row>().Where(r => r.RowIndex == rowIndex).First();
+        }
     }
 
 
@@ -1321,3 +2134,7 @@ namespace ExtensionMethods
         }
     }
 }
+
+
+
+
