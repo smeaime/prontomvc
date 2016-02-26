@@ -25834,7 +25834,6 @@ Public Class ExcelImportadorManager
         '//////////////////////////////////////////////////////////////////////
 
 
-
         Dim dtOrigen = ds.Tables(0)
 
         Dim dtDestino As Data.DataTable = TablaFormato(SC)
@@ -25865,6 +25864,29 @@ Public Class ExcelImportadorManager
 
 
 
+        '        Log Entry
+        '02/25/2016 00:49:39
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:No se encontró el renglon de titulos. Renglones totales:49
+        '        __________________________()
+
+        '        Log Entry
+        '02/25/2016 00:49:39
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.IndexOutOfRangeException
+        'There is no row at position -1.
+        '   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+        '   at System.Data.DataRowCollection.get_Item(Int32 index)
+        '   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32& m_IdMaestro, String archivoExcel, FormatosDeExcel Formato, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, String txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 25869
+        '   at CartasDePorteImportador.FormatearExcelImportado(String nombre)
+        '   at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e)
+        '        System.Data()
+        '        ________________()
+
+
+        If renglonDeTitulos = -1 Then
+            Throw New Exception("No se encontró el renglon de titulos. Falta elegir el formato del archivo?")
+        ElseIf renglonDeTitulos > dtOrigen.Rows.Count - 1 Then
+            Throw New Exception("No se encontró el renglon de titulos. Falta elegir el formato del archivo?")asdasd
+        End If
 
         row = dtOrigen.Rows(renglonDeTitulos)
 
