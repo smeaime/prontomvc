@@ -93,9 +93,19 @@ namespace ProntoMVC.Tests
             //    sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
             //
 
+            DirApp = ConfigurationManager.AppSettings["DirApp"];
+
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
+
+            plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
+
+            //probar conexion con timeout cortopp
+            var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
+
+
+            /*
 
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
-            TempFolder = DirApp + @"\Temp";
             // string SamplesFolder = @"C:\Users\Administrador\Desktop\tiff multipagina";
 
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
@@ -103,6 +113,10 @@ namespace ProntoMVC.Tests
 
             // plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
             plantilla = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\cartaporte.afl";
+            */
+
+            TempFolder = DirApp + @"\Temp";
+
         }
 
 
@@ -131,7 +145,8 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void CartaPorteFuncionalidadBasica()
         {
-            //adasdas
+
+            //tarda 5 min
 
             string ms = "", warn = "";
             var carta = CartaDePorteManager.GetItem(SC, 4444);
@@ -182,12 +197,169 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void ImagenesTiffMultipaginaFormatoCPTK_CPTK_CPTK_17748()
+        {
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\CPTKCPTK.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\3333.tif";
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false,false,1);
+
+
+            string sError = "";
+
+            CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, l, -1, ref sError, DirApp);
+
+
+        }
+
+
+        [TestMethod]
+        public void LocalidadAprox()
+        {
+            SQLdinamico.BuscaIdLocalidadAproximado("IRENEO PORTELA - BS. AS.", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("RENEO PORTELA - BS. AS.", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("Chi’J'ilcoy", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("fi7/in-r.HAnARi ino", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("J.J. ALMEYRA", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("pUGGAN", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("zarate", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("RINCON DEL GATO", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("6740-CHACABUCO", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("Sote", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("SAN ANDRES DE GILES", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("25 de Mayo", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("SAN ANDRES DE GILES", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("Gral Viamonte", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("ÜAN AINUKhb Ut UILbb", SC, 7);
+            SQLdinamico.BuscaIdLocalidadAproximado("ARROYO DULCE", SC, 7);
+        }
+
+
+        [TestMethod]
+        public void PruebaFlexicaptureConZip()
+        {
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\LoteDe10.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\Nueva carpeta.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02102016173229.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\tandabuena.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02152016123436.zip";
+            zipFile = @"C:\Users\Administrador\Desktop\bien giradas\bien giradas.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\patasarriba.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016135519.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016094547.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02182016085814.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote 23feb094434 prueba1\doc02232016091830.tif";
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true,3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            if (true)
+            {
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+                // ProntoWindowsService.Service1.Initialize();
+            }
+            else
+            {
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                                        plantilla, 30,
+                                         SC, DirApp, true, ref sError);
+                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+            }
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+            // mostrar info del lote1
+            //VerInfoDelLote(ticket);
+
+
+        }
+
+
+
+
+
+        void VaciarDirectorioTemp()
+        {
+
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Administrador\Documents\bdl\prontoweb\Temp");
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+        }
+
+
+
+
+        [TestMethod]
         public void NuevoLote()
         {
             string SamplesFolder;
             SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
             SamplesFolder = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote";
-
+            SamplesFolder = @"C:\Users\Administrador\Documents\bdl\New folder\repetido";
 
             string sError = "";
 
@@ -206,6 +378,18 @@ namespace ProntoMVC.Tests
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
             ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
+
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var cdp = CartaDePorteManager.GetItemPorNumero(SC, 550867628, 0, 0);
+            Assert.AreNotEqual(cdp.PathImagen ?? "", "");
+            Assert.AreNotEqual(cdp.PathImagen2 ?? "", "");
+
+
+
         }
 
 
@@ -228,6 +412,8 @@ namespace ProntoMVC.Tests
                 //lista.Add(file.FullName);
                 lista.Add(file.Name);
             }
+
+
 
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
             ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
@@ -335,6 +521,10 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void Pegatina_17734()
         {
+
+            //explota
+
+
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\30488_Posi19.txt";
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
@@ -508,6 +698,8 @@ Nombre de acondicionador: listado de clientes de Williams
         public void InformeDeClientesIncompletos_16492()
         {
 
+            // explota
+
 
             //               Mariano,
             //Con estas columnas estaría bien (si puede ser con un link al cliente):
@@ -596,6 +788,9 @@ Nombre de acondicionador: listado de clientes de Williams
         [TestMethod]
         public void InformeMultigrain_14861()
         {
+
+            // tarda 7 min
+
             /*
             * Ahi veo tu mail. El tema es que el dato que envía el sistema es el que está en la pestaña de Calidad (no en 
              la pestaña de Descarga).
@@ -764,6 +959,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         [TestMethod]
         public void ZipdePDFsReducidos()
         {
+            //tarda 12 min
 
             string titulo = "";
             var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
@@ -784,8 +980,9 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         [TestMethod]
         public void PDFdeCartaPorte()
         {
-            //aaaaaa
 
+
+            // explota
 
 
             var idorig = 2165737;
@@ -836,6 +1033,9 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         [TestMethod]
         public void SincroDow()
         {
+
+            // tarda 2 min
+
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
@@ -966,88 +1166,18 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         public void ImagenesPendientesListados()
         {
 
-            var irrec = ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp).ToList();
+            var irrec = ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp, SC).ToList();
 
             var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
             var encola = (from i in lista select new { nombre = i }).ToList();
 
-            var termin = ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp).ToList();
+            var termin = ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp, SC).ToList();
 
         }
 
 
 
-        [TestMethod]
-        public void PruebaFlexicaptureConZip()
-        {
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\LoteDe10.zip";
-
-
-            //usuario 1 
-            //    usuario2 sube lote2
-            //int ticket = SuboElZip("");
-            string DIRTEMP = DirApp + @"\Temp\";
-            string nuevosubdir = DIRTEMP + CartaDePorteManager.CrearDirectorioParaLoteImagenes(DirApp, "Mariano");
-            string destarchivo = nuevosubdir + Path.GetFileName(zipFile);
-            File.Copy(zipFile, destarchivo, true);
-            var l= CartaDePorteManager.Extraer(destarchivo, nuevosubdir);
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-            // 2 caminos
-            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
-            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
-
-            IEngine engine = null;
-            IEngineLoader engineLoader = null;
-            IFlexiCaptureProcessor processor = null;
-
-
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
-
-            string sError = "";
-
-
-            if (true)
-            {
-
-                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
-                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
-            }
-            else
-            {
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
-                                        plantilla, 30,
-                                         SC, DirApp, true, ref sError);
-                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-            }
-
-
-            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
-
-            System.Diagnostics.Process.Start(excels[0]);
-
-            
-            // mostrar info del lote1
-            //VerInfoDelLote(ticket);
-
-
-        }
 
         int SuboElZip(string archivo)
         {
@@ -1093,6 +1223,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         public void ProcesarTiffMultipagina_Reclamo14967()
         {
 
+            // explota
+
             string sError = "";
 
             List<string> lista = new List<string>();
@@ -1117,6 +1249,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         public void FormatoImpresionPlantillaFactura_14851()
         {
 
+
+            //explota
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -1168,6 +1302,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         public void FormatoImpresionPlantillaRemitoLDC()
         {
 
+
+            //explota
 
 
             string plantilla = DirApp + @"\Documentos\" + "RemitoLDC.docx";
@@ -1229,6 +1365,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         [TestMethod]
         public void CrearDirectoriosParaLasImagenesAutomaticamente_15153()
         {
+            //explota
 
             string sError = "";
 
@@ -1256,6 +1393,9 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         [TestMethod]
         public void Pegatina_14744()
         {
+
+            //explota
+
             string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
             int m_IdMaestro = 0;
             string logerror = "";
@@ -1332,13 +1472,13 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
             var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada2(SC,
-                "", "", "", 1, 300, CartaDePorteManager.enumCDPestado.Facturadas
-                   , "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 1),
-                0, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+               "", "", "", 0, 1000, CartaDePorteManager.enumCDPestado.Facturadas
+                  , "", 4333, -1,
+               -1, 4333, 4333,
+               -1, -1, -1,
+               CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
+               new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
 
 
             var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
