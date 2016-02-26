@@ -18,16 +18,24 @@ using ProntoMVC.Data.Models;
 using System.Configuration;
 
 using System.IO;
+using System.Threading;
+
 
 namespace ProntoWindowsService
 {
     public partial class Service1 : ServiceBase
     {
 
-        static string DirApp;
-        static string SC;
-        static string TempFolder;
+        protected Thread m_thread;
+        static protected ManualResetEvent m_shutdownEvent;
+        static protected TimeSpan m_delay;
+
+
+        static string DirApp1, DirApp2;
+        static string SC1, SC2;
         static string plantilla;
+
+        ///static string TempFolder;
 
         static IEngine engine = null;
         static IEngineLoader engineLoader = null;
@@ -52,19 +60,35 @@ namespace ProntoWindowsService
 
         protected override void OnStart(string[] args)
         {
+
+
+            // create the manual reset event and
+            // set it to an initial state of unsignaled
+            m_shutdownEvent = new ManualResetEvent(false);
+
+
             DebugMode();
 
-            var worker = new System.Threading.Thread(DoWork);
-            worker.Name = "MyWorker";
-            worker.IsBackground = false;
-            worker.Start();
+            m_thread = new System.Threading.Thread(DoWork);
+            m_thread.Name = "MyWorker";
+            m_thread.IsBackground = false;
+            m_thread.Start();
         }
 
 
         protected override void OnStop()
         {
+            // signal the event to shutdown
+            m_shutdownEvent.Set();
+
+            // wait for the thread to stop giving it 10 seconds
+            m_thread.Join(20000);
+
+            // Temillas con la parada del servicio
+            //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
+            //http://stackoverflow.com/questions/1528209/how-to-properly-stop-a-multi-threaded-net-windows-service
+
             Console.WriteLine("exit");
-            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
         }
 
 
@@ -81,24 +105,20 @@ namespace ProntoWindowsService
             */
 
 
-            DirApp = ConfigurationManager.AppSettings["DirApp"];
-
-            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
-
             plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
 
+            DirApp1 = ConfigurationManager.AppSettings["DirApp"];
+            SC1 = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
+
+            DirApp2 = ConfigurationManager.AppSettings["DirApp_Test"];
+            SC2 = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC_Test"]);
+
+
+
+
         }
 
 
-        static void Log(string s)
-        {
-
-            using (EventLog eventLog = new EventLog("Application"))
-            {
-                eventLog.Source = "Application";
-                eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
-            }
-        }
 
 
 
@@ -107,15 +127,23 @@ namespace ProntoWindowsService
         static public void DoWork()
         {
 
-            kjhkjhk
 
-            Log("Empieza");
+
+            ClassFlexicapture.Log("Empieza");
 
             Initialize();
 
-            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
 
-            Log("CONEXION: " + cadena);
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
+
+            ClassFlexicapture.Log("CONEXION: " + cadena);
             Console.WriteLine("CONEXION: " + cadena);
 
             try
@@ -126,13 +154,23 @@ namespace ProntoWindowsService
             }
             catch (Exception x)
             {
-                Log(x.ToString());
+                ClassFlexicapture.Log(x.ToString());
                 Console.WriteLine(x.ToString());
                 return;
             }
 
 
-            Log("llamo a iniciamotor");
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+            ClassFlexicapture.Log("llamo a iniciamotor");
 
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
 
@@ -141,13 +179,17 @@ namespace ProntoWindowsService
 
 
 
-            Log("Motor iniciado");
-            string sError = "";
+            ClassFlexicapture.Log("Motor iniciado");
 
 
             // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
 
             Console.WriteLine("Busca imagenes Pendientes");
+
+
+            bool bSignaled = false;
+
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado;
 
             while (true)
             {
@@ -161,51 +203,131 @@ namespace ProntoWindowsService
 
                 try
                 {
-                    var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                                        plantilla, 5,
-                                         SC, DirApp, true, ref sError);
 
 
-                    string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
-                    if ((html ?? "") != "")
-                    {
-                        Console.WriteLine(html);
-                        Log(html);
-                    }
+                    if (bSignaled == true) break;
+                    bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                    if (bSignaled == true) break;
 
-
-
-                    using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
-                    using (StreamWriter sw = new StreamWriter(fs))
-                    {
-                        sw.WriteLine(html);
-                    }
-
-
+                    resultado = null;
+                    resultado = Tanda(SC1, DirApp1);
                     if (resultado == null)
                     {
-                        System.Threading.Thread.Sleep(1000 * 30);
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if (bSignaled == true) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        if (bSignaled == true) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        Console.Write(".");
+                    }
+
+
+                    resultado = null;
+                    resultado = Tanda(SC2, DirApp2);
+                    if (resultado == null)
+                    {
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if (bSignaled == true) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        if (bSignaled == true) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
                         Console.Write(".");
                     }
 
                 }
+
+                catch (System.Runtime.InteropServices.COMException x2)
+                {
+                    /*
+System.Runtime.InteropServices.COMException (0x80004005): Error communicating with ABBYY Product 
+     *                  Licensing Service on 186.18.248.116: The RPC server is unavailable.
+        Diagnostic Message: 1710(0x000006BA) 1442(0x000006BA) 323(0x000006BA) 313(0x000004D5) 311(0x0000274C) 318(0x0000274C)
+at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
+at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 209
+at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 123
+at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
+    */
+
+                    ClassFlexicapture.Log(x2.ToString());
+                    ClassFlexicapture.Log("Problemas con la licencia? Paro y reinicio");
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(x2);
+
+                    //hacer un unload y cargar de nuevo?
+
+                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                    processor = null;
+                    ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
+
+                    ClassFlexicapture.Log("funciona?");
+
+                }
+
                 catch (Exception x)
                 {
-                    Log(x.ToString());
+                    ClassFlexicapture.Log(x.ToString());
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x);
-                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-                    return;
                 }
 
             }
 
-
+            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+            ClassFlexicapture.Log("Se apagó el motor");
 
         }
 
 
 
+        static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> Tanda(string SC, string DirApp)
+        {
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
+
+            try
+            {
+
+                string sError = "";
+
+                resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
+                               plantilla, 3,
+                                SC, DirApp, true, ref sError);
+
+
+
+
+
+                string html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+                if ((html ?? "") != "")
+                {
+                    Console.WriteLine(html);
+                    ClassFlexicapture.Log(html);
+                }
+
+
+
+                using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(html);
+                }
+
+
+            }
+
+            catch (Exception x)
+            {
+                //System.Runtime.InteropServices.COMException (0x80004005):
+                // que pasa si salto el error de la licencia? diferenciar si saltó por un archivo que no existe u otro error
+                ClassFlexicapture.Log(x.ToString());
+                throw;
+
+            }
+
+            return resultado;
+
+        }
+
+
     }
+
 
 
 
@@ -226,7 +348,7 @@ namespace ProntoWindowsService
             processInstaller.Account = ServiceAccount.LocalSystem;
 
             // The services are started manually.
-            serviceInstaller.StartType = ServiceStartMode.Manual;
+            serviceInstaller.StartType = ServiceStartMode.Automatic;
 
             // ServiceName must equal those on ServiceBase derived classes.
             serviceInstaller.ServiceName = "ProntoAgente";
