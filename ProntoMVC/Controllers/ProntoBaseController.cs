@@ -94,7 +94,7 @@ namespace ProntoMVC.Controllers
             var d = new dsEncrypt();
             d.KeyString = "EDS";
 
-            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService );
+            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
             return d.Encrypt(s);
 
 
@@ -1616,7 +1616,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                
+
 
                 dest = Generales.sCadenaConex(nombrebasepronto, oStaticMembershipService);
                 dbDest = new ProntoMVC.Data.Models.DemoProntoEntities(dest);
@@ -2795,7 +2795,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString());
+            Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString(), oStaticMembershipService);
             TreeDest = new List<Tablas.Tree>();
 
 
@@ -2911,7 +2911,7 @@ namespace ProntoMVC.Controllers
         public List<Tablas.Tree> MenuConNiveles_Tree(int IdUsuario)
         {
 
-            List<Tablas.Tree> Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString());
+            List<Tablas.Tree> Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString(), oStaticMembershipService);
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
 
             //string usuario = ViewBag.NombreUsuario;
@@ -2989,7 +2989,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            var archivoapp = LeerArchivoAPP(IdUsuario, sBase, usuario, dbcontext, (Guid) ServicioMembership.GetUser().ProviderUserKey );
+            var archivoapp = LeerArchivoAPP(IdUsuario, sBase, usuario, dbcontext, (Guid)ServicioMembership.GetUser().ProviderUserKey);
 
 
             var permisos = (from i in dbcontext.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
