@@ -25885,7 +25885,7 @@ Public Class ExcelImportadorManager
         If renglonDeTitulos = -1 Then
             Throw New Exception("No se encontró el renglon de titulos. Falta elegir el formato del archivo?")
         ElseIf renglonDeTitulos > dtOrigen.Rows.Count - 1 Then
-            Throw New Exception("No se encontró el renglon de titulos. Falta elegir el formato del archivo?")asdasd
+            Throw New Exception("No se encontró el renglon de titulos. Falta elegir el formato del archivo?")
         End If
 
         row = dtOrigen.Rows(renglonDeTitulos)
