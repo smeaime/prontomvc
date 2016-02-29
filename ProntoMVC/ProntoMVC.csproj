@@ -77,9 +77,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\BusinessObject.dll</HintPath>
     </Reference>
-    <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\ClaseMigrar.dll</HintPath>
+    <Reference Include="ClaseMigrar">
+      <HintPath>..\..\bussinessobject\ClaseMigrar\bin\Debug\ClaseMigrar.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML">
       <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
