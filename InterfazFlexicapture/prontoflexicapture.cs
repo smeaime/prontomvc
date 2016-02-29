@@ -576,11 +576,11 @@ namespace ProntoFlexicapture
 
         public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
         {
-            pasar id
+            //pasar id
 
             cdp.CalidadTierra = -1;
 
-            cdp.
+            //cdp.
 
             //cdp.Corredor2
             //  cdp.
