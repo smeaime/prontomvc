@@ -227,7 +227,7 @@ namespace ProntoMVC.Models
             List<Tablas.Tree> TreeCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase, ServicioMembership);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;
@@ -288,12 +288,12 @@ namespace ProntoMVC.Models
             return TreeCollection;
         }
 
-        public static List<Tablas.Tree> Menu(string nombrebase)
+        public static List<Tablas.Tree> Menu(string nombrebase , Generales.IStaticMembershipService ServicioMembership )
         {
             const string spName = "Tree_TX_Arbol";
             List<Tablas.Tree> TreeCollection;
 
-            string connectionString = Generales.sCadenaConexSQL(nombrebase,null);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase, ServicioMembership);
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
             if (string.IsNullOrEmpty(connectionString))
                 return null;
