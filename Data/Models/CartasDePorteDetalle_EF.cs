@@ -12,9 +12,13 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Calidade
+    public partial class CartasDePorteDetalle_EF
     {
-        public int IdCalidad { get; set; }
-        public string Descripcion { get; set; }
+        public int IdCartaDePorteDetalle { get; set; }
+        public Nullable<int> IdCartaDePorte { get; set; }
+        public string Campo { get; set; }
+        public Nullable<decimal> Valor { get; set; }
+    
+        public virtual CartasDePorte CartasDePorte { get; set; }
     }
 }

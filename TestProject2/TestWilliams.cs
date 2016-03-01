@@ -196,6 +196,52 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+                   [TestMethod]
+           public void LogDeEnvioDeFactura_18012()
+           {
+               barras.MarcarEnviada(SC, 17000);
+           }
+   
+   
+           [TestMethod]
+           public void SincroMonsanto_17940()
+           {
+   
+               string sErrores = "", sTitulo = "";
+               LinqCartasPorteDataContext db = null;
+   
+               // el _CONST_MAXROWS sale del app.config
+   
+               int registrosf = 0;
+   
+               var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
+                                   , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                        "", -1, -1,
+                   -1, -1,
+                   -1, -1, -1, -1,
+                    CartaDePorteManager.FiltroANDOR.FiltroOR,  "Ambas" ,
+                   new DateTime(2015, 2, 1), new DateTime(2015, 2, 3),
+                   0, "Ambas", false, "", "", -1, ref registrosf);
+   
+   
+   
+               //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+               System.Diagnostics.Process.Start(output);
+           }
+   
+   
+   
+
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void ImagenesTiffMultipaginaFormatoCPTK_CPTK_CPTK_17748()
         {
