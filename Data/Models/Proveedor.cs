@@ -147,6 +147,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaInicialControlComprobantes { get; set; }
         public string ResolucionAfip3668 { get; set; }
         public string ExcluirDelCircuitoDeFirmasComprobantes { get; set; }
+        public string ExcluirDeActualizacionIvaRG18 { get; set; }
     
         public virtual ICollection<DetalleProveedor> DetalleProveedoresContactos { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }
