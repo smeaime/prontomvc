@@ -325,7 +325,7 @@ Namespace Pronto.ERP.Bll
                     Optional ByVal optDivisionSyngenta As String = "Ambas", _
                     Optional ByVal bTraerDuplicados As Boolean = False, _
                     Optional ByVal Contrato As String = "", _
-                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, Optional ByRef registrosFiltrados As Integer = 0 _
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, Optional ByRef registrosFiltrados As Integer = 0, Optional ByVal maximumRows As Long = 3000 _
             ) As String
 
 
@@ -701,8 +701,11 @@ Namespace Pronto.ERP.Bll
 
                             Dim sErrores As String
 
+
+
+
                             Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(SC, _
-                               "", "", "", 1, 3000, _
+                               "", "", "", 1, maximumRows, _
                                estado, "", idVendedor, idCorredor, _
                                idDestinatario, idIntermediario, _
                                idRComercial, idArticulo, idProcedencia, idDestino, _
@@ -712,7 +715,8 @@ Namespace Pronto.ERP.Bll
                                puntoventa, sTitulo, optDivisionSyngenta, , Contrato).ToList
 
                             registrosFiltrados = q.Count
-                            output = Sincronismo_Monsanto(q, "", sWHERE, sErrores)
+
+                            output = Sincronismo_Monsanto(q, "", SC, sErrores)
 
 
 
@@ -18967,7 +18971,10 @@ Namespace Pronto.ERP.Bll
         End Function
 
         Public Shared Function Sincronismo_Monsanto(q As Generic.List(Of CartasConCalada), _
-    Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
+    Optional ByVal titulo As String = "", Optional ByVal SC As String = "", Optional ByRef sErrores As String = "") As String
+
+
+
 
 
 
@@ -19051,20 +19058,20 @@ Namespace Pronto.ERP.Bll
             '    sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
             'Next
             'PrintLine(nF, sb) 'encabezado
-            Dim i As Integer = 0
+            Dim ii As Integer = 0
             Dim dr As DataRow
 
 
             'Dim a = pDataTable(1)
 
 
-
+            Const SEPARADOR = "|"
 
             'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
             For Each cdp As CartasConCalada In q
                 With cdp
 
-                    i = 0 : sb = ""
+                    ii = 0 : sb = ""
 
                     Dim cero = 0
 
@@ -19083,7 +19090,97 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= .ProductoSagpya.PadRight(3) 'Grano	STRING(3)	Código de grano Sagpya)    1)    3
+
+                    sb &= "CA"
+                    sb &= SEPARADOR
+
+                    sb &= "C"
+                    sb &= SEPARADOR
+
+                    sb &= .NumeroCartaDePorte
+                    sb &= SEPARADOR
+
+                    sb &= .CEE_CAU
+                    sb &= SEPARADOR
+
+
+
+                    '                    Fecha Carga
+                    'Fecha de Vencimiento
+                    'Titular de la carta de porte
+                    '                    Intermediario()
+                    '                    Remitente Comercial
+                    '                    Transportista()
+                    '                    Corredor()
+                    'Representante/entregador
+                    '                    Destinatario()
+                    '                    Destino()
+                    '                    Directo()
+                    'Grano/Especie
+                    'Grano/Especie(Tipo)
+                    '                    Cosecha()
+                    'Numero de Contrato
+                    '                    Observaciones()
+                    'Carga pesada en Destino
+                    '                    La Tijereta
+                    'Declaracion de Calidad
+                    '                    Conforme()
+                    '                    Condicional()
+                    '                    Establecimiento()
+                    '                    Direccion()
+                    '                    Codigo Postal
+                    '                    Localidad()
+                    '                    Establecimiento()
+                    '                    Direccion()
+                    '                    Codigo Postal
+                    '                    Localidad()
+                    'Pagador del flete
+                    'Kms a recorrer
+                    'Fecha y Hora de Arribo
+                    '                    Observaciones()
+                    '                    CUIT()
+                    '                    Direccion()
+                    'Nro Planta ONCCA
+                    '                    Fecha()
+                    'Traslado ordenado por
+                    '                    Direccion()
+                    '                    Codigo Postal
+                    '                    Localidad()
+                    'Numero de planta RUCA
+                    '                    Campo Opcional
+                    '                    Campo Opcional
+                    '                    Campo Opcional
+                    '                    Campo Opcional
+                    '                    Peso Bruto
+                    '                    Paso Tara
+                    '                    Peso Bruto
+                    '                    Paso Tara
+                    'Numero de CTG
+                    '                    Chofer()
+                    '                    Kgs.Estimados()
+                    '                    Camion()
+                    '                    Acoplado()
+                    'Tarifa de Referencia
+                    '                    Tarifa()
+                    '                    Flete Pagado
+                    'Flete a Pagar
+                    'Fecha y Hora de Arribo
+                    '                    Calidad()
+                    '                    Turno()
+                    'Observaciones de Calidad
+                    '                    Estado()
+                    '                    Campo Opcional
+                    '                    Campo Opcional
+                    '                    Campo Opcional
+                    '                    Campo Opcional
+                    '                    Calidad -Atributo
+                    '                    Calidad -Porcentaje
+                    '                    Calidad -Kilogramos
+
+
+
+
+                    sb &= If(.ProductoSagpya, "").PadRight(3) 'Grano	STRING(3)	Código de grano Sagpya)    1)    3
                     sb &= IIf(True, 1, 2).ToString.PadRight(3) 'GranelBolsa	STRING(3)	Embalaje del grano 1=Granel 2=Bolsa)    4)    6
 
                     sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4)
@@ -19366,7 +19463,7 @@ Namespace Pronto.ERP.Bll
 
                     sb &= Left(.ProcedenciaCodigoPostal.ToString, 8).PadRight(8) 'CPPorcede 	STRING(8)	Código Postal Procedencia)    527)    534
                     sb &= Left(.ProcedenciaDesc.ToString, 30).PadRight(30) 'NomProcede	STRING(30)	Nombre Procedencia)    535)    564
-                    sb &= Left(.DestinoCodigoPostal.ToString, 8).PadRight(8) 'CPDestino	STRING(8)	Código Postal Destino)    565)    572
+                    sb &= Left(.DestinoCodigoPostal.nullsafe, 8).PadRight(8) 'CPDestino	STRING(8)	Código Postal Destino)    565)    572
                     sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
 
 
