@@ -214,14 +214,16 @@ namespace ProntoMVC.Tests
    
                int registrosf = 0;
    
+               
+
                var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
                                    , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                         "", -1, -1,
                    -1, -1,
                    -1, -1, -1, -1,
                     CartaDePorteManager.FiltroANDOR.FiltroOR,  "Ambas" ,
-                   new DateTime(2015, 2, 1), new DateTime(2015, 2, 3),
-                   0, "Ambas", false, "", "", -1, ref registrosf);
+                   new DateTime(2014, 1 , 20), new DateTime(2014, 1, 28),
+                   -1, "Ambas", false, "", "", -1, ref registrosf, 100);
    
    
    

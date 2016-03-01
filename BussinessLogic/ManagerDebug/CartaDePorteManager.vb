@@ -144,13 +144,13 @@ Public Class CartaDePorteManager
 
 
 
-    Sub New(ByVal s As String)
-        'excepciones = New String() {"", "Agro", "Seeds", "CDC Pehua.", "CDC Olavar", "CDC Naon", "CDC G.Vill", "CDC Iriart", "CDC Wright", "CDC ACA", "GUALEGUAY", "GLGUAYCHU", "OTROS"} 'usar como maximo 10 caracteres, por sql
-        'excepciones = ConfigurationManager.AppSettings("WilliamsAcopios").Split(",")
+    'Sub New(ByVal s As String)
+    '    'excepciones = New String() {"", "Agro", "Seeds", "CDC Pehua.", "CDC Olavar", "CDC Naon", "CDC G.Vill", "CDC Iriart", "CDC Wright", "CDC ACA", "GUALEGUAY", "GLGUAYCHU", "OTROS"} 'usar como maximo 10 caracteres, por sql
+    '    'excepciones = ConfigurationManager.AppSettings("WilliamsAcopios").Split(",")
 
 
 
-    End Sub
+    'End Sub
 
 
 
@@ -2187,6 +2187,8 @@ Public Class CartaDePorteManager
         optCamionVagon)
 
     End Function
+
+
     Shared Function CartasLINQlocalSimplificadoTipadoConCalada3(ByVal SC As String, _
          ByVal ColumnaParaFiltrar As String, _
          ByVal TextoParaFiltrar As String, _
@@ -2223,6 +2225,7 @@ Public Class CartaDePorteManager
         'con entityframework
         Dim db As DemoProntoEntities
         If db2 Is Nothing Then db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC))) Else db = db2
+        db.Database.CommandTimeout = 200
 
         'con linqtosql
         'Dim db As LinqCartasPorteDataContext
@@ -2307,7 +2310,7 @@ Public Class CartaDePorteManager
             Select New CartasConCalada With { _
              .IdCartaDePorte = cdp.IdCartaDePorte, _
              .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8), _
+             .NumeroCartaDePorteFormateada = "no puedo usar padleft en linq to entities", _
              .NumeroSubfijo = cdp.NumeroSubfijo, _
              .SubnumeroVagon = cdp.SubnumeroVagon, _
              .FechaArribo = cdp.FechaArribo, _
@@ -2366,13 +2369,13 @@ Public Class CartaDePorteManager
             .NobleACamara = (cdp.NobleACamara = "SI"), _
             .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0), _
             .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0), _
-            .CalidadGranosQuemadosBonifRebaja = If(cdp.CalidadGranosQuemadosBonifica_o_Rebaja, 0), _
+            .CalidadGranosQuemadosBonifRebaja = 0, _
             .CalidadTierra = If(cdp.CalidadTierra, 0), _
             .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0), _
             .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0), _
-            .CalidadMermaChamicoBonifRebaja = If(cdp.CalidadMermaChamicoBonifica_o_Rebaja, 0), _
+            .CalidadMermaChamicoBonifRebaja = 0, _
             .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0), _
-            .CalidadMermaZarandeoBonifRebaja = If(cdp.CalidadMermaZarandeoBonifica_o_Rebaja, 0), _
+            .CalidadMermaZarandeoBonifRebaja = 0, _
  _
             .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA, _
             .ProcedenciaPartidoONCCA = part.CodigoONCCA, _
@@ -2400,10 +2403,10 @@ Public Class CartaDePorteManager
                 .CEE_CAU = cdp.CEE _
         , .Contrato = cdp.Contrato _
       , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-  , .NRecibo = cdp.NRecibo _
-    , .CalidadGranosDanadosRebaja = If(cdp.CalidadGranosDanadosRebaja, 0) _
-            , .CalidadGranosExtranosRebaja = If(cdp.CalidadGranosExtranosRebaja, 0) _
-        , .DestinoCodigoPostal = dest.CodigoPostal _
+  , .NRecibo = cdp.NRecibo, _
+     .CalidadGranosDanadosRebaja = 0.01, _
+             .CalidadGranosExtranosRebaja = 0.01, _
+         .DestinoCodigoPostal = dest.CodigoPostal _
         , .ProcedenciaCodigoPostal = loc.CodigoPostal
            }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
 
@@ -2532,6 +2535,7 @@ Public Class CartaDePorteManager
         'If db2 Is Nothing Then db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC))) Else db = db2
 
         'con linqtosql
+
         Dim db As LinqCartasPorteDataContext
         If db2 Is Nothing Then db = New LinqCartasPorteDataContext(Encriptar(SC)) Else db = db2
         db.ObjectTrackingEnabled = False
@@ -2564,6 +2568,10 @@ Public Class CartaDePorteManager
 
 
 
+
+
+
+
         Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes _
                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
                 From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
@@ -2583,43 +2591,43 @@ Public Class CartaDePorteManager
                 From detfac In db.linqDetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty _
                 From clifac In db.linqClientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty _
                 Where _
-            cdp.Vendedor > 0 _
-            And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-            And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
-            And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
-            And (ModoExportacion = enumCDPexportacion.Ambas _
-                    Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
-                    Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
-            And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-            And ( _
-                  (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
-                  Or _
-                  (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial) _
-                  ) _
-                  Or _
-                  (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And _
-                    (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial) _
-                   ) _
-                ) _
-            And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
-            And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-            And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-            And (idDestino = -1 Or cdp.Destino = idDestino) _
-            And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-            And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2)) _
-            Order By cdp.FechaModificacion Descending _
-            Select New CartasConCalada With { _
+        cdp.Vendedor > 0 _
+        And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+        And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
+        And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
+        And (ModoExportacion = enumCDPexportacion.Ambas _
+            Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
+            Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
+        And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+        And ( _
+          (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
+          Or _
+          (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
+            And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+            And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+            And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial) _
+          ) _
+          Or _
+          (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And _
+            (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial) _
+           ) _
+        ) _
+        And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
+        And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+        And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+        And (idDestino = -1 Or cdp.Destino = idDestino) _
+        And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
+        And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2))
+        Order By cdp.FechaModificacion Descending _
+           Select New CartasConCalada With { _
              .IdCartaDePorte = cdp.IdCartaDePorte, _
              .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
              .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8), _
              .NumeroSubfijo = cdp.NumeroSubfijo, _
              .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = cdp.FechaArribo, _
-             .FechaModificacion = cdp.FechaModificacion, _
-             .FechaDescarga = cdp.FechaDescarga, _
+             .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue), _
+             .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue), _
+             .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue), _
              .Observaciones = cdp.Observaciones, _
  _
             .NetoProc = cdp.NetoProc, _
@@ -2651,7 +2659,7 @@ Public Class CartaDePorteManager
              .DestinoDesc = dest.Descripcion, _
              .CalidadDesc = cdp.Calidad, _
              .UsuarioIngreso = "", _
-            .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo), _
+            .FechaDeCarga = If(cdp.FechaDeCarga, If(cdp.FechaArribo, DateTime.MinValue)), _
             .NobleExtranos = cdp.NobleExtranos, _
             .NobleNegros = cdp.NobleNegros, _
             .NobleQuebrados = cdp.NobleQuebrados, _
