@@ -224,6 +224,10 @@ Namespace Pronto.ERP.Bll
                     txtPopClienteAuxiliar.Text = "RIVARA S.A"
                 Case "MIGUEL CINQUE"
                     txtTitular.Text = "CINQUE MIGUEL MARTIN"
+                Case "MONSANTO"
+                    txtTitular.Text = "MONSANTO ARGENTINA S.A.I.C."
+                    txtIntermediario.Text = "MONSANTO ARGENTINA S.A.I.C."
+                    txtRcomercial.Text = "MONSANTO ARGENTINA S.A.I.C."
                 Case "SANTA CATALINA"
                     txtTitular.Text = "SANTA CATALINA SA"
                 Case "TOMAS HNOS"
@@ -704,7 +708,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                            Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(SC, _
+                            Dim iq = CartasLINQlocalSimplificadoTipadoConCalada3(SC, _
                                "", "", "", 1, maximumRows, _
                                estado, "", idVendedor, idCorredor, _
                                idDestinatario, idIntermediario, _
@@ -712,7 +716,9 @@ Namespace Pronto.ERP.Bll
                                                                  AplicarANDuORalFiltro, ModoExportacion, _
                                Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)), _
                                Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)), _
-                               puntoventa, sTitulo, optDivisionSyngenta, , Contrato).ToList
+                               puntoventa, sTitulo, optDivisionSyngenta, , Contrato, , , 17497) 'filtrar "La Tijereta"
+
+                            Dim q As Generic.List(Of CartasConCalada) = iq.ToList
 
                             registrosFiltrados = q.Count
 
@@ -2145,16 +2151,16 @@ Namespace Pronto.ERP.Bll
                     Dim VendedorCUIT, VendedorDesc As String
                     ' If InStr(.RComercialDesc, "AMAGGI") > 0 Then Stop
 
-                    If .RComercialDesc <> "" And InStr(.RComercialDesc, "ZENI") = 0 Then
-                        VendedorCUIT = .RComercialCUIT
-                        VendedorDesc = .RComercialDesc
-                    ElseIf .IntermediarioDesc <> "" Then
-                        VendedorCUIT = .IntermediarioCUIT
-                        VendedorDesc = .IntermediarioDesc
-                    Else
-                        VendedorCUIT = .TitularCUIT
-                        VendedorDesc = .TitularDesc
-                    End If
+                    'If .RComercialDesc <> "" And InStr(.RComercialDesc, "ZENI") = 0 Then
+                    '    VendedorCUIT = .RComercialCUIT
+                    '    VendedorDesc = .RComercialDesc
+                    'ElseIf .IntermediarioDesc <> "" Then
+                    '    VendedorCUIT = .IntermediarioCUIT
+                    '    VendedorDesc = .IntermediarioDesc
+                    'Else
+                    '    VendedorCUIT = .TitularCUIT
+                    '    VendedorDesc = .TitularDesc
+                    'End If
 
 
 
@@ -2196,6 +2202,45 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Recibidor)    87)    100
                     sb &= Left(wily.ToString, 30).PadRight(30) 'NomRecibidor	STRING(30)	Nombre Recibidor)    101)    130
 
+
+
+
+
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    'cambios del reclamo 
+                    'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=17945
+                    'CUITComprador	  CHAR(14) 	131 a 144	CUIT Comprador	·         Destinatario
+                    'NomComp   	  CHAR(30) 	145 a 174	Nombre Comprador	·         Destinatario
+                    'CUITCorrCarg	  CHAR(14) 	175 a 188	CUIT Corredor del Cargador	
+                    'NomCorrCarg 	  CHAR(30) 	189 a 218	Nombre Corredor del Cargador	
+                    'CUITEntregador 	  CHAR(14) 	219 a 232	CUIT Entregador	
+                    'NomEntregador	  CHAR(30) 	233 a 262	Nombre Entregador	
+
+                    'CUITCargador_1	  CHAR(14) 	263 a 276	CUIT Cargador 1	·         Remitente Comercial
+                    'NomCargador_1	  CHAR(30) 	277 a 306 	Nombre Cargador 1	·         Remitente Comercial
+                    'CUITVendedor	  CHAR(14) 	307 a 320 	CUIT Vendedor	        Titular
+                    'NomVendedor	  CHAR(30) 	321 a 350	Nombre Vendedor	        Titular
+                    'CUITCorrEndo	  CHAR(14) 	351 a 364	CUIT Corredor Endoso	
+                    'NomCorrEndo 	  CHAR(30) 	365 a 394	Nombre Corredor Endoso	
+                    'CUITCompEndo	  CHAR(14) 	395 a 408	CUIT Comprador Endoso	·         Intermediario
+                    'NomCompEndo 	  CHAR(30) 	409 a 438	Nombre Comprador Endoso	·         Intermediario
+
+
+
+
                     sb &= Left(.DestinatarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITComprador	STRING(14)	CUIT Comprador)    131)    144
                     sb &= Left(.DestinatarioDesc.ToString, 30).PadRight(30) 'NomComp	STRING(30)	Nombre Comprador)    145)    174
 
@@ -2206,31 +2251,73 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Recibidor)    87)    100
                     sb &= Left(wily.ToString, 30).PadRight(30) 'NomRecibidor	STRING(30)	Nombre Recibidor)    101)    130
 
-                    sb &= Left(.DestinatarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
-                    sb &= Left(.DestinatarioDesc.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
 
 
                     '////////////////////////////////////////////////////////////////////////////////
                     'Strongly Typed DataSets encountering NULL values – Grrrrrr… 
                     'http://social.msdn.microsoft.com/forums/en-US/winformsdatacontrols/thread/1dad8d0d-6eae-4254-a9d6-22d50da5578a
                     '////////////////////////////////////////////////////////////////////////////////
+                    'CUITCargador_1	  CHAR(14) 	263 a 276	CUIT Cargador 1	·         Remitente Comercial
+                    'NomCargador_1	  CHAR(30) 	277 a 306 	Nombre Cargador 1	·         Remitente Comercial
+                    'CUITVendedor	  CHAR(14) 	307 a 320 	CUIT Vendedor	        Titular
+                    'NomVendedor	  CHAR(30) 	321 a 350	Nombre Vendedor	        Titular
+                    'CUITCorrEndo	  CHAR(14) 	351 a 364	CUIT Corredor Endoso	
+                    'NomCorrEndo 	  CHAR(30) 	365 a 394	Nombre Corredor Endoso	
+                    'CUITCompEndo	  CHAR(14) 	395 a 408	CUIT Comprador Endoso	·         Intermediario
+                    'NomCompEndo 	  CHAR(30) 	409 a 438	Nombre Comprador Endoso	·         Intermediario
 
-                    If .IsClienteFacturadoCUITNull Then .ClienteFacturadoCUIT = ""
-                    sb &= Left(.ClienteFacturadoCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)    276
-                    If .IsClienteFacturadoNull Then .ClienteFacturado = ""
-                    sb &= Left(.ClienteFacturado.ToString, 30).PadRight(30) 'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
+
+
+
+                    sb &= Left(.RComercialCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)    276
+                    sb &= Left(.RComercialDesc.ToString, 30).PadRight(30) 'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
+
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
+                    sb &= Left(.TitularDesc.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
+
 
 
 
                     sb &= Left(cadenavacia.ToString, 14).PadRight(14) 'CUITCorrEndo	STRING(14)	CUIT  Corredor Endozo)    351)    364
                     sb &= Left(cadenavacia.ToString, 30).PadRight(30) 'NomCorrEndo	STRING(30)	Nombre Corredor Endozo)    365)    394
 
-                    sb &= Left(cadenavacia.ToString, 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
-                    sb &= Left(cadenavacia.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
+                    sb &= Left(.IntermediarioCUIT.ToString, 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
+                    sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
+
+
+
+
+
+
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////////
+
+
 
                     'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9214
-                    sb &= Left(VendedorCUIT.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
-                    sb &= Left(VendedorDesc, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
+                    sb &= Left(.DestinatarioCUIT.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
+                    sb &= Left(.DestinatarioDesc, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
+
 
 
 
@@ -2406,8 +2493,18 @@ Namespace Pronto.ERP.Bll
                     'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13649
                     'El pedido es que al final de cada linea del sincronismo agreguemos Razon Social del Intermediario y Cuit del Intermediario
 
+
+                    'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=17945
+                    'CHAR(14) 	1055 a 1068	CUIT Intermediario	campos adicionales que ya les estabamos pasando y que ahora serían inservibles
+                    'CHAR(30) 	1069 a 1098	Nombre Intermediario	campos adicionales que ya les estabamos pasando y que ahora serían inservibles
+                    'CHAR(8) 	1099 a 1106	CTG	
+
+
+
                     sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
                     sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
+                    sb &= .CTG.ToString
+
 
 
                     PrintLine(nF, sb)
@@ -18974,75 +19071,6 @@ Namespace Pronto.ERP.Bll
     Optional ByVal titulo As String = "", Optional ByVal SC As String = "", Optional ByRef sErrores As String = "") As String
 
 
-
-
-
-
-            '            Orden	Nombre	Long.	Descripción	Requerido	Justificacion	Posicion
-            '1	Grano	3	Código de grano Sagpya	*	Izquierda	1
-            '2	GranelBolsa	3	Embalaje del grano 1=Granel 2=Bolsa	*	Derecha	4
-            '3	Cosecha	4	Cosecha 2000-2001 Ej: 0001	*	Izquierda	7
-            '4	FecIng	8	Fecha de entrada del camión Formato (DDMMYYYY) ej: 01052001	*	Izquierda	11
-            '5	HorIng	8	Hora de entrada del camión Formato (HHMISS) ej:092556	*	Izquierda	19
-            '6	FecSal	8	Fecha de salida o Descarga del camión Formato(DDMMYYYY) ej:01052001	*	Izquierda	27
-            '7	HorSal	8	Hora de salida o Descarga del camión  Formato (HHMISS) ej:092556	*	Izquierda	35
-            '8	CUITPuerto	14	CUIT PUERTO	*	Izquierda	43
-            '9	NomPuerto	30	Nombre Puerto	*	Izquierda	57
-            '10	CUITRecibidor	14	CUIT Recibidor	*	Izquierda	87
-            '11	NomRecibidor	30	Nombre Recibidor	*	Izquierda	101
-            '12	CUITComprador	14	CUIT Comprador	*	Izquierda	131
-            '13	NomComp	30	Nombre Comprador	*	Izquierda	145
-            '14	CUITCorrComp	14	CUIT Corredor Comprador	*	Izquierda	175
-            '15	NomCorrComp	30	Nombre Corredor Comprador	*	Izquierda	189
-            '16	CUITEntregador	14	CUIT Entregador	*	Izquierda	219
-            '17	NomEntregador	30	Nombre Entregador	*	Izquierda	233
-            '18	CUITCargador	14	CUIT Cargador	*	Izquierda	263
-            '19	NomCargador	30	Nombre Cargador	*	Izquierda	277
-            '20	CUITVendedor	14	CUIT Vendedor	*	Izquierda	307
-            '21	NomVendedor	30	Nombre Vendedor	*	Izquierda	321
-            '22	CUITCorrEndo	14	CUIT  Corredor Endozo		Izquierda	351
-            '23	NomCorrEndo	30	Nombre Corredor Endozo		Izquierda	365
-            '24	CUITCompEndo	14	CUIT Comprador Endozo		Izquierda	395
-            '25	NomCompEndo	30	Nombre Comprador Endozo		Izquierda	409
-            '26	CUITCorrVend	14	CUIT Corredor Vendedor.	*	Izquierda	439
-            '27	NomCorrVend	30	Nombre Corredor Vendedor	*	Izquierda	453
-            '28	CUITPlantaOrigen	14	CUIT Planta Origen	*	Izquierda	483
-            '29	NomPlantaOrigen	30	Nombre Planta Origen	*	Izquierda	497
-            '30	CPPorcede	8	Código Postal Procedencia	*	Izquierda	527
-            '31	NomProcede	30	Nombre Procedencia	*	Izquierda	535
-            '32	CPDestino	8	Código Postal Destino	*	Izquierda	565
-            '33	NomDestino	30	Nombre Destino	*	Izquierda	573
-            '34	CodMovIE	1	Código Mov. 0=Ing 1=Egr 2=Transf.Ing 3=Transf.Egr	*	Derecha	603
-            '35	PatCha	10	Patente chasis		Izquierda	604
-            '36	PesoBrut	10	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.	*	Derecha	614
-            '37	PesoEgre	10	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales	*	Derecha	624
-            '38	PesoNeto	10	Total bruto(PesoBrut-PesoEgre) (sin decimales)	*	Derecha	634
-            '39	TotMerm	10	Total mermas (Total mermas sin decimales)		Derecha	644
-            '40	TotNeto	10	Total neto ((Camión cargado – Tara)- Total mermas) (sin decimales)	*	Derecha	654
-            '41	PorHume	10	Porcentaje humedad (un (1) decimal)		Derecha	664
-            '42	PorMemaHumedad	10	Porcentaje merma humedad (dos (2) decimales)		Derecha	674
-            '43	KgsHume	10	Kilos humedad (sin decimales)		Derecha	684
-            '44	PBonHume	10	Porcentaje bonificación humedad (dos (2) decimales)		Derecha	694
-            '45	KgsBonHu	10	Kilos bonificación humedad		Derecha	704
-            '46	PorZaran	10	Porcentaje zarandeo (dos (2) decimales)		Derecha	714
-            '47	KgsZaran	10	Kilos zarandeo (sin decimales)		Derecha	724
-            '48	PorDesca	10	Porcentaje descarte (dos (2) decimales)		Derecha	734
-            '49	KgsDesca	10	Kilogramos Descarte (Sin Decimales)		Derecha	744
-            '50	PorVolat	10	Porcentaje volátil (dos (2) decimales)		Derecha	754
-            '51	KgsVolat	10	Kilogramos volátil (sin decimales)		Derecha	764
-            '52	CantBolsa	8	Cantidad de bolsas		Derecha	774
-            '53	Fumigada	1	Condición fumigada 0=no 1=si	*	Derecha	782
-            '54	PesoProcede	10	Peso procedencia (Sin Decimales)		Derecha	783
-            '55	Contrato	12	Número de contrato  (Numeros 0 al 9)		Derecha	793
-            '56	CarPorte	14	Número de Carta de Porte (Numeros  0 al 9)	*	Derecha	805
-            '57	TipoTrans	1	Tipo de transporte c=camión  v=vagón o=Otro	*	Izquierda	819
-            '58	Grado	10	Grado	*	Derecha	820
-            '59	Factor	10	Factor	*	Derecha	830
-            '60	Observac	100	Observaciones		Izquierda	840
-            '61	ConCalidad	4	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o                       Fuera de standart (FE)	*	Izquierda	940
-            '62	MovStock	1	Señal 1=Movió mercadería       0=No movió mercadería	*	Izquierda	944
-            '63	ObsAna	100	Observaciones Analisis		Izquierda	945
-
             Dim sErroresProcedencia, sErroresDestinos As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
@@ -19057,7 +19085,13 @@ Namespace Pronto.ERP.Bll
             'For Each dc In pDataTable.Columns
             '    sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
             'Next
-            'PrintLine(nF, sb) 'encabezado
+
+
+
+            'PrintLine(nF, "CA|C|000000534543|00000004568741|20151001|20151030|30503508725|30503508725||30503508725|30503508725|30707386076|30503508725|30503508725|S|13||1415||una observacion|S|S|S|S|S|21456|una direccion|31753|12441||una direccion|75316|11111|transport payer commercial|987654|201510010000|mas observaciones|30503508725|30503508725|5,46742E+19|20151001|transfer order by|change address|987123654|||empty1|empty2|empty3|empty4|1000|10|1000|10|75312532||150|a transport truck|a truck trailer|546.32|123.66|S|N|201510010000|a crop quality|order number|a discharge quality observations|DISCHARGED|optionalFied1|optionalFied2|optionalFied3|optionalFied4|HD|0.50||MCV||15.38") 'encabezado
+            'PrintLine(nF, "")
+
+
             Dim ii As Integer = 0
             Dim dr As DataRow
 
@@ -19074,8 +19108,6 @@ Namespace Pronto.ERP.Bll
                     ii = 0 : sb = ""
 
                     Dim cero = 0
-
-
 
 
                     '                    Grano	Texto	1	3	Falta Dato
@@ -19097,658 +19129,286 @@ Namespace Pronto.ERP.Bll
                     sb &= "C"
                     sb &= SEPARADOR
 
-                    sb &= .NumeroCartaDePorte
+                    sb &= JustificadoDerecha(.NumeroCartaDePorte, 12, "0")
                     sb &= SEPARADOR
 
                     sb &= .CEE_CAU
                     sb &= SEPARADOR
 
 
+                    sb &= FechaANSI(.FechaDeCarga)
+                    sb &= SEPARADOR
+
+                    sb &= FechaANSI(IIf(.FechaVencimiento = Date.MinValue, .FechaDescarga, .FechaVencimiento))
+                    sb &= SEPARADOR
+
+
+                    sb &= If(.TitularCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
+
+                    sb &= If(.IntermediarioCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
+
+                    sb &= If(.RComercialCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
+
+                    sb &= If(.TransportistaCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
+
+                    sb &= If(.CorredorCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
+
+                    Dim wily = "Williams Entregas S.A."
+                    Dim wilycuit = "30-70738607-6"
+                    sb &= If(wilycuit, "").Replace("-", "")
+                    sb &= SEPARADOR
+
+
+                    sb &= If(.DestinatarioCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
+
+                    sb &= If(.DestinoCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
 
                     '                    Fecha Carga
                     'Fecha de Vencimiento
                     'Titular de la carta de porte
-                    '                    Intermediario()
-                    '                    Remitente Comercial
-                    '                    Transportista()
-                    '                    Corredor()
+                    ' Intermediario()
+                    ' Remitente Comercial
+                    'Transportista()
+                    'Corredor()
                     'Representante/entregador
-                    '                    Destinatario()
-                    '                    Destino()
-                    '                    Directo()
+                    'Destinatario()
+                    'Destino()
+
+
+
+
+
+                    '                    Directo()  boolean	S: Si es verdadero; N: si  si es falso
+                    sb &= IIf(True, "S", "N")
+                    sb &= SEPARADOR
+
+
+
+
+
+
+
+
+
+
+
                     'Grano/Especie
+                    sb &= If(.ProductoSagpya, "")
+                    sb &= SEPARADOR
+
+
                     'Grano/Especie(Tipo)
-                    '                    Cosecha()
+                    sb &= "0"
+                    sb &= SEPARADOR
+
+
+
+
+
+                    'Cosecha()
+                    sb &= Right(.Cosecha.Replace("20", "").Replace("-", "").Replace("/", ""), 4)
+                    sb &= SEPARADOR
+
+
                     'Numero de Contrato
-                    '                    Observaciones()
+                    sb &= .Contrato
+                    sb &= SEPARADOR
+
+
+
+                    'Observaciones()
+                    sb &= .Observaciones
+                    sb &= SEPARADOR
+
+
                     'Carga pesada en Destino
-                    '                    La Tijereta
+                    sb &= IIf(True, "S", "N")
+                    sb &= SEPARADOR
+
+                    'La Tijereta
+                    sb &= IIf(True, "S", "N")
+                    sb &= SEPARADOR
+
                     'Declaracion de Calidad
-                    '                    Conforme()
-                    '                    Condicional()
-                    '                    Establecimiento()
-                    '                    Direccion()
-                    '                    Codigo Postal
-                    '                    Localidad()
-                    '                    Establecimiento()
-                    '                    Direccion()
-                    '                    Codigo Postal
-                    '                    Localidad()
-                    'Pagador del flete
-                    'Kms a recorrer
-                    'Fecha y Hora de Arribo
-                    '                    Observaciones()
-                    '                    CUIT()
-                    '                    Direccion()
-                    'Nro Planta ONCCA
-                    '                    Fecha()
-                    'Traslado ordenado por
-                    '                    Direccion()
-                    '                    Codigo Postal
-                    '                    Localidad()
-                    'Numero de planta RUCA
-                    '                    Campo Opcional
-                    '                    Campo Opcional
-                    '                    Campo Opcional
-                    '                    Campo Opcional
-                    '                    Peso Bruto
-                    '                    Paso Tara
-                    '                    Peso Bruto
-                    '                    Paso Tara
-                    'Numero de CTG
-                    '                    Chofer()
-                    '                    Kgs.Estimados()
-                    '                    Camion()
-                    '                    Acoplado()
-                    'Tarifa de Referencia
-                    '                    Tarifa()
-                    '                    Flete Pagado
-                    'Flete a Pagar
-                    'Fecha y Hora de Arribo
-                    '                    Calidad()
-                    '                    Turno()
-                    'Observaciones de Calidad
-                    '                    Estado()
-                    '                    Campo Opcional
-                    '                    Campo Opcional
-                    '                    Campo Opcional
-                    '                    Campo Opcional
-                    '                    Calidad -Atributo
-                    '                    Calidad -Porcentaje
-                    '                    Calidad -Kilogramos
+                    sb &= IIf(True, "S", "N")
+                    sb &= SEPARADOR
 
-
-
-
-                    sb &= If(.ProductoSagpya, "").PadRight(3) 'Grano	STRING(3)	Código de grano Sagpya)    1)    3
-                    sb &= IIf(True, 1, 2).ToString.PadRight(3) 'GranelBolsa	STRING(3)	Embalaje del grano 1=Granel 2=Bolsa)    4)    6
-
-                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4)
-
-
-
-                    sb &= .FechaArribo.ToString("ddMMyyyy")       'FecIng	STRING(8)	Fecha de entrada del camión Formato (DDMMYYYY) ej: 01052001)    11)    18
-
-
-                    'If .IsHoraNull Then
-                    '    sb &= #12:00:00 AM#.ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
-                    'Else
-                    '    sb &= Convert.ToDateTime(.Hora).ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
-                    'End If
-
-
-                    'sb &= "  "
-
-                    'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
-                    'sb &= .FechaDescarga.ToString("ddMMyyyy")  'FecSal	STRING(8)	Fecha de salida o Descarga del camión Formato(DDMMYYYY) ej:01052001)    27)    34
-                    'sb &= Convert.ToDateTime(iisNull(.FechaDescarga, #12:00:00 AM#)).ToString("hhmmss") 'HorSal	STRING(8)	Hora de salida o Descarga del camión  Formato (HHMISS) ej:092556)    35)    42
-
-
-                    sb &= "  "
-
-
-
-
-                    'Sincro Tecnocampo          ABM ProntoWeb (o CDP física)
-                    '------------------------------------------
-                    'Puerto					    Destino
-                    'Recibidor				    WILLIAMS SA
-                    'Comprador				    Destinatario		
-                    'Corredor Comprador		    Corredor
-                    'Entregador				    Destinatario
-                    'Cargador				    (este es a quien se le facturó)
-                    'Vendedor				    Titular  'Acá va el Rte Comercial, si no hay RteCom va el Titular
-                    'Corredor Endozo		    ?'No se manda?
-                    'Comprador Endozo		    ?'No se manda?
-                    'Corredor Vendedor		    ?'No se manda?
-                    'Planta Origen			    ?
-                    'Procedencia 			    Origen
-                    'Destino 				    Destino
-
-                    'https://mail.google.com/mail/u/0/#search/amaggi/13795391d0a49a8d
-                    ' Me llaman de Williams para ver si podemos ver un tema con el sincro Amaggi que les esta saliendo con un error (Carta de Porte del ejemplo: 525174646) mañana lo vemos
+                    'Conforme()
+                    sb &= IIf(.NobleConforme, "S", "N")
+                    sb &= SEPARADOR
 
-                    'Lucas, si los datos están bien cargados se está confeccionando mal el TXT y las cuentas no vienen donde corresponden.
-                    'Desconozco los datos de la CP original para que Andrés sepa dónde está el problema.
 
-                    'Por lo que me dijo Juan Pablo, estos datos vienen mal:
-                    'Viene comprador BUNGE
-                    'Cargador, vendedor y comp endoso: Amaggi
+                    '24	?	Condicional	boolean	S: Si es verdadero; N: si  si es falso
+                    sb &= IIf(.NobleConforme, "S", "N")
+                    sb &= SEPARADOR
 
 
 
+                    'seccion Procedencia de la mercaderia ---------------------------------
+                    '25	no	Establecimiento	digits{1,6}	Numerico entre 1 y  11 digitos
+                    sb &= .Establecimiento
+                    sb &= SEPARADOR
+                    '26	yes	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
+                    sb &= SEPARADOR
+                    '27	yes	Codigo Postal	String{1,10}	Texto entre 1 y 10 caracteres
+                    sb &= SEPARADOR
+                    '28	yes	Localidad	cityAfipId	Texto entre 1 y 5 digitos
+                    sb &= SEPARADOR
 
+
+
+                    'seccion Lugar Destino de los Granos ------------------------------------------------------------
+                    '29	no	Establecimiento	digits{1,6}	Numerico entre 1 y  11 digitos
+                    sb &= SEPARADOR
+                    '30	no	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
+                    sb &= SEPARADOR
+                    '31	no	Codigo Postal	String{1,10}	Texto entre 1 y 10 caracteres
+                    sb &= .DestinoCodigoPostal
+                    sb &= SEPARADOR
+                    '32	no	Localidad	cityAfipId	Texto entre 1 y 5 digitos
+                    sb &= SEPARADOR
 
-                    Dim wily = "Williams Entregas S.A."
-                    Dim wilycuit = "30707386076"
-                    Dim cadenavacia As String = ""
 
+                    '33	no	Pagador del flete	String{1,60}	Texto entre 1 y 60 caracteres
+                    sb &= SEPARADOR
+                    '34	no	Kms a recorrer	Integer{1,999999}	Numerico entero entre 1 y 999999
+                    sb &= .KmArecorrer.ToString
+                    sb &= SEPARADOR
 
+
 
+                    '35	no	Fecha y Hora de Arribo	datetime	Formato aaaaMMddHHmm Ej:201509291130 = 29/09/2015 - 11:30
+                    sb &= SEPARADOR
+                    '36	no	Observaciones	String{1,60}	Texto entre 1 y 60 caracteres
+                    sb &= SEPARADOR
 
-                    'Comentan que en los siguientes campos se debe mandar (en los 
-                    'tres campos) el Intermediario y en 
-                    ' caso que no haya Intermediario, en los tres casos el Titular: NomCargador NomCompEndo NomVendedor 
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8740
 
 
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8740
-                    Dim VendedorCUIT, VendedorDesc As String
-                    ' If InStr(.RComercialDesc, "AMAGGI") > 0 Then Stop
 
-                    If .RComercialDesc <> "" And InStr(.RComercialDesc, "AMAGGI") = 0 Then
-                        VendedorCUIT = .RComercialCUIT
-                        VendedorDesc = .RComercialDesc
-                    ElseIf .IntermediarioDesc <> "" Then
-                        VendedorCUIT = .IntermediarioCUIT
-                        VendedorDesc = .IntermediarioDesc
-                    Else
-                        VendedorCUIT = .TitularCUIT
-                        VendedorDesc = .TitularDesc
-                    End If
 
+                    'seccion  Cambio de domicilio de descarga  ------------------------------------------------------------
+                    '37	no	CUIT	numerico{11,11}	Numerico de 11 digitos
+                    sb &= SEPARADOR
+                    '38	no	Direccion	numerico{11,11}	Numerico de 11 digitos
+                    sb &= SEPARADOR
+                    '39	no	Nro Planta ONCCA	String{1,29}	Texto entre 1 y 29 caracteres
+                    sb &= SEPARADOR
+                    '40	no	Fecha	date	Formato aaaaMMdd. Ej:20150929 = 29/09/2015
+                    If .FechaDescarga > Date.MinValue Then sb &= FechaANSI(.FechaDescarga)
+                    sb &= SEPARADOR
+                    '41	no	Traslado ordenado por	String{1,17}	Texto entre 1 y 17 caracteres
+                    sb &= SEPARADOR
+                    '42	no	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
+                    sb &= SEPARADOR
+                    '43	no	Codigo Postal	String{1,10}	Texto entre 1 y 10 caracteres
+                    sb &= SEPARADOR
+                    '44	no	Localidad	String{1,5}	Texto entre 1 y 5 digitos
+                    sb &= SEPARADOR
 
 
-
-                    '[OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.]
-                    '   System.Data.Common.DecimalStorage.SetCapacity(Int32 capacity) +22
-                    '   System.Data.RecordManager.set_RecordCapacity(Int32 value) +77
-                    '                    System.Data.RecordManager.GrowRecordCapacity(+52)
-                    '                    System.Data.RecordManager.NewRecordBase(+34)
-                    '   System.Data.DataTable.NewRecord(Int32 sourceRecord) +23
-                    '                    System.Data.DataRow.BeginEditInternal(+4817531)
-                    '   System.Data.DataRow.set_Item(DataColumn column, Object value) +244
-                    '   wCartasDePorte_TX_InformesCorregidoRow.set_IntermediarioCUIT(String Value) in C:\Backup\BDL\BussinessLogic\WillyInformesDataSet7.Designer.vb:4427
-                    '   Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_AmaggiDescargas(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores) +1699
-                    '   CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) +5006
-                    '   System.Web.UI.WebControls.Button.OnClick(EventArgs e) +111
-                    '   System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument) +110
-                    '   System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument) +10
-                    '   System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument) +13
-                    '   System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData) +36
-                    '   System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint) +1565
 
-                    If .IntermediarioCUIT = "" Then
-                        .IntermediarioCUIT = .TitularCUIT
-                        .IntermediarioDesc = .TitularDesc
-                    Else
-                        Debug.Print(.IntermediarioCUIT)
-                    End If
 
 
 
-                    Try
+                    '45	no	Numero de planta RUCA	String{1,6}	Texto entre 1 y 6 digitos
+                    sb &= SEPARADOR
+                    '46	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    sb &= SEPARADOR
+                    '47	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    sb &= SEPARADOR
+                    '48	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    sb &= SEPARADOR
+                    '49	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    sb &= SEPARADOR
 
-                        If .TitularDesc.Trim() = "DIRECTO" Then
-                            .TitularDesc = ""
-                            .TitularCUIT = ""
-                        End If
+                    '50	yes	Peso Bruto	Integer{1,999999}	Numerico entero entre 1 y 999999
+                    sb &= .BrutoPto.ToString("G0")
+                    sb &= SEPARADOR
+                    '51	yes	Paso Tara	Integer{1,999999}	Numerico entero entre 1 y 999999
+                    sb &= .TaraPto.ToString("G0")
+                    sb &= SEPARADOR
+                    '52	no	Peso Bruto	Integer{1,999999}	Numerico entero entre 1 y 999999
+                    sb &= .BrutoFinal.ToString("G0")
+                    sb &= SEPARADOR
+                    '53	no	Paso Tara	Integer{1,999999}	Numerico entero entre 1 y 999999
+                    sb &= .TaraFinal.ToString("G0")
+                    sb &= SEPARADOR
 
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
 
-                    Try
-                        If .IntermediarioDesc.Trim() = "DIRECTO" Then
-                            .IntermediarioDesc = ""
-                            .IntermediarioCUIT = ""
-                        End If
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                    '54	no	Numero de CTG	digits{8,8}	Numerico entero entre 1 y 8
+                    sb &= .CTG.ToString
+                    sb &= SEPARADOR
 
-                    Try
-                        If .RComercialDesc.Trim() = "DIRECTO" Then
-                            .RComercialDesc = ""
-                            .RComercialCUIT = ""
-                        End If
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                    '55	no	Chofer	numerico{11,11}	Numerico de 11 digitos
+                    sb &= If(.ChoferCUIT, "").Replace("-", "")
+                    sb &= SEPARADOR
 
-                    Try
-                        If .CorredorDesc.Trim() = "DIRECTO" Then
-                            .CorredorDesc = ""
-                            .CorredorCUIT = ""
-                        End If
+                    '56	no	Kgs. Estimados	Integer{1,999999}	Numerico entero entre 1 y 999999
+                    sb &= SEPARADOR
+                    '57	no	Camion	String{1,20}	Texto entre 1 y 20 caracteres
+                    sb &= .Patente
+                    sb &= SEPARADOR
+                    '58	no	Acoplado	String{1,20}	Texto entre 1 y 20 caracteres
+                    sb &= .Acoplado
+                    sb &= SEPARADOR
 
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                    '59	no	Tarifa de Referencia	money	numerico entre 0.01  y 999999.99}
+                    sb &= SEPARADOR
+                    '60	no	Tarifa	money	numerico entre 0.01  y 999999.99}
+                    sb &= .Tarifa.ToString("0.00").Replace(",", ".")
+                    sb &= SEPARADOR
 
-                    Try
 
-                        If .DestinatarioDesc.Trim() = "DIRECTO" Then
-                            .DestinatarioDesc = ""
-                            .DestinatarioCUIT = ""
-                        End If
+                    '61	no	Flete Pagado	boolean	S: Si es verdadero; N: si  si es falso
+                    sb &= IIf(True, "S", "N")
+                    sb &= SEPARADOR
+                    '62	no	Flete a Pagar	boolean	S: Si es verdadero; N: si  si es falso
+                    sb &= IIf(True, "S", "N")
+                    sb &= SEPARADOR
 
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
 
+                    '63	no	Fecha y Hora de Arribo	datetime	Formato aaaaMMddHHmm Ej:201509291130 = 29/09/2015 - 11:30
+                    sb &= .FechaArribo.ToString("yyyyMMddHHmm")
+                    sb &= SEPARADOR
 
+                    '64	no	Calidad	String{1,17}	Texto entre 1 y 17 caracteres
+                    'sb &= _cc(FormatearCalidad(If(.CalidadDesc, "")))
+                    sb &= If(.CalidadDesc, "")
+                    sb &= SEPARADOR
 
+                    '65	no	Turno	String{1,20}	Texto entre 1 y 20 caracteres
+                    sb &= SEPARADOR
 
-                    '                CUITPUERTO	43	56
-                    'NOMPUERTO	57	86
-                    'CUITRECIBIDOR	87	100
-                    'NOMRECIBIDOR	101	130
-                    'CUITCOMPRADOR	131	144
-                    'NOMCOMP	145	174
-                    'CUITCORRCOMP	175	188
-                    'NOMCORRCOMP	189	218
-                    'CUITENTREGADOR	219	232
-                    'NOMENTREGADOR	233	262
-                    'CUITCARGADOR	307	320
-                    'NOMCARGADOR	321	350
-                    'CUITVENDEDOR	263	276
-                    'NOMVENDEDOR	277	306
-                    'CUITCORRENDO	351	364
-                    'NOMCORRENDO	365	394
-                    'CUITCOMPENDO	395	408
-                    'NOMCOMPENDO	409	438
-                    'CUITCORRVEND	439	452
-                    'NOMCORRVEND	453	482
-                    'CUITPLANTAORIGEN	483	496
-                    'NOMPLANTAORIGEN	497	526
-                    'CPPROCEDE	527	534
-                    'NOMPROCEDE	535	564
-                    'CPDESTINO	565	572
-                    'NOMDESTINO	573	602
-                    'CODMOVIE	603	603
 
 
 
+                    '66	no	Observaciones de Calidad	String{1,150}	Texto entre 1 y 150 caracteres
+                    sb &= SEPARADOR
 
-                    sb &= Left("".Replace("-", ""), 14).PadRight(14) 'CUITPuerto	STRING(14)	CUIT PUERTO)    43)    56
-                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPuerto	STRING(30)	Nombre Puerto)    57)    86
+                    '48	yes	Estado	status	Ver Solada Estado (valores esperados)
+                    sb &= "DESCARGADA"                    'RECIBIDA()                    'RECHAZADA()
+                    sb &= SEPARADOR
 
-                    sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Recibidor)    87)    100
-                    sb &= Left(wily.ToString, 30).PadRight(30) 'NomRecibidor	STRING(30)	Nombre Recibidor)    101)    130
 
-                    sb &= Left(.DestinatarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITComprador	STRING(14)	CUIT Comprador)    131)    144
-                    sb &= Left(.DestinatarioDesc.ToString, 30).PadRight(30) 'NomComp	STRING(30)	Nombre Comprador)    145)    174
 
-                    '///////////////////////////////////////////////////
-                    ' acá va BLD S.A.                      30707386076
-                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrComp	STRING(14)	CUIT Corredor Comprador)    175)    188
-                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrComp	STRING(30)	Nombre Corredor Comprador)    189)    218
-                    '////////////////////////////////////////////////////
+                    '67	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    sb &= SEPARADOR
+                    '68	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    sb &= SEPARADOR
+                    '69	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    sb &= SEPARADOR
+                    '70	no	Campo Opcional	empty	Este campo tiene que estar vacio Ej: ||
+                    'sb &= SEPARADOR 'lo saco así puedo poner el primer "pipe" de calidades sin verificar nada....
 
-                    sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Entregador
-                    sb &= Left(wily.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)   
 
-                    '////////////////////////////////////////////////////////////////////////////////
-                    'Strongly Typed DataSets encountering NULL values – Grrrrrr… 
-                    'http://social.msdn.microsoft.com/forums/en-US/winformsdatacontrols/thread/1dad8d0d-6eae-4254-a9d6-22d50da5578a
-                    '////////////////////////////////////////////////////////////////////////////////
-
-
-
-                    'en "Vendedor" les pasaba el RemComercial. Pidieron que les pasemos el titular por acá 
-                    '                    (se filtró usando "SYNGENTA" en RemComercial, y
-                    ' y parece que no les gustó que apareciera SYNGENTA en el sincro
-                    sb &= Left(VendedorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
-                    sb &= Left(VendedorDesc.ToString, 30).PadRight(30) 'NomVendedor	STRING(30)	Nombre Vendedor)    321)    350
-
-
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)  
-                    sb &= Left(.TitularDesc.ToString, 30).PadRight(30)   'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
-
-
-
-
-
-
-                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrEndo	STRING(14)	CUIT  Corredor Endozo)    351)    364
-                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrEndo	STRING(30)	Nombre Corredor Endozo)    365)    394
-
-
-
-
-                    sb &= Left(VendedorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
-                    sb &= Left(VendedorDesc.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
-
-
-                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrVend	STRING(14)	CUIT Corredor Vendedor.)    439)    452
-                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrVend	STRING(30)	Nombre Corredor Vendedor)    453)    482
-
-
-                    sb &= Left(cadenavacia.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
-                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPlantaOrigen	STRING(30)	Nombre Planta Origen)    497)    526
-
-
-
-                    'CPProcede	Texto	527	8	Falta Dato
-                    'NomProcede	Texto	535	30	Falta Dato
-                    'CPDestino	Texto	565	8	
-                    'NomDestino	Texto	573	30	
-                    'CodMovIE	Texto	603	1	
-
-
-
-                    If .ProcedenciaCodigoPostal.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
-                        'si no tiene codigo ni está ya en sErrores, lo meto
-
-                        ErrHandler2.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
-                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
-
-                        'sErroresProcedencia &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
-
-
-                        sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & .IdProcedencia & """ target=""_blank"">" & .ProcedenciaDesc & "</a>; "
-                    End If
-
-
-                    sb &= Left(.ProcedenciaCodigoPostal.ToString, 8).PadRight(8) 'CPPorcede 	STRING(8)	Código Postal Procedencia)    527)    534
-                    sb &= Left(.ProcedenciaDesc.ToString, 30).PadRight(30) 'NomProcede	STRING(30)	Nombre Procedencia)    535)    564
-                    sb &= Left(.DestinoCodigoPostal.nullsafe, 8).PadRight(8) 'CPDestino	STRING(8)	Código Postal Destino)    565)    572
-                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
-
-
-
-
-                    'Viene un 1 en el TXT, deben enviar un 0.
-                    sb &= IIf(False, 1, 0).ToString.PadRight(1) 'CodMovIE	STRING(1)	Código Mov. 0=Ing 1=Egr 2=Transf.Ing 3=Transf.Egr)    603)    603
-                    sb &= Left(.Patente.ToString, 6).PadRight(10) 'PatCha	STRING(6)	Patente chasis)    604)    609
-                    'sb &= Left(.Acoplado.ToString, 6).PadRight(6) 'PatAcoplado	STRING(6)	Acoplado chasis)    610)    615
-
-
-
-
-                    '36	PesoBrut	10	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.	*	Derecha	614
-                    '37	PesoEgre	10	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales	*	Derecha	624
-                    '38	PesoNeto	10	Total bruto(PesoBrut-PesoEgre) (sin decimales)	*	Derecha	634
-                    '39	TotMerm	10	Total mermas (Total mermas sin decimales)		Derecha	644
-
-
-
-                    'https://mail.google.com/mail/#label/Sincros/136a3190360d2620
-                    'En la posición 36 que es PESOBRUT va el bruto real del camión. Lo que pesó en destino.
-                    'En la posición 37 que es PESOEGRE va la tara real del camión. Lo que pesó en destino.
-                    'En la posición 38 que es PESONETO va el PESOBRUT – PESOEGRE
-                    'En la posición 40 que es TOTNETO va el neto final, es decir el PESONETO – el total de mermas. Por lo que vos me ponés, aca irían los 29860 kls. Los kilos procedencia por el momento no serian importante.
-
-
-                    '.BrutoPto
-                    '.TaraPto
-                    '.NetoPto
-                    '.BrutoFinal
-                    '.TaraFinal
-                    '.NetoFinal
-                    '.NetoProc
-
-                    sb &= Int(.BrutoFinal).ToString.PadLeft(10) 'PesoBrut	STRING(10)	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.)    616)    625
-                    sb &= Int(.TaraFinal).ToString.PadLeft(10) 'PesoEgre	STRING(10)	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales)    626)    635
-                    sb &= Int(.NetoFinal).ToString.PadLeft(10) 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
-                    sb &= Int(.NetoFinal - .NetoProc).ToString.PadLeft(10, "0") 'TotMerm	STRING(10)	Total mermas (Total mermas sin decimales))    646)    655
-
-
-                    '40	TotNeto	10	Total neto ((Camión cargado – Tara)- Total mermas) (sin decimales)	*	Derecha	654
-
-                    sb &= Int(.NetoProc).ToString.PadLeft(10) 'TotNeto	STRING(10)	Total neto ((Camión cargado - Tara)- Total mermas) (sin decimales))    656)    665
-
-
-
-
-
-
-
-                    '41	PorHume	10	Porcentaje humedad (un (1) decimal)		Derecha	664
-                    '42	PorMemaHumedad	10	Porcentaje merma humedad (dos (2) decimales)		Derecha	674
-                    '43	KgsHume	10	Kilos humedad (sin decimales)		Derecha	684
-                    '44	PBonHume	10	Porcentaje bonificación humedad (dos (2) decimales)		Derecha	694
-                    '45	KgsBonHu	10	Kilos bonificación humedad		Derecha	704
-
-                    sb &= String.Format("{0:F1}", .Humedad).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
-                    sb &= cero.ToString.PadLeft(10) 'PorMemaHumedad	STRING(10)	Porcentaje merma humedad (dos (2) decimales))    676)    685
-                    sb &= Int(.HumedadDesnormalizada).ToString.PadLeft(10) 'KgsHume	STRING(10)	Kilos humedad (sin decimales))    686)    695
-                    sb &= Left(cero.ToString, 10).PadLeft(10) 'PBonHume	STRING(10)	Porcentaje bonificación humedad (dos (2) decimales))    696)    705
-                    sb &= Left(cero.ToString, 10).PadLeft(10) 'KgsBonHu	STRING(10)	Kilos bonificación humedad)    706)    715
-
-
-
-                    '46	PorZaran	10	Porcentaje zarandeo (dos (2) decimales)		Derecha	714
-                    '47	KgsZaran	10	Kilos zarandeo (sin decimales)		Derecha	724
-                    '48	PorDesca	10	Porcentaje descarte (dos (2) decimales)		Derecha	734
-                    '49	KgsDesca	10	Kilogramos Descarte (Sin Decimales)		Derecha	744
-                    '50	PorVolat	10	Porcentaje volátil (dos (2) decimales)		Derecha	754
-                    '51	KgsVolat	10	Kilogramos volátil (sin decimales)		Derecha	764
-
-
-                    'esto?
-                    sb &= cadenavacia.ToString.PadLeft(10) 'PorZaran	STRING(10)	Porcentaje zarandeo (dos (2) decimales))    716)    725
-                    sb &= Int(Val(.Merma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
-                    sb &= cadenavacia.ToString.PadLeft(10) 'PorDesca	STRING(10)	Porcentaje descarte (dos (2) decimales))    736)    745
-                    sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsDesca	STRING(10)	Kilogramos Descarte (Sin Decimales))    746)    755
-                    sb &= Left(Val(cadenavacia).ToString, 10).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
-                    sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
-
-
-
-
-                    '52	CantBolsa	8	Cantidad de bolsas		Derecha	774
-                    '53	Fumigada	1	Condición fumigada 0=no 1=si	*	Derecha	782
-                    '54	PesoProcede	10	Peso procedencia (Sin Decimales)		Derecha	783
-                    '55	Contrato	12	Número de contrato  (Numeros 0 al 9)		Derecha	793
-                    '56	CarPorte	14	Número de Carta de Porte (Numeros  0 al 9)	*	Derecha	805
-
-
-
-
-                    '57	TipoTrans	1	Tipo de transporte c=camión  v=vagón o=Otro	*	Izquierda	819
-                    '58	Grado	10	Grado	*	Derecha	820
-                    '59	Factor	10	Factor	*	Derecha	830
-                    '60	Observac	100	Observaciones		Izquierda	840
-                    '61	ConCalidad	4	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o                       Fuera de standart (FE)	*	Izquierda	940
-                    '62	MovStock	1	Señal 1=Movió mercadería       0=No movió mercadería	*	Izquierda	944
-                    '63	ObsAna	100	Observaciones Analisis		Izquierda	945
-
-
-
-                    sb &= Left(cadenavacia.ToString, 8).PadLeft(8) 'CantBolsa	STRING(8)	Cantidad de bolsas)    776)    783
-                    sb &= IIf(True, 0, 1).ToString.PadRight(1) 'Fumigada	STRING(1)	Condición fumigada 0=no 1=si)    784)    784
-
-
-
-                    sb &= Int(.NetoProc).ToString.PadRight(10) 'PesoProcede	STRING(10)	Peso procedencia (Sin Decimales))    785)    794
-                    'sb &= Int(.BrutoPto).ToString.PadRight(10) 'BrutoProcede	STRING(10)	Bruto procedencia (Sin Decimales))    795)    804
-                    'sb &= Int(.TaraPto).ToString.PadRight(10) 'TaraProcede	STRING(10)	Tara procedencia (Sin Decimales))    805)    814
-
-
-
-
-
-                    sb &= Left(Val(.Contrato).ToString, 12).PadRight(12) 'Contrato	STRING(12)	Número de contrato  (Numeros 0 al 9))    815)    826
-                    ForzarPrefijo5(.NumeroCartaDePorte)
-                    sb &= Left(.NumeroCartaDePorte.ToString, 14).PadLeft(14, "0") 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
-
-
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    'EN LOS CASOS DE VAGONES
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8740
-                    '/////////////////////////////////////////////////////////////////////////////////////
-
-                    'Col Nombre Desde Hasta Dato
-                    'campo decisivo:
-                    '57	TIPOTRANS	819	 819	 S         'Venga una F que indica Ferroviario. por defecto viene A, que es Automotor.
-                    sb &= IIf(.SubnumeroVagon > 0, "F", "A").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
-
-                    'aclaracion de otros campos:
-                    '56	CARPORTE	805	 818	 N       'Nro de Carta de Porte, este numero al ser ferroviario porque el TIPOTRANS asi lo indica va a permitir que ingrese duplicada.
-                    '79	NUMVAGON	1260	 1270 N      'Numero de Vagon, este nro debe ser el que identifique a cada vagon y logicamente no puede repetirse.
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-                    sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
-                    sb &= Left(Int(0).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
-
-                    sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
-
-
-                    'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
-                    Dim sCalidad As String
-
-                    Try
-                        If InStr(.CalidadDesc.ToString.ToLower, "conforme") > 0 Then
-                            sCalidad = "CO"
-                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 1") > 0 Then
-                            sCalidad = "G1"
-                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 2") > 0 Then
-                            sCalidad = "G2"
-                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 3") > 0 Then
-                            sCalidad = "G3"
-                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "camara") > 0 Then
-                            sCalidad = "CC"
-                        Else
-                            sCalidad = "FE"
-                        End If
-                    Catch ex As Exception
-                        ErrHandler2.WriteError("Sincro amaggi")
-                        ErrHandler2.WriteError(ex)
-                    End Try
-                    'If .IsCalidadDescNull Then sCalidad = "FE"
-                    'sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
-
-
-
-                    'sb &= IIf(True, 0, 1).ToString.PadRight(1) 'MovStock	STRING(1)	Señal 1=Movió mercadería)       0=No movió mercadería)    966)    966
-                    'sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'ObsAna	STRING(100)	Observaciones Analisis)    967)    1066
-
-
-
-
-
-
-
-
-                    ''68	DOCUME	1045	1055	S
-                    'sb &= JustificadoIzquierda(If(.IschoferCUITNull, "", .ChoferCUIT.Replace("-", "")), 11)
-
-
-
-
-
-                    ''66	CTATRANSPOR	1056	1066	N
-                    'sb &= JustificadoIzquierda(If(.IsTransportistaCUITNull, "", .TransportistaCUIT.Replace("-", "")), 11)
-
-
-
-                    '/////////////////////////////////////////
-                    'ensartado
-                    '35	PATCHA	1067	1072	S    
-                    'sb &= JustificadoIzquierda(If(.IsPatenteNull, "", .Patente), 6)
-                    ''//////////////////////////////////////////
-
-                    ''69	PATACO	1073	1078	S
-                    'sb &= JustificadoIzquierda(If(.IsAcopladoNull, "", .Acoplado), 6)
-
-
-
-
-                    'sb &= Space(12)
-
-
-
-                    ''67	NOMCONDUC	1091	1120	S
-                    'sb &= JustificadoIzquierda(If(.IsChoferDescNull, "", .ChoferDesc), 30)
-
-
-
-                    sb &= Space(13)
-
-
-
-                    '70	KMSTIER	1134	1143	N
-                    sb &= JustificadoIzquierda(0, 10)
-                    '71	KMSASFA	1144	1153	N
-                    sb &= JustificadoIzquierda(0, 10)
-                    '72	TARIKMS	1154	1163	N
-                    sb &= JustificadoIzquierda(0, 10)  'cobran distinto los kilometros en tierra vs asfalto?
-                    '73	TARITIE	1164	1173	N
-                    sb &= JustificadoIzquierda(0, 10)
-
-
-
-                    sb &= Space(17)
-
-
-                    '64	NROCAU	1191	1205	N
-                    'sb &= JustificadoIzquierda(.CEE, 14)
-
-                    'sb &= Space(14)
-
-                    ''74	FECVTOCAU	1219	1226	S
-                    'sb &= JustificadoIzquierda(If(.IsFechaVencimientoNull, Nothing, .FechaVencimiento.ToString("ddMMyyyy")), 8)
-                    ''76	CTGNRO	1227	1234	N
-                    'sb &= JustificadoIzquierda(If(.IsCTGNull, 0, .CTG), 8)
-
-
-                    'sb &= Space(9)
-
-                    ''77	TIPORTA	1244	1244	N
-                    'sb &= JustificadoIzquierda(" ", 1)
-
-
-                    'sb &= Space(1)
-
-
-                    ''78	CODRTA	1246	1250	S
-                    'sb &= JustificadoIzquierda(If(.IsCEENull, "", .CEE), 5)
-                    ''79	NRO PLANTA ONCCA	1251	1257	N
-                    'sb &= JustificadoIzquierda(If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA), 7)
-
-
-                    'If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
-                    '    'si no tiene codigo ni está ya en sErrores, lo meto
-
-                    '    ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
-
-                    '    sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
-                    'End If
-
-
-
-
-
-
-                    'Col    Nombre            Desde    Hasta      Dato
-                    '79           NUMVAGON    1260             1270        N
-                    sb &= "  "
-                    sb &= JustificadoIzquierda(.SubnumeroVagon, 11)
+                    sb &= RenglonSufijoDeCalidadesMonsanto(SC, cdp)
 
 
 
@@ -19774,6 +19434,62 @@ Namespace Pronto.ERP.Bll
 
 
         End Function
+
+
+        Shared Function RenglonSufijoDeCalidadesMonsanto(SC As String, cdp As CartasConCalada) As String
+
+            'HD Humedad
+            'MY	Merma Total
+            'MCV	Merma Convenida
+            'MV	Merma Volátil
+            'DAÑ Dañados
+            'OLR	Olores Objetables
+            'INS	Insectos Vivos (FUMIGADA)
+            'CHA Chamico
+            'QUB Quebrados
+            'Z62	Rendimiento sobre Zaranda (ZARANDEO)
+            'MOH	Granos Amohosados MOHO
+            'REV	Revolcado en Tierra
+            'ME	Materias extrañas
+            'PH	Peso Hectolitrito
+
+            Dim carta As CartaDePorte = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
+
+            Dim s As String
+            s &= MonsantoCalidad("HD", carta.HumedadDesnormalizada, carta.CalidadHumedadMerma)
+            s &= MonsantoCalidad("MY", carta.Merma, 0)
+            s &= MonsantoCalidad("MCV", carta.CalidadMermaConvenidaMerma, carta.CalidadMermaConvenida)
+            s &= MonsantoCalidad("MV", carta.CalidadMermaVolatilMerma, carta.CalidadMermaVolatil)
+            s &= MonsantoCalidad("DAÑ", carta.CalidadDanadosMerma, carta.NobleDaniados)
+            s &= MonsantoCalidad("OLR", carta.CalidadObjetablesMerma, carta.NobleObjetables)
+            's &= MonsantoCalidad("INS", carta.viv, carta.NobleHectolitrico)
+            s &= MonsantoCalidad("CHA", carta.CalidadMermaChamico, carta.NobleChamico)
+            s &= MonsantoCalidad("QUB", carta.CalidadQuebradosMerma, carta.NobleQuebrados)
+            s &= MonsantoCalidad("Z62", carta.CalidadZarandeoMerma, carta.CalidadMermaZarandeo)
+            s &= MonsantoCalidad("MOH", carta.CalidadAmohosadosMerma, carta.NobleAmohosados)
+            s &= MonsantoCalidad("REV", carta.CalidadTierra, carta.CalidadTierra)
+            s &= MonsantoCalidad("ME", carta.CalidadGranosExtranosMerma, carta.NobleExtranos)
+            s &= MonsantoCalidad("PH", carta.CalidadHectolitricoMerma, carta.NobleHectolitrico)
+
+
+
+            Return s
+        End Function
+
+
+        Shared Function MonsantoCalidad(abrevCalidad As String, kilos As Integer, porcentaje As Decimal) As String
+            If kilos > 0 Then
+                Dim s = "|" & abrevCalidad & "|" & porcentaje.ToString("0.00").Replace(",", ".") & "|" & kilos.ToString
+                Return s
+
+            End If
+            Return ""
+
+        End Function
+
+
+
+
 
         Public Shared Function Sincronismo_ElEnlace(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "") As String
 
