@@ -167,6 +167,7 @@ Public Class CartaDePorteManager
         Public FechaArribo As Date
         Public FechaModificacion As Date
         Public FechaDescarga As Date
+        Public FechaVencimiento As Date
         Public Observaciones As String
 
 
@@ -216,9 +217,14 @@ Public Class CartaDePorteManager
         Public CorredorCUIT As String
         Public DestinatarioCUIT As String
 
+        Public KmArecorrer As Integer
+        Public Tarifa As Decimal
+
+
 
         Public IdProcedencia As String
         Public ProcedenciaDesc As String
+        Public DestinoCUIT As String
         Public DestinoDesc As String
         Public CalidadDesc As String
         Public UsuarioIngreso As String
@@ -271,6 +277,7 @@ Public Class CartaDePorteManager
         Public BrutoPto As Decimal
 
         Public CEE_CAU As String
+        Public CTG As Integer
 
         Public DestinoCodigoSAGPYA As String
 
@@ -2305,6 +2312,7 @@ Public Class CartaDePorteManager
             And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
             And (idDestino = -1 Or cdp.Destino = idDestino) _
             And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
+            And (idClienteAuxiliar = -1 Or cdp.IdClienteAuxiliar = idClienteAuxiliar) _
             And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2)) _
             Order By cdp.FechaModificacion Descending _
             Select New CartasConCalada With { _
@@ -2313,10 +2321,12 @@ Public Class CartaDePorteManager
              .NumeroCartaDePorteFormateada = "no puedo usar padleft en linq to entities", _
              .NumeroSubfijo = cdp.NumeroSubfijo, _
              .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = cdp.FechaArribo, _
-             .FechaModificacion = cdp.FechaModificacion, _
-             .FechaDescarga = cdp.FechaDescarga, _
+             .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue), _
+             .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue), _
+             .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue), _
+             .FechaVencimiento = If(cdp.FechaVencimiento, DateTime.MinValue), _
              .Observaciones = cdp.Observaciones, _
+             .CTG = If(cdp.CTG, 0), _
  _
             .NetoProc = cdp.NetoProc, _
             .NetoFinal = cdp.NetoFinal, _
@@ -2328,6 +2338,9 @@ Public Class CartaDePorteManager
             .Humedad = cdp.Humedad, _
             .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
             .Merma = cdp.Merma, _
+            .CalidadDesc = cal.Descripcion, _
+             .Tarifa = cdp.Tarifa, _
+             .KmArecorrer = cdp.KmARecorrer, _
  _
              .TitularDesc = clitit.RazonSocial, _
              .IntermediarioDesc = cliint.RazonSocial, _
@@ -2345,7 +2358,6 @@ Public Class CartaDePorteManager
              .IdProcedencia = cdp.Procedencia, _
              .ProcedenciaDesc = loc.Nombre, _
              .DestinoDesc = dest.Descripcion, _
-             .CalidadDesc = cdp.Calidad, _
              .UsuarioIngreso = "", _
             .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo), _
             .NobleExtranos = cdp.NobleExtranos, _
@@ -2382,6 +2394,7 @@ Public Class CartaDePorteManager
  _
              .Patente = cdp.Patente, _
             .Acoplado = cdp.Acoplado, _
+             .DestinoCUIT = dest.CUIT.Replace("-", ""), _
             .DestinoCodigoYPF = dest.CodigoYPF, _
             .DestinoCodigoSAGPYA = dest.CodigoONCAA, _
             .TransportistaCUIT = tr.Cuit.Replace("-", ""), _
@@ -24417,25 +24430,28 @@ Public Class ExcelImportadorManager
 
         For Each r In dt.Rows
 
+            Try
+                If Val(r(1)) = 0 Then Continue For
 
-            If Val(r(1)) = 0 Then Continue For
-
-            r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
+                r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
 
 
 
-            r(40) = CodigoCalidad(Val(r(40)))
+                r(40) = CodigoCalidad(Val(r(40)))
 
-            Select Case r(38)
-                Case "1"
-                    r(38) = "NO"
-                Case "2"
-                    r(38) = "SI"
-                Case "3"
-                    r(38) = "NO"
-                Case Else
+                Select Case r(38)
+                    Case "1"
+                        r(38) = "NO"
+                    Case "2"
+                        r(38) = "SI"
+                    Case "3"
+                        r(38) = "NO"
+                    Case Else
 
-            End Select
+                End Select
+            Catch ex As Exception
+
+            End Try
 
         Next
 

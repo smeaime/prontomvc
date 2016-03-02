@@ -3576,31 +3576,33 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdPartido" Type="int" />
     <Property Name="CodigoAfip" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Pronto.dbo.Log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Log">
-          <Property Name="Tipo" Type="varchar" MaxLength="5" />
-          <Property Name="IdComprobante" Type="int" />
-          <Property Name="IdDetalleComprobante" Type="int" />
-          <Property Name="FechaRegistro" Type="datetime" />
-          <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="Detalle" Type="varchar" MaxLength="100" />
-          <Property Name="AuxString1" Type="varchar" MaxLength="50" />
-          <Property Name="AuxString2" Type="varchar" MaxLength="50" />
-          <Property Name="AuxString3" Type="varchar" MaxLength="50" />
-          <Property Name="AuxString4" Type="varchar" MaxLength="50" />
-          <Property Name="AuxString5" Type="varchar" MaxLength="50" />
-          <Property Name="AuxDate1" Type="datetime" />
-          <Property Name="AuxDate2" Type="datetime" />
-          <Property Name="AuxDate3" Type="datetime" />
-          <Property Name="AuxDate4" Type="datetime" />
-          <Property Name="AuxDate5" Type="datetime" />
-          <Property Name="AuxNum1" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="AuxNum2" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="AuxNum3" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="AuxNum4" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="AuxNum5" Type="numeric" Precision="18" Scale="2" />
-        </EntityType>-->
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="IdLog" />
+    </Key>
+    <Property Name="Tipo" Type="varchar" MaxLength="5" />
+    <Property Name="IdComprobante" Type="int" />
+    <Property Name="IdDetalleComprobante" Type="int" />
+    <Property Name="FechaRegistro" Type="datetime" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Detalle" Type="varchar" MaxLength="100" />
+    <Property Name="AuxString1" Type="varchar" MaxLength="50" />
+    <Property Name="AuxString2" Type="varchar" MaxLength="50" />
+    <Property Name="AuxString3" Type="varchar" MaxLength="50" />
+    <Property Name="AuxString4" Type="varchar" MaxLength="50" />
+    <Property Name="AuxString5" Type="varchar" MaxLength="50" />
+    <Property Name="AuxDate1" Type="datetime" />
+    <Property Name="AuxDate2" Type="datetime" />
+    <Property Name="AuxDate3" Type="datetime" />
+    <Property Name="AuxDate4" Type="datetime" />
+    <Property Name="AuxDate5" Type="datetime" />
+    <Property Name="AuxNum1" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="AuxNum2" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="AuxNum3" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="AuxNum4" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="AuxNum5" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="LogComprobantesElectronicos">
     <Key>
       <PropertyRef Name="IdLog" />
@@ -3615,26 +3617,6 @@ warning 6013: The table/view 'Pronto.dbo.Log' does not have a primary key define
     <Property Name="Enviado" Type="ntext" />
     <Property Name="Recibido" Type="ntext" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="LogImpuestos">
-          <Property Name="FechaProceso" Type="datetime" />
-          <Property Name="ArchivoProcesado" Type="varchar" MaxLength="12" />
-          <Property Name="IdProveedor" Type="int" />
-          <Property Name="IGCondicion" Type="int" />
-          <Property Name="FechaLimiteExentoGanancias" Type="datetime" />
-          <Property Name="IvaExencionRetencion" Type="varchar" MaxLength="2" />
-          <Property Name="IvaPorcentajeExencion" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="IvaFechaCaducidadExencion" Type="datetime" />
-          <Property Name="CodigoSituacionRetencionIVA" Type="int" />
-          <Property Name="FechaLog" Type="datetime" />
-          <Property Name="SUSSFechaCaducidadExencion" Type="datetime" />
-          <Property Name="PorcentajeIBDirecto" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="FechaInicioVigenciaIBDirecto" Type="datetime" />
-          <Property Name="FechaFinVigenciaIBDirecto" Type="datetime" />
-          <Property Name="GrupoIIBB" Type="int" />
-          <Property Name="IdCliente" Type="int" />
-        </EntityType>-->
   <EntityType Name="Marcas">
     <Key>
       <PropertyRef Name="IdMarca" />
@@ -4363,6 +4345,17 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <Property Name="Campo" Type="varchar" MaxLength="50" />
     <Property Name="Valor" Type="varchar" MaxLength="500" />
   </EntityType>
+  <EntityType Name="Partidos">
+    <Key>
+      <PropertyRef Name="IdPartido" />
+    </Key>
+    <Property Name="IdPartido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="IdProvincia" Type="int" />
+    <Property Name="CodigoONCCA" Type="varchar" MaxLength="15" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="15" />
+  </EntityType>
   <EntityType Name="Pedidos">
     <Key>
       <PropertyRef Name="IdPedido" />
@@ -4803,6 +4796,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <Property Name="FechaInicialControlComprobantes" Type="datetime" />
     <Property Name="ResolucionAfip3668" Type="varchar" MaxLength="2" />
     <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="varchar" MaxLength="2" />
+    <Property Name="ExcluirDeActualizacionIvaRG18" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="Provincias">
     <Key>
@@ -5183,6 +5177,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <Property Name="Pedidos" Type="varchar" MaxLength="100" />
     <Property Name="Recepciones" Type="varchar" MaxLength="100" />
     <Property Name="SalidasMateriales" Type="varchar" MaxLength="100" />
+    <Property Name="Detalle2" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Rubros">
     <Key>
@@ -5207,6 +5202,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <Property Name="IdCuentaCompras10" Type="int" />
     <Property Name="Codigo" Type="int" />
     <Property Name="IdTipoOperacion" Type="int" />
+    <Property Name="AsignarIPsObradorCentral" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="RubrosContables">
     <Key>
@@ -5799,6 +5795,18 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
     <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="wGrillaPersistencia">
+    <Key>
+      <PropertyRef Name="IdRenglon" />
+      <PropertyRef Name="Sesion" />
+      <PropertyRef Name="Tilde" />
+    </Key>
+    <Property Name="IdRenglon" Type="int" Nullable="false" />
+    <Property Name="Sesion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tilde" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="WilliamsDestinos">
     <Key>
       <PropertyRef Name="IdWilliamsDestino" />
@@ -5859,6 +5867,41 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <Property Name="AgrupadorDeTandaPeriodos" Type="int" />
     <Property Name="ModoImpresion" Type="varchar" MaxLength="6" />
     <Property Name="Corredor2" Type="int" />
+  </EntityType>
+  <EntityType Name="wTempCartasPorteFacturacionAutomatica">
+    <Key>
+      <PropertyRef Name="IdTempCartasPorteFacturacionAutomatica" />
+    </Key>
+    <Property Name="IdTempCartasPorteFacturacionAutomatica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSesion" Type="int" />
+    <Property Name="IdCartaDePorte" Type="int" />
+    <Property Name="IdFacturarselaA" Type="int" />
+    <Property Name="ColumnaTilde" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="NumeroCartaDePorte" Type="bigint" />
+    <Property Name="SubNumeroVagon" Type="int" />
+    <Property Name="SubnumeroDeFacturacion" Type="int" />
+    <Property Name="FechaArribo" Type="datetime" />
+    <Property Name="FechaDescarga" Type="datetime" />
+    <Property Name="FacturarselaA" Type="varchar" MaxLength="50" />
+    <Property Name="Confirmado" Type="varchar" MaxLength="2" />
+    <Property Name="IdCodigoIVA" Type="int" />
+    <Property Name="CUIT" Type="varchar" MaxLength="50" />
+    <Property Name="ClienteSeparado" Type="varchar" MaxLength="50" />
+    <Property Name="TarifaFacturada" Type="money" />
+    <Property Name="Producto" Type="varchar" MaxLength="50" />
+    <Property Name="KgNetos" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdCorredor" Type="int" />
+    <Property Name="IdTitular" Type="int" />
+    <Property Name="IdIntermediario" Type="int" />
+    <Property Name="IdRComercial" Type="int" />
+    <Property Name="Titular" Type="varchar" MaxLength="50" />
+    <Property Name="RComercial" Type="varchar" MaxLength="50" />
+    <Property Name="Corredor" Type="varchar" MaxLength="50" />
+    <Property Name="Destinatario" Type="varchar" MaxLength="50" />
+    <Property Name="Procedcia" Type="varchar" MaxLength="50" />
+    <Property Name="DestinoDesc" Type="varchar" MaxLength="50" />
+    <Property Name="IdDestino" Type="int" />
   </EntityType>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Role="CartasPorteAcopios" Type="Self.CartasPorteAcopios" Multiplicity="0..1" />
@@ -6301,6 +6344,30 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
       </Principal>
       <Dependent Role="FertilizantesCupos">
         <PropertyRef Name="IdUsuarioAnulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Localidad__IdPar__7BC72F17">
+    <End Role="Partidos" Type="Self.Partidos" Multiplicity="0..1" />
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partidos">
+        <PropertyRef Name="IdPartido" />
+      </Principal>
+      <Dependent Role="Localidades">
+        <PropertyRef Name="IdPartido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Partidos__IdProv__7AD30ADE">
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
+    <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincias">
+        <PropertyRef Name="IdProvincia" />
+      </Principal>
+      <Dependent Role="Partidos">
+        <PropertyRef Name="IdProvincia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -9164,6 +9231,19 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
     <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="wTarifaWilliams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
+    <Parameter Name="idCliente" Type="int" Mode="In" />
+    <Parameter Name="IdArticulo" Type="int" Mode="In" />
+    <Parameter Name="IdDestino" Type="int" Mode="In" />
+    <Parameter Name="TipoTarifa" Type="int" Mode="In" />
+    <Parameter Name="Cantidad" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="wTarifaWilliamsEstimada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
+    <Parameter Name="idCliente" Type="int" Mode="In" />
+    <Parameter Name="IdArticulo" Type="int" Mode="In" />
+    <Parameter Name="IdDestino" Type="int" Mode="In" />
+    <Parameter Name="TipoTarifa" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="DemoProntoModelStoreContainer">
     <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Acopios" EntityType="Self.Acopios" Schema="dbo" store:Type="Tables" />
@@ -9304,6 +9384,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <EntitySet Name="ListasPreciosDetalle" EntityType="Self.ListasPreciosDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LMateriales" EntityType="Self.LMateriales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LogComprobantesElectronicos" EntityType="Self.LogComprobantesElectronicos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
@@ -9319,6 +9400,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parametros2" EntityType="Self.Parametros2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Partidos" EntityType="Self.Partidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PlazosEntrega" EntityType="Self.PlazosEntrega" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PlazosFijos" EntityType="Self.PlazosFijos" Schema="dbo" store:Type="Tables" />
@@ -9376,6 +9458,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WilliamsDestinos" EntityType="Self.WilliamsDestinos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WilliamsMailFiltrosCola" EntityType="Self.WilliamsMailFiltrosCola" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="wTempCartasPorteFacturacionAutomatica" EntityType="Self.wTempCartasPorteFacturacionAutomatica" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteHistorico" EntityType="Self.CartasDePorteHistorico" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [CartasDePorteHistorico].[IdCartaDePorte] AS [IdCartaDePorte], 
@@ -9530,6 +9613,13 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
     FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="wGrillaPersistencia" EntityType="Self.wGrillaPersistencia" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [wGrillaPersistencia].[IdRenglon] AS [IdRenglon], 
+    [wGrillaPersistencia].[Sesion] AS [Sesion], 
+    [wGrillaPersistencia].[Tilde] AS [Tilde]
+    FROM [dbo].[wGrillaPersistencia] AS [wGrillaPersistencia]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK__CartasDeP__Acopi__5498535D" Association="Self.FK__CartasDeP__Acopi__5498535D">
       <End Role="CartasPorteAcopios" EntitySet="CartasPorteAcopios" />
       <End Role="CartasDePorte" EntitySet="CartasDePorte" />
@@ -9677,6 +9767,14 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     <AssociationSet Name="FK__Fertiliza__IdUsu__5A1C2289" Association="Self.FK__Fertiliza__IdUsu__5A1C2289">
       <End Role="Empleados" EntitySet="Empleados" />
       <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Localidad__IdPar__7BC72F17" Association="Self.FK__Localidad__IdPar__7BC72F17">
+      <End Role="Partidos" EntitySet="Partidos" />
+      <End Role="Localidades" EntitySet="Localidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Partidos__IdProv__7AD30ADE" Association="Self.FK__Partidos__IdProv__7AD30ADE">
+      <End Role="Provincias" EntitySet="Provincias" />
+      <End Role="Partidos" EntitySet="Partidos" />
     </AssociationSet>
     <AssociationSet Name="FK__UsuariosR__IdFer__4303B307" Association="Self.FK__UsuariosR__IdFer__4303B307">
       <End Role="FertilizantesPuntosDespacho" EntitySet="FertilizantesPuntosDespacho" />
