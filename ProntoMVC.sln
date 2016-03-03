@@ -73,6 +73,8 @@ Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "CubosMVCPronto", "CubosMVCP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfazFlexicapture", "InterfazFlexicapture\InterfazFlexicapture.csproj", "{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoAgente", "ProntoWindowsService\ProntoAgente.csproj", "{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -309,6 +311,26 @@ Global
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.Release|x86.ActiveCfg = Release|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Development|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Development|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Development|x86.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

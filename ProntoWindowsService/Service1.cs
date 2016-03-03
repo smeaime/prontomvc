@@ -175,7 +175,7 @@ namespace ProntoWindowsService
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
 
 
-
+            mandarmail
 
 
 
@@ -247,6 +247,10 @@ at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngi
 at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 123
 at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
     */
+                    mandarmail
+
+                        desmarcar
+
 
                     ClassFlexicapture.Log(x2.ToString());
                     ClassFlexicapture.Log("Problemas con la licencia? Paro y reinicio");
@@ -286,11 +290,23 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
 
                 string sError = "";
 
-                resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                               plantilla, 3,
-                                SC, DirApp, true, ref sError);
+                try
+                {
+                    resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
+                                   plantilla, 3,
+                                    SC, DirApp, true, ref sError);
 
 
+                }
+                catch (Exception)
+                {
+desmarcar
+    mail
+                
+
+
+                throw;
+                }
 
 
 
