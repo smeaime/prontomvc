@@ -211,9 +211,25 @@ namespace ProntoFlexicapture
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
+
+
                 //trace("Recognize next document...");
+                try 
+	{	        
+		
                 IDocument document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
+	}
+	catch (Exception)
+	{
+ljlkjl
+        foreach (string s in imagenes)
+            {
+                DesmarcarImagenComoProcesandose(s);
+            }
+
+		throw;
+	}
 
 
 
@@ -578,7 +594,7 @@ namespace ProntoFlexicapture
         {
             //pasar id
 
-            cdp.CalidadTierra = -1;
+            cdp.IdUsuarioAnulo = -1;
 
             //cdp.
 
@@ -602,7 +618,7 @@ namespace ProntoFlexicapture
             // where (i.PathImagen != "" || i.PathImagen2 != "")
 
             List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                           where (i.CalidadTierra == -1)
+                                                           where (i.IdUsuarioAnulo == -1)
                                                            orderby i.FechaModificacion descending
                                                            select i).Take(100).ToList();
 
