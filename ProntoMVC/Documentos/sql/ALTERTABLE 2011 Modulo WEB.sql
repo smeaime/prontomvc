@@ -1681,14 +1681,18 @@ select top 10 cosecha  from cartasdeporte where idcartadeporte>1000000
 
 
 
-create table CartasDePorteLog
+create table CartasDePorteLogDeOCR
 (	
 	IdCartasDePorteLog int IDENTITY (1, 1) PRIMARY KEY,
-	numero  
+	NumeroCarta int NULL,
 	IdCartaDePorte  int REFERENCES CartasDePorte(IdCartaDePorte),
-	fecha
-	usuario
-	error
+	Fecha datetime NULL,
+	IdUsuario int NULL,
+	Observaciones varchar(100) NULL,
+	TextoAux1 varchar(100) NULL,
+	TextoAux2 varchar(100) NULL,
+	IntAux1 int NULL,
+	IntAux2 int NULL,
 )
 go
 
@@ -1718,4 +1722,5 @@ go
 
 
 
+	IdCartasDePorteMailClusters
 

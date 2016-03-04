@@ -17,6 +17,7 @@ namespace ProntoMVC.Data.Models
         public CartasDePorte()
         {
             this.CartasDePorteDetalles = new HashSet<CartasDePorteDetalle_EF>();
+            this.CartasDePorteLogDeOCRs = new HashSet<CartasDePorteLogDeOCR>();
         }
     
         public int IdCartaDePorte { get; set; }
@@ -205,5 +206,6 @@ namespace ProntoMVC.Data.Models
         public virtual Vendedor Vendedore { get; set; }
         public virtual DetalleFactura DetalleFactura { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual ICollection<CartasDePorteLogDeOCR> CartasDePorteLogDeOCRs { get; set; }
     }
 }
