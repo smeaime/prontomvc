@@ -6503,5 +6503,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CartasDePorteLogDeOCRs">
+      <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorteLogDeOCR">
+        <MappingFragment StoreEntitySet="CartasDePorteLogDeOCR">
+          <ScalarProperty Name="IntAux2" ColumnName="IntAux2" />
+          <ScalarProperty Name="IntAux1" ColumnName="IntAux1" />
+          <ScalarProperty Name="TextoAux2" ColumnName="TextoAux2" />
+          <ScalarProperty Name="TextoAux1" ColumnName="TextoAux1" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
+          <ScalarProperty Name="NumeroCarta" ColumnName="NumeroCarta" />
+          <ScalarProperty Name="IdCartasDePorteLog" ColumnName="IdCartasDePorteLog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
