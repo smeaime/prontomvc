@@ -787,6 +787,21 @@ warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a
     <Property Name="FueraDeEstandar" Type="varchar" MaxLength="2" />
     <Property Name="CalidadPuntaSombreada" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
+  <EntityType Name="CartasDePorteLogDeOCR">
+    <Key>
+      <PropertyRef Name="IdCartasDePorteLog" />
+    </Key>
+    <Property Name="IdCartasDePorteLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroCarta" Type="int" />
+    <Property Name="IdCartaDePorte" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Observaciones" Type="varchar" MaxLength="100" />
+    <Property Name="TextoAux1" Type="varchar" MaxLength="100" />
+    <Property Name="TextoAux2" Type="varchar" MaxLength="100" />
+    <Property Name="IntAux1" Type="int" />
+    <Property Name="IntAux2" Type="int" />
+  </EntityType>
   <EntityType Name="CartasDePorteReglasDeFacturacion">
     <Key>
       <PropertyRef Name="IdRegla" />
@@ -5927,6 +5942,18 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__CartasDeP__IdCar__5245F697">
+    <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="0..1" />
+    <End Role="CartasDePorteLogDeOCR" Type="Self.CartasDePorteLogDeOCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartasDePorte">
+        <PropertyRef Name="IdCartaDePorte" />
+      </Principal>
+      <Dependent Role="CartasDePorteLogDeOCR">
+        <PropertyRef Name="IdCartaDePorte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__CartasDeP__IdCar__5A512CB3">
     <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="0..1" />
     <End Role="CartasDePorteDetalle" Type="Self.CartasDePorteDetalle" Multiplicity="*" />
@@ -9263,6 +9290,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorte" EntityType="Self.CartasDePorte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteDetalle" EntityType="Self.CartasDePorteDetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CartasDePorteLogDeOCR" EntityType="Self.CartasDePorteLogDeOCR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteReglasDeFacturacion" EntityType="Self.CartasDePorteReglasDeFacturacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasPorteAcopios" EntityType="Self.CartasPorteAcopios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CDPEstablecimientos" EntityType="Self.CDPEstablecimientos" Schema="dbo" store:Type="Tables" />
@@ -9627,6 +9655,10 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <AssociationSet Name="FK__CartasDeP__Clien__25735020" Association="Self.FK__CartasDeP__Clien__25735020">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartasDeP__IdCar__5245F697" Association="Self.FK__CartasDeP__IdCar__5245F697">
+      <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+      <End Role="CartasDePorteLogDeOCR" EntitySet="CartasDePorteLogDeOCR" />
     </AssociationSet>
     <AssociationSet Name="FK__CartasDeP__IdCar__5A512CB3" Association="Self.FK__CartasDeP__IdCar__5A512CB3">
       <End Role="CartasDePorte" EntitySet="CartasDePorte" />

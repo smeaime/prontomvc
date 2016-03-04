@@ -212,24 +212,26 @@ namespace ProntoFlexicapture
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
 
+                IDocument document;
 
                 //trace("Recognize next document...");
-                try 
-	{	        
-		
-                IDocument document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
+                try
+                {
 
-	}
-	catch (Exception)
-	{
-ljlkjl
-        foreach (string s in imagenes)
-            {
-                DesmarcarImagenComoProcesandose(s);
-            }
+                    document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
-		throw;
-	}
+                }
+                catch (Exception xx)
+                {
+                    foreach (string s in imagenes)
+                    {
+                        DesmarcarImagenComoProcesandose(s);
+                    }
+
+                    CartaDePorteManager.MandarMailDeError(xx);
+
+                    throw;
+                }
 
 
 
@@ -430,7 +432,7 @@ ljlkjl
 
 
 
-        public static IQueryable<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
+        public static IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
@@ -440,9 +442,9 @@ ljlkjl
             ProntoMVC.Data.Models.DemoProntoEntities db =
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
-            IQueryable<ProntoMVC.Data.Models.CartasDePorte> q2 = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                                  where i.NumeroCartaDePorte >= 900000000
-                                                                  orderby i.FechaModificacion descending
+            IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> q2 = (from ProntoMVC.Data.Models.CartasDePorteLogDeOCR i in db.CartasDePorteLogDeOCRs
+                                                                  where i.NumeroCarta >= 900000000
+                                                                  orderby i.Fecha descending
                                                                   select i).AsQueryable();
 
             IQueryable<procesGrilla> q = (from f in files
@@ -590,47 +592,64 @@ ljlkjl
         }
 
 
-        public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
+        public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp, string usu, string SC)
         {
             //pasar id
 
-            cdp.IdUsuarioAnulo = -1;
+            //cdp.IdUsuarioAnulo = -1;
 
             //cdp.
 
             //cdp.Corredor2
             //  cdp.
 
+
+            // si la grabas acá, despues va a volver a pisar los datos de la carta
+            using (DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+            {
+
+
+                CartasDePorteLogDeOCR q = new CartasDePorteLogDeOCR();
+
+                q.Fecha = DateAndTime.Now;
+                q.NumeroCarta = Convert.ToInt32(cdp.NumeroCartaDePorte);
+                q.IdCartaDePorte = cdp.Id;
+                q.TextoAux1 = usu;
+                //q.Observaciones =
+
+
+                db.CartasDePorteLogDeOCRs.Add(q);
+                db.SaveChanges();
+            }
         }
 
 
-        public static List<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
+        public static List<CartasDePorteLogDeOCR> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
-            ProntoMVC.Data.Models.DemoProntoEntities db =
-                    new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+            using (DemoProntoEntities db =
+                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+            {
+                // where (i.PathImagen != "" || i.PathImagen2 != "")
 
+                List<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> q = (from ProntoMVC.Data.Models.CartasDePorteLogDeOCR i in db.CartasDePorteLogDeOCRs
+                                                                       orderby i.Fecha descending
+                                                                       select i).Take(100).ToList();
 
-            // where (i.PathImagen != "" || i.PathImagen2 != "")
-
-            List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                           where (i.IdUsuarioAnulo == -1)
-                                                           orderby i.FechaModificacion descending
-                                                           select i).Take(100).ToList();
-
-            //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
+                //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
 
 
 
-            // como me traigo la info de las id, etc?
+                // como me traigo la info de las id, etc?
+                return q;
+                //sacar info del log o de los archivos????
+            }
 
 
-            return q;
-            //sacar info del log o de los archivos????
         }
 
 
@@ -704,7 +723,7 @@ ljlkjl
             var tif = Tiff.Open(archivo, "r");
             //get number of pages
             var num = tif.NumberOfDirectories();
-       // http://stackoverflow.com/questions/13178185/how-to-split-multipage-tiff-using-libtiff-net
+            // http://stackoverflow.com/questions/13178185/how-to-split-multipage-tiff-using-libtiff-net
 
 
             List<string> l = new List<string>();
@@ -1074,6 +1093,8 @@ ljlkjl
 
             string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe();
 
+            string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe();
+
 
 
 
@@ -1181,7 +1202,14 @@ ljlkjl
 
                 string s;
 
-                MarcarCartaComoProcesada(ref cdp);
+
+                int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
+
+                string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
+                nombreusuario = nombreusuario.Substring(0, nombreusuario.Length - nombreusuario.IndexOf(" PV"));
+
+
+
 
                 bool bPisar = true;
 
@@ -1192,7 +1220,6 @@ ljlkjl
                 {
 
 
-                    int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
                     cdp.PuntoVenta = pv;
 
 
@@ -1309,7 +1336,7 @@ ljlkjl
                             ErrHandler2.WriteError(ex2);
                         }
 
-                        double.TryParse(Tarifa, out cdp.TarifaTransportista);
+                        double.TryParse(Tarifa.Replace(".", ","), out cdp.TarifaTransportista);
 
 
 
@@ -1355,6 +1382,9 @@ ljlkjl
                     id = cdp.Id;
 
                 }
+
+
+                MarcarCartaComoProcesada(ref cdp, nombreusuario, SC);
 
 
 
