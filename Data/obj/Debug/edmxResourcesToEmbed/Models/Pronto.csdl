@@ -1641,6 +1641,11 @@
       <End Role="Provincia" EntitySet="Provincias" />
       <End Role="Partido" EntitySet="Partidos" />
     </AssociationSet>
+    <EntitySet Name="CartasDePorteLogDeOCRs" EntityType="DemoProntoModel.CartasDePorteLogDeOCR" />
+    <AssociationSet Name="FK__CartasDeP__IdCar__5245F697" Association="DemoProntoModel.FK__CartasDeP__IdCar__5245F697">
+      <End Role="CartasDePorte" EntitySet="CartasDePortes" />
+      <End Role="CartasDePorteLogDeOCR" EntitySet="CartasDePorteLogDeOCRs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -11340,6 +11345,7 @@
     <Property Name="ClienteAcondicionador" Type="Int32" />
     <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="CartasDePorte" ToRole="Cliente" />
     <Property Name="MotivoRechazo" Type="Int32" />
+    <NavigationProperty Name="CartasDePorteLogDeOCRs" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" FromRole="CartasDePorte" ToRole="CartasDePorteLogDeOCR" />
   </EntityType>
   <EntityType Name="CartasDePorteDetalle_EF">
     <Key>
@@ -12533,6 +12539,34 @@
       </Principal>
       <Dependent Role="Partido">
         <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CartasDePorteLogDeOCR">
+    <Key>
+      <PropertyRef Name="IdCartasDePorteLog" />
+    </Key>
+    <Property Name="IdCartasDePorteLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroCarta" Type="Int32" />
+    <Property Name="IdCartaDePorte" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TextoAux1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TextoAux2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IntAux1" Type="Int32" />
+    <Property Name="IntAux2" Type="Int32" />
+    <NavigationProperty Name="CartasDePorte" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" FromRole="CartasDePorteLogDeOCR" ToRole="CartasDePorte" />
+  </EntityType>
+  <Association Name="FK__CartasDeP__IdCar__5245F697">
+    <End Type="DemoProntoModel.CartasDePorte" Role="CartasDePorte" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CartasDePorteLogDeOCR" Role="CartasDePorteLogDeOCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartasDePorte">
+        <PropertyRef Name="IdCartaDePorte" />
+      </Principal>
+      <Dependent Role="CartasDePorteLogDeOCR">
+        <PropertyRef Name="IdCartaDePorte" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

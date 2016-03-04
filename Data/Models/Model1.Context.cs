@@ -245,6 +245,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<Partido> Partidos { get; set; }
         public virtual DbSet<wTempCartasPorteFacturacionAutomatica_EF> wTempCartasPorteFacturacionAutomatica_EF { get; set; }
         public virtual DbSet<wGrillaPersistencia_EF> wGrillaPersistencia_EF { get; set; }
+        public virtual DbSet<CartasDePorteLogDeOCR> CartasDePorteLogDeOCRs { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
