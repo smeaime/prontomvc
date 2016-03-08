@@ -1502,7 +1502,12 @@ namespace ProntoMVC.Controllers
         {
             //probar que conecta
 
-            string sc = Generales.sCadenaConex(sBase);
+           
+            // tendría que haber un initialize que creara:
+            // oStaticMembershipService = new Generales.StaticMembershipService();
+
+
+            string sc = Generales.sCadenaConex(sBase, new Generales.StaticMembershipService());
 
 
 
