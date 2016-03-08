@@ -448,7 +448,7 @@ namespace ProntoFlexicapture
                                                                           select i).AsQueryable();
 
             IQueryable<procesGrilla> q = (from f in files
-                                          where (EsArchivoDeImagen(f.Name)
+                                          where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
                                                  &&
                                                  (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
                                           )
@@ -538,7 +538,7 @@ namespace ProntoFlexicapture
             // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
 
             var q = (from f in files
-                     where (EsArchivoDeImagen(f.Name)
+                     where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
                             &&
                             !files.Any(x => x.FullName == (f.FullName + ".bdl"))
                      )
