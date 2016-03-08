@@ -443,9 +443,9 @@ namespace ProntoFlexicapture
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
             IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> q2 = (from ProntoMVC.Data.Models.CartasDePorteLogDeOCR i in db.CartasDePorteLogDeOCRs
-                                                                  where i.NumeroCarta >= 900000000
-                                                                  orderby i.Fecha descending
-                                                                  select i).AsQueryable();
+                                                                          where i.NumeroCarta >= 900000000
+                                                                          orderby i.Fecha descending
+                                                                          select i).AsQueryable();
 
             IQueryable<procesGrilla> q = (from f in files
                                           where (EsArchivoDeImagen(f.Name)
@@ -937,7 +937,7 @@ namespace ProntoFlexicapture
                 else
                 {
                     l2.Add(f);
-                    DesmarcarImagenComoProcesandose(f);
+                    if (bProcesarConOCR) DesmarcarImagenComoProcesandose(f);
                 }
             }
 
