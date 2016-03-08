@@ -20919,7 +20919,7 @@ Public Class barras
                       "ciglesias@williamsentregas.com.ar, sgomez@williamsentregas.com.ar", True)
 
 
-            If bMarcar Then MarcarEnviada(SC, idfac)
+            If bMarcar And Not bVistaPrevia Then MarcarEnviada(SC, idfac)
 
         Next
 
