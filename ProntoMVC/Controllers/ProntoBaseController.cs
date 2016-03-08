@@ -123,7 +123,13 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-                //return;
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                
                 throw new Exception("Falla la conexion a la bdlmaster para verficar el membership .net");
             }
 
