@@ -4488,6 +4488,21 @@ Public Class CartaDePorteManager
 
 
 
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+
+
+
+
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
         Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
@@ -4503,8 +4518,6 @@ Public Class CartaDePorteManager
         End If
 
 
-
-        limitar()
 
 
 
