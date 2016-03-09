@@ -663,7 +663,7 @@ Namespace Pronto.ERP.Bll
 
                             Dim sErrores As String
 
-                            Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(SC, _
+                            Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(SC, _
                                "", "", "", 1, 3000, _
                                estado, "", idVendedor, idCorredor, _
                                idDestinatario, idIntermediario, _
