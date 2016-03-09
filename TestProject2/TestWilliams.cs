@@ -196,103 +196,144 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                   [TestMethod]
-           public void LogDeEnvioDeFactura_18012()
-           {
-               barras.MarcarEnviada(SC, 17000);
-           }
-   
-   
-           [TestMethod]
-           public void SincroMonsanto_17940()
-           {
-   
-               string sErrores = "", sTitulo = "";
-               LinqCartasPorteDataContext db = null;
-   
-               // el _CONST_MAXROWS sale del app.config
-   
-               int registrosf = 0;
-   
-               
+        [TestMethod]
+        public void LogDeEnvioDeFactura_18012()
+        {
+            barras.MarcarEnviada(SC, 17000);
+        }
 
-               var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
-                                   , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                        "", -1, -1,
-                   -1, -1,
-                   -1, -1, -1, -1,
-                    CartaDePorteManager.FiltroANDOR.FiltroOR,  "Ambas" ,
-                   new DateTime(2016, 1 , 1), new DateTime(2016, 1, 28),
-                   -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-   
-   
-   
-               //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-               System.Diagnostics.Process.Start(output);
-           }
+
+        [TestMethod]
+        public void SincroMonsanto_17940()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
 
 
 
-
-           [TestMethod]
-           public void SincroDiazForti_17962()
-           {
-
-               string sErrores = "", sTitulo = "";
-               LinqCartasPorteDataContext db = null;
-
-               // el _CONST_MAXROWS sale del app.config
-
-               int registrosf = 0;
+            var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
 
 
 
-               var output = SincronismosWilliamsManager.GenerarSincro("Diaz Forti", ref sErrores, SC, "dominio", ref sTitulo
-                                   , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                        "", -1, -1,
-                   -1, -1,
-                   -1, -1, -1, -1,
-                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                   new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                   -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
 
 
 
-               //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-               System.Diagnostics.Process.Start(output);
-           }
+
+        [TestMethod]
+        public void SincroDiazForti_17962()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
 
 
 
-           [TestMethod]
-           public void SincroZeni_17945()
-           {
-
-               string sErrores = "", sTitulo = "";
-               LinqCartasPorteDataContext db = null;
-
-               // el _CONST_MAXROWS sale del app.config
-
-               int registrosf = 0;
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Forti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
 
 
 
-               var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo
-                                   , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                        "", -1, -1,
-                   -1, -1,
-                   -1, -1, -1, -1,
-                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                   new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                   -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+        [TestMethod]
+        public void SincroYPF()
+        {
+
+            string sErrores = "", sTitulo = "";
+            DemoProntoEntities db = null;
 
 
 
-               //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-               System.Diagnostics.Process.Start(output);
-           }
-   
-   
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+               "", "", "", 0, 1000, CartaDePorteManager.enumCDPestado.Facturadas
+                  , "", 4333, -1,
+               -1, 4333, 4333,
+               -1, -1, -1,
+               CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+
+
+            var output = SincronismosWilliamsManager.Sincronismo_YPF_ConLINQ(q, ref sErrores, "", SC);
+
+
+
+            //registrosFiltrados = q.Count
+
+            //If registrosFiltrados > 0 Then 'And sErrores = "" Then
+            //    output = ProntoFuncionesUIWeb.RebindReportViewerExcel(HFSC.Value, _
+            //                "ProntoWeb\Informes\Sincronismo YPF.rdl", _
+            //                      q.ToDataTable, ArchivoExcelDestino) 'sTitulo)
+
+            //    CambiarElNombreDeLaPrimeraHojaDeYPF(output)
+            //End If
+
+            //var sForzarNombreDescarga = "ENTREGADOR.CSV";
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga, true);
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void SincroZeni_17945()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
 
 
 
@@ -321,7 +362,7 @@ namespace ProntoMVC.Tests
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false,false,1);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false, false, 1);
 
 
             string sError = "";
@@ -384,7 +425,7 @@ namespace ProntoMVC.Tests
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true,3);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
