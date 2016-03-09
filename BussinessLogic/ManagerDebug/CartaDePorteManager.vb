@@ -38,6 +38,9 @@ Imports System.Drawing
 
 Imports System.Collections.Generic
 
+
+Imports System.Data.Entity.SqlServer
+
 Imports System.Xml
 Imports System.Text
 Imports System.Security.Cryptography
@@ -2264,7 +2267,7 @@ Public Class CartaDePorteManager
         'y qué pasa si vuelvo a usar Equals? (en lugar de DefaultIfEmpty que me permite traer los nulls)
 
 
-
+        '.NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8)
 
 
         Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes _
@@ -2318,7 +2321,7 @@ Public Class CartaDePorteManager
             Select New CartasConCalada With { _
              .IdCartaDePorte = cdp.IdCartaDePorte, _
              .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroCartaDePorteFormateada = "no puedo usar padleft en linq to entities", _
+             .NumeroCartaDePorteFormateada = "000" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(1, 1) & "-" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(2, 8), _
              .NumeroSubfijo = cdp.NumeroSubfijo, _
              .SubnumeroVagon = cdp.SubnumeroVagon, _
              .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue), _
@@ -2338,7 +2341,7 @@ Public Class CartaDePorteManager
             .Humedad = cdp.Humedad, _
             .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
             .Merma = cdp.Merma, _
-            .CalidadDesc = cal.Descripcion, _
+            .CalidadDesc = If(cal.Descripcion, ""), _
              .Tarifa = cdp.Tarifa, _
              .KmArecorrer = cdp.KmARecorrer, _
  _
@@ -20917,6 +20920,10 @@ Public Class barras
                       ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", _
                       "Factura Electrónica Williams Entregas", _
                       "ciglesias@williamsentregas.com.ar, sgomez@williamsentregas.com.ar", True)
+
+
+            LogPronto(SC, idfac, "FCMAIL", Usuario, numerodefactura, destinatario, , )
+
 
 
             If bMarcar And Not bVistaPrevia Then MarcarEnviada(SC, idfac)
