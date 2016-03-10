@@ -520,7 +520,7 @@ Namespace Pronto.ERP.Bll
         'End Function
 
 
-        Public Shared Function LogPronto(ByVal SC As String, ByVal Id As Long, ByVal sTipoEntidad As String, Optional ByVal sNombreUsuario As String = "", _
+        Public Shared Function LogPronto(ByVal SC As String, ByVal Id As Long, ByVal sTipoEntidadVARCHAR5 As String, Optional ByVal sNombreUsuario As String = "", _
                                 Optional str3 As String = "", Optional str4 As String = "", Optional str5 As String = "", _
                                 Optional num1 As Integer = 0, Optional num2 As Integer = 0, Optional num3 As Integer = 0
                             )
@@ -539,12 +539,12 @@ Namespace Pronto.ERP.Bll
 
             Const max = 100
 
-            Dim arrayComentario = Split(sTipoEntidad, , )
+            Dim arrayComentario = Split(sTipoEntidadVARCHAR5, , )
 
 
             Try
                 EntidadManager.Tarea(SC, "Log_InsertarRegistro", IIf(Id <= 0, "ALTA", "MODIF"), _
-                              Id, 0, Now, 0, sTipoEntidad,
+                              Id, 0, Now, 0, sTipoEntidadVARCHAR5,
                               "", sNombreUsuario, str3, str4, str5, _
                             DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
                             num1, num2, num3, DBNull.Value, DBNull.Value)
