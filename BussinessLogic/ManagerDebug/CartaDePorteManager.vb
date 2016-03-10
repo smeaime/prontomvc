@@ -248,6 +248,12 @@ Public Class CartaDePorteManager
 
         Public ProcedenciaLocalidadONCCA_SAGPYA As String
         Public ProcedenciaPartidoONCCA As String
+
+        Public ProcedenciaLocalidadAFIP As String
+        Public DestinoLocalidadAFIP As String
+       
+
+
         Public Patente As String
         Public Acoplado As String
         Public DestinoCodigoYPF As String
@@ -2287,6 +2293,7 @@ Public Class CartaDePorteManager
                 From fac In db.Facturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty _
                 From detfac In db.DetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty _
                 From clifac In db.Clientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty _
+                From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty _
                 From part In db.Partidos.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty _
                 Where _
             cdp.Vendedor > 0 _
@@ -2394,6 +2401,8 @@ Public Class CartaDePorteManager
  _
             .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA, _
             .ProcedenciaPartidoONCCA = part.CodigoONCCA, _
+          .ProcedenciaLocalidadAFIP = loc.CodigoAfip, _
+            .DestinoLocalidadAFIP = locdes.CodigoAfip, _
  _
              .Patente = cdp.Patente, _
             .Acoplado = cdp.Acoplado, _
@@ -23138,13 +23147,22 @@ Public Class LogicaImportador
 
 
 
-            actualizar(.Humedad, dr.Item("column15"))
 
-            actualizar(.HumedadDesnormalizada, dr.Item("column16"))
+            If StringToDecimal(iisNull(dr.Item("column15"))) > 0 Then
+                actualizar(.Humedad, dr.Item("column15"))
+            End If
+
+            If StringToDecimal(iisNull(dr.Item("column16"))) > 0 Then
+                actualizar(.HumedadDesnormalizada, dr.Item("column16"))
+            End If
+
             If .HumedadDesnormalizada = 0 And .Humedad <> 0 And .IdArticulo > 0 Then
                 Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, .IdArticulo, .Humedad)
                 .HumedadDesnormalizada = porcentajemerma / 100 * .NetoFinalIncluyendoMermas
             End If
+
+
+
 
             '.Merma = 0 'la piso, por si ya se importó antes
 
@@ -23611,18 +23629,19 @@ Public Class ExcelImportadorManager
         End If
 
         Select Case s
-            Case "PRODUCTO", "PROD.", "MERC.", "MER", "GRANO", "MERCADERIA", "PROD"
+            Case "PRODUCTO", "PROD.", "MERC.", "MER", "GRANO", "MERCADERIA", "PROD", "GRANOESPECIE"
                 Return "Producto"
 
-            Case "VENDEDOR", "CARGADOR", "TITULAR DE CARTA DE PORTE", "REMITENTE", "TITULAR CP", "TITULAR", "TITULAR_CP"
-                Return "Titular" 'fijate que si está "remitente" solito, se usa Titular
+            Case "VENDEDOR", "CARGADOR", "TITULAR DE CARTA DE PORTE", "TITULAR CP", "TITULAR", "TITULAR_CP"
+                Return "Titular" 'fijate que si está "remitente" solito, se usa Titular -Quién lo usa así?????
 
             Case "CUENTA ORDEN 1", "1º CTA./ORDEN", "1º CTA./ORD.", "CY O 1", "C Y O 1", "CYO 1", "C/ORDEN 1", "C/O 1", "INTERMEDIARIO"
                 Return "Intermediario"
 
-            Case "CUENTA ORDEN 2", "2º CTA./ORDEN", "2º CTA./ORD.", "CY O 2", "C Y O 2", "CYO 2", "C/ORDEN 2", "C/O 2", "REMITENTE COMERCIAL", "REMIT COMERC", "RTE. COMERCIAL", "RTE.COMERCIAL", "R.COMERCIAL", "REMIT COMERCIAL", "RTE_COMERCIAL"
-
+            Case "CUENTA ORDEN 2", "2º CTA./ORDEN", "2º CTA./ORD.", "CY O 2", "C Y O 2", "CYO 2", "C/ORDEN 2", "C/O 2", "REMITENTE COMERCIAL", "REMIT COMERC", "RTE. COMERCIAL", "RTE.COMERCIAL", "R.COMERCIAL", "REMIT COMERCIAL", "RTE_COMERCIAL", "REMITENTE"
+                'fijate que si está "remitente" solito, se usa Titular -Quién lo usa así?????
                 Return "RComercial"
+
 
             Case "CORREDOR"
                 Return "Corredor"
@@ -23633,14 +23652,15 @@ Public Class ExcelImportadorManager
             Case "DESTINATARIO", "EXPORTADOR", "EXPORT.", "COMPRADOR", "EXP", "EXP.", "DEST."
                 Return "Comprador"
 
-            Case "CARTA PORTE", "C/PORTE", "C. PORTE", "C.PORTE", "C. P.", "CP.", "CCPP", "CC PP", "CARTA DE PORTE", "CP", "C PORTE", "NROCP"
+            Case "CARTA PORTE", "C/PORTE", "C. PORTE", "C.PORTE", "C. P.", "CP.", "CCPP", "CC PP", "CARTA DE PORTE", "CP", "C PORTE", "NROCP", "BARRACP"
+
 
 
                 Return "NumeroCDP"
 
 
 
-            Case "PROCEDENCIA", "PROCED", "PROCENDECIA", "PROCED.", "LOCALIDAD", "PROC", "PROC.", "LOCALIDAD_ORIGEN"
+            Case "PROCEDENCIA", "PROCED", "PROCENDECIA", "PROCED.", "LOCALIDAD", "PROC", "PROC.", "LOCALIDAD_ORIGEN", "LOCALIDAD1"
 
 
                 Return "Procedencia"
@@ -23666,7 +23686,7 @@ Public Class ExcelImportadorManager
 
             Case "TURNO"
                 'return  
-            Case "PATENTE", "PAT CHASIS", "PTE.", "PATE", "CHASIS"
+            Case "PATENTE", "PAT CHASIS", "PTE.", "PATE", "CHASIS", "CAMIÓN"
 
                 Return "Patente"
             Case "ACOPLADO", "ACOPL", "PAT.ACOP."
@@ -23683,7 +23703,7 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
 
             Case "NETO PROC", "KG", "KG. PROC.", "KG,PROC", "KG P", _
-                    "KGS", "KGS ORIGEN", "NETO_PROC" '"KGS." qué va a ser? Neto proc o Neto Pto???
+                    "KGS", "KGS ORIGEN", "NETO_PROC", "PESONETO"                '"KGS." qué va a ser? Neto proc o Neto Pto???
 
                 'conflicto "PROC": lo usa "Las Palmas" para "Procedencia"
                 Return "NetoProc"
@@ -23754,7 +23774,7 @@ Public Class ExcelImportadorManager
 
             Case "NRO. CTG", "CTG"
                 Return "CTG"
-            Case "KM"
+            Case "KM", "KMARECORRER"
                 Return "KmARecorrer"
             Case "TAR.FLETE", "TARIFA"
                 Return "TarifaTransportista"

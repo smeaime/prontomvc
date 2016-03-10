@@ -147,10 +147,21 @@ Namespace Pronto.ERP.Bll
                     txtIntermediario.Text = "BUNGE ARGENTINA S.A."
                     txtRcomercial.Text = "BUNGE ARGENTINA S.A."
                     txtDestinatario.Text = "BUNGE ARGENTINA S.A."
+
+                Case "DIAZ FORTI", "DIAZ FORTI [BIT]"
+                    txtIntermediario.Text = "DIAZ & FORTI S.R.L"
+                    txtRcomercial.Text = "DIAZ & FORTI S.R.L"
+                    txtDestinatario.Text = "DIAZ & FORTI S.R.L"
+
+
                 Case "DIAZ RIGANTI"
                     '               DIAZ(RIGANTI) : CORREDOR()
                     txtTitular.Text = ""
                     txtCorredor.Text = "DIAZ RIGANTI CEREALES S.R.L."
+
+
+         
+
                 Case "DOW", "DOW FORMATO ANTERIOR"
                     'DOW:            RTTE(COMERCIAL / DESTINATARIO)
                     txtRcomercial.Text = "DOW AGROSCIENCES ARG. SA"
@@ -5884,8 +5895,9 @@ Namespace Pronto.ERP.Bll
 
             FileClose(nF)
 
-
-            sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then
+                sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
+            End If
 
             If False Then
                 If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
@@ -19929,7 +19941,7 @@ Namespace Pronto.ERP.Bll
 
 
                     'Grano/Especie(Tipo)
-                    sb &= "0"
+                    sb &= "00"
                     sb &= SEPARADOR
 
 
@@ -19984,8 +19996,8 @@ Namespace Pronto.ERP.Bll
                     '27	yes	Codigo Postal	String{1,10}	Texto entre 1 y 10 caracteres
                     sb &= SEPARADOR
                     '28	yes	Localidad	cityAfipId	Texto entre 1 y 5 digitos
+                    sb &= .ProcedenciaLocalidadAFIP
                     sb &= SEPARADOR
-
 
 
                     'seccion Lugar Destino de los Granos ------------------------------------------------------------
@@ -19997,7 +20009,9 @@ Namespace Pronto.ERP.Bll
                     sb &= .DestinoCodigoPostal
                     sb &= SEPARADOR
                     '32	no	Localidad	cityAfipId	Texto entre 1 y 5 digitos
+                    sb &= .DestinoLocalidadAFIP
                     sb &= SEPARADOR
+
 
 
                     '33	no	Pagador del flete	String{1,60}	Texto entre 1 y 60 caracteres
