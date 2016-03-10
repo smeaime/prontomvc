@@ -447,14 +447,16 @@ namespace ProntoFlexicapture
                                                                           orderby i.Fecha descending
                                                                           select i).AsQueryable();
 
-            IQueryable<procesGrilla> q = (from f in files
-                                          where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
-                                                 &&
-                                                 (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
-                                          )
-                                          orderby f.LastWriteTime descending
-                                          select new procesGrilla() { nombreImagen = "" }).AsQueryable();
-
+            if (false)
+            {
+                IQueryable<procesGrilla> q = (from f in files
+                                              where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
+                                                     &&
+                                                     (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                                              )
+                                              orderby f.LastWriteTime descending
+                                              select new procesGrilla() { nombreImagen = "" }).AsQueryable();
+            }
 
 
             return q2;
@@ -521,6 +523,9 @@ namespace ProntoFlexicapture
             string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
+            //como hacer eficiente esto?
+
+
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
             // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
@@ -538,16 +543,17 @@ namespace ProntoFlexicapture
             // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
 
             var q = (from f in files
-                     where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
-                            &&
-                            !files.Any(x => x.FullName == (f.FullName + ".bdl"))
+                     where (f.LastWriteTime > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
+                            && (EsArchivoDeImagen(f.Name)
+                            && !f.FullName.Contains("_IMPORT1")
+                            && !files.Any(x => x.FullName == (f.FullName + ".bdl"))
                      )
                      orderby f.LastWriteTime ascending
-                     select f.FullName).Take(cuantas);
+                     select f.FullName).Take(cuantas).ToList();
 
 
 
-            return q.ToList();
+            return q;
 
         }
 
