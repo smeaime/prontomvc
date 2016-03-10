@@ -20922,7 +20922,7 @@ Public Class barras
                       "ciglesias@williamsentregas.com.ar, sgomez@williamsentregas.com.ar", True)
 
 
-            LogPronto(SC, idfac, "FCMAIL", Usuario, numerodefactura, destinatario, , )
+            LogPronto(SC, idfac, "FMAIL", Usuario, numerodefactura, destinatario, , )
 
 
 
