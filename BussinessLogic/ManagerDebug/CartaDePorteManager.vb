@@ -8716,6 +8716,11 @@ Public Class CartaDePorteManager
             End If
 
 
+            If IsNothing(.Cosecha) Or .Cosecha = "" Or .Cosecha = "-" Then
+                sWarnings &= "Falta la cosecha"
+                sWarnings &= vbCrLf   'return false
+            End If
+
 
 
             If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
@@ -9054,7 +9059,11 @@ Public Class CartaDePorteManager
         '        'ms &=vbCrLf   'return false
         '    End If
         'End If
-        If ms <> "" Then ms &= vbCrLf 'return false
+        If ms <> "" Then
+            ms &= vbCrLf
+            Return False
+        End If
+
 
         Return True
     End Function
