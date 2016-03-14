@@ -1086,6 +1086,7 @@ namespace ProntoFlexicapture
             string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe();
             string Localidad1 = Sample.AdvancedTechniques.findField(document, "Localidad1").NullStringSafe();
             string Direccion2 = Sample.AdvancedTechniques.findField(document, "Direccion2").NullStringSafe();
+            string Localidad2 = Sample.AdvancedTechniques.findField(document, "Localidad2").NullStringSafe();
             string Provincia2 = Sample.AdvancedTechniques.findField(document, "Provincia2").NullStringSafe();
             string Camión = Sample.AdvancedTechniques.findField(document, "Camión").NullStringSafe();
             string Acoplado = Sample.AdvancedTechniques.findField(document, "Acoplado").NullStringSafe();
@@ -1251,7 +1252,8 @@ namespace ProntoFlexicapture
                     cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
 
 
-                    cdp.Destino = CartaDePorteManager.BuscarDestinoPorCUIT(DestinoCUIT, SC, Destino);
+                    
+                    cdp.Destino = CartaDePorteManager.BuscarDestinoPorCUIT(DestinoCUIT, SC, Destino, Localidad2);
 
 
 
