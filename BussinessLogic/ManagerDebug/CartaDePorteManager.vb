@@ -747,7 +747,10 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.WilliamsDestinos Where c.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", ""))
+        Dim q = (From dest In db.WilliamsDestinos _
+                From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty() _
+                Select dest, locdes
+                Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", ""))
 
 
 
@@ -767,9 +770,11 @@ Public Class CartaDePorteManager
 
         ElseIf (q.Count > 1) Then
             'usar la localidad para guiarse
-            Return q(0).IdWilliamsDestino
+            Return q(0).Nombre
+
+            aadasdasdad()
         Else
-            Return q(0).IdWilliamsDestino
+            Return q(0).dest.IdWilliamsDestino
         End If
 
         'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
