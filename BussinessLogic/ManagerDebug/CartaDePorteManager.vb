@@ -739,7 +739,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function BuscarDestinoPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+    Public Shared Function BuscarDestinoPorCUIT(cuit As String, SC As String, RazonSocial As String, LocalidadDestino As String) As Integer
 
         If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
 
@@ -747,26 +747,29 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.WilliamsDestinos Where c.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+        Dim q = (From c In db.WilliamsDestinos Where c.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", ""))
 
 
 
 
         If q Is Nothing Then
             If RazonSocial.Trim.Length > 4 Then
-                q = New ProntoMVC.Data.Models.WilliamsDestino
-                q.Descripcion = RazonSocial
-                q.CUIT = cuit
+                Dim desti = New ProntoMVC.Data.Models.WilliamsDestino
+                desti.Descripcion = RazonSocial
+                desti.CUIT = cuit
                 'acá había un insertonsubmit
-                db.WilliamsDestinos.Add(q)
+                db.WilliamsDestinos.Add(desti)
                 db.SaveChanges()
-                Return q.IdWilliamsDestino
+                Return desti.IdWilliamsDestino
             Else
                 Return 0
             End If
 
+        ElseIf (q.Count > 1) Then
+            'usar la localidad para guiarse
+            Return q(0).IdWilliamsDestino
         Else
-            Return q.IdWilliamsDestino
+            Return q(0).IdWilliamsDestino
         End If
 
         'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
@@ -8717,8 +8720,8 @@ Public Class CartaDePorteManager
 
 
             If IsNothing(.Cosecha) Or .Cosecha = "" Or .Cosecha = "-" Then
-                sWarnings &= "Falta la cosecha"
-                sWarnings &= vbCrLf   'return false
+                ms &= "Falta la cosecha"
+                ms &= vbCrLf   'return false
             End If
 
 
