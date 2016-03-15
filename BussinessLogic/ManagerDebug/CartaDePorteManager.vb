@@ -25,6 +25,8 @@ Imports System.IO
 
 Imports System.Data.SqlClient
 
+Imports ProntoMVC.Data
+
 Imports System.Web.Security
 Imports System.Security
 
@@ -251,7 +253,7 @@ Public Class CartaDePorteManager
 
         Public ProcedenciaLocalidadAFIP As String
         Public DestinoLocalidadAFIP As String
-       
+
 
 
         Public Patente As String
@@ -750,7 +752,7 @@ Public Class CartaDePorteManager
         Dim q = (From dest In db.WilliamsDestinos _
                 From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty() _
                 Select dest, locdes
-                Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", ""))
+                Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).ToList()
 
 
 
@@ -773,7 +775,19 @@ Public Class CartaDePorteManager
             'Return q(0).Nombre
 
             'aadasdasdad()
-            Return q(0).dest.IdWilliamsDestino
+
+
+            Dim c = (From x In q _
+                     Select x.dest.IdWilliamsDestino, nombre = If(x.locdes, New Models.Localidad).Nombre, dist = FuncionesGenericasCSharp.levenshtein(Convert.ToString(If(x.locdes, New Models.Localidad).Nombre).Trim.ToUpper, LocalidadDestino.Trim.ToUpper)).ToList
+
+            Dim a = c.Where(Function(x) x.dist < 4).OrderBy(Function(x) x.dist).ToList()
+
+            If a.Count = 0 Then
+                Return -1
+            Else
+                Return a(0).IdWilliamsDestino
+            End If
+
         Else
             Return q(0).dest.IdWilliamsDestino
         End If
@@ -10618,7 +10632,7 @@ Public Class CartaDePorteManager
 
 
         'show the scan result
-       
+
 
         For n = 0 To datas2.Count - 1
             Dim largo = Val(datas2(n).Trim).ToString.Length
