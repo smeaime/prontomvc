@@ -1029,6 +1029,79 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
         }
 
+        [TestMethod]
+        public void OCR_equivalencia_de_Destino_18085()
+        {
+            adasdasdsadsad
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            if (true)
+            {
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+                // ProntoWindowsService.Service1.Initialize();
+            }
+            else
+            {
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                                        plantilla, 30,
+                                         SC, DirApp, true, ref sError);
+                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+            }
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+            // mostrar info del lote1
+            //VerInfoDelLote(ticket);
+
+
+        }
+
+
 
 
 
@@ -1236,7 +1309,34 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             System.Diagnostics.Process.Start(output);
         }
 
+        [TestMethod]
+        public void SincroRoagro()
+        {
 
+            // tarda 2 min
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Roagro", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
 
         [TestMethod]
         public void SincroBLD()

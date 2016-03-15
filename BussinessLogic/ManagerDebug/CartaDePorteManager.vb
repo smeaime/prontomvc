@@ -770,9 +770,10 @@ Public Class CartaDePorteManager
 
         ElseIf (q.Count > 1) Then
             'usar la localidad para guiarse
-            Return q(0).Nombre
+            'Return q(0).Nombre
 
-            aadasdasdad()
+            'aadasdasdad()
+            Return q(0).dest.IdWilliamsDestino
         Else
             Return q(0).dest.IdWilliamsDestino
         End If
