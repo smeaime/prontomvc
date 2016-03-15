@@ -807,7 +807,7 @@ Namespace Pronto.ERP.Bll
                             'output = Sincronismo_DOW(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
 
                             sTitulo = ""
-                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
+                            Dim sql As String = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
                                             "", "", "", 1, 0, _
                                             CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor, _
                                             idDestinatario, idIntermediario, _
@@ -819,29 +819,28 @@ Namespace Pronto.ERP.Bll
                             'FiltrarCopias(dt)
                             'dt = DataTableWHERE(dt, sWHERE)
 
-                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "SincroDOW" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
+                            Dim ArchivoExcelDestino As String = IO.Path.GetTempPath & "SincroDOW" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
                             'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
                             Try
 
 
-                                Using rep As New ReportViewer
+                                Dim rep As New ReportViewer
 
 
-                                    Dim yourParams As ReportParameter() = New ReportParameter(2) {}
+                                Dim yourParams As ReportParameter() = New ReportParameter(2) {}
 
 
-                                    yourParams(0) = New ReportParameter("CadenaConexionSQL", Encriptar(SC))
-                                    yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
-                                    yourParams(2) = New ReportParameter("SentenciaSQL", sql)
+                                yourParams(0) = New ReportParameter("CadenaConexionSQL", Encriptar(SC))
+                                yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
+                                yourParams(2) = New ReportParameter("SentenciaSQL", sql)
 
-                                    output = RebindReportViewer_ServidorExcel(rep, _
-                                           "Sincronismo DOW2.rdl", _
-                                             yourParams, ArchivoExcelDestino, False) 'sTitulo)
+                                output = RebindReportViewer_ServidorExcel(rep, _
+                                       "Sincronismo DOW2.rdl", _
+                                         yourParams, ArchivoExcelDestino, False) 'sTitulo)
 
-
-                                End Using
+                                rep = Nothing
 
                                 'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
                                 '            "ProntoWeb\Informes\Sincronismo DOW.rdl", _
