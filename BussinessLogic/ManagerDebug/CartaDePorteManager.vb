@@ -743,57 +743,63 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscarDestinoPorCUIT(cuit As String, SC As String, RazonSocial As String, LocalidadDestino As String) As Integer
 
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+        Try
+
+            If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
 
 
-        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+            Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From dest In db.WilliamsDestinos _
-                From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty() _
-                Select dest, locdes
-                Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).ToList()
+            Dim q = (From dest In db.WilliamsDestinos _
+                    From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty() _
+                    Select dest, locdes
+                    Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).ToList()
 
 
 
 
-        If q Is Nothing Then
-            If RazonSocial.Trim.Length > 4 Then
-                Dim desti = New ProntoMVC.Data.Models.WilliamsDestino
-                desti.Descripcion = RazonSocial
-                desti.CUIT = cuit
-                'acá había un insertonsubmit
-                db.WilliamsDestinos.Add(desti)
-                db.SaveChanges()
-                Return desti.IdWilliamsDestino
+            If q Is Nothing Then
+                If RazonSocial.Trim.Length > 4 Then
+                    Dim desti = New ProntoMVC.Data.Models.WilliamsDestino
+                    desti.Descripcion = RazonSocial
+                    desti.CUIT = cuit
+                    'acá había un insertonsubmit
+                    db.WilliamsDestinos.Add(desti)
+                    db.SaveChanges()
+                    Return desti.IdWilliamsDestino
+                Else
+                    Return 0
+                End If
+
+            ElseIf (q.Count > 1) Then
+                'usar la localidad para guiarse
+                'Return q(0).Nombre
+
+                'aadasdasdad()
+
+
+                Dim c = (From x In q _
+                         Select x.dest.IdWilliamsDestino, nombre = If(x.locdes, New Models.Localidad).Nombre, dist = FuncionesGenericasCSharp.levenshtein(Convert.ToString(If(x.locdes, New Models.Localidad).Nombre).Trim.ToUpper, LocalidadDestino.Trim.ToUpper)).ToList
+
+                Dim a = c.Where(Function(x) x.dist < 4).OrderBy(Function(x) x.dist).ToList()
+
+                If a.Count = 0 Then
+                    Return 0
+                Else
+                    Return a(0).IdWilliamsDestino
+                End If
+
             Else
-                Return 0
+                Return q(0).dest.IdWilliamsDestino
             End If
 
-        ElseIf (q.Count > 1) Then
-            'usar la localidad para guiarse
-            'Return q(0).Nombre
+            'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
 
-            'aadasdasdad()
-
-
-            Dim c = (From x In q _
-                     Select x.dest.IdWilliamsDestino, nombre = If(x.locdes, New Models.Localidad).Nombre, dist = FuncionesGenericasCSharp.levenshtein(Convert.ToString(If(x.locdes, New Models.Localidad).Nombre).Trim.ToUpper, LocalidadDestino.Trim.ToUpper)).ToList
-
-            Dim a = c.Where(Function(x) x.dist < 4).OrderBy(Function(x) x.dist).ToList()
-
-            If a.Count = 0 Then
-                Return -1
-            Else
-                Return a(0).IdWilliamsDestino
-            End If
-
-        Else
-            Return q(0).dest.IdWilliamsDestino
-        End If
-
-        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
-
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return 0
+        End Try
 
 
 
