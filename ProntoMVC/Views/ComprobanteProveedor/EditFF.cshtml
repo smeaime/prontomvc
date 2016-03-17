@@ -961,7 +961,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                 width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                 <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;" />
                 <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                    <div class="span5 pull-left">
+                    <div class="span6 pull-left">
                         @if ((TempData["Alerta"] ?? "").ToString().Contains("Grabado"))
                         {
                             <div class="alert fade in span12  alert-success" id="mensajeAlerta" style="display: none;
@@ -972,7 +972,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                             </div>
                         }
                     </div>
-                    <div class="span7 pull-right">
+                    <div class="span6 pull-right">
                         @if (true || Model.FechaIngreso == null)
                         {
                             if (true || Model.FechaIngreso == null)
