@@ -443,7 +443,7 @@ namespace ProntoFlexicapture
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
             IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> q2 = (from ProntoMVC.Data.Models.CartasDePorteLogDeOCR i in db.CartasDePorteLogDeOCRs
-                                                                          where i.NumeroCarta >= 900000000
+                                                                          where i.NumeroCarta >= 900000000 || i.Observaciones!=""
                                                                           orderby i.Fecha descending
                                                                           select i).AsQueryable();
 
@@ -621,7 +621,7 @@ namespace ProntoFlexicapture
                 q.NumeroCarta = Convert.ToInt32(cdp.NumeroCartaDePorte);
                 q.IdCartaDePorte = cdp.Id;
                 q.TextoAux1 = usu;
-                //q.Observaciones =
+                q.Observaciones = cdp.MotivoAnulacion;
 
 
                 db.CartasDePorteLogDeOCRs.Add(q);
@@ -1382,14 +1382,16 @@ namespace ProntoFlexicapture
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
                     id = CartaDePorteManager.Save(SC, cdp, 0, "");
-                    cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
-                    if (numeroCarta > numprefijo) CartaDePorteManager.Anular(SC, cdp, 1, "");
-                }
-                else if (cdp.Destino<=0)
-                {
-                    id = CartaDePorteManager.Save(SC, cdp, 0, "");
-                    cdp.MotivoAnulacion = "destino no detectado";
-                    if (numeroCarta > numprefijo) CartaDePorteManager.Anular(SC, cdp, 1, "");
+                    if (numeroCarta > numprefijo)
+                    {
+                        cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
+                        CartaDePorteManager.Anular(SC, cdp, 1, "");
+                    }
+                    else if (cdp.Destino <= 0)
+                    {
+                        cdp.MotivoAnulacion = "destino no detectado";
+                        CartaDePorteManager.Anular(SC, cdp, 1, "");
+                    }
                 }
                 else
                 {
