@@ -1385,6 +1385,12 @@ namespace ProntoFlexicapture
                     cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
                     if (numeroCarta > numprefijo) CartaDePorteManager.Anular(SC, cdp, 1, "");
                 }
+                else if (cdp.Destino<=0)
+                {
+                    id = CartaDePorteManager.Save(SC, cdp, 0, "");
+                    cdp.MotivoAnulacion = "destino no detectado";
+                    if (numeroCarta > numprefijo) CartaDePorteManager.Anular(SC, cdp, 1, "");
+                }
                 else
                 {
                     id = cdp.Id;
