@@ -746,15 +746,19 @@
                 width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span4 lightblue">
-                            <input type="button" id="grabar2" value="Aceptar" class="btn btn-large  btn-primary" />
-                            @if (Model.IdProveedor > 0)
-                            { 
-                                @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdProveedor }, new { @class = "btn btn-large   btn-default" }) 
-                                @*@Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link " }*@
-                            }
+                        <div class="span8 ">
                         </div>
-                    </div>
+                        
+
+                            <div class="span4 lightblue">
+                                <input type="button" id="grabar2" value="Aceptar" class="btn btn-large  btn-primary" />
+                                @if (Model.IdProveedor > 0)
+                                {
+                                    @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdProveedor }, new { @class = "btn btn-large   btn-default" })
+                                    @*@Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link " }*@
+                                }
+                            </div>
+                        </div>
                 </div>
             </div>
 
