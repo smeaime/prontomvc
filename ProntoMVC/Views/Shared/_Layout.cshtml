@@ -2184,6 +2184,11 @@ Released   : 20120723
                              alt="" style="text-align: left ; margin-top:3px;  margin-left: 0px;  width: ; height: 42px;" />
 
                     </a>*@
+
+
+                <label id="CartelSinConexion"> Hay problemas con la conexión a la base!!!!! </label>
+
+
                 @if (false)
                 {
                     <br />
@@ -2644,7 +2649,6 @@ else
     }
 }
 
-<label id="CartelSinConexion"> Te quedaste sin conexión!!!!! </label>
 
 @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
 @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
@@ -3252,7 +3256,9 @@ else
 
     </script>
 }
-<script src="@Url.Content("~/Scripts/jsLayout.js?1620")" type="text/javascript"></script>
+
+
+
 <script>
     $(function () {
         panelessetup()
@@ -3260,6 +3266,8 @@ else
         $("#CartelSinConexion").hide();
         var timer = setInterval("ProbarConexionSQL()", 10000);
     })
+
+
 
     function panelessetup() {
 
@@ -3341,3 +3349,5 @@ else
 
 
 </script>
+
+<script src="@Url.Content("~/Scripts/jsLayout.js?1620")" type="text/javascript"></script>
