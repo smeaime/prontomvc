@@ -780,7 +780,8 @@ Public Class CartaDePorteManager
 
 
                 Dim c = (From x In q _
-                         Select x.dest.IdWilliamsDestino, nombre = If(x.locdes, New Models.Localidad).Nombre, dist = FuncionesGenericasCSharp.levenshtein(Convert.ToString(If(x.locdes, New Models.Localidad).Nombre).Trim.ToUpper, LocalidadDestino.Trim.ToUpper)).ToList
+                         Select x.dest.IdWilliamsDestino, nombre = If(If(x.locdes, New Models.Localidad).Nombre, ""), dist = FuncionesGenericasCSharp.levenshtein(
+                             If(If(x.locdes, New Models.Localidad).Nombre, "").Trim.ToUpper, LocalidadDestino.Trim.ToUpper)).ToList
 
                 Dim a = c.Where(Function(x) x.dist < 4).OrderBy(Function(x) x.dist).ToList()
 
