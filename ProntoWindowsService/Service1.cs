@@ -155,6 +155,7 @@ namespace ProntoWindowsService
             catch (Exception x)
             {
                 ClassFlexicapture.Log(x.ToString());
+                CartaDePorteManager.MandarMailDeError(x);
                 Console.WriteLine(x.ToString());
                 return;
             }
@@ -173,9 +174,6 @@ namespace ProntoWindowsService
             ClassFlexicapture.Log("llamo a iniciamotor");
 
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
-
-
-
 
 
 
@@ -248,6 +246,8 @@ at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_Sacan
 at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
     */
 
+                    CartaDePorteManager.MandarMailDeError(x2);
+
                     ClassFlexicapture.Log(x2.ToString());
                     ClassFlexicapture.Log("Problemas con la licencia? Paro y reinicio");
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x2);
@@ -286,11 +286,19 @@ at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bd
 
                 string sError = "";
 
-                resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                               plantilla, 3,
-                                SC, DirApp, true, ref sError);
+                try
+                {
+                    resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
+                                   plantilla, 3,
+                                    SC, DirApp, true, ref sError);
 
 
+                }
+                catch (Exception x3)
+                {
+                    ClassFlexicapture.Log(x3.ToString());
+                    throw;
+                }
 
 
 

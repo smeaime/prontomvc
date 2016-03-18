@@ -2378,7 +2378,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAsientos_IdMonedaDestino" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAsientos_IdObra" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorte" Width="1.5" PointX="31.875" PointY="64.625" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteDetalle" Width="1.5" PointX="33.75" PointY="85.125" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteDetalle_EF" Width="1.5" PointX="33.75" PointY="85.125" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteReglasDeFacturacion" Width="1.5" PointX="13" PointY="107.375" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasPorteAcopio" Width="1.5" PointX="13" PointY="111.625" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteHistorico" Width="1.5" PointX="25.375" PointY="19.75" />
@@ -2427,7 +2427,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ValoresFaltantesVisto" Width="1.5" PointX="22.375" PointY="26.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetallePlazosFijosRubrosContable" Width="1.5" PointX="27.375" PointY="19.75" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Calidade" Width="1.5" PointX="27.375" PointY="22.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Calidade_EF" Width="1.5" PointX="27.375" PointY="22.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CDPEstablecimiento" Width="1.5" PointX="27.375" PointY="25.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CDPHumedade" Width="1.5" PointX="7" PointY="54" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.WilliamsDestino" Width="1.5" PointX="20" PointY="88.5" />
@@ -2446,6 +2446,14 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.UsuariosRelacionFertilizantesTiposDespacho" Width="1.5" PointX="30.625" PointY="14.625" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__UsuariosR__IdFer__4303B307" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__UsuariosR__IdFer__47C86824" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Log" Width="1.5" PointX="7.375" PointY="29.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Partido" Width="1.5" PointX="7.75" PointY="106" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.wTempCartasPorteFacturacionAutomatica_EF" Width="1.5" PointX="29.375" PointY="17.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.wGrillaPersistencia_EF" Width="1.5" PointX="15.375" PointY="29.75" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Localidad__IdPar__7BC72F17" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__Partidos__IdProv__7AD30ADE" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteLogDeOCR" Width="1.5" PointX="34.125" PointY="80.5" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />

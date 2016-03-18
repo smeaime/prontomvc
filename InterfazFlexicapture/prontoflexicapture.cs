@@ -211,9 +211,27 @@ namespace ProntoFlexicapture
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
-                //trace("Recognize next document...");
-                IDocument document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
+                IDocument document;
+
+                //trace("Recognize next document...");
+                try
+                {
+
+                    document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
+
+                }
+                catch (Exception xx)
+                {
+                    foreach (string s in imagenes)
+                    {
+                        DesmarcarImagenComoProcesandose(s);
+                    }
+
+                    CartaDePorteManager.MandarMailDeError(xx);
+
+                    throw;
+                }
 
 
 
@@ -414,7 +432,7 @@ namespace ProntoFlexicapture
 
 
 
-        public static IQueryable<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
+        public static IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
@@ -424,19 +442,21 @@ namespace ProntoFlexicapture
             ProntoMVC.Data.Models.DemoProntoEntities db =
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
-            IQueryable<ProntoMVC.Data.Models.CartasDePorte> q2 = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                                  where i.NumeroCartaDePorte >= 900000000
-                                                                  orderby i.FechaModificacion descending
-                                                                  select i).AsQueryable();
+            IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> q2 = (from ProntoMVC.Data.Models.CartasDePorteLogDeOCR i in db.CartasDePorteLogDeOCRs
+                                                                          where i.NumeroCarta >= 900000000 || i.Observaciones!=""
+                                                                          orderby i.Fecha descending
+                                                                          select i).AsQueryable();
 
-            IQueryable<procesGrilla> q = (from f in files
-                                          where (EsArchivoDeImagen(f.Name)
-                                                 &&
-                                                 (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
-                                          )
-                                          orderby f.LastWriteTime descending
-                                          select new procesGrilla() { nombreImagen = "" }).AsQueryable();
-
+            if (false)
+            {
+                IQueryable<procesGrilla> q = (from f in files
+                                              where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
+                                                     &&
+                                                     (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+                                              )
+                                              orderby f.LastWriteTime descending
+                                              select new procesGrilla() { nombreImagen = "" }).AsQueryable();
+            }
 
 
             return q2;
@@ -503,6 +523,9 @@ namespace ProntoFlexicapture
             string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
+            //como hacer eficiente esto?
+
+
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
             // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
@@ -520,16 +543,17 @@ namespace ProntoFlexicapture
             // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
 
             var q = (from f in files
-                     where (EsArchivoDeImagen(f.Name)
-                            &&
-                            !files.Any(x => x.FullName == (f.FullName + ".bdl"))
+                     where (f.LastWriteTime > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
+                            && (EsArchivoDeImagen(f.Name)
+                            && !f.FullName.Contains("_IMPORT1")
+                            && !files.Any(x => x.FullName == (f.FullName + ".bdl"))
                      )
                      orderby f.LastWriteTime ascending
-                     select f.FullName).Take(cuantas);
+                     select f.FullName).Take(cuantas).ToList();
 
 
 
-            return q.ToList();
+            return q;
 
         }
 
@@ -574,47 +598,64 @@ namespace ProntoFlexicapture
         }
 
 
-        public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp)
+        public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp, string usu, string SC)
         {
             //pasar id
 
-            cdp.CalidadTierra = -1;
+            //cdp.IdUsuarioAnulo = -1;
 
             //cdp.
 
             //cdp.Corredor2
             //  cdp.
 
+
+            // si la grabas acá, despues va a volver a pisar los datos de la carta
+            using (DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+            {
+
+
+                CartasDePorteLogDeOCR q = new CartasDePorteLogDeOCR();
+
+                q.Fecha = DateAndTime.Now;
+                q.NumeroCarta = Convert.ToInt32(cdp.NumeroCartaDePorte);
+                q.IdCartaDePorte = cdp.Id;
+                q.TextoAux1 = usu;
+                q.Observaciones = cdp.MotivoAnulacion;
+
+
+                db.CartasDePorteLogDeOCRs.Add(q);
+                db.SaveChanges();
+            }
         }
 
 
-        public static List<ProntoMVC.Data.Models.CartasDePorte> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
+        public static List<CartasDePorteLogDeOCR> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
-            ProntoMVC.Data.Models.DemoProntoEntities db =
-                    new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+            using (DemoProntoEntities db =
+                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+            {
+                // where (i.PathImagen != "" || i.PathImagen2 != "")
 
+                List<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> q = (from ProntoMVC.Data.Models.CartasDePorteLogDeOCR i in db.CartasDePorteLogDeOCRs
+                                                                       orderby i.Fecha descending
+                                                                       select i).Take(100).ToList();
 
-            // where (i.PathImagen != "" || i.PathImagen2 != "")
-
-            List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes
-                                                           where (i.CalidadTierra == -1)
-                                                           orderby i.FechaModificacion descending
-                                                           select i).Take(100).ToList();
-
-            //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
+                //List<ProntoMVC.Data.Models.CartasDePorte> q = (from ProntoMVC.Data.Models.CartasDePorte i in db.CartasDePortes select i).Take(10).ToList();
 
 
 
-            // como me traigo la info de las id, etc?
+                // como me traigo la info de las id, etc?
+                return q;
+                //sacar info del log o de los archivos????
+            }
 
 
-            return q;
-            //sacar info del log o de los archivos????
         }
 
 
@@ -688,7 +729,7 @@ namespace ProntoFlexicapture
             var tif = Tiff.Open(archivo, "r");
             //get number of pages
             var num = tif.NumberOfDirectories();
-       // http://stackoverflow.com/questions/13178185/how-to-split-multipage-tiff-using-libtiff-net
+            // http://stackoverflow.com/questions/13178185/how-to-split-multipage-tiff-using-libtiff-net
 
 
             List<string> l = new List<string>();
@@ -902,7 +943,7 @@ namespace ProntoFlexicapture
                 else
                 {
                     l2.Add(f);
-                    DesmarcarImagenComoProcesandose(f);
+                    if (bProcesarConOCR) DesmarcarImagenComoProcesandose(f);
                 }
             }
 
@@ -1045,6 +1086,7 @@ namespace ProntoFlexicapture
             string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe();
             string Localidad1 = Sample.AdvancedTechniques.findField(document, "Localidad1").NullStringSafe();
             string Direccion2 = Sample.AdvancedTechniques.findField(document, "Direccion2").NullStringSafe();
+            string Localidad2 = Sample.AdvancedTechniques.findField(document, "Localidad2").NullStringSafe();
             string Provincia2 = Sample.AdvancedTechniques.findField(document, "Provincia2").NullStringSafe();
             string Camión = Sample.AdvancedTechniques.findField(document, "Camión").NullStringSafe();
             string Acoplado = Sample.AdvancedTechniques.findField(document, "Acoplado").NullStringSafe();
@@ -1057,6 +1099,8 @@ namespace ProntoFlexicapture
 
 
             string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe();
+
+            string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe();
 
 
 
@@ -1165,7 +1209,14 @@ namespace ProntoFlexicapture
 
                 string s;
 
-                MarcarCartaComoProcesada(ref cdp);
+
+                int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
+
+                string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
+                nombreusuario = nombreusuario.Substring(0, nombreusuario.Length - nombreusuario.IndexOf(" PV"));
+
+
+
 
                 bool bPisar = true;
 
@@ -1176,7 +1227,6 @@ namespace ProntoFlexicapture
                 {
 
 
-                    int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
                     cdp.PuntoVenta = pv;
 
 
@@ -1202,7 +1252,8 @@ namespace ProntoFlexicapture
                     cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
 
 
-                    cdp.Destino = CartaDePorteManager.BuscarDestinoPorCUIT(DestinoCUIT, SC, Destino);
+                    
+                    cdp.Destino = CartaDePorteManager.BuscarDestinoPorCUIT(DestinoCUIT, SC, Destino, Localidad2);
 
 
 
@@ -1293,7 +1344,7 @@ namespace ProntoFlexicapture
                             ErrHandler2.WriteError(ex2);
                         }
 
-                        double.TryParse(Tarifa, out cdp.TarifaTransportista);
+                        double.TryParse(Tarifa.Replace(".", ","), out cdp.TarifaTransportista);
 
 
 
@@ -1331,14 +1382,25 @@ namespace ProntoFlexicapture
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
                     id = CartaDePorteManager.Save(SC, cdp, 0, "");
-                    cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
-                    if (numeroCarta > numprefijo) CartaDePorteManager.Anular(SC, cdp, 1, "");
+                    if (numeroCarta > numprefijo)
+                    {
+                        cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
+                        CartaDePorteManager.Anular(SC, cdp, 1, "");
+                    }
+                    else if (cdp.Destino <= 0)
+                    {
+                        cdp.MotivoAnulacion = "destino no detectado";
+                        CartaDePorteManager.Anular(SC, cdp, 1, "");
+                    }
                 }
                 else
                 {
                     id = cdp.Id;
 
                 }
+
+
+                MarcarCartaComoProcesada(ref cdp, nombreusuario, SC);
 
 
 

@@ -49,5 +49,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<FertilizantesCupos> FertilizantesCupos { get; set; }
         public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
         public virtual ICollection<WilliamsDestino> WilliamsDestinos { get; set; }
+        public virtual Partido Partido1 { get; set; }
     }
 }

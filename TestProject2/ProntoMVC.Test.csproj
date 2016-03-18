@@ -60,9 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BussinessLogic\bin\Debug\BusinessObject.dll</HintPath>
     </Reference>
-    <Reference Include="ClaseMigrar">
-      <HintPath>..\..\ClaseMigrar\bin\Debug\ClaseMigrar.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
