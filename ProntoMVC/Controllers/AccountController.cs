@@ -449,7 +449,7 @@ namespace ProntoMVC.Controllers
                     Response.Cookies.Add(ck);
 
 
-
+                    kñlkñllk
                     int b = Generales.BasesDelUsuario((Guid)Membership.GetUser(model.UserName).ProviderUserKey);
 
                     if (true)
