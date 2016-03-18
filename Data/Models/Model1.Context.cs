@@ -219,7 +219,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<LMateriale> LMateriales { get; set; }
         public virtual DbSet<CentrosCosto> CentrosCostoes { get; set; }
         public virtual DbSet<CartasDePorte> CartasDePortes { get; set; }
-        public virtual DbSet<CartasDePorteDetalle> CartasDePorteDetalles { get; set; }
+        public virtual DbSet<CartasDePorteDetalle_EF> CartasDePorteDetalle_EF { get; set; }
         public virtual DbSet<CartasDePorteReglasDeFacturacion> CartasDePorteReglasDeFacturacions { get; set; }
         public virtual DbSet<CartasPorteAcopio> CartasPorteAcopios { get; set; }
         public virtual DbSet<CartasDePorteHistorico> CartasDePorteHistoricoes { get; set; }
@@ -232,7 +232,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleValoresRubrosContable> DetalleValoresRubrosContables { get; set; }
         public virtual DbSet<ValoresFaltantesVisto> ValoresFaltantesVistos { get; set; }
         public virtual DbSet<DetallePlazosFijosRubrosContable> DetallePlazosFijosRubrosContables { get; set; }
-        public virtual DbSet<Calidade> Calidades { get; set; }
+        public virtual DbSet<Calidade_EF> Calidade_EF { get; set; }
         public virtual DbSet<CDPEstablecimiento> CDPEstablecimientos { get; set; }
         public virtual DbSet<CDPHumedade> CDPHumedades { get; set; }
         public virtual DbSet<WilliamsDestino> WilliamsDestinos { get; set; }
@@ -241,6 +241,11 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<FertilizantesTiposDespacho> FertilizantesTiposDespachoes { get; set; }
         public virtual DbSet<UsuariosRelacionFertilizantesPuntosDespacho> UsuariosRelacionFertilizantesPuntosDespachoes { get; set; }
         public virtual DbSet<UsuariosRelacionFertilizantesTiposDespacho> UsuariosRelacionFertilizantesTiposDespachoes { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Partido> Partidos { get; set; }
+        public virtual DbSet<wTempCartasPorteFacturacionAutomatica_EF> wTempCartasPorteFacturacionAutomatica_EF { get; set; }
+        public virtual DbSet<wGrillaPersistencia_EF> wGrillaPersistencia_EF { get; set; }
+        public virtual DbSet<CartasDePorteLogDeOCR> CartasDePorteLogDeOCRs { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

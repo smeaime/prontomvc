@@ -84,6 +84,7 @@ namespace ProntoMVC.Data.Models
         public string Pedidos { get; set; }
         public string Recepciones { get; set; }
         public string SalidasMateriales { get; set; }
+        public string Detalle2 { get; set; }
     
         public virtual Obra Obra { get; set; }
         public virtual Sector Sectores { get; set; }

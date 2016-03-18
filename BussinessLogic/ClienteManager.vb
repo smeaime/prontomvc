@@ -1191,8 +1191,8 @@ Namespace Pronto.ERP.Bll
                         .ExigeDatosCompletosEnCartaDePorteQueLoUse = oCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse
                         .IncluyeTarifaEnFactura = oCliente.IncluyeTarifaEnFactura
 
-                        .IdCondicionCompra = oCliente.IdCondicionVenta
-                        .IdCondicionVenta = oCliente.IdCondicionVenta
+                        .IdCondicionCompra = If(oCliente.IdCondicionVenta, -1)
+                        .IdCondicionVenta = If(oCliente.IdCondicionVenta, -1)
 
 
                         .DireccionDeCorreos = oCliente.DireccionDeCorreos
