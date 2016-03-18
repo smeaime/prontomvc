@@ -196,6 +196,247 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+        [TestMethod]
+        public void MailDeInformeDow_18085()
+        {
+
+        //  https://prontoweb.williamsentregas.com.ar/ProntoWeb/Reporte.aspx?ReportName=Listado%20DOW
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 6, 30);
+            int pventa = 0;
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = 1618; // DOW
+            dr["CuentaOrden1"] = 1618;
+            dr["CuentaOrden2"] = 1618;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            dr["ModoImpresion"] = "ExcHtm";
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+
+            string output;
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+            output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                   pventa, "", estado,
+                                                ref dr, ref sError, false,
+                                               ConfigurationManager.AppSettings["SmtpServer"],
+                                                 ConfigurationManager.AppSettings["SmtpUser"],
+                                                 ConfigurationManager.AppSettings["SmtpPass"],
+                                                 Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                   "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void LogDeEnvioDeFactura_18012()
+        {
+            barras.MarcarEnviada(SC, 17000);
+        }
+
+
+        [TestMethod]
+        public void SincroMonsanto_17940()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+        [TestMethod]
+        public void SincroDiazForti_17962()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Forti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+        [TestMethod]
+        public void SincroYPF()
+        {
+
+            string sErrores = "", sTitulo = "";
+            DemoProntoEntities db = null;
+
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+               "", "", "", 0, 1000, CartaDePorteManager.enumCDPestado.Facturadas
+                  , "", 4333, -1,
+               -1, 4333, 4333,
+               -1, -1, -1,
+               CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+
+
+            var output = SincronismosWilliamsManager.Sincronismo_YPF_ConLINQ(q, ref sErrores, "", SC);
+
+
+
+            //registrosFiltrados = q.Count
+
+            //If registrosFiltrados > 0 Then 'And sErrores = "" Then
+            //    output = ProntoFuncionesUIWeb.RebindReportViewerExcel(HFSC.Value, _
+            //                "ProntoWeb\Informes\Sincronismo YPF.rdl", _
+            //                      q.ToDataTable, ArchivoExcelDestino) 'sTitulo)
+
+            //    CambiarElNombreDeLaPrimeraHojaDeYPF(output)
+            //End If
+
+            //var sForzarNombreDescarga = "ENTREGADOR.CSV";
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga, true);
+
+
+        }
+
+
+        [TestMethod]
+        public void SincroRivara()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Rivara", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+        [TestMethod]
+        public void SincroZeni_17945()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void ImagenesTiffMultipaginaFormatoCPTK_CPTK_CPTK_17748()
         {
@@ -213,7 +454,7 @@ namespace ProntoMVC.Tests
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false,false,1);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false, false, 1);
 
 
             string sError = "";
@@ -269,14 +510,14 @@ namespace ProntoMVC.Tests
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016094547.tif";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02182016085814.tif";
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote 23feb094434 prueba1\doc02232016091830.tif";
-
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\pv4 buenas\pv4 buenas.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
             VaciarDirectorioTemp();
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true,3);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -854,6 +1095,90 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
+        [TestMethod]
+        public void OCR_equivalencia_de_Destino_18085_2()
+        {
+            var id = CartaDePorteManager.BuscarDestinoPorCUIT("30506792165", SC, "CARGILL SAC.I.(E)", "VILLA GOBERNADOR GAL");
+            var id2 = CartaDePorteManager.BuscarDestinoPorCUIT("30506792165", SC, "CARGILL SAC.I.(E)", ".PilaR-");
+
+        }
+
+
+        [TestMethod]
+        public void OCR_equivalencia_de_Destino_18085()
+        {
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\destino rebuscado.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            if (true)
+            {
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+                // ProntoWindowsService.Service1.Initialize();
+            }
+            else
+            {
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                                        plantilla, 30,
+                                         SC, DirApp, true, ref sError);
+                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+            }
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+            // mostrar info del lote1
+            //VerInfoDelLote(ticket);
+
+
+        }
+
+
+
+
 
         [TestMethod]
         public void MailDeInformeConHtmlyConExcelAdjunto_16455()
@@ -1059,7 +1384,34 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             System.Diagnostics.Process.Start(output);
         }
 
+        [TestMethod]
+        public void SincroRoagro()
+        {
 
+            // tarda 2 min
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Roagro", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
 
         [TestMethod]
         public void SincroBLD()

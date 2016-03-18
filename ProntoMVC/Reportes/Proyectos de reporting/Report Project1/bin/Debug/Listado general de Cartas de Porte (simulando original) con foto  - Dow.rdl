@@ -6569,6 +6569,10 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>sServidorSQL</Prompt>
     </ReportParameter>
+    <ReportParameter Name="titulo">
+      <DataType>String</DataType>
+      <Prompt>titulo</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
     <EmbeddedImage Name="williams">

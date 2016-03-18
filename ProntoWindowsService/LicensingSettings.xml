@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LicensingSettings xmlns="http://www.abbyy.com/Protection/LicensingSettings">
+	<LicensingServers>
+		<MainNetworkLicenseServer ServerAddress="190.16.100.211" ProtocolType="TCP/IP" EndPointName="3011"/>
+	</LicensingServers>
+</LicensingSettings> 
+
