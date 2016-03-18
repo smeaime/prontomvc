@@ -77,9 +77,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\BusinessObject.dll</HintPath>
     </Reference>
-    <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\ClaseMigrar.dll</HintPath>
+    <Reference Include="ClaseMigrar">
+      <HintPath>..\..\bussinessobject\ClaseMigrar\bin\Debug\ClaseMigrar.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML">
       <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
@@ -130,6 +129,11 @@
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -368,6 +372,15 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="elmah.cs" />
     <Content Include="App_Data\TextFile1.txt" />
+    <Content Include="Areas\WebForms\Cartadeporte.aspx" />
+    <Content Include="Areas\WebForms\Cartadeporte.aspx.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Areas\WebForms\CartasDePortes.aspx" />
+    <Content Include="Areas\WebForms\CartasDePortes.aspx.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Areas\WebForms\MasterPage.master.vb" />
     <Content Include="BugTrack.aspx" />
     <Content Include="BugTrack.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
@@ -714,6 +727,7 @@
     <Content Include="Documentos\NotaDebito_A_BaseNueva.dot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\WebForms\MasterPage.master" />
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />

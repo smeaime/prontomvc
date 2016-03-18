@@ -123,8 +123,27 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-                //return;
-                throw new Exception("Falla la conexion a la bdlmaster para verficar el membership .net");
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+                // ofrecer un logoff!!!!!!!!!!
+
+
+                if (false)
+                {
+                    throw new Exception("Falla la conexion a la bdlmaster para verficar el membership .net");
+                }
+                else
+                {
+                    // es porque está mal logeado o porque no se conecta a la bdlmaster?
+
+                    FormsAuthentication.SignOut();
+                    Session.Abandon();
+                    FormsAuthentication.RedirectToLoginPage();
+                    return;
+                }
             }
 
 
@@ -302,6 +321,16 @@ namespace ProntoMVC.Controllers
                 base.Initialize(rc);
 
                 oStaticMembershipService = new Generales.StaticMembershipService();
+
+
+                if (oStaticMembershipService.GetUser()==null)
+                {
+                    FormsAuthentication.SignOut();
+                    Session.Abandon();
+                    FormsAuthentication.RedirectToLoginPage();
+                    return;
+                }
+
 
 
                 // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];

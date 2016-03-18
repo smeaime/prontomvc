@@ -792,6 +792,21 @@ warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a
           <Property Name="FueraDeEstandar" Type="varchar" MaxLength="2" />
           <Property Name="CalidadPuntaSombreada" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
+        <EntityType Name="CartasDePorteLogDeOCR">
+          <Key>
+            <PropertyRef Name="IdCartasDePorteLog" />
+          </Key>
+          <Property Name="IdCartasDePorteLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroCarta" Type="int" />
+          <Property Name="IdCartaDePorte" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="100" />
+          <Property Name="TextoAux1" Type="varchar" MaxLength="100" />
+          <Property Name="TextoAux2" Type="varchar" MaxLength="100" />
+          <Property Name="IntAux1" Type="int" />
+          <Property Name="IntAux2" Type="int" />
+        </EntityType>
         <EntityType Name="CartasDePorteReglasDeFacturacion">
           <Key>
             <PropertyRef Name="IdRegla" />
@@ -3581,9 +3596,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdPartido" Type="int" />
           <Property Name="CodigoAfip" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Pronto.dbo.Log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="IdLog" />
+          </Key>
           <Property Name="Tipo" Type="varchar" MaxLength="5" />
           <Property Name="IdComprobante" Type="int" />
           <Property Name="IdDetalleComprobante" Type="int" />
@@ -3605,7 +3621,8 @@ warning 6013: The table/view 'Pronto.dbo.Log' does not have a primary key define
           <Property Name="AuxNum3" Type="numeric" Precision="18" Scale="2" />
           <Property Name="AuxNum4" Type="numeric" Precision="18" Scale="2" />
           <Property Name="AuxNum5" Type="numeric" Precision="18" Scale="2" />
-        </EntityType>-->
+          <Property Name="IdLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="LogComprobantesElectronicos">
           <Key>
             <PropertyRef Name="IdLog" />
@@ -3620,26 +3637,6 @@ warning 6013: The table/view 'Pronto.dbo.Log' does not have a primary key define
           <Property Name="Enviado" Type="ntext" />
           <Property Name="Recibido" Type="ntext" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="LogImpuestos">
-          <Property Name="FechaProceso" Type="datetime" />
-          <Property Name="ArchivoProcesado" Type="varchar" MaxLength="12" />
-          <Property Name="IdProveedor" Type="int" />
-          <Property Name="IGCondicion" Type="int" />
-          <Property Name="FechaLimiteExentoGanancias" Type="datetime" />
-          <Property Name="IvaExencionRetencion" Type="varchar" MaxLength="2" />
-          <Property Name="IvaPorcentajeExencion" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="IvaFechaCaducidadExencion" Type="datetime" />
-          <Property Name="CodigoSituacionRetencionIVA" Type="int" />
-          <Property Name="FechaLog" Type="datetime" />
-          <Property Name="SUSSFechaCaducidadExencion" Type="datetime" />
-          <Property Name="PorcentajeIBDirecto" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="FechaInicioVigenciaIBDirecto" Type="datetime" />
-          <Property Name="FechaFinVigenciaIBDirecto" Type="datetime" />
-          <Property Name="GrupoIIBB" Type="int" />
-          <Property Name="IdCliente" Type="int" />
-        </EntityType>-->
         <EntityType Name="Marcas">
           <Key>
             <PropertyRef Name="IdMarca" />
@@ -4368,6 +4365,17 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="Campo" Type="varchar" MaxLength="50" />
           <Property Name="Valor" Type="varchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="Partidos">
+          <Key>
+            <PropertyRef Name="IdPartido" />
+          </Key>
+          <Property Name="IdPartido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IdProvincia" Type="int" />
+          <Property Name="CodigoONCCA" Type="varchar" MaxLength="15" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="15" />
+        </EntityType>
         <EntityType Name="Pedidos">
           <Key>
             <PropertyRef Name="IdPedido" />
@@ -4808,6 +4816,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="FechaInicialControlComprobantes" Type="datetime" />
           <Property Name="ResolucionAfip3668" Type="varchar" MaxLength="2" />
           <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="varchar" MaxLength="2" />
+          <Property Name="ExcluirDeActualizacionIvaRG18" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5188,6 +5197,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="Pedidos" Type="varchar" MaxLength="100" />
           <Property Name="Recepciones" Type="varchar" MaxLength="100" />
           <Property Name="SalidasMateriales" Type="varchar" MaxLength="100" />
+          <Property Name="Detalle2" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Rubros">
           <Key>
@@ -5212,6 +5222,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="IdCuentaCompras10" Type="int" />
           <Property Name="Codigo" Type="int" />
           <Property Name="IdTipoOperacion" Type="int" />
+          <Property Name="AsignarIPsObradorCentral" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="RubrosContables">
           <Key>
@@ -5804,6 +5815,18 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="wGrillaPersistencia">
+          <Key>
+            <PropertyRef Name="IdRenglon" />
+            <PropertyRef Name="Sesion" />
+            <PropertyRef Name="Tilde" />
+          </Key>
+          <Property Name="IdRenglon" Type="int" Nullable="false" />
+          <Property Name="Sesion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tilde" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="WilliamsDestinos">
           <Key>
             <PropertyRef Name="IdWilliamsDestino" />
@@ -5865,6 +5888,41 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="ModoImpresion" Type="varchar" MaxLength="6" />
           <Property Name="Corredor2" Type="int" />
         </EntityType>
+        <EntityType Name="wTempCartasPorteFacturacionAutomatica">
+          <Key>
+            <PropertyRef Name="IdTempCartasPorteFacturacionAutomatica" />
+          </Key>
+          <Property Name="IdTempCartasPorteFacturacionAutomatica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSesion" Type="int" />
+          <Property Name="IdCartaDePorte" Type="int" />
+          <Property Name="IdFacturarselaA" Type="int" />
+          <Property Name="ColumnaTilde" Type="int" />
+          <Property Name="IdArticulo" Type="int" />
+          <Property Name="NumeroCartaDePorte" Type="bigint" />
+          <Property Name="SubNumeroVagon" Type="int" />
+          <Property Name="SubnumeroDeFacturacion" Type="int" />
+          <Property Name="FechaArribo" Type="datetime" />
+          <Property Name="FechaDescarga" Type="datetime" />
+          <Property Name="FacturarselaA" Type="varchar" MaxLength="50" />
+          <Property Name="Confirmado" Type="varchar" MaxLength="2" />
+          <Property Name="IdCodigoIVA" Type="int" />
+          <Property Name="CUIT" Type="varchar" MaxLength="50" />
+          <Property Name="ClienteSeparado" Type="varchar" MaxLength="50" />
+          <Property Name="TarifaFacturada" Type="money" />
+          <Property Name="Producto" Type="varchar" MaxLength="50" />
+          <Property Name="KgNetos" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdCorredor" Type="int" />
+          <Property Name="IdTitular" Type="int" />
+          <Property Name="IdIntermediario" Type="int" />
+          <Property Name="IdRComercial" Type="int" />
+          <Property Name="Titular" Type="varchar" MaxLength="50" />
+          <Property Name="RComercial" Type="varchar" MaxLength="50" />
+          <Property Name="Corredor" Type="varchar" MaxLength="50" />
+          <Property Name="Destinatario" Type="varchar" MaxLength="50" />
+          <Property Name="Procedcia" Type="varchar" MaxLength="50" />
+          <Property Name="DestinoDesc" Type="varchar" MaxLength="50" />
+          <Property Name="IdDestino" Type="int" />
+        </EntityType>
         <Association Name="FK__CartasDeP__Acopi__5498535D">
           <End Role="CartasPorteAcopios" Type="Self.CartasPorteAcopios" Multiplicity="0..1" />
           <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="*" />
@@ -5886,6 +5944,18 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
             </Principal>
             <Dependent Role="CartasDePorte">
               <PropertyRef Name="ClienteAcondicionador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartasDeP__IdCar__5245F697">
+          <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="0..1" />
+          <End Role="CartasDePorteLogDeOCR" Type="Self.CartasDePorteLogDeOCR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CartasDePorte">
+              <PropertyRef Name="IdCartaDePorte" />
+            </Principal>
+            <Dependent Role="CartasDePorteLogDeOCR">
+              <PropertyRef Name="IdCartaDePorte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6306,6 +6376,30 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
             </Principal>
             <Dependent Role="FertilizantesCupos">
               <PropertyRef Name="IdUsuarioAnulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Localidad__IdPar__7BC72F17">
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="0..1" />
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partidos">
+              <PropertyRef Name="IdPartido" />
+            </Principal>
+            <Dependent Role="Localidades">
+              <PropertyRef Name="IdPartido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partidos__IdProv__7AD30ADE">
+          <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="IdProvincia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9169,6 +9263,19 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Parameter Name="IdComprobante" Type="int" Mode="In" />
           <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="wTarifaWilliams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="IdArticulo" Type="int" Mode="In" />
+          <Parameter Name="IdDestino" Type="int" Mode="In" />
+          <Parameter Name="TipoTarifa" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="wTarifaWilliamsEstimada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="IdArticulo" Type="int" Mode="In" />
+          <Parameter Name="IdDestino" Type="int" Mode="In" />
+          <Parameter Name="TipoTarifa" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DemoProntoModelStoreContainer">
           <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Acopios" EntityType="Self.Acopios" Schema="dbo" store:Type="Tables" />
@@ -9188,6 +9295,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorte" EntityType="Self.CartasDePorte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorteDetalle" EntityType="Self.CartasDePorteDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartasDePorteLogDeOCR" EntityType="Self.CartasDePorteLogDeOCR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorteReglasDeFacturacion" EntityType="Self.CartasDePorteReglasDeFacturacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasPorteAcopios" EntityType="Self.CartasPorteAcopios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CDPEstablecimientos" EntityType="Self.CDPEstablecimientos" Schema="dbo" store:Type="Tables" />
@@ -9309,6 +9417,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <EntitySet Name="ListasPreciosDetalle" EntityType="Self.ListasPreciosDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LMateriales" EntityType="Self.LMateriales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogComprobantesElectronicos" EntityType="Self.LogComprobantesElectronicos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
@@ -9324,6 +9433,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parametros2" EntityType="Self.Parametros2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partidos" EntityType="Self.Partidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlazosEntrega" EntityType="Self.PlazosEntrega" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlazosFijos" EntityType="Self.PlazosFijos" Schema="dbo" store:Type="Tables" />
@@ -9381,6 +9491,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WilliamsDestinos" EntityType="Self.WilliamsDestinos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WilliamsMailFiltrosCola" EntityType="Self.WilliamsMailFiltrosCola" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wTempCartasPorteFacturacionAutomatica" EntityType="Self.wTempCartasPorteFacturacionAutomatica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorteHistorico" EntityType="Self.CartasDePorteHistorico" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CartasDePorteHistorico].[IdCartaDePorte] AS [IdCartaDePorte], 
@@ -9535,6 +9646,13 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
     [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
     FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="wGrillaPersistencia" EntityType="Self.wGrillaPersistencia" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [wGrillaPersistencia].[IdRenglon] AS [IdRenglon], 
+    [wGrillaPersistencia].[Sesion] AS [Sesion], 
+    [wGrillaPersistencia].[Tilde] AS [Tilde]
+    FROM [dbo].[wGrillaPersistencia] AS [wGrillaPersistencia]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__CartasDeP__Acopi__5498535D" Association="Self.FK__CartasDeP__Acopi__5498535D">
             <End Role="CartasPorteAcopios" EntitySet="CartasPorteAcopios" />
             <End Role="CartasDePorte" EntitySet="CartasDePorte" />
@@ -9542,6 +9660,10 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <AssociationSet Name="FK__CartasDeP__Clien__25735020" Association="Self.FK__CartasDeP__Clien__25735020">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartasDeP__IdCar__5245F697" Association="Self.FK__CartasDeP__IdCar__5245F697">
+            <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+            <End Role="CartasDePorteLogDeOCR" EntitySet="CartasDePorteLogDeOCR" />
           </AssociationSet>
           <AssociationSet Name="FK__CartasDeP__IdCar__5A512CB3" Association="Self.FK__CartasDeP__IdCar__5A512CB3">
             <End Role="CartasDePorte" EntitySet="CartasDePorte" />
@@ -9682,6 +9804,14 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <AssociationSet Name="FK__Fertiliza__IdUsu__5A1C2289" Association="Self.FK__Fertiliza__IdUsu__5A1C2289">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="FertilizantesCupos" EntitySet="FertilizantesCupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Localidad__IdPar__7BC72F17" Association="Self.FK__Localidad__IdPar__7BC72F17">
+            <End Role="Partidos" EntitySet="Partidos" />
+            <End Role="Localidades" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partidos__IdProv__7AD30ADE" Association="Self.FK__Partidos__IdProv__7AD30ADE">
+            <End Role="Provincias" EntitySet="Provincias" />
+            <End Role="Partidos" EntitySet="Partidos" />
           </AssociationSet>
           <AssociationSet Name="FK__UsuariosR__IdFer__4303B307" Association="Self.FK__UsuariosR__IdFer__4303B307">
             <End Role="FertilizantesPuntosDespacho" EntitySet="FertilizantesPuntosDespacho" />
@@ -12015,7 +12145,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
             <End Role="DetalleAsiento" EntitySet="DetalleAsientos" />
           </AssociationSet>
           <EntitySet Name="CartasDePortes" EntityType="DemoProntoModel.CartasDePorte" />
-          <EntitySet Name="CartasDePorteDetalles" EntityType="DemoProntoModel.CartasDePorteDetalle" />
+          <EntitySet Name="CartasDePorteDetalle_EF" EntityType="DemoProntoModel.CartasDePorteDetalle_EF" />
           <EntitySet Name="CartasDePorteReglasDeFacturacions" EntityType="DemoProntoModel.CartasDePorteReglasDeFacturacion" />
           <EntitySet Name="CartasPorteAcopios" EntityType="DemoProntoModel.CartasPorteAcopio" />
           <EntitySet Name="CartasDePorteHistoricoes" EntityType="DemoProntoModel.CartasDePorteHistorico" />
@@ -12027,7 +12157,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           </AssociationSet>
           <AssociationSet Name="FK__CartasDeP__IdCar__5A512CB3" Association="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3">
             <End Role="CartasDePorte" EntitySet="CartasDePortes" />
-            <End Role="CartasDePorteDetalle" EntitySet="CartasDePorteDetalles" />
+            <End Role="CartasDePorteDetalle" EntitySet="CartasDePorteDetalle_EF" />
           </AssociationSet>
           <AssociationSet Name="FK__CartasDeP__IdCor__7D7A6D5F" Association="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F">
             <End Role="Vendedor" EntitySet="Vendedores" />
@@ -12184,7 +12314,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
             <End Role="PlazosFijo" EntitySet="PlazosFijos" />
             <End Role="DetallePlazosFijosRubrosContable" EntitySet="DetallePlazosFijosRubrosContables" />
           </AssociationSet>
-          <EntitySet Name="Calidades" EntityType="DemoProntoModel.Calidade" />
+          <EntitySet Name="Calidade_EF" EntityType="DemoProntoModel.Calidade_EF" />
           <EntitySet Name="CDPEstablecimientos" EntityType="DemoProntoModel.CDPEstablecimiento" />
           <EntitySet Name="CDPHumedades" EntityType="DemoProntoModel.CDPHumedade" />
           <EntitySet Name="WilliamsDestinos" EntityType="DemoProntoModel.WilliamsDestino" />
@@ -12232,6 +12362,23 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <AssociationSet Name="FK__UsuariosR__IdFer__47C86824" Association="DemoProntoModel.FK__UsuariosR__IdFer__47C86824">
             <End Role="FertilizantesTiposDespacho" EntitySet="FertilizantesTiposDespachoes" />
             <End Role="UsuariosRelacionFertilizantesTiposDespacho" EntitySet="UsuariosRelacionFertilizantesTiposDespachoes" />
+          </AssociationSet>
+          <EntitySet Name="Logs" EntityType="DemoProntoModel.Log" />
+          <EntitySet Name="Partidos" EntityType="DemoProntoModel.Partido" />
+          <EntitySet Name="wTempCartasPorteFacturacionAutomatica_EF" EntityType="DemoProntoModel.wTempCartasPorteFacturacionAutomatica_EF" />
+          <EntitySet Name="wGrillaPersistencia_EF" EntityType="DemoProntoModel.wGrillaPersistencia_EF" />
+          <AssociationSet Name="FK__Localidad__IdPar__7BC72F17" Association="DemoProntoModel.FK__Localidad__IdPar__7BC72F17">
+            <End Role="Partido" EntitySet="Partidos" />
+            <End Role="Localidad" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partidos__IdProv__7AD30ADE" Association="DemoProntoModel.FK__Partidos__IdProv__7AD30ADE">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Partido" EntitySet="Partidos" />
+          </AssociationSet>
+          <EntitySet Name="CartasDePorteLogDeOCRs" EntityType="DemoProntoModel.CartasDePorteLogDeOCR" />
+          <AssociationSet Name="FK__CartasDeP__IdCar__5245F697" Association="DemoProntoModel.FK__CartasDeP__IdCar__5245F697">
+            <End Role="CartasDePorte" EntitySet="CartasDePortes" />
+            <End Role="CartasDePorteLogDeOCR" EntitySet="CartasDePorteLogDeOCRs" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -12778,6 +12925,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <NavigationProperty Name="CompradorRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador" FromRole="Requerimiento" ToRole="Empleado" />
           <NavigationProperty Name="DioPorCumplidoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido" FromRole="Requerimiento" ToRole="Empleado" />
           <NavigationProperty Name="SolicitoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito" FromRole="Requerimiento" ToRole="Empleado" />
+          <Property Name="Detalle2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Sector">
           <Key>
@@ -14269,6 +14417,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <NavigationProperty Name="FertilizantesCupos" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__49E5BAC0" FromRole="Localidad" ToRole="FertilizantesCupos" />
           <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" FromRole="Localidad" ToRole="FertilizantesCupos" />
           <NavigationProperty Name="WilliamsDestinos" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__3EDE1C68" FromRole="Localidad" ToRole="WilliamsDestino" />
+          <NavigationProperty Name="Partido1" Relationship="DemoProntoModel.FK__Localidad__IdPar__7BC72F17" FromRole="Localidad" ToRole="Partido" />
         </EntityType>
         <EntityType Name="Moneda">
           <Key>
@@ -14357,6 +14506,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_IdProvinciaDestino" FromRole="Provincia" ToRole="NotasCredito" />
           <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_IdProvinciaDestino" FromRole="Provincia" ToRole="NotasDebito" />
           <NavigationProperty Name="WilliamsDestinos" Relationship="DemoProntoModel.FK__WilliamsD__IdPro__3DE9F82F" FromRole="Provincia" ToRole="WilliamsDestino" />
+          <NavigationProperty Name="Partidos" Relationship="DemoProntoModel.FK__Partidos__IdProv__7AD30ADE" FromRole="Provincia" ToRole="Partido" />
         </EntityType>
         <EntityType Name="TiposComprobante">
           <Key>
@@ -15062,6 +15212,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="ResolucionAfip3668" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Estados_Proveedores" Relationship="DemoProntoModel.FK_Proveedores_EstadosProveedores" FromRole="Proveedor" ToRole="Estados_Proveedore" />
           <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ExcluirDeActualizacionIvaRG18" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -15090,6 +15241,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <NavigationProperty Name="DefinicionArticulos" Relationship="DemoProntoModel.FK_DefinicionArticulos_Rubros" FromRole="Rubro" ToRole="DefinicionArticulo" />
           <Property Type="Int32" Name="Codigo" />
           <Property Name="IdTipoOperacion" Type="Int32" />
+          <Property Name="AsignarIPsObradorCentral" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Articulos_Rubros">
           <End Type="DemoProntoModel.Rubro" Role="Rubro" Multiplicity="0..1" />
@@ -21938,8 +22090,9 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <Property Name="ClienteAcondicionador" Type="Int32" />
           <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="CartasDePorte" ToRole="Cliente" />
           <Property Name="MotivoRechazo" Type="Int32" />
+          <NavigationProperty Name="CartasDePorteLogDeOCRs" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" FromRole="CartasDePorte" ToRole="CartasDePorteLogDeOCR" />
         </EntityType>
-        <EntityType Name="CartasDePorteDetalle">
+        <EntityType Name="CartasDePorteDetalle_EF">
           <Key>
             <PropertyRef Name="IdCartaDePorteDetalle" />
           </Key>
@@ -22231,7 +22384,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
         </Association>
         <Association Name="FK__CartasDeP__IdCar__5A512CB3">
           <End Type="DemoProntoModel.CartasDePorte" Role="CartasDePorte" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.CartasDePorteDetalle" Role="CartasDePorteDetalle" Multiplicity="*" />
+          <End Type="DemoProntoModel.CartasDePorteDetalle_EF" Role="CartasDePorteDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CartasDePorte">
               <PropertyRef Name="IdCartaDePorte" />
@@ -22774,7 +22927,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Calidade">
+        <EntityType Name="Calidade_EF">
           <Key>
             <PropertyRef Name="IdCalidad" />
           </Key>
@@ -23022,6 +23175,143 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
             </Principal>
             <Dependent Role="UsuariosRelacionFertilizantesTiposDespacho">
               <PropertyRef Name="IdFertilizantesTiposDespacho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="IdLog" />
+          </Key>
+          <Property Name="Tipo" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IdComprobante" Type="Int32" />
+          <Property Name="IdDetalleComprobante" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AuxString1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxString2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxString3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxString4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxString5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxDate1" Type="DateTime" Precision="3" />
+          <Property Name="AuxDate2" Type="DateTime" Precision="3" />
+          <Property Name="AuxDate3" Type="DateTime" Precision="3" />
+          <Property Name="AuxDate4" Type="DateTime" Precision="3" />
+          <Property Name="AuxDate5" Type="DateTime" Precision="3" />
+          <Property Name="AuxNum1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AuxNum2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AuxNum3" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AuxNum4" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AuxNum5" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Partido">
+          <Key>
+            <PropertyRef Name="IdPartido" />
+          </Key>
+          <Property Name="IdPartido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia" Type="Int32" />
+          <Property Name="CodigoONCCA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Localidades" Relationship="DemoProntoModel.FK__Localidad__IdPar__7BC72F17" FromRole="Partido" ToRole="Localidad" />
+          <NavigationProperty Name="Provincia" Relationship="DemoProntoModel.FK__Partidos__IdProv__7AD30ADE" FromRole="Partido" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="wTempCartasPorteFacturacionAutomatica_EF">
+          <Key>
+            <PropertyRef Name="IdTempCartasPorteFacturacionAutomatica" />
+          </Key>
+          <Property Name="IdTempCartasPorteFacturacionAutomatica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSesion" Type="Int32" />
+          <Property Name="IdCartaDePorte" Type="Int32" />
+          <Property Name="IdFacturarselaA" Type="Int32" />
+          <Property Name="ColumnaTilde" Type="Int32" />
+          <Property Name="IdArticulo" Type="Int32" />
+          <Property Name="NumeroCartaDePorte" Type="Int64" />
+          <Property Name="SubNumeroVagon" Type="Int32" />
+          <Property Name="SubnumeroDeFacturacion" Type="Int32" />
+          <Property Name="FechaArribo" Type="DateTime" Precision="3" />
+          <Property Name="FechaDescarga" Type="DateTime" Precision="3" />
+          <Property Name="FacturarselaA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Confirmado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdCodigoIVA" Type="Int32" />
+          <Property Name="CUIT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClienteSeparado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TarifaFacturada" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Producto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KgNetos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdCorredor" Type="Int32" />
+          <Property Name="IdTitular" Type="Int32" />
+          <Property Name="IdIntermediario" Type="Int32" />
+          <Property Name="IdRComercial" Type="Int32" />
+          <Property Name="Titular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RComercial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Corredor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Destinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Procedcia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinoDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdDestino" Type="Int32" />
+        </EntityType>
+        <EntityType Name="wGrillaPersistencia_EF">
+          <Key>
+            <PropertyRef Name="IdRenglon" />
+            <PropertyRef Name="Sesion" />
+            <PropertyRef Name="Tilde" />
+          </Key>
+          <Property Name="IdRenglon" Type="Int32" Nullable="false" />
+          <Property Name="Sesion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tilde" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Localidad__IdPar__7BC72F17">
+          <End Type="DemoProntoModel.Partido" Role="Partido" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Localidad" Role="Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partido">
+              <PropertyRef Name="IdPartido" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="IdPartido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partidos__IdProv__7AD30ADE">
+          <End Type="DemoProntoModel.Provincia" Role="Provincia" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Partido" Role="Partido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Partido">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CartasDePorteLogDeOCR">
+          <Key>
+            <PropertyRef Name="IdCartasDePorteLog" />
+          </Key>
+          <Property Name="IdCartasDePorteLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroCarta" Type="Int32" />
+          <Property Name="IdCartaDePorte" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TextoAux1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TextoAux2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IntAux1" Type="Int32" />
+          <Property Name="IntAux2" Type="Int32" />
+          <NavigationProperty Name="CartasDePorte" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" FromRole="CartasDePorteLogDeOCR" ToRole="CartasDePorte" />
+        </EntityType>
+        <Association Name="FK__CartasDeP__IdCar__5245F697">
+          <End Type="DemoProntoModel.CartasDePorte" Role="CartasDePorte" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.CartasDePorteLogDeOCR" Role="CartasDePorteLogDeOCR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CartasDePorte">
+              <PropertyRef Name="IdCartaDePorte" />
+            </Principal>
+            <Dependent Role="CartasDePorteLogDeOCR">
+              <PropertyRef Name="IdCartaDePorte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -23421,6 +23711,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
             <ScalarProperty Name="DiasLiquidacionCertificados" ColumnName="DiasLiquidacionCertificados" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Requerimientos"><EntityTypeMapping TypeName="DemoProntoModel.Requerimiento"><MappingFragment StoreEntitySet="Requerimientos">
+                <ScalarProperty Name="Detalle2" ColumnName="Detalle2" />
                 <ScalarProperty Name="SalidasMateriales" ColumnName="SalidasMateriales" />
                 <ScalarProperty Name="Recepciones" ColumnName="Recepciones" />
                 <ScalarProperty Name="Pedidos" ColumnName="Pedidos" />
@@ -24786,6 +25077,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="ExcluirDeActualizacionIvaRG18" ColumnName="ExcluirDeActualizacionIvaRG18" />
                 <ScalarProperty Name="ExcluirDelCircuitoDeFirmasComprobantes" ColumnName="ExcluirDelCircuitoDeFirmasComprobantes" />
                 <ScalarProperty Name="ResolucionAfip3668" ColumnName="ResolucionAfip3668" />
                 <ScalarProperty Name="FechaInicialControlComprobantes" ColumnName="FechaInicialControlComprobantes" />
@@ -24911,6 +25203,7 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
           <EntitySetMapping Name="Rubros">
             <EntityTypeMapping TypeName="DemoProntoModel.Rubro">
               <MappingFragment StoreEntitySet="Rubros">
+                <ScalarProperty Name="AsignarIPsObradorCentral" ColumnName="AsignarIPsObradorCentral" />
                 <ScalarProperty Name="IdTipoOperacion" ColumnName="IdTipoOperacion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdCuentaCompras10" ColumnName="IdCuentaCompras10" />
@@ -28949,8 +29242,8 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CartasDePorteDetalles">
-            <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorteDetalle">
+          <EntitySetMapping Name="CartasDePorteDetalle_EF">
+            <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorteDetalle_EF">
               <MappingFragment StoreEntitySet="CartasDePorteDetalle">
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="Campo" ColumnName="Campo" />
@@ -29289,8 +29582,8 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Calidades">
-            <EntityTypeMapping TypeName="DemoProntoModel.Calidade">
+          <EntitySetMapping Name="Calidade_EF">
+            <EntityTypeMapping TypeName="DemoProntoModel.Calidade_EF">
               <MappingFragment StoreEntitySet="Calidades">
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdCalidad" ColumnName="IdCalidad" />
@@ -29415,6 +29708,107 @@ warning 6013: The table/view 'Pronto.dbo.LogImpuestos' does not have a primary k
                 <ScalarProperty Name="UsuarioEnBaseBDLMaster" ColumnName="UsuarioEnBaseBDLMaster" />
                 <ScalarProperty Name="IdFertilizantesTiposDespacho" ColumnName="IdFertilizantesTiposDespacho" />
                 <ScalarProperty Name="IdUsuariosRelacionFertilizantesTiposDespacho" ColumnName="IdUsuariosRelacionFertilizantesTiposDespacho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="DemoProntoModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="IdLog" ColumnName="IdLog" />
+                <ScalarProperty Name="AuxNum5" ColumnName="AuxNum5" />
+                <ScalarProperty Name="AuxNum4" ColumnName="AuxNum4" />
+                <ScalarProperty Name="AuxNum3" ColumnName="AuxNum3" />
+                <ScalarProperty Name="AuxNum2" ColumnName="AuxNum2" />
+                <ScalarProperty Name="AuxNum1" ColumnName="AuxNum1" />
+                <ScalarProperty Name="AuxDate5" ColumnName="AuxDate5" />
+                <ScalarProperty Name="AuxDate4" ColumnName="AuxDate4" />
+                <ScalarProperty Name="AuxDate3" ColumnName="AuxDate3" />
+                <ScalarProperty Name="AuxDate2" ColumnName="AuxDate2" />
+                <ScalarProperty Name="AuxDate1" ColumnName="AuxDate1" />
+                <ScalarProperty Name="AuxString5" ColumnName="AuxString5" />
+                <ScalarProperty Name="AuxString4" ColumnName="AuxString4" />
+                <ScalarProperty Name="AuxString3" ColumnName="AuxString3" />
+                <ScalarProperty Name="AuxString2" ColumnName="AuxString2" />
+                <ScalarProperty Name="AuxString1" ColumnName="AuxString1" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdDetalleComprobante" ColumnName="IdDetalleComprobante" />
+                <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partidos">
+            <EntityTypeMapping TypeName="DemoProntoModel.Partido">
+              <MappingFragment StoreEntitySet="Partidos">
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="CodigoONCCA" ColumnName="CodigoONCCA" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPartido" ColumnName="IdPartido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wTempCartasPorteFacturacionAutomatica_EF">
+            <EntityTypeMapping TypeName="DemoProntoModel.wTempCartasPorteFacturacionAutomatica_EF">
+              <MappingFragment StoreEntitySet="wTempCartasPorteFacturacionAutomatica">
+                <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
+                <ScalarProperty Name="DestinoDesc" ColumnName="DestinoDesc" />
+                <ScalarProperty Name="Procedcia" ColumnName="Procedcia" />
+                <ScalarProperty Name="Destinatario" ColumnName="Destinatario" />
+                <ScalarProperty Name="Corredor" ColumnName="Corredor" />
+                <ScalarProperty Name="RComercial" ColumnName="RComercial" />
+                <ScalarProperty Name="Titular" ColumnName="Titular" />
+                <ScalarProperty Name="IdRComercial" ColumnName="IdRComercial" />
+                <ScalarProperty Name="IdIntermediario" ColumnName="IdIntermediario" />
+                <ScalarProperty Name="IdTitular" ColumnName="IdTitular" />
+                <ScalarProperty Name="IdCorredor" ColumnName="IdCorredor" />
+                <ScalarProperty Name="KgNetos" ColumnName="KgNetos" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="TarifaFacturada" ColumnName="TarifaFacturada" />
+                <ScalarProperty Name="ClienteSeparado" ColumnName="ClienteSeparado" />
+                <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+                <ScalarProperty Name="IdCodigoIVA" ColumnName="IdCodigoIVA" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+                <ScalarProperty Name="FacturarselaA" ColumnName="FacturarselaA" />
+                <ScalarProperty Name="FechaDescarga" ColumnName="FechaDescarga" />
+                <ScalarProperty Name="FechaArribo" ColumnName="FechaArribo" />
+                <ScalarProperty Name="SubnumeroDeFacturacion" ColumnName="SubnumeroDeFacturacion" />
+                <ScalarProperty Name="SubNumeroVagon" ColumnName="SubNumeroVagon" />
+                <ScalarProperty Name="NumeroCartaDePorte" ColumnName="NumeroCartaDePorte" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="ColumnaTilde" ColumnName="ColumnaTilde" />
+                <ScalarProperty Name="IdFacturarselaA" ColumnName="IdFacturarselaA" />
+                <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
+                <ScalarProperty Name="IdSesion" ColumnName="IdSesion" />
+                <ScalarProperty Name="IdTempCartasPorteFacturacionAutomatica" ColumnName="IdTempCartasPorteFacturacionAutomatica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wGrillaPersistencia_EF">
+            <EntityTypeMapping TypeName="DemoProntoModel.wGrillaPersistencia_EF">
+              <MappingFragment StoreEntitySet="wGrillaPersistencia">
+                <ScalarProperty Name="Tilde" ColumnName="Tilde" />
+                <ScalarProperty Name="Sesion" ColumnName="Sesion" />
+                <ScalarProperty Name="IdRenglon" ColumnName="IdRenglon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartasDePorteLogDeOCRs">
+            <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorteLogDeOCR">
+              <MappingFragment StoreEntitySet="CartasDePorteLogDeOCR">
+                <ScalarProperty Name="IntAux2" ColumnName="IntAux2" />
+                <ScalarProperty Name="IntAux1" ColumnName="IntAux1" />
+                <ScalarProperty Name="TextoAux2" ColumnName="TextoAux2" />
+                <ScalarProperty Name="TextoAux1" ColumnName="TextoAux1" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
+                <ScalarProperty Name="NumeroCarta" ColumnName="NumeroCarta" />
+                <ScalarProperty Name="IdCartasDePorteLog" ColumnName="IdCartasDePorteLog" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
