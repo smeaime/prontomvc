@@ -70,7 +70,7 @@ namespace ProntoMVC.Controllers
 
 
             MembershipUser membershipUser;
-            membershipUser = Membership.GetUser(usuario);
+            membershipUser = ostatic Membership.GetUser(usuario);
 
             //var rol = Roles.GetRolesForUser(e.CommandArgument.ToString);
 
@@ -298,7 +298,7 @@ namespace ProntoMVC.Controllers
             MembershipUser membershipUser;
             if (usuario == "")
             {
-                membershipUser = Membership.GetUser();
+                membershipUser = ostatic Membership.GetUser();
             }
             else
             {
