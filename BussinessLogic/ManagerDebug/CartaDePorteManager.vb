@@ -685,6 +685,8 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
+
             Return q.IdTransportista
         End If
 
@@ -725,6 +727,8 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.Nombre, SC)
+
             Return q.IdChofer
         End If
 
@@ -788,10 +792,12 @@ Public Class CartaDePorteManager
                 If a.Count = 0 Then
                     Return 0
                 Else
+                    CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
                     Return a(0).IdWilliamsDestino
                 End If
 
             Else
+                CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
                 Return q(0).dest.IdWilliamsDestino
             End If
 
@@ -843,8 +849,13 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
             Return q.IdCliente
         End If
+
+
+
+
 
         'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
 
@@ -853,6 +864,35 @@ Public Class CartaDePorteManager
 
 
     End Function
+
+
+    Public Shared Function CrearEquivalencia(palabra As String, traduccion As String, SC As String)
+
+        If palabra = traduccion Then Return
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.equi Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.Cliente
+                q.RazonSocial = RazonSocial
+                q.Cuit = cuit
+                'acá había un insertonsubmit
+                db.Clientes.Add(q)
+                db.SaveChanges()
+                Return q.IdCliente
+            Else
+                Return 0
+            End If
+    End Function
+
+
+
+
 
     Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
@@ -889,6 +929,8 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
+
             Return q.IdVendedor
         End If
 
@@ -8412,6 +8454,9 @@ Public Class CartaDePorteManager
                     If myCartaDePorte.Id = -1 And myCartaDePorte.SubnumeroDeFacturacion = -1 Then myCartaDePorte.SubnumeroDeFacturacion = 0
                     myCartaDePorte.Id = CartaDePorteId
                     CrearleDuplicadaConEl_FacturarA_Indicado(SC, myCartaDePorte)
+
+                    'al original hay que marcarle el FacturarA como usando el automatico
+                    myCartaDePorte.IdClienteAFacturarle = FacturarA_Automatico(SC, myCartaDePorte)
 
 
                     'arreglar esta galletita
