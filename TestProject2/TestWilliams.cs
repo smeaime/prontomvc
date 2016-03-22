@@ -199,29 +199,10 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void EquivalenciasOCR_18223()
         {
-            ddsd
-
-
+           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\LoteDe10.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\Nueva carpeta.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02102016173229.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\tandabuena.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\doc02152016123436.zip";
-            zipFile = @"C:\Users\Administrador\Desktop\bien giradas\bien giradas.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\patasarriba.zip";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016135519.tif";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02172016094547.tif";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\doc02182016085814.tif";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote 23feb094434 prueba1\doc02232016091830.tif";
-            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\pv4 buenas\pv4 buenas.zip";
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote 21mar101631 prueba1 PV1\prueba sistema.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -282,6 +263,10 @@ namespace ProntoMVC.Tests
 
 
 
+            string archivoExcel = excels[0];
+            
+
+            int m_IdMaestro = 0;
 
                          string log = "";
             //hay que pasar el formato como parametro 
