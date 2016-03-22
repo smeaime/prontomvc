@@ -146,6 +146,9 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdTipoOperacion { get; set; }
         public string FueEnviadoCorreoConFacturaElectronica { get; set; }
         public Nullable<int> IdClienteObservaciones { get; set; }
+        public string BienesOServicios { get; set; }
+        public Nullable<System.DateTime> FechaInicioServicio { get; set; }
+        public Nullable<System.DateTime> FechaFinServicio { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }

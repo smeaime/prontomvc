@@ -20,8 +20,64 @@ namespace ProntoMVC.Controllers
     public partial class AccountController : Controller // este no creo que deba heredar ProntoBaseController, no? -por qué?
     {
 
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        public Generales.IStaticMembershipService oStaticMembershipService; // como no heredo prontobasecontroller, tengo que crearla
+
+
+
+        protected override void Initialize(System.Web.Routing.RequestContext rc)
+        {
+            //MiniProfiler profiler = MiniProfiler.Current;
+
+            base.Initialize(rc);
+            oStaticMembershipService = new Generales.StaticMembershipService();
+            ViewBag.BasePronto = this.Session["BasePronto"];
+
+        }
+
+
+
+
+
+
+
+        private const int PageSize = 200;
+        private const string ResetPasswordBody = "Your new password is: ";
+        private const string ResetPasswordSubject = "Your New Password";
+        private readonly MvcMembership.IRolesService _rolesService;
+        private readonly MvcMembership.ISmtpClient _smtpClient;
+        private readonly MvcMembership.Settings.IMembershipSettings _membershipSettings;
+        private readonly MvcMembership.IUserService _userService;
+        private readonly MvcMembership.IPasswordService _passwordService;
+
+
+        /// <summary>
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+        /// <returns></returns>
+
+
+
+
+
+
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual  bool DBConnectionStatus()
+        public virtual bool DBConnectionStatus()
         {
 
             // var sc=   sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid());
@@ -30,8 +86,8 @@ namespace ProntoMVC.Controllers
 
             //var sConexSQL = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
 
-          
-            
+
+
 
             try
             {
@@ -60,7 +116,7 @@ namespace ProntoMVC.Controllers
 
         // set UltimaBaseElegida();
         //get UltimaBaseAccedidaa() 
-        public void GrabarUltimaBaseAccedida(string usuario, string sBase)
+        public void GrabarUltimaBaseAccedida(string usuario, string sBase, Generales.IStaticMembershipService ServicioMembership)
         {
 
             if (sBase == "")
@@ -70,7 +126,7 @@ namespace ProntoMVC.Controllers
 
 
             MembershipUser membershipUser;
-            membershipUser = ostatic Membership.GetUser(usuario);
+            membershipUser = ServicioMembership.GetUser();
 
             //var rol = Roles.GetRolesForUser(e.CommandArgument.ToString);
 
@@ -111,7 +167,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            var emp = (from n in pronto.Empleados select new { n.UsuarioNT, n.IdEmpleado , n.Nombre }).ToList();
+            var emp = (from n in pronto.Empleados select new { n.UsuarioNT, n.IdEmpleado, n.Nombre }).ToList();
 
             var usersext = (from u in bdlmaster.aspnet_Users
                             join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
@@ -183,7 +239,7 @@ namespace ProntoMVC.Controllers
                         {
                             IdFactura = new Guid(),
                             UserId = new Guid(),
-                            UserName =  (e.UsuarioNT ?? "")=="" ?  "sin usuario [" + e.Nombre + "]"  :  e.UsuarioNT   ,
+                            UserName = (e.UsuarioNT ?? "") == "" ? "sin usuario [" + e.Nombre + "]" : e.UsuarioNT,
                             IdEmpleado = e.IdEmpleado,
                             leyenda = "sin usuario"
                         }
@@ -243,7 +299,7 @@ namespace ProntoMVC.Controllers
                 //        .Where(campo)
                 //.OrderBy(sidx + " " + sord)
                         .OrderBy(x => x.UserName).ThenByDescending(x => x.UserId)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -298,7 +354,7 @@ namespace ProntoMVC.Controllers
             MembershipUser membershipUser;
             if (usuario == "")
             {
-                membershipUser = ostatic Membership.GetUser();
+                membershipUser = oStaticMembershipService.GetUser();
             }
             else
             {
@@ -449,8 +505,8 @@ namespace ProntoMVC.Controllers
                     Response.Cookies.Add(ck);
 
 
-                    kñlkñllk
-                    int b = Generales.BasesDelUsuario((Guid)Membership.GetUser(model.UserName).ProviderUserKey);
+
+                    int b = Generales.BasesDelUsuario((Guid) oStaticMembershipService.GetUser().ProviderUserKey);
 
                     if (true)
                     {
@@ -487,7 +543,7 @@ namespace ProntoMVC.Controllers
                         if (false)
                         {
                             this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser(model.UserName).ProviderUserKey);
-                            GrabarUltimaBaseAccedida(model.UserName, this.Session["BasePronto"].ToString());
+                            GrabarUltimaBaseAccedida(model.UserName, this.Session["BasePronto"].ToString(),oStaticMembershipService);
                         }
                         else
                         {
@@ -618,44 +674,6 @@ namespace ProntoMVC.Controllers
 
 
 
-        private const int PageSize = 200;
-        private const string ResetPasswordBody = "Your new password is: ";
-        private const string ResetPasswordSubject = "Your New Password";
-        private readonly MvcMembership.IRolesService _rolesService;
-        private readonly MvcMembership.ISmtpClient _smtpClient;
-        private readonly MvcMembership.Settings.IMembershipSettings _membershipSettings;
-        private readonly MvcMembership.IUserService _userService;
-        private readonly MvcMembership.IPasswordService _passwordService;
-
-
-
-        protected override void Initialize(System.Web.Routing.RequestContext rc)
-        {
-            /* http://stackoverflow.com/questions/3180291/mvc2-logonmodel-not-found */
-
-            base.Initialize(rc);
-
-            string sc;
-            try
-            {
-               // if (oStaticMembershipService.GetUser() != null) sc = Generales.sCadenaConex(rc);
-
-                //ViewData["BasePronto"] = sBasePronto;
-                ViewBag.BasePronto = this.Session["BasePronto"];
-                // this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey);
-
-                //}
-                // string sss = this.Session["BasePronto"].ToString();
-                // sc = Generales.sCadenaConex(sss);
-                //    return RedirectToAction("Index", "Home");
-                //if (sc == null) throw new Exception("Falta la cadena de conexion a la base Pronto");
-            }
-            catch (Exception)
-            {
-                //return;
-                //throw new Exception("Falta la cadena de conexion a la base Pronto");
-            }
-        }
 
 
 
@@ -1502,12 +1520,12 @@ namespace ProntoMVC.Controllers
         {
             //probar que conecta
 
-           
+
             // tendría que haber un initialize que creara:
             // oStaticMembershipService = new Generales.StaticMembershipService();
 
 
-            string sc = Generales.sCadenaConex(sBase, new Generales.StaticMembershipService());
+            string sc = Generales.sCadenaConex(sBase, oStaticMembershipService);
 
 
 
@@ -1566,7 +1584,7 @@ namespace ProntoMVC.Controllers
 
 
 
-                GrabarUltimaBaseAccedida(Membership.GetUser().UserName, sBase);
+                GrabarUltimaBaseAccedida(oStaticMembershipService.GetUser().UserName, sBase, oStaticMembershipService);
 
                 this.Session["BasePronto"] = sBase;
                 return RedirectToAction("Index", "Home");

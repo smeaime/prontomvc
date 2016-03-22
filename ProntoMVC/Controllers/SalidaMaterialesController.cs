@@ -192,7 +192,7 @@ namespace ProntoMVC.Controllers
                 if ((x.IdMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin moneda"; }
                 if ((x.CostoUnitario ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin costo"; }
 
-                mIdRubro = db.Articulos.Where(y => y.IdArticulo == x.IdArticulo).Select(y => y.IdRubro).FirstOrDefault() ?? 0;
+                mIdRubro = db.Articulos.Where(y => y.IdArticulo == x.IdArticulo).Select(y => y.IdRubro).FirstOrDefault() ;
             }
 
             sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
