@@ -23006,7 +23006,8 @@ Public Class LogicaImportador
 
             If .Anulada = "SI" Then
                 ErrHandler2.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
-                LogPronto(SC, .Id, "IMPANU", Session(SESSIONPRONTO_UserName))
+                Dim Usuario As String = IIf(Session Is Nothing, "", Session(SESSIONPRONTO_UserName))
+                LogPronto(SC, .Id, "IMPANU", Usuario)
                 CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
 
                 .Anulada = "NO"
