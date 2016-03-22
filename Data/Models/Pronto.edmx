@@ -14084,8 +14084,6 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="CircuitoFirmasCompleto" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ConfirmadoPorWeb" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="FechaCierreCompulsa" Precision="3" />
-          <Property Type="String" Name="NombreUsuarioWeb" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="FechaRespuestaweb" Precision="3" />
           <NavigationProperty Name="Condiciones_Compra" Relationship="DemoProntoModel.FK_Presupuestos_Condiciones_Compra" FromRole="Presupuesto" ToRole="Condiciones_Compra" />
           <NavigationProperty Name="DetallePresupuestos" Relationship="DemoProntoModel.FK_DetallePresupuestos_Presupuestos" FromRole="Presupuesto" ToRole="DetallePresupuesto" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Presupuestos_Monedas" FromRole="Presupuesto" ToRole="Moneda" />
