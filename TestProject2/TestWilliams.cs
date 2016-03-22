@@ -197,9 +197,39 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void ModicarCartaConIdApartirDelExcelDelFlexicapture_18266()
+        {
+
+
+
+            string archivoExcel = "";
+
+
+            int m_IdMaestro = 0;
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+        }
+
+
+
+        [TestMethod]
         public void EquivalenciasOCR_18223()
         {
-           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote 21mar101631 prueba1 PV1\prueba sistema.zip";
@@ -264,11 +294,11 @@ namespace ProntoMVC.Tests
 
 
             string archivoExcel = excels[0];
-            
+
 
             int m_IdMaestro = 0;
 
-                         string log = "";
+            string log = "";
             //hay que pasar el formato como parametro 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
@@ -330,7 +360,7 @@ namespace ProntoMVC.Tests
         public void MailDeInformeDow_18085()
         {
 
-        //  https://prontoweb.williamsentregas.com.ar/ProntoWeb/Reporte.aspx?ReportName=Listado%20DOW
+            //  https://prontoweb.williamsentregas.com.ar/ProntoWeb/Reporte.aspx?ReportName=Listado%20DOW
 
             var fechadesde = new DateTime(2014, 1, 1);
             var fechahasta = new DateTime(2014, 6, 30);
@@ -378,7 +408,7 @@ namespace ProntoMVC.Tests
                                                    "", ref sError2, inlinePNG, inlinePNG2);
 
 
-            
+
             System.Diagnostics.Process.Start(output);
 
         }
