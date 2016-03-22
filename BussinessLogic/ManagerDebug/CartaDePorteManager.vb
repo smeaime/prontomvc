@@ -792,12 +792,12 @@ Public Class CartaDePorteManager
                 If a.Count = 0 Then
                     Return 0
                 Else
-                    CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
+                    CrearEquivalencia(RazonSocial, a(0).nombre, SC)
                     Return a(0).IdWilliamsDestino
                 End If
 
             Else
-                CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
+                CrearEquivalencia(RazonSocial, q(0).dest.Descripcion, SC)
                 Return q(0).dest.IdWilliamsDestino
             End If
 
@@ -868,26 +868,25 @@ Public Class CartaDePorteManager
 
     Public Shared Function CrearEquivalencia(palabra As String, traduccion As String, SC As String)
 
-        If palabra = traduccion Then Return
+        If palabra = traduccion Then Return 0
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.equi Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+        Dim q = (From c In db.DiccionarioEquivalencias Where c.Palabra = palabra).FirstOrDefault()
 
 
         If q Is Nothing Then
-            If RazonSocial.Trim.Length > 4 Then
-                q = New ProntoMVC.Data.Models.Cliente
-                q.RazonSocial = RazonSocial
-                q.Cuit = cuit
-                'acá había un insertonsubmit
-                db.Clientes.Add(q)
-                db.SaveChanges()
-                Return q.IdCliente
-            Else
-                Return 0
-            End If
+            q = New ProntoMVC.Data.Models.DiccionarioEquivalencia
+            q.Palabra = palabra
+            q.Traduccion = traduccion
+
+            db.DiccionarioEquivalencias.Add(q)
+            db.SaveChanges()
+        End If
+
+        Return q.IdDiccionarioEquivalencia
+
     End Function
 
 
@@ -929,7 +928,7 @@ Public Class CartaDePorteManager
             End If
 
         Else
-            CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
+            CrearEquivalencia(RazonSocial, q.Nombre, SC)
 
             Return q.IdVendedor
         End If
@@ -7055,6 +7054,55 @@ Public Class CartaDePorteManager
         End Try
         Return False
     End Function
+
+
+
+    Public Shared Function FacturarA_Automatico(ByVal SC As String, ByVal oCDP As CartaDePorte) As Integer
+
+
+        'Dim idclienteexportador As Integer
+
+        'If myCartaDePorte.Entregador > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.Entregador).EsClienteExportador = "SI" Then
+        '    idclienteexportador = myCartaDePorte.Entregador
+        'End If
+        'If myCartaDePorte.CuentaOrden1 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1).EsClienteExportador = "SI" Then
+        '    idclienteexportador = myCartaDePorte.CuentaOrden1
+        'End If
+        'If myCartaDePorte.CuentaOrden2 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2).EsClienteExportador = "SI" Then
+        '    idclienteexportador = myCartaDePorte.CuentaOrden2
+        'End If
+
+
+        'sssss()
+
+        'CartasDePorteReglasDeFacturacion()
+
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+        Dim q1 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.Titular And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
+        Dim q2 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.CuentaOrden1 And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
+        Dim q3 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.CuentaOrden1 And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
+
+        Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular _
+                                                                And x.PuntoVenta = IdClienteEquivalenteDelIdVendedor(oCDP.Corredor, SC) And _
+                                                                x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
+
+        Dim q5 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.Titular And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
+
+        If q1 IsNot Nothing Then Return q1.IdCliente
+
+
+
+
+
+
+
+    End Function
+
+
+
+
+
 
     Public Shared Sub CrearleDuplicadaConEl_FacturarA_Indicado(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte)
         '        * La magia quedaría así: el usuario llena la carta, y pone grabar...

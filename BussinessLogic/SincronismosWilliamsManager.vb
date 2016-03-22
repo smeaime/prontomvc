@@ -19829,7 +19829,8 @@ Namespace Pronto.ERP.Bll
 
 
             'PrintLine(nF, "CA|C|000000534543|00000004568741|20151001|20151030|30503508725|30503508725||30503508725|30503508725|30707386076|30503508725|30503508725|S|13||1415||una observacion|S|S|S|S|S|21456|una direccion|31753|12441||una direccion|75316|11111|transport payer commercial|987654|201510010000|mas observaciones|30503508725|30503508725|5,46742E+19|20151001|transfer order by|change address|987123654|||empty1|empty2|empty3|empty4|1000|10|1000|10|75312532||150|a transport truck|a truck trailer|546.32|123.66|S|N|201510010000|a crop quality|order number|a discharge quality observations|DISCHARGED|optionalFied1|optionalFied2|optionalFied3|optionalFied4|HD|0.50||MCV||15.38") 'encabezado
-            'PrintLine(nF, "")
+
+            PrintLine(nF, "")
 
 
             Dim ii As Integer = 0
@@ -20117,7 +20118,7 @@ Namespace Pronto.ERP.Bll
 
 
                     '63	no	Fecha y Hora de Arribo	datetime	Formato aaaaMMddHHmm Ej:201509291130 = 29/09/2015 - 11:30
-                    sb &= .FechaArribo.ToString("yyyyMMddHHmm")
+                    sb &= .FechaDescarga.ToString("yyyyMMddHHmm")
                     sb &= SEPARADOR
 
                     '64	no	Calidad	String{1,17}	Texto entre 1 y 17 caracteres
@@ -20202,7 +20203,7 @@ Namespace Pronto.ERP.Bll
             s &= MonsantoCalidad("MY", carta.Merma, 0)
             s &= MonsantoCalidad("MCV", carta.CalidadMermaConvenidaMerma, carta.CalidadMermaConvenida)
             s &= MonsantoCalidad("MV", carta.CalidadMermaVolatilMerma, carta.CalidadMermaVolatil)
-            s &= MonsantoCalidad("DAÑ", carta.CalidadDanadosMerma, carta.NobleDaniados)
+            s &= MonsantoCalidad("DAN", carta.CalidadDanadosMerma, carta.NobleDaniados)
             s &= MonsantoCalidad("OLR", carta.CalidadObjetablesMerma, carta.NobleObjetables)
             's &= MonsantoCalidad("INS", carta.viv, carta.NobleHectolitrico)
             s &= MonsantoCalidad("CHA", carta.CalidadMermaChamico, carta.NobleChamico)

@@ -70,6 +70,10 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> PorcentajePercepcionIVA { get; set; }
         public Nullable<int> IdDeposito { get; set; }
         public Nullable<int> IdUsuarioAnulacion { get; set; }
+        public string CAE { get; set; }
+        public string RechazoCAE { get; set; }
+        public Nullable<System.DateTime> FechaVencimientoORechazoCAE { get; set; }
+        public Nullable<int> IdIdentificacionCAE { get; set; }
     
         public virtual ICollection<DetalleDevolucione> DetalleDevoluciones { get; set; }
     }
