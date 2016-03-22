@@ -7079,19 +7079,29 @@ Public Class CartaDePorteManager
 
         Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Dim q1 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.Titular And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
-        Dim q2 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.CuentaOrden1 And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
-        Dim q3 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.CuentaOrden1 And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
-
-        Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular _
-                                                                And x.PuntoVenta = IdClienteEquivalenteDelIdVendedor(oCDP.Corredor, SC) And _
-                                                                x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
-
-        Dim q5 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.Titular And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
+        Dim q1 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
 
         If q1 IsNot Nothing Then Return q1.IdCliente
 
+        Dim q2 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.CuentaOrden1 And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoIntermediario = "SI").FirstOrDefault
+        If q2 IsNot Nothing Then Return q2.IdCliente
 
+
+        Dim q3 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.CuentaOrden2 And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoRemcomercial = "SI").FirstOrDefault
+
+        If q3 IsNot Nothing Then Return q3.IdCliente
+
+        Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = IdClienteEquivalenteDelIdVendedor(oCDP.Corredor, SC) _
+                                                                And x.PuntoVenta = oCDP.PuntoVenta And _
+                                                                x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
+        If q4 IsNot Nothing Then Return q4.IdCliente
+
+
+        Dim q5 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Entregador And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
+
+        If q5 IsNot Nothing Then Return q5.IdCliente
+
+        Return 0
 
 
 
