@@ -74,6 +74,9 @@ namespace ProntoMVC.Data.Models
         public string RechazoCAE { get; set; }
         public Nullable<System.DateTime> FechaVencimientoORechazoCAE { get; set; }
         public Nullable<int> IdIdentificacionCAE { get; set; }
+        public string Cliente { get; set; }
+        public string OrigenRegistro { get; set; }
+        public string CuitClienteExterno { get; set; }
     
         public virtual ICollection<DetalleDevolucione> DetalleDevoluciones { get; set; }
     }
