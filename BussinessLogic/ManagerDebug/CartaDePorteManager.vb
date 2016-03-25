@@ -22961,7 +22961,7 @@ Public Class LogicaImportador
         Dim myCartaDePorte As New Pronto.ERP.BO.CartaDePorte
 
 
-
+        If NoValidarColumnas Is Nothing Then NoValidarColumnas = New List(Of String)
 
 
 
@@ -22979,6 +22979,9 @@ Public Class LogicaImportador
         If numeroCarta < 100000000 Then numeroCarta += 500000000
 
 
+        'ver si vino el id en una columna
+        Dim ssss = dr.Item("Auxiliar4").ToString.Substring(6, 11)
+        kjhkjhkjhk()
 
         myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, subnumerodefac)
 
@@ -23795,11 +23798,21 @@ Public Class ExcelImportadorManager
             Case "DESTINATARIO", "EXPORTADOR", "EXPORT.", "COMPRADOR", "EXP", "EXP.", "DEST."
                 Return "Comprador"
 
+
+
+
+
             Case "CARTA PORTE", "C/PORTE", "C. PORTE", "C.PORTE", "C. P.", "CP.", "CCPP", "CC PP", "CARTA DE PORTE", "CP", "C PORTE", "NROCP", "BARRACP"
 
 
 
                 Return "NumeroCDP"
+
+
+            Case "COLUMNAADICIONAL"
+                Return "Auxiliar4"
+
+
 
 
 
@@ -23895,11 +23908,17 @@ Public Class ExcelImportadorManager
             Case "F. DE DESCARGA", "FECHA"
                 Return "FechaDescarga"
 
-            Case "F. DE CARGA", "FEC.CARGA", "FECHA_CARGA"
+            Case "F. DE CARGA", "FEC.CARGA", "FECHA_CARGA", "FECHACARGA"
                 Return "column18"
-            Case "FECHA VTO.", "FEC.VTO.", "FECHA_VENCIMIENTO"
 
+            Case "FECHA VTO.", "FEC.VTO.", "FECHA_VENCIMIENTO", "FECHAVENCIMIENTO"
                 Return "column19"
+
+
+
+
+
+
             Case "C.E.E", "C.E.E NRO", "NRO.CEE", "NRO. CEE", "CEE"
                 Return "column20"
             Case "TRANSPORTISTA", "TRANSP.", "TRANSPORTE"
@@ -23998,6 +24017,9 @@ Public Class ExcelImportadorManager
         Exporta
         SubnumeroDeFacturacion
 
+
+        Auxiliar4
+        ' -tengo q agregar estos renglones en un orden especial???
 
         'Tenés que agregar el campo en la tabla "ExcelImportador"
         'Tenés que agregar el campo en la tabla "ExcelImportador"
@@ -27478,6 +27500,17 @@ Public Class ExcelImportadorManager
 
 
         Return ExcelImportadorManager.TraerMetadataPorIdMaestro(SC, -1)
+
+
+        'Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+        'db.exce()
+        'ddddddd()
+        Dim x As ProntoMVC.Data.Models.ExcelImportador
+        'x.
+
+
+
     End Function
 
 
