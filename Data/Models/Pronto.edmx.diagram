@@ -2455,6 +2455,7 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteLogDeOCR" Width="1.5" PointX="34.125" PointY="80.5" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DiccionarioEquivalencia" Width="1.5" PointX="17.375" PointY="29.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ExcelImportador" Width="1.5" PointX="29.375" PointY="25.75" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
