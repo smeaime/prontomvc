@@ -2030,6 +2030,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="Talle" Type="varchar" MaxLength="2" />
           <Property Name="IdColor" Type="int" />
           <Property Name="IdDetallePresupuestoVenta" Type="int" />
+          <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="DetalleEmpleados">
           <Key>
@@ -3082,6 +3083,9 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="RechazoCAE" Type="varchar" MaxLength="11" />
           <Property Name="FechaVencimientoORechazoCAE" Type="datetime" />
           <Property Name="IdIdentificacionCAE" Type="int" />
+          <Property Name="Cliente" Type="varchar" MaxLength="50" />
+          <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
+          <Property Name="CuitClienteExterno" Type="varchar" MaxLength="13" />
         </EntityType>
         <EntityType Name="DiccionarioEquivalencias">
           <Key>
@@ -3230,6 +3234,67 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="Activo" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="ExcelImportador">
+          <Key>
+            <PropertyRef Name="IdExcelImportador" />
+          </Key>
+          <Property Name="IdExcelImportador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTanda" Type="int" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="IdUsuarioIngreso" Type="int" />
+          <Property Name="FechaTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="check1" Type="varchar" MaxLength="50" />
+          <Property Name="URLgenerada" Type="varchar" MaxLength="50" />
+          <Property Name="IdTitular" Type="varchar" MaxLength="50" />
+          <Property Name="IdIntermediario" Type="varchar" MaxLength="50" />
+          <Property Name="IdRComercial" Type="varchar" MaxLength="50" />
+          <Property Name="IdCorredor" Type="varchar" MaxLength="50" />
+          <Property Name="IdDestinatario" Type="varchar" MaxLength="50" />
+          <Property Name="IdChofer" Type="varchar" MaxLength="50" />
+          <Property Name="Producto" Type="varchar" MaxLength="100" />
+          <Property Name="Titular" Type="varchar" MaxLength="100" />
+          <Property Name="Intermediario" Type="varchar" MaxLength="100" />
+          <Property Name="RComercial" Type="varchar" MaxLength="100" />
+          <Property Name="Corredor" Type="varchar" MaxLength="100" />
+          <Property Name="Procedencia" Type="varchar" MaxLength="100" />
+          <Property Name="Patente" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroCDP" Type="varchar" MaxLength="50" />
+          <Property Name="Acoplado" Type="varchar" MaxLength="50" />
+          <Property Name="NetoProc" Type="varchar" MaxLength="50" />
+          <Property Name="Calidad" Type="varchar" MaxLength="50" />
+          <Property Name="column12" Type="varchar" MaxLength="50" />
+          <Property Name="column13" Type="varchar" MaxLength="50" />
+          <Property Name="column14" Type="varchar" MaxLength="50" />
+          <Property Name="column15" Type="varchar" MaxLength="50" />
+          <Property Name="column16" Type="varchar" MaxLength="50" />
+          <Property Name="column17" Type="varchar" MaxLength="50" />
+          <Property Name="column18" Type="varchar" MaxLength="50" />
+          <Property Name="column19" Type="varchar" MaxLength="50" />
+          <Property Name="column20" Type="varchar" MaxLength="50" />
+          <Property Name="column21" Type="varchar" MaxLength="50" />
+          <Property Name="column22" Type="varchar" MaxLength="50" />
+          <Property Name="column23" Type="varchar" MaxLength="50" />
+          <Property Name="column24" Type="varchar" MaxLength="50" />
+          <Property Name="column25" Type="varchar" MaxLength="50" />
+          <Property Name="Comprador" Type="varchar" MaxLength="100" />
+          <Property Name="Destino" Type="varchar" MaxLength="100" />
+          <Property Name="Subcontratista1" Type="varchar" MaxLength="50" />
+          <Property Name="Subcontratista2" Type="varchar" MaxLength="50" />
+          <Property Name="FechaDescarga" Type="varchar" MaxLength="50" />
+          <Property Name="Hora" Type="varchar" MaxLength="50" />
+          <Property Name="Auxiliar1" Type="varchar" MaxLength="50" />
+          <Property Name="Auxiliar2" Type="varchar" MaxLength="50" />
+          <Property Name="Auxiliar3" Type="varchar" MaxLength="50" />
+          <Property Name="Auxiliar4" Type="varchar" MaxLength="50" />
+          <Property Name="Auxiliar5" Type="varchar" MaxLength="50" />
+          <Property Name="EntregadorFiltrarPorWilliams" Type="varchar" MaxLength="50" />
+          <Property Name="CTG" Type="varchar" MaxLength="50" />
+          <Property Name="KmARecorrer" Type="varchar" MaxLength="50" />
+          <Property Name="TarifaTransportista" Type="varchar" MaxLength="50" />
+          <Property Name="Exporta" Type="varchar" MaxLength="10" />
+          <Property Name="SubnumeroDeFacturacion" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -9422,6 +9487,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySet Name="EmpleadosAccesos" EntityType="Self.EmpleadosAccesos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estados Proveedores" EntityType="Self.Estados Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExcelImportador" EntityType="Self.ExcelImportador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FertilizantesCupos" EntityType="Self.FertilizantesCupos" Schema="dbo" store:Type="Tables" />
@@ -12401,6 +12467,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <End Role="CartasDePorteLogDeOCR" EntitySet="CartasDePorteLogDeOCRs" />
           </AssociationSet>
           <EntitySet Name="DiccionarioEquivalencias" EntityType="DemoProntoModel.DiccionarioEquivalencia" />
+          <EntitySet Name="ExcelImportadors" EntityType="DemoProntoModel.ExcelImportador" />
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -19832,6 +19899,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="IdColor" Type="Int32" />
           <Property Name="IdDetallePresupuestoVenta" Type="Int32" />
           <NavigationProperty Name="Devolucione" Relationship="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" FromRole="DetalleDevolucione" ToRole="Devolucione" />
+          <Property Name="OrigenRegistro" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Devolucione">
           <Key>
@@ -19893,6 +19961,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="RechazoCAE" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="FechaVencimientoORechazoCAE" Type="DateTime" Precision="3" />
           <Property Name="IdIdentificacionCAE" Type="Int32" />
+          <Property Name="Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrigenRegistro" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CuitClienteExterno" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_DetalleDevoluciones_Devoluciones">
           <End Type="DemoProntoModel.Devolucione" Role="Devolucione" Multiplicity="0..1" />
@@ -23354,6 +23425,67 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="Palabra" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Traduccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Tabla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ExcelImportador">
+          <Key>
+            <PropertyRef Name="IdExcelImportador" />
+          </Key>
+          <Property Name="IdExcelImportador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTanda" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioIngreso" Type="Int32" />
+          <Property Name="FechaTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="check1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="URLgenerada" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTitular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdIntermediario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRComercial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCorredor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdChofer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Producto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Titular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Intermediario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RComercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Corredor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Procedencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Patente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroCDP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Acoplado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NetoProc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Calidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column15" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column16" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column17" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column18" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column19" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column20" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column21" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column22" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column23" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column24" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="column25" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comprador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Subcontratista1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Subcontratista2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaDescarga" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Auxiliar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Auxiliar2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Auxiliar3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Auxiliar4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Auxiliar5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntregadorFiltrarPorWilliams" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CTG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KmARecorrer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TarifaTransportista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Exporta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SubnumeroDeFacturacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -28041,6 +28173,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="DetalleDevoluciones">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleDevolucione">
               <MappingFragment StoreEntitySet="DetalleDevoluciones">
+                <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
                 <ScalarProperty Name="IdDetallePresupuestoVenta" ColumnName="IdDetallePresupuestoVenta" />
                 <ScalarProperty Name="IdColor" ColumnName="IdColor" />
                 <ScalarProperty Name="Talle" ColumnName="Talle" />
@@ -28070,6 +28203,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Devoluciones">
             <EntityTypeMapping TypeName="DemoProntoModel.Devolucione">
               <MappingFragment StoreEntitySet="Devoluciones">
+                <ScalarProperty Name="CuitClienteExterno" ColumnName="CuitClienteExterno" />
+                <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
                 <ScalarProperty Name="IdIdentificacionCAE" ColumnName="IdIdentificacionCAE" />
                 <ScalarProperty Name="FechaVencimientoORechazoCAE" ColumnName="FechaVencimientoORechazoCAE" />
                 <ScalarProperty Name="RechazoCAE" ColumnName="RechazoCAE" />
@@ -29872,6 +30008,68 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ExcelImportadors">
+            <EntityTypeMapping TypeName="DemoProntoModel.ExcelImportador">
+              <MappingFragment StoreEntitySet="ExcelImportador">
+                <ScalarProperty Name="SubnumeroDeFacturacion" ColumnName="SubnumeroDeFacturacion" />
+                <ScalarProperty Name="Exporta" ColumnName="Exporta" />
+                <ScalarProperty Name="TarifaTransportista" ColumnName="TarifaTransportista" />
+                <ScalarProperty Name="KmARecorrer" ColumnName="KmARecorrer" />
+                <ScalarProperty Name="CTG" ColumnName="CTG" />
+                <ScalarProperty Name="EntregadorFiltrarPorWilliams" ColumnName="EntregadorFiltrarPorWilliams" />
+                <ScalarProperty Name="Auxiliar5" ColumnName="Auxiliar5" />
+                <ScalarProperty Name="Auxiliar4" ColumnName="Auxiliar4" />
+                <ScalarProperty Name="Auxiliar3" ColumnName="Auxiliar3" />
+                <ScalarProperty Name="Auxiliar2" ColumnName="Auxiliar2" />
+                <ScalarProperty Name="Auxiliar1" ColumnName="Auxiliar1" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="FechaDescarga" ColumnName="FechaDescarga" />
+                <ScalarProperty Name="Subcontratista2" ColumnName="Subcontratista2" />
+                <ScalarProperty Name="Subcontratista1" ColumnName="Subcontratista1" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="Comprador" ColumnName="Comprador" />
+                <ScalarProperty Name="column25" ColumnName="column25" />
+                <ScalarProperty Name="column24" ColumnName="column24" />
+                <ScalarProperty Name="column23" ColumnName="column23" />
+                <ScalarProperty Name="column22" ColumnName="column22" />
+                <ScalarProperty Name="column21" ColumnName="column21" />
+                <ScalarProperty Name="column20" ColumnName="column20" />
+                <ScalarProperty Name="column19" ColumnName="column19" />
+                <ScalarProperty Name="column18" ColumnName="column18" />
+                <ScalarProperty Name="column17" ColumnName="column17" />
+                <ScalarProperty Name="column16" ColumnName="column16" />
+                <ScalarProperty Name="column15" ColumnName="column15" />
+                <ScalarProperty Name="column14" ColumnName="column14" />
+                <ScalarProperty Name="column13" ColumnName="column13" />
+                <ScalarProperty Name="column12" ColumnName="column12" />
+                <ScalarProperty Name="Calidad" ColumnName="Calidad" />
+                <ScalarProperty Name="NetoProc" ColumnName="NetoProc" />
+                <ScalarProperty Name="Acoplado" ColumnName="Acoplado" />
+                <ScalarProperty Name="NumeroCDP" ColumnName="NumeroCDP" />
+                <ScalarProperty Name="Patente" ColumnName="Patente" />
+                <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
+                <ScalarProperty Name="Corredor" ColumnName="Corredor" />
+                <ScalarProperty Name="RComercial" ColumnName="RComercial" />
+                <ScalarProperty Name="Intermediario" ColumnName="Intermediario" />
+                <ScalarProperty Name="Titular" ColumnName="Titular" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+                <ScalarProperty Name="IdDestinatario" ColumnName="IdDestinatario" />
+                <ScalarProperty Name="IdCorredor" ColumnName="IdCorredor" />
+                <ScalarProperty Name="IdRComercial" ColumnName="IdRComercial" />
+                <ScalarProperty Name="IdIntermediario" ColumnName="IdIntermediario" />
+                <ScalarProperty Name="IdTitular" ColumnName="IdTitular" />
+                <ScalarProperty Name="URLgenerada" ColumnName="URLgenerada" />
+                <ScalarProperty Name="check1" ColumnName="check1" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
+                <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdTanda" ColumnName="IdTanda" />
+                <ScalarProperty Name="IdExcelImportador" ColumnName="IdExcelImportador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -29888,7 +30086,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
         <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
         <edmx:DesignerProperty Name="EnablePluralization" Value="True" />
         <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
         <edmx:DesignerProperty Name="UseLegacyProvider" Value="False" />
       </edmx:DesignerInfoPropertySet>
     </edmx:Options>

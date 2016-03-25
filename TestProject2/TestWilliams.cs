@@ -200,9 +200,7 @@ namespace ProntoMVC.Tests
         public void ModicarCartaConIdApartirDelExcelDelFlexicapture_18266()
         {
 
-
-
-            string archivoExcel = "";
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\Copia de PRUEBA SISTEMA2.xls";
 
 
             int m_IdMaestro = 0;
@@ -214,12 +212,15 @@ namespace ProntoMVC.Tests
 
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
 
+            string sb = "";
             foreach (System.Data.DataRow r in dt.Rows)
             {
                 var dr = r;
-                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                string c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
                                                         null, null, null, null,
                                                         null, null);
+
+                sb += c + "\n";
             }
 
         }
