@@ -325,27 +325,42 @@ namespace ProntoMVC.Tests
         public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_18059()
         {
 
+
+
+
             string ms = "", warn = "";
-            var carta = CartaDePorteManager.GetItem(SC, 4444);
+            var carta = new Pronto.ERP.BO.CartaDePorte();
 
-            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
-            carta.NobleGrado = 2;
+            carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
+            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
+            carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
+            carta.IdArticulo = 22;
+            carta.Destino = 222;
+            carta.Procedencia = 211;
+            carta.Cosecha = "2016/17";
+            carta.FechaArribo = DateTime.Today;
+            carta.PuntoVenta = 1;
+
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala");
 
-            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
-            Assert.AreEqual(1, carta.NobleGrado);
+            // verificar que le creó un duplicado
 
-            carta = null;
-            carta = CartaDePorteManager.GetItem(SC, 4444);
 
-            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
-            carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            //Assert.AreEqual(1, carta.NobleGrado);
 
-            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
-            Assert.AreEqual(2, carta.NobleGrado);
+            //carta = null;
+            //carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            //carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            //carta.NobleGrado = 3;
+            //CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            //Assert.AreEqual(2, carta.NobleGrado);
 
 
 

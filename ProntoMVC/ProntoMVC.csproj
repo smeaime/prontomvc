@@ -372,15 +372,15 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="elmah.cs" />
     <Content Include="App_Data\TextFile1.txt" />
-    <Content Include="Areas\WebForms\Cartadeporte.aspx" />
-    <Content Include="Areas\WebForms\Cartadeporte.aspx.vb">
+    <Content Include="Areas\WebForms\_MVC_Cartadeporte.aspx" />
+    <Content Include="Areas\WebForms\_MVC_Cartadeporte.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Areas\WebForms\CartasDePortes.aspx" />
-    <Content Include="Areas\WebForms\CartasDePortes.aspx.vb">
+    <Content Include="Areas\WebForms\_MVC_CartasDePortes.aspx" />
+    <Content Include="Areas\WebForms\_MVC_CartasDePortes.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Areas\WebForms\MasterPage.master.vb" />
+    <Content Include="Areas\WebForms\_MVC_MasterPage.master.vb" />
     <Content Include="BugTrack.aspx" />
     <Content Include="BugTrack.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
@@ -727,7 +727,7 @@
     <Content Include="Documentos\NotaDebito_A_BaseNueva.dot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\WebForms\MasterPage.master" />
+    <Content Include="Areas\WebForms\_MVC_MasterPage.master" />
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />

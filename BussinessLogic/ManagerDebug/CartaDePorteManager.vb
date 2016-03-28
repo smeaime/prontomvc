@@ -8517,7 +8517,11 @@ Public Class CartaDePorteManager
                     myCartaDePorte.IdClienteAFacturarle = FacturarA_Automatico(SC, myCartaDePorte)
 
 
-                    'arreglar esta galletita
+
+                    Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+                    Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = CartaDePorteId).SingleOrDefault
+                    oCarta.IdClienteAFacturarle = myCartaDePorte.IdClienteAFacturarle
+                    db.SaveChanges()
                 End If
             End If
 
@@ -11420,8 +11424,62 @@ Public Class CartaDePorteManager
                                   JustificadoDerecha(ofac.CAE, 14, "0"), _
                                   ofac.FechaVencimientoORechazoCAE.Date.ToString("yyyyMMdd"))
 
+
+
+
+
         ErrHandler2.WriteError("Creando pdf")
-        output = ConvertirEnPDF_y_PonerCodigoDeBarras(output, imagen, bMostrarPDF)
+        Try
+
+            output = ConvertirEnPDF_y_PonerCodigoDeBarras(output, imagen, bMostrarPDF)
+
+
+        Catch ex As Exception
+
+
+            '            When you first launch Word programmatically, it connects to Word via an RPC server. When you close the document, this server gets closed without your application knowing about it.
+
+            'The solution is to trap an error and re-initialise your Word object. you will then be able to continue.
+
+            '            George()
+
+            '            Brisbane()
+
+            '()
+
+            '            Log Entry
+            '03/28/2016 13:46:10
+            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=hWpifvVkVRg=. Error Message:System.Runtime.InteropServices.COMException
+            'The remote procedure call failed. (Exception from HRESULT: 0x800706BE)
+            '            at Microsoft.Office.Interop.Word.ApplicationClass.get_Documents()
+            '   at CartaDePorteManager.ConvertirEnPDF_y_PonerCodigoDeBarras(String output, String fImagenBarras, Boolean bMostrarPDF) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 11325
+            '            Microsoft.Office.Interop.Word()
+            '            __________________________()
+
+            '            Log Entry
+            '03/28/2016 13:46:10
+            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=hWpifvVkVRg=. Error Message:System.NullReferenceException
+            'Object reference not set to an instance of an object.
+            '   at System.Runtime.InteropServices.Marshal.ReleaseComObject(Object o)
+            '   at ProntoDebug.NAR(Object o)
+            '            mscorlib()
+            '            __________________________()
+
+            '            Log Entry
+            '03/28/2016 13:46:10
+            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=hWpifvVkVRg=. Error Message:System.Runtime.InteropServices.COMException
+            'The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+            '   at Microsoft.Office.Interop.Word.ApplicationClass.Quit(Object& SaveChanges, Object& OriginalFormat, Object& RouteDocument)
+            '   at CartaDePorteManager.ConvertirEnPDF_y_PonerCodigoDeBarras(String output, String fImagenBarras, Boolean bMostrarPDF) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 11386
+            '            Microsoft.Office.Interop.Word()
+
+
+        End Try
+
+
+
+
+
 
         ErrHandler2.WriteError("salgo")
 
@@ -22980,10 +23038,18 @@ Public Class LogicaImportador
 
 
         'ver si vino el id en una columna
-        Dim ssss = dr.Item("Auxiliar4").ToString.Substring(6, 11)
-        kjhkjhkjhk()
+        Dim ssss = Val(dr.Item("Auxiliar4").ToString.Substring(6, 11))
+        If ssss > 0 Then
+            myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, ssss, vagon, subnumerodefac)
+            If myCartaDePorte.Id = -1 Then
+                ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " no existe")
+                Return 0
+            End If
+            myCartaDePorte.NumeroCartaDePorte = numeroCarta
+        Else
+            myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, subnumerodefac)
+        End If
 
-        myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, subnumerodefac)
 
         'y si tiene duplicados, como sabes?
 
@@ -23009,8 +23075,11 @@ Public Class LogicaImportador
 
             If .Anulada = "SI" Then
                 ErrHandler2.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
-                Dim Usuario As String = IIf(Session Is Nothing, "", Session(SESSIONPRONTO_UserName))
+                Dim Usuario As String = ""
+                If Session IsNot Nothing Then Usuario = Session(SESSIONPRONTO_UserName)
+
                 LogPronto(SC, .Id, "IMPANU", Usuario)
+
                 CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
 
                 .Anulada = "NO"
