@@ -59,8 +59,6 @@ namespace ProntoMVC.Data.Models
         public string CircuitoFirmasCompleto { get; set; }
         public string ConfirmadoPorWeb { get; set; }
         public Nullable<System.DateTime> FechaCierreCompulsa { get; set; }
-        public string NombreUsuarioWeb { get; set; }
-        public Nullable<System.DateTime> FechaRespuestaweb { get; set; }
     
         public virtual Condiciones_Compra Condiciones_Compra { get; set; }
         public virtual ICollection<DetallePresupuesto> DetallePresupuestos { get; set; }
