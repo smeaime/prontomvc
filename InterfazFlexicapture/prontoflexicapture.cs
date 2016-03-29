@@ -1748,9 +1748,9 @@ namespace ProntoFlexicapture
         public static void Log(string s)
         {
 
-            using (EventLog eventLog = new EventLog("Application"))
+            using (EventLog eventLog = new EventLog("ProntoAgente"))
             {
-                eventLog.Source = "Application";
+                eventLog.Source = "ProntoAgente";
                 eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
             }
         }
