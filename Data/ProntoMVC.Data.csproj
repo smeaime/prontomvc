@@ -500,6 +500,9 @@
     <Compile Include="Models\Devolucione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiccionarioEquivalencia.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DiferenciasCambio.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -522,6 +525,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estados_Proveedore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExcelImportador.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura.cs">

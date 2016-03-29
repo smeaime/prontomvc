@@ -196,13 +196,187 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        [TestMethod]
+        public void ModicarCartaConIdApartirDelExcelDelFlexicapture_18266()
+        {
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\Copia de PRUEBA SISTEMA2.xls";
+
+
+            int m_IdMaestro = 0;
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            string sb = "";
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                string c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+
+                sb += c + "\n";
+            }
+
+        }
+
+
+
+        [TestMethod]
+        public void EquivalenciasOCR_18223()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote 21mar101631 prueba1 PV1\prueba sistema.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            if (true)
+            {
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+                // ProntoWindowsService.Service1.Initialize();
+            }
+            else
+            {
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                                        plantilla, 30,
+                                         SC, DirApp, true, ref sError);
+                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+            }
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+            // mostrar info del lote1
+            //VerInfoDelLote(ticket);
+
+
+
+            string archivoExcel = excels[0];
+
+
+            int m_IdMaestro = 0;
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_18059()
+        {
+
+
+
+
+            string ms = "", warn = "";
+            var carta = new Pronto.ERP.BO.CartaDePorte();
+
+            carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
+            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
+            carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
+            carta.IdArticulo = 22;
+            carta.Destino = 222;
+            carta.Procedencia = 211;
+            carta.Cosecha = "2016/17";
+            carta.FechaArribo = DateTime.Today;
+            carta.PuntoVenta = 1;
+
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            // verificar que le creó un duplicado
+
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            //Assert.AreEqual(1, carta.NobleGrado);
+
+            //carta = null;
+            //carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            //carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            //carta.NobleGrado = 3;
+            //CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            //Assert.AreEqual(2, carta.NobleGrado);
+
+
+
+        }
+
+
+
+
+
 
 
         [TestMethod]
         public void MailDeInformeDow_18085()
         {
 
-        //  https://prontoweb.williamsentregas.com.ar/ProntoWeb/Reporte.aspx?ReportName=Listado%20DOW
+            //  https://prontoweb.williamsentregas.com.ar/ProntoWeb/Reporte.aspx?ReportName=Listado%20DOW
 
             var fechadesde = new DateTime(2014, 1, 1);
             var fechahasta = new DateTime(2014, 6, 30);
@@ -250,7 +424,7 @@ namespace ProntoMVC.Tests
                                                    "", ref sError2, inlinePNG, inlinePNG2);
 
 
-            
+
             System.Diagnostics.Process.Start(output);
 
         }

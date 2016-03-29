@@ -989,7 +989,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             // if (id == Guid.Empty) id = guiduser;
             //MembershipUser u = Membership.GetUser(id);
             var c = new ProntoMVC.Controllers.AccountController();
-            c.GrabarUltimaBaseAccedida(user.UserName, EmpresaDefault);
+            c.GrabarUltimaBaseAccedida(user.UserName, EmpresaDefault, oStaticMembershipService);
             //ViewBag.EmpresaDefault = new SelectList(baselistado.ToList(), "Value", "Text", nombrebase);
 
 

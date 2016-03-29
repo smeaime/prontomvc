@@ -685,6 +685,8 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
+
             Return q.IdTransportista
         End If
 
@@ -725,6 +727,8 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.Nombre, SC)
+
             Return q.IdChofer
         End If
 
@@ -788,10 +792,12 @@ Public Class CartaDePorteManager
                 If a.Count = 0 Then
                     Return 0
                 Else
+                    CrearEquivalencia(RazonSocial, a(0).nombre, SC)
                     Return a(0).IdWilliamsDestino
                 End If
 
             Else
+                CrearEquivalencia(RazonSocial, q(0).dest.Descripcion, SC)
                 Return q(0).dest.IdWilliamsDestino
             End If
 
@@ -843,8 +849,13 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.RazonSocial, SC)
             Return q.IdCliente
         End If
+
+
+
+
 
         'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
 
@@ -853,6 +864,34 @@ Public Class CartaDePorteManager
 
 
     End Function
+
+
+    Public Shared Function CrearEquivalencia(palabra As String, traduccion As String, SC As String)
+
+        If palabra = traduccion Then Return 0
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From c In db.DiccionarioEquivalencias Where c.Palabra = palabra).FirstOrDefault()
+
+
+        If q Is Nothing Then
+            q = New ProntoMVC.Data.Models.DiccionarioEquivalencia
+            q.Palabra = palabra
+            q.Traduccion = traduccion
+
+            db.DiccionarioEquivalencias.Add(q)
+            db.SaveChanges()
+        End If
+
+        Return q.IdDiccionarioEquivalencia
+
+    End Function
+
+
+
+
 
     Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
@@ -889,6 +928,8 @@ Public Class CartaDePorteManager
             End If
 
         Else
+            CrearEquivalencia(RazonSocial, q.Nombre, SC)
+
             Return q.IdVendedor
         End If
 
@@ -7014,6 +7055,65 @@ Public Class CartaDePorteManager
         Return False
     End Function
 
+
+
+    Public Shared Function FacturarA_Automatico(ByVal SC As String, ByVal oCDP As CartaDePorte) As Integer
+
+
+        'Dim idclienteexportador As Integer
+
+        'If myCartaDePorte.Entregador > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.Entregador).EsClienteExportador = "SI" Then
+        '    idclienteexportador = myCartaDePorte.Entregador
+        'End If
+        'If myCartaDePorte.CuentaOrden1 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1).EsClienteExportador = "SI" Then
+        '    idclienteexportador = myCartaDePorte.CuentaOrden1
+        'End If
+        'If myCartaDePorte.CuentaOrden2 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2).EsClienteExportador = "SI" Then
+        '    idclienteexportador = myCartaDePorte.CuentaOrden2
+        'End If
+
+
+        'sssss()
+
+        'CartasDePorteReglasDeFacturacion()
+
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+        Dim q1 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
+
+        If q1 IsNot Nothing Then Return q1.IdCliente
+
+        Dim q2 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.CuentaOrden1 And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoIntermediario = "SI").FirstOrDefault
+        If q2 IsNot Nothing Then Return q2.IdCliente
+
+
+        Dim q3 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.CuentaOrden2 And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoRemcomercial = "SI").FirstOrDefault
+
+        If q3 IsNot Nothing Then Return q3.IdCliente
+
+        Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = IdClienteEquivalenteDelIdVendedor(oCDP.Corredor, SC) _
+                                                                And x.PuntoVenta = oCDP.PuntoVenta And _
+                                                                x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
+        If q4 IsNot Nothing Then Return q4.IdCliente
+
+
+        Dim q5 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Entregador And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
+
+        If q5 IsNot Nothing Then Return q5.IdCliente
+
+        Return 0
+
+
+
+
+
+    End Function
+
+
+
+
+
+
     Public Shared Sub CrearleDuplicadaConEl_FacturarA_Indicado(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte)
         '        * La magia quedaría así: el usuario llena la carta, y pone grabar...
         '*Si la carta usa un cliente exportador en Destinatario, Intermediario o Rte Comercial,
@@ -8413,8 +8513,15 @@ Public Class CartaDePorteManager
                     myCartaDePorte.Id = CartaDePorteId
                     CrearleDuplicadaConEl_FacturarA_Indicado(SC, myCartaDePorte)
 
+                    'al original hay que marcarle el FacturarA como usando el automatico
+                    myCartaDePorte.IdClienteAFacturarle = FacturarA_Automatico(SC, myCartaDePorte)
 
-                    'arreglar esta galletita
+
+
+                    Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+                    Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = CartaDePorteId).SingleOrDefault
+                    oCarta.IdClienteAFacturarle = myCartaDePorte.IdClienteAFacturarle
+                    db.SaveChanges()
                 End If
             End If
 
@@ -11317,8 +11424,62 @@ Public Class CartaDePorteManager
                                   JustificadoDerecha(ofac.CAE, 14, "0"), _
                                   ofac.FechaVencimientoORechazoCAE.Date.ToString("yyyyMMdd"))
 
+
+
+
+
         ErrHandler2.WriteError("Creando pdf")
-        output = ConvertirEnPDF_y_PonerCodigoDeBarras(output, imagen, bMostrarPDF)
+        Try
+
+            output = ConvertirEnPDF_y_PonerCodigoDeBarras(output, imagen, bMostrarPDF)
+
+
+        Catch ex As Exception
+
+
+            '            When you first launch Word programmatically, it connects to Word via an RPC server. When you close the document, this server gets closed without your application knowing about it.
+
+            'The solution is to trap an error and re-initialise your Word object. you will then be able to continue.
+
+            '            George()
+
+            '            Brisbane()
+
+            '()
+
+            '            Log Entry
+            '03/28/2016 13:46:10
+            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=hWpifvVkVRg=. Error Message:System.Runtime.InteropServices.COMException
+            'The remote procedure call failed. (Exception from HRESULT: 0x800706BE)
+            '            at Microsoft.Office.Interop.Word.ApplicationClass.get_Documents()
+            '   at CartaDePorteManager.ConvertirEnPDF_y_PonerCodigoDeBarras(String output, String fImagenBarras, Boolean bMostrarPDF) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 11325
+            '            Microsoft.Office.Interop.Word()
+            '            __________________________()
+
+            '            Log Entry
+            '03/28/2016 13:46:10
+            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=hWpifvVkVRg=. Error Message:System.NullReferenceException
+            'Object reference not set to an instance of an object.
+            '   at System.Runtime.InteropServices.Marshal.ReleaseComObject(Object o)
+            '   at ProntoDebug.NAR(Object o)
+            '            mscorlib()
+            '            __________________________()
+
+            '            Log Entry
+            '03/28/2016 13:46:10
+            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=hWpifvVkVRg=. Error Message:System.Runtime.InteropServices.COMException
+            'The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+            '   at Microsoft.Office.Interop.Word.ApplicationClass.Quit(Object& SaveChanges, Object& OriginalFormat, Object& RouteDocument)
+            '   at CartaDePorteManager.ConvertirEnPDF_y_PonerCodigoDeBarras(String output, String fImagenBarras, Boolean bMostrarPDF) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 11386
+            '            Microsoft.Office.Interop.Word()
+
+
+        End Try
+
+
+
+
+
 
         ErrHandler2.WriteError("salgo")
 
@@ -22858,7 +23019,7 @@ Public Class LogicaImportador
         Dim myCartaDePorte As New Pronto.ERP.BO.CartaDePorte
 
 
-
+        If NoValidarColumnas Is Nothing Then NoValidarColumnas = New List(Of String)
 
 
 
@@ -22876,8 +23037,19 @@ Public Class LogicaImportador
         If numeroCarta < 100000000 Then numeroCarta += 500000000
 
 
+        'ver si vino el id en una columna
+        Dim ssss = Val(dr.Item("Auxiliar4").ToString.Substring(6, 11))
+        If ssss > 0 Then
+            myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, ssss, vagon, subnumerodefac)
+            If myCartaDePorte.Id = -1 Then
+                ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " no existe")
+                Return 0
+            End If
+            myCartaDePorte.NumeroCartaDePorte = numeroCarta
+        Else
+            myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, subnumerodefac)
+        End If
 
-        myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, subnumerodefac)
 
         'y si tiene duplicados, como sabes?
 
@@ -22903,7 +23075,11 @@ Public Class LogicaImportador
 
             If .Anulada = "SI" Then
                 ErrHandler2.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
-                LogPronto(SC, .Id, "IMPANU", Session(SESSIONPRONTO_UserName))
+                Dim Usuario As String = ""
+                If Session IsNot Nothing Then Usuario = Session(SESSIONPRONTO_UserName)
+
+                LogPronto(SC, .Id, "IMPANU", Usuario)
+
                 CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
 
                 .Anulada = "NO"
@@ -23691,11 +23867,21 @@ Public Class ExcelImportadorManager
             Case "DESTINATARIO", "EXPORTADOR", "EXPORT.", "COMPRADOR", "EXP", "EXP.", "DEST."
                 Return "Comprador"
 
+
+
+
+
             Case "CARTA PORTE", "C/PORTE", "C. PORTE", "C.PORTE", "C. P.", "CP.", "CCPP", "CC PP", "CARTA DE PORTE", "CP", "C PORTE", "NROCP", "BARRACP"
 
 
 
                 Return "NumeroCDP"
+
+
+            Case "COLUMNAADICIONAL"
+                Return "Auxiliar4"
+
+
 
 
 
@@ -23791,11 +23977,17 @@ Public Class ExcelImportadorManager
             Case "F. DE DESCARGA", "FECHA"
                 Return "FechaDescarga"
 
-            Case "F. DE CARGA", "FEC.CARGA", "FECHA_CARGA"
+            Case "F. DE CARGA", "FEC.CARGA", "FECHA_CARGA", "FECHACARGA"
                 Return "column18"
-            Case "FECHA VTO.", "FEC.VTO.", "FECHA_VENCIMIENTO"
 
+            Case "FECHA VTO.", "FEC.VTO.", "FECHA_VENCIMIENTO", "FECHAVENCIMIENTO"
                 Return "column19"
+
+
+
+
+
+
             Case "C.E.E", "C.E.E NRO", "NRO.CEE", "NRO. CEE", "CEE"
                 Return "column20"
             Case "TRANSPORTISTA", "TRANSP.", "TRANSPORTE"
@@ -23894,6 +24086,9 @@ Public Class ExcelImportadorManager
         Exporta
         SubnumeroDeFacturacion
 
+
+        Auxiliar4
+        ' -tengo q agregar estos renglones en un orden especial???
 
         'Tenés que agregar el campo en la tabla "ExcelImportador"
         'Tenés que agregar el campo en la tabla "ExcelImportador"
@@ -27374,6 +27569,17 @@ Public Class ExcelImportadorManager
 
 
         Return ExcelImportadorManager.TraerMetadataPorIdMaestro(SC, -1)
+
+
+        'Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+        'db.exce()
+        'ddddddd()
+        Dim x As ProntoMVC.Data.Models.ExcelImportador
+        'x.
+
+
+
     End Function
 
 

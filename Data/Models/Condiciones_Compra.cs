@@ -55,6 +55,7 @@ namespace ProntoMVC.Data.Models
         public string Codigo { get; set; }
         public Nullable<decimal> PorcentajeBonificacion { get; set; }
         public string ContraEntregaDeValores { get; set; }
+        public string AsociarARecepciones { get; set; }
     
         public virtual ICollection<Presupuesto> Presupuestos { get; set; }
         public virtual ICollection<Cliente> Clientes { get; set; }
