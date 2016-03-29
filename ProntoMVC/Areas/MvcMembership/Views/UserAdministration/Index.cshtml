@@ -319,7 +319,7 @@
                                     @{
                                         MembershipUser u = Membership.GetUser(user.ProviderUserKey);
                                         var c = new ProntoMVC.Controllers.AccountController();
-                                        string nombrebase = c.BuscarUltimaBaseAccedida(u.UserName);
+                                        string nombrebase = c.BuscarUltimaBaseAccedida(new Generales.StaticMembershipService());
                                         @Html.Raw(nombrebase.NullSafeToString());
                                     }
                                     @if (false)
