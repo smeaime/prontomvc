@@ -15,6 +15,7 @@ using System.Configuration;
 using System.Data;
 
 
+
 namespace ProntoMVC.Controllers
 {
     public partial class AccountController : Controller // este no creo que deba heredar ProntoBaseController, no? -por qué?
@@ -32,6 +33,8 @@ namespace ProntoMVC.Controllers
         public Generales.IStaticMembershipService oStaticMembershipService; // como no heredo prontobasecontroller, tengo que crearla
 
 
+
+     
 
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
@@ -349,17 +352,17 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public string BuscarUltimaBaseAccedida(string usuario = "")
+        public string BuscarUltimaBaseAccedida(Generales.IStaticMembershipService ServicioMembership)
         {
             MembershipUser membershipUser;
-            if (usuario == "")
-            {
-                membershipUser = oStaticMembershipService.GetUser();
-            }
-            else
-            {
-                membershipUser = Membership.GetUser(usuario);
-            }
+            //if (usuario == "")
+            //{
+                membershipUser = ServicioMembership.GetUser();
+            //}
+            //else
+            //{
+                //membershipUser = ServicioMembership.GetUser(usuario);
+            //}
 
             if (membershipUser == null)
             {
@@ -552,9 +555,9 @@ namespace ProntoMVC.Controllers
                                 this.Session["BasePronto"] = empresa;
                             }
 
-                            else if (BuscarUltimaBaseAccedida(model.UserName) != "")
+                            else if (BuscarUltimaBaseAccedida( oStaticMembershipService) != "")
                             {
-                                this.Session["BasePronto"] = BuscarUltimaBaseAccedida();
+                                this.Session["BasePronto"] = BuscarUltimaBaseAccedida(oStaticMembershipService);
 
                             }
 
@@ -588,9 +591,9 @@ namespace ProntoMVC.Controllers
                             return RedirectToAction("Index", "Home");
                         }
 
-                        if (BuscarUltimaBaseAccedida(model.UserName) != "")
+                        if (BuscarUltimaBaseAccedida(oStaticMembershipService) != "")
                         {
-                            this.Session["BasePronto"] = BuscarUltimaBaseAccedida();
+                            this.Session["BasePronto"] = BuscarUltimaBaseAccedida(oStaticMembershipService);
                             return RedirectToAction("Index", "Home");
                         };
 
