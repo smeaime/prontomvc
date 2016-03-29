@@ -401,7 +401,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             if (id == Guid.Empty) id = guiduser;
             MembershipUser u = Membership.GetUser(id);
             var c = new ProntoMVC.Controllers.AccountController();
-            string nombrebase = (Session["BasePronto"].NullSafeToString() == "") ? c.BuscarUltimaBaseAccedida(u.UserName) : Session["BasePronto"].NullSafeToString();
+            string nombrebase = (Session["BasePronto"].NullSafeToString() == "") ? c.BuscarUltimaBaseAccedida( oStaticMembershipService) : Session["BasePronto"].NullSafeToString();
             ViewBag.EmpresaDefault = new SelectList(baselistado.ToList(), "Value", "Text", nombrebase);
 
             try

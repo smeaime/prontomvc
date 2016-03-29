@@ -56,7 +56,7 @@ namespace ProntoMVC.Reportes
             catch (Exception)
             {
                 var c = new ProntoMVC.Controllers.AccountController();
-                nombreBase = c.BuscarUltimaBaseAccedida();
+                nombreBase = c.BuscarUltimaBaseAccedida(new Generales.StaticMembershipService());
             }
 
             if (nombreBase == "")

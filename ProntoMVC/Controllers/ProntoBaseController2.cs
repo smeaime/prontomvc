@@ -29,6 +29,7 @@ namespace ProntoMVC.Controllers
 
         public string SC;
 
+        public Generales.IStaticMembershipService oStaticMembershipService;
 
 
         public int glbIdUsuario
@@ -165,9 +166,9 @@ namespace ProntoMVC.Controllers
 
                 var n = new AccountController();
 
-                if ((n.BuscarUltimaBaseAccedida() ?? "") != "")
+                if ((n.BuscarUltimaBaseAccedida(oStaticMembershipService) ?? "") != "")
                 {
-                    this.Session["BasePronto"] = n.BuscarUltimaBaseAccedida();
+                    this.Session["BasePronto"] = n.BuscarUltimaBaseAccedida(oStaticMembershipService);
                     // return Redirect(returnUrl);
                 }
                 else
@@ -278,9 +279,9 @@ namespace ProntoMVC.Controllers
                 // -ok, pero pasá la información de en qué página estaba antes!!!!
 
                 AccountController a = new AccountController();
-                if (a.BuscarUltimaBaseAccedida() != "")
+                if (a.BuscarUltimaBaseAccedida(oStaticMembershipService) != "")
                 {
-                    this.Session["BasePronto"] = a.BuscarUltimaBaseAccedida();
+                    this.Session["BasePronto"] = a.BuscarUltimaBaseAccedida(oStaticMembershipService);
 
                 }
 
