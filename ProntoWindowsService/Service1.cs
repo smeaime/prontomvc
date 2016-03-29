@@ -280,8 +280,6 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-                    alguna manera de desmarcar los archivos?
-
 
 
                     CartaDePorteManager.MandarMailDeError(x2);
