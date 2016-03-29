@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Archivos Compartidos", "{A7AAB93D-0E57-4580-96C8-51710EF8D2FA}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Arc
 		Novedades\Nuevos_SP.sql = Novedades\Nuevos_SP.sql
 		..\ProntoWeb\App_Code\vbcode\ManagerDebug\SincronismosWilliamsManager.vb = ..\ProntoWeb\App_Code\vbcode\ManagerDebug\SincronismosWilliamsManager.vb
 		..\ProntoWeb\Documentos\dev\superbuscador.sql = ..\ProntoWeb\Documentos\dev\superbuscador.sql
+		..\prontoweb\Documentos\dev\wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql = ..\prontoweb\Documentos\dev\wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql
 		..\ProntoWeb\web.config = ..\ProntoWeb\web.config
 		..\ProntoWeb\Documentos\otros\williams.sql = ..\ProntoWeb\Documentos\otros\williams.sql
 	EndProjectSection
@@ -75,12 +76,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfazFlexicapture", "Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoAgente", "ProntoWindowsService\ProntoAgente.csproj", "{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}"
 EndProject
-<<<<<<< HEAD
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProntoWeb", "ProntoWeb", "{715BC03D-B453-4269-B1F4-08EDEF0BE038}"
 	ProjectSection(SolutionItems) = preProject
 		..\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx = ..\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx
 		..\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb = ..\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb
 		..\prontoweb\ProntoWeb\CartasDePorteFotos.aspx.vb = ..\prontoweb\ProntoWeb\CartasDePorteFotos.aspx.vb
+		..\prontoweb\ProntoWeb\CartasDePorteImportador.aspx = ..\prontoweb\ProntoWeb\CartasDePorteImportador.aspx
+		..\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb = ..\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb
 		..\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx = ..\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx
 		..\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb = ..\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb
 		..\prontoweb\ProntoWeb\Facturas.aspx.vb = ..\prontoweb\ProntoWeb\Facturas.aspx.vb
@@ -88,8 +90,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProntoWeb", "ProntoWeb", "{
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ProntoCartaPorteApp", "..\prontoweb\ProntoCartaPorteApp.vbproj", "{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}"
 EndProject
-=======
->>>>>>> b6154df230779837368b2f2a854ecdea066cce44
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb(1)", "http://localhost:53829", "{116B68A6-181C-489E-8185-07A9A64B1AA3}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_53829"
+		Debug.AspNetCompiler.PhysicalPath = "Y:\prontoweb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53829\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_53829"
+		Release.AspNetCompiler.PhysicalPath = "Y:\prontoweb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53829\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Y:\prontoweb\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -346,7 +367,6 @@ Global
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|x86.ActiveCfg = Release|Any CPU
-<<<<<<< HEAD
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -367,8 +387,26 @@ Global
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|x86.ActiveCfg = Release|Any CPU
-=======
->>>>>>> b6154df230779837368b2f2a854ecdea066cce44
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Mixed Platforms.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|x86.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

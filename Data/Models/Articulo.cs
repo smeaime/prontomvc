@@ -46,8 +46,8 @@ namespace ProntoMVC.Data.Models
         }
     
         public int IdArticulo { get; set; }
-        public Nullable<int> IdRubro { get; set; }
-        public Nullable<int> IdSubrubro { get; set; }
+        public int IdRubro { get; set; }
+        public int IdSubrubro { get; set; }
         public Nullable<int> IdFamilia { get; set; }
         public string Descripcion { get; set; }
         public string Productivo { get; set; }

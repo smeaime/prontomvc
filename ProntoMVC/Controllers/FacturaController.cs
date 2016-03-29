@@ -775,7 +775,7 @@ namespace ProntoMVC.Controllers
                                 mAlicuotaIVA = db.Articulos.Find(d.IdArticulo).AlicuotaIVA ?? 0;
                                 if (mIvaNoDiscriminado > 0 && mAlicuotaIVA == 0) { mImporteDetalle = mImporteDetalle * (mImporteGravado - mIvaNoDiscriminado) / mImporteGravado; }
 
-                                mIdRubro = db.Articulos.Find(d.IdArticulo).IdRubro ?? 0;
+                                mIdRubro = db.Articulos.Find(d.IdArticulo).IdRubro ;
                                 mIdCuenta = db.Rubros.Find(mIdRubro).IdCuenta ?? 0;
 
                                 if (mIdCuenta > 0)
