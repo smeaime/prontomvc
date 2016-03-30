@@ -509,7 +509,7 @@ namespace ProntoMVC.Controllers
 
 
 
-                    int b = Generales.BasesDelUsuario((Guid) oStaticMembershipService.GetUser().ProviderUserKey);
+                    int b = Generales.BasesDelUsuario((Guid) Membership.GetUser(model.UserName).ProviderUserKey);
 
                     if (true)
                     {
