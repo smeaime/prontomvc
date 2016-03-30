@@ -11,7 +11,9 @@
 
 
 
-
+<script>
+    var ROOT = <%=Page.ResolveUrl("~/")  %>;  
+</script>
 
 <script runat="server">
 
@@ -22,9 +24,16 @@
     <%--/////////////////////////////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////////////////////////////--%>
     <%//////////////////////////////// JQUERY  ////////////////////////////////////////%>
-    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <%-- <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>--%>
+
+
+    <script crossorigin="anonymous" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script crossorigin="anonymous" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+
     <%////////////////////////////////////////////////////////////////////////////////%>
     <%////////////////////////////////////////////////////////////////////////////////%>
     <%////////////////////////////////////////////////////////////////////////////////%>
@@ -557,7 +566,7 @@ If you want additionally remove vertical border between the cells in the grid yo
 </html>
 <script type="text/javascript">
 
-    var ROOT = <%=Page.ResolveUrl("~/")  %>;     //  =Url.Content("~")  ;
+    <%--var ROOT = <%=Page.ResolveUrl("~/")  %>;  --%>   //  =Url.Content("~")  ;
 
 
     function InvocarReporte() {
@@ -705,16 +714,30 @@ If you want additionally remove vertical border between the cells in the grid yo
     }
 
 
-  
+
+
+    //repito estas llamadas porque no me las llama más abajo
+    //repito estas llamadas porque no me las llama más abajo
+    //repito estas llamadas porque no me las llama más abajo
+    //repito estas llamadas porque no me las llama más abajo
+    armarMenu();
+
+    estiloArbol();
 
 
 </script>
 <script src="<%=Page.ResolveUrl("~/")%>Scripts/jsLayout.js?1611" type="text/javascript"></script>
-<script>
-    $(function () {
-        //armarArbol();
-        armarMenu();
+<script type="text/javascript">
 
-        estiloArbol();
+    $(function () {
+
+        // no me está llamando estas funciones, entonces repetí las llamadas más arriba
+        // no me está llamando estas funciones, entonces repetí las llamadas más arriba
+        // no me está llamando estas funciones, entonces repetí las llamadas más arriba
+        // no me está llamando estas funciones, entonces repetí las llamadas más arriba
+        // no me está llamando estas funciones, entonces repetí las llamadas más arriba
+
+   //     armarMenu();
+   //     estiloArbol();
     })
 </script>
