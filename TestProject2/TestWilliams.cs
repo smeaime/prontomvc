@@ -154,7 +154,7 @@ namespace ProntoMVC.Tests
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
             Assert.AreEqual(1, carta.NobleGrado);
@@ -165,7 +165,7 @@ namespace ProntoMVC.Tests
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
             Assert.AreEqual(2, carta.NobleGrado);
@@ -326,11 +326,24 @@ namespace ProntoMVC.Tests
         public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_18059()
         {
 
+            // q lo haga solo en los casos especiales
+            //                La cosa quedaría así:
 
+            //Si se duplica una carta de porte y en una copia está el tilde y en otra no:
+
+            //* En la que tiene el tilde -> FacturarAExplicito = Destinatario
+            //* En la que no tiene el tilde -> FacturarAExplicito = Cliente a determinar según los tildes. Si no se puede determinar porque mas de uno cumple con la regla, quedará vacío y a cargar por el cliente
+
+
+            //Casos en los que no llenar el FacturarAExplicito:
+            //* Si está triplicada
+            //* Si está duplicada y ninguna tiene tilde
 
 
             string ms = "", warn = "";
-            var carta = new Pronto.ERP.BO.CartaDePorte();
+
+            // doy un alta
+            Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
 
             carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
             carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
@@ -343,8 +356,36 @@ namespace ProntoMVC.Tests
             carta.FechaArribo = DateTime.Today;
             carta.PuntoVenta = 1;
 
+            carta.Exporta = false;
+
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+            
+            // duplico la carta
+            Pronto.ERP.BO.CartaDePorte carta2 = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2.Id = -1;
+            carta2.SubnumeroDeFacturacion = CartaDePorteManager.ProximoSubNumeroParaNumeroCartaPorte(SC, carta2);
+            carta2.IdClienteAFacturarle = -1;
+            carta2.Exporta = true;
+
+            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
+
+
+            ////////////////////////////////
+
+            carta = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2 = CartaDePorteManager.GetItem(SC, carta2.Id, true);
+
+
+            ////////////////////////////////
+
+            Assert.AreNotEqual(-1, carta.IdClienteAFacturarle);
+            Assert.AreNotEqual(-1, carta2.IdClienteAFacturarle);
+
+
 
             // verificar que le creó un duplicado
 
@@ -940,6 +981,7 @@ namespace ProntoMVC.Tests
 
             //explota
 
+            string ms = "";
 
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\30488_Posi19.txt";
             int m_IdMaestro = 0;
@@ -950,7 +992,7 @@ namespace ProntoMVC.Tests
             carta = null;
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
 
 
@@ -978,7 +1020,7 @@ namespace ProntoMVC.Tests
             carta = null;
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
         }
 
@@ -1094,7 +1136,7 @@ Nombre de acondicionador: listado de clientes de Williams
 
             bool esvalido = CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             Assert.AreEqual(true, esvalido);
-            int id = CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            int id = CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreNotEqual(-1, id);
 
 
@@ -1231,7 +1273,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
             Assert.AreEqual(1, carta.NobleGrado);
@@ -1242,7 +1284,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
             Assert.AreEqual(2, carta.NobleGrado);

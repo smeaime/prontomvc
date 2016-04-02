@@ -1646,14 +1646,16 @@
       <End Role="CartasDePorte" EntitySet="CartasDePortes" />
       <End Role="CartasDePorteLogDeOCR" EntitySet="CartasDePorteLogDeOCRs" />
     </AssociationSet>
+    <EntitySet Name="DiccionarioEquivalencias" EntityType="DemoProntoModel.DiccionarioEquivalencia" />
+    <EntitySet Name="ExcelImportadors" EntityType="DemoProntoModel.ExcelImportador" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
       <PropertyRef Name="IdArticulo" />
     </Key>
     <Property Name="IdArticulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Name="IdRubro" Type="Int32" />
-    <Property Name="IdSubrubro" Type="Int32" />
+    <Property Name="IdRubro" Type="Int32" Nullable="false" />
+    <Property Name="IdSubrubro" Type="Int32" Nullable="false" />
     <Property Name="IdFamilia" Type="Int32" />
     <Property Name="Descripcion" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
     <Property Name="Productivo" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
@@ -1811,7 +1813,7 @@
     <Property Name="FechaCaducidadGarantia" Type="DateTime" Precision="3" />
     <Property Name="TipoCoberturaSeguro" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="NumeroPolizaSeguro" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="CompañiaSeguro" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="CompañiaSeguro" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="FechaVigenciaSeguro" Type="DateTime" Precision="3" />
     <Property Name="FechaVencimientoVerificacionTecnica" Type="DateTime" Precision="3" />
     <Property Name="CalculaAmortizacion" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
@@ -2471,7 +2473,7 @@
     <Property Type="Int32" Name="IdTipoComprobanteCajaIngresos" />
     <Property Type="Int32" Name="IdTipoComprobanteCajaEgresos" />
     <Property Type="String" Name="DirectorioDTS" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PathObra" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PathObra" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="DateTime" Name="FechaUltimoCierre" Precision="3" />
     <Property Type="Int32" Name="IdConceptoDiferenciaCambio" />
     <Property Type="Int32" Name="IdTipoCuentaGrupoFF" />
@@ -2894,6 +2896,7 @@
     <NavigationProperty Name="OrdenesCompras" Relationship="DemoProntoModel.FK_OrdenesCompra_Condiciones_Compras" FromRole="Condiciones_Compra" ToRole="OrdenesCompra" />
     <NavigationProperty Name="Remitos" Relationship="DemoProntoModel.FK_Remitos_Condiciones_Compras" FromRole="Condiciones_Compra" ToRole="Remito" />
     <NavigationProperty Name="Facturas" Relationship="DemoProntoModel.FK_Facturas_Condiciones_Compras" FromRole="Condiciones_Compra" ToRole="Factura" />
+    <Property Name="AsociarARecepciones" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Ganancia">
     <Key>
@@ -3321,8 +3324,6 @@
     <Property Type="String" Name="CircuitoFirmasCompleto" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ConfirmadoPorWeb" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="DateTime" Name="FechaCierreCompulsa" Precision="3" />
-    <Property Type="String" Name="NombreUsuarioWeb" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="DateTime" Name="FechaRespuestaweb" Precision="3" />
     <NavigationProperty Name="Condiciones_Compra" Relationship="DemoProntoModel.FK_Presupuestos_Condiciones_Compra" FromRole="Presupuesto" ToRole="Condiciones_Compra" />
     <NavigationProperty Name="DetallePresupuestos" Relationship="DemoProntoModel.FK_DetallePresupuestos_Presupuestos" FromRole="Presupuesto" ToRole="DetallePresupuesto" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Presupuestos_Monedas" FromRole="Presupuesto" ToRole="Moneda" />
@@ -4175,6 +4176,9 @@
     <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Facturas_IdAutorizaAnulacion" FromRole="Factura" ToRole="Empleado" />
     <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_Facturas_IdUsuarioIngreso" FromRole="Factura" ToRole="Empleado" />
     <NavigationProperty Name="ListasPrecio" Relationship="DemoProntoModel.FK_Facturas_ListasPrecios" FromRole="Factura" ToRole="ListasPrecio" />
+    <Property Name="BienesOServicios" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="FechaInicioServicio" Type="DateTime" Precision="3" />
+    <Property Name="FechaFinServicio" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_DetalleFacturas_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -4499,7 +4503,7 @@
     <Property Name="AsignarIPsObradorCentral" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Articulos_Rubros">
-    <End Type="DemoProntoModel.Rubro" Role="Rubro" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Rubro" Role="Rubro" Multiplicity="1" />
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Rubro">
@@ -5733,7 +5737,7 @@
     <Property Type="Int32" Name="IdFamilia" Nullable="false" />
     <Property Type="String" Name="AddNombre" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="Int16" Name="Orden" Nullable="false" />
-    <Property Type="String" Name="Campo" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Campo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Etiqueta" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="TablaCombo" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="CampoCombo" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -6906,6 +6910,8 @@
     <Property Type="Int32" Name="IdUsuarioModificoCuenta" />
     <Property Type="DateTime" Name="FechaModificacionCuenta" Precision="3" />
     <Property Name="IdPedido" Type="Int32" />
+    <Property Name="IdUsuarioEnlazoRecepcion" Type="Int32" />
+    <Property Name="FechaEnlazoRecepcion" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedoresPresupuestosObra">
     <Key>
@@ -7277,6 +7283,8 @@
     <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_NotasCredito_IdObra" FromRole="NotasCredito" ToRole="Obra" />
     <NavigationProperty Name="Provincia" Relationship="DemoProntoModel.FK_NotasCredito_IdProvinciaDestino" FromRole="NotasCredito" ToRole="Provincia" />
     <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_NotasCredito_IdVendedor" FromRole="NotasCredito" ToRole="Vendedor" />
+    <Property Name="FechaInicioServicio" Type="DateTime" Precision="3" />
+    <Property Name="FechaFinServicio" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -7680,7 +7688,7 @@
     <NavigationProperty Name="Articulos" Relationship="DemoProntoModel.FK_Articulos_Subrubros" FromRole="Subrubro" ToRole="Articulo" />
   </EntityType>
   <Association Name="FK_Articulos_Subrubros">
-    <End Type="DemoProntoModel.Subrubro" Role="Subrubro" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Subrubro" Role="Subrubro" Multiplicity="1" />
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subrubro">
@@ -9060,6 +9068,7 @@
     <Property Name="IdColor" Type="Int32" />
     <Property Name="IdDetallePresupuestoVenta" Type="Int32" />
     <NavigationProperty Name="Devolucione" Relationship="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" FromRole="DetalleDevolucione" ToRole="Devolucione" />
+    <Property Name="OrigenRegistro" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Devolucione">
     <Key>
@@ -9117,6 +9126,13 @@
     <Property Name="IdDeposito" Type="Int32" />
     <Property Name="IdUsuarioAnulacion" Type="Int32" />
     <NavigationProperty Name="DetalleDevoluciones" Relationship="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" FromRole="Devolucione" ToRole="DetalleDevolucione" />
+    <Property Name="CAE" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Name="RechazoCAE" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="FechaVencimientoORechazoCAE" Type="DateTime" Precision="3" />
+    <Property Name="IdIdentificacionCAE" Type="Int32" />
+    <Property Name="Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OrigenRegistro" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="CuitClienteExterno" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_DetalleDevoluciones_Devoluciones">
     <End Type="DemoProntoModel.Devolucione" Role="Devolucione" Multiplicity="0..1" />
@@ -10044,7 +10060,7 @@
       <PropertyRef Name="IdOrdenTrabajo" />
     </Key>
     <Property Name="IdOrdenTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Name="NumeroOrdenTrabajo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroOrdenTrabajo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaInicio" Type="DateTime" Precision="3" />
     <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
@@ -12570,4 +12586,74 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="DiccionarioEquivalencia">
+    <Key>
+      <PropertyRef Name="IdDiccionarioEquivalencia" />
+    </Key>
+    <Property Name="IdDiccionarioEquivalencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Palabra" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Traduccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tabla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ExcelImportador">
+    <Key>
+      <PropertyRef Name="IdExcelImportador" />
+    </Key>
+    <Property Name="IdExcelImportador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTanda" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioIngreso" Type="Int32" />
+    <Property Name="FechaTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="check1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="URLgenerada" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdTitular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdIntermediario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdRComercial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdCorredor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdChofer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Producto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Titular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Intermediario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RComercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Corredor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Procedencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Patente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroCDP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Acoplado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NetoProc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Calidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column15" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column16" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column17" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column18" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column19" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column20" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column21" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column22" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column23" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column24" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column25" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comprador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Subcontratista1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Subcontratista2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaDescarga" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Hora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Auxiliar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Auxiliar2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Auxiliar3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Auxiliar4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Auxiliar5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EntregadorFiltrarPorWilliams" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CTG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KmARecorrer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TarifaTransportista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Exporta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SubnumeroDeFacturacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>
