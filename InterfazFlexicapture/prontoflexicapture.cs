@@ -1387,7 +1387,8 @@ namespace ProntoFlexicapture
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
-                    id = CartaDePorteManager.Save(SC, cdp, 0, "");
+                    string err="";
+                    id = CartaDePorteManager.Save(SC, cdp, 0, "", true, ref err);
                     if (numeroCarta > numprefijo)
                     {
                         cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";

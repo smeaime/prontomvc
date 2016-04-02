@@ -7093,7 +7093,9 @@ Public Class CartaDePorteManager
 
             If q3 IsNot Nothing Then Return q3.IdCliente
 
-            Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = IdClienteEquivalenteDelIdVendedor(oCDP.Corredor, SC) _
+
+            Dim idequi As Integer = IdClienteEquivalenteDelIdVendedor(CLng(oCDP.Corredor), SC)
+            Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = idequi _
                                                                     And x.PuntoVenta = oCDP.PuntoVenta And _
                                                                     x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
             If q4 IsNot Nothing Then Return q4.IdCliente
@@ -8113,13 +8115,13 @@ Public Class CartaDePorteManager
 
 
     <DataObjectMethod(DataObjectMethodType.Update, True)> _
-    Public Shared Function Save(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, ByVal IdUsuario As Integer, ByVal NombreUsuario As String, Optional ByVal bCopiarDuplicados As Boolean = True) As Integer
+    Public Shared Function Save(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, ByVal IdUsuario As Integer, ByVal NombreUsuario As String, Optional ByVal bCopiarDuplicados As Boolean = True, Optional ByRef ms As String = "") As Integer
         Dim CartaDePorteId As Integer
 
         'Dim myTransactionScope As TransactionScope = New TransactionScope
         Try
 
-            Dim ms As String
+
             If Not IsValid(SC, myCartaDePorte, ms) Then
                 ErrHandler2.WriteError(ms)
                 Return -1
@@ -8531,6 +8533,25 @@ Public Class CartaDePorteManager
                 End If
             End If
 
+            '                      La cosa quedaría así:
+
+            'Si se duplica una carta de porte y en una copia está el tilde y en otra no:
+
+            '* En la que tiene el tilde -> FacturarAExplicito = Destinatario
+            '* En la que no tiene el tilde -> FacturarAExplicito = Cliente a determinar según los tildes. Si no se puede determinar porque mas de uno cumple con la regla, quedará vacío y a cargar por el cliente
+
+            'Casos en los que no llenar el FacturarAExplicito:
+            '* Si está triplicada
+            '* Si está duplicada y ninguna tiene tilde
+
+
+
+            VerSiSeEstaCreandoUnDuplicadoYSuOriginalEsExportador(myCartaDePorte, SC, CartaDePorteId, ms)
+
+
+
+
+
 
             '/////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////
@@ -8595,6 +8616,86 @@ Public Class CartaDePorteManager
         End Try
         Return myCartaDePorte.Id
     End Function
+
+
+    Shared Sub VerSiSeEstaCreandoUnDuplicadoYSuOriginalEsExportador(cartaActual As CartaDePorte, SC As String, CartaDePorteId As Long, ByRef ms As String)
+
+
+
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+        Dim familia = ( _
+                        From e In db.CartasDePortes _
+                        Where e.NumeroCartaDePorte = cartaActual.NumeroCartaDePorte _
+                        And e.SubnumeroVagon = cartaActual.SubnumeroVagon _
+                         And e.IdCartaDePorte <> CartaDePorteId _
+                         And e.Anulada <> "SI").AsEnumerable
+
+
+
+        If familia.Count <> 1 Then Return 'tienen que ser dos
+
+
+
+        Dim cartaLaOtra = CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
+
+        If Not (cartaActual.Exporta Xor cartaLaOtra.Exporta) Then Return
+
+
+
+
+        Dim cartaExportadora As CartaDePorte
+        Dim cartaNoExportadora As CartaDePorte
+        If cartaActual.Exporta Then
+            cartaExportadora = cartaActual
+            cartaNoExportadora = cartaLaOtra
+        Else
+            cartaExportadora = cartaLaOtra
+            cartaNoExportadora = cartaActual
+        End If
+
+
+
+        If cartaActual.Id = -1 And cartaActual.SubnumeroDeFacturacion = -1 Then cartaActual.SubnumeroDeFacturacion = 0
+        cartaActual.Id = CartaDePorteId
+
+
+
+        '///////////////////////////////////////////////////////////////////////////////////
+        '* En la que tiene el tilde -> FacturarAExplicito = Destinatario
+        '///////////////////////////////////////////////////////////////////////////////////
+
+        'no permitir poner un valor en blanco si ya hay un valor en el idclienteafacturarle
+        If Not (cartaExportadora.IdClienteAFacturarle > 0 And cartaExportadora.Entregador <= 0) Then
+            cartaExportadora.IdClienteAFacturarle = cartaExportadora.Entregador
+        End If
+
+
+        '///////////////////////////////////////////////////////////////////////////////////
+        '* En la que no tiene el tilde -> FacturarAExplicito = Cliente a determinar según los tildes. Si no se puede 
+        'determinar porque mas de uno cumple con la regla, quedará vacío y a cargar por el cliente
+        '///////////////////////////////////////////////////////////////////////////////////
+
+        'no permitir poner un valor en blanco si ya hay un valor en el idclienteafacturarle  
+        If Not (cartaNoExportadora.IdClienteAFacturarle > 0 And FacturarA_Automatico(SC, cartaNoExportadora) <= 0) Then
+            cartaNoExportadora.IdClienteAFacturarle = FacturarA_Automatico(SC, cartaNoExportadora)
+        End If
+
+        ms &= "Tirar mensaje de refrescar el formulario original"
+
+
+
+        Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaLaOtra.Id).SingleOrDefault
+        oCarta.IdClienteAFacturarle = cartaLaOtra.IdClienteAFacturarle
+        Dim oCarta2 = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaActual.Id).SingleOrDefault
+        oCarta2.IdClienteAFacturarle = cartaActual.IdClienteAFacturarle
+
+        db.SaveChanges()
+
+
+    End Sub
+
+
 
 
     Shared Sub CopiarCarta(ByVal orig As ProntoMVC.Data.Models.CartasDePorte, ByRef dest As ProntoMVC.Data.Models.CartasDePorte)
