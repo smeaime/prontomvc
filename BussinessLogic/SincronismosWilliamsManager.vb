@@ -20199,7 +20199,7 @@ Namespace Pronto.ERP.Bll
             Dim carta As CartaDePorte = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
 
             Dim s As String
-            s &= MonsantoCalidad("HD", carta.HumedadDesnormalizada, carta.CalidadHumedadMerma)
+            s &= MonsantoCalidad("HD", carta.HumedadDesnormalizada, carta.Humedad)
             s &= MonsantoCalidad("MY", carta.Merma, 0)
             s &= MonsantoCalidad("MCV", carta.CalidadMermaConvenidaMerma, carta.CalidadMermaConvenida)
             s &= MonsantoCalidad("MV", carta.CalidadMermaVolatilMerma, carta.CalidadMermaVolatil)
@@ -20221,7 +20221,7 @@ Namespace Pronto.ERP.Bll
 
 
         Shared Function MonsantoCalidad(abrevCalidad As String, kilos As Integer, porcentaje As Decimal) As String
-            If kilos > 0 Then
+            If kilos > 0 Or porcentaje > 0 Then
                 Dim s = "|" & abrevCalidad & "|" & porcentaje.ToString("0.00").Replace(",", ".") & "|" & kilos.ToString
                 Return s
 
