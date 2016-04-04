@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Drawing.Imaging;
 
+using System.ServiceProcess;
+
 using FCEngine;
 
 using System.Collections.Generic;
@@ -1046,6 +1048,35 @@ namespace ProntoFlexicapture
 
 
 
+
+
+        static string EstadoServicio()
+        {
+            string SERVICENAME = "ProntoAgente";
+
+            ServiceController sc = new ServiceController(SERVICENAME);
+
+            switch (sc.Status)
+            {
+                case ServiceControllerStatus.Running:
+                    return "Running";
+                case ServiceControllerStatus.Stopped:
+                    return "Stopped";
+                case ServiceControllerStatus.Paused:
+                    return "Paused";
+                case ServiceControllerStatus.StopPending:
+                    return "Stopping";
+                case ServiceControllerStatus.StartPending:
+                    return "Starting";
+                default:
+                    return "Status Changing";
+            }
+
+
+        }
+
+
+
         static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
         {
 
@@ -1387,7 +1418,7 @@ namespace ProntoFlexicapture
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
-                    string err="";
+                    string err = "";
                     id = CartaDePorteManager.Save(SC, cdp, 0, "", true, ref err);
                     if (numeroCarta > numprefijo)
                     {
@@ -1755,9 +1786,11 @@ namespace ProntoFlexicapture
         public static void Log(string s)
         {
 
-            using (EventLog eventLog = new EventLog("ProntoAgente"))
+            //string nombre = "ProntoAgente";  // para usar un nombre especifico creo que tenes que declarar un eventsource o permisos administrativos
+            string nombre = "Application";
+            using (EventLog eventLog = new EventLog(nombre))
             {
-                eventLog.Source = "ProntoAgente";
+                eventLog.Source = nombre;
                 eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
             }
         }

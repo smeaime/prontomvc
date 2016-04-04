@@ -215,17 +215,33 @@ namespace ProntoMVC.Tests
             string sb = "";
             foreach (System.Data.DataRow r in dt.Rows)
             {
+                try
+                {
+
+
                 var dr = r;
                 string c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
                                                         null, null, null, null,
                                                         null, null);
 
                 sb += c + "\n";
+                }
+                catch (Exception x)
+                {
+                    sb += x.ToString() + "\n";
+                    
+                }
+
             }
 
         }
 
 
+        [TestMethod]
+        public void Log()
+        {
+            ClassFlexicapture.Log("safasdfsf");
+        }
 
         [TestMethod]
         public void EquivalenciasOCR_18223()
@@ -346,7 +362,9 @@ namespace ProntoMVC.Tests
             Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
 
             carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
-            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
+            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
             carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
             carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
             carta.IdArticulo = 22;
