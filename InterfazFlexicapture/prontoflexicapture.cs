@@ -1050,7 +1050,7 @@ namespace ProntoFlexicapture
 
 
 
-        static string EstadoServicio()
+       public  static string EstadoServicio()
         {
             string SERVICENAME = "ProntoAgente";
 
