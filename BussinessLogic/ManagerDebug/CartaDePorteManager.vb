@@ -780,8 +780,6 @@ Public Class CartaDePorteManager
                 'usar la localidad para guiarse
                 'Return q(0).Nombre
 
-                'aadasdasdad()
-
 
                 Dim c = (From x In q _
                          Select x.dest.IdWilliamsDestino, nombre = If(If(x.locdes, New Models.Localidad).Nombre, ""), dist = FuncionesGenericasCSharp.levenshtein(
@@ -7057,7 +7055,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function FacturarA_Automatico(ByVal SC As String, ByVal oCDP As CartaDePorte) As Integer
+    Public Shared Function FacturarA_Automatico(ByVal SC As String, ByVal oCDP As CartaDePorte, ByRef ms As String) As Integer
 
 
         'Dim idclienteexportador As Integer
@@ -7081,29 +7079,43 @@ Public Class CartaDePorteManager
 
             Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
+            Dim clis As New List(Of Integer)
+
+
             Dim q1 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Titular And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoTitular = "SI").FirstOrDefault
 
-            If q1 IsNot Nothing Then Return q1.IdCliente
+            If q1 IsNot Nothing Then clis.Add(oCDP.Titular)
 
             Dim q2 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.CuentaOrden1 And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoIntermediario = "SI").FirstOrDefault
-            If q2 IsNot Nothing Then Return q2.IdCliente
+            If q2 IsNot Nothing Then clis.Add(oCDP.CuentaOrden1)
 
 
             Dim q3 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.CuentaOrden2 And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoRemcomercial = "SI").FirstOrDefault
 
-            If q3 IsNot Nothing Then Return q3.IdCliente
+            If q3 IsNot Nothing Then clis.Add(oCDP.CuentaOrden2)
 
 
             Dim idequi As Integer = IdClienteEquivalenteDelIdVendedor(CLng(oCDP.Corredor), SC)
             Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = idequi _
                                                                     And x.PuntoVenta = oCDP.PuntoVenta And _
                                                                     x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
-            If q4 IsNot Nothing Then Return q4.IdCliente
+            If q4 IsNot Nothing Then clis.Add(idequi)
 
+            If False Then ' el destinatario no lo reviso porque 
+                Dim q5 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Entregador And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
 
-            Dim q5 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = oCDP.Entregador And x.PuntoVenta = oCDP.PuntoVenta And x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
+                If q5 IsNot Nothing Then Return q5.IdCliente
+            End If
 
-            If q5 IsNot Nothing Then Return q5.IdCliente
+            If clis.Count = 1 Then Return clis(0)
+
+            If clis.Count > 1 Then
+                ms &= "No se pudo asignar el cliente a facturar automaticamente, clientes en conflicto ("
+                For Each i In clis
+                    ms &= NombreCliente(SC, i) & "  "
+                Next
+                ms &= ")"
+            End If
 
             Return 0
         Catch ex As Exception
@@ -8522,7 +8534,7 @@ Public Class CartaDePorteManager
                     CrearleDuplicadaConEl_FacturarA_Indicado(SC, myCartaDePorte)
 
                     'al original hay que marcarle el FacturarA como usando el automatico
-                    myCartaDePorte.IdClienteAFacturarle = FacturarA_Automatico(SC, myCartaDePorte)
+                    myCartaDePorte.IdClienteAFacturarle = FacturarA_Automatico(SC, myCartaDePorte, ms)
 
 
 
@@ -8618,7 +8630,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Sub VerSiSeEstaCreandoUnDuplicadoYSuOriginalEsExportador(cartaActual As CartaDePorte, SC As String, CartaDePorteId As Long, ByRef ms As String)
+    Shared Sub VerSiSeEstaCreandoUnDuplicadoYSuOriginalEsExportador(cartaActual As CartaDePorte, SC As String, CartaDePorteId As Long, ByRef ms As String, Optional bSoloValidar As Boolean = False)
 
 
 
@@ -8677,21 +8689,25 @@ Public Class CartaDePorteManager
         '///////////////////////////////////////////////////////////////////////////////////
 
         'no permitir poner un valor en blanco si ya hay un valor en el idclienteafacturarle  
-        If Not (cartaNoExportadora.IdClienteAFacturarle > 0 And FacturarA_Automatico(SC, cartaNoExportadora) <= 0) Then
-            cartaNoExportadora.IdClienteAFacturarle = FacturarA_Automatico(SC, cartaNoExportadora)
+        Dim ms2 As String
+        If cartaNoExportadora.IdClienteAFacturarle <= 0 Then
+            Dim idauto = FacturarA_Automatico(SC, cartaNoExportadora, ms2)
+            If Not (cartaNoExportadora.IdClienteAFacturarle > 0 And idauto <= 0) Then
+                cartaNoExportadora.IdClienteAFacturarle = idauto
+            End If
         End If
 
-        ms &= "Tirar mensaje de refrescar el formulario original"
+        'ms &= "Tirar mensaje de refrescar el formulario original"
 
 
+        If Not bSoloValidar Then
+            Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaLaOtra.Id).SingleOrDefault
+            oCarta.IdClienteAFacturarle = cartaLaOtra.IdClienteAFacturarle
+            Dim oCarta2 = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaActual.Id).SingleOrDefault
+            oCarta2.IdClienteAFacturarle = cartaActual.IdClienteAFacturarle
 
-        Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaLaOtra.Id).SingleOrDefault
-        oCarta.IdClienteAFacturarle = cartaLaOtra.IdClienteAFacturarle
-        Dim oCarta2 = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaActual.Id).SingleOrDefault
-        oCarta2.IdClienteAFacturarle = cartaActual.IdClienteAFacturarle
-
-        db.SaveChanges()
-
+            db.SaveChanges()
+        End If
 
     End Sub
 
@@ -9286,6 +9302,12 @@ Public Class CartaDePorteManager
 
 
         End With
+
+
+
+        VerSiSeEstaCreandoUnDuplicadoYSuOriginalEsExportador(myCartaDePorte, SC, myCartaDePorte.Id, ms, True)
+
+
 
         '"La lista de items está vacía"
 
@@ -23145,7 +23167,13 @@ Public Class LogicaImportador
 
 
         'ver si vino el id en una columna
-        Dim ssss = Val(dr.Item("Auxiliar4").ToString.Substring(6, 11))
+        Dim ssss = 0
+        Try
+            ssss = Val(dr.Item("Auxiliar4").ToString.Substring(6, 11))
+        Catch ex As Exception
+            ssss = 0
+        End Try
+
         If ssss > 0 Then
             myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, ssss, vagon, subnumerodefac)
             If myCartaDePorte.Id = -1 Then
@@ -23156,6 +23184,11 @@ Public Class LogicaImportador
         Else
             myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, subnumerodefac)
         End If
+
+
+
+
+
 
 
         'y si tiene duplicados, como sabes?
@@ -23373,11 +23406,37 @@ Public Class LogicaImportador
 
 
 
+
+
+
+
+
             dr.Item("Destino") = iisNull(dr.Item("Destino"))
             If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") Then
+
+
                 .Destino = BuscaIdWilliamsDestinoPreciso(RTrim(dr.Item("Destino")), SC)
                 If .Destino = -1 Then .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Destino")), SC)
                 'dt.Rows(row).Item("IdDestino") = .Destino
+
+
+
+                'ver si vino la localidaddestino (por el flexicapture) en una columna
+                Dim localidaddestino As String = dr.Item("Auxiliar3").ToString
+                Dim destinocuit As String = dr.Item("Auxiliar2").ToString
+                If localidaddestino <> "" And destinocuit <> "" Then
+
+                    Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+                    'Dim destinocuit = (From dest In db.WilliamsDestinos _
+                    '        Where dest.IdWilliamsDestino = .Destino).FirstOrDefault().CUIT
+
+                    .Destino = CartaDePorteManager.BuscarDestinoPorCUIT(destinocuit, SC, dr.Item("Destino"), localidaddestino)
+                End If
+
+
+
                 If .Destino = -1 And dr.Item("Destino") = "" Then
                     'solo uso el default si está vacío el texto
                     .Destino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, SC)
@@ -23388,6 +23447,9 @@ Public Class LogicaImportador
                     AsignarContratistasSegunDestino(dr, SC)
                 End If
             End If
+
+
+
 
 
 
@@ -23986,9 +24048,17 @@ Public Class ExcelImportadorManager
                 Return "NumeroCDP"
 
 
+                '///////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////
+                'columnas del excel del Flexicapture
             Case "COLUMNAADICIONAL"
                 Return "Auxiliar4"
-
+            Case "LOCALIDAD2"
+                Return "Auxiliar3"
+            Case "DESTINOCUIT"
+                Return "Auxiliar2"
+                '///////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////
 
 
 
@@ -24196,6 +24266,9 @@ Public Class ExcelImportadorManager
 
 
         Auxiliar4
+        Auxiliar3
+        Auxiliar2
+
         ' -tengo q agregar estos renglones en un orden especial???
 
         'Tenés que agregar el campo en la tabla "ExcelImportador"
@@ -24856,18 +24929,19 @@ Public Class ExcelImportadorManager
         Dim sourceRow As DataRow
 
         For Each r As DataRow In dt.Rows
+            If Not IsDBNull(r(38)) Then
+                If r(38) = "SI" Then
 
-            If r(38) = "SI" Then
-
-                sourceRow = r
-                r(38) = "NO"
+                    sourceRow = r
+                    r(38) = "NO"
 
 
-                Dim desRow As DataRow = dtcopias.NewRow
-                desRow.ItemArray = sourceRow.ItemArray.Clone
-                desRow(50) = "1" 'segundo subnumero de facturacion
-                desRow(38) = "SI"
-                dtcopias.Rows.Add(desRow)
+                    Dim desRow As DataRow = dtcopias.NewRow
+                    desRow.ItemArray = sourceRow.ItemArray.Clone
+                    desRow(50) = "1" 'segundo subnumero de facturacion
+                    desRow(38) = "SI"
+                    dtcopias.Rows.Add(desRow)
+                End If
             End If
         Next
 
