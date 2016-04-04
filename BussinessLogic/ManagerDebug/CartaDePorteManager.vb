@@ -13371,7 +13371,7 @@ Public Class LogicaFacturacion
 
             Dim l = (From i In dt.AsEnumerable _
                        Where If(IsNull(i("ConDuplicados")), 0, CInt(i("ConDuplicados"))) > 0 And _
-                             IsNull(i("IdClienteAFacturarle")) _
+                           If(IsNull(i("IdClienteAFacturarle")), 0, CInt(i("IdClienteAFacturarle"))) <= 0 _
                 Select New With { _
                         .IdCartaDePorte = CLng(If(i("IdCartaDePorte"), 0)), _
                         .NumeroCartaDePorte = CLng(If(i("NumeroCartaDePorte"), 0)), _
@@ -13384,8 +13384,9 @@ Public Class LogicaFacturacion
 
             Dim rows = (From i In dt.AsEnumerable _
                         Where Not (If(IsNull(i("ConDuplicados")), 0, i("ConDuplicados")) > 0 And _
-                             IsNull(i("IdClienteAFacturarle"))) _
-                    )
+                                    If(IsNull(i("IdClienteAFacturarle")), 0, CInt(i("IdClienteAFacturarle"))) <= 0 _
+                                    ) _
+                        )
             If rows.Any() Then dt = rows.CopyToDataTable() Else dt = dt.Clone
 
 
