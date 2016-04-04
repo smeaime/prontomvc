@@ -192,9 +192,15 @@ namespace ProntoFlexicapture
                 // processor.ResetProcessing();
                 processor.SetCustomImageSource(imageSource);
             }
-            catch (Exception)
+            catch (Exception xxx)
             {
                 //tirar la Lista de imagenes sospechosas
+                foreach (string s in imagenes)
+                {
+                    DesmarcarImagenComoProcesandose(s);
+                }
+
+                CartaDePorteManager.MandarMailDeError(xxx);
                 throw;
             }
 
@@ -443,7 +449,7 @@ namespace ProntoFlexicapture
                     new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
             IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> q2 = (from ProntoMVC.Data.Models.CartasDePorteLogDeOCR i in db.CartasDePorteLogDeOCRs
-                                                                          where i.NumeroCarta >= 900000000 || i.Observaciones!=""
+                                                                          where i.NumeroCarta >= 900000000 || i.Observaciones != ""
                                                                           orderby i.Fecha descending
                                                                           select i).AsQueryable();
 
@@ -1252,7 +1258,7 @@ namespace ProntoFlexicapture
                     cdp.Entregador = CartaDePorteManager.BuscarClientePorCUIT(DestinatarioCUIT, SC, Destinatario);
 
 
-                    
+
                     cdp.Destino = CartaDePorteManager.BuscarDestinoPorCUIT(DestinoCUIT, SC, Destino, Localidad2);
 
 
@@ -1748,9 +1754,9 @@ namespace ProntoFlexicapture
         public static void Log(string s)
         {
 
-            using (EventLog eventLog = new EventLog("Application"))
+            using (EventLog eventLog = new EventLog("ProntoAgente"))
             {
-                eventLog.Source = "Application";
+                eventLog.Source = "ProntoAgente";
                 eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
             }
         }
