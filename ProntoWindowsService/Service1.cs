@@ -246,6 +246,42 @@ at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_Sacan
 at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
     */
 
+
+                    /*
+                     * 
+                     * 
+                     * 
+                    System.OutOfMemoryException: Insufficient memory to continue the execution of the program.
+   at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 233
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 127
+   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 328
+   at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+
+
+   
+    with the event: 
+
+System.Runtime.InteropServices.COMException (0x8000FFFF): Error interno del programa:
+FCESupport\FCESupportImpl.h, 42.
+   at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 198
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 127
+   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 300
+
+
+                     * 
+                     * * 
+                     * 
+                     * 
+                     * 
+                     * */
+
+
+
+
+
+
                     CartaDePorteManager.MandarMailDeError(x2);
 
                     ClassFlexicapture.Log(x2.ToString());

@@ -3665,12 +3665,12 @@ Public Class CartaDePorteManager
 
 
 
-                EntidadManager.Tarea(SC, "Log_InsertarRegistro", "ALTAINF", _
-                                  dr.Item(0), 0, Now, 0, Mid(logtexto, 1, 100), _
-                               Mid(logtexto, 101, 50), Mid(logtexto, 151, 50), Mid(logtexto, 201, 50), _
-                               Mid(logtexto, 251, 50), Mid(logtexto, 301, 50), DBNull.Value, DBNull.Value, _
-                                DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
-                                99990, DBNull.Value, DBNull.Value)
+                'EntidadManager.Tarea(SC, "Log_InsertarRegistro", "ALTAINF", _
+                '                  dr.Item(0), 0, Now, 0, Mid(logtexto, 1, 100), _
+                '               Mid(logtexto, 101, 50), Mid(logtexto, 151, 50), Mid(logtexto, 201, 50), _
+                '               Mid(logtexto, 251, 50), Mid(logtexto, 301, 50), DBNull.Value, DBNull.Value, _
+                '                DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                '                99990, DBNull.Value, DBNull.Value)
 
 
 
@@ -23083,6 +23083,7 @@ Public Class LogicaImportador
                 CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
 
                 .Anulada = "NO"
+                .FechaAnulacion = Nothing
             End If
 
 
