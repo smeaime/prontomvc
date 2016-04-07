@@ -881,6 +881,9 @@ Public Class CartaDePorteManager
 
             db.DiccionarioEquivalencias.Add(q)
             db.SaveChanges()
+        Else
+            q.Traduccion = traduccion 'actualizo la traduccion. quizas hay alguna diferencia, quedará la consistencia con la ultima planilla importada
+            db.SaveChanges()
         End If
 
         Return q.IdDiccionarioEquivalencia
@@ -23525,6 +23528,11 @@ Public Class LogicaImportador
 
             actualizar(.NetoPto, dr.Item("NetoProc"))
 
+            actualizar(.TaraPto, dr.Item("TaraProc"))
+            actualizar(.BrutoPto, dr.Item("BrutoProc"))
+
+
+
             '.NetoPto = IIf( StringToDecimal(iisNull(dr.Item("NetoProc"))) 
 
             actualizar(.BrutoFinal, dr.Item("column12"))
@@ -23599,15 +23607,20 @@ Public Class LogicaImportador
 
             ' no actualizar fechadescarga si es posicion
             'con el chkAyer tambien debo modificar la fecha de arribo???
-            actualizar(.FechaDescarga,
-                       iisValidSqlDate(TextoAFecha(
-                                                iisNull(dr.Item("FechaDescarga"), _
-                                                    IIf(.NetoFinalIncluyendoMermas > 0, _
-                                                        IIf(chkAyer.Checked, _
-                                                            DateAdd(DateInterval.Day, -1, Today), _
-                                                            Today) _
-                                                        , Nothing)))))  'si la fechadescarga está en null, me fijo si hay NetoFinalIncluyendoMermas
+            Try
 
+                actualizar(.FechaDescarga,
+                           iisValidSqlDate(TextoAFecha(
+                                                    iisNull(dr.Item("FechaDescarga"), _
+                                                        IIf(.NetoFinalIncluyendoMermas > 0, _
+                                                            IIf(chkAyer.Checked, _
+                                                                DateAdd(DateInterval.Day, -1, Today), _
+                                                                Today) _
+                                                            , Nothing)))))  'si la fechadescarga está en null, me fijo si hay NetoFinalIncluyendoMermas
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
 
 
 
@@ -23615,7 +23628,13 @@ Public Class LogicaImportador
 
 
             'If iisNull(.FechaArribo, #12:00:00 AM#) = #12:00:00 AM# Then
-            actualizar(.FechaArribo, IIf(chkAyer.Checked, DateAdd(DateInterval.Day, -1, Today), txtFechaArribo.Text))
+            Try
+                actualizar(.FechaArribo, IIf(chkAyer.Checked, DateAdd(DateInterval.Day, -1, Today), txtFechaArribo.Text))
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+
+            End Try
             'End If
             '.Merma = StringToDecimal(dr.Item("column16")) 'este es el otras mermas
 
@@ -23639,7 +23658,7 @@ Public Class LogicaImportador
             End If
 
 
-            If Val(iisNull(dr.Item("CTG"))) > 0 Then .CTG = Val(iisNull(dr.Item("CTG")))
+            If Val(iisNull(dr.Item("CTG")).Replace(".", "")) > 0 Then .CTG = Val(iisNull(dr.Item("CTG")).Replace(".", ""))
 
             actualizar(.TarifaTransportista, dr.Item("TarifaTransportista"))
             actualizar(.KmARecorrer, dr.Item("KmARecorrer"))
@@ -24113,6 +24132,12 @@ Public Class ExcelImportadorManager
                 Return "NetoProc"
 
 
+            Case "PESOBRUTO"
+                Return "BrutoProc"
+
+            Case "PESOTARA"
+                Return "TaraProc"
+
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
@@ -24269,6 +24294,15 @@ Public Class ExcelImportadorManager
         Auxiliar4
         Auxiliar3
         Auxiliar2
+
+
+        BrutoProc
+        TaraProc
+        Auxiliar6
+        Auxiliar7
+        Auxiliar8
+        Auxiliar9
+        Auxiliar1
 
         ' -tengo q agregar estos renglones en un orden especial???
 
@@ -26646,6 +26680,8 @@ Public Class ExcelImportadorManager
         ExcepcionTerminal6_UnirColumnasConPatente(dtOrigen, renglonDeTitulos)
 
 
+        FormatearColumnasFlexicapture(dtOrigen)
+
 
         'excepcion BUNGE / RAMALLO: calidades en minicolumnas improvisadas para cada renglon
         '-pero esto no tiene que estar en postproduccion, sino en preproduccion
@@ -26812,6 +26848,13 @@ Public Class ExcelImportadorManager
 
         For j = dtDestino.Rows.Count - 1 To 0 Step -1
             row = dtDestino.Rows(j)
+
+            If Not IsDBNull(row.Item("Auxiliar4")) Then
+                If row.Item("Auxiliar4").ToString() <> "" And row.Item("Auxiliar4").ToString() <> "ColumnaAdicional" Then
+                    Continue For
+                End If
+            End If
+
             If IsDBNull(row.Item("NumeroCDP")) Then
                 dtDestino.Rows.Remove(row)
                 Continue For
@@ -27146,7 +27189,20 @@ Public Class ExcelImportadorManager
 
     End Sub
 
+    Public Shared Sub FormatearColumnasFlexicapture(ByRef dt As Data.DataTable)
 
+        
+        If (dt.Rows(0).Item(0) = "BarraCP") Then 'es del flexicapture
+
+
+            For r = 1 To dt.Rows.Count - 1
+
+                dt.Rows(r).Item(9) = dt.Rows(r).Item(7) 'copiar BarraCEE en CEE
+            Next
+        End If
+
+
+    End Sub
 
     Public Shared Sub RellenarCeldaVaciaConCeldaSuperior(ByRef dt As Data.DataTable)
         For r = 0 To dt.Rows.Count - 2
