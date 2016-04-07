@@ -200,8 +200,9 @@ namespace ProntoMVC.Tests
         public void ModicarCartaConIdApartirDelExcelDelFlexicapture_18266()
         {
 
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\Copia de PRUEBA SISTEMA2.xls";
-
+            // string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\Copia de PRUEBA SISTEMA2.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Downloads\prueba3.xls";
+            string archivoExcel = @"C:\Users\Administrador\Downloads\ExportToXLS (97).xls";
 
             int m_IdMaestro = 0;
 
