@@ -549,9 +549,11 @@ namespace ProntoFlexicapture
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
 
             // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+         
+            // tenes usar el creationtime para las que fueron extraidas del zip
 
             var q = (from f in files
-                     where (f.LastWriteTime > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
+                     where ((f.LastWriteTime > f.CreationTime  ? f.LastWriteTime : f.CreationTime) > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
                             && (EsArchivoDeImagen(f.Name)
                             && !f.FullName.Contains("_IMPORT1")
                             && !files.Any(x => x.FullName == (f.FullName + ".bdl"))
