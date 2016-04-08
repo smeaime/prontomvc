@@ -1730,7 +1730,7 @@ ALTER TABLE ExcelImportador add  BrutoProc   varchar(100) NULL
 ALTER TABLE ExcelImportador add  TaraProc    varchar(100) NULL
 ALTER TABLE ExcelImportador add  Auxiliar6   varchar(100) NULL
 ALTER TABLE ExcelImportador add  Auxiliar7   varchar(100) NULL
-ALTER TABLE ExcelImportador add  Auxiliar8   varchar(100) NULL
+ALTER TABLE ExcelImportador add  Auxiliar8   varchar(100) NULL 
 ALTER TABLE ExcelImportador add  Auxiliar9   varchar(100) NULL
 
 
