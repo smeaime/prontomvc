@@ -27191,16 +27191,20 @@ Public Class ExcelImportadorManager
 
     Public Shared Sub FormatearColumnasFlexicapture(ByRef dt As Data.DataTable)
 
-        
-        If (dt.Rows(0).Item(0) = "BarraCP") Then 'es del flexicapture
+        Try
+
+            If (dt.Rows(0).Item(0) = "BarraCP") Then 'es del flexicapture
 
 
-            For r = 1 To dt.Rows.Count - 1
+                For r = 1 To dt.Rows.Count - 1
 
-                dt.Rows(r).Item(9) = dt.Rows(r).Item(7) 'copiar BarraCEE en CEE
-            Next
-        End If
+                    dt.Rows(r).Item(9) = dt.Rows(r).Item(7) 'copiar BarraCEE en CEE
+                Next
+            End If
 
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
 
     End Sub
 
