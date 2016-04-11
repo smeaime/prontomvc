@@ -10727,6 +10727,9 @@ Public Class CartaDePorteManager
 
         ErrHandler2.WriteError("GrabarImagen 2")
 
+
+        guardar el tiff original
+
         'si es un .tiff paginado
         If archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tif") Or archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tiff") Then
             Try
