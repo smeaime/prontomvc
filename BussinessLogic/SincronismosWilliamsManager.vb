@@ -19997,6 +19997,7 @@ Namespace Pronto.ERP.Bll
                     sb &= .Establecimiento
                     sb &= SEPARADOR
                     '26	yes	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
+                    sb &= .ProcedenciaDesc
                     sb &= SEPARADOR
                     '27	yes	Codigo Postal	String{1,10}	Texto entre 1 y 10 caracteres
                     sb &= SEPARADOR
@@ -20009,6 +20010,7 @@ Namespace Pronto.ERP.Bll
                     '29	no	Establecimiento	digits{1,6}	Numerico entre 1 y  11 digitos
                     sb &= SEPARADOR
                     '30	no	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
+                    sb &= .destino
                     sb &= SEPARADOR
                     '31	no	Codigo Postal	String{1,10}	Texto entre 1 y 10 caracteres
                     sb &= .DestinoCodigoPostal
