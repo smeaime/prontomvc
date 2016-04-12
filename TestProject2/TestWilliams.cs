@@ -200,17 +200,21 @@ namespace ProntoMVC.Tests
         public void webServiceParaBLDconDescargaDeImagenes_18181()
         {
 
-            sssssss
+            
                 System.IO.FileStream fs1=null;
-    WSRef.FileDownload ls1 = new WSRef.FileDownload();
-    byte[] b1=null;
-    b1 = ls1.DownloadFile("C:\\Source.xml");
-    fs1=new FileStream("D:\\Source.xml", FileMode.Create);
-    fs1.Write(b1,0,b1.Length);  
-    fs1.Close();
-    fs1 = null;
-    Label1.Text="File dow
+    //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+    //byte[] b1=null;
+    //b1 = ls1.DownloadFile("C:\\Source.xml");
+    //fs1=new FileStream("D:\\Source.xml", FileMode.Create);
+    //fs1.Write(b1,0,b1.Length);  
+    //fs1.Close();
+    //fs1 = null;
+    //Label1.Text = "File dow";
+
         }
+
+
+
 
 
         [TestMethod]
