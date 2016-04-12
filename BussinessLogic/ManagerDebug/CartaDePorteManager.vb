@@ -10721,31 +10721,35 @@ Public Class CartaDePorteManager
 
 
 
-        Dim DIRFTP = DirApp & "\DataBackupear\"
+        Dim DIRDATABACKUPEAR = DirApp & "\DataBackupear\"
 
 
 
         ErrHandler2.WriteError("GrabarImagen 2")
 
 
-        guardar el tiff original
+
 
         'si es un .tiff paginado
         If archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tif") Or archivoImagenSinPathUbicadaEnDATABACKUPEAR.EndsWith(".tiff") Then
             Try
 
+                'guardar el tiff original
+                '-cómo? hay codigo que borra ese archivo tif original????
+                '-tenes razon! el tif original se salva! solo hay que buscarlo sin el .jpg agregado... Ponelo en el form de cartaporte
+                
 
-                Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
+                Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRDATABACKUPEAR + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
 
 
                 'primera pagina del tiff
                 If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
-                    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
-                    BorroArchivo(DIRFTP + oCarta.PathImagen)
+                    listapaginas(0).Save(DIRDATABACKUPEAR + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen)
                     oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
                 Else
-                    listapaginas(0).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
-                    BorroArchivo(DIRFTP + oCarta.PathImagen2)
+                    listapaginas(0).Save(DIRDATABACKUPEAR + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen2)
                     oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
                 End If
 
@@ -10753,8 +10757,8 @@ Public Class CartaDePorteManager
                 'meté el "TK" como sufijo, no como prefijo, porque en el nombre puede venir el subdirectorio de clasificacion
                 If listapaginas.Count > 1 Then
                     'listapaginas(1).Save(Path.GetFullPath(archivoImagen) + "TK_" + Path.GetFileName(archivoImagen))
-                    listapaginas(1).Save(DIRFTP + archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg", Imaging.ImageFormat.Jpeg)
-                    BorroArchivo(DIRFTP + oCarta.PathImagen2)
+                    listapaginas(1).Save(DIRDATABACKUPEAR + archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg", Imaging.ImageFormat.Jpeg)
+                    BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen2)
                     oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR + "_TK" + ".jpg"
 
                 End If
@@ -10767,10 +10771,10 @@ Public Class CartaDePorteManager
 
 
         ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
-            If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen2)
+            If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen2)
             oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR
         ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") > 0 Then
-            If oCarta.PathImagen <> "" Then BorroArchivo(DIRFTP + oCarta.PathImagen)
+            If oCarta.PathImagen <> "" Then BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen)
             oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR
         Else
             If oCarta.PathImagen = "" Or bForzarCasillaCP Then
