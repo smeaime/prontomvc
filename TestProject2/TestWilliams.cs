@@ -197,19 +197,50 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void bldClienteUsuarioExterno_20348()
+        {
+            //escribir 
+            //Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "")
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            ProntoMVC.Data.Models.Parametros2 param = (from c in db.Parametros2 where c.Campo == "EsClienteBLDcorredor2" select c).FirstOrDefault();
+            if (param == null)
+            {
+                param = new ProntoMVC.Data.Models.Parametros2();
+                param.Campo = "EsClienteBLDcorredor2";
+                param.Valor = "BLDPIRULO";
+                db.Parametros2.Add(param);
+            }
+            else
+            {
+                param.Valor = "BLDPIRULO";
+            }
+            db.SaveChanges();
+
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLDPIRULO", SC);
+            var q2 = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD_ALABERN", SC);
+            Assert.AreNotEqual(q.Count, q2.Count);
+        }
+
+
+
+        [TestMethod]
         public void webServiceParaBLDconDescargaDeImagenes_18181()
         {
 
-            
-                System.IO.FileStream fs1=null;
-    //WSRef.FileDownload ls1 = new WSRef.FileDownload();
-    //byte[] b1=null;
-    //b1 = ls1.DownloadFile("C:\\Source.xml");
-    //fs1=new FileStream("D:\\Source.xml", FileMode.Create);
-    //fs1.Write(b1,0,b1.Length);  
-    //fs1.Close();
-    //fs1 = null;
-    //Label1.Text = "File dow";
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            //byte[] b1=null;
+            //b1 = ls1.DownloadFile("C:\\Source.xml");
+            //fs1=new FileStream("D:\\Source.xml", FileMode.Create);
+            //fs1.Write(b1,0,b1.Length);  
+            //fs1.Close();
+            //fs1 = null;
+            //Label1.Text = "File dow";
 
         }
 
@@ -241,17 +272,17 @@ namespace ProntoMVC.Tests
                 {
 
 
-                var dr = r;
-                string c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
-                                                        null, null, null, null,
-                                                        null, null);
+                    var dr = r;
+                    string c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                            null, null, null, null,
+                                                            null, null);
 
-                sb += c + "\n";
+                    sb += c + "\n";
                 }
                 catch (Exception x)
                 {
                     sb += x.ToString() + "\n";
-                    
+
                 }
 
             }
@@ -402,7 +433,7 @@ namespace ProntoMVC.Tests
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 
-            
+
             // duplico la carta
             Pronto.ERP.BO.CartaDePorte carta2 = CartaDePorteManager.GetItem(SC, carta.Id, true);
             carta2.Id = -1;
@@ -1538,633 +1569,645 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         }
 
 
-        [TestMethod]
-        public void ZipdePDFsReducidos()
-        {
-            //tarda 12 min
-
-            string titulo = "";
-            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
-                 "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
-                0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, SC, false);
-            System.Diagnostics.Process.Start(output);
 
-        }
 
-        [TestMethod]
-        public void PDFdeCartaPorte()
+
+        [TestClass]
+        public class TestsWilliamsLentos
         {
 
 
-            // explota
 
 
-            var idorig = 2165737;
-            var sDirFTP = DirApp + @"\DataBackupear\";
-            string output = DirApp + @"\DataBackupear\lala.pdf";
-
-            var myCartaDePorte = CartaDePorteManager.GetItem(SC, idorig);
-
-            CartaDePorteManager.PDFcon_iTextSharp(output,
-                        (myCartaDePorte.PathImagen != "") ? sDirFTP + myCartaDePorte.PathImagen : "",
-                        (myCartaDePorte.PathImagen2 != "") ? sDirFTP + myCartaDePorte.PathImagen2 : ""
-                );
-
-            System.Diagnostics.Process.Start(output);
-
-        }
-
-
-        [TestMethod]
-        public void SincroBunge()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Bunge", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-        [TestMethod]
-        public void SincroDow()
-        {
-
-            // tarda 2 min
-
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("DOW", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-        [TestMethod]
-        public void SincroRoagro()
-        {
-
-            // tarda 2 min
-
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Roagro", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-        [TestMethod]
-        public void SincroBLD()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("BLD", ref sErrores, SC, "dominio",
-            ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                 0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-        [TestMethod]
-        public void SincroPetroAgro_16516()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("PetroAgro", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                  0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-        [TestMethod]
-        public void SincroDiazRiganti_15362()
-        {
-
-            string sErrores = "", sTitulo = "";
-            // LinqCartasPorteDataContext db = null;
-
-
-
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                    "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
-                0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-        /// </summary>
-        [TestMethod]
-        public void ImagenesPendientesListados()
-        {
-
-            var irrec = ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp, SC).ToList();
-
-            var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
-            var encola = (from i in lista select new { nombre = i }).ToList();
-
-            var termin = ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp, SC).ToList();
-
-        }
-
-
-
-
-
-        int SuboElZip(string archivo)
-        {
-            // "C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote"
-            //List<String> archivos = CartaDePorteManager.Extraer(destzip, DIRTEMP, out ticket);
-
-            //return ticket;
-            return 0;
-        }
-
-
-        string VerInfoDelLote(int ticket)
-        {
-
-            // buscar la informacion en el log?
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-
-
-            // buscar factura de LDC (id2775) y de ACA (id10)
-            //int IdFactura = from l in db.log
-
-            //sssss
-
-            return "";
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-        [TestMethod]
-        public void ProcesarTiffMultipagina_Reclamo14967()
-        {
-
-            // explota
-
-            string sError = "";
-
-            List<string> lista = new List<string>();
-
-            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
-
-            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.*");
-            foreach (FileInfo file in Files)
+            [TestMethod]
+            public void ZipdePDFsReducidos()
             {
-                //lista.Add(file.FullName);
-                lista.Add(file.Name);
+                //tarda 12 min
+
+                string titulo = "";
+                var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                     "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                         "", -1, -1,
+                    -1, -1,
+                    -1, -1, -1, -1,
+                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                    new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
+                    0, ref titulo, "Ambas", false);
+
+
+                var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, SC, false);
+                System.Diagnostics.Process.Start(output);
+
             }
 
-            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-            ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
-        }
-
-
-
-        [TestMethod]
-        public void FormatoImpresionPlantillaFactura_14851()
-        {
-
-
-            //explota
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            // buscar factura de LDC (id2775) y de ACA (id10)
-            int IdFactura = (from c in db.CartasDePortes
-                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
-                             where c.Exporta == "SI" && f.IdCliente == 2775
-                             orderby f.IdFactura descending
-                             select f.IdFactura).FirstOrDefault();
-
-
-
-            //var IdFactura = db.Facturas.OrderByDescending(x=>x.IdFactura)
-            //                .Where(x=>x)
-            //                .Where(x=>x.IdCliente==2775).FirstOrDefault().IdFactura;
-
-            // buscar una de exportacion de LDC
-
-
-            var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
-
-
-
-
-            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
-            //File.Copy(output,copia, true);
-            System.Diagnostics.Process.Start(output);
-
-
-            int IdFactura2 = (from c in db.CartasDePortes
-                              from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
-                              where c.Exporta == "SI" && f.IdCliente != 2775 && f.IdCliente != 10
-                              orderby f.IdFactura descending
-                              select f.IdFactura).FirstOrDefault();
-
-
-            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura2, false, SC, DirApp);
-
-
-            System.Diagnostics.Process.Start(output2);
-
-        }
-
-
-
-
-        [TestMethod]
-        public void FormatoImpresionPlantillaRemitoLDC()
-        {
-
-
-            //explota
-
-
-            string plantilla = DirApp + @"\Documentos\" + "RemitoLDC.docx";
-            string output = DirApp + @"\Documentos\" + "remito_.docx";
-
-            var MyFile1 = new System.IO.FileInfo(output);
-            if (MyFile1.Exists) MyFile1.Delete();
-
-            File.Copy(plantilla, output);
-
-            // var o = FertilizanteManager.GetItem(SC, IdCartaDePorte, True);
-
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            // buscar factura de LDC y de ACA
-            FertilizantesCupos cupofert = (from c in db.FertilizantesCupos
-                                           orderby c.FechaModificacion descending
-                                           select c).FirstOrDefault();
-
-            OpenXML_Pronto.RemitoParaLDC_XML_DOCX_Williams(output, cupofert, SC);
-
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-        [TestMethod]
-        public void FormatoImpresionPlantillaOrdenDeCarga()
-        {
-
-            string plantilla = DirApp + @"\Documentos\" + "OrdenDeCarga.docx";
-            string output = DirApp + @"\Documentos\" + "orden_.docx";
-
-            var MyFile1 = new System.IO.FileInfo(output);
-            if (MyFile1.Exists) MyFile1.Delete();
-
-            File.Copy(plantilla, output);
-
-            // var o = FertilizanteManager.GetItem(SC, IdCartaDePorte, True);
-
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            // buscar factura de LDC y de ACA
-            FertilizantesCupos cupofert = (from c in db.FertilizantesCupos
-                                           orderby c.FechaModificacion descending
-                                           select c).FirstOrDefault();
-
-            OpenXML_Pronto.OrdenCarga_XML_DOCX_Williams(output, cupofert, SC);
-
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-        [TestMethod]
-        public void CrearDirectoriosParaLasImagenesAutomaticamente_15153()
-        {
-            //explota
-
-            string sError = "";
-
-            List<string> lista = new List<string>();
-
-            Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
-
-            DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.*");
-            foreach (FileInfo file in Files)
-            {
-                //lista.Add(file.FullName);
-                lista.Add(file.Name);
-            }
-
-            CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
-
-            //probar subida individual -qué diferencia hay entre AdjuntarImagen y GrabarImagen (esta ultima es la llamada por ProcesarIm...)
-            //CartaDePorteManager.AdjuntarImagen
-            //CartaDePorteManager.AdjuntarImagen2
-        }
-
-
-
-        [TestMethod]
-        public void Pegatina_14744()
-        {
-
-            //explota
-
-            string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
-            int m_IdMaestro = 0;
-            string logerror = "";
-
-            //hay que pasar el formato como parametro 
-
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                            LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref logerror, "1/1/2014", 0, "");
-
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
-
-            foreach (System.Data.DataRow r in dt.Rows)
-            {
-                var dr = r;
-                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
-                                                        null, null, null, null,
-                                                        null, null);
-            }
-
-        }
-
-
-
-
-        [TestMethod]
-        public void PegatinaDeFertilizantes()
-        {
-            string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
-            int m_IdMaestro = 0;
-
-            //hay que pasar el formato como parametro
-
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
-
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
-
-            foreach (System.Data.DataRow r in dt.Rows)
-            {
-                var dr = r;
-                var c = FertilizanteManager.GrabaRenglonEnTablaFertilizantes(ref dr, SC, null, null, null,
-                                                        null, null, null, null,
-                                                        null, null);
-            }
-
-        }
-
-
-        [TestMethod]
-        public void Lartirigoyen_13789()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-
-            var s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" + ProntoFuncionesGenerales.FechaANSI(new DateTime(2014, 1, 1)) +
-                                 "'     AND   '" + ProntoFuncionesGenerales.FechaANSI(new DateTime(2014, 1, 1)) + "' )";
-            var dt = EntidadManager.ExecDinamico(SC, CartaDePorteManager.strSQLsincronismo() + " WHERE " + s);
-
-
-            var output = SincronismosWilliamsManager.Sincronismo_Lartirigoyen(dt, ref sErrores, sTitulo);
-
-            File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-        }
-
-
-        [TestMethod]
-        public void SincroFacturacionSyngenta_Reclamo15104()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-
-
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada2(SC,
-               "", "", "", 0, 1000, CartaDePorteManager.enumCDPestado.Facturadas
-                  , "", 4333, -1,
-               -1, 4333, 4333,
-               -1, -1, -1,
-               CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
-               new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
-                -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
-
-
-            var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
-
-            var sForzarNombreDescarga = "ENTREGADOR.CSV";
-            File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga, true);
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        static void Copy(string sourceDir, string targetDir)
-        {
-
-            try
+            [TestMethod]
+            public void PDFdeCartaPorte()
             {
 
-                Directory.CreateDirectory(targetDir);
 
-                foreach (var file in Directory.GetFiles(sourceDir))
-                    File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)), true);
+                // explota
 
-                foreach (var directory in Directory.GetDirectories(sourceDir))
-                    Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)));
+
+                var idorig = 2165737;
+                var sDirFTP = DirApp + @"\DataBackupear\";
+                string output = DirApp + @"\DataBackupear\lala.pdf";
+
+                var myCartaDePorte = CartaDePorteManager.GetItem(SC, idorig);
+
+                CartaDePorteManager.PDFcon_iTextSharp(output,
+                            (myCartaDePorte.PathImagen != "") ? sDirFTP + myCartaDePorte.PathImagen : "",
+                            (myCartaDePorte.PathImagen2 != "") ? sDirFTP + myCartaDePorte.PathImagen2 : ""
+                    );
+
+                System.Diagnostics.Process.Start(output);
 
             }
-            catch (Exception)
+
+
+            [TestMethod]
+            public void SincroBunge()
             {
 
-                //throw;
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+
+                // el _CONST_MAXROWS sale del app.config
+
+                int registrosf = 0;
+
+                var output = SincronismosWilliamsManager.GenerarSincro("Bunge", ref sErrores, SC, "dominio", ref sTitulo
+                                    , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                         "", -1, -1,
+                    -1, -1,
+                    -1, -1, -1, -1,
+                     CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                    new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                    0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output);
             }
 
+
+
+
+            [TestMethod]
+            public void SincroDow()
+            {
+
+                // tarda 2 min
+
+
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+
+                // el _CONST_MAXROWS sale del app.config
+
+                int registrosf = 0;
+
+                var output = SincronismosWilliamsManager.GenerarSincro("DOW", ref sErrores, SC, "dominio", ref sTitulo
+                                    , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                         "", -1, -1,
+                    -1, -1,
+                    -1, -1, -1, -1,
+                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                    new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                    0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output);
+            }
+
+            [TestMethod]
+            public void SincroRoagro()
+            {
+
+                // tarda 2 min
+
+
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+
+                // el _CONST_MAXROWS sale del app.config
+
+                int registrosf = 0;
+
+                var output = SincronismosWilliamsManager.GenerarSincro("Roagro", ref sErrores, SC, "dominio", ref sTitulo
+                                    , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                         "", -1, -1,
+                    -1, -1,
+                    -1, -1, -1, -1,
+                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                    new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                    0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output);
+            }
+
+            [TestMethod]
+            public void SincroBLD()
+            {
+
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+
+                // el _CONST_MAXROWS sale del app.config
+
+                int registrosf = 0;
+
+                var output = SincronismosWilliamsManager.GenerarSincro("BLD", ref sErrores, SC, "dominio",
+                ref sTitulo
+                                    , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                         "", -1, -1,
+                    -1, -1,
+                    -1, -1, -1, -1,
+                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                    new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                     0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output);
+            }
+
+
+            [TestMethod]
+            public void SincroPetroAgro_16516()
+            {
+
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+
+                // el _CONST_MAXROWS sale del app.config
+
+                int registrosf = 0;
+
+                var output = SincronismosWilliamsManager.GenerarSincro("PetroAgro", ref sErrores, SC, "dominio", ref sTitulo
+                                    , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                         "", -1, -1,
+                    -1, -1,
+                    -1, -1, -1, -1,
+                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                    new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                      0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output);
+            }
+
+
+
+
+            [TestMethod]
+            public void SincroDiazRiganti_15362()
+            {
+
+                string sErrores = "", sTitulo = "";
+                // LinqCartasPorteDataContext db = null;
+
+
+
+
+                int registrosf = 0;
+
+                var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
+                                    , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                        "", -1, -1,
+                    -1, -1,
+                    -1, -1, -1, -1,
+                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                    new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
+                    0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output);
+            }
+
+
+
+
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+            /// </summary>
+            [TestMethod]
+            public void ImagenesPendientesListados()
+            {
+
+                var irrec = ClassFlexicapture.ExtraerListaDeImagenesIrreconocibles(DirApp, SC).ToList();
+
+                var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
+                var encola = (from i in lista select new { nombre = i }).ToList();
+
+                var termin = ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp, SC).ToList();
+
+            }
+
+
+
+
+
+            int SuboElZip(string archivo)
+            {
+                // "C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\buenlote"
+                //List<String> archivos = CartaDePorteManager.Extraer(destzip, DIRTEMP, out ticket);
+
+                //return ticket;
+                return 0;
+            }
+
+
+            string VerInfoDelLote(int ticket)
+            {
+
+                // buscar la informacion en el log?
+
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+                // buscar factura de LDC (id2775) y de ACA (id10)
+                //int IdFactura = from l in db.log
+
+                //sssss
+
+                return "";
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            [TestMethod]
+            public void ProcesarTiffMultipagina_Reclamo14967()
+            {
+
+                // explota
+
+                string sError = "";
+
+                List<string> lista = new List<string>();
+
+                Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
+
+                DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
+                FileInfo[] Files = d.GetFiles("*.*");
+                foreach (FileInfo file in Files)
+                {
+                    //lista.Add(file.FullName);
+                    lista.Add(file.Name);
+                }
+
+                //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+                ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
+            }
+
+
+
+            [TestMethod]
+            public void FormatoImpresionPlantillaFactura_14851()
+            {
+
+
+                //explota
+
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+                // buscar factura de LDC (id2775) y de ACA (id10)
+                int IdFactura = (from c in db.CartasDePortes
+                                 from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                                 where c.Exporta == "SI" && f.IdCliente == 2775
+                                 orderby f.IdFactura descending
+                                 select f.IdFactura).FirstOrDefault();
+
+
+
+                //var IdFactura = db.Facturas.OrderByDescending(x=>x.IdFactura)
+                //                .Where(x=>x)
+                //                .Where(x=>x.IdCliente==2775).FirstOrDefault().IdFactura;
+
+                // buscar una de exportacion de LDC
+
+
+                var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
+
+
+
+
+                //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+                //File.Copy(output,copia, true);
+                System.Diagnostics.Process.Start(output);
+
+
+                int IdFactura2 = (from c in db.CartasDePortes
+                                  from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                                  where c.Exporta == "SI" && f.IdCliente != 2775 && f.IdCliente != 10
+                                  orderby f.IdFactura descending
+                                  select f.IdFactura).FirstOrDefault();
+
+
+                var output2 = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura2, false, SC, DirApp);
+
+
+                System.Diagnostics.Process.Start(output2);
+
+            }
+
+
+
+
+            [TestMethod]
+            public void FormatoImpresionPlantillaRemitoLDC()
+            {
+
+
+                //explota
+
+
+                string plantilla = DirApp + @"\Documentos\" + "RemitoLDC.docx";
+                string output = DirApp + @"\Documentos\" + "remito_.docx";
+
+                var MyFile1 = new System.IO.FileInfo(output);
+                if (MyFile1.Exists) MyFile1.Delete();
+
+                File.Copy(plantilla, output);
+
+                // var o = FertilizanteManager.GetItem(SC, IdCartaDePorte, True);
+
+
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+                // buscar factura de LDC y de ACA
+                FertilizantesCupos cupofert = (from c in db.FertilizantesCupos
+                                               orderby c.FechaModificacion descending
+                                               select c).FirstOrDefault();
+
+                OpenXML_Pronto.RemitoParaLDC_XML_DOCX_Williams(output, cupofert, SC);
+
+                System.Diagnostics.Process.Start(output);
+            }
+
+
+            [TestMethod]
+            public void FormatoImpresionPlantillaOrdenDeCarga()
+            {
+
+                string plantilla = DirApp + @"\Documentos\" + "OrdenDeCarga.docx";
+                string output = DirApp + @"\Documentos\" + "orden_.docx";
+
+                var MyFile1 = new System.IO.FileInfo(output);
+                if (MyFile1.Exists) MyFile1.Delete();
+
+                File.Copy(plantilla, output);
+
+                // var o = FertilizanteManager.GetItem(SC, IdCartaDePorte, True);
+
+
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+                // buscar factura de LDC y de ACA
+                FertilizantesCupos cupofert = (from c in db.FertilizantesCupos
+                                               orderby c.FechaModificacion descending
+                                               select c).FirstOrDefault();
+
+                OpenXML_Pronto.OrdenCarga_XML_DOCX_Williams(output, cupofert, SC);
+
+                System.Diagnostics.Process.Start(output);
+            }
+
+
+
+
+            [TestMethod]
+            public void CrearDirectoriosParaLasImagenesAutomaticamente_15153()
+            {
+                //explota
+
+                string sError = "";
+
+                List<string> lista = new List<string>();
+
+                Copy(@"C:\Users\Administrador\Desktop\tiff multipagina", TempFolder);
+
+                DirectoryInfo d = new DirectoryInfo(TempFolder);//Assuming Test is your Folder
+                FileInfo[] Files = d.GetFiles("*.*");
+                foreach (FileInfo file in Files)
+                {
+                    //lista.Add(file.FullName);
+                    lista.Add(file.Name);
+                }
+
+                CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+
+                //probar subida individual -qué diferencia hay entre AdjuntarImagen y GrabarImagen (esta ultima es la llamada por ProcesarIm...)
+                //CartaDePorteManager.AdjuntarImagen
+                //CartaDePorteManager.AdjuntarImagen2
+            }
+
+
+
+            [TestMethod]
+            public void Pegatina_14744()
+            {
+
+                //explota
+
+                string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
+                int m_IdMaestro = 0;
+                string logerror = "";
+
+                //hay que pasar el formato como parametro 
+
+                ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                                LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref logerror, "1/1/2014", 0, "");
+
+                var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+                foreach (System.Data.DataRow r in dt.Rows)
+                {
+                    var dr = r;
+                    var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                            null, null, null, null,
+                                                            null, null);
+                }
+
+            }
+
+
+
+
+            [TestMethod]
+            public void PegatinaDeFertilizantes()
+            {
+                string archivoExcel = @"C:\Users\Administrador\Downloads\Lima Noble (1).xls";
+                int m_IdMaestro = 0;
+
+                //hay que pasar el formato como parametro
+
+                ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
+
+                var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+                foreach (System.Data.DataRow r in dt.Rows)
+                {
+                    var dr = r;
+                    var c = FertilizanteManager.GrabaRenglonEnTablaFertilizantes(ref dr, SC, null, null, null,
+                                                            null, null, null, null,
+                                                            null, null);
+                }
+
+            }
+
+
+            [TestMethod]
+            public void Lartirigoyen_13789()
+            {
+
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+
+
+                var s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" + ProntoFuncionesGenerales.FechaANSI(new DateTime(2014, 1, 1)) +
+                                     "'     AND   '" + ProntoFuncionesGenerales.FechaANSI(new DateTime(2014, 1, 1)) + "' )";
+                var dt = EntidadManager.ExecDinamico(SC, CartaDePorteManager.strSQLsincronismo() + " WHERE " + s);
+
+
+                var output = SincronismosWilliamsManager.Sincronismo_Lartirigoyen(dt, ref sErrores, sTitulo);
+
+                File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            }
+
+
+            [TestMethod]
+            public void SincroFacturacionSyngenta_Reclamo15104()
+            {
+
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+
+
+
+                var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada2(SC,
+                   "", "", "", 0, 1000, CartaDePorteManager.enumCDPestado.Facturadas
+                      , "", 4333, -1,
+                   -1, 4333, 4333,
+                   -1, -1, -1,
+                   CartaDePorteManager.FiltroANDOR.FiltroOR, CartaDePorteManager.enumCDPexportacion.Ambas,
+                   new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                    -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+
+
+                var output = SincronismosWilliamsManager.Sincronismo_SyngentaFacturacion_ConLINQ(q, ref sErrores, "", SC);
+
+                var sForzarNombreDescarga = "ENTREGADOR.CSV";
+                File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga, true);
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            static void Copy(string sourceDir, string targetDir)
+            {
+
+                try
+                {
+
+                    Directory.CreateDirectory(targetDir);
+
+                    foreach (var file in Directory.GetFiles(sourceDir))
+                        File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)), true);
+
+                    foreach (var directory in Directory.GetDirectories(sourceDir))
+                        Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)));
+
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+
+            }
         }
+
+
+
+
+
+        //Function test1_ReclamoN9066(ByVal sc As String) As String
+
+        //    Dim ds As New WillyInformesDataSet
+        //    Dim adapter As New WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter
+
+        //    '// Customize the connection string.
+        //    Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(sc)) ' Properties.Settings.Default.DistXsltDbConnectionString)
+        //    'builder.DataSource = builder.DataSource.Replace(".", Environment.MachineName)
+        //    Dim desiredConnectionString = builder.ConnectionString
+
+        //    '// Set it directly on the adapter.
+        //    adapter.Connection.ConnectionString = desiredConnectionString 'tenes que cambiar el ConnectionModifier=Public http://weblogs.asp.net/rajbk/archive/2007/05/26/changing-the-connectionstring-of-a-wizard-generated-tableadapter-at-runtime-from-an-objectdatasource.aspx
+        //    adapter.Fill(ds.wCartasDePorte_TX_InformesCorregido, -1, #4/1/2012#, #4/4/2012#)
+
+        //    Dim sWHERE = ""
+        //    ' Dim output As String = Sincronismo_Argencer(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+
+        //    'Return output
+        //End Function
+
     }
-
-
-
-
-
-    //Function test1_ReclamoN9066(ByVal sc As String) As String
-
-    //    Dim ds As New WillyInformesDataSet
-    //    Dim adapter As New WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter
-
-    //    '// Customize the connection string.
-    //    Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(sc)) ' Properties.Settings.Default.DistXsltDbConnectionString)
-    //    'builder.DataSource = builder.DataSource.Replace(".", Environment.MachineName)
-    //    Dim desiredConnectionString = builder.ConnectionString
-
-    //    '// Set it directly on the adapter.
-    //    adapter.Connection.ConnectionString = desiredConnectionString 'tenes que cambiar el ConnectionModifier=Public http://weblogs.asp.net/rajbk/archive/2007/05/26/changing-the-connectionstring-of-a-wizard-generated-tableadapter-at-runtime-from-an-objectdatasource.aspx
-    //    adapter.Fill(ds.wCartasDePorte_TX_InformesCorregido, -1, #4/1/2012#, #4/4/2012#)
-
-    //    Dim sWHERE = ""
-    //    ' Dim output As String = Sincronismo_Argencer(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
-
-    //    'Return output
-    //End Function
-
-
 
 }
