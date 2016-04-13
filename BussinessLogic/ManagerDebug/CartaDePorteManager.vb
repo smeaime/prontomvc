@@ -12989,7 +12989,8 @@ Public Class CartaDePorteManager
 
 
     Shared Function usuariosBLD(SC As String) As List(Of String)
-        Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor"), "")
+        Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor"), "") _
+                            + "|" + iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "")
         Dim sss = aaa.Split("|").ToList
         sss.Add("BLDCORREDOR")
         sss.Add("BLD_ALABERN")
