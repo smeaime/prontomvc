@@ -10524,10 +10524,10 @@ Namespace Pronto.ERP.Bll
 
             sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
-            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
 
-            Sincronismo_NOBLEarchivoadicional(pDataTable, sWHERE)
+            'Sincronismo_NOBLEarchivoadicional(pDataTable, sWHERE)
 
 
 
