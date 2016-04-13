@@ -1574,33 +1574,6 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
-        [TestClass]
-        public class TestsWilliamsLentos
-        {
-
-
-
-
-            [TestMethod]
-            public void ZipdePDFsReducidos()
-            {
-                //tarda 12 min
-
-                string titulo = "";
-                var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
-                     "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                         "", -1, -1,
-                    -1, -1,
-                    -1, -1, -1, -1,
-                    CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                    new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
-                    0, ref titulo, "Ambas", false);
-
-
-                var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, SC, false);
-                System.Diagnostics.Process.Start(output);
-
-            }
 
             [TestMethod]
             public void PDFdeCartaPorte()
@@ -2207,6 +2180,37 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
         //    'Return output
         //End Function
+
+
+
+    [TestClass]
+    public class TestsWilliamsLentos
+    {
+
+
+
+
+        [TestMethod]
+        public void ZipdePDFsReducidos()
+        {
+            //tarda 12 min
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado("poner SC", "",
+                 "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
 
     }
 
