@@ -247,6 +247,8 @@
     <Compile Include="CDPmovimientos.vb">
       <DependentUpon>CDPmovimientos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ExcelImportador.vb" />
+    <Compile Include="LogicaFacturacion.vb" />
     <Compile Include="ClienteManager.vb" />
     <Compile Include="ComparativaManager.vb" />
     <Compile Include="ComparativaItemManager.vb" />
