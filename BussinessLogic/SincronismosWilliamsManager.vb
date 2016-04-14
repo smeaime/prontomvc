@@ -160,7 +160,7 @@ Namespace Pronto.ERP.Bll
                     txtCorredor.Text = "DIAZ RIGANTI CEREALES S.R.L."
 
 
-         
+
 
                 Case "DOW", "DOW FORMATO ANTERIOR"
                     'DOW:            RTTE(COMERCIAL / DESTINATARIO)
@@ -1254,7 +1254,7 @@ Namespace Pronto.ERP.Bll
 
                         Case "CGG"
                             Dim sErrores As String
-                            output = Sincronismo_CGG(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores)
+                            output = Sincronismo_CGG(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, SC)
 
                             sErroresRef = sErrores
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
@@ -9974,14 +9974,15 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_CGG(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, ByRef sErrores As String) As String
+        Public Shared Function Sincronismo_CGG(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, ByRef sErrores As String, SC As String) As String
 
 
 
+            Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
-            Dim vFileName As String = Path.GetTempPath & "we2cgg " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            Dim vFileName As String = Path.GetTempPath & "we2cgg.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
             'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
             'Dim vFileName As String = "c:\archivo.txt"
@@ -10286,7 +10287,18 @@ Namespace Pronto.ERP.Bll
                     'según código campo anterior ( decodificación )	
 
                     If .IsProcedenciaCodigoWilliamsNull Then .ProcedenciaCodigoWilliams = ""
-                    sb &= Left(.ProcedenciaCodigoWilliams.ToString.Trim, 11).PadRight(11) '
+
+                    Dim proccod As String
+                    Try
+                        Dim idloc As Integer = Val(.Procedencia)
+                        Dim loccgg = (From x In db.Localidades Where x.IdLocalidad = idloc Select x).FirstOrDefault
+                        proccod = If(loccgg.CodigoCGG, "")
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(ex)
+                    End Try
+                    sb &= Left(proccod, 11).PadRight(11) '
+
+
                     sb &= Left(.ProcedenciaDesc.ToString, 30).PadRight(30) 'NomProcede	STRING(30)	Nombre Procedencia)    535)    564
 
 
@@ -10539,7 +10551,7 @@ Namespace Pronto.ERP.Bll
 
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
-            Dim vFileName As String = Path.GetTempPath & "wecal2cgg " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            Dim vFileName As String = Path.GetTempPath & "wecal2des.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
             'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
             'Dim vFileName As String = "c:\archivo.txt"
@@ -12923,8 +12935,8 @@ Namespace Pronto.ERP.Bll
 
 
 
-                   
-                    
+
+
                     '74 FECVTOCAU 1.157 1.164 S X
                     sb &= JustificadoIzquierda(If(.IsFechaVencimientoNull, Nothing, .FechaVencimiento.ToString("ddMMyyyy")), 8)
                     '76 CTGNRO 1.165 1.172 N X
@@ -12944,7 +12956,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                   
+
 
 
 
