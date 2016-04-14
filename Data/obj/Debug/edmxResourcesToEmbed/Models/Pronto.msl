@@ -1458,6 +1458,7 @@
     <EntitySetMapping Name="Localidades">
       <EntityTypeMapping TypeName="DemoProntoModel.Localidad">
         <MappingFragment StoreEntitySet="Localidades">
+          <ScalarProperty Name="CodigoCGG" ColumnName="CodigoCGG" />
           <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
           <ScalarProperty Name="CodigoONCAA" ColumnName="CodigoONCAA" />
           <ScalarProperty Name="Partido" ColumnName="Partido" />
@@ -1610,6 +1611,7 @@
     <EntitySetMapping Name="Facturas">
       <EntityTypeMapping TypeName="DemoProntoModel.Factura">
         <MappingFragment StoreEntitySet="Facturas">
+          <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
           <ScalarProperty Name="FechaFinServicio" ColumnName="FechaFinServicio" />
           <ScalarProperty Name="FechaInicioServicio" ColumnName="FechaInicioServicio" />
           <ScalarProperty Name="BienesOServicios" ColumnName="BienesOServicios" />

@@ -17,6 +17,7 @@ AS
             Paises.Descripcion AS [Pais],
             CodigoONCAA as CodigoONCAA, CodigoWilliams,CodigoLosGrobo,CodigoAFIP,
 			Partidos.Nombre AS [Partido]
+			,CodigoCGG
 			--,partidos.idpartido
     FROM    Localidades
             LEFT OUTER JOIN Provincias ON Provincias.IdProvincia = Localidades.IdProvincia
@@ -26,7 +27,7 @@ AS
 
 go
 
---wLocalidades_TT
+wLocalidades_TT
 --select * from localidades
 --select * from partidos
 --/////////////////////////////////////////////////////////////////////////////////////////////
