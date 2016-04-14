@@ -39,6 +39,7 @@ namespace ProntoMVC.Data.Models
         public string Partido { get; set; }
         public string CodigoONCAA { get; set; }
         public Nullable<int> CodigoAfip { get; set; }
+        public string CodigoCGG { get; set; }
     
         public virtual ICollection<Cliente> Clientes { get; set; }
         public virtual ICollection<Cliente> Clientes1 { get; set; }

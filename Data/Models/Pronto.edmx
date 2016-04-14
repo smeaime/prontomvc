@@ -3427,6 +3427,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="BienesOServicios" Type="varchar" MaxLength="1" />
           <Property Name="FechaInicioServicio" Type="datetime" />
           <Property Name="FechaFinServicio" Type="datetime" />
+          <Property Name="IdLiquidacionFlete" Type="int" />
         </EntityType>
         <EntityType Name="Feriados">
           <Key>
@@ -3679,6 +3680,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Partido" Type="varchar" MaxLength="60" />
           <Property Name="IdPartido" Type="int" />
           <Property Name="CodigoAfip" Type="int" />
+          <Property Name="CodigoCGG" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -14505,6 +14507,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="FertilizantesCupos1" Relationship="DemoProntoModel.FK__Fertiliza__IdLoc__573FB5DE" FromRole="Localidad" ToRole="FertilizantesCupos" />
           <NavigationProperty Name="WilliamsDestinos" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__3EDE1C68" FromRole="Localidad" ToRole="WilliamsDestino" />
           <NavigationProperty Name="Partido1" Relationship="DemoProntoModel.FK__Localidad__IdPar__7BC72F17" FromRole="Localidad" ToRole="Partido" />
+          <Property Name="CodigoCGG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Moneda">
           <Key>
@@ -15009,6 +15012,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="BienesOServicios" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="FechaInicioServicio" Type="DateTime" Precision="3" />
           <Property Name="FechaFinServicio" Type="DateTime" Precision="3" />
+          <Property Name="IdLiquidacionFlete" Type="Int32" />
         </EntityType>
         <Association Name="FK_DetalleFacturas_Articulos">
           <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -24923,6 +24927,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Localidades">
             <EntityTypeMapping TypeName="DemoProntoModel.Localidad">
               <MappingFragment StoreEntitySet="Localidades">
+                <ScalarProperty Name="CodigoCGG" ColumnName="CodigoCGG" />
                 <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
                 <ScalarProperty Name="CodigoONCAA" ColumnName="CodigoONCAA" />
                 <ScalarProperty Name="Partido" ColumnName="Partido" />
@@ -25075,6 +25080,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Facturas">
             <EntityTypeMapping TypeName="DemoProntoModel.Factura">
               <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
                 <ScalarProperty Name="FechaFinServicio" ColumnName="FechaFinServicio" />
                 <ScalarProperty Name="FechaInicioServicio" ColumnName="FechaInicioServicio" />
                 <ScalarProperty Name="BienesOServicios" ColumnName="BienesOServicios" />

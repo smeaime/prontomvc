@@ -8769,7 +8769,13 @@ Public Class CartaDePorteManager
             If sourceProp.Name = "IdChofer" Then Continue For
             If sourceProp.Name = "IdTransportista" Then Continue For
 
-
+            If sourceProp.Name = "Acopio1" Then Continue For
+            If sourceProp.Name = "Acopio2" Then Continue For
+            If sourceProp.Name = "Acopio3" Then Continue For
+            If sourceProp.Name = "Acopio4" Then Continue For
+            If sourceProp.Name = "Acopio5" Then Continue For
+            If sourceProp.Name = "Acopio6" Then Continue For
+            If sourceProp.Name = "AcopioFacturarleA" Then Continue For
 
 
 
