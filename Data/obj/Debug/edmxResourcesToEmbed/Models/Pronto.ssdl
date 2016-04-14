@@ -3422,6 +3422,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="BienesOServicios" Type="varchar" MaxLength="1" />
     <Property Name="FechaInicioServicio" Type="datetime" />
     <Property Name="FechaFinServicio" Type="datetime" />
+    <Property Name="IdLiquidacionFlete" Type="int" />
   </EntityType>
   <EntityType Name="Feriados">
     <Key>
@@ -3674,6 +3675,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="Partido" Type="varchar" MaxLength="60" />
     <Property Name="IdPartido" Type="int" />
     <Property Name="CodigoAfip" Type="int" />
+    <Property Name="CodigoCGG" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
