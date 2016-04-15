@@ -10298,6 +10298,17 @@ Namespace Pronto.ERP.Bll
                     End Try
                     sb &= Left(proccod, 11).PadRight(11) '
 
+                    If proccod = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
+                        'si no tiene codigo ni está ya en sErrores, lo meto
+
+
+                        ErrHandler2.WriteError("La localidad " & .ProcedenciaDesc.ToString & " es usada en el sincro de CGG y no tiene codigo CGG")
+
+                        sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & .Procedencia & """ target=""_blank"">" & .ProcedenciaDesc.ToString & "</a>; "
+                    End If
+
+
+
 
                     sb &= Left(.ProcedenciaDesc.ToString, 30).PadRight(30) 'NomProcede	STRING(30)	Nombre Procedencia)    535)    564
 
@@ -10445,12 +10456,15 @@ Namespace Pronto.ERP.Bll
                     'sb &= LeftMasPadRight(.FechaVencimiento, 10)
 
 
+
+
+
                     '│ OPEONCCA     │ Character │    10 │     │
 
                     'actual : viene información, nuevo blancos 
                     If .IsProcedenciaCodigoONCAANull Then .ProcedenciaCodigoONCAA = ""
                     sb &= Left(.ProcedenciaCodigoONCAA.ToString.Trim, 10).PadRight(10)
-                    If .ProcedenciaCodigoONCAA.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
+                    If False Or .ProcedenciaCodigoONCAA.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
                         'si no tiene codigo ni está ya en sErrores, lo meto
 
 
@@ -10458,6 +10472,9 @@ Namespace Pronto.ERP.Bll
 
                         sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & .Procedencia & """ target=""_blank"">" & .ProcedenciaDesc.ToString & "</a>; "
                     End If
+
+
+
 
 
 
@@ -10534,7 +10551,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-            sErrores = "DATOS FALTANTES <br/> Procedencias sin código ONCAA:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
+            sErrores = "DATOS FALTANTES <br/> Procedencias sin código CGG:<br/> " & sErroresProcedencia & "<br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos & sErroresCartas
 
             If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresCartas <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
 
