@@ -153,7 +153,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleEmpleadosUbicacione> DetalleEmpleadosUbicaciones { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
         public virtual DbSet<CuentasBancaria> CuentasBancarias { get; set; }
-        public virtual DbSet<DetalleEmpleado> DetalleEmpleadosIngresosEgresos { get; set; }
+        public virtual DbSet<DetalleEmpleadosIngresoEgreso> DetalleEmpleadosIngresosEgresos { get; set; }
         public virtual DbSet<Empleado> Empleados { get; set; }
         public virtual DbSet<Valore> Valores { get; set; }
         public virtual DbSet<CurvasTalle> CurvasTalles { get; set; }
