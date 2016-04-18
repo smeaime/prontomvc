@@ -2256,7 +2256,7 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Cargo" Width="1.5" PointX="9.375" PointY="16.875" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasBancaria" Width="1.5" PointX="9.625" PointY="42.375" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_CuentasBancarias_Bancos" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleado" Width="2.125" PointX="14.875" PointY="61.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosIngresoEgreso" Width="2.125" PointX="14.875" PointY="61.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Empleado" Width="2.625" PointX="12.25" PointY="56.25" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Cargos" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Empleados_Ingreso" />
@@ -2581,10 +2581,10 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.C_TempAutorizaciones" Width="1.5" PointX="12.75" PointY="23.75" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Transportista" Width="1.5" PointX="8.25" PointY="87.75" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosObra" Width="1.5" PointX="8.25" PointY="74.25" IsExpanded="true" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" Width="1.5" PointX="8.25" PointY="76.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" Width="2.875" PointX="8.25" PointY="76.75" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Cargo" Width="1.5" PointX="3.75" PointY="72.625" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasBancaria" Width="1.5" PointX="5.25" PointY="224.375" IsExpanded="true" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleado" Width="1.5" PointX="8.25" PointY="79.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosIngresoEgreso" Width="3.625" PointX="8.25" PointY="79.375" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Empleado" Width="1.5" PointX="6" PointY="65.5" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Valore" Width="1.5" PointX="3" PointY="95.875" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CurvasTalle" Width="1.5" PointX="23.75" PointY="18.75" IsExpanded="true" />

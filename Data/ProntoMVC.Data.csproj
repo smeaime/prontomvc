@@ -356,10 +356,10 @@
     <Compile Include="Models\DetalleDevolucione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleEmpleado.cs">
+    <Compile Include="Models\DetalleEmpleadosCuentasBancaria.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleEmpleadosCuentasBancaria.cs">
+    <Compile Include="Models\DetalleEmpleadosIngresoEgreso.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetalleEmpleadosJornada.cs">
