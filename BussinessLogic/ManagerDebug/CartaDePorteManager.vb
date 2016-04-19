@@ -756,7 +756,7 @@ Public Class CartaDePorteManager
 
 
             Dim q = (From dest In db.WilliamsDestinos _
-                    From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty() _
+                    From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad) Or idlocalidad2).DefaultIfEmpty() _
                     Select dest, locdes
                     Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).ToList()
 

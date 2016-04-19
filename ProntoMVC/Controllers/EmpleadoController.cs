@@ -115,7 +115,7 @@ namespace ProntoMVC.Controllers
             try
             {
                 db.Empleados.Remove(empleado);
-                db.DetalleEmpleadosIngresosEgresos.Remove
+                //db.DetalleEmpleadosIngresosEgresos.Remove
                 db.SaveChanges();
 
             }
