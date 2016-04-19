@@ -4184,7 +4184,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DetalleEmpleadosIngresosEgresos">
-      <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleado">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleadosIngresoEgreso">
         <MappingFragment StoreEntitySet="DetalleEmpleados">
           <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
           <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
