@@ -10374,13 +10374,16 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= Int(.NetoFinal).ToString.PadRight(10)
-                    sb &= Int(.BrutoPto).ToString.PadLeft(10)
-                    sb &= Int(.TaraPto).ToString.PadLeft(10)
+                    'sb &= Int(.NetoFinal).ToString.PadRight(10)
+                    'sb &= Int(.BrutoPto).ToString.PadLeft(10)
+                    'sb &= Int(.TaraPto).ToString.PadLeft(10)
+                    'sb &= Int(.NetoPto).ToString.PadLeft(10)
 
 
                     sb &= Int(.NetoPto).ToString.PadLeft(10)
-
+                    sb &= Int(.BrutoFinal).ToString.PadLeft(10)
+                    sb &= Int(.TaraFinal).ToString.PadLeft(10)
+                    sb &= Int(.NetoFinal).ToString.PadLeft(10)
 
 
                     '│ KGSACONDIC │ Character │    10 │     │

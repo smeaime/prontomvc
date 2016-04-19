@@ -759,7 +759,7 @@
       <End Role="Banco" EntitySet="Bancos" />
       <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
     </AssociationSet>
-    <EntitySet Name="DetalleEmpleadosIngresosEgresos" EntityType="DemoProntoModel.DetalleEmpleado" />
+    <EntitySet Name="DetalleEmpleadosIngresosEgresos" EntityType="DemoProntoModel.DetalleEmpleadosIngresoEgreso" />
     <EntitySet Name="Empleados" EntityType="DemoProntoModel.Empleado" />
     <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
       <End Role="Cargo" EntitySet="Cargos" />
@@ -7933,7 +7933,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="DetalleEmpleado">
+  <EntityType Name="DetalleEmpleadosIngresoEgreso">
     <Key>
       <PropertyRef Name="IdDetalleEmpleado" />
     </Key>
@@ -8067,7 +8067,7 @@
   </Association>
   <Association Name="FK_DetalleEmpleados_Empleados">
     <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.DetalleEmpleado" Role="DetalleEmpleado" Multiplicity="*" />
+    <End Type="DemoProntoModel.DetalleEmpleadosIngresoEgreso" Role="DetalleEmpleado" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Empleado">
         <PropertyRef Name="IdEmpleado" />
