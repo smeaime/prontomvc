@@ -402,7 +402,7 @@ Namespace Pronto.ERP.Bll
 
             Using ds As New WillyInformesDataSet
 
-                If sSincronismo.ToUpper <> "YPF" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
+                If sSincronismo.ToUpper <> "YPF" And sSincronismo.ToUpper <> "NIDERA" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
 
                     '// Customize the connection string.
                     Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(SC)) ' Properties.Settings.Default.DistXsltDbConnectionString)
@@ -758,6 +758,8 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+
                         Case "ANDREOLI"
 
 
@@ -876,6 +878,42 @@ Namespace Pronto.ERP.Bll
                             CambiarElNombreDeLaPrimeraHojaDeDow(output)
 
 
+
+                        Case "NIDERA"
+
+
+                            sTitulo = ""
+
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
+                                            "", "", "", 1, maximumRows, _
+                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
+                                            idDestinatario, idIntermediario, _
+                                            idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                                                "1", ModoExportacion, _
+                                            Convert.ToDateTime(sDesde), _
+                                            Convert.ToDateTime(sHasta), _
+                                             Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
+
+
+                            Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
+
+
+                            Dim yourParams As ReportParameter() = New ReportParameter(8) {}
+
+                            yourParams(0) = New ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx")
+                            yourParams(1) = New ReportParameter("sServidor", "kjhkjlh")
+                            yourParams(2) = New ReportParameter("idArticulo", -1)
+                            yourParams(3) = New ReportParameter("idDestino", -1)
+                            yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+                            yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+                            yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+                            yourParams(7) = New ReportParameter("Consulta", Sql)
+                            yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+
+                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "Nidera" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
+
+                            output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep,
+                                    "Williams - Nidera con SQL.rdl", yourParams, ArchivoExcelDestino, False)
 
 
                         Case "BLD x"
