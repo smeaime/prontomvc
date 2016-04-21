@@ -11602,7 +11602,7 @@
     <DataSource Name="DataSource2">
       <ConnectionProperties>
         <DataProvider>XML</DataProvider>
-        <ConnectString>http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx?op=GetCartasSinParametros</ConnectString>
+        <ConnectString>http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx</ConnectString>
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>d27e6b94-1df5-4c72-81bc-996788baaeff</rd:DataSourceID>
@@ -11614,7 +11614,7 @@
         <DataSourceName>DataSource2</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="partedelnumero">
-            <Value>222</Value>
+            <Value>=Parameters!partedelnumero.Value</Value>
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
           <QueryParameter Name="desde">
@@ -11630,11 +11630,11 @@
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
           <QueryParameter Name="iddestino">
-            <Value>1</Value>
+            <Value>-1</Value>
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
           <QueryParameter Name="idproducto">
-            <Value>=Parameters!idproducto.Value</Value>
+            <Value>-1</Value>
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
         </QueryParameters>
@@ -11642,18 +11642,26 @@
 	&lt;Method Namespace="http://microsoft.com/webservices" Name="GetCartas"&gt;
 		 &lt;Parameters&gt;
 			&lt;Parameter Name="partedelnumero"&gt;
-			           &lt;DefaultValue&gt;/&lt;/DefaultValue&gt;
+			           &lt;DefaultValue&gt; &lt;/DefaultValue&gt;
+			&lt;/Parameter&gt;
+			&lt;Parameter Name="desde"&gt;
+			           &lt;DefaultValue&gt; &lt;/DefaultValue&gt;
+			&lt;/Parameter&gt;
+			&lt;Parameter Name="hasta"&gt;
+			           &lt;DefaultValue&gt; &lt;/DefaultValue&gt;
+			&lt;/Parameter&gt;
+			&lt;Parameter Name="quecontenga"&gt;
+			           &lt;DefaultValue&gt; &lt;/DefaultValue&gt;
 			&lt;/Parameter&gt;
 			&lt;Parameter Name="idproducto"&gt;
-			           &lt;DefaultValue&gt;1&lt;/DefaultValue&gt;
+			           &lt;DefaultValue&gt;-1&lt;/DefaultValue&gt;
 			&lt;/Parameter&gt;
 			&lt;Parameter Name="iddestino"&gt;
-			           &lt;DefaultValue&gt;1&lt;/DefaultValue&gt;
+			           &lt;DefaultValue&gt;-1&lt;/DefaultValue&gt;
 			&lt;/Parameter&gt;
 		  &lt;/Parameters&gt;
 	&lt;/Method&gt;
-	&lt;ElementPath IgnoreNamespaces="true"&gt;*&lt;/ElementPath&gt;
-	&lt;SoapAction&gt;http://microsoft.com/webservices/GetCartasSinParametros&lt;/SoapAction&gt;
+	&lt;SoapAction&gt;http://microsoft.com/webservices/GetCartas&lt;/SoapAction&gt;
 &lt;/Query&gt;</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -11662,392 +11670,8 @@
           <DataField>xmlns</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="NumeroCartaDePorte">
-          <DataField>NumeroCartaDePorte</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Observaciones">
-          <DataField>Observaciones</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NumeroCartaDePorteFormateada">
-          <DataField>NumeroCartaDePorteFormateada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Humedad">
-          <DataField>Humedad</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NetoFinal">
-          <DataField>NetoFinal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaDescarga">
-          <DataField>FechaDescarga</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Patente">
-          <DataField>Patente</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="HumedadDesnormalizada">
-          <DataField>HumedadDesnormalizada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadDescuentoFinal">
-          <DataField>CalidadDescuentoFinal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaVencimiento">
-          <DataField>FechaVencimiento</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Acoplado">
-          <DataField>Acoplado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGranosQuemadosBonifRebaja">
-          <DataField>CalidadGranosQuemadosBonifRebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Merma">
-          <DataField>Merma</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadTierraBonifRebaja">
-          <DataField>CalidadTierraBonifRebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TaraFinal">
-          <DataField>TaraFinal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BrutoFinal">
-          <DataField>BrutoFinal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaChamicoBonifRebaja">
-          <DataField>CalidadMermaChamicoBonifRebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NetoProc">
-          <DataField>NetoProc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaZarandeoBonifRebaja">
-          <DataField>CalidadMermaZarandeoBonifRebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CorredorDesc">
-          <DataField>CorredorDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaArribo">
-          <DataField>FechaArribo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Producto">
-          <DataField>Producto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedenciaDesc">
-          <DataField>ProcedenciaDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoDesc">
-          <DataField>DestinoDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdCartaDePorte">
-          <DataField>IdCartaDePorte</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaModificacion">
-          <DataField>FechaModificacion</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoCodigoYPF">
-          <DataField>DestinoCodigoYPF</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EspecieONCCA">
-          <DataField>EspecieONCCA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SubnumeroVagon">
-          <DataField>SubnumeroVagon</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NumeroSubfijo">
-          <DataField>NumeroSubfijo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdDetalleFacturaImputada">
-          <DataField>IdDetalleFacturaImputada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="UsuarioIngreso">
-          <DataField>UsuarioIngreso</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PrecioUnitarioTotal">
-          <DataField>PrecioUnitarioTotal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleExtranos">
-          <DataField>NobleExtranos</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleNegros">
-          <DataField>NobleNegros</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleQuebrados">
-          <DataField>NobleQuebrados</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleDaniados">
-          <DataField>NobleDaniados</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleChamico">
-          <DataField>NobleChamico</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleChamico2">
-          <DataField>NobleChamico2</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleRevolcado">
-          <DataField>NobleRevolcado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleObjetables">
-          <DataField>NobleObjetables</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleAmohosados">
-          <DataField>NobleAmohosados</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RComercialDesc">
-          <DataField>RComercialDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleHectolitrico">
-          <DataField>NobleHectolitrico</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleCarbon">
-          <DataField>NobleCarbon</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NoblePanzaBlanca">
-          <DataField>NoblePanzaBlanca</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NoblePicados">
-          <DataField>NoblePicados</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RComercialCUIT">
-          <DataField>RComercialCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleMGrasa">
-          <DataField>NobleMGrasa</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleAcidezGrasa">
-          <DataField>NobleAcidezGrasa</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleVerdes">
-          <DataField>NobleVerdes</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="KmArecorrer">
-          <DataField>KmArecorrer</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleGrado">
-          <DataField>NobleGrado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Tarifa">
-          <DataField>Tarifa</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleConforme">
-          <DataField>NobleConforme</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdProcedencia">
-          <DataField>IdProcedencia</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NobleACamara">
-          <DataField>NobleACamara</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Cosecha">
-          <DataField>Cosecha</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoCUIT">
-          <DataField>DestinoCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdFacturaImputada">
-          <DataField>IdFacturaImputada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IdClienteAFacturarle">
-          <DataField>IdClienteAFacturarle</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGranosQuemados">
-          <DataField>CalidadGranosQuemados</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadTierra">
-          <DataField>CalidadTierra</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaChamico">
-          <DataField>CalidadMermaChamico</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadMermaZarandeo">
-          <DataField>CalidadMermaZarandeo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FueraDeEstandar">
-          <DataField>FueraDeEstandar</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TitularDesc">
-          <DataField>TitularDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPuntaSombreada">
-          <DataField>CalidadPuntaSombreada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TitularCUIT">
-          <DataField>TitularCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CorredorCUIT">
-          <DataField>CorredorCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinatarioDesc">
-          <DataField>DestinatarioDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedenciaLocalidadONCCA_SAGPYA">
-          <DataField>ProcedenciaLocalidadONCCA_SAGPYA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinatarioCUIT">
-          <DataField>DestinatarioCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedenciaLocalidadAFIP">
-          <DataField>ProcedenciaLocalidadAFIP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoLocalidadAFIP">
-          <DataField>DestinoLocalidadAFIP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadDesc">
-          <DataField>CalidadDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TransportistaCUIT">
-          <DataField>TransportistaCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TransportistaDesc">
-          <DataField>TransportistaDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ChoferCUIT">
-          <DataField>ChoferCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ChoferDesc">
-          <DataField>ChoferDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PathImagen">
-          <DataField>PathImagen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProductoSagpya">
-          <DataField>ProductoSagpya</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NetoPto">
-          <DataField>NetoPto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TaraPto">
-          <DataField>TaraPto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BrutoPto">
-          <DataField>BrutoPto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CEE_CAU">
-          <DataField>CEE_CAU</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CTG">
-          <DataField>CTG</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoCodigoSAGPYA">
-          <DataField>DestinoCodigoSAGPYA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Contrato">
-          <DataField>Contrato</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PuntoVenta">
-          <DataField>PuntoVenta</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Cosecha2">
-          <DataField>Cosecha2</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FechaDeCarga">
-          <DataField>FechaDeCarga</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NRecibo">
-          <DataField>NRecibo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedenciaCodigoPostal">
-          <DataField>ProcedenciaCodigoPostal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoCodigoPostal">
-          <DataField>DestinoCodigoPostal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGranosDanadosRebaja">
-          <DataField>CalidadGranosDanadosRebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGranosExtranosRebaja">
-          <DataField>CalidadGranosExtranosRebaja</DataField>
+        <Field Name="GetCartasResult">
+          <DataField>GetCartasResult</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -12105,6 +11729,10 @@
     <ReportParameter Name="idproducto">
       <DataType>String</DataType>
       <Prompt>idproducto</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="partedelnumero">
+      <DataType>String</DataType>
+      <Prompt>partedelnumero</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
