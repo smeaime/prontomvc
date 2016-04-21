@@ -197,6 +197,29 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void InformeSincroDeNidera_20523_2()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Nidera", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 5),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
 
 
         [TestMethod]
@@ -238,39 +261,76 @@ namespace ProntoMVC.Tests
 
 
 
+            string output;
             string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
-
-            ReportParameter[] yourParams=new ReportParameter[8];
-
-            yourParams[0] = new ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx");
-            yourParams[1] = new ReportParameter("sServidor", "");
-            yourParams[2] = new ReportParameter("idArticulo", "-1");
-            yourParams[3] = new ReportParameter("idDestino", "-1");
-            yourParams[4] = new ReportParameter("desde", new DateTime(2012, 11, 1).ToString());
-            yourParams[5] = new ReportParameter("hasta", new DateTime(2012, 11, 1).ToString());
-            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
-            yourParams[7] = new ReportParameter("Consulta", "");
-
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
-            //var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-            //        "Williams - Nidera con Webservice.rdl", yourParams, ref ArchivoExcelDestino, false);
-            
-            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-                        "Williams - Nidera con Webservice sin parametros.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+            if (false)
+            {
+                ReportParameter[] yourParams = new ReportParameter[8];
+                yourParams[0] = new ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx");
+                yourParams[1] = new ReportParameter("sServidor", "");
+                yourParams[2] = new ReportParameter("idArticulo", "-1");
+                yourParams[3] = new ReportParameter("idDestino", "-1");
+                yourParams[4] = new ReportParameter("desde", new DateTime(2012, 11, 1).ToString());
+                yourParams[5] = new ReportParameter("hasta", new DateTime(2012, 11, 1).ToString());
+                yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+                yourParams[7] = new ReportParameter("Consulta", "");
+
+
+                //var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                //        "Williams - Nidera con Webservice.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+                output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                            "Williams - Nidera con Webservice sin parametros.rdl", yourParams, ref ArchivoExcelDestino, false);
+            }
+
+            else
+            {
+
+
+                string strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                               "", "", "", 1, 20, CartaDePorteManager.enumCDPestado.Todas,
+                               "", -1, -1,
+                               -1, -1,
+                               -1, -1, -1, -1,
+                               CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2013, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas");
+
+
+                ReportParameter[] yourParams = new ReportParameter[9];
+                yourParams[0] = new ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx");
+                yourParams[1] = new ReportParameter("sServidor", ConfigurationManager.AppSettings["UrlDominio"]);
+                yourParams[2] = new ReportParameter("idArticulo", "-1");
+                yourParams[3] = new ReportParameter("idDestino", "-1");
+                yourParams[4] = new ReportParameter("desde", new DateTime(2012, 11, 1).ToString());
+                yourParams[5] = new ReportParameter("hasta", new DateTime(2012, 11, 1).ToString());
+                yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+                yourParams[7] = new ReportParameter("Consulta", strSQL);
+                yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+               
+
+                output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                            "Williams - Nidera con SQL.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+
+            }
 
             try
             {
-                rep.Dispose();
+                //rep.Dispose();
             }
             catch (Exception)
             {
-                
+
                 //throw;
             }
 
 
-            System.Diagnostics.Process.Start(output2);
+            System.Diagnostics.Process.Start(output);
 
 
             //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErrores, bVistaPrevia);
