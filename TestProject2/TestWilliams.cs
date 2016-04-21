@@ -211,53 +211,66 @@ namespace ProntoMVC.Tests
             LinqCartasPorteDataContext db = null;
             DemoProntoEntities db2 = null;
 
+            if (false)
+            {
+
+                // probar el webservice tambien
+                var q2 = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2013, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas").ToList();
 
 
-            // probar el webservice tambien
-            var q2 = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
-                   "", "", "", 1, 10,
-                    CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                   -1, -1,
-                   -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                    new DateTime(2013, 1, 1),
-                    new DateTime(2014, 1, 1),
-                    -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas").ToList();
 
-
-
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada(SC,
-                   "", "", "", 1, 10,
-                    CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                   -1, -1,
-                   -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                    new DateTime(2013, 1, 1),
-                    new DateTime(2014, 1, 1),
-                    -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
-
+                var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2013, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+            }
 
 
 
             string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
 
-            //yourParams(0) = New ReportParameter("webservice", "")
-            //yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
-            //yourParams(2) = New ReportParameter("idArticulo", -1)
-            //yourParams(3) = New ReportParameter("idDestino", -1)
-            //yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-            //yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-            //yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
-            //yourParams(7) = New ReportParameter("Consulta", strSQL)
-            //yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+            ReportParameter[] yourParams=new ReportParameter[8];
+
+            yourParams[0] = new ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx");
+            yourParams[1] = new ReportParameter("sServidor", "");
+            yourParams[2] = new ReportParameter("idArticulo", "-1");
+            yourParams[3] = new ReportParameter("idDestino", "-1");
+            yourParams[4] = new ReportParameter("desde", new DateTime(2012, 11, 1).ToString());
+            yourParams[5] = new ReportParameter("hasta", new DateTime(2012, 11, 1).ToString());
+            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+            yourParams[7] = new ReportParameter("Consulta", "");
 
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
-            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-                    "Williams - Nidera con Webservice.rdl",
-                             "", SC, false, ref ArchivoExcelDestino, sTitulo, false);
+            //var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+            //        "Williams - Nidera con Webservice.rdl", yourParams, ref ArchivoExcelDestino, false);
+            
+            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                        "Williams - Nidera con Webservice sin parametros.rdl", yourParams, ref ArchivoExcelDestino, false);
 
-            rep.Dispose();
+            try
+            {
+                rep.Dispose();
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
 
 
+            System.Diagnostics.Process.Start(output2);
 
 
             //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErrores, bVistaPrevia);
