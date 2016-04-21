@@ -426,6 +426,10 @@
       <Name>Williams - Nidera con Webservice.rdl</Name>
       <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Williams - Nidera con Webservice sin parametros.rdl</Name>
+      <FullPath>Williams - Nidera con Webservice sin parametros.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
