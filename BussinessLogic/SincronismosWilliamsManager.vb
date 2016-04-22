@@ -2603,7 +2603,15 @@ Namespace Pronto.ERP.Bll
 
                     sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
                     sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
-                    sb &= .CTG.ToString
+
+
+                    sb &= JustificadoIzquierda(.CTG.ToString, 8)
+
+                    sb &= JustificadoIzquierda(.SubnumeroVagon.ToString, 8)
+
+
+
+
 
 
 

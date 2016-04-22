@@ -1252,8 +1252,7 @@ namespace ProntoFlexicapture
                 int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
 
                 string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
-                nombreusuario = nombreusuario.Substring(0, nombreusuario.Length - nombreusuario.IndexOf(" PV"));
-
+                nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4); 
 
 
 
