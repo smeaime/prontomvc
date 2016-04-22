@@ -8711,7 +8711,7 @@ Public Class CartaDePorteManager
                     cartaNoExportadora.AcopioFacturarleA = l.Where(Function(x) x > 0).Distinct().First
                 ElseIf l.Where(Function(x) x > 0).Distinct().Count > 1 Then
                     cartaNoExportadora.IdClienteAFacturarle = 0
-                    ms &= "No se pudo elegir automaticamente el acopio del cliente a facturale la carta no exportadora" & vbCrLf
+                    'ms &= "No se pudo elegir automaticamente el acopio del cliente a facturale la carta no exportadora" & vbCrLf
                 End If
             End If
         End If
