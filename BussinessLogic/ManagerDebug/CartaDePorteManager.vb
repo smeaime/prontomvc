@@ -7114,9 +7114,9 @@ Public Class CartaDePorteManager
                 If q5 IsNot Nothing Then Return q5.IdCliente
             End If
 
-            If clis.Count = 1 Then Return clis(0)
+            If clis.Distinct.Count = 1 Then Return clis(0)
 
-            If clis.Count > 1 Then
+            If clis.Distinct.Count > 1 Then
                 ms &= "No se pudo asignar el cliente a facturar automaticamente, clientes en conflicto ("
                 For Each i In clis
                     ms &= NombreCliente(SC, i) & "  "
@@ -8679,7 +8679,7 @@ Public Class CartaDePorteManager
         cartaActual.Id = CartaDePorteId
 
 
-
+  
         '///////////////////////////////////////////////////////////////////////////////////
         '* En la que tiene el tilde -> FacturarAExplicito = Destinatario
         '///////////////////////////////////////////////////////////////////////////////////
@@ -8687,6 +8687,7 @@ Public Class CartaDePorteManager
         'no permitir poner un valor en blanco si ya hay un valor en el idclienteafacturarle
         If Not (cartaExportadora.IdClienteAFacturarle > 0 And cartaExportadora.Entregador <= 0) Then
             cartaExportadora.IdClienteAFacturarle = cartaExportadora.Entregador
+            cartaExportadora.AcopioFacturarleA = cartaExportadora.Acopio5
         End If
 
 
@@ -8701,6 +8702,17 @@ Public Class CartaDePorteManager
             Dim idauto = FacturarA_Automatico(SC, cartaNoExportadora, ms2)
             If Not (cartaNoExportadora.IdClienteAFacturarle > 0 And idauto <= 0) Then
                 cartaNoExportadora.IdClienteAFacturarle = idauto
+
+                Dim l = New List(Of Integer)
+                l.Add(cartaNoExportadora.Acopio1)
+                l.Add(cartaNoExportadora.Acopio2)
+                l.Add(cartaNoExportadora.Acopio3)
+                If l.Where(Function(x) x > 0).Distinct().Count = 1 Then
+                    cartaNoExportadora.AcopioFacturarleA = l.Where(Function(x) x > 0).Distinct().First
+                ElseIf l.Where(Function(x) x > 0).Distinct().Count > 1 Then
+                    cartaNoExportadora.IdClienteAFacturarle = 0
+                    ms &= "No se pudo elegir automaticamente el acopio del cliente a facturale la carta no exportadora" & vbCrLf
+                End If
             End If
         End If
 
@@ -8710,8 +8722,11 @@ Public Class CartaDePorteManager
         If Not bSoloValidar Then
             Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaLaOtra.Id).SingleOrDefault
             oCarta.IdClienteAFacturarle = cartaLaOtra.IdClienteAFacturarle
+            oCarta.AcopioFacturarleA = cartaLaOtra.AcopioFacturarleA
+
             Dim oCarta2 = (From i In db.CartasDePortes Where i.IdCartaDePorte = cartaActual.Id).SingleOrDefault
             oCarta2.IdClienteAFacturarle = cartaActual.IdClienteAFacturarle
+            oCarta2.AcopioFacturarleA = cartaActual.AcopioFacturarleA
 
             db.SaveChanges()
         End If
@@ -9003,6 +9018,7 @@ Public Class CartaDePorteManager
 
 
 
+
             Try
                 If .CalidadDe > 0 Then
                     If NombreCalidad(SC, .CalidadDe).Contains("GRADO 1") And .NobleGrado <> 1 Then
@@ -9115,6 +9131,18 @@ Public Class CartaDePorteManager
                 ms &= "No pueden estar tildados Conforme y A camara en Noble"
                 ms &= vbCrLf   'return false
             End If
+
+
+
+
+            'revisar si el cliente asignado usa acopios
+            If .IdClienteAFacturarle > 0 And .AcopioFacturarleA <= 0 Then
+                If (CartaDePorteManager.excepcionesAcopios(SC, .IdClienteAFacturarle).Count > 1) Then
+                    ms &= "El cliente a facturarle exige un acopio" & vbCrLf
+                End If
+            End If
+
+
 
             If .Titular > 0 Then
                 If InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "SYNGENTA") > 0 And .EnumSyngentaDivision = "" Then
