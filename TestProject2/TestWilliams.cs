@@ -197,6 +197,151 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_20539_extensionde18059()
+        {
+
+            // q lo haga solo en los casos especiales
+            //                La cosa quedaría así:
+
+            //Si se duplica una carta de porte y en una copia está el tilde y en otra no:
+
+            //* En la que tiene el tilde -> FacturarAExplicito = Destinatario
+            //* En la que no tiene el tilde -> FacturarAExplicito = Cliente a determinar según los tildes. Si no se puede determinar porque mas de uno cumple con la regla, quedará vacío y a cargar por el cliente
+
+
+            //Casos en los que no llenar el FacturarAExplicito:
+            //* Si está triplicada
+            //* Si está duplicada y ninguna tiene tilde
+
+
+            string ms = "", warn = "";
+
+            // doy un alta
+            Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
+
+            carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
+            //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
+            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
+            carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
+            carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
+            carta.IdArticulo = 22;
+            carta.Destino = 222;
+            carta.Procedencia = 211;
+            carta.Cosecha = "2016/17";
+            carta.FechaArribo = DateTime.Today;
+            carta.PuntoVenta = 1;
+
+            carta.Exporta = false;
+
+            carta.FacturarAManual = true;
+
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+            // duplico la carta
+            Pronto.ERP.BO.CartaDePorte carta2 = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2.Id = -1;
+            carta2.SubnumeroDeFacturacion = CartaDePorteManager.ProximoSubNumeroParaNumeroCartaPorte(SC, carta2);
+            carta2.IdClienteAFacturarle = -1;
+            carta2.Exporta = true;
+
+            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
+
+
+            ////////////////////////////////
+
+            carta = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2 = CartaDePorteManager.GetItem(SC, carta2.Id, true);
+
+
+            ////////////////////////////////
+
+            Assert.AreNotEqual(-1, carta.IdClienteAFacturarle);
+            Assert.AreNotEqual(-1, carta2.IdClienteAFacturarle);
+
+
+
+            // verificar que le creó un duplicado
+
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            //Assert.AreEqual(1, carta.NobleGrado);
+
+            //carta = null;
+            //carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            //carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            //carta.NobleGrado = 3;
+            //CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            //Assert.AreEqual(2, carta.NobleGrado);
+
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void TambienParaFlexicaptureActivar_ImagenesTiffMultipaginaFormatoCPTK_CPTK_CPTK_20503()
+        {
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\3333.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\CPTKCPTK.tif";
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false, false, 1);
+
+
+            string sError = "";
+
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+        }
+
+
+
+
+
+        [TestMethod]
+        public void webServiceParaBLDconDescargaDeImagenes_18181()
+        {
+            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            //byte[] b1=null;
+            //b1 = ls1.DownloadFile("C:\\Source.xml");
+            //fs1=new FileStream("D:\\Source.xml", FileMode.Create);
+            //fs1.Write(b1,0,b1.Length);  
+            //fs1.Close();
+            //fs1 = null;
+            //Label1.Text = "File dow";
+
+        }
+
+
+
 
         [TestMethod]
         public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_20463()
@@ -512,24 +657,6 @@ namespace ProntoMVC.Tests
             Assert.AreNotEqual(q.Count, q2.Count);
         }
 
-
-
-        [TestMethod]
-        public void webServiceParaBLDconDescargaDeImagenes_18181()
-        {
-
-
-            System.IO.FileStream fs1 = null;
-            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
-            //byte[] b1=null;
-            //b1 = ls1.DownloadFile("C:\\Source.xml");
-            //fs1=new FileStream("D:\\Source.xml", FileMode.Create);
-            //fs1.Write(b1,0,b1.Length);  
-            //fs1.Close();
-            //fs1 = null;
-            //Label1.Text = "File dow";
-
-        }
 
 
 

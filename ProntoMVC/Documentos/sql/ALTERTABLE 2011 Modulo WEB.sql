@@ -1738,3 +1738,21 @@ ALTER TABLE ExcelImportador add  Auxiliar9   varchar(100) NULL
 
 ALTER TABLE Localidades add  CodigoCGG   varchar(10) NULL
 
+
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+FacturarAManual
+
+
+alter table WilliamsDestinos add
+	IdLocalidad2 int null references Localidades(IdLocalidad),
+	IdLocalidad3 int null references Localidades(IdLocalidad),
+	IdLocalidad4 int null references Localidades(IdLocalidad)
+go
+
+
+
+
+
