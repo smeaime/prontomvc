@@ -167,7 +167,7 @@ namespace ProntoFlexicapture
 
 
 
-
+            bool conTK = imagenes[0].Contains("_unido");
 
 
             //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
@@ -220,11 +220,22 @@ namespace ProntoFlexicapture
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
 
+
+                //ojo , porque incrementas el count de archivosimagenes, pero un archivo puede tener 2 paginas con cp+tk
+                // ademas, el GrabarImagen (en el importador2) solo esta recibiendo el tiff de pagina simple exportado por el flexicapture.
+                // el primer tema lo resolvería haciendo un +2 en lugar de ++
+                // y el segundo tema... ¿no puedo pasar como parametro el nombre original del archivo?
+
+
+
+
                 IDocument document;
 
                 //trace("Recognize next document...");
                 try
                 {
+
+                    if (conTK && count > 0) processor.RecognizeNextDocument(); // saltar la pagina con el tiket, y así pasar al siguiente archivo
 
                     document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
@@ -325,6 +336,38 @@ namespace ProntoFlexicapture
                         //explota aca con la carta invalida
                         ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString());
 
+
+
+                        if (conTK)
+                        {
+                            string archivoOriginal = imagenes[count];
+
+                            string nombrenuevo = rnd.Next(1, 99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(archivoOriginal);
+
+                            nombrenuevo = CartaDePorteManager.CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp);
+
+
+                            string DIRFTP = DirApp + @"\DataBackupear\";
+                            string destino = DIRFTP + nombrenuevo;
+
+
+                            try
+                            {
+                                FileInfo MyFile1 = new FileInfo(destino);
+                                if (MyFile1.Exists) MyFile1.Delete();
+
+                                File.Copy(archivoOriginal, destino);
+                            }
+                            catch (Exception x)
+                            {
+                                ErrHandler2.WriteError(x);
+                            }
+
+
+                            var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true);
+                        }
+
+
                     }
                     catch (Exception x)
                     {
@@ -355,8 +398,9 @@ namespace ProntoFlexicapture
 
 
 
-
                 count++;
+
+
             }
             //traceEnd("OK");
 
@@ -549,11 +593,11 @@ namespace ProntoFlexicapture
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
 
             // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
-         
+
             // tenes usar el creationtime para las que fueron extraidas del zip
 
             var q = (from f in files
-                     where ((f.LastWriteTime > f.CreationTime  ? f.LastWriteTime : f.CreationTime) > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
+                     where ((f.LastWriteTime > f.CreationTime ? f.LastWriteTime : f.CreationTime) > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
                             && (EsArchivoDeImagen(f.Name)
                             && !f.FullName.Contains("_IMPORT1")
                             && !files.Any(x => x.FullName == (f.FullName + ".bdl"))
@@ -1052,7 +1096,7 @@ namespace ProntoFlexicapture
 
 
 
-       public  static string EstadoServicio()
+        public static string EstadoServicio()
         {
             string SERVICENAME = "ProntoAgente";
 
@@ -1252,7 +1296,7 @@ namespace ProntoFlexicapture
                 int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
 
                 string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
-                nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4); 
+                nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4);
 
 
 

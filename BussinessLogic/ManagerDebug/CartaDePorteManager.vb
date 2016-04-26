@@ -10774,8 +10774,7 @@ Public Class CartaDePorteManager
 
                 'guardar el tiff original
                 '-cómo? hay codigo que borra ese archivo tif original????
-                '-tenes razon! el tif original se salva! solo hay que buscarlo sin el .jpg agregado... Ponelo en el form de cartaporte
-                
+
 
                 Dim listapaginas As List(Of System.Drawing.Image) = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(DIRDATABACKUPEAR + archivoImagenSinPathUbicadaEnDATABACKUPEAR)
 
