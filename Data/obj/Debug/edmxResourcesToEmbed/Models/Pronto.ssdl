@@ -659,6 +659,7 @@
     <Property Name="EstadoRecibidor" Type="int" />
     <Property Name="ClienteAcondicionador" Type="int" />
     <Property Name="MotivoRechazo" Type="int" />
+    <Property Name="FacturarA_Manual" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="CartasDePorteDetalle">
     <Key>
@@ -2026,6 +2027,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="IdColor" Type="int" />
     <Property Name="IdDetallePresupuestoVenta" Type="int" />
     <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
+    <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
   </EntityType>
   <EntityType Name="DetalleEmpleados">
     <Key>
@@ -3081,6 +3084,9 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="Cliente" Type="varchar" MaxLength="50" />
     <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
     <Property Name="CuitClienteExterno" Type="varchar" MaxLength="13" />
+    <Property Name="OtrasPercepciones3" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="OtrasPercepciones3Desc" Type="varchar" MaxLength="15" />
+    <Property Name="AjusteIva" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="DiccionarioEquivalencias">
     <Key>
@@ -5932,6 +5938,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Property Name="IdProvincia" Type="int" />
     <Property Name="IdLocalidad" Type="int" />
     <Property Name="PuntoVenta" Type="int" />
+    <Property Name="IdLocalidad2" Type="int" />
+    <Property Name="IdLocalidad3" Type="int" />
+    <Property Name="IdLocalidad4" Type="int" />
   </EntityType>
   <EntityType Name="WilliamsMailFiltrosCola">
     <Key>
@@ -6505,6 +6514,42 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
       </Principal>
       <Dependent Role="UsuariosRelacionFertilizantesTiposDespacho">
         <PropertyRef Name="IdFertilizantesTiposDespacho" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WilliamsD__IdLoc__0A8A4FBA">
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+    <End Role="WilliamsDestinos" Type="Self.WilliamsDestinos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidades">
+        <PropertyRef Name="IdLocalidad" />
+      </Principal>
+      <Dependent Role="WilliamsDestinos">
+        <PropertyRef Name="IdLocalidad2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WilliamsD__IdLoc__0B7E73F3">
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+    <End Role="WilliamsDestinos" Type="Self.WilliamsDestinos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidades">
+        <PropertyRef Name="IdLocalidad" />
+      </Principal>
+      <Dependent Role="WilliamsDestinos">
+        <PropertyRef Name="IdLocalidad3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WilliamsD__IdLoc__0C72982C">
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+    <End Role="WilliamsDestinos" Type="Self.WilliamsDestinos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidades">
+        <PropertyRef Name="IdLocalidad" />
+      </Principal>
+      <Dependent Role="WilliamsDestinos">
+        <PropertyRef Name="IdLocalidad4" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -9903,6 +9948,18 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <AssociationSet Name="FK__UsuariosR__IdFer__47C86824" Association="Self.FK__UsuariosR__IdFer__47C86824">
       <End Role="FertilizantesTiposDespacho" EntitySet="FertilizantesTiposDespacho" />
       <End Role="UsuariosRelacionFertilizantesTiposDespacho" EntitySet="UsuariosRelacionFertilizantesTiposDespacho" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WilliamsD__IdLoc__0A8A4FBA" Association="Self.FK__WilliamsD__IdLoc__0A8A4FBA">
+      <End Role="Localidades" EntitySet="Localidades" />
+      <End Role="WilliamsDestinos" EntitySet="WilliamsDestinos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WilliamsD__IdLoc__0B7E73F3" Association="Self.FK__WilliamsD__IdLoc__0B7E73F3">
+      <End Role="Localidades" EntitySet="Localidades" />
+      <End Role="WilliamsDestinos" EntitySet="WilliamsDestinos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WilliamsD__IdLoc__0C72982C" Association="Self.FK__WilliamsD__IdLoc__0C72982C">
+      <End Role="Localidades" EntitySet="Localidades" />
+      <End Role="WilliamsDestinos" EntitySet="WilliamsDestinos" />
     </AssociationSet>
     <AssociationSet Name="FK__WilliamsD__IdLoc__3EDE1C68" Association="Self.FK__WilliamsD__IdLoc__3EDE1C68">
       <End Role="Localidades" EntitySet="Localidades" />

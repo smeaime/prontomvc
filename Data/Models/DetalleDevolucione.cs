@@ -38,6 +38,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdColor { get; set; }
         public Nullable<int> IdDetallePresupuestoVenta { get; set; }
         public string OrigenRegistro { get; set; }
+        public Nullable<decimal> PorcentajeIva { get; set; }
+        public Nullable<decimal> ImporteIva { get; set; }
     
         public virtual Devolucione Devolucione { get; set; }
     }

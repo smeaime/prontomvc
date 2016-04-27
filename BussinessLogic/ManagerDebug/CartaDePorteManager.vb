@@ -13144,6 +13144,67 @@ Public Class CartaDePorteManager
     End Function
 
 
+
+
+
+
+    Public Shared Function BajarImagenDeCartaPorte_DLL(identificador As String, SC As String) As Byte()
+
+        'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+        '      DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+        Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, 550867628, 0, 0)
+
+
+
+
+        'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
+        'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
+        'Return File.ReadAllText(FullPath)
+
+        Dim FName As String = cdp.PathImagen
+
+        Dim fs1 As System.IO.FileStream = Nothing
+        fs1 = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
+        Dim b1(fs1.Length) As Byte
+        fs1.Read(b1, 0, fs1.Length)
+        fs1.Close()
+        Return b1
+
+        'usaria la descarga que usa bld en el informe?
+
+        'usando response para que baje el archivo
+
+
+        'Response.Clear()
+        'Response.ClearHeaders()
+        'Response.ContentType = "text/html; charset=UTF-8"
+        'Response.AddHeader("Content-Disposition", "attachment; filename=\"" & filePath & " \ "")
+        'Response.AddHeader("Content-Length", b1.Length)
+        'Response.OutputStream.Write(b1, 0, b1.Length)
+        'Response.Flush()
+        'Response.End()
+
+        'pdfreducido()
+        'oenjpg()
+
+
+        'If Not b Then
+        '    output = CartaDePorteManager.DescargarImagenesAdjuntas(dt, HFSC.Value, True)
+        'Else
+        '    output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False)
+        'End If
+
+
+    End Function
+
+
+
+
+
+
+
+
 End Class
 
 

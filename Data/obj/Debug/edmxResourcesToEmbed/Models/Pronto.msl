@@ -4710,6 +4710,8 @@
     <EntitySetMapping Name="DetalleDevoluciones">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleDevolucione">
         <MappingFragment StoreEntitySet="DetalleDevoluciones">
+          <ScalarProperty Name="ImporteIva" ColumnName="ImporteIva" />
+          <ScalarProperty Name="PorcentajeIva" ColumnName="PorcentajeIva" />
           <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
           <ScalarProperty Name="IdDetallePresupuestoVenta" ColumnName="IdDetallePresupuestoVenta" />
           <ScalarProperty Name="IdColor" ColumnName="IdColor" />
@@ -4740,6 +4742,9 @@
     <EntitySetMapping Name="Devoluciones">
       <EntityTypeMapping TypeName="DemoProntoModel.Devolucione">
         <MappingFragment StoreEntitySet="Devoluciones">
+          <ScalarProperty Name="AjusteIva" ColumnName="AjusteIva" />
+          <ScalarProperty Name="OtrasPercepciones3Desc" ColumnName="OtrasPercepciones3Desc" />
+          <ScalarProperty Name="OtrasPercepciones3" ColumnName="OtrasPercepciones3" />
           <ScalarProperty Name="CuitClienteExterno" ColumnName="CuitClienteExterno" />
           <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
           <ScalarProperty Name="Cliente" ColumnName="Cliente" />
@@ -5782,6 +5787,7 @@
     <EntitySetMapping Name="CartasDePortes">
       <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
         <MappingFragment StoreEntitySet="CartasDePorte">
+          <ScalarProperty Name="FacturarA_Manual" ColumnName="FacturarA_Manual" />
           <ScalarProperty Name="MotivoRechazo" ColumnName="MotivoRechazo" />
           <ScalarProperty Name="ClienteAcondicionador" ColumnName="ClienteAcondicionador" />
           <ScalarProperty Name="EstadoRecibidor" ColumnName="EstadoRecibidor" />
@@ -6340,6 +6346,9 @@
     <EntitySetMapping Name="WilliamsDestinos">
       <EntityTypeMapping TypeName="DemoProntoModel.WilliamsDestino">
         <MappingFragment StoreEntitySet="WilliamsDestinos">
+          <ScalarProperty Name="IdLocalidad4" ColumnName="IdLocalidad4" />
+          <ScalarProperty Name="IdLocalidad3" ColumnName="IdLocalidad3" />
+          <ScalarProperty Name="IdLocalidad2" ColumnName="IdLocalidad2" />
           <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
           <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
           <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
