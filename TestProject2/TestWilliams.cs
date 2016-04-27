@@ -338,16 +338,22 @@ namespace ProntoMVC.Tests
             //fs1 = null;
             //Label1.Text = "File dow";
 
-            string archivodestino = "c:\\Source.xml";
+            string archivodestino = "c:\\Source.jpg";
+            //"\CartaDePorteEncriptada.aspx&Id=" & EntidadManager.encryptQueryString(ID).ToString()
 
             System.IO.FileStream fs1 = null;
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
             byte[] b1=null;
-            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("500asdasd");
+            
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("550166736", SC, DirApp);
+
+
             fs1 = new FileStream(archivodestino, FileMode.Create);
             fs1.Write(b1,0,b1.Length);  
             fs1.Close();
             fs1 = null;
+
+            //cómo sé en qué formato está?
 
             System.Diagnostics.Process.Start(archivodestino);
         }

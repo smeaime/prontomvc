@@ -7892,6 +7892,7 @@ Public Class CartaDePorteManager
                 .MotivoRechazo = iisNull(oCarta.MotivoRechazo, 0)
                 .ClienteAcondicionador = iisNull(oCarta.ClienteAcondicionador, -1)
 
+                .FacturarAManual = oCarta.FacturarA_Manual
 
 
 
@@ -8326,6 +8327,7 @@ Public Class CartaDePorteManager
                     oCarta.MotivoRechazo = .MotivoRechazo
                     oCarta.ClienteAcondicionador = .ClienteAcondicionador
 
+                    oCarta.FacturarA_Manual = .FacturarAManual
 
 
                     'Try
@@ -8679,13 +8681,13 @@ Public Class CartaDePorteManager
         cartaActual.Id = CartaDePorteId
 
 
-  
+
         '///////////////////////////////////////////////////////////////////////////////////
         '* En la que tiene el tilde -> FacturarAExplicito = Destinatario
         '///////////////////////////////////////////////////////////////////////////////////
 
         'no permitir poner un valor en blanco si ya hay un valor en el idclienteafacturarle
-        If Not (cartaExportadora.IdClienteAFacturarle > 0 And cartaExportadora.Entregador <= 0) Then
+        If Not (cartaExportadora.IdClienteAFacturarle > 0 And cartaExportadora.Entregador <= 0) And Not cartaExportadora.FacturarAManual Then
             cartaExportadora.IdClienteAFacturarle = cartaExportadora.Entregador
             cartaExportadora.AcopioFacturarleA = cartaExportadora.Acopio5
         End If
@@ -8698,7 +8700,7 @@ Public Class CartaDePorteManager
 
         'no permitir poner un valor en blanco si ya hay un valor en el idclienteafacturarle  
         Dim ms2 As String
-        If cartaNoExportadora.IdClienteAFacturarle <= 0 Then
+        If cartaNoExportadora.IdClienteAFacturarle <= 0 And Not cartaNoExportadora.FacturarAManual Then
             Dim idauto = FacturarA_Automatico(SC, cartaNoExportadora, ms2)
             If Not (cartaNoExportadora.IdClienteAFacturarle > 0 And idauto <= 0) Then
                 cartaNoExportadora.IdClienteAFacturarle = idauto
@@ -13147,22 +13149,24 @@ Public Class CartaDePorteManager
 
 
 
-
-    Public Shared Function BajarImagenDeCartaPorte_DLL(identificador As String, SC As String) As Byte()
+    Public Shared Function BajarImagenDeCartaPorte_DLL(usuario As String, password As String, numerocarta As Long, SC As String, DirApp As String) As Byte()
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
         '      DemoProntoEntities db = new DemoProntoEntities(scEF);
 
-        Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, 550867628, 0, 0)
+        'Dim IdCartaDePorte = EntidadManager.decryptQueryString(identificador)
 
+        verificar q la carta tenga como cliente ese usuario
 
+        Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, IdCartaDePorte, 0, 0)
 
+        Dim DIRFTP As String = DirApp & "\DataBackupear\"
 
         'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
         'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
         'Return File.ReadAllText(FullPath)
 
-        Dim FName As String = cdp.PathImagen
+        Dim FName As String = DIRFTP + cdp.PathImagen
 
         Dim fs1 As System.IO.FileStream = Nothing
         fs1 = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
