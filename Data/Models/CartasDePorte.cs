@@ -200,6 +200,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> EstadoRecibidor { get; set; }
         public Nullable<int> ClienteAcondicionador { get; set; }
         public Nullable<int> MotivoRechazo { get; set; }
+        public bool FacturarA_Manual { get; set; }
     
         public virtual CartasPorteAcopio CartasPorteAcopio { get; set; }
         public virtual ICollection<CartasDePorteDetalle_EF> CartasDePorteDetalles { get; set; }

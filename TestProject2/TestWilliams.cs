@@ -198,7 +198,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_20539_extensionde18059()
+        public void NoPonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_20539_extensionde18059()
         {
 
             // q lo haga solo en los casos especiales
@@ -328,7 +328,7 @@ namespace ProntoMVC.Tests
         {
             // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
 
-            System.IO.FileStream fs1 = null;
+            //System.IO.FileStream fs1 = null;
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
             //byte[] b1=null;
             //b1 = ls1.DownloadFile("C:\\Source.xml");
@@ -338,6 +338,18 @@ namespace ProntoMVC.Tests
             //fs1 = null;
             //Label1.Text = "File dow";
 
+            string archivodestino = "c:\\Source.xml";
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            byte[] b1=null;
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("500asdasd");
+            fs1 = new FileStream(archivodestino, FileMode.Create);
+            fs1.Write(b1,0,b1.Length);  
+            fs1.Close();
+            fs1 = null;
+
+            System.Diagnostics.Process.Start(archivodestino);
         }
 
 

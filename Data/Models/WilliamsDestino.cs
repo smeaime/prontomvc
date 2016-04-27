@@ -40,6 +40,9 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdProvincia { get; set; }
         public Nullable<int> IdLocalidad { get; set; }
         public Nullable<int> PuntoVenta { get; set; }
+        public Nullable<int> IdLocalidad2 { get; set; }
+        public Nullable<int> IdLocalidad3 { get; set; }
+        public Nullable<int> IdLocalidad4 { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Cliente Cliente1 { get; set; }
@@ -47,5 +50,8 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
         public virtual Localidad Localidade { get; set; }
         public virtual Provincia Provincia { get; set; }
+        public virtual Localidad Localidade1 { get; set; }
+        public virtual Localidad Localidade11 { get; set; }
+        public virtual Localidad Localidade2 { get; set; }
     }
 }
