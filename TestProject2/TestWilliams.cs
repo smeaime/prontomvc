@@ -345,7 +345,7 @@ namespace ProntoMVC.Tests
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
             byte[] b1=null;
             
-            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("550166736", SC, DirApp);
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("hgfhgf","hgfg!",550166736, SC, DirApp);
 
 
             fs1 = new FileStream(archivodestino, FileMode.Create);

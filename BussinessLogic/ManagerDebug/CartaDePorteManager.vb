@@ -8798,8 +8798,7 @@ Public Class CartaDePorteManager
             If sourceProp.Name = "Acopio6" Then Continue For
             If sourceProp.Name = "AcopioFacturarleA" Then Continue For
 
-
-
+            If sourceProp.Name = "FacturarA_Manual" Then Continue For
 
 
 
@@ -9139,15 +9138,18 @@ Public Class CartaDePorteManager
 
             'revisar si el cliente asignado usa acopios
             If .IdClienteAFacturarle > 0 And .AcopioFacturarleA <= 0 Then
-                If (CartaDePorteManager.excepcionesAcopios(SC, .IdClienteAFacturarle).Count > 1) Then
-                    ms &= "El cliente a facturarle exige un acopio" & vbCrLf
+                If Not InStr(EntidadManager.NombreCliente(SC, .IdClienteAFacturarle).ToUpper, "SYNGENTA") > 0 Then
+                    If (CartaDePorteManager.excepcionesAcopios(SC, .IdClienteAFacturarle).Count > 1) Then
+                        ms &= "El cliente a facturarle exige un acopio" & vbCrLf
+                    End If
                 End If
             End If
 
 
 
             If .Titular > 0 Then
-                If InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "SYNGENTA") > 0 And .EnumSyngentaDivision = "" Then
+
+                If False And InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "SYNGENTA") > 0 And .EnumSyngentaDivision = "" Then
                     If Not (.bSeLeFactura_a_SyngentaDivisionAgro Xor .bSeLeFactura_a_SyngentaDivisionAgro) Then
                         ms &= "Debe elegir a cuál de las divisiones de Syngenta se le facturará (a división Agro o a división Seeds)"
                         ms &= vbCrLf   'return false
@@ -13156,9 +13158,9 @@ Public Class CartaDePorteManager
 
         'Dim IdCartaDePorte = EntidadManager.decryptQueryString(identificador)
 
-        verificar q la carta tenga como cliente ese usuario
+        'verificar q la carta tenga como cliente ese usuario
 
-        Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, IdCartaDePorte, 0, 0)
+        Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numerocarta, 0, 0)
 
         Dim DIRFTP As String = DirApp & "\DataBackupear\"
 

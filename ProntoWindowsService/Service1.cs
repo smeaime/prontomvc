@@ -280,8 +280,6 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-
-
                     CartaDePorteManager.MandarMailDeError(x2);
 
                     ClassFlexicapture.Log(x2.ToString());
@@ -292,6 +290,7 @@ FCESupport\FCESupportImpl.h, 42.
 
                     ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                     processor = null;
+
                     ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
 
                     ClassFlexicapture.Log("funciona?");
@@ -300,6 +299,9 @@ FCESupport\FCESupportImpl.h, 42.
 
                 catch (Exception x)
                 {
+
+                    CartaDePorteManager.MandarMailDeError(x);
+
                     ClassFlexicapture.Log(x.ToString());
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x);
                 }
