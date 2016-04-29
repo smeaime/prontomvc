@@ -408,7 +408,7 @@ namespace ProntoFlexicapture
             //assert(count == 4);bul
 
 
-
+            //esta bien esto?
             processor.ResetProcessing();
 
             return r;
