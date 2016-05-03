@@ -13151,31 +13151,68 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function BajarImagenDeCartaPorte_DLL(usuario As String, password As String, numerocarta As Long, SC As String, DirApp As String) As Byte()
+    Public Shared Function BajarImagenDeCartaPorte_DLL(usuario As String, password As String, numerocarta As Long, SC As String, DirApp As String, ConexBDLmaster As String) As Byte()
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
         '      DemoProntoEntities db = new DemoProntoEntities(scEF);
 
         'Dim IdCartaDePorte = EntidadManager.decryptQueryString(identificador)
 
-        'verificar q la carta tenga como cliente ese usuario
 
-        Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numerocarta, 0, 0)
+        Try
 
-        Dim DIRFTP As String = DirApp & "\DataBackupear\"
+            'validar pass
 
-        'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
-        'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
-        'Return File.ReadAllText(FullPath)
+            If Not Membership.ValidateUser(usuario, password) Then Return Nothing
 
-        Dim FName As String = DIRFTP + cdp.PathImagen
 
-        Dim fs1 As System.IO.FileStream = Nothing
-        fs1 = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
-        Dim b1(fs1.Length) As Byte
-        fs1.Read(b1, 0, fs1.Length)
-        fs1.Close()
-        Return b1
+
+
+            'verificar q la carta tenga como cliente ese usuario
+            'pero como se qué empresa tiene vinculada ese usuario?
+
+            'agregar al where que aparezca la razon social de este cliente
+            Dim rs As String
+            Try
+                Dim idusuario = Membership.GetUser(usuario).ProviderUserKey
+                rs = UserDatosExtendidosManager.Traer(idusuario, ConexBDLmaster).RazonSocial.ToUpper
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+                Return Nothing
+            End Try
+
+
+            Dim idcliente As Integer = BuscaIdClientePreciso(rs, SC)
+
+            Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numerocarta, 0, 0)
+
+            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente Then
+                Return Nothing
+            End If
+
+
+
+
+
+
+            Dim DIRFTP As String = DirApp & "\DataBackupear\"
+
+            'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
+            'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
+            'Return File.ReadAllText(FullPath)
+
+            Dim FName As String = DIRFTP + cdp.PathImagen
+
+            Dim fs1 As System.IO.FileStream = Nothing
+            fs1 = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
+            Dim b1(fs1.Length) As Byte
+            fs1.Read(b1, 0, fs1.Length)
+            fs1.Close()
+            Return b1
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return Nothing
+        End Try
 
         'usaria la descarga que usa bld en el informe?
 
@@ -17376,3 +17413,40 @@ Public Class LogicaInformesWilliams
 End Class
 
 
+
+Public Class UserDatosExtendidosManager
+    Shared Function Update(ByVal userid As String, ByVal razonsocial As String, cuit As String, ConexBDLmaster As String)
+        Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
+
+
+        Dim ue = (From p In db.UserDatosExtendidos _
+                       Where p.UserId.ToString = userid _
+                       Select p).SingleOrDefault
+
+
+        If IsNothing(ue) Then
+            ue = New UserDatosExtendido
+            ue.UserId = New Guid(userid)
+            ue.RazonSocial = razonsocial
+            ue.CUIT = cuit
+
+            db.UserDatosExtendidos.InsertOnSubmit(ue)
+        Else
+            ue.RazonSocial = razonsocial
+        End If
+
+        db.SubmitChanges()
+    End Function
+
+    Public Shared Function Traer(ByVal UserId As String, ConexBDLmaster As String) As UserDatosExtendido
+
+        Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
+
+        Dim uext = (From p In db.UserDatosExtendidos _
+                       Where p.UserId.ToString = UserId _
+                       Select p).SingleOrDefault
+
+        Return uext
+    End Function
+
+End Class
