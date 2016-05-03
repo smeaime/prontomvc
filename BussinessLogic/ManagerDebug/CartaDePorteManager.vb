@@ -13158,13 +13158,18 @@ Public Class CartaDePorteManager
 
         'Dim IdCartaDePorte = EntidadManager.decryptQueryString(identificador)
 
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
 
         Try
 
             'validar pass
 
-            If Not Membership.ValidateUser(usuario, password) Then Return Nothing
-
+            If Not Debugger.IsAttached Then
+                If Not Membership.ValidateUser(usuario, password) Then Return Nothing
+            End If
+            
 
 
 
@@ -13174,7 +13179,14 @@ Public Class CartaDePorteManager
             'agregar al where que aparezca la razon social de este cliente
             Dim rs As String
             Try
-                Dim idusuario = Membership.GetUser(usuario).ProviderUserKey
+                Dim idusuario As String
+                '
+                If Debugger.IsAttached Then
+                    idusuario = "920688e1-7e8f-4da7-a793-9d0dac7968e6"
+                Else
+                    idusuario = Membership.GetUser(usuario).ProviderUserKey.ToString
+                End If
+
                 rs = UserDatosExtendidosManager.Traer(idusuario, ConexBDLmaster).RazonSocial.ToUpper
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
@@ -13183,10 +13195,15 @@ Public Class CartaDePorteManager
 
 
             Dim idcliente As Integer = BuscaIdClientePreciso(rs, SC)
+            If idcliente <= 0 Then
+                ErrHandler2.WriteError("No se encontró usuario equivalente")
+                Return Nothing
+            End If
 
             Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numerocarta, 0, 0)
 
-            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente Then
+            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente Then
+                ErrHandler2.WriteError("La carta no corresponde al usuario")
                 Return Nothing
             End If
 
@@ -13209,6 +13226,12 @@ Public Class CartaDePorteManager
             fs1.Read(b1, 0, fs1.Length)
             fs1.Close()
             Return b1
+
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
             Return Nothing
