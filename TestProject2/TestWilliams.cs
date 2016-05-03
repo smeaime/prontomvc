@@ -200,6 +200,90 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void FormatoImpresionPlantillaFactura_Leyenda_ELEVACION_20516()
+        {
+
+
+            //explota
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            int IdFactura = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                             where c.Exporta == "SI" && f.IdCliente == 2775
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+
+
+            //var IdFactura = db.Facturas.OrderByDescending(x=>x.IdFactura)
+            //                .Where(x=>x)
+            //                .Where(x=>x.IdCliente==2775).FirstOrDefault().IdFactura;
+
+            // buscar una de exportacion de LDC
+
+
+            var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
+
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+
+            int IdFactura2 = (from c in db.CartasDePortes
+                              from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                              where c.Exporta == "SI" && f.IdCliente != 2775 && f.IdCliente != 10
+                              orderby f.IdFactura descending
+                              select f.IdFactura).FirstOrDefault();
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura2, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
+        }
+
+
+
+        [TestMethod]
+        public void InformeFacturacionBLD_17587()
+        {
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            int IdFactura = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                             where c.Exporta == "SI" && f.IdCliente == 2775
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+
+
+            // var output = CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel(SC, IdFactura, "", ReporteLocal);
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            //System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+        [TestMethod]
         public void NoPonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_20539_extensionde18059()
         {
 
@@ -1377,35 +1461,6 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void InformeFacturacionBLD_17587()
-        {
-
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            // buscar factura de LDC (id2775) y de ACA (id10)
-            int IdFactura = (from c in db.CartasDePortes
-                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
-                             where c.Exporta == "SI" && f.IdCliente == 2775
-                             orderby f.IdFactura descending
-                             select f.IdFactura).FirstOrDefault();
-
-
-
-            // var output = CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel(SC, IdFactura, "", ReporteLocal);
-
-
-
-            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
-            //File.Copy(output,copia, true);
-            //System.Diagnostics.Process.Start(output);
-
-        }
-
-
-
-        [TestMethod]
         public void AlertaMailFertilizante()
         {
 
@@ -2294,6 +2349,9 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
         }
 
+
+
+       
 
 
         [TestMethod]
