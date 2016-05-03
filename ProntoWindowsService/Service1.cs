@@ -187,7 +187,7 @@ namespace ProntoWindowsService
 
             bool bSignaled = false;
 
-            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado;
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado,resultado2;
 
             while (true)
             {
@@ -209,20 +209,13 @@ namespace ProntoWindowsService
 
                     resultado = null;
                     resultado = Tanda(SC1, DirApp1);
-                    if (resultado == null)
-                    {
-                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-                        if (bSignaled == true) break;
-                        System.Threading.Thread.Sleep(1000 * 15);
-                        if (bSignaled == true) break;
-                        System.Threading.Thread.Sleep(1000 * 15);
-                        Console.Write(".");
-                    }
 
 
-                    resultado = null;
-                    resultado = Tanda(SC2, DirApp2);
-                    if (resultado == null)
+                    resultado2 = null;
+                    resultado2 = Tanda(SC2, DirApp2);
+                    
+                    
+                    if (resultado == null && resultado2==null)
                     {
                         bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
                         if (bSignaled == true) break;
@@ -327,7 +320,7 @@ FCESupport\FCESupportImpl.h, 42.
                 try
                 {
                     resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                                   plantilla, 3,
+                                   plantilla,  Convert.ToInt32(ConfigurationManager.AppSettings["CantidadLote"]),
                                     SC, DirApp, true, ref sError);
 
 
