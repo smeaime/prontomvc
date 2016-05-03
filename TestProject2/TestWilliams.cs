@@ -103,7 +103,7 @@ namespace ProntoMVC.Tests
             var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
 
 
-            bdlmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            bdlmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
 
             /*
 
@@ -330,14 +330,17 @@ namespace ProntoMVC.Tests
         {
             // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
 
+
+            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
+
             string archivodestino = "c:\\Source.jpg";
 
             System.IO.FileStream fs1 = null;
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
             byte[] b1 = null;
 
-            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 550166736, SC, DirApp, bdlmasterappconfig);
-
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, bdlmasterappconfig);
+            //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
 
             fs1 = new FileStream(archivodestino, FileMode.Create);
             fs1.Write(b1, 0, b1.Length);
