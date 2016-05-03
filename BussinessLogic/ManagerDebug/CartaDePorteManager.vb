@@ -13167,7 +13167,10 @@ Public Class CartaDePorteManager
             'validar pass
 
             If Not Debugger.IsAttached Then
-                If Not Membership.ValidateUser(usuario, password) Then Return Nothing
+                If Not Membership.ValidateUser(usuario, password) Then
+                    ErrHandler2.WriteError("No logra autenticarse")
+                    Return Nothing
+                End If
             End If
             
 
