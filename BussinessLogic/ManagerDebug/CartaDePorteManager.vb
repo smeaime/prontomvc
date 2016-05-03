@@ -11683,6 +11683,9 @@ Public Class CartaDePorteManager
 
 
 
+
+
+
         Dim oW As Word.Application
         Dim oDoc As Microsoft.Office.Interop.Word.Document
         'Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
@@ -11744,6 +11747,20 @@ Public Class CartaDePorteManager
             oDoc.Close(False)
 
         Catch ex As Exception
+
+
+
+            '        Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=81889. Error Message:System.InvalidCastException
+            'Unable to cast COM object of type 'Microsoft.Office.Interop.Word.ApplicationClass' to interface type 'Microsoft.Office.Interop.Word._Application'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{00020970-0000-0000-C000-000000000046}' failed due to the following error: The RPC server is unavailable. (Exception from HRESULT: 0x800706BA).
+            '   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, Boolean& pfNeedsRelease)
+            '            at Microsoft.Office.Interop.Word.ApplicationClass.get_Documents()
+            '   at CartaDePorteManager.ConvertirEnPDF_y_PonerCodigoDeBarras(String output, String fImagenBarras, Boolean bMostrarPDF) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 11693
+            '            mscorlib()
+
+
+            'http://stackoverflow.com/questions/22340518/unable-to-cast-com-object-of-office-interop-word
+            'http://stackoverflow.com/questions/12957595/error-accessing-com-components
+
             ErrHandler2.WriteError(ex)
         Finally
 
@@ -11941,6 +11958,9 @@ Public Class CartaDePorteManager
             regexReplace2(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
             Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
+
+
+
 
             'regexReplace2(docText, "#Observaciones#", oFac.Observaciones)
             'regexReplace2(docText, "lugarentrega", oFac.LugarEntrega)

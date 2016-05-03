@@ -5141,7 +5141,9 @@ Public Class LogicaFacturacion
 
 
     Public Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        
+        
+
         Try
 
             Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
