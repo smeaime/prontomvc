@@ -103,6 +103,8 @@ namespace ProntoMVC.Tests
             var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
 
 
+            bdlmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+
             /*
 
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
@@ -328,28 +330,17 @@ namespace ProntoMVC.Tests
         {
             // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
 
-            //System.IO.FileStream fs1 = null;
-            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
-            //byte[] b1=null;
-            //b1 = ls1.DownloadFile("C:\\Source.xml");
-            //fs1=new FileStream("D:\\Source.xml", FileMode.Create);
-            //fs1.Write(b1,0,b1.Length);  
-            //fs1.Close();
-            //fs1 = null;
-            //Label1.Text = "File dow";
-
             string archivodestino = "c:\\Source.jpg";
-            //"\CartaDePorteEncriptada.aspx&Id=" & EntidadManager.encryptQueryString(ID).ToString()
 
             System.IO.FileStream fs1 = null;
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
-            byte[] b1=null;
-            
-            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("hgfhgf","hgfg!",550166736, SC, DirApp);
+            byte[] b1 = null;
+
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 550166736, SC, DirApp, bdlmasterappconfig);
 
 
             fs1 = new FileStream(archivodestino, FileMode.Create);
-            fs1.Write(b1,0,b1.Length);  
+            fs1.Write(b1, 0, b1.Length);
             fs1.Close();
             fs1 = null;
 
@@ -467,7 +458,7 @@ namespace ProntoMVC.Tests
             archivoOriginal = @"\Temp\Lote 09abr080248 jheredia PV1\ExportToXLS.xls";
 
             string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
-            nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV")+4);
+            nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4);
 
         }
 
