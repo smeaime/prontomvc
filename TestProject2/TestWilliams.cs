@@ -199,6 +199,31 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_17890()
+        {
+            //tarda 12 min
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado("poner SC", "",
+                 "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, "poner SC", false);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
         [TestMethod]
         public void FormatoImpresionPlantillaFactura_Leyenda_ELEVACION_20516()
         {
@@ -228,6 +253,8 @@ namespace ProntoMVC.Tests
             var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
 
 
+            //LogicaFacturacion.EsDeExportacion(oFac.Id, SC)
+
 
 
             //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
@@ -254,7 +281,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void InformeFacturacionBLD_17587()
         {
-
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -266,15 +293,14 @@ namespace ProntoMVC.Tests
                              orderby f.IdFactura descending
                              select f.IdFactura).FirstOrDefault();
 
-
-
-            // var output = CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel(SC, IdFactura, "", ReporteLocal);
+            string output="";
+            CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
 
 
 
             //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
             //File.Copy(output,copia, true);
-            //System.Diagnostics.Process.Start(output);
+            System.Diagnostics.Process.Start(output);
 
         }
 
@@ -2351,7 +2377,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
 
 
-       
+
 
 
         [TestMethod]
