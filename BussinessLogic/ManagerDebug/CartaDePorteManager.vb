@@ -4912,6 +4912,190 @@ Public Class CartaDePorteManager
 
 
 
+    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+
+
+
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+
+
+
+
+        'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
+        'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
+
+        If System.Diagnostics.Debugger.IsAttached() Then
+            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        Else
+            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        End If
+
+
+
+
+
+
+        Dim wordFiles As New List(Of String)
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        'Dim idorig = _
+        '                 (From c In db.CartasDePortes _
+        '                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+        '                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+        '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+
+
+        For Each c As DataRow In dt.Rows
+            Dim id As Long = c.Item("IdCartaDePorte")
+            Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
+
+
+
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
+            '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
+            '000123456789-cp
+            '000123456789-tk
+            'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
+
+            Dim imagenpathcp = myCartaDePorte.PathImagen
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + Path.GetExtension(imagenpathcp)
+
+            Dim imagenpathtk = myCartaDePorte.PathImagen2
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
+
+
+            If imagenpathcp <> "" Then
+
+                Try
+                    Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
+                    If fcp.Exists Then
+                        fcp.CopyTo(sDirFTP + nombrecp, True)
+                    End If
+                    wordFiles.Add(nombrecp)
+
+                Catch ex As Exception
+                    ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
+                End Try
+            End If
+
+
+
+            If imagenpathtk <> "" Then
+
+                Try
+
+                    Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
+                    If ftk.Exists Then
+                        ftk.CopyTo(sDirFTP + nombretk, True)
+                    End If
+                    wordFiles.Add(nombretk)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
+                End Try
+            End If
+
+
+
+
+
+            If bJuntarCPconTK Then
+                Try
+
+                    If True Then
+                        'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
+
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+
+                        Dim bimp = MergeTwoImages(oImg, oImg2)
+
+
+                        bimp.Save(sDirFTP + nombrecp)
+
+
+                        wordFiles.Remove(nombretk)
+                    Else
+
+
+                        'juntar las imagenes para DOW
+                        'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
+
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+
+                        Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
+                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                            grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
+
+
+                        End Using
+
+                        oImg.Save(sDirFTP + nombrecp)
+
+
+
+                    End If
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+            End If
+
+
+        Next
+
+
+
+
+
+
+        '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
+
+        Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
+        Dim MyFile1 = New FileInfo(output)
+        If MyFile1.Exists Then
+            MyFile1.Delete()
+        End If
+        Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
+        For Each s In wordFiles
+            If s = "" Then Continue For
+            s = sDirFTP + s
+            Dim MyFile2 = New FileInfo(s)
+            If MyFile2.Exists Then
+                Try
+                    zip.AddFile(s, "")
+                Catch ex As Exception
+                    ErrHandler2.WriteError(s)
+                    ErrHandler2.WriteError(ex)
+                End Try
+
+            End If
+
+        Next
+
+        zip.Save()
+
+        Return output
+
+    End Function
+
 
     Shared Function ImagenPDF(SC As String, IdCarta As Long) As String
 
@@ -10005,6 +10189,83 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(ByVal SC As String, ByVal IdFactura As Integer, ByRef ArchivoExcelDestino As String, ByRef ReportViewer2 As ReportViewer) As String
+
+        ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsExcel Idfactura=" & IdFactura)
+
+
+        Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+
+        If ArchivoExcelDestino = "" Then
+            ArchivoExcelDestino = IO.Path.GetTempPath & "AdjuntoDeFactura " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+        End If
+
+        'Dim vFileName As String = "c:\archivo.txt"
+        ' FileOpen(1, ArchivoExcelDestino, OpenMode.Output)
+
+
+
+
+        'Using ReportViewer2 As New ReportViewer
+        With ReportViewer2
+            .ProcessingMode = ProcessingMode.Local
+
+            .Visible = False
+
+            With .LocalReport
+
+                .ReportPath = "ProntoWeb\Informes\Adjuntos de Facturacion para exportar a Excel formato BLD.rdl"
+                '.ReportPath = "C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Informes\Adjuntos de Facturacion para exportar a Excel formato BLD.rdl"
+
+                .EnableHyperlinks = True
+                .DataSources.Clear()
+
+                .EnableExternalImages = True
+
+                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
+                .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+
+            End With
+
+            .DocumentMapCollapsed = True
+
+            '.LocalReport.Refresh()
+            '.DataBind()
+
+            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType, encoding, extension As String
+
+            Dim format = "Excel"
+
+            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
+                       format, Nothing, mimeType, encoding, _
+                         extension, _
+                        streamids, warnings)
+
+            Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
+            fs.Write(bytes, 0, bytes.Length)
+            fs.Close()
+
+
+
+
+
+            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es la mitad de la normal)
+            'Notas de Entrega: 160 ancho x 36 alt
+            'Facturas y Adjuntos: 160 ancho x 78 alto
+
+            'ArchivoExcelDestino = ImpresoraMatrizDePuntosEPSONTexto.ExcelToTextWilliamsAdjunto(ArchivoExcelDestino)
+
+        End With
+        '  End Using
+
+
+        Return ArchivoExcelDestino
+
+    End Function
     Public Shared Function InformeAdjuntoDeFacturacionWilliamsExcel(ByVal SC As String, ByVal IdFactura As Integer, ByRef ArchivoExcelDestino As String, ByRef ReportViewer2 As ReportViewer) As String
 
         ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsExcel Idfactura=" & IdFactura)
@@ -11957,8 +12218,10 @@ Public Class CartaDePorteManager
 
             regexReplace2(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
-            Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
-
+            
+            'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=20516
+            'Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
+            Dim EsElevacionLDC As Boolean = LogicaFacturacion.EsDeExportacion(oFac.Id, SC)
 
 
 
