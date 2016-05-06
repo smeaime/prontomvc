@@ -35,7 +35,6 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports ClaseMigrar.SQLdinamico
 
-Imports System.Drawing
 'Namespace Pronto.ERP.Bll
 
 Imports System.Collections.Generic
@@ -74,6 +73,12 @@ Imports LogicaImportador.FormatosDeExcel
 
 
 Imports BitMiracle
+
+Imports BitMiracle.LibTiff.Classic
+
+
+Imports System.Drawing
+Imports System.Drawing.Imaging
 
 
 
@@ -4758,6 +4763,10 @@ Public Class CartaDePorteManager
 
 
 
+
+
+
+
     Public Shared Function MergeTwoImages(firstImage As System.Drawing.Image, secondImage As System.Drawing.Image) As Bitmap
 
         If (firstImage Is Nothing) Then Throw New ArgumentNullException("firstImage")
@@ -4784,6 +4793,88 @@ Public Class CartaDePorteManager
 
         Return outputImage
     End Function
+
+
+
+    Public Shared Function MergeTwoImages_TiffMultipage(f1 As String, f2 As String, sOutFilePath As String) As Bitmap
+
+
+
+        'http://stackoverflow.com/questions/398388/convert-bitmaps-to-one-multipage-tiff-image-in-net-2-0
+
+        ' Start with the first bitmap by putting it into an Image object
+
+        Dim bitmap As Bitmap = System.Drawing.Image.FromFile(f1)
+        'Save the bitmap to memory as tiff
+
+        Dim byteStream As MemoryStream = New MemoryStream()
+        bitmap.Save(byteStream, ImageFormat.Tiff)
+        'Put Tiff into another Image object
+
+        Dim Tiff As System.Drawing.Image = System.Drawing.Image.FromStream(byteStream)
+
+        'Prepare encoders
+
+        Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
+
+        Dim encoderParams As EncoderParameters = New EncoderParameters(2)
+        Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
+        encoderParams.Param(0) = parameter
+        parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.MultiFrame)
+        encoderParams.Param(1) = parameter
+
+        'Save to file:
+        Tiff.Save(sOutFilePath, encoderInfo, encoderParams)
+
+
+
+
+        Try
+
+            Dim bitmap2 As Bitmap = System.Drawing.Image.FromFile(f2)
+            'Save the bitmap to memory as tiff
+            Dim byteStream2 As MemoryStream = New MemoryStream()
+            bitmap2.Save(byteStream2, ImageFormat.Tiff)
+
+
+            'For subsequent pages, prepare encoders:
+
+            Dim encoderParams2 As EncoderParameters = New EncoderParameters(2)
+            Dim SaveEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.FrameDimensionPage)
+            Dim CompressionEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
+            encoderParams2.Param(0) = CompressionEncodeParam
+            encoderParams2.Param(1) = SaveEncodeParam
+            Tiff.SaveAdd(bitmap2, encoderParams2)
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+
+        End Try
+
+
+        'Finally flush the file:
+        Dim SaveEncodeParam2 As EncoderParameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.Flush)
+        encoderParams = New EncoderParameters(1)
+        encoderParams.Param(0) = SaveEncodeParam2
+        Tiff.SaveAdd(encoderParams)
+
+    End Function
+
+
+    Private Shared Function GetEncoderInfo(ByVal mimeType As String) As ImageCodecInfo
+        Dim j As Integer
+        Dim encoders() As ImageCodecInfo
+        encoders = ImageCodecInfo.GetImageEncoders()
+
+        j = 0
+        While j < encoders.Length
+            If encoders(j).MimeType = mimeType Then
+                Return encoders(j)
+            End If
+            j += 1
+        End While
+        Return Nothing
+
+    End Function 'GetEncoderInfo
 
 
     Shared Function DescargarImagenesAdjuntas_PDF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
@@ -4912,7 +5003,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String) As String
 
 
 
@@ -4933,17 +5024,19 @@ Public Class CartaDePorteManager
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
-        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
 
-        If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
-            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
-            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
-        Else
-            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
-            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
-            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-        End If
+
+        Dim sDIRFTP = DirApp & "\DataBackupear\"
+        'If System.Diagnostics.Debugger.IsAttached() Then
+        '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        'Else
+        '    'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+        '    'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+        '    'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        'End If
 
 
 
@@ -4986,11 +5079,11 @@ Public Class CartaDePorteManager
             If imagenpathcp <> "" Then
 
                 Try
-                    Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
+                    Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
                     If fcp.Exists Then
-                        fcp.CopyTo(sDirFTP + nombrecp, True)
+                        fcp.CopyTo(sDIRFTP + nombrecp, True)
                     End If
-                    wordFiles.Add(nombrecp)
+                    'wordFiles.Add(nombrecp)
 
                 Catch ex As Exception
                     ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
@@ -5003,11 +5096,11 @@ Public Class CartaDePorteManager
 
                 Try
 
-                    Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
+                    Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
                     If ftk.Exists Then
-                        ftk.CopyTo(sDirFTP + nombretk, True)
+                        ftk.CopyTo(sDIRFTP + nombretk, True)
                     End If
-                    wordFiles.Add(nombretk)
+                    'wordFiles.Add(nombretk)
                 Catch ex As Exception
                     ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
                 End Try
@@ -5015,48 +5108,36 @@ Public Class CartaDePorteManager
 
 
 
+            'http://stackoverflow.com/questions/398388/convert-bitmaps-to-one-multipage-tiff-image-in-net-2-0
+
+            Try
+
+                'JuntarImagenesYhacerTiff(sDirFTP + nombretk, sDirFTP + nombrecp, sDirFTP + nombrecp)
 
 
-            If bJuntarCPconTK Then
-                Try
-
-                    If True Then
-                        'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
-
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
-                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
-
-                        Dim bimp = MergeTwoImages(oImg, oImg2)
+                Dim archivo As String = Path.GetFileNameWithoutExtension(nombrecp) + ".tif"
 
 
-                        bimp.Save(sDirFTP + nombrecp)
+                If True Then
+                    'metodo 1
+                    Dim bimp = MergeTwoImages_TiffMultipage(sDIRFTP + nombrecp, sDIRFTP + nombretk, sDIRFTP + archivo)
+
+                Else
+
+                    'metodo 2 
+                    'sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+                    '                          @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                    'SaveAsMultiPageTiff()
+                End If
 
 
-                        wordFiles.Remove(nombretk)
-                    Else
+                wordFiles.Add(archivo)
 
 
-                        'juntar las imagenes para DOW
-                        'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
-
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
-
-                        Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
-                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
-                            grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
-
-
-                        End Using
-
-                        oImg.Save(sDirFTP + nombrecp)
-
-
-
-                    End If
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex)
-                End Try
-            End If
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
 
 
         Next
@@ -5076,7 +5157,7 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDirFTP + s
+            s = sDIRFTP + s
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -5095,6 +5176,19 @@ Public Class CartaDePorteManager
         Return output
 
     End Function
+
+
+
+
+    Public Shared Function JuntarImagenesYhacerTiff(archivo1 As String, archivo2 As String, final As String) As String
+
+        Dim arguments As String() = {archivo1, archivo2, final}
+        TiffCP.Program.Main(arguments)
+
+        Return final
+    End Function
+
+
 
 
     Shared Function ImagenPDF(SC As String, IdCarta As Long) As String
@@ -12218,7 +12312,7 @@ Public Class CartaDePorteManager
 
             regexReplace2(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
-            
+
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=20516
             'Dim EsElevacionLDC As Boolean = (oFac.IdCliente = 2775 And LogicaFacturacion.EsDeExportacion(oFac.Id, SC))
             Dim EsElevacionLDC As Boolean = LogicaFacturacion.EsDeExportacion(oFac.Id, SC)
@@ -13455,7 +13549,7 @@ Public Class CartaDePorteManager
                     Return Nothing
                 End If
             End If
-            
+
 
 
 
