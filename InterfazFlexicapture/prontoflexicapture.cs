@@ -523,9 +523,21 @@ namespace ProntoFlexicapture
             string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
-            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
+            //DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            //FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
+            // IEnumerable<FileInfo> files = d.EnumerateFiles("Export*.xls", SearchOption. .AllDirectories); //Getting Text files
+
+            // levantá solo los nombres de directorios y agregales EXPORTToXLS
+            string[] ld = Directory.GetDirectories(dir);
+
+
+            //  http://stackoverflow.com/questions/7865159/retrieving-files-from-directory-that-contains-large-amount-of-files
+            //http://stackoverflow.com/questions/1199732/directoryinfo-getfiles-slow-when-using-searchoption-alldirectories
+
             // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+
+
 
 
             //foreach (FileInfo file in Files)
@@ -538,12 +550,18 @@ namespace ProntoFlexicapture
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
 
 
-            var q = (from f in files
-                     orderby f.LastWriteTime descending
-                     select f.FullName);
+            List<string> sss = new List<string>();
+            foreach (string Dir in ld)
+            {
+                var dirInfo = new System.IO.DirectoryInfo(Dir);
+                sss.Add(dirInfo.Name + "ExportXLS.xls");
+            }
+            return sss;
 
-
-            return q.ToList();
+            //var q = (from f in files
+            //         orderby f.LastWriteTime descending
+            //         select f.FullName);
+            //     return q.ToList();
 
         }
 
@@ -868,6 +886,8 @@ namespace ProntoFlexicapture
         }
 
 
+
+
         public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
         {
 
@@ -1093,6 +1113,64 @@ namespace ProntoFlexicapture
         }
 
 
+
+        static public void SaveAsMultiPageTiff(string sOutFile, string[] archivos)
+        {
+
+
+            System.Drawing.Imaging.Encoder encoder = System.Drawing.Imaging.Encoder.SaveFlag;
+            ImageCodecInfo encoderInfo = ImageCodecInfo.GetImageEncoders().First(i => i.MimeType == "image/tiff");
+            EncoderParameters encoderParameters = new EncoderParameters(1);
+            encoderParameters.Param[0] = new EncoderParameter(encoder, (long)EncoderValue.MultiFrame);
+
+            Bitmap firstImage = null;
+            try
+            {
+
+                using (MemoryStream ms1 = new MemoryStream())
+                {
+                    using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(archivos[0])))
+                    {
+                        Image.FromStream(ms).Save(ms1, ImageFormat.Tiff);
+                        firstImage = (Bitmap)Image.FromStream(ms1);
+                    }
+                    // Save the first frame of the multi page tiff
+                    firstImage.Save(sOutFile, encoderInfo, encoderParameters); //throws Generic GDI+ error if the memory streams are not open when this is called
+                }
+
+
+                encoderParameters.Param[0] = new EncoderParameter(encoder, (long)EncoderValue.FrameDimensionPage);
+
+                Bitmap imagePage;
+                // Add the remining images to the tiff
+                for (int i = 1; i < archivos.Length; i++)
+                {
+
+                    using (MemoryStream ms1 = new MemoryStream())
+                    {
+                        using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(archivos[i])))
+                        {
+                            Image.FromStream(ms).Save(ms1, ImageFormat.Tiff);
+                            imagePage = (Bitmap)Image.FromStream(ms1);
+                        }
+
+                        firstImage.SaveAdd(imagePage, encoderParameters); //throws Generic GDI+ error if the memory streams are not open when this is called
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                //ensure the errors are not missed while allowing for flush in finally block so files dont get locked up.
+                throw;
+            }
+            finally
+            {
+                // Close out the file
+                encoderParameters.Param[0] = new EncoderParameter(encoder, (long)EncoderValue.Flush);
+                firstImage.SaveAdd(encoderParameters);
+            }
+        }
 
 
 

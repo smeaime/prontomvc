@@ -200,23 +200,42 @@ namespace ProntoMVC.Tests
 
 
 
+
+
         [TestMethod]
         public void DESCARGA_IMAGENES_17890()
         {
-            //tarda 12 min
+
+            //CartaDePorteManager.JuntarImagenesYhacerTiff(@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff"
+            //                                  );
+
+
+            if (false)
+            {
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
+                                              @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                ClassFlexicapture.SaveAsMultiPageTiff(
+                                                     @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff",
+                                                     sss
+                                                     );
+            }
+
 
             string titulo = "";
-            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado("poner SC", "",
-                 "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
+                new DateTime(2016, 4, 10), new DateTime(2016, 5, 30),
                 0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, "poner SC", false);
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp);
             System.Diagnostics.Process.Start(output);
 
         }
@@ -293,7 +312,7 @@ namespace ProntoMVC.Tests
                              orderby f.IdFactura descending
                              select f.IdFactura).FirstOrDefault();
 
-            string output="";
+            string output = "";
             CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
 
 
