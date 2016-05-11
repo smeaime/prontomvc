@@ -554,8 +554,10 @@ namespace ProntoFlexicapture
             foreach (string Dir in ld)
             {
                 var dirInfo = new System.IO.DirectoryInfo(Dir);
-                sss.Add(dirInfo.Name + "ExportXLS.xls");
+                sss.Add(dirInfo.Name );
             }
+
+            ordenar por fecha
             return sss;
 
             //var q = (from f in files
