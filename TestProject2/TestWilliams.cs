@@ -103,6 +103,8 @@ namespace ProntoMVC.Tests
             var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
 
 
+            bdlmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+
             /*
 
             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
@@ -154,7 +156,7 @@ namespace ProntoMVC.Tests
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
             Assert.AreEqual(1, carta.NobleGrado);
@@ -165,7 +167,7 @@ namespace ProntoMVC.Tests
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
             Assert.AreEqual(2, carta.NobleGrado);
@@ -196,12 +198,618 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_17890()
+        {
+
+            //CartaDePorteManager.JuntarImagenesYhacerTiff(@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff"
+            //                                  );
+
+
+            if (false)
+            {
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
+                                              @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                ClassFlexicapture.SaveAsMultiPageTiff(
+                                                     @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff",
+                                                     sss
+                                                     );
+            }
+
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2016, 4, 10), new DateTime(2016, 5, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void FormatoImpresionPlantillaFactura_Leyenda_ELEVACION_20516()
+        {
+
+
+            //explota
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            int IdFactura = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                             where c.Exporta == "SI" && f.IdCliente == 2775
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+
+
+            //var IdFactura = db.Facturas.OrderByDescending(x=>x.IdFactura)
+            //                .Where(x=>x)
+            //                .Where(x=>x.IdCliente==2775).FirstOrDefault().IdFactura;
+
+            // buscar una de exportacion de LDC
+
+
+            var output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, false, SC, DirApp);
+
+
+            //LogicaFacturacion.EsDeExportacion(oFac.Id, SC)
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+
+            int IdFactura2 = (from c in db.CartasDePortes
+                              from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                              where c.Exporta == "SI" && f.IdCliente != 2775 && f.IdCliente != 10
+                              orderby f.IdFactura descending
+                              select f.IdFactura).FirstOrDefault();
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura2, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
+        }
+
+
+
+        [TestMethod]
+        public void InformeFacturacionBLD_17587()
+        {
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            int IdFactura = (from c in db.CartasDePortes
+                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
+                             where c.Exporta == "SI" && f.IdCliente == 2775
+                             orderby f.IdFactura descending
+                             select f.IdFactura).FirstOrDefault();
+
+            string output = "";
+            CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void NoPonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_20539_extensionde18059()
+        {
+
+            // q lo haga solo en los casos especiales
+            //                La cosa quedaría así:
+
+            //Si se duplica una carta de porte y en una copia está el tilde y en otra no:
+
+            //* En la que tiene el tilde -> FacturarAExplicito = Destinatario
+            //* En la que no tiene el tilde -> FacturarAExplicito = Cliente a determinar según los tildes. Si no se puede determinar porque mas de uno cumple con la regla, quedará vacío y a cargar por el cliente
+
+
+            //Casos en los que no llenar el FacturarAExplicito:
+            //* Si está triplicada
+            //* Si está duplicada y ninguna tiene tilde
+
+
+            string ms = "", warn = "";
+
+            // doy un alta
+            Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
+
+            carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
+            //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
+            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
+            carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
+            carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
+            carta.IdArticulo = 22;
+            carta.Destino = 222;
+            carta.Procedencia = 211;
+            carta.Cosecha = "2016/17";
+            carta.FechaArribo = DateTime.Today;
+            carta.PuntoVenta = 1;
+
+            carta.Exporta = false;
+
+            carta.FacturarAManual = true;
+
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+            // duplico la carta
+            Pronto.ERP.BO.CartaDePorte carta2 = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2.Id = -1;
+            carta2.SubnumeroDeFacturacion = CartaDePorteManager.ProximoSubNumeroParaNumeroCartaPorte(SC, carta2);
+            carta2.IdClienteAFacturarle = -1;
+            carta2.Exporta = true;
+
+            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
+
+
+            ////////////////////////////////
+
+            carta = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2 = CartaDePorteManager.GetItem(SC, carta2.Id, true);
+
+
+            ////////////////////////////////
+
+            Assert.AreNotEqual(-1, carta.IdClienteAFacturarle);
+            Assert.AreNotEqual(-1, carta2.IdClienteAFacturarle);
+
+
+
+            // verificar que le creó un duplicado
+
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            //Assert.AreEqual(1, carta.NobleGrado);
+
+            //carta = null;
+            //carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            //carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            //carta.NobleGrado = 3;
+            //CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            //Assert.AreEqual(2, carta.NobleGrado);
+
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void TambienParaFlexicaptureActivar_ImagenesTiffMultipaginaFormatoCPTK_CPTK_CPTK_20503()
+        {
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\3333.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\imagenes\CPTKCPTK.tif";
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false, false, 1);
+
+
+            string sError = "";
+
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+        }
+
+
+
+
+
+        [TestMethod]
+        public void webServiceParaBLDconDescargaDeImagenes_18181()
+        {
+            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
+
+
+            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
+
+            string archivodestino = "c:\\Source.jpg";
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            byte[] b1 = null;
+
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, bdlmasterappconfig);
+            //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
+
+            fs1 = new FileStream(archivodestino, FileMode.Create);
+            fs1.Write(b1, 0, b1.Length);
+            fs1.Close();
+            fs1 = null;
+
+            //cómo sé en qué formato está?
+
+            System.Diagnostics.Process.Start(archivodestino);
+        }
+
+
+
+
+        [TestMethod]
+        public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_20463()
+        {
+
+            // q lo haga solo en los casos especiales
+            //                La cosa quedaría así:
+
+            //Si se duplica una carta de porte y en una copia está el tilde y en otra no:
+
+            //* En la que tiene el tilde -> FacturarAExplicito = Destinatario
+            //* En la que no tiene el tilde -> FacturarAExplicito = Cliente a determinar según los tildes. Si no se puede determinar porque mas de uno cumple con la regla, quedará vacío y a cargar por el cliente
+
+
+            //Casos en los que no llenar el FacturarAExplicito:
+            //* Si está triplicada
+            //* Si está duplicada y ninguna tiene tilde
+
+
+            string ms = "", warn = "";
+
+            // doy un alta
+            Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
+
+            carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
+            //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
+            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
+            carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
+            carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
+            carta.IdArticulo = 22;
+            carta.Destino = 222;
+            carta.Procedencia = 211;
+            carta.Cosecha = "2016/17";
+            carta.FechaArribo = DateTime.Today;
+            carta.PuntoVenta = 1;
+
+            carta.Exporta = false;
+
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+            // duplico la carta
+            Pronto.ERP.BO.CartaDePorte carta2 = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2.Id = -1;
+            carta2.SubnumeroDeFacturacion = CartaDePorteManager.ProximoSubNumeroParaNumeroCartaPorte(SC, carta2);
+            carta2.IdClienteAFacturarle = -1;
+            carta2.Exporta = true;
+
+            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
+
+
+            ////////////////////////////////
+
+            carta = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2 = CartaDePorteManager.GetItem(SC, carta2.Id, true);
+
+
+            ////////////////////////////////
+
+            Assert.AreNotEqual(-1, carta.IdClienteAFacturarle);
+            Assert.AreNotEqual(-1, carta2.IdClienteAFacturarle);
+
+
+
+            // verificar que le creó un duplicado
+
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            //Assert.AreEqual(1, carta.NobleGrado);
+
+            //carta = null;
+            //carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            //carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            //carta.NobleGrado = 3;
+            //CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala");
+
+            //Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            //Assert.AreEqual(2, carta.NobleGrado);
+
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void cadenaenProcesaCarta()
+        {
+            string archivoOriginal;
+            archivoOriginal = @"\Temp\Lote 14abr073732 EGUIDI PV1\ExportToXLS.xls";
+            archivoOriginal = @"\Temp\Lote 14abr073732 EGUIDI PV1\ExportToXLS.xls";
+            archivoOriginal = @"\Temp\Lote 14abr114641 fvelazquez PV4\ExportToXLS.xls";
+            archivoOriginal = @"\Temp\Lote 14abr113424 fvelazquez PV4\ExportToXLS.xls";
+            archivoOriginal = @"\Temp\Lote 12abr170609 cgoycochea PV4\ExportToXLS.xls";
+            archivoOriginal = @"\Temp\Lote 13abr160652 jheredia PV1\ExportToXLS.xls";
+            archivoOriginal = @"\Temp\Lote 13abr083243 EGUIDI PV1\ExportToXLS.xls";
+            archivoOriginal = @"\Temp\Lote 09abr080248 jheredia PV1\ExportToXLS.xls";
+
+            string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
+            nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4);
+
+        }
+
+
+
+        [TestMethod]
+        public void InformeSincroDeNidera_20523_2()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Nidera", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 5),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+        [TestMethod]
+        public void InformeSincroDeNidera_20523()
+        {
+
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+            DemoProntoEntities db2 = null;
+
+            if (false)
+            {
+
+                // probar el webservice tambien
+                var q2 = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2013, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas").ToList();
+
+
+
+                var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2013, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+            }
+
+
+
+            string output;
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+            if (false)
+            {
+                ReportParameter[] yourParams = new ReportParameter[8];
+                yourParams[0] = new ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx");
+                yourParams[1] = new ReportParameter("sServidor", "");
+                yourParams[2] = new ReportParameter("idArticulo", "-1");
+                yourParams[3] = new ReportParameter("idDestino", "-1");
+                yourParams[4] = new ReportParameter("desde", new DateTime(2012, 11, 1).ToString());
+                yourParams[5] = new ReportParameter("hasta", new DateTime(2012, 11, 1).ToString());
+                yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+                yourParams[7] = new ReportParameter("Consulta", "");
+
+
+                //var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                //        "Williams - Nidera con Webservice.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+                output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                            "Williams - Nidera con Webservice sin parametros.rdl", yourParams, ref ArchivoExcelDestino, false);
+            }
+
+            else
+            {
+
+
+                string strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                               "", "", "", 1, 20, CartaDePorteManager.enumCDPestado.Todas,
+                               "", -1, -1,
+                               -1, -1,
+                               -1, -1, -1, -1,
+                               CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2013, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas");
+
+
+                ReportParameter[] yourParams = new ReportParameter[9];
+                yourParams[0] = new ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx");
+                yourParams[1] = new ReportParameter("sServidor", ConfigurationManager.AppSettings["UrlDominio"]);
+                yourParams[2] = new ReportParameter("idArticulo", "-1");
+                yourParams[3] = new ReportParameter("idDestino", "-1");
+                yourParams[4] = new ReportParameter("desde", new DateTime(2012, 11, 1).ToString());
+                yourParams[5] = new ReportParameter("hasta", new DateTime(2012, 11, 1).ToString());
+                yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+                yourParams[7] = new ReportParameter("Consulta", strSQL);
+                yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+
+                output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                            "Williams - Nidera con SQL.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+
+            }
+
+            try
+            {
+                //rep.Dispose();
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+            System.Diagnostics.Process.Start(output);
+
+
+            //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErrores, bVistaPrevia);
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+        }
+
+
+
+
+        [TestMethod]
+        public void SincroCGG_20470()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("CGG", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+        [TestMethod]
+        public void bldClienteUsuarioExterno_20348()
+        {
+            //escribir 
+            //Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "")
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            ProntoMVC.Data.Models.Parametros2 param = (from c in db.Parametros2 where c.Campo == "EsClienteBLDcorredor2" select c).FirstOrDefault();
+            if (param == null)
+            {
+                param = new ProntoMVC.Data.Models.Parametros2();
+                param.Campo = "EsClienteBLDcorredor2";
+                param.Valor = "BLDPIRULO";
+                db.Parametros2.Add(param);
+            }
+            else
+            {
+                param.Valor = "BLDPIRULO";
+            }
+            db.SaveChanges();
+
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLDPIRULO", SC);
+            var q2 = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD_ALABERN", SC);
+            Assert.AreNotEqual(q.Count, q2.Count);
+        }
+
+
+
+
+
+
         [TestMethod]
         public void ModicarCartaConIdApartirDelExcelDelFlexicapture_18266()
         {
 
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\Copia de PRUEBA SISTEMA2.xls";
-
+            // string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\Copia de PRUEBA SISTEMA2.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Downloads\prueba3.xls";
+            string archivoExcel = @"C:\Users\Administrador\Downloads\ExportToXLS (97).xls";
 
             int m_IdMaestro = 0;
 
@@ -215,17 +823,33 @@ namespace ProntoMVC.Tests
             string sb = "";
             foreach (System.Data.DataRow r in dt.Rows)
             {
-                var dr = r;
-                string c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
-                                                        null, null, null, null,
-                                                        null, null);
+                try
+                {
 
-                sb += c + "\n";
+
+                    var dr = r;
+                    string c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                            null, null, null, null,
+                                                            null, null);
+
+                    sb += c + "\n";
+                }
+                catch (Exception x)
+                {
+                    sb += x.ToString() + "\n";
+
+                }
+
             }
 
         }
 
 
+        [TestMethod]
+        public void Log()
+        {
+            ClassFlexicapture.Log("safasdfsf");
+        }
 
         [TestMethod]
         public void EquivalenciasOCR_18223()
@@ -234,6 +858,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
             zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\Lote 21mar101631 prueba1 PV1\prueba sistema.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\New folder\prueba.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -325,14 +950,29 @@ namespace ProntoMVC.Tests
         public void PonerAutomaticamenteAquienSeFacturaAlaOriginalEnLasDuplicacionesConExportador_18059()
         {
 
+            // q lo haga solo en los casos especiales
+            //                La cosa quedaría así:
 
+            //Si se duplica una carta de porte y en una copia está el tilde y en otra no:
+
+            //* En la que tiene el tilde -> FacturarAExplicito = Destinatario
+            //* En la que no tiene el tilde -> FacturarAExplicito = Cliente a determinar según los tildes. Si no se puede determinar porque mas de uno cumple con la regla, quedará vacío y a cargar por el cliente
+
+
+            //Casos en los que no llenar el FacturarAExplicito:
+            //* Si está triplicada
+            //* Si está duplicada y ninguna tiene tilde
 
 
             string ms = "", warn = "";
-            var carta = new Pronto.ERP.BO.CartaDePorte();
+
+            // doy un alta
+            Pronto.ERP.BO.CartaDePorte carta = new Pronto.ERP.BO.CartaDePorte();
 
             carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
-            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
+            carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
+            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
             carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
             carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
             carta.IdArticulo = 22;
@@ -342,8 +982,36 @@ namespace ProntoMVC.Tests
             carta.FechaArribo = DateTime.Today;
             carta.PuntoVenta = 1;
 
+            carta.Exporta = false;
+
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+            // duplico la carta
+            Pronto.ERP.BO.CartaDePorte carta2 = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2.Id = -1;
+            carta2.SubnumeroDeFacturacion = CartaDePorteManager.ProximoSubNumeroParaNumeroCartaPorte(SC, carta2);
+            carta2.IdClienteAFacturarle = -1;
+            carta2.Exporta = true;
+
+            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
+
+
+            ////////////////////////////////
+
+            carta = CartaDePorteManager.GetItem(SC, carta.Id, true);
+            carta2 = CartaDePorteManager.GetItem(SC, carta2.Id, true);
+
+
+            ////////////////////////////////
+
+            Assert.AreNotEqual(-1, carta.IdClienteAFacturarle);
+            Assert.AreNotEqual(-1, carta2.IdClienteAFacturarle);
+
+
 
             // verificar que le creó un duplicado
 
@@ -838,35 +1506,6 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void InformeFacturacionBLD_17587()
-        {
-
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            // buscar factura de LDC (id2775) y de ACA (id10)
-            int IdFactura = (from c in db.CartasDePortes
-                             from f in db.Facturas.Where(x => c.IdFacturaImputada == x.IdFactura).DefaultIfEmpty()
-                             where c.Exporta == "SI" && f.IdCliente == 2775
-                             orderby f.IdFactura descending
-                             select f.IdFactura).FirstOrDefault();
-
-
-
-            // var output = CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel(SC, IdFactura, "", ReporteLocal);
-
-
-
-            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
-            //File.Copy(output,copia, true);
-            //System.Diagnostics.Process.Start(output);
-
-        }
-
-
-
-        [TestMethod]
         public void AlertaMailFertilizante()
         {
 
@@ -939,6 +1578,7 @@ namespace ProntoMVC.Tests
 
             //explota
 
+            string ms = "";
 
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\prontoweb\Documentos\pegatinas\30488_Posi19.txt";
             int m_IdMaestro = 0;
@@ -949,7 +1589,7 @@ namespace ProntoMVC.Tests
             carta = null;
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
 
 
@@ -977,7 +1617,7 @@ namespace ProntoMVC.Tests
             carta = null;
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
         }
 
@@ -1093,7 +1733,7 @@ Nombre de acondicionador: listado de clientes de Williams
 
             bool esvalido = CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
             Assert.AreEqual(true, esvalido);
-            int id = CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            int id = CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreNotEqual(-1, id);
 
 
@@ -1230,7 +1870,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
             Assert.AreEqual(1, carta.NobleGrado);
@@ -1241,7 +1881,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
             CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
-            CartaDePorteManager.Save(SC, carta, 1, "lalala");
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
             Assert.AreEqual(2, carta.NobleGrado);
@@ -1455,26 +2095,11 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
         }
 
 
-        [TestMethod]
-        public void ZipdePDFsReducidos()
-        {
-            //tarda 12 min
-
-            string titulo = "";
-            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
-                 "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
-                0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, SC, false);
-            System.Diagnostics.Process.Start(output);
 
-        }
+
+
 
         [TestMethod]
         public void PDFdeCartaPorte()
@@ -1768,6 +2393,9 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
             ClassFlexicapture.ActivarMotor(SC, lista, ref sError, DirApp, "SI");
         }
+
+
+
 
 
 
@@ -2083,5 +2711,36 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
     //End Function
 
 
+
+    [TestClass]
+    public class TestsWilliamsLentos
+    {
+
+
+
+
+        [TestMethod]
+        public void ZipdePDFsReducidos()
+        {
+            //tarda 12 min
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado("poner SC", "",
+                 "", "", 0, 100, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2015, 12, 30), new DateTime(2015, 12, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+    }
 
 }

@@ -4,9 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Está seguro de querer eliminar este empleado?</h3>
 <fieldset>
     <legend>Empleado</legend>
 
@@ -32,7 +32,7 @@
 
     <div class="display-label">Sector</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Sector.Descripcion)
+        @Html.DisplayFor(model => model.Sectore.Descripcion)
     </div>
 
     <div class="display-label">IdCargo</div>
@@ -182,7 +182,7 @@
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
-        <input type="submit" value="Delete" /> |
+        <input type="submit" value="Delete" title="Eliminar" /> |
         @Html.ActionLink("Volver al listado", "Index")
     </p>
 }

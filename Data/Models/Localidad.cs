@@ -24,6 +24,9 @@ namespace ProntoMVC.Data.Models
             this.FertilizantesCupos = new HashSet<FertilizantesCupos>();
             this.FertilizantesCupos1 = new HashSet<FertilizantesCupos>();
             this.WilliamsDestinos = new HashSet<WilliamsDestino>();
+            this.WilliamsDestinos1 = new HashSet<WilliamsDestino>();
+            this.WilliamsDestinos11 = new HashSet<WilliamsDestino>();
+            this.WilliamsDestinos2 = new HashSet<WilliamsDestino>();
         }
     
         public int IdLocalidad { get; set; }
@@ -39,6 +42,7 @@ namespace ProntoMVC.Data.Models
         public string Partido { get; set; }
         public string CodigoONCAA { get; set; }
         public Nullable<int> CodigoAfip { get; set; }
+        public string CodigoCGG { get; set; }
     
         public virtual ICollection<Cliente> Clientes { get; set; }
         public virtual ICollection<Cliente> Clientes1 { get; set; }
@@ -50,5 +54,8 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<FertilizantesCupos> FertilizantesCupos1 { get; set; }
         public virtual ICollection<WilliamsDestino> WilliamsDestinos { get; set; }
         public virtual Partido Partido1 { get; set; }
+        public virtual ICollection<WilliamsDestino> WilliamsDestinos1 { get; set; }
+        public virtual ICollection<WilliamsDestino> WilliamsDestinos11 { get; set; }
+        public virtual ICollection<WilliamsDestino> WilliamsDestinos2 { get; set; }
     }
 }
