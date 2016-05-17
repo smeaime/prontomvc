@@ -1445,6 +1445,7 @@ namespace ProntoMVC.Controllers
             string mArchivoXMLRecibido = "";
             string mArchivoXMLEnviado2 = "";
             string mArchivoXMLRecibido2 = "";
+            string glbArchivoCertificadoPassWord = "";
 
             Int32 mIdPuntoVenta = 0;
             Int32 mPuntoVenta = 0;
@@ -1480,6 +1481,8 @@ namespace ProntoMVC.Controllers
             mIdMonedaPesos = parametros.IdMoneda ?? 0;
             mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
             mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+
+            glbArchivoCertificadoPassWord = BuscarClaveINI("ArchivoCertificadoPassWord", -1);
 
             var Parametros2 = db.Parametros2.Where(p => p.Campo == "DebugFacturaElectronica").FirstOrDefault();
             if (Parametros2 != null) { if ((Parametros2.Valor ?? "") == "SI") { glbDebugFacturaElectronica = true; } }
@@ -1539,10 +1542,25 @@ namespace ProntoMVC.Controllers
 
             if (mWebService == "WSFE1" && (mTipoABC == "A" || mTipoABC == "B"))
             {
-                mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
-                if (glbDebugFacturaElectronica) { Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
+                if (!System.IO.File.Exists(glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic"))
+                {
+                    mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
+                    if (glbDebugFacturaElectronica)
+                    {
+                        Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                    }
+                    if (!mResul)
+                    {
+                        ErrHandler.WriteError("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                    }
+                }
 
                 mResul = FE.iniciar(WSAFIPFE.Factura.modoFiscal.Fiscal, mCuitEmpresa, glbPathPlantillas + "\\" + mArchivoAFIP + ".pfx", glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic");
+
+                if (glbArchivoCertificadoPassWord.Length > 0)
+                {
+                    FE.ArchivoCertificadoPassword = glbArchivoCertificadoPassWord;
+                }
 
                 if (mResul) mResul = FE.f1ObtenerTicketAcceso();
                 if (glbDebugFacturaElectronica) { Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
