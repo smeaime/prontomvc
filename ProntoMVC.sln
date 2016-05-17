@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Arc
 		..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql = ..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql
 		Novedades\Nuevos_SP.sql = Novedades\Nuevos_SP.sql
 		..\ProntoWeb\App_Code\vbcode\ManagerDebug\SincronismosWilliamsManager.vb = ..\ProntoWeb\App_Code\vbcode\ManagerDebug\SincronismosWilliamsManager.vb
+		..\prontoweb\Documentos\dev\superbuscador williams.sql = ..\prontoweb\Documentos\dev\superbuscador williams.sql
 		..\ProntoWeb\Documentos\dev\superbuscador.sql = ..\ProntoWeb\Documentos\dev\superbuscador.sql
 		..\prontoweb\Documentos\dev\wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql = ..\prontoweb\Documentos\dev\wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql
 		..\ProntoWeb\web.config = ..\ProntoWeb\web.config

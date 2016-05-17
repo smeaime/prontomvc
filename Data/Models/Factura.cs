@@ -149,6 +149,7 @@ namespace ProntoMVC.Data.Models
         public string BienesOServicios { get; set; }
         public Nullable<System.DateTime> FechaInicioServicio { get; set; }
         public Nullable<System.DateTime> FechaFinServicio { get; set; }
+        public Nullable<int> IdLiquidacionFlete { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }

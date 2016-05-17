@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Drawing.Imaging;
 
+using System.ServiceProcess;
+
 using FCEngine;
 
 using System.Collections.Generic;
@@ -165,7 +167,7 @@ namespace ProntoFlexicapture
 
 
 
-
+            bool conTK = imagenes[0].Contains("_unido");
 
 
             //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
@@ -218,11 +220,22 @@ namespace ProntoFlexicapture
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
 
+
+                //ojo , porque incrementas el count de archivosimagenes, pero un archivo puede tener 2 paginas con cp+tk
+                // ademas, el GrabarImagen (en el importador2) solo esta recibiendo el tiff de pagina simple exportado por el flexicapture.
+                // el primer tema lo resolvería haciendo un +2 en lugar de ++
+                // y el segundo tema... ¿no puedo pasar como parametro el nombre original del archivo?
+
+
+
+
                 IDocument document;
 
                 //trace("Recognize next document...");
                 try
                 {
+
+                    if (conTK && count > 0) processor.RecognizeNextDocument(); // saltar la pagina con el tiket, y así pasar al siguiente archivo
 
                     document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
@@ -323,6 +336,38 @@ namespace ProntoFlexicapture
                         //explota aca con la carta invalida
                         ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString());
 
+
+
+                        if (conTK)
+                        {
+                            string archivoOriginal = imagenes[count];
+
+                            string nombrenuevo = rnd.Next(1, 99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(archivoOriginal);
+
+                            nombrenuevo = CartaDePorteManager.CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp);
+
+
+                            string DIRFTP = DirApp + @"\DataBackupear\";
+                            string destino = DIRFTP + nombrenuevo;
+
+
+                            try
+                            {
+                                FileInfo MyFile1 = new FileInfo(destino);
+                                if (MyFile1.Exists) MyFile1.Delete();
+
+                                File.Copy(archivoOriginal, destino);
+                            }
+                            catch (Exception x)
+                            {
+                                ErrHandler2.WriteError(x);
+                            }
+
+
+                            var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true);
+                        }
+
+
                     }
                     catch (Exception x)
                     {
@@ -353,8 +398,9 @@ namespace ProntoFlexicapture
 
 
 
-
                 count++;
+
+
             }
             //traceEnd("OK");
 
@@ -362,7 +408,7 @@ namespace ProntoFlexicapture
             //assert(count == 4);bul
 
 
-
+            //esta bien esto?
             processor.ResetProcessing();
 
             return r;
@@ -477,9 +523,21 @@ namespace ProntoFlexicapture
             string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
-            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
+            //DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            //FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
+            // IEnumerable<FileInfo> files = d.EnumerateFiles("Export*.xls", SearchOption. .AllDirectories); //Getting Text files
+
+            // levantá solo los nombres de directorios y agregales EXPORTToXLS
+            string[] ld = Directory.GetDirectories(dir);
+
+
+            //  http://stackoverflow.com/questions/7865159/retrieving-files-from-directory-that-contains-large-amount-of-files
+            //http://stackoverflow.com/questions/1199732/directoryinfo-getfiles-slow-when-using-searchoption-alldirectories
+
             // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+
+
 
 
             //foreach (FileInfo file in Files)
@@ -492,12 +550,21 @@ namespace ProntoFlexicapture
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
 
 
-            var q = (from f in files
-                     orderby f.LastWriteTime descending
-                     select f.FullName);
+            List<string> sss = new List<string>();
+            foreach (string Dir in ld)
+            {
+                var dirInfo = new System.IO.DirectoryInfo(Dir);
+                sss.Add(dirInfo.Name );
+            }
 
+            //  TO DO ordenar por fecha
 
-            return q.ToList();
+            return sss;
+
+            //var q = (from f in files
+            //         orderby f.LastWriteTime descending
+            //         select f.FullName);
+            //     return q.ToList();
 
         }
 
@@ -548,8 +615,10 @@ namespace ProntoFlexicapture
 
             // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
 
+            // tenes usar el creationtime para las que fueron extraidas del zip
+
             var q = (from f in files
-                     where (f.LastWriteTime > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
+                     where ((f.LastWriteTime > f.CreationTime ? f.LastWriteTime : f.CreationTime) > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
                             && (EsArchivoDeImagen(f.Name)
                             && !f.FullName.Contains("_IMPORT1")
                             && !files.Any(x => x.FullName == (f.FullName + ".bdl"))
@@ -820,6 +889,8 @@ namespace ProntoFlexicapture
         }
 
 
+
+
         public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
         {
 
@@ -1046,6 +1117,93 @@ namespace ProntoFlexicapture
 
 
 
+        static public void SaveAsMultiPageTiff(string sOutFile, string[] archivos)
+        {
+
+
+            System.Drawing.Imaging.Encoder encoder = System.Drawing.Imaging.Encoder.SaveFlag;
+            ImageCodecInfo encoderInfo = ImageCodecInfo.GetImageEncoders().First(i => i.MimeType == "image/tiff");
+            EncoderParameters encoderParameters = new EncoderParameters(1);
+            encoderParameters.Param[0] = new EncoderParameter(encoder, (long)EncoderValue.MultiFrame);
+
+            Bitmap firstImage = null;
+            try
+            {
+
+                using (MemoryStream ms1 = new MemoryStream())
+                {
+                    using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(archivos[0])))
+                    {
+                        Image.FromStream(ms).Save(ms1, ImageFormat.Tiff);
+                        firstImage = (Bitmap)Image.FromStream(ms1);
+                    }
+                    // Save the first frame of the multi page tiff
+                    firstImage.Save(sOutFile, encoderInfo, encoderParameters); //throws Generic GDI+ error if the memory streams are not open when this is called
+                }
+
+
+                encoderParameters.Param[0] = new EncoderParameter(encoder, (long)EncoderValue.FrameDimensionPage);
+
+                Bitmap imagePage;
+                // Add the remining images to the tiff
+                for (int i = 1; i < archivos.Length; i++)
+                {
+
+                    using (MemoryStream ms1 = new MemoryStream())
+                    {
+                        using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(archivos[i])))
+                        {
+                            Image.FromStream(ms).Save(ms1, ImageFormat.Tiff);
+                            imagePage = (Bitmap)Image.FromStream(ms1);
+                        }
+
+                        firstImage.SaveAdd(imagePage, encoderParameters); //throws Generic GDI+ error if the memory streams are not open when this is called
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                //ensure the errors are not missed while allowing for flush in finally block so files dont get locked up.
+                throw;
+            }
+            finally
+            {
+                // Close out the file
+                encoderParameters.Param[0] = new EncoderParameter(encoder, (long)EncoderValue.Flush);
+                firstImage.SaveAdd(encoderParameters);
+            }
+        }
+
+
+
+        public static string EstadoServicio()
+        {
+            string SERVICENAME = "ProntoAgente";
+
+            ServiceController sc = new ServiceController(SERVICENAME);
+
+            switch (sc.Status)
+            {
+                case ServiceControllerStatus.Running:
+                    return "Running";
+                case ServiceControllerStatus.Stopped:
+                    return "Stopped";
+                case ServiceControllerStatus.Paused:
+                    return "Paused";
+                case ServiceControllerStatus.StopPending:
+                    return "Stopping";
+                case ServiceControllerStatus.StartPending:
+                    return "Starting";
+                default:
+                    return "Status Changing";
+            }
+
+
+        }
+
+
+
         static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
         {
 
@@ -1219,8 +1377,7 @@ namespace ProntoFlexicapture
                 int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
 
                 string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
-                nombreusuario = nombreusuario.Substring(0, nombreusuario.Length - nombreusuario.IndexOf(" PV"));
-
+                nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4);
 
 
 
@@ -1387,7 +1544,8 @@ namespace ProntoFlexicapture
                 var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
-                    id = CartaDePorteManager.Save(SC, cdp, 0, "");
+                    string err = "";
+                    id = CartaDePorteManager.Save(SC, cdp, 0, "", true, ref err);
                     if (numeroCarta > numprefijo)
                     {
                         cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
@@ -1754,9 +1912,11 @@ namespace ProntoFlexicapture
         public static void Log(string s)
         {
 
-            using (EventLog eventLog = new EventLog("ProntoAgente"))
+            //string nombre = "ProntoAgente";  // para usar un nombre especifico creo que tenes que declarar un eventsource o permisos administrativos
+            string nombre = "Application";
+            using (EventLog eventLog = new EventLog(nombre))
             {
-                eventLog.Source = "ProntoAgente";
+                eventLog.Source = nombre;
                 eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
             }
         }
