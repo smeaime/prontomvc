@@ -112,8 +112,18 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult DeleteConfirmed(int id)
         {
             Empleado empleado = db.Empleados.Find(id);
-            db.Empleados.Remove(empleado);
-            db.SaveChanges();
+            try
+            {
+                db.Empleados.Remove(empleado);
+                //db.DetalleEmpleadosIngresosEgresos.Remove
+                db.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                // salta fk en DetalleEmpleado. por que no aparece esa tabla en el modelo???? -Está renombrada como "DetalleEmpleadosIngresoEgreso"
+                throw;
+            }
             return RedirectToAction("Index");
         }
 

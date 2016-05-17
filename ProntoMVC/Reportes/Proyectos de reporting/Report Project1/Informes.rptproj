@@ -259,6 +259,10 @@
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto 2 .rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto 2 .rdl</FullPath>
     </ProjectItem>
@@ -375,6 +379,22 @@
       <FullPath>Seguimiento Compras.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Sincronismo BLD demorados.rdl</Name>
+      <FullPath>Sincronismo BLD demorados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo BLD.rdl</Name>
+      <FullPath>Sincronismo BLD.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo DOW2.rdl</Name>
+      <FullPath>Sincronismo DOW2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo YPF.rdl</Name>
+      <FullPath>Sincronismo YPF.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Stock a fecha.rdl</Name>
       <FullPath>Stock a fecha.rdl</FullPath>
     </ProjectItem>
@@ -403,24 +423,16 @@
       <FullPath>Williams - Listado de Clientes incompletos.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Sincronismo BLD.rdl</Name>
-      <FullPath>Sincronismo BLD.rdl</FullPath>
+      <Name>Williams - Nidera con Webservice sin parametros.rdl</Name>
+      <FullPath>Williams - Nidera con Webservice sin parametros.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</FullPath>
+      <Name>Williams - Nidera con Webservice.rdl</Name>
+      <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Sincronismo BLD demorados.rdl</Name>
-      <FullPath>Sincronismo BLD demorados.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Sincronismo DOW2.rdl</Name>
-      <FullPath>Sincronismo DOW2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Sincronismo YPF.rdl</Name>
-      <FullPath>Sincronismo YPF.rdl</FullPath>
+      <Name>Williams - Nidera con SQL.rdl</Name>
+      <FullPath>Williams - Nidera con SQL.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

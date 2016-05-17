@@ -80,8 +80,10 @@ substring(cabfac.NumeroExpedienteCertificacionObra,4,1) as AgrupacionUsada,
 
 
 	 isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS
-			as Establecimiento
+			as Establecimiento,
 
+
+			isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT
 
 
 from facturas CABFAC

@@ -77,6 +77,9 @@ namespace ProntoMVC.Data.Models
         public string Cliente { get; set; }
         public string OrigenRegistro { get; set; }
         public string CuitClienteExterno { get; set; }
+        public Nullable<decimal> OtrasPercepciones3 { get; set; }
+        public string OtrasPercepciones3Desc { get; set; }
+        public Nullable<decimal> AjusteIva { get; set; }
     
         public virtual ICollection<DetalleDevolucione> DetalleDevoluciones { get; set; }
     }

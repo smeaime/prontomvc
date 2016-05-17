@@ -418,6 +418,12 @@ Public Module SQLdinamico
 
 
     Function BuscaIdTransportistaPreciso(ByVal RazonSocial As String, ByVal SC As String) As Integer
+
+        'Usually, string comparisons are case-insensitive. If your database is configured to 
+        'case sensitive collation, you need to force to use a case insensitive one:
+        'SELECT balance FROM people WHERE email = 'billg@microsoft.com'  COLLATE SQL_Latin1_General_CP1_CI_AS
+
+
         If RazonSocial = "" Then Return -1
         Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdTransportista FROM Transportistas WHERE RazonSocial='" & RazonSocial & "'")
 
@@ -499,7 +505,7 @@ Public Module SQLdinamico
 
     End Function
     'Function BuscaIdWilliamsDestino(ByVal Destino As String, ByVal SC As String) As Integer
-    '    Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='" & Destino & "'")
+    '    Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Desqipcion='" & Destino & "'")
 
     '    If ds.Rows.Count < 1 Then Return -1
 

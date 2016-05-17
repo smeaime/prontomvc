@@ -299,7 +299,7 @@ drop index IDX_Cartasdeporte_Superbuscador on cartasdeporte
 
 CREATE UNIQUE INDEX IDX_Cartasdeporte_Superbuscador
 ON CartasDePorte (NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon,SubnumeroDeFacturacion,FechaArribo,FechaIngreso,FechaAnulacion)
---eso taambien tiene que incluir el fechaanulacion
+--eso taamten tiene que incluir el fechaanulacion
 GO
 
 
@@ -1721,6 +1721,42 @@ go
 
 
 
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	IdCartasDePorteMailClusters
+
+ALTER TABLE ExcelImportador add  BrutoProc   varchar(100) NULL
+ALTER TABLE ExcelImportador add  TaraProc    varchar(100) NULL
+ALTER TABLE ExcelImportador add  Auxiliar6   varchar(100) NULL
+ALTER TABLE ExcelImportador add  Auxiliar7   varchar(100) NULL
+ALTER TABLE ExcelImportador add  Auxiliar8   varchar(100) NULL 
+ALTER TABLE ExcelImportador add  Auxiliar9   varchar(100) NULL
+
+
+
+
+ALTER TABLE Localidades add  CodigoCGG   varchar(10) NULL
+
+
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+alter table CartasDePorte add
+	FacturarA_Manual bit  NOT NULL  default(0)
+go
+
+
+sp_help WilliamsDestinos
+go
+
+alter table WilliamsDestinos add
+	IdLocalidad2 int null references Localidades(IdLocalidad),
+	IdLocalidad3 int null references Localidades(IdLocalidad),
+	IdLocalidad4 int null references Localidades(IdLocalidad)
+go
+
+
+
 
