@@ -894,44 +894,30 @@ namespace ProntoMVC.Controllers
 
 
         public virtual ActionResult Requerimientos_DynamicGridData
-            (string sidx, string sord, int page, int rows, bool _search, string filters,
-string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
+                (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)   
         {
             /*
-
             var aada =( db.Requerimientos
                     .Include("DetalleRequerimientos.DetallePedidos") // funciona tambien
                     .Include("DetalleRequerimientos.DetallePresupuestos") // funciona tambien
                     .Include("DetalleRequerimientos.DetallePresupuestos,DetalleRequerimientos.DetallePedidos") // funciona tambien
                     .Take(10) ).ToList();
-
             */
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            int totalRecords = 0;
-
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Requerimiento>
-                                ("DetalleRequerimientos.DetallePedidos",
-                                sidx, sord, page, rows, _search, filters, db, ref totalRecords,
-                                 "DetalleRequerimientos.DetallePresupuestos");
-            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
-            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             string campo = "true";
             int pageSize = rows;
             int currentPage = page;
-
-
             int totalPages = 0;
+            int totalRecords = 0;
 
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Requerimiento>
+                                ("DetalleRequerimientos.DetallePedidos", sidx, sord, page, rows, _search, filters, db, ref totalRecords, "DetalleRequerimientos.DetallePresupuestos");
+            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
+            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (false)
             {
@@ -939,8 +925,6 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                 var qq = (from rm in l2sqlPronto.Requerimientos
                           select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
                           ).Take(100).ToList();
-
-
             }
 
             var Req = pagedQuery
@@ -949,22 +933,15 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                 //.Include(x => x.AproboRequerimiento)
                 //.Include(x => x.Sectores)
                 //.Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
-
-
-
-           //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
                 //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
                 // .Include(x => x.Aprobo)
                           .AsQueryable();
-
-
-
 
             try
             {
 
                 var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
-
                 //totalRecords = Req1.Count();
                 totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             }
@@ -1028,10 +1005,9 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
 
 
             var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord)
-                           //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList()
-                       select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
-
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList()
+                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 
             var jsonData = new jqGridJson()
             {
@@ -1059,11 +1035,6 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
 
                                 //  string.Join(" ",  a.DetalleRequerimientos.Select(x=> (x.DetallePresupuestos.Select(y=> y.IdPresupuesto))  )),
                                 // string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePresupuestos   ==null) ? "" : x.DetallePresupuestos.Select(z=>z.Presupuesto.Numero.ToString()).NullSafeToString() ).Distinct()),
-
-
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
                                 // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
 
                                 string.Join(",",  a.DetalleRequerimientos
@@ -1078,10 +1049,7 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                                     ).Distinct()
                                 ),
 
-
                                 "",
-
-                                 
 
                                 string.Join(",",  a.DetalleRequerimientos
                                     .SelectMany(x =>
@@ -1091,7 +1059,6 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                                                     (y.Pedido == null) ?
                                                     null :
                                                     "<a href="+ Url.Action("Edit", "Pedido",new {id = y.Pedido.IdPedido} ) + "  >" + y.Pedido.NumeroPedido.NullSafeToString() + "</>"
-                                                    
                                             )
                                     ).Distinct()
                                 ),
@@ -1103,11 +1070,8 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                                 //a.Comparativas,
                                 //string.Join(" ",  a.DetalleRequerimientos.Select(x=> x.DetallePedidos.Count ))  ,
 
-
                                 ////string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePedidos   ==null) ? "" : x.DetallePedidos.Select(z=>z.Pedido.NumeroPedido.ToString()).NullSafeToString() ).Distinct()),
                                 //a.Recepciones,
-                                
-                                
                                 
                                 (a.SolicitoRequerimiento==null) ?  "" :   a.SolicitoRequerimiento.Nombre,
                                 (a.AproboRequerimiento==null) ?  "" :  a.AproboRequerimiento.Nombre,
@@ -1132,7 +1096,7 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
 
 
         public virtual ActionResult Requerimientos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
-                                            string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
+                                                   string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;
@@ -1148,8 +1112,6 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                 var qq = (from rm in l2sqlPronto.Requerimientos
                           select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
                           ).Take(100).ToList();
-
-
             }
 
             var Req = db.Requerimientos
