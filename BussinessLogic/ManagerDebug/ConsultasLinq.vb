@@ -1047,6 +1047,11 @@ Public Class ConsultasLinq
         Else
             fechadesde2 = DateAdd(DateInterval.Day, -1, fechadesde - (fechahasta - fechadesde)) 'le agrego un dia mas porque si puso "ayer", la dif entre hasta y desde es 0
         End If
+
+
+        'logear (o poner en el titulo) el rango de fechas usado para el periodo anterior
+        ErrHandler2.WriteError(fechadesde2.ToShortDateString() & "   " & fechadesde.ToShortDateString() & "    " & fechahasta.ToShortDateString())
+
         '////////////////////////////////////////////////////
         '////////////////////////////////////////////////////
 
