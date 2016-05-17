@@ -471,11 +471,6 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
-
-
-
-
-
                         ////////////////////////////////////////////// IMPUTACION //////////////////////////////////////////////
                         if (mIdFactura <= 0 && !mAnulada && mAplicarEnCtaCte)
                         {
@@ -798,29 +793,13 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
-
-
                         //////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////
-
                         db.Tree_TX_Actualizar("FacturasAgrupadas", Factura.IdFactura, "Factura");
                         // db.SaveChanges(); // no tiene sentido con un store
 
                         //////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////
-
-
-
-
-                        //////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////
                         scope.Complete();
                         scope.Dispose();
-                        //////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////
                         //////////////////////////////////////////////////////////
                     }
 
@@ -1636,6 +1615,7 @@ namespace ProntoMVC.Controllers
             string mArchivoXMLRecibido = "";
             string mArchivoXMLEnviado2 = "";
             string mArchivoXMLRecibido2 = "";
+            string glbArchivoCertificadoPassWord = "";
 
             Int32 mIdPuntoVenta = 0;
             Int32 mPuntoVenta = 0;
@@ -1671,6 +1651,8 @@ namespace ProntoMVC.Controllers
             mIdMonedaPesos = parametros.IdMoneda ?? 0;
             mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
             mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+
+            glbArchivoCertificadoPassWord = BuscarClaveINI("ArchivoCertificadoPassWord", -1);
 
             var Parametros2 = db.Parametros2.Where(p => p.Campo == "DebugFacturaElectronica").FirstOrDefault();
             if (Parametros2 != null) { if ((Parametros2.Valor ?? "") == "SI") { glbDebugFacturaElectronica = true; } }
@@ -1729,26 +1711,32 @@ namespace ProntoMVC.Controllers
             //WSAFIPFE.Factura FEx = new WSAFIPFE.Factura();
             //esto en modo test tambien debería devolver true  https://sites.google.com/site/facturaelectronicax/documentacion-wsfev1/wsfev1/wsfev1-ejemplos/ejemplo-wsfev1-visual-basic-net-para-cae
 
+
             if (mWebService == "WSFE1" && (mTipoABC == "A" || mTipoABC == "B"))
             {
-                mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
-                if (glbDebugFacturaElectronica)
+                if (!System.IO.File.Exists(glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic"))
                 {
-                    Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
-                }
-
-                if (!mResul)
-                {
-                    ErrHandler.WriteError("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                    mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
+                    if (glbDebugFacturaElectronica)
+                    {
+                        Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                    }
+                    if (!mResul)
+                    {
+                        ErrHandler.WriteError("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                    }
                 }
 
                 mResul = FE.iniciar(WSAFIPFE.Factura.modoFiscal.Fiscal, mCuitEmpresa, glbPathPlantillas + "\\" + mArchivoAFIP + ".pfx", glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic");
-
                 if (!mResul)
                 {
                     ErrHandler.WriteError("iniciar : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
                 }
 
+                if (glbArchivoCertificadoPassWord.Length>0)
+                {
+                    FE.ArchivoCertificadoPassword = glbArchivoCertificadoPassWord;
+                }
 
                 if (mResul) mResul = FE.f1ObtenerTicketAcceso();
                 if (!mResul)
@@ -1756,13 +1744,10 @@ namespace ProntoMVC.Controllers
                     ErrHandler.WriteError("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
                 }
 
-
                 if (glbDebugFacturaElectronica)
                 {
                     Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
-
                 }
-
 
                 if (mResul)
                 {
