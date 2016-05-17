@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Archivos Compartidos", "{A7AAB93D-0E57-4580-96C8-51710EF8D2FA}"
 	ProjectSection(SolutionItems) = preProject
@@ -89,27 +89,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProntoWeb", "ProntoWeb", "{
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ProntoCartaPorteApp", "..\prontoweb\ProntoCartaPorteApp.vbproj", "{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb(1)", "http://localhost:53829", "{116B68A6-181C-489E-8185-07A9A64B1AA3}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_53829"
-		Debug.AspNetCompiler.PhysicalPath = "Y:\prontoweb\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53829\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_53829"
-		Release.AspNetCompiler.PhysicalPath = "Y:\prontoweb\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53829\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "Y:\prontoweb\"
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -387,26 +366,6 @@ Global
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|x86.ActiveCfg = Release|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Any CPU.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Any CPU.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|Mixed Platforms.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Development|x86.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
-		{116B68A6-181C-489E-8185-07A9A64B1AA3}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

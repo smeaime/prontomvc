@@ -1707,13 +1707,10 @@ namespace ProntoMVC.Controllers
 
             glbPathPlantillas = AppDomain.CurrentDomain.BaseDirectory + "Documentos";
 
-            FE = new WSAFIPFE.Factura();
-            //WSAFIPFE.Factura FEx = new WSAFIPFE.Factura();
-            //esto en modo test tambien debería devolver true  https://sites.google.com/site/facturaelectronicax/documentacion-wsfev1/wsfev1/wsfev1-ejemplos/ejemplo-wsfev1-visual-basic-net-para-cae
-
-
             if (mWebService == "WSFE1" && (mTipoABC == "A" || mTipoABC == "B"))
             {
+                FE = new WSAFIPFE.Factura();
+
                 if (!System.IO.File.Exists(glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic"))
                 {
                     mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
