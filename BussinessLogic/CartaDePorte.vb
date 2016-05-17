@@ -303,6 +303,8 @@ Namespace Pronto.ERP.BO
         Public ClienteAcondicionador As Integer? = 0
 
 
+        Public FacturarAManual As Boolean = False
+
 
         'Public CartaLINQ As New CartasDePorte 'probar poniendo el "Serialization Mode" del .dbml en "Unidirectional" (porque explota al intentar meterlo en el Viewstate)
         '-no... parecería no bastar.... probaré agregando un  " <Serializable()> _ Partial Class CartasDePorte " en un archivo aparte
