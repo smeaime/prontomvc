@@ -557,7 +557,8 @@ namespace ProntoFlexicapture
                 sss.Add(dirInfo.Name );
             }
 
-            ordenar por fecha
+            //  TO DO ordenar por fecha
+
             return sss;
 
             //var q = (from f in files
