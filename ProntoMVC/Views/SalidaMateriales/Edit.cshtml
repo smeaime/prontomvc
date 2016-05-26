@@ -46,9 +46,66 @@
         <form class="form-horizontal" style=" margin-bottom: 0px;">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
+
+                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+
+                        <div class="span6">
+                            <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
+                            text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+
+
+                                <span class="span6" style="padding-top: 15px; width: 310px">Salida de materiales </span>
+                                @Html.TextBoxFor(model => model.NumeroSalidaMateriales, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span3", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="span6">
+                            @*  <input type="button" id="grabar2" value="Aceptar" style="margin-top: 15px;" class="btn  btn-large btn-primary pull-right" />*@
+                        </div>
+                        <script>
+                            $(function () {
+
+                                function resizeInput() {
+                                    // $(this).attr('size', $(this).val().length + 2);
+                                    $(this).css('width', $(this).val().length * 32);
+                                }
+
+
+                           
+                                $('#NumeroSalidaMateriales').css('width', $('#NumeroSalidaMateriales').val().length * 21);
+
+                            })
+                        </script>
+                    </div>
+
+
                     <div class="row-fluid">
-                        <div class="span6 lightblue titulo">
-                            Salida de materiales
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.NumeroSalidaMateriales2, "Numero")
+                            @Html.TextBoxFor(model => model.NumeroSalidaMateriales2, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.NumeroSalidaMateriales2)
+                        </div>
+                        <div class="span1 lightblue">
+                            @Html.LabelFor(model => model.NumeroSalidaMateriales, ":")
+                            @Html.TextBoxFor(model => model.NumeroSalidaMateriales, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.NumeroSalidaMateriales)
+                        </div>
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.FechaSalidaMateriales, "Fecha")
+                            @Html.TextBoxFor(model => model.FechaSalidaMateriales, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                            @Html.ValidationMessageFor(model => model.FechaSalidaMateriales)
+                            <script>
+                                $("#FechaSalidaMateriales").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
+                                });
+                            </script>
+                        </div>
+                        <div class="span3 lightblue">
+                            @Html.LabelFor(model => model.TipoSalida, "Tipo de salida")
+                            @Html.DropDownList("TipoSalida", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                            @Html.ValidationMessageFor(model => model.TipoSalida)
                         </div>
                         <div class="span1 lightblue">
                             <div>@Html.Hidden("IdSalidaMateriales", Model.IdSalidaMateriales)</div>
@@ -98,41 +155,6 @@
                                 mCampoVB = '@(ViewBag.ProntoIni_OTsDesdeMantenimiento)';
                                 $("#ProntoIni_OTsDesdeMantenimiento").val(mCampoVB);
                             </script>
-                        </div>
-                        <div class="span1 lightblue"></div>
-                        <div class="span2 lightblue"></div>
-                        <div class="span4 lightblue">
-                        </div>
-                    </div>
-
-                    <div class="row-fluid">
-                        <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.NumeroSalidaMateriales2, "Numero")
-                            @Html.TextBoxFor(model => model.NumeroSalidaMateriales2, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12", @readonly = "readonly" })
-                            @Html.ValidationMessageFor(model => model.NumeroSalidaMateriales2)
-                        </div>
-                        <div class="span1 lightblue">
-                            @Html.LabelFor(model => model.NumeroSalidaMateriales, ":")
-                            @Html.TextBoxFor(model => model.NumeroSalidaMateriales, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12", @readonly = "readonly" })
-                            @Html.ValidationMessageFor(model => model.NumeroSalidaMateriales)
-                        </div>
-                        <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.FechaSalidaMateriales, "Fecha")
-                            @Html.TextBoxFor(model => model.FechaSalidaMateriales, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                            @Html.ValidationMessageFor(model => model.FechaSalidaMateriales)
-                            <script>
-                                $("#FechaSalidaMateriales").datepicker({
-                                    changeMonth: true,
-                                    changeYear: true,
-                                    dateFormat: 'dd/mm/yy'
-                                    //numberOfMonths: 2,
-                                });
-                            </script>
-                        </div>
-                        <div class="span3 lightblue">
-                            @Html.LabelFor(model => model.TipoSalida, "Tipo de salida")
-                            @Html.DropDownList("TipoSalida", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
-                            @Html.ValidationMessageFor(model => model.TipoSalida)
                         </div>
                     </div>
 
