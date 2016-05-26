@@ -1,0 +1,8 @@
+Estimado proveedor, Ud. ya puede consultar sus pagos a través de la web:
+
+http://proveedores.cedinsa.com/cedinsa/
+
+Los datos para ingresar al sistema son los siguientes:
+
+Nombre de usuario: <% UserName %>
+Contrasena: <% Password %>

@@ -1,0 +1,245 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="943e2dd5-376b-4361-985f-57b42ae8211e" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>VOD Pronto2005 4</ID>
+  <Name>EgresosProyectados</Name>
+  <CreatedTimestamp>2010-01-28T14:00:50Z</CreatedTimestamp>
+  <LastSchemaUpdate>2010-01-28T14:00:50Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>2010-01-28T14:01:20Z</LastProcessed>
+  <State>Processed</State>
+  <Language>3082</Language>
+  <Collation>Latin1_General_CI_AS</Collation>
+  <Dimensions>
+    <Dimension dwd:design-time-name="ae6753da-ffb2-4d73-a981-65fbdd5f7746">
+      <ID>EgresosProyectados</ID>
+      <Name>EgresosProyectados</Name>
+      <DimensionID>Temp Cubo Proyeccion Egresos</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="57f8bd4b-b920-40bf-b8dc-a865d3ff966c">
+          <AttributeID>Temp Cubo Proyeccion Egresos</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="303e4f65-dd09-4243-ba04-588a26ec9e00">
+          <AttributeID>Proveedor</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="8daee2ba-e58a-4a64-b9b2-7f775af3016c">
+          <AttributeID>Detalle</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="456c3642-9bb4-40e3-8da0-ae5962c3b20f">
+          <AttributeID>Column1</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="9fbbe9f5-830f-4d6e-a884-5b1e795116c0">
+          <AttributeID>Column2</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="541cbb3d-8e79-4b2f-a2e4-b86495b0286c">
+          <AttributeID>Column4</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="66baeeeb-a452-4521-a647-8a6981535add">
+          <AttributeID>Column6</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="408f75e0-89d9-474b-aaf7-e6865a368e89">
+          <AttributeID>Column9</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="c696de24-007e-4982-ab20-4348c1d54062">
+          <HierarchyID>Jerarquía</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="fefa1f25-2503-40cd-bf5c-1b33c6df53b6">
+          <HierarchyID>Jerarquía 1</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="66878b94-c750-44be-abb2-94f93dc12200">
+          <HierarchyID>Jerarquía 2</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="b03aa97f-78cf-46ba-8af8-94e0eeb2dc63">
+      <ID>Temp Cubo Proyeccion Egresos</ID>
+      <Name>EgresosProyectados</Name>
+      <CreatedTimestamp>2010-01-28T14:00:50Z</CreatedTimestamp>
+      <LastSchemaUpdate>2010-01-28T14:00:50Z</LastSchemaUpdate>
+      <LastProcessed>2010-01-28T14:01:20Z</LastProcessed>
+      <State>Processed</State>
+      <Measures>
+        <Measure dwd:design-time-name="a3c39a6e-7245-4708-81e8-8950ed200af2">
+          <ID>Importe</ID>
+          <Name>Importe</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="ca78ad88-f0a4-4c52-8e08-355153f173c9">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="11fdd17a-2c9f-4408-b04d-713978105789">
+              <TableID>_TempCuboProyeccionEgresos</TableID>
+              <ColumnID>Importe</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="93e9b68d-f4ac-41bf-8226-433e118deb96">
+          <ID>Recuento Temp Cubo Proyeccion Egresos</ID>
+          <Name>Recuento Temp Cubo Proyeccion Egresos</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="d787cbd7-0a75-434c-b729-94b66fe0dda1">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="36527dd5-829e-48cd-ab1c-a417cac48164">
+              <TableID>_TempCuboProyeccionEgresos</TableID>
+            </Source>
+          </Source>
+          <Visible>false</Visible>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <EstimatedSize>3193</EstimatedSize>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="fd6ce226-4a51-4ff5-b864-a6df651895a7">
+          <CubeDimensionID>EgresosProyectados</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="90bfc427-565c-4d56-a59c-00b2266a7743">
+              <AttributeID>Temp Cubo Proyeccion Egresos</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="06e13630-fafe-4a65-a2a1-217e7cc40d2d">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="bbf1d105-c30d-4e66-8ce6-bf422efa02f6">
+                    <TableID>_TempCuboProyeccionEgresos</TableID>
+                    <ColumnID>IdCuboProyeccionEgresos</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+            <Attribute dwd:design-time-name="bb81d93e-8e40-4945-b970-99e0980dbbee">
+              <AttributeID>Proveedor</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="f9970a5c-1959-4890-89ee-7bec54243f4f">
+                  <DataType>WChar</DataType>
+                  <DataSize>50</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="7129d616-8c8e-4da6-8cb3-83928aa85819" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="a9433d4e-8f9f-4f55-b13c-c5bb169dac82">
+              <AttributeID>Detalle</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="f7767996-6872-45ba-960f-ed92427b6afb">
+                  <DataType>WChar</DataType>
+                  <DataSize>100</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="92b34499-b97a-43bb-8e87-011decc63fe0" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="d72b8544-2ce6-4552-94d4-2913f4170cd3">
+              <AttributeID>Column1</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="5bb95eaa-7688-44fb-9b26-d6103f2a945e">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="a8375f9b-d535-454b-be8e-e40f6442396b" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="e7b833e3-296b-4e06-815c-ccbfe1a35215">
+              <AttributeID>Column2</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="e8da91d3-8893-4f56-9882-3c2a34280e23">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="aed5b27d-f943-4227-9db4-5f9fbac991ea" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="8bdcd575-37d3-4692-8aab-6c121d3ea9ac">
+              <AttributeID>Column4</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="c6c73457-0b59-434a-8820-cf6107ddbea2">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="77830526-bc5f-4ee6-abe4-9677987a1949" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="b28f6648-2782-44cc-b730-152e2535633c">
+              <AttributeID>Column6</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="3f85842c-e594-410a-b119-8656e4399ab0">
+                  <DataType>WChar</DataType>
+                  <DataSize>30</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="4bc7de42-63fe-46d4-80aa-8d6690ec6704" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="b98a8b2f-c6a2-4b82-aa42-82c7baef25be">
+              <AttributeID>Column9</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="1f12a730-6d4e-4f02-a971-c2e410ba2c52">
+                  <DataType>WChar</DataType>
+                  <DataSize>30</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="fe72e39d-01b4-4d03-b399-0a7ac6494652" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+      <ProactiveCaching dwd:design-time-name="3840a375-73b4-4a64-8126-dae93be4b0d8">
+        <SilenceInterval>-PT1S</SilenceInterval>
+        <Latency>-PT1S</Latency>
+        <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+        <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+        <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="ebf69975-54e8-4434-810a-ad36251c7925" />
+      </ProactiveCaching>
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="c96d3a4b-a9a2-4d45-85fb-03b9f3b8442b">
+    <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+  </Source>
+  <ProactiveCaching dwd:design-time-name="5af3425a-5249-4b9b-a474-dba5febe2ce4">
+    <SilenceInterval>-PT1S</SilenceInterval>
+    <Latency>-PT1S</Latency>
+    <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+    <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+    <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="35a5f51b-80dd-41d5-ba65-73484f61ba51" />
+  </ProactiveCaching>
+</Cube>
