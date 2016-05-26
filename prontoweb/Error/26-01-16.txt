@@ -1,0 +1,1127 @@
+
+Log Entry : 
+01/26/2016 09:52:55
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 09:56:21
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control62(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 99
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 184
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 09:57:04
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\global.asax:line 472
+System
+__________________________
+
+Log Entry : 
+01/26/2016 09:57:32
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 09:58:00
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control62(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 99
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 184
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 09:59:37
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control75(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 117
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 184
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 09:59:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 10:02:28
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control28(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 45
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 187
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 10:03:45
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpException
+Multiple controls with the same ID 'ctl00$ContentPlaceHolder1$GridView1$ctl02$HyperLink1' were found. Trace requires that controls have unique IDs.
+   at System.Web.TraceContext.AddNewControl(String id, String parentId, String type, Int32 viewStateSize, Int32 controlStateSize)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Page.BuildPageProfileTree(Boolean enableViewState)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 10:03:47
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpException
+Multiple controls with the same ID 'ctl00$ContentPlaceHolder1$GridView1$ctl02$HyperLink1' were found. Trace requires that controls have unique IDs.
+   at System.Web.TraceContext.AddNewControl(String id, String parentId, String type, Int32 viewStateSize, Int32 controlStateSize)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Control.BuildProfileTree(String parentId, Boolean calcViewState)
+   at System.Web.UI.Page.BuildPageProfileTree(Boolean enableViewState)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 10:04:48
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control33(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 59
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 187
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 10:05:20
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control33(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 59
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 187
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 11:10:57
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 11:18:29
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2212099. Error Message:La carta numero 550594898 id=2212099 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/26/2016 11:32:20
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx(32): error BC30456: 'Button1_Click' is not a member of 'ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx'.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 11:48:09
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagen.aspx?Id=548834437.tif. Error Message:Viendo Encriptacion del ID -1
+__________________________
+
+Log Entry : 
+01/26/2016 12:16:43
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb(1035): error BC30451: 'CrearDirectorioParaLoteImagenes' is not declared. It may be inaccessible due to its protection level.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 12:18:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000 - EXEC sp_who2 90 0
+__________________________
+
+Log Entry : 
+01/26/2016 12:18:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+01/26/2016 12:18:14
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Data.SqlClient.SqlException
+A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 793
+   at CartaDePorteManager.Log_sp_who2(String sc) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 6201
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\global.asax:line 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/26/2016 12:59:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 13:05:08
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 13:08:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:Ionic.Zip.BadReadException
+bad read of entry 548834436.tif from compressed archive.
+   at Ionic.Zip.ZipEntry._CheckRead(Int32 nbytes)
+   at Ionic.Zip.ZipEntry.ExtractOne(Stream output)
+   at Ionic.Zip.ZipEntry.InternalExtract(String baseDir, Stream outstream, String password)
+   at Ionic.Zip.ZipEntry.Extract(String baseDirectory, ExtractExistingFileAction extractExistingFile)
+   at CartaDePorteManager.Extraer(String ZipAExtraer, String DirectorioExtraccion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 9308
+Ionic.Zip
+__________________________
+
+Log Entry : 
+01/26/2016 13:08:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.ObjectDisposedException
+Cannot access a closed file.
+   at System.IO.__Error.FileNotOpen()
+   at System.IO.FileStream.get_Length()
+   at Ionic.Zip.ZipEntry.SetFdpLoh()
+   at Ionic.Zip.ZipEntry.get_FileDataPosition()
+   at Ionic.Zip.ZipEntry.ExtractOne(Stream output)
+   at Ionic.Zip.ZipEntry.InternalExtract(String baseDir, Stream outstream, String password)
+   at Ionic.Zip.ZipEntry.Extract(String baseDirectory, ExtractExistingFileAction extractExistingFile)
+   at CartaDePorteManager.Extraer(String ZipAExtraer, String DirectorioExtraccion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 9308
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 13:08:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.ObjectDisposedException
+Cannot access a closed file.
+   at System.IO.__Error.FileNotOpen()
+   at System.IO.FileStream.get_Position()
+   at Ionic.Zip.ZipEntry.SetFdpLoh()
+   at Ionic.Zip.ZipEntry.get_FileDataPosition()
+   at Ionic.Zip.ZipEntry.ExtractOne(Stream output)
+   at Ionic.Zip.ZipEntry.InternalExtract(String baseDir, Stream outstream, String password)
+   at Ionic.Zip.ZipEntry.Extract(String baseDirectory, ExtractExistingFileAction extractExistingFile)
+   at CartaDePorteManager.Extraer(String ZipAExtraer, String DirectorioExtraccion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 9308
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 13:08:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.ObjectDisposedException
+Cannot access a closed file.
+   at System.IO.__Error.FileNotOpen()
+   at System.IO.FileStream.get_Position()
+   at Ionic.Zip.ZipEntry.SetFdpLoh()
+   at Ionic.Zip.ZipEntry.get_FileDataPosition()
+   at Ionic.Zip.ZipEntry.ExtractOne(Stream output)
+   at Ionic.Zip.ZipEntry.InternalExtract(String baseDir, Stream outstream, String password)
+   at Ionic.Zip.ZipEntry.Extract(String baseDirectory, ExtractExistingFileAction extractExistingFile)
+   at CartaDePorteManager.Extraer(String ZipAExtraer, String DirectorioExtraccion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 9308
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 13:13:11
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 13:20:09
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 13:59:50
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb(701): error BC30456: 'Irreconocibles' is not a member of 'ProntoFlexicapture.ClassFlexicapture'.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:00:21
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 14:01:50
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpException
+DataBinding: 'System.String' does not contain a property with the name 'IdCartaPorte'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control70(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 128
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.ReBind() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 705
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 120
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:03:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpException
+DataBinding: 'System.String' does not contain a property with the name 'FullName'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control70(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 128
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.ReBind() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 705
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 120
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:04:14
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: expression
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control70(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 128
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.ReBind() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 705
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 120
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:07:11
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb(704): error BC30203: Identifier expected.
+
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:07:11
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb(704): error BC30203: Identifier expected.
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:09:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpException
+DataBinding: 'VB$AnonymousType_1`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]' does not contain a property with the name 'IdCartaPorte'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control83(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 146
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.ReBind() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 706
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 120
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:19:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteFotos.aspx.vb(245): error BC30455: Argument not specified for parameter 'DirApp' of 'Public Function AdjuntarImagenEnZip(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String) As String'.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:20:51
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/26/2016 14:20:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/26/2016 14:20:58
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:reconocer imagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:21:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Procesó carta: titular GAHAN ANA
+__________________________
+
+Log Entry : 
+01/26/2016 14:21:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/26/2016 14:21:56
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:05
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:12
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:System.IO.IOException
+The file 'C:\Users\Administrador\Documents\bdl\prontoweb\\databackupear\548834437.tif' already exists.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   at System.IO.File.Copy(String sourceFileName, String destFileName)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 533
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:12
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:12
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:12
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Archivo C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\548834437.tif numcarta 548834437
+__________________________
+
+Log Entry : 
+01/26/2016 14:22:18
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:reconocer imagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:08
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:08
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:09
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:10
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:System.IO.IOException
+The file 'C:\Users\Administrador\Documents\bdl\prontoweb\\databackupear\548834439.tif' already exists.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   at System.IO.File.Copy(String sourceFileName, String destFileName)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 533
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:14
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:14
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:14
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Archivo C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\548834439.tif numcarta 548834439
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:14
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:reconocer imagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:32
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Procesó carta: titular GAHAN ANA
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:32
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Detectó bien el numero con el Flexicapture: 548834439
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:32
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:System.IO.IOException
+The file 'C:\Users\Administrador\Documents\bdl\prontoweb\\databackupear\548944449.tif' already exists.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   at System.IO.File.Copy(String sourceFileName, String destFileName)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 533
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Archivo C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\548944449.tif numcarta 548834439
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:reconocer imagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Procesó carta: titular LELFUN S.A.
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:System.ArgumentException
+Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(String filename)
+   at CartaDePorteManager.ReadBarcode1D_ZXing(String fileName, Int32 page) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 10211
+System.Drawing
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:No se detecto por ningun medio el numero de carta
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:Archivo C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Nueva carpeta/ numcarta 0
+__________________________
+
+Log Entry : 
+01/26/2016 14:23:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:reconocer imagen
+__________________________
+
+Log Entry : 
+01/26/2016 14:24:16
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 14:24:16
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/26/2016 14:28:32
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control97(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 171
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.ReBind() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 702
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 120
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:29:27
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'nombre'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control97(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 171
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.ReBind() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 702
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 120
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________
+
+Log Entry : 
+01/26/2016 14:29:43
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Web.HttpException
+DataBinding: 'ProntoFlexicapture.ClassFlexicapture+procesGrilla' does not contain a property with the name 'Name'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at System.Web.UI.DataBinder.Eval(Object container, String expression)
+   at System.Web.UI.TemplateControl.Eval(String expression)
+   at ASP.prontoweb_cartasdeportereasignarimagenlistado_aspx.__DataBinding__control115(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx:line 200
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBind()
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at System.Web.UI.DataSourceView.Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+   at System.Web.UI.WebControls.DataBoundControl.PerformSelect()
+   at System.Web.UI.WebControls.BaseDataBoundControl.DataBind()
+   at System.Web.UI.WebControls.GridView.DataBind()
+   at CartasDePorteReasignarImagenListado.ReBind() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 702
+   at CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:line 120
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Web
+__________________________

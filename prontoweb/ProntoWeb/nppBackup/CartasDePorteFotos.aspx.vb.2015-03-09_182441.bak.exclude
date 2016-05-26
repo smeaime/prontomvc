@@ -1,0 +1,723 @@
+﻿Imports System
+Imports System.Data.SqlClient
+Imports System.Reflection
+Imports System.IO
+Imports System.Web.UI.WebControls
+Imports Pronto.ERP.Bll
+Imports Pronto.ERP.BO
+Imports Pronto.ERP.Bll.EntidadManager
+Imports Microsoft.Office.Interop.Excel
+Imports System.Text
+Imports System.Data
+Imports System.Diagnostics
+Imports System.Web.UI
+Imports Excel = Microsoft.Office.Interop.Excel
+
+
+Imports Inlite.ClearImageNet
+
+Imports CartasDePorteImportador.FormatosDeExcel
+
+Imports DocumentFormat.OpenXml
+Imports DocumentFormat.OpenXml.Packaging
+
+Imports ExcelImportadorManager
+Imports ExcelImportadorManager.FormatosDeExcel
+
+Imports ClaseMigrar.SQLdinamico
+
+Imports System.Linq
+
+Imports CartaDePorteManager
+Partial Class CartasDePorteImportador
+    Inherits System.Web.UI.Page
+
+    'Tecnicas de importacion de excel a gridview
+    ' 
+    'http://forums.asp.net/p/1192930/2057005.aspx#2057005
+    'http://forums.asp.net/t/1195205.aspx
+    'Una tecnica puede ser usar un ODS  http://forums.asp.net/t/995531.aspx
+
+    'http://www.4guysfromrolla.com/articles/031208-1.aspx
+    'http://www.aspboy.com/Categories/GridArticles/Excel_Like_GridView.aspx
+
+
+    'http://www.codeproject.com/KB/webforms/BulkEditGridView.aspx
+
+    'voy a necesitar eliminacion de columnas y desplazamiento de columnas?
+
+    'copy paste
+    'http://forums.asp.net/t/1092548.aspx
+
+    'asuntos del render
+    'http://forums.asp.net/p/901776/986762.aspx#986762
+
+    'asuntos con el teclado (las flechitas)
+    'http://forums.asp.net/t/1522647.aspx
+    'http://codeasp.net/articles/gridview-rows-navigation-using-arrow-up-down-keys/137/gridview-rows-navigation-using-arrow-up-down-keys
+
+    'VINCE XU
+    'Hi, There are two approach for achieving it.
+    'One is using Excel Object(Microsoft.Office.Interop.Excel) to retrieve it into DataSet.
+    'The following post is retrieving excel file and import into GridView by using Microsoft.Office.Interop.Excel: http://forums.asp.net/p/1192930/2057005.aspx#2057005
+    'Another is using OLEDB to retrieve excel into DataSet which can be convert into database. It's easier and more appropriated for you.
+
+
+    Private DIRFTP As String = "C:\"
+
+    Private IdComparativa As Integer = -1
+    Private mKey As String, SC As String
+    Private mAltaItem As Boolean
+    Private usuario As Usuario = Nothing
+
+    Private bEligioForzarFormato As Boolean = False
+    Private _acVendedores As Object
+
+    Private Property acVendedores As Object
+        Get
+            Return _acVendedores
+        End Get
+        Set(value As Object)
+            _acVendedores = value
+        End Set
+    End Property
+
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+        'If Not (Request.QueryString.Get("Id") Is Nothing) Then 'si trajo el parametro ID, lo guardo aparte
+        '    IdComparativa = Convert.ToInt32(Request.QueryString.Get("Id"))
+        '    Me.IdEntity = IdComparativa
+        'End If
+        'mKey = "Comparativa_" & Me.IdEntity.ToString
+        'mAltaItem = False
+        usuario = New Usuario
+        usuario = Session(SESSIONPRONTO_USUARIO)
+
+        'que pasa si el usuario es Nothing? Qué se rompió?
+        If usuario Is Nothing Then Response.Redirect(String.Format("../Login.aspx"))
+
+        SC = usuario.StringConnection
+        HFSC.Value = SC
+
+        DIRFTP = System.IO.Path.GetTempPath()
+
+        lblVistaPrevia.Visible = False
+
+        Dim cSuperbuscador As WebControls.TextBox = Me.Master.FindControl("txtSuperbuscador")
+        cSuperbuscador.Visible = False 'pinta que si está el superbuscador, me tira lo del Response Server Error
+
+        Try
+            Dim cmbSuperbuscador As WebControls.DropDownList = Me.Master.FindControl("cmbFiltroSuperbuscador")
+            cmbSuperbuscador.Visible = False
+            'btnVistaPrevia.Visible = False
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+        If Not IsPostBack Then
+            'primera carga
+            txtFechaArribo.Text = Today
+            btnEmpezarImportacion.Visible = False
+
+            txtFechaArribo.Visible = True
+
+
+            cmbPuntoVenta.DataSource = PuntoVentaWilliams.IniciaComboPuntoVentaWilliams3(SC)
+            'cmbPuntoVenta.DataSource = EntidadManager.ExecDinamico(HFSC.Value, "SELECT DISTINCT PuntoVenta FROM PuntosVenta WHERE not PuntoVenta is null")
+            cmbPuntoVenta.DataTextField = "PuntoVenta"
+            cmbPuntoVenta.DataValueField = "PuntoVenta"
+            cmbPuntoVenta.DataBind()
+
+            If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
+                Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+                BuscaTextoEnCombo(cmbPuntoVenta, pventa)
+                If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
+            End If
+
+        Else
+
+            'hicieron postback desde el textbox?
+            'If sender = txtBuscarCliente Then validar()
+
+        End If
+        '///////////////////////////
+        '///////////////////////////
+        'DEBUG
+        'Dim ds As DataSet = GetExcel("C:\Rasic Monte.xls") '("C:\williamsf11.xls") '   (DIRFTP + FileUpLoad2.FileName)
+        'gvClientes.DataSource = ds
+        'gvClientes.DataBind()
+        'gvExcel.DataSource = ds
+        'gvExcel.DataBind()
+        '///////////////////////////
+        '///////////////////////////
+
+
+
+
+        AutoCompleteExtender6.ContextKey = SC
+        AutoCompleteExtender8.ContextKey = SC
+
+
+
+        'Permisos()
+    End Sub
+
+
+
+    Protected Sub AsyncFileUpload2_UploadedComplete(ByVal sender As Object, ByVal e As AjaxControlToolkit.AsyncFileUploadEventArgs) Handles AsyncFileUpload2.UploadedComplete
+        'System.Threading.Thread.Sleep(5000)
+
+        If (AsyncFileUpload2.HasFile) Then
+            Try
+
+                Dim nombre = NameOnlyFromFullPath(AsyncFileUpload2.PostedFile.FileName)
+                'Dim nombresolo As String = Mid(nombre, nombre.LastIndexOf("\"))
+                Randomize()
+                Dim nombrenuevo = DIRFTP + Int(Rnd(100000) * 100000).ToString.Replace(".", "") + "_" + nombre
+                Session("NombreArchivoSubido2") = nombrenuevo
+
+                Dim MyFile1 As New FileInfo(nombrenuevo)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
+
+                AsyncFileUpload2.SaveAs(nombrenuevo)
+
+                'btnEmpezarImportacion.Visible = True
+                'txtFechaArribo.Visible = True
+                'panelEquivalencias.Visible = False
+                'txtLogErrores.Visible = False
+                'txtLogErrores.Text = ""
+
+                'If Not bEligioForzarFormato Then FormatoDelArchivo(nombrenuevo) 'como no lo eligió manualmente, lo puedo cambiar automaticamente si decidió volver a subir otro archivo
+                'RefrescarTextosDefault()
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+                Throw
+            End Try
+        Else
+            'FileUpLoad2.click 'estaría bueno que se pudiese hacer esto, es decir, llamar al click
+        End If
+
+    End Sub
+
+
+
+
+
+
+    Protected Sub AsyncFileUpload1_UploadedComplete(ByVal sender As Object, ByVal e As AjaxControlToolkit.AsyncFileUploadEventArgs) Handles AsyncFileUpload1.UploadedComplete
+        'System.Threading.Thread.Sleep(5000)
+
+        Dim sError As String
+        Try
+            If InStr(AsyncFileUpload1.FileName, ".zip") Then
+                'CartaDePorteManager.
+                AdjuntarImagenEnZip(SC, AsyncFileUpload1, -1, sError)
+            Else
+
+                If False Then
+                    AsyncFileUpload1.SaveAs(DIRFTP + AsyncFileUpload1.PostedFile.FileName)
+                    Dim numeroCarta = Val(ReadBarcode1D_ZXing(DIRFTP + AsyncFileUpload1.PostedFile.FileName, 0))
+                End If
+
+                CartaDePorteManager.AdjuntarImagen(SC, AsyncFileUpload1, -1, sError, DirApp(), _
+                                                   NameOnlyFromFullPath(AsyncFileUpload1.PostedFile.FileName))
+            End If
+
+        Catch ex As Exception
+            sError = ex.ToString & " " & ex.Source & vbCrLf & sError
+            'MandarMailDeError(sError)
+        End Try
+        'MsgBoxAjax(Me, sError)
+        txtLogErrores.Text = sError
+        txtLogErrores.Visible = True
+
+
+
+    End Sub
+
+
+
+
+    Protected Sub btnVistaPrevia_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnVistaPrevia.Click
+
+        Exit Sub
+
+
+    End Sub
+
+    Protected Sub btnEmpezarImportacion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEmpezarImportacion.Click
+    End Sub
+
+
+    Private Shared Function Extraer(ZipAExtraer As String, DirectorioExtraccion As String) As Generic.List(Of String)
+
+
+
+
+        Dim archivos As New Generic.List(Of String)
+
+        Using zip1 As Ionic.Zip.ZipFile = Ionic.Zip.ZipFile.Read(ZipAExtraer)
+            Dim e As Ionic.Zip.ZipEntry
+            For Each e In zip1
+                e.Extract(DirectorioExtraccion, Ionic.Zip.ExtractExistingFileAction.OverwriteSilently)
+                archivos.Add(e.FileName)
+            Next
+        End Using
+
+
+
+
+
+        Return archivos
+    End Function
+
+
+
+    Shared Function ReadBarcode1D_Spire(ByVal fileName As String, ByVal page As Integer) As String
+        'http://how-to.inliteresearch.com/barcode-reading-howto/read-barcodes-from-an-image-page/
+
+
+
+
+        Try
+            Dim reader As New Spire.Barcode.BarcodeScanner
+            ' Select barcode type(s) to read
+            'reader.Code128 = True
+            'reader.Code39 = True
+
+
+            ' Find the most popular 1D Barcodes
+            'reader.Auto1D = True
+            '  Look only for Horizontal barcodes
+            'reader.Vertical = False
+            'reader.Diagonal = False
+            '   Set search zone to upper left corner
+            'Dim io As New ImageIO()
+            'Dim info As ImageInfo = io.Info(fileName, page)
+            'reader.Zone = New Rectangle(0, 0, info.Width / 2, info.Height / 2)
+            ' Read barcodes
+
+
+            'Dim barcodes As Barcode() = reader.
+            '' Process results
+            'For Each bc As Barcode In barcodes
+            '    Console.Write(bc.Text) ' Use barcode text OR
+            '    ' ProcessBarcode(bc)     ' do other processing
+            'Next
+
+            'If barcodes.Count = 1 Then
+            '    Return barcodes(0).Text
+            'ElseIf barcodes.Count = 0 Then
+            '    Return ""
+            'Else
+            '    'Stop
+            '    If barcodes(0).Text.Length >= 14 Then
+            '        Return barcodes(1).Text
+            '    Else
+            '        Return barcodes(0).Text
+            '    End If
+            'End If
+            'Return ""
+
+        Catch ex As Exception
+            'ProcessException(ex)
+            'http://www.inliteresearch.com/homepage/support/pdk_vs_sdk.html
+            ErrHandler2.WriteError(ex)
+        End Try
+    End Function
+
+    Shared Function ReadBarcode1D_ClearImage(ByVal fileName As String, ByVal page As Integer) As String
+        'http://how-to.inliteresearch.com/barcode-reading-howto/read-barcodes-from-an-image-page/
+
+
+
+
+        Try
+            Dim reader As New BarcodeReader()
+            ' Select barcode type(s) to read
+            reader.Code128 = True
+            reader.Code39 = True
+
+
+            ' Find the most popular 1D Barcodes
+            'reader.Auto1D = True
+            '  Look only for Horizontal barcodes
+            'reader.Vertical = False
+            'reader.Diagonal = False
+            '   Set search zone to upper left corner
+            'Dim io As New ImageIO()
+            'Dim info As ImageInfo = io.Info(fileName, page)
+            'reader.Zone = New Rectangle(0, 0, info.Width / 2, info.Height / 2)
+            ' Read barcodes
+
+
+            Dim barcodes As Barcode() = reader.Read(fileName, page)
+            ' Process results
+            For Each bc As Barcode In barcodes
+                Console.Write(bc.Text) ' Use barcode text OR
+                ' ProcessBarcode(bc)     ' do other processing
+            Next
+
+            If barcodes.Count = 1 Then
+                Return barcodes(0).Text
+            ElseIf barcodes.Count = 0 Then
+                Return ""
+            Else
+                'Stop
+                If barcodes(0).Text.Length >= 14 Then
+                    Return barcodes(1).Text
+                Else
+                    Return barcodes(0).Text
+                End If
+            End If
+            Return ""
+
+        Catch ex As Exception
+            'ProcessException(ex)
+            'http://www.inliteresearch.com/homepage/support/pdk_vs_sdk.html
+            ErrHandler2.WriteError(ex)
+        End Try
+    End Function
+
+
+    Shared Function ReadBarcode1D_ZXing(ByVal fileName As String, ByVal page As Integer) As String
+        'http://how-to.inliteresearch.com/barcode-reading-howto/read-barcodes-from-an-image-page/
+
+        Try
+
+
+            '// create a barcode reader instance
+            Dim reader As ZXing.IBarcodeReader = New ZXing.BarcodeReader()
+
+            reader.Options.TryHarder = True
+            'reader.Options.
+            '   var previousFormats = barcodeReader.Options.PossibleFormats;
+            '   if (possibleFormats != null)
+            '      barcodeReader.Options.PossibleFormats = possibleFormats;
+            '   if (tryMultipleBarcodes)
+            '      results = barcodeReader.DecodeMultiple(image);
+            '   else
+
+
+            '// load a bitmap
+            Dim barcodeBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(fileName)   '.LoadFrom(fileName)
+            '// detect and decode the barcode inside the bitmap
+            Dim result = reader.Decode(barcodeBitmap)
+            '// do something with the result
+            If (result IsNot Nothing) Then
+
+                'txtDecoderType.Text = result.BarcodeFormat.ToString()
+                'txtDecoderContent.Text = result.Text
+                Return result.Text
+            End If
+        Catch ex As Exception
+            'ProcessException(ex)
+            'http://www.inliteresearch.com/homepage/support/pdk_vs_sdk.html
+            ErrHandler2.WriteError(ex)
+        End Try
+    End Function
+
+
+
+    '  private void btnStartDecoding_Click(object sender, EventArgs e)
+    '{
+    '   var fileName = txtBarcodeImageFile.Text;
+    '   if (!File.Exists(fileName))
+    '   {
+    '      MessageBox.Show(this, String.Format("File not found: {0}", fileName), "Error", MessageBoxButtons.OK,
+    '                      MessageBoxIcon.Error);
+    '      return;
+    '   }
+
+    '   using (var bitmap = (Bitmap)Bitmap.FromFile(fileName))
+    '   {
+    '      if (TryOnlyMultipleQRCodes)
+    '         Decode(bitmap, TryMultipleBarcodes, new List<BarcodeFormat> { BarcodeFormat.QR_CODE });
+    '      else
+    '         Decode(bitmap, TryMultipleBarcodes, null);
+    '   }
+    '}
+
+    'private void Decode(Bitmap image, bool tryMultipleBarcodes, IList<BarcodeFormat> possibleFormats)
+    '{
+    '   resultPoints.Clear();
+    '   lastResults.Clear();
+    '   txtContent.Text = String.Empty;
+
+    '   var timerStart = DateTime.Now.Ticks;
+    '   Result[] results = null;
+    '   var previousFormats = barcodeReader.Options.PossibleFormats;
+    '   if (possibleFormats != null)
+    '      barcodeReader.Options.PossibleFormats = possibleFormats;
+    '   if (tryMultipleBarcodes)
+    '      results = barcodeReader.DecodeMultiple(image);
+    '   else
+    '   {
+    '      var result = barcodeReader.Decode(image);
+    '      if (result != null)
+    '      {
+    '         results = new[] {result};
+    '      }
+    '   }
+    '   var timerStop = DateTime.Now.Ticks;
+
+    '   barcodeReader.Options.PossibleFormats = previousFormats;
+
+    '   if (results == null)
+    '   {
+    '      txtContent.Text = "No barcode recognized";
+    '   }
+    '   labDuration.Text = new TimeSpan(timerStop - timerStart).ToString();
+
+    '   if (results != null)
+    '   {
+    '      foreach (var result in results)
+    '      {
+    '         if (result.ResultPoints.Length > 0)
+    '         {
+    '            var rect = new Rectangle((int) result.ResultPoints[0].X, (int) result.ResultPoints[0].Y, 1, 1);
+    '            foreach (var point in result.ResultPoints)
+    '            {
+    '               if (point.X < rect.Left)
+    '                  rect = new Rectangle((int) point.X, rect.Y, rect.Width + rect.X - (int) point.X, rect.Height);
+    '               if (point.X > rect.Right)
+    '                  rect = new Rectangle(rect.X, rect.Y, rect.Width + (int) point.X - rect.X, rect.Height);
+    '               if (point.Y < rect.Top)
+    '                  rect = new Rectangle(rect.X, (int) point.Y, rect.Width, rect.Height + rect.Y - (int) point.Y);
+    '               if (point.Y > rect.Bottom)
+    '                  rect = new Rectangle(rect.X, rect.Y, rect.Width, rect.Height + (int) point.Y - rect.Y);
+    '            }
+    '            using (var g = picBarcode.CreateGraphics())
+    '            {
+    '               g.DrawRectangle(Pens.Green, rect);
+    '            }
+    '         }
+    '      }
+    '   }
+    '}
+
+
+
+    Shared Function AdjuntarImagenEnZip(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, Optional forzarID As Long = -1, Optional ByRef sError As String = "") As String
+
+        Dim DIRTEMP = DirApp() & "\Temp\"
+        Dim DIRFTP = DirApp() & "\DataBackupear\"
+
+
+
+
+
+        Dim destzip = DIRTEMP + "zipeado.zip"
+        Dim MyFile3 As New FileInfo(destzip)
+        Try
+            If MyFile3.Exists Then
+                MyFile3.Delete()
+            End If
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+        Dim files = Directory.GetFiles(DIRTEMP)
+        For Each file As String In files
+            IO.File.SetAttributes(file, FileAttributes.Normal)
+            IO.File.Delete(file)
+        Next
+
+
+        AsyncFileUpload1.SaveAs(destzip)
+        Dim archivos As Generic.List(Of String) = Extraer(destzip, DIRTEMP)
+
+
+
+
+
+
+        For Each nombre As String In archivos
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            Randomize()
+            Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+            Dim numeroCarta, vagon As Long
+
+
+            Try
+                numeroCarta = Val(ReadBarcode1D_ZXing(DIRTEMP + nombre, 0))
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
+            If numeroCarta <> 0 Then
+                sError &= "Código de barras detectado con Zxing. "
+
+            Else
+                numeroCarta = Val(ReadBarcode1D_ClearImage(DIRTEMP + nombre, 0))
+                If numeroCarta <> 0 Then
+                    sError &= "Código de barras detectado con ClearImage. "
+                End If
+            End If
+
+
+
+
+
+
+
+
+
+
+            ErrHandler2.WriteError((DIRTEMP + nombre).ToString() & " " & numeroCarta)
+
+            If numeroCarta = 0 Then
+                CartaDePorteManager.ParseNombreCarta(nombre, numeroCarta, vagon)
+            End If
+
+            If numeroCarta = 0 Then
+                sError &= "Código de barras no detectado en archivo " & nombre & " <br/> "
+                Continue For
+            End If
+
+
+
+
+            Dim MyFile1 As New FileInfo(DIRFTP + nombrenuevo)
+            Try
+                If MyFile1.Exists Then
+                    MyFile1.Delete()
+                End If
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '/////////////  COPIAR AL DIRECTORIO DE ARCHIVOS
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+            'copio el archivo cambiandole el nombre agregandole un sufijo
+            '-qué pasa si ya tenía una imagen la carta?
+            'de todas maneras, se esta copiando dos veces con distinto nombre en el mismo segundo
+
+            Dim MyFile2 As New FileInfo(DIRTEMP + nombre)
+            Try
+                If MyFile2.Exists Then
+                    MyFile2.CopyTo(DIRFTP + nombrenuevo)
+                End If
+            Catch ex As Exception
+            End Try
+
+
+
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////
+
+
+
+            'hacer así: si la imagen no se pudo asignar, borrar el archivo del \DataBackupear\
+
+
+
+            If True Then
+                Dim s = CartaDePorteManager.GrabarImagen(forzarID, SC, numeroCarta, vagon, nombrenuevo, sError, DirApp())
+
+                If s = "" Then
+                    'hacer así: si la imagen no se pudo asignar, borrar el archivo del \DataBackupear\
+
+                    Dim MyFile5 As New FileInfo(DIRFTP + nombrenuevo)
+                    Try
+                        If MyFile5.Exists Then
+                            MyFile5.Delete()
+                        End If
+                    Catch ex As Exception
+                    End Try
+
+
+                End If
+
+            Else
+
+
+
+
+                Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
+                If cdp.Id = -1 Then
+                    sError &= numeroCarta & "/" & vagon & " no existe <br/> "
+
+                    Continue For
+                End If
+                forzarID = cdp.Id
+
+
+                Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+                Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
+
+
+                If InStr(nombrenuevo.ToUpper, "TK") Then
+                    oCarta.PathImagen2 = nombrenuevo
+                ElseIf InStr(nombrenuevo.ToUpper, "CP") Then
+                    oCarta.PathImagen = nombrenuevo
+                Else
+                    If oCarta.PathImagen = "" Then
+                        oCarta.PathImagen = nombrenuevo 'nombrenuevo
+                    ElseIf oCarta.PathImagen2 = "" Then
+                        oCarta.PathImagen2 = nombrenuevo 'nombrenuevo
+                    Else
+                        sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a> tiene las dos imagenes ocupadas;  <br/> "
+                        'sError &= vbCrLf & numeroCarta & " tiene las dos imagenes ocupadas  <br/>"
+                        Continue For
+                    End If
+                End If
+
+                sError &= "<a href=""CartaDePorte.aspx?Id=" & forzarID & """ target=""_blank"">" & oCarta.NumeroCartaDePorte & "/" & oCarta.SubnumeroVagon & "</a>;  <br/> "
+
+                db.SubmitChanges()
+
+
+
+
+
+            End If
+
+
+        Next
+    End Function
+
+
+
+
+End Class
+
+
+
+
+

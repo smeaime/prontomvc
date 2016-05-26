@@ -1,0 +1,33 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="53191d38-6151-4a79-8d97-8645fe3f29b2" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Balance</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Temp Cubo Balance</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="f8a3da3d-208d-442b-8598-7e65c827d2c1">
+          <ID>Temp Cubo Balance</ID>
+          <Name>Balance</Name>
+          <CreatedTimestamp>2010-01-28T14:00:49Z</CreatedTimestamp>
+          <LastSchemaUpdate>2010-01-28T14:00:49Z</LastSchemaUpdate>
+          <LastProcessed>2010-01-28T14:01:06Z</LastProcessed>
+          <State>Processed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="fad76ab2-a417-402c-80c8-bc77b730830c">
+            <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+            <TableID>dbo__TempCuboBalance</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="989020da-6892-4f36-a18f-d99f1e388ad6">
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="6cdebf05-ba62-49a5-8e75-635e9c830b56" />
+          </ProactiveCaching>
+          <EstimatedSize>283344</EstimatedSize>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

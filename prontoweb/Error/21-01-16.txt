@@ -1,0 +1,210 @@
+
+Log Entry : 
+01/21/2016 21:40:18
+Error in: http://localhost:59798/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:51:45
+Error in: http://localhost:59798/ProntoWeb/WebServiceSuperbuscador.asmx/GetCompletionList. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/21/2016 21:51:45
+Error in: http://localhost:59798/ProntoWeb/WebServiceSuperbuscador.asmx/GetCompletionList. Error Message:En efecto, hay que usar WITH RECOMPILE en este store
+__________________________
+
+Log Entry : 
+01/21/2016 21:51:45
+Error in: http://localhost:59798/ProntoWeb/WebServiceSuperbuscador.asmx/GetCompletionList. Error Message:Timeout? Parameter sniffing? o usar WITH RECOMPILE para que el store no use la cache en este caso del Buscador que se usa con tantos registros.   ejecutar DBCC DROPCLEANBUFFERS y  DBCC FREEPROCCACHE ????? agregar OPTION RECOMPILE en el codigo TSQL? 
+__________________________
+
+Log Entry : 
+01/21/2016 21:51:45
+Error in: http://localhost:59798/ProntoWeb/WebServiceSuperbuscador.asmx/GetCompletionList. Error Message:System.ApplicationException
+Error en la ejecucion del SP: wBusqueda conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4{mAkmLjc0'cMf*dxOtvS`=utdBwfr4/;EdbMjupfgycg}TxwihMtb`;mzwgrcOO!\  - System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:a20aa3e4-86b7-4aa4-a59b-e3513ea56fd0
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, enumSPs enumNombreSP_Completo, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 720
+   at WebServiceSuperbuscador.GetCompletionList(String prefixText, Int32 count, String contextKey) in C:\Users\Administrador\Documents\bdl\prontoweb\App_Code\vbcode\WebServiceSuperbuscador.vb:line 52
+DataAccess
+__________________________
+
+Log Entry : 
+01/21/2016 21:52:40
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:La carta numero 543366236 id=1830205 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/21/2016 21:53:20
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:La carta numero 543366236 id=1830205 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:10
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:11
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:12
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:13
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:14
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:23
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:24
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:25
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:26
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:27
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:31
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at Pronto.ERP.Bll.ClienteManager.GetItem(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ClienteManager.vb:line 1194
+mscorlib
+__________________________
+
+Log Entry : 
+01/21/2016 21:54:37
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=1830205. Error Message:La carta numero 64646 id=1830205 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/21/2016 21:59:00
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2212065. Error Message:La carta numero 543366236 id=2212065 tiene el subnumerodefacturacion mal subn=0
+__________________________
