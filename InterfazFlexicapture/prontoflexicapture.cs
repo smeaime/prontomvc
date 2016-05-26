@@ -500,7 +500,7 @@ namespace ProntoFlexicapture
 
             if (false)
             {
-               FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
+                FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
                 IQueryable<procesGrilla> q = (from f in files
                                               where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
                                                      &&
@@ -554,7 +554,7 @@ namespace ProntoFlexicapture
             foreach (string Dir in ld)
             {
                 var dirInfo = new System.IO.DirectoryInfo(Dir);
-                sss.Add(dirInfo.Name );
+                sss.Add(dirInfo.Name);
             }
 
             //  TO DO ordenar por fecha
@@ -600,23 +600,35 @@ namespace ProntoFlexicapture
 
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
-            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+            FileInfo[] files;
 
-            d.EnumerateFiles()
+            try
+            {
 
-            kjhkjhkljh
 
-   //             System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
-   //at System.IO.FileInfoResultHandler.CreateObject(SearchResult result)
-   //at System.IO.FileSystemEnumerableIterator`1.MoveNext()
-   //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
-   //at System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
-   //at System.IO.DirectoryInfo.GetFiles(String searchPattern, SearchOption searchOption)
-   //at ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(Int32 cuantas, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 582
-   //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 108
-   //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
-   //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+                files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
+                // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+                // d.EnumerateFiles()
+            }
+            catch (Exception ex)
+            {
+                //             System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+                //at System.IO.FileInfoResultHandler.CreateObject(SearchResult result)
+                //at System.IO.FileSystemEnumerableIterator`1.MoveNext()
+                //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+                //at System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
+                //at System.IO.DirectoryInfo.GetFiles(String searchPattern, SearchOption searchOption)
+                //at ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(Int32 cuantas, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 582
+                //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 108
+                //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
+                //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+                Log("Probablemente explota Getfiles");
+                Log(ex.ToString());
+                return null;
+            }
+
+
 
 
 
