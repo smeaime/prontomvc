@@ -1,0 +1,118 @@
+Línea 278: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 297: la clase RichTextLib.RichTextBox del control rchObservaciones no era una clase de control cargada.
+Línea 526: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 542: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 558: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 576: la clase MSComCtl2.DTPicker del control DTFields no era una clase de control cargada.
+Línea 591: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 608: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 626: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 644: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 663: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 682: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 701: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 720: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 739: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 758: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 777: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 796: la clase FileBrowser1.FileBrowser del control FileBrowser1 no era una clase de control cargada.
+Línea 815: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 832: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 849: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 867: la clase MSDataListLib.DataCombo del control DataCombo1 no era una clase de control cargada.
+Línea 12: la propiedad Icon de frmDetRequerimientos tenía una referencia a archivo no válida.
+Línea 285: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 286: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 303: el nombre de la propiedad _ExtentX de rchObservaciones no es válido.
+Línea 304: el nombre de la propiedad _ExtentY de rchObservaciones no es válido.
+Línea 305: el nombre de la propiedad _Version de rchObservaciones no es válido.
+Línea 307: el nombre de la propiedad ScrollBars de rchObservaciones no es válido.
+Línea 308: el nombre de la propiedad TextRTF de rchObservaciones no es válido.
+Línea 535: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 536: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 537: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 538: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 539: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 540: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 551: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 552: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 553: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 554: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 555: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 556: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 567: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 568: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 569: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 571: el nombre de la propiedad Style de DataCombo1 no es válido.
+Línea 572: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 573: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 574: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 584: el nombre de la propiedad _ExtentX de DTFields no es válido.
+Línea 585: el nombre de la propiedad _ExtentY de DTFields no es válido.
+Línea 586: el nombre de la propiedad _Version de DTFields no es válido.
+Línea 588: el nombre de la propiedad Format de DTFields no es válido.
+Línea 589: el nombre de la propiedad CurrentDate de DTFields no es válido.
+Línea 600: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 601: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 602: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 603: el nombre de la propiedad Style de DataCombo1 no es válido.
+Línea 604: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 605: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 606: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 618: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 619: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 620: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 621: el nombre de la propiedad Style de DataCombo1 no es válido.
+Línea 622: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 623: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 624: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 636: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 637: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 638: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 639: el nombre de la propiedad Style de DataCombo1 no es válido.
+Línea 640: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 641: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 642: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 651: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 652: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 670: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 671: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 689: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 690: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 708: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 709: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 727: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 728: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 746: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 747: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 765: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 766: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 784: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 785: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 803: el nombre de la propiedad _ExtentX de FileBrowser1 no es válido.
+Línea 804: el nombre de la propiedad _ExtentY de FileBrowser1 no es válido.
+Línea 825: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 826: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 827: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 828: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 829: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 830: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 842: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 843: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 844: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 845: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 846: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 847: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 859: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 860: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 861: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 862: el nombre de la propiedad Style de DataCombo1 no es válido.
+Línea 863: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 864: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 865: el nombre de la propiedad Text de DataCombo1 no es válido.
+Línea 877: el nombre de la propiedad _ExtentX de DataCombo1 no es válido.
+Línea 878: el nombre de la propiedad _ExtentY de DataCombo1 no es válido.
+Línea 879: el nombre de la propiedad _Version de DataCombo1 no es válido.
+Línea 880: el nombre de la propiedad ListField de DataCombo1 no es válido.
+Línea 881: el nombre de la propiedad BoundColumn de DataCombo1 no es válido.
+Línea 882: el nombre de la propiedad Text de DataCombo1 no es válido.

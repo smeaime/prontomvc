@@ -1,0 +1,219 @@
+
+Log Entry : 
+04/07/2016 12:47:06
+Error in: http://localhost:59798/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+04/07/2016 12:54:00
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [COLUMNAADICIONAL2][PESOBRUTODESCARGA][TARIFAREF][FLETEAPAGAR1][FLETEPAGADO][PAGADORDELFLETE][PROVINCIA2][DIRECCION2][PROVINCIA1][DIRECCION1][ESABLECIMIENTO][CONDICIONAL][CONFORME][DECLARACIÓNDECALIDAD][LACARGASERÁPESADAENDESTINO][CONTRATONRO][TIPOGRANO][COSECHA][CHOFERCUIT][TRANSPORTISTACUIT][DESTINATARIOCUIT][CORREDORCUIT][NUMEROCARTA][BARRACEE][REMITENTECUIT][INTERMEDIARIOCUIT][TITULARCUIT] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 551894500 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 551894500 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 551894500 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 551940541 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 551940541 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 551940541 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 552450640 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 552450640 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 552450640 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 552450637 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 552450637 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 552450637 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 552485479 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 552485479 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 552485479 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 552485478 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 552485478 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 552485478 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 552484394 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 552484394 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 552484394 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 551952741 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 551952741 no existe
+__________________________
+
+Log Entry : 
+04/07/2016 12:55:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 551952741 no existe System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 23184
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
