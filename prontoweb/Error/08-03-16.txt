@@ -1,0 +1,873 @@
+
+Log Entry : 
+03/08/2016 09:16:40
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/08/2016 09:17:58
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Syngenta Facturación 07/03/2016 07/03/2016 4333 -1 -1 4333 4333 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/08/2016 09:25:06
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when sending the request to the server. (provider: TCP Provider, error: 0 - Se ha forzado la interrupción de una conexión existente por el host remoto.) ---> System.ComponentModel.Win32Exception (0x80004005): Se ha forzado la interrupción de una conexión existente por el host remoto
+   at System.Data.SqlClient.TdsParser.TdsExecuteRPC(_SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource`1 completion, Int32 startRpc, Int32 startParam)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at System.Data.Linq.SqlClient.SqlProvider.Execute(Expression query, QueryInfo queryInfo, IObjectReaderFactory factory, Object[] parentArgs, Object[] userArgs, ICompiledSubQuery[] subQueries, Object lastResult)
+   at System.Data.Linq.SqlClient.SqlProvider.ExecuteAll(Expression query, QueryInfo[] queryInfos, IObjectReaderFactory factory, Object[] userArguments, ICompiledSubQuery[] subQueries)
+   at System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   at System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2056
+ClientConnectionId:e4a90f0a-dfb8-4492-a0ac-02c0e1ca1c87
+__________________________
+
+Log Entry : 
+03/08/2016 09:25:06
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3082
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2261
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+A transport-level error has occurred when sending the request to the server. (provider: TCP Provider, error: 0 - Se ha forzado la interrupción de una conexión existente por el host remoto.)
+__________________________
+
+Log Entry : 
+03/08/2016 09:25:36
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Syngenta Facturación 07/03/2016 07/03/2016 4333 -1 -1 4333 4333 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/08/2016 09:26:05
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac
+__________________________
+
+Log Entry : 
+03/08/2016 09:26:06
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac 2
+__________________________
+
+Log Entry : 
+03/08/2016 09:26:06
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac 3
+__________________________
+
+Log Entry : 
+03/08/2016 09:26:06
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:esto tambien explota?
+__________________________
+
+Log Entry : 
+03/08/2016 09:26:06
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac 4
+__________________________
+
+Log Entry : 
+03/08/2016 09:26:07
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2288
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:19
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Syngenta Facturación 01/02/2016 29/02/2016 4333 -1 -1 4333 4333 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:37
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac 2
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac 3
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:esto tambien explota?
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2276130  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2276129  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2276126  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275287  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275293  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275936  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275499  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275498  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275501  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275500  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275905  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275904  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275676  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275657  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275672  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275679  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275066  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275290  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275289  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275492  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275060  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275292  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275550  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275172  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275142  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275143  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275586  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275578  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275575  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275574  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275583  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2275740  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274601  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274550  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274557  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274099  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274458  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274461  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274087  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274428  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2274086  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:cartaid 2273829  cartaimputada 0
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:en el sincro syngfac 4
+__________________________
+
+Log Entry : 
+03/08/2016 09:32:38
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2288
+__________________________
+
+Log Entry : 
+03/08/2016 10:39:38
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/08/2016 10:51:43
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/08/2016 10:56:17
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:idfac 79361
+__________________________
+
+Log Entry : 
+03/08/2016 10:56:18
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:cli 10 ciglesias@williamsentregas.com.ar 0 10
+__________________________
+
+Log Entry : 
+03/08/2016 11:06:57
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:idfac 79152
+__________________________
+
+Log Entry : 
+03/08/2016 11:06:58
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:cli 10 ciglesias@williamsentregas.com.ar 0 10
+__________________________
+
+Log Entry : 
+03/08/2016 11:07:01
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:idfac 79151
+__________________________
+
+Log Entry : 
+03/08/2016 11:07:02
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:cli 10 ciglesias@williamsentregas.com.ar 0 10
+__________________________
+
+Log Entry : 
+03/08/2016 11:07:40
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/08/2016 11:07:54
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:07:54
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:11:01
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:System.ArgumentOutOfRangeException
+Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Web.UI.WebControls.DataKeyArray.get_Item(Int32 index)
+   at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.<>c__DisplayClass13.<KeepSelection>b__8(GridViewRow item2) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 121
+   at System.Linq.Lookup`2.CreateForJoin(IEnumerable`1 source, Func`2 keySelector, IEqualityComparer`1 comparer)
+   at System.Linq.Enumerable.<GroupJoinIterator>d__6a`4.MoveNext()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 119
+   at Facturas.GetListaDeFacturasTildadas() in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 1238
+   at Facturas.imprimir_bool(Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 2083
+mscorlib
+__________________________
+
+Log Entry : 
+03/08/2016 11:11:01
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:Lista 
+__________________________
+
+Log Entry : 
+03/08/2016 11:11:01
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:0
+__________________________
+
+Log Entry : 
+03/08/2016 11:11:01
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:Lista 
+__________________________
+
+Log Entry : 
+03/08/2016 11:11:03
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:11:04
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:11:21
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:System.ArgumentOutOfRangeException
+Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Web.UI.WebControls.DataKeyArray.get_Item(Int32 index)
+   at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.<>c__DisplayClass13.<KeepSelection>b__8(GridViewRow item2) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 121
+   at System.Linq.Lookup`2.CreateForJoin(IEnumerable`1 source, Func`2 keySelector, IEqualityComparer`1 comparer)
+   at System.Linq.Enumerable.<GroupJoinIterator>d__6a`4.MoveNext()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 119
+   at Facturas.GridView1_PageIndexChanging(Object sender, GridViewPageEventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 1963
+   at System.Web.UI.WebControls.GridView.OnPageIndexChanging(GridViewPageEventArgs e)
+   at System.Web.UI.WebControls.GridView.HandlePage(Int32 newPage)
+   at System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   at System.Web.UI.WebControls.GridView.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.GridView.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+mscorlib
+__________________________
+
+Log Entry : 
+03/08/2016 11:12:08
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:System.ArgumentOutOfRangeException
+Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Web.UI.WebControls.DataKeyArray.get_Item(Int32 index)
+   at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.<>c__DisplayClass13.<KeepSelection>b__8(GridViewRow item2) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 121
+   at System.Linq.Lookup`2.CreateForJoin(IEnumerable`1 source, Func`2 keySelector, IEqualityComparer`1 comparer)
+   at System.Linq.Enumerable.<GroupJoinIterator>d__6a`4.MoveNext()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 119
+   at Facturas.GridView1_PageIndexChanging(Object sender, GridViewPageEventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 1963
+   at System.Web.UI.WebControls.GridView.OnPageIndexChanging(GridViewPageEventArgs e)
+   at System.Web.UI.WebControls.GridView.HandlePage(Int32 newPage)
+   at System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   at System.Web.UI.WebControls.GridView.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.GridView.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+mscorlib
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:13
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:13
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:19
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:20
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:28
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:29
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:33
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:34
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:41
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:idfac 79148
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:42
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:cli 10 ciglesias@williamsentregas.com.ar 2 10
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:48
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:48
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:58
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:13:58
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:14:03
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:14:03
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:14:10
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:idfac 79363
+__________________________
+
+Log Entry : 
+03/08/2016 11:14:10
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:cli 10 ciglesias@williamsentregas.com.ar 0 10
+__________________________
+
+Log Entry : 
+03/08/2016 11:14:20
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b5cc75e497014185b461410f6a83d6ff&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:14:21
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=2fceeadc5367459a986cab3f63baa8c9&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:01
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Diaz Forti 01/03/2016 31/03/2016 -1 -1 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:03
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para DIAZ FORTI
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:10
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada Diaz Forti
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:25
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Diaz Forti 24/02/2016 31/03/2016 -1 -1 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:26
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para DIAZ FORTI
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:30
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada Diaz Forti
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:57
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Diaz Forti 01/01/2016 31/03/2016 22509 -1 -1 22509 22509 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/08/2016 11:30:58
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para DIAZ FORTI
+__________________________
+
+Log Entry : 
+03/08/2016 11:31:03
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada Diaz Forti
+__________________________
+
+Log Entry : 
+03/08/2016 11:31:31
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Diaz Forti 01/01/2016 31/03/2016 -1 43 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/08/2016 11:31:59
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para DIAZ FORTI
+__________________________
+
+Log Entry : 
+03/08/2016 11:32:28
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:La procedencia  no tiene codigo postal
+__________________________
+
+Log Entry : 
+03/08/2016 11:32:28
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Falta el codigo ONCCA para el destino MOLINO JUAN SEMINO SA ( CARCARANA )
+__________________________
+
+Log Entry : 
+03/08/2016 11:32:28
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:La procedencia LAS PETACAS no tiene codigo postal
+__________________________
+
+Log Entry : 
+03/08/2016 11:32:29
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:La procedencia COLONIA TIROLEZA no tiene codigo postal
+__________________________
+
+Log Entry : 
+03/08/2016 11:32:30
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:La procedencia COLONIA BARON no tiene codigo postal
+__________________________
+
+Log Entry : 
+03/08/2016 11:32:30
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2306
+__________________________

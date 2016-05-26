@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <Body>
+    <ReportItems>
+      <Image Name="Image1">
+        <Source>External</Source>
+        <Value>=Parameters!ReportParameter1.Value</Value>
+        <Sizing>FitProportional</Sizing>
+        <Top>0mm</Top>
+        <Left>0mm</Left>
+        <Height>172.77292mm</Height>
+        <Width>156.54866mm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="Image2">
+        <Source>External</Source>
+        <Value>=Parameters!ReportParameter2.Value</Value>
+        <Sizing>FitProportional</Sizing>
+        <Top>183.007mm</Top>
+        <Left>0mm</Left>
+        <Height>169.5979mm</Height>
+        <Width>156.54866mm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+    </ReportItems>
+    <Height>352.6049mm</Height>
+    <Style>
+      <Border>
+        <Style>None</Style>
+      </Border>
+    </Style>
+  </Body>
+  <ReportParameters>
+    <ReportParameter Name="ReportParameter1">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ReportParameter2">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter2</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Width>156.54866mm</Width>
+  <Page>
+    <LeftMargin>25.4mm</LeftMargin>
+    <RightMargin>25.4mm</RightMargin>
+    <TopMargin>25.4mm</TopMargin>
+    <BottomMargin>25.4mm</BottomMargin>
+    <Style />
+  </Page>
+  <rd:ReportID>b0fb7df5-6c01-4d00-8a25-39ad30ced290</rd:ReportID>
+  <rd:ReportUnitType>Mm</rd:ReportUnitType>
+</Report>

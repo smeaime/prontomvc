@@ -1,0 +1,1339 @@
+﻿/* *************************************************************************** */
+/* *************************************************************************** */
+/* **********MASTER PAGE Y SUPER BUSCADOR*************************************************** */
+/* para el autocomplete, andá a .AutoCompleteScrollParaElSuperbuscador          */
+/* *************************************************************************** */
+.LoginLogo
+{
+	
+	/*height:	120px;*/
+	width: 400px;
+    
+	margin-left: 40px; 
+	margin-top: 5px;
+}
+
+
+.bodyMasterPage
+{
+	/* El asuntito de la imagen del background http://www.daniweb.com/forums/thread57245.html#  */ /*background-image: url('<%= imgPath %>'); */ /*background-image:"Imagenes/bck_header.jpg";*/
+	background-repeat: repeat-x;
+	background-attachment: scroll; /*es esto lo que tapa el segundo renglon!! */
+	background-image: url("../Imagenes/bck_header.jpg");
+	background-repeat: repeat-x;
+	background-attachment: scroll;
+	margin: 0; /* importante. si no, te pone un margen blanco*/ /*background-color: #507CBB; height: 100%; width: 100%; background-image: url('<%= imgPath %>');     background-repeat: repeat-x; background-attachment: scroll;"*/
+}
+
+.MasterPrimerRenglon
+{
+	/* El asuntito de la imagen del background http://www.daniweb.com/forums/thread57245.html#  */
+	height: 34px; /*background-image: url('<%= imgMenuBackgrund %>');*/
+	background-image: url("../Imagenes/bck_headerMenu.jpg");
+	background-repeat: repeat-x;
+	background-attachment: scroll; /*style="margin-top: 2px; */
+	border: 0;
+	padding: 0;
+}
+
+.MasterSegundoRenglon
+{
+	/* El asuntito de la imagen del background http://www.daniweb.com/forums/thread57245.html#  */ /*background-image: url('<%= imgSegundoSectorBackgrund %>');*/ /*margin-top: 10px;*/
+	padding-top: 10px;
+	margin: 10px; /*height: 2000px; 		background-image: url("../Imagenes/bck_headerSegundoSector.jpg");         background-repeat: repeat-x;          background-attachment: scroll;*/
+}
+
+.MasterLogo
+{
+	height: 62px;
+	width: 180px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
+
+.txtBuscar
+{
+	/* si es distinto el estilo del txtBuscar con el de su watermark, va a haber cambios de tamaños cuando  		saques el watermark */
+	padding-left: 3px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border: 2px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-image: url('../Imagenes/lupita.jpg');
+	background-position: right;
+	background-repeat: no-repeat;
+	width: 400PX; /*font-family: Verdana;*/ /*font-size:  medium;*/ /*BorderStyle="None"*/
+	font-family: Verdana;
+	font-size: medium;
+
+	height: 23px;
+
+}
+
+.CombitoDelSuperbuscador
+{
+	height: 25px; /*  2 mas que el textbox  */
+
+	margin-bottom: 0px;
+    margin-top: 0px;
+    
+    padding-left: 0px;
+    padding: 0px;
+	border:0 px;
+	margin-left: 0px;
+	margin-right: 0px;
+
+	font-family: Verdana;
+	font-size: small;
+	
+	width: 100PX; 
+/*	font-family: Verdana;
+	font-size: small; */
+	 vertical-align:top;
+		
+    }
+
+.panelSuperbuscador
+{
+    width: 520px;
+}
+
+/* 
+///////////////////////////////////////////////////////////////
+	texto con watermarked para el sombreado de los "buscar"
+
+///////////////////////////////////////////////////////////////
+*/
+.watermarkedBuscar
+{
+	height: 23px; /*20px;*/
+
+/* no sirve usar inherit, porque no hereda al textbox, sino al div */
+	padding-left:  3px; /* 3px; */
+	margin-left: 0px; /*  0px; */
+	margin-right:  0px; /*  0px; /*height:18px;    width:150px;    padding:2px 0 0 2px;    border:1px solid #BEBEBE;    background-color:#F0F8FF;*/
+	border: 2px;
+	color: Silver;
+
+	width: 400PX; /* 420PX; /*background-image: url('../Imagenes/lupita.jpg');*/ /*font-family: Verdana; 	font-weight: normal; 	font-size: x-small;*/
+	font-family: Verdana; /* Verdana; */
+	font-size: medium; /* small;*/
+		background-image: url('../Imagenes/lupita.jpg');
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+.watermarked
+{
+	padding-left:  inherit; /* 3px; */
+	margin-left: inherit; /*  0px; */
+	margin-right:  inherit; /*  0px; /*height:18px;    width:150px;    padding:2px 0 0 2px;    border:1px solid #BEBEBE;    background-color:#F0F8FF;*/
+	color: Silver;
+	height: inherit; /*20px;*/
+	width: inherit; /* 420PX; /*background-image: url('../Imagenes/lupita.jpg');*/ /*font-family: Verdana; 	font-weight: normal; 	font-size: x-small;*/
+	font-family: inherit; /* Verdana; */
+	font-size: inherit; /* small;*/
+}
+
+
+
+.butBuscar
+{
+	margin: 0px;
+	padding: 0px;
+	height: 6px;
+	width: 100%;
+	top: 1px;
+}
+
+
+
+
+
+
+/*
+usar validacion de css 3.0
+http://stackoverflow.com/questions/4810401/css-3-0-in-visual-studio-2010
+http://visualstudiogallery.msdn.microsoft.com/7211bcac-091b-4a32-be2d-e797be0db210/view/Discussions
+*/
+
+.cssTextoComun
+{
+	font-size: 11px;
+	font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;
+	color: White; /* #333;*/
+	line-height: 1.28;
+	text-align: left;
+	direction: ltr;
+}
+
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+
+/* boton clasico */
+
+.but
+{
+	margin: 0px;
+	border: 1px solid #2F5BB7; /* facebook */ /*white;*/
+	height: 24px;
+	width: 70px;
+	padding: 3px;
+	font-weight: bolder;
+	font-size: 9pt;
+	color: white;
+	font-family: Verdana;
+	background-color: #4F6AA3; /* facebook */
+	cursor: hand;
+}
+
+
+.butcancela
+{
+	margin: 0px;
+	border: 1px solid #C6C6C6; /* facebook */ /*white;*/
+	height: 23px;
+	width: 70px;
+	padding: 3px;
+	font-weight: normal;
+	font-size: x-small;
+	color: #333;
+	font-family: Verdana;
+	background-color: #F8F8F8; /* facebook */
+	cursor: hand;
+}
+
+/* 
+	cómo hacer lo del hover o rollover ? así no usa:
+ 
+	.butcancela .hover { text-decoration: underline; }
+
+*/
+
+.butAzulFacebook
+{
+	margin: 0px;
+	margin-right: 40px;
+	border: 1px solid #29447E; /* facebook */ /*white;*/
+	height: 23px;
+	width: auto;
+	padding-top: 5px;
+	padding-right: 8px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	font-weight: bold;
+	font-size: small;
+	color: white;
+	font-family: Verdana;
+	background-color: #4F6AA3; /* facebook */
+	cursor: hand;
+}
+
+
+.butAzulGoogle
+{
+	margin: 0px;
+	border: 1px solid #2F5BB7; /* facebook */ /*white;*/
+	height: 25px;
+	width: 70px;
+	padding: 3px;
+	font-weight: bold;
+	font-size: x-small;
+	color: white;
+	font-family: Verdana;
+	background-color: #357AE8; /* facebook */
+	cursor: hand;
+}
+
+
+.butCrearViejo
+{
+	font-weight: normal;
+	text-decoration: none; /*sin underline */
+	margin: 0px;
+	margin-right: 40px;
+	border: 1px solid #29447E; /* facebook */ /*white;*/
+	height: 23px;
+	width: auto;
+	padding-top: 5px;
+	padding-right: 8px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	font-size: small;
+	color: white;
+	font-family: Verdana;
+	background-color: #4F6AA3; /* facebook */
+	cursor: hand;
+}
+
+
+
+/*botones google*/
+.jfk-button-action
+{
+	background-color: #4D90FE;
+	background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+	background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
+	background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
+	background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
+	background-image: linear-gradient(top,#4d90fe,#4787ed);
+	border: 1px solid #3079ED;
+	color: white;
+}
+
+.jfk-button
+{
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	cursor: default;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	margin-right: 16px;
+	height: 27px;
+	line-height: 27px;
+	min-width: 54px;
+	outline: 0;
+	padding: 0 8px;
+}
+/*
+    border: 1px solid #2F4F4F;
+    color: white;
+    background-color: #4A3C8C;
+*/
+
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+
+/* links */
+
+a:link
+{
+	text-decoration: underline;
+	color: inherit;
+}
+/* unvisited link */
+a:hover
+{
+	text-decoration: underline;
+}
+
+/*
+a:active {  text-decoration: none }
+a:visited {  text-decoration: none }
+a:hover { text-decoration: underline; }
+.linkHoverSubrayado:hover{ text-decoration: underline;}
+*/
+
+/* cómo hago para no perder el underline en las paginas de la grilla? */
+
+
+
+
+
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+.t1
+{
+	border: #4A3C8C 1px solid;
+	padding: 4px;
+	text-align: left;
+	width: 316px;
+	margin-left: 0px;
+}
+
+.header
+{
+	background-color: #4A3C8C;
+	font-weight: bold;
+	vertical-align: middle;
+	text-align: center;
+	color: #F0FFFF;
+}
+
+
+
+.imp
+{
+	border: #0000FF 1px solid;
+	color: #0000FF;
+	font-family: Verdana;
+	background-color: #F0FFFF;
+	margin-left: 0px;
+}
+
+.deletebutoon
+{
+	background-image: "~/Imagenes/close.gif";
+}
+
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
+
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* TABLA DE ENCABEZADO */
+
+body
+{
+	font-family: Verdana, Arial, Sans-Serif;
+	font-size: 11px;
+}
+
+h1
+{
+	font-size: 15px;
+}
+
+.LabelCell
+{
+	/*background-color: #507CBB;*/
+	color: #fff; /* font-weight: bold;*/
+	vertical-align: top;
+	border: thin solid #FFFFFF;
+	width: 270px; /*border-right: thin solid;    border-top: thin solid;    border-left: thin solid;    border-bottom: thin solid;*/
+}
+
+.EncabezadoCell
+{
+	/*border: thin solid #FFFFFF;*/
+	border: none;
+	font-size: small;
+	color: White;
+}
+
+.EncabezadoCellOculto
+{
+	/*border: thin solid #FFFFFF;*/
+	border: none;
+	font-size: small;
+	color: White;
+	visibility: hidden;
+	display: none;
+}
+
+.EncabezadoCellSeparadorDerecha
+{
+	/*border: thin solid #FFFFFF;*/
+	border-right-style: solid;
+}
+
+
+.EncabezadoTexto
+{
+	color: White;
+	font-size: small;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+fieldset
+{
+	padding: 20px;
+	padding-top: 0; /*  Fix issue in IE where padding-top is not applied. Add margin to legend instead */
+}
+
+legend
+{
+	margin-bottom: 10px;
+}
+
+.Label
+{
+	display: block;
+	font-weight: bold;
+	background-color: #507cd1;
+	color: #fff;
+}
+
+.Degrade
+{
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='degradado.png');
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+TEXTBOX Y DROPDOWNLIST Y AJAX-COMBOBOX
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.CssCombo
+{
+	width: 180px;
+	margin-left: 0px;
+	margin-right: 0px;
+	/*filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+	background-color: transparent;
+	background: transparent;
+	border: none;*/
+}
+
+.CssTextBox /*tiene que ser -4px que el combo */
+{
+	width: 176px;
+	margin-left: 0px;
+}
+
+.CssTextBoxChico /*tiene que ser -4px que el combo */
+{
+	width: 66px;
+	margin-left: 0px;
+}
+
+
+.CssNumBox /*tiene que ser -4px que el combo */
+{
+	width: 176px;
+	margin-left: 0px;
+	text-align: right;
+}
+
+
+
+/*css para el combobox de ajax. no me anda */
+/*http://forums.asp.net/t/1511600.aspx*/
+.WindowsStyle .ajax__combobox_inputcontainer
+{
+}
+.WindowsStyle .ajax__combobox_textboxcontainer
+{
+	width: 155px;
+}
+.WindowsStyle .ajax__combobox_textboxcontainer input
+{
+	width: 155px;
+}
+.WindowsStyle .ajax__combobox_buttoncontainer
+{
+}
+.WindowsStyle .ajax__combobox_buttoncontainer button
+{
+	/*background-image: ;*/
+	background-position: center;
+	background-repeat: no-repeat;
+	border-color: ButtonFace;
+	height: 15px;
+	width: 15px;
+}
+.WindowsStyle .ajax__combobox_itemlist
+{
+	margin: 0px;
+	padding: 0px;
+	cursor: default;
+	list-style-type: none;
+	text-align: left;
+	border: solid 1px ButtonShadow;
+	background-color: Window;
+	color: WindowText;
+}
+.WindowsStyle .ajax__combobox_itemlist li
+{
+	white-space: nowrap;
+	width: 155px;
+	padding: 0 3px 0 2px;
+}
+
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* Oculto */
+
+
+.Oculto
+{
+	display: none;
+}
+
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* Para transformar boton en link */
+
+
+.button-link
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: medium;
+	background-color: transparent;
+	text-decoration: underline;
+	padding: 0;
+	color: White;
+	margin-right: 0px;
+}
+
+
+
+/* ////////////////////////////////////////////////////////
+ VALIDATOR CALLOUT
+*/
+
+
+.CustomValidatorCalloutStyle div, .CustomValidatorCalloutStyle td
+{
+	border: solid 1px Black;
+	background-color: #FFFACD; /*LemonChiffon*/
+	color: Black;
+}
+
+
+
+/* ////////////////////////////////////////////////////////
+ PARA HACER WRAP DE COLUMNAS SIN ESPACIOS EN BLANCO
+*/
+
+.WrapSinEspacios
+{
+	white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
+	white-space: -pre-wrap; /* Opera 4 - 6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	white-space: pre-wrap; /* CSS3 */
+	word-wrap: break-word; /* IE 5.5+ */
+	text-overflow: ellipsis;
+}
+
+.grillarow
+{
+	text-overflow: ellipsis;
+	height: 50px;
+	max-height: 50px;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+AUTOCOMPLETE
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/*http://forums.asp.net/p/1407330/3740472.aspx#3740472*/
+
+
+.AutoCompleteScroll
+{
+	/*height: 200px;*/ /* NO ES NEGOCIO: hace que no se descontrole el tamaño en IE6, pero deja una barra de scroll fija */
+	max-height: 200px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border: 0px solid;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px 0px;
+	width: auto !important; /*para que los items no hagan wrap*/ /*http://publicityson.blogspot.com/2009/09/autocomplete-extender-word-wrapping.html*/ /*overflow: visible !important; */
+}
+
+
+
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+AUTOCOMPLETE del SUPERBUSCADOR
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+.AutoCompleteScrollParaElSuperbuscador
+{
+	font-size: small;
+	font-weight: normal;
+	max-height: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border: 1px solid;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px 0px; /*overflow: visible !important; */ /*height: 200px;*/ /* NO ES NEGOCIO: hace que no se descontrole el tamaño en IE6, pero deja una barra de scroll fija */ /*border: 2px solid #0;*/ /********************/
+	width: 350px; /*width: auto !important; */ /*para que los items no hagan wrap -pero si tenes un buen alto por renglon, no hay problema*/ /*http://publicityson.blogspot.com/2009/09/autocomplete-extender-word-wrapping.html*/ /*width:  300px;*/ /*para que los items no hagan wrap*/ /*http://publicityson.blogspot.com/2009/09/autocomplete-extender-word-wrapping.html*/ /*GUARDA: poner el width fijo me congelaba el scroll */ /**********************/ /*overflow: visible !important; */
+}
+
+
+.AutoCompleteScrollParaElSuperbuscadorlistitem
+{
+	height: 60px; /* tiene que ser igual al del hoverlistitem !!! */ /*padding: 5px  2px;*/
+	background-color: White;
+}
+
+.AutoCompleteScrollParaElSuperbuscadorhoverlistitem
+{
+	height: 60px; /* tiene que ser igual al del listitem !!! */
+	background-color: #4F6AA3;
+	color: White;
+}
+
+
+
+
+
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* http://www.velocityreviews.com/forums/t113606-web-textbox-charactercasing.html */
+
+.UpperCase
+{
+	text-transform: uppercase;
+}
+
+.ProperCase
+{
+	text-transform: capitalize;
+}
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
+
+
+.LogoTransparente
+{
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+
+
+celda
+{
+	background-color: #507CBB;
+	color: #fff;
+	font-weight: bold;
+	vertical-align: top;
+	border: thin solid #FFFFFF;
+	width: 270px;
+}
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* GridView Skin settings */
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.FooterStyle
+{
+	background-color: Transparent;
+	background: #Transparent; /* color: #fff;*/
+	color: #4A3C8C;
+	font-weight: bold;
+}
+
+.RowStyle
+{
+	background-color: #EFF3FB;
+}
+
+.AlternatingRowStyle
+{
+	background-color: #F0FFFF;
+}
+
+.SelectedRowStyle
+{
+	background-color: #D1DDF1;
+	color: #333333;
+	font-weight: bold;
+}
+
+.PagerStyle
+{
+	background-color: #2461BF;
+	color: #fff;
+	text-align: center;
+}
+
+.HeaderStyle
+{
+	background-color: #507CD1;
+	color: #fff;
+	font-weight: bold;
+}
+
+
+/* GRILLA ANIDADA */
+.GrillaAnidadaHeaderStyle
+{
+	background-color: #4F6AA3;
+	color: #fff;
+	font-weight: bold;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+y esta que diferencia tiene?
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+.DetalleGrilla
+{
+	margin-left: 0px;
+	margin-right: 3px;
+	margin-bottom: 0px;
+	margin-top: 2px;
+	border-color: White;
+}
+
+.DetalleGrilla tr th, .DetalleGrilla tr td
+{
+	border: solid 0px #000000;
+}
+
+
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+
+.ColumnaConWrapAunqueNoHayaEspacios
+{
+	white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
+	white-space: -pre-wrap; /* Opera 4 - 6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	white-space: pre-wrap; /* CSS3 */
+	word-wrap: break-word; /* IE 5.5+ */
+	max-width: 350px;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
+/*Modal Popup*/
+
+/* opacity and filter properties in css? http://forums.asp.net/p/1001257/1974118.aspx#1974118  
+   - Lo prefijás con -ms-   
+   - No me funcionó!
+*/
+
+.modalPopup
+{
+	background-color: #507CBB;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #29447E; /*#507CDD;*/
+	padding: 3px;
+	width: 250px; /*filter: alpha(opacity=90); esta linea me causa problemas en IE6 */ /*opacity: 0.9;*/
+	opacity: 1.0;
+}
+
+
+/* este es el color de fondo del popup */
+.modalBackground
+{
+	background-color: Gray;
+	filter: alpha(opacity=70);
+	opacity: 0.7;
+}
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* 
+///////////////////////////////////////////////////////////////
+					acordion
+
+*/
+
+
+.accordionHeader
+{
+	border: 1px solid #2F4F4F;
+	color: white;
+	background-color: #4A3C8C; /*	background-color: transparent;*/
+	font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif; /*Arial, Sans-Serif;*/
+	font-size: 9px;
+	font-weight: bold; /* normal */
+	padding: 3px;
+	margin-top: 3px;
+	margin-bottom: 0px;
+	cursor: pointer;
+}
+
+.accordionHeader a
+{
+	color: white;
+	background: none;
+	text-decoration: none;
+}
+
+.accordionHeader a:hover
+{
+	background: none;
+	text-decoration: nonr;
+}
+
+.accordionHeaderSelected
+{
+	border: 0px solid #2F4F4F;
+	color: white;
+	font-weight: bold;
+	font-style: normal;
+	cursor: pointer;
+}
+
+.accordionHeaderSelected a
+{
+	color: white;
+	text-decoration: none;
+}
+
+.accordionHeaderSelected a:hover
+{
+	background: none;
+	text-decoration: none;
+}
+
+
+.accordionContent
+{
+	background-color: #E7E7FF;
+	color: #4A3C8C; /* 	background-color: transparent; 	color: white; */
+	font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif; /*Arial, Sans-Serif;*/
+	font-size: 11px;
+	border: 0px solid #2F4F4F;
+	border-top: none;
+	padding: 3px;
+	padding-top: 10px;
+	font-style: normal;
+	font-size: small;
+}
+
+
+
+
+
+.accordionContent a
+{
+	margin-left: 10px; /* 21px es el margen que usa Facebook, donde pone el iconito */
+	text-decoration: none;
+	margin-top: 15px;
+	
+	color: #4A3C8C; /*color: white; */
+}
+
+.accordionContent a:link
+{
+	text-decoration: none;
+		color: #4A3C8C; /*color: white; */
+}
+
+.accordionContent a:active
+{
+	text-decoration: none;
+	color: #4A3C8C; /*color: white; */
+	/*border-left: 2px solid;
+	border-left-color: inherit;*/
+	 
+	 	/*border:2px;
+	border-left-width: 3;*/ /* una onda la barrita de seleccionado en GMail */
+	
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+.backgroundPopUp /*solo usado en documentosAFirmar */
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: Gray; /*#000;*/
+	-ms-filter: alpha(opacity=60);
+	-moz-opacity: 0.8;
+	-ms-opacity: 0.6;
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+.DropDownTransparente
+{
+	-moz-opacity: 0.99;
+	filter: alpha(opacity=100,finishopacity=100);
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*
+					tabcontainer
+http://www.krissteele.net/blogdetails.aspx?id=117
+http://blogs.visoftinc.com/archive/2007/09/26/ajax-control-toolkit-tab-control-themes.aspx
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+*/
+
+.SimpleTab .ajax__tab_body
+{
+	background: #507CBB;
+}
+
+
+
+
+.NewsTab .ajax__tab_body
+{
+	/*border: thin;*/
+	border: 1px solid; /*border-color: #7898d5;*/
+	border-color: white;
+	background: #Transparent; /*este es el color de fondo del contenido */
+	color: White;
+}
+
+.NewsTab .ajax__tab_header
+{
+	/*color: #aa976b;*/
+	color: white;
+	border: thin;
+	border-color: white;
+	font-size: x-small;
+	font-weight: bold;
+	background-color: Transparent; /*este es el color de fondo de la pestañita (no del contenido) */
+	margin-left: 4px;
+}
+
+
+.NewsTab .ajax__tab_outer
+{
+	/*background-color: White;*/
+	border: thin;
+	border-color: white;
+	color: White;
+}
+.NewsTab .ajax__tab_inner
+{
+	padding: 3px;
+	margin-right: 1px;
+	margin-left: 1px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	border: thin;
+	border-color: white; /*border-color: White;*/ /*background-color: #f8f6ea; */
+}
+.NewsTab .ajax__tab_hover .ajax__tab_outer
+{
+	background-color: #7898d5;
+	border: thin;
+	color: White;
+}
+.NewsTab .ajax__tab_hover .ajax__tab_inner
+{
+	background-color: #7898d5;
+	border: thin;
+	color: White;
+}
+.NewsTab .ajax__tab_active .ajax__tab_outer
+{
+	border: 1px solid;
+	border-style: solid solid none solid;
+	background-color: #7898d5; /*background-color: Transparent; */
+	border-color: white;
+	color: White;
+}
+.NewsTab .ajax__tab_active .ajax__tab_inner
+{
+	border-style: none;
+	background-color: #7898d5; /*background-color: Transparent; */
+	color: White;
+	border-color: white;
+}
+
+
+
+/* 
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+					tabcontainer sin bordes para asistente tipo wizard
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+*/
+
+
+
+
+.AsistenteTab .ajax__tab_body
+{
+	/*border: thin;*/
+	border: none; /*border-color: #7898d5;*/
+	border-color: white;
+	background: #Transparent; /*este es el color de fondo del contenido */
+	color: White;
+}
+
+.AsistenteTab .ajax__tab_header
+{
+	display: none; /*color: #aa976b;*/
+	color: white;
+	border: none;
+	border-color: white;
+	font-size: x-small;
+	font-weight: bold;
+	background-color: Transparent; /*este es el color de fondo de la pestañita (no del contenido) */
+	margin-left: 4px;
+}
+
+
+.AsistenteTab .ajax__tab_outer
+{
+	/*background-color: White;*/
+	border: none;
+	border-color: white;
+	color: White;
+}
+.AsistenteTab .ajax__tab_inner
+{
+	padding: 3px;
+	margin-right: 1px;
+	margin-left: 1px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	border: none;
+	border-color: white; /*border-color: White;*/ /*background-color: #f8f6ea; */
+}
+.AsistenteTab .ajax__tab_hover .ajax__tab_outer
+{
+	background-color: #7898d5;
+	border: none;
+	color: White;
+}
+.AsistenteTab .ajax__tab_hover .ajax__tab_inner
+{
+	background-color: #7898d5;
+	border: none;
+	color: White;
+}
+.AsistenteTab .ajax__tab_active .ajax__tab_outer
+{
+	border: 1px solid;
+	border-style: solid solid none solid;
+	background-color: #7898d5; /*background-color: Transparent; */
+	border-color: white;
+	color: White;
+}
+.AsistenteTab .ajax__tab_active .ajax__tab_inner
+{
+	border-style: none;
+	background-color: #7898d5; /*background-color: Transparent; */
+	color: White;
+	border-color: white;
+}
+
+
+
+
+
+
+
+/* 
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+para el pie de pagina
+http://www.cssstickyfooter.com/using-sticky-footer-code.html
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+*/
+
+html, body
+{
+	height: 100%;
+}
+
+#wrap
+{
+	min-height: 100%;
+}
+
+#main
+{
+	overflow: auto;
+	padding-bottom: 150px;
+}
+/* must be same height as the footer */
+
+#footer
+{
+	position: relative;
+	margin-top: -150px; /* negative value of footer height */
+	height: 150px;
+	clear: both;
+}
+
+/*Opera Fix*/
+body:before
+{
+	content: "";
+	height: 100%;
+	float: left;
+	width: 0;
+	margin-top: -32767px;
+}
+
+
+
+
+/* 
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+*/
+
+
+
+
+
+.TablaTransparente
+{
+	background-color: Black;
+	background: #Transparent;
+	border: none;
+}
+
+
+
+
+
+/* 
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+highlight del texto buscado en la grilla
+http://blog.evonet.com.au/post/Gridview-with-highlighted-search-results.aspx
+
+*/
+
+
+.highlight
+{
+	text-decoration: none;
+	color: black;
+	background: yellow;
+}
+
+
+/*
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+	DEVEXPRESS
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+*/
+
+.DevXGVCmmnd
+{
+	display: block;
+}
+
+
+
+.Alerta 
+{
+	/* sacado de Gmail */
+border-color: #F0C36D;
+background-color: #F9EDBE;
+color: #222;
+padding: 0 10px;
+border: 1px solid transparent;
+border-radius: 2px;
+-webkit-border-radius: 2px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
