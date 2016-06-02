@@ -207,11 +207,12 @@
       <siteMapNode url="ProntoWeb/CDPHumedades.aspx?tipo=0" title="Humedad"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
       <siteMapNode url="ProntoWeb/CartasDePorteFotos.aspx?Id=-1"  title="Import Imag 1"  description="Import Imagen" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />-->
+      <siteMapNode url="ProntoWeb/CartasDePorteReasignarImagenListadoViejo.aspx?Id=-1"  title="Reasignar"  description="Import Imag II" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
       <!--<siteMapNode url="ProntoWeb/CartasDePorteFotosDesatendida.aspx?Id=-1"  title="Desatendido"  description="Importador Imagen" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" /> -->
       <siteMapNode url="ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1"  title="Import Imag 2"  description="Import Imag II" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
-      
-      
-      
+
+
+
       <siteMapNode url="ProntoWeb/Reporte.aspx"  title="Buscador"  description="Buscador" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
     </siteMapNode>
 
