@@ -11736,7 +11736,12 @@ Public Class CartaDePorteManager
                         System.GC.Collect()
                         System.GC.WaitForPendingFinalizers()
                         ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14955
-                        'MyFile6.Delete() 'me está tirando que es usado por otro proceso
+
+                        Try
+                            MyFile6.Delete() 'me está tirando que es usado por otro proceso
+                        Catch ex As Exception
+                            ErrHandler2.WriteError(ex)
+                        End Try
                     End If
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -16695,35 +16700,41 @@ Public Class CDPMailFiltrosManager2
         Dim a = ""
 
 
+
         Select Case puntoventa
             Case 1
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a buenosaires@williamsentregas.com.ar<br/>"
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Buenos Aires<br/>" + vbCrLf + _
                         "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf + _
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
 
 
             Case 2
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a sanlorenzo@williamsentregas.com.ar<br/>"
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina San Lorenzo<br/>" + vbCrLf + _
                         "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf + _
                         "Tel: 03476 - 430234 / 430158<br/>sanlorenzo@williamsentregas.com.ar" + vbCrLf
 
             Case 3
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a arroyoseco@williamsentregas.com.ar<br/>"
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Arroyo Seco<br/>" + vbCrLf + _
                         "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf + _
                         "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
 
             Case 4
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a bahiablanca@williamsentregas.com.ar<br/>"
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Bahia Blanca<br/>" + vbCrLf + _
                         "Playa el Triangulo<br/>" + vbCrLf + _
                         "Tel: 0291 - 4007928 / 4816778<br/>bahiablanca@williamsentregas.com.ar" + vbCrLf
 
 
             Case Else
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a buenosaires@williamsentregas.com.ar<br/>"
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Buenos Aires<br/>" + vbCrLf + _
                         "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf + _
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
