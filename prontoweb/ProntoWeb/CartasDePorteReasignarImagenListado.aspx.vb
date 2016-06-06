@@ -703,9 +703,9 @@ Partial Class CartasDePorteReasignarImagenListado
 
         grillaEncoladas.DataSource = (From i In lista Where i.Contains(puntoventa) Select New With {.nombre = i.Substring(i.IndexOf("\Temp"))}).ToList
         grillaEncoladas.DataBind()
-        lblCantidad.Text = lista.Count & " cartas en cola.     Estado del servicio: " & ProntoFlexicapture.ClassFlexicapture.EstadoServicio()
-
-
+        Dim estado As String = ProntoFlexicapture.ClassFlexicapture.EstadoServicio()
+        lblCantidad.Text = lista.Count & " cartas en cola.     Estado del servicio: " & estado
+        If estado = "Stopped" Then FileUpload1.Enabled = False Else FileUpload1.Enabled = True
 
 
 
