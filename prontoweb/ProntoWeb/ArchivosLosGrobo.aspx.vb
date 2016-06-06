@@ -9,6 +9,8 @@ Imports System.Diagnostics
 Imports System.Collections.Generic
 
 Imports CartaDePorteManager
+Imports importadores
+
 
 Partial Class ArchivosLosGrobo
     Inherits System.Web.UI.Page
@@ -369,34 +371,34 @@ Partial Class ArchivosLosGrobo
 
                 If False Then
                     Dim ds = GetExcelToDatatable(nombrenuevo, , , 12000)
-                    ImportarEstablecimientosLosGrobo(ds)
+                    ImportarEstablecimientosLosGrobo(ds, HFSC.Value)
                 ElseIf tipo.Text = "partidos ypf" Then
                     Dim ds As New DataSet
                     Dim dt = getExcel2(nombrenuevo, "Partidos ONCCA")
                     ds.Tables.Add(dt.Copy)
-                    ImportarProvinciasONCCA(ds)
+                    ImportarProvinciasONCCA(ds, HFSC.Value)
                 ElseIf tipo.Text = "localidades ypf" Then
                     Dim ds As New DataSet
                     Dim dt = getExcel2(nombrenuevo, "Localidades ONCCA")
                     ds.Tables.Add(dt.Copy)
-                    ImportarLocalidadesONCCA(ds)
+                    ImportarLocalidadesONCCA(ds, HFSC.Value)
                 ElseIf tipo.Text = "localidades bld afip" Then
                     Dim ds As New DataSet
                     Dim dt = getExcel2(nombrenuevo, "Localidades BLD + Relcion AFIP")
                     ds.Tables.Add(dt.Copy)
-                    ImportarLocalidadesBLDafip(ds)
+                    ImportarLocalidadesBLDafip(ds, HFSC.Value)
                 ElseIf tipo.Text = "centros ypf" Then
                     Dim ds As New DataSet
                     Dim dt = getExcel2(nombrenuevo, "Hoja1")
                     ds.Tables.Add(dt.Copy)
-                    ImportarCentros(ds)
+                    ImportarCentros(ds, HFSC.Value)
                 ElseIf tipo.Text = "establecimientos grobo" Then
                     Dim ds As New DataSet
                     Dim dt = getExcel2(nombrenuevo, "bwF1C")
                     ds.Tables.Add(dt.Copy)
-                    ImportarEstablecimientosLosGrobo(ds)
+                    ImportarEstablecimientosLosGrobo(ds, HFSC.Value)
                 Else
-                    error
+                    'error
                 End If
 
 
@@ -426,463 +428,20 @@ Partial Class ArchivosLosGrobo
         Dim ds As New DataSet
         Dim dt = getExcel2("C:\Users\Mariano\Desktop\ypf\codigos oncca.xls", "Partidos ONCCA")
         ds.Tables.Add(dt.Copy)
-        ImportarProvinciasONCCA(ds)
+        ImportarProvinciasONCCA(ds, HFSC.Value)
     End Sub
 
 
-    Public Class Importadores
-        Sub ImportarEstablecimientosLosGrobo(ByVal ds As DataSet)
-            'ds.Tables(0).Rows(0).Item(0)
 
 
-            Const RENGLON_DE_ENCABEZADOS = 3
-            For c = 0 To ds.Tables(0).Columns.Count - 1
-                Try
-                    ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex.ToString)
-                End Try
-            Next
 
 
-            Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-            Dim establecimientos = From e In db.linqCDPEstablecimientos
 
 
-            For Each i As DataRow In ds.Tables(0).Rows
 
-                'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), HFSC.Value)
-                'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), HFSC.Value)
-                'Dim tarif As Double = Val(i("Tarifa"))
-                'Dim bPORdestino As Boolean
-                'Dim iddestino As Long
-                'Try
-                '    bPORdestino = (i("Por Destino?") = "SI")
-                '    If bPORdestino Then
-                '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), HFSC.Value)
-                '    End If
-                'Catch ex As Exception
-                '    ErrHandler2.WriteError(ex.ToString)
-                'End Try
 
 
-                Dim codestab As String = i(0).ToString ' i("CODIGO")
-                Dim aux1 As String = i(1).ToString 'i("Campo")
-                Dim aux2 As String = i(4).ToString 'i("Cuit Comprador")
-
-                CDPEstablecimientosManager.Update(HFSC.Value, codestab, "", "", aux1, aux2, "")
-
-
-                '            update(cdpestablecimientos)
-                '            AuxiliarString1 = descripcion
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-                '            update(cdpestablecimientos)
-                '            descripcion = AuxiliarString1
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-
-
-                'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
-
-                '            If existeelcodigo Then
-
-                'Else
-                '    e.
-
-                'End If
-
-
-            Next
-
-
-
-            MsgBoxAjax(Me, "Importación terminada")
-        End Sub
-
-
-        Sub ImportarLocalidadesBLDafip(ByVal ds As DataSet)
-            'ds.Tables(0).Rows(0).Item(0)
-
-
-            Const RENGLON_DE_ENCABEZADOS = 3
-            For c = 0 To ds.Tables(0).Columns.Count - 1
-                Try
-                    ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex.ToString)
-                End Try
-            Next
-
-
-            Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-            Dim establecimientos = From e In db.Localidades
-
-            Dim cont = 0
-
-            For Each i As DataRow In ds.Tables(0).Rows
-
-
-                'Id	DLocalidad	IdPartido	DPartido	IdProvincia	DProvincia	CodigoPostal	IdAFIPLocalidad	Latitud	Longitud
-
-                Dim nombrelocalidad As String = Trim(i(1).ToString) ' i("CODIGO")
-                Dim nombreprovincia As String = Trim(i(5).ToString) 'i("Campo")
-                Dim nombrepartido As String = Trim(i(3).ToString) 'i("Campo")
-                Dim codigopostal As String = Trim(i(6).ToString)
-                Dim codigoAFIP As String = Trim(i(7).ToString) 'i("Campo")
-                Dim codigoONCCA = ""
-
-                'como se si puedo pisar el nombre, o crear uno nuevo?
-                Try
-
-                    Dim idlocalidad = LocalidadManager.Update(HFSC.Value, nombrelocalidad, codigoONCCA, codigoAFIP)
-                    CDPDestinosManager.Update(HFSC.Value, nombrelocalidad, codigoONCCA, "", codigopostal, "", "", "")
-                Catch ex As Exception
-                    'Throw
-                End Try
-
-                cont += 1
-
-            Next
-
-
-
-            MsgBoxAjax(Me, "Importación terminada")
-        End Sub
-
-        Sub ImportarLocalidadesONCCA(ByVal ds As DataSet)
-            'ds.Tables(0).Rows(0).Item(0)
-
-
-            Const RENGLON_DE_ENCABEZADOS = 3
-            For c = 0 To ds.Tables(0).Columns.Count - 1
-                Try
-                    ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex.ToString)
-                End Try
-            Next
-
-
-            Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-            Dim establecimientos = From e In db.Localidades
-
-
-            For Each i As DataRow In ds.Tables(0).Rows
-
-                'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), HFSC.Value)
-                'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), HFSC.Value)
-                'Dim tarif As Double = Val(i("Tarifa"))
-                'Dim bPORdestino As Boolean
-                'Dim iddestino As Long
-                'Try
-                '    bPORdestino = (i("Por Destino?") = "SI")
-                '    If bPORdestino Then
-                '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), HFSC.Value)
-                '    End If
-                'Catch ex As Exception
-                '    ErrHandler2.WriteError(ex.ToString)
-                'End Try
-
-
-                If True Then
-                    Dim codestab As String = Trim(i(0).ToString) ' i("CODIGO")
-                    Dim aux1 As String = Trim(i(1).ToString) 'i("Campo")
-
-                    LocalidadManager.Update(HFSC.Value, aux1, codestab, "")
-
-                End If
-
-
-                If True Then
-                    Dim codestab As String = Trim(i(3).ToString) ' i("CODIGO")
-                    Dim aux1 As String = Trim(i(4).ToString) 'i("Campo")
-
-
-                    LocalidadManager.Update(HFSC.Value, aux1, codestab, "")
-                End If
-
-
-
-                '            update(cdpestablecimientos)
-                '            AuxiliarString1 = descripcion
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-                '            update(cdpestablecimientos)
-                '            descripcion = AuxiliarString1
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-
-
-                'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
-
-                '            If existeelcodigo Then
-
-                'Else
-                '    e.
-
-                'End If
-
-
-            Next
-
-
-
-            MsgBoxAjax(Me, "Importación terminada")
-        End Sub
-
-        Sub ImportarCentros(ByVal ds As DataSet)
-            'ds.Tables(0).Rows(0).Item(0)
-
-
-            Const RENGLON_DE_ENCABEZADOS = 3
-            For c = 0 To ds.Tables(0).Columns.Count - 1
-                Try
-                    ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex.ToString)
-                End Try
-            Next
-
-
-            Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-            Dim establecimientos = From e In db.Localidades
-
-
-            For Each i As DataRow In ds.Tables(0).Rows
-
-                'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), HFSC.Value)
-                'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), HFSC.Value)
-                'Dim tarif As Double = Val(i("Tarifa"))
-                'Dim bPORdestino As Boolean
-                'Dim iddestino As Long
-                'Try
-                '    bPORdestino = (i("Por Destino?") = "SI")
-                '    If bPORdestino Then
-                '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), HFSC.Value)
-                '    End If
-                'Catch ex As Exception
-                '    ErrHandler2.WriteError(ex.ToString)
-                'End Try
-
-
-                If True Then
-                    'Centro	    Código ONCCA		Código Postal	Población	Nombre Empresa	Nombre Planta
-                    '0655		MOLINOS	2200	San Lorenzo	MOLINOS RIO DE LA PLATA S.A.	Molinos Pta. Binielli
-
-                    Dim centro As String = Trim(i(0).ToString) ' i("Centro")
-                    Dim oncaa As String = Trim(i(1).ToString) 'i("Código ONCCA")
-                    Dim asdasd As String = Trim(i(2).ToString) '?????????
-                    Dim codpostal As String = Trim(i(3).ToString) 'i("Código Postal")
-                    Dim poblacion As String = Trim(i(4).ToString) 'i("Población")
-                    Dim empresa As String = Trim(i(5).ToString) 'i("Nombre Empresa")
-                    Dim planta As String = Trim(i(6).ToString) 'i("Nombre Planta")
-
-
-                    CDPDestinosManager.Update(HFSC.Value, centro, oncaa, asdasd, codpostal, poblacion, empresa, planta)
-                End If
-
-
-
-
-
-
-                '            update(cdpestablecimientos)
-                '            AuxiliarString1 = descripcion
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-                '            update(cdpestablecimientos)
-                '            descripcion = AuxiliarString1
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-
-
-                'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
-
-                '            If existeelcodigo Then
-
-                'Else
-                '    e.
-
-                'End If
-
-
-            Next
-
-
-
-            MsgBoxAjax(Me, "Importación terminada")
-        End Sub
-
-        Sub ImportarProvinciasONCCA(ByVal ds As DataSet)
-            'ds.Tables(0).Rows(0).Item(0)
-
-
-            Const RENGLON_DE_ENCABEZADOS = 3
-            For c = 0 To ds.Tables(0).Columns.Count - 1
-                Try
-                    ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex.ToString)
-                End Try
-            Next
-
-
-            Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-            Dim establecimientos = From e In db.linqPartido
-
-
-            For Each i As DataRow In ds.Tables(0).Rows
-
-                'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), HFSC.Value)
-                'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), HFSC.Value)
-                'Dim tarif As Double = Val(i("Tarifa"))
-                'Dim bPORdestino As Boolean
-                'Dim iddestino As Long
-                'Try
-                '    bPORdestino = (i("Por Destino?") = "SI")
-                '    If bPORdestino Then
-                '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), HFSC.Value)
-                '    End If
-                'Catch ex As Exception
-                '    ErrHandler2.WriteError(ex.ToString)
-                'End Try
-
-
-                If True Then
-                    Dim codestab As String = Trim(i(0).ToString) ' i("CODIGO")
-                    Dim aux1 As String = Trim(i(1).ToString) 'i("Campo")
-
-                    PartidoManager.Update(HFSC.Value, aux1, codestab)
-                End If
-
-
-                If True Then
-                    Dim codestab As String = Trim(i(3).ToString) ' i("CODIGO")
-                    Dim aux1 As String = Trim(i(4).ToString) 'i("Campo")
-
-
-                    PartidoManager.Update(HFSC.Value, aux1, codestab)
-                End If
-
-
-
-                '            update(cdpestablecimientos)
-                '            AuxiliarString1 = descripcion
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-                '            update(cdpestablecimientos)
-                '            descripcion = AuxiliarString1
-                'where isnumeric(descripcion)=0 --codigo alfanumerico
-
-
-
-                'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
-
-                '            If existeelcodigo Then
-
-                'Else
-                '    e.
-
-                'End If
-
-
-            Next
-
-
-
-            MsgBoxAjax(Me, "Importación terminada")
-        End Sub
-
-    End Class
-
-
-
-    Public Class PartidoManager
-
-
-        Shared Function Update(ByVal sc As String, ByVal nombreProvincia As String, ByVal codigoONCCA As String)
-            Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
-
-
-
-
-            Dim ue As linqPartido = (From p In db.linqPartido _
-                           Where p.Nombre.ToString = nombreProvincia _
-                           Select p).FirstOrDefault
-
-
-            If IsNothing(ue) Then
-                ue = New linqPartido
-
-                ue.Nombre = nombreProvincia
-
-                ue.Codigo = codigoONCCA
-                ue.CodigoONCCA = codigoONCCA
-
-                db.linqPartido.InsertOnSubmit(ue)
-            Else
-                ue.Codigo = codigoONCCA
-                ue.CodigoONCCA = codigoONCCA
-
-            End If
-
-
-            'buscar todos los establecimientos con codigos con letras y intercambiarlos con la descripcion
-
-            'update establecimientos
-            'set aux1=descripcion, descripcion=
-            'where descripcion is alfanumeric --recordar que uso descripcion por codigo 
-            '
-
-            db.SubmitChanges()
-        End Function
-    End Class
-
-
-
-    Partial Public Class LocalidadManager
-
-
-        Shared Function Update(ByVal sc As String, ByVal nombreLocalidad As String, ByVal codigoONCCA As String, codigoAFIP As String) As Integer
-            Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
-
-
-            Dim ue As Localidade = (From p In db.Localidades _
-                           Where p.Nombre.ToString = nombreLocalidad _
-                           Select p).FirstOrDefault
-
-
-            If IsNothing(ue) Then
-                ue = New Localidade
-
-                ue.Nombre = nombreLocalidad
-
-                ue.CodigoONCAA = codigoONCCA
-
-                ue.CodigoAfip = Val(codigoAFIP)
-
-                db.Localidades.InsertOnSubmit(ue)
-            Else
-                ue.CodigoONCAA = codigoONCCA
-
-                ue.CodigoAfip = Val(codigoAFIP)
-
-            End If
-
-
-            'buscar todos los establecimientos con codigos con letras y intercambiarlos con la descripcion
-
-            'update establecimientos
-            'set aux1=descripcion, descripcion=
-            'where descripcion is alfanumeric --recordar que uso descripcion por codigo 
-            '
-
-            db.SubmitChanges()
-
-            Return ue.IdLocalidad
-        End Function
-    End Class
+    
 
 
 
@@ -1254,6 +813,458 @@ End Class
 
 
 
+Public Class Importadores
+    Shared Sub ImportarEstablecimientosLosGrobo(ByVal ds As DataSet, SC As String)
+        'ds.Tables(0).Rows(0).Item(0)
 
+
+        Const RENGLON_DE_ENCABEZADOS = 3
+        For c = 0 To ds.Tables(0).Columns.Count - 1
+            Try
+                ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+            End Try
+        Next
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim establecimientos = From e In db.linqCDPEstablecimientos
+
+
+        For Each i As DataRow In ds.Tables(0).Rows
+
+            'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), HFSC.Value)
+            'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), HFSC.Value)
+            'Dim tarif As Double = Val(i("Tarifa"))
+            'Dim bPORdestino As Boolean
+            'Dim iddestino As Long
+            'Try
+            '    bPORdestino = (i("Por Destino?") = "SI")
+            '    If bPORdestino Then
+            '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), HFSC.Value)
+            '    End If
+            'Catch ex As Exception
+            '    ErrHandler2.WriteError(ex.ToString)
+            'End Try
+
+
+            Dim codestab As String = i(0).ToString ' i("CODIGO")
+            Dim aux1 As String = i(1).ToString 'i("Campo")
+            Dim aux2 As String = i(4).ToString 'i("Cuit Comprador")
+
+            CDPEstablecimientosManager.Update(SC, codestab, "", "", aux1, aux2, "")
+
+
+            '            update(cdpestablecimientos)
+            '            AuxiliarString1 = descripcion
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+            '            update(cdpestablecimientos)
+            '            descripcion = AuxiliarString1
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+
+
+            'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
+
+            '            If existeelcodigo Then
+
+            'Else
+            '    e.
+
+            'End If
+
+
+        Next
+
+
+
+        ' MsgBoxAjax(Me, "Importación terminada")
+    End Sub
+
+
+    Shared Sub ImportarLocalidadesBLDafip(ByVal ds As DataSet, SC As String)
+        'ds.Tables(0).Rows(0).Item(0)
+
+
+        Const RENGLON_DE_ENCABEZADOS = 3
+        For c = 0 To ds.Tables(0).Columns.Count - 1
+            Try
+                ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+            End Try
+        Next
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim establecimientos = From e In db.Localidades
+
+        Dim cont = 0
+
+        For Each i As DataRow In ds.Tables(0).Rows
+
+
+            'Id	DLocalidad	IdPartido	DPartido	IdProvincia	DProvincia	CodigoPostal	IdAFIPLocalidad	Latitud	Longitud
+
+            Dim nombrelocalidad As String = Trim(i(1).ToString) ' i("CODIGO")
+            Dim nombreprovincia As String = Trim(i(5).ToString) 'i("Campo")
+            Dim nombrepartido As String = Trim(i(3).ToString) 'i("Campo")
+            Dim codigopostal As String = Trim(i(6).ToString)
+            Dim codigoAFIP As String = Trim(i(7).ToString) 'i("Campo")
+            Dim codigoONCCA = ""
+
+            'como se si puedo pisar el nombre, o crear uno nuevo?
+            Try
+
+                Dim idlocalidad = LocalidadManager.Update(sc, nombrelocalidad, codigoONCCA, codigoAFIP)
+                CDPDestinosManager.Update(sc, nombrelocalidad, codigoONCCA, "", codigopostal, "", "", "")
+            Catch ex As Exception
+                'Throw
+            End Try
+
+            cont += 1
+
+        Next
+
+
+
+        'MsgBoxAjax(Me, "Importación terminada")
+    End Sub
+
+    Shared Sub ImportarLocalidadesONCCA(ByVal ds As DataSet, SC As String)
+        'ds.Tables(0).Rows(0).Item(0)
+
+
+        Const RENGLON_DE_ENCABEZADOS = 3
+        For c = 0 To ds.Tables(0).Columns.Count - 1
+            Try
+                ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+            End Try
+        Next
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim establecimientos = From e In db.Localidades
+
+
+        For Each i As DataRow In ds.Tables(0).Rows
+
+            'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), HFSC.Value)
+            'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), HFSC.Value)
+            'Dim tarif As Double = Val(i("Tarifa"))
+            'Dim bPORdestino As Boolean
+            'Dim iddestino As Long
+            'Try
+            '    bPORdestino = (i("Por Destino?") = "SI")
+            '    If bPORdestino Then
+            '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), HFSC.Value)
+            '    End If
+            'Catch ex As Exception
+            '    ErrHandler2.WriteError(ex.ToString)
+            'End Try
+
+
+            If True Then
+                Dim codestab As String = Trim(i(0).ToString) ' i("CODIGO")
+                Dim aux1 As String = Trim(i(1).ToString) 'i("Campo")
+
+                LocalidadManager.Update(SC, aux1, codestab, "")
+
+            End If
+
+
+            If True Then
+                Dim codestab As String = Trim(i(3).ToString) ' i("CODIGO")
+                Dim aux1 As String = Trim(i(4).ToString) 'i("Campo")
+
+
+                LocalidadManager.Update(SC, aux1, codestab, "")
+            End If
+
+
+
+            '            update(cdpestablecimientos)
+            '            AuxiliarString1 = descripcion
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+            '            update(cdpestablecimientos)
+            '            descripcion = AuxiliarString1
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+
+
+            'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
+
+            '            If existeelcodigo Then
+
+            'Else
+            '    e.
+
+            'End If
+
+
+        Next
+
+
+
+        '  MsgBoxAjax(Me, "Importación terminada")
+    End Sub
+
+    Shared Sub ImportarCentros(ByVal ds As DataSet, SC As String)
+        'ds.Tables(0).Rows(0).Item(0)
+
+
+        Const RENGLON_DE_ENCABEZADOS = 3
+        For c = 0 To ds.Tables(0).Columns.Count - 1
+            Try
+                ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+            End Try
+        Next
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim establecimientos = From e In db.Localidades
+
+
+        For Each i As DataRow In ds.Tables(0).Rows
+
+            'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), SC)
+            'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), SC)
+            'Dim tarif As Double = Val(i("Tarifa"))
+            'Dim bPORdestino As Boolean
+            'Dim iddestino As Long
+            'Try
+            '    bPORdestino = (i("Por Destino?") = "SI")
+            '    If bPORdestino Then
+            '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), SC)
+            '    End If
+            'Catch ex As Exception
+            '    ErrHandler2.WriteError(ex.ToString)
+            'End Try
+
+
+            If True Then
+                'Centro	    Código ONCCA		Código Postal	Población	Nombre Empresa	Nombre Planta
+                '0655		MOLINOS	2200	San Lorenzo	MOLINOS RIO DE LA PLATA S.A.	Molinos Pta. Binielli
+
+                Dim centro As String = Trim(i(0).ToString) ' i("Centro")
+                Dim oncaa As String = Trim(i(1).ToString) 'i("Código ONCCA")
+                Dim asdasd As String = Trim(i(2).ToString) '?????????
+                Dim codpostal As String = Trim(i(3).ToString) 'i("Código Postal")
+                Dim poblacion As String = Trim(i(4).ToString) 'i("Población")
+                Dim empresa As String = Trim(i(5).ToString) 'i("Nombre Empresa")
+                Dim planta As String = Trim(i(6).ToString) 'i("Nombre Planta")
+
+
+                CDPDestinosManager.Update(SC, centro, oncaa, asdasd, codpostal, poblacion, empresa, planta)
+            End If
+
+
+
+
+
+
+            '            update(cdpestablecimientos)
+            '            AuxiliarString1 = descripcion
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+            '            update(cdpestablecimientos)
+            '            descripcion = AuxiliarString1
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+
+
+            'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
+
+            '            If existeelcodigo Then
+
+            'Else
+            '    e.
+
+            'End If
+
+
+        Next
+
+
+
+        'MsgBoxAjax(Me, "Importación terminada")
+    End Sub
+
+    Shared Sub ImportarProvinciasONCCA(ByVal ds As DataSet, SC As String)
+        'ds.Tables(0).Rows(0).Item(0)
+
+
+        Const RENGLON_DE_ENCABEZADOS = 3
+        For c = 0 To ds.Tables(0).Columns.Count - 1
+            Try
+                ds.Tables(0).Columns(c).ColumnName = ds.Tables(0).Rows(RENGLON_DE_ENCABEZADOS).Item(c)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+            End Try
+        Next
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim establecimientos = From e In db.linqPartido
+
+
+        For Each i As DataRow In ds.Tables(0).Rows
+
+            'Dim idClienteAfacturarle As Long = BuscaIdClientePreciso(i("Cliente"), SC)
+            'Dim idart As Long = BuscaIdArticuloPreciso(i("Articulo"), SC)
+            'Dim tarif As Double = Val(i("Tarifa"))
+            'Dim bPORdestino As Boolean
+            'Dim iddestino As Long
+            'Try
+            '    bPORdestino = (i("Por Destino?") = "SI")
+            '    If bPORdestino Then
+            '        iddestino = BuscaIdWilliamsDestinoPreciso(i("Destino"), HFSC.Value)
+            '    End If
+            'Catch ex As Exception
+            '    ErrHandler2.WriteError(ex.ToString)
+            'End Try
+
+
+            If True Then
+                Dim codestab As String = Trim(i(0).ToString) ' i("CODIGO")
+                Dim aux1 As String = Trim(i(1).ToString) 'i("Campo")
+
+                PartidoManager.Update(SC, aux1, codestab)
+            End If
+
+
+            If True Then
+                Dim codestab As String = Trim(i(3).ToString) ' i("CODIGO")
+                Dim aux1 As String = Trim(i(4).ToString) 'i("Campo")
+
+
+                PartidoManager.Update(SC, aux1, codestab)
+            End If
+
+
+
+            '            update(cdpestablecimientos)
+            '            AuxiliarString1 = descripcion
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+            '            update(cdpestablecimientos)
+            '            descripcion = AuxiliarString1
+            'where isnumeric(descripcion)=0 --codigo alfanumerico
+
+
+
+            'CDPEstablecimientoManager.Update(codEstab, desc, obs1)
+
+            '            If existeelcodigo Then
+
+            'Else
+            '    e.
+
+            'End If
+
+
+        Next
+
+
+
+        ' MsgBoxAjax(Me, "Importación terminada")
+    End Sub
+
+End Class
+
+
+
+Public Class PartidoManager
+
+
+    Shared Function Update(ByVal sc As String, ByVal nombreProvincia As String, ByVal codigoONCCA As String)
+        Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+
+
+        Dim ue As linqPartido = (From p In db.linqPartido _
+                       Where p.Nombre.ToString = nombreProvincia _
+                       Select p).FirstOrDefault
+
+
+        If IsNothing(ue) Then
+            ue = New linqPartido
+
+            ue.Nombre = nombreProvincia
+
+            ue.Codigo = codigoONCCA
+            ue.CodigoONCCA = codigoONCCA
+
+            db.linqPartido.InsertOnSubmit(ue)
+        Else
+            ue.Codigo = codigoONCCA
+            ue.CodigoONCCA = codigoONCCA
+
+        End If
+
+
+        'buscar todos los establecimientos con codigos con letras y intercambiarlos con la descripcion
+
+        'update establecimientos
+        'set aux1=descripcion, descripcion=
+        'where descripcion is alfanumeric --recordar que uso descripcion por codigo 
+        '
+
+        db.SubmitChanges()
+    End Function
+End Class
+
+
+
+Partial Public Class LocalidadManager
+
+
+    Shared Function Update(ByVal sc As String, ByVal nombreLocalidad As String, ByVal codigoONCCA As String, codigoAFIP As String) As Integer
+        Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+        Dim ue As Localidade = (From p In db.Localidades _
+                       Where p.Nombre.ToString = nombreLocalidad _
+                       Select p).FirstOrDefault
+
+
+        If IsNothing(ue) Then
+            ue = New Localidade
+
+            ue.Nombre = nombreLocalidad
+
+            ue.CodigoONCAA = codigoONCCA
+
+            ue.CodigoAfip = Val(codigoAFIP)
+
+            db.Localidades.InsertOnSubmit(ue)
+        Else
+            ue.CodigoONCAA = codigoONCCA
+
+            ue.CodigoAfip = Val(codigoAFIP)
+
+        End If
+
+
+        'buscar todos los establecimientos con codigos con letras y intercambiarlos con la descripcion
+
+        'update establecimientos
+        'set aux1=descripcion, descripcion=
+        'where descripcion is alfanumeric --recordar que uso descripcion por codigo 
+        '
+
+        db.SubmitChanges()
+
+        Return ue.IdLocalidad
+    End Function
+End Class
 
 

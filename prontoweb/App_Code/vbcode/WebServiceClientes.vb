@@ -134,10 +134,12 @@ Public Class WebServiceClientes
         'Pronto.ERP.Bll.CartaPorteManagerAux()
 
 
-        'SC = SC.Replace(vbNewLine, "\n")
         If Not Diagnostics.Debugger.IsAttached Then
-            SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
-
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
         End If
 
         'ErrHandler2.WriteError("AcopiosPorCliente " & NombreCliente & " - " & Encriptar(SC))

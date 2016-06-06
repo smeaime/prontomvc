@@ -135,14 +135,14 @@ Partial Class CartasDePorteReasignarImagenListadoViejo
 
                     'Dim filePaths = Directory.GetFiles("c:\MyDir\")
 
-
-
+                    
                     Dim Directory = New DirectoryInfo(DIRTEMP)
                     Dim dt = (From f In Directory.GetFiles("*.*", SearchOption.AllDirectories) _
-                              Where Not f.Name.Contains(".zip") _
+                              Where Not f.Name.Contains(".zip") And Not f.Name.Contains(".bdl") _
+                                    And f.FullName.Contains("_IMPORT1") _
                                  Order By f.LastWriteTime Descending _
                                  Select New With {
-                                f.Name, f.FullName, f.LastWriteTime
+                    f.Name, f.FullName, f.LastWriteTime
                     }
                     ).Take(100).ToList()
 
