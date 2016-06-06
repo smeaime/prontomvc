@@ -609,7 +609,7 @@ namespace ProntoFlexicapture
                 files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
                 // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
 
-                // d.EnumerateFiles()
+                //d.EnumerateFiles()
             }
             catch (Exception ex)
             {
