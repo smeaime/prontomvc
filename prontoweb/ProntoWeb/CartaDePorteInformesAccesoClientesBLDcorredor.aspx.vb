@@ -464,8 +464,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
 
 
-
-
+        
 
         Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser().UserName, HFSC.Value)  'c.ToList()
         Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(HFSC.Value, "ClienteBLDcorredorCUIT"), "")

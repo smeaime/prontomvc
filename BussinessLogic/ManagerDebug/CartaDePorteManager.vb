@@ -9368,6 +9368,26 @@ Public Class CartaDePorteManager
 
 
 
+            Dim pat As String = .Patente.Replace(" ", "")
+            If Not (pat.Length = 6 Or pat.Length = 7 Or pat.Length = 0) Then
+
+                ms &= "La patente del camión es inválida "
+                ms &= vbCrLf   'return false
+
+            End If
+
+
+            Dim aco As String = .Acoplado.Replace(" ", "")
+            If Not (aco.Length = 6 Or aco.Length = 7 Or aco.Length = 0) Then
+
+                ms &= "La patente del acoplado es inválida "
+                ms &= vbCrLf   'return false
+
+            End If
+
+
+
+
             If False Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11839
                 'Cada vez que se graba la carta de porte, si el Entregador no es Williams ni está vacío (es decir,
@@ -9618,6 +9638,11 @@ Public Class CartaDePorteManager
                     ms &= vbCrLf   'return false
 
                 End If
+
+
+
+             
+
 
 
             End If

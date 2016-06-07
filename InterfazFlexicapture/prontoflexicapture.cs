@@ -527,17 +527,16 @@ namespace ProntoFlexicapture
             //FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
             // IEnumerable<FileInfo> files = d.EnumerateFiles("Export*.xls", SearchOption. .AllDirectories); //Getting Text files
 
-            // levantá solo los nombres de directorios y agregales EXPORTToXLS
-            string[] ld = Directory.GetDirectories(dir);
+            
 
 
-            //  http://stackoverflow.com/questions/7865159/retrieving-files-from-directory-that-contains-large-amount-of-files
-            //http://stackoverflow.com/questions/1199732/directoryinfo-getfiles-slow-when-using-searchoption-alldirectories
+            var di = new DirectoryInfo(DirApp);
+            List<string> directories = di.EnumerateDirectories()
+                    .OrderByDescending(d => d.CreationTime)
+                    .Select(d => d.Name)
+                    .ToList();
 
-            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
-
-
-
+            return directories;
 
 
             //foreach (FileInfo file in Files)
@@ -548,6 +547,17 @@ namespace ProntoFlexicapture
 
             //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
+
+
+
+            // levantá solo los nombres de directorios y agregales EXPORTToXLS
+            string[] ld = Directory.GetDirectories(dir);
+
+
+            //  http://stackoverflow.com/questions/7865159/retrieving-files-from-directory-that-contains-large-amount-of-files
+            //http://stackoverflow.com/questions/1199732/directoryinfo-getfiles-slow-when-using-searchoption-alldirectories
+
+            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
 
 
             List<string> sss = new List<string>();
@@ -566,6 +576,7 @@ namespace ProntoFlexicapture
             //         select f.FullName);
             //     return q.ToList();
 
+        
         }
 
 

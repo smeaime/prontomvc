@@ -2011,6 +2011,30 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         output = Sincronismo_MiguelCinque(dt)
                         registrosFiltrados = dt.Rows.Count
 
+
+                    Case "MORGAN (DESCARGAS) [BIT]"
+
+                        'como verificar que solo venga una sin copia? -una opcion en el 
+                        '-no se puede filtrar el datatable?
+                        'BorrarCartasRepetidas(ds.wCartasDePorte_TX_InformesCorregido) 'ahora BorrarCartasRepetidas esta dentro del sincro
+                        ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14373
+                        output = Sincronismo_MorganDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+
+
+                        lblErrores.Text = sErrores
+                        UpdatePanel2.Update()
+
+                        registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
+                    Case "MORGAN (CALIDADES) [BIT]"
+
+                        output = Sincronismo_MorganCalidades(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, HFSC.Value)
+                        registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
                     Case "MONSANTO"
 
 
