@@ -1261,13 +1261,13 @@
                                 <td class="EncabezadoCell" style="width: 15%">Pat camión
                                 </td>
                                 <td class="EncabezadoCell" style="width: 35%;">
-                                    <asp:TextBox ID="txtPatenteCamion" runat="server" Width="66px" MaxLength="6" TabIndex="23"
+                                    <asp:TextBox ID="txtPatenteCamion" runat="server" Width="66px" MaxLength="9" TabIndex="23"
                                         CssClass="UpperCase"></asp:TextBox>
                                 </td>
                                 <td class="EncabezadoCell" style="width: 15%">Pat acoplado
                                 </td>
                                 <td class="EncabezadoCell">
-                                    <asp:TextBox ID="txtPatenteAcoplado" runat="server" Width="66px" MaxLength="6" TabIndex="24"
+                                    <asp:TextBox ID="txtPatenteAcoplado" runat="server" Width="66px" MaxLength="9" TabIndex="24"
                                         CssClass="UpperCase"></asp:TextBox>
                                 </td>
                             </tr>

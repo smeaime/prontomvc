@@ -120,6 +120,14 @@ Namespace Pronto.ERP.Bll
                 Case "ANDREOLI EXPORTACION"
                     txtDestinatario.Text = "ANDREOLI S.A."
                     DropDownList2.Text = "Export"
+
+
+                Case "MORGAN (CALIDADES)", "MORGAN (DESCARGAS)", "MORGAN (CALIDADES) [BIT]", "MORGAN (DESCARGAS) [BIT]"
+                    txtCorredor.Text = "MORGAN GARCIA MANSILLA S.A"
+                    txtDestinatario.Text = ""
+                    txtTitular.Text = ""
+
+
                 Case "AMAGGI (CALIDADES)", "AMAGGI (DESCARGAS)", "AMAGGI (CALIDADES) [BIT]", "AMAGGI (DESCARGAS) [BIT]"
                     txtCorredor.Text = ""
                     txtDestinatario.Text = "AMAGGI ARGENTINA S.A."
@@ -573,6 +581,7 @@ Namespace Pronto.ERP.Bll
 
 
 
+
                         Case "LOS GROBO"
                             Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
                                          "'     AND   '" & FechaANSI(sHasta) & "' )"
@@ -791,18 +800,6 @@ Namespace Pronto.ERP.Bll
 
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
-                        Case "AMAGGI (DESCARGAS)"
-
-
-                            Dim sErrores As String
-
-                            output = Sincronismo_AmaggiDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
-
-
-                            sErroresRef = sErrores
-
-                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
-
                         Case "DIAZ FORTI"
 
 
@@ -816,12 +813,46 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
 
+                        Case "AMAGGI (DESCARGAS)"
+
+
+                            Dim sErrores As String
+
+                            output = Sincronismo_AmaggiDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+                   
+
+                        Case "MORGAN (CALIDADES)"
+
+
+                            output = Sincronismo_MorganCalidades(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, SC)
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+                        Case "MORGAN (DESCARGAS)"
+
+
+                            Dim sErrores As String
+
+                            output = Sincronismo_MorganDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
+
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
+
                         Case "AMAGGI (CALIDADES)"
 
 
                             output = Sincronismo_AmaggiCalidades(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, SC)
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
-
 
                         Case "DOW"
 
@@ -13181,7 +13212,7 @@ Namespace Pronto.ERP.Bll
             Dim sErroresProcedencia, sErroresDestinos As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
-            Dim vFileName As String = Path.GetTempPath & "SincroAmaggi " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            Dim vFileName As String = Path.GetTempPath & "SincroMorgan " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
             'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
             'Dim vFileName As String = "c:\archivo.txt"
@@ -13820,6 +13851,717 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
+
+        Public Shared Function Sincronismo_MorganDescargas(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
+
+
+
+            '            Orden	Nombre	Long.	Descripción	Requerido	Justificacion	Posicion
+            '1	Grano	3	Código de grano Sagpya	*	Izquierda	1
+            '2	GranelBolsa	3	Embalaje del grano 1=Granel 2=Bolsa	*	Derecha	4
+            '3	Cosecha	4	Cosecha 2000-2001 Ej: 0001	*	Izquierda	7
+            '4	FecIng	8	Fecha de entrada del camión Formato (DDMMYYYY) ej: 01052001	*	Izquierda	11
+            '5	HorIng	8	Hora de entrada del camión Formato (HHMISS) ej:092556	*	Izquierda	19
+            '6	FecSal	8	Fecha de salida o Descarga del camión Formato(DDMMYYYY) ej:01052001	*	Izquierda	27
+            '7	HorSal	8	Hora de salida o Descarga del camión  Formato (HHMISS) ej:092556	*	Izquierda	35
+            '8	CUITPuerto	14	CUIT PUERTO	*	Izquierda	43
+            '9	NomPuerto	30	Nombre Puerto	*	Izquierda	57
+            '10	CUITRecibidor	14	CUIT Recibidor	*	Izquierda	87
+            '11	NomRecibidor	30	Nombre Recibidor	*	Izquierda	101
+            '12	CUITComprador	14	CUIT Comprador	*	Izquierda	131
+            '13	NomComp	30	Nombre Comprador	*	Izquierda	145
+            '14	CUITCorrComp	14	CUIT Corredor Comprador	*	Izquierda	175
+            '15	NomCorrComp	30	Nombre Corredor Comprador	*	Izquierda	189
+            '16	CUITEntregador	14	CUIT Entregador	*	Izquierda	219
+            '17	NomEntregador	30	Nombre Entregador	*	Izquierda	233
+            '18	CUITCargador	14	CUIT Cargador	*	Izquierda	263
+            '19	NomCargador	30	Nombre Cargador	*	Izquierda	277
+            '20	CUITVendedor	14	CUIT Vendedor	*	Izquierda	307
+            '21	NomVendedor	30	Nombre Vendedor	*	Izquierda	321
+            '22	CUITCorrEndo	14	CUIT  Corredor Endozo		Izquierda	351
+            '23	NomCorrEndo	30	Nombre Corredor Endozo		Izquierda	365
+            '24	CUITCompEndo	14	CUIT Comprador Endozo		Izquierda	395
+            '25	NomCompEndo	30	Nombre Comprador Endozo		Izquierda	409
+            '26	CUITCorrVend	14	CUIT Corredor Vendedor.	*	Izquierda	439
+            '27	NomCorrVend	30	Nombre Corredor Vendedor	*	Izquierda	453
+            '28	CUITPlantaOrigen	14	CUIT Planta Origen	*	Izquierda	483
+            '29	NomPlantaOrigen	30	Nombre Planta Origen	*	Izquierda	497
+            '30	CPPorcede	8	Código Postal Procedencia	*	Izquierda	527
+            '31	NomProcede	30	Nombre Procedencia	*	Izquierda	535
+            '32	CPDestino	8	Código Postal Destino	*	Izquierda	565
+            '33	NomDestino	30	Nombre Destino	*	Izquierda	573
+            '34	CodMovIE	1	Código Mov. 0=Ing 1=Egr 2=Transf.Ing 3=Transf.Egr	*	Derecha	603
+            '35	PatCha	10	Patente chasis		Izquierda	604
+            '36	PesoBrut	10	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.	*	Derecha	614
+            '37	PesoEgre	10	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales	*	Derecha	624
+            '38	PesoNeto	10	Total bruto(PesoBrut-PesoEgre) (sin decimales)	*	Derecha	634
+            '39	TotMerm	10	Total mermas (Total mermas sin decimales)		Derecha	644
+            '40	TotNeto	10	Total neto ((Camión cargado – Tara)- Total mermas) (sin decimales)	*	Derecha	654
+            '41	PorHume	10	Porcentaje humedad (un (1) decimal)		Derecha	664
+            '42	PorMemaHumedad	10	Porcentaje merma humedad (dos (2) decimales)		Derecha	674
+            '43	KgsHume	10	Kilos humedad (sin decimales)		Derecha	684
+            '44	PBonHume	10	Porcentaje bonificación humedad (dos (2) decimales)		Derecha	694
+            '45	KgsBonHu	10	Kilos bonificación humedad		Derecha	704
+            '46	PorZaran	10	Porcentaje zarandeo (dos (2) decimales)		Derecha	714
+            '47	KgsZaran	10	Kilos zarandeo (sin decimales)		Derecha	724
+            '48	PorDesca	10	Porcentaje descarte (dos (2) decimales)		Derecha	734
+            '49	KgsDesca	10	Kilogramos Descarte (Sin Decimales)		Derecha	744
+            '50	PorVolat	10	Porcentaje volátil (dos (2) decimales)		Derecha	754
+            '51	KgsVolat	10	Kilogramos volátil (sin decimales)		Derecha	764
+            '52	CantBolsa	8	Cantidad de bolsas		Derecha	774
+            '53	Fumigada	1	Condición fumigada 0=no 1=si	*	Derecha	782
+            '54	PesoProcede	10	Peso procedencia (Sin Decimales)		Derecha	783
+            '55	Contrato	12	Número de contrato  (Numeros 0 al 9)		Derecha	793
+            '56	CarPorte	14	Número de Carta de Porte (Numeros  0 al 9)	*	Derecha	805
+            '57	TipoTrans	1	Tipo de transporte c=camión  v=vagón o=Otro	*	Izquierda	819
+            '58	Grado	10	Grado	*	Derecha	820
+            '59	Factor	10	Factor	*	Derecha	830
+            '60	Observac	100	Observaciones		Izquierda	840
+            '61	ConCalidad	4	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o                       Fuera de standart (FE)	*	Izquierda	940
+            '62	MovStock	1	Señal 1=Movió mercadería       0=No movió mercadería	*	Izquierda	944
+            '63	ObsAna	100	Observaciones Analisis		Izquierda	945
+
+            Dim sErroresProcedencia, sErroresDestinos As String
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroAmaggi " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+            For Each dc In pDataTable.Columns
+                sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+            Next
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+
+
+            'Dim a = pDataTable(1)
+            Dim aaa = pDataTable.Select(sWHERE)
+            BorrarCartasRepetidas(aaa)
+
+
+            'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
+            For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aaa
+                With cdp
+
+                    i = 0 : sb = ""
+
+                    Dim cero = 0
+
+
+
+
+                    '                    Grano	Texto	1	3	Falta Dato
+                    'GranelBolsa	Entero largo	4	3	
+                    'Cosecha	Entero largo	7	4	Esta todo en 0 - Falta Dato
+                    'FecIng	Fecha/Hora	11	8	No respeta formato DDMMAAAA
+                    'HorIng	Texto	19	8	
+                    'FechSal	Fecha/Hora	27	8	No respeta formato DDMMAAAA
+                    'HorSal	Texto	35	8	
+                    'CUITPuerto	Texto	43	14	Falta Dato
+                    'NomPuerto	Texto	57	30	No respeta largo dato
+
+
+
+                    sb &= .CodigoSAJPYA.PadRight(3) 'Grano	STRING(3)	Código de grano Sagpya)    1)    3
+                    sb &= IIf(True, 1, 2).ToString.PadRight(3) 'GranelBolsa	STRING(3)	Embalaje del grano 1=Granel 2=Bolsa)    4)    6
+
+                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4)
+
+
+                    If .IsFechaArriboNull Then .FechaArribo = Nothing
+                    sb &= .FechaArribo.ToString("ddMMyyyy")       'FecIng	STRING(8)	Fecha de entrada del camión Formato (DDMMYYYY) ej: 01052001)    11)    18
+
+
+                    If .IsHoraNull Then
+                        sb &= #12:00:00 AM#.ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
+                    Else
+                        sb &= Convert.ToDateTime(.Hora).ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
+                    End If
+
+
+                    sb &= "  "
+
+                    If .IsFechaDescargaNull Then .FechaDescarga = Nothing
+                    sb &= .FechaDescarga.ToString("ddMMyyyy")  'FecSal	STRING(8)	Fecha de salida o Descarga del camión Formato(DDMMYYYY) ej:01052001)    27)    34
+                    sb &= Convert.ToDateTime(iisNull(.FechaDescarga, #12:00:00 AM#)).ToString("hhmmss") 'HorSal	STRING(8)	Hora de salida o Descarga del camión  Formato (HHMISS) ej:092556)    35)    42
+
+
+                    sb &= "  "
+
+
+
+
+                    'Sincro Tecnocampo          ABM ProntoWeb (o CDP física)
+                    '------------------------------------------
+                    'Puerto					    Destino
+                    'Recibidor				    WILLIAMS SA
+                    'Comprador				    Destinatario		
+                    'Corredor Comprador		    Corredor
+                    'Entregador				    Destinatario
+                    'Cargador				    (este es a quien se le facturó)
+                    'Vendedor				    Titular  'Acá va el Rte Comercial, si no hay RteCom va el Titular
+                    'Corredor Endozo		    ?'No se manda?
+                    'Comprador Endozo		    ?'No se manda?
+                    'Corredor Vendedor		    ?'No se manda?
+                    'Planta Origen			    ?
+                    'Procedencia 			    Origen
+                    'Destino 				    Destino
+
+                    'https://mail.google.com/mail/u/0/#search/amaggi/13795391d0a49a8d
+                    ' Me llaman de Williams para ver si podemos ver un tema con el sincro Amaggi que les esta saliendo con un error (Carta de Porte del ejemplo: 525174646) mañana lo vemos
+
+                    'Lucas, si los datos están bien cargados se está confeccionando mal el TXT y las cuentas no vienen donde corresponden.
+                    'Desconozco los datos de la CP original para que Andrés sepa dónde está el problema.
+
+                    'Por lo que me dijo Juan Pablo, estos datos vienen mal:
+                    'Viene comprador BUNGE
+                    'Cargador, vendedor y comp endoso: Amaggi
+
+
+
+
+
+                    Dim wily = "Williams Entregas S.A."
+                    Dim wilycuit = "30707386076"
+                    Dim cadenavacia As String = ""
+
+
+
+
+                    'Comentan que en los siguientes campos se debe mandar (en los 
+                    'tres campos) el Intermediario y en 
+                    ' caso que no haya Intermediario, en los tres casos el Titular: NomCargador NomCompEndo NomVendedor 
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8740
+
+
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8740
+                    Dim VendedorCUIT, VendedorDesc As String
+                    ' If InStr(.RComercialDesc, "AMAGGI") > 0 Then Stop
+
+                    If .RComercialDesc <> "" And InStr(.RComercialDesc, "AMAGGI") = 0 Then
+                        VendedorCUIT = .RComercialCUIT
+                        VendedorDesc = .RComercialDesc
+                    ElseIf .IntermediarioDesc <> "" Then
+                        VendedorCUIT = .IntermediarioCUIT
+                        VendedorDesc = .IntermediarioDesc
+                    Else
+                        VendedorCUIT = .TitularCUIT
+                        VendedorDesc = .TitularDesc
+                    End If
+
+
+
+
+                    '[OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.]
+                    '   System.Data.Common.DecimalStorage.SetCapacity(Int32 capacity) +22
+                    '   System.Data.RecordManager.set_RecordCapacity(Int32 value) +77
+                    '                    System.Data.RecordManager.GrowRecordCapacity(+52)
+                    '                    System.Data.RecordManager.NewRecordBase(+34)
+                    '   System.Data.DataTable.NewRecord(Int32 sourceRecord) +23
+                    '                    System.Data.DataRow.BeginEditInternal(+4817531)
+                    '   System.Data.DataRow.set_Item(DataColumn column, Object value) +244
+                    '   wCartasDePorte_TX_InformesCorregidoRow.set_IntermediarioCUIT(String Value) in C:\Backup\BDL\BussinessLogic\WillyInformesDataSet7.Designer.vb:4427
+                    '   Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_AmaggiDescargas(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores) +1699
+                    '   CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) +5006
+                    '   System.Web.UI.WebControls.Button.OnClick(EventArgs e) +111
+                    '   System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument) +110
+                    '   System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument) +10
+                    '   System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument) +13
+                    '   System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData) +36
+                    '   System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint) +1565
+
+                    If .IntermediarioCUIT = "" Then
+                        .IntermediarioCUIT = .TitularCUIT
+                        .IntermediarioDesc = .TitularDesc
+                    Else
+                        Debug.Print(.IntermediarioCUIT)
+                    End If
+
+
+
+                    Try
+
+                        If .TitularDesc.Trim() = "DIRECTO" Then
+                            .TitularDesc = ""
+                            .TitularCUIT = ""
+                        End If
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(ex)
+                    End Try
+
+                    Try
+                        If .IntermediarioDesc.Trim() = "DIRECTO" Then
+                            .IntermediarioDesc = ""
+                            .IntermediarioCUIT = ""
+                        End If
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(ex)
+                    End Try
+
+                    Try
+                        If .RComercialDesc.Trim() = "DIRECTO" Then
+                            .RComercialDesc = ""
+                            .RComercialCUIT = ""
+                        End If
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(ex)
+                    End Try
+
+                    Try
+                        If .CorredorDesc.Trim() = "DIRECTO" Then
+                            .CorredorDesc = ""
+                            .CorredorCUIT = ""
+                        End If
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(ex)
+                    End Try
+
+                    Try
+
+                        If .DestinatarioDesc.Trim() = "DIRECTO" Then
+                            .DestinatarioDesc = ""
+                            .DestinatarioCUIT = ""
+                        End If
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(ex)
+                    End Try
+
+
+
+
+                    '                CUITPUERTO	43	56
+                    'NOMPUERTO	57	86
+                    'CUITRECIBIDOR	87	100
+                    'NOMRECIBIDOR	101	130
+                    'CUITCOMPRADOR	131	144
+                    'NOMCOMP	145	174
+                    'CUITCORRCOMP	175	188
+                    'NOMCORRCOMP	189	218
+                    'CUITENTREGADOR	219	232
+                    'NOMENTREGADOR	233	262
+                    'CUITCARGADOR	307	320
+                    'NOMCARGADOR	321	350
+                    'CUITVENDEDOR	263	276
+                    'NOMVENDEDOR	277	306
+                    'CUITCORRENDO	351	364
+                    'NOMCORRENDO	365	394
+                    'CUITCOMPENDO	395	408
+                    'NOMCOMPENDO	409	438
+                    'CUITCORRVEND	439	452
+                    'NOMCORRVEND	453	482
+                    'CUITPLANTAORIGEN	483	496
+                    'NOMPLANTAORIGEN	497	526
+                    'CPPROCEDE	527	534
+                    'NOMPROCEDE	535	564
+                    'CPDESTINO	565	572
+                    'NOMDESTINO	573	602
+                    'CODMOVIE	603	603
+
+
+
+
+                    sb &= Left(.DestinoCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPuerto	STRING(14)	CUIT PUERTO)    43)    56
+                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPuerto	STRING(30)	Nombre Puerto)    57)    86
+
+                    sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Recibidor)    87)    100
+                    sb &= Left(wily.ToString, 30).PadRight(30) 'NomRecibidor	STRING(30)	Nombre Recibidor)    101)    130
+
+                    sb &= Left(.DestinatarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITComprador	STRING(14)	CUIT Comprador)    131)    144
+                    sb &= Left(.DestinatarioDesc.ToString, 30).PadRight(30) 'NomComp	STRING(30)	Nombre Comprador)    145)    174
+
+                    '///////////////////////////////////////////////////
+                    ' acá va BLD S.A.                      30707386076
+                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrComp	STRING(14)	CUIT Corredor Comprador)    175)    188
+                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrComp	STRING(30)	Nombre Corredor Comprador)    189)    218
+                    '////////////////////////////////////////////////////
+
+                    sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Entregador
+                    sb &= Left(wily.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)   
+
+                    '////////////////////////////////////////////////////////////////////////////////
+                    'Strongly Typed DataSets encountering NULL values – Grrrrrr… 
+                    'http://social.msdn.microsoft.com/forums/en-US/winformsdatacontrols/thread/1dad8d0d-6eae-4254-a9d6-22d50da5578a
+                    '////////////////////////////////////////////////////////////////////////////////
+
+
+
+                    'en "Vendedor" les pasaba el RemComercial. Pidieron que les pasemos el titular por acá 
+                    '                    (se filtró usando "SYNGENTA" en RemComercial, y
+                    ' y parece que no les gustó que apareciera SYNGENTA en el sincro
+                    sb &= Left(VendedorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    sb &= Left(VendedorDesc.ToString, 30).PadRight(30) 'NomVendedor	STRING(30)	Nombre Vendedor)    321)    350
+
+
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)  
+                    sb &= Left(.TitularDesc.ToString, 30).PadRight(30)   'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
+
+
+
+
+
+
+                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrEndo	STRING(14)	CUIT  Corredor Endozo)    351)    364
+                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrEndo	STRING(30)	Nombre Corredor Endozo)    365)    394
+
+
+
+
+                    sb &= Left(VendedorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
+                    sb &= Left(VendedorDesc.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
+
+
+                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrVend	STRING(14)	CUIT Corredor Vendedor.)    439)    452
+                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrVend	STRING(30)	Nombre Corredor Vendedor)    453)    482
+
+
+                    sb &= Left(cadenavacia.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
+                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPlantaOrigen	STRING(30)	Nombre Planta Origen)    497)    526
+
+
+
+                    'CPProcede	Texto	527	8	Falta Dato
+                    'NomProcede	Texto	535	30	Falta Dato
+                    'CPDestino	Texto	565	8	
+                    'NomDestino	Texto	573	30	
+                    'CodMovIE	Texto	603	1	
+
+
+
+                    If .ProcedenciaCodigoPostal.ToString = "" And InStr(sErroresProcedencia, .ProcedenciaDesc.ToString) = 0 Then
+                        'si no tiene codigo ni está ya en sErrores, lo meto
+
+                        ErrHandler2.WriteError("La procedencia " & .ProcedenciaDesc.ToString & " no tiene codigo postal")
+                        'ErrHandler2.WriteError("La carta " & .NumeroCartaDePorte & " no tiene codigo postal de procedencia")
+
+                        'sErroresProcedencia &= "<a href=""CartaPorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & "</a>; "
+
+
+                        sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & .Procedencia & """ target=""_blank"">" & .ProcedenciaDesc & "</a>; "
+                    End If
+
+
+                    sb &= Left(.ProcedenciaCodigoPostal.ToString, 8).PadRight(8) 'CPPorcede 	STRING(8)	Código Postal Procedencia)    527)    534
+                    sb &= Left(.ProcedenciaDesc.ToString, 30).PadRight(30) 'NomProcede	STRING(30)	Nombre Procedencia)    535)    564
+                    sb &= Left(.DestinoCodigoPostal.ToString, 8).PadRight(8) 'CPDestino	STRING(8)	Código Postal Destino)    565)    572
+                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
+
+
+
+
+                    'Viene un 1 en el TXT, deben enviar un 0.
+                    sb &= IIf(False, 1, 0).ToString.PadRight(1) 'CodMovIE	STRING(1)	Código Mov. 0=Ing 1=Egr 2=Transf.Ing 3=Transf.Egr)    603)    603
+                    sb &= Left(.Patente.ToString, 6).PadRight(10) 'PatCha	STRING(6)	Patente chasis)    604)    609
+                    'sb &= Left(.Acoplado.ToString, 6).PadRight(6) 'PatAcoplado	STRING(6)	Acoplado chasis)    610)    615
+
+
+
+
+                    '36	PesoBrut	10	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.	*	Derecha	614
+                    '37	PesoEgre	10	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales	*	Derecha	624
+                    '38	PesoNeto	10	Total bruto(PesoBrut-PesoEgre) (sin decimales)	*	Derecha	634
+                    '39	TotMerm	10	Total mermas (Total mermas sin decimales)		Derecha	644
+
+
+
+                    'https://mail.google.com/mail/#label/Sincros/136a3190360d2620
+                    'En la posición 36 que es PESOBRUT va el bruto real del camión. Lo que pesó en destino.
+                    'En la posición 37 que es PESOEGRE va la tara real del camión. Lo que pesó en destino.
+                    'En la posición 38 que es PESONETO va el PESOBRUT – PESOEGRE
+                    'En la posición 40 que es TOTNETO va el neto final, es decir el PESONETO – el total de mermas. Por lo que vos me ponés, aca irían los 29860 kls. Los kilos procedencia por el momento no serian importante.
+
+
+                    '.BrutoPto
+                    '.TaraPto
+                    '.NetoPto
+                    '.BrutoFinal
+                    '.TaraFinal
+                    '.NetoFinal
+                    '.NetoProc
+
+                    sb &= Int(.BrutoFinal).ToString.PadLeft(10) 'PesoBrut	STRING(10)	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.)    616)    625
+                    sb &= Int(.TaraFinal).ToString.PadLeft(10) 'PesoEgre	STRING(10)	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales)    626)    635
+                    sb &= Int(.NetoFinal).ToString.PadLeft(10) 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+                    sb &= Int(.NetoFinal - .NetoProc).ToString.PadLeft(10, "0") 'TotMerm	STRING(10)	Total mermas (Total mermas sin decimales))    646)    655
+
+
+                    '40	TotNeto	10	Total neto ((Camión cargado – Tara)- Total mermas) (sin decimales)	*	Derecha	654
+
+                    sb &= Int(.NetoProc).ToString.PadLeft(10) 'TotNeto	STRING(10)	Total neto ((Camión cargado - Tara)- Total mermas) (sin decimales))    656)    665
+
+
+
+
+
+
+
+                    '41	PorHume	10	Porcentaje humedad (un (1) decimal)		Derecha	664
+                    '42	PorMemaHumedad	10	Porcentaje merma humedad (dos (2) decimales)		Derecha	674
+                    '43	KgsHume	10	Kilos humedad (sin decimales)		Derecha	684
+                    '44	PBonHume	10	Porcentaje bonificación humedad (dos (2) decimales)		Derecha	694
+                    '45	KgsBonHu	10	Kilos bonificación humedad		Derecha	704
+
+                    sb &= String.Format("{0:F1}", .Humedad).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
+                    sb &= cero.ToString.PadLeft(10) 'PorMemaHumedad	STRING(10)	Porcentaje merma humedad (dos (2) decimales))    676)    685
+                    sb &= Int(.HumedadDesnormalizada).ToString.PadLeft(10) 'KgsHume	STRING(10)	Kilos humedad (sin decimales))    686)    695
+                    sb &= Left(cero.ToString, 10).PadLeft(10) 'PBonHume	STRING(10)	Porcentaje bonificación humedad (dos (2) decimales))    696)    705
+                    sb &= Left(cero.ToString, 10).PadLeft(10) 'KgsBonHu	STRING(10)	Kilos bonificación humedad)    706)    715
+
+
+
+                    '46	PorZaran	10	Porcentaje zarandeo (dos (2) decimales)		Derecha	714
+                    '47	KgsZaran	10	Kilos zarandeo (sin decimales)		Derecha	724
+                    '48	PorDesca	10	Porcentaje descarte (dos (2) decimales)		Derecha	734
+                    '49	KgsDesca	10	Kilogramos Descarte (Sin Decimales)		Derecha	744
+                    '50	PorVolat	10	Porcentaje volátil (dos (2) decimales)		Derecha	754
+                    '51	KgsVolat	10	Kilogramos volátil (sin decimales)		Derecha	764
+
+
+                    'esto?
+                    sb &= cadenavacia.ToString.PadLeft(10) 'PorZaran	STRING(10)	Porcentaje zarandeo (dos (2) decimales))    716)    725
+                    sb &= Int(Val(.Merma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                    sb &= cadenavacia.ToString.PadLeft(10) 'PorDesca	STRING(10)	Porcentaje descarte (dos (2) decimales))    736)    745
+                    sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsDesca	STRING(10)	Kilogramos Descarte (Sin Decimales))    746)    755
+                    sb &= Left(Val(cadenavacia).ToString, 10).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
+                    sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+
+
+
+
+                    '52	CantBolsa	8	Cantidad de bolsas		Derecha	774
+                    '53	Fumigada	1	Condición fumigada 0=no 1=si	*	Derecha	782
+                    '54	PesoProcede	10	Peso procedencia (Sin Decimales)		Derecha	783
+                    '55	Contrato	12	Número de contrato  (Numeros 0 al 9)		Derecha	793
+                    '56	CarPorte	14	Número de Carta de Porte (Numeros  0 al 9)	*	Derecha	805
+
+
+
+
+                    '57	TipoTrans	1	Tipo de transporte c=camión  v=vagón o=Otro	*	Izquierda	819
+                    '58	Grado	10	Grado	*	Derecha	820
+                    '59	Factor	10	Factor	*	Derecha	830
+                    '60	Observac	100	Observaciones		Izquierda	840
+                    '61	ConCalidad	4	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o                       Fuera de standart (FE)	*	Izquierda	940
+                    '62	MovStock	1	Señal 1=Movió mercadería       0=No movió mercadería	*	Izquierda	944
+                    '63	ObsAna	100	Observaciones Analisis		Izquierda	945
+
+
+
+                    sb &= Left(cadenavacia.ToString, 8).PadLeft(8) 'CantBolsa	STRING(8)	Cantidad de bolsas)    776)    783
+                    sb &= IIf(True, 0, 1).ToString.PadRight(1) 'Fumigada	STRING(1)	Condición fumigada 0=no 1=si)    784)    784
+
+
+
+                    sb &= Int(.NetoProc).ToString.PadRight(10) 'PesoProcede	STRING(10)	Peso procedencia (Sin Decimales))    785)    794
+                    'sb &= Int(.BrutoPto).ToString.PadRight(10) 'BrutoProcede	STRING(10)	Bruto procedencia (Sin Decimales))    795)    804
+                    'sb &= Int(.TaraPto).ToString.PadRight(10) 'TaraProcede	STRING(10)	Tara procedencia (Sin Decimales))    805)    814
+
+
+
+
+
+                    sb &= Left(Val(.Contrato).ToString, 12).PadRight(12) 'Contrato	STRING(12)	Número de contrato  (Numeros 0 al 9))    815)    826
+                    ForzarPrefijo5(.NumeroCartaDePorte)
+                    sb &= Left(.NumeroCartaDePorte.ToString, 14).PadLeft(14, "0") 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
+
+
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    'EN LOS CASOS DE VAGONES
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8740
+                    '/////////////////////////////////////////////////////////////////////////////////////
+
+                    'Col Nombre Desde Hasta Dato
+                    'campo decisivo:
+                    '57	TIPOTRANS	819	 819	 S         'Venga una F que indica Ferroviario. por defecto viene A, que es Automotor.
+                    sb &= IIf(.SubnumeroVagon > 0, "F", "A").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
+
+                    'aclaracion de otros campos:
+                    '56	CARPORTE	805	 818	 N       'Nro de Carta de Porte, este numero al ser ferroviario porque el TIPOTRANS asi lo indica va a permitir que ingrese duplicada.
+                    '79	NUMVAGON	1260	 1270 N      'Numero de Vagon, este nro debe ser el que identifique a cada vagon y logicamente no puede repetirse.
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+                    sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
+                    sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
+
+                    sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
+
+
+                    'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+                    Dim sCalidad As String
+
+                    Try
+                        If InStr(.CalidadDesc.ToString.ToLower, "conforme") > 0 Then
+                            sCalidad = "CO"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 1") > 0 Then
+                            sCalidad = "G1"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 2") > 0 Then
+                            sCalidad = "G2"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 3") > 0 Then
+                            sCalidad = "G3"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "camara") > 0 Then
+                            sCalidad = "CC"
+                        Else
+                            sCalidad = "FE"
+                        End If
+                    Catch ex As Exception
+                        ErrHandler2.WriteError("Sincro amaggi")
+                        ErrHandler2.WriteError(ex)
+                    End Try
+                    If .IsCalidadDescNull Then sCalidad = "FE"
+                    sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+
+
+
+                    sb &= IIf(True, 0, 1).ToString.PadRight(1) 'MovStock	STRING(1)	Señal 1=Movió mercadería)       0=No movió mercadería)    966)    966
+                    sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'ObsAna	STRING(100)	Observaciones Analisis)    967)    1066
+
+
+
+
+
+
+
+
+                    '68	DOCUME	1045	1055	S
+                    sb &= JustificadoIzquierda(If(.IschoferCUITNull, "", .choferCUIT.Replace("-", "")), 11)
+
+
+
+
+
+                    '66	CTATRANSPOR	1056	1066	N
+                    sb &= JustificadoIzquierda(If(.IsTransportistaCUITNull, "", .TransportistaCUIT.Replace("-", "")), 11)
+
+
+
+                    '/////////////////////////////////////////
+                    'ensartado
+                    '35	PATCHA	1067	1072	S    
+                    sb &= JustificadoIzquierda(If(.IsPatenteNull, "", .Patente), 6)
+                    '//////////////////////////////////////////
+
+                    '69	PATACO	1073	1078	S
+                    sb &= JustificadoIzquierda(If(.IsAcopladoNull, "", .Acoplado), 6)
+
+
+
+
+                    sb &= Space(12)
+
+
+
+                    '67	NOMCONDUC	1091	1120	S
+                    sb &= JustificadoIzquierda(If(.IsChoferDescNull, "", .ChoferDesc), 30)
+
+
+
+                    sb &= Space(13)
+
+
+
+                    '70	KMSTIER	1134	1143	N
+                    sb &= JustificadoIzquierda(0, 10)
+                    '71	KMSASFA	1144	1153	N
+                    sb &= JustificadoIzquierda(If(.IsKmARecorrerNull, 0, .KmARecorrer), 10)
+                    '72	TARIKMS	1154	1163	N
+                    sb &= JustificadoIzquierda(If(.IsTarifaNull, 0, .Tarifa), 10)  'cobran distinto los kilometros en tierra vs asfalto?
+                    '73	TARITIE	1164	1173	N
+                    sb &= JustificadoIzquierda(If(.IsTarifaNull, 0, .Tarifa), 10)
+
+
+
+                    sb &= Space(17)
+
+
+                    '64	NROCAU	1191	1205	N
+                    sb &= JustificadoIzquierda(.CEE, 14)
+
+                    sb &= Space(14)
+
+                    '74	FECVTOCAU	1219	1226	S
+                    sb &= JustificadoIzquierda(If(.IsFechaVencimientoNull, Nothing, .FechaVencimiento.ToString("ddMMyyyy")), 8)
+                    '76	CTGNRO	1227	1234	N
+                    sb &= JustificadoIzquierda(If(.IsCTGNull, 0, .CTG), 8)
+
+
+                    sb &= Space(9)
+
+                    '77	TIPORTA	1244	1244	N
+                    sb &= JustificadoIzquierda(" ", 1)
+
+
+                    sb &= Space(1)
+
+
+                    '78	CODRTA	1246	1250	S
+                    sb &= JustificadoIzquierda(If(.IsCEENull, "", .CEE), 5)
+                    '79	NRO PLANTA ONCCA	1251	1257	N
+                    sb &= JustificadoIzquierda(If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA), 7)
+
+
+                    If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
+                        'si no tiene codigo ni está ya en sErrores, lo meto
+
+                        ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+
+                        sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
+                    End If
+
+
+
+
+
+
+                    'Col    Nombre            Desde    Hasta      Dato
+                    '79           NUMVAGON    1260             1270        N
+                    sb &= "  "
+                    sb &= JustificadoIzquierda(.SubnumeroVagon, 11)
+
+
+
+                    PrintLine(nF, sb)
+                End With
+            Next
+
+
+
+
+            FileClose(nF)
+
+
+
+
+            sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
+
+            If True Then
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            End If
+
+            Return vFileName
+
+
+        End Function
         Public Shared Function Sincronismo_BTGDescargas(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
 
 
@@ -18555,6 +19297,761 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
+        Public Shared Function Sincronismo_MorganCalidades(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, SC As String) As String
+
+            '            Nombre(RESULTA.TXT)
+            '            Tipo(ASCII)
+            'Longitud de registro	71
+
+            'Descripción del registro
+
+            'Nombre	             Longitud      Desde    Hasta	Tipo de Dato
+            'Fecha	de descarga		6	1	6	N	ddmmaa
+            'Carta de porte			11	7	17	N	
+            'Número de resultado		2	18	19	N
+            'Código de ensayo		5	20	24	N
+            'Resultado del ensayo		7	25	31	N
+            'Kilos  				7	32	38	N
+            'Cereal 				2	39	40	N
+            'Número de Vagón		8	41	48	N
+            'Importe de honorarios		9	49	57	N
+            'Bonifica o Rebaja		1	58	58	A	B-Bonifica	R-Rebaja
+            'Total de bonificación o rebaja	5	59	63	N	
+            'Fuera de standard		1	64	64	A	S-Si	N-No
+            'Número de certificado		7	65	71	N	
+
+
+
+
+
+            'Número de resultado 2 18 19 N Número de certificado 7 65 71 N Con estos datos agreguen un nro correlativo y único, que identifique al análisis y listo, puede ser una numeración interna de Uds. respetando siempre las longitudes de datos del diseño. 
+            'Importe de honorarios 9 49 57 N Envíen 0 en los honorarios sino es de la operatoria de Williams. Los honorarios son de la cámara porque la misma cobra por cada análisis. 
+            'Bonifica o Rebaja 1 58 58 A B-Bonifica R-Rebaja Esto es clave, por ejemplo el ítems de “Materias extrañas”, bonifica o rebaja, por ejemplo el valor 1.5 cargado en este ítems es Bonifica o Rebaja?. 
+            'Total de bonificación o rebaja 5 59 63 N Envíen 0 
+            'Fuera de standard 1 64 64 A S-Si N-No Esto es si una calidad mala es S, esto significa que no sirve la calidad. Normalmente viene en N Saludos.-"
+
+
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroMorganAnalisis " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+            For Each dc In pDataTable.Columns
+                sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+            Next
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+
+
+
+            Dim id_trigocandeal = BuscaIdArticuloPreciso("TRIGO CANDEAL", SC) 'pan y forrajero
+            Dim id_trigopan = BuscaIdArticuloPreciso("TRIGO PAN", SC) 'pan y forrajero
+            Dim id_trigoforraj = BuscaIdArticuloPreciso("TRIGO FORRAJERO", SC) 'pan y forrajero
+
+            Dim id_soja = BuscaIdArticuloPreciso("SOJA", SC)
+            Dim id_sorgo = BuscaIdArticuloPreciso("SORGO GRANIFERO", SC)
+            Dim id_maiz = BuscaIdArticuloPreciso("MAIZ", SC)
+            Dim id_girasol = BuscaIdArticuloPreciso("GIRASOL", SC)
+
+
+
+
+
+
+
+
+            'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
+            For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In pDataTable.Select(sWHERE)
+                With cdp
+
+
+                    i = 0 : sb = ""
+
+                    Dim cero = 0
+
+
+
+
+                    'Nombre	             Longitud      Desde    Hasta	Tipo de Dato
+                    'Fecha	de descarga		6	1	6	N	ddmmaa
+                    'Carta de porte			11	7	17	N	
+                    'Número de resultado		2	18	19	N
+                    'Código de ensayo		5	20	24	N
+                    'Resultado del ensayo		7	25	31	N
+                    'Kilos  				7	32	38	N
+                    'Cereal 				2	39	40	N
+                    'Número de Vagón		8	41	48	N
+                    'Importe de honorarios		9	49	57	N
+                    'Bonifica o Rebaja		1	58	58	A	B-Bonifica	R-Rebaja
+                    'Total de bonificación o rebaja	5	59	63	N	
+                    'Fuera de standard		1	64	64	A	S-Si	N-No
+                    'Número de certificado		7	65	71	N	
+
+                    '                                               Nombre	              Lon  Desde Hasta	Tipo de Dato
+
+
+
+
+
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    'consulta AMAGGI
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=7963
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+
+                    If .IsFueraDeEstandarNull Then .FueraDeEstandar = 0
+                    If .IsCalidadMermaChamicoNull Then
+                        .CalidadMermaChamico = 0
+                        .CalidadMermaChamicoBonifica_o_Rebaja = 0
+                    Else
+                        'Stop
+                    End If
+                    If .IsCalidadMermaZarandeoNull Then
+                        .CalidadMermaZarandeo = 0
+                        .CalidadMermaZarandeoBonifica_o_Rebaja = 0
+                    End If
+                    If .IsCalidadGranosQuemadosNull Then
+                        .CalidadGranosQuemados = 0
+                        .CalidadGranosQuemadosBonifica_o_Rebaja = 0
+                    End If
+                    If .IsCalidadTierraNull Then
+                        .CalidadTierra = 0
+                        .CalidadTierraBonifica_o_Rebaja = 0
+                    End If
+
+                    If .IsCalidadPuntaSombreadaNull Then
+                        .CalidadPuntaSombreada = 0
+                        '.CalidadTierraBonifica_o_Rebaja = 0
+                    End If
+
+
+
+
+                    '/////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////
+                    '                pero si no tiene ninguna calidad, los datos de la carta de porte tienen que ir igual
+                    'Mariano Scalella dice
+                    'guardiola, los renglones tienen el codigo de la calidad q se mide. lo dejo en blanco entonces? 
+                    'estas excepciones nos las tienen q aclarar
+                    'perate q reviso el ejemplo a ver como safan
+                    'el codigo de cual es la calidad q se mide va del caracter 20 al 24. en el ejemplo q nos 
+                    'mandaron siempre hay dato ahi. le meto entonces uno obligatorio, con codigo "0000"?
+                    '                Andrés(dice)
+                    'si, para mandarles un ejemplo
+                    'pero en el correo les pregunto
+
+                    sb = RenglonAmaggiCalidad(cdp, 0, 0, 0, 0, nF, "00") 'RENGLON FORZOSO, para que haya dato aunque no haya calada
+                    '/////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////
+
+                    'sb = RenglonAmaggiCalidad(cdp, 0, .NobleGrado, 0, 0, nF, "01") '	0	GRADO
+                    'sb = RenglonAmaggiCalidad(cdp, 1, .FueraDeEstandar, 0, 0, nF) '	1	GRADO FUERA DE STANDARD
+
+
+
+
+                    Select Case CodigoArticuloAmaggi(.Producto)
+
+                        Case 12
+
+                            '	12	SOJA	1044	MERMA POR CHAMICO
+                            '	12	SOJA	1300	GRANOS DAÑADOS
+                            '	12	SOJA	1440	GRANOS QUEMADOS O DE AVERIA
+                            '	12	SOJA	1111	TOTAL GRANOS DAÑADOS
+                            '	12	SOJA	1311	GRANOS VERDES
+                            '	12	SOJA	1524	MATERIAS EXTRAÑAS (SIN TIERRA)
+                            '	12	SOJA	1531	TIERRA
+                            '	12	SOJA	1114	TOTAL MATERIAS EXTRAÑAS INCL. TIERRA.
+                            '	12	SOJA	1652	GRANOS QUEBRADOS Y/O PARTIDOS
+                            '	12	SOJA	1551	GRANOS NEGROS
+                            '	12	SOJA	2062	CHAMICO(semillas cada 100 gr.)
+                            '	12	SOJA	2111	GRANOS REVOLCADOS EN TIERRA
+                            '	12	SOJA	2131	GRANOS AMOHOSADOS
+                            '	12	SOJA	3020	HUMEDAD
+                            '	12	SOJA	2021	OLOR OBJETABLE
+                            '	12	SOJA	3122	PROTEINA (s.s.s.)
+                            '	12	SOJA	4112	MATERIA GRASA (s.s.s.)
+                            '	12	SOJA	4142	FIBRA (s.s.s.)
+
+                            sb = RenglonAmaggiCalidad(cdp, 1044, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+                            sb = RenglonAmaggiCalidad(cdp, 1212, .CalidadMermaZarandeo, .CalidadMermaZarandeoBonifica_o_Rebaja, 0, nF, "02") '	1212	SOBRE ZARANDA  2.5 MM.
+                            sb = RenglonAmaggiCalidad(cdp, 1440, .CalidadGranosQuemados, .CalidadGranosQuemadosBonifica_o_Rebaja, 0, nF, "03") '	1440	GRANOS QUEMADOS O DE AVERIA
+                            sb = RenglonAmaggiCalidad(cdp, 1531, .CalidadTierra, .CalidadTierraBonifica_o_Rebaja, 0, nF, "04") '	1531	TIERRA
+
+                            sb = RenglonAmaggiCalidad(cdp, 2112, .CalidadPuntaSombreada, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05") '	2112	GRANOS PUNTA SOMBREADA P/TIERRA
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1111, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1611, .NobleQuebrados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1551, .NobleNegros, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2131, .NobleAmohosados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1460, .NobleCarbon, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1470, .NoblePanzaBlanca, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1311, .NobleVerdes, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 4131, .NobleAcidezGrasa, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 4112, .NobleMGrasa, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            'El ítems 03020 es el único que está en la lista de que mandan en el registro, los otros dos de donde los sacaron?
+
+                            '24041300030894591050 3020 000001500299001200000000000000000B00.00N1110326
+                            '24041300030894591050 1112 000000400299001200000000000000000B00.00N1110326
+                            '24041300030894591050 2161 000000600299001200000000000000000B00.00N1110326
+
+                        Case 2
+                            '	2	MAIZ	2131	GRANOS AMOHOSADOS
+                            '	2	MAIZ	2021	OLOR OBJETABLE
+                            '	2	MAIZ	2022	OLOR A HUMEDAD
+                            '	2	MAIZ	1300	GRANOS DAÑADOS
+                            '	2	MAIZ	1510	MATERIAS EXTRAÑAS
+                            '	2	MAIZ	1611	GRANOS QUEBRADOS
+                            '	2	MAIZ	1480	GRANOS DE OTRO TIPO
+                            '	2	MAIZ	1490	GRANOS DE OTRO COLOR
+                            '	2	MAIZ	2161	GRANOS PICADOS
+                            '	2	MAIZ	2062	CHAMICO(semillas cada 100 gr.)
+                            '	2	MAIZ	3020	HUMEDAD
+                            '	2	MAIZ	1711	PESO HECTOLITRICO
+                            '	2	MAIZ	2211	DURO
+                            '	2	MAIZ	2213	DENTADO
+                            '	2	MAIZ	2233	AMARILLO
+                            '	2	MAIZ	2234	BLANCO
+                            '	2	MAIZ	2232	COLORADO
+                            '	2	MAIZ	0	GRADO
+                            '	2	MAIZ	1	GRADO FUERA DE STANDARD
+
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 2131, .NobleAmohosados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1611, .NobleQuebrados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+
+                        Case 1
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 1111, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1651, .NobleQuebrados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+                            '	1	TRIGO	2021	OLOR OBJETABLE
+                            '	1	TRIGO	2022	OLOR A HUMEDAD
+                            '	1	TRIGO	2023	OLOR A TREBOL
+                            '	1	TRIGO	2024	OLOR A CARBON
+                            '	1	TRIGO	2111	GRANOS REVOLCADOS EN TIERRA
+                            '	1	TRIGO	2112	GRANOS PUNTA SOMBREADA P/TIERRA
+                            '	1	TRIGO	2121	GRANOS REVOLCADOS EN CARBON
+                            '	1	TRIGO	2122	GRANOS PUNTA NEGRA POR CARBON
+                            '	1	TRIGO	2123	G.PTA.NEG.P/CARBON Y OLOR CARBON
+                            '	1	TRIGO	1300	GRANOS DAÑADOS
+                            '	1	TRIGO	1420	GNOS.ARDIDOS Y/O DAÑADOS P/CALOR
+                            '	1	TRIGO	1111	TOTAL GRANOS DAÑADOS
+                            '	1	TRIGO	1510	MATERIAS EXTRAÑAS
+                            '	1	TRIGO	1651	GRANOS QUEBRADOS Y/O CHUZOS
+                            '	1	TRIGO	1470	GRANOS PANZA BLANCA
+                            '	1	TRIGO	1460	GRANOS CON CARBON
+                            '	1	TRIGO	2161	GRANOS PICADOS
+                            '	1	TRIGO	2051	CORNEZUELO
+                            '	1	TRIGO	2062	CHAMICO(semillas cada 100 gr.)
+                            '	1	TRIGO	2064	SEMILLAS DE TREBOL DE OLOR
+                            '	1	TRIGO	2214	SEMI DURO
+                            '	1	TRIGO	2215	BLANDO
+                            '	1	TRIGO	2211	DURO
+                            '	1	TRIGO	1711	PESO HECTOLITRICO
+                            '	1	TRIGO	0	GRADO
+                            '	1	TRIGO	1	GRADO FUERA DE STANDARD
+                            '	1	TRIGO	3020	HUMEDAD
+                            '	1	TRIGO	3113	PROTEINA (s/base 13,5 % H)
+                            '	1	TRIGO	3212	GLUTEN MOL.INT.HUM.B/13,5 %H
+                            '	1	TRIGO	3222	GLUTEN HÚMEDO HARINA (s/base 13.5% H)
+                            '	1	TRIGO	3217	GLUTEN MOL.INT.SECO B/13,5 %H
+                            '	1	TRIGO	3227	GLUTEN SECO HARINA (s/base 13.5% H)
+                        Case 4
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            '	4	AVENA	1511	MATERIAS EXTRAÑAS  SIN VALOR
+                            '	4	AVENA	1512	MATERIAS EXTRAÑAS CON VALOR
+                            '	4	AVENA	1656	GRANOS PELADOS Y ROTOS
+                            '	4	AVENA	1300	GRANOS DAÑADOS
+                            '	4	AVENA	1130	TOTAL CALIDAD
+                            '	4	AVENA	2161	GRANOS PICADOS
+                            '	4	AVENA	2013	LIGERAMENTE
+                            '	4	AVENA	2014	RAZONABLEMENTE
+                            '	4	AVENA	2011	LIBRE
+                            '	4	AVENA	2010	MANCHADO
+                            '	4	AVENA	1711	PESO HECTOLITRICO
+                            '	4	AVENA	1480	GRANOS DE OTRO TIPO
+                            '	4	AVENA	3020	HUMEDAD
+                            '	4	AVENA	2021	OLOR OBJETABLE
+                            '	4	AVENA	0	GRADO
+                            '	4	AVENA	1	GRADO FUERA DE STANDARD
+                            '	4	AVENA	2218	BLANCA
+                            '	4	AVENA	2219	AMARILLA
+
+                        Case 3
+
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            '				
+                            '	3	LINO	1520	CUERPOS EXTRAÑOS
+                            '	3	LINO	4112	MATERIA GRASA (s.s.s.)
+                            '	3	LINO	4131	ACIDEZ DE LA  MATERIA GRASA
+                            '	3	LINO	2111	GRANOS REVOLCADOS EN TIERRA
+                            '	3	LINO	3020	HUMEDAD
+                            '				
+                        Case 6
+                            sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1611, .NobleQuebrados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            '				
+                            '	6	CENTENO	1521	CUERPOS EXTRAÑOS SIN VALOR
+                            '	6	CENTENO	1522	CUERPOS EXTRAÑOS CON VALOR
+                            '	6	CENTENO	1611	GRANOS QUEBRADOS
+                            '	6	CENTENO	1300	GRANOS DAÑADOS
+                            '	6	CENTENO	1130	TOTAL CALIDAD
+                            '	6	CENTENO	2051	CORNEZUELO
+                            '	6	CENTENO	2161	GRANOS PICADOS
+                            '	6	CENTENO	1711	PESO HECTOLITRICO
+                            '	6	CENTENO	0	GRADO
+                            '	6	CENTENO	1	GRADO FUERA DE STANDARD
+                        Case 7
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+                            '				
+                            '	7	ALPISTE	1525	C.EXTRAÑOS(INC.DESC.ROTOS Y VAN)
+                            '	7	ALPISTE	1523	CUERPOS EXTRAÑOS SIMIL ALPISTE
+                            '	7	ALPISTE	1300	GRANOS DAÑADOS
+                            '	7	ALPISTE	1552	GRANOS VERDES INTENSOS
+                            '	7	ALPISTE	2051	CORNEZUELO
+                            '	7	ALPISTE	2041	EXCREMENTOS  DE ROEDORES
+                            '	7	ALPISTE	2062	CHAMICO(semillas cada 100 gr.)
+                            '	7	ALPISTE	3020	HUMEDAD
+                        Case 8
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+                            '	8	GIRASOL	1112	TOTAL MATERIAS EXTRAÑAS
+                            '	8	GIRASOL	2062	CHAMICO(semillas cada 100 gr.)
+                            '	8	GIRASOL	4112	MATERIA GRASA (s.s.s.)
+                            '	8	GIRASOL	4131	ACIDEZ DE LA  MATERIA GRASA
+                            '	8	GIRASOL	3020	HUMEDAD
+                            '	8	GIRASOL	1515	MATERIAS EXTRAÑAS SIN ESCLEROTOS
+                            '	8	GIRASOL	1541	ESCLEROTOS
+                        Case 9
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                            sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+                            '				
+                            '	9	MIJO	1300	GRANOS DAÑADOS
+                            '	9	MIJO	1520	CUERPOS EXTRAÑOS
+                            '	9	MIJO	0	GRADO
+                            '	9	MIJO	1	GRADO FUERA DE STANDARD
+                            '	9	MIJO	1655	GRANOS DESCASCARADOS Y ROTOS
+                            '	9	MIJO	2161	GRANOS PICADOS
+                            '	9	MIJO	2062	CHAMICO(semillas cada 100 gr.)
+                            '	9	MIJO	3020	HUMEDAD
+                        Case 11
+
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 2131, .NobleAmohosados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1611, .NobleQuebrados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+
+                            '	11	SORGO GRANIFERO	1490	GRANOS DE OTRO COLOR
+                            '	11	SORGO GRANIFERO	1300	GRANOS DAÑADOS
+                            '	11	SORGO GRANIFERO	1514	MAT.EXT.Y SORGO NO GRANIFERO
+                            '	11	SORGO GRANIFERO	1611	GRANOS QUEBRADOS
+                            '	11	SORGO GRANIFERO	2161	GRANOS PICADOS
+                            '	11	SORGO GRANIFERO	2062	CHAMICO(semillas cada 100 gr.)
+                            '	11	SORGO GRANIFERO	3020	HUMEDAD
+                            '	11	SORGO GRANIFERO	2021	OLOR OBJETABLE
+                            '	11	SORGO GRANIFERO	2022	OLOR A HUMEDAD
+                            '	11	SORGO GRANIFERO	2131	GRANOS AMOHOSADOS
+                            '	11	SORGO GRANIFERO	0	GRADO
+                            '	11	SORGO GRANIFERO	1	GRADO FUERA DE STANDARD
+                        Case 15
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            sb = RenglonAmaggiCalidad(cdp, 1111, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 1651, .NobleQuebrados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+                            '	15	TRIGO FIDEO	1300	GRANOS DAÑADOS
+                            '	15	TRIGO FIDEO	1420	GNOS.ARDIDOS Y/O DAÑADOS P/CALOR
+                            '	15	TRIGO FIDEO	1111	TOTAL GRANOS DAÑADOS
+                            '	15	TRIGO FIDEO	1510	MATERIAS EXTRAÑAS
+                            '	15	TRIGO FIDEO	1651	GRANOS QUEBRADOS Y/O CHUZOS
+                            '	15	TRIGO FIDEO	1460	GRANOS CON CARBON
+                            '	15	TRIGO FIDEO	2151	VITREOSIDAD
+                            '	15	TRIGO FIDEO	2161	GRANOS PICADOS
+                            '	15	TRIGO FIDEO	2061	TRIGO PAN
+                            '	15	TRIGO FIDEO	2051	CORNEZUELO
+                            '	15	TRIGO FIDEO	2062	CHAMICO(semillas cada 100 gr.)
+                            '	15	TRIGO FIDEO	2063	SEMILLAS DE TREBOL
+                            '	15	TRIGO FIDEO	3113	PROTEINA (s/base 13,5 % H)
+                            '	15	TRIGO FIDEO	3020	HUMEDAD
+                            '	15	TRIGO FIDEO	1711	PESO HECTOLITRICO
+                            '	15	TRIGO FIDEO	2023	OLOR A TREBOL
+                            '	15	TRIGO FIDEO	2022	OLOR A HUMEDAD
+                            '	15	TRIGO FIDEO	2021	OLOR OBJETABLE
+                            '	15	TRIGO FIDEO	2024	OLOR A CARBON
+                            '	15	TRIGO FIDEO	2112	GRANOS PUNTA SOMBREADA P/TIERRA
+                            '	15	TRIGO FIDEO	2111	GRANOS REVOLCADOS EN TIERRA
+                            '	15	TRIGO FIDEO	2122	GRANOS PUNTA NEGRA POR CARBON
+                            '	15	TRIGO FIDEO	2123	G.PTA.NEG.P/CARBON Y OLOR CARBON
+                            '	15	TRIGO FIDEO	2121	GRANOS REVOLCADOS EN CARBON
+                            '	15	TRIGO FIDEO	3212	GLUTEN HÚMEDO M.INTEGRAL(s/base 13.5% H)
+                            '	15	TRIGO FIDEO	3217	GLUTEN SECO M.INTEGRAL(s/base 13.5% H)
+                            '	15	TRIGO FIDEO	0	GRADO
+                            '	15	TRIGO FIDEO	1	GRADO FUERA DE STANDARD
+                        Case 16
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            '				
+                            '	16	CEBADA CERVECERA	1510	MATERIAS EXTRAÑAS
+                            '	16	CEBADA CERVECERA	1140	SUB TOTAL
+                            '	16	CEBADA CERVECERA	1654	GRANOS QUEBRADOS, PART.,  PEL.,  DAÑADOS
+                            '	16	CEBADA CERVECERA	1513	MATERIAS INERTES Y SEMILLAS EXTRAÑAS
+                            '	16	CEBADA CERVECERA	2161	GRANOS PICADOS
+                            '	16	CEBADA CERVECERA	1460	GRANOS CON CARBON
+                            '	16	CEBADA CERVECERA	1214	BAJO     ZARANDA  2.2 MM.
+                            '	16	CEBADA CERVECERA	1150	DESECHOS TOTALES
+                            '	16	CEBADA CERVECERA	1212	SOBRE ZARANDA  2.5 MM.
+                            '	16	CEBADA CERVECERA	4132	CAPACIDAD GERMINATIVA
+                            '	16	CEBADA CERVECERA	3122	PROTEINA (s.s.s.)
+                            '	16	CEBADA CERVECERA	3020	HUMEDAD
+                        Case 17
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            '	17	COLZA	1520	CUERPOS EXTRAÑOS
+                            '	17	COLZA	4112	MATERIA GRASA (s.s.s.)
+                            '	17	COLZA	4131	ACIDEZ DE LA  MATERIA GRASA
+                            '	17	COLZA	3020	HUMEDAD
+
+                        Case 18
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+
+
+                            '	18	GIRASOL OLEICO	1112	TOTAL MATERIAS EXTRAÑAS
+                            '	18	GIRASOL OLEICO	2062	CHAMICO(semillas cada 100 gr.)
+                            '	18	GIRASOL OLEICO	4112	MATERIA GRASA (s.s.s.)
+                            '	18	GIRASOL OLEICO	4131	ACIDEZ DE LA  MATERIA GRASA
+                            '	18	GIRASOL OLEICO	3020	HUMEDAD
+                            '	18	GIRASOL OLEICO	1515	MATERIAS EXTRAÑAS SIN ESCLEROTOS
+                            '	18	GIRASOL OLEICO	1541	ESCLEROTOS
+                            '	18	GIRASOL OLEICO	4268	ACIDO OLEICO
+                        Case 21
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                            '	21	CANOLA	1520	CUERPOS EXTRAÑOS
+                            '	21	CANOLA	4112	MATERIA GRASA (s.s.s.)
+                            '	21	CANOLA	4131	ACIDEZ DE LA  MATERIA GRASA
+                            '	21	CANOLA	4272	ACIDO ERUCICO
+                            '	21	CANOLA	4510	GLUCOSINOLATOS
+                            '	21	CANOLA	3020	HUMEDAD
+                        Case 25
+                            sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            sb = RenglonAmaggiCalidad(cdp, 2062, .CalidadMermaChamico, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01") '	1044	MERMA POR CHAMICO
+
+
+                            '	25	CÁRTAMO	1112	MATERIAS EXTRAÑAS
+                            '	25	CÁRTAMO	2062	CHAMICO(semillas cada 100 gr.)
+                            '	25	CÁRTAMO	4112	MATERIA GRASA (s.s.s.)
+                            '	25	CÁRTAMO	4131	ACIDEZ DE LA  MATERIA GRASA
+                            '	25	CÁRTAMO	3020	HUMEDAD
+
+                        Case Else
+                            'sb = RenglonAmaggiCalidad(cdp, 3020, .Humedad, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1212, .CalidadMermaZarandeo, .CalidadMermaZarandeoBonifica_o_Rebaja, 0, nF, "02") '	1212	SOBRE ZARANDA  2.5 MM.
+                            'sb = RenglonAmaggiCalidad(cdp, 1440, .CalidadGranosQuemados, .CalidadGranosQuemadosBonifica_o_Rebaja, 0, nF, "03") '	1440	GRANOS QUEMADOS O DE AVERIA
+                            'sb = RenglonAmaggiCalidad(cdp, 1531, .CalidadTierra, .CalidadTierraBonifica_o_Rebaja, 0, nF, "04") '	1531	TIERRA
+
+                            'sb = RenglonAmaggiCalidad(cdp, 1111, .NobleDaniados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1112, .NobleExtranos, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1611, .NobleQuebrados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 2161, .NoblePicados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1551, .NobleNegros, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 2131, .NobleAmohosados, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1460, .NobleCarbon, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1470, .NoblePanzaBlanca, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 1311, .NobleVerdes, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 4131, .NobleAcidezGrasa, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                            'sb = RenglonAmaggiCalidad(cdp, 4112, .NobleMGrasa, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+                    End Select
+
+                    'sb = RenglonAmaggiCalidad(cdp, 2112, .Merma, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+                    'sb = RenglonAmaggiCalidad(cdp, , .Fumigada, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                    'sb = RenglonAmaggiCalidad(cdp, , .NobleACamara, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+                    'sb = RenglonAmaggiCalidad(cdp, , .NobleGrado, .CalidadTierraBonifica_o_Rebaja, 0, nF, "05")
+
+
+
+
+
+                    '	CODIGO	NOMBRE	CODIGO	NOMBRE
+
+
+
+
+                    '                    Andres disculpa la demora por este tema, mira probé este análisis y el diseño de 
+                    'registro esta OK, pero noto que envían valores de ítems de calidad que no están en las 
+                    'tablas de equivalencia del grano de la CP, por ejemplo esta línea mandan uds y es un CP de Soja. Debajo te paso los ítems de análisis con sus equivalencias…
+
+                    'El ítems 03020 es el único que está en la lista de que mandan en el registro, los otros dos de donde los sacaron?
+
+                    '24041300030894591050 3020 000001500299001200000000000000000B00.00N1110326
+                    '24041300030894591050 1112 000000400299001200000000000000000B00.00N1110326
+                    '24041300030894591050 2161 000000600299001200000000000000000B00.00N1110326
+
+
+                    '                    GRANOS()
+                    '                    ENSAYOS()
+                    '                    CODIGO()
+                    '                    NOMBRE()
+                    '                    CODIGO()
+                    '                    NOMBRE()
+                    '12:
+                    '                    SOJA()
+                    '1044:
+                    'MERMA POR CHAMICO
+                    '12:
+                    '                    SOJA()
+                    '1300:
+                    '                    GRANOS(DAÑADOS)
+                    '12:
+                    '                    SOJA()
+                    '1440:
+                    'GRANOS QUEMADOS O DE AVERIA
+                    '12:
+                    '                    SOJA()
+                    '1111:
+                    'TOTAL GRANOS DAÑADOS
+                    '12:
+                    '                    SOJA()
+                    '1311:
+                    '                    GRANOS(VERDES)
+                    '12:
+                    '                    SOJA()
+                    '1524:
+                    'MATERIAS EXTRAÑAS (SIN TIERRA)
+                    '12:
+                    '                    SOJA()
+                    '1531:
+                    '                    TIERRA()
+                    '12:
+                    '                    SOJA()
+                    '1114:
+                    'TOTAL MATERIAS EXTRAÑAS INCL. TIERRA.
+                    '12:
+                    '                    SOJA()
+                    '1652:
+                    'GRANOS QUEBRADOS Y/O PARTIDOS
+                    '12:
+                    '                    SOJA()
+                    '1551:
+                    '                    GRANOS(NEGROS)
+                    '12:
+                    '                    SOJA()
+                    '2062:
+                    'CHAMICO(semillas cada 100 gr.)
+                    '12:
+                    '                    SOJA()
+                    '2111:
+                    'GRANOS REVOLCADOS EN TIERRA
+                    '12:
+                    '                    SOJA()
+                    '2131:
+                    '                    GRANOS(AMOHOSADOS)
+                    '12:
+                    '                    SOJA()
+                    '3020:
+                    '                    HUMEDAD()
+                    '12:
+                    '                    SOJA()
+                    '2021:
+                    '                    OLOR(OBJETABLE)
+                    '12:
+                    '                    SOJA()
+                    '3122:
+                    'PROTEINA (s.s.s.)
+                    '12:
+                    '                    SOJA()
+                    '4112:
+                    'MATERIA GRASA (s.s.s.)
+                    '12:
+                    '                    SOJA()
+                    '4142:
+                    'FIBRA (s.s.s.)
+
+
+
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1111	TOTAL GRANOS DAÑADOS
+                    'sb = RenglonAmaggiCalidad(cdp, 1112, .NobleExtranos, 0, nF) '	1112	MATERIAS EXTRAÑAS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1112	TOTAL MATERIAS EXTRAÑAS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1114	TOTAL MATERIAS EXTRAÑAS INCL. TIERRA.
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1130	TOTAL CALIDAD
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1140	SUB TOTAL
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1150	DESECHOS TOTALES
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1214	BAJO     ZARANDA  2.2 MM.
+                    'sb = RenglonAmaggiCalidad(cdp, 1300, .NobleDaniados, 0, nF) '	1300	GRANOS DAÑADOS
+                    'sb = RenglonAmaggiCalidad(cdp, 1311, .NobleVerdes, 0, nF) '	1311	GRANOS VERDES
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1420	GNOS.ARDIDOS Y/O DAÑADOS P/CALOR
+                    'sb = RenglonAmaggiCalidad(cdp, 1460, .NobleCarbon, 0, nF) '	1460	GRANOS CON CARBON
+                    'sb = RenglonAmaggiCalidad(cdp, 1470, .NoblePanzaBlanca, 0, nF) '	1470	GRANOS PANZA BLANCA
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1480	GRANOS DE OTRO TIPO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1490	GRANOS DE OTRO COLOR
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1510	MATERIAS EXTRAÑAS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1511	MATERIAS EXTRAÑAS  SIN VALOR
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1512	MATERIAS EXTRAÑAS CON VALOR
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1513	MATERIAS INERTES Y SEMILLAS EXTRAÑAS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1514	MAT.EXT.Y SORGO NO GRANIFERO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1515	MATERIAS EXTRAÑAS SIN ESCLEROTOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1520	CUERPOS EXTRAÑOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1521	CUERPOS EXTRAÑOS SIN VALOR
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1522	CUERPOS EXTRAÑOS CON VALOR
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1523	CUERPOS EXTRAÑOS SIMIL ALPISTE
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1524	MATERIAS EXTRAÑAS (SIN TIERRA)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1525	C.EXTRAÑOS(INC.DESC.ROTOS Y VAN)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1541	ESCLEROTOS
+                    'sb = RenglonAmaggiCalidad(cdp, 1551, .NobleNegros, 0, nF) '	1551	GRANOS NEGROS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1552	GRANOS VERDES INTENSOS
+                    'sb = RenglonAmaggiCalidad(cdp, 1611, .NobleQuebrados, 0, nF) '	1611	GRANOS QUEBRADOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1651	GRANOS QUEBRADOS Y/O CHUZOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1652	GRANOS QUEBRADOS Y/O PARTIDOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1654	GRANOS QUEBRADOS, PART.,  PEL.,  DAÑADOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1655	GRANOS DESCASCARADOS Y ROTOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	1656	GRANOS PELADOS Y ROTOS
+                    'sb = RenglonAmaggiCalidad(cdp, 1711, .NobleHectolitrico, 0, nF) '	1711	PESO HECTOLITRICO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2010	MANCHADO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2011	LIBRE
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2013	LIGERAMENTE
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2014	RAZONABLEMENTE
+                    'sb = RenglonAmaggiCalidad(cdp, 2021, .NobleObjetables, 0, nF) '	2021	OLOR OBJETABLE
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2022	OLOR A HUMEDAD
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2023	OLOR A TREBOL
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2024	OLOR A CARBON
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2041	EXCREMENTOS  DE ROEDORES
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2051	CORNEZUELO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2061	TRIGO PAN
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2062	CHAMICO(semillas cada 100 gr.)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2063	SEMILLAS DE TREBOL
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2064	SEMILLAS DE TREBOL DE OLOR
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleRevolcado, 0, nF) '	2111	GRANOS REVOLCADOS EN TIERRA
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2112	GRANOS PUNTA SOMBREADA P/TIERRA
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2121	GRANOS REVOLCADOS EN CARBON
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2122	GRANOS PUNTA NEGRA POR CARBON
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2123	G.PTA.NEG.P/CARBON Y OLOR CARBON
+                    'sb = RenglonAmaggiCalidad(cdp, 2131, .NobleAmohosados, 0, nF) '	2131	GRANOS AMOHOSADOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2151	VITREOSIDAD
+                    'sb = RenglonAmaggiCalidad(cdp, 2161, .NoblePicados, 0, nF) '	2161	GRANOS PICADOS
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2211	DURO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2213	DENTADO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2214	SEMI DURO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2215	BLANDO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2218	BLANCA
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2219	AMARILLA
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2232	COLORADO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2233	AMARILLO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	2234	BLANCO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3020	HUMEDAD
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3113	PROTEINA (s/base 13,5 % H)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3122	PROTEINA (s.s.s.)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3212	GLUTEN HÚMEDO M.INTEGRAL(s/base 13.5% H)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3212	GLUTEN MOL.INT.HUM.B/13,5 %H
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3217	GLUTEN MOL.INT.SECO B/13,5 %H
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3217	GLUTEN SECO M.INTEGRAL(s/base 13.5% H)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3222	GLUTEN HÚMEDO HARINA (s/base 13.5% H)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	3227	GLUTEN SECO HARINA (s/base 13.5% H)
+                    'sb = RenglonAmaggiCalidad(cdp, 11, .NobleMGrasa, 0, nF) '	4112	MATERIA GRASA (s.s.s.)
+                    'sb = RenglonAmaggiCalidad(cdp, 11, .NobleAcidezGrasa, 0, nF) '	4131	ACIDEZ DE LA  MATERIA GRASA
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	4132	CAPACIDAD GERMINATIVA
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	4142	FIBRA (s.s.s.)
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	4268	ACIDO OLEICO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	4272	ACIDO ERUCICO
+                    ''sb = RenglonAmaggiCalidad(cdp, 11, .NobleExtranos, 0, nF) '	4510	GLUCOSINOLATOS
+
+
+
+
+
+
+                    'PrintLine(nF, sb)
+                End With
+            Next
+
+
+            FileClose(nF)
+
+
+            Return vFileName
+
+        End Function
         Public Shared Function Sincronismo_AmaggiCalidades(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, SC As String) As String
 
             '            Nombre(RESULTA.TXT)
