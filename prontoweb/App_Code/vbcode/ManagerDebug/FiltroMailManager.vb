@@ -530,7 +530,7 @@ Namespace Pronto.ERP.Bll
                                              "", _
                                             SmtpPort, _
                                     , _
-                                    CCOaddress, )
+                                    CCOaddress, , , De)
 
 
                             'MandaEmail(destinatario, _
@@ -561,7 +561,7 @@ Namespace Pronto.ERP.Bll
                                              , _
                                              CCOaddress, _
                                                 truquito _
-                                                , "Williams Entregas" _
+                                                , "Williams Entregas", De _
                                            )
 
                         End If
@@ -832,7 +832,7 @@ Namespace Pronto.ERP.Bll
                                              "", _
                                             SmtpPort, _
                                     , _
-                                    CCOaddress, )
+                                    CCOaddress, , , De)
 
 
                             'MandaEmail(destinatario, _
@@ -863,7 +863,7 @@ Namespace Pronto.ERP.Bll
                                              , _
                                              CCOaddress, _
                                                 truquito _
-                                                , "Williams Entregas" _
+                                                , "Williams Entregas", De _
                                            )
 
                         End If
