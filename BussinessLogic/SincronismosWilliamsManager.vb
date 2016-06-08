@@ -13212,7 +13212,7 @@ Namespace Pronto.ERP.Bll
             Dim sErroresProcedencia, sErroresDestinos As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
-            Dim vFileName As String = Path.GetTempPath & "SincroMorgan " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            Dim vFileName As String = Path.GetTempPath & "SincroAmaggi " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
             'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
             'Dim vFileName As String = "c:\archivo.txt"
@@ -13924,7 +13924,7 @@ Namespace Pronto.ERP.Bll
             Dim sErroresProcedencia, sErroresDestinos As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
-            Dim vFileName As String = Path.GetTempPath & "SincroAmaggi " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            Dim vFileName As String = Path.GetTempPath & "SincroMorgan " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
             'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
             'Dim vFileName As String = "c:\archivo.txt"

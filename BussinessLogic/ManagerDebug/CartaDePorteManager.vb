@@ -9641,7 +9641,7 @@ Public Class CartaDePorteManager
 
 
 
-             
+
 
 
 
@@ -13438,7 +13438,9 @@ Public Class CartaDePorteManager
 
     Shared Function usuariosBLD(SC As String) As List(Of String)
         Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor"), "") _
-                            + "|" + iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "")
+                            + "|" + iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "") _
+                            + "|" + iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor3"), "")
+
         Dim sss = aaa.Split("|").ToList
         sss.Add("BLDCORREDOR")
         sss.Add("BLD_ALABERN")
@@ -13463,6 +13465,7 @@ Public Class CartaDePorteManager
 
     Shared Function TraerCUITClientesSegunUsuario(usuario As String, SC As String) As List(Of String)
 
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=14187
 
         Dim c1() As String = { _
                                       "20268165178" _
@@ -13488,7 +13491,7 @@ Public Class CartaDePorteManager
 
 
 
-
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=20348
         Dim c2() As String = { _
                               "33708480849" _
                             , "30668239559" _
@@ -13543,10 +13546,190 @@ Public Class CartaDePorteManager
                             }
 
 
-        Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "")
-        Dim sss = aaa.Split("|").ToList
+        'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=20848
+        Dim c3() As String = { _
+ "30508255965" _
+, "30708547758" _
+, "30613957509" _
+, "30550246771" _
+, "30502793175" _
+, "30712157107" _
+, "30709054704" _
+, "30590467010" _
+, "27173198146" _
+, "20220775640" _
+, "30667622707" _
+, "20162019873" _
+, "23073814499" _
+, "30710132395" _
+, "33693971239" _
+, "30714038911" _
+, "20226532537" _
+, "30552574822" _
+, "20103905932" _
+, "30710225733" _
+, "30700522314" _
+, "20085369645" _
+, "30649229755" _
+, "20170298358" _
+, "30634408475" _
+, "98927187872" _
+, "33710880579" _
+, "33631032929" _
+, "20045814484" _
+, "20135485501" _
+, "24040384525" _
+, "30714659258" _
+, "20107656910" _
+, "24113366210" _
+, "30708724463" _
+, "33615604599" _
+, "30711806209" _
+, "30691552590" _
+, "33623538899" _
+, "20108993627" _
+, "20044232619" _
+, "30709936812" _
+, "30619381064" _
+, "30688956427" _
+, "30617007785" _
+, "30711544646" _
+, "30708363827" _
+, "30665352893" _
+, "30696150520" _
+, "30714626945" _
+, "30711955530" _
+, "33710309529" _
+, "33621155429" _
+, "30708451629" _
+, "23210571299" _
+, "20176690772" _
+, "20265609415" _
+, "20303380605" _
+, "27035489733" _
+, "20229905830" _
+, "20262092632" _
+, "20185006183" _
+, "27217201077" _
+, "30707049843" _
+, "20140057453" _
+, "30711988099" _
+, "30712210253" _
+, "30710256507" _
+, "30547406776" _
+, "20226480723" _
+, "30557861420" _
+, "30607229828" _
+, "30710194250" _
+, "20175222791" _
+, "27066336978" _
+, "27050046414" _
+, "20268133985" _
+, "20125834621" _
+, "20278570798" _
+, "27226443237" _
+, "30511824563" _
+, "30708924985" _
+, "30649023316" _
+, "30683682302" _
+, "30683044098" _
+, "30709049565" _
+, "30710822170" _
+, "30710328427" _
+, "30708414308" _
+, "33709199779" _
+, "30707818707" _
+, "30683941499" _
+, "30528794544" _
+, "20238353948" _
+, "30708855703" _
+, "30710731604" _
+, "27215151153" _
+, "27054880206" _
+, "20239541179" _
+, "20220470718" _
+, "30708418788" _
+, "30711124108" _
+, "20052568243" _
+, "27124852515" _
+, "20043838483" _
+, "20121825075" _
+, "30615426829" _
+, "27042589255" _
+, "30519261517" _
+, "27004059730" _
+, "20043578155" _
+, "20266070641" _
+, "33708285639" _
+, "30619004449" _
+, "20304689618" _
+, "30711306958" _
+, "30713609508" _
+, "30707463259" _
+, "20294464418" _
+, "30709242993" _
+, "33708714289" _
+, "30711515719" _
+, "20050615287" _
+, "30711731020" _
+, "20116593700" _
+, "20228254488" _
+, "27181169937" _
+, "20300301593" _
+, "20206542587" _
+, "30712149562" _
+, "30668774268" _
+, "30696156499" _
+, "33708414609" _
+, "30708139846" _
+, "30708729996" _
+, "30667592565" _
+, "30708508094" _
+, "30538263431" _
+, "30709917788" _
+, "30565748811" _
+, "30528749166" _
+, "20122852580" _
+, "20177302164" _
+, "23125564909" _
+, "20236836178" _
+, "30644492563" _
+, "30640655247" _
+, "20129916924" _
+, "30526381943" _
+, "30710229372" _
+, "30708047461" _
+, "30501036125" _
+, "20139950985" _
+, "30709042390" _
+, "30558314539" _
+, "30595526511" _
+, "30658938300" _
+, "33708830599" _
+, "33594705829" _
+, "30552646750" _
+, "30631839319" _
+, "20052577447" _
+, "20085369564" _
+, "30553563182" _
+, "30522189894" _
+, "23182504114" _
+, "27209562389" _
+, "20939127977" _
+, "23116523914" _
+, "20043789083" _
+, "30619509133" _
+}
 
-        If sss.Contains(usuario) Then
+
+
+        Dim lista2 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "").Split("|"), IEnumerable(Of String)).ToList
+        Dim lista3 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor3"), "").Split("|"), IEnumerable(Of String)).ToList
+
+        If lista3.Contains(usuario) Then
+            Return c3.ToList
+
+        ElseIf lista2.Contains(usuario) Then
             Return c2.ToList
         Else
             Return c1.ToList
@@ -16722,13 +16905,16 @@ Public Class CDPMailFiltrosManager2
         Dim logo = "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\n/Tfimth/I/4H/IqMrS7KwMAAAAAASUVORK5CYII="
 
         Dim html = "" '" <img src=""data:image/jpg;base64, " + logo + """ />"""
-        Dim a = ""
+        Dim a = "", b = ""
 
 
 
         Select Case puntoventa
             Case 1
-                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a buenosaires@williamsentregas.com.ar<br/>"
+
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a>"
+
                 a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Buenos Aires<br/>" + vbCrLf + _
                         "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf + _
@@ -16736,21 +16922,27 @@ Public Class CDPMailFiltrosManager2
 
 
             Case 2
-                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a sanlorenzo@williamsentregas.com.ar<br/>"
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a sanlorenzo@williamsentregas.com.ar</a>"
+
                 a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina San Lorenzo<br/>" + vbCrLf + _
                         "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf + _
                         "Tel: 03476 - 430234 / 430158<br/>sanlorenzo@williamsentregas.com.ar" + vbCrLf
 
             Case 3
-                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a arroyoseco@williamsentregas.com.ar<br/>"
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a arroyoseco@williamsentregas.com.ar</a>"
+
                 a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Arroyo Seco<br/>" + vbCrLf + _
                         "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf + _
                         "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
 
             Case 4
-                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a bahiablanca@williamsentregas.com.ar<br/>"
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a bahiablanca@williamsentregas.com.ar</a>"
+
                 a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Bahia Blanca<br/>" + vbCrLf + _
                         "Playa el Triangulo<br/>" + vbCrLf + _
@@ -16758,7 +16950,9 @@ Public Class CDPMailFiltrosManager2
 
 
             Case Else
-                a = "<br/>Estimados, este mail se utiliza únicamente para envíos. En caso de responder favor de responder a buenosaires@williamsentregas.com.ar<br/>"
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a>"
+
                 a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Buenos Aires<br/>" + vbCrLf + _
                         "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf + _
@@ -16767,7 +16961,7 @@ Public Class CDPMailFiltrosManager2
         End Select
 
 
-        html &= "<br/><a href=""http://williamsentregas.com.ar/""> <img src=""cid:Image""></a>" + a +
+        html &= b + "<br/><a href=""http://williamsentregas.com.ar/""> <img src=""cid:Image""></a>" + a +
                "<br/><a href=""https://twitter.com/WEntregas?lang=es""><img src=""cid:Image2""></a>"
 
 
@@ -17109,7 +17303,7 @@ Public Class CDPMailFiltrosManager2
                                                                 output, _
                                                               SmtpPort, _
                                                       , _
-                                                      CCOaddress, , , , , inlinePNG, inlinePNG2)
+                                                      CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
                     ElseIf bDescargaHtml Then
@@ -17129,7 +17323,7 @@ Public Class CDPMailFiltrosManager2
                                           "", _
                                         SmtpPort, _
                                 , _
-                                CCOaddress, , , , , inlinePNG, inlinePNG2)
+                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
                         'MandaEmail(destinatario, _
@@ -17160,7 +17354,7 @@ Public Class CDPMailFiltrosManager2
                                          , _
                                          CCOaddress, _
                                             truquito _
-                                            , "Williams Entregas", , , inlinePNG, inlinePNG2 _
+                                            , "Williams Entregas", De, , inlinePNG, inlinePNG2 _
                                        )
 
                     End If

@@ -498,7 +498,7 @@ Partial Class CDPMailing
                             "", _
                             ConfigurationManager.AppSettings("SmtpPort"), _
                             , _
-                            ccoaddress, "Williams Entregas", , , True)
+                            ccoaddress, "Williams Entregas", , De, True)
 
 
 
@@ -519,7 +519,7 @@ Partial Class CDPMailing
                           ConfigurationManager.AppSettings("SmtpPort"), _
                           , _
                           ccoaddress, _
-                                                 , "Williams Entregas", ccoaddress)
+                                                 , "Williams Entregas", De)
 
                 End If
 
@@ -857,7 +857,7 @@ Partial Class CDPMailing
                                 "", _
                                 ConfigurationManager.AppSettings("SmtpPort"), _
                                 , _
-                                ccoaddress, , , , True)
+                                ccoaddress, , , De, True)
                     Catch ex As Exception
                         ErrHandler2.WriteError(ex)
                     End Try
@@ -880,7 +880,7 @@ Partial Class CDPMailing
                             "", _
                             ConfigurationManager.AppSettings("SmtpPort"), _
                             , _
-                            ccoaddress, , , , True)
+                            ccoaddress, , , De, True)
 
 
                 Else
@@ -905,7 +905,7 @@ Partial Class CDPMailing
                                   ConfigurationManager.AppSettings("SmtpPort"), _
                                   , _
                                   ccoaddress, _
-                                                         , "Williams Entregas", ccoaddress)
+                                                         , "Williams Entregas", De)
                         End If
 
                     Catch ex As Exception
@@ -930,7 +930,7 @@ Partial Class CDPMailing
                               ConfigurationManager.AppSettings("SmtpPort"), _
                               , _
                               ccoaddress, _
-                                                     , "Williams Entregas", ccoaddress)
+                                                     , "Williams Entregas", De)
 
 
                     End If
@@ -2531,7 +2531,7 @@ Partial Class CDPMailing
         MandaEmail_Nuevo("mscalella911@gmail.com", _
                                 "ccc", _
                               "", _
-                            "buenosaires@williamsentregas.com.ar", _
+                             "buenosaires@williamsentregas.com.ar", _
                             ConfigurationManager.AppSettings("SmtpServer"), _
                             ConfigurationManager.AppSettings("SmtpUser"), _
                             ConfigurationManager.AppSettings("SmtpPass"), _

@@ -527,11 +527,12 @@ namespace ProntoFlexicapture
             //FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
             // IEnumerable<FileInfo> files = d.EnumerateFiles("Export*.xls", SearchOption. .AllDirectories); //Getting Text files
 
-            
 
 
-            var di = new DirectoryInfo(DirApp);
+
+            var di = new DirectoryInfo(dir);
             List<string> directories = di.EnumerateDirectories()
+                    .Where(d => !d.Name.Contains("_IMPORT1"))
                     .OrderByDescending(d => d.CreationTime)
                     .Select(d => d.Name)
                     .ToList();
@@ -576,7 +577,7 @@ namespace ProntoFlexicapture
             //         select f.FullName);
             //     return q.ToList();
 
-        
+
         }
 
 
