@@ -196,6 +196,19 @@ namespace ProntoFlexicapture
             }
             catch (Exception xxx)
             {
+
+
+
+                
+//System.Runtime.InteropServices.COMException (0x8000FFFF): Error interno del programa:
+//FCESupport\FCESupportImpl.h, 42.
+//   at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
+//   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 206
+//   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 129
+//   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 322
+
+
+
                 //tirar la Lista de imagenes sospechosas
                 foreach (string s in imagenes)
                 {
@@ -240,8 +253,21 @@ namespace ProntoFlexicapture
                     document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
                 }
+                   
                 catch (Exception xx)
                 {
+                    // si no esta la licencia, acá explota
+
+
+                    // puede ser por falta de memoria tambien
+   //                 System.OutOfMemoryException: Insufficient memory to continue the execution of the program.
+   //at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
+   //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 252
+   //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 129
+   //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
+   //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+
+
                     foreach (string s in imagenes)
                     {
                         DesmarcarImagenComoProcesandose(s);
@@ -616,6 +642,9 @@ namespace ProntoFlexicapture
 
             try
             {
+
+                //esto es durisimo
+                ffffff
 
 
                 files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
@@ -1470,6 +1499,8 @@ namespace ProntoFlexicapture
 
                         cdp.Acoplado = Acoplado;
                         cdp.Patente = Camión;
+                        graba 5 caracteres y no se valida
+
                         cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
                         cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", "").Replace(",", ""));
                         cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", "").Replace(",", ""));
