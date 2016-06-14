@@ -644,8 +644,6 @@ namespace ProntoFlexicapture
             {
 
                 //esto es durisimo
-                ffffff
-
 
                 files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
                 // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
@@ -1497,9 +1495,8 @@ namespace ProntoFlexicapture
                         cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
                         cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
-                        cdp.Acoplado = Acoplado;
-                        cdp.Patente = Camión;
-                        graba 5 caracteres y no se valida
+                        cdp.Acoplado = Acoplado.Replace("-", "").Replace(" ", "");
+                        cdp.Patente = Camión.Replace("-", "").Replace(" ", "");
 
                         cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
                         cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", "").Replace(",", ""));
