@@ -200,6 +200,17 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void problema_informe_22009()
+        {
+            ReportParameter p2=null;
+
+            var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "2/11/2015",
+                                            "Personalizar",
+                                            1, "Entregas", SC);
+
+        }
+
 
 
         [TestMethod]
