@@ -6,7 +6,8 @@
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, 
-Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms"
+Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    Namespace="Microsoft.Reporting.WebForms"
     TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
@@ -38,13 +39,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                     <td style="width: 101px; height: 24px;" class="EncabezadoCell">
                         Informe
                     </td>--%>
-                    <td style="width: 300px; height: 24px; " align="right">
+                    <td style="width: 300px; height: 24px;" align="right">
                         <%--<asp:ListBox ID="ListBox1" runat="server" Width="500px" AutoPostBack="true" Font-Size="14px"
                             Height="650px" Style="margin-left: 0px;">--%>
                         <asp:DropDownList ID="cmbInforme" runat="server" Width="500px" AutoPostBack="true"
                             Font-Size="18px" Height="32px" Style="margin-left: 0px; max-height: 300px;">
                             <asp:ListItem>-- Elija un informe --</asp:ListItem>
-                   
+
                             <asp:ListItem>Resumen de facturación</asp:ListItem>
                             <asp:ListItem>Proyección de facturación</asp:ListItem>
                             <asp:ListItem>Planilla de movimientos</asp:ListItem>
@@ -58,7 +59,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                             <asp:ListItem>Estadísticas de Toneladas descargadas (Sucursal-Modo) todos los modos</asp:ListItem>
                             <asp:ListItem>Volumen de Carga</asp:ListItem>
                             <asp:ListItem>Diferencias por Destino por Mes</asp:ListItem>
-                                                        <asp:ListItem>Listado de Tarifas</asp:ListItem>
+                            <asp:ListItem>Listado de Tarifas</asp:ListItem>
 
                         </asp:DropDownList>
                     </td>
@@ -69,11 +70,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                         <asp:Button ID="btnTexto" Text="Descargar Notas de Entrega" runat="server" Visible="false" />
                         <asp:Button ID="Button1" Text="SubcontratistaFix" runat="server" Height="30" Visible="false" />
                     </td>
-                    <td class="EncabezadoCell" style="width: 200px; height: 18px;">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <td class="EncabezadoCell" style="width: 200px; height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <%--Sincronismo--%>
                     </td>
-                    <td  style="display:none">
+                    <td style="display: none">
                         <asp:DropDownList ID="cmbSincronismo" runat="server" Width="307px" AutoPostBack="true"
                             Font-Size="18px" Height="32" Style="margin-left: 0px">
                             <asp:ListItem Enabled="False">-- Elija un informe --</asp:ListItem>
@@ -144,7 +144,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                             <asp:ListItem Enabled="true">ZENI</asp:ListItem>
                         </asp:DropDownList>
                     </td>
-                    <td colspan="2" style="display:none">
+                    <td colspan="2" style="display: none">
                         <asp:Button ID="btnDescargaSincro" Text="descargar" runat="server" CssClass="butcancela"
                             Height="32" Width="100" />
                     </td>
@@ -158,7 +158,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
             <br />
             <table style="padding: 0px; border: none #FFFFFF; width: 696px; margin-right: 0px;"
                 cellpadding="1" cellspacing="1">
-               
             </table>
             <br />
             <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
@@ -170,88 +169,127 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                     <asp:Panel ID="Panel4" runat="server">
                         <table style="padding: 0px; border: none #FFFFFF; width: 696px; margin-right: 0px;"
                             cellpadding="1" cellspacing="1">
-                             <tr>
-                    <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                        Estado
-                    </td>
-                    <td class="EncabezadoCell" style="width: 222px; height: 18px;">
-                        <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                            CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px">
-                            <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
-                            <asp:ListItem Text="Incompletas" Value="Incompletas" />
-                            <asp:ListItem Text="Posición" Value="Posición" />
-                            <asp:ListItem Text="Descargas" Value="Descargas" />
-                            <asp:ListItem Text="Facturadas" Value="Facturadas" />
-                            <asp:ListItem Text="No facturadas" Value="NoFacturadas" />
-                            <asp:ListItem Text="Rechazadas" Value="Rechazadas" />
-                            <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
-                        </asp:DropDownList>
-                    </td>
-                    <td class="EncabezadoCell" style="width: 162px; height: 18px;">
-                        Descarga
-                    </td>
-                    <td class="EncabezadoCell" style="width: 300px; height: 18px;">
-                        <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
-                            Visible="true">
-                            <asp:ListItem Text="Hoy" />
-                            <asp:ListItem Text="Ayer" Selected="True" />
-                            <%--<asp:ListItem Text="Esta semana" />
-                        <asp:ListItem Text="Semana pasada" />--%>
-                            <asp:ListItem Text="Este mes" />
-                            <asp:ListItem Text="Mes anterior" />
-                            <asp:ListItem Text="Cualquier fecha" />
-                            <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
-                            <asp:ListItem Text="Personalizar" />
-                        </asp:DropDownList>
-                        <br />
-                        <asp:TextBox ID="txtFechaDesde" runat="server" Width="72px" MaxLength="1" autocomplete="off"
-                            TabIndex="2" AutoPostBack="false"></asp:TextBox>
-                        <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
-                            Enabled="True">
-                        </cc1:CalendarExtender>
-                        <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
-                            Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
-                            CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                            CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                            UserDateFormat="DayMonthYear" Enabled="True">
-                        </cc1:MaskedEditExtender>
-                        <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
-                            WatermarkText="desde" WatermarkCssClass="watermarked" />
-                        <asp:TextBox ID="txtFechaHasta" runat="server" Width="72px" MaxLength="1" TabIndex="2"
-                            AutoPostBack="false"></asp:TextBox>
-                        <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
-                            Enabled="True">
-                        </cc1:CalendarExtender>
-                        <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
-                            Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
-                            CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                            CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                            Enabled="True">
-                        </cc1:MaskedEditExtender>
-                        <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
-                            WatermarkText="hasta" WatermarkCssClass="watermarked" />
-                    </td>
-                </tr>
                             <tr>
-                                
-                                <td class="EncabezadoCell" style="width: 160px; height: 18px;">
-                                    Punto venta
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Estado
+                                </td>
+                                <td class="EncabezadoCell" style="width: 222px; height: 18px;">
+                                    <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
+                                        CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px">
+                                        <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
+                                        <asp:ListItem Text="Incompletas" Value="Incompletas" />
+                                        <asp:ListItem Text="Posición" Value="Posición" />
+                                        <asp:ListItem Text="Descargas" Value="Descargas" />
+                                        <asp:ListItem Text="Facturadas" Value="Facturadas" />
+                                        <asp:ListItem Text="No facturadas" Value="NoFacturadas" />
+                                        <asp:ListItem Text="Rechazadas" Value="Rechazadas" />
+                                        <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
+                                    </asp:DropDownList>
+                                </td>
+                                <td class="EncabezadoCell" style="width: 162px; height: 18px;">Descarga
+                                </td>
+                                <td class="EncabezadoCell" style="width: 300px; height: 18px;">
+                                    <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
+                                        Visible="true">
+                                        <asp:ListItem Text="Hoy" />
+                                        <asp:ListItem Text="Ayer" Selected="True" />
+                                        <%--<asp:ListItem Text="Esta semana" />
+                        <asp:ListItem Text="Semana pasada" />--%>
+                                        <asp:ListItem Text="Este mes" />
+                                        <asp:ListItem Text="Mes anterior" />
+                                        <asp:ListItem Text="Cualquier fecha" />
+                                        <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
+                                        <asp:ListItem Text="Personalizar" />
+                                    </asp:DropDownList>
+                                    <br />
+                                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="72px" MaxLength="1" autocomplete="off"
+                                        TabIndex="2" AutoPostBack="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
+                                        Enabled="True">
+                                    </cc1:CalendarExtender>
+                                    <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
+                                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
+                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                        UserDateFormat="DayMonthYear" Enabled="True">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
+                                        WatermarkText="desde" WatermarkCssClass="watermarked" />
+                                    <asp:TextBox ID="txtFechaHasta" runat="server" Width="72px" MaxLength="1" TabIndex="2"
+                                        AutoPostBack="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
+                                        Enabled="True">
+                                    </cc1:CalendarExtender>
+                                    <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
+                                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
+                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                        Enabled="True">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
+                                        WatermarkText="hasta" WatermarkCssClass="watermarked" />
+
+
+
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+
+                                <td class="EncabezadoCell" style="width: 162px; height: 18px;">Período anterior
+                                </td>
+
+                                <td>
+
+
+                                    <asp:TextBox ID="txtFechaDesdeAnterior" runat="server" Width="72px" MaxLength="1" autocomplete="off"
+                                        TabIndex="2" AutoPostBack="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesdeAnterior"
+                                        Enabled="True">
+                                    </cc1:CalendarExtender>
+                                    <cc1:MaskedEditExtender ID="MaskedEditExtender1" runat="server" ErrorTooltipEnabled="True"
+                                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesdeAnterior" CultureAMPMPlaceholder=""
+                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                        UserDateFormat="DayMonthYear" Enabled="True">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtFechaDesdeAnterior"
+                                        WatermarkText="desde" WatermarkCssClass="watermarked" />
+                                    <asp:TextBox ID="txtFechaHastaAnterior" runat="server" Width="72px" MaxLength="1" TabIndex="2"
+                                        AutoPostBack="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHastaAnterior"
+                                        Enabled="True">
+                                    </cc1:CalendarExtender>
+                                    <cc1:MaskedEditExtender ID="MaskedEditExtender2" runat="server" ErrorTooltipEnabled="True"
+                                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHastaAnterior" CultureAMPMPlaceholder=""
+                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                        Enabled="True">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtFechaHastaAnterior"
+                                        WatermarkText="hasta" WatermarkCssClass="watermarked" />
+
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="60px" />
                                 </td>
-                                <td class="EncabezadoCell" style="height: 18px; display:none">
-                                    Contrato
+                                <td class="EncabezadoCell" style="height: 18px; display: none">Contrato
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtContrato" runat="server" TabIndex="13" Style="margin-left: 0px; display:none" />
+                                    <asp:TextBox ID="txtContrato" runat="server" TabIndex="13" Style="margin-left: 0px; display: none" />
                                 </td>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px; display:none">
-                                    Origen
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px; display: none">Origen
                                 </td>
-                                <td class="EncabezadoCell" style="width: 200px; height: 18px; display:none">
+                                <td class="EncabezadoCell" style="width: 200px; height: 18px; display: none">
                                     <asp:TextBox ID="txtProcedencia" runat="server" CssClass="CssTextBox" Text='<%# Bind("ProcedenciaDesc") %>'
                                         AutoPostBack="false"></asp:TextBox>
                                     <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender27" runat="server"
@@ -260,8 +298,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                         ServicePath="WebServiceLocalidades.asmx" TargetControlID="txtProcedencia" UseContextKey="True">
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                    Destino
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
                                 </td>
                                 <td class="EncabezadoCell" style="width: 200px; height: 18px;">
                                     <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
@@ -274,8 +311,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                     </cc1:AutoCompleteExtender>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                    Producto
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Producto
                                 </td>
                                 <td class="EncabezadoCell" style="width: 200px; height: 18px;">
                                     <asp:TextBox ID="txt_AC_Articulo" runat="server" TabIndex="13" Style="margin-left: 0px;"
@@ -286,8 +322,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                         ServicePath="WebServiceArticulos.asmx" TargetControlID="txt_AC_Articulo" UseContextKey="True">
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                <td class="EncabezadoCell" style="width: 90px; height: 18px;">
-                                    Corredor
+                                <td class="EncabezadoCell" style="width: 90px; height: 18px;">Corredor
                                 </td>
                                 <td class="EncabezadoCell" style="height: 18px">
                                     <asp:TextBox ID="txtCorredor" runat="server" CssClass="CssTextBox" autocomplete="off"
@@ -300,8 +335,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                 </td>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                    Cliente Obs.
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Cliente Obs.
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPopClienteAuxiliar" runat="server" CssClass="CssTextBox" autocomplete="off"
@@ -313,8 +347,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                         DelimiterCharacters="" Enabled="True">
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                    Destinatario
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destinatario
                                 </td>
                                 <td class="EncabezadoCell" style="width: 200px; height: 18px;">
                                     <asp:TextBox ID="txtDestinatario" runat="server" Text='<%# Bind("EntregadorDesc") %>'
@@ -328,8 +361,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                 </td>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell">
-                                    Modo
+                                <td class="EncabezadoCell">Modo
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="CssTextBox"
@@ -340,8 +372,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                         <asp:ListItem>Buques</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                <td class="EncabezadoCell">
-                                    Excepciones
+                                <td class="EncabezadoCell">Excepciones
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="optDivisionSyngenta" runat="server" ToolTip="Elija la División de Syngenta"
@@ -365,20 +396,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                         </asp:RadioButtonList>
                     </td>--%>
                             </tr>
-                            <tr style="; display:none">
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                    Vagon
+                            <tr style="display: none">
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Vagon
                                 </td>
                                 <td class="EncabezadoCell" style="height: 18px;">
-                                    <asp:TextBox runat="server" ID="txtVagon"   CssClass="CssTextBox"  />
+                                    <asp:TextBox runat="server" ID="txtVagon" CssClass="CssTextBox" />
                                 </td>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                    Patente
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Patente
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtPatente"  CssClass="CssTextBox"  />
+                                    <asp:TextBox runat="server" ID="txtPatente" CssClass="CssTextBox" />
                                 </td>
-                              
+
                             </tr>
                             <tr>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">
@@ -395,19 +424,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                     <asp:TextBox ID="txtMinimoNeto" runat="server" TabIndex="13" Style="margin-left: 0px;" />
                                 </td>
                             </tr>
-                            <tr><td></td></tr>
+                            <tr>
+                                <td></td>
+                            </tr>
                             <tr style="border-top: 8px; margin-top: 5px;">
                                 <td colspan="2">
-                                    <asp:DropDownList ID="cmbCriterioWHERE" runat="server" ToolTip="" Height="21px" Style="visibility: visible;
-                                        overflow: auto;" CssClass="CssCombo" TabIndex="6">
+                                    <asp:DropDownList ID="cmbCriterioWHERE" runat="server" ToolTip="" Height="21px" Style="visibility: visible; overflow: auto;"
+                                        CssClass="CssCombo" TabIndex="6">
                                         <asp:ListItem Text="y TODOS estos" Value="todos" />
                                         <asp:ListItem Text="y ALGUNO de estos" Value="alguno" Selected="True" />
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                    Titular
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Titular
                                 </td>
                                 <td class="EncabezadoCell" style="width: 200px; height: 18px;">
                                     <asp:TextBox ID="txtTitular" runat="server" CssClass="CssTextBox" Text='<%# Bind("VendedorDesc") %>'
@@ -419,8 +449,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                         Enabled="True">
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                <td class="EncabezadoCell" style="width: 90px">
-                                    Intermed.
+                                <td class="EncabezadoCell" style="width: 90px">Intermed.
                                 </td>
                                 <td class="EncabezadoCell">
                                     <asp:TextBox ID="txtIntermediario" runat="server" autocomplete="off" Text='<%# Bind("IntermediarioDesc") %>'
@@ -434,8 +463,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                 </td>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell" style="width: 90px">
-                                    R. Comercial
+                                <td class="EncabezadoCell" style="width: 90px">R. Comercial
                                 </td>
                                 <td class="EncabezadoCell" style="width: 220px">
                                     <asp:TextBox ID="txtRcomercial" runat="server" autocomplete="off" AutoPostBack="false"
@@ -446,21 +474,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                             DelimiterCharacters="" Enabled="True" CompletionInterval="100">
                                         </cc1:AutoCompleteExtender>
                                 </td>
-                                <td class="EncabezadoCell">
-                                </td>
+                                <td class="EncabezadoCell"></td>
                             </tr>
 
                             <tr></tr>
                             <tr>
-                                <td class="EncabezadoCell" colspan="2">
-                                    Max. Clientes en grafico (dif de destinos)
+                                <td class="EncabezadoCell" colspan="2">Max. Clientes en grafico (dif de destinos)
                                 </td>
                                 <td class="EncabezadoCell" style="width: 50px">
                                     <asp:TextBox ID="txtTopeClientesDifDestinos" runat="server" autocomplete="off" AutoPostBack="false"
-                                        CssClass="CssTextBox" TabIndex="8"  Width="40px">5</asp:TextBox>
+                                        CssClass="CssTextBox" TabIndex="8" Width="40px">5</asp:TextBox>
                                 </td>
-                                <td class="EncabezadoCell">
-                                </td>
+                                <td class="EncabezadoCell"></td>
                             </tr>
 
 

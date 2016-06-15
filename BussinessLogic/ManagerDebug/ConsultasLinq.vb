@@ -1041,20 +1041,27 @@ Public Class ConsultasLinq
 
 
 
-    Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String, cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String) As Object
+    Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String, _
+                                           txtFechaDesdeAnterior As String, txtFechaHastaAnterior As String, _
+                                          cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String) As Object
         Dim dt = New DataTable
 
         '////////////////////////////////////////////////////
         '////////////////////////////////////////////////////
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta, #1/1/2100#)
-        Dim fechadesde2 As Date
 
-        'la fecha del periodo anterior a comparar
-        If cmbPeriodo = "Este mes" Or cmbPeriodo = "Mes anterior" Then
-            fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
-        Else
-            fechadesde2 = DateAdd(DateInterval.Day, -1, fechadesde - (fechahasta - fechadesde)) 'le agrego un dia mas porque si puso "ayer", la dif entre hasta y desde es 0
+        Dim fechadesde2 As Date = iisValidSqlDate(txtFechaDesdeAnterior, #1/1/2100#)
+        Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior, #1/1/2100#)
+
+        If False Then
+
+            'la fecha del periodo anterior a comparar
+            If cmbPeriodo = "Este mes" Or cmbPeriodo = "Mes anterior" Then
+                fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
+            Else
+                fechadesde2 = DateAdd(DateInterval.Day, -1, fechadesde - (fechahasta - fechadesde)) 'le agrego un dia mas porque si puso "ayer", la dif entre hasta y desde es 0
+            End If
         End If
 
 
@@ -1077,7 +1084,11 @@ Public Class ConsultasLinq
                 Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
                 Where cdp.Vendedor > 0 _
                     And cli.RazonSocial IsNot Nothing _
-                    And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
+                    And ( _
+                            (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta2) _
+                            Or _
+                            (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                        ) _
                     And (cdp.Anulada <> "SI") _
                     And ((ModoExportacion = "Ambos") _
                           Or (ModoExportacion = "Todos") _
