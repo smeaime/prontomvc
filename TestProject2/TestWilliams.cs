@@ -205,7 +205,7 @@ namespace ProntoMVC.Tests
         {
             ReportParameter p2=null;
 
-            var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "2/11/2015",
+            var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "31/5/2016", "1/11/2015", "31/5/2016",
                                             "Personalizar",
                                             1, "Entregas", SC);
 
