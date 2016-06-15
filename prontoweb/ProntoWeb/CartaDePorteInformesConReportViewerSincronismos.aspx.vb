@@ -3226,13 +3226,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     totpormesmodoysucursal()
 
 
-                Case "Estadísticas de Toneladas descargadas (Sucursal-Modo)"
-
-                    estadsucmodo()
-                Case "Estadísticas de Toneladas descargadas (Modo-Sucursal)"
-
-
-                    estadmodosuc()
+           
                 Case "Volumen de Carga"
                     VolumenCarga()
 
@@ -3406,31 +3400,6 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
 
-
-    Function estadmodosuc()
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-
-
-
-        Dim p2 As ReportParameter
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
-
-        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString), p2})
-
-    End Function
-
-    Function estadsucmodo()
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim p2 As ReportParameter
-
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
-        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString), p2})
-
-    End Function
 
     Function VolumenCarga()
 

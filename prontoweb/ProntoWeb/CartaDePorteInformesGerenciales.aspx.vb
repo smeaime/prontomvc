@@ -126,15 +126,21 @@ Partial Class CartaDePorteInformesGerenciales
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_Facturacion)
 
 
-        Dim a = New String() {"Mariano", "Andres", "hwilliams"}
-        If Not a.Contains(Session(SESSIONPRONTO_UserName).ToString) Then
+        Dim admins = New String() {"Mariano", "Andres", "hwilliams"}
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
+        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea"}
+
+        If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString) Then
             MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
             Exit Sub
         End If
 
 
+
+
+
         'If Not p("PuedeLeer") Then
-        If Not a.Contains(Session(SESSIONPRONTO_UserName)) Then
+        If Not admins.Contains(Session(SESSIONPRONTO_UserName)) Then
             'anular la columna de edicion
             'getGridIDcolbyHeader(
 
@@ -148,21 +154,35 @@ Partial Class CartaDePorteInformesGerenciales
             cmbInforme.Items.FindByText("Ranking de Cereales").Enabled = False
             cmbInforme.Items.FindByText("Ranking de Clientes").Enabled = False
             cmbInforme.Items.FindByText("Proyección de facturación").Enabled = False
-            cmbInforme.Items.FindByText("Totales generales por mes").Enabled = False
-            cmbInforme.Items.FindByText("Cartas Duplicadas").Enabled = False
+            'cmbInforme.Items.FindByText("Totales generales por mes").Enabled = False
+            'cmbInforme.Items.FindByText("Cartas Duplicadas").Enabled = False
             cmbInforme.Items.FindByText("Resumen de facturación").Enabled = False
 
-            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Modo-Sucursal)").Enabled = False
-            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Sucursal-Modo)").Enabled = False
+
+
             cmbInforme.Items.FindByText("Volumen de Carga").Enabled = False
             cmbInforme.Items.FindByText("Diferencias por Destino por Mes").Enabled = False
 
-            cmbInforme.Items.FindByText("Totales generales por mes").Enabled = False
+
+            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Modo-Sucursal)").Enabled = False
+            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Sucursal-Modo)").Enabled = False
+            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Sucursal-Modo) todos los modos").Enabled = False
+            'cmbInforme.Items.FindByText("Totales generales por mes").Enabled = False
             cmbInforme.Items.FindByText("Totales generales por mes por sucursal").Enabled = False
             cmbInforme.Items.FindByText("Totales generales por mes por modo y sucursal").Enabled = False
             cmbInforme.Items.FindByText("Totales generales por mes por modo").Enabled = False
+
         End If
 
+        If encargados.Contains(Session(SESSIONPRONTO_UserName)) Then
+
+            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Modo-Sucursal)").Enabled = True
+            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Sucursal-Modo)").Enabled = True
+            cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Sucursal-Modo) todos los modos").Enabled = True
+            cmbInforme.Items.FindByText("Totales generales por mes por sucursal").Enabled = True
+            cmbInforme.Items.FindByText("Totales generales por mes por modo y sucursal").Enabled = True
+            cmbInforme.Items.FindByText("Totales generales por mes por modo").Enabled = True
+        End If
 
 
 
@@ -1065,12 +1085,20 @@ Partial Class CartaDePorteInformesGerenciales
         'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
+        Dim fechadesde2 As Date = iisValidSqlDate(txtFechaDesdeAnterior.Text, #1/1/1753#)
+        Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior.Text, #1/1/2100#)
 
 
         Dim p2 As ReportParameter
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
+        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text _
+                                                    , txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text _
+                                                    , cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
 
-        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString), p2})
+        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas.rdl", q, New ReportParameter() _
+                               {New ReportParameter("Titulo", _
+                                                    fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString & " - periodo anterior " & fechadesde2.ToShortDateString & " al " & fechahasta2.ToShortDateString _
+                                                    ), p2}
+                                            )
 
     End Function
 
@@ -1078,10 +1106,20 @@ Partial Class CartaDePorteInformesGerenciales
         'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
+        Dim fechadesde2 As Date = iisValidSqlDate(txtFechaDesdeAnterior.Text, #1/1/1753#)
+        Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior.Text, #1/1/2100#)
         Dim p2 As ReportParameter
 
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
-        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString), p2})
+        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, _
+                                                    txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text, _
+                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
+
+        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() _
+                               {New ReportParameter("Titulo", _
+                                                    fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString & " - periodo anterior " & fechadesde2.ToShortDateString & " al " & fechahasta2.ToShortDateString _
+                                                    ), p2}
+                                            )
+
 
     End Function
 
@@ -1092,10 +1130,20 @@ Partial Class CartaDePorteInformesGerenciales
         'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
+        Dim fechadesde2 As Date = iisValidSqlDate(txtFechaDesdeAnterior.Text, #1/1/1753#)
+        Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior.Text, #1/1/2100#)
         Dim p2 As ReportParameter
 
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, "Todos", HFSC.Value)
-        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString), p2})
+        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, _
+                                                    txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text, _
+                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, "Todos", HFSC.Value)
+
+        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() _
+                               {New ReportParameter("Titulo", _
+                                                    fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString & " - periodo anterior " & fechadesde2.ToShortDateString & " al " & fechahasta2.ToShortDateString _
+                                                    ), p2}
+                                            )
+
 
     End Function
 
@@ -2955,10 +3003,19 @@ Partial Class CartaDePorteInformesGerenciales
             Case "Mes anterior"
                 txtFechaDesde.Text = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, Today))
                 txtFechaHasta.Text = GetLastDayInMonth(DateAdd(DateInterval.Month, -1, Today))
+
+                
             Case "Personalizar"
                 txtFechaDesde.Visible = True
                 txtFechaHasta.Visible = True
         End Select
+
+
+        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
+        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
+        txtFechaDesdeAnterior.Text = DateAdd(DateInterval.Year, -1, fechadesde)
+        txtFechaHastaAnterior.Text = DateAdd(DateInterval.Year, -1, fechahasta)
+
 
 
     End Sub
