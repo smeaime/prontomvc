@@ -72,10 +72,10 @@ Public Class ConsultasLinq
           Optional ByVal Contrato As String = "") As Object
 
 
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
-        'db.CommandTimeout = 5 * 60 ' 3 Mins
+        db.CommandTimeout = 5 * 60 ' 3 Mins
 
         'If False Then
 
@@ -145,9 +145,9 @@ Public Class ConsultasLinq
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
         Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
+                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
+                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
+                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
                 Where _
                     cdp.Vendedor > 0 _
                     And cli.RazonSocial IsNot Nothing _
@@ -258,11 +258,11 @@ Public Class ConsultasLinq
 
 
 
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        'db.CommandTimeout = 5 * 60 ' 3 Mins
+        db.CommandTimeout = 5 * 60 ' 3 Mins
 
 
         'If False Then
@@ -333,9 +333,9 @@ Public Class ConsultasLinq
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
         Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
+                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
+                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
+                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
                 Where _
                     cdp.Vendedor > 0 _
                     And cli.RazonSocial IsNot Nothing _
@@ -396,7 +396,7 @@ Public Class ConsultasLinq
 
             Dim q3 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
             Dim a = (From i In q3 _
-                    Join art In db.Articulos On art.IdArticulo Equals i.IdArticulo _
+                    Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo _
                         Group i By Ano = i.FechaIngreso.Value.Year, _
                                 MesNumero = i.FechaIngreso.Value.Month, _
                                 Producto = art.Descripcion _
@@ -475,11 +475,11 @@ Public Class ConsultasLinq
 
 
 
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        'db.CommandTimeout = 5 * 60 ' 3 Mins
+        db.CommandTimeout = 5 * 60 ' 3 Mins
 
 
         'If False Then
@@ -584,9 +584,9 @@ Public Class ConsultasLinq
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
         Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
+                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
+                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
+                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
                 Where _
                     cdp.Vendedor > 0 _
                     And cli.RazonSocial IsNot Nothing _
@@ -614,11 +614,11 @@ Public Class ConsultasLinq
                     .Mes = MonthName(MesNumero), _
                     .Producto = Producto, _
                     .CantCartas = g.Count, _
-                                             .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000, _
+                    .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000, _
                     .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000, _
                     .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000, _
                     .MesNumero = MesNumero, _
-                     .Importe = g.Sum(Function(i) CDec( _
+                    .Importe = g.Sum(Function(i) CDec( _
                                                      CDec(i.TarifaFacturada.GetValueOrDefault) * CDec(i.NetoPto) / 1000 _
                                                    )) _
                         }).ToList
@@ -644,7 +644,7 @@ Public Class ConsultasLinq
 
             Dim q3 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
             Dim a = (From i In q3 _
-                    Join art In db.Articulos On art.IdArticulo Equals i.IdArticulo _
+                    Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo _
                         Group i By Ano = i.FechaIngreso.Value.Year, _
                                 MesNumero = i.FechaIngreso.Value.Month, _
                                 Producto = art.Descripcion, _
@@ -874,7 +874,7 @@ Public Class ConsultasLinq
                             Sucursal = cdp.PuntoVenta _
                     Into g = Group _
                 Select New With { _
-                                        .Sucursal = SqlFunctions.StringConvert(Sucursal), _
+                    .Sucursal = SqlFunctions.StringConvert(Sucursal), _
                     .Hora = Hora, _
                     .CantCartas = g.Count, _
                     .ModificacionesPromedio = altabaja _
@@ -1083,35 +1083,46 @@ Public Class ConsultasLinq
                           Or (ModoExportacion = "Todos") _
                           Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
                           Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (pv = -1 Or cdp.PuntoVenta = pv) _
-                Group cdp By _
-                        Producto = art.Descripcion, _
-                        Modo = cdp.Exporta, _
-                        Sucursal = cdp.PuntoVenta _
-                    Into g = Group _
-                Select New With { _
+                    And (pv = -1 Or cdp.PuntoVenta = pv))
+
+
+        If False Then
+            Dim a = q.Select(Function(ss) ss.cdp.NumeroCartaDePorte).ToList().Select(Function(xx) xx.ToString).ToArray
+            Dim sss = String.Join(vbCrLf, a)
+            ErrHandler2.WriteError(sss)
+
+        End If
+
+        Dim aaa = (From xx In q _
+                   Group xx.cdp By _
+                        Producto = xx.art.Descripcion, _
+                        Modo = xx.cdp.Exporta, _
+                        Sucursal = xx.cdp.PuntoVenta _
+                          Into g = Group
+                  Select New With { _
                         .Sucursal = SqlFunctions.StringConvert(Sucursal), _
                         .Modo = Modo, _
                         .Producto = Producto, _
                         .CantCartas = g.Count, _
+                        .Cartas = g.Select(Function(i) i.NumeroCartaDePorte), _
                         .NetoPto = g.Sum(Function(i) If(i.NetoFinal, 0)) / 1000, _
                         .Merma = g.Sum(Function(i) (If(i.Merma, 0) + If(i.HumedadDesnormalizada, 0))) / 1000, _
                         .NetoFinal = g.Sum(Function(i) If(i.NetoProc, 0)) / 1000, _
                         .Importe = g.Sum(Function(i) CDec( _
                                                          CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000 _
                                                         )), _
-                        .PV1 = g.Where(Function(i) i.PuntoVenta = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
-                        .PV2 = g.Where(Function(i) i.PuntoVenta = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
-                        .PV3 = g.Where(Function(i) i.PuntoVenta = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
-                        .PV4 = g.Where(Function(i) i.PuntoVenta = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
-                        .TotalEntrega = g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "NO") _
-                                            .DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
-                        .TotalExportacion = g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "SI") _
-                                            .DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
+                        .PV1 = CInt(g.Where(Function(i) i.PuntoVenta = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
+                        .PV2 = CInt(g.Where(Function(i) i.PuntoVenta = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
+                        .PV3 = CInt(g.Where(Function(i) i.PuntoVenta = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
+                        .PV4 = CInt(g.Where(Function(i) i.PuntoVenta = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
+                        .TotalEntrega = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "NO") _
+                                            .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
+                        .TotalExportacion = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "SI") _
+                                            .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
                         .TotalBuques = 0, _
-                        .Total = g.Where(Function(i) i.FechaDescarga >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
+                        .Total = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
                         .Porcent = 0, _
-                        .PeriodoAnterior = g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(If(i.NetoFinal, 0) / 1000)), _
+                        .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
                         .Diferen = 0, _
                         .DiferencPorcent = 0 _
                     } _
@@ -1140,13 +1151,13 @@ Public Class ConsultasLinq
 
 
 
-        Dim x = q.ToList()
+        Dim x = aaa.ToList()
 
         If ModoExportacion = "Buques" Or ModoExportacion = "Todos" Then
 
 
             Dim q2 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
-            Dim a = (From i In q2 _
+            Dim bb = (From i In q2 _
                     Join art In db.Articulos On art.IdArticulo Equals i.IdArticulo _
                         Group i By _
                             Producto = art.Descripcion, _
@@ -1162,21 +1173,21 @@ Public Class ConsultasLinq
                             .Merma = CDec(0), _
                             .NetoFinal = CDec(0), _
                             .Importe = CDec(0), _
-                            .PV1 = g.Where(Function(i) i.IdStock = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(i.Cantidad / 1000)), _
-                            .PV2 = g.Where(Function(i) i.IdStock = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(i.Cantidad / 1000)), _
-                            .PV3 = g.Where(Function(i) i.IdStock = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(i.Cantidad / 1000)), _
-                            .PV4 = g.Where(Function(i) i.IdStock = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(i.Cantidad / 1000)), _
+                            .PV1 = CInt(g.Where(Function(i) i.IdStock = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.Cantidad, 0)) / 1000), _
+                            .PV2 = CInt(g.Where(Function(i) i.IdStock = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.Cantidad, 0)) / 1000), _
+                            .PV3 = CInt(g.Where(Function(i) i.IdStock = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.Cantidad, 0)) / 1000), _
+                            .PV4 = CInt(g.Where(Function(i) i.IdStock = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.Cantidad, 0)) / 1000), _
                             .TotalEntrega = 0, _
                             .TotalExportacion = 0, _
                             .TotalBuques = CInt(g.Sum(Function(i) If(i.Cantidad, 0) / 1000)), _
-                            .Total = g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(i.Cantidad / 1000)), _
+                            .Total = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.Cantidad, 0)) / 1000), _
                             .Porcent = 0, _
-                            .PeriodoAnterior = g.Where(Function(i) i.FechaIngreso < fechadesde).DefaultIfEmpty().Sum(Function(i) CInt(i.Cantidad / 1000)), _
+                            .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaIngreso < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.Cantidad, 0)) / 1000), _
                             .Diferen = 0, _
                             .DiferencPorcent = 0 _
                         }).ToList
 
-            x = x.Union(a).ToList()
+            x = x.Union(bb).ToList()
         End If
 
 
@@ -1191,6 +1202,11 @@ Public Class ConsultasLinq
         For Each i In x
             i.Sucursal = PuntoVentaWilliams.NombrePuntoVentaWilliams2(Val(i.Sucursal))
             i.Modo = IIf(i.Modo = "SI", "Exportación", "Entrega").ToString()
+
+
+            Dim a = i.Cartas.Select(Function(xx) xx.ToString).ToArray
+            Dim sss = String.Join(vbCrLf, a)
+            ErrHandler2.WriteError(i.Producto & " " & i.CantCartas & " " & sss)
         Next
 
 
