@@ -16087,3 +16087,101 @@ Object reference not set to an instance of an object.
    at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
 App_Web_cartadeporteinformesgerenciales.aspx.4199bbd4.vayytr54
 __________________________
+
+Log Entry : 
+06/15/2016 18:48:52
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+06/15/2016 18:51:00
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.ArgumentException
+Argument 'Expression' cannot be converted to type 'DBNull'.
+   at Microsoft.VisualBasic.Conversion.Val(Object Expression)
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2612
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/15/2016 18:51:14
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.ArgumentException
+Argument 'Expression' cannot be converted to type 'DBNull'.
+   at Microsoft.VisualBasic.Conversion.Val(Object Expression)
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2612
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/15/2016 18:56:02
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.ArgumentException
+Argument 'Expression' cannot be converted to type 'DBNull'.
+   at Microsoft.VisualBasic.Conversion.Val(Object Expression)
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2612
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/15/2016 18:56:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.ArgumentException
+Argument 'Expression' cannot be converted to type 'DBNull'.
+   at Microsoft.VisualBasic.Conversion.Val(Object Expression)
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2612
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/15/2016 18:56:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.ArgumentException
+Argument 'Expression' cannot be converted to type 'DBNull'.
+   at Microsoft.VisualBasic.Conversion.Val(Object Expression)
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2612
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/15/2016 18:56:05
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.ArgumentException
+Argument 'Expression' cannot be converted to type 'DBNull'.
+   at Microsoft.VisualBasic.Conversion.Val(Object Expression)
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2612
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/15/2016 18:56:25
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.ArgumentException
+Argument 'Expression' cannot be converted to type 'DBNull'.
+   at Microsoft.VisualBasic.Conversion.Val(Object Expression)
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2612
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+06/15/2016 18:56:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ExcelImportadorManager.Unidad6CalidadesToDataset(String pFileName, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, DateTime txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2829
+   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32& m_IdMaestro, String archivoExcel, FormatosDeExcel Formato, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, String txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 3739
+   at CartasDePorteImportador.FormatearExcelImportado(String nombre) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 584
+   at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 284
+BusinessLogic
+__________________________
+
+Log Entry : 
+06/15/2016 18:56:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:C:\Users\Administrador\AppData\Local\Temp\67467_anali19.d
+__________________________
+
+Log Entry : 
+06/15/2016 18:58:33
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][CANTIDAD][PORCENTAJEMERMA][PROCENTAJEHUMEDAD][VAGON][RUBRO][RECIBO][PREFIJO] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________

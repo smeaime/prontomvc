@@ -825,7 +825,7 @@ Namespace Pronto.ERP.Bll
 
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
-                   
+
 
                         Case "MORGAN (CALIDADES)"
 
@@ -12524,14 +12524,18 @@ Namespace Pronto.ERP.Bll
             BorrarCartasRepetidas(aaa)
 
 
+
+
+
             'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
+
             For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aaa
                 With cdp
 
                     i = 0 : sb = ""
 
                     Dim cero = 0
-
+                    Dim bGenerico As Boolean = False
 
 
 
@@ -12603,6 +12607,25 @@ Namespace Pronto.ERP.Bll
                     'Cargador, vendedor y comp endoso: Amaggi
 
 
+
+
+                    'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=20845
+                    Dim transp = If(.IsTransportistaCUITNull, "", .TransportistaCUIT.Replace("-", ""))
+                    Dim chof = If(.IsChoferDescNull, "", .ChoferDesc)
+                    Dim pat = If(.IsPatenteNull, "", .Patente)
+                    Dim acoplado = If(.IsAcopladoNull, "", .Acoplado)
+                    If .Exporta = "SI" And (.DestinatarioCUIT = "30-71479294-2" Or .RComercialCUIT = "30-71479294-2") Then
+                        '                        sasdasdasd()
+                        '                    Ok, es decir que si tiene tilde Y Diaz Forti viene como Destinatario o Rte Comercial, entonces van esos datos que detallan en la consulta.
+                        'Si no tiene el tilde o bien si tiene el tilde pero Diaz Forti viene en otro lado (por ejemplo Titular) entonces los datos van como hasta ahora.
+                        bGenerico = True
+                        '.TransportistaDesc = "TRANSPORTE GENERICO" 'TRANSPORTE GENERICO CUIT 20-22222222-3
+                        transp = "20222222223"
+                        chof = "CHOFER GENERICO"
+                        '.choferCUIT = "27000000006" 'Chofer: CHOFER GENERICO CUIT 27-00000000-6
+                        pat = "YYY999"
+                        acoplado = "ZZZ999"
+                    End If
 
 
 
@@ -12713,6 +12736,8 @@ Namespace Pronto.ERP.Bll
                     Catch ex As Exception
                         ErrHandler2.WriteError(ex)
                     End Try
+
+
 
 
 
@@ -13025,19 +13050,23 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+
+
                     '66 CTATRANSPOR 1.059 1.069 N X
-                    sb &= JustificadoIzquierda(If(.IsTransportistaCUITNull, "", .TransportistaCUIT.Replace("-", "")), 11)
+                    sb &= JustificadoIzquierda(transp, 11)
 
 
 
                     '67 NOMCONDUC 1.070 1.099 S X
-                    sb &= JustificadoIzquierda(If(.IsChoferDescNull, "", .ChoferDesc), 30)
+                    sb &= JustificadoIzquierda(chof, 30)
 
                     '68 DOCUME 1.100 1.110 S X
                     sb &= Space(11)
 
+
                     '69 PATACO 1.111 1.116 S X
-                    sb &= JustificadoIzquierda(If(.IsAcopladoNull, "", .Acoplado), 6)
+                    sb &= JustificadoIzquierda(acoplado, 6)
 
 
                     '
@@ -13095,7 +13124,8 @@ Namespace Pronto.ERP.Bll
 
 
                     '35 PATCHA 1.192 1.197 S 
-                    sb &= JustificadoIzquierda(If(.IsPatenteNull, "", .Patente), 6)
+
+                    sb &= JustificadoIzquierda(pat, 6)
                     '//////////////////////////////////////////
 
                     'y de 1198 a 1201 qué hay????
@@ -13112,6 +13142,9 @@ Namespace Pronto.ERP.Bll
 
                         sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
                     End If
+
+
+
 
 
 

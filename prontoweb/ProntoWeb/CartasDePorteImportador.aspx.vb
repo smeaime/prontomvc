@@ -315,8 +315,14 @@ Partial Class CartasDePorteImportador
 
 
 
-                If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = ReyserAnalisis Then Exit Sub
-                If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = Unidad6Analisis Then Exit Sub
+                If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = ReyserAnalisis Then
+                    MsgBoxAjax(Me, txtLogErrores.Text)
+                    Exit Sub
+                End If
+                If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = Unidad6Analisis Then
+                    MsgBoxAjax(Me, txtLogErrores.Text)
+                    Exit Sub
+                End If
 
                 MostrarPrimerosDiezRenglones()
 
@@ -584,6 +590,7 @@ Partial Class CartasDePorteImportador
             Dim ret = FormatearExcelImportadoEnDLL(idm, nombre, ff, SC, cmbPuntoVenta.SelectedValue, texto, txtFechaArribo.Text, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
             m_IdMaestro = idm
             txtLogErrores.Text = texto
+            If texto <> "" Then txtLogErrores.Visible = True
             Return ret
         End If
 
