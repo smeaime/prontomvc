@@ -2564,7 +2564,7 @@ Public Class ExcelImportadorManager
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
 
             MyReader.TextFieldType = Microsoft.VisualBasic.FileIO.FieldType.Delimited
-            MyReader.Delimiters = New String() {vbTab}
+            MyReader.Delimiters = New String() {";"}
 
             Dim currentRow As String()
             'Loop through all of the fields in the file. 
@@ -2612,10 +2612,27 @@ Public Class ExcelImportadorManager
                 If Val(r(1)) = 0 Then Continue For
                 r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
 
+
+                'el separado por tabs
                 Dim numeroCarta As Long = r(1)   '  Val(Replace(r(0), "-", ""))
-                Dim vagon As Long = Val(r(4)) 'por ahora, las cdp importadas tendran subnumero 0
-                Dim Rubro As Long = r(3)
-                Dim analisis As Double = r(7)
+                Dim vagon As Long = 0 ' Val(r(4)) 'por ahora, las cdp importadas tendran subnumero 0
+
+                Dim Rubro As Long = r(2)
+                Dim kilosmerma As Double = Val(r(4))
+                Dim porcentajehum As Double = Val(r(5))
+                Dim analisis As Double = r(6)
+
+
+                If False Then
+                    'el de punto y coma
+                    Rubro = r(3)
+                    analisis = r(6)
+                    kilosmerma = Val(r(4))
+                    porcentajehum = Val(r(5))
+
+                End If
+
+
 
                 Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
                 If cdp.Id = -1 Then
@@ -2626,6 +2643,9 @@ Public Class ExcelImportadorManager
                     Select Case Rubro
                         Case 1 'dañado
                             cdp.NobleDaniados = analisis
+                        Case 2
+                            cdp.Humedad = porcentajehum
+                            cdp.HumedadDesnormalizada = kilosmerma
 
                         Case 3
                             .NobleHectolitrico = analisis

@@ -61,18 +61,15 @@
                         <asp:ListItem Text="excel ToepferPtoElTransito" Value="ToepferPtoElTransito" />
                         <asp:ListItem Text="excel Toepfer" Value="Toepfer" />
                         <asp:ListItem Text="excel VICENTIN" Value="VICENTIN" />
-                        <asp:ListItem Text="excel VICENTIN (reemplazando columna Remitente con Titular)"
-                            Value="VICENTIN_ExcepcionTagRemitenteConflictivo" visible="false" />
+                        <asp:ListItem Text="excel VICENTIN (reemplazando columna Remitente con Titular)"     Value="VICENTIN_ExcepcionTagRemitenteConflictivo" visible="false" />
                         <asp:ListItem Text="texto Cargill........(Formato Cerealnet, PREFIJO-NROCARTA-etc separado por tabs)" Value="Reyser" />
                         <asp:ListItem Text="texto Cargill Posic..(Formato Cerealnet, PREFIJO-NROCARTA-etc separado por tabs)" Value="ReyserCargillPosicion" />
                         <asp:ListItem Text="texto Reyser.........(Formato Cerealnet igual que Cargill, pero con otros clientes de exportación)" Value="Reyser2" />
-                        <asp:ListItem Text="texto ReyserAnalisis.(Formato Cerealnet, usado también por Cargill Alvear)" Value="ReyserAnalisis" />
+                        <asp:ListItem Text="texto ReyserAnalisis.(Formato Cerealnet, separador tab, rubro en 4ta, merma en 6ta columna. Usado también por Cargill Alvear)" Value="ReyserAnalisis" />
                         <asp:ListItem Text="texto Toepfer........(Formato Cerealnet)" Value="CerealnetToepfer" />
-                        <asp:ListItem Text="texto Unidad6 Descar.(Formato Cerealnet pero separador punto y coma..: PREFIJO-NROCARTA-etc)"
-                            Value="Unidad6Prefijo_NroCarta" />
-                        <asp:ListItem Text="texto Unidad6 Posic..(Formato PlayaPerez: CUITTIT-CUITCORR-etc)"
-                            Value="Unidad6" />
-                        <asp:ListItem Text="texto Unidad6Analis..(separador punto y coma)" Value="Unidad6Analisis" />
+                        <asp:ListItem Text="texto Unidad6 Descar.(Formato Cerealnet pero separador punto y coma..: PREFIJO-NROCARTA-etc)" Value="Unidad6Prefijo_NroCarta" />
+                        <asp:ListItem Text="texto Unidad6 Posic..(Formato PlayaPerez: CUITTIT-CUITCORR-etc)" Value="Unidad6" />
+                        <asp:ListItem Text="texto Unidad6Analis..(Formato  ????    . separador punto y coma, rubro en 3ra ,  merma en 5ta columna )" Value="Unidad6Analisis" />
                         <asp:ListItem Text=".rtf.  Nidera" Value="Nidera" />
                         <%--            <asp:ListItem Text="AdmServPortuarios" Value="AdmServPortuarios" />--%>
                     </asp:DropDownList>
