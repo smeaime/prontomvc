@@ -1,0 +1,35 @@
+
+Log Entry : 
+06/16/2016 10:09:13
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Falta la cosecha
+El punto de venta debe estar entre 1 y 4
+
+
+__________________________
+
+Log Entry : 
+06/16/2016 10:09:13
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error al grabar CDP importada
+__________________________
+
+Log Entry : 
+06/16/2016 10:09:14
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][CANTIDAD][PORCENTAJEMERMA][PROCENTAJEHUMEDAD][VAGON][RUBRO][RECIBO][PREFIJO] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+06/16/2016 11:53:29
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Falta la cosecha
+
+
+__________________________
+
+Log Entry : 
+06/16/2016 11:53:29
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error al grabar CDP importada
+__________________________
+
+Log Entry : 
+06/16/2016 11:53:29
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][CANTIDAD][PORCENTAJEMERMA][PROCENTAJEHUMEDAD][VAGON][RUBRO][RECIBO][PREFIJO] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________

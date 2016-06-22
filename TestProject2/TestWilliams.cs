@@ -93,7 +93,7 @@ namespace ProntoMVC.Tests
             //    sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
             //
 
-            DirApp = ConfigurationManager.AppSettings["DirApp"];
+            DirApp = ConfigurationManager.AppSettings["AplicacionConImagenes"];
 
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
 
@@ -197,6 +197,119 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+        [TestMethod]
+        public void webServiceParaBLDconDescargaDeImagenes_18181_20864()
+        {
+            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
+
+
+            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
+
+            //string archivodestino = "c:\\Source.jpg";
+            string archivodestino = "c:\\Source.pdf";
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            byte[] b1 = null;
+
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, bdlmasterappconfig);
+            //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
+
+            fs1 = new FileStream(archivodestino, FileMode.Create);
+            fs1.Write(b1, 0, b1.Length);
+            fs1.Close();
+            fs1 = null;
+
+            //cómo sé en qué formato está?
+
+            System.Diagnostics.Process.Start(archivodestino);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void SincroDiazForti_17962_20845()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Forti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+        [TestMethod]
+        public void Pegatina_20886()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Unidad6Analisis, SC, 0, ref log,  DateTime.Today.ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
 
 
 
@@ -462,35 +575,6 @@ namespace ProntoMVC.Tests
         }
 
 
-
-
-
-        [TestMethod]
-        public void webServiceParaBLDconDescargaDeImagenes_18181()
-        {
-            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
-
-
-            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
-
-            string archivodestino = "c:\\Source.jpg";
-
-            System.IO.FileStream fs1 = null;
-            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
-            byte[] b1 = null;
-
-            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, bdlmasterappconfig);
-            //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
-
-            fs1 = new FileStream(archivodestino, FileMode.Create);
-            fs1.Write(b1, 0, b1.Length);
-            fs1.Close();
-            fs1 = null;
-
-            //cómo sé en qué formato está?
-
-            System.Diagnostics.Process.Start(archivodestino);
-        }
 
 
 
@@ -1151,33 +1235,7 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void SincroDiazForti_17962()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Forti", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
+   
 
 
         [TestMethod]
@@ -2746,8 +2804,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
                 0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false);
-            System.Diagnostics.Process.Start(output);
+           // var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false, DirApp);
+           // System.Diagnostics.Process.Start(output);
 
         }
 
