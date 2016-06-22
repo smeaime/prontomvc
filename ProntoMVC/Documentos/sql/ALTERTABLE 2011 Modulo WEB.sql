@@ -1760,3 +1760,25 @@ go
 
 
 
+
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+drop table CartasDePorteControlDescarga
+create table CartasDePorteControlDescarga (
+	IdCartasDePorteControlDescarga int IDENTITY (1, 1) PRIMARY KEY,
+
+	Fecha datetime not null,
+	IdDestino int null references williamsdestinos(Idwilliamsdestino),
+	IdPuntoVenta int,
+	TotalDescargaDia int,
+	PorcentajeDesnormalizado  numeric(18,2) NULL
+
+	--,constraint U_Unicidad unique NONCLUSTERED (IdCartasDePorteControlDescarga,Sesion)
+)
+go
+
+
