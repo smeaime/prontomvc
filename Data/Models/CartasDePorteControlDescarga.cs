@@ -12,14 +12,15 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleProveedoresRubro
+    public partial class CartasDePorteControlDescarga
     {
-        public int IdDetalleProveedorRubros { get; set; }
-        public Nullable<int> IdProveedor { get; set; }
-        public Nullable<int> IdRubro { get; set; }
-        public Nullable<int> IdSubrubro { get; set; }
+        public int IdCartasDePorteControlDescarga { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public Nullable<int> IdDestino { get; set; }
+        public Nullable<int> IdPuntoVenta { get; set; }
+        public Nullable<int> TotalDescargaDia { get; set; }
+        public Nullable<decimal> PorcentajeDesnormalizado { get; set; }
     
-        public virtual Proveedor Proveedor { get; set; }
-        public virtual Rubro Rubro { get; set; }
+        public virtual WilliamsDestino WilliamsDestino { get; set; }
     }
 }
