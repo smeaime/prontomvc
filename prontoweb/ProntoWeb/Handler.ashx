@@ -33,14 +33,60 @@ using ProntoMVC.Data.Models;
 using ProntoMVC.Data;
 
 
+using System.Linq.Dynamic;
+
+using System.Configuration;
+
+
 public class JQGridHandler : IHttpHandler
 {
-    public void ProcessRequest(HttpContext context)
+
+
+
+
+    //Public ReadOnly Property scLocal() As String
+    //    Get
+    //        Return ConfigurationManager.AppSettings("scLocal")
+    //    End Get
+    //End Property
+    //Public ReadOnly Property scWilliamsRelease() As String
+    //    Get
+    //        Return ConfigurationManager.AppSettings("scWilliamsRelease")
+    //    End Get
+    //End Property
+
+    //Public ReadOnly Property scWilliamsDebug() As String
+    //    Get
+    //        Return ConfigurationManager.AppSettings("scWilliamsDebug")
+    //    End Get
+    //End Property
+
+
+    //Public ReadOnly Property scConexBDLmaster() As String
+    //    Get
+    //        Return ConfigurationManager.ConnectionStrings("LocalSqlServer").ConnectionString
+    //    End Get
+    //End Property
+
+
+
+    //Public ReadOnly Property AplicacionConImagenes() As String 'si lo uso desde prontoclientes, debo apuntar hacia el de pronto a secas
+    //    Get
+    //        Return ConfigurationManager.AppSettings("AplicacionConImagenes")
+    //    End Get
+    //End Property
+
+
+
+
+
+    public void ProcessRequestOriginal(HttpContext context)
     {
 
         // http://stackoverflow.com/questions/8392413/asp-net-returning-json-with-ashx
         // http://stackoverflow.com/questions/3275863/does-net-4-have-a-built-in-json-serializer-deserializer
 
+        //http://stackoverflow.com/questions/9784033/how-to-get-searchstring-in-asp-net-with-jqgrid
 
         JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
 
@@ -123,6 +169,36 @@ public class JQGridHandler : IHttpHandler
 
 
 
+
+
+
+    public void ProcessRequest(HttpContext context)
+    {
+        HttpRequest request = context.Request;
+        HttpResponse response = context.Response;
+
+        // get parameters sent from jqGrid
+        string numberOfRows = request["rows"];
+        string pageIndex = request["page"];
+        string sortColumnName = request["sidx"];
+        string sortOrderBy = request["sord"];
+        string isSearch = request["_search"];
+        string searchField = request["searchField"];
+        string searchString = request["searchString"];
+        string searchOper = request["searchOper"];
+        string filters = request["filters"];
+
+
+        string output = Pedidos_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters);
+
+        response.ContentType = "application/json";
+        response.Write(output);
+    }
+
+
+
+
+
     public bool IsReusable
     {
         get
@@ -149,16 +225,32 @@ public class JQGridHandler : IHttpHandler
 
 
 
-    public virtual void Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+    public virtual string Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
     {
+
+        //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+        string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+
+        //If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+        //     scs = scLocal
+        // Else
+        //     scs = scWilliamsRelease
+        // End If
+
+        ProntoMVC.Data.Models.DemoProntoEntities db =
+                           new DemoProntoEntities(
+                               Auxiliares.FormatearConexParaEntityFramework(
+                               ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         int totalRecords = 0;
 
-        
-        
+
+
         var pagedQuery = Filtrador.Filters.FiltroGenerico<ProntoMVC.Data.Models.Pedido>
                             ("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
         //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
@@ -258,58 +350,62 @@ public class JQGridHandler : IHttpHandler
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
                                 a.IdPedido.ToString(), 
-                                a.NumeroPedido.NullSafeToString(), 
-                                a.SubNumero.NullSafeToString(), 
-                                 a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                 a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Cumplido.NullSafeToString(), 
+                                //a.NumeroPedido.NullSafeToString(), 
+                                //a.SubNumero.NullSafeToString(), 
+                                // a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //a.Cumplido.NullSafeToString(), 
 
 
-                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
-                                                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
-                                                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
-                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
-                                                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
-                                                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
-                                                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
+                                //                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
+                                //                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
+                                //                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
                               
                                                              
-                                a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
-                                (a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
-                                a.Bonificacion.NullSafeToString(), 
-                                a.TotalIva1.NullSafeToString(), 
-                                a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
-                                a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
-                                a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
-                                a.DetallePedidos.Count().NullSafeToString(),  
-                                a.IdPedido.NullSafeToString(), 
-                                a.NumeroComparativa.NullSafeToString(),  
-                                a.IdTipoCompraRM.NullSafeToString(), 
-                                a.Observaciones.NullSafeToString(),   
-                                a.DetalleCondicionCompra.NullSafeToString(),   
-                                a.PedidoExterior.NullSafeToString(),  
-                                a.IdPedidoAbierto.NullSafeToString(), 
-                                a.NumeroLicitacion .NullSafeToString(), 
-                                a.Impresa.NullSafeToString(), 
-                                a.UsuarioAnulacion.NullSafeToString(), 
-                                a.FechaAnulacion.NullSafeToString(),  
-                                a.MotivoAnulacion.NullSafeToString(),  
-                                a.ImpuestosInternos.NullSafeToString(), 
-                                "", // #Auxiliar1.Equipos , 
-                                a.CircuitoFirmasCompleto.NullSafeToString(), 
-                                a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
-                                a.IdComprador.NullSafeToString(),
-                                a.IdProveedor.NullSafeToString(),
-                                a.ConfirmadoPorWeb_1.NullSafeToString()
+                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                //(a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                //a.Bonificacion.NullSafeToString(), 
+                                //a.TotalIva1.NullSafeToString(), 
+                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                //a.DetallePedidos.Count().NullSafeToString(),  
+                                //a.IdPedido.NullSafeToString(), 
+                                //a.NumeroComparativa.NullSafeToString(),  
+                                //a.IdTipoCompraRM.NullSafeToString(), 
+                                //a.Observaciones.NullSafeToString(),   
+                                //a.DetalleCondicionCompra.NullSafeToString(),   
+                                //a.PedidoExterior.NullSafeToString(),  
+                                //a.IdPedidoAbierto.NullSafeToString(), 
+                                //a.NumeroLicitacion .NullSafeToString(), 
+                                //a.Impresa.NullSafeToString(), 
+                                //a.UsuarioAnulacion.NullSafeToString(), 
+                                //a.FechaAnulacion.NullSafeToString(),  
+                                //a.MotivoAnulacion.NullSafeToString(),  
+                                //a.ImpuestosInternos.NullSafeToString(), 
+                                //"", // #Auxiliar1.Equipos , 
+                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
+                                //a.IdComprador.NullSafeToString(),
+                                //a.IdProveedor.NullSafeToString(),
+                                //a.ConfirmadoPorWeb_1.NullSafeToString()
                                
                             }
                     }).ToArray()
         };
 
         //return Json(jsonData, JsonRequestBehavior.AllowGet);
+        JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+        return jsonSerializer.Serialize(jsonData);
+
+
     }
-    
-    
+
+
     //public ActionResult ArticulosGridData2(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
     //{
     //    string campo = String.Empty;

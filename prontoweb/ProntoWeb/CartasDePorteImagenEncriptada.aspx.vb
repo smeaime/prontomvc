@@ -412,7 +412,7 @@ Partial Class CartasDePorteImagenEncriptada
                 ElseIf oCarta.PathImagen <> "" Then
                     If True Then
 
-                        CartaDePorteManager.ResizeImage(oCarta.PathImagen, 400, 400, oCarta.PathImagen & ".temp." & Path.GetExtension(oCarta.PathImagen), sDirFTP)
+                        CartaDePorteManager.ResizeImage(oCarta.PathImagen, 400, 400, oCarta.PathImagen & ".temp." & Path.GetExtension(oCarta.PathImagen), sDirFTP, DirApp)
                         'oCarta.PathImagen = "temp_" + oCarta.PathImagen
                     End If
 
@@ -441,7 +441,7 @@ Partial Class CartasDePorteImagenEncriptada
                 If oCarta.PathImagen2 <> "" Then
 
                     If True Then
-                        CartaDePorteManager.ResizeImage(oCarta.PathImagen2, 400, 400, oCarta.PathImagen2 & ".temp." & Path.GetExtension(oCarta.PathImagen2), sDirFTP)
+                        CartaDePorteManager.ResizeImage(oCarta.PathImagen2, 400, 400, oCarta.PathImagen2 & ".temp." & Path.GetExtension(oCarta.PathImagen2), sDirFTP, DirApp)
                         'oCarta.PathImagen2 = "temp_" + oCarta.PathImagen2
                     End If
 
