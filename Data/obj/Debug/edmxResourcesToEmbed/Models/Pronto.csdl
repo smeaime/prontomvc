@@ -654,12 +654,12 @@
       <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
     </AssociationSet>
     <FunctionImport Name="AutorizacionesPorComprobante_A">
+      <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
       <Parameter Name="OrdenAutorizacion" Mode="In" Type="Int32" />
       <Parameter Name="IdAutorizo" Mode="In" Type="Int32" />
       <Parameter Name="FechaAutorizacion" Mode="In" Type="DateTime" />
       <Parameter Name="Visto" Mode="In" Type="String" />
       <Parameter Name="IdFormulario" Mode="In" Type="Int32" />
-      <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
       <Parameter Name="IdAutorizacionPorComprobante" Mode="InOut" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="wActualizacionesVariasPorComprobante">
@@ -1660,6 +1660,11 @@
       <End Role="Localidad" EntitySet="Localidades" />
       <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
     </AssociationSet>
+    <EntitySet Name="CartasDePorteControlDescargas" EntityType="DemoProntoModel.CartasDePorteControlDescarga" />
+    <AssociationSet Name="FK__CartasDeP__IdDes__4C581317" Association="DemoProntoModel.FK__CartasDeP__IdDes__4C581317">
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+      <End Role="CartasDePorteControlDescarga" EntitySet="CartasDePorteControlDescargas" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -2122,6 +2127,7 @@
     <NavigationProperty Name="OrdenesPagoes" Relationship="DemoProntoModel.FK_OrdenesPago_IdObra" FromRole="Obra" ToRole="OrdenPago" />
     <NavigationProperty Name="RubrosContables" Relationship="DemoProntoModel.FK_RubrosContables_IdObra" FromRole="Obra" ToRole="RubrosContable" />
     <NavigationProperty Name="DetalleAsientos" Relationship="DemoProntoModel.FK_DetalleAsientos_IdObra" FromRole="Obra" ToRole="DetalleAsiento" />
+    <Property Name="RegimenMinero" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Requerimiento">
     <Key>
@@ -4047,6 +4053,7 @@
     <Property Name="ImporteIva" Type="Decimal" Precision="18" Scale="4" />
     <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="DetalleFactura" ToRole="CartasDePorte" />
     <NavigationProperty Name="CartasPorteMovimientos" Relationship="DemoProntoModel.FK__CartasPor__IdDet__56CAB492" FromRole="DetalleFactura" ToRole="CartasPorteMovimiento" />
+    <Property Name="IdDetalleLiquidacionFlete" Type="Int32" />
   </EntityType>
   <EntityType Name="Factura">
     <Key>
@@ -4196,6 +4203,33 @@
     <Property Name="FechaInicioServicio" Type="DateTime" Precision="3" />
     <Property Name="FechaFinServicio" Type="DateTime" Precision="3" />
     <Property Name="IdLiquidacionFlete" Type="Int32" />
+    <Property Name="IdIBCondicion31" Type="Int32" />
+    <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="Int32" />
+    <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="Int32" />
+    <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="Int32" />
+    <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="Int32" />
+    <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="Int32" />
+    <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="Int32" />
+    <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="Int32" />
+    <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="Int32" />
+    <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
   </EntityType>
   <Association Name="FK_DetalleFacturas_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -4489,6 +4523,7 @@
     <NavigationProperty Name="Estados_Proveedores" Relationship="DemoProntoModel.FK_Proveedores_EstadosProveedores" FromRole="Proveedor" ToRole="Estados_Proveedore" />
     <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="ExcluirDeActualizacionIvaRG18" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="ResolucionAfip3692" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>
@@ -6834,6 +6869,7 @@
     <Property Name="NoTomarParaCalculoDeImpuestos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="IdPuntoVenta" Type="Int32" />
     <Property Name="PuntoVenta" Type="Int32" />
+    <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="Int32" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedore">
     <Key>
@@ -7302,6 +7338,34 @@
     <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_NotasCredito_IdVendedor" FromRole="NotasCredito" ToRole="Vendedor" />
     <Property Name="FechaInicioServicio" Type="DateTime" Precision="3" />
     <Property Name="FechaFinServicio" Type="DateTime" Precision="3" />
+    <Property Name="IdIBCondicion31" Type="Int32" />
+    <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="Int32" />
+    <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="Int32" />
+    <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="Int32" />
+    <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="Int32" />
+    <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="Int32" />
+    <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="Int32" />
+    <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="Int32" />
+    <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="Int32" />
+    <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="Int32" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -7377,6 +7441,35 @@
     <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_NotasDebito_IdObra" FromRole="NotasDebito" ToRole="Obra" />
     <NavigationProperty Name="Provincia" Relationship="DemoProntoModel.FK_NotasDebito_IdProvinciaDestino" FromRole="NotasDebito" ToRole="Provincia" />
     <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_NotasDebito_IdVendedor" FromRole="NotasDebito" ToRole="Vendedor" />
+    <Property Name="IdIBCondicion31" Type="Int32" />
+    <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="Int32" />
+    <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="Int32" />
+    <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="Int32" />
+    <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="Int32" />
+    <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="Int32" />
+    <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="Int32" />
+    <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="Int32" />
+    <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="Int32" />
+    <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="ActivarRecuperoGastos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdAutorizoRecuperoGastos" Type="Int32" />
   </EntityType>
   <EntityType Name="TiposValore">
     <Key>
@@ -8392,6 +8485,9 @@
     <NavigationProperty Name="DetalleValoresCuentas" Relationship="DemoProntoModel.FK_DetalleValoresCuentas_Valores" FromRole="Valore" ToRole="DetalleValoresCuenta" />
     <NavigationProperty Name="DetalleValoresProvincias" Relationship="DemoProntoModel.FK_DetalleValoresProvincias_Valores" FromRole="Valore" ToRole="DetalleValoresProvincia" />
     <NavigationProperty Name="DetalleValoresRubrosContables" Relationship="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" FromRole="Valore" ToRole="DetalleValoresRubrosContable" />
+    <Property Name="PercepcionIva" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdCuentaPercepcionIva" Type="Int32" />
+    <Property Name="PorcentajePercepcionIva" Type="Decimal" Precision="6" Scale="2" />
   </EntityType>
   <Association Name="FK_Valores_Monedas_IdMoneda">
     <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
@@ -8517,6 +8613,7 @@
     <Property Name="TopeAnual" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="CodigoRegimen" Type="Int32" />
+    <Property Name="ImpuestoMinimo" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="Marca">
     <Key>
@@ -9155,6 +9252,33 @@
     <Property Name="OtrasPercepciones3" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="OtrasPercepciones3Desc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="AjusteIva" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdIBCondicion31" Type="Int32" />
+    <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="Int32" />
+    <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="Int32" />
+    <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="Int32" />
+    <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="Int32" />
+    <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="Int32" />
+    <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="Int32" />
+    <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="Int32" />
+    <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="Int32" />
+    <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
   </EntityType>
   <Association Name="FK_DetalleDevoluciones_Devoluciones">
     <End Type="DemoProntoModel.Devolucione" Role="Devolucione" Multiplicity="0..1" />
@@ -10052,6 +10176,7 @@
     <Property Name="LimiteSuperior" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="IdUnidad" Type="Int32" />
     <Property Name="FechaVigencia" Type="DateTime" Precision="3" />
+    <Property Name="ValorUnitario2" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <Association Name="FK_DetalleSalidasMateriales_DetalleRecepciones">
     <End Type="DemoProntoModel.DetalleRecepcione" Role="DetalleRecepcione" Multiplicity="0..1" />
@@ -12287,6 +12412,7 @@
     <NavigationProperty Name="Localidade1" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0A8A4FBA" FromRole="WilliamsDestino" ToRole="Localidad" />
     <NavigationProperty Name="Localidade11" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0B7E73F3" FromRole="WilliamsDestino" ToRole="Localidad" />
     <NavigationProperty Name="Localidade2" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0C72982C" FromRole="WilliamsDestino" ToRole="Localidad" />
+    <NavigationProperty Name="CartasDePorteControlDescargas" Relationship="DemoProntoModel.FK__CartasDeP__IdDes__4C581317" FromRole="WilliamsDestino" ToRole="CartasDePorteControlDescarga" />
   </EntityType>
   <EntityType Name="WilliamsMailFiltrosCola">
     <Key>
@@ -12718,6 +12844,30 @@
       </Principal>
       <Dependent Role="WilliamsDestino">
         <PropertyRef Name="IdLocalidad4" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CartasDePorteControlDescarga">
+    <Key>
+      <PropertyRef Name="IdCartasDePorteControlDescarga" />
+    </Key>
+    <Property Name="IdCartasDePorteControlDescarga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdDestino" Type="Int32" />
+    <Property Name="IdPuntoVenta" Type="Int32" />
+    <Property Name="TotalDescargaDia" Type="Int32" />
+    <Property Name="PorcentajeDesnormalizado" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="WilliamsDestino" Relationship="DemoProntoModel.FK__CartasDeP__IdDes__4C581317" FromRole="CartasDePorteControlDescarga" ToRole="WilliamsDestino" />
+  </EntityType>
+  <Association Name="FK__CartasDeP__IdDes__4C581317">
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CartasDePorteControlDescarga" Role="CartasDePorteControlDescarga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WilliamsDestino">
+        <PropertyRef Name="IdWilliamsDestino" />
+      </Principal>
+      <Dependent Role="CartasDePorteControlDescarga">
+        <PropertyRef Name="IdDestino" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
