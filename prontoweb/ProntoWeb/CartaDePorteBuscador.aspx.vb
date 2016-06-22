@@ -759,14 +759,14 @@ Partial Class CartaDePorteBuscador
 
                 Case "Estadísticas de Toneladas descargadas (Sucursal-Modo)"
 
-                    estadsucmodo()
+                    ' estadsucmodo()
                 Case "Estadísticas de Toneladas descargadas (Modo-Sucursal)"
-                    estadmodosuc()
+                    'estadmodosuc()
                 Case "Volumen de Carga"
-                    VolumenCarga()
+                    'VolumenCarga()
 
                 Case "Diferencias por Destino por Mes"
-                    DiferenciasPorDestino()
+                    'DiferenciasPorDestino()
 
                 Case "Cartas Duplicadas"
                     'TraerDataset = TotalesPorMes()
@@ -892,9 +892,9 @@ Partial Class CartaDePorteBuscador
 
 
                 Case "Ranking de Cereales"
-                    rankcereales()
+                    'rankcereales()
                 Case "Ranking de Clientes"
-                    rankingclientes()
+                    'rankingclientes()
                 Case Else
                     'MsgBoxAjax(Me, "El informe no existe. Consulte con el administrador")
             End Select
@@ -1030,226 +1030,8 @@ Partial Class CartaDePorteBuscador
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Function estadmodosuc()
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-
-
-        Dim p2 As ReportParameter
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
-
-        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString), p2})
-
-    End Function
-
-    Function estadsucmodo()
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim p2 As ReportParameter
-
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
-        RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString), p2})
-
-    End Function
-
-    Function VolumenCarga()
-
-
-        Dim pv As Integer = cmbPuntoVenta.SelectedValue
-
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim sTitulo As String = ""
-        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
-        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-        Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
-        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
-        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
-        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-
-
-        Dim sWHERE As String
-
-
-
-
-        Dim q = ConsultasLinq.VolumenCarga(HFSC.Value, _
-                                    sTitulo, _
-                                    "", "", 0, 999999, CartaDePorteManager.enumCDPestado.Todas, "", _
-                                    idVendedor, idCorredor, _
-                                    idDestinatario, idIntermediario, _
-                                    idRComercial, idArticulo, idProcedencia, idDestino, _
-                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                       DropDownList2.Text, _
-                                   fechadesde, fechahasta, pv)
-
-
-
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        RebindReportViewerLINQ("ProntoWeb\Informes\Volumen de Carga.rdl", q, New ReportParameter() {New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString)})
-
-
-
-    End Function
-
-
-    Function DiferenciasPorDestino()
-
-
-
-        Dim pv As Integer = cmbPuntoVenta.SelectedValue
-
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim sTitulo As String = ""
-        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
-        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-        Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
-        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
-        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
-        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-
-
-        Dim sWHERE As String
-
-
-
-
-        Dim q = ConsultasLinq.DiferenciasDestino(HFSC.Value, _
-                                    sTitulo, _
-                                    "", "", 0, 999999, CartaDePorteManager.enumCDPestado.Todas, "", _
-                                    idVendedor, idCorredor, _
-                                    idDestinatario, idIntermediario, _
-                                    idRComercial, idArticulo, idProcedencia, idDestino, _
-                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                       DropDownList2.Text, _
-                                   fechadesde, fechahasta, pv)
-
-
-
-
-        Dim p1 = New ReportParameter("Titulo", fechadesde.ToShortDateString & " al " & fechahasta.ToShortDateString)
-        Dim p2 = New ReportParameter("Tope", Val(txtTopeClientesDifDestinos.Text))
-        Dim params = New ReportParameter() {p1, p2}
-
-
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        RebindReportViewerLINQ("ProntoWeb\Informes\Diferencias Por Destino.rdl", q, _
-                               params)
-
-
-
-    End Function
-
-
-    Sub rankcereales()
-        '////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim fechadesde2 As Date
-
-        'la fecha del periodo anterior a comparar
-        If cmbPeriodo.Text = "Este mes" Or cmbPeriodo.Text = "Mes anterior" Then
-            fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
-        Else
-            fechadesde2 = fechadesde - (fechahasta - fechadesde)
-        End If
-        '////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////
-
-
-        Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-
-
-
-        Dim sTitulo As String = ""
-        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
-        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
-        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
-        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-        Dim pv As Integer = cmbPuntoVenta.SelectedValue
-
-
-
-
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                Join art In db.linqArticulos On art.IdArticulo Equals cdp.IdArticulo _
-                Where cdp.Vendedor > 0 _
-                   And cli.RazonSocial IsNot Nothing _
-                   And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
-                  And (cdp.Anulada <> "SI") _
-                                      And ((DropDownList2.Text = "Ambos") Or (DropDownList2.Text = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (DropDownList2.Text = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-       And (cdp.PuntoVenta = cmbPuntoVenta.SelectedValue Or cmbPuntoVenta.SelectedValue = -1) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-        Group cdp By Producto = art.Descripcion Into g = Group _
-                Select New With { _
-                        .Producto = Producto, _
-                        .PV1 = g.Sum(Function(i) IIf(i.PuntoVenta = 1 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV2 = g.Sum(Function(i) IIf(i.PuntoVenta = 2 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV3 = g.Sum(Function(i) IIf(i.PuntoVenta = 3 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV4 = g.Sum(Function(i) IIf(i.PuntoVenta = 4 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Total = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Porcent = 0, _
-                        .PeriodoAnterior = g.Sum(Function(i) IIf((cmbPuntoVenta.SelectedValue = 0 Or i.PuntoVenta = cmbPuntoVenta.SelectedValue) And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Diferen = 0, _
-                        .DiferencPorcent = 0 _
-                    } _
-                ).Where(Function(i) i.Total > 0).ToList
-
-
-
-
-        '
-
-
-
-        'Cereal
-        'BA (Tn sin mermas de Buenos Aires si se saca de todos los PV)
-        'SL (Tn sin mermas de San Lorenzo si se saca de todos los PV)
-        'AS (Tn sin mermas de Arroyo Seco si se saca de todos los PV)
-        'BB (Tn sin mermas de Bahia Blanca si se saca de todos los PV)
-        'Total (Tn netas sin mermas)
-        '% (Sobre la suma de todos los clientes)
-        'Total Periodo Anterior (*)
-        'Diferencia (Total - Total Periodo Anterior)
-        '%Dif (Diferencia/Total).
-
-
-
-
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        If cmbPuntoVenta.SelectedValue > 0 Then
-            RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Cereales (un solo punto venta).rdl", q, New ReportParameter() {New ReportParameter("Titulo", PuntoVentaWilliams.NombrePuntoVentaWilliams2(cmbPuntoVenta.SelectedValue))})
-        Else
-            RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Cereales.rdl", q)
-        End If
-
-
-        'RebindReportViewer("ProntoWeb\Informes\Ranking de Cereales.rdl", dt)
-
-    End Sub
-
-
-
+    
+ 
 
 
 
