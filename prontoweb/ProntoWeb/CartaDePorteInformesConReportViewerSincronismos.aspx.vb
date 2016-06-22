@@ -3020,7 +3020,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                 Case "Descargar imágenes en PDF"
 
-                    output = DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False)
+                    output = DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False, DirApp)
 
                 Case "Descargar imágenes en TIFF"
 

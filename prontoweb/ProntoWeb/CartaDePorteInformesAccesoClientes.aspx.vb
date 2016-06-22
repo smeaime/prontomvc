@@ -1725,7 +1725,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         If Not b Then
             output = DescargarImagenesAdjuntas(dt, HFSC.Value, True)
         Else
-            output = DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False)
+            output = DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False, DirApp)
         End If
 
 
