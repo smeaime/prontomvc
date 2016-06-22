@@ -4877,7 +4877,7 @@ Public Class CartaDePorteManager
     End Function 'GetEncoderInfo
 
 
-    Shared Function DescargarImagenesAdjuntas_PDF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+    Shared Function DescargarImagenesAdjuntas_PDF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String) As String
 
 
 
@@ -4935,10 +4935,10 @@ Public Class CartaDePorteManager
             Dim imagenpathtk = myCartaDePorte.PathImagen2
             Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
 
-            Dim archivopdf = ImagenPDF(SC, id)
+            Dim archivopdf = ImagenPDF(SC, id, DirApp)
 
 
-            wordFiles.Add(archivopdf)
+            wordFiles.Add(sDirFTP)
 
 
 
@@ -5191,7 +5191,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function ImagenPDF(SC As String, IdCarta As Long) As String
+    Shared Function ImagenPDF(SC As String, IdCarta As Long, DirApp As String) As String
 
         Dim sDirFTP As String
 
@@ -5258,15 +5258,15 @@ Public Class CartaDePorteManager
 
         Try
 
-            If System.Diagnostics.Debugger.IsAttached() Then
+            If System.Diagnostics.Debugger.IsAttached() And False Then
                 sDirFTP = "~/" + "DataBackupear\"
-
+                sDirFTP = DirApp + "\DataBackupear\"
 
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP, DirApp)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP, DirApp)
 
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -5283,16 +5283,17 @@ Public Class CartaDePorteManager
 
                 sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
                 sDirFTP = "E:\Sites\Pronto\DataBackupear\"
+                sDirFTP = DirApp + "\DataBackupear\"
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
@@ -5424,7 +5425,7 @@ Public Class CartaDePorteManager
 
 
     'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
-    Public Shared Sub ResizeImage(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
+    Public Shared Sub ResizeImage(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String, DirApp As String)
         'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
         'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
 
@@ -5440,6 +5441,8 @@ Public Class CartaDePorteManager
             'sDir = HttpContext.Current.Server.MapPath(AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\")
             'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
+
+        sDir = DirApp & "\DataBackupear\"
 
 
         ErrHandler2.WriteError("ResizeImage " & sDir & image)
@@ -10390,7 +10393,10 @@ Public Class CartaDePorteManager
         ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsExcel Idfactura=" & IdFactura)
 
 
-        Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+        'Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+        Dim dt = EntidadManager.ExecDinamico(SC, "wCartasDePorte_TX_PorIdFactura " & IdFactura, 100)
+
+
 
         If ArchivoExcelDestino = "" Then
             ArchivoExcelDestino = IO.Path.GetTempPath & "AdjuntoDeFactura " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
@@ -13802,16 +13808,29 @@ Public Class CartaDePorteManager
 
 
 
+            Dim FName As String
+            If True Then
+
+                'PDF
+                FName = ImagenPDF(SC, cdp.Id, DirApp)
+
+            Else
+
+                'imagen
+
+                Dim DIRFTP As String = DirApp & "\DataBackupear\"
+
+                'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
+                'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
+                'Return File.ReadAllText(FullPath)
+
+                FName = DIRFTP + cdp.PathImagen
+
+            End If
 
 
 
-            Dim DIRFTP As String = DirApp & "\DataBackupear\"
 
-            'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
-            'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
-            'Return File.ReadAllText(FullPath)
-
-            Dim FName As String = DIRFTP + cdp.PathImagen
 
             Dim fs1 As System.IO.FileStream = Nothing
             fs1 = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
