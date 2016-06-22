@@ -181,6 +181,9 @@
     <Compile Include="Models\CartasDePorte.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartasDePorteControlDescarga.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CartasDePorteDetalle_EF.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content lkjlkjlk -->
     <edmx:StorageModels>
-    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="_TempAutorizaciones">
           <Key>
             <PropertyRef Name="IdTempAutorizacion" />
@@ -666,6 +666,17 @@
           <Property Name="MotivoRechazo" Type="int" />
           <Property Name="FacturarA_Manual" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="CartasDePorteControlDescarga">
+          <Key>
+            <PropertyRef Name="IdCartasDePorteControlDescarga" />
+          </Key>
+          <Property Name="IdCartasDePorteControlDescarga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdDestino" Type="int" />
+          <Property Name="IdPuntoVenta" Type="int" />
+          <Property Name="TotalDescargaDia" Type="int" />
+          <Property Name="PorcentajeDesnormalizado" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="CartasDePorteDetalle">
           <Key>
             <PropertyRef Name="IdCartaDePorteDetalle" />
@@ -675,8 +686,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -833,8 +844,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene 
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -1188,6 +1199,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="NoTomarParaCalculoDeImpuestos" Type="varchar" MaxLength="2" />
           <Property Name="IdPuntoVenta" Type="int" />
           <Property Name="PuntoVenta" Type="int" />
+          <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="int" />
         </EntityType>
         <EntityType Name="Conceptos">
           <Key>
@@ -2122,6 +2134,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
           <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
           <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="IdDetalleLiquidacionFlete" Type="int" />
         </EntityType>
         <EntityType Name="DetalleFacturasClientesPRESTO">
           <Key>
@@ -3092,6 +3105,33 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="OtrasPercepciones3" Type="numeric" Precision="18" Scale="2" />
           <Property Name="OtrasPercepciones3Desc" Type="varchar" MaxLength="15" />
           <Property Name="AjusteIva" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdIBCondicion31" Type="int" />
+          <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="int" />
+          <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="int" />
+          <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="int" />
+          <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="int" />
+          <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="int" />
+          <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="int" />
+          <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="int" />
+          <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="int" />
+          <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="DiccionarioEquivalencias">
           <Key>
@@ -3132,8 +3172,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -3434,6 +3474,33 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="FechaInicioServicio" Type="datetime" />
           <Property Name="FechaFinServicio" Type="datetime" />
           <Property Name="IdLiquidacionFlete" Type="int" />
+          <Property Name="IdIBCondicion31" Type="int" />
+          <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="int" />
+          <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="int" />
+          <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="int" />
+          <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="int" />
+          <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="int" />
+          <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="int" />
+          <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="int" />
+          <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="int" />
+          <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="Feriados">
           <Key>
@@ -3601,6 +3668,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="TopeAnual" Type="numeric" Precision="18" Scale="2" />
           <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="varchar" MaxLength="2" />
           <Property Name="CodigoRegimen" Type="int" />
+          <Property Name="ImpuestoMinimo" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ListasPrecios">
           <Key>
@@ -3836,6 +3904,34 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdClienteObservaciones" Type="int" />
           <Property Name="FechaInicioServicio" Type="datetime" />
           <Property Name="FechaFinServicio" Type="datetime" />
+          <Property Name="IdIBCondicion31" Type="int" />
+          <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="int" />
+          <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="int" />
+          <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="int" />
+          <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="int" />
+          <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="int" />
+          <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="int" />
+          <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="int" />
+          <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="int" />
+          <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="int" />
         </EntityType>
         <EntityType Name="NotasDebito">
           <Key>
@@ -3901,6 +3997,35 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="FechaVencimientoORechazoCAE" Type="datetime" />
           <Property Name="IdIdentificacionCAE" Type="int" />
           <Property Name="IdClienteObservaciones" Type="int" />
+          <Property Name="IdIBCondicion31" Type="int" />
+          <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="int" />
+          <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="int" />
+          <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="int" />
+          <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="int" />
+          <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="int" />
+          <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="int" />
+          <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="int" />
+          <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="int" />
+          <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="ActivarRecuperoGastos" Type="varchar" MaxLength="2" />
+          <Property Name="IdAutorizoRecuperoGastos" Type="int" />
         </EntityType>
         <EntityType Name="Obras">
           <Key>
@@ -3963,6 +4088,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="DiasLiquidacionCertificados" Type="int" />
           <Property Name="IdObraRelacionada" Type="int" />
           <Property Name="OrdenamientoSecundario" Type="int" />
+          <Property Name="RegimenMinero" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="OrdenesCompra">
           <Key>
@@ -4909,6 +5035,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="ResolucionAfip3668" Type="varchar" MaxLength="2" />
           <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="varchar" MaxLength="2" />
           <Property Name="ExcluirDeActualizacionIvaRG18" Type="varchar" MaxLength="2" />
+          <Property Name="ResolucionAfip3692" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5513,6 +5640,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="LimiteSuperior" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IdUnidad" Type="int" />
           <Property Name="FechaVigencia" Type="datetime" />
+          <Property Name="ValorUnitario2" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="TarjetasCredito">
           <Key>
@@ -5874,6 +6002,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdOrigen" Type="int" />
           <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
           <Property Name="IdReciboAsignado" Type="int" />
+          <Property Name="PercepcionIva" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdCuentaPercepcionIva" Type="int" />
+          <Property Name="PorcentajePercepcionIva" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="ValoresFaltantesVistos">
           <Key>
@@ -5907,8 +6038,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wGrillaPersistencia">
           <Key>
             <PropertyRef Name="IdRenglon" />
@@ -6087,6 +6218,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             </Principal>
             <Dependent Role="CartasDePorte">
               <PropertyRef Name="IdCorredor2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartasDeP__IdDes__4C581317">
+          <End Role="WilliamsDestinos" Type="Self.WilliamsDestinos" Multiplicity="0..1" />
+          <End Role="CartasDePorteControlDescarga" Type="Self.CartasDePorteControlDescarga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WilliamsDestinos">
+              <PropertyRef Name="IdWilliamsDestino" />
+            </Principal>
+            <Dependent Role="CartasDePorteControlDescarga">
+              <PropertyRef Name="IdDestino" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9294,12 +9437,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Parameter Name="IdComprobante" Type="int" Mode="In" />
         </Function>
         <Function Name="AutorizacionesPorComprobante_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdComprobante" Type="int" Mode="In" />
           <Parameter Name="OrdenAutorizacion" Type="int" Mode="In" />
           <Parameter Name="IdAutorizo" Type="int" Mode="In" />
           <Parameter Name="FechaAutorizacion" Type="datetime" Mode="In" />
           <Parameter Name="Visto" Type="varchar" Mode="In" />
           <Parameter Name="IdFormulario" Type="int" Mode="In" />
-          <Parameter Name="IdComprobante" Type="int" Mode="In" />
           <Parameter Name="IdAutorizacionPorComprobante" Type="int" Mode="InOut" />
         </Function>
         <Function Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -9425,6 +9568,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorte" EntityType="Self.CartasDePorte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartasDePorteControlDescarga" EntityType="Self.CartasDePorteControlDescarga" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorteDetalle" EntityType="Self.CartasDePorteDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorteLogDeOCR" EntityType="Self.CartasDePorteLogDeOCR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartasDePorteReglasDeFacturacion" EntityType="Self.CartasDePorteReglasDeFacturacion" Schema="dbo" store:Type="Tables" />
@@ -9809,6 +9953,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <AssociationSet Name="FK__CartasDeP__IdCor__7D7A6D5F" Association="Self.FK__CartasDeP__IdCor__7D7A6D5F">
             <End Role="Vendedores" EntitySet="Vendedores" />
             <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartasDeP__IdDes__4C581317" Association="Self.FK__CartasDeP__IdDes__4C581317">
+            <End Role="WilliamsDestinos" EntitySet="WilliamsDestinos" />
+            <End Role="CartasDePorteControlDescarga" EntitySet="CartasDePorteControlDescarga" />
           </AssociationSet>
           <AssociationSet Name="FK__CartasDeP__IdDet__55D69059" Association="Self.FK__CartasDeP__IdDet__55D69059">
             <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
@@ -11533,12 +11681,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
           </AssociationSet>
           <FunctionImport Name="AutorizacionesPorComprobante_A">
+            <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
             <Parameter Name="OrdenAutorizacion" Mode="In" Type="Int32" />
             <Parameter Name="IdAutorizo" Mode="In" Type="Int32" />
             <Parameter Name="FechaAutorizacion" Mode="In" Type="DateTime" />
             <Parameter Name="Visto" Mode="In" Type="String" />
             <Parameter Name="IdFormulario" Mode="In" Type="Int32" />
-            <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
             <Parameter Name="IdAutorizacionPorComprobante" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="wActualizacionesVariasPorComprobante">
@@ -12539,6 +12687,11 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             <End Role="Localidad" EntitySet="Localidades" />
             <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
           </AssociationSet>
+          <EntitySet Name="CartasDePorteControlDescargas" EntityType="DemoProntoModel.CartasDePorteControlDescarga" />
+          <AssociationSet Name="FK__CartasDeP__IdDes__4C581317" Association="DemoProntoModel.FK__CartasDeP__IdDes__4C581317">
+            <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+            <End Role="CartasDePorteControlDescarga" EntitySet="CartasDePorteControlDescargas" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -13005,6 +13158,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <NavigationProperty Name="OrdenesPagoes" Relationship="DemoProntoModel.FK_OrdenesPago_IdObra" FromRole="Obra" ToRole="OrdenPago" />
           <NavigationProperty Name="RubrosContables" Relationship="DemoProntoModel.FK_RubrosContables_IdObra" FromRole="Obra" ToRole="RubrosContable" />
           <NavigationProperty Name="DetalleAsientos" Relationship="DemoProntoModel.FK_DetalleAsientos_IdObra" FromRole="Obra" ToRole="DetalleAsiento" />
+          <Property Name="RegimenMinero" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Requerimiento">
           <Key>
@@ -14936,6 +15090,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="ImporteIva" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="DetalleFactura" ToRole="CartasDePorte" />
           <NavigationProperty Name="CartasPorteMovimientos" Relationship="DemoProntoModel.FK__CartasPor__IdDet__56CAB492" FromRole="DetalleFactura" ToRole="CartasPorteMovimiento" />
+          <Property Name="IdDetalleLiquidacionFlete" Type="Int32" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
@@ -15085,6 +15240,33 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="FechaInicioServicio" Type="DateTime" Precision="3" />
           <Property Name="FechaFinServicio" Type="DateTime" Precision="3" />
           <Property Name="IdLiquidacionFlete" Type="Int32" />
+          <Property Name="IdIBCondicion31" Type="Int32" />
+          <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="Int32" />
+          <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="Int32" />
+          <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="Int32" />
+          <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="Int32" />
+          <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="Int32" />
+          <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="Int32" />
+          <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="Int32" />
+          <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="Int32" />
+          <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <Association Name="FK_DetalleFacturas_Articulos">
           <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -15379,6 +15561,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <NavigationProperty Name="Estados_Proveedores" Relationship="DemoProntoModel.FK_Proveedores_EstadosProveedores" FromRole="Proveedor" ToRole="Estados_Proveedore" />
           <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="ExcluirDeActualizacionIvaRG18" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ResolucionAfip3692" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -17724,6 +17907,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="NoTomarParaCalculoDeImpuestos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="IdPuntoVenta" Type="Int32" />
           <Property Name="PuntoVenta" Type="Int32" />
+          <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="Int32" />
         </EntityType>
         <EntityType Name="DetalleComprobantesProveedore">
           <Key>
@@ -18192,6 +18376,34 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_NotasCredito_IdVendedor" FromRole="NotasCredito" ToRole="Vendedor" />
           <Property Name="FechaInicioServicio" Type="DateTime" Precision="3" />
           <Property Name="FechaFinServicio" Type="DateTime" Precision="3" />
+          <Property Name="IdIBCondicion31" Type="Int32" />
+          <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="Int32" />
+          <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="Int32" />
+          <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="Int32" />
+          <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="Int32" />
+          <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="Int32" />
+          <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="Int32" />
+          <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="Int32" />
+          <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="Int32" />
+          <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="Int32" />
         </EntityType>
         <EntityType Name="NotasDebito">
           <Key>
@@ -18267,6 +18479,35 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_NotasDebito_IdObra" FromRole="NotasDebito" ToRole="Obra" />
           <NavigationProperty Name="Provincia" Relationship="DemoProntoModel.FK_NotasDebito_IdProvinciaDestino" FromRole="NotasDebito" ToRole="Provincia" />
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_NotasDebito_IdVendedor" FromRole="NotasDebito" ToRole="Vendedor" />
+          <Property Name="IdIBCondicion31" Type="Int32" />
+          <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="Int32" />
+          <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="Int32" />
+          <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="Int32" />
+          <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="Int32" />
+          <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="Int32" />
+          <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="Int32" />
+          <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="Int32" />
+          <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="Int32" />
+          <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ActivarRecuperoGastos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdAutorizoRecuperoGastos" Type="Int32" />
         </EntityType>
         <EntityType Name="TiposValore">
           <Key>
@@ -19282,6 +19523,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <NavigationProperty Name="DetalleValoresCuentas" Relationship="DemoProntoModel.FK_DetalleValoresCuentas_Valores" FromRole="Valore" ToRole="DetalleValoresCuenta" />
           <NavigationProperty Name="DetalleValoresProvincias" Relationship="DemoProntoModel.FK_DetalleValoresProvincias_Valores" FromRole="Valore" ToRole="DetalleValoresProvincia" />
           <NavigationProperty Name="DetalleValoresRubrosContables" Relationship="DemoProntoModel.FK_DetalleValoresRubrosContables_Valores" FromRole="Valore" ToRole="DetalleValoresRubrosContable" />
+          <Property Name="PercepcionIva" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdCuentaPercepcionIva" Type="Int32" />
+          <Property Name="PorcentajePercepcionIva" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <Association Name="FK_Valores_Monedas_IdMoneda">
           <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
@@ -19407,6 +19651,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="TopeAnual" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="CodigoRegimen" Type="Int32" />
+          <Property Name="ImpuestoMinimo" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Marca">
           <Key>
@@ -20045,6 +20290,33 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="OtrasPercepciones3" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OtrasPercepciones3Desc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="AjusteIva" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdIBCondicion31" Type="Int32" />
+          <Property Name="RetencionIBrutos31" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos31" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion32" Type="Int32" />
+          <Property Name="RetencionIBrutos32" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos32" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion33" Type="Int32" />
+          <Property Name="RetencionIBrutos33" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos33" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion34" Type="Int32" />
+          <Property Name="RetencionIBrutos34" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos34" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion35" Type="Int32" />
+          <Property Name="RetencionIBrutos35" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos35" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion36" Type="Int32" />
+          <Property Name="RetencionIBrutos36" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos36" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion37" Type="Int32" />
+          <Property Name="RetencionIBrutos37" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos37" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion38" Type="Int32" />
+          <Property Name="RetencionIBrutos38" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos38" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdIBCondicion39" Type="Int32" />
+          <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <Association Name="FK_DetalleDevoluciones_Devoluciones">
           <End Type="DemoProntoModel.Devolucione" Role="Devolucione" Multiplicity="0..1" />
@@ -20942,6 +21214,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="LimiteSuperior" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IdUnidad" Type="Int32" />
           <Property Name="FechaVigencia" Type="DateTime" Precision="3" />
+          <Property Name="ValorUnitario2" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_DetalleSalidasMateriales_DetalleRecepciones">
           <End Type="DemoProntoModel.DetalleRecepcione" Role="DetalleRecepcione" Multiplicity="0..1" />
@@ -23177,6 +23450,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <NavigationProperty Name="Localidade1" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0A8A4FBA" FromRole="WilliamsDestino" ToRole="Localidad" />
           <NavigationProperty Name="Localidade11" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0B7E73F3" FromRole="WilliamsDestino" ToRole="Localidad" />
           <NavigationProperty Name="Localidade2" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0C72982C" FromRole="WilliamsDestino" ToRole="Localidad" />
+          <NavigationProperty Name="CartasDePorteControlDescargas" Relationship="DemoProntoModel.FK__CartasDeP__IdDes__4C581317" FromRole="WilliamsDestino" ToRole="CartasDePorteControlDescarga" />
         </EntityType>
         <EntityType Name="WilliamsMailFiltrosCola">
           <Key>
@@ -23611,6 +23885,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CartasDePorteControlDescarga">
+          <Key>
+            <PropertyRef Name="IdCartasDePorteControlDescarga" />
+          </Key>
+          <Property Name="IdCartasDePorteControlDescarga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdDestino" Type="Int32" />
+          <Property Name="IdPuntoVenta" Type="Int32" />
+          <Property Name="TotalDescargaDia" Type="Int32" />
+          <Property Name="PorcentajeDesnormalizado" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="WilliamsDestino" Relationship="DemoProntoModel.FK__CartasDeP__IdDes__4C581317" FromRole="CartasDePorteControlDescarga" ToRole="WilliamsDestino" />
+        </EntityType>
+        <Association Name="FK__CartasDeP__IdDes__4C581317">
+          <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.CartasDePorteControlDescarga" Role="CartasDePorteControlDescarga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WilliamsDestino">
+              <PropertyRef Name="IdWilliamsDestino" />
+            </Principal>
+            <Dependent Role="CartasDePorteControlDescarga">
+              <PropertyRef Name="IdDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -23948,7 +24246,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
             </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Obras"><EntityTypeMapping TypeName="DemoProntoModel.Obra"><MappingFragment StoreEntitySet="Obras">
-            <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
+            <ScalarProperty Name="RegimenMinero" ColumnName="RegimenMinero" />
+                <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
                 <ScalarProperty Name="IdObraRelacionada" ColumnName="IdObraRelacionada" />
                 <ScalarProperty Name="IdObra" ColumnName="IdObra" />
             <ScalarProperty Name="NumeroObra" ColumnName="NumeroObra" />
@@ -25162,6 +25461,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="DetalleFacturas">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleFactura">
               <MappingFragment StoreEntitySet="DetalleFacturas">
+                <ScalarProperty Name="IdDetalleLiquidacionFlete" ColumnName="IdDetalleLiquidacionFlete" />
                 <ScalarProperty Name="ImporteIva" ColumnName="ImporteIva" />
                 <ScalarProperty Name="PorcentajeIva" ColumnName="PorcentajeIva" />
                 <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
@@ -25200,6 +25500,33 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="Facturas">
             <EntityTypeMapping TypeName="DemoProntoModel.Factura">
               <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+                <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+                <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+                <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+                <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+                <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+                <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+                <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+                <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+                <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+                <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+                <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+                <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+                <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+                <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+                <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+                <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+                <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+                <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+                <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+                <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+                <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+                <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+                <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+                <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+                <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+                <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
                 <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
                 <ScalarProperty Name="FechaFinServicio" ColumnName="FechaFinServicio" />
                 <ScalarProperty Name="FechaInicioServicio" ColumnName="FechaInicioServicio" />
@@ -25377,6 +25704,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="ResolucionAfip3692" ColumnName="ResolucionAfip3692" />
                 <ScalarProperty Name="ExcluirDeActualizacionIvaRG18" ColumnName="ExcluirDeActualizacionIvaRG18" />
                 <ScalarProperty Name="ExcluirDelCircuitoDeFirmasComprobantes" ColumnName="ExcluirDelCircuitoDeFirmasComprobantes" />
                 <ScalarProperty Name="ResolucionAfip3668" ColumnName="ResolucionAfip3668" />
@@ -26963,6 +27291,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="ComprobantesProveedor">
             <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
               <MappingFragment StoreEntitySet="ComprobantesProveedores">
+                <ScalarProperty Name="IdNotaDebitoVenta_RecuperoGastos" ColumnName="IdNotaDebitoVenta_RecuperoGastos" />
                 <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
                 <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
                 <ScalarProperty Name="NoTomarParaCalculoDeImpuestos" ColumnName="NoTomarParaCalculoDeImpuestos" />
@@ -27404,6 +27733,34 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="NotasCreditoes">
             <EntityTypeMapping TypeName="DemoProntoModel.NotasCredito">
               <MappingFragment StoreEntitySet="NotasCredito">
+                <ScalarProperty Name="IdNotaDebitoVenta_RecuperoGastos" ColumnName="IdNotaDebitoVenta_RecuperoGastos" />
+                <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+                <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+                <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+                <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+                <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+                <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+                <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+                <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+                <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+                <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+                <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+                <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+                <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+                <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+                <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+                <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+                <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+                <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+                <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+                <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+                <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+                <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+                <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+                <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+                <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+                <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+                <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
                 <ScalarProperty Name="FechaFinServicio" ColumnName="FechaFinServicio" />
                 <ScalarProperty Name="FechaInicioServicio" ColumnName="FechaInicioServicio" />
                 <ScalarProperty Name="IdClienteObservaciones" ColumnName="IdClienteObservaciones" />
@@ -27479,6 +27836,35 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="NotasDebitoes">
             <EntityTypeMapping TypeName="DemoProntoModel.NotasDebito">
               <MappingFragment StoreEntitySet="NotasDebito">
+                <ScalarProperty Name="IdAutorizoRecuperoGastos" ColumnName="IdAutorizoRecuperoGastos" />
+                <ScalarProperty Name="ActivarRecuperoGastos" ColumnName="ActivarRecuperoGastos" />
+                <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+                <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+                <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+                <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+                <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+                <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+                <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+                <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+                <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+                <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+                <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+                <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+                <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+                <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+                <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+                <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+                <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+                <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+                <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+                <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+                <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+                <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+                <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+                <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+                <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+                <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+                <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
                 <ScalarProperty Name="IdClienteObservaciones" ColumnName="IdClienteObservaciones" />
                 <ScalarProperty Name="IdIdentificacionCAE" ColumnName="IdIdentificacionCAE" />
                 <ScalarProperty Name="FechaVencimientoORechazoCAE" ColumnName="FechaVencimientoORechazoCAE" />
@@ -27830,6 +28216,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="Valores">
             <EntityTypeMapping TypeName="DemoProntoModel.Valore">
               <MappingFragment StoreEntitySet="Valores">
+                <ScalarProperty Name="PorcentajePercepcionIva" ColumnName="PorcentajePercepcionIva" />
+                <ScalarProperty Name="IdCuentaPercepcionIva" ColumnName="IdCuentaPercepcionIva" />
+                <ScalarProperty Name="PercepcionIva" ColumnName="PercepcionIva" />
                 <ScalarProperty Name="IdReciboAsignado" ColumnName="IdReciboAsignado" />
                 <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
                 <ScalarProperty Name="IdOrigen" ColumnName="IdOrigen" />
@@ -27932,6 +28321,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="ImpuestosDirectos">
             <EntityTypeMapping TypeName="DemoProntoModel.ImpuestosDirecto">
               <MappingFragment StoreEntitySet="ImpuestosDirectos">
+                <ScalarProperty Name="ImpuestoMinimo" ColumnName="ImpuestoMinimo" />
                 <ScalarProperty Name="CodigoRegimen" ColumnName="CodigoRegimen" />
                 <ScalarProperty Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" ColumnName="ParaInscriptosEnRegistroFiscalOperadoresGranos" />
                 <ScalarProperty Name="TopeAnual" ColumnName="TopeAnual" />
@@ -28331,6 +28721,33 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="Devoluciones">
             <EntityTypeMapping TypeName="DemoProntoModel.Devolucione">
               <MappingFragment StoreEntitySet="Devoluciones">
+                <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+                <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+                <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+                <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+                <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+                <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+                <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+                <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+                <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+                <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+                <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+                <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+                <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+                <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+                <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+                <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+                <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+                <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+                <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+                <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+                <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+                <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+                <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+                <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+                <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+                <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+                <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
                 <ScalarProperty Name="AjusteIva" ColumnName="AjusteIva" />
                 <ScalarProperty Name="OtrasPercepciones3Desc" ColumnName="OtrasPercepciones3Desc" />
                 <ScalarProperty Name="OtrasPercepciones3" ColumnName="OtrasPercepciones3" />
@@ -28984,6 +29401,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <EntitySetMapping Name="TarifasFletes">
             <EntityTypeMapping TypeName="DemoProntoModel.TarifasFlete">
               <MappingFragment StoreEntitySet="TarifasFletes">
+                <ScalarProperty Name="ValorUnitario2" ColumnName="ValorUnitario2" />
                 <ScalarProperty Name="FechaVigencia" ColumnName="FechaVigencia" />
                 <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
                 <ScalarProperty Name="LimiteSuperior" ColumnName="LimiteSuperior" />
@@ -30202,6 +30620,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
                 <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
                 <ScalarProperty Name="IdTanda" ColumnName="IdTanda" />
                 <ScalarProperty Name="IdExcelImportador" ColumnName="IdExcelImportador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartasDePorteControlDescargas">
+            <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorteControlDescarga">
+              <MappingFragment StoreEntitySet="CartasDePorteControlDescarga">
+                <ScalarProperty Name="PorcentajeDesnormalizado" ColumnName="PorcentajeDesnormalizado" />
+                <ScalarProperty Name="TotalDescargaDia" ColumnName="TotalDescargaDia" />
+                <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
+                <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCartasDePorteControlDescarga" ColumnName="IdCartasDePorteControlDescarga" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
