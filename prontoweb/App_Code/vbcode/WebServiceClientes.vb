@@ -165,6 +165,69 @@ Public Class WebServiceClientes
 
 
 
+    <WebMethod()> _
+    Public Function CotizacionWilliamsDestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
+
+
+        If (o.IdCartasDePorteControlDescarga > 0) Then
+
+        End If
+
+
+
+        'if (!PuedeEditar(enumNodos.Cotizaciones)) throw new Exception("No tenés permisos");
+
+        'Try
+        '{
+        '    If (ModelState.IsValid) Then
+        '    {
+        '        If (Cotizacion.IdCotizacion > 0) Then
+        '        {
+        '            var EntidadOriginal = db.Cotizaciones.Where(p => p.IdCotizacion == Cotizacion.IdCotizacion).SingleOrDefault();
+        '            var EntidadEntry = db.Entry(EntidadOriginal);
+        '            EntidadEntry.CurrentValues.SetValues(Cotizacion);
+
+        '            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+        '        }
+        '        Else
+        '        {
+        '            db.Cotizaciones.Add(Cotizacion);
+        '        }
+
+        '        db.SaveChanges();
+
+        '        TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+        '        return Json(new { Success = 1, IdCotizacion = Cotizacion.IdCotizacion, ex = "" });
+        '    }
+        '    else
+        '    {
+        '        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+        '        Response.TrySkipIisCustomErrors = true;
+
+        '        JsonResponse res = new JsonResponse();
+        '        res.Status = Status.Error;
+        '        res.Errors = GetModelStateErrorsAsString(this.ModelState);
+        '        res.Message = "El registro tiene datos invalidos";
+
+        '        return Json(res);
+        '    }
+        '}
+        'catch (Exception ex)
+        '{
+        '    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+        '    Response.TrySkipIisCustomErrors = true;
+
+        '    List<string> errors = new List<string>();
+        '    errors.Add(ex.Message);
+        '    return Json(errors);
+        '}
+
+
+
+
+    End Function
+
 
 
 
