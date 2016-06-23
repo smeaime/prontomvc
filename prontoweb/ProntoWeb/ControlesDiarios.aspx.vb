@@ -74,7 +74,7 @@ Partial Class ControlesDiarios
             '////////////////////////////////////////////
 
 
-            Me.Title = "Sincros Automáticos"
+            Me.Title = "Control de Descargas"
 
             BindTypeDropDown()
             'refrescaPeriodo()
