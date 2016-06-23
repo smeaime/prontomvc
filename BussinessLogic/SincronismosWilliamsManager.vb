@@ -2570,6 +2570,8 @@ Namespace Pronto.ERP.Bll
 
                     'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
                     Dim sCalidad As String
+
+
                     If InStr(.Calidad.ToString.ToLower, "grado 1") > 0 Then
                         sCalidad = "G1"
                     ElseIf InStr(.Calidad.ToString.ToLower, "grado 2") > 0 Then
@@ -2582,6 +2584,8 @@ Namespace Pronto.ERP.Bll
                         sCalidad = "FE"
                     End If
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+
+
 
 
 
