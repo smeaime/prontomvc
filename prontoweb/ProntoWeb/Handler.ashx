@@ -224,12 +224,15 @@ public class JQGridHandler : IHttpHandler
     }
 
 
-
+        // de la misma manera que estas llamando con jquery para buscar los acopios por cliente
 
 
     public virtual string Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
     {
 
+        // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
+        
+        
         //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
         string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
 
@@ -309,7 +312,7 @@ public class JQGridHandler : IHttpHandler
                                 
                                 a.IdCartasDePorteControlDescarga.ToString(), 
                                 
-                                 a.Fecha.ToShortTimeString(),
+                                 a.Fecha.ToShortDateString(),
                                  
                                  a.WilliamsDestino.Descripcion,
                                  
