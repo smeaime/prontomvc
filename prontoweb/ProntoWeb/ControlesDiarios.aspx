@@ -24,6 +24,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
     <%--/////////////////////////////////////////////////////////////--%>
@@ -329,10 +330,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 //    }
                 //}
 
-                var datos = $("#formid").serializeObject();
+                var datos = {}; //= $("#formid").serializeObject();
                 var err;
 
-                datos. IdCartasDePorteControlDescarga = gridId;
+                
+                datos.IdCartasDePorteControlDescarga = gridId;
                 datos.Fecha = dataFromTheRow.Fecha;
                 datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
                 //datos.Cotizacion = dataFromTheRow.Cotizacion;
@@ -340,8 +342,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 err = ""
                 if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta definir la moneda.\n"
-                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "No ingreso la cotizacion\n"
+                //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta definir la moneda.\n"
+                //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "No ingreso la cotizacion\n"
 
                 if (err != "") {
                     alert('No se pudo grabar el registro.\n' + err);
@@ -510,7 +512,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['Acciones', 'Id', 'Fecha', 'Destino',  'IdDestino', 'Kilos', 'Oficina'
+                    colNames: ['', 'Id', 'Fecha', 'Destino',  'IdDestino', 'Kilos', 'Oficina'
 
                     ],
                
@@ -518,7 +520,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     colModel: [
                                 {
-                                    name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false, //classes: "myLink",
+                                    name: 'act', index: 'act', align: 'center', width: 50, editable: false, hidden: false, //classes: "myLink",
                                     //formatter: function (cellValue, options, rowObject) {
                                     //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
                                     //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
@@ -531,7 +533,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 },
                                 { name: ' IdCartasDePorteControlDescarga', index: ' IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
                                 {
-                                    name: 'Fecha', index: 'Fecha', width: 120, sortable: false, align: 'right', editable: true,
+                                    name: 'Fecha', index: 'Fecha', width: 200, sortable: false, align: 'right', editable: true,
                                     editoptions: {
                                         size: 10,
                                         maxlengh: 10,
@@ -547,7 +549,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                                 },
                                 {
-                                    name: 'WilliamsDestino', index: 'WilliamsDestino', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                                    name: 'WilliamsDestino', index: 'WilliamsDestino', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                                     editoptions: {
                                         dataUrl: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
 
@@ -610,7 +612,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     //    }
                     //},
                     pager: $('#ListaPager'),
-                    rowNum: 20,
+                    rowNum: 10,
                     rowList: [10, 20, 50, 100],
                     sortname: 'Fecha',
                     sortorder: 'desc',
@@ -622,7 +624,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
-                    caption: '<b>COTIZACIONES MONEDA</b>',
+                    caption: '<b>Control de Descargas</b>',
                     cellEdit: true,
                     cellsubmit: 'clientArray',
                     dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
