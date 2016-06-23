@@ -4600,8 +4600,11 @@ Public Class CartaDePorteManager
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
         Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
 
+
+        gggggg()
+
         If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+            sDirFTP = "C:\Users\Administrador\Documents\bdl\pronto\ProntoWeb\DataBackupear\"
             'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
             'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
         Else
@@ -4938,7 +4941,7 @@ Public Class CartaDePorteManager
             Dim archivopdf = ImagenPDF(SC, id, DirApp)
 
 
-            wordFiles.Add(sDirFTP)
+            wordFiles.Add(archivopdf)
 
 
 
@@ -5434,7 +5437,7 @@ Public Class CartaDePorteManager
 
         If System.Diagnostics.Debugger.IsAttached() And HttpContext.Current IsNot Nothing Then
             'sDirVirtual = "~/DataBackupear\"
-            sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
+            'sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
             ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
             sDir = "E:\Sites\Pronto\DataBackupear\"
