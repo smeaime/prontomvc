@@ -31,7 +31,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <br />
     <br />
     <div>
-     <%--   <table id="list9">
+        <%--   <table id="list9">
         </table>
         <div id="pager9">
         </div>
@@ -90,7 +90,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
     <div>
-        <script type="text/javascript">
+        <%--<script type="text/javascript">
             $(document).ready(function () {
                 var lastSelectedId;
                 var inEdit;
@@ -109,18 +109,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
                     datatype: 'json',
                     mtype: 'POST',
-                    colNames: ['Acciones', 'IdPedido', 'Fecha', 'Destino' ,'Kilos', 'Oficina'
+                    colNames: ['Acciones', 'IdPedido', 'Fecha', 'Destino', 'Kilos', 'Oficina'
 
                     ],
                     colModel: [
 
                                 { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                                 { name: 'IdCartasDePorteControlDescarga', index: 'IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'Fecha', index: 'Fecha', width: 100, align: 'center', sorttype: 'date', editable: true, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                                { name: 'WilliamsDestino', index: 'WilliamsDestino', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                                { name: 'Fecha', index: 'Fecha', width: 120, align: 'center', sorttype: 'date', editable: true, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                                { name: 'WilliamsDestino', index: 'WilliamsDestino', align: 'right', width: 240, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                                 { name: 'TotalDescargaDia', index: 'TotalDescargaDia', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                                { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } }
-                                
+                                { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'right', width: 50, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } }
+
 
                     ],
                     onSelectRow: function (id) {
@@ -202,6 +202,453 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
             })
+
+        </script>--%>
+
+
+
+
+
+        <script type="text/javascript">
+
+
+
+
+
+
+            function jsAcopiosPorCliente(textbox, combo) {
+                //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
+
+                var $txttitular = $("#" + textbox.id + "")
+                var $select = $("#" + combo.id + "")
+
+
+
+                var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
+                var myEscapedJSONString = myJSONString.escapeSpecialChars();
+
+                var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
+
+
+                $.ajax({
+                    // url: "/CartaDePorte.aspx/AcopiosPorCliente",
+                    url: "WebServiceClientes.asmx/AcopiosPorCliente",
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    //dataType: "xml",
+                    data: "{'NombreCliente':'" +
+                           addslashes($txttitular.val()) +
+                         "', 'SC':'" + aaa + "' }",
+
+
+                    //data: {
+                    //    NombreCliente: 'asdfasdf',
+                    //    SC:  'asdfsadfsa' // $("#HFSC").val()
+                    //},
+                    success: function (data) {
+
+                        var x = data.d;
+
+                        //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
+
+                        var guardoelactualId = $select.val()
+                        $select.find('option').remove();
+
+
+
+                        $.each(x, function (i, val) {
+
+
+                            $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
+
+                            //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
+                            //$("<option></option>")
+                            //    .val(val.idacopio).text(val.desc));
+
+                        });
+
+                        $select.val(guardoelactualId)
+
+                        if (x.length > 1) combo.style.visibility = "visible";
+                        else combo.style.visibility = "hidden";
+
+                    },
+                    error: function (xhr) {
+                        // alert("Something seems Wrong");
+                    }
+                });
+
+            }
+
+
+
+
+
+            var $grid = "";
+            var lastSelectedId;
+            var lastSelectediCol;
+            var lastSelectediRow;
+            var lastSelectediCol2;
+            var lastSelectediRow2;
+            var inEdit;
+            var selICol;
+            var selIRow;
+            var gridCellWasClicked = false;
+            var grillaenfoco = false;
+            var getColumnIndexByName = function (grid, columnName) {
+                var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+                for (i = 0; i < l; i++) {
+                    if (cm[i].name === columnName) {
+                        return i; // return the index
+                    }
+                }
+                return -1;
+            };
+            var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+            $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+            $.extend($.jgrid.inlineEdit, {
+                keys: true
+            });
+
+            function GrabarFila(gridId) {
+                var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
+
+                //var dataIds = $('#Lista').jqGrid('getDataIDs');
+                //for (i = 0; i < dataIds.length; i++) {
+                //    try {
+                //        //Save row only to the grid
+                //        //$('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
+                //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+                //    }
+                //    catch (ex) {
+                //        //If you are using editRules it might end up with exception
+                //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+                //    }
+                //}
+
+                var datos = $("#formid").serializeObject();
+                var err;
+
+                datos. IdCartasDePorteControlDescarga = gridId;
+                datos.Fecha = dataFromTheRow.Fecha;
+                datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
+                //datos.Cotizacion = dataFromTheRow.Cotizacion;
+                datos.TotalDescargaDia = dataFromTheRow.TotalDescargaDia;
+
+                err = ""
+                if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
+                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta definir la moneda.\n"
+                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "No ingreso la cotizacion\n"
+
+                if (err != "") {
+                    alert('No se pudo grabar el registro.\n' + err);
+                } else {
+                    //$('html, body').css('cursor', 'wait');
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        url: "WebServiceClientes.asmx/CotizacionWilliamsDestinoBatchUpdate",
+                        dataType: 'json',
+                        data: JSON.stringify(datos),
+                        success: function (result) {
+                            if (result) {
+                                $grid.jqGrid('setRowData', gridId, { act: "" });
+                                var rowid = $('#Lista').getGridParam('selrow');
+                                var valor = result. IdCartasDePorteControlDescarga;
+                                if (valor == "") { valor = "0"; }
+                                $('#Lista').jqGrid('setCell', rowid, ' IdCartasDePorteControlDescarga', valor);
+                            } else {
+                                alert('No se pudo grabar el registro.');
+                            }
+                        },
+                        error: function (xhr, textStatus, exceptionThrown) {
+                            try {
+                                var errorData = $.parseJSON(xhr.responseText);
+                                var errorMessages = [];
+                                for (var key in errorData) { errorMessages.push(errorData[key]); }
+                                $('html, body').css('cursor', 'auto');
+                                $('#grabar2').attr("disabled", false).val("Aceptar");
+                                $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                                $("#mensajeAlerta").show();
+                                alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                            } catch (e) {
+                                $('html, body').css('cursor', 'auto');
+                                $('#grabar2').attr("disabled", false).val("Aceptar");
+                                $("#textoMensajeAlerta").html(xhr.responseText);
+                                $("#mensajeAlerta").show();
+                            }
+                        }
+                    });
+                };
+            };
+
+            function EliminarFila(gridId) {
+                var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+                var idprincipal = dataFromTheRow[' IdCartasDePorteControlDescarga'];
+                if (idprincipal <= 0) {
+                    $grid.jqGrid('delRowData', gridId);
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        url: "WebServiceClientes.asmx/CotizacionWilliamsDestinoDelete",
+                        dataType: 'json',
+                        data: JSON.stringify({ id: idprincipal }),
+                        success: function (result) {
+                            if (result) {
+                                $grid.jqGrid('delRowData', gridId);
+                            } else {
+                                alert('No se pudo eliminar el registro.');
+                            }
+                        },
+                    });
+                };
+            };
+
+            window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+            document.body.onclick = saveEditedCell; // attach to current document.
+
+            function saveEditedCell(evt) {
+                var target = $(evt.target);
+
+                if ($grid) {
+                    var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+                    if (gridCellWasClicked && !isCellClicked) // check if a valid click
+                    {
+                        gridCellWasClicked = false;
+                        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+                    }
+                }
+
+                //$grid = "";
+                gridCellWasClicked = false;
+
+                if (jQuery("#Lista").find(target).length) {
+                    $grid = $('#Lista');
+                    grillaenfoco = true;
+                }
+                if (grillaenfoco) {
+                    gridCellWasClicked = true;
+                    lastSelectediRow2 = lastSelectediRow;
+                    lastSelectediCol2 = lastSelectediCol;
+                }
+            };
+
+            function MarcarSeleccionadosParaEliminar(grid) {
+                var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+                var i, Id;
+                for (i = selectedIds.length - 1; i >= 0; i--) {
+                    Id = selectedIds[i];
+                    var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+                    grid.jqGrid('setRowData', Id, { act: se });
+                    //grid.jqGrid('delRowData', selectedIds[i]);
+                }
+            };
+
+            function AgregarItemVacio(grid) {
+                var colModel = grid.jqGrid('getGridParam', 'colModel');
+                var dataIds = grid.jqGrid('getDataIDs');
+                var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+                var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+                var data, j, cm;
+
+                if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
+
+                data = '{';
+                for (j = 1; j < colModel.length; j++) {
+                    cm = colModel[j];
+                    data = data + '"' + cm.index + '":' + '"",';
+                }
+                data = data.substring(0, data.length - 1) + '}';
+                data = data.replace(/(\r\n|\n|\r)/gm, "");
+                grid.jqGrid('addRowData', Id, data, "first");
+                grid.jqGrid('setRowData', Id, { act: se });
+            };
+
+            // Esto es para obtener el contenido de una celda en modo edicion. Ojo que las funciones estan como declarativas (,)
+            //getColumnIndexByName = function (grid, columnName) {
+            //    var cm = grid.jqGrid('getGridParam', 'colModel');
+            //    for (var i = 0, l = cm.length; i < l; i++) {
+            //        if (cm[i].name === columnName) {
+            //            return i; // return the index
+            //        }
+            //    }
+            //    return -1;
+            //},
+            //getTextFromCell = function (cellNode) {
+            //    return cellNode.childNodes[0].nodeName === "INPUT" ?
+            //            cellNode.childNodes[0].value :
+            //            cellNode.textContent || cellNode.innerText;
+            //},
+            //calculateTotal = function () {
+            //    var totalAmount = 0, totalTax = 0,
+            //        i = getColumnIndexByName(grid, 'amount'); // nth-child need 1-based index so we use (i+1) below
+            //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+            //        totalAmount += Number(getTextFromCell(this));
+            //    });
+
+            //    i = getColumnIndexByName(grid, 'tax');
+            //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+            //        totalTax += Number(getTextFromCell(this));
+            //    });
+
+            //    grid.jqGrid('footerData', 'set', { name: 'TOTAL', amount: totalAmount, tax: totalTax });
+            //};
+
+            $().ready(function () {
+                'use strict';
+
+                $('#Lista').jqGrid({
+                    //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
+                    url: 'Handler.ashx',
+                    postData: {},
+                    datatype: 'json',
+                    mtype: 'POST',
+
+
+
+                    colNames: ['Acciones', 'Id', 'Fecha', 'Destino',  'IdDestino', 'Kilos', 'Oficina'
+
+                    ],
+               
+                                
+
+                    colModel: [
+                                {
+                                    name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false, //classes: "myLink",
+                                    //formatter: function (cellValue, options, rowObject) {
+                                    //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
+                                    //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
+                                    //    var  IdCartasDePorteControlDescarga = $(rowObject)[1]
+                                    //    return ( IdCartasDePorteControlDescarga >= 0 ? convertIcon : ""); // + "<span>" + cellValue + "</span>";
+                                    //},
+                                    //cellattr: function () {
+                                    //    return " title=\"Graba el registro\"";
+                                    //}
+                                },
+                                { name: ' IdCartasDePorteControlDescarga', index: ' IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
+                                {
+                                    name: 'Fecha', index: 'Fecha', width: 120, sortable: false, align: 'right', editable: true,
+                                    editoptions: {
+                                        size: 10,
+                                        maxlengh: 10,
+                                        dataInit: function (element) {
+                                            $(element).datepicker({
+                                                dateFormat: 'dd/mm/yy',
+                                                constrainInput: false,
+                                                showOn: 'button',
+                                                buttonText: '...'
+                                            });
+                                        }
+                                    },
+                                    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                },
+                                {
+                                    name: 'WilliamsDestino', index: 'WilliamsDestino', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                                    editoptions: {
+                                        dataUrl: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+
+                                        dataEvents: [{
+                                            type: 'change', fn: function (e) {
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdWilliamsDestino', this.value);
+                                            }
+                                        }]
+                                    },
+                                },
+                                { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
+                                {
+                                    name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                                    editoptions: {
+                                        maxlength: 20, defaultValue: '0.00',
+                                        dataEvents: [
+                                        {
+                                            type: 'keypress',
+                                            fn: function (e) {
+                                                var key = e.charCode || e.keyCode;
+                                                if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                                if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                            }
+                                        }]
+                                    }
+                                }
+                                ,
+                                { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'right', width: 50, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } }
+
+
+                    ],
+                    //gridComplete: function () {
+                    //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+                    //    for (var i = 0; i < ids.length; i++) {
+                    //        var cl = ids[i];
+                    //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+                    //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+                    //    }
+                    //},
+                    onCellSelect: function (rowid, iCol, cellcontent, e) {
+                        var $this = $(this);
+                        var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                        lastSelectedId = rowid;
+                        lastSelectediCol = iCol;
+                        lastSelectediRow = iRow;
+                    },
+                    afterEditCell: function (id, name, val, iRow, iCol) {
+                        if (name == 'Fecha') {
+                            jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+                        }
+                        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
+                        jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+                    },
+                    //beforeSelectRow: function (rowid, e) {
+                    //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
+                    //    if (this.p.colModel[iCol].name === 'act') {
+                    //        GrabarFila(rowid);
+                    //        return false;
+                    //    }
+                    //},
+                    pager: $('#ListaPager'),
+                    rowNum: 20,
+                    rowList: [10, 20, 50, 100],
+                    sortname: 'Fecha',
+                    sortorder: 'desc',
+                    viewrecords: true,
+                    multiselect: true,
+                    shrinkToFit: true,
+                    width: 'auto',
+                    height: $(window).height() - 200, // '100%'
+                    altRows: false,
+                    footerrow: false,
+                    userDataOnFooter: true,
+                    caption: '<b>COTIZACIONES MONEDA</b>',
+                    cellEdit: true,
+                    cellsubmit: 'clientArray',
+                    dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
+                });
+                jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+                jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                                {
+                                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                                                    onClickButton: function () {
+                                                        AgregarItemVacio(jQuery("#Lista"));
+                                                    },
+                                                });
+                jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                                {
+                                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                                    onClickButton: function () {
+                                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                                                    },
+                                                });
+            });
+
+
+
+            $(window).resize(function () {
+                //RefrescaAnchoJqgrids();
+            });
 
         </script>
     </div>
