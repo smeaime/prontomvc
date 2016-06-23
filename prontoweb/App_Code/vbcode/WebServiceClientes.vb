@@ -168,6 +168,10 @@ Public Class WebServiceClientes
     <WebMethod()> _
     Public Function CotizacionWilliamsDestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
 
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
 
         If (o.IdCartasDePorteControlDescarga > 0) Then
 
