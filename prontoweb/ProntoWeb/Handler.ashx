@@ -189,6 +189,8 @@ public class JQGridHandler : IHttpHandler
         string filters = request["filters"];
 
 
+        if (sortColumnName==null) return;
+            
         string output = Pedidos_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters);
 
         response.ContentType = "application/json";
@@ -251,8 +253,8 @@ public class JQGridHandler : IHttpHandler
 
 
 
-        var pagedQuery = Filtrador.Filters.FiltroGenerico<ProntoMVC.Data.Models.Pedido>
-                            ("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+        var pagedQuery = Filtrador.Filters.FiltroGenerico<ProntoMVC.Data.Models.CartasDePorteControlDescarga>
+                            ( "", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
         //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,57 +286,14 @@ public class JQGridHandler : IHttpHandler
                       .AsQueryable();
 
 
-        var Entidad1 = (from a in Entidad.Where(campo) select new { IdPedido = a.IdPedido });
+        //var Entidad1 = (from a in Entidad.Where(campo) select new { Id = a.IdCartasDePorteControlDescarga });
 
         int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
         var data = (from a in Entidad
-
-
-                    //   .Include(x => x.Proveedor)
-                    //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
-                    //.Include(x => x.DetallePedidos.Select(y => y. y.IdDetalleRequerimiento))
-                    // .Include(x => x.Aprobo)
-                    select
-
-                    a
-            //                        new
-            //                        {
-            //                            IdPedido = a.IdPedido,
-
-//                            Numero = a.NumeroPedido,
-            //                            fecha
-            //                            fechasalida
-            //                            cumpli
-            //                            rms
-            //                            obras
-            //                            proveedor
-            //                            neto gravado
-            //                            bonif
-            //                            total iva
-
-
-//// IsNull(Pedidos.TotalPedido,0)-IsNull(Pedidos.TotalIva1,0)+IsNull(Pedidos.Bonificacion,0)-  
-            //// IsNull(Pedidos.ImpuestosInternos,0)-IsNull(Pedidos.OtrosConceptos1,0)-IsNull(Pedidos.OtrosConceptos2,0)-  
-            //// IsNull(Pedidos.OtrosConceptos3,0)-IsNull(Pedidos.OtrosConceptos4,0)-IsNull(Pedidos.OtrosConceptos5,0)as [Neto gravado],  
-            //// Case When Bonificacion=0 Then Null Else Bonificacion End as [Bonificacion],  
-
-//// Case When TotalIva1=0 Then Null Else TotalIva1 End as [Total Iva],  
-
-//// IsNull(Pedidos.ImpuestosInternos,0)+IsNull(Pedidos.OtrosConceptos1,0)+IsNull(Pedidos.OtrosConceptos2,0)+  
-            //// IsNull(Pedidos.OtrosConceptos3,0)+IsNull(Pedidos.OtrosConceptos4,0)+IsNull(Pedidos.OtrosConceptos5,0)as [Otros Conceptos],  
-            //// TotalPedido as [Total pedido],  
-
-
-
-
-
-//                        }
-
-
+                    select a
                     ).Where(campo).OrderBy(sidx + " " + sord)
-            //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                    .ToList();
 
         var jsonData = new jqGridJson()
         {
@@ -344,16 +303,22 @@ public class JQGridHandler : IHttpHandler
             rows = (from a in data
                     select new jqGridRowJson
                     {
-                        id = a.IdPedido.ToString(),
+                        id = a.IdCartasDePorteControlDescarga.ToString(),
                         cell = new string[] { 
-                                //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + " target='' >Editar</>" ,
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
-                                a.IdPedido.ToString(), 
-                                //a.NumeroPedido.NullSafeToString(), 
-                                //a.SubNumero.NullSafeToString(), 
-                                // a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.IdCartasDePorteControlDescarga.ToString(), 
+                                
+                                 a.Fecha.ToShortTimeString(),
+                                 
+                                 a.WilliamsDestino.Descripcion,
+                                 
+                                 a.TotalDescargaDia.ToString(),
+
+                                 a.IdPuntoVenta.ToString()
+                                 
+                                 
+                                 // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 //a.Cumplido.NullSafeToString(), 
 
 

@@ -199,6 +199,58 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void InformeControlDiario_22052()
+        {
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            int iddest = db.WilliamsDestinos.Where(x => x.Descripcion == "Villa Constitucion - Servicios Portuarios").Select(x => x.IdWilliamsDestino).FirstOrDefault();
+
+            db.CartasDePorteControlDescargas.Add(new CartasDePorteControlDescarga { Fecha = new DateTime(2016, 1, 22), IdPuntoVenta = 1, TotalDescargaDia = 400, IdDestino = iddest });
+            db.SaveChanges();
+
+            var control = (from a in db.CartasDePorteControlDescargas select a).ToList();
+
+            db.Database.CommandTimeout = 180;
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            var xxx = (from d in control
+                       from c in db.CartasDePortes.Where(x => x.FechaDescarga == d.Fecha && x.Destino == d.IdDestino).DefaultIfEmpty()
+                       group c by new { c.Destino, c.FechaDescarga } into g
+                       select new
+                           {
+                               g.Key.Destino,
+                               g.Key.FechaDescarga,
+                               Total = g.Sum(x => x.NetoFinal)
+                           }
+                      );
+
+
+
+            string output = "";
+            //CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
+
+            var ccc = xxx.ToArray();
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
         [TestMethod]
         public void webServiceParaBLDconDescargaDeImagenes_18181_20864()
         {
@@ -288,7 +340,7 @@ namespace ProntoMVC.Tests
             string log = "";
             //hay que pasar el formato como parametro 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.Unidad6Analisis, SC, 0, ref log,  DateTime.Today.ToShortDateString(), 0, "");
+                                    LogicaImportador.FormatosDeExcel.Unidad6Analisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
 
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
 
@@ -316,7 +368,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void problema_informe_22009()
         {
-            ReportParameter p2=null;
+            ReportParameter p2 = null;
 
             var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "31/5/2016", "1/11/2015", "31/5/2016",
                                             "Personalizar",
@@ -1235,7 +1287,7 @@ namespace ProntoMVC.Tests
 
 
 
-   
+
 
 
         [TestMethod]
@@ -2804,8 +2856,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
                 0, ref titulo, "Ambas", false);
 
 
-           // var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false, DirApp);
-           // System.Diagnostics.Process.Start(output);
+            // var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false, DirApp);
+            // System.Diagnostics.Process.Start(output);
 
         }
 
