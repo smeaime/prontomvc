@@ -1834,11 +1834,18 @@ Public Module ProntoFuncionesUIWeb
 
 
     
+    Public ReadOnly Property AplicacionConImagenes() As String 'si lo uso desde prontoclientes, debo apuntar hacia el de pronto a secas
+        Get
+            Return ConfigurationManager.AppSettings("AplicacionConImagenes")
+        End Get
+    End Property
 
 
     Function DirApp() As String
-        Return HttpContext.Current.Request.MapPath(HttpContext.Current.Request.ApplicationPath)
+        Return ConfigurationManager.AppSettings("DirApp")
+        'Return HttpContext.Current.Request.MapPath(HttpContext.Current.Request.ApplicationPath)
     End Function
+
 
 
     Function ConexBDLmaster() As String

@@ -3043,7 +3043,11 @@ Public Class LogicaFacturacion
 
 
     Public Shared Function ListaEmbarquesQueryable(ByVal sc As String, ByVal FechaDesde As Date, ByVal FechaHasta As Date, Optional ByVal idTitular As Integer = -1, Optional ByVal pventa As Integer = 0, Optional ByVal idQueContenga As Integer = -1) As IQueryable(Of CartasPorteMovimiento)
-        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+        ssss()
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc)))
+
+
 
         ' Dim q = From i In db.CartasPorteMovimientos
         Dim embarques = From i In db.CartasPorteMovimientos _

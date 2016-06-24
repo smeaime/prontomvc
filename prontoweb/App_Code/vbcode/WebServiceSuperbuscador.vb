@@ -51,9 +51,14 @@ Public Class WebServiceSuperbuscador
 
 
 
+
         Dim lista As Data.DataTable
         Try
+
+            deberia ir con timeout
             lista = EntidadManager.GetStoreProcedure(sc, enumSPs.wBusqueda, prefixText)
+            'lista = EntidadManager.ExecDinamico(sc, "wBusqueda " & prefixText, 15)
+
 
         Catch ex As Exception
             'ojito si anda lento!!!!!!!
@@ -71,11 +76,12 @@ Public Class WebServiceSuperbuscador
             'http://stackoverflow.com/questions/20864934/option-recompile-is-always-faster-why
             'http://stackoverflow.com/questions/20864934/option-recompile-is-always-faster-why
 
+            ErrHandler2.WriteError("prefixText " & prefixText)
             ErrHandler2.WriteError("En efecto, hay que usar WITH RECOMPILE en este store")
             ErrHandler2.WriteError("Timeout? Parameter sniffing? o usar WITH RECOMPILE para que el store no use la cache en este caso del Buscador que se usa con tantos registros.   ejecutar DBCC DROPCLEANBUFFERS y  DBCC FREEPROCCACHE ????? agregar OPTION RECOMPILE en el codigo TSQL? ")
             ErrHandler2.WriteError(ex)
 
-            CartaDePorteManager.MandarMailDeError("El superbuscador dio timeout.  " + ex.ToString)
+            CartaDePorteManager.MandarMailDeError("El superbuscador dio timeout.  cadena " + prefixText + "     " + ex.ToString)
 
 
             'EntidadManager.ExecDinamico(sc, "DBCC DROPCLEANBUFFERS")

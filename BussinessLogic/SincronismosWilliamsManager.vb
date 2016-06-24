@@ -998,6 +998,7 @@ Namespace Pronto.ERP.Bll
                                     '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
                                     '                   dt, ArchivoExcelDestino) 'sTitulo)
                                 Catch ex As Exception
+                                    ssss()
                                     ErrHandler2.WriteError("No se pudo generar el informe de bld! ")
 
                                 End Try
