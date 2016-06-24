@@ -1066,7 +1066,7 @@ Public Class ConsultasLinq
 
 
         'logear (o poner en el titulo) el rango de fechas usado para el periodo anterior
-        ErrHandler2.WriteError(fechadesde2.ToShortDateString() & "   " & fechadesde.ToShortDateString() & "    " & fechahasta.ToShortDateString())
+        ErrHandler2.WriteError( "estadidesc   " & fechadesde2.ToShortDateString() & "   " fechahasta2.ToShortDateString() & "   " & fechadesde.ToShortDateString() & "    " & fechahasta.ToShortDateString())
 
         '////////////////////////////////////////////////////
         '////////////////////////////////////////////////////

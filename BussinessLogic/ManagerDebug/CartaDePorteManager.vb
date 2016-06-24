@@ -4257,7 +4257,7 @@ Public Class CartaDePorteManager
                             'MsgBox(inner.Message)
                             'Stop
                         End If
-                        ' ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filtro:" & titulo)
                         inner = inner.InnerException
                     End While
                     Throw
