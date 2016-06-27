@@ -1723,7 +1723,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
         If Not b Then
-            output = DescargarImagenesAdjuntas(dt, HFSC.Value, True)
+            output = DescargarImagenesAdjuntas(dt, HFSC.Value, True, ConfigurationManager.AppSettings("AplicacionConImagenes"))
         Else
             output = DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False, ConfigurationManager.AppSettings("AplicacionConImagenes"))
         End If

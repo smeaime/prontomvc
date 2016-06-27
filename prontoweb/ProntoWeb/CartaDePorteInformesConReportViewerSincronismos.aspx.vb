@@ -3016,7 +3016,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                 Case "Descargar imágenes"
 
-                    output = DescargarImagenesAdjuntas(dt, HFSC.Value, False)
+                    output = DescargarImagenesAdjuntas(dt, HFSC.Value, False, ConfigurationManager.AppSettings("AplicacionConImagenes"))
 
                 Case "Descargar imágenes en PDF"
 

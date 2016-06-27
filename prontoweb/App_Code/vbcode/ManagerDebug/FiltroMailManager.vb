@@ -651,9 +651,6 @@ Namespace Pronto.ERP.Bll
             End If
 
 
-            jklhkljhlkjhlkjh()
-
-
 
 
             Dim output As String
