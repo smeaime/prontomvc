@@ -651,6 +651,10 @@ Namespace Pronto.ERP.Bll
             End If
 
 
+            jklhkljhlkjhlkjh()
+
+
+
 
             Dim output As String
             'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
