@@ -1079,23 +1079,23 @@ Public Class ConsultasLinq
         Dim pv As Integer = cmbPuntoVenta
         'ListaEmbarquesQueryable
 
-        Dim qqqq = (From cdp In db.CartasDePortes _
-                Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
-                Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
-                Where cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And ( _
-                            (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta2) _
-                            Or _
-                            (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                        ) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((ModoExportacion = "Ambos") _
-                          Or (ModoExportacion = "Todos") _
-                          Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
-                          Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (pv = -1 Or cdp.PuntoVenta = pv)
-                )
+        'Dim qqqq = (From cdp In db.CartasDePortes _
+        '        Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
+        '        Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
+        '        Where cdp.Vendedor > 0 _
+        '            And cli.RazonSocial IsNot Nothing _
+        '            And ( _
+        '                    (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta2) _
+        '                    Or _
+        '                    (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+        '                ) _
+        '            And (cdp.Anulada <> "SI") _
+        '            And ((ModoExportacion = "Ambos") _
+        '                  Or (ModoExportacion = "Todos") _
+        '                  Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
+        '                  Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+        '            And (pv = -1 Or cdp.PuntoVenta = pv)
+        '        )
 
 
 
