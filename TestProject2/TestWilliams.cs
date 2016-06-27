@@ -203,7 +203,39 @@ namespace ProntoMVC.Tests
 
 
 
-        
+        [TestMethod]
+        public void SincroZeni_17945()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+    
                         
 
         [TestMethod]
@@ -601,7 +633,7 @@ namespace ProntoMVC.Tests
 
             var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "31/5/2016", "1/11/2015", "31/5/2016",
                                             "Personalizar",
-                                            1, "Entregas", SC);
+                                            1, "Todos", SC);
 
         }
 
@@ -1589,39 +1621,7 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void SincroZeni_17945()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-
-
+    
 
 
 

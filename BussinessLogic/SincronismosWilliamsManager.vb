@@ -998,8 +998,7 @@ Namespace Pronto.ERP.Bll
                                     '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
                                     '                   dt, ArchivoExcelDestino) 'sTitulo)
                                 Catch ex As Exception
-                                    ssss()
-                                    ErrHandler2.WriteError("No se pudo generar el informe de bld! ")
+                                    ErrHandler2.WriteError("No se pudo generar el informe de bld! " & ex.ToString)
 
                                 End Try
 
@@ -2569,6 +2568,17 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
 
 
+
+
+
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+
+                    'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=22039
+
                     'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
                     Dim sCalidad As String
 
@@ -2584,7 +2594,21 @@ Namespace Pronto.ERP.Bll
                     Else
                         sCalidad = "FE"
                     End If
-                    sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+                    'sb &= sCalidad.PadRight(2) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+
+
+
+
+
+                    sb &= .NobleGrado.ToString().PadRight(2)
+                    sb &= IIf(.NobleConforme = "0", "NO", "SI").PadRight(2)
+
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 

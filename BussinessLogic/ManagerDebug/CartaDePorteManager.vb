@@ -4577,7 +4577,7 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String) As String
 
 
 
@@ -4598,21 +4598,22 @@ Public Class CartaDePorteManager
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
-        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
 
 
-        gggggg()
+        'gggggg()
 
-        If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "C:\Users\Administrador\Documents\bdl\pronto\ProntoWeb\DataBackupear\"
-            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
-            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
-        Else
-            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
-            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
-            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-        End If
+        'If System.Diagnostics.Debugger.IsAttached() Then
+        '    sDirFTP = "C:\Users\Administrador\Documents\bdl\pronto\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        'Else
+        '    'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+        '    'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+        '    'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        'End If
 
+        Dim sDirFTP = DirApp + "\DataBackupear\"
 
 
 
@@ -4886,19 +4887,19 @@ Public Class CartaDePorteManager
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
-        Dim sDirFTP As String
+        'Dim sDirFTP As String
 
-        If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
-            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
-            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
-        Else
-            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
-            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
-            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-            sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-            sDirFTP = "E:\Sites\Pronto\DataBackupear\"
-        End If
+        'If System.Diagnostics.Debugger.IsAttached() Then
+        '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        'Else
+        '    'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+        '    'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+        '    'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        '    sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        '    sDirFTP = "E:\Sites\Pronto\DataBackupear\"
+        'End If
 
 
 
