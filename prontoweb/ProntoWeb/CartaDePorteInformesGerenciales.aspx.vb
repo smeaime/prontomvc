@@ -818,12 +818,12 @@ Partial Class CartaDePorteInformesGerenciales
 
                 Case "Estadísticas de Toneladas descargadas (Sucursal-Modo)"
 
-                    'estadsucmodo()
+                    estadsucmodo()
                 Case "Estadísticas de Toneladas descargadas (Sucursal-Modo) todos los modos"
-                    'estadsucmodoTodos()
+                    estadsucmodoTodos()
 
                 Case "Estadísticas de Toneladas descargadas (Modo-Sucursal)"
-                    'estadmodosuc()
+                    estadmodosuc()
 
 
 
