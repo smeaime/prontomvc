@@ -985,6 +985,8 @@ go
 update CartasDePorte 
 set SubnumeroVagonEnTextoParaBusqueda=SubNumeroVagon
 
+
+--la diferencia con el IDX_NumeroCartaEnTextoParaBusqueda_Superbuscador4 es que este es para el subnumero vagon
 CREATE NONCLUSTERED INDEX IDX_NumeroCartaEnTextoParaBusqueda_Superbuscador6
 ON CartasDePorte (SubnumeroVagonEnTextoParaBusqueda,
 					NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon,SubnumeroDeFacturacion,
@@ -1780,5 +1782,19 @@ create table CartasDePorteControlDescarga (
 	--,constraint U_Unicidad unique NONCLUSTERED (IdCartasDePorteControlDescarga,Sesion)
 )
 go
+
+
+
+
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+--NumeroCartaEnTextoParaBusqueda y [SubnumeroVagonEnTextoParaBusqueda] en indice (creo que estaba [SubnumeroVagonEnTextoParaBusqueda] y NumeroCarta)
+
+
+CREATE NONCLUSTERED INDEX IDX_NumeroCartaEnTextoParaBusqueda_Superbuscador7
+ON CartasDePorte (NumeroCartaEnTextoParaBusqueda,SubnumeroVagonEnTextoParaBusqueda, NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon,SubnumeroDeFacturacion,
+					FechaArribo,FechaIngreso,FechaModificacion)
+GO
 
 
