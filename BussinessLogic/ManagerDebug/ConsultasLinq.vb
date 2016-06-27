@@ -1066,7 +1066,7 @@ Public Class ConsultasLinq
 
 
         'logear (o poner en el titulo) el rango de fechas usado para el periodo anterior
-        ErrHandler2.WriteError( "estadidesc   " & fechadesde2.ToShortDateString() & "   " fechahasta2.ToShortDateString() & "   " & fechadesde.ToShortDateString() & "    " & fechahasta.ToShortDateString())
+        ErrHandler2.WriteError("estadidesc   " & fechadesde2.ToShortDateString() & "   " & fechahasta2.ToShortDateString() & "   " & fechadesde.ToShortDateString() & "    " & fechahasta.ToShortDateString())
 
         '////////////////////////////////////////////////////
         '////////////////////////////////////////////////////
@@ -1079,7 +1079,7 @@ Public Class ConsultasLinq
         Dim pv As Integer = cmbPuntoVenta
         'ListaEmbarquesQueryable
 
-        Dim q = (From cdp In db.CartasDePortes _
+        Dim qqqq = (From cdp In db.CartasDePortes _
                 Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
                 Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
                 Where cdp.Vendedor > 0 _
@@ -1094,28 +1094,38 @@ Public Class ConsultasLinq
                           Or (ModoExportacion = "Todos") _
                           Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
                           Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (pv = -1 Or cdp.PuntoVenta = pv))
+                    And (pv = -1 Or cdp.PuntoVenta = pv)
+                )
 
 
-        If False Then
-            Dim a = q.Select(Function(ss) ss.cdp.NumeroCartaDePorte).ToList().Select(Function(xx) xx.ToString).ToArray
-            Dim sss = String.Join(vbCrLf, a)
-            ErrHandler2.WriteError(sss)
 
-        End If
 
-        Dim aaa = (From xx In q _
-                   Group xx.cdp By _
-                        Producto = xx.art.Descripcion, _
-                        Modo = xx.cdp.Exporta, _
-                        Sucursal = xx.cdp.PuntoVenta _
+        '.Cartas = g.Select(Function(i) i.NumeroCartaDePorte), _
+
+        Dim aaa = (From cdp In db.CartasDePortes _
+                Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
+                Where cdp.Vendedor > 0 _
+                    And ( _
+                            (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta2) _
+                            Or _
+                            (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                        ) _
+                    And (cdp.Anulada <> "SI") _
+                    And ((ModoExportacion = "Ambos") _
+                          Or (ModoExportacion = "Todos") _
+                          Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
+                          Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                    And (pv = -1 Or cdp.PuntoVenta = pv)
+                   Group cdp By _
+                        Producto = art.Descripcion, _
+                        Modo = cdp.Exporta, _
+                        Sucursal = cdp.PuntoVenta _
                           Into g = Group
                   Select New With { _
                         .Sucursal = SqlFunctions.StringConvert(Sucursal), _
                         .Modo = Modo, _
                         .Producto = Producto, _
                         .CantCartas = g.Count, _
-                        .Cartas = g.Select(Function(i) i.NumeroCartaDePorte), _
                         .NetoPto = g.Sum(Function(i) If(i.NetoFinal, 0)) / 1000, _
                         .Merma = g.Sum(Function(i) (If(i.Merma, 0) + If(i.HumedadDesnormalizada, 0))) / 1000, _
                         .NetoFinal = g.Sum(Function(i) If(i.NetoProc, 0)) / 1000, _
@@ -1215,9 +1225,9 @@ Public Class ConsultasLinq
             i.Modo = IIf(i.Modo = "SI", "Exportación", "Entrega").ToString()
 
 
-            Dim a = i.Cartas.Select(Function(xx) xx.ToString).ToArray
-            Dim sss = String.Join(vbCrLf, a)
-            ErrHandler2.WriteError(i.Producto & " " & i.CantCartas & " " & sss)
+            'Dim a = i.Cartas.Select(Function(xx) xx.ToString).ToArray
+            'Dim sss = String.Join(vbCrLf, a)
+            'ErrHandler2.WriteError(i.Producto & " " & i.CantCartas & " " & sss)
         Next
 
 

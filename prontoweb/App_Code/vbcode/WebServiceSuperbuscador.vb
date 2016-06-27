@@ -55,9 +55,11 @@ Public Class WebServiceSuperbuscador
         Dim lista As Data.DataTable
         Try
 
-            deberia ir con timeout
+            'deberia ir con timeout
             lista = EntidadManager.GetStoreProcedure(sc, enumSPs.wBusqueda, prefixText)
             'lista = EntidadManager.ExecDinamico(sc, "wBusqueda " & prefixText, 15)
+
+            'verificar qué otra cosa se está haciendo cuando da timeout. se estan haciendo los informes por mail? 
 
 
         Catch ex As Exception
