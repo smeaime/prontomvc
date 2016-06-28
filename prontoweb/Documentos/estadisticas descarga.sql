@@ -1,27 +1,42 @@
-﻿declare  @ModoExportacion varchar(20)
-declare  @pv integer
+﻿
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'[dbo].[wCartasDePorte_TX_EstadisticasDeDescarga]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE [dbo].[wCartasDePorte_TX_EstadisticasDeDescarga]
+go
 
 
-set @ModoExportacion='Ambos'
-set @pv=-1
+
+CREATE PROCEDURE [dbo].[wCartasDePorte_TX_EstadisticasDeDescarga]
+
+@ModoExportacion varchar(20),
+@pv integer,
+
+@fechadesde2 datetime,
+@fechahasta2 datetime,
+@fechadesde datetime,
+@fechahasta datetime
+
+AS
 
 
-declare  @fechadesde2 datetime
-declare  @fechahasta2 datetime
-declare  @fechadesde datetime
-declare  @fechahasta datetime
 
-set @fechadesde2='2015-06-01 00:00:00'
-set @fechahasta2='2015-06-01 00:00:00'
-set @fechahasta='2014-06-01 00:00:00'
-set @fechadesde='2014-06-01 00:00:00'
+--set @ModoExportacion='Ambos'
+--set @pv=-1
+
+
+
+--set @fechadesde2='2015-06-01 00:00:00'
+--set @fechahasta2='2015-06-01 00:00:00'
+--set @fechahasta='2014-06-01 00:00:00'
+--set @fechadesde='2014-06-01 00:00:00'
 
 
 
 
 						/*
 
-                  Select New With { _
                         .Sucursal = SqlFunctions.StringConvert(Sucursal), _
                         .Modo = Modo, _
                         .Producto = Producto, _
@@ -46,36 +61,46 @@ set @fechadesde='2014-06-01 00:00:00'
                         .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
                         .Diferen = 0, _
                         .DiferencPorcent = 0 _
-                    } _
-                ).Where(Function(i) i.Total > 0).ToList
-				
-				*/
 
-				select 	*
-                                                        
+						*/
 
-
-FROM
-				( 
-SELECT  art.Descripcion, cdp.Exporta as Modo, cdp.PuntoVenta , sum(Merma + HumedadDesnormalizada) as Merma, sum(NetoFinal) as NetoPto,
-sum(NetoProc) as NetoFinal , sum(TarifaFacturada*NetoPto) as Importe,
- sum(case  when cdp.PuntoVenta = 1 And FechaIngreso >= @fechadesde  then NetoFinal else 0 end ) as PV1
+SELECT  art.Descripcion as Producto, cdp.Exporta as Modo, cdp.PuntoVenta as Sucursal , count(*) as CantCartas,
+	sum(Merma + HumedadDesnormalizada) /1000 as Merma, sum(NetoFinal) /1000 as NetoPto,
+	sum(NetoProc)/1000 as NetoFinal , sum(TarifaFacturada*NetoPto)/1000 as Importe,
+	sum(case  when cdp.PuntoVenta = 1 And FechaIngreso >= @fechadesde  then NetoFinal else 0 end )/1000 as PV1,
+	sum(case  when cdp.PuntoVenta = 2 And FechaIngreso >= @fechadesde  then NetoFinal else 0 end )/1000 as PV2,
+	sum(case  when cdp.PuntoVenta = 3 And FechaIngreso >= @fechadesde  then NetoFinal else 0 end ) /1000 as PV3,
+	sum(case  when cdp.PuntoVenta = 4 And FechaIngreso >= @fechadesde  then NetoFinal else 0 end )/1000 as PV4,
+	sum(case  when isnull(Exporta, 'NO') = 'NO' And FechaDescarga >= @fechadesde  then NetoFinal else 0 end )/1000 as TotalEntrega,
+	sum(case  when isnull(Exporta, 'NO') = 'SI' And FechaDescarga >= @fechadesde  then NetoFinal else 0 end )/1000 as TotalExportacion,
+	0 as TotalBuques,
+	sum(case  when FechaDescarga >= @fechadesde  then NetoFinal else 0 end ) as Total,
+	0 as Porcent,
+	sum(case  when FechaDescarga < @fechadesde  then NetoFinal else 0 end ) as PeriodoAnterior,
+	0 as Diferen,
+	0 as DiferencPorcent
 from CartasDePorte cdp
 join Articulos art On art.IdArticulo = cdp.IdArticulo 
-                Where cdp.Vendedor > 0 
-                    And ( 
-                            (cdp.FechaDescarga >= @fechadesde2 And cdp.FechaDescarga <= @fechahasta2) 
-                            Or 
-                            (cdp.FechaDescarga >= @fechadesde And cdp.FechaDescarga <= @fechahasta) 
-                        ) 
-                    And (cdp.Anulada <> 'SI') 
-                    And ((@ModoExportacion = 'Ambos') 
-                          Or (@ModoExportacion = 'Todos') 
-                          Or (@ModoExportacion = 'Entregas' And isnull(cdp.Exporta, 'NO') = 'NO') 
-                          Or (@ModoExportacion = 'Export' And isnull(cdp.Exporta, 'NO') = 'SI')) 
-                    And (@pv = -1 Or cdp.PuntoVenta = @pv)
+
+Where	cdp.Vendedor > 0 
+        And ( 
+                (cdp.FechaDescarga >= @fechadesde2 And cdp.FechaDescarga <= @fechahasta2) 
+                Or 
+                (cdp.FechaDescarga >= @fechadesde And cdp.FechaDescarga <= @fechahasta) 
+            ) 
+        And (cdp.Anulada <> 'SI') 
+        And ((@ModoExportacion = 'Ambos') 
+                Or (@ModoExportacion = 'Todos') 
+                Or (@ModoExportacion = 'Entregas' And isnull(cdp.Exporta, 'NO') = 'NO') 
+                Or (@ModoExportacion = 'Export' And isnull(cdp.Exporta, 'NO') = 'SI')) 
+        And (@pv = -1 Or cdp.PuntoVenta = @pv)
+
+Group BY  art.Descripcion, cdp.Exporta, cdp.PuntoVenta 
+
+go
 
 
-	Group BY  art.Descripcion, cdp.Exporta, cdp.PuntoVenta 
 
-	) as Q
+	
+
+[wCartasDePorte_TX_EstadisticasDeDescarga] 'Ambos',-1,'2015-06-01 00:00:00','2015-06-01 00:00:00','2014-06-01 00:00:00','2014-06-01 00:00:00'

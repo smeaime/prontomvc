@@ -9537,6 +9537,14 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Parameter Name="IdComprobante" Type="int" Mode="In" />
           <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="wCartasDePorte_TX_EstadisticasDeDescarga" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ModoExportacion" Type="varchar" Mode="In" />
+          <Parameter Name="pv" Type="int" Mode="In" />
+          <Parameter Name="fechadesde2" Type="datetime" Mode="In" />
+          <Parameter Name="fechahasta2" Type="datetime" Mode="In" />
+          <Parameter Name="fechadesde" Type="datetime" Mode="In" />
+          <Parameter Name="fechahasta" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="wTarifaWilliams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
           <Parameter Name="idCliente" Type="int" Mode="In" />
           <Parameter Name="IdArticulo" Type="int" Mode="In" />
@@ -12692,6 +12700,14 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
             <End Role="CartasDePorteControlDescarga" EntitySet="CartasDePorteControlDescargas" />
           </AssociationSet>
+          <FunctionImport Name="wCartasDePorte_TX_EstadisticasDeDescarga" ReturnType="Collection(DemoProntoModel.wCartasDePorte_TX_EstadisticasDeDescarga_Result1)">
+            <Parameter Name="ModoExportacion" Mode="In" Type="String" />
+            <Parameter Name="pv" Mode="In" Type="Int32" />
+            <Parameter Name="fechadesde2" Mode="In" Type="DateTime" />
+            <Parameter Name="fechahasta2" Mode="In" Type="DateTime" />
+            <Parameter Name="fechadesde" Mode="In" Type="DateTime" />
+            <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -23909,6 +23925,48 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="wCartasDePorte_TX_EstadisticasDeDescarga_Result">
+          <Property Type="String" Name="Producto" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Modo" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="Sucursal" Nullable="true" />
+          <Property Type="Decimal" Name="Merma" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="NetoPto" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="NetoFinal" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV1" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV2" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV3" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV4" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="TotalEntrega" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="TotalExportacion" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Porcent" Nullable="false" />
+          <Property Type="Decimal" Name="PeriodoAnterior" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Diferen" Nullable="false" />
+          <Property Type="Int32" Name="DiferencPorcent" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="wCartasDePorte_TX_EstadisticasDeDescarga_Result1">
+          <Property Type="String" Name="Producto" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Modo" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="Sucursal" Nullable="true" />
+          <Property Type="Int32" Name="CantCartas" Nullable="true" />
+          <Property Type="Decimal" Name="Merma" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="NetoPto" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="NetoFinal" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV1" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV2" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV3" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PV4" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="TotalEntrega" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="TotalExportacion" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="TotalBuques" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Porcent" Nullable="false" />
+          <Property Type="Decimal" Name="PeriodoAnterior" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Diferen" Nullable="false" />
+          <Property Type="Int32" Name="DiferencPorcent" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -30635,6 +30693,32 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="wCartasDePorte_TX_EstadisticasDeDescarga" FunctionName="DemoProntoModel.Store.wCartasDePorte_TX_EstadisticasDeDescarga">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DemoProntoModel.wCartasDePorte_TX_EstadisticasDeDescarga_Result1">
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Modo" ColumnName="Modo" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="CantCartas" ColumnName="CantCartas" />
+                <ScalarProperty Name="Merma" ColumnName="Merma" />
+                <ScalarProperty Name="NetoPto" ColumnName="NetoPto" />
+                <ScalarProperty Name="NetoFinal" ColumnName="NetoFinal" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="PV1" ColumnName="PV1" />
+                <ScalarProperty Name="PV2" ColumnName="PV2" />
+                <ScalarProperty Name="PV3" ColumnName="PV3" />
+                <ScalarProperty Name="PV4" ColumnName="PV4" />
+                <ScalarProperty Name="TotalEntrega" ColumnName="TotalEntrega" />
+                <ScalarProperty Name="TotalExportacion" ColumnName="TotalExportacion" />
+                <ScalarProperty Name="TotalBuques" ColumnName="TotalBuques" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Porcent" ColumnName="Porcent" />
+                <ScalarProperty Name="PeriodoAnterior" ColumnName="PeriodoAnterior" />
+                <ScalarProperty Name="Diferen" ColumnName="Diferen" />
+                <ScalarProperty Name="DiferencPorcent" ColumnName="DiferencPorcent" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

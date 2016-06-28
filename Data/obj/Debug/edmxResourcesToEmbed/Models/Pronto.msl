@@ -6748,5 +6748,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="wCartasDePorte_TX_EstadisticasDeDescarga" FunctionName="DemoProntoModel.Store.wCartasDePorte_TX_EstadisticasDeDescarga">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DemoProntoModel.wCartasDePorte_TX_EstadisticasDeDescarga_Result1">
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="Modo" ColumnName="Modo" />
+          <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+          <ScalarProperty Name="CantCartas" ColumnName="CantCartas" />
+          <ScalarProperty Name="Merma" ColumnName="Merma" />
+          <ScalarProperty Name="NetoPto" ColumnName="NetoPto" />
+          <ScalarProperty Name="NetoFinal" ColumnName="NetoFinal" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="PV1" ColumnName="PV1" />
+          <ScalarProperty Name="PV2" ColumnName="PV2" />
+          <ScalarProperty Name="PV3" ColumnName="PV3" />
+          <ScalarProperty Name="PV4" ColumnName="PV4" />
+          <ScalarProperty Name="TotalEntrega" ColumnName="TotalEntrega" />
+          <ScalarProperty Name="TotalExportacion" ColumnName="TotalExportacion" />
+          <ScalarProperty Name="TotalBuques" ColumnName="TotalBuques" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Porcent" ColumnName="Porcent" />
+          <ScalarProperty Name="PeriodoAnterior" ColumnName="PeriodoAnterior" />
+          <ScalarProperty Name="Diferen" ColumnName="Diferen" />
+          <ScalarProperty Name="DiferencPorcent" ColumnName="DiferencPorcent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

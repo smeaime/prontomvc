@@ -9532,6 +9532,14 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
     <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="wCartasDePorte_TX_EstadisticasDeDescarga" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModoExportacion" Type="varchar" Mode="In" />
+    <Parameter Name="pv" Type="int" Mode="In" />
+    <Parameter Name="fechadesde2" Type="datetime" Mode="In" />
+    <Parameter Name="fechahasta2" Type="datetime" Mode="In" />
+    <Parameter Name="fechadesde" Type="datetime" Mode="In" />
+    <Parameter Name="fechahasta" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="wTarifaWilliams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
     <Parameter Name="idCliente" Type="int" Mode="In" />
     <Parameter Name="IdArticulo" Type="int" Mode="In" />

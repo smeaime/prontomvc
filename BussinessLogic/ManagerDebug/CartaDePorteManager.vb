@@ -4040,6 +4040,11 @@ Public Class CartaDePorteManager
 
 
 
+        'no es suficiente con poner permisos al usuario en el server\reports\ "Configuracion de sitio", tambien hay que ponerlo en cada carpeta
+
+
+
+
         ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         ' REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
