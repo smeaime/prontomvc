@@ -314,6 +314,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 keys: true
             });
 
+
+
+
+
             function GrabarFila(gridId) {
                 var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
 
@@ -454,7 +458,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 var colModel = grid.jqGrid('getGridParam', 'colModel');
                 var dataIds = grid.jqGrid('getDataIDs');
                 var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
-                var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+                var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + Id + "');\"  />";
                 var data, j, cm;
 
                 if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
@@ -466,7 +470,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }
                 data = data.substring(0, data.length - 1) + '}';
                 data = data.replace(/(\r\n|\n|\r)/gm, "");
-                grid.jqGrid('addRowData', Id, data, "first");
+                grid.jqGrid('addRowData', Id, data, "last");
                 grid.jqGrid('setRowData', Id, { act: se });
             };
 
@@ -520,7 +524,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     colModel: [
                                 {
-                                    name: 'act', index: 'act', align: 'center', width: 50, editable: false, hidden: false, //classes: "myLink",
+                                    name: 'act', index: 'act', align: 'center', width: 100, editable: false, hidden: false, //classes: "myLink",
                                     //formatter: function (cellValue, options, rowObject) {
                                     //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
                                     //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
@@ -582,14 +586,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                     ],
-                    //gridComplete: function () {
+
+                    gridComplete: function () {
                     //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
                     //    for (var i = 0; i < ids.length; i++) {
                     //        var cl = ids[i];
                     //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
                     //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
                     //    }
-                    //},
+                        //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
+                        //AgregarItemVacio(grid)
+                    },
                     onCellSelect: function (rowid, iCol, cellcontent, e) {
                         var $this = $(this);
                         var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
@@ -601,7 +608,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         if (name == 'Fecha') {
                             jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                         }
-                        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
+                        var se = "<input style='height:22px;width:20px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
                         jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                     },
                     //beforeSelectRow: function (rowid, e) {
