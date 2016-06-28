@@ -1798,3 +1798,16 @@ ON CartasDePorte (NumeroCartaEnTextoParaBusqueda,SubnumeroVagonEnTextoParaBusque
 GO
 
 
+
+
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+CREATE NONCLUSTERED INDEX IDX_CartaPorte_EstadisticasDeDescarga
+ON [dbo].[CartasDePorte] ([Anulada],[Vendedor],[FechaDescarga])
+INCLUDE ([FechaIngreso],[IdArticulo],[NetoProc],[NetoPto],[Merma],[NetoFinal],[Exporta],[HumedadDesnormalizada],[PuntoVenta],[TarifaFacturada])
+GO
+

@@ -637,7 +637,50 @@ namespace ProntoMVC.Tests
 
         }
 
+        [TestMethod]
+        public void problema_informe()
+        {
+            ReportParameter p2 = null;
+            string sTitulo = "";
 
+            var q = ConsultasLinq.totpormesmodo(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "");
+
+            
+            var q2 = ConsultasLinq.totpormessucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+
+            var q3 = ConsultasLinq.totpormesmodoysucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+            var q4 = ConsultasLinq.totpormes(SC,
+             "", "", "", 1, 10,
+              CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+             -1, -1,
+             -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+              new DateTime(2014, 1, 1),
+              new DateTime(2014, 2, 1),
+              -1, ref sTitulo, "Ambas", false, "");
+        }
 
         [TestMethod]
         public void DESCARGA_IMAGENES_17890()
