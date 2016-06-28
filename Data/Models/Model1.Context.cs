@@ -570,5 +570,34 @@ namespace ProntoMVC.Data.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Tree_TX_Generar");
         }
+    
+        public virtual ObjectResult<wCartasDePorte_TX_EstadisticasDeDescarga_Result1> wCartasDePorte_TX_EstadisticasDeDescarga(string modoExportacion, Nullable<int> pv, Nullable<System.DateTime> fechadesde2, Nullable<System.DateTime> fechahasta2, Nullable<System.DateTime> fechadesde, Nullable<System.DateTime> fechahasta)
+        {
+            var modoExportacionParameter = modoExportacion != null ?
+                new ObjectParameter("ModoExportacion", modoExportacion) :
+                new ObjectParameter("ModoExportacion", typeof(string));
+    
+            var pvParameter = pv.HasValue ?
+                new ObjectParameter("pv", pv) :
+                new ObjectParameter("pv", typeof(int));
+    
+            var fechadesde2Parameter = fechadesde2.HasValue ?
+                new ObjectParameter("fechadesde2", fechadesde2) :
+                new ObjectParameter("fechadesde2", typeof(System.DateTime));
+    
+            var fechahasta2Parameter = fechahasta2.HasValue ?
+                new ObjectParameter("fechahasta2", fechahasta2) :
+                new ObjectParameter("fechahasta2", typeof(System.DateTime));
+    
+            var fechadesdeParameter = fechadesde.HasValue ?
+                new ObjectParameter("fechadesde", fechadesde) :
+                new ObjectParameter("fechadesde", typeof(System.DateTime));
+    
+            var fechahastaParameter = fechahasta.HasValue ?
+                new ObjectParameter("fechahasta", fechahasta) :
+                new ObjectParameter("fechahasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<wCartasDePorte_TX_EstadisticasDeDescarga_Result1>("wCartasDePorte_TX_EstadisticasDeDescarga", modoExportacionParameter, pvParameter, fechadesde2Parameter, fechahasta2Parameter, fechadesdeParameter, fechahastaParameter);
+        }
     }
 }

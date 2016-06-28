@@ -165,6 +165,48 @@ Public Class WebServiceClientes
 
 
 
+    Class autocomplete
+        Public id As Integer
+        Public value As String
+    End Class
+
+
+    <WebMethod()> _
+    Public Function WilliamsDestinoGetWilliamsDestinos(term As String, SC As String) As List(Of autocomplete) 'As String()
+
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From item In db.WilliamsDestinos
+                   Where item.Descripcion.ToLower().Contains(term.ToLower())
+                   Order By item.Descripcion
+                   Select New autocomplete With
+                   {
+                       .id = item.IdWilliamsDestino,
+                       .value = item.Descripcion
+                   }).Take(10).ToList()
+
+
+        '    return Json(q, JsonRequestBehavior.AllowGet);
+
+        Return q
+
+    End Function
+
+
+
+
+
+
     <WebMethod()> _
     Public Function CotizacionWilliamsDestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
 

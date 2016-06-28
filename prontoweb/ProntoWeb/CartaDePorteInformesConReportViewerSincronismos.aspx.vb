@@ -3654,82 +3654,18 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-                From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = cdp.Procedencia).DefaultIfEmpty _
-                From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-                From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
-                Where _
-                    cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((DropDownList2.Text = "Ambos") Or (DropDownList2.Text = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (DropDownList2.Text = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (pv = -1 Or cdp.PuntoVenta = pv) _
-                Group cdp By Ano = cdp.FechaDescarga.Value.Year, _
-                            MesNumero = cdp.FechaDescarga.Value.Month, _
-                            Producto = art.Descripcion Into g = Group _
-                Select New With { _
-                    .Ano = Ano, _
-                    .Mes = MonthName(MesNumero), _
-                    .Producto = Producto, _
-                    .CantCartas = g.Count, _
-                    .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000, _
-                    .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000, _
-                    .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000, _
-                    .MesNumero = MesNumero _
-                }).ToList
 
 
 
-
-        '/////////////////////////////////////////////////////////////////////////////////////////////////////////
-        '/////////////////////////////////////////////////////////////////////////////////////////////////////////
-        '/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        Dim q2 = LogicaFacturacion.ListaEmbarquesQueryable(HFSC.Value, fechadesde, fechahasta).ToList
-        Dim a = (From i In q2 _
-                Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo _
-                    Group i By Ano = i.FechaIngreso.Value.Year, _
-                            MesNumero = i.FechaIngreso.Value.Month, _
-                            Producto = art.Descripcion _
-                    Into g = Group _
-                    Select New With { _
-                    .Ano = Ano, _
-                    .Mes = MonthName(MesNumero), _
-                    .Producto = Producto, _
-                    .CantCartas = g.Count, _
-                    .NetoPto = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000, _
-                    .Merma = CDec(0), _
-                    .NetoFinal = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000, _
-                    .MesNumero = MesNumero _
-                    }).ToList
-
-        Dim x = q.Union(a).ToList()
-
-        'http://connect.microsoft.com/VisualStudio/feedback/details/590217/editor-very-slow-when-code-contains-linq-queries
-
-        '/////////////////////////////////////////////////////////////////////////////////////////////////////////
-        '/////////////////////////////////////////////////////////////////////////////////////////////////////////
-        '/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        Dim q = ConsultasLinq.totpormesmodo(HFSC.Value, _
+                                 sTitulo, _
+                                 "", "", 0, 999999, enumCDPestado.Todas, "", _
+                                 idVendedor, idCorredor, _
+                                 idDestinatario, idIntermediario, _
+                                 idRComercial, idArticulo, idProcedencia, idDestino, _
+                                 IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+                                    DropDownList2.Text, _
+                                fechadesde, fechahasta, pv)
 
 
         'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
