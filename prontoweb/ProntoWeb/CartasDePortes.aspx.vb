@@ -820,29 +820,33 @@ Partial Class CartasDePortes
 " FROM CartasDePorte ORDER BY IdCartaDePorte DESC"
 
 
-
-            Dim dt = EntidadManager.ExecDinamico(HFSC.Value, s)
-
-
-            With dt
-                '.Columns("IdCartaDePorte").ColumnName = "Id"
-
-                '    .Columns("VendedorDesc").ColumnName = "TitularDesc"
-                '    .Columns("EntregadorDesc").ColumnName = "DestinatarioDesc"
-                '    .Columns("CuentaOrden1Desc").ColumnName = "IntermediarioDesc"
-                '    .Columns("CuentaOrden2Desc").ColumnName = "RComercialDesc"
-                '    '.Columns("VendedorDesc").ColumnName = "TitularDesc"
-            End With
+            Try
+                Dim dt = EntidadManager.ExecDinamico(HFSC.Value, s)
 
 
-            If False Then
-                dt = DataTableWHERE(dt, generarWHERE)
 
-                Dim b As Data.DataView = DataTableORDER(dt, "FechaModificacion DESC")
-                ViewState("Sort") = b.Sort
-            End If
+                With dt
+                    '.Columns("IdCartaDePorte").ColumnName = "Id"
 
-            GridView1.DataSource = dt 'b
+                    '    .Columns("VendedorDesc").ColumnName = "TitularDesc"
+                    '    .Columns("EntregadorDesc").ColumnName = "DestinatarioDesc"
+                    '    .Columns("CuentaOrden1Desc").ColumnName = "IntermediarioDesc"
+                    '    .Columns("CuentaOrden2Desc").ColumnName = "RComercialDesc"
+                    '    '.Columns("VendedorDesc").ColumnName = "TitularDesc"
+                End With
+
+
+                If False Then
+                    dt = DataTableWHERE(dt, generarWHERE)
+
+                    Dim b As Data.DataView = DataTableORDER(dt, "FechaModificacion DESC")
+                    ViewState("Sort") = b.Sort
+                End If
+
+                GridView1.DataSource = dt 'b
+            Catch ex As Exception
+                ErrHandler2.WriteAndRaiseError("Los errores de deadlock pasan siempre acá?")
+            End Try
 
         Else
 

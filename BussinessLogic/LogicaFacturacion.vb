@@ -237,7 +237,8 @@ Public Class LogicaFacturacion
 
             For Each cdp In q2
                 Dim ccc = db.CartasDePortes.Where(Function(x) x.IdCartaDePorte = cdp).FirstOrDefault()
-                ccc.SubnumeroDeFacturacion = -1
+                ccc.SubnumeroDeFacturacion = 0
+                'ccc.SubnumeroDeFacturacion = -1
                 Try
                     db.SubmitChanges()
                 Catch ex As Exception

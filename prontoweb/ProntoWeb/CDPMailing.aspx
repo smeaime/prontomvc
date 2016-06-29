@@ -108,9 +108,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:LinkButton ID="LinkZipDescarga" runat="server" Font-Bold="false" Font-Underline="true"
                                 ForeColor="White" CausesValidation="true" Font-Size="x-Small">Zip</asp:LinkButton>--%>
                                     </td>
+
+                                    
                                     <td align="right">
                                         <%--1 a 8 de un gran número--%>
-                                        <asp:Button ID="Button1" Text="test" runat="server" Visible="false" />
+                                        <asp:Button ID="Button1" Text="test de mail y hit a testcachetimeout" runat="server" Visible="false" />
                                         <asp:Label ID="lblGrilla1Info" runat="server"></asp:Label>
                                         <asp:Button ID="btnPaginaRetrocede" Text="<" runat="server" />
                                         <asp:Button ID="btnPaginaAvanza" Text=">" runat="server" />
