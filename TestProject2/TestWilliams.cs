@@ -204,6 +204,88 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void problema_informe_liquidacionsubcon()
+        {
+
+
+
+            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontratistas", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN");
+
+
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, 105, ref sTitulo);
+        }
+
+
+        [TestMethod]
+        public void Pegatina_22167()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, 0,
+                                    ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
         public void SincroZeni_17945()
         {
 
@@ -235,8 +317,8 @@ namespace ProntoMVC.Tests
 
 
 
-    
-                        
+
+
 
         [TestMethod]
         public void probar_informe_estandar_con_el_EnviarMailFiltroPorId_DLL()
@@ -267,7 +349,7 @@ namespace ProntoMVC.Tests
             dr["EnumSyngentaDivision"] = "";
             dr["EsPosicion"] = false;
             dr["IdArticulo"] = -1;
-            
+
             dr["ModoImpresion"] = "Excel";
             CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
 
@@ -637,8 +719,14 @@ namespace ProntoMVC.Tests
 
         }
 
+
+
+
+
+
+
         [TestMethod]
-        public void problema_informe()
+        public void problema_informe_totalespormes()
         {
             ReportParameter p2 = null;
             string sTitulo = "";
@@ -652,7 +740,7 @@ namespace ProntoMVC.Tests
                         new DateTime(2014, 1, 1),
                         -1, ref sTitulo, "Ambas", false, "");
 
-            
+
             var q2 = ConsultasLinq.totpormessucursal(SC,
               "", "", "", 1, 10,
                CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
@@ -1664,7 +1752,7 @@ namespace ProntoMVC.Tests
 
 
 
-    
+
 
 
 
