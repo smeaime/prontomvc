@@ -61,7 +61,7 @@ AS
                         .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
                         .Diferen = 0, _
                         .DiferencPorcent = 0 _
-
+						er
 						*/
 
 SELECT  art.Descripcion as Producto, cdp.Exporta as Modo, cdp.PuntoVenta as Sucursal , count(*) as CantCartas,
@@ -74,9 +74,9 @@ SELECT  art.Descripcion as Producto, cdp.Exporta as Modo, cdp.PuntoVenta as Sucu
 	sum(case  when isnull(Exporta, 'NO') = 'NO' And FechaDescarga >= @fechadesde  then NetoFinal else 0 end )/1000 as TotalEntrega,
 	sum(case  when isnull(Exporta, 'NO') = 'SI' And FechaDescarga >= @fechadesde  then NetoFinal else 0 end )/1000 as TotalExportacion,
 	0 as TotalBuques,
-	sum(case  when FechaDescarga >= @fechadesde  then NetoFinal else 0 end ) as Total,
+	sum(case  when FechaDescarga >= @fechadesde  then NetoFinal else 0 end ) /1000 as Total,
 	0 as Porcent,
-	sum(case  when FechaDescarga < @fechadesde  then NetoFinal else 0 end ) as PeriodoAnterior,
+	sum(case  when FechaDescarga < @fechadesde  then NetoFinal else 0 end )/1000 as PeriodoAnterior,
 	0 as Diferen,
 	0 as DiferencPorcent
 from CartasDePorte cdp
@@ -101,6 +101,7 @@ go
 
 
 
-	
+[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
+go
 
 [wCartasDePorte_TX_EstadisticasDeDescarga] 'Ambos',-1,'2015-06-01 00:00:00','2015-06-01 00:00:00','2014-06-01 00:00:00','2014-06-01 00:00:00'
