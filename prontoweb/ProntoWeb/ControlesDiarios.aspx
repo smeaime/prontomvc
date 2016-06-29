@@ -40,6 +40,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
             id="m1s">Select(Unselect) row 13</a>--%>
 
+        <asp:Button  ID="informe" Text="Informe" runat="server" />
+        <br /><br />
+
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;">
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
@@ -552,19 +555,79 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     },
                                     formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                                 },
-                                {
-                                    name: 'WilliamsDestino', index: 'WilliamsDestino', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
-                                    editoptions: {
-                                        dataUrl: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
 
-                                        dataEvents: [{
-                                            type: 'change', fn: function (e) {
-                                                var rowid = $('#Lista').getGridParam('selrow');
-                                                $('#Lista').jqGrid('setCell', rowid, 'IdWilliamsDestino', this.value);
-                                            }
-                                        }]
-                                    },
-                                },
+
+                                 {
+                                     name: 'Descripcion', formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
+                                     editoptions: {
+                                         rows: '1', cols: '1',
+                                         dataInit: function (elem) {
+                                             var NoResultsLabel = "No se encontraron resultados";
+                                             $(elem).autocomplete({
+                                                 source: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                                 dataType: "json", //"xml",
+
+                                                 minLength: 0,
+                                                 select: function (event, ui) {
+                                                     if (ui.item.value === NoResultsLabel) {
+                                                         event.preventDefault();
+                                                         return;
+                                                     }
+                                                     $("#IdWilliamsDestino").val(ui.item.id);
+
+                                                     UltimoIdArticulo = ui.item.id;
+                                                 },
+                                                 focus: function (event, ui) {
+                                                     if (ui.item.value === NoResultsLabel) {
+                                                         event.preventDefault();
+                                                     }
+                                                 }
+                                             })
+                                             .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                                 return $("<li></li>")
+                                                     .data("ui-autocomplete-item", item)
+                                                     .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.codigo + "]</b></span></a>")
+                                                     .appendTo(ul);
+                                             };
+                                         },
+                                         dataEvents: [{
+                                             type: 'change',
+                                             fn: function (e) {
+                                                 if (this.value == "No se encontraron resultados") {
+                                                     $("#Descripcion").val("");
+                                                     return;
+                                                 }
+                                                 $.post("WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",  // ?term=' + val
+                                                     
+                                                     { term: this.value },
+
+                                                     function (data) {
+                                                         if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                             var ui = data[0];
+
+                                                             if (ui.id== "") {
+                                                                 alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                                 $("#Descripcion").val("");
+                                                                 return;
+                                                             }
+                                                             $("#IdWilliamsDestino").val(ui.id);
+                                                            
+                                                             UltimoIdArticulo = ui.id;
+                                                         }
+                                                         else {
+                                                             alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                         }
+                                                     }
+
+                                                      ,"json" //"xml"
+                                                 );
+                                             }
+                                         }]
+                                     },
+                                     editrules: { required: true }
+                                 },
+
+
                                 { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
                                 {
                                     name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
@@ -608,7 +671,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         if (name == 'Fecha') {
                             jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                         }
-                        var se = "<input style='height:22px;width:20px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                        var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
                         jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                     },
                     //beforeSelectRow: function (rowid, e) {

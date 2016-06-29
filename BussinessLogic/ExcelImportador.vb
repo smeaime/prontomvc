@@ -3039,12 +3039,19 @@ Public Class ExcelImportadorManager
 
                 Dim analisis As Double = r(7)
 
-                Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
+                Dim cdp As CartaDePorte
+                Try
+                    cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0)
+                Catch ex As Exception
+                    cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
+                End Try
+
+
                 If cdp.Id = -1 Then
                     cdp.NumeroCartaDePorte = numeroCarta
                     cdp.SubnumeroVagon = vagon
 
-                    cdp.SubnumeroDeFacturacion = -1
+                    cdp.SubnumeroDeFacturacion = 0
                 End If
 
                 cdp.PuntoVenta = cmbPuntoVenta
@@ -3056,6 +3063,7 @@ Public Class ExcelImportadorManager
                         Case 2
                             cdp.Humedad = porcentajehum
                             cdp.HumedadDesnormalizada = kilosmerma
+
                         Case 3
                             .NobleHectolitrico = analisis
                         Case 4

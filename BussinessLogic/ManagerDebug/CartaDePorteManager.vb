@@ -8335,7 +8335,10 @@ Public Class CartaDePorteManager
         If SubnumeroFacturacion > 0 Then Return New CartaDePorte
         If familia.Count = 1 Then Return CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
 
-        ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
+        ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & _
+                                       NumeroCartaDePorte & " " & SubNumeroVagon & " " & SubnumeroFacturacion & _
+                                       ".  Puede ser una con otro Subnumero de facturacion. " & familia.Count & " " & sss.IdCartaDePorte & _
+                                       " Estas haciendo altas usando el -1 en SubnumeroDeFacturacion? estas buscando con -1 cuando solo hay con 0?")
 
 
 
