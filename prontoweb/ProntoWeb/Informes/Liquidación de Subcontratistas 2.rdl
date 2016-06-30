@@ -598,16 +598,16 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.10032in</Size>
+                    <Size>0.98425in</Size>
                     <CellContents>
-                      <Textbox Name="Textbox14">
+                      <Textbox Name="Textbox33">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Vagón/Camión</Value>
+                                <Value>Group3</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontSize>9pt</FontSize>
@@ -619,7 +619,7 @@
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Textbox14</rd:DefaultName>
+                        <rd:DefaultName>Textbox33</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>#7292cc</Color>
@@ -729,79 +729,31 @@
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
-              <KeepWithGroup>After</KeepWithGroup>
             </TablixMember>
             <TablixMember>
-              <Group Name="SubcontrDesc">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!SubcontrDesc.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-              <SortExpressions>
-                <SortExpression>
-                  <Value>=Fields!SubcontrDesc.Value</Value>
-                </SortExpression>
-              </SortExpressions>
-              <TablixHeader>
-                <Size>1.34475in</Size>
-                <CellContents>
-                  <Textbox Name="DestinoDesc">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Fields!SubcontrDesc.Value</Value>
-                            <Style>
-                              <FontFamily>Tahoma</FontFamily>
-                              <FontSize>9pt</FontSize>
-                              <FontWeight>Bold</FontWeight>
-                              <Color>#465678</Color>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>DestinoDesc</rd:DefaultName>
-                    <Style>
-                      <Border>
-                        <Color>#c6daf8</Color>
-                        <Style>Solid</Style>
-                      </Border>
-                      <BackgroundColor>#9eb6e4</BackgroundColor>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </CellContents>
-              </TablixHeader>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="Group2">
+                  <Group Name="SubcontrDesc">
                     <GroupExpressions>
-                      <GroupExpression>agrupVagon</GroupExpression>
+                      <GroupExpression>=Fields!SubcontrDesc.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>agrupVagon</Value>
+                      <Value>=Fields!SubcontrDesc.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1.10032in</Size>
+                    <Size>1.34475in</Size>
                     <CellContents>
-                      <Textbox Name="Group2">
+                      <Textbox Name="DestinoDesc">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!agrupVagon.Value</Value>
+                                <Value>=Fields!SubcontrDesc.Value</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontSize>9pt</FontSize>
@@ -813,7 +765,7 @@
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Group2</rd:DefaultName>
+                        <rd:DefaultName>DestinoDesc</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>#c6daf8</Color>
@@ -830,168 +782,27 @@
                   </TablixHeader>
                   <TablixMembers>
                     <TablixMember>
-                      <Group Name="DestinoDesc">
+                      <Group Name="Group3">
                         <GroupExpressions>
-                          <GroupExpression>=Fields!DestinoDesc.Value</GroupExpression>
+                          <GroupExpression>=Fields!agrupVagon.Value</GroupExpression>
                         </GroupExpressions>
                       </Group>
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!DestinoDesc.Value</Value>
+                          <Value>=Fields!agrupVagon.Value</Value>
                         </SortExpression>
                       </SortExpressions>
-                      <TablixMembers>
-                        <TablixMember>
-                          <TablixHeader>
-                            <Size>2.56167in</Size>
-                            <CellContents>
-                              <Textbox Name="SubcontrDesc1">
-                                <CanGrow>true</CanGrow>
-                                <KeepTogether>true</KeepTogether>
-                                <Paragraphs>
-                                  <Paragraph>
-                                    <TextRuns>
-                                      <TextRun>
-                                        <Value>=Fields!DestinoDesc.Value</Value>
-                                        <Style>
-                                          <FontFamily>Tahoma</FontFamily>
-                                          <FontSize>9pt</FontSize>
-                                          <FontWeight>Bold</FontWeight>
-                                          <Color>#4c68a2</Color>
-                                        </Style>
-                                      </TextRun>
-                                    </TextRuns>
-                                    <Style />
-                                  </Paragraph>
-                                </Paragraphs>
-                                <rd:DefaultName>SubcontrDesc1</rd:DefaultName>
-                                <Style>
-                                  <Border>
-                                    <Color>#e6eefc</Color>
-                                    <Style>Solid</Style>
-                                  </Border>
-                                  <BackgroundColor>#c6daf8</BackgroundColor>
-                                  <PaddingLeft>2pt</PaddingLeft>
-                                  <PaddingRight>2pt</PaddingRight>
-                                  <PaddingTop>2pt</PaddingTop>
-                                  <PaddingBottom>2pt</PaddingBottom>
-                                </Style>
-                              </Textbox>
-                            </CellContents>
-                          </TablixHeader>
-                          <TablixMembers>
-                            <TablixMember>
-                              <Group Name="Group1">
-                                <GroupExpressions>
-                                  <GroupExpression>=Fields!Tarifa.Value</GroupExpression>
-                                </GroupExpressions>
-                              </Group>
-                              <SortExpressions>
-                                <SortExpression>
-                                  <Value>=Fields!Tarifa.Value</Value>
-                                </SortExpression>
-                              </SortExpressions>
-                              <TablixHeader>
-                                <Size>0.99676in</Size>
-                                <CellContents>
-                                  <Textbox Name="Group1">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value>=Fields!Tarifa.Value</Value>
-                                            <Style>
-                                              <FontFamily>Tahoma</FontFamily>
-                                              <FontSize>9pt</FontSize>
-                                              <FontWeight>Bold</FontWeight>
-                                              <Format>0.000</Format>
-                                              <Color>#4c68a2</Color>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style>
-                                          <TextAlign>Right</TextAlign>
-                                        </Style>
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Group1</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Color>#e6eefc</Color>
-                                        <Style>Solid</Style>
-                                      </Border>
-                                      <BackgroundColor>#c6daf8</BackgroundColor>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixHeader>
-                              <TablixMembers>
-                                <TablixMember />
-                              </TablixMembers>
-                            </TablixMember>
-                          </TablixMembers>
-                        </TablixMember>
-                      </TablixMembers>
-                    </TablixMember>
-                  </TablixMembers>
-                </TablixMember>
-                <TablixMember>
-                  <TablixHeader>
-                    <Size>1.10032in</Size>
-                    <CellContents>
-                      <Textbox Name="Textbox17">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style>
-                                  <FontFamily>Tahoma</FontFamily>
-                                  <FontSize>9pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
-                                  <Color>#465678</Color>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Textbox17</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Color>#c6daf8</Color>
-                            <Style>Solid</Style>
-                          </Border>
-                          <BackgroundColor>#9eb6e4</BackgroundColor>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
-                  <TablixMembers>
-                    <TablixMember>
                       <TablixHeader>
-                        <Size>2.56167in</Size>
+                        <Size>0.98425in</Size>
                         <CellContents>
-                          <Textbox Name="Textbox87">
+                          <Textbox Name="Group3">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>Total</Value>
+                                    <Value>=Fields!agrupVagon.Value</Value>
                                     <Style>
                                       <FontFamily>Tahoma</FontFamily>
                                       <FontSize>9pt</FontSize>
@@ -1003,7 +814,7 @@
                                 <Style />
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Textbox87</rd:DefaultName>
+                            <rd:DefaultName>Group3</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Color>#c6daf8</Color>
@@ -1020,17 +831,173 @@
                       </TablixHeader>
                       <TablixMembers>
                         <TablixMember>
+                          <TablixMembers>
+                            <TablixMember>
+                              <Group Name="DestinoDesc">
+                                <GroupExpressions>
+                                  <GroupExpression>=Fields!DestinoDesc.Value</GroupExpression>
+                                </GroupExpressions>
+                              </Group>
+                              <SortExpressions>
+                                <SortExpression>
+                                  <Value>=Fields!DestinoDesc.Value</Value>
+                                </SortExpression>
+                              </SortExpressions>
+                              <TablixMembers>
+                                <TablixMember>
+                                  <TablixHeader>
+                                    <Size>2.56167in</Size>
+                                    <CellContents>
+                                      <Textbox Name="SubcontrDesc1">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!DestinoDesc.Value</Value>
+                                                <Style>
+                                                  <FontFamily>Tahoma</FontFamily>
+                                                  <FontSize>9pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>#4c68a2</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>SubcontrDesc1</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Color>#e6eefc</Color>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <BackgroundColor>#c6daf8</BackgroundColor>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixHeader>
+                                  <TablixMembers>
+                                    <TablixMember>
+                                      <Group Name="Group1">
+                                        <GroupExpressions>
+                                          <GroupExpression>=Fields!Tarifa.Value</GroupExpression>
+                                        </GroupExpressions>
+                                      </Group>
+                                      <SortExpressions>
+                                        <SortExpression>
+                                          <Value>=Fields!Tarifa.Value</Value>
+                                        </SortExpression>
+                                      </SortExpressions>
+                                      <TablixHeader>
+                                        <Size>0.99676in</Size>
+                                        <CellContents>
+                                          <Textbox Name="Group1">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!Tarifa.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>Tahoma</FontFamily>
+                                                      <FontSize>9pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Format>0.000</Format>
+                                                      <Color>#4c68a2</Color>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Group1</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Color>#e6eefc</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>#c6daf8</BackgroundColor>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixHeader>
+                                      <TablixMembers>
+                                        <TablixMember />
+                                      </TablixMembers>
+                                    </TablixMember>
+                                  </TablixMembers>
+                                </TablixMember>
+                              </TablixMembers>
+                            </TablixMember>
+                          </TablixMembers>
+                        </TablixMember>
+                      </TablixMembers>
+                    </TablixMember>
+                    <TablixMember>
+                      <TablixHeader>
+                        <Size>0.98425in</Size>
+                        <CellContents>
+                          <Textbox Name="Textbox35">
+                            <CanGrow>true</CanGrow>
+                            <KeepTogether>true</KeepTogether>
+                            <Paragraphs>
+                              <Paragraph>
+                                <TextRuns>
+                                  <TextRun>
+                                    <Value />
+                                    <Style>
+                                      <FontFamily>Tahoma</FontFamily>
+                                      <FontSize>9pt</FontSize>
+                                      <FontWeight>Bold</FontWeight>
+                                      <Color>#465678</Color>
+                                    </Style>
+                                  </TextRun>
+                                </TextRuns>
+                                <Style />
+                              </Paragraph>
+                            </Paragraphs>
+                            <rd:DefaultName>Textbox35</rd:DefaultName>
+                            <Style>
+                              <Border>
+                                <Color>#c6daf8</Color>
+                                <Style>Solid</Style>
+                              </Border>
+                              <BackgroundColor>#9eb6e4</BackgroundColor>
+                              <PaddingLeft>2pt</PaddingLeft>
+                              <PaddingRight>2pt</PaddingRight>
+                              <PaddingTop>2pt</PaddingTop>
+                              <PaddingBottom>2pt</PaddingBottom>
+                            </Style>
+                          </Textbox>
+                          <rd:Selected>true</rd:Selected>
+                        </CellContents>
+                      </TablixHeader>
+                      <TablixMembers>
+                        <TablixMember>
                           <TablixHeader>
-                            <Size>0.99676in</Size>
+                            <Size>2.56167in</Size>
                             <CellContents>
-                              <Textbox Name="Textbox136">
+                              <Textbox Name="Textbox87">
                                 <CanGrow>true</CanGrow>
                                 <KeepTogether>true</KeepTogether>
                                 <Paragraphs>
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value />
+                                        <Value>Total</Value>
                                         <Style>
                                           <FontFamily>Tahoma</FontFamily>
                                           <FontSize>9pt</FontSize>
@@ -1039,12 +1006,10 @@
                                         </Style>
                                       </TextRun>
                                     </TextRuns>
-                                    <Style>
-                                      <TextAlign>Right</TextAlign>
-                                    </Style>
+                                    <Style />
                                   </Paragraph>
                                 </Paragraphs>
-                                <rd:DefaultName>Textbox136</rd:DefaultName>
+                                <rd:DefaultName>Textbox87</rd:DefaultName>
                                 <Style>
                                   <Border>
                                     <Color>#c6daf8</Color>
@@ -1060,13 +1025,56 @@
                             </CellContents>
                           </TablixHeader>
                           <TablixMembers>
-                            <TablixMember />
+                            <TablixMember>
+                              <TablixHeader>
+                                <Size>0.99676in</Size>
+                                <CellContents>
+                                  <Textbox Name="Textbox136">
+                                    <CanGrow>true</CanGrow>
+                                    <KeepTogether>true</KeepTogether>
+                                    <Paragraphs>
+                                      <Paragraph>
+                                        <TextRuns>
+                                          <TextRun>
+                                            <Value />
+                                            <Style>
+                                              <FontFamily>Tahoma</FontFamily>
+                                              <FontSize>9pt</FontSize>
+                                              <FontWeight>Bold</FontWeight>
+                                              <Color>#465678</Color>
+                                            </Style>
+                                          </TextRun>
+                                        </TextRuns>
+                                        <Style>
+                                          <TextAlign>Right</TextAlign>
+                                        </Style>
+                                      </Paragraph>
+                                    </Paragraphs>
+                                    <rd:DefaultName>Textbox136</rd:DefaultName>
+                                    <Style>
+                                      <Border>
+                                        <Color>#c6daf8</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>#9eb6e4</BackgroundColor>
+                                      <PaddingLeft>2pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                      <PaddingTop>2pt</PaddingTop>
+                                      <PaddingBottom>2pt</PaddingBottom>
+                                    </Style>
+                                  </Textbox>
+                                </CellContents>
+                              </TablixHeader>
+                              <TablixMembers>
+                                <TablixMember />
+                              </TablixMembers>
+                            </TablixMember>
                           </TablixMembers>
                         </TablixMember>
                       </TablixMembers>
+                      <KeepWithGroup>Before</KeepWithGroup>
                     </TablixMember>
                   </TablixMembers>
-                  <KeepWithGroup>Before</KeepWithGroup>
                 </TablixMember>
               </TablixMembers>
             </TablixMember>
@@ -1111,9 +1119,9 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.10032in</Size>
+                    <Size>0.98425in</Size>
                     <CellContents>
-                      <Textbox Name="Textbox18">
+                      <Textbox Name="Textbox37">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
@@ -1132,7 +1140,7 @@
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Textbox18</rd:DefaultName>
+                        <rd:DefaultName>Textbox37</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>#9eb6e4</Color>
@@ -1236,7 +1244,6 @@
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
-              <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
@@ -1244,7 +1251,7 @@
         <Top>63.58822mm</Top>
         <Left>2.3857mm</Left>
         <Height>23.99995mm</Height>
-        <Width>223.34623mm</Width>
+        <Width>220.3974mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1675,7 +1682,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>241.24798mm</Width>
+  <Width>250.73123mm</Width>
   <Page>
     <PageFooter>
       <Height>11.43mm</Height>

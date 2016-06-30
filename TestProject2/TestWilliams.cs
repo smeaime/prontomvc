@@ -208,23 +208,52 @@ namespace ProntoMVC.Tests
         {
 
 
+            var c = CartaDePorteManager.GetItem(SC, 1372987);
+            c.SubnumeroVagon = 222;
+            string ms = "";
+            CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
+            
+            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
 
-            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN");
 
-
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
 
             ReportParameter p2 = null;
             string sTitulo = "";
 
             var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
-                       "", "", "", 1, 10,
+                       "", "", "", 1, 2000,
                         CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
                        -1, -1,
-                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                         new DateTime(2014, 1, 1),
-                        new DateTime(2014, 1, 1),
-                        -1, 105, ref sTitulo);
+                        new DateTime(2014, 1, 10),
+                        -1, -1, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
         }
+
+
+
 
 
         [TestMethod]

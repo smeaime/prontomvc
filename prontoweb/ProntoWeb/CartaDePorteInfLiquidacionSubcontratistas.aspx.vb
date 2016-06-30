@@ -477,7 +477,7 @@ Partial Class CartaDePorteInfLiquidacionSubcontratistas
 
 
         'RebindReportViewerLINQ("ProntoWeb\Informes\Valorizado por SubContratista.rdl", q2.ToList)
-        Dim f = RebindReportViewerLINQ_Excel("ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q3, , params)
+        Dim f = CartaDePorteManager.RebindReportViewerLINQ_Excel(ReportViewer2, "ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q3, , params)
         Return f
 
 
@@ -829,125 +829,7 @@ Partial Class CartaDePorteInfLiquidacionSubcontratistas
 
 
 
-    Function RebindReportViewerLINQ_Excel(ByVal rdlFile As String, ByVal q As Object, Optional ByRef ArchivoExcelDestino As String = "", Optional parametros As IEnumerable(Of ReportParameter) = Nothing) As String
-
-
-        If ArchivoExcelDestino = "" Then
-            ArchivoExcelDestino = Path.GetTempPath & "Informe " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
-            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
-        End If
-
-        'Dim vFileName As String = "c:\archivo.txt"
-        ' FileOpen(1, ArchivoExcelDestino, OpenMode.Output)
-
-
-        'http://forums.asp.net/t/1183208.aspx
-
-        With ReportViewer2
-            .ProcessingMode = ProcessingMode.Local
-            .Visible = True
-
-            .Reset()
-
-
-            With .LocalReport
-                .ReportPath = rdlFile
-                .EnableHyperlinks = True
-
-                .DataSources.Clear()
-
-                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                .DataSources.Add(New ReportDataSource("DataSet1", q)) '//the first parameter is the name of the datasource which you bind your report table to.
-
-                '.ReportEmbeddedResource = rdlFile
-
-
-                .EnableExternalImages = True
-
-
-                '.DataSources.Add(New ReportDataSource("http://www.google.com/intl/en_ALL/images/logo.gif", "Image1"))
-                'DataSource.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
-                '.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
-
-
-
-                '/////////////////////
-                'parametros (no uses la @ delante del parametro!!!!)
-                '/////////////////////
-                Try
-                    If parametros IsNot Nothing Then
-                        .SetParameters(parametros)
-                    End If
-                    '    If .GetParameters.Count > 1 Then
-                    '        If .GetParameters.Item(1).Name = "FechaDesde" Then
-                    '            Dim p1 = New ReportParameter("IdCartaDePorte", -1)
-                    '            Dim p2 = New ReportParameter("FechaDesde", Today)
-                    '            Dim p3 = New ReportParameter("FechaHasta", Today)
-                    '            .SetParameters(New ReportParameter() {p1, p2, p3})
-                    '        End If
-                    '    End If
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex.ToString)
-                End Try
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-
-            End With
-
-
-            .DocumentMapCollapsed = True
-
-
-
-            '.LocalReport.Refresh()
-            '.DataBind()
-
-
-
-
-            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-            Dim warnings As Warning()
-            Dim streamids As String()
-            Dim mimeType, encoding, extension As String
-
-            Dim bytes As Byte()
-
-
-
-            Try
-                bytes = ReportViewer2.LocalReport.Render( _
-                       "Excel", Nothing, mimeType, encoding, _
-                         extension, _
-                        streamids, warnings)
-
-            Catch e As System.Exception
-                Dim inner As Exception = e.InnerException
-                While Not (inner Is Nothing)
-
-                    If System.Diagnostics.Debugger.IsAttached() Then
-                        MsgBox(inner.Message)
-                    End If
-
-                    ErrHandler2.WriteError(inner.Message)
-                    inner = inner.InnerException
-                End While
-                Throw
-            End Try
-
-
-            Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
-            fs.Write(bytes, 0, bytes.Length)
-            fs.Close()
-
-
-
-        End With
-
-        Return ArchivoExcelDestino
-    End Function
-
+    
 
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
