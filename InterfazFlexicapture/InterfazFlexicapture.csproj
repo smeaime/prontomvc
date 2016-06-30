@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BitMiracle.LibTiff.NET">
-      <HintPath>..\..\..\..\Desktop\libtiff\BitMiracle.LibTiff.NET.dll</HintPath>
+      <HintPath>..\packages\libtiff\BitMiracle.LibTiff.NET.dll</HintPath>
     </Reference>
     <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -64,9 +64,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TiffCP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\libtiff\TiffCP.exe</HintPath>
+    <Reference Include="TiffCP">
+      <HintPath>..\packages\libtiff\TiffCP.exe</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
