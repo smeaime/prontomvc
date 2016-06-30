@@ -210,7 +210,7 @@
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="TiffCP">
-      <HintPath>..\..\..\..\Desktop\libtiff\TiffCP.exe</HintPath>
+      <HintPath>..\packages\libtiff\TiffCP.exe</HintPath>
     </Reference>
     <Reference Include="WSAFIPFE">
       <HintPath>bin\Debug\WSAFIPFE.dll</HintPath>

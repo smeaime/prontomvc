@@ -255,8 +255,10 @@ Public Class LogicaFacturacion
                     MandarMailDeError("Se intentará emparchar. Error en CorrectorSubnumeroFacturacion: Carta Porte " & ccc.IdCartaDePorte & " numero " & _
                                         ccc.NumeroCartaDePorte & " " & ccc.SubnumeroVagon & " " & ex.ToString)
                     ErrHandler2.WriteError(ex.ToString)
-                    Dim ccorig = db.CartasDePortes.Where(Function(x) x.NumeroCartaDePorte = ccc.NumeroCartaDePorte And x.SubnumeroVagon = ccc.SubnumeroVagon And x.SubnumeroDeFacturacion = -1).FirstOrDefault()
-                    ccorig.SubnumeroDeFacturacion = 0
+                    If False Then
+                        Dim ccorig = db.CartasDePortes.Where(Function(x) x.NumeroCartaDePorte = ccc.NumeroCartaDePorte And x.SubnumeroVagon = ccc.SubnumeroVagon And x.SubnumeroDeFacturacion = -1).FirstOrDefault()
+                        ccorig.SubnumeroDeFacturacion = 0
+                    End If
                     ccc.SubnumeroDeFacturacion = 1
                     Try
                         db.SubmitChanges()
