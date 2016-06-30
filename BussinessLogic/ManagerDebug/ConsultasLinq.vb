@@ -259,7 +259,7 @@ Public Class ConsultasLinq
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim s As String = iisNull(ParametroManager.TraerValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontratistas"), "")
+        Dim s As String = iisNull(ParametroManager.TraerValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr"), "")
 
         Dim lista() As String = Split(s, "|")
 
