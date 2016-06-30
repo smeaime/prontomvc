@@ -308,7 +308,7 @@ Public Class ConsultasLinq
         Dim ms As String = ""
         'el filtro tiene que incluir duplicados (el True despues de syngenta)
         Try
-            LogicaFacturacion.CorrectorParcheSubnumeroFacturacion(SC, ms)
+            'LogicaFacturacion.CorrectorParcheSubnumeroFacturacion(SC, ms)
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
         End Try
@@ -358,7 +358,7 @@ Public Class ConsultasLinq
                     cdp.NetoFinal, _
                     cdp.Subcontr1, _
                     cdp.Subcontr2, _
-                    agrupVagon = IIf(destinosapartados.Contains(cdp.Destino), IIf(cdp.SubnumeroVagon = 0, "Vagones", "Camiones"), ""), _
+                    agrupVagon = IIf(destinosapartados.Contains(cdp.Destino), IIf(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
                     cdp.ExcluirDeSubcontratistas, _
                     cdp.SubnumeroDeFacturacion, _
                     VendedorDesc = clitit.RazonSocial, _
@@ -465,10 +465,13 @@ Public Class ConsultasLinq
 
 
 
+        If Debugger.IsAttached Then
+            q.ToList()
 
-        Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
+            Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
 
-        ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
+            ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
+        End If
 
 
 
