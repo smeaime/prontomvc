@@ -7,12 +7,12 @@ Imports Pronto.ERP.BO
 Imports Pronto.ERP.Bll
 
 Imports System.Web.Script.Serialization
+Imports System.Web.Script.Services
 
 Imports CartaDePorteManager
 
 <WebService(Namespace:="http://tempuri.org/")> _
 <WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 <System.Web.Script.Services.ScriptService()> _
 Public Class WebServiceClientes
     Inherits System.Web.Services.WebService
@@ -173,9 +173,9 @@ Public Class WebServiceClientes
     End Class
 
 
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
-    Public Shared Function WilliamsDestinoGetWilliamsDestinos(term As String) As String ' As List(Of autocomplete) 'As String()
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
+    <WebMethod()> _
+    Public Function WilliamsDestinoGetWilliamsDestinos(term As String) As String ' As List(Of autocomplete) 'As String()
 
         Dim SC As String
 
@@ -184,7 +184,7 @@ Public Class WebServiceClientes
             SC = Encriptar(scWilliamsRelease())
             'dddddd()
         Else
-            SC = Encriptar(scWilliamsRelease())
+            SC = Encriptar(scLocal())
             'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
         End If
 
@@ -208,7 +208,7 @@ Public Class WebServiceClientes
         Dim TheSerializer As JavaScriptSerializer = New JavaScriptSerializer()
 
 
-        Dim TheJson = TheSerializer.Serialize(q)
+        Dim TheJson As String = TheSerializer.Serialize(q)
 
         Return TheJson
 
@@ -221,7 +221,7 @@ Public Class WebServiceClientes
 
 
     <WebMethod()> _
-    Public Function CotizacionWilliamsDestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
+    Public Function CotizacionWilliamsDestinoBatchUpdate(o As Object) ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
 
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
