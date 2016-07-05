@@ -9,6 +9,8 @@ Imports Pronto.ERP.Bll
 Imports System.Web.Script.Serialization
 Imports System.Web.Script.Services
 
+Imports ProntoMVC.Data.Models
+
 Imports CartaDePorteManager
 
 <WebService(Namespace:="http://tempuri.org/")> _
@@ -221,56 +223,48 @@ Public Class WebServiceClientes
 
 
     <WebMethod()> _
-    Public Function CotizacionWilliamsDestinoBatchUpdate(o As Object) ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
+    Public Function DestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga) As String ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
 
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+
+        Dim SC As String
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar(scLocal())
+            'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
 
         If (o.IdCartasDePorteControlDescarga > 0) Then
 
+            Dim EntidadOriginal = db.CartasDePorteControlDescargas.Where(Function(p) p.IdCartasDePorteControlDescarga = o.IdCartasDePorteControlDescarga).SingleOrDefault()
+            Dim EntidadEntry = db.Entry(EntidadOriginal)
+            EntidadEntry.CurrentValues.SetValues(o)
+
+            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified
+
+        Else
+
+            db.CartasDePorteControlDescargas.Add(o)
         End If
 
+        db.SaveChanges()
+
+        'TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+        'return Json(new { Success = 1, IdCotizacion = Cotizacion.IdCotizacion, ex = "" });
 
 
-        'if (!PuedeEditar(enumNodos.Cotizaciones)) throw new Exception("No tenés permisos");
-
-        'Try
-        '{
-        '    If (ModelState.IsValid) Then
-        '    {
-        '        If (Cotizacion.IdCotizacion > 0) Then
-        '        {
-        '            var EntidadOriginal = db.Cotizaciones.Where(p => p.IdCotizacion == Cotizacion.IdCotizacion).SingleOrDefault();
-        '            var EntidadEntry = db.Entry(EntidadOriginal);
-        '            EntidadEntry.CurrentValues.SetValues(Cotizacion);
-
-        '            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
-        '        }
-        '        Else
-        '        {
-        '            db.Cotizaciones.Add(Cotizacion);
-        '        }
-
-        '        db.SaveChanges();
-
-        '        TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
-
-        '        return Json(new { Success = 1, IdCotizacion = Cotizacion.IdCotizacion, ex = "" });
-        '    }
-        '    else
-        '    {
-        '        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-        '        Response.TrySkipIisCustomErrors = true;
-
-        '        JsonResponse res = new JsonResponse();
-        '        res.Status = Status.Error;
-        '        res.Errors = GetModelStateErrorsAsString(this.ModelState);
-        '        res.Message = "El registro tiene datos invalidos";
-
-        '        return Json(res);
-        '    }
         '}
         'catch (Exception ex)
         '{
