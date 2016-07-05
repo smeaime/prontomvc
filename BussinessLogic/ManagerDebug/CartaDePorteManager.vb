@@ -4742,7 +4742,7 @@ Public Class CartaDePorteManager
         'End If
 
         Dim sDirFTP = DirApp + "\DataBackupear\"
-
+        Dim sDirFTPdest = sDirFTP + "\borrar\"
 
 
 
@@ -4766,7 +4766,6 @@ Public Class CartaDePorteManager
 
 
 
-
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
             '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
             '000123456789-cp
@@ -4779,13 +4778,18 @@ Public Class CartaDePorteManager
             Dim imagenpathtk = myCartaDePorte.PathImagen2
             Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
 
+            Dim destinocp = sDirFTPdest + nombrecp
+            Dim destinotk = sDirFTPdest + nombretk
+
+
+
 
             If imagenpathcp <> "" Then
 
                 Try
                     Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
                     If fcp.Exists Then
-                        fcp.CopyTo(sDirFTP + nombrecp, True)
+                        fcp.CopyTo(destinocp, True)
                     End If
                     wordFiles.Add(nombrecp)
 
@@ -4802,7 +4806,7 @@ Public Class CartaDePorteManager
 
                     Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
                     If ftk.Exists Then
-                        ftk.CopyTo(sDirFTP + nombretk, True)
+                        ftk.CopyTo(destinotk, True)
                     End If
                     wordFiles.Add(nombretk)
                 Catch ex As Exception
@@ -4820,13 +4824,13 @@ Public Class CartaDePorteManager
                     If True Then
                         'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
 
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
-                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinotk)))
+                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinocp)))
 
                         Dim bimp = MergeTwoImages(oImg, oImg2)
 
 
-                        bimp.Save(sDirFTP + nombrecp)
+                        bimp.Save(destinocp)
 
 
                         wordFiles.Remove(nombretk)
@@ -4836,16 +4840,16 @@ Public Class CartaDePorteManager
                         'juntar las imagenes para DOW
                         'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
 
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinotk)))
 
                         Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
-                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinocp)))
                             grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
 
 
                         End Using
 
-                        oImg.Save(sDirFTP + nombrecp)
+                        oImg.Save(destinocp)
 
 
 
@@ -4873,7 +4877,7 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDirFTP + s
+            s = sDirFTPdest + s
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -5160,6 +5164,7 @@ Public Class CartaDePorteManager
 
 
         Dim sDIRFTP = DirApp & "\DataBackupear\"
+        Dim sDirFTPdest = sDIRFTP + "\borrar\"
         'If System.Diagnostics.Debugger.IsAttached() Then
         '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
         '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
@@ -5213,7 +5218,7 @@ Public Class CartaDePorteManager
                 Try
                     Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
                     If fcp.Exists Then
-                        fcp.CopyTo(sDIRFTP + nombrecp, True)
+                        fcp.CopyTo(sDIRFTPdest + nombrecp, True)
                     End If
                     'wordFiles.Add(nombrecp)
 
@@ -5230,7 +5235,7 @@ Public Class CartaDePorteManager
 
                     Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
                     If ftk.Exists Then
-                        ftk.CopyTo(sDIRFTP + nombretk, True)
+                        ftk.CopyTo(sDIRFTPdest + nombretk, True)
                     End If
                     'wordFiles.Add(nombretk)
                 Catch ex As Exception
@@ -5252,7 +5257,7 @@ Public Class CartaDePorteManager
 
                 If True Then
                     'metodo 1
-                    Dim bimp = MergeTwoImages_TiffMultipage(sDIRFTP + nombrecp, sDIRFTP + nombretk, sDIRFTP + archivo)
+                    Dim bimp = MergeTwoImages_TiffMultipage(sDIRFTPdest + nombrecp, sDIRFTPdest + nombretk, sDIRFTPdest + archivo)
 
                 Else
 
@@ -5289,7 +5294,7 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDIRFTP + s
+            s = sDIRFTPdest + s
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -5417,6 +5422,7 @@ Public Class CartaDePorteManager
                 sDirFTP = "E:\Sites\Pronto\DataBackupear\"
                 sDirFTP = DirApp + "\DataBackupear\"
 
+
                 Try
                     CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP, DirApp)
                 Catch ex As Exception
@@ -5453,8 +5459,7 @@ Public Class CartaDePorteManager
         End Try
 
 
-
-
+  
         Return output
 
     End Function
@@ -5575,7 +5580,7 @@ Public Class CartaDePorteManager
         End If
 
         sDir = DirApp & "\DataBackupear\"
-
+        Dim sDirDest = sDir & "\borrar\"
 
         ErrHandler2.WriteError("ResizeImage " & sDir & image)
 
@@ -5613,18 +5618,18 @@ Public Class CartaDePorteManager
             If newimagename = "" Then
                 If image.Substring(image.LastIndexOf(".")) <> ".png" Then
                     ErrHandler2.WriteError("resize 1")
-                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    oThumbNail.Save(sDirDest & image, System.Drawing.Imaging.ImageFormat.Jpeg)
                 Else
                     ErrHandler2.WriteError("resize 2")
-                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+                    oThumbNail.Save(sDirDest & image, System.Drawing.Imaging.ImageFormat.Png)
                 End If
             Else
                 If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
                     ErrHandler2.WriteError("resize 3")
-                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    oThumbNail.Save(sDirDest & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
                 Else
                     ErrHandler2.WriteError("resize 4")
-                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
+                    oThumbNail.Save(sDirDest & newimagename, System.Drawing.Imaging.ImageFormat.Png)
                 End If
             End If
 
@@ -5638,7 +5643,7 @@ Public Class CartaDePorteManager
             ErrHandler2.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
             ErrHandler2.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
             ErrHandler2.WriteError(ex)
-            ErrHandler2.WriteError(sDir & "---" & image & "---" & newimagename)
+            ErrHandler2.WriteError(sDirDest & "---" & image & "---" & newimagename)
         End Try
 
 
@@ -17965,6 +17970,7 @@ Public Class LogicaInformesWilliams
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
 
 
+
         Dim movs = (From i In db.CartasPorteMovimientos _
                     Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente _
                     Where _
@@ -18086,13 +18092,15 @@ Public Class LogicaInformesWilliams
 
         Else
 
+            'el true está obviando la condicion de SubnumeroDeFacturacion
             'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
 
-
+            
             Dim q = Aggregate i In db.CartasDePortes _
                     Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
-                    And (True Or If(i.SubnumeroDeFacturacion, 0) <= 0) _
-                        And i.Exporta = "SI" And i.Anulada <> "SI" _
+                        And (If(i.SubnumeroDeFacturacion, 0) <= 0) _
+                        And db.CartasDePortes.Any(Function(x) x.Exporta = "SI" And x.NumeroCartaDePorte = i.NumeroCartaDePorte) _
+                        And i.Anulada <> "SI" _
                         And If(i.Destino, 0) = IdDestinoWilliams _
                         And If(i.IdArticulo, 0) = IdArticulo _
                         And If(i.Entregador, 0) = iddestinatario _
@@ -18105,7 +18113,6 @@ Public Class LogicaInformesWilliams
         '///////////////////////////////////////////////
         'movimientos:
         '///////////////////////////////////////////////
-
 
         Dim temp = From i In db.CartasPorteMovimientos _
                    Where _
