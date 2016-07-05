@@ -99,9 +99,9 @@ namespace ProntoFlexicapture
 
 
 
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(
-            ref IEngine engine, ref IFlexiCaptureProcessor processor, string plantilla,
-                                                int cuantasImagenes, string SC, string DirApp, bool bProcesar, ref string sError)
+        public static List<FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(
+                                        ref IEngine engine, ref IFlexiCaptureProcessor processor, string plantilla,
+                                        int cuantasImagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
 
@@ -207,7 +207,7 @@ namespace ProntoFlexicapture
 //   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 129
 //   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 322
 
-
+               Log(xxx.ToString());
 
                 //tirar la Lista de imagenes sospechosas
                 foreach (string s in imagenes)
@@ -229,6 +229,7 @@ namespace ProntoFlexicapture
 
                 if (count > imagenes.Count - 1) break;
 
+                
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
 
@@ -267,6 +268,7 @@ namespace ProntoFlexicapture
    //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
    //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
 
+                    Log(xx.ToString());
 
                     foreach (string s in imagenes)
                     {
@@ -386,6 +388,7 @@ namespace ProntoFlexicapture
                             }
                             catch (Exception x)
                             {
+                                Log(x.ToString());
                                 ErrHandler2.WriteError(x);
                             }
 
