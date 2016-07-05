@@ -397,9 +397,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceClientes.asmx/CotizacionWilliamsDestinoBatchUpdate",
+                        url: "WebServiceClientes.asmx/DestinoBatchUpdate",
                         dataType: 'json',
-                        data: JSON.stringify(datos),
+                        data: JSON.stringify({ o: datos }),
                         success: function (result) {
                             if (result) {
                                 $grid.jqGrid('setRowData', gridId, { act: "" });
