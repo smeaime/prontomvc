@@ -5424,8 +5424,7 @@ Public Class LogicaFacturacion
 
 
 
-
-
+            
             oRs = oAp.Parametros.TraerFiltrado("_PorId", 1)
             mIdMonedaPesos = IIf(IsNull(oRs.Fields("IdMoneda").Value), 1, oRs.Fields("IdMoneda").Value)
             mIdCuenta = IIf(IsNull(oRs.Fields("IdCuentaDeudoresVarios").Value), 0, oRs.Fields("IdCuentaDeudoresVarios").Value)
@@ -5673,8 +5672,6 @@ Public Class LogicaFacturacion
                     'como hago para que el imputador revise esto?
 
 
-
-
                     Dim renglons As Integer = 0
                     For Each o In ImputacionDevuelta
                         renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
@@ -5721,6 +5718,7 @@ Public Class LogicaFacturacion
 
                                 .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
 
+                                If (.Fields("PrecioUnitario").Value = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
 
 
                                 .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value 'mTotal - mIVA
@@ -5820,6 +5818,9 @@ Public Class LogicaFacturacion
 
                                 .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
                                 .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
+
+                                If (dr.Item("TarifaFacturada") = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+
                                 .Fields("PrecioUnitario").Value = dr.Item("TarifaFacturada")
                                 .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
                                 .Fields("Costo").Value = 0
@@ -5902,6 +5903,7 @@ Public Class LogicaFacturacion
                                     End If
 
 
+                                    If (tarif = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
 
 
                                     .Fields("PrecioUnitario").Value = tarif

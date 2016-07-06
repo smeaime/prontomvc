@@ -203,6 +203,28 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void primer_test_para_temas_de_facturacion_22221()
+        {
+            
+            // tenes instalado el pronto? server2/publico/actualizacion
+
+            //    tarifas en cero de buques
+                    //LogicaFacturacion.GenerarLoteFacturas_NUEVO(tablaEditadaDeFacturasParaGenerar, HFSC.Value, ViewState("pagina"), ViewState("sesionId"), optFacturarA.SelectedValue, gvFacturasGeneradas, _
+                    //                    txtFacturarATerceros.Text, SeEstaSeparandoPorCorredor, Session, cmbPuntoVenta.Text, _
+                    //                    dtViewstateRenglonesManuales, cmbAgruparArticulosPor.SelectedItem.Text, _
+                    //                    txtBuscar.Text, txtTarifaGastoAdministrativo.Text, errLog, txtCorredor.Text, chkPagaCorredor.Checked, txtOrdenCompra.Text, ViewState("PrimeraIdFacturaGenerada"), ViewState("UltimaIdFacturaGenerada"), 0)
+
+
+           // LogicaFacturacion.CreaFacturaCOMpronto()
+
+
+
+        }
+
+
+
         [TestMethod]
         public void problema_informe_liquidacionsubcon()
         {
