@@ -18058,9 +18058,12 @@ Public Class LogicaInformesWilliams
 
         'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
 
+
         If True Then
 
-            'no puedo usar esto, porque necesito traer cartas desde el principio de los tiempos
+            'acá tenes un tema con usar Fecha o Fecha-1
+            '-si el tipo elige desde hoy hasta hoy, tenes que llamar a la funcion con el ultimo segundo de ayer, porque GetDataTableFiltradoYPaginado_CadenaSQL usa menor o igual
+
 
             Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc, _
                     "", "", "", 1, 0, _
@@ -18068,7 +18071,7 @@ Public Class LogicaInformesWilliams
                     iddestinatario, -1, _
                     -1, IdArticulo, -1, IdDestinoWilliams, _
                    "1", "Export", _
-                      #1/1/1980#, Fecha, -1, , , , , , , , , , )
+                      #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
 
 
 
