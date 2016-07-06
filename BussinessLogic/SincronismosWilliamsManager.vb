@@ -2595,13 +2595,14 @@ Namespace Pronto.ERP.Bll
                         sCalidad = "FE"
                     End If
                     'sb &= sCalidad.PadRight(2) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
-
-
-
-
-
                     sb &= .NobleGrado.ToString().PadRight(2)
-                    sb &= IIf(.NobleConforme = "0", "NO", "SI").PadRight(2)
+
+
+
+
+                    'sb &= IIf(.NobleConforme = "0", "NO", "SI").PadRight(2)
+                    sb &= IIf(.CalidadDe = 25, "SI", "NO").PadRight(2) 'Andres, solamente poner si cuando es CONFORME, resto poner NO ( Todo el resto del listado que detallas )
+
 
                     '//////////////////////////////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////////////////////////////

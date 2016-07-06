@@ -18058,19 +18058,23 @@ Public Class LogicaInformesWilliams
 
         'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
 
-        If False Then
+        If True Then
 
             'no puedo usar esto, porque necesito traer cartas desde el principio de los tiempos
 
-            'Dim dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
-            '        "", "", "", 1, 0, _
-            '        enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-            '        iddestinatario, -1, _
-            '        -1, IdArticulo, -1, idDestino, _
-            '        "1", "Export", _
-            '          #1/1/1980#, hasta, -1, sTitulo, , , , , , , , , )
+            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc, _
+                    "", "", "", 1, 0, _
+                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+                    iddestinatario, -1, _
+                    -1, IdArticulo, -1, IdDestinoWilliams, _
+                   "1", "Export", _
+                      #1/1/1980#, Fecha, -1, , , , , , , , , , )
 
 
+
+            entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C").Rows(0).Item(0)
+
+         
 
         ElseIf False Then
 
@@ -18095,7 +18099,7 @@ Public Class LogicaInformesWilliams
             'el true está obviando la condicion de SubnumeroDeFacturacion
             'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
 
-            
+
             Dim q = Aggregate i In db.CartasDePortes _
                     Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
                         And (If(i.SubnumeroDeFacturacion, 0) <= 0) _
