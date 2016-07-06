@@ -212,7 +212,7 @@ namespace ProntoMVC.Tests
             c.SubnumeroVagon = 222;
             string ms = "";
             CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
-            
+
             ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
 
 
@@ -315,7 +315,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void SincroZeni_17945()
+        public void SincroZeni_17945_22197()
         {
 
             string sErrores = "", sTitulo = "";
@@ -327,14 +327,13 @@ namespace ProntoMVC.Tests
 
 
 
-            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                        "", -1, -1, -1, -1,
+                        -1, -1, -1, -1,
+                        CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                        -1, "Ambas", false, "", "", -1, ref registrosf, 40);
 
 
 
@@ -2138,6 +2137,47 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void movimientos_22213()
+        {
+
+            //Cuando pone del 27/06 al 27/06 le tira tantos kg netos . Y cuando tira del 01/01 al 27/06 le tira otros kg netos. Los kg netos tendrian que ser los mismos, ya que la fecha final es la misma ( 27/06).
+
+            int pv = 2;
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ACA SAN LORENZO", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
+            DateTime desde = new DateTime(2016, 1,1 );
+            DateTime hasta = new DateTime(2015, 7, 27);
+
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario);
+
+            string sTitulo = "";
+
+            // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
+            //var dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC,
+            //        "", "", "", 1, 0,
+            //        CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+            //        destinatario, -1,
+            //        -1, idarticulo, -1, destino,
+            //        CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+            //         desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                    "", "", "", 1, 0,
+                    CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    destinatario, -1,
+                    -1, idarticulo, -1, destino,
+                    CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                     desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C");
+
+            decimal total = Convert.ToDecimal(dt.Rows[0][0]);
+
+        }
 
 
 
