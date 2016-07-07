@@ -228,31 +228,63 @@ namespace ProntoMVC.Tests
             //ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String, _
 
 
-            System.Web.SessionState.HttpSessionState Session = null;
+            //System.Web.SessionState.HttpSessionState Session;
+            //Session[CartaDePorteManager.SESSIONPRONTO_glbIdUsuario] = 4;
 
-            string agruparArticulosPor = "";
             string txtBuscar = "";
             string txtTarifaGastoAdministrativo = "";
 
-            DataTable dtRenglonesAgregados = null;
             bool chkPagaCorredor = false;
             //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
 
-            int optFacturarA = 0;
+
+            int optFacturarA = 4;
+            string agruparArticulosPor = "Destino";
+
+
             string txtCorredor = "";
-            long idClienteAfacturarle = -1;
+            long idClienteAfacturarle = 164;
             int idClienteObservaciones = -1;
             bool SeEstaSeparandoPorCorredor = true;
             int PuntoVenta = 2;
-            DataTable dtViewstateRenglonesManuales;
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
 
             var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
-            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+            for (int n = 1372900; n < 1372910; n++)
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.IdFacturaImputada = 0;
+                db.SaveChanges();
+
+                var c = CartaDePorteManager.GetItem(SC, n);
+                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
+
+                lote.Add(c);
+            }
+
 
             IEnumerable<LogicaFacturacion.grup> imputaciones = null;
 
+
             int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
-                                                 dtRenglonesAgregados, SC, Session, optFacturarA,
+                                                 dtRenglonesAgregados, SC, null, optFacturarA,
                                               agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
                                                 txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
 
