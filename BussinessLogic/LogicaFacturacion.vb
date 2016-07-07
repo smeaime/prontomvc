@@ -4782,7 +4782,7 @@ Public Class LogicaFacturacion
 
 
 
-    Class grup
+    Public Class grup
         Public cartas As System.Collections.Generic.IEnumerable(Of Pronto.ERP.BO.CartaDePorte)
         Public IdArticulo As Integer
         Public Entregador As Integer
