@@ -5370,6 +5370,8 @@ Public Class LogicaFacturacion
         'factura (daríamos de alta los 4 centros de costo)
 
 
+        Dim usuario As Integer = 1
+        If Session IsNot Nothing Then usuario = Session(SESSIONPRONTO_glbIdUsuario)
 
 
         Dim tTemp As Date = Now
@@ -5566,7 +5568,11 @@ Public Class LogicaFacturacion
 
                         .Fields("NumeroCAI").Value = Val(mCAI)
                         .Fields("FechaVencimientoCAI").Value = mFechaCAI
-                        .Fields("IdUsuarioIngreso").Value = Session(SESSIONPRONTO_glbIdUsuario)
+
+                       
+
+                        .Fields("IdUsuarioIngreso").Value = usuario
+
                         .Fields("FechaIngreso").Value = Today
                         .Fields("IdCodigoIva").Value = mIdCodigoIva   'este no lo estas asignando (ahora)... Igual, la factura graba
                         '.Fields("PercepcionIVA").Value = 1 ' 0   'Esta linea tira error
@@ -6159,7 +6165,7 @@ Public Class LogicaFacturacion
 
 
                 Try
-                    EntidadManager.LogPronto(SC, idFacturaCreada, "Factura por ProntoWeb", Session(SESSIONPRONTO_glbIdUsuario))
+                    EntidadManager.LogPronto(SC, idFacturaCreada, "Factura por ProntoWeb", usuario)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
@@ -6529,6 +6535,9 @@ Public Class LogicaFacturacion
 
 
 
+        Dim usuario As Integer = 1
+        If session IsNot Nothing Then usuario = session(SESSIONPRONTO_glbIdUsuario)
+
         Dim totIVA As Double = 0
 
 
@@ -6610,9 +6619,10 @@ Public Class LogicaFacturacion
                     'el total es el total, no importa que discrimine
                     mTotal += .Fields("Cantidad").Value * (mvarPrecio + iva)
 
+
                     '
                     If mvarTipoABC = "B" And mvarTipoIVA <> 8 And _
-                          EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, session(SESSIONPRONTO_glbIdUsuario)) <> "SI" Then
+                          EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, usuario) <> "SI" Then
                         'acá hace "la magia" de encajarle el iva en el precio del item (recordá que 
                         'no discriminar el iva es solo un tema de presentacion)
                         mvarPrecio = mvarPrecio + iva
@@ -6719,7 +6729,7 @@ Public Class LogicaFacturacion
                 .Fields("ImporteTotal").Value = Math.Round(mvarSubTotal + mvarIBrutos + Math.Round(totIVA, 2), 2)   ' Math.Round(mTotal, 2)
 
                 If mvarTipoABC = "B" And mvarTipoIVA <> 8 And _
-                      EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, session(SESSIONPRONTO_glbIdUsuario)) <> "SI" Then
+                      EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, usuario) <> "SI" Then
                     .Fields("IVANoDiscriminado").Value = Math.Round(totIVA, 2) ' totIVA
                     .Fields("ImporteIva1").Value = 0
                 Else
