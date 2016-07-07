@@ -31,6 +31,7 @@ using System.IO;
 
 using Pronto.ERP.Bll;
 
+using System.Data;
 
 using System.Diagnostics;
 
@@ -207,21 +208,61 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void primer_test_para_temas_de_facturacion_22221()
         {
-            
+
             // tenes instalado el pronto? server2/publico/actualizacion
 
             //    tarifas en cero de buques
-                    //LogicaFacturacion.GenerarLoteFacturas_NUEVO(tablaEditadaDeFacturasParaGenerar, HFSC.Value, ViewState("pagina"), ViewState("sesionId"), optFacturarA.SelectedValue, gvFacturasGeneradas, _
-                    //                    txtFacturarATerceros.Text, SeEstaSeparandoPorCorredor, Session, cmbPuntoVenta.Text, _
-                    //                    dtViewstateRenglonesManuales, cmbAgruparArticulosPor.SelectedItem.Text, _
-                    //                    txtBuscar.Text, txtTarifaGastoAdministrativo.Text, errLog, txtCorredor.Text, chkPagaCorredor.Checked, txtOrdenCompra.Text, ViewState("PrimeraIdFacturaGenerada"), ViewState("UltimaIdFacturaGenerada"), 0)
+            //LogicaFacturacion.GenerarLoteFacturas_NUEVO(tablaEditadaDeFacturasParaGenerar, HFSC.Value, ViewState("pagina"), ViewState("sesionId"), optFacturarA.SelectedValue, gvFacturasGeneradas, _
+            //                    txtFacturarATerceros.Text, SeEstaSeparandoPorCorredor, Session, cmbPuntoVenta.Text, _
+            //                    dtViewstateRenglonesManuales, cmbAgruparArticulosPor.SelectedItem.Text, _
+            //                    txtBuscar.Text, txtTarifaGastoAdministrativo.Text, errLog, txtCorredor.Text, chkPagaCorredor.Checked, txtOrdenCompra.Text, ViewState("PrimeraIdFacturaGenerada"), ViewState("UltimaIdFacturaGenerada"), 0)
 
 
-           // LogicaFacturacion.CreaFacturaCOMpronto()
 
+
+            //              ByRef pag As Object, _
+            //  ByRef sesionId As Object, _
+
+
+
+            //ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String, _
+
+
+            System.Web.SessionState.HttpSessionState Session = null;
+
+            string agruparArticulosPor = "";
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            DataTable dtRenglonesAgregados = null;
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+            int optFacturarA = 0;
+            string txtCorredor = "";
+            long idClienteAfacturarle = -1;
+            int idClienteObservaciones = -1;
+            bool SeEstaSeparandoPorCorredor = true;
+            int PuntoVenta = 2;
+            DataTable dtViewstateRenglonesManuales;
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+            int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
+                                                 dtRenglonesAgregados, SC, Session, optFacturarA,
+                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
+                                                txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
 
 
         }
+
+
+
+
+
 
 
 
@@ -2169,7 +2210,7 @@ namespace ProntoMVC.Tests
             int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
             int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ACA SAN LORENZO", SC);
             int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
-            DateTime desde = new DateTime(2016, 1,1 );
+            DateTime desde = new DateTime(2016, 1, 1);
             DateTime hasta = new DateTime(2015, 7, 27);
 
             var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
