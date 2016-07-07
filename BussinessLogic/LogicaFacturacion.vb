@@ -5149,8 +5149,8 @@ Public Class LogicaFacturacion
 
 
     Public Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
-        
-        
+
+
 
         Try
 
@@ -5426,7 +5426,7 @@ Public Class LogicaFacturacion
 
 
 
-            
+
             oRs = oAp.Parametros.TraerFiltrado("_PorId", 1)
             mIdMonedaPesos = IIf(IsNull(oRs.Fields("IdMoneda").Value), 1, oRs.Fields("IdMoneda").Value)
             mIdCuenta = IIf(IsNull(oRs.Fields("IdCuentaDeudoresVarios").Value), 0, oRs.Fields("IdCuentaDeudoresVarios").Value)
@@ -5502,10 +5502,34 @@ Public Class LogicaFacturacion
                         'hay una tablita de condiciones
                         'se llama "Conciciones Compra"
                         'que tiene la cantidad de dias CantidadDias
-                        Dim dtcondiciones As DataTable = EntidadManager.ExecDinamico(SC, "SELECT IdCondicionVenta FROM Clientes WHERE idCliente= " & IdClienteAFacturarle)
-                        Dim idcondicion As Integer = iisNull(dtcondiciones.Rows(0).Item("IdCondicionVenta"), 1)
-                        .Fields("IdCondicionVenta").Value = idcondicion
-                        Dim dias As Integer = iisNull(EntidadManager.ExecDinamico(SC, "SELECT CantidadDias1 FROM  [Condiciones Compra]  WHERE idCondicionCompra=" & idcondicion).Rows(0).Item(0), 0)
+                        Dim idcondicion As Integer = 4
+                        Try
+
+                            Dim dtcondiciones As DataTable = EntidadManager.ExecDinamico(SC, "SELECT IdCondicionVenta FROM Clientes WHERE idCliente= " & IdClienteAFacturarle)
+
+                            'había un idcondicion que no existia como id en la tabla (estaban usando la id=15) -claro, explotaba la linea de CantidadDias!
+
+                            idcondicion = iisNull(dtcondiciones.Rows(0).Item("IdCondicionVenta"), 1)
+                            .Fields("IdCondicionVenta").Value = idcondicion
+                        Catch ex As Exception
+                            ErrHandler2.WriteError("Problema con la IdCondicionVenta?    " & IdClienteAFacturarle & " " & ex.ToString)
+                            'Throw no rompas la facturacion
+                        End Try
+
+                        Dim dias As Integer = 0
+                        Try
+
+
+                            dias = iisNull(EntidadManager.ExecDinamico(SC, "SELECT CantidadDias1 FROM  [Condiciones Compra]  WHERE idCondicionCompra=" & idcondicion).Rows(0).Item(0), 0)
+                        Catch ex As Exception
+                            ErrHandler2.WriteError("Problema con  CantidadDias1?    " & idcondicion & " " & ex.ToString)
+                            'Throw no rompas la facturacion
+                        End Try
+
+
+
+
+
                         .Fields("FechaVencimiento").Value = DateAdd(DateInterval.Day, dias, Today) ' mFecha 
 
 
@@ -5569,7 +5593,7 @@ Public Class LogicaFacturacion
                         .Fields("NumeroCAI").Value = Val(mCAI)
                         .Fields("FechaVencimientoCAI").Value = mFechaCAI
 
-                       
+
 
                         .Fields("IdUsuarioIngreso").Value = usuario
 
