@@ -223,7 +223,9 @@ Public Class WebServiceClientes
 
 
     <WebMethod()> _
-    Public Function DestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga) As String ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
+    Public Function DestinoBatchUpdate(o As Object) As String
+        'Public Function DestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga) As String
+        ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
 
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
@@ -243,27 +245,38 @@ Public Class WebServiceClientes
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
+        Dim id As Integer = o("IdCartasDePorteControlDescarga")
 
 
-        If (o.IdCartasDePorteControlDescarga > 0) Then
 
-            Dim EntidadOriginal = db.CartasDePorteControlDescargas.Where(Function(p) p.IdCartasDePorteControlDescarga = o.IdCartasDePorteControlDescarga).SingleOrDefault()
+
+        If (id > 0) Then
+
+            Dim EntidadOriginal = db.CartasDePorteControlDescargas.Where(Function(p) p.IdCartasDePorteControlDescarga = id).SingleOrDefault()
             Dim EntidadEntry = db.Entry(EntidadOriginal)
-            EntidadEntry.CurrentValues.SetValues(o)
+
+            EntidadOriginal.Fecha = o("Fecha")
+            EntidadOriginal.IdDestino = CInt(o("IdWilliamsDestino"))
+            EntidadOriginal.TotalDescargaDia = o("TotalDescargaDia")
+
+            EntidadEntry.CurrentValues.SetValues(EntidadOriginal)
 
             db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified
 
         Else
+            Dim x As New CartasDePorteControlDescarga
+            x.IdCartasDePorteControlDescarga = o("IdCartasDePorteControlDescarga")
+            x.Fecha = o("Fecha")
+            x.IdDestino = CInt(o("IdWilliamsDestino"))
+            x.TotalDescargaDia = o("TotalDescargaDia")
 
-            db.CartasDePorteControlDescargas.Add(o)
+            db.CartasDePorteControlDescargas.Add(x)
         End If
 
         db.SaveChanges()
 
         'TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
-
         'return Json(new { Success = 1, IdCotizacion = Cotizacion.IdCotizacion, ex = "" });
-
 
         '}
         'catch (Exception ex)

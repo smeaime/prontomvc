@@ -317,7 +317,7 @@ public class JQGridHandler : IHttpHandler
                                 
                                  a.Fecha.ToShortDateString(),
                                  
-                                 a.WilliamsDestino.Descripcion,
+                                a.WilliamsDestino==null ? "" : a.WilliamsDestino.Descripcion,
      
                                  a.IdDestino.ToString(),
                                  
