@@ -43,7 +43,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <asp:Button ID="informe" Text="Informe" runat="server" />
         <br />
         <br />
-        <input type="text" class="span4" id="text1" name="agent" value="" />
+        <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
 
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;">
@@ -605,62 +605,111 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                          rows: '1', cols: '1',
                                          dataInit: function (elem) {
                                              var NoResultsLabel = "No se encontraron resultados";
+
+
                                              $(elem).autocomplete({
-                                                 source:  //"WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                                                     function (request, response) {
-                                                         $.ajax({
-                                                             type: "POST",
-                                                             url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                                                             dataType: "json",
-                                                             contentType: "application/json; charset=utf-8",
+                                                 source: function (request, response) {
+                                                     $.ajax({
+                                                         type: "POST",
+                                                         url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                                         dataType: "json",
+                                                         contentType: "application/json; charset=utf-8",
 
-                                                             data: JSON.stringify({ term: request.term }),
-                                                             success: function (data2) {
-                                                                 var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-                                                                 if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                                                     var ui = data[0];
+                                                         data: JSON.stringify({ term: request.term }),
 
-                                                                     if (ui.id == "") {
-                                                                         alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                                         $("#Descripcion").val("");
-                                                                         return;
-                                                                     }
-                                                                     $("#IdWilliamsDestino").val(ui.id);
+                                                         //success: function (data) {
+                                                         //    //check what data contains. it should contain a string like "['val1','val2','val3','val4']"
+                                                         //    //the next line should use $.map(data and not $.map(response
+                                                         //    var a = $.parseJSON(data.d);
+                                                         //    response($.map(a, function (item) {
+                                                         //        return {
+                                                         //            label: item.value,
+                                                         //            value: item.id
+                                                         //        }
+                                                         //    }));
+                                                         //}
 
-                                                                     UltimoIdArticulo = ui.id;
-                                                                 }
-                                                                 else {
+
+                                                         success: function (data2) {
+                                                             var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+                                                             if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                                 var ui = data[0];
+
+                                                                 if (ui.id == "") {
                                                                      alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                                     $("#Descripcion").val("");
+                                                                     return;
                                                                  }
+                                                                 $("#IdWilliamsDestino").val(ui.id);
+
+                                                                 UltimoIdArticulo = ui.id;
                                                              }
-                                                         });
-                                                     },
+                                                             else {
+                                                                 alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                             }
+                                                         }
 
-                                                 dataType: "json", //"xml",
-                                                 contentType: "application/json; charset=utf-8",
-                                                 minLength: 0,
-                                                 select: function (event, ui) {
-                                                     if (ui.item.value === NoResultsLabel) {
-                                                         event.preventDefault();
-                                                         return;
-                                                     }
-                                                     $("#IdWilliamsDestino").val(ui.item.id);
 
-                                                     UltimoIdArticulo = ui.item.id;
-                                                 },
-                                                 focus: function (event, ui) {
-                                                     if (ui.item.value === NoResultsLabel) {
-                                                         event.preventDefault();
-                                                     }
+                                                     })
                                                  }
-                                             })
-                                             //.data("ui-autocomplete")._renderItem = function (ul, item) {
-                                             //    return $("<li></li>")
-                                             //        .data("ui-autocomplete-item", item)
-                                             //        .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.value + "]</b></span></a>")
-                                             //        .appendTo(ul);
-                                             //}
-                                             ;
+                                             });
+
+
+
+
+                                             //$(elem).autocomplete({
+                                             //    source:  //"WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                             //        function (request, response) {
+                                             //            $.ajax({
+                                             //                type: "POST",
+                                             //                url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                             //                dataType: "json",
+                                             //                contentType: "application/json; charset=utf-8",
+
+                                             //                data: JSON.stringify({ term: request.term }),
+                                             //                success: function (data2) {
+                                             //                    var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+                                             //                    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                             //                        var ui = data[0];
+
+                                             //                        if (ui.id == "") {
+                                             //                            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                             //                            $("#Descripcion").val("");
+                                             //                            return;
+                                             //                        }
+                                             //                        $("#IdWilliamsDestino").val(ui.id);
+
+                                             //                        UltimoIdArticulo = ui.id;
+                                             //                    }
+                                             //                    else {
+                                             //                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                             //                    }
+                                             //                }
+                                             //            });
+                                             //        },
+
+                                             //    dataType: "json", //"xml",
+                                             //    contentType: "application/json; charset=utf-8",
+                                             //    minLength: 0,
+                                             //    select: function (event, ui) {
+                                             //        if (ui.item.value === NoResultsLabel) {
+                                             //            event.preventDefault();
+                                             //            return;
+                                             //        }
+                                             //        $("#IdWilliamsDestino").val(ui.item.id);
+
+                                             //        UltimoIdArticulo = ui.item.id;
+                                             //    },
+                                             //    focus: function (event, ui) {
+                                             //        if (ui.item.value === NoResultsLabel) {
+                                             //            event.preventDefault();
+                                             //        }
+                                             //    }
+                                             //});
+
+
+
+
                                          },
                                          dataEvents: [{
                                              type: 'change',
@@ -749,7 +798,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }
             }
                                 ,
-            { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'right', width: 50, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } }
+            {
+                name: 'IdPuntoVenta', index: 'IdPuntoVenta',
+
+                width: 100, resizable: true,
+                align: "left", sorttype: "text", editable: true, edittype: "select", editoptions:
+                { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" }, editrules: { required: true }
+            }
+
+
+
 
 
                     ],
@@ -794,7 +852,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     multiselect: true,
                     shrinkToFit: true,
                     width: 'auto',
-                    height: $(window).height() - 200, // '100%'
+                    height: $(window).height() - 300, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
