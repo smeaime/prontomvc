@@ -12082,6 +12082,7 @@ Public Class CartaDePorteManager
 
 
 
+
     Public Shared Function ImprimirFacturaElectronica(IdFactura As Integer, bMostrarPDF As Boolean, SC As String, DirApp As String) As String
 
         ErrHandler2.WriteError("ImprimirFacturaElectronica idfac " & IdFactura) ' & " " & Encriptar(SC))
@@ -13570,6 +13571,23 @@ Public Class CartaDePorteManager
 
 
     End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
