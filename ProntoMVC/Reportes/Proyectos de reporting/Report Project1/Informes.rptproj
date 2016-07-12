@@ -423,6 +423,10 @@
       <FullPath>Williams - Listado de Clientes incompletos.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Williams - Nidera con SQL.rdl</Name>
+      <FullPath>Williams - Nidera con SQL.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Williams - Nidera con Webservice sin parametros.rdl</Name>
       <FullPath>Williams - Nidera con Webservice sin parametros.rdl</FullPath>
     </ProjectItem>
@@ -431,8 +435,8 @@
       <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Williams - Nidera con SQL.rdl</Name>
-      <FullPath>Williams - Nidera con SQL.rdl</FullPath>
+      <Name>Williams - Controles Diarios.rdl</Name>
+      <FullPath>Williams - Controles Diarios.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
