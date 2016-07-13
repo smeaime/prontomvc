@@ -19,10 +19,10 @@ select
     IdCartasDePorteControlDescarga,
     Destino,
     FechaDescarga,
-    Sum(NetoFinal),
+    Sum(NetoFinal) as NetoFinal,
     TotalDescargaDia,
-    TotalDescargaDia - Sum(NetoFinal),
-    Count(*)
+    TotalDescargaDia - Sum(NetoFinal) as dif,
+    Count(*) as cuantas
     --g.Select(x => x.NumeroCartaDePorte).ToList()
 
 	from CartasDePorteControlDescarga D

@@ -48,7 +48,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;">
         </table>
-        <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
+        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
         </div>
         <%--<script>
 
@@ -632,6 +632,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                                                          success: function (data2) {
                                                              var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
                                                              if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
                                                                  var ui = data[0];
 
@@ -647,10 +648,52 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                              else {
                                                                  alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
                                                              }
+
+                                                             response($.map(data, function (item) {
+                                                                 return {
+                                                                     label: item.value,
+                                                                     value: item.value //item.id
+                                                                     ,id: item.id
+                                                                 }
+                                                             }));
+
                                                          }
 
 
+
                                                      })
+
+
+                                                 }
+
+                                                  ,
+                                                 select: function (e, ui) {
+                                                     //http://stackoverflow.com/questions/27635689/jqgrid-autocomplete-cannot-post-id-column
+                                                     // Oleg
+                                                     //UPDATED: It's really important to know which editing mode you use because 
+                                                     //id of input fields will be set based on different rules. The below code detect
+                                                     //whether form editing, inline editing or toolbar filter will be used which to choose the corresponding id.
+
+                                                     var id;
+                                                     if ($(elem).hasClass("FormElement")) {
+                                                         // form editing
+                                                         id = "IdWilliamsDestino";
+                                                     } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
+                                                         // filter foolbar
+                                                         id = "gs_IdWilliamsDestino";
+                                                     } else if ($(elem).closest("tr.jqgrow").length > 0) {
+                                                         //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
+
+
+                                                         var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
+                                                         var rowData = $("#Lista").jqGrid('getRowData', rowId);
+                                                         rowData.Descripcion = ui.item.value;
+                                                         rowData.IdWilliamsDestino = ui.item.id;
+                                                         $("#Lista").jqGrid('setRowData', rowId, rowData);
+
+
+                                                     }
+                                                     //$("#" + id).val(ui.item.id);
                                                  }
                                              });
 
@@ -710,72 +753,74 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                                         },
-                                         dataEvents: [{
-                                             type: 'change',
-                                             fn: function (e) {
-                                                 if (this.value == "No se encontraron resultados") {
-                                                     $("#Descripcion").val("");
-                                                     return;
-                                                 }
+                                         }
+
+                                         //,
+                                         //dataEvents: [{
+                                         //    type: 'change',
+                                         //    fn: function (e) {
+                                         //        if (this.value == "No se encontraron resultados") {
+                                         //            $("#Descripcion").val("");
+                                         //            return;
+                                         //        }
 
 
-                                                 $.ajax({
-                                                     url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                                                     type: "POST",
-                                                     data: JSON.stringify({ term: this.value }),
-                                                     contentType: "application/json; charset=utf-8",
-                                                     dataType: "json",
-                                                     success:
-                                                         function (data2) {
-                                                             var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-                                                             if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                                                 var ui = data[0];
+                                         //        $.ajax({
+                                         //            url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                         //            type: "POST",
+                                         //            data: JSON.stringify({ term: this.value }),
+                                         //            contentType: "application/json; charset=utf-8",
+                                         //            dataType: "json",
+                                         //            success:
+                                         //                function (data2) {
+                                         //                    var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+                                         //                    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                         //                        var ui = data[0];
 
-                                                                 if (ui.id == "") {
-                                                                     alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                                     $("#Descripcion").val("");
-                                                                     return;
-                                                                 }
-                                                                 $("#IdWilliamsDestino").val(ui.id);
+                                         //                        if (ui.id == "") {
+                                         //                            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                         //                            $("#Descripcion").val("");
+                                         //                            return;
+                                         //                        }
+                                         //                        $("#IdWilliamsDestino").val(ui.id);
 
-                                                                 UltimoIdArticulo = ui.id;
-                                                             }
-                                                             else {
-                                                                 alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                             }
-                                                         }
-                                                 })
-
-
+                                         //                        UltimoIdArticulo = ui.id;
+                                         //                    }
+                                         //                    else {
+                                         //                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                         //                    }
+                                         //                }
+                                         //        })
 
 
-                                                 //$.post("WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",  // ?term=' + val
 
-                                                 //    { term: this.value },
 
-                                                 //    function (data) {
-                                                 //        if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                                 //            var ui = data[0];
+                                         //        //$.post("WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",  // ?term=' + val
 
-                                                 //            if (ui.id== "") {
-                                                 //                alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                 //                $("#Descripcion").val("");
-                                                 //                return;
-                                                 //            }
-                                                 //            $("#IdWilliamsDestino").val(ui.id);
+                                         //        //    { term: this.value },
 
-                                                 //            UltimoIdArticulo = ui.id;
-                                                 //        }
-                                                 //        else {
-                                                 //            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                 //        }
-                                                 //    }
+                                         //        //    function (data) {
+                                         //        //        if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                         //        //            var ui = data[0];
 
-                                                 //     ,"json" //"xml"
-                                                 //);
-                                             }
-                                         }]
+                                         //        //            if (ui.id== "") {
+                                         //        //                alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                         //        //                $("#Descripcion").val("");
+                                         //        //                return;
+                                         //        //            }
+                                         //        //            $("#IdWilliamsDestino").val(ui.id);
+
+                                         //        //            UltimoIdArticulo = ui.id;
+                                         //        //        }
+                                         //        //        else {
+                                         //        //            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                         //        //        }
+                                         //        //    }
+
+                                         //        //     ,"json" //"xml"
+                                         //        //);
+                                         //    }
+                                         //}]
                                      },
                                      editrules: { required: true }
                                  },

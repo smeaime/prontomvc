@@ -257,7 +257,7 @@ Public Class WebServiceClientes
 
             EntidadOriginal.Fecha = o("Fecha")
             EntidadOriginal.IdDestino = CInt(o("IdWilliamsDestino"))
-            EntidadOriginal.TotalDescargaDia = o("TotalDescargaDia")
+            EntidadOriginal.TotalDescargaDia = CInt(o("TotalDescargaDia"))
 
             EntidadEntry.CurrentValues.SetValues(EntidadOriginal)
 
@@ -265,10 +265,9 @@ Public Class WebServiceClientes
 
         Else
             Dim x As New CartasDePorteControlDescarga
-            x.IdCartasDePorteControlDescarga = o("IdCartasDePorteControlDescarga")
             x.Fecha = o("Fecha")
             x.IdDestino = CInt(o("IdWilliamsDestino"))
-            x.TotalDescargaDia = o("TotalDescargaDia")
+            x.TotalDescargaDia = CInt(o("TotalDescargaDia"))
 
             db.CartasDePorteControlDescargas.Add(x)
         End If
