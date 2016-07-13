@@ -4742,9 +4742,8 @@ Public Class CartaDePorteManager
         'End If
 
         Dim sDirFTP = DirApp + "\DataBackupear\"
-        Dim sDirFTPdest = sDirFTP + "\borrar\"
-
-
+        Dim sDirFTPdest = sDirFTP '+ "\borrar\"
+        'xxxxx()
 
 
         Dim wordFiles As New List(Of String)
@@ -5164,7 +5163,11 @@ Public Class CartaDePorteManager
 
 
         Dim sDIRFTP = DirApp & "\DataBackupear\"
-        Dim sDirFTPdest = sDIRFTP + "\borrar\"
+        Dim sDirFTPdest = sDIRFTP '+ "\borrar\"
+        'xxxx()
+
+
+
         'If System.Diagnostics.Debugger.IsAttached() Then
         '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
         '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
@@ -5580,7 +5583,11 @@ Public Class CartaDePorteManager
         End If
 
         sDir = DirApp & "\DataBackupear\"
-        Dim sDirDest = sDir & "\borrar\"
+        Dim sDirDest = sDir '& "\borrar\"
+
+        'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
+
+        
 
         ErrHandler2.WriteError("ResizeImage " & sDir & image)
 
