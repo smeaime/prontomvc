@@ -1,0 +1,226 @@
+﻿Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Warning: The source ProntoAgente is not registered on the local machine.
+Service ProntoAgente is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: El servicio especificado no existe como servicio instalado
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Warning: The source ProntoAgente is not registered on the local machine.
+Service ProntoAgente is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: El servicio especificado no existe como servicio instalado
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Warning: The source ProntoAgente is not registered on the local machine.
+Service ProntoAgente is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: El servicio especificado no existe como servicio instalado
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Warning: The source ProntoAgente is not registered on the local machine.
+Service ProntoAgente is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: El servicio especificado no existe como servicio instalado
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Service ProntoAgente is being removed from the system...
+Service ProntoAgente was successfully removed from the system.
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Warning: The source ProntoAgente is not registered on the local machine.
+Service ProntoAgente is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: El servicio especificado no existe como servicio instalado
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Service ProntoAgente is being removed from the system...
+Service ProntoAgente was successfully removed from the system.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Service ProntoAgente is being removed from the system...
+Service ProntoAgente was successfully removed from the system.
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Warning: The source ProntoAgente is not registered on the local machine.
+Service ProntoAgente is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: El servicio especificado no existe como servicio instalado
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Service ProntoAgente is being removed from the system...
+Service ProntoAgente was successfully removed from the system.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Service ProntoAgente is being removed from the system...
+Service ProntoAgente was successfully removed from the system.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Service ProntoAgente is being removed from the system...
+Service ProntoAgente was successfully removed from the system.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Uninstalling assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Removing EventLog source ProntoAgente.
+Service ProntoAgente is being removed from the system...
+Service ProntoAgente was successfully removed from the system.
+Installing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Installing service ProntoAgente...
+Service ProntoAgente has been successfully installed.
+Creating EventLog source ProntoAgente in log Application...
+Committing assembly 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe

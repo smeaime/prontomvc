@@ -1,0 +1,66 @@
+﻿<ConfigurationSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Database>
+    <DataSources>
+      <DataSource>
+        <ID>Demo Pronto Web</ID>
+        <ConnectionString>Provider=SQLNCLI10.1;Data Source=SERVERSQL3\TESTING;Integrated Security=SSPI;Initial Catalog=DemoProntoWeb</ConnectionString>
+        <ImpersonationInfo>
+          <ImpersonationMode>ImpersonateServiceAccount</ImpersonationMode>
+          <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
+        </ImpersonationInfo>
+      </DataSource>
+    </DataSources>
+    <Dimensions>
+      <Dimension>
+        <ID>Articulos</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Fecha</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Obras</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Unidades</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Comprobantes</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Ubicaciones</ID>
+      </Dimension>
+    </Dimensions>
+    <Cubes>
+      <Cube>
+        <ID>Stock</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>DW Fact Stock</ID>
+            <Partitions>
+              <Partition>
+                <ID>DW Fact Stock</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>GastosDetallados</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>DW Fact Cuadro Gastos Detallado</ID>
+            <Partitions>
+              <Partition>
+                <ID>DW Fact Cuadro Gastos Detallado</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+    </Cubes>
+    <DataSourceImpersonationInfo>
+      <ImpersonationMode>Default</ImpersonationMode>
+      <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
+    </DataSourceImpersonationInfo>
+  </Database>
+</ConfigurationSettings>
