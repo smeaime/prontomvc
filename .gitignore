@@ -8,11 +8,8 @@
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
 x64/
 build/
-[Bb]in/
 [Oo]bj/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
@@ -155,5 +152,3 @@ $RECYCLE.BIN/
 .DS_Store
 /ProntoMVC/Error
 ProntoMVC/Documentos/archivo.pdf
-/Data/Models/*.edmx
-/Data/Models/Pronto.edmx
