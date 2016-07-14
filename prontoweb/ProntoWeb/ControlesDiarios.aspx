@@ -358,8 +358,54 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+            function sacarDeEditMode() {
+
+                // grabando o deshaciendo???
+                //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+                //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+                // jQuery('#Lista').jqGrid('editCell', lastRowIndex, lastColIndex);
+                // jQuery('#Lista').jqGrid("setCell", rowid, "amount", val, "");
+
+
+
+                         var ids = $('#Lista').getDataIDs();
+                        for (var i = 0, il = ids.length; i < il; i++) {
+                            $('#Lista').jqGrid('restoreRow', ids[i]);
+                                                   }
+
+
+
+                //        var $this = $('#Lista'), ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
+                //        for (i = l - 1; i >= 0; i--) {
+                //                $('#Lista').jqGrid('restoreRow', ids[i]);
+                //        }
+
+
+            }
+
+
+
 
             function GrabarFila(gridId) {
+
+                var saveparameters = {
+                    "successfunc": null,
+                    "url": 'clientArray',
+                    "extraparam": {},
+                    //                "aftersavefunc": function (response) {
+                    //                    alert('saved');
+                    //                },
+                    "errorfunc": null,
+                    "afterrestorefunc": null,
+                    "restoreAfterError": true,
+                    "mtype": "POST"
+                }
+
+                //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+                //$('#Lista').jqGrid('saveRow', gridId, saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
+
+                sacarDeEditMode();
                 var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
 
                 //var dataIds = $('#Lista').jqGrid('getDataIDs');
@@ -384,6 +430,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
                 //datos.Cotizacion = dataFromTheRow.Cotizacion;
                 datos.TotalDescargaDia = dataFromTheRow.TotalDescargaDia;
+                datos.IdPuntoVenta = dataFromTheRow.IdPuntoVenta;
+
 
                 err = ""
                 if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
@@ -874,20 +922,31 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         lastSelectediCol = iCol;
                         lastSelectediRow = iRow;
                     },
-                    afterEditCell: function (id, name, val, iRow, iCol) {
-                        if (name == 'Fecha') {
-                            jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
-                        }
-                        var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
-                        jQuery("#Lista").jqGrid('setRowData', id, { act: se });
-                    },
-                    //beforeSelectRow: function (rowid, e) {
-                    //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
-                    //    if (this.p.colModel[iCol].name === 'act') {
-                    //        GrabarFila(rowid);
-                    //        return false;
+                    //afterEditCell: function (id, name, val, iRow, iCol) {
+                    //    if (name == 'Fecha') {
+                    //        jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                     //    }
+                    //    var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                    //    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                     //},
+                    //beforeSelectRow: function (rowid, e) {
+                        //var $this = $(this),
+                        //    $td = $(e.target).closest('td'),
+                        //    $tr = $td.closest('tr'),
+                        //    iRow = $tr[0].rowIndex,
+                        //    iCol = $.jgrid.getCellIndex($td);
+
+                        //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
+                        //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
+                        //    $this.jqGrid('setGridParam', {cellEdit: true});
+                        //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
+                        //    $this.jqGrid('setGridParam', {cellEdit: false});
+                        //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
+                        //        .removeClass("ui-state-highlight");
+                        //}
+                        //return true;
+                    //},
+                  
                     pager: $('#ListaPager'),
                     rowNum: 10,
                     rowList: [10, 20, 50, 100],

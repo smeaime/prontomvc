@@ -227,6 +227,9 @@ Public Class WebServiceClientes
         'Public Function DestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga) As String
         ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
 
+
+
+
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
         'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
@@ -248,6 +251,7 @@ Public Class WebServiceClientes
         Dim id As Integer = o("IdCartasDePorteControlDescarga")
 
 
+        Dim sssss = Membership.GetUser()
 
 
         If (id > 0) Then
@@ -258,6 +262,7 @@ Public Class WebServiceClientes
             EntidadOriginal.Fecha = o("Fecha")
             EntidadOriginal.IdDestino = CInt(o("IdWilliamsDestino"))
             EntidadOriginal.TotalDescargaDia = CInt(o("TotalDescargaDia"))
+            EntidadOriginal.IdPuntoVenta = CInt(o("IdPuntoVenta"))
 
             EntidadEntry.CurrentValues.SetValues(EntidadOriginal)
 
@@ -268,6 +273,7 @@ Public Class WebServiceClientes
             x.Fecha = o("Fecha")
             x.IdDestino = CInt(o("IdWilliamsDestino"))
             x.TotalDescargaDia = CInt(o("TotalDescargaDia"))
+            x.IdPuntoVenta = CInt(o("IdPuntoVenta"))
 
             db.CartasDePorteControlDescargas.Add(x)
         End If
