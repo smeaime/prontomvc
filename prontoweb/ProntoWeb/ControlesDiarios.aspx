@@ -362,7 +362,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 // grabando o deshaciendo???
                 //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
-                jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
+                try {
+                    jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
+
+                } catch (e) {
+
+                }
 
                 // jQuery('#Lista').jqGrid('editCell', lastRowIndex, lastColIndex);
                 // jQuery('#Lista').jqGrid("setCell", rowid, "amount", val, "");
@@ -432,13 +437,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
                 //datos.Cotizacion = dataFromTheRow.Cotizacion;
                 datos.TotalDescargaDia = dataFromTheRow.TotalDescargaDia;
-                datos.IdPuntoVenta = dataFromTheRow.IdPuntoVenta;
+                datos.IdPuntoVenta = 1; //dataFromTheRow.IdPuntoVenta;
 
 
                 err = ""
                 if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-                //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta definir la moneda.\n"
-                //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "No ingreso la cotizacion\n"
+                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta definir el destino.\n"
+                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "No ingreso la descarga\n"
 
                 if (err != "") {
                     alert('No se pudo grabar el registro.\n' + err);
@@ -559,16 +564,131 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
 
-                data = '{';
-                for (j = 1; j < colModel.length; j++) {
-                    cm = colModel[j];
-                    data = data + '"' + cm.index + '":' + '"",';
+                if (false) {
+                    data = '{';
+                    for (j = 1; j < colModel.length; j++) {
+                        cm = colModel[j];
+                        data = data + '"' + cm.index + '":' + '"",';
+                    }
+                    data = data.substring(0, data.length - 1) + '}';
                 }
-                data = data.substring(0, data.length - 1) + '}';
+                else {
+
+                    data = " { \"act\": \"\" , \"IdCartasDePorteControlDescarga\": \"0\", \"Fecha\": \"\" , \"Descripcion\": \"\"   , \"IdWilliamsDestino\": \"0\", \"TotalDescargaDia\": \"0\" , \"IdPuntoVenta\": \"1\" } ";
+                    
+                }
+                //  grid.jqGrid("addRowData", "empty_" + i, );
+
                 data = data.replace(/(\r\n|\n|\r)/gm, "");
                 grid.jqGrid('addRowData', Id, data, "last");
                 grid.jqGrid('setRowData', Id, { act: se });
             };
+
+
+
+
+
+            function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
+
+
+                nombregrilla = nombregrilla || "#Lista";
+                var grid = jQuery(nombregrilla)
+                var pageSize = parseInt(grid.jqGrid("getGridParam", "rowNum"))
+
+                var rows = grid.getGridParam("reccount") || 0;
+
+
+                // jQuery("#Lista").jqGrid('getGridParam', 'records')
+                var emptyRows;       // -data.rows.length; // pageSize - data.rows.length;
+
+                //alert(rows)
+                if (rows < 3) emptyRows = 3 - rows;
+                else emptyRows = 1;
+
+
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+
+                var rowsLlenas = 0;
+
+                var dataIds = grid.jqGrid('getDataIDs');
+                for (var i = 0; i < dataIds.length; i++) {
+
+                    var data = grid.jqGrid('getRowData', dataIds[i]);
+
+
+                    var desc = data['Descripcion'];
+                    // alert(desc);
+                    if (desc == "") continue;
+
+                    if (data['NumeroItem'] == "") {
+                        data['NumeroItem'] = ProximoNumeroItem();
+                        grid.jqGrid('setRowData', dataIds[i], data);
+                    }
+
+                    rowsLlenas++;
+                }
+
+
+
+
+                // alert(rowsLlenas);
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                if (!renglonVacio) {
+                    //    alert('ssss');
+                    renglonVacio = {};
+                }
+
+
+                var gridceil
+
+                if (emptyRows > 0 && (rowsLlenas == rows || rows < 3)) {
+                    //   alert(emptyRows);
+                    for (var i = 1; i <= emptyRows; i++) {
+                        //                    // adjust the counts at lower right
+                        //                    grid.jqGrid("setGridParam", {
+                        //                        reccount: grid.jqGrid("getGridParam", "reccount") - emptyRows,
+                        //                        records: grid.jqGrid("getGridParam", "records") - emptyRows
+                        //                    });
+                        //                    grid[0].updatepager();
+
+
+
+
+                        // grid.jqGrid("addRowData", "empty_" + i, {});
+
+
+
+                        gridceil = Math.ceil(Math.random() * 1000000); // ojo con esto, si usas el mismo id, la edicion de un renglon se va a pasar a otro al instante!, y no vas a entender q está pasando 
+
+
+                        grid.jqGrid("addRowData", "empty_" + gridceil, renglonVacio);
+                        //  grid.jqGrid("addRowData", "empty_" + i, { "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
+
+                    }
+
+                }
+                rows = grid.getGridParam("reccount");
+
+
+                //alert(rows);
+
+                grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+            }
+
 
             // Esto es para obtener el contenido de una celda en modo edicion. Ojo que las funciones estan como declarativas (,)
             //getColumnIndexByName = function (grid, columnName) {
@@ -624,7 +744,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     colModel: [
                                 {
-                                    name: 'act', index: 'act', align: 'center', width: 100, editable: false, hidden: false, //classes: "myLink",
+                                    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false, //classes: "myLink",
                                     //formatter: function (cellValue, options, rowObject) {
                                     //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
                                     //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
@@ -729,26 +849,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                      //id of input fields will be set based on different rules. The below code detect
                                                      //whether form editing, inline editing or toolbar filter will be used which to choose the corresponding id.
 
-                                                     var id;
-                                                     if ($(elem).hasClass("FormElement")) {
-                                                         // form editing
-                                                         id = "IdWilliamsDestino";
-                                                     } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
-                                                         // filter foolbar
-                                                         id = "gs_IdWilliamsDestino";
-                                                     } else if ($(elem).closest("tr.jqgrow").length > 0) {
-                                                         //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
+                                                     try {
+                                                         var id;
+                                                         if ($(elem).hasClass("FormElement")) {
+                                                             // form editing
+                                                             id = "IdWilliamsDestino";
+                                                         } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
+                                                             // filter foolbar
+                                                             id = "gs_IdWilliamsDestino";
+                                                         } else if ($(elem).closest("tr.jqgrow").length > 0) {
+                                                             //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
+                                                             
+                                                             var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
+                                                             var rowData = $("#Lista").jqGrid('getRowData', rowId);
+                                                             rowData.Descripcion = ui.item.value;
+                                                             rowData.IdWilliamsDestino = ui.item.id;
+                                                             // $("#Lista").jqGrid('setRowData', rowId, rowData);
 
+                                                             $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
+                                                         }
+                                                         //$("#" + id).val(ui.item.id);
 
-                                                         var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
-                                                         var rowData = $("#Lista").jqGrid('getRowData', rowId);
-                                                         rowData.Descripcion = ui.item.value;
-                                                         rowData.IdWilliamsDestino = ui.item.id;
-                                                         $("#Lista").jqGrid('setRowData', rowId, rowData);
-
+                                                     } catch (e) {
 
                                                      }
-                                                     //$("#" + id).val(ui.item.id);
                                                  }
                                              });
 

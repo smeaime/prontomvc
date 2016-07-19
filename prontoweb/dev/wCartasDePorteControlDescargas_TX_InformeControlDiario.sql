@@ -17,7 +17,7 @@ declare @i int
 
 select 
     IdCartasDePorteControlDescarga,
-    Destino,
+    DEST.Descripcion as Destino,
     FechaDescarga,
     Sum(NetoFinal) as NetoFinal,
     TotalDescargaDia,
@@ -27,7 +27,8 @@ select
 
 	from CartasDePorteControlDescarga D
 	inner join CartasDePorte C on   C.FechaDescarga = D.Fecha  AND C.Destino = d.IdDestino AND  C.SubnumeroDeFacturacion <= 0
-	group by d.IdCartasDePorteControlDescarga, c.Destino, c.FechaDescarga, d.TotalDescargaDia 
+	inner join WilliamsDestinos DEST on C.Destino=DEST.IdWilliamsDestino
+	group by d.IdCartasDePorteControlDescarga, DEST.Descripcion, c.FechaDescarga, d.TotalDescargaDia 
                       
 end
 go
