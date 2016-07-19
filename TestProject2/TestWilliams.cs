@@ -221,21 +221,25 @@ namespace ProntoMVC.Tests
             string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
-            ReportParameter[] yourParams = new ReportParameter[9];
-            yourParams[0] = new ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx");
-            yourParams[1] = new ReportParameter("sServidor", ConfigurationManager.AppSettings["UrlDominio"]);
-            yourParams[2] = new ReportParameter("idArticulo", "-1");
-            yourParams[3] = new ReportParameter("idDestino", "-1");
-            yourParams[4] = new ReportParameter("desde", new DateTime(2012, 11, 1).ToString());
-            yourParams[5] = new ReportParameter("hasta", new DateTime(2012, 11, 1).ToString());
-            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+            ReportParameter[] yourParams = new ReportParameter[5];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2012, 11, 1).ToString());
+            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2012, 11, 1).ToString());
+            yourParams[4] = new ReportParameter("IdDestino", "-1");
             //yourParams[7] = new ReportParameter("Consulta", strSQL);
-            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
 
 
             var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
                                 "Williams - Controles Diarios.rdl", yourParams, ref ArchivoExcelDestino, false);
 
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+        [TestMethod]
+        public void InformeControlDiario_22052_2()
+        {
 
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
