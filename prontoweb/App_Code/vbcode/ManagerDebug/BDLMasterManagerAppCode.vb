@@ -704,6 +704,7 @@ Namespace Pronto.ERP.Bll
             CDPs_InfGerenciales
             CDPs_InfAnalisisTarifa
             CDPs_ImagenesDescarga
+            CDPs_ControlDiario
 
             CDPs_Importador
             CDPs_Mails
@@ -743,7 +744,7 @@ Namespace Pronto.ERP.Bll
             s(EntidadesPermisos.CDPs_FacturarleAClienteExplicito, UserId, dt)
             s(EntidadesPermisos.CDPs_InfAnalisisTarifa, UserId, dt)
             s(EntidadesPermisos.CDPs_InfGerenciales, UserId, dt)
-
+            s(EntidadesPermisos.CDPs_ControlDiario, UserId, dt)
 
             s(EntidadesPermisos.CDPs_ImagenesDescarga, UserId, dt)
 

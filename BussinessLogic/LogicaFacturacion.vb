@@ -4654,7 +4654,7 @@ Public Class LogicaFacturacion
                     'anular factura idfactura
                     MandarMailDeError(ex)
 
-                    y por que no la anuló? me mandó el mail bien (del timeout) del 22 de junio a las 15:42
+                    'y por que no la anuló? me mandó el mail bien (del timeout) del 22 de junio a las 15:42
 
                     Dim myFactura As Pronto.ERP.BO.Factura = FacturaManager.GetItem(SC, idFactura)
                     FacturaManager.AnularFactura(SC, myFactura, Session(SESSIONPRONTO_glbIdUsuario))

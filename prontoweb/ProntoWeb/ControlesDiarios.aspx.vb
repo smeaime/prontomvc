@@ -137,24 +137,21 @@ Partial Class ControlesDiarios
         Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
 
 
-        Dim yourParams As ReportParameter() = New ReportParameter(8) {}
-        Dim ArchivoExcelDestino = ""
-        Dim vFileName As String = Path.GetTempPath & "ControlDiario_" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
+        Dim yourParams As ReportParameter() = New ReportParameter(4) {}
 
-        yourParams(0) = New ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx")
-        yourParams(1) = New ReportParameter("sServidor", "kjhkjlh")
-        yourParams(2) = New ReportParameter("idArticulo", -1)
-        yourParams(3) = New ReportParameter("idDestino", -1)
-        yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-        yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-        yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+        Dim ArchivoExcelDestino As String = Path.GetTempPath & "ControlDiario_" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
+
+        yourParams(0) = New ReportParameter("CadenaConexion", Encriptar(HFSC.Value))
+        yourParams(1) = New ReportParameter("sServidorWeb", "kjhkjlh")
+        yourParams(2) = New ReportParameter("FechaDesde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+        yourParams(3) = New ReportParameter("FechaHasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+        yourParams(4) = New ReportParameter("IdDestino", -1)
         'yourParams(7) = New ReportParameter("Consulta", Sql)
-        'yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
 
 
 
         Dim output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep, _
-                     "Williams - Nidera con SQL.rdl", yourParams, ArchivoExcelDestino, False)
+                      "Williams - Controles Diarios.rdl", yourParams, ArchivoExcelDestino, False)
 
 
         Try
@@ -191,7 +188,7 @@ Partial Class ControlesDiarios
         '////////////////////////////////////////////
         'If ProntoFuncionesUIWeb.EstaEsteRol("Cliente") Or
 
-        Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_Facturacion)
+        Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_ControlDiario)
 
 
         Dim a = New String() {"Mariano", "Andres", "hwilliams"}
