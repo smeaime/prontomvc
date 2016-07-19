@@ -32,11 +32,13 @@ using System.Linq;
 using ProntoMVC.Data.Models;
 using ProntoMVC.Data;
 
+using System.Web.Security;
 
 using System.Linq.Dynamic;
 
 using System.Configuration;
 
+using Pronto.ERP.Bll;
 
 public class JQGridHandler : IHttpHandler
 {
@@ -234,16 +236,26 @@ public class JQGridHandler : IHttpHandler
 
         string SC;
         //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
-        if (System.Diagnostics.Debugger.IsAttached )
+        if (System.Diagnostics.Debugger.IsAttached)
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
         else
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
-        
+
         //If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
         //     scs = scLocal
         // Else
         //     scs = scWilliamsRelease
         // End If
+
+
+        var usuario = Membership.GetUser();
+        System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'");
+        int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+        int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+
+
 
         ProntoMVC.Data.Models.DemoProntoEntities db =
                            new DemoProntoEntities(
@@ -260,7 +272,7 @@ public class JQGridHandler : IHttpHandler
 
 
         var pagedQuery = Filtrador.Filters.FiltroGenerico<ProntoMVC.Data.Models.CartasDePorteControlDescarga>
-                            ( "", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+                            ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
         //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
