@@ -152,6 +152,7 @@ Partial Class ControlesDiarios
         'yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
 
 
+
         Dim output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep, _
                      "Williams - Nidera con SQL.rdl", yourParams, ArchivoExcelDestino, False)
 
