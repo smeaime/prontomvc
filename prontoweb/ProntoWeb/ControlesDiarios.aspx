@@ -218,7 +218,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <script type="text/javascript">
 
-
+            "use strict";
 
 
 
@@ -362,17 +362,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 // grabando o deshaciendo???
                 //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
-                //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+                jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
 
                 // jQuery('#Lista').jqGrid('editCell', lastRowIndex, lastColIndex);
                 // jQuery('#Lista').jqGrid("setCell", rowid, "amount", val, "");
 
 
 
-                         var ids = $('#Lista').getDataIDs();
-                        for (var i = 0, il = ids.length; i < il; i++) {
-                            $('#Lista').jqGrid('restoreRow', ids[i]);
-                                                   }
+                var ids = $('#Lista').getDataIDs();
+                for (var i = 0, il = ids.length; i < il; i++) {
+                    $('#Lista').jqGrid('restoreRow', ids[i]);
+                }
 
 
 
@@ -388,6 +388,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             function GrabarFila(gridId) {
+
+                $grid = $('#Lista');
 
                 var saveparameters = {
                     "successfunc": null,
@@ -503,34 +505,39 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 };
             };
 
-            window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-            document.body.onclick = saveEditedCell; // attach to current document.
 
-            function saveEditedCell(evt) {
-                var target = $(evt.target);
 
-                if ($grid) {
-                    var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-                    if (gridCellWasClicked && !isCellClicked) // check if a valid click
-                    {
-                        gridCellWasClicked = false;
-                        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-                    }
-                }
 
-                //$grid = "";
-                gridCellWasClicked = false;
+            //window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+            //document.body.onclick = saveEditedCell; // attach to current document.
 
-                if (jQuery("#Lista").find(target).length) {
-                    $grid = $('#Lista');
-                    grillaenfoco = true;
-                }
-                if (grillaenfoco) {
-                    gridCellWasClicked = true;
-                    lastSelectediRow2 = lastSelectediRow;
-                    lastSelectediCol2 = lastSelectediCol;
-                }
-            };
+            //function saveEditedCell(evt) {
+            //    var target = $(evt.target);
+
+            //    if ($grid) {
+            //        var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+            //        if (gridCellWasClicked && !isCellClicked) // check if a valid click
+            //        {
+            //            gridCellWasClicked = false;
+            //            $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+            //        }
+            //    }
+
+            //    //$grid = "";
+            //    gridCellWasClicked = false;
+
+            //    if (jQuery("#Lista").find(target).length) {
+            //        $grid = $('#Lista');
+            //        grillaenfoco = true;
+            //    }
+            //    if (grillaenfoco) {
+            //        gridCellWasClicked = true;
+            //        lastSelectediRow2 = lastSelectediRow;
+            //        lastSelectediCol2 = lastSelectediCol;
+            //    }
+            //};
+
+
 
             function MarcarSeleccionadosParaEliminar(grid) {
                 var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
@@ -701,7 +708,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                                  return {
                                                                      label: item.value,
                                                                      value: item.value //item.id
-                                                                     ,id: item.id
+                                                                     , id: item.id
                                                                  }
                                                              }));
 
@@ -896,7 +903,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 width: 100, resizable: true,
                 align: "left", sorttype: "text", editable: true, edittype: "select", editoptions:
-                { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" }, editrules: { required: true }
+                // { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" },
+                { value: "1:1;2:2;3:3;4:4" },
+                editrules: { required: true }
             }
 
 
@@ -922,31 +931,31 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         lastSelectediCol = iCol;
                         lastSelectediRow = iRow;
                     },
-                    //afterEditCell: function (id, name, val, iRow, iCol) {
-                    //    if (name == 'Fecha') {
-                    //        jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
-                    //    }
-                    //    var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
-                    //    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
-                    //},
-                    //beforeSelectRow: function (rowid, e) {
-                        //var $this = $(this),
-                        //    $td = $(e.target).closest('td'),
-                        //    $tr = $td.closest('tr'),
-                        //    iRow = $tr[0].rowIndex,
-                        //    iCol = $.jgrid.getCellIndex($td);
-
-                        //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
-                        //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
-                        //    $this.jqGrid('setGridParam', {cellEdit: true});
-                        //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
-                        //    $this.jqGrid('setGridParam', {cellEdit: false});
-                        //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
-                        //        .removeClass("ui-state-highlight");
+                    afterEditCell: function (id, name, val, iRow, iCol) {
+                        //if (name == 'Fecha') {
+                        //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                         //}
-                        //return true;
+                        var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                        jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+                    },
+                    //beforeSelectRow: function (rowid, e) {
+                    //var $this = $(this),
+                    //    $td = $(e.target).closest('td'),
+                    //    $tr = $td.closest('tr'),
+                    //    iRow = $tr[0].rowIndex,
+                    //    iCol = $.jgrid.getCellIndex($td);
+
+                    //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
+                    //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
+                    //    $this.jqGrid('setGridParam', {cellEdit: true});
+                    //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
+                    //    $this.jqGrid('setGridParam', {cellEdit: false});
+                    //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
+                    //        .removeClass("ui-state-highlight");
+                    //}
+                    //return true;
                     //},
-                  
+
                     pager: $('#ListaPager'),
                     rowNum: 10,
                     rowList: [10, 20, 50, 100],

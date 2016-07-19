@@ -253,32 +253,40 @@ Public Class WebServiceClientes
 
         Dim sssss = Membership.GetUser()
 
+        Try
 
-        If (id > 0) Then
 
-            Dim EntidadOriginal = db.CartasDePorteControlDescargas.Where(Function(p) p.IdCartasDePorteControlDescarga = id).SingleOrDefault()
-            Dim EntidadEntry = db.Entry(EntidadOriginal)
 
-            EntidadOriginal.Fecha = o("Fecha")
-            EntidadOriginal.IdDestino = CInt(o("IdWilliamsDestino"))
-            EntidadOriginal.TotalDescargaDia = CInt(o("TotalDescargaDia"))
-            EntidadOriginal.IdPuntoVenta = CInt(o("IdPuntoVenta"))
+            If (id > 0) Then
 
-            EntidadEntry.CurrentValues.SetValues(EntidadOriginal)
+                Dim EntidadOriginal = db.CartasDePorteControlDescargas.Where(Function(p) p.IdCartasDePorteControlDescarga = id).SingleOrDefault()
+                Dim EntidadEntry = db.Entry(EntidadOriginal)
 
-            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified
+                EntidadOriginal.Fecha = o("Fecha")
+                EntidadOriginal.IdDestino = CInt(o("IdWilliamsDestino"))
+                EntidadOriginal.TotalDescargaDia = CInt(o("TotalDescargaDia"))
+                EntidadOriginal.IdPuntoVenta = CInt(o("IdPuntoVenta"))
 
-        Else
-            Dim x As New CartasDePorteControlDescarga
-            x.Fecha = o("Fecha")
-            x.IdDestino = CInt(o("IdWilliamsDestino"))
-            x.TotalDescargaDia = CInt(o("TotalDescargaDia"))
-            x.IdPuntoVenta = CInt(o("IdPuntoVenta"))
+                EntidadEntry.CurrentValues.SetValues(EntidadOriginal)
 
-            db.CartasDePorteControlDescargas.Add(x)
-        End If
+                db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified
 
-        db.SaveChanges()
+            Else
+                Dim x As New CartasDePorteControlDescarga
+                x.Fecha = o("Fecha")
+                x.IdDestino = CInt(o("IdWilliamsDestino"))
+                x.TotalDescargaDia = CInt(o("TotalDescargaDia"))
+                x.IdPuntoVenta = CInt(o("IdPuntoVenta"))
+
+                db.CartasDePorteControlDescargas.Add(x)
+            End If
+
+            db.SaveChanges()
+
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
 
         'TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
         'return Json(new { Success = 1, IdCotizacion = Cotizacion.IdCotizacion, ex = "" });
