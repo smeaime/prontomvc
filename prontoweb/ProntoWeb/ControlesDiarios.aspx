@@ -30,6 +30,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <br />
+     
+    <div class="titulos" style="color: white">
+        Control diario de descargas 
+    </div>
+    <br />
     <br />
     <div>
         <%--   <table id="list9">
@@ -40,7 +45,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
             id="m1s">Select(Unselect) row 13</a>--%>
 
-        <asp:Button ID="informe" Text="Informe" runat="server" />
+
+
+        <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="True" CssClass="btn btn-primary"
+            Width="150" Height="40" />
         <br />
         <br />
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
@@ -442,8 +450,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 err = ""
                 if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta definir el destino.\n"
-                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "No ingreso la descarga\n"
+                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
+                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
 
                 if (err != "") {
                     alert('No se pudo grabar el registro.\n' + err);
@@ -575,7 +583,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 else {
 
                     data = " { \"act\": \"\" , \"IdCartasDePorteControlDescarga\": \"0\", \"Fecha\": \"\" , \"Descripcion\": \"\"   , \"IdWilliamsDestino\": \"0\", \"TotalDescargaDia\": \"0\" , \"IdPuntoVenta\": \"1\" } ";
-                    
+
                 }
                 //  grid.jqGrid("addRowData", "empty_" + i, );
 
@@ -859,7 +867,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                              id = "gs_IdWilliamsDestino";
                                                          } else if ($(elem).closest("tr.jqgrow").length > 0) {
                                                              //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
-                                                             
+
                                                              var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
                                                              var rowData = $("#Lista").jqGrid('getRowData', rowId);
                                                              rowData.Descripcion = ui.item.value;
@@ -1086,14 +1094,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     sortname: 'Fecha',
                     sortorder: 'desc',
                     viewrecords: true,
-                    multiselect: true,
+                    //multiselect: true,
                     shrinkToFit: true,
                     width: 'auto',
                     height: $(window).height() - 300, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
-                    caption: '<b>Control de Descargas</b>',
+                    //caption: '<b>Control de Descargas</b>',
                     cellEdit: true,
                     cellsubmit: 'clientArray',
                     dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
