@@ -1,0 +1,114 @@
+
+Log Entry : 
+07/20/2016 12:45:36
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+07/20/2016 13:06:05
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_130108.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:06:05
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_130108.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:06:05
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 166
+__________________________
+
+Log Entry : 
+07/20/2016 13:07:23
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_130719.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:07:23
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_130719.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:07:23
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 166
+__________________________
+
+Log Entry : 
+07/20/2016 13:41:25
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_134120.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:41:25
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_134120.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:41:25
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 166
+__________________________
+
+Log Entry : 
+07/20/2016 13:43:13
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_134310.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:43:13
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_134310.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:43:13
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 166
+__________________________
+
+Log Entry : 
+07/20/2016 13:46:23
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_134618.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:46:23
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_20jul2016_134618.xls
+__________________________
+
+Log Entry : 
+07/20/2016 13:46:23
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 166
+__________________________

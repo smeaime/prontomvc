@@ -22,16 +22,18 @@ select
     Sum(NetoFinal) as NetoFinal,
     TotalDescargaDia,
     TotalDescargaDia - Sum(NetoFinal) as dif,
-    Count(*) as cuantas
+    Count(NetoFinal) as cuantas,
+	D.idpuntoventa
     --g.Select(x => x.NumeroCartaDePorte).ToList()
 
 	from CartasDePorteControlDescarga D
-	inner join CartasDePorte C on   C.FechaDescarga = D.Fecha  AND C.Destino = d.IdDestino AND  C.SubnumeroDeFacturacion <= 0
-	inner join WilliamsDestinos DEST on C.Destino=DEST.IdWilliamsDestino
-	group by d.IdCartasDePorteControlDescarga, DEST.Descripcion, c.FechaDescarga, d.TotalDescargaDia 
+	left join CartasDePorte C on   C.FechaDescarga = D.Fecha  AND C.Destino = d.IdDestino AND  C.SubnumeroDeFacturacion <= 0 AND D.idPuntoVenta=C.puntoVenta
+	left  join WilliamsDestinos DEST on C.Destino=DEST.IdWilliamsDestino
+	group by d.IdCartasDePorteControlDescarga, DEST.Descripcion, c.FechaDescarga, d.TotalDescargaDia ,D.idpuntoventa
                       
 end
 go
+
 
 
 

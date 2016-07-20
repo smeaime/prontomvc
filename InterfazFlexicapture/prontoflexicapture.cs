@@ -1630,8 +1630,8 @@ namespace ProntoFlexicapture
                     }
                     else if (cdp.Destino <= 0)
                     {
-                        cdp.MotivoAnulacion = "destino no detectado";
-                        CartaDePorteManager.Anular(SC, cdp, 1, "");
+                        // cdp.MotivoAnulacion = "destino no detectado";
+                        // CartaDePorteManager.Anular(SC, cdp, 1, "");
                     }
                 }
                 else
