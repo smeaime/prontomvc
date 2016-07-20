@@ -60,6 +60,9 @@
             <TablixColumn>
               <Width>2.5cm</Width>
             </TablixColumn>
+            <TablixColumn>
+              <Width>2.5cm</Width>
+            </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
@@ -381,6 +384,42 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Sucursal</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e6eefc</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#e4effd</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -618,23 +657,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NetoFinal.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
-                              <Value>/</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
-                              <Value>=Fields!TotalDescargaDia.Value</Value>
+                              <Value>= Fields!NetoFinal.Value/Fields!TotalDescargaDia.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>SemiBold</FontWeight>
@@ -699,12 +722,50 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="idpuntoventa">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!idpuntoventa.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                                <Color>Blue</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>idpuntoventa</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#e4effd</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -729,7 +790,7 @@
         <Top>2.2987cm</Top>
         <Left>0.44367cm</Left>
         <Height>1.86146cm</Height>
-        <Width>17.83041cm</Width>
+        <Width>20.33042cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -800,7 +861,7 @@
         </Field>
         <Field Name="Destino">
           <DataField>Destino</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FechaDescarga">
           <DataField>FechaDescarga</DataField>
@@ -820,6 +881,10 @@
         </Field>
         <Field Name="cuantas">
           <DataField>cuantas</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="idpuntoventa">
+          <DataField>idpuntoventa</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
