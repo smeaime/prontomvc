@@ -6,7 +6,8 @@ CREATE PROCEDURE [dbo].wCartasDePorteControlDescargas_TX_InformeControlDiario
 (
 	@FechaDesde DateTime,
 	@FechaHasta DateTime,
-	@IdDestino int
+	@IdDestino int,
+	@IdPuntoVenta int
 )
 AS
 BEGIN
@@ -17,8 +18,9 @@ declare @i int
 
 select 
     IdCartasDePorteControlDescarga,
-    DEST.Descripcion as Destino,
-    FechaDescarga,
+    D.IdDestino ,
+	DEST.Descripcion as Destino,
+   D.Fecha  as FechaDescarga,
     Sum(NetoFinal) as NetoFinal,
     TotalDescargaDia,
     TotalDescargaDia - Sum(NetoFinal) as dif,
@@ -27,19 +29,23 @@ select
     --g.Select(x => x.NumeroCartaDePorte).ToList()
 
 	from CartasDePorteControlDescarga D
-	left join CartasDePorte C on   C.FechaDescarga = D.Fecha  AND C.Destino = d.IdDestino AND  C.SubnumeroDeFacturacion <= 0 AND D.idPuntoVenta=C.puntoVenta
-	left  join WilliamsDestinos DEST on C.Destino=DEST.IdWilliamsDestino
-	group by d.IdCartasDePorteControlDescarga, DEST.Descripcion, c.FechaDescarga, d.TotalDescargaDia ,D.idpuntoventa
+	left join CartasDePorte C on   C.FechaDescarga = D.Fecha  
+								AND C.Destino = D.IdDestino 
+								AND C.SubnumeroDeFacturacion <= 0 
+								AND D.idPuntoVenta=C.puntoVenta
+	left  join WilliamsDestinos DEST on D.IdDestino=DEST.IdWilliamsDestino
+	where D.idPuntoVenta=@IdPuntoVenta or @IdPuntoVenta=0
+	group by d.IdCartasDePorteControlDescarga,D.IdDestino , DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
                       
 end
 go
 
+--select * from WilliamsDestinos where IdWilliamsDestino=47
 
 
 
 
-
-exec wCartasDePorteControlDescargas_TX_InformeControlDiario '','',3
+exec wCartasDePorteControlDescargas_TX_InformeControlDiario '','',3,0
 
 /*
 CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]

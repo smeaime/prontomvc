@@ -270,10 +270,16 @@ public class JQGridHandler : IHttpHandler
         int totalRecords = 0;
 
 
+        var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<CartasDePorteControlDescarga>
+                        (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+                                db.CartasDePorteControlDescargas.Where(x => x.IdPuntoVenta == puntovent || puntovent == 0));
 
-        var pagedQuery = Filtrador.Filters.FiltroGenerico<ProntoMVC.Data.Models.CartasDePorteControlDescarga>
-                            ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-        //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
+
+
+        // var pagedQuery = Filtrador.Filters.FiltroGenerico<CartasDePorteControlDescarga>
+        //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
