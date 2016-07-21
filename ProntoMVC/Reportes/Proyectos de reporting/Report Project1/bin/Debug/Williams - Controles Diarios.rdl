@@ -40,7 +40,7 @@
               <Width>0.35687cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>4.29773cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.52646cm</Width>
@@ -61,12 +61,12 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>1.89146cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.95719cm</Height>
+              <Height>1.06302cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -79,7 +79,7 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -96,6 +96,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -115,7 +116,7 @@
                             <TextRun>
                               <Value>Destino</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -132,6 +133,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -151,7 +153,7 @@
                             <TextRun>
                               <Value>Fecha </Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -165,7 +167,7 @@
                             <TextRun>
                               <Value>Descarga</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -182,6 +184,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -201,7 +204,7 @@
                             <TextRun>
                               <Value>Neto Final</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -218,6 +221,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -237,7 +241,7 @@
                             <TextRun>
                               <Value>Total</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -254,6 +258,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -273,7 +278,7 @@
                             <TextRun>
                               <Value>Dif.</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -290,6 +295,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -309,7 +315,7 @@
                             <TextRun>
                               <Value>%</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -326,6 +332,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -345,7 +352,7 @@
                             <TextRun>
                               <Value>Cant </Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -359,7 +366,7 @@
                             <TextRun>
                               <Value>Cartas</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -376,6 +383,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -395,7 +403,7 @@
                             <TextRun>
                               <Value>Sucursal</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -412,6 +420,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -437,8 +446,7 @@
                               <Value />
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -453,7 +461,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -474,8 +481,7 @@
                               <Value>=Fields!Destino.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -490,7 +496,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -511,9 +516,8 @@
                               <Value>=Fields!FechaDescarga.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
+                                <FontWeight>Normal</FontWeight>
                                 <Format>dd/MM/yy</Format>
-                                <Color>Blue</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -528,7 +532,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -549,8 +552,7 @@
                               <Value>=Fields!NetoFinal.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -565,7 +567,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -586,8 +587,7 @@
                               <Value>=Fields!TotalDescargaDia.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -602,7 +602,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -623,8 +622,7 @@
                               <Value>=Fields!dif.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -639,7 +637,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -660,8 +657,7 @@
                               <Value>= Fields!NetoFinal.Value/Fields!TotalDescargaDia.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -676,7 +672,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -697,8 +692,7 @@
                               <Value>=Fields!cuantas.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -713,7 +707,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -734,8 +727,7 @@
                               <Value>=Fields!idpuntoventa.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -750,7 +742,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -789,8 +780,8 @@
         <DataSetName>ds1</DataSetName>
         <Top>2.2987cm</Top>
         <Left>0.44367cm</Left>
-        <Height>1.86146cm</Height>
-        <Width>20.33042cm</Width>
+        <Height>1.96729cm</Height>
+        <Width>21.51961cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -838,7 +829,7 @@
   <DataSets>
     <DataSet Name="ds1">
       <Query>
-        <DataSourceName>TestHarcodeada</DataSourceName>
+        <DataSourceName>DataSource1</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
@@ -849,6 +840,9 @@
           <QueryParameter Name="@IdDestino">
             <Value>=Parameters!IdDestino.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@IdPuntoVenta">
+            <Value>=Parameters!IdPuntoVenta.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
         <CommandText>wCartasDePorteControlDescargas_TX_InformeControlDiario</CommandText>
@@ -857,6 +851,10 @@
       <Fields>
         <Field Name="IdCartasDePorteControlDescarga">
           <DataField>IdCartasDePorteControlDescarga</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdDestino">
+          <DataField>IdDestino</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Destino">
@@ -912,6 +910,10 @@
     <ReportParameter Name="IdDestino">
       <DataType>Integer</DataType>
       <Prompt>Id Destino</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="IdPuntoVenta">
+      <DataType>Integer</DataType>
+      <Prompt>Id Punto Venta</Prompt>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
