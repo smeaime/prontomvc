@@ -3119,6 +3119,10 @@ Public Class ExcelImportadorManager
                             '	26	FONDO                         	FDO 
                             '	27	MERMA CONVENIDA               	MC 
                             '	28	TIERRA                        	TIE
+
+                        Case 27
+                            'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=22167
+                            cdp.HumedadDesnormalizada = kilosmerma
                         Case 28
                             .CalidadTierra = analisis
 
