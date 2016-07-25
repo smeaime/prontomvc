@@ -137,7 +137,7 @@ Partial Class ControlesDiarios
         Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
 
 
-        Dim yourParams As ReportParameter() = New ReportParameter(4) {}
+        Dim yourParams As ReportParameter() = New ReportParameter(5) {}
 
         Dim ArchivoExcelDestino As String = Path.GetTempPath & "ControlDiario_" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
 
@@ -146,6 +146,7 @@ Partial Class ControlesDiarios
         yourParams(2) = New ReportParameter("FechaDesde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
         yourParams(3) = New ReportParameter("FechaHasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
         yourParams(4) = New ReportParameter("IdDestino", -1)
+        yourParams(5) = New ReportParameter("IdPuntoVenta", 0)
         'yourParams(7) = New ReportParameter("Consulta", Sql)
 
 
