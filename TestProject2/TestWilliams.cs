@@ -205,6 +205,18 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void OCR_alta_automatica_de_clientes_22172()
+        {
+            var a = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("20");
+            var b = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4");
+            var c = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4");
+            var d= CartaDePorteManager.VerfCuit("30537771274");
+        }
+
+
+
         [TestMethod]
         public void Pegatina_22167()
         {
@@ -319,7 +331,7 @@ namespace ProntoMVC.Tests
 
 
 
-           string output = "c:\\adasdasd.xls";
+            string output = "c:\\adasdasd.xls";
 
             //exportar excel al estilo Pronto, como tenemos hacer en las grillas de mvc
 
