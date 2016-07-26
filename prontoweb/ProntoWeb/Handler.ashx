@@ -265,7 +265,7 @@ public class JQGridHandler : IHttpHandler
         }
         catch (Exception)
         {
-            
+
         }
 
         try
@@ -275,10 +275,10 @@ public class JQGridHandler : IHttpHandler
         }
         catch (Exception)
         {
-            
+
         }
-            
-            
+
+
 
 
 
@@ -299,10 +299,12 @@ public class JQGridHandler : IHttpHandler
                         (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
                                 db.CartasDePorteControlDescargas
                                         .Where(x =>
-                                                (x.IdPuntoVenta == puntovent || puntovent == 0)
-                                                &&
-                                                 (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
-                                                )
+                                                //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                //&&
+                                                (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                 &&
+                                                (x.WilliamsDestino.PuntoVenta == puntovent || puntovent == 0)
+                                             )
                                         );
 
 
