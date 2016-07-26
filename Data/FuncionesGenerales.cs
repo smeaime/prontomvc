@@ -145,6 +145,7 @@ namespace ProntoMVC.Data
                     }
                     else
                     {
+
                         mk_suma = 0;
                         mk_suma += Convert.ToInt32(mk_p_nro.Substring(0, 1)) * 5;
                         mk_suma += Convert.ToInt32(mk_p_nro.Substring(1, 1)) * 4;
