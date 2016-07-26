@@ -49,7 +49,7 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.36771cm</Width>
+              <Width>2.12959cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.02375cm</Width>
@@ -188,7 +188,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total calculado</Value>
+                              <Value>TOTAL Williams</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -225,7 +225,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total</Value>
+                              <Value>TOTAL Puerto </Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -760,7 +760,11 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
+            <TablixMember>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+            </TablixMember>
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -777,7 +781,7 @@
         <Top>2.2987cm</Top>
         <Left>0.44367cm</Left>
         <Height>2.12604cm</Height>
-        <Width>24.98565cm</Width>
+        <Width>24.74753cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
