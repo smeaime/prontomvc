@@ -189,11 +189,12 @@ public class JQGridHandler : IHttpHandler
         string searchString = request["searchString"];
         string searchOper = request["searchOper"];
         string filters = request["filters"];
-
+        string FechaInicial = request["FechaInicial"];
+        string FechaFinal = request["FechaFinal"];
 
         if (sortColumnName == null) return;
 
-        string output = Pedidos_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters);
+        string output = Pedidos_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal);
 
         response.ContentType = "application/json";
         response.Write(output);
@@ -229,7 +230,7 @@ public class JQGridHandler : IHttpHandler
     // de la misma manera que estas llamando con jquery para buscar los acopios por cliente
 
 
-    public virtual string Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+    public virtual string Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
     {
 
         // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -254,6 +255,30 @@ public class JQGridHandler : IHttpHandler
         int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
 
 
+        DateTime FechaDesde = new DateTime(1980, 1, 1);
+        DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+        try
+        {
+
+            FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+        }
+        catch (Exception)
+        {
+            
+        }
+
+        try
+        {
+            FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+        }
+        catch (Exception)
+        {
+            
+        }
+            
+            
 
 
 
@@ -272,7 +297,13 @@ public class JQGridHandler : IHttpHandler
 
         var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<CartasDePorteControlDescarga>
                         (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
-                                db.CartasDePorteControlDescargas.Where(x => x.IdPuntoVenta == puntovent || puntovent == 0));
+                                db.CartasDePorteControlDescargas
+                                        .Where(x =>
+                                                (x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                &&
+                                                 (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                )
+                                        );
 
 
 
