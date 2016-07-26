@@ -360,7 +360,7 @@ namespace Filtrador
             catch (Exception)
             {
 
-                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica? no podes usar "cn", tenes que usar "eq" en searchoptions
                 // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
                 throw;
             }

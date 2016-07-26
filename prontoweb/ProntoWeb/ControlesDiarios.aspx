@@ -753,7 +753,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     colModel: [
                                 {
-                                    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false, //classes: "myLink",
+                                    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false,
+                                    search: false,
+                                    //classes: "myLink",
                                     //formatter: function (cellValue, options, rowObject) {
                                     //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
                                     //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
@@ -782,11 +784,26 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                                     //, formatter: 'date'
                                     , sorttype: 'date'
+
+
+                                    , searchoptions: {
+                                        sopt: ['eq', 'ne'],
+                                        dataInit: function (elem) {
+                                            $(elem).datepicker({
+                                                dateFormat: 'dd/mm/yy',
+                                                showButtonPanel: true
+                                            })
+                                        }
+                                    }
                                 },
 
 
+
+
+
                                  {
-                                     name: 'Descripcion', formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
+                                     name: 'WilliamsDestino.Descripcion', index: 'WilliamsDestino.Descripcion',
+                                     formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
                                      editoptions: {
                                          rows: '1', cols: '1',
                                          dataInit: function (elem) {
@@ -1018,7 +1035,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
             {
-                name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', sorttype: "number"
+                , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+
+                searchoptions: { sopt: ['eq'] },
+
                 editoptions: {
                     maxlength: 20, defaultValue: '0.00',
                     dataEvents: [
@@ -1037,9 +1058,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 name: 'IdPuntoVenta', index: 'IdPuntoVenta',
 
                 width: 100, resizable: true,
-                align: "left", sorttype: "text", editable: true, edittype: "select", editoptions:
-                // { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" },
-                { value: "1:1;2:2;3:3;4:4" },
+                align: "left", sorttype: "number", editable: true, edittype: "select",
+                editoptions: { value: "1:1;2:2;3:3;4:4" }, // { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" },
+                searchoptions: { sopt: ['eq'] },
                 editrules: { required: true }
             }
 
@@ -1111,8 +1132,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                     gridview: true
-                    , multiboxonly: true
-                    , multipleSearch: true
+            , multiboxonly: true
+            , multipleSearch: true
 
                 });
 
