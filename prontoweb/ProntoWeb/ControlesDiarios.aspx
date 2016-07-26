@@ -30,7 +30,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <br />
-     
+
     <div class="titulos" style="color: white">
         Control diario de descargas 
     </div>
@@ -445,7 +445,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
                 //datos.Cotizacion = dataFromTheRow.Cotizacion;
                 datos.TotalDescargaDia = dataFromTheRow.TotalDescargaDia;
-                datos.IdPuntoVenta = 1; //dataFromTheRow.IdPuntoVenta;
+                datos.IdPuntoVenta = dataFromTheRow.IdPuntoVenta;
 
 
                 err = ""
@@ -496,6 +496,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             };
 
             function EliminarFila(gridId) {
+                $grid = $('#Lista');
                 var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
                 var idprincipal = dataFromTheRow[' IdCartasDePorteControlDescarga'];
                 if (idprincipal <= 0) {
@@ -504,7 +505,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceClientes.asmx/CotizacionWilliamsDestinoDelete",
+                        url: "WebServiceClientes.asmx/DestinoDelete",
                         dataType: 'json',
                         data: JSON.stringify({ id: idprincipal }),
                         success: function (result) {
@@ -744,7 +745,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'Fecha', 'Destino', 'IdDestino', 'Kilos', 'Oficina'
+                    colNames: ['', 'Id', 'Fecha', 'Destino', 'IdDestino', 'Kilos', 'Sucursal'
 
                     ],
 
@@ -779,6 +780,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         }
                                     },
                                     formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                    //, formatter: 'date'
+                                    , sorttype: 'date'
                                 },
 
 
@@ -1094,7 +1097,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     sortname: 'Fecha',
                     sortorder: 'desc',
                     viewrecords: true,
-                    //multiselect: true,
+                    multiselect: true,
                     shrinkToFit: true,
                     width: 'auto',
                     height: $(window).height() - 300, // '100%'
@@ -1105,8 +1108,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     cellEdit: true,
                     cellsubmit: 'clientArray',
                     dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
+
+
+                    gridview: true
+                    , multiboxonly: true
+                    , multipleSearch: true
+
                 });
-                jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+
+                jQuery("#Lista").jqGrid('bindKeys');
+
+                jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+                 { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+                 {
+                     //sopt: ["cn"]
+                     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+                 }
+                );
+
+                //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+                //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+
+
+
                 jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
                                                 {
                                                     caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
@@ -1121,6 +1146,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                         MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
                                                     },
                                                 });
+                jQuery("#Lista").filterToolbar({
+                    stringResult: true, searchOnEnter: true,
+                    defaultSearch: 'cn',
+                    enableClear: false
+                }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
             });
 
 

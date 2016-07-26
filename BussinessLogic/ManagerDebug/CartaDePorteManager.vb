@@ -832,6 +832,7 @@ Public Class CartaDePorteManager
 
 
         If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+        If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
 
 
 
@@ -840,13 +841,15 @@ Public Class CartaDePorteManager
         Dim q = (From c In db.Clientes Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
 
 
-
-
+        
         If q Is Nothing Then
             If RazonSocial.Trim.Length > 4 Then
                 q = New ProntoMVC.Data.Models.Cliente
                 q.RazonSocial = RazonSocial
+
+                'hay q guardarlo con guiones????? -sí!!!!!
                 q.Cuit = cuit
+
                 'acá había un insertonsubmit
                 db.Clientes.Add(q)
                 db.SaveChanges()
@@ -871,6 +874,35 @@ Public Class CartaDePorteManager
 
 
     End Function
+
+
+    Public Shared Function VerfCuit(ByVal e As String) As Boolean
+
+        e = e.Replace("-", "").Replace(" ", "")
+
+        Dim numconst As String = 5432765432
+        Dim x As Integer
+        Dim valor1 As Integer
+        Dim valor2 As Integer
+        Dim valor3 As Integer
+        Dim comprobante As Integer = CInt(e.ToArray.GetValue(e.ToArray.Length - 1).ToString)
+
+        For x = 0 To CInt(CInt(e.ToArray.Length).ToString - 2)
+            valor1 += CInt(e.ToArray.GetValue(x).ToString) * CInt(numconst.ToArray.GetValue(x).ToString)
+        Next
+
+        valor2 = valor1 Mod 11
+        valor3 = 11 - valor2
+
+        If valor3 = comprobante Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+
+
 
 
     Public Shared Function CrearEquivalencia(palabra As String, traduccion As String, SC As String)
@@ -13966,7 +13998,8 @@ Public Class CartaDePorteManager
 
             Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numerocarta, 0, 0)
 
-            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente Then
+            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente And _
+              IdClienteEquivalenteDelIdVendedor(cdp.Corredor2, SC) <> idcliente Then
                 ErrHandler2.WriteError("La carta no corresponde al usuario")
                 Return Nothing
             End If
