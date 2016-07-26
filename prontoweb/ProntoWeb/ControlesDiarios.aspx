@@ -46,10 +46,58 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             id="m1s">Select(Unselect) row 13</a>--%>
 
 
-
         <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="True" CssClass="btn btn-primary"
             Width="150" Height="40" />
         <br />
+        <br />
+         <table>
+            <tr>
+
+
+                <td class="EncabezadoCell">
+                    <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
+                        Visible="true">
+                        <asp:ListItem Text="Hoy" />
+                        <asp:ListItem Text="Ayer" />
+                        <%--<asp:ListItem Text="Esta semana" />
+                        <asp:ListItem Text="Semana pasada" />--%>
+                        <asp:ListItem Text="Este mes" Selected="True" />
+                        <asp:ListItem Text="Mes anterior" />
+                        <asp:ListItem Text="Cualquier fecha" />
+                        <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
+                        <asp:ListItem Text="Personalizar" />
+                    </asp:DropDownList>
+                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" 
+                        TabIndex="2" AutoPostBack="false"></asp:TextBox>
+                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
+                        Enabled="True">
+                    </cc1:CalendarExtender>
+                    <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
+                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
+                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                        Enabled="True">
+                    </cc1:MaskedEditExtender>
+                    <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
+                        WatermarkText="desde" WatermarkCssClass="watermarked" />
+                    <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2"
+                        AutoPostBack="false"></asp:TextBox>
+                    <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
+                        Enabled="True">
+                    </cc1:CalendarExtender>
+                    <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
+                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
+                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                        Enabled="True">
+                    </cc1:MaskedEditExtender>
+                    <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
+                        WatermarkText="hasta" WatermarkCssClass="watermarked" />
+                </td>
+
+            </tr>
+        </table>
+
         <br />
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
@@ -739,7 +787,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 $('#Lista').jqGrid({
                     //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
                     url: 'Handler.ashx',
-                    postData: {},
+                    //postData: {},
+                    postData: {
+                        'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                        'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                    },
                     datatype: 'json',
                     mtype: 'POST',
 
