@@ -50,7 +50,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             Width="150" Height="40" />
         <br />
         <br />
-         <table>
+        <table>
             <tr>
 
 
@@ -67,7 +67,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                         <asp:ListItem Text="Personalizar" />
                     </asp:DropDownList>
-                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" 
+                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"
                         TabIndex="2" AutoPostBack="false"></asp:TextBox>
                     <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                         Enabled="True">
@@ -807,16 +807,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 {
                                     name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false,
                                     search: false,
-                                    //classes: "myLink",
-                                    //formatter: function (cellValue, options, rowObject) {
-                                    //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
-                                    //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
-                                    //    var  IdCartasDePorteControlDescarga = $(rowObject)[1]
-                                    //    return ( IdCartasDePorteControlDescarga >= 0 ? convertIcon : ""); // + "<span>" + cellValue + "</span>";
-                                    //},
-                                    //cellattr: function () {
-                                    //    return " title=\"Graba el registro\"";
-                                    //}
                                 },
                                 { name: ' IdCartasDePorteControlDescarga', index: ' IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
                                 {
@@ -870,19 +860,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                          dataType: "json",
                                                          contentType: "application/json; charset=utf-8",
 
-                                                         data: JSON.stringify({ term: request.term }),
-
-                                                         //success: function (data) {
-                                                         //    //check what data contains. it should contain a string like "['val1','val2','val3','val4']"
-                                                         //    //the next line should use $.map(data and not $.map(response
-                                                         //    var a = $.parseJSON(data.d);
-                                                         //    response($.map(a, function (item) {
-                                                         //        return {
-                                                         //            label: item.value,
-                                                         //            value: item.id
-                                                         //        }
-                                                         //    }));
-                                                         //}
+                                                         data: JSON.stringify({
+                                                             term: request.term
+                                                             //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                         }),
 
 
                                                          success: function (data2) {
@@ -959,127 +940,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                                             //$(elem).autocomplete({
-                                             //    source:  //"WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                                             //        function (request, response) {
-                                             //            $.ajax({
-                                             //                type: "POST",
-                                             //                url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                                             //                dataType: "json",
-                                             //                contentType: "application/json; charset=utf-8",
-
-                                             //                data: JSON.stringify({ term: request.term }),
-                                             //                success: function (data2) {
-                                             //                    var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-                                             //                    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                             //                        var ui = data[0];
-
-                                             //                        if (ui.id == "") {
-                                             //                            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                             //                            $("#Descripcion").val("");
-                                             //                            return;
-                                             //                        }
-                                             //                        $("#IdWilliamsDestino").val(ui.id);
-
-                                             //                        UltimoIdArticulo = ui.id;
-                                             //                    }
-                                             //                    else {
-                                             //                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                             //                    }
-                                             //                }
-                                             //            });
-                                             //        },
-
-                                             //    dataType: "json", //"xml",
-                                             //    contentType: "application/json; charset=utf-8",
-                                             //    minLength: 0,
-                                             //    select: function (event, ui) {
-                                             //        if (ui.item.value === NoResultsLabel) {
-                                             //            event.preventDefault();
-                                             //            return;
-                                             //        }
-                                             //        $("#IdWilliamsDestino").val(ui.item.id);
-
-                                             //        UltimoIdArticulo = ui.item.id;
-                                             //    },
-                                             //    focus: function (event, ui) {
-                                             //        if (ui.item.value === NoResultsLabel) {
-                                             //            event.preventDefault();
-                                             //        }
-                                             //    }
-                                             //});
-
-
 
 
                                          }
 
-                                         //,
-                                         //dataEvents: [{
-                                         //    type: 'change',
-                                         //    fn: function (e) {
-                                         //        if (this.value == "No se encontraron resultados") {
-                                         //            $("#Descripcion").val("");
-                                         //            return;
-                                         //        }
 
-
-                                         //        $.ajax({
-                                         //            url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                                         //            type: "POST",
-                                         //            data: JSON.stringify({ term: this.value }),
-                                         //            contentType: "application/json; charset=utf-8",
-                                         //            dataType: "json",
-                                         //            success:
-                                         //                function (data2) {
-                                         //                    var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-                                         //                    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                         //                        var ui = data[0];
-
-                                         //                        if (ui.id == "") {
-                                         //                            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                         //                            $("#Descripcion").val("");
-                                         //                            return;
-                                         //                        }
-                                         //                        $("#IdWilliamsDestino").val(ui.id);
-
-                                         //                        UltimoIdArticulo = ui.id;
-                                         //                    }
-                                         //                    else {
-                                         //                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                         //                    }
-                                         //                }
-                                         //        })
-
-
-
-
-                                         //        //$.post("WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",  // ?term=' + val
-
-                                         //        //    { term: this.value },
-
-                                         //        //    function (data) {
-                                         //        //        if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                         //        //            var ui = data[0];
-
-                                         //        //            if (ui.id== "") {
-                                         //        //                alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                         //        //                $("#Descripcion").val("");
-                                         //        //                return;
-                                         //        //            }
-                                         //        //            $("#IdWilliamsDestino").val(ui.id);
-
-                                         //        //            UltimoIdArticulo = ui.id;
-                                         //        //        }
-                                         //        //        else {
-                                         //        //            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                         //        //        }
-                                         //        //    }
-
-                                         //        //     ,"json" //"xml"
-                                         //        //);
-                                         //    }
-                                         //}]
                                      },
                                      editrules: { required: true }
                                  },
@@ -1110,7 +975,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 name: 'IdPuntoVenta', index: 'IdPuntoVenta',
 
                 width: 100, resizable: true,
-                align: "left", sorttype: "number", editable: true, edittype: "select",
+                align: "left", sorttype: "number", editable: true, edittype: "select", hidden: true,
                 editoptions: { value: "1:1;2:2;3:3;4:4" }, // { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" },
                 searchoptions: { sopt: ['eq'] },
                 editrules: { required: true }
@@ -1182,6 +1047,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     cellsubmit: 'clientArray',
                     dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
+                    toppager: true,
 
                     gridview: true
             , multiboxonly: true

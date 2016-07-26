@@ -181,6 +181,9 @@ Public Class WebServiceClientes
 
         Dim SC As String
 
+
+
+
         If Not Diagnostics.Debugger.IsAttached Then
             'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
             SC = Encriptar(scWilliamsRelease())
@@ -190,11 +193,19 @@ Public Class WebServiceClientes
             'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
         End If
 
+
+        Dim usuario = Membership.GetUser()
+        Dim dt As System.Data.DataTable = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'")
+        Dim idUsuario As Integer = Convert.ToInt32(dt.Rows(0)(0))
+        Dim puntovent As Integer = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado
+
+
+
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
         Dim q = (From item In db.WilliamsDestinos
-                   Where item.Descripcion.ToLower().Contains(term.ToLower())
+                   Where item.Descripcion.ToLower().Contains(term.ToLower()) And (puntovent = 0 Or item.PuntoVenta = puntovent)
                    Order By item.Descripcion
                    Select New autocomplete With
                    {
@@ -289,8 +300,11 @@ Public Class WebServiceClientes
 
         Dim id As Integer = o("IdCartasDePorteControlDescarga")
 
+        Dim usuario = Membership.GetUser()
+        Dim dt As System.Data.DataTable = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'")
+        Dim idUsuario As Integer = Convert.ToInt32(dt.Rows(0)(0))
+        Dim puntovent As Integer = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado
 
-        Dim sssss = Membership.GetUser()
 
         Try
 
@@ -304,7 +318,7 @@ Public Class WebServiceClientes
                 EntidadOriginal.Fecha = o("Fecha")
                 EntidadOriginal.IdDestino = CInt(o("IdWilliamsDestino"))
                 EntidadOriginal.TotalDescargaDia = CInt(o("TotalDescargaDia"))
-                EntidadOriginal.IdPuntoVenta = CInt(o("IdPuntoVenta"))
+                EntidadOriginal.IdPuntoVenta = puntovent ' CInt(o("IdPuntoVenta"))
 
                 EntidadEntry.CurrentValues.SetValues(EntidadOriginal)
 
@@ -315,7 +329,7 @@ Public Class WebServiceClientes
                 x.Fecha = o("Fecha")
                 x.IdDestino = CInt(o("IdWilliamsDestino"))
                 x.TotalDescargaDia = CInt(o("TotalDescargaDia"))
-                x.IdPuntoVenta = CInt(o("IdPuntoVenta"))
+                x.IdPuntoVenta = puntovent ' CInt(o("IdPuntoVenta"))
 
                 db.CartasDePorteControlDescargas.Add(x)
             End If
