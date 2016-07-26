@@ -154,6 +154,9 @@ Partial Class ControlesDiarios
         End Try
 
 
+        Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+
+
         Dim yourParams As ReportParameter() = New ReportParameter(5) {}
 
         Dim ArchivoExcelDestino As String = Path.GetTempPath & "ControlDiario_" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
@@ -163,7 +166,7 @@ Partial Class ControlesDiarios
         yourParams(2) = New ReportParameter("FechaDesde", FechaDesde)
         yourParams(3) = New ReportParameter("FechaHasta", FechaHasta)
         yourParams(4) = New ReportParameter("IdDestino", -1)
-        yourParams(5) = New ReportParameter("IdPuntoVenta", 0)
+        yourParams(5) = New ReportParameter("IdPuntoVenta", pventa)
         'yourParams(7) = New ReportParameter("Consulta", Sql)
 
 
