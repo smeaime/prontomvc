@@ -77,7 +77,7 @@ Partial Class ControlesDiarios
             Me.Title = "Control de Descargas"
 
             BindTypeDropDown()
-            'refrescaPeriodo()
+            refrescaPeriodo()
 
 
 
@@ -136,6 +136,23 @@ Partial Class ControlesDiarios
 
         Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
 
+        Dim FechaDesde = New DateTime(1980, 1, 1)
+        Dim FechaHasta = New DateTime(2050, 1, 1)
+
+        Try
+
+            FechaDesde = DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Nothing)
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            FechaHasta = DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Nothing)
+
+        Catch ex As Exception
+
+        End Try
+
 
         Dim yourParams As ReportParameter() = New ReportParameter(5) {}
 
@@ -143,8 +160,8 @@ Partial Class ControlesDiarios
 
         yourParams(0) = New ReportParameter("CadenaConexion", Encriptar(HFSC.Value))
         yourParams(1) = New ReportParameter("sServidorWeb", "kjhkjlh")
-        yourParams(2) = New ReportParameter("FechaDesde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-        yourParams(3) = New ReportParameter("FechaHasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+        yourParams(2) = New ReportParameter("FechaDesde", FechaDesde)
+        yourParams(3) = New ReportParameter("FechaHasta", FechaHasta)
         yourParams(4) = New ReportParameter("IdDestino", -1)
         yourParams(5) = New ReportParameter("IdPuntoVenta", 0)
         'yourParams(7) = New ReportParameter("Consulta", Sql)
@@ -228,7 +245,41 @@ Partial Class ControlesDiarios
     End Sub
 
 
+    Protected Sub cmbPeriodo_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbPeriodo.SelectedIndexChanged
+        refrescaPeriodo()
 
+    End Sub
+
+    Sub refrescaPeriodo()
+        txtFechaDesde.Enabled = False
+        txtFechaHasta.Enabled = False
+        Select Case cmbPeriodo.Text
+
+            Case "Cualquier fecha"
+                txtFechaDesde.Text = ""
+                txtFechaHasta.Text = ""
+
+            Case "Hoy"
+                txtFechaDesde.Text = Today
+                txtFechaHasta.Text = ""
+
+            Case "Ayer"
+                txtFechaDesde.Text = DateAdd(DateInterval.Day, -1, Today)
+                txtFechaHasta.Text = DateAdd(DateInterval.Day, -1, Today)
+
+            Case "Este mes"
+                txtFechaDesde.Text = GetFirstDayInMonth(Today)
+                txtFechaHasta.Text = GetLastDayInMonth(Today)
+            Case "Mes anterior"
+                txtFechaDesde.Text = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, Today))
+                txtFechaHasta.Text = GetLastDayInMonth(DateAdd(DateInterval.Month, -1, Today))
+            Case "Personalizar"
+                txtFechaDesde.Enabled = True
+                txtFechaHasta.Enabled = True
+        End Select
+
+
+    End Sub
 
 
 

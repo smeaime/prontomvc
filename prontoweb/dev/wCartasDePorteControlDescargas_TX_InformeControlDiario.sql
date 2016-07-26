@@ -35,8 +35,11 @@ select
 								AND D.idPuntoVenta=C.puntoVenta
 	left  join WilliamsDestinos DEST on D.IdDestino=DEST.IdWilliamsDestino
 	where D.idPuntoVenta=@IdPuntoVenta or @IdPuntoVenta=0
+			AND (D.Fecha between @FechaDesde and @FechaHasta)
 	group by d.IdCartasDePorteControlDescarga,D.IdDestino , DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
-                      
+    order by D.Fecha desc, DEST.Descripcion asc
+
+
 end
 go
 

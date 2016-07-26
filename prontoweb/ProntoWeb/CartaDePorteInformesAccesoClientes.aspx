@@ -154,7 +154,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                             <asp:ListItem Text="Personalizar" />
                         </asp:DropDownList>
-                        <asp:TextBox ID="txtFechaDesde" runat="server" Width="72px" MaxLength="1" autocomplete="off"
+                        <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"
                             TabIndex="2" AutoPostBack="false"></asp:TextBox>
                         <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                             Enabled="True">
@@ -167,7 +167,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         </cc1:MaskedEditExtender>
                         <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                             WatermarkText="desde" WatermarkCssClass="watermarked" />
-                        <asp:TextBox ID="txtFechaHasta" runat="server" Width="72px" MaxLength="1" TabIndex="2"
+                        <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2"
                             AutoPostBack="false"></asp:TextBox>
                         <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                             Enabled="True">
