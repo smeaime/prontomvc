@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using ProntoMVC.ViewModels;
 
 using System.Transactions;
+using ProntoFlexicapture;
 
 
 //test de java lopez
@@ -52,7 +53,8 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
-        const string nombreempresa = "Pronto"; 
+        const string nombreempresa = "Williams2";
+        //const string nombreempresa = "Pronto";
         //const string nombreempresa = "DemoProntoWeb";
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
@@ -70,8 +72,110 @@ namespace ProntoMVC.Tests
         {
             string bldmastersql = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
+            
             sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+
+
+
+        [TestMethod]
+        public void Exportacion_a_Excel_de_Entities_2()
+        {
+
+            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de
+            // otro modo, pasandole como maxrows un numero grandisimo
+            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
+            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
+
+            // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
+
+
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+            string filters = "";
+
+
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+
+
+            //llamo directo a FiltroGenerico o a Pedidos_DynamicGridData??? -y, filtroGenerico no va a incluir las columnas recalculadas!!!!
+            // Cuanto tarda ExportToExcelEntityCollection en crear el excel de un FiltroGenerico de toda la tabla de Pedidos?
+
+            
+            IQueryable<Data.Models.Factura> q = (from a in db.Facturas select a).AsQueryable();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            List<Data.Models.Factura> pagedQuery =
+                    Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Factura>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+            if (true)
+            {
+                var c = new FacturaController();
+                GetMockedControllerGenerico(c);
+                JsonResult result =(JsonResult) c.TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
+
+                // cómo convertir el JsonResult (o mejor dicho, un array de strings)  en un excel?
+            }
+
+            List<Data.Models.Factura> control = pagedQuery.ToList();
+
+
+            string output = "c:\\adasdasd.xls";
+
+            FuncionesCSharpBLL.ExportToExcelEntityCollection<Data.Models.Factura>(control, output);
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
 
 
 
@@ -96,7 +200,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Pedido Pedido = db.Pedidos.OrderByDescending(x=>x.IdPedido).First();
+            Pedido Pedido = db.Pedidos.OrderByDescending(x => x.IdPedido).First();
 
             var c = new PedidoController();
 
@@ -113,7 +217,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Requerimiento o = db.Requerimientos.OrderByDescending(x=>x.IdRequerimiento).First();
+            Requerimiento o = db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
 
             var c = new RequerimientoController();
 
@@ -130,7 +234,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Presupuesto o = db.Presupuestos.OrderByDescending(x=>x.IdPresupuesto).First();
+            Presupuesto o = db.Presupuestos.OrderByDescending(x => x.IdPresupuesto).First();
 
             var c = new PresupuestoController();
 
@@ -147,7 +251,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Comparativa o = db.Comparativas.OrderByDescending(x=>x.IdComparativa).First();
+            Comparativa o = db.Comparativas.OrderByDescending(x => x.IdComparativa).First();
 
             var c = new ComparativaController();
 
@@ -164,7 +268,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            ComprobanteProveedor o = db.ComprobantesProveedor.OrderByDescending(x=>x.IdComprobanteProveedor).First();
+            ComprobanteProveedor o = db.ComprobantesProveedor.OrderByDescending(x => x.IdComprobanteProveedor).First();
 
 
 
@@ -188,7 +292,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            OrdenPago o = db.OrdenesPago.OrderByDescending(x=>x.IdOrdenPago).First();
+            OrdenPago o = db.OrdenesPago.OrderByDescending(x => x.IdOrdenPago).First();
 
 
             var c = new OrdenPagoController();
@@ -207,7 +311,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Factura o = db.Facturas.OrderByDescending(x=>x.IdFactura).First();
+            Factura o = db.Facturas.OrderByDescending(x => x.IdFactura).First();
 
 
             var c = new FacturaController();
@@ -225,7 +329,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Recibo o = db.Recibos.OrderByDescending(x=>x.IdRecibo).First();
+            Recibo o = db.Recibos.OrderByDescending(x => x.IdRecibo).First();
 
 
             var c = new ReciboController();
@@ -246,7 +350,7 @@ namespace ProntoMVC.Tests
 
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Articulo o = db.Articulos.OrderByDescending(x=>x.IdArticulo).First();
+            Articulo o = db.Articulos.OrderByDescending(x => x.IdArticulo).First();
 
 
             var c = new ArticuloController();
@@ -266,7 +370,7 @@ namespace ProntoMVC.Tests
 
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Cliente o = db.Clientes.OrderByDescending(x=>x.IdCliente).First();
+            Cliente o = db.Clientes.OrderByDescending(x => x.IdCliente).First();
 
 
             var c = new ClienteController();
@@ -284,7 +388,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Proveedor o = db.Proveedores.OrderByDescending(x=>x.IdProveedor).First();
+            Proveedor o = db.Proveedores.OrderByDescending(x => x.IdProveedor).First();
 
 
             var c = new ProveedorController();
@@ -407,7 +511,7 @@ namespace ProntoMVC.Tests
 
 
 
-        static private void GetMockedControllerGenerico(ProntoBaseController c)
+        static public void GetMockedControllerGenerico(ProntoBaseController c)
         {
 
             var controllerContext = new Mock<ControllerContext>();
