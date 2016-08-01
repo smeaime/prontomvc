@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advanced techniques.cs" />
+    <Compile Include="DataForExcel.cs" />
     <Compile Include="Frequently asked questions.cs" />
     <Compile Include="prontoflexicapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
