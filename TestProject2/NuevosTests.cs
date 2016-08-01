@@ -24,6 +24,7 @@ using ProntoMVC.ViewModels;
 using System.Transactions;
 using ProntoFlexicapture;
 
+using System.IO;
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -72,7 +73,7 @@ namespace ProntoMVC.Tests
         {
             string bldmastersql = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
-            
+
             sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
 
         }
@@ -140,7 +141,7 @@ namespace ProntoMVC.Tests
             //llamo directo a FiltroGenerico o a Pedidos_DynamicGridData??? -y, filtroGenerico no va a incluir las columnas recalculadas!!!!
             // Cuanto tarda ExportToExcelEntityCollection en crear el excel de un FiltroGenerico de toda la tabla de Pedidos?
 
-            
+
             IQueryable<Data.Models.Factura> q = (from a in db.Facturas select a).AsQueryable();
 
 
@@ -152,21 +153,46 @@ namespace ProntoMVC.Tests
             List<Data.Models.Factura> pagedQuery =
                     Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Factura>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
 
+            JsonResult result;
+
             if (true)
             {
                 var c = new FacturaController();
                 GetMockedControllerGenerico(c);
-                JsonResult result =(JsonResult) c.TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
+                result = (JsonResult)c.TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
 
                 // cómo convertir el JsonResult (o mejor dicho, un array de strings)  en un excel?
             }
 
+            string output = "c:\\adasdasd.xls";
+
+
+            jqGridJson listado = (jqGridJson)result.Data;
+            string[] renglon = listado.rows[0].cell;
+
+
+            var excelData = new jqGridWeb.DataForExcel(
+                                // column Header
+                    new[] { "Col1", "Col2", "Col3" },
+                    new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
+                          jqGridWeb.DataForExcel.DataType.String},
+                    new List<string[]> {
+                        new[] {"a", "1", "c1"},
+                        new[] {"a", "2", "c2"}
+                    },
+                    "Test Grid");
+            Stream stream = new FileStream(output, FileMode.Create);
+            excelData.CreateXlsxAndFillData(stream);
+            stream.Close();
+
+
+
             List<Data.Models.Factura> control = pagedQuery.ToList();
 
 
-            string output = "c:\\adasdasd.xls";
-
+            if (false) {
             FuncionesCSharpBLL.ExportToExcelEntityCollection<Data.Models.Factura>(control, output);
+        }
 
             System.Diagnostics.Process.Start(output);
         }
