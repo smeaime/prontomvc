@@ -2059,7 +2059,7 @@ namespace ProntoMVC.Tests
         void VaciarDirectorioTemp()
         {
 
-            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Administrador\Documents\bdl\prontoweb\Temp");
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp");
 
             foreach (FileInfo file in di.GetFiles())
             {

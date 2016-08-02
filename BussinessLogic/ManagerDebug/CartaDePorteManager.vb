@@ -11278,7 +11278,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
+    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False, Optional bForzarCasillaTK As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
         ErrHandler2.WriteError("GrabarImagen 1")
@@ -11376,7 +11376,7 @@ Public Class CartaDePorteManager
             End Try
 
 
-        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Or bForzarCasillaTK Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen2)
             oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR
         ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") > 0 Then
