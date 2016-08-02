@@ -201,6 +201,100 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void OCR_y_Tickets()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\imagenescp\tickets.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            if (true)
+            {
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+                // ProntoWindowsService.Service1.Initialize();
+            }
+            else
+            {
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                                        plantilla, 30,
+                                         SC, DirApp, true, ref sError);
+                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+            }
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+            // mostrar info del lote1
+            //VerInfoDelLote(ticket);
+
+
+
+            string archivoExcel = excels[0];
+
+
+            int m_IdMaestro = 0;
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+        }
+
+
+
+
+
 
 
         [TestMethod]
@@ -1450,6 +1544,8 @@ namespace ProntoMVC.Tests
         {
             ClassFlexicapture.Log("safasdfsf");
         }
+
+
 
         [TestMethod]
         public void EquivalenciasOCR_18223()
