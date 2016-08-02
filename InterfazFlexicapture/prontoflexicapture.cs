@@ -1344,10 +1344,8 @@ namespace ProntoFlexicapture
 
             string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe();
 
-
-
-
-            string plantillaUsada = document.Pages[0].SectionDefinition.FlexibleDescription.Name;
+            string PlantillaUsada = Sample.AdvancedTechniques.findField(document, "PlantillaUsada").NullStringSafe();
+            //string plantillaUsada = document.Pages[0].SectionDefinition.FlexibleDescription.Name;
 
 
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
@@ -1747,7 +1745,7 @@ namespace ProntoFlexicapture
 
                     //si es un ticket lo tiene que poner en segunda posicion
 
-                        bool esTicket=(plantillaUsada!="carta");
+                    bool esTicket = true; // (plantillaUsada != "carta");
 
                     var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
                                                   , ref sError, DirApp, bCodigoBarrasDetectado, esTicket);
