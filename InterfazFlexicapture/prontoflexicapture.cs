@@ -259,6 +259,8 @@ namespace ProntoFlexicapture
 
                     document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
+
+
                 }
 
                 catch (Exception xx)
@@ -1345,6 +1347,8 @@ namespace ProntoFlexicapture
 
 
 
+            string plantillaUsada = document.Pages[0].SectionDefinition.FlexibleDescription.Name;
+
 
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
@@ -1741,8 +1745,12 @@ namespace ProntoFlexicapture
 
                     //se da cuenta si es un ticket? no lo esta poniendo en 2 posicion?
 
+                    //si es un ticket lo tiene que poner en segunda posicion
+
+                        bool esTicket=(plantillaUsada!="carta");
+
                     var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
-                                                  , ref sError, DirApp, bCodigoBarrasDetectado);
+                                                  , ref sError, DirApp, bCodigoBarrasDetectado, esTicket);
 
 
 
