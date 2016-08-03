@@ -1,0 +1,89 @@
+
+Log Entry : 
+08/03/2016 17:02:05
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+08/03/2016 17:06:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Estadísticas de Toneladas descargadas (Modo-Sucursal)
+__________________________
+
+Log Entry : 
+08/03/2016 17:06:39
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:estadidesc   02/08/2015   02/08/2015   02/08/2016    02/08/2016
+__________________________
+
+Log Entry : 
+08/03/2016 17:06:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Estadísticas de Toneladas descargadas (Modo-Sucursal)
+__________________________
+
+Log Entry : 
+08/03/2016 17:06:50
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:estadidesc   02/08/2015   02/08/2015   02/08/2016    02/08/2016
+__________________________
+
+Log Entry : 
+08/03/2016 17:06:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Estadísticas de Toneladas descargadas (Modo-Sucursal)
+__________________________
+
+Log Entry : 
+08/03/2016 17:06:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:estadidesc   02/08/2015   02/08/2015   02/08/2016    02/08/2016
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Totales generales por mes por sucursal
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:11
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Totales generales por mes por sucursal
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:12
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Totales generales por mes por sucursal
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Estadísticas de Toneladas descargadas (Modo-Sucursal)
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:estadidesc   02/08/2015   02/08/2015   02/08/2016    02/08/2016
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Estadísticas de Toneladas descargadas (Modo-Sucursal)
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:estadidesc   02/08/2015   02/08/2015   02/08/2016    02/08/2016
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Estadísticas de Toneladas descargadas (Modo-Sucursal)
+__________________________
+
+Log Entry : 
+08/03/2016 17:07:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:estadidesc   02/08/2015   02/08/2015   02/08/2016    02/08/2016
+__________________________
