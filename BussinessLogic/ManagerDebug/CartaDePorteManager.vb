@@ -11349,7 +11349,7 @@ Public Class CartaDePorteManager
 
 
                 'primera pagina del tiff
-                If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
+                If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 And Not bForzarCasillaTK Then
                     listapaginas(0).Save(DIRDATABACKUPEAR + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
                     BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen)
                     oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"

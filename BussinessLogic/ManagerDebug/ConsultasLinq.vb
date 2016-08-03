@@ -1476,7 +1476,7 @@ Public Class ConsultasLinq
 
 
 
-
+    'aca deberia bancarme el destino y el articulo, pero y los demas filtros???
     Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String, _
                                            txtFechaDesdeAnterior As String, txtFechaHastaAnterior As String, _
                                           cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String) As Object
