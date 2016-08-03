@@ -1310,12 +1310,12 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_DEST"
+            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_DEST", "PESOBRUTODESCARGA"
 
                 Return "column12"
-            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_DEST"
+            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_DEST", "PESOTARADESCARGA"
                 Return "column13"
-            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_DEST"
+            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_DEST", "PESONETODESCARGA"
 
                 Return "column14"
 
@@ -1333,7 +1333,7 @@ Public Class ExcelImportadorManager
             Case "OTRASMERMAS"
                 Return "Auxiliar5" '"OtrasMermas"
 
-            Case "NETO FINAL", "FINAL", "NETO_DEST"
+            Case "NETO FINAL", "FINAL", "PESONETOFINAL" '  "NETO_DEST" <- este ya lo estoy usando en descarga
 
                 Return "column17"
 
