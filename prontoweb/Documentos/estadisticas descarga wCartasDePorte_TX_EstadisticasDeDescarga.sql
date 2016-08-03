@@ -97,6 +97,8 @@ Where	cdp.Vendedor > 0
 
 Group BY  art.Descripcion, cdp.Exporta, cdp.PuntoVenta 
 
+agregar producto y destino
+
 go
 
 

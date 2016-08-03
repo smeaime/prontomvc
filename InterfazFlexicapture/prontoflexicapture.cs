@@ -1320,9 +1320,18 @@ namespace ProntoFlexicapture
             string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe();
             string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe();
             string Condicional = Sample.AdvancedTechniques.findField(document, "Condicional").NullStringSafe();
+
             string PesoBruto = Sample.AdvancedTechniques.findField(document, "PesoBruto").NullStringSafe();
             string PesoTara = Sample.AdvancedTechniques.findField(document, "PesoTara").NullStringSafe();
             string PesoNeto = Sample.AdvancedTechniques.findField(document, "PesoNeto").NullStringSafe();
+
+            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
+            string PesoTaraDescarga = Sample.AdvancedTechniques.findField(document, "PesoTaraDescarga").NullStringSafe();
+            string PesoNetoDescarga = Sample.AdvancedTechniques.findField(document, "PesoNetoDescarga").NullStringSafe();
+
+            string PesoNetoFinal = Sample.AdvancedTechniques.findField(document, "PesoNetoFinal").NullStringSafe();
+
+
             string Observaciones = Sample.AdvancedTechniques.findField(document, "Observaciones").NullStringSafe();
             string Esablecimiento = Sample.AdvancedTechniques.findField(document, "Esablecimiento").NullStringSafe();
             string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe();
@@ -1335,7 +1344,6 @@ namespace ProntoFlexicapture
             string KmARecorrer = Sample.AdvancedTechniques.findField(document, "KmARecorrer").NullStringSafe();
             string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe();
             string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe();
-            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
 
             string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe();
 
@@ -1347,6 +1355,7 @@ namespace ProntoFlexicapture
             string PlantillaUsada = Sample.AdvancedTechniques.findField(document, "PlantillaUsada").NullStringSafe();
             //string plantillaUsada = document.Pages[0].SectionDefinition.FlexibleDescription.Name;
 
+            string FechaDescarga = Sample.AdvancedTechniques.findField(document, "FechaDescarga").NullStringSafe();
 
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
@@ -1357,47 +1366,50 @@ namespace ProntoFlexicapture
 
 
 
-            // if (BarraCP.Value.AsString != ""   )
+            bool esTicket = (PlantillaUsada != "");
 
-
-            if (BarraCP != null)
+            if (!esTicket)
             {
-                if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+                if (BarraCP != null)
                 {
-                    //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
-                    // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
-                    if (numeroCarta.ToString().Length == 9)
+                    if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
                     {
-                        ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
+                        //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
+                        // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
+                        if (numeroCarta.ToString().Length == 9)
+                        {
+                            ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
 
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
 
-                        numeroCarta = 0;
+                            numeroCarta = 0;
+                        }
                     }
+                }
+
+
+
+                if (numeroCarta == 0)
+                {
+
+                    // qué pasa si no esta la licencia?
+                    // detectar con lectores de codigo de barra
+
+                    ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
+
+                    numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
+
+                    ErrHandler2.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
+
+
+                    //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
+
+
                 }
             }
 
-
-
-            if (numeroCarta == 0)
-            {
-
-                // qué pasa si no esta la licencia?
-                // detectar con lectores de codigo de barra
-
-                ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
-
-                numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
-
-                ErrHandler2.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
-
-
-                //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
-
-
-            }
 
 
             if (numeroCarta == 0)
@@ -1407,7 +1419,7 @@ namespace ProntoFlexicapture
                 if (NCarta != "")
                 {
                     long n = 0;
-                    long.TryParse(NCarta.Replace(" ", ""), out n);
+                    long.TryParse(NCarta.Replace("-", "").Replace(" ", ""), out n);
                     if (n.ToString().Length == 9) numeroCarta = n;
                 }
             }
@@ -1512,7 +1524,15 @@ namespace ProntoFlexicapture
                         cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
                         cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", "").Replace(",", ""));
                         cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", "").Replace(",", ""));
+
                         cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
+                        cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
+                        cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
+
+                        cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+
+
+
                         cdp.Observaciones = Observaciones;
 
 
@@ -1642,6 +1662,11 @@ namespace ProntoFlexicapture
 
                 }
 
+                //  por qué llegó hasta acá con id=-1? -porque es una carta nueva pero inválida que no se intentó grabar 
+                if (id == -1)
+                {
+                    Debug.Print(ms + " " + warn);
+                }
 
                 MarcarCartaComoProcesada(ref cdp, nombreusuario, SC);
 
@@ -1745,7 +1770,6 @@ namespace ProntoFlexicapture
 
                     //si es un ticket lo tiene que poner en segunda posicion
 
-                    bool esTicket = true; // (plantillaUsada != "carta");
 
                     var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
                                                   , ref sError, DirApp, bCodigoBarrasDetectado, esTicket);
