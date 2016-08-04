@@ -79,7 +79,8 @@ SELECT  art.Descripcion as Producto, cdp.Exporta as Modo, cdp.PuntoVenta as Sucu
 	sum(case  when FechaDescarga < @fechadesde  then NetoFinal else 0 end )/1000 as PeriodoAnterior,
 	0 as Diferen,
 	0 as DiferencPorcent
-from CartasDePorte cdp
+--from CartasDePorte cdp
+from dbo.fSQL_GetDataTableFiltradoYPaginado ( NULL, NULL, NULL,@fechadesde,@fechahasta2 ) as cdp
 join Articulos art On art.IdArticulo = cdp.IdArticulo 
 
 Where	cdp.Vendedor > 0 
@@ -97,8 +98,6 @@ Where	cdp.Vendedor > 0
 
 Group BY  art.Descripcion, cdp.Exporta, cdp.PuntoVenta 
 
-agregar producto y destino
-
 go
 
 
@@ -107,3 +106,5 @@ go
 go
 
 [wCartasDePorte_TX_EstadisticasDeDescarga] 'Ambos',-1,'2015-06-01 00:00:00','2015-06-01 00:00:00','2014-06-01 00:00:00','2014-06-01 00:00:00'
+go
+
