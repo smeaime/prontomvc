@@ -1666,12 +1666,33 @@
       <End Role="CartasDePorteControlDescarga" EntitySet="CartasDePorteControlDescargas" />
     </AssociationSet>
     <FunctionImport Name="wCartasDePorte_TX_EstadisticasDeDescarga" ReturnType="Collection(DemoProntoModel.wCartasDePorte_TX_EstadisticasDeDescarga_Result1)">
+      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+      <Parameter Name="estado" Mode="In" Type="Int32" />
+      <Parameter Name="QueContenga" Mode="In" Type="String" />
+      <Parameter Name="idVendedor" Mode="In" Type="Int32" />
+      <Parameter Name="idCorredor" Mode="In" Type="Int32" />
+      <Parameter Name="optCamionVagon" Mode="In" Type="String" />
+      <Parameter Name="fechadesdeAnterior" Mode="In" Type="DateTime" />
+      <Parameter Name="fechahastaAnterior" Mode="In" Type="DateTime" />
+      <Parameter Name="Contrato" Mode="In" Type="String" />
+      <Parameter Name="QueContenga2" Mode="In" Type="String" />
+      <Parameter Name="idClienteAuxiliarint" Mode="In" Type="Int32" />
+      <Parameter Name="AgrupadorDeTandaPeriodos" Mode="In" Type="Int32" />
+      <Parameter Name="Vagon" Mode="In" Type="Int32" />
+      <Parameter Name="Patente" Mode="In" Type="String" />
+      <Parameter Name="AplicarANDuORalFiltro" Mode="In" Type="Int32" />
       <Parameter Name="ModoExportacion" Mode="In" Type="String" />
-      <Parameter Name="pv" Mode="In" Type="Int32" />
-      <Parameter Name="fechadesde2" Mode="In" Type="DateTime" />
-      <Parameter Name="fechahasta2" Mode="In" Type="DateTime" />
       <Parameter Name="fechadesde" Mode="In" Type="DateTime" />
       <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
+      <Parameter Name="puntoventa" Mode="In" Type="Int32" />
+      <Parameter Name="optDivisionSyngenta" Mode="In" Type="String" />
+      <Parameter Name="idDestinatario" Mode="In" Type="Int32" />
+      <Parameter Name="idIntermediario" Mode="In" Type="Int32" />
+      <Parameter Name="idRemComercial" Mode="In" Type="Int32" />
+      <Parameter Name="idArticulo" Mode="In" Type="Int32" />
+      <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
+      <Parameter Name="idDestino" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="Articulo">
@@ -6878,6 +6899,7 @@
     <Property Name="IdPuntoVenta" Type="Int32" />
     <Property Name="PuntoVenta" Type="Int32" />
     <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="Int32" />
+    <Property Name="CompensacionGastosProveedorCliente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedore">
     <Key>
@@ -7374,6 +7396,7 @@
     <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
     <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="Int32" />
+    <Property Name="IdComprobanteProveedor_Compensacion" Type="Int32" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>

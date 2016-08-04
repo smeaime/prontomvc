@@ -1479,7 +1479,9 @@ Public Class ConsultasLinq
     'aca deberia bancarme el destino y el articulo, pero y los demas filtros???
     Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String, _
                                            txtFechaDesdeAnterior As String, txtFechaHastaAnterior As String, _
-                                          cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String) As Object
+                                          cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String _
+                                , idDestinatario As Integer, idDestino As Integer, IdArticulo As Integer
+                    ) As Object
         Dim dt = New DataTable
 
         '////////////////////////////////////////////////////
@@ -1487,22 +1489,22 @@ Public Class ConsultasLinq
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta, #1/1/2100#)
 
-        Dim fechadesde2 As Date = iisValidSqlDate(txtFechaDesdeAnterior, #1/1/2100#)
-        Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior, #1/1/2100#)
+        Dim fechadesdeAnterior As Date = iisValidSqlDate(txtFechaDesdeAnterior, #1/1/2100#)
+        Dim fechahastaAnterior As Date = iisValidSqlDate(txtFechaHastaAnterior, #1/1/2100#)
 
         If False Then
 
             'la fecha del periodo anterior a comparar
             If cmbPeriodo = "Este mes" Or cmbPeriodo = "Mes anterior" Then
-                fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
+                fechadesdeAnterior = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
             Else
-                fechadesde2 = DateAdd(DateInterval.Day, -1, fechadesde - (fechahasta - fechadesde)) 'le agrego un dia mas porque si puso "ayer", la dif entre hasta y desde es 0
+                fechadesdeAnterior = DateAdd(DateInterval.Day, -1, fechadesde - (fechahasta - fechadesde)) 'le agrego un dia mas porque si puso "ayer", la dif entre hasta y desde es 0
             End If
         End If
 
 
         'logear (o poner en el titulo) el rango de fechas usado para el periodo anterior
-        ErrHandler2.WriteError("estadidesc   " & fechadesde2.ToShortDateString() & "   " & fechahasta2.ToShortDateString() & "   " & fechadesde.ToShortDateString() & "    " & fechahasta.ToShortDateString())
+        ErrHandler2.WriteError("estadidesc   " & fechadesdeAnterior.ToShortDateString() & "   " & fechadesdeAnterior.ToShortDateString() & "   " & fechadesde.ToShortDateString() & "    " & fechahasta.ToShortDateString())
 
         '////////////////////////////////////////////////////
         '////////////////////////////////////////////////////
@@ -1538,7 +1540,12 @@ Public Class ConsultasLinq
 
         'If ModoExportacion <> "Buques" Then
 
-        Dim aaa = From xz In db.wCartasDePorte_TX_EstadisticasDeDescarga(ModoExportacion, pv, fechadesde2, fechahasta2, fechadesde, fechahasta)
+        Dim aaa = From xz In db.wCartasDePorte_TX_EstadisticasDeDescarga(Nothing, Nothing, Nothing, Nothing, Nothing,
+                                                                          Nothing, Nothing, fechadesdeAnterior, fechahastaAnterior, Nothing,
+                                                                         Nothing, Nothing, Nothing, Nothing, Nothing,
+                                                                          Nothing, ModoExportacion, fechadesde, fechahasta, pv,
+                                                                         Nothing, idDestinatario, Nothing, Nothing, Nothing,
+                                                                         Nothing, IdDestino)
                   Select xz
         'End If
 
@@ -1551,7 +1558,7 @@ Public Class ConsultasLinq
                     Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
                     Where cdp.Vendedor > 0 _
                         And ( _
-                                (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta2) _
+                                (cdp.FechaDescarga >= fechadesdeAnterior And cdp.FechaDescarga <= fechahastaAnterior) _
                                 Or _
                                 (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
                             ) _
@@ -1623,7 +1630,7 @@ Public Class ConsultasLinq
         If ModoExportacion = "Buques" Or ModoExportacion = "Todos" Then
 
 
-            Dim q2 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde2, fechahasta).ToList
+            Dim q2 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesdeAnterior, fechahasta).ToList
             Dim bb = (From i In q2 _
                        From art In db.Articulos.Where(Function(f) f.IdArticulo = i.IdArticulo).DefaultIfEmpty _
                         Group i By _
@@ -1649,7 +1656,7 @@ Public Class ConsultasLinq
                             .TotalBuques = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
                             .Total = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
                             .Porcent = 0, _
-                            .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaIngreso <= fechahasta2).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
+                            .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaIngreso <= fechahastaAnterior).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
                             .Diferen = 0, _
                             .DiferencPorcent = 0 _
                         }).ToList

@@ -134,9 +134,9 @@ LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado
 			
 			
 WHERE 1=1     
-    And (@IdArticulo IS NULL Or cdp.IdArticulo = @IdArticulo)
-    And (@IdDestino IS NULL Or cdp.Destino = @IdDestino)
-    And (@idDestinatario IS NULL Or cdp.Entregador = @idDestinatario)
+    And (@IdArticulo IS NULL Or @IdArticulo=-1 Or cdp.IdArticulo = @IdArticulo)
+    And (@IdDestino IS NULL Or @IdDestino=-1  Or cdp.Destino = @IdDestino)
+    And (@idDestinatario IS NULL Or @idDestinatario=-1   Or cdp.Entregador = @idDestinatario)
 	AND ISNULL(CDP.Anulada,'NO')<>'SI'    
 	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= @fechadesde
 	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= @fechahasta

@@ -323,7 +323,7 @@ namespace ProntoMVC.Tests
 
             db.Database.CommandTimeout = 180;
 
-            
+
 
             string output = "c:\\adasdasd.xls";
 
@@ -429,7 +429,7 @@ namespace ProntoMVC.Tests
             var a = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("20");
             var b = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4");
             var c = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4");
-            var d= CartaDePorteManager.VerfCuit("30537771274");
+            var d = CartaDePorteManager.VerfCuit("30537771274");
         }
 
 
@@ -867,7 +867,7 @@ namespace ProntoMVC.Tests
 
             var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "31/5/2016", "1/11/2015", "31/5/2016",
                                             "Personalizar",
-                                            1, "Todos", SC);
+                                            1, "Todos", SC, -1, -1, -1);
 
         }
 
