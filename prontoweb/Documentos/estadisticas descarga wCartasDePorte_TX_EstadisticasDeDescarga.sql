@@ -16,7 +16,12 @@ CREATE PROCEDURE [dbo].[wCartasDePorte_TX_EstadisticasDeDescarga]
 @fechadesde2 datetime,
 @fechahasta2 datetime,
 @fechadesde datetime,
-@fechahasta datetime
+@fechahasta datetime,
+
+@idArticulo int  = NULL,
+@idProcedencia int  = NULL,
+@idDestino int  = NULL,
+@AplicarANDuORalFiltro int  = NULL
 
 AS
 
@@ -80,7 +85,40 @@ SELECT  art.Descripcion as Producto, cdp.Exporta as Modo, cdp.PuntoVenta as Sucu
 	0 as Diferen,
 	0 as DiferencPorcent
 --from CartasDePorte cdp
-from dbo.fSQL_GetDataTableFiltradoYPaginado ( NULL, NULL, NULL,@fechadesde,@fechahasta2 ) as cdp
+from dbo.fSQL_GetDataTableFiltradoYPaginado
+( 
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					@idArticulo,
+
+					NULL, --@idProcedencia,
+					@idDestino,
+					NULL, --@AplicarANDuORalFiltro,
+					@ModoExportacion,
+					@fechadesde,
+
+					@fechahasta2, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
+
+					) as cdp
+
 join Articulos art On art.IdArticulo = cdp.IdArticulo 
 
 Where	cdp.Vendedor > 0 
