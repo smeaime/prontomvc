@@ -1097,6 +1097,23 @@ Partial Class CartaDePorteInformesGerenciales
 
 
     Function estadmodosuc()
+
+
+        Dim pv As Integer = cmbPuntoVenta.SelectedValue
+
+        Dim sTitulo As String = ""
+        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
+        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
+        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
+        Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
+        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
+        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
+        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+
+
+
         'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
@@ -1107,7 +1124,7 @@ Partial Class CartaDePorteInformesGerenciales
         Dim p2 As ReportParameter
         Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text _
                                                     , txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text _
-                                                    , cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
+                                                    , cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value, idDestinatario, idDestino, idArticulo)
 
         RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas.rdl", q, New ReportParameter() _
                                {New ReportParameter("Titulo", _
@@ -1117,17 +1134,38 @@ Partial Class CartaDePorteInformesGerenciales
 
     End Function
 
+
+
+
     Function estadsucmodo()
         'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
+
+
+        Dim pv As Integer = cmbPuntoVenta.SelectedValue
+
+        Dim sTitulo As String = ""
+        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
+        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
+        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
+        Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
+        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
+        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
+        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+
+
+
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
         Dim fechadesde2 As Date = iisValidSqlDate(txtFechaDesdeAnterior.Text, #1/1/1753#)
         Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior.Text, #1/1/2100#)
+
         Dim p2 As ReportParameter
 
         Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, _
                                                     txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text, _
-                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value)
+                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value, idDestinatario, idDestino, idArticulo)
 
         RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() _
                                {New ReportParameter("Titulo", _
@@ -1142,6 +1180,23 @@ Partial Class CartaDePorteInformesGerenciales
 
     Function estadsucmodoTodos()
 
+
+        Dim pv As Integer = cmbPuntoVenta.SelectedValue
+
+        Dim sTitulo As String = ""
+        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
+        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
+        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
+        Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
+        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
+        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
+        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+
+
+
+
         'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
@@ -1151,7 +1206,7 @@ Partial Class CartaDePorteInformesGerenciales
 
         Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, _
                                                     txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text, _
-                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, "Todos", HFSC.Value)
+                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, "Todos", HFSC.Value, idDestinatario, idDestino, idArticulo)
 
         RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() _
                                {New ReportParameter("Titulo", _

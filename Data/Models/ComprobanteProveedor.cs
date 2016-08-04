@@ -154,6 +154,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdPuntoVenta { get; set; }
         public Nullable<int> PuntoVenta { get; set; }
         public Nullable<int> IdNotaDebitoVenta_RecuperoGastos { get; set; }
+        public string CompensacionGastosProveedorCliente { get; set; }
     
         public virtual ICollection<DetalleComprobantesProveedore> DetalleComprobantesProveedores { get; set; }
         public virtual Proveedor Proveedor { get; set; }
