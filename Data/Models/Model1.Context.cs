@@ -571,23 +571,75 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Tree_TX_Generar");
         }
     
-        public virtual ObjectResult<wCartasDePorte_TX_EstadisticasDeDescarga_Result1> wCartasDePorte_TX_EstadisticasDeDescarga(string modoExportacion, Nullable<int> pv, Nullable<System.DateTime> fechadesde2, Nullable<System.DateTime> fechahasta2, Nullable<System.DateTime> fechadesde, Nullable<System.DateTime> fechahasta)
+        public virtual ObjectResult<wCartasDePorte_TX_EstadisticasDeDescarga_Result1> wCartasDePorte_TX_EstadisticasDeDescarga(Nullable<int> startRowIndex, Nullable<int> maximumRows, Nullable<int> estado, string queContenga, Nullable<int> idVendedor, Nullable<int> idCorredor, string optCamionVagon, Nullable<System.DateTime> fechadesdeAnterior, Nullable<System.DateTime> fechahastaAnterior, string contrato, string queContenga2, Nullable<int> idClienteAuxiliarint, Nullable<int> agrupadorDeTandaPeriodos, Nullable<int> vagon, string patente, Nullable<int> aplicarANDuORalFiltro, string modoExportacion, Nullable<System.DateTime> fechadesde, Nullable<System.DateTime> fechahasta, Nullable<int> puntoventa, string optDivisionSyngenta, Nullable<int> idDestinatario, Nullable<int> idIntermediario, Nullable<int> idRemComercial, Nullable<int> idArticulo, Nullable<int> idProcedencia, Nullable<int> idDestino)
         {
+            var startRowIndexParameter = startRowIndex.HasValue ?
+                new ObjectParameter("startRowIndex", startRowIndex) :
+                new ObjectParameter("startRowIndex", typeof(int));
+    
+            var maximumRowsParameter = maximumRows.HasValue ?
+                new ObjectParameter("maximumRows", maximumRows) :
+                new ObjectParameter("maximumRows", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(int));
+    
+            var queContengaParameter = queContenga != null ?
+                new ObjectParameter("QueContenga", queContenga) :
+                new ObjectParameter("QueContenga", typeof(string));
+    
+            var idVendedorParameter = idVendedor.HasValue ?
+                new ObjectParameter("idVendedor", idVendedor) :
+                new ObjectParameter("idVendedor", typeof(int));
+    
+            var idCorredorParameter = idCorredor.HasValue ?
+                new ObjectParameter("idCorredor", idCorredor) :
+                new ObjectParameter("idCorredor", typeof(int));
+    
+            var optCamionVagonParameter = optCamionVagon != null ?
+                new ObjectParameter("optCamionVagon", optCamionVagon) :
+                new ObjectParameter("optCamionVagon", typeof(string));
+    
+            var fechadesdeAnteriorParameter = fechadesdeAnterior.HasValue ?
+                new ObjectParameter("fechadesdeAnterior", fechadesdeAnterior) :
+                new ObjectParameter("fechadesdeAnterior", typeof(System.DateTime));
+    
+            var fechahastaAnteriorParameter = fechahastaAnterior.HasValue ?
+                new ObjectParameter("fechahastaAnterior", fechahastaAnterior) :
+                new ObjectParameter("fechahastaAnterior", typeof(System.DateTime));
+    
+            var contratoParameter = contrato != null ?
+                new ObjectParameter("Contrato", contrato) :
+                new ObjectParameter("Contrato", typeof(string));
+    
+            var queContenga2Parameter = queContenga2 != null ?
+                new ObjectParameter("QueContenga2", queContenga2) :
+                new ObjectParameter("QueContenga2", typeof(string));
+    
+            var idClienteAuxiliarintParameter = idClienteAuxiliarint.HasValue ?
+                new ObjectParameter("idClienteAuxiliarint", idClienteAuxiliarint) :
+                new ObjectParameter("idClienteAuxiliarint", typeof(int));
+    
+            var agrupadorDeTandaPeriodosParameter = agrupadorDeTandaPeriodos.HasValue ?
+                new ObjectParameter("AgrupadorDeTandaPeriodos", agrupadorDeTandaPeriodos) :
+                new ObjectParameter("AgrupadorDeTandaPeriodos", typeof(int));
+    
+            var vagonParameter = vagon.HasValue ?
+                new ObjectParameter("Vagon", vagon) :
+                new ObjectParameter("Vagon", typeof(int));
+    
+            var patenteParameter = patente != null ?
+                new ObjectParameter("Patente", patente) :
+                new ObjectParameter("Patente", typeof(string));
+    
+            var aplicarANDuORalFiltroParameter = aplicarANDuORalFiltro.HasValue ?
+                new ObjectParameter("AplicarANDuORalFiltro", aplicarANDuORalFiltro) :
+                new ObjectParameter("AplicarANDuORalFiltro", typeof(int));
+    
             var modoExportacionParameter = modoExportacion != null ?
                 new ObjectParameter("ModoExportacion", modoExportacion) :
                 new ObjectParameter("ModoExportacion", typeof(string));
-    
-            var pvParameter = pv.HasValue ?
-                new ObjectParameter("pv", pv) :
-                new ObjectParameter("pv", typeof(int));
-    
-            var fechadesde2Parameter = fechadesde2.HasValue ?
-                new ObjectParameter("fechadesde2", fechadesde2) :
-                new ObjectParameter("fechadesde2", typeof(System.DateTime));
-    
-            var fechahasta2Parameter = fechahasta2.HasValue ?
-                new ObjectParameter("fechahasta2", fechahasta2) :
-                new ObjectParameter("fechahasta2", typeof(System.DateTime));
     
             var fechadesdeParameter = fechadesde.HasValue ?
                 new ObjectParameter("fechadesde", fechadesde) :
@@ -597,7 +649,39 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("fechahasta", fechahasta) :
                 new ObjectParameter("fechahasta", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<wCartasDePorte_TX_EstadisticasDeDescarga_Result1>("wCartasDePorte_TX_EstadisticasDeDescarga", modoExportacionParameter, pvParameter, fechadesde2Parameter, fechahasta2Parameter, fechadesdeParameter, fechahastaParameter);
+            var puntoventaParameter = puntoventa.HasValue ?
+                new ObjectParameter("puntoventa", puntoventa) :
+                new ObjectParameter("puntoventa", typeof(int));
+    
+            var optDivisionSyngentaParameter = optDivisionSyngenta != null ?
+                new ObjectParameter("optDivisionSyngenta", optDivisionSyngenta) :
+                new ObjectParameter("optDivisionSyngenta", typeof(string));
+    
+            var idDestinatarioParameter = idDestinatario.HasValue ?
+                new ObjectParameter("idDestinatario", idDestinatario) :
+                new ObjectParameter("idDestinatario", typeof(int));
+    
+            var idIntermediarioParameter = idIntermediario.HasValue ?
+                new ObjectParameter("idIntermediario", idIntermediario) :
+                new ObjectParameter("idIntermediario", typeof(int));
+    
+            var idRemComercialParameter = idRemComercial.HasValue ?
+                new ObjectParameter("idRemComercial", idRemComercial) :
+                new ObjectParameter("idRemComercial", typeof(int));
+    
+            var idArticuloParameter = idArticulo.HasValue ?
+                new ObjectParameter("idArticulo", idArticulo) :
+                new ObjectParameter("idArticulo", typeof(int));
+    
+            var idProcedenciaParameter = idProcedencia.HasValue ?
+                new ObjectParameter("idProcedencia", idProcedencia) :
+                new ObjectParameter("idProcedencia", typeof(int));
+    
+            var idDestinoParameter = idDestino.HasValue ?
+                new ObjectParameter("idDestino", idDestino) :
+                new ObjectParameter("idDestino", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<wCartasDePorte_TX_EstadisticasDeDescarga_Result1>("wCartasDePorte_TX_EstadisticasDeDescarga", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, optCamionVagonParameter, fechadesdeAnteriorParameter, fechahastaAnteriorParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, optDivisionSyngentaParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter);
         }
     }
 }
