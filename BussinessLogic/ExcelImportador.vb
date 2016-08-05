@@ -111,6 +111,7 @@ Public Class LogicaImportador
         Unidad6Analisis
         AdmServPortuarios
 
+        BungeRamalloDescargaTexto
 
         Nidera
         'esta enumeracion debe tener el mismo orden que el combo
@@ -1889,6 +1890,315 @@ Public Class ExcelImportadorManager
 
 
     End Function
+
+
+    Public Shared Function BungeRamalloDescargaTextoToDataset(ByVal pFileName As String) As Data.DataSet
+
+
+        '7:41 (hace 13 minutos)
+
+        '        para(mí, soporte)
+        'System.ArgumentNullException: Argument cannot be Nothing. Parameter name: path at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) STACKTRACE: at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e)
+
+
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 1: abrirlo a lo macho y meterlo en un dataset
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+
+
+        Dim dt As New Data.DataTable
+        For i As Integer = 0 To 85
+            dt.Columns.Add("column" & i + 1)
+        Next
+
+        Dim dr = dt.NewRow()
+
+
+
+
+        'dr(0) = "Prefijo Cp"
+        dr(1) = "CARTA PORTE"
+        dr(2) = "CARGADOR"
+        dr(4) = "CORREDOR"
+        dr(6) = "DESTINATARIO"
+        dr(8) = "PRODUCTO"
+
+
+        'dr(2) = "Nro Vagon"
+        'dr(3) = "Cuit Entregador"
+        'dr(4) = "Razon Social Entregador"
+        'dr(5) = "Cuit Corredor"
+
+        'dr(6) = "CUIT"
+        dr(14) = "INTERMEDIARIO"
+        'dr(8) = "CUIT"
+        dr(18) = "REMITENTE COMERCIAL"
+
+
+        dr(43) = "OBSERVACIONES"
+
+
+        'dr(10) = "CUIT"
+
+        'dr(20) = "DESTINATARIOCUIT"
+
+        'dr(6) = "Razon Social Corredor"
+        'dr(7) = "Cuit Destinatario"
+        'dr(8) = "Razon Social Destinatario"
+        'dr(9) = "Cuit Titular"
+        'dr(10) = "Razon Social Titular"
+        'dr(11) = "Nro Planta Oncca Titular"
+        'dr(12) = "Descripcion Planta Titular"
+        'dr(13) = "Cuit Intermediario"
+        'dr(14) = "Razon Social Intermediario"
+        'dr(15) = "Nro Planta Oncca Intermediario"
+        'dr(16) = "Descripcion Planta Intermediario"
+        'dr(17) = "Cuit Remitente C."
+        'dr(18) = "Razon Social  Remitente C."
+        'dr(19) = "Nro Planta Oncca Remitente C."
+        'dr(20) = "Descripcion Planta Remitente C."
+        'dr(21) = "Cod Oncca Cereal"
+        'dr(22) = "Descrip. Oncca"
+        'dr(23) = "Cod Oncca Procedencia"
+        'dr(24) = "Descrip. Procedencia"
+
+        'dr(23) = "CHOFER"
+        'dr(24) = "CHOFERCUIT"
+        
+        dr(24) = "PROCEDENCIA"
+        dr(27) = "PATENTE"
+        'dr(33) = "ACOPLADO"
+        dr(26) = "CONTRATO"
+        dr(33) = "OBSERVACIONES"
+
+
+        'dr(27) = "BRUTO PROC"
+        'dr(28) = "TARA PROC"
+        dr(25) = "NETO PROC"
+
+        'dr(25) = "Kilos Netos Procedencia"
+        'dr(27) = "Patente"
+        dr(28) = "TRANSPORTISTA"
+        dr(29) = "TRANSPCUIT"
+
+        'dr(28) = "Cuit Transportista"
+        'dr(29) = "Razon Social Transportista"
+        'dr(30) = "Turno"
+        'dr(31) = "Estado"
+        dr(32) = "F. DE CARGA"
+        'dr(33) = "Observacion"
+        'dr(34) = "Hora Entrada"
+        'dr(35) = "Cod Puerto"
+        'dr(36) = "Medio"
+        'dr(37) = "Kilos Netos Descargados"
+        'dr(38) = "Tipo"
+        'dr(39) = "Fecha Descarga"
+        dr(39) = "F. DE DESCARGA"
+        'dr(40) = "Calidad"
+        dr(40) = "CALIDAD"
+        'dr(41) = "Hora Salida"
+        'dr(42) = "Bruto Descarga"
+        'dr(43) = "Tara Descarga"
+        dr(42) = "BRUTO PTO"
+        dr(43) = "TARA PTO"
+        'dr() = "MERMA"
+        dr(37) = "NETO PTO"
+
+        dr(44) = "RECIBO"
+
+
+        dr(1) = "CARTA PORTE"
+        'dr(2) = "VAGON"
+        dr(30) = "TURNO"
+        'dr(4) = "CTG"
+
+
+        'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=13119
+        dr(38) = "EXPORTA"
+        dr(50) = "SUBNUMERODEFACTURACION"
+
+        dt.Rows.Add(dr)
+
+
+
+        'to do
+        'no guardar datos de descarga
+
+
+
+        '        0005;54520954 (numero de cp);
+        'ARAMBURU HNOS AGROPECUARIA SA (Titular)                     
+        ';30648082408(cuit titular);
+        'GRANAR S.A.C.Y.F. (corredor)                            
+        '     ;30528981700(cuit corredor);
+        'BUNGE ARGENTINA S.A.  (destinatario)                            
+        ';30700869918(cuit destinatario);
+        '        SOJA(product)
+        ' ;023;BUNGE ARGENTINA S.A.;
+        '30700869918;WILLIAMS ENTREGAS S.A.                
+        '     ;30707386076;9 DE JULIO (BS.AS.)(procedencia)                       
+        '        ;0000030;000101;000001;05/07/2016;(fecha de descarga)    
+        '        ;CAMION;04/07/2016 (fecha de carga) ;ESY835(pat camion)    ;000029380(kg neto proce);000044800(kg Bruto);000044600(bruto descar);000015420(Tara proce);000015310(tara descar);000029290(neto descar);15,00(humedad);02,55;0000747;0000747(merma humedad? no se pq esta dos veces);0000000;04/07/2016 ;1909;1136;Sergio (nombre del chofer)                                            ;0056;          ;GRANEL    ;N;CONDICIONAL(calidad)         ;ILLINOIS S.A.(Intermediario)                                     ;30709162094;QUEBRACHITO GRANOS SA (remitente)                            ;30696426127(cuit remitente);                                                  ;00000000000;86248882908556 (cee);0;0;0000000000;0000023405;58;0;30648082408 (cuit transportista);ARAMBURU HNOS AGROPECUARIA SA (transportista)                    ;RILGENMAN (nombre chofer)                      
+        '                   ;23236808629(cuit chofer);00000501,95;CYU363    
+        ' ;10/08/2016;(fecha vencimiento)
+
+
+
+        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
+            'REYSER VA SEPARADO CON TABS!
+            'REYSER VA SEPARADO CON TABS!
+            'REYSER VA SEPARADO CON TABS!
+            'REYSER VA SEPARADO CON TABS!
+
+
+            MyReader.TextFieldType = Microsoft.VisualBasic.FileIO.FieldType.Delimited
+            MyReader.Delimiters = New String() {";"}
+
+            Dim currentRow As String()
+            'Loop through all of the fields in the file. 
+            'If any lines are corrupt, report an error and continue parsing. 
+            While Not MyReader.EndOfData
+                Try
+                    currentRow = MyReader.ReadFields()
+
+                    ' Include code here to handle the row.
+
+
+                    dr = dt.NewRow()
+                    For i As Integer = 0 To currentRow.Length - 1
+                        dr(i) = currentRow(i)
+                    Next
+                    dt.Rows.Add(dr)
+
+
+                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                End Try
+            End While
+        End Using
+
+
+        For Each r In dt.Rows
+
+            Try
+                If Val(r(1)) = 0 Then Continue For
+
+                r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
+
+
+
+                'r(40) = CodigoCalidad(Val(r(40)))
+
+                'Select Case r(38)
+                '    Case "1"
+                '        r(38) = "NO"
+                '    Case "2"
+                '        r(38) = "SI"
+                '    Case "3"
+                '        r(38) = "NO"
+                '    Case Else
+
+                'End Select
+            Catch ex As Exception
+
+            End Try
+
+        Next
+
+
+
+
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        'duplico renglones con tipo de exportacion especial
+
+        'lo que necesitamos es que si viene código 2 ,que pegue duplicada. 
+        '(Original con el tilde de exportación y la duplicada sin el tilde es de entrega)
+        'otra posibilidad si no se puede hacer la anterior es que pegue como entrega solamente.
+
+        Dim dtcopias = dt.Clone
+
+        Dim sourceRow As DataRow
+
+        For Each r As DataRow In dt.Rows
+            If Not IsDBNull(r(38)) Then
+                If r(38) = "SI" Then
+
+                    sourceRow = r
+                    r(38) = "NO"
+
+
+                    Dim desRow As DataRow = dtcopias.NewRow
+                    desRow.ItemArray = sourceRow.ItemArray.Clone
+                    desRow(50) = "1" 'segundo subnumero de facturacion
+                    desRow(38) = "SI"
+                    dtcopias.Rows.Add(desRow)
+                End If
+            End If
+        Next
+
+        For Each r In dtcopias.Rows
+            Dim desRow As DataRow = dt.NewRow
+            desRow.ItemArray = r.ItemArray.Clone
+            dt.Rows.Add(desRow)
+        Next
+
+
+
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+        Dim ds As New Data.DataSet
+        ds.Tables.Add(dt)
+        Return ds
+
+
+
+
+
+        'http://stackoverflow.com/questions/1103495/is-there-a-proper-way-to-read-csv-files
+        'http://www.codeproject.com/KB/database/GenericParser.aspx
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 2: convertirlo a excel con OOXML
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'Dim oExc As SpreadsheetDocument=SpreadsheetDocument.Open(pFileName,False,OpenSettings.
+
+
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 3: a excel pero con EPPLUS
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+
+
+    End Function
+
 
     Public Shared Function ReyserToDataset(ByVal pFileName As String) As Data.DataSet
 
@@ -3770,6 +4080,10 @@ Public Class ExcelImportadorManager
             Case Unidad6Analisis
                 ds = Unidad6CalidadesToDataset(archivoExcel, SC, cmbPuntoVenta, txtLogErrores, txtFechaArribo, glbIdUsuario, UserName)
 
+
+
+            Case BungeRamalloDescargaTexto
+                ds = BungeRamalloDescargaTextoToDataset(archivoExcel)
 
 
             Case PuertoACA

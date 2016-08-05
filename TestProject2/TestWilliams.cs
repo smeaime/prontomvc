@@ -201,6 +201,125 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void liquidacionsubcon_22294()
+        {
+
+
+            // Sería agregar dos tarifas más que servirían para la liquidación de subcontratistas, especialmente para Vagones, separado por  Calada y Descarga
+
+
+            var c = CartaDePorteManager.GetItem(SC, 1372987);
+            c.SubnumeroVagon = 222;
+            string ms = "";
+            CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
+
+            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 10),
+                        -1, -1, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void PegatinaRamalloBunge_22408()
+        {
+
+            //explota
+
+            string ms = "";
+
+            //string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.BungeRamalloDescargaTexto, SC, 0,
+                                    ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
+
+
+
+
+
+
+
         [TestMethod]
         public void OCR_y_Tickets()
         {
