@@ -70,6 +70,9 @@
                         <asp:ListItem Text="texto Unidad6 Descar.(Formato Cerealnet pero separador punto y coma..: PREFIJO-NROCARTA-etc)" Value="Unidad6Prefijo_NroCarta" />
                         <asp:ListItem Text="texto Unidad6 Posic..(Formato PlayaPerez: CUITTIT-CUITCORR-etc)" Value="Unidad6" />
                         <asp:ListItem Text="texto Unidad6Analis..(Formato  ????    . separador punto y coma, rubro en 3ra ,  merma en 5ta columna )" Value="Unidad6Analisis" />
+
+                        <asp:ListItem Text="texto BungeRamalloDescargas.." Value="BungeRamalloDescargaTexto" />
+
                         <asp:ListItem Text=".rtf.  Nidera" Value="Nidera" />
                         <%--            <asp:ListItem Text="AdmServPortuarios" Value="AdmServPortuarios" />--%>
                     </asp:DropDownList>
