@@ -3714,6 +3714,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Precio9" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PrecioEmbarque2" Type="money" />
           <Property Name="MaximaCantidadParaPrecioEmbarque" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PrecioVagonesBalanza" Type="money" />
+          <Property Name="PrecioVagonesCalada" Type="money" />
         </EntityType>
         <EntityType Name="LMateriales">
           <Key>
@@ -18988,6 +18990,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="MaximaCantidadParaPrecioEmbarque" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK_ListasPreciosDetalle_Articulos" FromRole="ListasPreciosDetalle" ToRole="Articulo" />
           <NavigationProperty Name="ListasPrecio" Relationship="DemoProntoModel.FK_ListasPreciosDetalle_ListasPrecios" FromRole="ListasPreciosDetalle" ToRole="ListasPrecio" />
+          <Property Name="PrecioVagonesBalanza" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrecioVagonesCalada" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <Association Name="FK_ListasPreciosDetalle_Articulos">
           <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -28148,6 +28152,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="ListasPreciosDetalles">
             <EntityTypeMapping TypeName="DemoProntoModel.ListasPreciosDetalle">
               <MappingFragment StoreEntitySet="ListasPreciosDetalle">
+                <ScalarProperty Name="PrecioVagonesCalada" ColumnName="PrecioVagonesCalada" />
+                <ScalarProperty Name="PrecioVagonesBalanza" ColumnName="PrecioVagonesBalanza" />
                 <ScalarProperty Name="MaximaCantidadParaPrecioEmbarque" ColumnName="MaximaCantidadParaPrecioEmbarque" />
                 <ScalarProperty Name="PrecioEmbarque2" ColumnName="PrecioEmbarque2" />
                 <ScalarProperty Name="Precio9" ColumnName="Precio9" />

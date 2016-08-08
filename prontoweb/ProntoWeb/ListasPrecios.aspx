@@ -86,7 +86,7 @@
                     </asp:TemplateField>
                     <%--                    <asp:CommandField ShowEditButton="True" />
                     --%>
-                    <asp:CommandField HeaderText="" ShowSelectButton="True" ShowHeader="True" SelectText="Elegir" DeleteText="Borrar"  />
+                    <asp:CommandField HeaderText="" ShowSelectButton="True" ShowHeader="True" SelectText="Elegir" DeleteText="Borrar" />
                     <asp:TemplateField HeaderText="" ShowHeader="False">
                         <EditItemTemplate>
                             <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update"
@@ -145,7 +145,7 @@
                     <%-- --%>
                     <%-- --%>
                     <asp:CommandField HeaderText="" ShowDeleteButton="True" ShowHeader="True" DeleteText="Borrar" />
-                    <asp:BoundField DataField="IdListaPrecios"  HeaderText="Código" />
+                    <asp:BoundField DataField="IdListaPrecios" HeaderText="Código" />
                     <%--                    <asp:ButtonField ButtonType="Link" CommandName="Excel" Text="Excel" ItemStyle-HorizontalAlign="Center"
                         ImageUrl="~/Imagenes/action_delete.png" CausesValidation="true" ValidationGroup="Encabezado">
                         <ControlStyle Font-Size="Small" Font-Underline="True" />
@@ -164,7 +164,8 @@
             <asp:Label ID="lblAlerta" runat="server" CssClass="Alerta" Font-Size="small"></asp:Label>
 
 
-            <br /><br />
+            <br />
+            <br />
             <div style="color: White">
                 <%--Detalle de precios--%>
             </div>
@@ -174,7 +175,7 @@
             <asp:TextBox ID="txtBuscarDetalleDestino" runat="server" Style="text-align: right;" Text="" AutoPostBack="True" Width="300px"></asp:TextBox>
             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtBuscarDetalleDestino"
                 WatermarkText="Buscar destino" WatermarkCssClass="watermarked" />
-            
+
             <asp:TextBox ID="txtBuscarDetalleArticulo" runat="server" Style="text-align: right;" Text="" AutoPostBack="True" Width="300px"></asp:TextBox>
             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtBuscarDetalleArticulo"
                 WatermarkText="Buscar producto" WatermarkCssClass="watermarked" />
@@ -241,7 +242,7 @@
 
                     <asp:TemplateField HeaderText="Destino">
 
-<%--                        <HeaderTemplate>
+                        <%--                        <HeaderTemplate>
                             <asp:TextBox ID="txtBuscarDetalleDestino" runat="server" Style="text-align: right;" Text="" AutoPostBack="True"></asp:TextBox>
 
                         </HeaderTemplate>--%>
@@ -274,7 +275,7 @@
 
                     <asp:TemplateField HeaderText="Producto">
 
-               <%--         <HeaderTemplate>
+                        <%--         <HeaderTemplate>
                             <asp:TextBox ID="txtBuscarDetalleArticulo" runat="server" Style="text-align: right;" Text="" AutoPostBack="True"></asp:TextBox>
 
                         </HeaderTemplate>--%>
@@ -386,6 +387,8 @@
                             <asp:Label ID="lblPrecioDescargaLocal" Width="40px" runat="server" Text='<%# Bind("PrecioDescargaLocal","{0:F3}") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
+
                     <asp:TemplateField HeaderText="Descarga Exp">
                         <EditItemTemplate>
                             <asp:TextBox ID="txtPrecioDescargaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioDescargaExportacion","{0:F3}") %>'></asp:TextBox>
@@ -397,6 +400,45 @@
                             <asp:Label ID="lblPrecioDescargaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioDescargaExportacion","{0:F3}") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
+
+
+
+
+
+
+                    <asp:TemplateField HeaderText="Calada Vagón">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrecioVagonesCalada" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesCalada", "{0:F3}")%>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewPrecioVagonesCalada" Width="40px" runat="server"></asp:TextBox>
+                        </FooterTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrecioVagonesCalada" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesCalada", "{0:F3}")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+
+
+                    <asp:TemplateField HeaderText="Descarga Vagón">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrecioVagonesBalanza" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesBalanza", "{0:F3}")%>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewPrecioVagonesBalanza" Width="40px" runat="server"></asp:TextBox>
+                        </FooterTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrecioVagonesBalanza" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesBalanza", "{0:F3}")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+
+
+
+
+
+
                     <%-- --%>
                     <%-- --%>
                     <%-- --%>

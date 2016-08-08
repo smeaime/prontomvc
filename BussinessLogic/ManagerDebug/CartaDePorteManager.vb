@@ -4006,6 +4006,17 @@ Public Class CartaDePorteManager
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
                                     ByRef ArchivoExcelDestino As String, bDescargaHtml As Boolean) As String
 
+
+        'errores
+        '   rsCredentialsNotSpecified     porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
+        '   rsProcessingAborted           porque la cuenta que corre el repservice no tiene permisos: 
+        '                                         GRANT  Execute on [dbo].your_object to [public]
+        '                                         REVOKE Execute on [dbo].your_object to [public]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\NETWORK SERVICE]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
+        '                                         grant execute on wCart... to public
+
+
         For Each i In parametros
             If i Is Nothing Then
                 Throw New Exception("Te falta por lo menos un parametro. Recordá que el array que pasás se dimensiona con un elemento de más")
@@ -7385,27 +7396,30 @@ Public Class CartaDePorteManager
 
     Public Shared Function ReasignoTarifaSubcontratistasDeTodasLasCDPsDescargadasSinFacturarYLasGrabo(ByVal SC As String, ByVal IdUsuario As Integer, ByVal NombreUsuario As String, Optional ByVal IdListaPrecio As Long = -1) As Integer
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
         'me traigo la lista de subcontratistas que usan esa lista de precios
-        Dim lSubcontratistasParaActualizar = (From c In db.linqClientes _
+        Dim lSubcontratistasParaActualizar = (From c In db.Clientes _
                                                 From l In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = c.IdListaPrecios).DefaultIfEmpty _
                                                 From pd In db.ListasPreciosDetalles.Where(Function(i) i.IdListaPrecios = l.IdListaPrecios).DefaultIfEmpty _
-                                                Where c.IdListaPrecios = IdListaPrecio Select c.IdCliente, pd.PrecioCaladaLocal, pd.PrecioCaladaExportacion, pd.PrecioDescargaLocal, pd.PrecioDescargaExportacion).ToList
+                                                Where c.IdListaPrecios = IdListaPrecio Select c.IdCliente, pd.PrecioCaladaLocal, pd.PrecioCaladaExportacion, pd.PrecioDescargaLocal, pd.PrecioDescargaExportacion, pd.PrecioVagonesBalanza, pd.PrecioVagonesCalada).ToList
 
 
 
-        Dim sublista = From i In lSubcontratistasParaActualizar Select i.IdCliente
+        Dim sublista = (From i In lSubcontratistasParaActualizar Select i.IdCliente).ToList
 
-        Dim q = (From cdp In db.CartasDePortes _
+        Dim aaa = (From cdp In db.CartasDePortes _
                Where _
                      (cdp.IdFacturaImputada Is Nothing Or cdp.IdFacturaImputada = 0 Or cdp.IdFacturaImputada = -1) _
                  And (cdp.Anulada <> "SI") _
                  And (sublista.Contains(cdp.Subcontr1) Or sublista.Contains(cdp.Subcontr2)) _
-                ).ToList
+                )
 
+        Debug.Print(aaa.Count)
 
+        Dim q = aaa.ToList()
 
 
 
@@ -7428,7 +7442,10 @@ Public Class CartaDePorteManager
                     If True Then
                         'cdp.TarifaSubcontratista1 = tarifaDefaultCalada
                         'cdp.TarifaSubcontratista2 = tarifaDefaultBalanza
-                        If cdp.Exporta = "SI" Then
+                        If If(cdp.SubnumeroVagon, 0) > 0 Then
+                            cdp.TarifaSubcontratista1 = i.PrecioVagonesCalada
+                            cdp.TarifaSubcontratista2 = i.PrecioVagonesBalanza
+                        ElseIf cdp.Exporta = "SI" Then
                             cdp.TarifaSubcontratista1 = i.PrecioCaladaExportacion
                             cdp.TarifaSubcontratista2 = i.PrecioDescargaExportacion
                         Else
@@ -7448,7 +7465,7 @@ Public Class CartaDePorteManager
             r = r + 1
         Next
 
-        db.SubmitChanges()
+        db.SaveChanges()
 
         Return cartasactualizadas
     End Function

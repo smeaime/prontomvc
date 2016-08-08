@@ -3709,6 +3709,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="Precio9" Type="numeric" Precision="18" Scale="2" />
     <Property Name="PrecioEmbarque2" Type="money" />
     <Property Name="MaximaCantidadParaPrecioEmbarque" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PrecioVagonesBalanza" Type="money" />
+    <Property Name="PrecioVagonesCalada" Type="money" />
   </EntityType>
   <EntityType Name="LMateriales">
     <Key>

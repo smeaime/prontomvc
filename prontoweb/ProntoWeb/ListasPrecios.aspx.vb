@@ -539,6 +539,11 @@ Partial Class ListasPrecios
                 dr.Item("PrecioDescargaLocal") = Val(TextoWebControl(.FindControl("txtNewPrecioDescargaLocal")))
                 dr.Item("PrecioDescargaExportacion") = Val(TextoWebControl(.FindControl("txtNewPrecioDescargaExportacion")))
 
+
+                dr.Item("PrecioVagonesCalada") = Val(TextoWebControl(.FindControl("txtNewPrecioVagonesCalada")))
+                dr.Item("PrecioVagonesBalanza") = Val(TextoWebControl(.FindControl("txtNewPrecioVagonesBalanza")))
+
+
                 'dr.Item("PrecioCaladaLocal") = Val(TextoWebControl(.Cells(6).Controls(0)))
                 'dr.Item("PrecioCaladaExportacion") = Val(TextoWebControl(.Cells(7).Controls(0)))
                 'dr.Item("PrecioDescargaLocal") = Val(TextoWebControl(.Cells(8).Controls(0)))
@@ -603,12 +608,19 @@ Partial Class ListasPrecios
                 If iisNull(dr.Item("PrecioCaladaLocal"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioCaladaLocal"))) _
                     Or iisNull(dr.Item("PrecioCaladaExportacion"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioCaladaExportacion"))) _
                     Or iisNull(dr.Item("PrecioDescargaLocal"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioDescargaLocal"))) _
-                    Or iisNull(dr.Item("PrecioDescargaExportacion"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioDescargaExportacion"))) Then
+                    Or iisNull(dr.Item("PrecioDescargaExportacion"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioDescargaExportacion"))) _
+                    Or iisNull(dr.Item("PrecioVagonesCalada"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesCalada"))) _
+                    Or iisNull(dr.Item("PrecioVagonesBalanza"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanza"))) _
+                    Then
 
                     dr.Item("PrecioCaladaLocal") = Val(TextoWebControl(.FindControl("txtPrecioCaladaLocal")))
                     dr.Item("PrecioCaladaExportacion") = Val(TextoWebControl(.FindControl("txtPrecioCaladaExportacion")))
                     dr.Item("PrecioDescargaLocal") = Val(TextoWebControl(.FindControl("txtPrecioDescargaLocal")))
                     dr.Item("PrecioDescargaExportacion") = Val(TextoWebControl(.FindControl("txtPrecioDescargaExportacion")))
+
+                    dr.Item("PrecioVagonesCalada") = Val(TextoWebControl(.FindControl("txtPrecioVagonesCalada")))
+                    dr.Item("PrecioVagonesBalanza") = Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanza")))
+
 
                     ListasPreciosItemManager.Update(HFSC.Value, dt)
                     CartaDePorteManager.ReasignoTarifaSubcontratistasDeTodasLasCDPsDescargadasSinFacturarYLasGrabo(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName), gvMaestro.SelectedDataKey.Value)
@@ -623,8 +635,8 @@ Partial Class ListasPrecios
                 lblAlerta.Text = "Ya existe ese item"
                 'Do something about the exception
             Catch sqlEx As SqlException
-                ErrHandler2.WriteError(sqlex.ToString)
-                lblAlerta.Text = sqlex.ToString
+                ErrHandler2.WriteError(sqlEx.ToString)
+                lblAlerta.Text = sqlEx.ToString
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
                 'MsgBoxAlert(ex.ToString)
