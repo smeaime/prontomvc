@@ -303,7 +303,11 @@ Public Class ConsultasLinq
 
 
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
 
         Dim ms As String = ""
         'el filtro tiene que incluir duplicados (el True despues de syngenta)
@@ -320,18 +324,18 @@ Public Class ConsultasLinq
         'supongo que hay quilombo en el join del detalle de precios        'http://stackoverflow.com/questions/492683/how-to-limit-a-linq-left-outer-join-to-one-row
         'no puedo usae el take(1) en sql2000!!!! -y si agrupo esos registros con un Average?  .Average(Function(i) i.PrecioCaladaLocal).
         Dim qq = From cdp In db.CartasDePortes _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From cal In db.Calidades.Where(Function(i) i.IdCalidad = CInt(cdp.Calidad)).DefaultIfEmpty _
-                From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
+                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
+                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
+                From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
+                From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
+                From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
+                From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
+                From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = CInt(cdp.Calidad)).DefaultIfEmpty _
+                From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
                 From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
                 From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From clisub1 In db.linqClientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty _
-                From clisub2 In db.linqClientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty _
+                From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty _
+                From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty _
                 From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty _
                 From pd1 In db.ListasPreciosDetalles.Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo)).DefaultIfEmpty _
                 From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty _
@@ -358,7 +362,7 @@ Public Class ConsultasLinq
                     cdp.NetoFinal, _
                     cdp.Subcontr1, _
                     cdp.Subcontr2, _
-                    agrupVagon = IIf(destinosapartados.Contains(cdp.Destino), IIf(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
+                    agrupVagon = If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
                     cdp.ExcluirDeSubcontratistas, _
                     cdp.SubnumeroDeFacturacion, _
                     VendedorDesc = clitit.RazonSocial, _
@@ -370,12 +374,16 @@ Public Class ConsultasLinq
                     DestinoDesc = dest.Descripcion, _
                     Subcontr1Desc = clisub1.RazonSocial, _
                     Subcontr2Desc = clisub2.RazonSocial, _
-                    tarif1 = CDec(If(IIf( _
+                    tarif1 = CDec(If(If( _
                     (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
-                        , pd1.PrecioCaladaExportacion, pd1.PrecioCaladaLocal), 0)), _
-                    tarif2 = CDec(If(IIf( _
+                        , If(cdp.SubnumeroVagon <= 0, pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCalada) _
+                        , If(cdp.SubnumeroVagon <= 0, pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada) _
+                        ), 0)), _
+                    tarif2 = CDec(If(If( _
                         (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
-                                , pd2.PrecioDescargaExportacion, pd2.PrecioDescargaLocal), 0)), _
+                        , If(cdp.SubnumeroVagon <= 0, pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanza) _
+                        , If(cdp.SubnumeroVagon <= 0, pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
+                                ), 0)), _
                     Exporta = cdp.Exporta, _
                     cdp.Corredor, _
                     cdp.IdClienteEntregador
@@ -468,7 +476,7 @@ Public Class ConsultasLinq
         If Debugger.IsAttached Then
             q.ToList()
 
-            Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
+            Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select SqlFunctions.StringConvert(x.NumeroCartaDePorte) & " " & SqlFunctions.StringConvert(x.IdCartaDePorte) & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
 
             ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
         End If
@@ -488,7 +496,7 @@ Public Class ConsultasLinq
                     Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) _
                     Select New infLiqui With { _
                         .agrupVagon = cdp.agrupVagon, _
-                        .DestinoDesc = cdp.DestinoDesc & " Calada" & IIf( _
+                        .DestinoDesc = cdp.DestinoDesc & " Calada" & If( _
                             (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
                                    , " - Export.", " - Entrega"), _
                         .SubcontrDesc = cdp.Subcontr1Desc, _
@@ -500,7 +508,7 @@ Public Class ConsultasLinq
                    Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) _
                     Select New infLiqui With { _
                         .agrupVagon = cdp.agrupVagon, _
-                        .DestinoDesc = cdp.DestinoDesc & " Balanza" & IIf( _
+                        .DestinoDesc = cdp.DestinoDesc & " Balanza" & If( _
                                       (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
                                     , " - Export.", " - Entrega"), _
                         .SubcontrDesc = cdp.Subcontr2Desc, _
@@ -532,11 +540,11 @@ Public Class ConsultasLinq
 
 
     Class infLiqui
-        Public agrupVagon
-        Public DestinoDesc
-        Public SubcontrDesc
-        Public NetoPto
-        Public Tarifa
+        Public agrupVagon As String
+        Public DestinoDesc As String
+        Public SubcontrDesc As String
+        Public NetoPto As Decimal
+        Public Tarifa As Decimal
         Public Comision As Decimal
     End Class
 
