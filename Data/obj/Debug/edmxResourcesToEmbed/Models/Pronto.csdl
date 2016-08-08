@@ -7919,6 +7919,8 @@
     <Property Name="MaximaCantidadParaPrecioEmbarque" Type="Decimal" Precision="18" Scale="2" />
     <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK_ListasPreciosDetalle_Articulos" FromRole="ListasPreciosDetalle" ToRole="Articulo" />
     <NavigationProperty Name="ListasPrecio" Relationship="DemoProntoModel.FK_ListasPreciosDetalle_ListasPrecios" FromRole="ListasPreciosDetalle" ToRole="ListasPrecio" />
+    <Property Name="PrecioVagonesBalanza" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioVagonesCalada" Type="Decimal" Precision="19" Scale="4" />
   </EntityType>
   <Association Name="FK_ListasPreciosDetalle_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />

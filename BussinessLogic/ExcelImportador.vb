@@ -1297,10 +1297,10 @@ Public Class ExcelImportadorManager
                 Return "NetoProc"
 
 
-            Case "PESOBRUTO"
+            Case "PESOBRUTO", "BRUTO PROC"
                 Return "BrutoProc"
 
-            Case "PESOTARA"
+            Case "PESOTARA", "TARA PROC"
                 Return "TaraProc"
 
                 '/////////////////////////////////////////////////////////////////////////
@@ -1928,6 +1928,51 @@ Public Class ExcelImportadorManager
         dr(6) = "DESTINATARIO"
         dr(8) = "PRODUCTO"
 
+        dr(14) = "PROCEDENCIA"
+        dr(18) = "F. DE DESCARGA"
+
+        dr(20) = "VAGON"
+        dr(21) = "F. DE CARGA"
+
+        dr(22) = "PATENTE"
+
+        dr(23) = "NETO PROC"
+        dr(24) = "BRUTO PROC"
+        dr(25) = "BRUTO PTO"
+        dr(26) = "TARA PROC"
+        dr(27) = "TARA PTO"
+        dr(28) = "NETO PTO"
+
+        
+        dr(29) = "HUMEDAD"
+        dr(31) = "MERMA"
+
+        dr(42) = "CALIDAD"
+        dr(43) = "INTERMEDIARIO"
+        dr(45) = "REMITENTE COMERCIAL"
+
+        dr(49) = "CEE"
+
+
+        dr(56) = "TRANSPCUIT"
+        dr(57) = "TRANSPORTISTA"
+        dr(58) = "CHOFER"
+
+
+        dr(61) = "ACOPLADO"
+        dr(62) = "FECHAVENCIMIENTO"
+
+        
+
+        'dr(42) = "Bruto Descarga"
+        'dr(43) = "Tara Descarga"
+        'dr() = "MERMA"
+
+
+        'dr(27) = "BRUTO PROC"
+        'dr(28) = "TARA PROC"
+
+
 
         'dr(2) = "Nro Vagon"
         'dr(3) = "Cuit Entregador"
@@ -1935,12 +1980,10 @@ Public Class ExcelImportadorManager
         'dr(5) = "Cuit Corredor"
 
         'dr(6) = "CUIT"
-        dr(14) = "INTERMEDIARIO"
         'dr(8) = "CUIT"
-        dr(18) = "REMITENTE COMERCIAL"
 
 
-        dr(43) = "OBSERVACIONES"
+        'dr(43) = "OBSERVACIONES"
 
 
         'dr(10) = "CUIT"
@@ -1967,30 +2010,21 @@ Public Class ExcelImportadorManager
         'dr(23) = "Cod Oncca Procedencia"
         'dr(24) = "Descrip. Procedencia"
 
-        'dr(23) = "CHOFER"
         'dr(24) = "CHOFERCUIT"
         
-        dr(24) = "PROCEDENCIA"
-        dr(27) = "PATENTE"
         'dr(33) = "ACOPLADO"
-        dr(26) = "CONTRATO"
-        dr(33) = "OBSERVACIONES"
+        'dr(26) = "CONTRATO"
+        'dr(33) = "OBSERVACIONES"
 
 
-        'dr(27) = "BRUTO PROC"
-        'dr(28) = "TARA PROC"
-        dr(25) = "NETO PROC"
 
         'dr(25) = "Kilos Netos Procedencia"
         'dr(27) = "Patente"
-        dr(28) = "TRANSPORTISTA"
-        dr(29) = "TRANSPCUIT"
 
         'dr(28) = "Cuit Transportista"
         'dr(29) = "Razon Social Transportista"
         'dr(30) = "Turno"
         'dr(31) = "Estado"
-        dr(32) = "F. DE CARGA"
         'dr(33) = "Observacion"
         'dr(34) = "Hora Entrada"
         'dr(35) = "Cod Puerto"
@@ -1998,29 +2032,20 @@ Public Class ExcelImportadorManager
         'dr(37) = "Kilos Netos Descargados"
         'dr(38) = "Tipo"
         'dr(39) = "Fecha Descarga"
-        dr(39) = "F. DE DESCARGA"
         'dr(40) = "Calidad"
-        dr(40) = "CALIDAD"
         'dr(41) = "Hora Salida"
-        'dr(42) = "Bruto Descarga"
-        'dr(43) = "Tara Descarga"
-        dr(42) = "BRUTO PTO"
-        dr(43) = "TARA PTO"
-        'dr() = "MERMA"
-        dr(37) = "NETO PTO"
 
-        dr(44) = "RECIBO"
+        'dr(44) = "RECIBO"
 
 
-        dr(1) = "CARTA PORTE"
-        'dr(2) = "VAGON"
-        dr(30) = "TURNO"
+        'dr(1) = "CARTA PORTE"
+        'dr(30) = "TURNO"
         'dr(4) = "CTG"
 
 
         'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=13119
-        dr(38) = "EXPORTA"
-        dr(50) = "SUBNUMERODEFACTURACION"
+        'dr(38) = "EXPORTA"
+        'dr(50) = "SUBNUMERODEFACTURACION"
 
         dt.Rows.Add(dr)
 
