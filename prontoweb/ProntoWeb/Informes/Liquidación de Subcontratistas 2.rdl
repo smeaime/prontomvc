@@ -598,7 +598,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.98425in</Size>
+                    <Size>1.10035in</Size>
                     <CellContents>
                       <Textbox Name="Textbox33">
                         <CanGrow>true</CanGrow>
@@ -607,7 +607,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Group3</Value>
+                                <Value>vagón/camión</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontSize>9pt</FontSize>
@@ -793,7 +793,7 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>0.98425in</Size>
+                        <Size>1.10035in</Size>
                         <CellContents>
                           <Textbox Name="Group3">
                             <CanGrow>true</CanGrow>
@@ -948,7 +948,7 @@
                     </TablixMember>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.98425in</Size>
+                        <Size>1.10035in</Size>
                         <CellContents>
                           <Textbox Name="Textbox35">
                             <CanGrow>true</CanGrow>
@@ -982,7 +982,6 @@
                               <PaddingBottom>2pt</PaddingBottom>
                             </Style>
                           </Textbox>
-                          <rd:Selected>true</rd:Selected>
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
@@ -1119,7 +1118,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.98425in</Size>
+                    <Size>1.10035in</Size>
                     <CellContents>
                       <Textbox Name="Textbox37">
                         <CanGrow>true</CanGrow>
@@ -1251,7 +1250,7 @@
         <Top>63.58822mm</Top>
         <Left>2.3857mm</Left>
         <Height>23.99995mm</Height>
-        <Width>220.3974mm</Width>
+        <Width>223.34623mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1321,6 +1320,19 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>*La separación entre vagones y camiones solo se aplica en ciertos Destinos</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
                 <Value />
                 <Style>
                   <FontSize>8pt</FontSize>
@@ -1336,7 +1348,7 @@
         <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
         <rd:DefaultName>ReportTitle</rd:DefaultName>
         <Top>23.90347mm</Top>
-        <Left>0.23857cm</Left>
+        <Left>0.25622cm</Left>
         <Height>31.77754mm</Height>
         <Width>223.34623mm</Width>
         <ZIndex>1</ZIndex>

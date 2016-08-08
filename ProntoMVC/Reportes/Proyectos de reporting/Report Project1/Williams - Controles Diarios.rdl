@@ -821,8 +821,9 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=SERVERSQL3;Initial Catalog=Williams2</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>2c4ffc7c-0801-41c0-866f-a2ebeaccb58e</rd:DataSourceID>
     </DataSource>
   </DataSources>
