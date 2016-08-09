@@ -510,7 +510,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
 
 
-            List<T> pagedQuery = filteredQuery.Skip((page - 1) * rows).Take(rows).ToList();
+            List<T> pagedQuery = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows).ToList();
             //.Skip( sidx + " " + sord, "@skip",
             //       new ObjectParameter("skip", (page - 1) * rows))
             //.Top("@limit", new ObjectParameter("limit", rows));
