@@ -49,7 +49,32 @@
                         { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                         {
+                             name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center',
+                             sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                             datefmt: 'dd/mm/yy',
+
+                             search: true,
+                             searchrules: {
+                                 date: true
+                             },
+                             searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                 sopt: ['ge', 'le', 'eq'],
+                                 dataInit: function (elem) {
+                                     $(elem).datepicker({
+                                         dateFormat: 'dd/mm/yy',
+                                         changeYear: true,
+                                         changeMonth: true,
+                                         showButtonPanel: true,
+                                         onSelect: function () {
+                                             $(this).keydown();
+                                         }
+                                     });
+                                 }
+                             }
+
+                         },
+
                         { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
@@ -111,6 +136,7 @@
             //userDataOnFooter: true,
             //caption: '<b>SOLICITUDES DE COTIZACION</b>'
         });
+
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
 //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
