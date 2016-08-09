@@ -788,6 +788,17 @@ Released   : 20120723
 
 
 
+            // para sacar por default el boton x de los filtros 
+            jQuery.extend(jQuery.jgrid.defaults, {
+                cmTemplate: {
+                    searchoptions: {
+                        clearSearch: false
+                    }
+                }
+            });
+
+
+
 
             var OrigenDescripcionDefault;
             //  var OrigenDescripcionDefault = @ViewBag.OrigenDescripcionDefault;
