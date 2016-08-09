@@ -1834,7 +1834,7 @@ alter table listaspreciosdetalle add
 go
 
 
-	CREATE NONCLUSTERED INDEX CartasDePorte_IdFacturaImputada_Subcontr
+CREATE NONCLUSTERED INDEX CartasDePorte_IdFacturaImputada_Subcontr
 ON [dbo].[CartasDePorte] ([IdFacturaImputada])
 INCLUDE ([Anulada],[Subcontr1],[Subcontr2])
 go

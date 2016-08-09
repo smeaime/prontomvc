@@ -1089,7 +1089,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-                        .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
+                     //   .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
 
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
