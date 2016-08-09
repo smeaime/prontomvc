@@ -47,8 +47,37 @@
                         { name: 'IdMoneda', index: 'IdMoneda', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'NumeroOrdenCompraCliente', index: 'NumeroOrdenCompraCliente', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'NumeroOrdenCompra', index: 'NumeroOrdenCompra', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'FechaOrdenCompra', index: 'FechaOrdenCompra', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Producido', index: 'Producido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+
+                  
+                         {
+                             name: 'FechaOrdenCompra', index: 'FechaOrdenCompra', width: 100, align: 'center',
+                             sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                             datefmt: 'dd/mm/yy',
+
+                             search: true,
+                             searchrules: {
+                                 date: true
+                             },
+                             searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                 sopt: ['ge', 'le', 'eq'],
+                                 dataInit: function (elem) {
+                                     $(elem).datepicker({
+                                         dateFormat: 'dd/mm/yy',
+                                         changeYear: true,
+                                         changeMonth: true,
+                                         showButtonPanel: true,
+                                         onSelect: function () {
+                                             $(this).keydown();
+                                         }
+                                     });
+                                 }
+                             }
+
+                         },
+
+
+
+                        { name: 'Producido', index: 'Producido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'Anulada', index: 'Anulada', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'SeleccionadaParaFacturacion', index: 'SeleccionadaParaFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
@@ -64,13 +93,90 @@
                         { name: 'FacturarA', index: 'FacturarA', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'UsuarioAnulo', index: 'UsuarioAnulo', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        {
+                             name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center',
+                             sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                             datefmt: 'dd/mm/yy',
+
+                             search: true,
+                             searchrules: {
+                                 date: true
+                             },
+                             searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                 sopt: ['ge', 'le', 'eq'],
+                                 dataInit: function (elem) {
+                                     $(elem).datepicker({
+                                         dateFormat: 'dd/mm/yy',
+                                         changeYear: true,
+                                         changeMonth: true,
+                                         showButtonPanel: true,
+                                         onSelect: function () {
+                                             $(this).keydown();
+                                         }
+                                     });
+                                 }
+                             }
+
+                         },
+
                         { name: 'UsuarioIngreso', index: 'UsuarioIngreso', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'FechaModifico', index: 'FechaModifico', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'UsuarioModifico', index: 'UsuarioModifico', align: 'left', width: 150, editable: false, hidden: false },
+                        {
+                             name: 'FechaModifico', index: 'FechaModifico', width: 100, align: 'center',
+                             sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                             datefmt: 'dd/mm/yy',
+
+                             search: true,
+                             searchrules: {
+                                 date: true
+                             },
+                             searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                 sopt: ['ge', 'le', 'eq'],
+                                 dataInit: function (elem) {
+                                     $(elem).datepicker({
+                                         dateFormat: 'dd/mm/yy',
+                                         changeYear: true,
+                                         changeMonth: true,
+                                         showButtonPanel: true,
+                                         onSelect: function () {
+                                             $(this).keydown();
+                                         }
+                                     });
+                                 }
+                             }
+
+                         },
+
+                        {
+                            name: 'UsuarioModifico', index: 'UsuarioModifico', align: 'left', width: 150, editable: false, hidden: false
+                        },
                         { name: 'GrupoFacturacion', index: 'GrupoFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'TipoOC', index: 'TipoOC', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'MayorFechaEntrega', index: 'MayorFechaEntrega', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    {
+                    name: 'MayorFechaEntrega', index: 'MayorFechaEntrega', width: 100, align: 'center',
+                    sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                    datefmt: 'dd/mm/yy',
+
+                    search: true,
+                    searchrules: {
+                        date: true
+                    },
+                    searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                        sopt: ['ge', 'le', 'eq'],
+                        dataInit: function (elem) {
+                            $(elem).datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                changeYear: true,
+                                changeMonth: true,
+                                showButtonPanel: true,
+                                onSelect: function () {
+                                    $(this).keydown();
+                                }
+                            });
+                        }
+                    }
+
+                },
+
                         { name: 'ListaDePrecio', index: 'ListaDePrecio', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'PorcentajeBonificacion', index: 'PorcentajeBonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
