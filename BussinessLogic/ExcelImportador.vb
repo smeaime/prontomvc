@@ -1959,8 +1959,8 @@ Public Class ExcelImportadorManager
         dr(58) = "CHOFER"
 
 
-        dr(61) = "ACOPLADO"
-        dr(62) = "FECHAVENCIMIENTO"
+        dr(62) = "ACOPLADO" 'le agrego una columna por la columna adicional que me crea el doble renglon
+        dr(63) = "FECHAVENCIMIENTO"
 
         
 
@@ -2089,7 +2089,12 @@ Public Class ExcelImportadorManager
             'If any lines are corrupt, report an error and continue parsing. 
             While Not MyReader.EndOfData
                 Try
-                    currentRow = MyReader.ReadFields()
+                    'leo 2 renglones seguidos (así es este formato)
+                    Dim l = MyReader.ReadFields().ToList
+                    l.AddRange(MyReader.ReadFields().ToList)
+
+                    currentRow = l.ToArray
+
 
                     ' Include code here to handle the row.
 
@@ -2116,6 +2121,7 @@ Public Class ExcelImportadorManager
                 r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
 
 
+                r(29) = r(29).Replace(".", "").Replace(",", ".")
 
                 'r(40) = CodigoCalidad(Val(r(40)))
 
