@@ -8609,6 +8609,14 @@ Public Class CartaDePorteManager
 
 
 
+    Shared Function VerificarQueEnLaBaseNoEsteImputada(ByVal SC As String, id As Long)
+        If False Then
+            'Throw New error ()
+
+        End If
+
+    End Function
+
 
 
     <DataObjectMethod(DataObjectMethodType.Update, True)> _
@@ -8642,6 +8650,10 @@ Public Class CartaDePorteManager
                     'If .IdFacturaImputadaOriginal Then
                     If .IdFacturaImputada >= 0 Then
 
+                        'creo que en el caso de la factura Id=85806 no se pasó por estas lineas, porque supongo que cflores tenía
+                        '       .IdFacturaImputada  en 0  mientras la mandaron a facturar, y al grabarla cflores evidentemente no pasaría
+                        '   por acá. No sería conveniente entonces llamar a CopiarEnHistorico siempre? o directamente impedir que se libere 
+                        ' la IdFacturaImputada en este metodo?
 
                         If Not VerificarConcurrenciaTimeStamp(SC, .Id, .FechaTimeStamp) Then
                             'si es un duplicado, por ahora no verifiquemos la concurrencia, porque creo que modifican primero la original
@@ -8665,6 +8677,9 @@ Public Class CartaDePorteManager
                         '          99990, DBNull.Value, DBNull.Value)
 
                         CopiarEnHistorico(SC, .Id)
+                    Else
+                        'no permitir desimputar usando el Save. Que se use otro método especifico para eso
+                        VerificarQueEnLaBaseNoEsteImputada(SC, .Id)
                     End If
 
 
