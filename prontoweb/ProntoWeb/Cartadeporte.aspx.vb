@@ -3707,19 +3707,8 @@ Partial Class CartadeporteABM
         'sagasdf()
         Dim myCartaDePorte As Pronto.ERP.BO.CartaDePorte = CType(Me.ViewState(mKey), Pronto.ERP.BO.CartaDePorte)
 
-        Try
-            LogPronto(SC, myCartaDePorte.Id, "Se desimputa la carta id" & myCartaDePorte.Id & " de la factura id" & myCartaDePorte.IdFacturaImputada, Session(SESSIONPRONTO_UserName), , , , , myCartaDePorte.IdFacturaImputada)
-        Catch ex As Exception
-            ErrHandler2.WriteError(ex)
-        End Try
+        DesfacturarCarta(SC, myCartaDePorte, Session(SESSIONPRONTO_UserName))
 
-
-        Using db = New LinqCartasPorteDataContext(Encriptar(SC))
-            Dim cp = (From i In db.CartasDePortes Where i.IdCartaDePorte = myCartaDePorte.Id).Single
-            cp.IdFacturaImputada = 0
-            db.SubmitChanges()
-            'MsgBoxAjax(Me, "Desfacturada con éxito")
-        End Using
 
         'myCartaDePorte.IdFacturaImputada = 0 
         'si llamo a Save así, tengo que cumplir la validacion, y no debería. En realidad, esto debiera ser un método aparte

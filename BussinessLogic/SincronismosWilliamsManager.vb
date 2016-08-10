@@ -502,7 +502,7 @@ Namespace Pronto.ERP.Bll
                                                 AplicarANDuORalFiltro, ModoExportacion, _
                                                 Convert.ToDateTime(sDesde), _
                                                 Convert.ToDateTime(sHasta), _
-                                                puntoventa, optDivisionSyngenta)
+                                                puntoventa, optDivisionSyngenta, , , , idClienteAuxiliar)
                     sWHERE = sWHERE.Replace("CDP.", "")
 
 
@@ -554,7 +554,7 @@ Namespace Pronto.ERP.Bll
                                                            AplicarANDuORalFiltro, ModoExportacion, _
                                                             Convert.ToDateTime(sDesde), _
                                                             Convert.ToDateTime(sHasta), _
-                                                          Val(puntoventa), optDivisionSyngenta)
+                                                          Val(puntoventa), optDivisionSyngenta, , , , idClienteAuxiliar)
                                 sWHERE = sWHERE.Replace("CDP.", "")
 
 
@@ -1470,7 +1470,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    If sErroresRef <> "" Then
+                    If sErroresRef <> "" Or True Then
                         'También, ver de diferenciar el mensaje que salta cuando ninguna carta de porte cumple con 
                         'los filtros de cuando el sincro no sale porque alguna de las cartas no cumple con los requisitos.
                         Dim registrosGenerados = 0

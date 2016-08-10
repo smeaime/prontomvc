@@ -374,6 +374,7 @@ Public Class CartaDePorteManager
         Public idcliente As Integer?
     End Class
 
+
     Public Shared Function excepcionesAcopios(SC As String, Optional idcliente As Integer = 0) As List(Of aaa)
         'Get
 
@@ -5758,7 +5759,8 @@ Public Class CartaDePorteManager
                     ByVal puntoventa As Integer, _
                     Optional ByVal optDivisionSyngenta As String = "Ambas", _
                     Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-                    Optional ByVal optCamionVagon As String = "Ambas" _
+                    Optional ByVal optCamionVagon As String = "Ambas", _
+                    Optional ByVal idClienteAuxiliar As Integer = -1 _
                 ) As String
 
 
@@ -5792,13 +5794,14 @@ Public Class CartaDePorteManager
             strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
+                    iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
+
         Else
             Dim s = " AND (1=0 " & _
-                     iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
+                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") & _
+                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
                     "  )  "
 
             If s <> " AND (1=0   )  " Then strWHERE += s
@@ -5809,6 +5812,7 @@ Public Class CartaDePorteManager
         strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
         strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
         strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
+        strWHERE += iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
 
 
 
@@ -6023,16 +6027,15 @@ Public Class CartaDePorteManager
             strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
                     ""
-            'iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
         Else
             Dim s = " AND (1=0 " & _
                     iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
                                                        "  )  "
-
-            'iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
 
             If s <> " AND (1=0   )  " Then strWHERE += s
         End If
@@ -6046,7 +6049,7 @@ Public Class CartaDePorteManager
         strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
         strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
         strWHERE += iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
-        strWHERE += iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
+        'strWHERE += iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
 
 
         '//////////////////////////////////////////////////////////////////////////////////////////////
@@ -6710,7 +6713,7 @@ Public Class CartaDePorteManager
     "           Calidad, " & _
     "          Cosecha, NobleGrado,Factor, ESTAB.Descripcion as CodigoEstablecimientoProcedencia, ESTAB.AuxiliarString1 as DescripcionEstablecimientoProcedencia, " & _
     "           CTG as CTG, CEE, FechaAnulacion,MotivoAnulacion, " & _
-    "          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia, Corredor2  " & _
+    "          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia, Corredor2, IdClienteAuxiliar  " & _
       " FROM CartasDePorte CDP " & _
                    " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
                    " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
@@ -8609,14 +8612,37 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function VerificarQueEnLaBaseNoEsteImputada(ByVal SC As String, id As Long)
-        If False Then
-            'Throw New error ()
+    Shared Function IdFacturaImputadaEnLaBase(ByVal SC As String, id As Long) As Integer?
 
-        End If
+
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+        Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = id).SingleOrDefault
+
+        Return oCarta.IdFacturaImputada
+
 
     End Function
 
+
+
+    Shared Function DesfacturarCarta(ByVal SC As String, myCartaDePorte As CartaDePorte, usuario As String)
+
+        Try
+            LogPronto(SC, myCartaDePorte.Id, "Se desimputa la carta id" & myCartaDePorte.Id & " de la factura id" & myCartaDePorte.IdFacturaImputada, usuario, , , , , myCartaDePorte.IdFacturaImputada)
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+        Using db = New LinqCartasPorteDataContext(Encriptar(SC))
+            Dim cp = (From i In db.CartasDePortes Where i.IdCartaDePorte = myCartaDePorte.Id).Single
+            cp.IdFacturaImputada = 0
+            db.SubmitChanges()
+            'MsgBoxAjax(Me, "Desfacturada con éxito")
+        End Using
+
+    End Function
 
 
     <DataObjectMethod(DataObjectMethodType.Update, True)> _
@@ -8648,7 +8674,7 @@ Public Class CartaDePorteManager
 
                 Else
                     'If .IdFacturaImputadaOriginal Then
-                    If .IdFacturaImputada >= 0 Then
+                    If .IdFacturaImputada <= 0 Then
 
                         'creo que en el caso de la factura Id=85806 no se pasó por estas lineas, porque supongo que cflores tenía
                         '       .IdFacturaImputada  en 0  mientras la mandaron a facturar, y al grabarla cflores evidentemente no pasaría
@@ -8676,10 +8702,16 @@ Public Class CartaDePorteManager
                         '          DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
                         '          99990, DBNull.Value, DBNull.Value)
 
+                        'no permitir desimputar usando el Save. Que se use otro método especifico para eso (DesfacturarCarta())
+
+
+                        If .IdFacturaImputada <> IdFacturaImputadaEnLaBase(SC, .Id) Then
+
+                            Throw New Exception("Otro usuario actualizó la carta mientras vos la editabas. Por favor, volvé a cargar la carta y hacé nuevamente las modificaciones. Es posible que no esté más disponible para editar")
+                        End If
+
                         CopiarEnHistorico(SC, .Id)
-                    Else
-                        'no permitir desimputar usando el Save. Que se use otro método especifico para eso
-                        VerificarQueEnLaBaseNoEsteImputada(SC, .Id)
+
                     End If
 
 
@@ -9508,6 +9540,14 @@ Public Class CartaDePorteManager
                 sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
             End If
 
+
+
+
+            If .Id > 0 Then
+                If .IdFacturaImputada <> IdFacturaImputadaEnLaBase(SC, .Id) Then
+                    ms &= "Otro usuario actualizó la carta mientras vos la editabas. Por favor, volvé a cargar la carta y hacé nuevamente las modificaciones. Es posible que no esté más disponible para editar"
+                End If
+            End If
 
 
 
@@ -14104,6 +14144,10 @@ Public Class CartaDePorteManager
         'End If
 
 
+    End Function
+
+    Private Shared Function idClienteAuxiliar() As Object
+        Throw New NotImplementedException
     End Function
 
 
