@@ -355,18 +355,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </td>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Cliente Obs.
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtPopClienteAuxiliar" runat="server" CssClass="CssTextBox" autocomplete="off"
-                                        Width="" TabIndex="20"></asp:TextBox>
-                                    <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender11" runat="server"
-                                        CompletionSetCount="12" MinimumPrefixLength="1" ServiceMethod="GetCompletionList"
-                                        ServicePath="WebServiceClientes.asmx" TargetControlID="txtPopClienteAuxiliar"
-                                        UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
-                                        DelimiterCharacters="" Enabled="True">
-                                    </cc1:AutoCompleteExtender>
-                                </td>
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;"></td>
+                                <td></td>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destinatario
                                 </td>
                                 <td class="EncabezadoCell" style="width: 200px; height: 18px;">
@@ -503,7 +493,24 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             DelimiterCharacters="" Enabled="True" CompletionInterval="100">
                                         </cc1:AutoCompleteExtender>
                                 </td>
-                                <td class="EncabezadoCell"></td>
+
+
+                                <td class="EncabezadoCell" style="width: 90px">Cliente Obs.
+                                </td>
+                                <td class="EncabezadoCell">
+
+
+
+                                    <asp:TextBox ID="txtPopClienteAuxiliar" runat="server" CssClass="CssTextBox" autocomplete="off"
+                                        Width="" TabIndex="20"></asp:TextBox>
+                                    <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender11" runat="server"
+                                        CompletionSetCount="12" MinimumPrefixLength="1" ServiceMethod="GetCompletionList"
+                                        ServicePath="WebServiceClientes.asmx" TargetControlID="txtPopClienteAuxiliar"
+                                        UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
+                                        DelimiterCharacters="" Enabled="True">
+                                    </cc1:AutoCompleteExtender>
+
+                                </td>
                             </tr>
                             <tr>
                                 <td style="width: 101px">
@@ -521,7 +528,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </tr>
                             <tr>
                                 <td class="EncabezadoCell" style="width: 190px">Omitir errores?</td>
-                                  <td class="EncabezadoCell">
+                                <td class="EncabezadoCell">
                                     <asp:CheckBox runat="server" ID="chkOmitirErrores" value="false" />
                                 </td>
                             </tr>

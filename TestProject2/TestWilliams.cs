@@ -198,6 +198,43 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+        [TestMethod]
+        public void asdasd_23498()
+        {
+
+            //tarda 5 min
+
+            string ms = "", warn = "";
+            var carta = CartaDePorteManager.GetItem(SC, 114444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            Assert.AreEqual(1, carta.NobleGrado);
+
+            carta = null;
+            carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            carta.NobleGrado = 3;
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            Assert.AreEqual(2, carta.NobleGrado);
+
+        }
+
+
+
+
+
+
         [TestMethod]
         public void liquidacionsubcon_22294_2()
         {
