@@ -111,6 +111,56 @@ namespace ProntoMVC.Tests
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
 
+        [TestMethod]
+        public void Exportacion_a_Excel_de_Entities_3()
+        {
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+            string filters = "";
+
+
+            var c = new FacturaController();
+            GetMockedControllerGenerico(c);
+            var f = c.TT_DynamicGridData_ExcelExportacion(sidx, sord, page, rows, _search, filters, "", "");
+            string o = "lala.xlsx";
+
+            ToFile(f, o);
+
+            System.Diagnostics.Process.Start(o);
+        }
+
+
+        public void ToFile(FileResult fileResult, string fileName)
+        {
+            if (fileResult is FileContentResult)
+            {
+                File.WriteAllBytes(fileName, ((FileContentResult)fileResult).FileContents);
+            }
+            else if (fileResult is FilePathResult)
+            {
+                File.Copy(((FilePathResult)fileResult).FileName, fileName, true); //overwrite file if it already exists
+            }
+            else if (fileResult is FileStreamResult)
+            {
+                //from http://stackoverflow.com/questions/411592/how-do-i-save-a-stream-to-a-file-in-c
+                using (var fileStream = File.Create(fileName))
+                {
+                    var fileStreamResult = (FileStreamResult)fileResult;
+                    fileStreamResult.FileStream.Seek(0, SeekOrigin.Begin);
+                    fileStreamResult.FileStream.CopyTo(fileStream);
+                    fileStreamResult.FileStream.Seek(0, SeekOrigin.Begin); //reset position to beginning. If there's any chance the FileResult will be used by a future method, this will ensure it gets left in a usable state - Suggestion by Steven Liekens
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Unsupported FileResult type");
+            }
+        }
+
 
 
         [TestMethod]
@@ -129,7 +179,7 @@ namespace ProntoMVC.Tests
             string sidx = "NumeroPedido";
             string sord = "desc";
             int page = 1;
-            int rows = 100;
+            int rows = 99999999;
             bool _search = false;
             string filters = "";
 
@@ -166,20 +216,31 @@ namespace ProntoMVC.Tests
 
             string output = "c:\\adasdasd.xls";
 
+            List<string[]> lista = new List<string[]>();
 
             jqGridJson listado = (jqGridJson)result.Data;
-            string[] renglon = listado.rows[0].cell;
+
+
+            for (int n = 0; n < listado.rows.Count(); n++)
+            {
+                string[] renglon = listado.rows[n].cell;
+                lista.Add(renglon);
+            }
+
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                                // column Header
+                // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                    new List<string[]> {
-                        new[] {"a", "1", "c1"},
-                        new[] {"a", "2", "c2"}
-                    },
+                //      new List<string[]> {
+                //    new[] {"a", "1", "c1"},
+                //    new[] {"a", "2", "c2"}
+                //},
+                    lista,
+
+
                     "Test Grid");
             Stream stream = new FileStream(output, FileMode.Create);
             excelData.CreateXlsxAndFillData(stream);
@@ -190,9 +251,10 @@ namespace ProntoMVC.Tests
             List<Data.Models.Factura> control = pagedQuery.ToList();
 
 
-            if (false) {
-            FuncionesCSharpBLL.ExportToExcelEntityCollection<Data.Models.Factura>(control, output);
-        }
+            if (false)
+            {
+                FuncionesCSharpBLL.ExportToExcelEntityCollection<Data.Models.Factura>(control, output);
+            }
 
             System.Diagnostics.Process.Start(output);
         }
