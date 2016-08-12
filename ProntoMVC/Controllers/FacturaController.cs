@@ -770,7 +770,7 @@ namespace ProntoMVC.Controllers
                                 mAlicuotaIVA = db.Articulos.Find(d.IdArticulo).AlicuotaIVA ?? 0;
                                 if (mIvaNoDiscriminado > 0 && mAlicuotaIVA == 0) { mImporteDetalle = mImporteDetalle * (mImporteGravado - mIvaNoDiscriminado) / mImporteGravado; }
 
-                                mIdRubro = db.Articulos.Find(d.IdArticulo).IdRubro ;
+                                mIdRubro = db.Articulos.Find(d.IdArticulo).IdRubro;
                                 mIdCuenta = db.Rubros.Find(mIdRubro).IdCuenta ?? 0;
 
                                 if (mIdCuenta > 0)
@@ -972,6 +972,91 @@ namespace ProntoMVC.Controllers
 
 
 
+        public virtual FileResult TT_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+            //asdad
+
+            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de
+            // otro modo, pasandole como maxrows un numero grandisimo
+            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
+            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
+
+            // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
+
+
+
+            //string sidx = "NumeroPedido";
+            //string sord = "desc";
+            //int page = 1;
+            //rows = 99999999;
+            //bool _search = false;
+            //string filters = "";
+
+
+            //DemoProntoEntities db = new DemoProntoEntities(sc);
+
+
+
+            //llamo directo a FiltroGenerico o a Pedidos_DynamicGridData??? -y, filtroGenerico no va a incluir las columnas recalculadas!!!!
+            // Cuanto tarda ExportToExcelEntityCollection en crear el excel de un FiltroGenerico de toda la tabla de Pedidos?
+
+
+            IQueryable<Data.Models.Factura> q = (from a in db.Facturas select a).AsQueryable();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            List<Data.Models.Factura> pagedQuery =
+                    Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Factura>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+            JsonResult result;
+
+            result = (JsonResult) TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
+
+
+            string output = "c:\\adasdasd.xls";
+
+            List<string[]> lista = new List<string[]>();
+
+            jqGridJson listado = (jqGridJson)result.Data;
+
+
+            for (int n = 0; n < listado.rows.Count(); n++)
+            {
+                string[] renglon = listado.rows[n].cell;
+                lista.Add(renglon);
+            }
+
+
+
+            var excelData = new jqGridWeb.DataForExcel(
+                // column Header
+                    new[] { "Col1", "Col2", "Col3" },
+                    new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
+                          jqGridWeb.DataForExcel.DataType.String},
+                //      new List<string[]> {
+                //    new[] {"a", "1", "c1"},
+                //    new[] {"a", "2", "c2"}
+                //},
+                    lista,
+
+                    "Test Grid");
+
+
+            Stream stream = new FileStream(output, FileMode.Create);
+            excelData.CreateXlsxAndFillData(stream);
+            stream.Close();
+
+                        
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
+
+        }
+
+
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
 
@@ -1089,7 +1174,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-                     //   .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
+                //   .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
 
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -1730,7 +1815,7 @@ namespace ProntoMVC.Controllers
                     ErrHandler.WriteError("iniciar : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
                 }
 
-                if (glbArchivoCertificadoPassWord.Length>0)
+                if (glbArchivoCertificadoPassWord.Length > 0)
                 {
                     FE.ArchivoCertificadoPassword = glbArchivoCertificadoPassWord;
                 }
