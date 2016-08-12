@@ -1484,7 +1484,7 @@ Namespace Pronto.ERP.Bll
                             ErrHandler2.WriteError(ex)
                         End Try
 
-                        Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
+                        'Dim renglonesEnErrores = sErroresRef.Split("<br/>").Count - 1
                         'Dim renglonesEnDataset = dt.Rows.Count
                         'output cantidad de renglones
 

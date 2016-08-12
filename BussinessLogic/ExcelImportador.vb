@@ -2996,127 +2996,33 @@ Public Class ExcelImportadorManager
                             .NobleQuebrados = analisis
                         Case 7
                             .NoblePicados = analisis
-
-
-
-                            '	1	DAÑADO                        	DÑ 
-                            '	2	HUMEDAD                       	HD 
-                            '	3	PESO HECTOLITRICO             	PH 
-                            '	4	MATERIA EXTRAÑA               	C/E 
-                            '	5	QUEBRADO.                     	QB 
-                            '	6	PARTIDO                       	PAR 
-                            '	7	PICADO                        	PIC 
-
-
                         Case 8
                             .CalidadPuntaSombreada = analisis
                         Case 9
                             .NobleNegros = analisis
                         Case 10
                             .NobleObjetables = analisis
-
-
-                            '	8	PUNTA SOMBREADO               	PS 
-                            '	9	PUNTA NEGRA                   	PN 
-                            '	10	OLORES OBJETABLES             	OL 
-                            '	11	SEMILLAS DE TREBOL            	STR 
-                            '	12	TIPO	TIP 
-
-
-                            '	13	COLOR            	COL 
-                            '	14	GRANOS AMOHOSADOS            	MH 
                         Case 14
                             .NobleAmohosados = analisis
-                            '	15	CHAMICO                       	CHA 
                         Case 15
                             .CalidadMermaChamico = analisis
-                            '	16	GRANOS CON CARBON             	GC  
                         Case 16
                             .NobleCarbon = analisis
-                            '	17	REVOLCADO TIERRA              	REV 
-                            '	18	FUMIGACION PART               	F/P 
                         Case 18
                             .Fumigada = analisis
-                            '	19	FUMIGACION CINTA              	F/C 
-                            '	24	TEMPERATURA                   	TP 
-                            '	25	PROTEINAS                     	PRT 
-                            '	26	FONDO                         	FDO 
-                            '	27	MERMA CONVENIDA               	MC 
-                            '	28	TIERRA                        	TIE
                         Case 28
                             .CalidadTierra = analisis
-
-                            '	29	AVERIA                        	AVE 
-                            '	30	PANZA BLANCA                  	PBA 
                         Case 30
                             .NoblePanzaBlanca = analisis
-                            '	31	MERMA TOTAL                   	MT
-
-                            '	32	CUERPOS EXTRAÑOS      	C.E
-
-                            '	33	TOTAL DAÑADOS	TD
-
-                            '	34	QUEBRADOS Y/O CHUZOS	CHU 
                         Case 34
                             .NobleQuebrados = analisis
-                            '	38	ARDIDO                        	ARD 
-                            '	39	GRANOS VERDES                 	GV
                         Case 39
                             .NobleVerdes = analisis
-                            '	40	Humedad y chamicos	H/C 
                         Case 40
                             .CalidadMermaChamico = analisis
-                            '	41	P.H. grado y tipo (trigo)	G/T
-
-                            '	42	Grado y color (sorgo)	G/C
-                            '	43	Grado tipo y color (ma¡z)	GTC
-                            '	44	Análisis completo	A.C
-                            '	45	Granos Ardidos y/o Dañados	A/D
-                            '	46	Gastos Secada	G.S.
-                            '	47	Merma x chamicos	MCH
-                            '	48	SILO	SIL
-                            '	49	Merma Volatil	MV
-
-                            '	50	Acidez s/Materia Grasa	AMG
-                            '	51	Aflatoxinas 	AFL
-                            '	52	Arbitraje Otras Causas Calidad Inferior	CAL
-                            '	53	Ardidos y Dañados por Calor	ADC
-                            '	54	Brotados	BRO
-
-                            '	55	Coloreados y/o con Estrias Roja	CER
-                            '	56	Contenido Proteico	C/P
-                            '	57	Cornezuelo	COR
-                            '	58	Descascarado y Roto	D/R
-                            '	59	Enyesados o Muertos	E/M
-                            '	60	Esclerotos	ESC
-                            '	61	Excremento de Roedores	EXC
-
-                            '	62	Falling Number	FN
-                            '	63	Granos Helados	GH
-                            '	64	Granos Negros	GN
-                            '	65	Granos Otro Color	OCO
-                            '	66	Granos Sueltos	GS
-
-                            '	67	Manchados y/o Coloreados	M/C
-                            '	68	Materia Grasa S.S.S.	MG
                         Case 68
                             .NobleMGrasa = analisis
-                            '	70	Otro Tipo	OT
-                            '	71	Quebrados y/o Chuzos	Q/C
-                            '	72	Quebrados y/o Partidos	Q/P
 
-                            '	73	Rendimiento de Granos Enteros	EGE
-
-                            '	74	Rendimiento de Granos Quebrados	RGQ
-                            '	75	Rendimiento sobre zaranda 6.25 mm	Z62
-                            '	76	Rendimiento sobre zaranda 7.5 mm	Z75
-                            '	77	Sedimento	SED
-                            '	78	Semillas de Bejuco y/o Porotillo	B/P
-                            '	79	Total Dañados	TDÑ
-                            '	80	Verde Intenso	VIN
-                            '	81	GRADO	GRA
-                            '	85	Insectos vivos 	INS.V
-                            '	502	Granos clorados 	G.CLO
                         Case Else
                             If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
 
