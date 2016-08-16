@@ -5102,17 +5102,26 @@ Public Class LogicaFacturacion
         Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
-        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
+        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura).ToList
         Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
 
         Dim acopios = (From x In oListaCDP
-                       Select New With {
-                        x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6, x.AcopioFacturarleA
+                       Select New With { _
+                        .Acopio1 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio1, 0))), _
+                        .Acopio2 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio2, 0))), _
+                        .Acopio3 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio3, 0))), _
+                        .Acopio4 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio4, 0))), _
+                        .Acopio5 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio5, 0))), _
+                        .Acopio6 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio6, 0))) _
                         }).ToList
 
 
-        Dim ccc As List(Of Integer) = acopios.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6, x.AcopioFacturarleA}).Where(Function(x) If(x, 0) <> 0).Select(Function(x) If(x, 0)).Distinct.ToList
+        Dim ccc As List(Of Integer) = acopios.SelectMany(Function(x) _
+                                                         {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6} _
+                            ).Where(Function(x) x <> 0).Distinct.ToList
+
+
 
         'Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
         'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio1

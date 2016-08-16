@@ -14,7 +14,7 @@
             <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nueva Factura</button>
 
             <button onclick="window.location.href='@Url.Action("TT_DynamicGridData_ExcelExportacion", new { id = -1 })'" class="btn ">Excel</button>
-            <button id="boton">asdasdasd</button>
+            <a id="boton">asdasdasd</a>
         </div>
     </div>
     <br />
@@ -40,7 +40,7 @@
         $('#boton').click(function () {
             var p = $("#Lista").jqGrid("getGridParam");
 
-            location.href = 'TT_DynamicGridData_ExcelExportacion?sidx=' + p.sortname + '&sord=' + p.sortorder + '&page=1&rows=100&_search=false&filters=&FechaInicial=""&FechaFinal""';
+            location.href = '..\    TT_DynamicGridData_ExcelExportacion?sidx=' + p.sortname + '&sord=' + p.sortorder + '&page=1&rows=100&_search=false&filters=&FechaInicial=""&FechaFinal""';
         });
 
 
