@@ -462,8 +462,8 @@ Public Class ConsultasLinq
                     Subcontr1Desc, _
                     Subcontr2Desc, _
                     Exporta, _
-                    .tarif1 = Group.Average(Function(x) x.tarif1), _
-                    .tarif2 = Group.Average(Function(x) x.tarif2), _
+                    .tarif1 = Group.Max(Function(x) x.tarif1), _
+                    .tarif2 = Group.Max(Function(x) x.tarif2), _
                     Corredor, _
                     IdClienteEntregador
                      }

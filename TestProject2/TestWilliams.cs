@@ -199,6 +199,18 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        
+            
+        [TestMethod]
+        public void asdasd_23480()
+        {
+
+            LogicaFacturacion.LeyendaAcopio(86082, SC);
+
+        }
+
+
+
 
         [TestMethod]
         public void asdasd_23498()

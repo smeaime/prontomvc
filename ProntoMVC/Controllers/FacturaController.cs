@@ -1014,7 +1014,7 @@ namespace ProntoMVC.Controllers
 
             JsonResult result;
 
-            result = (JsonResult) TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
+            result = (JsonResult)TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
 
 
             string output = "c:\\adasdasd.xls";
@@ -1050,7 +1050,7 @@ namespace ProntoMVC.Controllers
             excelData.CreateXlsxAndFillData(stream);
             stream.Close();
 
-                        
+
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
 
@@ -1127,9 +1127,9 @@ namespace ProntoMVC.Controllers
                             a.FechaFactura,
                             Sucursal = a.Deposito != null ? a.Deposito.Descripcion : "",
                             a.Anulada,
-                            ClienteSubCod = a.Cliente.Codigo.Substring(1, 2),
-                            ClienteCodigo = a.Cliente.CodigoCliente,
-                            ClienteNombre = a.Cliente.RazonSocial,
+                            ClienteSubCod = a.Cliente != null ? a.Cliente.Codigo.Substring(1, 2) : "",
+                            ClienteCodigo = a.Cliente != null ? a.Cliente.CodigoCliente : 0,
+                            ClienteNombre = a.Cliente != null ? a.Cliente.RazonSocial : "",
                             DescripcionIva = a.DescripcionIva != null ? a.DescripcionIva.Descripcion : "",
                             ClienteCuit = a.Cliente.Cuit,
                             CondicionVenta = a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
@@ -1147,7 +1147,7 @@ namespace ProntoMVC.Controllers
                             TotalPercepcionIVA = a.PercepcionIVA,
                             TotalOtrasPercepciones = (a.OtrasPercepciones1 ?? 0) + (a.OtrasPercepciones2 ?? 0) + (a.OtrasPercepciones3 ?? 0),
                             a.ImporteTotal,
-                            Moneda = a.Moneda.Abreviatura,
+                            Moneda = a.Moneda == null ? "" : a.Moneda.Abreviatura,
                             Obra = a.Obra != null ? a.Obra.NumeroObra : "",
                             Vendedor = a.Vendedore != null ? a.Vendedore.Nombre : "",
                             ProvinciaDestino = a.Provincia != null ? a.Provincia.Nombre : "",
