@@ -6739,3 +6739,90 @@ ASP.NET session has expired or could not be found
    at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 Microsoft.ReportViewer.WebForms
 __________________________
+
+Log Entry : 
+08/18/2016 11:40:44
+Error in: http://localhost:58911/ProntoWeb/Busqueda.aspx?preciso=2445802^554096385 0-0&value=554096385 0-0                            Carta.de.porte.................................... ...........con.arribo.el.30/05/16. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Busqueda.aspx.vb(252): error BC32206: The project currently contains references to more than one version of BusinessLogic, a direct reference to version 1.0.33.20575 and an indirect reference (through 'ProntoFuncionesUIWeb.AbrirSegunTipoComprobante') to version 1.0.33.26214. Change the direct reference to use version 1.0.33.26214 (or higher) of BusinessLogic.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+08/18/2016 11:42:20
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+08/18/2016 11:45:11
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+08/18/2016 11:45:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802. Error Message:La carta numero 554096385 id=2445802 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/18/2016 11:45:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/18/2016 11:46:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802&AsyncFileUploadID=ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_AsyncFileUpload1&rnd=09850842859838502. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+08/18/2016 11:46:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802&AsyncFileUploadID=ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_AsyncFileUpload1&rnd=09850842859838502. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+08/18/2016 11:46:20
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802&AsyncFileUploadID=ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_AsyncFileUpload1&rnd=09850842859838502. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+08/18/2016 11:46:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802&AsyncFileUploadID=ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_AsyncFileUpload1&rnd=09850842859838502. Error Message:grabado
+__________________________
+
+Log Entry : 
+08/18/2016 11:46:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802. Error Message:La carta numero 554096385 id=2445802 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/18/2016 11:46:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/18/2016 11:48:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802. Error Message:La carta numero 554096385 id=2445802 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/18/2016 11:48:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2445802. Error Message:PV 2 0
+__________________________
