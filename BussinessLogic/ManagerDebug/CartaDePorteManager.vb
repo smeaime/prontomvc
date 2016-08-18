@@ -842,7 +842,7 @@ Public Class CartaDePorteManager
         Dim q = (From c In db.Clientes Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
 
 
-        
+
         If q Is Nothing Then
             If RazonSocial.Trim.Length > 4 Then
                 q = New ProntoMVC.Data.Models.Cliente
@@ -4979,6 +4979,7 @@ Public Class CartaDePorteManager
 
 
 
+
         'http://stackoverflow.com/questions/398388/convert-bitmaps-to-one-multipage-tiff-image-in-net-2-0
 
         ' Start with the first bitmap by putting it into an Image object
@@ -5239,11 +5240,11 @@ Public Class CartaDePorteManager
         '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
 
 
+        Const MAXIMO = 200
+
         For Each c As DataRow In dt.Rows
             Dim id As Long = c.Item("IdCartaDePorte")
             Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
-
-
 
 
 
@@ -5260,34 +5261,57 @@ Public Class CartaDePorteManager
             Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
 
 
-            If imagenpathcp <> "" Then
+
+
+
+            Dim reducir As Boolean = True
+            If (reducir) Then
+                Try
+                    CartaDePorteManager.ResizeImage(imagenpathcp, 600, 800, imagenpathcp, sDIRFTP, DirApp)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+
 
                 Try
-                    Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
-                    If fcp.Exists Then
-                        fcp.CopyTo(sDIRFTPdest + nombrecp, True)
-                    End If
-                    'wordFiles.Add(nombrecp)
-
+                    CartaDePorteManager.ResizeImage(imagenpathtk, 600, 800, nombretk, sDIRFTP, DirApp)
                 Catch ex As Exception
-                    ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
+                    ErrHandler2.WriteError(ex)
                 End Try
-            End If
+            Else
+
+
+                If imagenpathcp <> "" Then
+
+                    Try
+                        Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
+                        If fcp.Exists Then
+                            fcp.CopyTo(sDirFTPdest + nombrecp, True)
+                        End If
+                        'wordFiles.Add(nombrecp)
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
+                    End Try
+                End If
 
 
 
-            If imagenpathtk <> "" Then
+                If imagenpathtk <> "" Then
 
-                Try
+                    Try
 
-                    Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
-                    If ftk.Exists Then
-                        ftk.CopyTo(sDIRFTPdest + nombretk, True)
-                    End If
-                    'wordFiles.Add(nombretk)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
-                End Try
+                        Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
+                        If ftk.Exists Then
+                            ftk.CopyTo(sDirFTPdest + nombretk, True)
+                        End If
+                        'wordFiles.Add(nombretk)
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
+                    End Try
+                End If
+
+
             End If
 
 
@@ -5304,7 +5328,7 @@ Public Class CartaDePorteManager
 
                 If True Then
                     'metodo 1
-                    Dim bimp = MergeTwoImages_TiffMultipage(sDIRFTPdest + nombrecp, sDIRFTPdest + nombretk, sDIRFTPdest + archivo)
+                    Dim bimp = MergeTwoImages_TiffMultipage(sDirFTPdest + nombrecp, sDirFTPdest + nombretk, sDirFTPdest + archivo)
 
                 Else
 
@@ -5317,6 +5341,7 @@ Public Class CartaDePorteManager
 
 
                 wordFiles.Add(archivo)
+                If wordFiles.Count >= MAXIMO Then Exit For
 
 
             Catch ex As Exception
@@ -5341,7 +5366,7 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDIRFTPdest + s
+            s = sDirFTPdest + s
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -5356,6 +5381,8 @@ Public Class CartaDePorteManager
         Next
 
         zip.Save()
+
+
 
         Return output
 
@@ -5506,7 +5533,7 @@ Public Class CartaDePorteManager
         End Try
 
 
-  
+
         Return output
 
     End Function
@@ -5631,7 +5658,7 @@ Public Class CartaDePorteManager
 
         'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
 
-        
+
 
         ErrHandler2.WriteError("ResizeImage " & sDir & image)
 
@@ -18211,7 +18238,7 @@ Public Class LogicaInformesWilliams
 
             entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C").Rows(0).Item(0)
 
-         
+
 
         ElseIf False Then
 
