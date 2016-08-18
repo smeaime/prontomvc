@@ -353,40 +353,40 @@ Public Class ConsultasLinq
                   And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
                   And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
                   And (idDestino = -1 Or cdp.Destino = idDestino) _
-                  And (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr Or cdp.Subcontr2 = idSubcontr) _
+                  And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
                   And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Select _
+                Select New With { _
                     cdp.NumeroCartaDePorte, _
                     cdp.IdCartaDePorte, _
                     cdp.FechaDescarga, _
                     cdp.NetoFinal, _
-                    cdp.Subcontr1, _
-                    cdp.Subcontr2, _
-                    agrupVagon = If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
+                    .Subcontr1 = If(cdp.Subcontr1, dest.Subcontratista1), _
+                    .Subcontr2 = If(cdp.Subcontr2, dest.Subcontratista2), _
+                    .agrupVagon = If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
                     cdp.ExcluirDeSubcontratistas, _
                     cdp.SubnumeroDeFacturacion, _
-                    VendedorDesc = clitit.RazonSocial, _
-                    CuentaOrden1Desc = cliint.RazonSocial, _
-                    CuentaOrden2Desc = clircom.RazonSocial, _
-                    CorredorDesc = corr.Nombre, _
-                    EntregadorDesc = clidest.RazonSocial, _
-                    ProcedenciaDesc = loc.Nombre, _
-                    DestinoDesc = dest.Descripcion, _
-                    Subcontr1Desc = clisub1.RazonSocial, _
-                    Subcontr2Desc = clisub2.RazonSocial, _
-                    tarif1 = CDec(If(If( _
+                    .VendedorDesc = clitit.RazonSocial, _
+                    .CuentaOrden1Desc = cliint.RazonSocial, _
+                    .CuentaOrden2Desc = clircom.RazonSocial, _
+                    .CorredorDesc = corr.Nombre, _
+                    .EntregadorDesc = clidest.RazonSocial, _
+                    .ProcedenciaDesc = loc.Nombre, _
+                    .DestinoDesc = dest.Descripcion, _
+                    .Subcontr1Desc = clisub1.RazonSocial, _
+                    .Subcontr2Desc = clisub2.RazonSocial, _
+                    .tarif1 = CDec(If(If( _
                     (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
                         , If(cdp.SubnumeroVagon <= 0, pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCalada) _
                         , If(cdp.SubnumeroVagon <= 0, pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada) _
                         ), 0)), _
-                    tarif2 = CDec(If(If( _
+                    .tarif2 = CDec(If(If( _
                         (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
                         , If(cdp.SubnumeroVagon <= 0, pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanza) _
                         , If(cdp.SubnumeroVagon <= 0, pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
                                 ), 0)), _
-                    Exporta = cdp.Exporta, _
+                    .Exporta = cdp.Exporta, _
                     cdp.Corredor, _
-                    cdp.IdClienteEntregador
+                    cdp.IdClienteEntregador}
         'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
 
 
