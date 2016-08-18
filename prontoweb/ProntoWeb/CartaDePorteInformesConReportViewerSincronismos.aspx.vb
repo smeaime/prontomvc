@@ -3024,7 +3024,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                 Case "Descargar imágenes en TIFF"
 
-                    output = DescargarImagenesAdjuntas_TIFF(dt, HFSC.Value, False, DirApp)
+                    output = DescargarImagenesAdjuntas_TIFF(dt, HFSC.Value, False, DirApp, False)
 
                 Case "Listado general de cartas de porte (con imagen)"
 

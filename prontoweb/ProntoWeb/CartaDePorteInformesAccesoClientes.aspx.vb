@@ -118,6 +118,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnDescargaSincro)
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenes)
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesPDF)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesTiffReducido)
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExcel)
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnTexto)
 
@@ -1530,7 +1531,7 @@ Partial Class CartaDePorteInformesAccesoClientes
     End Sub
 
 
-    Sub desc(b As Boolean)
+    Sub desc(b As Boolean, reducido As Boolean)
         Dim rs As String
         Try
             rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
@@ -1723,7 +1724,11 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
         If Not b Then
-            output = DescargarImagenesAdjuntas(dt, HFSC.Value, True, ConfigurationManager.AppSettings("AplicacionConImagenes"))
+            If reducido Then
+                output = DescargarImagenesAdjuntas_TIFF(dt, HFSC.Value, True, ConfigurationManager.AppSettings("AplicacionConImagenes"), True)
+            Else
+                output = DescargarImagenesAdjuntas(dt, HFSC.Value, True, ConfigurationManager.AppSettings("AplicacionConImagenes"))
+            End If
         Else
             output = DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False, ConfigurationManager.AppSettings("AplicacionConImagenes"))
         End If
@@ -1742,7 +1747,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         Try
             Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
             If MyFile1.Exists Then
-             
+
 
                 'como limitar la velocidad de descarga?
                 If False Then
@@ -1758,7 +1763,7 @@ Partial Class CartaDePorteInformesAccesoClientes
                     WriteFile(output, "application/octet-stream", 200)
                 End If
 
-                
+
 
 
 
@@ -1775,17 +1780,6 @@ Partial Class CartaDePorteInformesAccesoClientes
             'MsgBoxAjax(Me, ex.tostring)
             Return
         End Try
-
-
-    End Sub
-
-    Protected Sub btnImagenesPDF_Click(sender As Object, e As EventArgs) Handles btnImagenesPDF.Click
-        desc(True)
-    End Sub
-
-
-    Protected Sub btnImagenes_Click(sender As Object, e As EventArgs) Handles btnImagenes.Click
-        desc(False)
 
 
     End Sub
@@ -1827,9 +1821,23 @@ Partial Class CartaDePorteInformesAccesoClientes
     End Sub
 
 
+    Protected Sub btnImagenesPDF_Click(sender As Object, e As EventArgs) Handles btnImagenesPDF.Click
+        desc(True, True)
+    End Sub
+
+
+    Protected Sub btnImagenes_Click(sender As Object, e As EventArgs) Handles btnImagenes.Click
+        desc(False, False)
+
+
+    End Sub
 
 
 
+
+    Protected Sub btnImagenesTiffReducido_Click(sender As Object, e As EventArgs) Handles btnImagenesTiffReducido.Click
+        desc(False, True)
+    End Sub
 End Class
 
 

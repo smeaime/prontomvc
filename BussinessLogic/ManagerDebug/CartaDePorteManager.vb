@@ -4998,6 +4998,8 @@ Public Class CartaDePorteManager
         Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
 
         Dim encoderParams As EncoderParameters = New EncoderParameters(2)
+        'Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionNone)
+        'no va mas rapido sin compresion, y pesa mucho mas
         Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
         encoderParams.Param(0) = parameter
         parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.MultiFrame)
@@ -5021,6 +5023,7 @@ Public Class CartaDePorteManager
 
             Dim encoderParams2 As EncoderParameters = New EncoderParameters(2)
             Dim SaveEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.FrameDimensionPage)
+            'Dim CompressionEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionNone)
             Dim CompressionEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
             encoderParams2.Param(0) = CompressionEncodeParam
             encoderParams2.Param(1) = SaveEncodeParam
@@ -5183,7 +5186,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String) As String
+    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String, reducir As Boolean) As String
 
 
 
@@ -5255,26 +5258,26 @@ Public Class CartaDePorteManager
             'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
 
             Dim imagenpathcp = myCartaDePorte.PathImagen
-            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + Path.GetExtension(imagenpathcp)
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".tif"
 
             Dim imagenpathtk = myCartaDePorte.PathImagen2
-            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".tif"
 
 
 
 
 
-            Dim reducir As Boolean = True
+
             If (reducir) Then
                 Try
-                    CartaDePorteManager.ResizeImage(imagenpathcp, 600, 800, imagenpathcp, sDIRFTP, DirApp)
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathcp, 800, 1100, nombrecp, sDIRFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(imagenpathtk, 600, 800, nombretk, sDIRFTP, DirApp)
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathtk, 800, 1100, nombretk, sDIRFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
@@ -5328,7 +5331,7 @@ Public Class CartaDePorteManager
 
                 If True Then
                     'metodo 1
-                    Dim bimp = MergeTwoImages_TiffMultipage(sDirFTPdest + nombrecp, sDirFTPdest + nombretk, sDirFTPdest + archivo)
+                    'Dim bimp = MergeTwoImages_TiffMultipage(sDirFTPdest + nombrecp, sDirFTPdest + nombretk, sDirFTPdest + archivo)
 
                 Else
 
@@ -5340,7 +5343,8 @@ Public Class CartaDePorteManager
                 End If
 
 
-                wordFiles.Add(archivo)
+                wordFiles.Add(nombrecp)
+                wordFiles.Add(nombretk)
                 If wordFiles.Count >= MAXIMO Then Exit For
 
 
@@ -5730,6 +5734,92 @@ Public Class CartaDePorteManager
     End Sub
 
 
+
+
+    'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
+    Public Shared Sub ResizeImage_ToTIFF(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String, DirApp As String)
+        'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
+        'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
+
+
+        Dim sDir As String
+
+        If System.Diagnostics.Debugger.IsAttached() And HttpContext.Current IsNot Nothing Then
+            'sDirVirtual = "~/DataBackupear\"
+            'sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
+        Else
+            ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+            sDir = "E:\Sites\Pronto\DataBackupear\"
+            'sDir = HttpContext.Current.Server.MapPath(AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\")
+            'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        End If
+
+        sDir = DirApp & "\DataBackupear\"
+        Dim sDirDest = sDir '& "\borrar\"
+
+        'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
+
+
+
+        ErrHandler2.WriteError("ResizeImage " & sDir & image)
+
+
+
+        'Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings(Okey) & image))
+        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(sDir & image)
+
+        'http://siderite.blogspot.com/2009/09/outofmemoryexception-in.html
+        oImg = oImg.GetThumbnailImage(oImg.Width, oImg.Height, Nothing, IntPtr.Zero)
+
+
+        Dim oThumbNail As System.Drawing.Image = New System.Drawing.Bitmap(width, height)
+        ', System.Drawing.Imaging.PixelFormat.Format24bppRgb
+        Dim oGraphic As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oThumbNail)
+
+        oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality
+
+        'set smoothing mode to high quality
+        oGraphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+        'set the interpolation mode
+        oGraphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+        'set the offset mode
+        oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality
+
+        Dim oRectangle As New System.Drawing.Rectangle(0, 0, width, height)
+
+        oGraphic.DrawImage(oImg, oRectangle)
+
+
+        Try
+
+            Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
+            Dim encoderParams As EncoderParameters = New EncoderParameters(1)
+            Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
+            encoderParams.Param(0) = parameter
+            'parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.)
+            'encoderParams.Param(1) = parameter
+
+
+
+            oThumbNail.Save(sDirDest & newimagename, encoderInfo, encoderParams)
+            
+        Catch ex As Exception
+            'acá está pasando lo del gdi
+            'A generic error occurred in GDI+.
+            'parece ser que el archivo ya existe?
+            'NO!!!! es por el subdirectorio de destino!!! 
+            'http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream
+            'If you are getting that error , then I can say that your application doesn't have a write permission on some directory.
+            ErrHandler2.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
+            ErrHandler2.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
+            ErrHandler2.WriteError(ex)
+            ErrHandler2.WriteError(sDirDest & "---" & image & "---" & newimagename)
+        End Try
+
+
+
+        oImg.Dispose()
+    End Sub
 
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

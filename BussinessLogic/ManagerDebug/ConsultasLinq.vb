@@ -320,6 +320,12 @@ Public Class ConsultasLinq
         Dim destinosapartados As List(Of Integer) = destinosSeparados(SC)
 
 
+        'tiene que incluir las copias???? quiero decir con esto... con qué informe puedo comparar la cantidad de cartas que me tira este?
+        'tiene que incluir las copias???? quiero decir con esto... con qué informe puedo comparar la cantidad de cartas que me tira este?
+        'tiene que incluir las copias???? quiero decir con esto... con qué informe puedo comparar la cantidad de cartas que me tira este?
+        'tiene que incluir las copias???? quiero decir con esto... con qué informe puedo comparar la cantidad de cartas que me tira este?
+        'tiene que incluir las copias???? quiero decir con esto... con qué informe puedo comparar la cantidad de cartas que me tira este?
+        'tiene que incluir las copias???? quiero decir con esto... con qué informe puedo comparar la cantidad de cartas que me tira este?
 
         'supongo que hay quilombo en el join del detalle de precios        'http://stackoverflow.com/questions/492683/how-to-limit-a-linq-left-outer-join-to-one-row
         'no puedo usae el take(1) en sql2000!!!! -y si agrupo esos registros con un Average?  .Average(Function(i) i.PrecioCaladaLocal).
@@ -384,7 +390,7 @@ Public Class ConsultasLinq
                         , If(cdp.SubnumeroVagon <= 0, pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanza) _
                         , If(cdp.SubnumeroVagon <= 0, pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
                                 ), 0)), _
-                    .Exporta = cdp.Exporta, _
+                    .Exporta = If(cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0), "SI", cdp.Exporta), _
                     cdp.Corredor, _
                     cdp.IdClienteEntregador}
         'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
@@ -473,7 +479,7 @@ Public Class ConsultasLinq
 
 
 
-        If Debugger.IsAttached Then
+        If Debugger.IsAttached Or True Then
             q.ToList()
 
             Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select SqlFunctions.StringConvert(x.NumeroCartaDePorte) & " " & SqlFunctions.StringConvert(x.IdCartaDePorte) & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
