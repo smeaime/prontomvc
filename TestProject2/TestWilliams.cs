@@ -266,7 +266,7 @@ namespace ProntoMVC.Tests
                 0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp);
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp, true);
             System.Diagnostics.Process.Start(output);
 
         }
@@ -1199,11 +1199,11 @@ namespace ProntoMVC.Tests
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2016, 4, 10), new DateTime(2016, 5, 30),
+                new DateTime(2016, 5, 29), new DateTime(2016, 5, 30),
                 0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp);
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp,false);
             System.Diagnostics.Process.Start(output);
 
         }

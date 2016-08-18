@@ -109,6 +109,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             Width="" Height="40" />
                     </td>
 
+                    <td>
+                        <asp:Button ID="btnImagenesTiffReducido" Text="Imágenes en TIFF reducido" runat="server" Visible="True" CssClass="but"
+                            Width="" Height="40" />
+                    </td>
+
                 </tr>
                 <tr>
                     <td></td>
