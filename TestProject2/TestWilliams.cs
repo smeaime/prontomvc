@@ -181,6 +181,37 @@ namespace ProntoMVC.Tests
 
 
 
+            
+        [TestMethod]
+        public void         probar_todos_los_sincros()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+            string[] sincros= {"",""};
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                        "", -1, -1, -1, -1,
+                        -1, -1, -1, -1,
+                        CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                        -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
 
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,7 +230,48 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        
+
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373()
+        {
+
+            //CartaDePorteManager.JuntarImagenesYhacerTiff(@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff"
+            //                                  );
+
+
+            if (false)
+            {
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
+                                              @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                ClassFlexicapture.SaveAsMultiPageTiff(
+                                                     @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff",
+                                                     sss
+                                                     );
+            }
+
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2016, 5, 29), new DateTime(2016, 5, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
             
         [TestMethod]
         public void asdasd_23480()
