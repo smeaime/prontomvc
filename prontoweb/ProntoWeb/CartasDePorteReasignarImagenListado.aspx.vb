@@ -686,6 +686,8 @@ Partial Class CartasDePorteReasignarImagenListado
 
 
 
+        ErrHandler2.WriteError("grilla1")
+
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
@@ -695,6 +697,7 @@ Partial Class CartasDePorteReasignarImagenListado
 
 
 
+        ErrHandler2.WriteError("grilla2")
 
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
@@ -707,6 +710,9 @@ Partial Class CartasDePorteReasignarImagenListado
         lblCantidad.Text = lista.Count & " cartas en cola.     Estado del servicio: " & estado
         If estado = "Stopped" Then FileUpload1.Enabled = False Else FileUpload1.Enabled = True
 
+
+
+        ErrHandler2.WriteError("grilla3")
 
 
         '////////////////////////////////////////////////////////////////////
@@ -728,6 +734,9 @@ Partial Class CartasDePorteReasignarImagenListado
         grillaProcesadas.DataBind()
         'grillaProcesadas.Visible = False
 
+
+
+        ErrHandler2.WriteError("grilla4")
 
 
         '////////////////////////////////////////////////////////////////////
@@ -758,6 +767,7 @@ Partial Class CartasDePorteReasignarImagenListado
             Next
         End If
 
+        ErrHandler2.WriteError("grilla5")
 
 
     End Sub
