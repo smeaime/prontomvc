@@ -9,7 +9,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Controles diarios</Value>
+                <Value>Estadísticas por destinos </Value>
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
                   <FontSize>20pt</FontSize>
@@ -18,14 +18,61 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>desde </Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!FechaDesde.Value</Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>dd/MM/yyyy</Format>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value> hasta </Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!FechaHasta.Value</Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>dd/MM/yyyy</Format>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
-        <Top>0.50271cm</Top>
-        <Left>0.58487cm</Left>
-        <Height>0.40167in</Height>
-        <Width>5.77644in</Width>
+        <Top>1.62242cm</Top>
+        <Left>0.29104cm</Left>
+        <Height>0.83917in</Height>
+        <Width>9.74312in</Width>
         <Style>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -778,8 +825,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ds1</DataSetName>
-        <Top>2.2987cm</Top>
-        <Left>0.44367cm</Left>
+        <Top>4.15078cm</Top>
+        <Left>0.29104cm</Left>
         <Height>2.12604cm</Height>
         <Width>24.74753cm</Width>
         <ZIndex>1</ZIndex>
@@ -789,13 +836,28 @@
           </Border>
         </Style>
       </Tablix>
+      <Image Name="Image3">
+        <Source>External</Source>
+        <Value>http://prontoweb.williamsentregas.com.ar/imagenes/williamscomprimido.gif</Value>
+        <Sizing>FitProportional</Sizing>
+        <Top>2.53178mm</Top>
+        <Left>2.91042mm</Left>
+        <Height>15.47759mm</Height>
+        <Width>76.8582mm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
     </ReportItems>
     <Height>6.48046in</Height>
     <Style>
       <BackgroundColor>White</BackgroundColor>
     </Style>
   </Body>
-  <Width>15.56289in</Width>
+  <Width>10.16111in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

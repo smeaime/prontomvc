@@ -242,6 +242,10 @@ Partial Class CDPFacturacion
             'esto tiene que anular el sitemapnode
             TabContainer2.Visible = False
             'lnkNuevo.Visible = False
+
+           
+            'Response.Redirect(String.Format("Principal.aspx"))
+           
         End If
 
         If Not p("PuedeModificar") Then
