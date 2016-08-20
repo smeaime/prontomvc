@@ -118,6 +118,8 @@ Partial Class CartaDePorteInfLiquidacionSubcontratistas
             'anular la columna de edicion
             'getGridIDcolbyHeader(
 
+            MsgBoxAjaxAndRedirect(Me, "No tenés permisos para esta página", String.Format("Principal.aspx"))
+
 
             'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8918
             '            Ranking de Cereales

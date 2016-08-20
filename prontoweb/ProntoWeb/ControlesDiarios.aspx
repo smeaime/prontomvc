@@ -32,7 +32,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <br />
 
     <div class="titulos" style="color: white">
-        Control diario de descargas 
+        Estadísticas por destino
     </div>
     <br />
     <br />
