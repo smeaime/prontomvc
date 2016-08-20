@@ -212,22 +212,33 @@ Partial Class ControlesDiarios
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_ControlDiario)
 
 
-        Dim a = New String() {"Mariano", "Andres", "hwilliams"}
-        'If Not p("PuedeLeer") Then
-        If Not a.Contains(Session(SESSIONPRONTO_UserName)) Then
-            'anular la columna de edicion
-            'getGridIDcolbyHeader(
+        If Not p("PuedeLeer") Then
+            'esto tiene que anular el sitemapnode
+            'TabContainer2.Visible = False
+            'lnkNuevo.Visible = False
 
+            MsgBoxAjaxAndRedirect(Me, "No tenés permisos para esta página", String.Format("Principal.aspx"))
 
-            'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8918
-            '            Ranking de Cereales
-            'Ranking de Clientes
-            'Proyeccion de Facturacion
-            'Totales Grales por Mes
-            'Resumen de Facturacion
 
         End If
 
+        If Not p("PuedeModificar") Then
+            'anular la columna de edicion
+            'getGridIDcolbyHeader(
+            'GridView1.Columns(0).Visible = False
+            'btnGenerarFacturas.Visible = False
+        End If
+
+        If Not p("PuedeEliminar") Then
+            'anular la columna de eliminar
+            'GridView1.Columns(7).Visible = False
+        End If
+
+
+
+
+        Dim a = New String() {"Mariano", "Andres", "hwilliams"}
+      
 
 
 
