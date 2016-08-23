@@ -177,6 +177,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdIBCondicion39 { get; set; }
         public Nullable<decimal> RetencionIBrutos39 { get; set; }
         public Nullable<decimal> PorcentajeIBrutos39 { get; set; }
+        public Nullable<int> CircuitoLiquidacionFlete { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }
