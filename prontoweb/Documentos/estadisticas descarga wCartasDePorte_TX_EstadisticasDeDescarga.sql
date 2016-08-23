@@ -241,3 +241,7 @@ as cdp
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Ambos',-1
 go
 
+
+
+select top 10 * from cartasdeporte order by idcartadeporte desc
+

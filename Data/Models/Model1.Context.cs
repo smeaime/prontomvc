@@ -683,5 +683,111 @@ namespace ProntoMVC.Data.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<wCartasDePorte_TX_EstadisticasDeDescarga_Result1>("wCartasDePorte_TX_EstadisticasDeDescarga", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, optCamionVagonParameter, fechadesdeAnteriorParameter, fechahastaAnteriorParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, optDivisionSyngentaParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter);
         }
+    
+        [DbFunction("DemoProntoEntities", "fSQL_GetDataTableFiltradoYPaginado")]
+        public virtual IQueryable<fSQL_GetDataTableFiltradoYPaginado_Result> fSQL_GetDataTableFiltradoYPaginado(Nullable<int> startRowIndex, Nullable<int> maximumRows, Nullable<int> estado, string queContenga, Nullable<int> idVendedor, Nullable<int> idCorredor, Nullable<int> idDestinatario, Nullable<int> idIntermediario, Nullable<int> idRemComercial, Nullable<int> idArticulo, Nullable<int> idProcedencia, Nullable<int> idDestino, Nullable<int> aplicarANDuORalFiltro, string modoExportacion, Nullable<System.DateTime> fechadesde, Nullable<System.DateTime> fechahasta, Nullable<int> puntoventa, string optDivisionSyngenta, string contrato, string queContenga2, Nullable<int> idClienteAuxiliarint, Nullable<int> agrupadorDeTandaPeriodos, Nullable<int> vagon, string patente, string optCamionVagon)
+        {
+            var startRowIndexParameter = startRowIndex.HasValue ?
+                new ObjectParameter("startRowIndex", startRowIndex) :
+                new ObjectParameter("startRowIndex", typeof(int));
+    
+            var maximumRowsParameter = maximumRows.HasValue ?
+                new ObjectParameter("maximumRows", maximumRows) :
+                new ObjectParameter("maximumRows", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(int));
+    
+            var queContengaParameter = queContenga != null ?
+                new ObjectParameter("QueContenga", queContenga) :
+                new ObjectParameter("QueContenga", typeof(string));
+    
+            var idVendedorParameter = idVendedor.HasValue ?
+                new ObjectParameter("idVendedor", idVendedor) :
+                new ObjectParameter("idVendedor", typeof(int));
+    
+            var idCorredorParameter = idCorredor.HasValue ?
+                new ObjectParameter("idCorredor", idCorredor) :
+                new ObjectParameter("idCorredor", typeof(int));
+    
+            var idDestinatarioParameter = idDestinatario.HasValue ?
+                new ObjectParameter("idDestinatario", idDestinatario) :
+                new ObjectParameter("idDestinatario", typeof(int));
+    
+            var idIntermediarioParameter = idIntermediario.HasValue ?
+                new ObjectParameter("idIntermediario", idIntermediario) :
+                new ObjectParameter("idIntermediario", typeof(int));
+    
+            var idRemComercialParameter = idRemComercial.HasValue ?
+                new ObjectParameter("idRemComercial", idRemComercial) :
+                new ObjectParameter("idRemComercial", typeof(int));
+    
+            var idArticuloParameter = idArticulo.HasValue ?
+                new ObjectParameter("idArticulo", idArticulo) :
+                new ObjectParameter("idArticulo", typeof(int));
+    
+            var idProcedenciaParameter = idProcedencia.HasValue ?
+                new ObjectParameter("idProcedencia", idProcedencia) :
+                new ObjectParameter("idProcedencia", typeof(int));
+    
+            var idDestinoParameter = idDestino.HasValue ?
+                new ObjectParameter("idDestino", idDestino) :
+                new ObjectParameter("idDestino", typeof(int));
+    
+            var aplicarANDuORalFiltroParameter = aplicarANDuORalFiltro.HasValue ?
+                new ObjectParameter("AplicarANDuORalFiltro", aplicarANDuORalFiltro) :
+                new ObjectParameter("AplicarANDuORalFiltro", typeof(int));
+    
+            var modoExportacionParameter = modoExportacion != null ?
+                new ObjectParameter("ModoExportacion", modoExportacion) :
+                new ObjectParameter("ModoExportacion", typeof(string));
+    
+            var fechadesdeParameter = fechadesde.HasValue ?
+                new ObjectParameter("fechadesde", fechadesde) :
+                new ObjectParameter("fechadesde", typeof(System.DateTime));
+    
+            var fechahastaParameter = fechahasta.HasValue ?
+                new ObjectParameter("fechahasta", fechahasta) :
+                new ObjectParameter("fechahasta", typeof(System.DateTime));
+    
+            var puntoventaParameter = puntoventa.HasValue ?
+                new ObjectParameter("puntoventa", puntoventa) :
+                new ObjectParameter("puntoventa", typeof(int));
+    
+            var optDivisionSyngentaParameter = optDivisionSyngenta != null ?
+                new ObjectParameter("optDivisionSyngenta", optDivisionSyngenta) :
+                new ObjectParameter("optDivisionSyngenta", typeof(string));
+    
+            var contratoParameter = contrato != null ?
+                new ObjectParameter("Contrato", contrato) :
+                new ObjectParameter("Contrato", typeof(string));
+    
+            var queContenga2Parameter = queContenga2 != null ?
+                new ObjectParameter("QueContenga2", queContenga2) :
+                new ObjectParameter("QueContenga2", typeof(string));
+    
+            var idClienteAuxiliarintParameter = idClienteAuxiliarint.HasValue ?
+                new ObjectParameter("idClienteAuxiliarint", idClienteAuxiliarint) :
+                new ObjectParameter("idClienteAuxiliarint", typeof(int));
+    
+            var agrupadorDeTandaPeriodosParameter = agrupadorDeTandaPeriodos.HasValue ?
+                new ObjectParameter("AgrupadorDeTandaPeriodos", agrupadorDeTandaPeriodos) :
+                new ObjectParameter("AgrupadorDeTandaPeriodos", typeof(int));
+    
+            var vagonParameter = vagon.HasValue ?
+                new ObjectParameter("Vagon", vagon) :
+                new ObjectParameter("Vagon", typeof(int));
+    
+            var patenteParameter = patente != null ?
+                new ObjectParameter("Patente", patente) :
+                new ObjectParameter("Patente", typeof(string));
+    
+            var optCamionVagonParameter = optCamionVagon != null ?
+                new ObjectParameter("optCamionVagon", optCamionVagon) :
+                new ObjectParameter("optCamionVagon", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fSQL_GetDataTableFiltradoYPaginado_Result>("[DemoProntoEntities].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @optDivisionSyngenta, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, optDivisionSyngentaParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, optCamionVagonParameter);
+        }
     }
 }
