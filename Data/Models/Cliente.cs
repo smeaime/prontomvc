@@ -133,6 +133,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> ComisionDiferenciada { get; set; }
         public string OperacionesMercadoInternoEntidadVinculada { get; set; }
         public Nullable<int> CartaPorteTipoDeAdjuntoDeFacturacion { get; set; }
+        public Nullable<System.DateTime> FechaInicioExclusionPercepcionIVA { get; set; }
+        public Nullable<System.DateTime> FechaFinExclusionPercepcionIVA { get; set; }
     
         public virtual Cuenta Cuenta { get; set; }
         public virtual IBCondicion IBCondicione { get; set; }
