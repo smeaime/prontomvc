@@ -45,6 +45,11 @@ as
 --SET @fechadesde = IsNull(@fechadesde, Convert(DATETIME, '1/1/2000'))
 --SET @IdArticulo = IsNull(@IdArticulo, - 1)
 
+/*
+http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+http://weblogs.asp.net/zeeshanhirani/table-valued-functions-in-linq-to-sql
+https://msdn.microsoft.com/en-us/data/hh859577.aspx
+*/
 
 return 
 
@@ -132,22 +137,37 @@ LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido
 LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia  
 LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado  
 			
+
+where 1=1              
+
+
 			
-WHERE 1=1     
     And (@IdArticulo IS NULL Or @IdArticulo=-1 Or cdp.IdArticulo = @IdArticulo)
     And (@IdDestino IS NULL Or @IdDestino=-1  Or cdp.Destino = @IdDestino)
     And (@idDestinatario IS NULL Or @idDestinatario=-1   Or cdp.Entregador = @idDestinatario)
 	AND ISNULL(CDP.Anulada,'NO')<>'SI'    
 	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= @fechadesde
 	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= @fechahasta
-	--AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
-	--				where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
-	--				and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
-	--				AND ISNULL(COPIAS.Exporta,'NO')='SI'  
-	--				AND ISNULL(COPIAS.Anulada,'NO')<>'SI'  ) 
-	AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
-	AND ISNULL(CDP.Anulada,'NO')<>'SI'
+ 
+    And (@puntoventa IS NULL OR @puntoventa = -1 Or cdp.PuntoVenta = @puntoventa)
+	
 
+
+	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
+					where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
+					and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
+					and (
+						@ModoExportacion is null
+						or (@ModoExportacion = 'Ambos') 
+						Or (@ModoExportacion = 'Todos') 
+						Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI') 
+						Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
+						
+					) 
+				)
+
+	AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
+	       
 
 go
 
@@ -156,7 +176,7 @@ go
 
 
 
-select  sum(cdp.netofinal)
+select  * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				( 
 					NULL, 
@@ -172,12 +192,12 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 
 					NULL, 
-					NULL, 
+					32, 
 					NULL,
-					NULL, 
-					'2014-01-06 00:00:00',
+				 	'Entregas', 
+					'2016-01-07 00:00:00',
 
-					'2014-11-06 00:00:00',
+					'2016-31-07 00:00:00',
 					NULL, 
 					NULL,
 					NULL, 
@@ -196,4 +216,5 @@ go
 
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
 go
+
 

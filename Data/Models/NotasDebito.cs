@@ -109,6 +109,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> PorcentajeIBrutos39 { get; set; }
         public string ActivarRecuperoGastos { get; set; }
         public Nullable<int> IdAutorizoRecuperoGastos { get; set; }
+        public Nullable<int> IdLiquidacionFlete { get; set; }
+        public Nullable<int> CircuitoLiquidacionFlete { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }

@@ -232,6 +232,61 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void Pegatina_20886_23519()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Unidad6Analisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
+
+
+
+
 
         [TestMethod]
         public void DESCARGA_IMAGENES_22373()
@@ -1051,57 +1106,6 @@ namespace ProntoMVC.Tests
             System.Diagnostics.Process.Start(output);
         }
 
-
-        [TestMethod]
-        public void Pegatina_20886()
-        {
-
-            //explota
-
-            string ms = "";
-
-            string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
-            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
-
-            int m_IdMaestro = 0;
-            Pronto.ERP.BO.CartaDePorte carta;
-
-
-            // escribir descarga de una carta
-            //carta = null;
-            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            //carta.NobleGrado = 2;
-            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-
-
-
-
-            string log = "";
-            //hay que pasar el formato como parametro 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.Unidad6Analisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
-
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
-
-            foreach (System.Data.DataRow r in dt.Rows)
-            {
-                var dr = r;
-                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
-                                                        null, null, null, null,
-                                                        null, null);
-            }
-
-
-
-
-            //verificar que sigue así
-            carta = null;
-            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-        }
 
 
 
