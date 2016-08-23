@@ -2964,29 +2964,41 @@ Public Class ExcelImportadorManager
                 Dim analisis As Double = r(6)
 
 
-                If False Then
-                    'el de punto y coma
-                    Rubro = r(3)
-                    analisis = r(6)
-                    kilosmerma = Val(r(4))
-                    porcentajehum = Val(r(5))
 
-                End If
-
-
+             
 
                 Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
                 If cdp.Id = -1 Then
                     cdp.NumeroCartaDePorte = numeroCarta
                     cdp.SubnumeroVagon = vagon
                 End If
+
+
                 With cdp
                     Select Case Rubro
                         Case 1 'dañado
                             cdp.NobleDaniados = analisis
                         Case 2
+                            '                http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=23519
+                            '                Bueno, después de hablar con la gente del sistema y la gente que carga los datos en el puerto se llegó a la conclusión de que viene mal cargado de origen y va a seguir viniendo asi.
+
+                            'Por lo que dicen, siempre mandan todas las mermas juntas en un solo campo, sean por el motivo que sean.
+
+                            'Solución propuesta por Williams:
+                            'Si hay porcentaje de Humedad informado -> calcular la merma según la tabla de humedad y poner eso en merma por humedad. En Otras Mermas, poner la diferencia entre el total informado y esta merma calculada
+                            'Si no hay porcentaje de Humedad informado -> enviar a Otras Mermas el numero informado
+
+                            Dim kiloshumedad As Double = 0
+                            If porcentajehum > 0 Then
+                                Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, cdp.IdArticulo, porcentajehum)
+                                kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalSinMermas
+                            End If
+
                             cdp.Humedad = porcentajehum
-                            cdp.HumedadDesnormalizada = kilosmerma
+                            cdp.HumedadDesnormalizada = kiloshumedad
+                            cdp.Merma = kilosmerma - kiloshumedad
+
+
 
 
                         Case 3
@@ -3304,14 +3316,62 @@ Public Class ExcelImportadorManager
 
                 cdp.PuntoVenta = cmbPuntoVenta
 
+
+
+
+
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '                http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=23519
+                '                Bueno, después de hablar con la gente del sistema y la gente que carga los datos en el puerto se llegó a la conclusión de que viene mal cargado de origen y va a seguir viniendo asi.
+
+                'Por lo que dicen, siempre mandan todas las mermas juntas en un solo campo, sean por el motivo que sean.
+
+                'Solución propuesta por Williams:
+                'Si hay porcentaje de Humedad informado -> calcular la merma según la tabla de humedad y poner eso en merma por humedad. En Otras Mermas, poner la diferencia entre el total informado y esta merma calculada
+                'Si no hay porcentaje de Humedad informado -> enviar a Otras Mermas el numero informado
+
+
+
+                Dim kiloshumedad As Long = 0
+                If Rubro = 2 And porcentajehum > 0 Then
+                    Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, cdp.IdArticulo, porcentajehum)
+                    kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalSinMermas
+                    cdp.Humedad = porcentajehum
+                    cdp.HumedadDesnormalizada = kiloshumedad
+                End If
+
+                If kilosmerma > 0 And Rubro = 2 Then
+                    cdp.Merma = kilosmerma - kiloshumedad
+                ElseIf kilosmerma > 0 And Rubro <> 2 Then
+                    cdp.Merma = kilosmerma
+                End If
+
+
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
                 With cdp
                     Select Case Rubro
                         Case 1 'dañado
                             cdp.NobleDaniados = analisis
                         Case 2
-                            cdp.Humedad = porcentajehum
-                            cdp.HumedadDesnormalizada = kilosmerma
 
+                            cdp.Humedad = porcentajehum
+                         
                         Case 3
                             .NobleHectolitrico = analisis
                         Case 4
