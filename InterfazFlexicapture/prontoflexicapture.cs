@@ -762,24 +762,37 @@ namespace ProntoFlexicapture
             //cdp.Corredor2
             //  cdp.
 
-
-            // si la grabas acá, despues va a volver a pisar los datos de la carta
-            using (DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+            try
             {
 
 
-                CartasDePorteLogDeOCR q = new CartasDePorteLogDeOCR();
-
-                q.Fecha = DateAndTime.Now;
-                q.NumeroCarta = Convert.ToInt32(cdp.NumeroCartaDePorte);
-                q.IdCartaDePorte = cdp.Id;
-                q.TextoAux1 = usu;
-                q.Observaciones = cdp.MotivoAnulacion;
+                // si la grabas acá, despues va a volver a pisar los datos de la carta
+                using (DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+                {
 
 
-                db.CartasDePorteLogDeOCRs.Add(q);
-                db.SaveChanges();
+                    CartasDePorteLogDeOCR q = new CartasDePorteLogDeOCR();
+
+                    q.Fecha = DateAndTime.Now;
+                    q.NumeroCarta = Convert.ToInt32(cdp.NumeroCartaDePorte);
+                    q.IdCartaDePorte = cdp.Id;
+                    q.TextoAux1 = usu;
+                    q.Observaciones = cdp.MotivoAnulacion;
+
+
+                    db.CartasDePorteLogDeOCRs.Add(q);
+                    db.SaveChanges();
+                }
+
             }
+
+            catch (Exception)
+            {
+                Log("trate de grabar con id " + cdp.Id);
+
+                throw;
+            }
+
         }
 
 
@@ -1520,6 +1533,8 @@ namespace ProntoFlexicapture
 
                         cdp.Acoplado = Acoplado.Replace("-", "").Replace(" ", "");
                         cdp.Patente = Camión.Replace("-", "").Replace(" ", "");
+                        if (cdp.Acoplado.Length != 6 && cdp.Acoplado.Length != 7) cdp.Acoplado = "";
+                        if (cdp.Patente.Length != 6 && cdp.Patente.Length != 6) cdp.Patente = "";
 
                         cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
                         cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", "").Replace(",", ""));
@@ -1530,6 +1545,8 @@ namespace ProntoFlexicapture
                         cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
 
                         cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+
+
 
 
 
@@ -1606,6 +1623,7 @@ namespace ProntoFlexicapture
                             ErrHandler2.WriteError(ex2);
                         }
 
+
                         double.TryParse(Tarifa.Replace(".", ","), out cdp.TarifaTransportista);
 
 
@@ -1615,6 +1633,16 @@ namespace ProntoFlexicapture
                     {
                         ErrHandler2.WriteError(ex);
                     }
+                }
+
+
+                if (cdp.NetoFinalIncluyendoMermas > 0)
+                {
+                    if (cdp.FechaDescarga == DateTime.MinValue)
+                    {
+                        cdp.NetoFinalIncluyendoMermas = 0;
+                    }
+
                 }
 
 
@@ -1663,8 +1691,9 @@ namespace ProntoFlexicapture
                 }
 
                 //  por qué llegó hasta acá con id=-1? -porque es una carta nueva pero inválida que no se intentó grabar 
-                if (id == -1)
+                if (id == -1 || id <= 0)
                 {
+                    Log(ms + " " + warn);
                     Debug.Print(ms + " " + warn);
                 }
 
