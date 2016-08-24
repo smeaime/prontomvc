@@ -5487,7 +5487,7 @@ Public Class CartaDePorteManager
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(imagenpathtk, 300, 450, nombretk, sDIRFTP, DirApp)
+                    CartaDePorteManager.ResizeImage(imagenpathtk, 500, 800, nombretk, sDIRFTP, DirApp)
                     'CartaDePorteManager.ResizeImage_ToTIFF(imagenpathtk, 800, 1100, nombretk, sDIRFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -6043,6 +6043,10 @@ Public Class CartaDePorteManager
         oImg.Dispose()
     End Sub
 
+
+
+
+    
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -8843,9 +8847,9 @@ Public Class CartaDePorteManager
         'arreglar esto, porque la segunda vez que se llama con el mismo subnumerodefacturacion, va a devolver un error
 
 
-        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        'Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
         Dim familia = (From e In db.CartasDePortes _
                                       Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
