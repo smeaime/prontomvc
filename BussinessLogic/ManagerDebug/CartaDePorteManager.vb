@@ -5465,12 +5465,12 @@ Public Class CartaDePorteManager
             'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
 
             Dim imagenpathcp = myCartaDePorte.PathImagen
-            'Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".tif"
-            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".jpg"
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".tif"
+            'Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".jpg"
 
             Dim imagenpathtk = myCartaDePorte.PathImagen2
-            'Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".tif"
-            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".jpg"
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".tif"
+            'Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".jpg"
 
 
 
@@ -5479,16 +5479,16 @@ Public Class CartaDePorteManager
 
             If (reducir) Then
                 Try
-                    CartaDePorteManager.ResizeImage(imagenpathcp, 300, 450, nombrecp, sDIRFTP, DirApp)
-                    'CartaDePorteManager.ResizeImage_ToTIFF(imagenpathcp, 800, 1100, nombrecp, sDIRFTP, DirApp)
+                    'CartaDePorteManager.ResizeImage(imagenpathcp, 300, 450, nombrecp, sDIRFTP, DirApp)
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathcp, 0, 0, nombrecp, sDIRFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(imagenpathtk, 500, 800, nombretk, sDIRFTP, DirApp)
-                    'CartaDePorteManager.ResizeImage_ToTIFF(imagenpathtk, 800, 1100, nombretk, sDIRFTP, DirApp)
+                    'CartaDePorteManager.ResizeImage(imagenpathtk, 500, 800, nombretk, sDIRFTP, DirApp)
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathtk, 0, 0, nombretk, sDIRFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
@@ -5989,20 +5989,25 @@ Public Class CartaDePorteManager
 
         'http://siderite.blogspot.com/2009/09/outofmemoryexception-in.html
         oImg = oImg.GetThumbnailImage(oImg.Width, oImg.Height, Nothing, IntPtr.Zero)
+        If height = 0 And width = 0 Then
+            height = oImg.Height
+            width = oImg.Width
+        End If
 
 
         Dim oThumbNail As System.Drawing.Image = New System.Drawing.Bitmap(width, height)
         ', System.Drawing.Imaging.PixelFormat.Format24bppRgb
         Dim oGraphic As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oThumbNail)
 
-        oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality
+        oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed
 
         'set smoothing mode to high quality
         oGraphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
         'set the interpolation mode
         oGraphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
         'set the offset mode
-        oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality
+        oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed
+
 
         Dim oRectangle As New System.Drawing.Rectangle(0, 0, width, height)
 
@@ -8848,8 +8853,8 @@ Public Class CartaDePorteManager
 
 
         'Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
-
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        ' hay que revisar por qué no se banca el demoprontoentities
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))        ' hay que revisar por qué no se banca el demoprontoentities
 
         Dim familia = (From e In db.CartasDePortes _
                                       Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
