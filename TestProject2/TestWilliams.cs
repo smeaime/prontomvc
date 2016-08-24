@@ -395,10 +395,14 @@ namespace ProntoMVC.Tests
             string output = archivo + ".salida.jpg";
             string output2 = archivo + ".salida.tif";
 
-            CartaDePorteManager.ResizeImage(archivo, 300, 450, output, "", "");
+            if (true)
+                CartaDePorteManager.ResizeImage_ToTIFF(archivo, 0, 0, output2, "", "");
+            else
+            {
+                CartaDePorteManager.ResizeImage(archivo, 300, 450, output, "", "");
 
-            CartaDePorteManager.ResizeImage_ToTIFF(output, 800, 1100, output2, "", "");
-
+                CartaDePorteManager.ResizeImage_ToTIFF(output, 800, 1100, output2, "", "");
+            }
 
 
             System.Diagnostics.Process.Start(output2);
