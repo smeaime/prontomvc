@@ -105,7 +105,11 @@ namespace ProntoMVC.Tests
             plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
 
             //probar conexion con timeout cortopp
-            var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
+            if (false)
+            {
+                // no logro que el timeout sea corto
+                var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
+            }
 
 
             bdlmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -229,6 +233,131 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+        [TestMethod]
+        public void OCR_bug_23629()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\TIFFFF1.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+ 
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373_2()
+        {
+
+
+            string archivo = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg";
+            string output = archivo + ".salida.jpg";
+            string output2 = archivo + ".salida.tif";
+
+            CartaDePorteManager.ResizeImage(archivo, 300, 450, output, "", "");
+
+            CartaDePorteManager.ResizeImage_ToTIFF(output, 800, 1100, output2, "", "");
+
+                    
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373()
+        {
+
+            //CartaDePorteManager.JuntarImagenesYhacerTiff(@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff"
+            //                                  );
+
+
+            if (false)
+            {
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
+                                              @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                ClassFlexicapture.SaveAsMultiPageTiff(
+                                                     @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff",
+                                                     sss
+                                                     );
+            }
+
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2016, 5, 29), new DateTime(2016, 5, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
         [TestMethod]
         public void Pegatina_23519_reyser_analisis()
         {
@@ -337,46 +466,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-
-        [TestMethod]
-        public void DESCARGA_IMAGENES_22373()
-        {
-
-            //CartaDePorteManager.JuntarImagenesYhacerTiff(@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
-            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg",
-            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff"
-            //                                  );
-
-
-            if (false)
-            {
-                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
-                                              @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
-
-                ClassFlexicapture.SaveAsMultiPageTiff(
-                                                     @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff",
-                                                     sss
-                                                     );
-            }
-
-
-            string titulo = "";
-            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
-                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2016, 5, 29), new DateTime(2016, 5, 30),
-                0, ref titulo, "Ambas", false);
-
-
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp, true);
-            System.Diagnostics.Process.Start(output);
-
-        }
 
 
             
