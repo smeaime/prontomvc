@@ -5185,8 +5185,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-
-    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String, reducir As Boolean) As String
+    Shared Function DescargarImagenesAdjuntas_TIFF_anterior(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String, reducir As Boolean) As String
 
 
 
@@ -5327,6 +5326,218 @@ Public Class CartaDePorteManager
 
 
                 Dim archivo As String = Path.GetFileNameWithoutExtension(nombrecp) + ".tif"
+
+
+                If True Then
+                    'metodo 1
+                    'Dim bimp = MergeTwoImages_TiffMultipage(sDirFTPdest + nombrecp, sDirFTPdest + nombretk, sDirFTPdest + archivo)
+
+                Else
+
+                    'metodo 2 
+                    'sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+                    '                          @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                    'SaveAsMultiPageTiff()
+                End If
+
+
+                wordFiles.Add(nombrecp)
+                wordFiles.Add(nombretk)
+                If wordFiles.Count >= MAXIMO Then Exit For
+
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
+
+        Next
+
+
+
+
+
+
+        '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
+
+        Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
+        Dim MyFile1 = New FileInfo(output)
+        If MyFile1.Exists Then
+            MyFile1.Delete()
+        End If
+        Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
+        For Each s In wordFiles
+            If s = "" Then Continue For
+            s = sDirFTPdest + s
+            Dim MyFile2 = New FileInfo(s)
+            If MyFile2.Exists Then
+                Try
+                    zip.AddFile(s, "")
+                Catch ex As Exception
+                    ErrHandler2.WriteError(s)
+                    ErrHandler2.WriteError(ex)
+                End Try
+
+            End If
+
+        Next
+
+        zip.Save()
+
+
+
+        Return output
+
+    End Function
+
+
+
+    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String, reducir As Boolean) As String
+
+
+
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+
+
+
+
+        'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
+        'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
+
+
+        Dim sDIRFTP = DirApp & "\DataBackupear\"
+        Dim sDirFTPdest = sDIRFTP '+ "\borrar\"
+        'xxxx()
+
+
+
+        'If System.Diagnostics.Debugger.IsAttached() Then
+        '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        'Else
+        '    'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+        '    'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+        '    'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        'End If
+
+
+
+
+
+
+        Dim wordFiles As New List(Of String)
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        'Dim idorig = _
+        '                 (From c In db.CartasDePortes _
+        '                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+        '                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+        '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+
+
+        Const MAXIMO = 200
+
+        For Each c As DataRow In dt.Rows
+            Dim id As Long = c.Item("IdCartaDePorte")
+            Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
+
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
+            '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
+            '000123456789-cp
+            '000123456789-tk
+            'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
+
+            Dim imagenpathcp = myCartaDePorte.PathImagen
+            'Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".tif"
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".jpg"
+
+            Dim imagenpathtk = myCartaDePorte.PathImagen2
+            'Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".tif"
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".jpg"
+
+
+
+
+
+
+            If (reducir) Then
+                Try
+                    CartaDePorteManager.ResizeImage(imagenpathcp, 300, 450, nombrecp, sDIRFTP, DirApp)
+                    'CartaDePorteManager.ResizeImage_ToTIFF(imagenpathcp, 800, 1100, nombrecp, sDIRFTP, DirApp)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+
+
+                Try
+                    CartaDePorteManager.ResizeImage(imagenpathtk, 300, 450, nombretk, sDIRFTP, DirApp)
+                    'CartaDePorteManager.ResizeImage_ToTIFF(imagenpathtk, 800, 1100, nombretk, sDIRFTP, DirApp)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+            Else
+
+
+                If imagenpathcp <> "" Then
+
+                    Try
+                        Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
+                        If fcp.Exists Then
+                            fcp.CopyTo(sDirFTPdest + nombrecp, True)
+                        End If
+                        'wordFiles.Add(nombrecp)
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
+                    End Try
+                End If
+
+
+
+                If imagenpathtk <> "" Then
+
+                    Try
+
+                        Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
+                        If ftk.Exists Then
+                            ftk.CopyTo(sDirFTPdest + nombretk, True)
+                        End If
+                        'wordFiles.Add(nombretk)
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
+                    End Try
+                End If
+
+
+            End If
+
+
+
+            'http://stackoverflow.com/questions/398388/convert-bitmaps-to-one-multipage-tiff-image-in-net-2-0
+
+            Try
+
+                'JuntarImagenesYhacerTiff(sDirFTP + nombretk, sDirFTP + nombrecp, sDirFTP + nombrecp)
+
+
+                'Dim archivo As String = Path.GetFileNameWithoutExtension(nombrecp) + ".tif"
 
 
                 If True Then
@@ -5657,7 +5868,11 @@ Public Class CartaDePorteManager
             'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
 
-        sDir = DirApp & "\DataBackupear\"
+        If DirApp <> "" Then
+            sDir = DirApp & "\DataBackupear\"
+        Else
+            sDir = ""
+        End If
         Dim sDirDest = sDir '& "\borrar\"
 
         'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
@@ -5754,7 +5969,11 @@ Public Class CartaDePorteManager
             'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
 
-        sDir = DirApp & "\DataBackupear\"
+        If DirApp <> "" Then
+            sDir = DirApp & "\DataBackupear\"
+        Else
+            sDir = ""
+        End If
         Dim sDirDest = sDir '& "\borrar\"
 
         'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
@@ -5794,7 +6013,10 @@ Public Class CartaDePorteManager
 
             Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
             Dim encoderParams As EncoderParameters = New EncoderParameters(1)
+
             Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
+            'Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT3)
+
             encoderParams.Param(0) = parameter
             'parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.)
             'encoderParams.Param(1) = parameter
@@ -8621,8 +8843,9 @@ Public Class CartaDePorteManager
         'arreglar esto, porque la segunda vez que se llama con el mismo subnumerodefacturacion, va a devolver un error
 
 
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
         Dim familia = (From e In db.CartasDePortes _
                                       Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
