@@ -39,6 +39,10 @@ using Microsoft.Reporting.WebForms;
 
 using System.Configuration;
 
+using BitMiracle.LibTiff.Classic;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 using System.Text;
 using System.Reflection;
 
@@ -185,9 +189,9 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
         [TestMethod]
-        public void         probar_todos_los_sincros()
+        public void probar_todos_los_sincros()
         {
 
             string sErrores = "", sTitulo = "";
@@ -198,7 +202,7 @@ namespace ProntoMVC.Tests
             int registrosf = 0;
 
 
-            string[] sincros= {"",""};
+            string[] sincros = { "", "" };
 
             var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo,
                         CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
@@ -275,10 +279,10 @@ namespace ProntoMVC.Tests
             string sError = "";
 
 
-                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
-                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+            // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
 
- 
+
 
             var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
 
@@ -288,6 +292,96 @@ namespace ProntoMVC.Tests
 
         }
 
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373_3()
+        {
+            using (Bitmap bmp = new Bitmap(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg"))
+            {
+                using (Tiff tif = Tiff.Open(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\BitmapTo24BitColorTiff.tif", "w"))
+                {
+                    byte[] raster = getImageRasterBytes(bmp, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                    tif.SetField(TiffTag.IMAGEWIDTH, bmp.Width);
+                    tif.SetField(TiffTag.IMAGELENGTH, bmp.Height);
+                    tif.SetField(TiffTag.COMPRESSION, Compression.NONE);
+                    tif.SetField(TiffTag.PHOTOMETRIC, Photometric.MINISWHITE);
+
+                    tif.SetField(TiffTag.ROWSPERSTRIP, bmp.Height);
+
+                    tif.SetField(TiffTag.XRESOLUTION, bmp.HorizontalResolution);
+                    tif.SetField(TiffTag.YRESOLUTION,  bmp.VerticalResolution);
+
+                    tif.SetField(TiffTag.BITSPERSAMPLE, 8);
+                    tif.SetField(TiffTag.SAMPLESPERPIXEL, 3);
+
+                    tif.SetField(TiffTag.PLANARCONFIG, PlanarConfig.CONTIG);
+
+                    int stride = raster.Length / bmp.Height;
+                    convertSamples(raster, bmp.Width, bmp.Height);
+
+                    for (int i = 0, offset = 0; i < bmp.Height; i++)
+                    {
+                        tif.WriteScanline(raster, offset, i, 0);
+                        offset += stride;
+                    }
+                }
+
+                System.Diagnostics.Process.Start(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\BitmapTo24BitColorTiff.tif");
+            }
+        }
+
+
+
+
+        private static byte[] getImageRasterBytes(Bitmap bmp, PixelFormat format)
+        {
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            byte[] bits = null;
+
+            try
+            {
+                // Lock the managed memory
+                BitmapData bmpdata = bmp.LockBits(rect, ImageLockMode.ReadWrite, format);
+
+                // Declare an array to hold the bytes of the bitmap.
+                bits = new byte[bmpdata.Stride * bmpdata.Height];
+
+                // Copy the values into the array.
+                System.Runtime.InteropServices.Marshal.Copy(bmpdata.Scan0, bits, 0, bits.Length);
+
+                // Release managed memory
+                bmp.UnlockBits(bmpdata);
+            }
+            catch
+            {
+                return null;
+            }
+
+            return bits;
+        }
+
+        /// <summary> 
+        /// Converts BGR samples into RGB samples 
+        /// </summary> 
+        private static void convertSamples(byte[] data, int width, int height)
+        {
+            int stride = data.Length / height;
+            const int samplesPerPixel = 3;
+
+            for (int y = 0; y < height; y++)
+            {
+                int offset = stride * y;
+                int strideEnd = offset + width * samplesPerPixel;
+
+                for (int i = offset; i < strideEnd; i += samplesPerPixel)
+                {
+                    byte temp = data[i + 2];
+                    data[i + 2] = data[i];
+                    data[i] = temp;
+                }
+            }
+        }
 
 
 
@@ -305,7 +399,7 @@ namespace ProntoMVC.Tests
 
             CartaDePorteManager.ResizeImage_ToTIFF(output, 800, 1100, output2, "", "");
 
-                    
+
 
             System.Diagnostics.Process.Start(output2);
         }
@@ -468,7 +562,7 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
         [TestMethod]
         public void asdasd_23480()
         {
@@ -1348,7 +1442,7 @@ namespace ProntoMVC.Tests
                 0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp,false);
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp, false);
             System.Diagnostics.Process.Start(output);
 
         }
