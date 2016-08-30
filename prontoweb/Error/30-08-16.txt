@@ -1,0 +1,80 @@
+
+Log Entry : 
+08/30/2016 00:28:44
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_002840.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:28:44
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_002840.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:28:44
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 00:31:59
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003157.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:31:59
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003157.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:31:59
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 00:33:40
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003338.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:33:40
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003338.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:33:40
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 00:36:42
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003640.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:36:42
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003640.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:36:42
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________

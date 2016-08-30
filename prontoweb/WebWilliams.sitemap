@@ -216,7 +216,7 @@
       <siteMapNode url="ProntoWeb/Reporte.aspx"  title="Buscador"  description="Buscador" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
 
 
-      <siteMapNode url="ProntoWeb/ControlesDiarios.aspx"  title="Estd. p/destino"  description="Control" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/ControlesDiarios.aspx"  title="Estd. d/descargas"  description="Control" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
 
     </siteMapNode>
 
