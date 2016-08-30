@@ -1489,7 +1489,7 @@ namespace ProntoFlexicapture
                 // if (cdp.Titular > 0) bPisar = false;
 
                 // no pisar si ya esta la info
-                if (bPisar)
+                if (bPisar && !esTicket)
                 {
 
 
@@ -1634,6 +1634,24 @@ namespace ProntoFlexicapture
                         ErrHandler2.WriteError(ex);
                     }
                 }
+                else if (esTicket)
+                {
+                    cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
+                    cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
+                    cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
+
+                    cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+                    try
+                    {
+                        cdp.FechaDescarga = Convert.ToDateTime(FechaDescarga);
+                    }
+                    catch (Exception ex2)
+                    {
+
+                        ErrHandler2.WriteError(ex2);
+                    }
+                }
+
 
 
                 if (cdp.NetoFinalIncluyendoMermas > 0)
