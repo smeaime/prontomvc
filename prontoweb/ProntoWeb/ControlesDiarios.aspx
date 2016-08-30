@@ -32,7 +32,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <br />
 
     <div class="titulos" style="color: white">
-        Estadísticas por destino
+        Estadísticas de Descargas
     </div>
     <br />
     <br />
@@ -53,8 +53,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <table>
             <tr>
 
-
-                <td class="EncabezadoCell">
+                <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
+                <td class="EncabezadoCell" style="width: 400px; height: 18px;">
                     <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
                         Visible="true">
                         <asp:ListItem Text="Hoy" />
@@ -96,6 +96,29 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </td>
 
             </tr>
+            <tr>
+                <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
+                </td>
+                <td class="EncabezadoCell">
+                    <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" />
+                </td>
+
+            </tr>
+
+            <tr>
+                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
+                </td>
+                <td class="EncabezadoCell" style="width: 250px; height: 18px;">
+                    <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
+                        autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
+                    <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
+                        CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
+                        ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
+                        UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
+                        DelimiterCharacters="" Enabled="True">
+                    </cc1:AutoCompleteExtender>
+            </tr>
+
         </table>
 
         <br />

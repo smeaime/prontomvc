@@ -74,7 +74,7 @@ Partial Class ControlesDiarios
             '////////////////////////////////////////////
 
 
-            Me.Title = "Control de Descargas"
+            Me.Title = "Estadísticas de Descargas"
 
             BindTypeDropDown()
             refrescaPeriodo()
@@ -88,6 +88,7 @@ Partial Class ControlesDiarios
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(informe)
 
         'AutoCompleteExtender2.ContextKey = HFSC.Value
+        AutoCompleteExtender26.ContextKey = HFSC.Value
 
     End Sub
 
@@ -114,20 +115,20 @@ Partial Class ControlesDiarios
         'optDivisionSyngenta.DataBind()
 
 
-        'cmbPuntoVenta.DataSource = PuntoVentaWilliams.IniciaComboPuntoVentaWilliams3(HFSC.Value)
-        ''cmbPuntoVenta.DataSource = EntidadManager.ExecDinamico(HFSC.Value, "SELECT DISTINCT PuntoVenta FROM PuntosVenta WHERE not PuntoVenta is null")
-        'cmbPuntoVenta.DataTextField = "PuntoVenta"
-        'cmbPuntoVenta.DataValueField = "PuntoVenta"
-        'cmbPuntoVenta.DataBind()
-        'cmbPuntoVenta.SelectedIndex = 0
-        'cmbPuntoVenta.Items.Insert(0, New ListItem("Todos los puntos de venta", -1))
-        'cmbPuntoVenta.SelectedIndex = 0
+        cmbPuntoVenta.DataSource = PuntoVentaWilliams.IniciaComboPuntoVentaWilliams3(HFSC.Value)
+        'cmbPuntoVenta.DataSource = EntidadManager.ExecDinamico(HFSC.Value, "SELECT DISTINCT PuntoVenta FROM PuntosVenta WHERE not PuntoVenta is null")
+        cmbPuntoVenta.DataTextField = "PuntoVenta"
+        cmbPuntoVenta.DataValueField = "PuntoVenta"
+        cmbPuntoVenta.DataBind()
+        cmbPuntoVenta.SelectedIndex = 0
+        cmbPuntoVenta.Items.Insert(0, New ListItem("Todos los puntos de venta", -1))
+        cmbPuntoVenta.SelectedIndex = 0
 
-        'If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
-        '    Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
-        '    BuscaTextoEnCombo(cmbPuntoVenta, pventa)
-        '    If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
-        'End If
+        If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
+            Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+            BuscaTextoEnCombo(cmbPuntoVenta, pventa)
+            If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
+        End If
 
     End Sub
 
@@ -154,7 +155,9 @@ Partial Class ControlesDiarios
         End Try
 
 
-        Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+        'Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+        Dim pventa = cmbPuntoVenta.SelectedValue
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
 
 
         Dim yourParams As ReportParameter() = New ReportParameter(5) {}
@@ -165,7 +168,7 @@ Partial Class ControlesDiarios
         yourParams(1) = New ReportParameter("sServidorWeb", "kjhkjlh")
         yourParams(2) = New ReportParameter("FechaDesde", FechaDesde)
         yourParams(3) = New ReportParameter("FechaHasta", FechaHasta)
-        yourParams(4) = New ReportParameter("IdDestino", -1)
+        yourParams(4) = New ReportParameter("IdDestino", idDestino)
         yourParams(5) = New ReportParameter("IdPuntoVenta", pventa)
         'yourParams(7) = New ReportParameter("Consulta", Sql)
 

@@ -17,10 +17,12 @@ declare @i int
 
 
 select 
+	YEAR(D.Fecha) as Ano,
+	DATENAME(month, D.Fecha) as Mes,
     IdCartasDePorteControlDescarga,
     D.IdDestino ,
 	DEST.Descripcion as Destino,
-   D.Fecha  as FechaDescarga,
+	D.Fecha  as FechaDescarga,
     Sum(NetoFinal) as NetoFinal,
     TotalDescargaDia,
     TotalDescargaDia - Sum(NetoFinal) as dif,
@@ -29,15 +31,17 @@ select
     --g.Select(x => x.NumeroCartaDePorte).ToList()
 
 	from CartasDePorteControlDescarga D
-	left join CartasDePorte C on   C.FechaDescarga = D.Fecha  
-								AND C.Destino = D.IdDestino 
+	left join CartasDePorte C on  
+								C.Destino = D.IdDestino 
 								AND C.SubnumeroDeFacturacion <= 0 
 								AND D.idPuntoVenta=C.puntoVenta
+							    AND C.FechaDescarga = D.Fecha -- aca habria que tomar solo el dia de las dos fechas, sin tomar en cuenta la hora
 	left  join WilliamsDestinos DEST on D.IdDestino=DEST.IdWilliamsDestino
 	where	(DEST.PuntoVenta=@IdPuntoVenta or @IdPuntoVenta=0)
-			--D.idPuntoVenta=@IdPuntoVenta or @IdPuntoVenta=0
+			AND (C.Destino=@IdDestino or @IdDestino=-1)
 			AND (D.Fecha between @FechaDesde and @FechaHasta)
-	group by d.IdCartasDePorteControlDescarga,D.IdDestino , DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
+			AND (C.FechaDescarga between @FechaDesde and @FechaHasta)
+	group by YEAR(D.Fecha),DATENAME(month, D.Fecha),d.IdCartasDePorteControlDescarga,D.IdDestino , DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
     order by D.Fecha desc, DEST.Descripcion asc
 
 
@@ -45,15 +49,23 @@ end
 go
 
 --select * from WilliamsDestinos where IdWilliamsDestino=47
+--select * from CartasDePorteControlDescarga
 
 
-
-
-exec wCartasDePorteControlDescargas_TX_InformeControlDiario '','',3,0
+exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20140810','20160810',-1,0
 
 /*
 CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
 ON [dbo].[CartasDePorte] ([SubnumeroDeFacturacion])
 INCLUDE ([NetoFinal],[Destino],[FechaDescarga])
+GO
+*/
+
+/*
+USE [Williams2]
+GO
+CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+ON [dbo].[CartasDePorte] ([SubnumeroDeFacturacion])
+INCLUDE ([NetoFinal],[Destino],[FechaDescarga],[PuntoVenta])
 GO
 */
