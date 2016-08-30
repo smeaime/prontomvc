@@ -1848,3 +1848,11 @@ go
 
 
 
+CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+ON [dbo].[CartasDePorte] ([SubnumeroDeFacturacion])
+INCLUDE ([NetoFinal],[Destino],[FechaDescarga],[PuntoVenta])
+GO
+
+
+
+

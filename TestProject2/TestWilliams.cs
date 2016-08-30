@@ -239,6 +239,83 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void InformeControlDiario_22052_2()
+        {
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            List<CartasDePorteControlDescarga> control = (from a in db.CartasDePorteControlDescargas select a).ToList();
+
+
+            int iddest = db.WilliamsDestinos.Where(x => x.Descripcion == "Villa Constitucion - Servicios Portuarios")
+                            .Select(x => x.IdWilliamsDestino).FirstOrDefault();
+
+            db.CartasDePorteControlDescargas.Add(new CartasDePorteControlDescarga { Fecha = new DateTime(2016, 1, 22), IdPuntoVenta = 1, TotalDescargaDia = 400, IdDestino = iddest });
+            db.SaveChanges();
+
+
+
+            db.Database.CommandTimeout = 180;
+
+
+            List<ProntoFlexicapture.FuncionesCSharpBLL.ret> xxx = ProntoFlexicapture.FuncionesCSharpBLL.InformeControlDiario(scEF);
+
+
+
+            string output = "c:\\adasdasd.xls";
+
+            //exportar excel al estilo Pronto, como tenemos hacer en las grillas de mvc
+
+            //CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
+
+            FuncionesCSharpBLL.ExportToExcelEntityCollection<CartasDePorteControlDescarga>(control, output);
+            //FuncionesCSharpBLL.ExportToExcelEntityCollection<ProntoFlexicapture.FuncionesCSharpBLL.ret>(xxx, output);
+
+
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void InformeControlDiario_22052()
+        {
+
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter[] yourParams = new ReportParameter[6];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2015, 11, 1).ToString());
+            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2016, 11, 1).ToString());
+            yourParams[4] = new ReportParameter("IdDestino", "-1");
+            yourParams[5] = new ReportParameter("IdPuntoVenta", "0");
+            //yourParams[7] = new ReportParameter("Consulta", strSQL);
+
+
+            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                "Williams - Controles Diarios.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
         [TestMethod]
         public void OCR_bug_23629()
         {
@@ -883,81 +960,6 @@ namespace ProntoMVC.Tests
 
         }
 
-
-
-
-        [TestMethod]
-        public void InformeControlDiario_22052_2()
-        {
-
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-
-            List<CartasDePorteControlDescarga> control = (from a in db.CartasDePorteControlDescargas select a).ToList();
-
-
-            int iddest = db.WilliamsDestinos.Where(x => x.Descripcion == "Villa Constitucion - Servicios Portuarios")
-                            .Select(x => x.IdWilliamsDestino).FirstOrDefault();
-
-            db.CartasDePorteControlDescargas.Add(new CartasDePorteControlDescarga { Fecha = new DateTime(2016, 1, 22), IdPuntoVenta = 1, TotalDescargaDia = 400, IdDestino = iddest });
-            db.SaveChanges();
-
-
-
-            db.Database.CommandTimeout = 180;
-
-
-            List<ProntoFlexicapture.FuncionesCSharpBLL.ret> xxx = ProntoFlexicapture.FuncionesCSharpBLL.InformeControlDiario(scEF);
-
-
-
-            string output = "c:\\adasdasd.xls";
-
-            //exportar excel al estilo Pronto, como tenemos hacer en las grillas de mvc
-
-            //CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
-
-            FuncionesCSharpBLL.ExportToExcelEntityCollection<CartasDePorteControlDescarga>(control, output);
-            //FuncionesCSharpBLL.ExportToExcelEntityCollection<ProntoFlexicapture.FuncionesCSharpBLL.ret>(xxx, output);
-
-
-
-
-
-            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
-            //File.Copy(output,copia, true);
-            System.Diagnostics.Process.Start(output);
-
-        }
-
-
-
-
-        [TestMethod]
-        public void InformeControlDiario_22052()
-        {
-
-
-            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
-            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
-
-            ReportParameter[] yourParams = new ReportParameter[6];
-            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
-            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2012, 11, 1).ToString());
-            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2012, 11, 1).ToString());
-            yourParams[4] = new ReportParameter("IdDestino", "-1");
-            yourParams[5] = new ReportParameter("IdPuntoVenta", "0");
-            //yourParams[7] = new ReportParameter("Consulta", strSQL);
-
-
-            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-                                "Williams - Controles Diarios.rdl", yourParams, ref ArchivoExcelDestino, false);
-
-            System.Diagnostics.Process.Start(output2);
-        }
 
 
 
