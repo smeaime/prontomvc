@@ -11,15 +11,23 @@ if OBJECT_ID ('fSQL_GetDataTableFiltradoYPaginado') is not null
 go 
 
 /*
--- mejor NO uses parametros opcionales!!! (problemas en el orden de los parámetros al usar EntityFramework)
--- mejor NO uses parametros opcionales!!!
--- mejor NO uses parametros opcionales!!!
---            @startRowIndex int = NULL,
-http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
-http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
-http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
-http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
+
+This helped us trace the issue to this SQL Server issue https://msdn.microsoft.com/en-US/library/ms178653(SQL.90).aspx . Specifically see the section titled "Differences Between Lower Compatibility Levels and Level 90". @indigosquared had a database which was upgraded from an earlier version of SQL Server (rather than a new install) and hence that database was running with an old compatibility level. 
+
+To diagnose this run: 
+
+sp_dbcmptlevel '<your_database_name>' 
+
+If it reports a value below 90 then running 
+
+sp_dbcmptlevel '<your_database_name>', 90 
+
+updates the compatibility level of the database and fixes the problem.
+
 */
+
+
+
 create function fSQL_GetDataTableFiltradoYPaginado(
             @startRowIndex int ,
             @maximumRows int ,
@@ -50,6 +58,23 @@ create function fSQL_GetDataTableFiltradoYPaginado(
 ) 
 returns table 
 as 
+
+/*
+
+This helped us trace the issue to this SQL Server issue https://msdn.microsoft.com/en-US/library/ms178653(SQL.90).aspx . 
+Specifically see the section titled "Differences Between Lower Compatibility Levels and Level 90". @indigosquared had a database which was upgraded from an earlier version of SQL Server (rather than a new install) and hence that database was running with an old compatibility level. 
+
+To diagnose this run: 
+
+sp_dbcmptlevel '<your_database_name>' 
+
+If it reports a value below 90 then running 
+
+sp_dbcmptlevel '<your_database_name>', 90 
+
+updates the compatibility level of the database and fixes the problem.
+
+*/
 
 --SET @fechadesde = IsNull(@fechadesde, Convert(DATETIME, '1/1/2000'))
 --SET @IdArticulo = IsNull(@IdArticulo, - 1)
@@ -225,5 +250,15 @@ go
 
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
 go
+
+
+
+
+sp_dbcmptlevel 'Williams2' , 90 
+sp_dbcmptlevel 'Williams2' 
+
+sp_dbcmptlevel 'Pronto' , 90 
+sp_dbcmptlevel 'Pronto' 
+
 
 

@@ -5116,10 +5116,12 @@ Public Class LogicaFacturacion
                         .Acopio6 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio6, 0))) _
                         }).ToList
 
+        'caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
+        Dim acopiosdelcliente = db.CartasPorteAcopios.Where(Function(x) x.IdCliente = oFac.IdCliente).Select(Function(x) x.IdAcopio).ToList
 
         Dim ccc As List(Of Integer) = acopios.SelectMany(Function(x) _
                                                          {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6} _
-                            ).Where(Function(x) x <> 0).Distinct.ToList
+                            ).Where(Function(x) x <> 0 And acopiosdelcliente.Contains(x)).Distinct.ToList
 
 
 
@@ -5141,11 +5143,8 @@ Public Class LogicaFacturacion
 
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=22255
-        'cso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
+        'caso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
         'caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
-
-        asdasdad()
-
 
         If ccc.Count > 1 Then
             'Return vbCrLf + "Acopios id" + nombreacopio(acopios(0), SC)
@@ -5158,6 +5157,20 @@ Public Class LogicaFacturacion
             s = "ACOPIO " & nombreacopio(ccc(0), SC)
             'Return ""
         End If
+
+
+
+        Dim EsExportacion As Boolean = oListaCDP.Exists(Function(x) x.Exporta = "SI")
+        EsExportacion = LogicaFacturacion.EsDeExportacion(oFac.IdFactura, SC)
+
+
+        If oFac.IdCliente = 2775 And EsExportacion And s = "ACOPIO OTROS" Then
+            'caso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
+            s = ""
+        End If
+
+
+
 
         ' esto se lo paso al OBSITEM
         ' If oFac.IdCliente = 2775 And EsDeExportacion(idfactura, SC) Then s = "ELEVACION " & s

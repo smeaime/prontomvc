@@ -304,7 +304,7 @@ Public Class ConsultasLinq
 
 
         'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        
+
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
@@ -331,11 +331,27 @@ Public Class ConsultasLinq
         'no puedo usae el take(1) en sql2000!!!! -y si agrupo esos registros con un Average?  .Average(Function(i) i.PrecioCaladaLocal).
 
 
+
+        'https://entityframework.codeplex.com/workitem/705
+        'https://entityframework.codeplex.com/workitem/705
+        'https://entityframework.codeplex.com/workitem/705
+        'https://entityframework.codeplex.com/workitem/705
+        '        To diagnose this run: 
+
+        '        sp_dbcmptlevel() '<your_database_name>' 
+
+        'If it reports a value below 90 then running 
+
+        '            sp_dbcmptlevel() '<your_database_name>', 90 
+
+        'updates the compatibility level of the database and fixes the problem.
+
+
         Dim aaa = From xz In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, Nothing,
-                                                                 Nothing, Nothing, Nothing,
-                                                                  ModoExportacion, fechadesde, fechahasta, puntoventa,
-                                                                  Nothing, idDestinatario, Nothing, Nothing, Nothing, Nothing,
-                                                                  idDestino, Nothing, Nothing,
+                                                                 Nothing, idDestinatario, Nothing, Nothing, Nothing, Nothing, idDestino, Nothing,
+                                                                     ModoExportacion, fechadesde, fechahasta, puntoventa,
+                                                                  Nothing,
+                                                                    Nothing, Nothing, Nothing,
                                                                  Nothing, Nothing, Nothing, Nothing)
                         Select xz
 
@@ -343,21 +359,21 @@ Public Class ConsultasLinq
 
 
 
-            '        http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
-            'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
-            'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
-            'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
-            'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
-            'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
-            'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
-            'http://weblogs.asp.net/zeeshanhirani/table-valued-functions-in-linq-to-sql
-            '        http://weblogs.asp.net/zeeshanhirani/table-valued-functions-in-linq-to-sql
-            '        https://msdn.microsoft.com/en-us/data/hh859577.aspx
-            '        https://msdn.microsoft.com/en-us/data/hh859577.aspx
+        '        http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+        'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+        'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+        'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+        'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+        'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+        'http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-linq-compiled-query
+        'http://weblogs.asp.net/zeeshanhirani/table-valued-functions-in-linq-to-sql
+        '        http://weblogs.asp.net/zeeshanhirani/table-valued-functions-in-linq-to-sql
+        '        https://msdn.microsoft.com/en-us/data/hh859577.aspx
+        '        https://msdn.microsoft.com/en-us/data/hh859577.aspx
 
 
 
-            'And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+        'And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
         '(If(cdp.FechaDescarga, cdp.FechaArribo) >= fechadesde And If(cdp.FechaDescarga, cdp.FechaArribo) <= fechahasta) _
         '      And (cdp.Anulada <> "SI") _
         '      And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" _
@@ -427,30 +443,30 @@ Public Class ConsultasLinq
                     .Exporta = If(cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0), "SI", cdp.Exporta), _
                     cdp.Corredor, _
                     cdp.IdClienteEntregador}
-            'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
+        'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
 
 
 
-            'Dim a = qq.FirstOrDefault
+        'Dim a = qq.FirstOrDefault
 
 
-            'http://stackoverflow.com/questions/5568860/linq-to-sql-join-issues-with-firstordefault
+        'http://stackoverflow.com/questions/5568860/linq-to-sql-join-issues-with-firstordefault
 
 
 
 
-            'Dim qq2 = qq.ToList
+        'Dim qq2 = qq.ToList
         Dim aa = qq
         Dim filtr As Integer
         If False Then
-                'que pasa con las cartas que tienen varios subnumerodefacturacion y el 0 anulado? y no se puede tirar un listado viendo el subnumerodefac?
+            'que pasa con las cartas que tienen varios subnumerodefacturacion y el 0 anulado? y no se puede tirar un listado viendo el subnumerodefac?
 
 
             aa = qq.Where(Function(i) False Or (If(i.ExcluirDeSubcontratistas, "NO") = "NO" And If(i.SubnumeroDeFacturacion, 0) <= 0))
             filtr = qq.Count - aa.Count
         Else
 
-            End If
+        End If
 
 
 
@@ -507,7 +523,7 @@ Public Class ConsultasLinq
                     Corredor, _
                     IdClienteEntregador
                      }
-            'IdListaPreciosDetalle1, IdListaPreciosDetalle2
+        'IdListaPreciosDetalle1, IdListaPreciosDetalle2
 
 
 
@@ -519,7 +535,7 @@ Public Class ConsultasLinq
             Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select SqlFunctions.StringConvert(x.NumeroCartaDePorte) & " " & SqlFunctions.StringConvert(x.IdCartaDePorte) & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
 
             ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
-            End If
+        End If
 
 
 
@@ -573,7 +589,7 @@ Public Class ConsultasLinq
                 Select agrupVagon = agrupVagon, DestinoDesc = DestinoDesc, SubcontrDesc = SubcontrDesc, Tarifa = Tarifa, _
                 NetoPto = g.Sum(Function(i) i.NetoPto), Comision = g.Sum(Function(i) i.Comision), CantCartas = g.Count, _
                 numeros = vbCrLf + vbCrLf + vbCrLf + String.Join(vbCrLf, g.Select(Function(i) i.numerocarta.ToString).ToList)
-            'le meto esos vbCrLf para que no se vean los primeros renglones y así no me modifique automaticamente el ancho de la columna "oculta"
+        'le meto esos vbCrLf para que no se vean los primeros renglones y así no me modifique automaticamente el ancho de la columna "oculta"
 
         ErrHandler2.WriteError("     Excluidas por nofacturarasubcontratistas o duplicadas: " & filtr)
 
@@ -1597,11 +1613,12 @@ Public Class ConsultasLinq
         'If ModoExportacion <> "Buques" Then
 
         Dim aaa = From xz In db.wCartasDePorte_TX_EstadisticasDeDescarga(Nothing, Nothing, Nothing, Nothing, Nothing,
-                                                                          Nothing, Nothing, fechadesdeAnterior, fechahastaAnterior, Nothing,
-                                                                         Nothing, Nothing, Nothing, Nothing, Nothing,
-                                                                          Nothing, ModoExportacion, fechadesde, fechahasta, pv,
-                                                                         Nothing, idDestinatario, Nothing, Nothing, Nothing,
-                                                                         Nothing, IdDestino)
+                                                                          Nothing, idDestinatario, Nothing, Nothing, Nothing, Nothing, idDestino,
+                                                                           Nothing,
+                                                                             ModoExportacion, fechadesde, fechahasta, pv,
+                                                                            Nothing, Nothing, Nothing, Nothing, Nothing, Nothing,
+                                                                          Nothing,
+                                                                         Nothing, fechadesdeAnterior, fechahastaAnterior)
                   Select xz
         'End If
 

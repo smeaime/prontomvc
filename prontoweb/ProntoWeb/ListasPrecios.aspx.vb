@@ -544,6 +544,9 @@ Partial Class ListasPrecios
                 dr.Item("PrecioVagonesBalanza") = Val(TextoWebControl(.FindControl("txtNewPrecioVagonesBalanza")))
 
 
+                dr.Item("PrecioVagonesCaladaExportacion") = Val(TextoWebControl(.FindControl("txtNewPrecioVagonesCaladaExportacion")))
+                dr.Item("PrecioVagonesBalanzaExportacion") = Val(TextoWebControl(.FindControl("txtNewPrecioVagonesBalanzaExportacion")))
+
                 'dr.Item("PrecioCaladaLocal") = Val(TextoWebControl(.Cells(6).Controls(0)))
                 'dr.Item("PrecioCaladaExportacion") = Val(TextoWebControl(.Cells(7).Controls(0)))
                 'dr.Item("PrecioDescargaLocal") = Val(TextoWebControl(.Cells(8).Controls(0)))
@@ -611,6 +614,8 @@ Partial Class ListasPrecios
                     Or iisNull(dr.Item("PrecioDescargaExportacion"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioDescargaExportacion"))) _
                     Or iisNull(dr.Item("PrecioVagonesCalada"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesCalada"))) _
                     Or iisNull(dr.Item("PrecioVagonesBalanza"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanza"))) _
+                    Or iisNull(dr.Item("PrecioVagonesCalada"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesCaladaExportacion"))) _
+                    Or iisNull(dr.Item("PrecioVagonesBalanza"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanzaExportacion"))) _
                     Then
 
                     dr.Item("PrecioCaladaLocal") = Val(TextoWebControl(.FindControl("txtPrecioCaladaLocal")))
@@ -620,6 +625,9 @@ Partial Class ListasPrecios
 
                     dr.Item("PrecioVagonesCalada") = Val(TextoWebControl(.FindControl("txtPrecioVagonesCalada")))
                     dr.Item("PrecioVagonesBalanza") = Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanza")))
+
+                    dr.Item("PrecioVagonesCaladaExportacion") = Val(TextoWebControl(.FindControl("txtPrecioVagonesCaladaExportacion")))
+                    dr.Item("PrecioVagonesBalanzaExportacion") = Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanzaExportacion")))
 
 
                     ListasPreciosItemManager.Update(HFSC.Value, dt)

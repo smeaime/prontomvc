@@ -435,7 +435,31 @@
 
 
 
+                     <asp:TemplateField HeaderText="Calada Vagón Export">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrecioVagonesCaladaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesCaladaExportacion", "{0:F3}")%>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewPrecioVagonesCaladaExportacion" Width="40px" runat="server"></asp:TextBox>
+                        </FooterTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrecioVagonesCaladaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesCaladaExportacion", "{0:F3}")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
+
+
+                    <asp:TemplateField HeaderText="Descarga Vagón Export">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrecioVagonesBalanzaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesBalanzaExportacion", "{0:F3}")%>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewPrecioVagonesBalanzaExportacion" Width="40px" runat="server"></asp:TextBox>
+                        </FooterTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrecioVagonesBalanzaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesBalanzaExportacion", "{0:F3}")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
 
 
