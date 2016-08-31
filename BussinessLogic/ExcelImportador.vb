@@ -2089,9 +2089,10 @@ Public Class ExcelImportadorManager
             'If any lines are corrupt, report an error and continue parsing. 
             While Not MyReader.EndOfData
                 Try
-                    'leo 2 renglones seguidos (así es este formato)
+
                     Dim l = MyReader.ReadFields().ToList
-                    l.AddRange(MyReader.ReadFields().ToList)
+                    'leo 2 renglones seguidos (así es este formato) -dan marcha atrás con esto http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=23529
+                    'l.AddRange(MyReader.ReadFields().ToList)
 
                     currentRow = l.ToArray
 

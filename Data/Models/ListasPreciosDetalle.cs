@@ -40,6 +40,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> MaximaCantidadParaPrecioEmbarque { get; set; }
         public Nullable<decimal> PrecioVagonesBalanza { get; set; }
         public Nullable<decimal> PrecioVagonesCalada { get; set; }
+        public Nullable<decimal> PrecioVagonesBalanzaExportacion { get; set; }
+        public Nullable<decimal> PrecioVagonesCaladaExportacion { get; set; }
     
         public virtual Articulo Articulo { get; set; }
         public virtual ListasPrecio ListasPrecio { get; set; }

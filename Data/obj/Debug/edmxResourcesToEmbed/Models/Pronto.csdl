@@ -1694,32 +1694,32 @@
       <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
       <Parameter Name="idDestino" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="fSQL_GetDataTableFiltradoYPaginado" IsComposable="true" ReturnType="Collection(DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result)">
-      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
-      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
-      <Parameter Name="estado" Mode="In" Type="Int32" />
-      <Parameter Name="QueContenga" Mode="In" Type="String" />
-      <Parameter Name="idVendedor" Mode="In" Type="Int32" />
-      <Parameter Name="idCorredor" Mode="In" Type="Int32" />
-      <Parameter Name="idDestinatario" Mode="In" Type="Int32" />
-      <Parameter Name="idIntermediario" Mode="In" Type="Int32" />
-      <Parameter Name="idRemComercial" Mode="In" Type="Int32" />
-      <Parameter Name="idArticulo" Mode="In" Type="Int32" />
-      <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
-      <Parameter Name="idDestino" Mode="In" Type="Int32" />
-      <Parameter Name="AplicarANDuORalFiltro" Mode="In" Type="Int32" />
-      <Parameter Name="ModoExportacion" Mode="In" Type="String" />
-      <Parameter Name="fechadesde" Mode="In" Type="DateTime" />
-      <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
-      <Parameter Name="puntoventa" Mode="In" Type="Int32" />
-      <Parameter Name="optDivisionSyngenta" Mode="In" Type="String" />
+    <FunctionImport Name="fSQL_GetDataTableFiltradoYPaginado" IsComposable="true" ReturnType="Collection(DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result2)">
+      <Parameter Name="optCamionVagon" Mode="In" Type="String" />
       <Parameter Name="Contrato" Mode="In" Type="String" />
       <Parameter Name="QueContenga2" Mode="In" Type="String" />
       <Parameter Name="idClienteAuxiliarint" Mode="In" Type="Int32" />
       <Parameter Name="AgrupadorDeTandaPeriodos" Mode="In" Type="Int32" />
       <Parameter Name="Vagon" Mode="In" Type="Int32" />
       <Parameter Name="Patente" Mode="In" Type="String" />
-      <Parameter Name="optCamionVagon" Mode="In" Type="String" />
+      <Parameter Name="AplicarANDuORalFiltro" Mode="In" Type="Int32" />
+      <Parameter Name="ModoExportacion" Mode="In" Type="String" />
+      <Parameter Name="fechadesde" Mode="In" Type="DateTime" />
+      <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
+      <Parameter Name="puntoventa" Mode="In" Type="Int32" />
+      <Parameter Name="optDivisionSyngenta" Mode="In" Type="String" />
+      <Parameter Name="idDestinatario" Mode="In" Type="Int32" />
+      <Parameter Name="idIntermediario" Mode="In" Type="Int32" />
+      <Parameter Name="idRemComercial" Mode="In" Type="Int32" />
+      <Parameter Name="idArticulo" Mode="In" Type="Int32" />
+      <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
+      <Parameter Name="idDestino" Mode="In" Type="Int32" />
+      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+      <Parameter Name="estado" Mode="In" Type="Int32" />
+      <Parameter Name="QueContenga" Mode="In" Type="String" />
+      <Parameter Name="idVendedor" Mode="In" Type="Int32" />
+      <Parameter Name="idCorredor" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="Articulo">
@@ -7957,6 +7957,8 @@
     <NavigationProperty Name="ListasPrecio" Relationship="DemoProntoModel.FK_ListasPreciosDetalle_ListasPrecios" FromRole="ListasPreciosDetalle" ToRole="ListasPrecio" />
     <Property Name="PrecioVagonesBalanza" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="PrecioVagonesCalada" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioVagonesBalanzaExportacion" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioVagonesCaladaExportacion" Type="Decimal" Precision="19" Scale="4" />
   </EntityType>
   <Association Name="FK_ListasPreciosDetalle_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -12983,6 +12985,384 @@
     <Property Type="Int32" Name="DiferencPorcent" Nullable="false" />
   </ComplexType>
   <ComplexType Name="fSQL_GetDataTableFiltradoYPaginado_Result">
+    <Property Type="Int32" Name="IdCartaDePorte" Nullable="false" />
+    <Property Type="Int64" Name="NumeroCartaDePorte" Nullable="true" />
+    <Property Type="Int32" Name="IdUsuarioIngreso" Nullable="true" />
+    <Property Type="DateTime" Name="FechaIngreso" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Anulada" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="IdUsuarioAnulo" Nullable="true" />
+    <Property Type="DateTime" Name="FechaAnulacion" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Observaciones" Nullable="true" MaxLength="200" />
+    <Property Type="Binary" Name="FechaTimeStamp" Nullable="true" MaxLength="8" />
+    <Property Type="Int32" Name="Vendedor" Nullable="true" />
+    <Property Type="Int32" Name="CuentaOrden1" Nullable="true" />
+    <Property Type="Int32" Name="CuentaOrden2" Nullable="true" />
+    <Property Type="Int32" Name="Corredor" Nullable="true" />
+    <Property Type="Int32" Name="Entregador" Nullable="true" />
+    <Property Type="String" Name="Procedencia" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Patente" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="IdArticulo" Nullable="true" />
+    <Property Type="Int32" Name="IdStock" Nullable="true" />
+    <Property Type="String" Name="Partida" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="IdUnidad" Nullable="true" />
+    <Property Type="Int32" Name="IdUbicacion" Nullable="true" />
+    <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="12" Scale="2" />
+    <Property Type="String" Name="Cupo" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="NetoProc" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Calidad" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="BrutoPto" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TaraPto" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NetoPto" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Acoplado" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="Humedad" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Merma" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NetoFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="FechaDeCarga" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaVencimiento" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CEE" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="IdTransportista" Nullable="true" />
+    <Property Type="String" Name="TransportistaCUITdesnormalizado" Nullable="true" MaxLength="13" />
+    <Property Type="Int32" Name="IdChofer" Nullable="true" />
+    <Property Type="String" Name="ChoferCUITdesnormalizado" Nullable="true" MaxLength="13" />
+    <Property Type="Int32" Name="CTG" Nullable="true" />
+    <Property Type="String" Name="Contrato" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Destino" Nullable="true" />
+    <Property Type="Int32" Name="Subcontr1" Nullable="true" />
+    <Property Type="Int32" Name="Subcontr2" Nullable="true" />
+    <Property Type="Int32" Name="Contrato1" Nullable="true" />
+    <Property Type="Int32" Name="contrato2" Nullable="true" />
+    <Property Type="Decimal" Name="KmARecorrer" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NRecibo" Nullable="true" />
+    <Property Type="Int32" Name="CalidadDe" Nullable="true" />
+    <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Fumigada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Secada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Exporta" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="NobleExtranos" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleNegros" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleQuebrados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleDaniados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleChamico" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleChamico2" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleRevolcado" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleObjetables" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleAmohosados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleHectolitrico" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleCarbon" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NoblePanzaBlanca" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NoblePicados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleMGrasa" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleAcidezGrasa" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleVerdes" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="NobleGrado" Nullable="true" />
+    <Property Type="String" Name="NobleConforme" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="NobleACamara" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Cosecha" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="HumedadDesnormalizada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Factor" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="IdFacturaImputada" Nullable="true" />
+    <Property Type="Int32" Name="PuntoVenta" Nullable="true" />
+    <Property Type="Int32" Name="SubnumeroVagon" Nullable="true" />
+    <Property Type="Decimal" Name="TarifaFacturada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TarifaSubcontratista1" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TarifaSubcontratista2" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="FechaArribo" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="Version" Nullable="true" />
+    <Property Type="String" Name="MotivoAnulacion" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="NumeroSubfijo" Nullable="true" />
+    <Property Type="Int32" Name="IdEstablecimiento" Nullable="true" />
+    <Property Type="String" Name="EnumSyngentaDivision" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="Corredor2" Nullable="true" />
+    <Property Type="Int32" Name="IdUsuarioModifico" Nullable="true" />
+    <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaEmision" Nullable="true" Precision="23" />
+    <Property Type="String" Name="EstaArchivada" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="ExcluirDeSubcontratistas" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="IdTipoMovimiento" Nullable="true" />
+    <Property Type="Int32" Name="IdClienteAFacturarle" Nullable="true" />
+    <Property Type="Int32" Name="SubnumeroDeFacturacion" Nullable="true" />
+    <Property Type="String" Name="AgregaItemDeGastosAdministrativos" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadGranosQuemados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadGranosQuemadosBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadTierra" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadTierraBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadMermaChamico" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadMermaChamicoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadMermaZarandeo" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadMermaZarandeoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="FueraDeEstandar" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadPuntaSombreada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CobraAcarreo" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="LiquidaViaje" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="IdClienteAuxiliar" Nullable="true" />
+    <Property Type="Decimal" Name="CalidadDescuentoFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="PathImagen" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="PathImagen2" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="AgrupadorDeTandaPeriodos" Nullable="true" />
+    <Property Type="String" Name="ClaveEncriptada" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NumeroCartaEnTextoParaBusqueda" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="IdClienteEntregador" Nullable="true" />
+    <Property Type="Int32" Name="IdDetalleFactura" Nullable="true" />
+    <Property Type="String" Name="SojaSustentableCodCondicion" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SojaSustentableCondicion" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SojaSustentableNroEstablecimientoDeProduccion" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdClientePagadorFlete" Nullable="true" />
+    <Property Type="String" Name="SubnumeroVagonEnTextoParaBusqueda" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdCorredor2" Nullable="true" />
+    <Property Type="Int32" Name="Acopio1" Nullable="true" />
+    <Property Type="Int32" Name="Acopio2" Nullable="true" />
+    <Property Type="Int32" Name="Acopio3" Nullable="true" />
+    <Property Type="Int32" Name="Acopio4" Nullable="true" />
+    <Property Type="Int32" Name="Acopio5" Nullable="true" />
+    <Property Type="Int32" Name="Acopio6" Nullable="true" />
+    <Property Type="Int32" Name="AcopioFacturarleA" Nullable="true" />
+    <Property Type="Decimal" Name="CalidadGranosDanadosRebaja" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="CalidadGranosExtranosRebaja" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="NumeroCompleto" Nullable="true" MaxLength="93" />
+    <Property Type="Int32" Name="MinutosModifico" Nullable="true" />
+    <Property Type="String" Name="EspecieONCAA" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CodigoSAJPYA" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="txtCodigoZeni" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TitularDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="TitularCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="IntermediarioDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="IntermediarioCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="RComercialDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="RComercialCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="CorredorDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CorredorCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="DestinatarioDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="EntregadorDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="DestinatarioCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="ClienteAuxiliarDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClienteAuxiliarCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="Subcontr1Desc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Subcontr2Desc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Producto" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="TransportistaCUIT" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="TransportistaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ChoferCUIT" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="ChoferDesc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ProcedenciaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ProcedenciaCodigoPostal" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ProcedenciaCodigoONCAA" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ProcedenciaProvinciaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DestinoDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DestinoCodigoPostal" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="DestinoCodigoONCAA" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Mes" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="Ano" Nullable="true" />
+    <Property Type="String" Name="Factura" Nullable="true" MaxLength="63" />
+    <Property Type="DateTime" Name="FechaFactura" Nullable="true" Precision="23" />
+    <Property Type="String" Name="ClienteFacturado" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClienteFacturadoCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="CalidadDesc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UsuarioIngreso" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EstablecimientoDesc" Nullable="false" MaxLength="202" />
+    <Property Type="String" Name="ClientePagadorFleteDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ProcedenciaProvinciaPartido" Nullable="false" MaxLength="60" />
+    <Property Type="String" Name="ProcedenciaPartidoNormalizadaCodigo" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="DestinoProvinciaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ProcedenciaPartidoNormalizada" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CorredorDesc2" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CorredorCUIT2" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="fSQL_GetDataTableFiltradoYPaginado_Result1">
+    <Property Type="Int32" Name="IdCartaDePorte" Nullable="false" />
+    <Property Type="Int64" Name="NumeroCartaDePorte" Nullable="true" />
+    <Property Type="Int32" Name="IdUsuarioIngreso" Nullable="true" />
+    <Property Type="DateTime" Name="FechaIngreso" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Anulada" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="IdUsuarioAnulo" Nullable="true" />
+    <Property Type="DateTime" Name="FechaAnulacion" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Observaciones" Nullable="true" MaxLength="200" />
+    <Property Type="Binary" Name="FechaTimeStamp" Nullable="true" MaxLength="8" />
+    <Property Type="Int32" Name="Vendedor" Nullable="true" />
+    <Property Type="Int32" Name="CuentaOrden1" Nullable="true" />
+    <Property Type="Int32" Name="CuentaOrden2" Nullable="true" />
+    <Property Type="Int32" Name="Corredor" Nullable="true" />
+    <Property Type="Int32" Name="Entregador" Nullable="true" />
+    <Property Type="String" Name="Procedencia" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Patente" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="IdArticulo" Nullable="true" />
+    <Property Type="Int32" Name="IdStock" Nullable="true" />
+    <Property Type="String" Name="Partida" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="IdUnidad" Nullable="true" />
+    <Property Type="Int32" Name="IdUbicacion" Nullable="true" />
+    <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="12" Scale="2" />
+    <Property Type="String" Name="Cupo" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="NetoProc" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Calidad" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="BrutoPto" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TaraPto" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NetoPto" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Acoplado" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="Humedad" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Merma" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NetoFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="FechaDeCarga" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaVencimiento" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CEE" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="IdTransportista" Nullable="true" />
+    <Property Type="String" Name="TransportistaCUITdesnormalizado" Nullable="true" MaxLength="13" />
+    <Property Type="Int32" Name="IdChofer" Nullable="true" />
+    <Property Type="String" Name="ChoferCUITdesnormalizado" Nullable="true" MaxLength="13" />
+    <Property Type="Int32" Name="CTG" Nullable="true" />
+    <Property Type="String" Name="Contrato" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Destino" Nullable="true" />
+    <Property Type="Int32" Name="Subcontr1" Nullable="true" />
+    <Property Type="Int32" Name="Subcontr2" Nullable="true" />
+    <Property Type="Int32" Name="Contrato1" Nullable="true" />
+    <Property Type="Int32" Name="contrato2" Nullable="true" />
+    <Property Type="Decimal" Name="KmARecorrer" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NRecibo" Nullable="true" />
+    <Property Type="Int32" Name="CalidadDe" Nullable="true" />
+    <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Fumigada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Secada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Exporta" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="NobleExtranos" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleNegros" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleQuebrados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleDaniados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleChamico" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleChamico2" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleRevolcado" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleObjetables" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleAmohosados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleHectolitrico" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleCarbon" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NoblePanzaBlanca" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NoblePicados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleMGrasa" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleAcidezGrasa" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NobleVerdes" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="NobleGrado" Nullable="true" />
+    <Property Type="String" Name="NobleConforme" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="NobleACamara" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Cosecha" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="HumedadDesnormalizada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Factor" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="IdFacturaImputada" Nullable="true" />
+    <Property Type="Int32" Name="PuntoVenta" Nullable="true" />
+    <Property Type="Int32" Name="SubnumeroVagon" Nullable="true" />
+    <Property Type="Decimal" Name="TarifaFacturada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TarifaSubcontratista1" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TarifaSubcontratista2" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="FechaArribo" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="Version" Nullable="true" />
+    <Property Type="String" Name="MotivoAnulacion" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="NumeroSubfijo" Nullable="true" />
+    <Property Type="Int32" Name="IdEstablecimiento" Nullable="true" />
+    <Property Type="String" Name="EnumSyngentaDivision" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="Corredor2" Nullable="true" />
+    <Property Type="Int32" Name="IdUsuarioModifico" Nullable="true" />
+    <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaEmision" Nullable="true" Precision="23" />
+    <Property Type="String" Name="EstaArchivada" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="ExcluirDeSubcontratistas" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="IdTipoMovimiento" Nullable="true" />
+    <Property Type="Int32" Name="IdClienteAFacturarle" Nullable="true" />
+    <Property Type="Int32" Name="SubnumeroDeFacturacion" Nullable="true" />
+    <Property Type="String" Name="AgregaItemDeGastosAdministrativos" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadGranosQuemados" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadGranosQuemadosBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadTierra" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadTierraBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadMermaChamico" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadMermaChamicoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadMermaZarandeo" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CalidadMermaZarandeoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="FueraDeEstandar" Nullable="true" MaxLength="2" />
+    <Property Type="Decimal" Name="CalidadPuntaSombreada" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CobraAcarreo" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="LiquidaViaje" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="IdClienteAuxiliar" Nullable="true" />
+    <Property Type="Decimal" Name="CalidadDescuentoFinal" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="PathImagen" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="PathImagen2" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="AgrupadorDeTandaPeriodos" Nullable="true" />
+    <Property Type="String" Name="ClaveEncriptada" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NumeroCartaEnTextoParaBusqueda" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="IdClienteEntregador" Nullable="true" />
+    <Property Type="Int32" Name="IdDetalleFactura" Nullable="true" />
+    <Property Type="String" Name="SojaSustentableCodCondicion" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SojaSustentableCondicion" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SojaSustentableNroEstablecimientoDeProduccion" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdClientePagadorFlete" Nullable="true" />
+    <Property Type="String" Name="SubnumeroVagonEnTextoParaBusqueda" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdCorredor2" Nullable="true" />
+    <Property Type="Int32" Name="Acopio1" Nullable="true" />
+    <Property Type="Int32" Name="Acopio2" Nullable="true" />
+    <Property Type="Int32" Name="Acopio3" Nullable="true" />
+    <Property Type="Int32" Name="Acopio4" Nullable="true" />
+    <Property Type="Int32" Name="Acopio5" Nullable="true" />
+    <Property Type="Int32" Name="Acopio6" Nullable="true" />
+    <Property Type="Int32" Name="AcopioFacturarleA" Nullable="true" />
+    <Property Type="Decimal" Name="CalidadGranosDanadosRebaja" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="CalidadGranosExtranosRebaja" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="NumeroCompleto" Nullable="true" MaxLength="93" />
+    <Property Type="Int32" Name="MinutosModifico" Nullable="true" />
+    <Property Type="String" Name="EspecieONCAA" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CodigoSAJPYA" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="txtCodigoZeni" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TitularDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="TitularCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="IntermediarioDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="IntermediarioCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="RComercialDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="RComercialCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="CorredorDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CorredorCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="DestinatarioDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="EntregadorDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="DestinatarioCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="ClienteAuxiliarDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClienteAuxiliarCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="Subcontr1Desc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Subcontr2Desc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Producto" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="TransportistaCUIT" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="TransportistaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ChoferCUIT" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="ChoferDesc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ProcedenciaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ProcedenciaCodigoPostal" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ProcedenciaCodigoONCAA" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ProcedenciaProvinciaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DestinoDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DestinoCodigoPostal" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="DestinoCodigoONCAA" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Mes" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="Ano" Nullable="true" />
+    <Property Type="String" Name="Factura" Nullable="true" MaxLength="63" />
+    <Property Type="DateTime" Name="FechaFactura" Nullable="true" Precision="23" />
+    <Property Type="String" Name="ClienteFacturado" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClienteFacturadoCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="CalidadDesc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UsuarioIngreso" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EstablecimientoDesc" Nullable="false" MaxLength="202" />
+    <Property Type="String" Name="ClientePagadorFleteDesc" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ProcedenciaProvinciaPartido" Nullable="false" MaxLength="60" />
+    <Property Type="String" Name="ProcedenciaPartidoNormalizadaCodigo" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="DestinoProvinciaDesc" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ProcedenciaPartidoNormalizada" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CorredorDesc2" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CorredorCUIT2" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
+    <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="fSQL_GetDataTableFiltradoYPaginado_Result2">
     <Property Type="Int32" Name="IdCartaDePorte" Nullable="false" />
     <Property Type="Int64" Name="NumeroCartaDePorte" Nullable="true" />
     <Property Type="Int32" Name="IdUsuarioIngreso" Nullable="true" />

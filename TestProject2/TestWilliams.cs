@@ -240,6 +240,18 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void acopio_23480_22255()
+        {
+
+            LogicaFacturacion.LeyendaAcopio(86082, SC);
+
+        }
+
+
+
         [TestMethod]
         public void OCR_Tickets()
         {
@@ -697,16 +709,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-
-        [TestMethod]
-        public void asdasd_23480()
-        {
-
-            LogicaFacturacion.LeyendaAcopio(86082, SC);
-
-        }
 
 
 

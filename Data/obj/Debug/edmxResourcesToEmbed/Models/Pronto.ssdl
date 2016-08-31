@@ -3716,6 +3716,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="MaximaCantidadParaPrecioEmbarque" Type="numeric" Precision="18" Scale="2" />
     <Property Name="PrecioVagonesBalanza" Type="money" />
     <Property Name="PrecioVagonesCalada" Type="money" />
+    <Property Name="PrecioVagonesBalanzaExportacion" Type="money" />
+    <Property Name="PrecioVagonesCaladaExportacion" Type="money" />
   </EntityType>
   <EntityType Name="LMateriales">
     <Key>
@@ -9492,31 +9494,31 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Parameter Name="IdFactura" Type="int" Mode="In" />
   </Function>
   <Function Name="fSQL_GetDataTableFiltradoYPaginado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="startRowIndex" Type="int" Mode="In" />
-    <Parameter Name="maximumRows" Type="int" Mode="In" />
-    <Parameter Name="estado" Type="int" Mode="In" />
-    <Parameter Name="QueContenga" Type="varchar" Mode="In" />
-    <Parameter Name="idVendedor" Type="int" Mode="In" />
-    <Parameter Name="idCorredor" Type="int" Mode="In" />
-    <Parameter Name="idDestinatario" Type="int" Mode="In" />
-    <Parameter Name="idIntermediario" Type="int" Mode="In" />
-    <Parameter Name="idRemComercial" Type="int" Mode="In" />
-    <Parameter Name="idArticulo" Type="int" Mode="In" />
-    <Parameter Name="idProcedencia" Type="int" Mode="In" />
-    <Parameter Name="idDestino" Type="int" Mode="In" />
-    <Parameter Name="AplicarANDuORalFiltro" Type="int" Mode="In" />
-    <Parameter Name="ModoExportacion" Type="varchar" Mode="In" />
-    <Parameter Name="fechadesde" Type="datetime" Mode="In" />
-    <Parameter Name="fechahasta" Type="datetime" Mode="In" />
-    <Parameter Name="puntoventa" Type="int" Mode="In" />
-    <Parameter Name="optDivisionSyngenta" Type="varchar" Mode="In" />
+    <Parameter Name="optCamionVagon" Type="varchar" Mode="In" />
     <Parameter Name="Contrato" Type="varchar" Mode="In" />
     <Parameter Name="QueContenga2" Type="varchar" Mode="In" />
     <Parameter Name="idClienteAuxiliarint" Type="int" Mode="In" />
     <Parameter Name="AgrupadorDeTandaPeriodos" Type="int" Mode="In" />
     <Parameter Name="Vagon" Type="int" Mode="In" />
     <Parameter Name="Patente" Type="varchar" Mode="In" />
-    <Parameter Name="optCamionVagon" Type="varchar" Mode="In" />
+    <Parameter Name="AplicarANDuORalFiltro" Type="int" Mode="In" />
+    <Parameter Name="ModoExportacion" Type="varchar" Mode="In" />
+    <Parameter Name="fechadesde" Type="datetime" Mode="In" />
+    <Parameter Name="fechahasta" Type="datetime" Mode="In" />
+    <Parameter Name="puntoventa" Type="int" Mode="In" />
+    <Parameter Name="optDivisionSyngenta" Type="varchar" Mode="In" />
+    <Parameter Name="idDestinatario" Type="int" Mode="In" />
+    <Parameter Name="idIntermediario" Type="int" Mode="In" />
+    <Parameter Name="idRemComercial" Type="int" Mode="In" />
+    <Parameter Name="idArticulo" Type="int" Mode="In" />
+    <Parameter Name="idProcedencia" Type="int" Mode="In" />
+    <Parameter Name="idDestino" Type="int" Mode="In" />
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="estado" Type="int" Mode="In" />
+    <Parameter Name="QueContenga" Type="varchar" Mode="In" />
+    <Parameter Name="idVendedor" Type="int" Mode="In" />
+    <Parameter Name="idCorredor" Type="int" Mode="In" />
     <ReturnType>
       <CollectionType>
         <RowType>
