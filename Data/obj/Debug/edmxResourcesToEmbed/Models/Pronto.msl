@@ -6791,7 +6791,7 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="fSQL_GetDataTableFiltradoYPaginado" FunctionName="DemoProntoModel.Store.fSQL_GetDataTableFiltradoYPaginado">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result2">
+        <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result3">
           <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
           <ScalarProperty Name="NumeroCartaDePorte" ColumnName="NumeroCartaDePorte" />
           <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
