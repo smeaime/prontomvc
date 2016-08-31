@@ -5139,6 +5139,14 @@ Public Class LogicaFacturacion
 
 
 
+
+        'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=22255
+        'cso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
+        'caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
+
+        asdasdad()
+
+
         If ccc.Count > 1 Then
             'Return vbCrLf + "Acopios id" + nombreacopio(acopios(0), SC)
             s = "ACOPIO " & nombreacopio(ccc(0), SC)

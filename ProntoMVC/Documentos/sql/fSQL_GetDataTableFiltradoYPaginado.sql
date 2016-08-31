@@ -10,34 +10,43 @@ if OBJECT_ID ('fSQL_GetDataTableFiltradoYPaginado') is not null
     drop function fSQL_GetDataTableFiltradoYPaginado 
 go 
 
-
+/*
+-- mejor NO uses parametros opcionales!!! (problemas en el orden de los parámetros al usar EntityFramework)
+-- mejor NO uses parametros opcionales!!!
+-- mejor NO uses parametros opcionales!!!
+--            @startRowIndex int = NULL,
+http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
+http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
+http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
+http://stackoverflow.com/questions/4157421/why-the-order-of-params-of-function-imported-from-stored-procedure-changed
+*/
 create function fSQL_GetDataTableFiltradoYPaginado(
-            @startRowIndex int  = NULL,
-            @maximumRows int  = NULL,
-            @estado int  = NULL,
-            @QueContenga  VARCHAR(50) = NULL,
-            @idVendedor int  = NULL,
-            @idCorredor int  = NULL,
-            @idDestinatario int  = NULL,
-            @idIntermediario int  = NULL,
-            @idRemComercial int  = NULL,
-            @idArticulo int  = NULL,
-            @idProcedencia int  = NULL,
-            @idDestino int  = NULL,
-            @AplicarANDuORalFiltro int  = NULL,
-            @ModoExportacion  VARCHAR(20) = NULL,
-            @fechadesde As DateTime= NULL,
-			@fechahasta As DateTime= NULL,
-            @puntoventa int  = NULL, 
-            @optDivisionSyngenta  VARCHAR(50) = NULL,
-            --@bTraerDuplicados As Boolean = False,
-            @Contrato  VARCHAR(50) = NULL, 
-            @QueContenga2  VARCHAR(50) = NULL,
-            @idClienteAuxiliarint int  = NULL,
-            @AgrupadorDeTandaPeriodos int  = NULL,
-            @Vagon  int  = NULL,
-			@Patente VARCHAR(10) = NULL,
-            @optCamionVagon  VARCHAR(10) = NULL
+            @startRowIndex int ,
+            @maximumRows int ,
+            @estado int  ,
+            @QueContenga  VARCHAR(50) ,
+            @idVendedor int ,
+            @idCorredor int  ,
+            @idDestinatario int ,
+            @idIntermediario int ,
+            @idRemComercial int ,
+            @idArticulo int  ,
+            @idProcedencia int ,
+            @idDestino int  ,
+            @AplicarANDuORalFiltro int  ,
+            @ModoExportacion  VARCHAR(20) ,
+            @fechadesde As DateTime,
+			@fechahasta As DateTime,
+            @puntoventa int , 
+            @optDivisionSyngenta  VARCHAR(50) ,
+            --@bTraerDuplicados As Boolean ,
+            @Contrato  VARCHAR(50) , 
+            @QueContenga2  VARCHAR(50) ,
+            @idClienteAuxiliarint int ,
+            @AgrupadorDeTandaPeriodos int  ,
+            @Vagon  int  ,
+			@Patente VARCHAR(10) ,
+            @optCamionVagon  VARCHAR(10) 
 ) 
 returns table 
 as 
