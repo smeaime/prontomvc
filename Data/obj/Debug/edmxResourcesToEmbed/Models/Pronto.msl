@@ -4166,6 +4166,8 @@
     <EntitySetMapping Name="ListasPreciosDetalles">
       <EntityTypeMapping TypeName="DemoProntoModel.ListasPreciosDetalle">
         <MappingFragment StoreEntitySet="ListasPreciosDetalle">
+          <ScalarProperty Name="PrecioVagonesCaladaExportacion" ColumnName="PrecioVagonesCaladaExportacion" />
+          <ScalarProperty Name="PrecioVagonesBalanzaExportacion" ColumnName="PrecioVagonesBalanzaExportacion" />
           <ScalarProperty Name="PrecioVagonesCalada" ColumnName="PrecioVagonesCalada" />
           <ScalarProperty Name="PrecioVagonesBalanza" ColumnName="PrecioVagonesBalanza" />
           <ScalarProperty Name="MaximaCantidadParaPrecioEmbarque" ColumnName="MaximaCantidadParaPrecioEmbarque" />
@@ -6789,7 +6791,7 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="fSQL_GetDataTableFiltradoYPaginado" FunctionName="DemoProntoModel.Store.fSQL_GetDataTableFiltradoYPaginado">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result">
+        <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result2">
           <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
           <ScalarProperty Name="NumeroCartaDePorte" ColumnName="NumeroCartaDePorte" />
           <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />

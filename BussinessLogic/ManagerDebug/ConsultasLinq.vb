@@ -332,10 +332,10 @@ Public Class ConsultasLinq
 
 
         Dim aaa = From xz In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, Nothing,
-                                                                 Nothing, idDestinatario, Nothing, Nothing, Nothing,
-                                                                 Nothing, idDestino, Nothing,
-                                                                 ModoExportacion, fechadesde, fechahasta, puntoventa,
-                                                                 Nothing, Nothing, Nothing, Nothing,
+                                                                 Nothing, Nothing, Nothing,
+                                                                  ModoExportacion, fechadesde, fechahasta, puntoventa,
+                                                                  Nothing, idDestinatario, Nothing, Nothing, Nothing, Nothing,
+                                                                  idDestino, Nothing, Nothing,
                                                                  Nothing, Nothing, Nothing, Nothing)
                         Select xz
 
@@ -412,13 +412,17 @@ Public Class ConsultasLinq
                     .Subcontr2Desc = clisub2.RazonSocial, _
                     .tarif1 = CDec(If(If( _
                     (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCalada) _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada) _
+                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
+                             pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCaladaExportacion) _
+                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
+                             pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada) _
                         ), 0)), _
                     .tarif2 = CDec(If(If( _
                         (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanza) _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
+                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
+                             pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanzaExportacion) _
+                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
+                             pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
                                 ), 0)), _
                     .Exporta = If(cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0), "SI", cdp.Exporta), _
                     cdp.Corredor, _
