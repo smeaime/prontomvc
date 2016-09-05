@@ -254,11 +254,11 @@ go
 
 
 
-sp_dbcmptlevel 'Williams2' , 90 
-sp_dbcmptlevel 'Williams2' 
+--sp_dbcmptlevel 'Williams2' , 90 
+--sp_dbcmptlevel 'Williams2' 
 
-sp_dbcmptlevel 'Pronto' , 90 
-sp_dbcmptlevel 'Pronto' 
+--sp_dbcmptlevel 'Pronto' , 90 
+--sp_dbcmptlevel 'Pronto' 
 
 
 

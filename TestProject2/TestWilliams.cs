@@ -202,20 +202,28 @@ namespace ProntoMVC.Tests
             int registrosf = 0;
 
 
-            string[] sincros = { "", "" };
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo,
-                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                        "", -1, -1, -1, -1,
-                        -1, -1, -1, -1,
-                        CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                        new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                        -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+            string[] sincros = { "Beraza" };
+//            string[] sincros = { "Beraza", "Zeni" };
 
 
+            for (int n = 0; n < sincros.Count(); n++)
+            {
+                var output2 = SincronismosWilliamsManager.GenerarSincro(sincros[n], ref sErrores, SC, "dominio", ref sTitulo,
+                                     CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                     "", -1, -1, -1, -1,
+                                     -1, -1, -1, -1,
+                                     CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                                     new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                                     -1, "Ambas", false, "", "", -1, ref registrosf, 40);
 
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output2);
+            }
+
+
         }
 
 
@@ -349,7 +357,7 @@ namespace ProntoMVC.Tests
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
 
-           
+
         }
 
 
@@ -360,16 +368,16 @@ namespace ProntoMVC.Tests
         public void acopio_23480_22255()
         {
 
-           //caso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
-           var s1 = LogicaFacturacion.LeyendaAcopio(85759, SC);
+            //caso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
+            var s1 = LogicaFacturacion.LeyendaAcopio(85759, SC);
 
-           // caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
-           var s2 = LogicaFacturacion.LeyendaAcopio(85760, SC);
+            // caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
+            var s2 = LogicaFacturacion.LeyendaAcopio(85760, SC);
 
-            
 
-           var s3= LogicaFacturacion.LeyendaAcopio(86082, SC);
-           //Assert.AreEqual(s3, "");
+
+            var s3 = LogicaFacturacion.LeyendaAcopio(86082, SC);
+            //Assert.AreEqual(s3, "");
 
 
         }
@@ -581,7 +589,7 @@ namespace ProntoMVC.Tests
                     tif.SetField(TiffTag.ROWSPERSTRIP, bmp.Height);
 
                     tif.SetField(TiffTag.XRESOLUTION, bmp.HorizontalResolution);
-                    tif.SetField(TiffTag.YRESOLUTION,  bmp.VerticalResolution);
+                    tif.SetField(TiffTag.YRESOLUTION, bmp.VerticalResolution);
 
                     tif.SetField(TiffTag.BITSPERSAMPLE, 8);
                     tif.SetField(TiffTag.SAMPLESPERPIXEL, 3);
