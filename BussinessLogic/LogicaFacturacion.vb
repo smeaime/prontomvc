@@ -4650,6 +4650,7 @@ Public Class LogicaFacturacion
 
 
                 Catch ex As Exception
+                 
                     'si esto falla, anular la ultima factura y cortar el proceso
                     'anular factura idfactura
                     MandarMailDeError(ex)

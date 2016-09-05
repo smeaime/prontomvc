@@ -1521,6 +1521,24 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
 
+                    Case "BERAZA"
+
+
+                        output = SincronismosWilliamsManager.GenerarSincro("BERAZA", sErrores, _
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"), _
+                           "", estadofiltro, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRComercial, idArticulo, idProcedencia, idDestino, _
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos", _
+                              CartaDePorteManager.FiltroANDOR.FiltroAND, _
+                            CartaDePorteManager.FiltroANDOR.FiltroOR), _
+                          DropDownList2.Text, _
+                           iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#),
+                           iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), _
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        
 
                     Case "NIDERA"
 
@@ -2119,6 +2137,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     Case "CGG (CALIDADES)"
                         output = Sincronismo_CGGcalidades(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
                         registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
+
+
 
                     Case "SYNGENTA"
                         output = Sincronismo_Syngenta(ds.wCartasDePorte_TX_InformesCorregido, sTitulo, sWHERE, sErrores, HFSC.Value)

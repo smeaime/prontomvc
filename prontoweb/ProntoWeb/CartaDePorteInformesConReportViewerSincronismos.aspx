@@ -149,6 +149,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="True">Amaggi (calidades) [BIT]</asp:ListItem>
                             <asp:ListItem Enabled="True">Andreoli</asp:ListItem>
                             <asp:ListItem Enabled="True">Argencer</asp:ListItem>
+                            <asp:ListItem Enabled="True">Beraza</asp:ListItem>
                             <asp:ListItem Enabled="True">BLD</asp:ListItem>
                             <asp:ListItem Enabled="True">BLDCONVERTIR</asp:ListItem>
                             <asp:ListItem Enabled="True">BLD (calidades)</asp:ListItem>

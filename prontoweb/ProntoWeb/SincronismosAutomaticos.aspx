@@ -525,6 +525,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
         <div class="row">
             <div class="col-md-2">
+                <asp:CheckBox ID="CheckBox1" runat="server" Checked="true" />
+                Beraza
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailBeraza" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+            <%--corredor--%>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxBLD" runat="server" Checked="true" />
                 BLD
             </div>

@@ -99,6 +99,7 @@ Partial Class SincronismosAutomaticos
             txtMailAndreoli.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAndreoli" & pv).ToString
             txtMailAreco.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAreco" & pv).ToString
             txtMailArgencer.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteArgencer" & pv).ToString
+            txtMailBeraza.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBeraza" & pv).ToString
             txtMailBLD.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBLD" & pv).ToString
             txtMailBunge.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBunge" & pv).ToString
             txtMailDiazForti.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteDiazForti" & pv).ToString
@@ -348,6 +349,7 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteAndreoli" & pv, txtMailAndreoli.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteAreco" & pv, txtMailAreco.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteArgencer" & pv, txtMailArgencer.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBeraza" & pv, txtMailBeraza.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBLD" & pv, txtMailBLD.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBunge" & pv, txtMailBunge.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteDiazForti" & pv, txtMailDiazForti.Text)
@@ -424,6 +426,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxAndreoli.Checked) Then sTodosErr += Enviar("Andreoli", txtMailAndreoli.Text, sErr, bVistaPrevia)
         If (CheckBoxAreco.Checked) Then sTodosErr += Enviar("Areco", txtMailAreco.Text, sErr, bVistaPrevia)
         If (CheckBoxArgencer.Checked) Then sTodosErr += Enviar("Argencer", txtMailArgencer.Text, sErr, bVistaPrevia)
+        If (CheckBoxBLD.Checked) Then sTodosErr += Enviar("Beraza", txtMailBeraza.Text, sErr, bVistaPrevia)
         If (CheckBoxBLD.Checked) Then sTodosErr += Enviar("BLD", txtMailBLD.Text, sErr, bVistaPrevia)
         If (CheckBoxBLD.Checked) Then sTodosErr += Enviar("BLD (CALIDADES)", txtMailBLD.Text, sErr, bVistaPrevia)
         If (CheckBoxBTGPactual.Checked) Then sTodosErr += Enviar("BTG PACTUAL [BIT]", txtMailBTGPactual.Text, sErr, bVistaPrevia)
