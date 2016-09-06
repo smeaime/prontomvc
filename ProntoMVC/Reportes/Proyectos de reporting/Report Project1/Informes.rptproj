@@ -419,6 +419,10 @@
       <FullPath>Valores diferidos pendientes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Williams - Controles Diarios.rdl</Name>
+      <FullPath>Williams - Controles Diarios.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Williams - Listado de Clientes incompletos.rdl</Name>
       <FullPath>Williams - Listado de Clientes incompletos.rdl</FullPath>
     </ProjectItem>
@@ -435,8 +439,8 @@
       <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Williams - Controles Diarios.rdl</Name>
-      <FullPath>Williams - Controles Diarios.rdl</FullPath>
+      <Name>Williams - Controles de Kilos Clientes.rdl</Name>
+      <FullPath>Williams - Controles de Kilos Clientes.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
