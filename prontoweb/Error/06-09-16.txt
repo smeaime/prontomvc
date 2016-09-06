@@ -1,0 +1,59 @@
+
+Log Entry : 
+09/06/2016 13:44:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+09/06/2016 13:45:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando sincro para Beraza 06/09/2016 01/01/2100 668 -1 -1 668 668 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+09/06/2016 13:45:23
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando sincro para BERAZA
+__________________________
+
+Log Entry : 
+09/06/2016 13:45:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Syngenta renglones sincro 1
+__________________________
+
+Log Entry : 
+09/06/2016 13:50:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:No se pudo generar nada Beraza
+__________________________
+
+Log Entry : 
+09/06/2016 13:51:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando sincro para Beraza 06/09/2016 01/01/2100 668 -1 -1 668 668 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+09/06/2016 13:51:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando sincro para BERAZA
+__________________________
+
+Log Entry : 
+09/06/2016 13:51:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Syngenta renglones sincro 1
+__________________________
+
+Log Entry : 
+09/06/2016 13:52:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2395
+__________________________

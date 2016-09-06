@@ -1538,7 +1538,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                              cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
 
                         lblErrores.Text = sErrores
-                        
+                        sErrores = ""
 
                     Case "NIDERA"
 
