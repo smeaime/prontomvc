@@ -524,7 +524,6 @@ namespace ProntoFlexicapture
         public static IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
-            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
 
 
             ProntoMVC.Data.Models.DemoProntoEntities db =
@@ -537,6 +536,8 @@ namespace ProntoFlexicapture
 
             if (false)
             {
+                DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+
                 FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
                 IQueryable<procesGrilla> q = (from f in files
                                               where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
@@ -639,17 +640,27 @@ namespace ProntoFlexicapture
         }
 
 
+        private static void MoverDirectoriosViejos() { 
+        
+        
+        }
+
+        
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
             string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
-            //como hacer eficiente esto?
+            //como hacer eficiente esto? -por lo menos borra las imagenes viejas
+
+            MoverDirectoriosViejos();
+
 
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
             FileInfo[] files;
+
 
             try
             {
