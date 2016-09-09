@@ -3348,7 +3348,7 @@ Public Class ExcelImportadorManager
                 If kilosmerma > 0 And Rubro = 2 Then
                     cdp.Merma = kilosmerma - kiloshumedad
                 ElseIf kilosmerma > 0 And Rubro <> 2 Then
-                    cdp.Merma = kilosmerma
+                    cdp.Merma = kilosmerma - cdp.HumedadDesnormalizada 'seria bueno acá restar el  cdp.HumedadDesnormalizada ??
                 End If
 
 

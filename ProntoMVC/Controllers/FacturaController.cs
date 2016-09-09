@@ -1051,10 +1051,20 @@ namespace ProntoMVC.Controllers
             stream.Close();
 
 
+            //PreFormatear();
+            //abrir con eeplus y poner autowidth?
+
+
+
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
 
         }
+
+
+
+
+
 
 
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
