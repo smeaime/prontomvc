@@ -249,6 +249,71 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void Pegatina_23519_reyser_analisis_23761()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\080916\Anali19.txt";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556447516, 0, 0);
+            carta.NumeroCartaDePorte = 556447516;
+            carta.FechaArribo = new DateTime(2016, 1, 1);
+            carta.FechaDescarga= new DateTime(2016, 1, 1);
+            carta.PuntoVenta = 1;
+            carta.Cosecha = "2016/17";
+            carta.IdArticulo = 4;
+            carta.NetoFinalSinMermas = 30160;
+            carta.Merma = 0;
+            carta.Humedad= 0; 
+            carta.HumedadDesnormalizada = 0; 
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556447516, 0, 0);
+
+            Assert.AreEqual(528, carta.HumedadDesnormalizada);
+            Assert.AreEqual(0, carta.Merma);
+        }
+
+
+
+
+
+
+
         [TestMethod]
         public void InformeControlDeKilos_23685()
         {
@@ -762,59 +827,6 @@ namespace ProntoMVC.Tests
 
         }
 
-
-
-
-        [TestMethod]
-        public void Pegatina_23519_reyser_analisis()
-        {
-
-            //explota
-
-            string ms = "";
-
-            string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
-            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
-
-            int m_IdMaestro = 0;
-            Pronto.ERP.BO.CartaDePorte carta;
-
-
-            // escribir descarga de una carta
-            //carta = null;
-            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            //carta.NobleGrado = 2;
-            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-
-
-
-
-            string log = "";
-            //hay que pasar el formato como parametro 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
-
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
-
-            foreach (System.Data.DataRow r in dt.Rows)
-            {
-                var dr = r;
-                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
-                                                        null, null, null, null,
-                                                        null, null);
-            }
-
-
-
-
-            //verificar que sigue así
-            carta = null;
-            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-        }
 
 
 
