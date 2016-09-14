@@ -1959,8 +1959,8 @@ Public Class ExcelImportadorManager
         dr(58) = "CHOFER"
 
 
-        dr(62) = "ACOPLADO" 'le agrego una columna por la columna adicional que me crea el doble renglon
-        dr(63) = "FECHAVENCIMIENTO"
+        dr(61) = "ACOPLADO" 'le agrego una columna por la columna adicional que me crea el doble renglon
+        dr(62) = "FECHAVENCIMIENTO"
 
         
 
