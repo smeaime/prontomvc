@@ -1,0 +1,118 @@
+
+Log Entry : 
+09/14/2016 12:26:50
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+09/14/2016 12:27:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.InvalidCastException
+Operator '=' is not defined for type 'DBNull' and string "BarraCP".
+   at Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   at ExcelImportadorManager.FormatearColumnasFlexicapture(DataTable& dt) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4705
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+09/14/2016 12:27:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][TRANSPCUIT][][][][][][][][][][][][][][][][][][][][][][VAGON][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+09/14/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:7bdcb291-9d5e-49c3-b6e7-d16f7e18c1c3
+Error Number:-2,State:0,Class:11 - DELETE  ExcelImportador  WHERE IdTanda=160088 500 0
+__________________________
+
+Log Entry : 
+09/14/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+__________________________
+
+Log Entry : 
+09/14/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 793
+   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32& m_IdMaestro, String archivoExcel, FormatosDeExcel Formato, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, String txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4441
+   at CartasDePorteImportador.FormatearExcelImportado(String nombre) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 590
+   at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 284
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+09/14/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:C:\Users\Administrador\AppData\Local\Temp\97654_PORTE050041 (1).txt
+__________________________
+
+Log Entry : 
+09/14/2016 12:31:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.InvalidCastException
+Operator '=' is not defined for type 'DBNull' and string "BarraCP".
+   at Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   at ExcelImportadorManager.FormatearColumnasFlexicapture(DataTable& dt) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4705
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+09/14/2016 12:31:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][TRANSPCUIT][][][][][][][][][][][][][][][][][][][][][][VAGON][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+09/14/2016 12:32:17
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:d1e2d87f-31e4-4494-b9cd-413c15cf6297
+Error Number:-2,State:0,Class:11 - DELETE  ExcelImportador  WHERE IdTanda=101778 500 0
+__________________________
+
+Log Entry : 
+09/14/2016 12:32:17
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+__________________________
+
+Log Entry : 
+09/14/2016 12:32:17
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 793
+   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32& m_IdMaestro, String archivoExcel, FormatosDeExcel Formato, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, String txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4441
+   at CartasDePorteImportador.FormatearExcelImportado(String nombre) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 590
+   at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 284
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+09/14/2016 12:32:17
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:C:\Users\Administrador\AppData\Local\Temp\80582_PORTE050041.txt
+__________________________
