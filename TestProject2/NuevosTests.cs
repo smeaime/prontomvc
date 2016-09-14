@@ -19,6 +19,10 @@ using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
 
+
+using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
+
+
 using ProntoMVC.ViewModels;
 
 using System.Transactions;
@@ -111,6 +115,8 @@ namespace ProntoMVC.Tests
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
 
+
+
         [TestMethod]
         public void Exportacion_a_Excel_de_Entities_3()
         {
@@ -128,10 +134,68 @@ namespace ProntoMVC.Tests
             var f = c.TT_DynamicGridData_ExcelExportacion(sidx, sord, page, rows, _search, filters, "", "");
             string o = "lala.xlsx";
 
+            // formatear el excel con encabezados, ancho de columna y totales...
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+
+
             ToFile(f, o);
+            FormatearConEPPLUS(o);
+
 
             System.Diagnostics.Process.Start(o);
         }
+
+
+
+        void FormatearConEPPLUS(string archivo)
+        {
+            //http://fourleafit.wikispaces.com/EPPlus
+
+
+            using (var package = new ExcelPackage(new FileInfo(archivo)))
+            {
+                var ws = package.Workbook.Worksheets.SingleOrDefault(x => x.Name == "Test Grid");
+                //if (wk != null) { package.Workbook.Worksheets.Delete(wk); }
+
+
+
+                ws.View.ShowGridLines = true;
+
+                //ws.Column(4).OutlineLevel = 1;
+                //ws.Column(4).Collapsed = true;
+                //ws.Column(5).OutlineLevel = 1;
+                //ws.Column(5).Collapsed = true;
+                //ws.OutLineSummaryRight = true;
+
+                //Headers
+                ws.Cells["B1"].Value = "Name";
+                ws.Cells["C1"].Value = "Size";
+                ws.Cells["D1"].Value = "Created";
+                ws.Cells["E1"].Value = "Last modified";
+                ws.Cells["B1:E1"].Style.Font.Bold = true;
+
+                // calculate all formulas in the workbook
+                //package.Workbook.Calculate();
+                //// calculate one worksheet
+                //package.Workbook.Worksheets["Test Grid"].Calculate();
+                //// calculate a range
+                //package.Workbook.Worksheets["Test Grid"].Cells["A1"].Calculate();
+
+
+                //Create the worksheet
+                //Dim ws As ExcelWorksheet = pck.Workbook.Worksheets.Add("Accounts")
+                //Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
+                //ws.Cells("A1").LoadFromDataTable(pDataTable, True);
+                package.Save();
+
+
+            }
+
+        }
+
 
 
         public void ToFile(FileResult fileResult, string fileName)
