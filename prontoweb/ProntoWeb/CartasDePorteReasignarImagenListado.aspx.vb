@@ -704,7 +704,7 @@ Partial Class CartasDePorteReasignarImagenListado
         '////////////////////////////////////////////////////////////////////
         Try
 
-10:         segundos aca
+            '10 segundos aca
 
             Dim lista = ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(100, DirApp).ToList
 
@@ -728,7 +728,7 @@ Partial Class CartasDePorteReasignarImagenListado
         '////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////
 
-7:      segs aca
+        '7     segs aca
 
         Dim a As List(Of ProntoMVC.Data.Models.CartasDePorteLogDeOCR) = ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp, HFSC.Value).ToList
         'And i.FechaModificacion > (DateAdd(DateInterval.Hour, -23, DateTime.Now)) 
