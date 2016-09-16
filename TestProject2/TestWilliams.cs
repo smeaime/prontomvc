@@ -249,6 +249,68 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void Pegatina_23519_reyser_analisis_23519()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\150916\Anali19.txt";
+            
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556275834, 0, 0);
+            carta.NumeroCartaDePorte = 556275834;
+            carta.FechaArribo = new DateTime(2016, 1, 1);
+            carta.FechaDescarga = new DateTime(2016, 1, 1);
+            carta.PuntoVenta = 1;
+            carta.Cosecha = "2016/17";
+            carta.IdArticulo = 5;
+            carta.NetoFinalIncluyendoMermas = 30160;
+            carta.Merma = 0;
+            carta.Humedad = 0;
+            carta.HumedadDesnormalizada = 0;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, Convert.ToInt32( carta.PuntoVenta) , ref log, 
+                                    carta.FechaArribo.ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556275834, 0, 0);
+
+            Assert.AreEqual(528, carta.HumedadDesnormalizada);
+            Assert.AreEqual(0, carta.Merma);
+        }
+
+
+
 
         [TestMethod]
         public void Pegatina_23519_reyser_analisis_23761()

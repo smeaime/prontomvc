@@ -600,6 +600,7 @@ Partial Class ListasPrecios
             dr.Item("IdDestinoDeCartaDePorte") = IdNull(BuscaIdWilliamsDestinoPreciso(TextoWebControl(.FindControl("txtDestino")), HFSC.Value))
 
 
+
             dr.Item("PrecioEmbarque") = Val(TextoWebControl(.FindControl("txtPrecioEmbarque")))
             dr.Item("PrecioEmbarque2") = Val(TextoWebControl(.FindControl("txtPrecioEmbarque2")))
             dr.Item("MaximaCantidadParaPrecioEmbarque") = Val(TextoWebControl(.FindControl("txtMaximaCantidadParaPrecioEmbarque")))

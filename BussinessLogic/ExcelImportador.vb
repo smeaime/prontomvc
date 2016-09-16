@@ -3340,7 +3340,7 @@ Public Class ExcelImportadorManager
                 Dim kiloshumedad As Long = 0
                 If Rubro = 2 And porcentajehum > 0 Then
                     Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, cdp.IdArticulo, porcentajehum)
-                    kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalSinMermas
+                    kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalIncluyendoMermas
                     cdp.Humedad = porcentajehum
                     cdp.HumedadDesnormalizada = kiloshumedad
                 End If
@@ -3507,9 +3507,8 @@ Public Class ExcelImportadorManager
                             '	85	Insectos vivos 	INS.V
                             '	502	Granos clorados 	G.CLO
                         Case Else
-                            If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
-
-                            Continue For
+                            'If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
+                            'Continue For
                     End Select
 
                     c += 1
