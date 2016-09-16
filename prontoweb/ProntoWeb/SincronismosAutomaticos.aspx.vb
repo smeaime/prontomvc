@@ -110,6 +110,7 @@ Partial Class SincronismosAutomaticos
             txtMailLartirigoyen.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteLartirigoyen" & pv).ToString
             txtMailBragadense.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv).ToString
             txtMailFYO.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteFYO" & pv).ToString
+            txtMailGranar.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGranar" & pv).ToString
             txtMailGrobo.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGrobo" & pv).ToString
             txtMailGranosdelParana.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelParana" & pv).ToString
             txtMailGranosdelLitoral.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelLitoral" & pv).ToString
@@ -361,6 +362,7 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv, txtMailBragadense.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteFYO" & pv, txtMailFYO.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGrobo" & pv, txtMailGrobo.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGranar" & pv, txtMailGranar.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelParana" & pv, txtMailGranosdelParana.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelLitoral" & pv, txtMailGranosdelLitoral.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGrimaldi" & pv, txtMailGrimaldi.Text)
@@ -426,7 +428,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxAndreoli.Checked) Then sTodosErr += Enviar("Andreoli", txtMailAndreoli.Text, sErr, bVistaPrevia)
         If (CheckBoxAreco.Checked) Then sTodosErr += Enviar("Areco", txtMailAreco.Text, sErr, bVistaPrevia)
         If (CheckBoxArgencer.Checked) Then sTodosErr += Enviar("Argencer", txtMailArgencer.Text, sErr, bVistaPrevia)
-        If (CheckBoxBLD.Checked) Then sTodosErr += Enviar("Beraza", txtMailBeraza.Text, sErr, bVistaPrevia)
+        If (CheckBoxBeraza.Checked) Then sTodosErr += Enviar("Beraza", txtMailBeraza.Text, sErr, bVistaPrevia)
         If (CheckBoxBLD.Checked) Then sTodosErr += Enviar("BLD", txtMailBLD.Text, sErr, bVistaPrevia)
         If (CheckBoxBLD.Checked) Then sTodosErr += Enviar("BLD (CALIDADES)", txtMailBLD.Text, sErr, bVistaPrevia)
         If (CheckBoxBTGPactual.Checked) Then sTodosErr += Enviar("BTG PACTUAL [BIT]", txtMailBTGPactual.Text, sErr, bVistaPrevia)
@@ -440,6 +442,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxBragadense.Checked) Then sTodosErr += Enviar("La Bragadense", txtMailBragadense.Text, sErr, bVistaPrevia)
         If (CheckBoxLelfun.Checked) Then sTodosErr += Enviar("Lelfun", txtMailLelfun.Text, sErr, bVistaPrevia)
         If (CheckBoxGrobo.Checked) Then sTodosErr += Enviar("Los Grobo", txtMailGrobo.Text, sErr, bVistaPrevia)
+        If (CheckBoxGranar.Checked) Then sTodosErr += Enviar("Granar", txtMailGranar.Text, sErr, bVistaPrevia)
         If (CheckBoxFYO.Checked) Then sTodosErr += Enviar("FYO", txtMailFYO.Text, sErr, bVistaPrevia)
         If (CheckBoxGranosdelParana.Checked) Then sTodosErr += Enviar("Granos del Parana", txtMailGranosdelParana.Text, sErr, bVistaPrevia)
         If (CheckBoxGranosdelLitoral.Checked) Then sTodosErr += Enviar("Granos del Litoral", txtMailGranosdelLitoral.Text, sErr, bVistaPrevia)
