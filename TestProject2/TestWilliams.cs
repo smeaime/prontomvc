@@ -202,7 +202,7 @@ namespace ProntoMVC.Tests
             int registrosf = 0;
 
 
-            string[] sincros = { "Beraza" };
+            string[] sincros = { "Beraza", "Granar" };
 //            string[] sincros = { "Beraza", "Zeni" };
 
 

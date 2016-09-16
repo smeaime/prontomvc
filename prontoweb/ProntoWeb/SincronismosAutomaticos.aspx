@@ -389,7 +389,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     $(document).ready(function () {
                         $('#ctl00_ContentPlaceHolder1_CheckBox32').click(function () {
                             //alert('ass');
-                            var check = ($('#ctl00_ContentPlaceHolder1_CheckBox32').attr("checked") == undefined ) ;
+                            var check = ($('#ctl00_ContentPlaceHolder1_CheckBox32').attr("checked") == undefined);
                             // alert(check );
                             //$(':checkbox').attr('checked', this.checked);
                             $(':checkbox').attr('checked', check);
@@ -525,7 +525,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
         <div class="row">
             <div class="col-md-2">
-                <asp:CheckBox ID="CheckBox1" runat="server" Checked="true" />
+                <asp:CheckBox ID="CheckBoxBeraza" runat="server" Checked="true" />
                 Beraza
             </div>
             <div class="col-md-10">
@@ -668,6 +668,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
             <%--corredor--%>
         </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxGranar" runat="server" Checked="true" />
+                Granar
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailGranar" runat="server" Text=''
+                    AutoPostBack="false" autocomplete="off"></asp:TextBox>
+            </div>
+            <%--corredor--%>
+        </div>
+
         <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxGranosdelParana" runat="server" Checked="true" />
@@ -730,7 +743,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <asp:TextBox CssClass="col-md-8" ID="txtMailMorgan" runat="server" Text='' AutoPostBack="false"
                     autocomplete="off"></asp:TextBox>
             </div>
-        </div>        <div class="row">
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxNoble" runat="server" Checked="true" />
                 Noble

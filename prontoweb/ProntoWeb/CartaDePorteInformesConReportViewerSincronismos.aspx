@@ -171,7 +171,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="True">Los Grobo [Algoritmo]</asp:ListItem>
                             <asp:ListItem Enabled="true">FYO</asp:ListItem>
                             <asp:ListItem Enabled="true">FYO (posición)</asp:ListItem>
-                            <asp:ListItem Enabled="false">Granar</asp:ListItem>
+                            <asp:ListItem Enabled="true">Granar</asp:ListItem>
                             <asp:ListItem Enabled="true">Granos del Parana</asp:ListItem>
                             <asp:ListItem Enabled="true">Granos del Litoral</asp:ListItem>
                             <asp:ListItem Enabled="true">Grimaldi Grassi</asp:ListItem>
