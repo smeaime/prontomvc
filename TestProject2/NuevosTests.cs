@@ -157,12 +157,12 @@ namespace ProntoMVC.Tests
 
             using (var package = new ExcelPackage(new FileInfo(archivo)))
             {
-                var ws = package.Workbook.Worksheets.SingleOrDefault(x => x.Name == "Test Grid");
+                //var ws = package.Workbook.Worksheets.SingleOrDefault(x => x.Name == "Test Grid");
                 //if (wk != null) { package.Workbook.Worksheets.Delete(wk); }
 
 
 
-                ws.View.ShowGridLines = true;
+                //ws.View.ShowGridLines = true;
 
                 //ws.Column(4).OutlineLevel = 1;
                 //ws.Column(4).Collapsed = true;
@@ -171,11 +171,11 @@ namespace ProntoMVC.Tests
                 //ws.OutLineSummaryRight = true;
 
                 //Headers
-                ws.Cells["B1"].Value = "Name";
-                ws.Cells["C1"].Value = "Size";
-                ws.Cells["D1"].Value = "Created";
-                ws.Cells["E1"].Value = "Last modified";
-                ws.Cells["B1:E1"].Style.Font.Bold = true;
+                //ws.Cells["B1"].Value = "Name";
+                //ws.Cells["C1"].Value = "Size";
+                //ws.Cells["D1"].Value = "Created";
+                //ws.Cells["E1"].Value = "Last modified";
+                //ws.Cells["B1:E1"].Style.Font.Bold = true;
 
                 // calculate all formulas in the workbook
                 //package.Workbook.Calculate();
@@ -189,7 +189,7 @@ namespace ProntoMVC.Tests
                 //Dim ws As ExcelWorksheet = pck.Workbook.Worksheets.Add("Accounts")
                 //Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
                 //ws.Cells("A1").LoadFromDataTable(pDataTable, True);
-                package.Save();
+               // package.Save();
 
 
             }
