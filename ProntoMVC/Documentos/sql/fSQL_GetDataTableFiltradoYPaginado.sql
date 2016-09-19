@@ -210,6 +210,11 @@ go
 
 
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+/*
 select  * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				( 
@@ -247,6 +252,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
             
 go
 
+*/
 
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
 go
@@ -261,4 +267,120 @@ go
 --sp_dbcmptlevel 'Pronto' 
 
 
+
+
+
+if OBJECT_ID ('wCartasPorte_WraperDeLaTVF') is not null 
+    drop procedure wCartasPorte_WraperDeLaTVF 
+go 
+
+
+create procedure  wCartasPorte_WraperDeLaTVF
+   		    @startRowIndex int  = NULL,
+            @maximumRows int  = NULL,
+            @estado int  = NULL,
+            @QueContenga  VARCHAR(50) = NULL,
+            @idVendedor int  = NULL,
+            @idCorredor int  = NULL,
+            @idDestinatario int  = NULL,
+            @idIntermediario int  = NULL,
+            @idRemComercial int  = NULL,
+            @idArticulo int  = NULL,
+            @idProcedencia int  = NULL,
+            @idDestino int  = NULL,
+            @AplicarANDuORalFiltro int  = NULL,
+            @ModoExportacion  VARCHAR(20) = NULL,
+
+			@fechadesde datetime,
+			@fechahasta datetime,
+
+            @puntoventa int  = NULL, 
+            @optDivisionSyngenta  VARCHAR(50) = NULL,
+           --@bTraerDuplicados As Boolean = False,
+            @Contrato  VARCHAR(50) = NULL, 
+            @QueContenga2  VARCHAR(50) = NULL,
+            @idClienteAuxiliarint int  = NULL,
+            @AgrupadorDeTandaPeriodos int  = NULL,
+            @Vagon  int  = NULL,
+			@Patente VARCHAR(10) = NULL,
+            @optCamionVagon  VARCHAR(10) = NULL
+
+		AS
+
+
+
+		SELECT  *
+
+		from dbo.fSQL_GetDataTableFiltradoYPaginado
+		( 
+							NULL, 
+							NULL, 
+							NULL,
+							NULL, 
+							NULL, 
+
+							NULL, 
+							NULL, 
+							NULL,
+							NULL, 
+							@idArticulo,
+
+							@idProcedencia,
+							@idDestino,
+					
+							@AplicarANDuORalFiltro,
+							@ModoExportacion,
+							@fechadesde,
+
+							@fechahasta, 
+							NULL, 
+							NULL,
+							NULL, 
+							NULL, 
+
+							NULL, 
+							NULL, 
+							NULL,
+							NULL, 
+							NULL
+
+							) as cdp
+
+go
+
+
+
+
+wCartasPorte_WraperDeLaTVF 
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					4, --@idArticulo,
+
+					NULL, --@idProcedencia,
+					-1,---1, --@idDestino,
+					NULL, --@AplicarANDuORalFiltro,
+					'Ambos', --'Buques',
+					'2016-08-03 00:00:00',
+					
+					'2016-08-03 00:00:00',
+					NULL, 
+					NULL,
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
+
+go
 
