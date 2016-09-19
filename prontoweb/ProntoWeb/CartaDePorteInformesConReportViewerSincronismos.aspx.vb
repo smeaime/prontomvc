@@ -3001,7 +3001,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                                      "Ambos", _
                                     Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                                     Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text, , , , , , db)
+                                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text, _
+                                    , , , , , db)
 
 
                     Dim qq As List(Of ProntoMVC.Data.Models.CartasDePorte) = LogicaFacturacion.CartasConCopiaPendiente(q, ms, HFSC.Value)
