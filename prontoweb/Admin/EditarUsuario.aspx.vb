@@ -77,7 +77,7 @@ Partial Class Admin_EditarUsuario
                 ErrHandler2.WriteError(ex)
             End Try
 
-            Dim a = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster, SC)
+            Dim a = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster, HFSC.Value)
 
             If IsNothing(a) Then
                 txtRazonSocial.Text = Usuario.Nombre
@@ -210,7 +210,7 @@ Partial Class Admin_EditarUsuario
 
 
         
-        UserDatosExtendidosManager.Update(membershipUser.ProviderUserKey.ToString, BuscarClientePorCUIT("", SC, txtRazonSocial.Text), "", ConexBDLmaster)
+        UserDatosExtendidosManager.Update(membershipUser.ProviderUserKey.ToString, BuscaIdClientePreciso(txtRazonSocial.Text, HFSC.Value), "", ConexBDLmaster)
 
 
 
