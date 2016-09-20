@@ -445,7 +445,7 @@ Public Class ConsultasLinq
                     cdp.IdClienteEntregador}
         'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
 
-
+        asdfasdfasdfsdf()
 
         'Dim a = qq.FirstOrDefault
 
