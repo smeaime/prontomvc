@@ -395,18 +395,24 @@ Public Class ConsultasLinq
                 From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty _
                 From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty _
                 From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty _
-                From pd1 In db.ListasPreciosDetalles.Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo)).DefaultIfEmpty _
+                From pd1 In db.ListasPreciosDetalles _
+                        .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                            And (i.IdCliente Is Nothing Or i.IdCliente = clisub1.IdCliente)) _
+                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
                 From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty _
-                From pd2 In db.ListasPreciosDetalles.Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo)).DefaultIfEmpty _
+                From pd2 In db.ListasPreciosDetalles _
+                        .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                            And (i.IdCliente Is Nothing Or i.IdCliente = clisub1.IdCliente)) _
+                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
                 Where 1 = 1 _
-                  And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                  And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                  And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                  And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                  And (idDestino = -1 Or cdp.Destino = idDestino) _
-                  And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
-                  And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                  And If(cdp.SubnumeroDeFacturacion, 0) <= 0
+                      And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                      And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                      And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                      And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                      And (idDestino = -1 Or cdp.Destino = idDestino) _
+                      And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
+                      And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
+                      And If(cdp.SubnumeroDeFacturacion, 0) <= 0
                 Select New With { _
                     cdp.NumeroCartaDePorte, _
                     cdp.IdCartaDePorte, _
@@ -427,25 +433,25 @@ Public Class ConsultasLinq
                     .Subcontr1Desc = clisub1.RazonSocial, _
                     .Subcontr2Desc = clisub2.RazonSocial, _
                     .tarif1 = CDec(If(If( _
-                    (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
+                    (cdp.Exporta = "SI") _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                             pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCaladaExportacion) _
+                                pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCaladaExportacion) _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                             pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada) _
+                                pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada) _
                         ), 0)), _
                     .tarif2 = CDec(If(If( _
-                        (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
+                        (cdp.Exporta = "SI") _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                             pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanzaExportacion) _
+                                pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanzaExportacion) _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                             pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
+                                pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
                                 ), 0)), _
-                    .Exporta = If(cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0), "SI", cdp.Exporta), _
+                    .Exporta = cdp.Exporta, _
                     cdp.Corredor, _
                     cdp.IdClienteEntregador}
         'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
 
-        asdfasdfasdfsdf()
+
 
         'Dim a = qq.FirstOrDefault
 
@@ -553,7 +559,7 @@ Public Class ConsultasLinq
                     Select New infLiqui With { _
                         .agrupVagon = cdp.agrupVagon, _
                         .DestinoDesc = cdp.DestinoDesc & " Calada" & If( _
-                            (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
+                            (cdp.Exporta = "SI") _
                                    , " - Export.", " - Entrega"), _
                         .SubcontrDesc = cdp.Subcontr1Desc, _
                         .NetoPto = cdp.NetoFinal, _
@@ -568,7 +574,7 @@ Public Class ConsultasLinq
                     Select New infLiqui With { _
                         .agrupVagon = cdp.agrupVagon, _
                         .DestinoDesc = cdp.DestinoDesc & " Balanza" & If( _
-                                      (cdp.Exporta = "SI" Or (cdp.Corredor = IdCorredorBLD And (cdp.IdClienteEntregador <> IdWilliams Or cdp.IdClienteEntregador <= 0))) _
+                                      (cdp.Exporta = "SI") _
                                     , " - Export.", " - Entrega"), _
                         .SubcontrDesc = cdp.Subcontr2Desc, _
                         .NetoPto = cdp.NetoFinal, _
