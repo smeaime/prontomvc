@@ -309,7 +309,10 @@ create procedure  wCartasPorte_WraperDeLaTVF
 
 
 
-		SELECT  *
+		SELECT  
+		TOP (@maximumRows)  --quizas usando el TOP sin ORDERBY no haya diferencia de performance
+
+		*
 
 		from dbo.fSQL_GetDataTableFiltradoYPaginado
 		( 
@@ -353,7 +356,7 @@ go
 
 wCartasPorte_WraperDeLaTVF 
 					NULL, 
-					NULL, 
+					100, 
 					NULL,
 					NULL, 
 					NULL, 
