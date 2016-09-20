@@ -1799,9 +1799,12 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Avg(Iif((Fields!NetoPto.Value=0) Or 
-		iif (Fields!NetoFinal.Value is nothing, false, Fields!NetoFinal.Value =0)
-, 0  ,Fields!NetoPto.Value-Fields!NetoFinal.Value))</Value>
+                    <Value>=Avg(
+
+Code.IsNull(Fields!NetoPto.Value,0)-
+Code.IsNull(Fields!NetoFinal.Value,0)
+
+)</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                       <Color>White</Color>
@@ -1834,7 +1837,16 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Avg(Fields!TaraPto.Value - iif(Fields!TaraFinal.Value=0,Fields!TaraPto.Value,Fields!TaraFinal.Value), "ds1")</Value>
+                    <Value>=Avg(
+
+iif(
+	(Code.IsNull(Fields!TaraFinal.Value,0) =0) or  (Code.IsNull(Fields!TaraPto.Value,0) =0)
+
+	,0
+
+	,Code.IsNull(Fields!TaraFinal.Value,0) - Code.IsNull(Fields!TaraPto.Value,0) 
+	)
+)</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                       <Color>White</Color>
@@ -3092,6 +3104,9 @@
       <Prompt>Titulo</Prompt>
     </ReportParameter>
   </ReportParameters>
+  <Code>Public Function IsNull(input As Object, defaultValue As Object) As Object
+  Return IIf(input Is Nothing, defaultValue, input)
+End Function</Code>
   <Language>es-AR</Language>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>224ddd05-cbf9-4a2b-9d3e-6c9d69290d61</rd:ReportID>
