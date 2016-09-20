@@ -240,14 +240,10 @@
                         </FooterTemplate>
                     </asp:TemplateField>
 
+
                     <asp:TemplateField HeaderText="Destino">
 
-                        <%--                        <HeaderTemplate>
-                            <asp:TextBox ID="txtBuscarDetalleDestino" runat="server" Style="text-align: right;" Text="" AutoPostBack="True"></asp:TextBox>
-
-                        </HeaderTemplate>--%>
-
-
+                
                         <EditItemTemplate>
                             <asp:TextBox ID="txtDestino" runat="server" autocomplete="off" CssClass="CssTextBox"
                                 Text='<%# Bind("DestinoDesc") %>' TabIndex="23" Width="300px"></asp:TextBox>
@@ -281,17 +277,50 @@
                         </HeaderTemplate>--%>
 
                         <EditItemTemplate>
-                            <asp:DropDownList ID="cmbArticulo" runat="server" Width="300px">
+                            <asp:DropDownList ID="cmbArticulo" runat="server" Width="150px">
                             </asp:DropDownList>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="lblArticulo" runat="server" Width="300px" Text='<%# Eval("Producto") %>'></asp:Label>
+                            <asp:Label ID="lblArticulo" runat="server" Width="150px" Text='<%# Eval("Producto") %>'></asp:Label>
                         </ItemTemplate>
                         <FooterTemplate>
-                            <asp:DropDownList ID="cmbNewArticulo" runat="server" Width="300px">
+                            <asp:DropDownList ID="cmbNewArticulo" runat="server" Width="150px">
                             </asp:DropDownList>
                         </FooterTemplate>
                     </asp:TemplateField>
+
+                    
+                       <asp:TemplateField HeaderText="Cliente">
+
+                
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtCliente" runat="server" autocomplete="off" CssClass="CssTextBox"
+                                Text='<%# Bind("RazonSocial")%>' TabIndex="23" Width="300px"></asp:TextBox>
+                            <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender29" runat="server"
+                                CompletionSetCount="12" TargetControlID="txtCliente" MinimumPrefixLength="1"
+                                ServiceMethod="GetCompletionList" ServicePath="WebServiceClientes.asmx"
+                                UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
+                                DelimiterCharacters="" Enabled="True">
+                            </cc1:AutoCompleteExtender>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblClienteDeCartaDePorte" runat="server" Width="300px" Text='<%# Eval("RazonSocial")%>'></asp:Label>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewCliente" runat="server" autocomplete="off" CssClass="CssTextBox"
+                                TabIndex="23" Width="300px"></asp:TextBox>
+                            <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender9" runat="server"
+                                CompletionSetCount="12" TargetControlID="txtNewCliente" MinimumPrefixLength="1"
+                                ServiceMethod="GetCompletionList" ServicePath="WebServiceClientes.asmx"
+                                UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
+                                DelimiterCharacters="" Enabled="True">
+                            </cc1:AutoCompleteExtender>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+
+
+
+
                     <asp:TemplateField HeaderText="Precio">
                         <EditItemTemplate>
                             <asp:TextBox ID="txtPrecio" Width="40px" runat="server" Text='<%# Bind("PrecioRepetidoPeroConPrecision","{0:F3}") %>'></asp:TextBox>
@@ -435,7 +464,7 @@
 
 
 
-                     <asp:TemplateField HeaderText="Calada Vagón Export">
+                    <asp:TemplateField HeaderText="Calada Vagón Export">
                         <EditItemTemplate>
                             <asp:TextBox ID="txtPrecioVagonesCaladaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioVagonesCaladaExportacion", "{0:F3}")%>'></asp:TextBox>
                         </EditItemTemplate>
