@@ -299,6 +299,8 @@ Partial Class ListasPrecios
 
                 ac = e.Row.FindControl("AutoCompleteExtender28")
                 ac.ContextKey = HFSC.Value
+                ac = e.Row.FindControl("AutoCompleteExtender29")
+                ac.ContextKey = HFSC.Value
 
             End If
 
@@ -352,8 +354,8 @@ Partial Class ListasPrecios
 
             ac = e.Row.FindControl("AutoCompleteExtender8")
             ac.ContextKey = HFSC.Value
-            'ac = e.Row.FindControl("AutoCompleteExtender2")
-            'ac.ContextKey = HFSC.Value
+            ac = e.Row.FindControl("AutoCompleteExtender9")
+            ac.ContextKey = HFSC.Value
             'ac = e.Row.FindControl("AutoCompleteExtender3")
             'ac.ContextKey = HFSC.Value
             'ac = e.Row.FindControl("AutoCompleteExtender4")
@@ -524,6 +526,9 @@ Partial Class ListasPrecios
                 dr.Item("PrecioRepetidoPeroConPrecision") = Val(TextoWebControl(.FindControl("txtNewPrecio")))
 
 
+
+                dr.Item("IdCliente") = IdNull(BuscaIdClientePreciso(TextoWebControl(.FindControl("txtNewCliente")), HFSC.Value))
+
                 dr.Item("IdDestinoDeCartaDePorte") = IdNull(BuscaIdWilliamsDestinoPreciso(TextoWebControl(.FindControl("txtNewDestino")), HFSC.Value))
 
                 dr.Item("PrecioEmbarque") = Val(TextoWebControl(.FindControl("txtNewPrecioEmbarque")))
@@ -595,8 +600,7 @@ Partial Class ListasPrecios
             dr.Item("Precio") = Val(TextoWebControl(.FindControl("txtPrecio")))
             dr.Item("PrecioRepetidoPeroConPrecision") = Val(TextoWebControl(.FindControl("txtPrecio")))
 
-
-
+            dr.Item("IdCliente") = IdNull(BuscaIdClientePreciso(TextoWebControl(.FindControl("txtCliente")), HFSC.Value))
             dr.Item("IdDestinoDeCartaDePorte") = IdNull(BuscaIdWilliamsDestinoPreciso(TextoWebControl(.FindControl("txtDestino")), HFSC.Value))
 
 
