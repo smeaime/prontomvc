@@ -121,6 +121,9 @@
               <Width>1.5475cm</Width>
             </TablixColumn>
             <TablixColumn>
+              <Width>2.5cm</Width>
+            </TablixColumn>
+            <TablixColumn>
               <Width>1.85442cm</Width>
             </TablixColumn>
             <TablixColumn>
@@ -526,6 +529,45 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox123</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e6eefc</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#253686</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e6eefc</Color>
@@ -984,6 +1026,49 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox15">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=iif(
+	(Code.IsNull(Fields!TaraFinal.Value,0) =0) or  (Code.IsNull(Fields!TaraPto.Value,0) =0)
+
+	,0
+
+	,Code.IsNull(Fields!TaraFinal.Value,0) - Code.IsNull(Fields!TaraPto.Value,0) 
+	)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox15</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#e4effd</BackgroundColor>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1473,6 +1558,42 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox18">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox18</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#e4effd</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox288">
                       <CanGrow>true</CanGrow>
                       <CanShrink>true</CanShrink>
@@ -1582,6 +1703,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
             <TablixMember>
               <Visibility>
                 <Hidden>true</Hidden>
@@ -1600,10 +1722,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ds1</DataSetName>
-        <Top>6.69544cm</Top>
+        <Top>12.59565cm</Top>
         <Left>0.29104cm</Left>
         <Height>2.32916cm</Height>
-        <Width>35.40056cm</Width>
+        <Width>37.90056cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1800,13 +1922,12 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Avg(
-
-Code.IsNull(Fields!NetoPto.Value,0)-
-Code.IsNull(Fields!NetoFinal.Value,0)
-
+Code.IsNullOrZero(Fields!NetoFinal.Value,Code.IsNull(Fields!NetoPto.Value,0)) -
+Code.IsNullOrZero(Fields!NetoPto.Value,Code.IsNull(Fields!NetoFinal.Value,0))	
 )</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
+                      <Format>0.00</Format>
                       <Color>White</Color>
                     </Style>
                   </TextRun>
@@ -1838,17 +1959,12 @@ Code.IsNull(Fields!NetoFinal.Value,0)
                 <TextRuns>
                   <TextRun>
                     <Value>=Avg(
-
-iif(
-	(Code.IsNull(Fields!TaraFinal.Value,0) =0) or  (Code.IsNull(Fields!TaraPto.Value,0) =0)
-
-	,0
-
-	,Code.IsNull(Fields!TaraFinal.Value,0) - Code.IsNull(Fields!TaraPto.Value,0) 
-	)
+Code.IsNullOrZero(Fields!TaraFinal.Value,Code.IsNull(Fields!TaraPto.Value,0)) -
+Code.IsNullOrZero(Fields!TaraPto.Value,Code.IsNull(Fields!TaraFinal.Value,0))	
 )</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
+                      <Format>0.00</Format>
                       <Color>White</Color>
                     </Style>
                   </TextRun>
@@ -1879,9 +1995,13 @@ iif(
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Avg(Fields!BrutoPto.Value - iif(Fields!BrutoFinal.Value=0,Fields!BrutoPto.Value,Fields!BrutoFinal.Value), "ds1")</Value>
+                    <Value>=Avg(
+Code.IsNullOrZero(Fields!BrutoFinal.Value,Code.IsNull(Fields!BrutoPto.Value,0)) -
+Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))	
+)</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
+                      <Format>0.00</Format>
                       <Color>White</Color>
                     </Style>
                   </TextRun>
@@ -2039,7 +2159,7 @@ iif(
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>9.78142cm</Top>
+        <Top>6.90793cm</Top>
         <Left>0.29104cm</Left>
         <Height>5.33105cm</Height>
         <Width>13.61483cm</Width>
@@ -2052,7 +2172,7 @@ iif(
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>6.48046in</Height>
+    <Height>6.64674in</Height>
     <Style>
       <BackgroundColor>White</BackgroundColor>
     </Style>
@@ -3106,6 +3226,10 @@ iif(
   </ReportParameters>
   <Code>Public Function IsNull(input As Object, defaultValue As Object) As Object
   Return IIf(input Is Nothing, defaultValue, input)
+End Function
+
+Public Function IsNullOrZero(input As Object, defaultValue As Object) As Object
+  Return IIf(input Is Nothing, defaultValue, IIf(input =0, defaultValue, input) )
 End Function</Code>
   <Language>es-AR</Language>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
