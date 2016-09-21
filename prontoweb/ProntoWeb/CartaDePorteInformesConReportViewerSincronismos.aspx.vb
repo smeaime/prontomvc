@@ -3243,7 +3243,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                 Case "Control Kilos de Descarga"
 
 
-                    Dim ArchivoExcelDestino = "C:\Users\Administrador\Desktop\lala.xls"
+                    Dim ArchivoExcelDestino = Path.GetTempPath & "Control Kilos de Descarga " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
+
                     Dim rep As Microsoft.Reporting.WebForms.ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
 
                     Dim yourParams(25) As ReportParameter
