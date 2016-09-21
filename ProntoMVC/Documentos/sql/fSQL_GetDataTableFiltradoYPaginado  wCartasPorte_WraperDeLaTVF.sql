@@ -198,12 +198,45 @@ where 1=1
     And (@IdArticulo IS NULL Or @IdArticulo=-1 Or cdp.IdArticulo = @IdArticulo)
     And (@IdDestino IS NULL Or @IdDestino=-1  Or cdp.Destino = @IdDestino)
     And (@idDestinatario IS NULL Or @idDestinatario=-1   Or cdp.Entregador = @idDestinatario)
+    And (@idProcedencia IS NULL Or @idProcedencia=-1   Or cdp.Procedencia = @idProcedencia)
+	And (@idCorredor IS NULL Or @idCorredor=-1   Or cdp.Corredor = @idCorredor Or cdp.Corredor2 = @idCorredor)
+	
+	And (
+			(isnull(@idVendedor,-1)=-1 AND isnull(@idIntermediario,-1)=-1  AND  isnull(@idRemComercial,-1)=-1  AND  isnull(@idClienteAuxiliarint,-1)=-1 )
+
+			OR
+
+			(@AplicarANDuORalFiltro = 1 and
+					(
+						(cdp.Vendedor = @idVendedor  Or isnull(@idVendedor,-1)=-1) AND  
+						(cdp.CuentaOrden1= @idIntermediario  Or isnull(@idIntermediario,-1)=-1) AND  
+						(cdp.CuentaOrden2 = @idRemComercial  Or isnull(@idRemComercial,-1)=-1) AND  
+						(cdp.idClienteAuxiliar = @idClienteAuxiliarint  Or isnull(@idClienteAuxiliarint,-1)=-1) 
+					)
+ 			)
+			
+			OR
+ 		
+			(@AplicarANDuORalFiltro = 0 and
+				(
+						(cdp.Vendedor = @idVendedor  Or isnull(@idVendedor,-1)=-1) Or  
+						(cdp.CuentaOrden1= @idIntermediario  Or isnull(@idIntermediario,-1)=-1) Or  
+						(cdp.CuentaOrden2 = @idRemComercial  Or isnull(@idRemComercial,-1)=-1) Or  
+						(cdp.idClienteAuxiliar = @idClienteAuxiliarint  Or isnull(@idClienteAuxiliarint,-1)=-1)
+				)
+			)
+	)
+	
 	AND ISNULL(CDP.Anulada,'NO')<>'SI'    
 	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= @fechadesde
 	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= @fechahasta
  
-    And (@puntoventa IS NULL OR @puntoventa = -1 Or cdp.PuntoVenta = @puntoventa)
+    And (@puntoventa IS NULL OR @puntoventa <=0 Or cdp.PuntoVenta = @puntoventa)
 	
+
+
+
+
 
 
 	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
@@ -384,11 +417,11 @@ wCartasPorte_WraperDeLaTVF
 					NULL, 
 					NULL,
 					NULL, 
-					4, --@idArticulo,
+					-1, --@idArticulo,
 
 					NULL, --@idProcedencia,
 					-1,---1, --@idDestino,
-					NULL, --@AplicarANDuORalFiltro,
+					0, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
 					'2016-08-03 00:00:00',
 					
