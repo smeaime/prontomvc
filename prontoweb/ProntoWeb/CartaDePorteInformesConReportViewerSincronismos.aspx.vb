@@ -3247,14 +3247,14 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                     Dim rep As Microsoft.Reporting.WebForms.ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
 
-                    Dim yourParams(25) As ReportParameter
+                    Dim yourParams(26) As ReportParameter
                     yourParams(0) = New ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(HFSC.Value))
                     yourParams(1) = New ReportParameter("sServidorWeb", ConfigurationManager.AppSettings("UrlDominio"))
                     yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#).ToString))
                     yourParams(3) = New ReportParameter("FechaHasta", Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#).ToString))
                     yourParams(4) = New ReportParameter("IdDestino", idDestino.ToString)
-                    yourParams(5) = New ReportParameter("IdPuntoVenta", cmbPuntoVenta.SelectedValue.ToString)
 
+                    yourParams(5) = New ReportParameter("puntoventa", cmbPuntoVenta.SelectedValue.ToString)
 
 
                     yourParams(6) = New ReportParameter("startRowIndex", "0")
@@ -3267,7 +3267,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     yourParams(13) = New ReportParameter("idRemComercial", idRComercial)
                     yourParams(14) = New ReportParameter("idArticulo", idArticulo)
                     yourParams(15) = New ReportParameter("idProcedencia", idProcedencia)
-                    yourParams(16) = New ReportParameter("AplicarANDuORalFiltro", "-1")
+                    yourParams(16) = New ReportParameter("AplicarANDuORalFiltro", CInt(IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR)))
                     yourParams(17) = New ReportParameter("ModoExportacion", DropDownList2.Text)
                     yourParams(18) = New ReportParameter("optDivisionSyngenta", "-1")
                     yourParams(19) = New ReportParameter("Contrato", "-1")
@@ -3278,7 +3278,18 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     yourParams(24) = New ReportParameter("Patente", "-1")
                     yourParams(25) = New ReportParameter("optCamionVagon", "-1")
 
-        
+
+                    Dim titulo As String = ""
+                    titulo = FormatearTitulo(HFSC.Value, _
+                              titulo, estadofiltro, "", idVendedor, idCorredor, _
+                            idDestinatario, idIntermediario, _
+                            idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                              IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
+                            Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                            Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , _
+                            txtContrato.Text, idClienteAuxiliar)
+                    yourParams(26) = New ReportParameter("Titulo", titulo)
 
 
 

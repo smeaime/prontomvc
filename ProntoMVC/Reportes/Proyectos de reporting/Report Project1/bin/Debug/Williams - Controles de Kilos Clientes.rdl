@@ -28,8 +28,8 @@
                 <Value>=Parameters!Titulo.Value</Value>
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
-                  <FontSize>22pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
                   <Color>#253686</Color>
                 </Style>
               </TextRun>
@@ -41,26 +41,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!FechaDesde.Value</Value>
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>14pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <Format>dd/MM/yyyy</Format>
-                  <Color>#253686</Color>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value> al </Value>
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>14pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <Color>#253686</Color>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=Parameters!FechaHasta.Value</Value>
+                <Value />
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -119,9 +100,6 @@
             </TablixColumn>
             <TablixColumn>
               <Width>1.5475cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.85442cm</Width>
@@ -529,45 +507,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox123</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e6eefc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#253686</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox4">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox4</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e6eefc</Color>
@@ -1026,49 +965,6 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox15">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=iif(
-	(Code.IsNull(Fields!TaraFinal.Value,0) =0) or  (Code.IsNull(Fields!TaraPto.Value,0) =0)
-
-	,0
-
-	,Code.IsNull(Fields!TaraFinal.Value,0) - Code.IsNull(Fields!TaraPto.Value,0) 
-	)</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox15</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1558,42 +1454,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox18">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox18</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#e4effd</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox288">
                       <CanGrow>true</CanGrow>
                       <CanShrink>true</CanShrink>
@@ -1704,11 +1564,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember>
-              <Visibility>
-                <Hidden>true</Hidden>
-              </Visibility>
-            </TablixMember>
             <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
@@ -1725,7 +1580,7 @@
         <Top>12.59565cm</Top>
         <Left>0.29104cm</Left>
         <Height>2.32916cm</Height>
-        <Width>37.90056cm</Width>
+        <Width>35.40056cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -3092,7 +2947,7 @@ Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))
       </DefaultValue>
       <Prompt>Id Destino</Prompt>
     </ReportParameter>
-    <ReportParameter Name="IdPuntoVenta">
+    <ReportParameter Name="puntoventa">
       <DataType>Integer</DataType>
       <Nullable>true</Nullable>
       <DefaultValue>
@@ -3100,7 +2955,7 @@ Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))
           <Value>0</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Id Punto Venta</Prompt>
+      <Prompt>puntoventa</Prompt>
     </ReportParameter>
     <ReportParameter Name="startRowIndex">
       <DataType>Integer</DataType>
@@ -3171,11 +3026,6 @@ Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <Prompt>Modo Exportacion</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="puntoventa">
-      <DataType>Integer</DataType>
-      <Nullable>true</Nullable>
-      <Prompt>puntoventa</Prompt>
     </ReportParameter>
     <ReportParameter Name="optDivisionSyngenta">
       <DataType>String</DataType>
