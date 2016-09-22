@@ -1,1 +1,1 @@
-select merma, humedaddesnormalizada, * from cartasdeporte where idcartadeporte= 2583955
+﻿sp_helptext DetRequerimientos_M
