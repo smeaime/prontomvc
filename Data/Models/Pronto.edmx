@@ -2716,6 +2716,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="ObservacionDioPorCumplidoLiquidacionFletes" Type="ntext" />
           <Property Name="Talle" Type="varchar" MaxLength="2" />
           <Property Name="IdProduccionTerminado" Type="int" />
+          <Property Name="IdSituacion" Type="int" />
         </EntityType>
         <EntityType Name="DetalleRecibos">
           <Key>
@@ -4813,11 +4814,11 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="CodigoPresupuesto" Type="int" />
           <Property Name="Importe" Type="numeric" Precision="18" Scale="8" />
           <Property Name="Cantidad" Type="numeric" Precision="18" Scale="8" />
-          <Property Name="CantidadBase" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="Rendimiento" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CantidadBase" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="Rendimiento" Type="numeric" Precision="18" Scale="4" />
           <Property Name="Incidencia" Type="numeric" Precision="18" Scale="8" />
           <Property Name="Costo" Type="numeric" Precision="18" Scale="8" />
-          <Property Name="PrecioVentaUnitario" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PrecioVentaUnitario" Type="numeric" Precision="18" Scale="4" />
         </EntityType>
         <EntityType Name="PresupuestoObrasNodosPxQxPresupuesto">
           <Key>
@@ -9752,6 +9753,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
         <Function Name="Requerimientos_SalidasMateriales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
         </Function>
+        <Function Name="Requerimientos_TX_PendientesDeAsignacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Depositos" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="Tree_TX_Actualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Clave" Type="varchar" Mode="In" />
           <Parameter Name="IdComprobante" Type="int" Mode="In" />
@@ -13011,6 +13015,12 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <Parameter Name="Vagon" Mode="In" Type="Int32" />
             <Parameter Name="Patente" Mode="In" Type="String" />
             <Parameter Name="optCamionVagon" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Requerimientos_TX_PendientesDeAsignacion">
+            <Parameter Name="Depositos" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Requerimientos_TX_PendientesDeAsignacion1">
+            <Parameter Name="Depositos" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -21015,6 +21025,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK_DetalleRecepciones_Articulos" FromRole="DetalleRecepcione" ToRole="Articulo" />
           <NavigationProperty Name="Ubicacione" Relationship="DemoProntoModel.FK_DetalleRecepciones_Ubicaciones" FromRole="DetalleRecepcione" ToRole="Ubicacion" />
           <NavigationProperty Name="DetalleSalidasMateriales" Relationship="DemoProntoModel.FK_DetalleSalidasMateriales_DetalleRecepciones" FromRole="DetalleRecepcione" ToRole="DetalleSalidasMateriale" />
+          <Property Name="IdSituacion" Type="Int32" />
         </EntityType>
         <EntityType Name="DetalleSalidasMateriale">
           <Key>
@@ -21651,11 +21662,11 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="CodigoPresupuesto" Type="Int32" />
           <Property Name="Importe" Type="Decimal" Precision="18" Scale="8" />
           <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="8" />
-          <Property Name="CantidadBase" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Rendimiento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CantidadBase" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Rendimiento" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Incidencia" Type="Decimal" Precision="18" Scale="8" />
           <Property Name="Costo" Type="Decimal" Precision="18" Scale="8" />
-          <Property Name="PrecioVentaUnitario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrecioVentaUnitario" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="PresupuestoObrasNodo" Relationship="DemoProntoModel.FK_PresupuestoObrasNodosDatos_PresupuestoObrasNodos" FromRole="PresupuestoObrasNodosDato" ToRole="PresupuestoObrasNodo" />
         </EntityType>
         <EntityType Name="PresupuestoObrasNodosPxQxPresupuesto">
@@ -30170,6 +30181,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="DetalleRecepciones">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleRecepcione">
               <MappingFragment StoreEntitySet="DetalleRecepciones">
+                <ScalarProperty Name="IdSituacion" ColumnName="IdSituacion" />
                 <ScalarProperty Name="IdProduccionTerminado" ColumnName="IdProduccionTerminado" />
                 <ScalarProperty Name="Talle" ColumnName="Talle" />
                 <ScalarProperty Name="ObservacionDioPorCumplidoLiquidacionFletes" ColumnName="ObservacionDioPorCumplidoLiquidacionFletes" />
@@ -32002,6 +32014,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
+          <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion1" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

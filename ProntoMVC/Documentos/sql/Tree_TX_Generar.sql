@@ -1389,7 +1389,9 @@ INSERT INTO #Auxiliar0 Select '01-11-13-01-00','ComparativasAgrupadas','','01-11
 INSERT INTO #Auxiliar0 Select '80-01','mnuMaster2','Consultas',Null,1,Null,Null,Null,'SI','Horizontal'  
   
 INSERT INTO #Auxiliar0 Select '80-01-01','mnuSub0','Almacenes','80-01',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-01-01','mnuSubA0','Requerimientos pendientes de asignacion','80-01-01',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Requerimientos pendientes de asignacion">Requerimientos pendientes de asignacion</a>',Null,'NO','Horizontal'  
+--INSERT INTO #Auxiliar0 Select '80-01-01-01','mnuSubA0','Requerimientos pendientes de asignacion','80-01-01',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Requerimientos pendientes de asignacion">Requerimientos pendientes de asignacion</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-01-01','mnuSubA0','Requerimientos pendientes de asignacion','80-01-01',1,Null,'<a href="/' + @directorio + '/Requerimiento/RMsPendientesDeAsignar">Requerimientos pendientes de asignacion</a>',Null,'NO','Horizontal'  
+
 INSERT INTO #Auxiliar0 Select '80-01-01-02','mnuSubA0','Pedidos pendientes de recibir','80-01-01',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Pedidos pendientes de recibir">Pedidos pendientes de recibir</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-03','mnuSubA3','Vales emitidos no retirados','80-01-01',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Vales emitidos no retirados">Vales emitidos no retirados</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-04','mnuSubA4','Cardex','80-01-01',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Cardex">Cardex</a>',Null,'NO','Horizontal'  
