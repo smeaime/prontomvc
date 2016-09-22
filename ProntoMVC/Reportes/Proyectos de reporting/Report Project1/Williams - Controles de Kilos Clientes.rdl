@@ -12,7 +12,7 @@
                 <Value>Controles de Kilos Clientes  </Value>
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
-                  <FontSize>22pt</FontSize>
+                  <FontSize>18pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <Color>#253686</Color>
                 </Style>
@@ -28,7 +28,7 @@
                 <Value>=Parameters!Titulo.Value</Value>
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
-                  <FontSize>14pt</FontSize>
+                  <FontSize>12pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <Color>#253686</Color>
                 </Style>
@@ -1577,8 +1577,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ds1</DataSetName>
-        <Top>12.59565cm</Top>
-        <Left>0.29104cm</Left>
+        <Top>7.11491cm</Top>
+        <Left>0.29103cm</Left>
         <Height>2.32916cm</Height>
         <Width>35.40056cm</Width>
         <ZIndex>1</ZIndex>
@@ -2014,8 +2014,8 @@ Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>6.90793cm</Top>
-        <Left>0.29104cm</Left>
+        <Top>10.37236cm</Top>
+        <Left>0.29103cm</Left>
         <Height>5.33105cm</Height>
         <Width>13.61483cm</Width>
         <ZIndex>3</ZIndex>
