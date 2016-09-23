@@ -10,6 +10,10 @@
 
 
 
+function RefrescarArbol() {
+    $("#addtree2").trigger("reloadGrid");
+}
+
 
 
 $(function () {
@@ -247,10 +251,6 @@ else {
         });
     }
 
-
-    function RefrescarArbol() {
-        $("#addtree2").trigger("reloadGrid");
-    }
 
     if (localStorage.arbol != null) {
         $("#addtree2").jqGrid({

@@ -311,29 +311,29 @@ namespace ProntoMVC.Controllers
 
             IQueryable<T> filteredQuery;
 
-            
+
 
             // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
             if (f != null)
             {
                 f.CrearFiltro<T>(sb, objParams, true);
                 s = sb.ToString();
-               // s = "(Detalle.ToString().Contains(\"aaa\"))";
+                // s = "(Detalle.ToString().Contains(\"aaa\"))";
                 var parm = objParams.Select(x => x.Value).ToArray();
                 //s = s.Replace("it.", "");
                 //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
                 try
                 {
-                      filteredQuery = q.Where(s,  parm);  // este where es de dynamic, no de EF
-                
+                    filteredQuery = q.Where(s, parm);  // este where es de dynamic, no de EF
+
                 }
                 catch (Exception)
                 {
                     s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
-                    filteredQuery = q.Where(s,parm );
-                        
+                    filteredQuery = q.Where(s, parm);
+
                 }
-              
+
 
 
 
@@ -377,8 +377,18 @@ namespace ProntoMVC.Controllers
             //                             .Top("@limit", new ObjectParameter("limit", rows));
             // to be able to use ToString() below which is NOT exist in the LINQ to Entity
 
+            List<T> pagedQuery;
 
-            List<T> pagedQuery = filteredQuery.OrderBy(sidx).Skip((page - 1) * rows).Take(rows).ToList();
+            //IOrderedQueryable<T> qq;
+
+            //if (sord == "desc")
+            //    //qq = filteredQuery.OrderByDescending(sidx);
+            //    pagedQuery = filteredQuery.OrderByDescending(sidx).Skip((page - 1) * rows).Take(rows).ToList();
+            //else
+            //    //qq = filteredQuery.OrderBy(sidx);
+            pagedQuery = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows).ToList();
+
+
 
             return pagedQuery;
 
@@ -500,7 +510,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
 
 
-            List<T> pagedQuery = filteredQuery.Skip((page - 1) * rows).Take(rows).ToList();
+            List<T> pagedQuery = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows).ToList();
             //.Skip( sidx + " " + sord, "@skip",
             //       new ObjectParameter("skip", (page - 1) * rows))
             //.Top("@limit", new ObjectParameter("limit", rows));

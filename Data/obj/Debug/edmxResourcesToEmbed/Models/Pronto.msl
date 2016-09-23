@@ -345,6 +345,7 @@
     <EntitySetMapping Name="Obras">
       <EntityTypeMapping TypeName="DemoProntoModel.Obra">
         <MappingFragment StoreEntitySet="Obras">
+          <ScalarProperty Name="RegimenMinero" ColumnName="RegimenMinero" />
           <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
           <ScalarProperty Name="IdObraRelacionada" ColumnName="IdObraRelacionada" />
           <ScalarProperty Name="IdObra" ColumnName="IdObra" />
@@ -844,6 +845,8 @@
     <EntitySetMapping Name="Clientes">
       <EntityTypeMapping TypeName="DemoProntoModel.Cliente">
         <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="FechaFinExclusionPercepcionIVA" ColumnName="FechaFinExclusionPercepcionIVA" />
+          <ScalarProperty Name="FechaInicioExclusionPercepcionIVA" ColumnName="FechaInicioExclusionPercepcionIVA" />
           <ScalarProperty Name="CartaPorteTipoDeAdjuntoDeFacturacion" ColumnName="CartaPorteTipoDeAdjuntoDeFacturacion" />
           <ScalarProperty Name="OperacionesMercadoInternoEntidadVinculada" ColumnName="OperacionesMercadoInternoEntidadVinculada" />
           <ScalarProperty Name="ComisionDiferenciada" ColumnName="ComisionDiferenciada" />
@@ -1573,6 +1576,7 @@
     <EntitySetMapping Name="DetalleFacturas">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleFactura">
         <MappingFragment StoreEntitySet="DetalleFacturas">
+          <ScalarProperty Name="IdDetalleLiquidacionFlete" ColumnName="IdDetalleLiquidacionFlete" />
           <ScalarProperty Name="ImporteIva" ColumnName="ImporteIva" />
           <ScalarProperty Name="PorcentajeIva" ColumnName="PorcentajeIva" />
           <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
@@ -1611,6 +1615,34 @@
     <EntitySetMapping Name="Facturas">
       <EntityTypeMapping TypeName="DemoProntoModel.Factura">
         <MappingFragment StoreEntitySet="Facturas">
+          <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
+          <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+          <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+          <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+          <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+          <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+          <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+          <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+          <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+          <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+          <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+          <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+          <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+          <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+          <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+          <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+          <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+          <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+          <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+          <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+          <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+          <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+          <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+          <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+          <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+          <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+          <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+          <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
           <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
           <ScalarProperty Name="FechaFinServicio" ColumnName="FechaFinServicio" />
           <ScalarProperty Name="FechaInicioServicio" ColumnName="FechaInicioServicio" />
@@ -1788,6 +1820,7 @@
     <EntitySetMapping Name="Proveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="ResolucionAfip3692" ColumnName="ResolucionAfip3692" />
           <ScalarProperty Name="ExcluirDeActualizacionIvaRG18" ColumnName="ExcluirDeActualizacionIvaRG18" />
           <ScalarProperty Name="ExcluirDelCircuitoDeFirmasComprobantes" ColumnName="ExcluirDelCircuitoDeFirmasComprobantes" />
           <ScalarProperty Name="ResolucionAfip3668" ColumnName="ResolucionAfip3668" />
@@ -3374,6 +3407,9 @@
     <EntitySetMapping Name="ComprobantesProveedor">
       <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
         <MappingFragment StoreEntitySet="ComprobantesProveedores">
+          <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
+          <ScalarProperty Name="CompensacionGastosProveedorCliente" ColumnName="CompensacionGastosProveedorCliente" />
+          <ScalarProperty Name="IdNotaDebitoVenta_RecuperoGastos" ColumnName="IdNotaDebitoVenta_RecuperoGastos" />
           <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
           <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
           <ScalarProperty Name="NoTomarParaCalculoDeImpuestos" ColumnName="NoTomarParaCalculoDeImpuestos" />
@@ -3717,6 +3753,7 @@
     <EntitySetMapping Name="DetalleNotasDebitoes">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleNotasDebito">
         <MappingFragment StoreEntitySet="DetalleNotasDebito">
+          <ScalarProperty Name="IdDetalleLiquidacionFlete" ColumnName="IdDetalleLiquidacionFlete" />
           <ScalarProperty Name="OrigenDescripcion" ColumnName="OrigenDescripcion" />
           <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
           <ScalarProperty Name="ImporteIva" ColumnName="ImporteIva" />
@@ -3815,6 +3852,37 @@
     <EntitySetMapping Name="NotasCreditoes">
       <EntityTypeMapping TypeName="DemoProntoModel.NotasCredito">
         <MappingFragment StoreEntitySet="NotasCredito">
+          <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
+          <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
+          <ScalarProperty Name="IdComprobanteProveedor_Compensacion" ColumnName="IdComprobanteProveedor_Compensacion" />
+          <ScalarProperty Name="IdNotaDebitoVenta_RecuperoGastos" ColumnName="IdNotaDebitoVenta_RecuperoGastos" />
+          <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+          <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+          <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+          <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+          <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+          <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+          <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+          <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+          <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+          <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+          <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+          <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+          <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+          <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+          <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+          <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+          <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+          <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+          <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+          <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+          <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+          <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+          <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+          <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+          <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+          <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+          <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
           <ScalarProperty Name="FechaFinServicio" ColumnName="FechaFinServicio" />
           <ScalarProperty Name="FechaInicioServicio" ColumnName="FechaInicioServicio" />
           <ScalarProperty Name="IdClienteObservaciones" ColumnName="IdClienteObservaciones" />
@@ -3890,6 +3958,37 @@
     <EntitySetMapping Name="NotasDebitoes">
       <EntityTypeMapping TypeName="DemoProntoModel.NotasDebito">
         <MappingFragment StoreEntitySet="NotasDebito">
+          <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
+          <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
+          <ScalarProperty Name="IdAutorizoRecuperoGastos" ColumnName="IdAutorizoRecuperoGastos" />
+          <ScalarProperty Name="ActivarRecuperoGastos" ColumnName="ActivarRecuperoGastos" />
+          <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+          <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+          <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+          <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+          <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+          <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+          <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+          <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+          <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+          <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+          <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+          <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+          <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+          <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+          <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+          <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+          <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+          <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+          <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+          <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+          <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+          <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+          <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+          <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+          <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+          <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+          <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
           <ScalarProperty Name="IdClienteObservaciones" ColumnName="IdClienteObservaciones" />
           <ScalarProperty Name="IdIdentificacionCAE" ColumnName="IdIdentificacionCAE" />
           <ScalarProperty Name="FechaVencimientoORechazoCAE" ColumnName="FechaVencimientoORechazoCAE" />
@@ -4067,6 +4166,10 @@
     <EntitySetMapping Name="ListasPreciosDetalles">
       <EntityTypeMapping TypeName="DemoProntoModel.ListasPreciosDetalle">
         <MappingFragment StoreEntitySet="ListasPreciosDetalle">
+          <ScalarProperty Name="PrecioVagonesCaladaExportacion" ColumnName="PrecioVagonesCaladaExportacion" />
+          <ScalarProperty Name="PrecioVagonesBalanzaExportacion" ColumnName="PrecioVagonesBalanzaExportacion" />
+          <ScalarProperty Name="PrecioVagonesCalada" ColumnName="PrecioVagonesCalada" />
+          <ScalarProperty Name="PrecioVagonesBalanza" ColumnName="PrecioVagonesBalanza" />
           <ScalarProperty Name="MaximaCantidadParaPrecioEmbarque" ColumnName="MaximaCantidadParaPrecioEmbarque" />
           <ScalarProperty Name="PrecioEmbarque2" ColumnName="PrecioEmbarque2" />
           <ScalarProperty Name="Precio9" ColumnName="Precio9" />
@@ -4241,6 +4344,9 @@
     <EntitySetMapping Name="Valores">
       <EntityTypeMapping TypeName="DemoProntoModel.Valore">
         <MappingFragment StoreEntitySet="Valores">
+          <ScalarProperty Name="PorcentajePercepcionIva" ColumnName="PorcentajePercepcionIva" />
+          <ScalarProperty Name="IdCuentaPercepcionIva" ColumnName="IdCuentaPercepcionIva" />
+          <ScalarProperty Name="PercepcionIva" ColumnName="PercepcionIva" />
           <ScalarProperty Name="IdReciboAsignado" ColumnName="IdReciboAsignado" />
           <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
           <ScalarProperty Name="IdOrigen" ColumnName="IdOrigen" />
@@ -4343,6 +4449,7 @@
     <EntitySetMapping Name="ImpuestosDirectos">
       <EntityTypeMapping TypeName="DemoProntoModel.ImpuestosDirecto">
         <MappingFragment StoreEntitySet="ImpuestosDirectos">
+          <ScalarProperty Name="ImpuestoMinimo" ColumnName="ImpuestoMinimo" />
           <ScalarProperty Name="CodigoRegimen" ColumnName="CodigoRegimen" />
           <ScalarProperty Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" ColumnName="ParaInscriptosEnRegistroFiscalOperadoresGranos" />
           <ScalarProperty Name="TopeAnual" ColumnName="TopeAnual" />
@@ -4742,6 +4849,33 @@
     <EntitySetMapping Name="Devoluciones">
       <EntityTypeMapping TypeName="DemoProntoModel.Devolucione">
         <MappingFragment StoreEntitySet="Devoluciones">
+          <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
+          <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
+          <ScalarProperty Name="IdIBCondicion39" ColumnName="IdIBCondicion39" />
+          <ScalarProperty Name="PorcentajeIBrutos38" ColumnName="PorcentajeIBrutos38" />
+          <ScalarProperty Name="RetencionIBrutos38" ColumnName="RetencionIBrutos38" />
+          <ScalarProperty Name="IdIBCondicion38" ColumnName="IdIBCondicion38" />
+          <ScalarProperty Name="PorcentajeIBrutos37" ColumnName="PorcentajeIBrutos37" />
+          <ScalarProperty Name="RetencionIBrutos37" ColumnName="RetencionIBrutos37" />
+          <ScalarProperty Name="IdIBCondicion37" ColumnName="IdIBCondicion37" />
+          <ScalarProperty Name="PorcentajeIBrutos36" ColumnName="PorcentajeIBrutos36" />
+          <ScalarProperty Name="RetencionIBrutos36" ColumnName="RetencionIBrutos36" />
+          <ScalarProperty Name="IdIBCondicion36" ColumnName="IdIBCondicion36" />
+          <ScalarProperty Name="PorcentajeIBrutos35" ColumnName="PorcentajeIBrutos35" />
+          <ScalarProperty Name="RetencionIBrutos35" ColumnName="RetencionIBrutos35" />
+          <ScalarProperty Name="IdIBCondicion35" ColumnName="IdIBCondicion35" />
+          <ScalarProperty Name="PorcentajeIBrutos34" ColumnName="PorcentajeIBrutos34" />
+          <ScalarProperty Name="RetencionIBrutos34" ColumnName="RetencionIBrutos34" />
+          <ScalarProperty Name="IdIBCondicion34" ColumnName="IdIBCondicion34" />
+          <ScalarProperty Name="PorcentajeIBrutos33" ColumnName="PorcentajeIBrutos33" />
+          <ScalarProperty Name="RetencionIBrutos33" ColumnName="RetencionIBrutos33" />
+          <ScalarProperty Name="IdIBCondicion33" ColumnName="IdIBCondicion33" />
+          <ScalarProperty Name="PorcentajeIBrutos32" ColumnName="PorcentajeIBrutos32" />
+          <ScalarProperty Name="RetencionIBrutos32" ColumnName="RetencionIBrutos32" />
+          <ScalarProperty Name="IdIBCondicion32" ColumnName="IdIBCondicion32" />
+          <ScalarProperty Name="PorcentajeIBrutos31" ColumnName="PorcentajeIBrutos31" />
+          <ScalarProperty Name="RetencionIBrutos31" ColumnName="RetencionIBrutos31" />
+          <ScalarProperty Name="IdIBCondicion31" ColumnName="IdIBCondicion31" />
           <ScalarProperty Name="AjusteIva" ColumnName="AjusteIva" />
           <ScalarProperty Name="OtrasPercepciones3Desc" ColumnName="OtrasPercepciones3Desc" />
           <ScalarProperty Name="OtrasPercepciones3" ColumnName="OtrasPercepciones3" />
@@ -5395,6 +5529,7 @@
     <EntitySetMapping Name="TarifasFletes">
       <EntityTypeMapping TypeName="DemoProntoModel.TarifasFlete">
         <MappingFragment StoreEntitySet="TarifasFletes">
+          <ScalarProperty Name="ValorUnitario2" ColumnName="ValorUnitario2" />
           <ScalarProperty Name="FechaVigencia" ColumnName="FechaVigencia" />
           <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
           <ScalarProperty Name="LimiteSuperior" ColumnName="LimiteSuperior" />
@@ -6616,5 +6751,236 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CartasDePorteControlDescargas">
+      <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorteControlDescarga">
+        <MappingFragment StoreEntitySet="CartasDePorteControlDescarga">
+          <ScalarProperty Name="PorcentajeDesnormalizado" ColumnName="PorcentajeDesnormalizado" />
+          <ScalarProperty Name="TotalDescargaDia" ColumnName="TotalDescargaDia" />
+          <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
+          <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdCartasDePorteControlDescarga" ColumnName="IdCartasDePorteControlDescarga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="wCartasDePorte_TX_EstadisticasDeDescarga" FunctionName="DemoProntoModel.Store.wCartasDePorte_TX_EstadisticasDeDescarga">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DemoProntoModel.wCartasDePorte_TX_EstadisticasDeDescarga_Result1">
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="Modo" ColumnName="Modo" />
+          <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+          <ScalarProperty Name="CantCartas" ColumnName="CantCartas" />
+          <ScalarProperty Name="Merma" ColumnName="Merma" />
+          <ScalarProperty Name="NetoPto" ColumnName="NetoPto" />
+          <ScalarProperty Name="NetoFinal" ColumnName="NetoFinal" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="PV1" ColumnName="PV1" />
+          <ScalarProperty Name="PV2" ColumnName="PV2" />
+          <ScalarProperty Name="PV3" ColumnName="PV3" />
+          <ScalarProperty Name="PV4" ColumnName="PV4" />
+          <ScalarProperty Name="TotalEntrega" ColumnName="TotalEntrega" />
+          <ScalarProperty Name="TotalExportacion" ColumnName="TotalExportacion" />
+          <ScalarProperty Name="TotalBuques" ColumnName="TotalBuques" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Porcent" ColumnName="Porcent" />
+          <ScalarProperty Name="PeriodoAnterior" ColumnName="PeriodoAnterior" />
+          <ScalarProperty Name="Diferen" ColumnName="Diferen" />
+          <ScalarProperty Name="DiferencPorcent" ColumnName="DiferencPorcent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="fSQL_GetDataTableFiltradoYPaginado" FunctionName="DemoProntoModel.Store.fSQL_GetDataTableFiltradoYPaginado">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result3">
+          <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
+          <ScalarProperty Name="NumeroCartaDePorte" ColumnName="NumeroCartaDePorte" />
+          <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="Anulada" ColumnName="Anulada" />
+          <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
+          <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
+          <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+          <ScalarProperty Name="CuentaOrden1" ColumnName="CuentaOrden1" />
+          <ScalarProperty Name="CuentaOrden2" ColumnName="CuentaOrden2" />
+          <ScalarProperty Name="Corredor" ColumnName="Corredor" />
+          <ScalarProperty Name="Entregador" ColumnName="Entregador" />
+          <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
+          <ScalarProperty Name="Patente" ColumnName="Patente" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="IdStock" ColumnName="IdStock" />
+          <ScalarProperty Name="Partida" ColumnName="Partida" />
+          <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+          <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Cupo" ColumnName="Cupo" />
+          <ScalarProperty Name="NetoProc" ColumnName="NetoProc" />
+          <ScalarProperty Name="Calidad" ColumnName="Calidad" />
+          <ScalarProperty Name="BrutoPto" ColumnName="BrutoPto" />
+          <ScalarProperty Name="TaraPto" ColumnName="TaraPto" />
+          <ScalarProperty Name="NetoPto" ColumnName="NetoPto" />
+          <ScalarProperty Name="Acoplado" ColumnName="Acoplado" />
+          <ScalarProperty Name="Humedad" ColumnName="Humedad" />
+          <ScalarProperty Name="Merma" ColumnName="Merma" />
+          <ScalarProperty Name="NetoFinal" ColumnName="NetoFinal" />
+          <ScalarProperty Name="FechaDeCarga" ColumnName="FechaDeCarga" />
+          <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+          <ScalarProperty Name="CEE" ColumnName="CEE" />
+          <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+          <ScalarProperty Name="TransportistaCUITdesnormalizado" ColumnName="TransportistaCUITdesnormalizado" />
+          <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+          <ScalarProperty Name="ChoferCUITdesnormalizado" ColumnName="ChoferCUITdesnormalizado" />
+          <ScalarProperty Name="CTG" ColumnName="CTG" />
+          <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+          <ScalarProperty Name="Destino" ColumnName="Destino" />
+          <ScalarProperty Name="Subcontr1" ColumnName="Subcontr1" />
+          <ScalarProperty Name="Subcontr2" ColumnName="Subcontr2" />
+          <ScalarProperty Name="Contrato1" ColumnName="Contrato1" />
+          <ScalarProperty Name="contrato2" ColumnName="contrato2" />
+          <ScalarProperty Name="KmARecorrer" ColumnName="KmARecorrer" />
+          <ScalarProperty Name="Tarifa" ColumnName="Tarifa" />
+          <ScalarProperty Name="FechaDescarga" ColumnName="FechaDescarga" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="NRecibo" ColumnName="NRecibo" />
+          <ScalarProperty Name="CalidadDe" ColumnName="CalidadDe" />
+          <ScalarProperty Name="TaraFinal" ColumnName="TaraFinal" />
+          <ScalarProperty Name="BrutoFinal" ColumnName="BrutoFinal" />
+          <ScalarProperty Name="Fumigada" ColumnName="Fumigada" />
+          <ScalarProperty Name="Secada" ColumnName="Secada" />
+          <ScalarProperty Name="Exporta" ColumnName="Exporta" />
+          <ScalarProperty Name="NobleExtranos" ColumnName="NobleExtranos" />
+          <ScalarProperty Name="NobleNegros" ColumnName="NobleNegros" />
+          <ScalarProperty Name="NobleQuebrados" ColumnName="NobleQuebrados" />
+          <ScalarProperty Name="NobleDaniados" ColumnName="NobleDaniados" />
+          <ScalarProperty Name="NobleChamico" ColumnName="NobleChamico" />
+          <ScalarProperty Name="NobleChamico2" ColumnName="NobleChamico2" />
+          <ScalarProperty Name="NobleRevolcado" ColumnName="NobleRevolcado" />
+          <ScalarProperty Name="NobleObjetables" ColumnName="NobleObjetables" />
+          <ScalarProperty Name="NobleAmohosados" ColumnName="NobleAmohosados" />
+          <ScalarProperty Name="NobleHectolitrico" ColumnName="NobleHectolitrico" />
+          <ScalarProperty Name="NobleCarbon" ColumnName="NobleCarbon" />
+          <ScalarProperty Name="NoblePanzaBlanca" ColumnName="NoblePanzaBlanca" />
+          <ScalarProperty Name="NoblePicados" ColumnName="NoblePicados" />
+          <ScalarProperty Name="NobleMGrasa" ColumnName="NobleMGrasa" />
+          <ScalarProperty Name="NobleAcidezGrasa" ColumnName="NobleAcidezGrasa" />
+          <ScalarProperty Name="NobleVerdes" ColumnName="NobleVerdes" />
+          <ScalarProperty Name="NobleGrado" ColumnName="NobleGrado" />
+          <ScalarProperty Name="NobleConforme" ColumnName="NobleConforme" />
+          <ScalarProperty Name="NobleACamara" ColumnName="NobleACamara" />
+          <ScalarProperty Name="Cosecha" ColumnName="Cosecha" />
+          <ScalarProperty Name="HumedadDesnormalizada" ColumnName="HumedadDesnormalizada" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
+          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+          <ScalarProperty Name="SubnumeroVagon" ColumnName="SubnumeroVagon" />
+          <ScalarProperty Name="TarifaFacturada" ColumnName="TarifaFacturada" />
+          <ScalarProperty Name="TarifaSubcontratista1" ColumnName="TarifaSubcontratista1" />
+          <ScalarProperty Name="TarifaSubcontratista2" ColumnName="TarifaSubcontratista2" />
+          <ScalarProperty Name="FechaArribo" ColumnName="FechaArribo" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+          <ScalarProperty Name="NumeroSubfijo" ColumnName="NumeroSubfijo" />
+          <ScalarProperty Name="IdEstablecimiento" ColumnName="IdEstablecimiento" />
+          <ScalarProperty Name="EnumSyngentaDivision" ColumnName="EnumSyngentaDivision" />
+          <ScalarProperty Name="Corredor2" ColumnName="Corredor2" />
+          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+          <ScalarProperty Name="EstaArchivada" ColumnName="EstaArchivada" />
+          <ScalarProperty Name="ExcluirDeSubcontratistas" ColumnName="ExcluirDeSubcontratistas" />
+          <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+          <ScalarProperty Name="IdClienteAFacturarle" ColumnName="IdClienteAFacturarle" />
+          <ScalarProperty Name="SubnumeroDeFacturacion" ColumnName="SubnumeroDeFacturacion" />
+          <ScalarProperty Name="AgregaItemDeGastosAdministrativos" ColumnName="AgregaItemDeGastosAdministrativos" />
+          <ScalarProperty Name="CalidadGranosQuemados" ColumnName="CalidadGranosQuemados" />
+          <ScalarProperty Name="CalidadGranosQuemadosBonifica_o_Rebaja" ColumnName="CalidadGranosQuemadosBonifica_o_Rebaja" />
+          <ScalarProperty Name="CalidadTierra" ColumnName="CalidadTierra" />
+          <ScalarProperty Name="CalidadTierraBonifica_o_Rebaja" ColumnName="CalidadTierraBonifica_o_Rebaja" />
+          <ScalarProperty Name="CalidadMermaChamico" ColumnName="CalidadMermaChamico" />
+          <ScalarProperty Name="CalidadMermaChamicoBonifica_o_Rebaja" ColumnName="CalidadMermaChamicoBonifica_o_Rebaja" />
+          <ScalarProperty Name="CalidadMermaZarandeo" ColumnName="CalidadMermaZarandeo" />
+          <ScalarProperty Name="CalidadMermaZarandeoBonifica_o_Rebaja" ColumnName="CalidadMermaZarandeoBonifica_o_Rebaja" />
+          <ScalarProperty Name="FueraDeEstandar" ColumnName="FueraDeEstandar" />
+          <ScalarProperty Name="CalidadPuntaSombreada" ColumnName="CalidadPuntaSombreada" />
+          <ScalarProperty Name="CobraAcarreo" ColumnName="CobraAcarreo" />
+          <ScalarProperty Name="LiquidaViaje" ColumnName="LiquidaViaje" />
+          <ScalarProperty Name="IdClienteAuxiliar" ColumnName="IdClienteAuxiliar" />
+          <ScalarProperty Name="CalidadDescuentoFinal" ColumnName="CalidadDescuentoFinal" />
+          <ScalarProperty Name="PathImagen" ColumnName="PathImagen" />
+          <ScalarProperty Name="PathImagen2" ColumnName="PathImagen2" />
+          <ScalarProperty Name="AgrupadorDeTandaPeriodos" ColumnName="AgrupadorDeTandaPeriodos" />
+          <ScalarProperty Name="ClaveEncriptada" ColumnName="ClaveEncriptada" />
+          <ScalarProperty Name="NumeroCartaEnTextoParaBusqueda" ColumnName="NumeroCartaEnTextoParaBusqueda" />
+          <ScalarProperty Name="IdClienteEntregador" ColumnName="IdClienteEntregador" />
+          <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
+          <ScalarProperty Name="SojaSustentableCodCondicion" ColumnName="SojaSustentableCodCondicion" />
+          <ScalarProperty Name="SojaSustentableCondicion" ColumnName="SojaSustentableCondicion" />
+          <ScalarProperty Name="SojaSustentableNroEstablecimientoDeProduccion" ColumnName="SojaSustentableNroEstablecimientoDeProduccion" />
+          <ScalarProperty Name="IdClientePagadorFlete" ColumnName="IdClientePagadorFlete" />
+          <ScalarProperty Name="SubnumeroVagonEnTextoParaBusqueda" ColumnName="SubnumeroVagonEnTextoParaBusqueda" />
+          <ScalarProperty Name="IdCorredor2" ColumnName="IdCorredor2" />
+          <ScalarProperty Name="Acopio1" ColumnName="Acopio1" />
+          <ScalarProperty Name="Acopio2" ColumnName="Acopio2" />
+          <ScalarProperty Name="Acopio3" ColumnName="Acopio3" />
+          <ScalarProperty Name="Acopio4" ColumnName="Acopio4" />
+          <ScalarProperty Name="Acopio5" ColumnName="Acopio5" />
+          <ScalarProperty Name="Acopio6" ColumnName="Acopio6" />
+          <ScalarProperty Name="AcopioFacturarleA" ColumnName="AcopioFacturarleA" />
+          <ScalarProperty Name="CalidadGranosDanadosRebaja" ColumnName="CalidadGranosDanadosRebaja" />
+          <ScalarProperty Name="CalidadGranosExtranosRebaja" ColumnName="CalidadGranosExtranosRebaja" />
+          <ScalarProperty Name="NumeroCompleto" ColumnName="NumeroCompleto" />
+          <ScalarProperty Name="MinutosModifico" ColumnName="MinutosModifico" />
+          <ScalarProperty Name="EspecieONCAA" ColumnName="EspecieONCAA" />
+          <ScalarProperty Name="CodigoSAJPYA" ColumnName="CodigoSAJPYA" />
+          <ScalarProperty Name="txtCodigoZeni" ColumnName="txtCodigoZeni" />
+          <ScalarProperty Name="TitularDesc" ColumnName="TitularDesc" />
+          <ScalarProperty Name="TitularCUIT" ColumnName="TitularCUIT" />
+          <ScalarProperty Name="IntermediarioDesc" ColumnName="IntermediarioDesc" />
+          <ScalarProperty Name="IntermediarioCUIT" ColumnName="IntermediarioCUIT" />
+          <ScalarProperty Name="RComercialDesc" ColumnName="RComercialDesc" />
+          <ScalarProperty Name="RComercialCUIT" ColumnName="RComercialCUIT" />
+          <ScalarProperty Name="CorredorDesc" ColumnName="CorredorDesc" />
+          <ScalarProperty Name="CorredorCUIT" ColumnName="CorredorCUIT" />
+          <ScalarProperty Name="DestinatarioDesc" ColumnName="DestinatarioDesc" />
+          <ScalarProperty Name="EntregadorDesc" ColumnName="EntregadorDesc" />
+          <ScalarProperty Name="DestinatarioCUIT" ColumnName="DestinatarioCUIT" />
+          <ScalarProperty Name="ClienteAuxiliarDesc" ColumnName="ClienteAuxiliarDesc" />
+          <ScalarProperty Name="ClienteAuxiliarCUIT" ColumnName="ClienteAuxiliarCUIT" />
+          <ScalarProperty Name="Subcontr1Desc" ColumnName="Subcontr1Desc" />
+          <ScalarProperty Name="Subcontr2Desc" ColumnName="Subcontr2Desc" />
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="TransportistaCUIT" ColumnName="TransportistaCUIT" />
+          <ScalarProperty Name="TransportistaDesc" ColumnName="TransportistaDesc" />
+          <ScalarProperty Name="ChoferCUIT" ColumnName="ChoferCUIT" />
+          <ScalarProperty Name="ChoferDesc" ColumnName="ChoferDesc" />
+          <ScalarProperty Name="ProcedenciaDesc" ColumnName="ProcedenciaDesc" />
+          <ScalarProperty Name="ProcedenciaCodigoPostal" ColumnName="ProcedenciaCodigoPostal" />
+          <ScalarProperty Name="ProcedenciaCodigoONCAA" ColumnName="ProcedenciaCodigoONCAA" />
+          <ScalarProperty Name="ProcedenciaProvinciaDesc" ColumnName="ProcedenciaProvinciaDesc" />
+          <ScalarProperty Name="DestinoDesc" ColumnName="DestinoDesc" />
+          <ScalarProperty Name="DestinoCodigoPostal" ColumnName="DestinoCodigoPostal" />
+          <ScalarProperty Name="DestinoCodigoONCAA" ColumnName="DestinoCodigoONCAA" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+          <ScalarProperty Name="Ano" ColumnName="Ano" />
+          <ScalarProperty Name="Factura" ColumnName="Factura" />
+          <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+          <ScalarProperty Name="ClienteFacturado" ColumnName="ClienteFacturado" />
+          <ScalarProperty Name="ClienteFacturadoCUIT" ColumnName="ClienteFacturadoCUIT" />
+          <ScalarProperty Name="CalidadDesc" ColumnName="CalidadDesc" />
+          <ScalarProperty Name="UsuarioIngreso" ColumnName="UsuarioIngreso" />
+          <ScalarProperty Name="EstablecimientoDesc" ColumnName="EstablecimientoDesc" />
+          <ScalarProperty Name="ClientePagadorFleteDesc" ColumnName="ClientePagadorFleteDesc" />
+          <ScalarProperty Name="ProcedenciaProvinciaPartido" ColumnName="ProcedenciaProvinciaPartido" />
+          <ScalarProperty Name="ProcedenciaPartidoNormalizadaCodigo" ColumnName="ProcedenciaPartidoNormalizadaCodigo" />
+          <ScalarProperty Name="DestinoProvinciaDesc" ColumnName="DestinoProvinciaDesc" />
+          <ScalarProperty Name="ProcedenciaPartidoNormalizada" ColumnName="ProcedenciaPartidoNormalizada" />
+          <ScalarProperty Name="CorredorDesc2" ColumnName="CorredorDesc2" />
+          <ScalarProperty Name="CorredorCUIT2" ColumnName="CorredorCUIT2" />
+          <ScalarProperty Name="EntregadorCUIT" ColumnName="EntregadorCUIT" />
+          <ScalarProperty Name="CodigoAFIP" ColumnName="CodigoAFIP" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -1168,7 +1168,9 @@ namespace ProntoMVC.Controllers
             ObjectParameter o = new ObjectParameter("IdAutorizacionPorComprobante", typeof(int)); // el molestísimo output....
 
 
-            db.AutorizacionesPorComprobante_A(OrdenAutorizacion, IdAutorizo, DateTime.Now, "SI", IdFormulario, IdComprobante, o);
+            db.AutorizacionesPorComprobante_A( o,  IdFormulario, IdComprobante, OrdenAutorizacion, IdAutorizo, DateTime.Now, "SI");
+            
+
 
             //db.AutorizacionesPorComprobante_A( IdFormulario,   //@IdFormulario int,  
             //                                                IdComprobante,//                                                                        @IdComprobante int,

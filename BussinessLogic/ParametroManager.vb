@@ -519,6 +519,7 @@ Namespace Pronto.ERP.Bll
 
         '<DataObjectMethod(DataObjectMethodType.Select, True)> _
         Public Shared Function TraerValorParametro2(ByVal SC As String, ByVal Campo As String) As Object
+            If Campo.Length > 50 Then Throw New Exception("No puede ser mas largo de 50 caracteres")
 
             Dim mCampo As String
             Dim oRsParametros2 As System.Data.DataSet
@@ -547,6 +548,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
         Public Shared Sub GuardarValorParametro2(ByVal SC As String, ByVal Campo As String, ByVal Valor As String)
+            If Campo.Length > 50 Then Throw New Exception("No puede ser mas largo de 50 caracteres")
 
             Dim mCampo As String
 

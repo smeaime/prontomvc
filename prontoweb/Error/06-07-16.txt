@@ -1,0 +1,1214 @@
+
+Log Entry : 
+07/06/2016 16:46:25
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+07/06/2016 16:48:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 0
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 1
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:42
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:42
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:51
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:51
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:52
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 06/07/2016 04:52:52 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:52
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.06/07/2016 04:52:52 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:52
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:52
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.06/07/2016 04:52:52 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: Cannot create ActiveX component.
+   at Microsoft.VisualBasic.Interaction.CreateObject(String ProgId, String ServerName)
+   at ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearAppCompronto(String SC) in E:\Backup\BDL\ProntoWeb\Soluciones\ClaseMolestos\ClaseMigrar.vb:line 34
+   at LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 5416
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+BusinessLogic
+__________________________
+
+Log Entry : 
+07/06/2016 16:52:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:generarLoteFacturas(). 3segs System.Exception: No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:15
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 06/07/2016 04:53:17 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.06/07/2016 04:53:17 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.06/07/2016 04:53:18 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: Cannot create ActiveX component.
+   at Microsoft.VisualBasic.Interaction.CreateObject(String ProgId, String ServerName)
+   at ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearAppCompronto(String SC) in E:\Backup\BDL\ProntoWeb\Soluciones\ClaseMolestos\ClaseMigrar.vb:line 34
+   at LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 5416
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+BusinessLogic
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:generarLoteFacturas(). 2segs System.Exception: No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:35
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 06/07/2016 04:53:35 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:35
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.06/07/2016 04:53:35 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:35
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+07/06/2016 16:53:35
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.06/07/2016 04:53:35 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: Cannot create ActiveX component.
+   at Microsoft.VisualBasic.Interaction.CreateObject(String ProgId, String ServerName)
+   at ClaseMigrar.ProntoFuncionesGeneralesCOMPRONTO.CrearAppCompronto(String SC) in E:\Backup\BDL\ProntoWeb\Soluciones\ClaseMolestos\ClaseMigrar.vb:line 34
+   at LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 5416
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+BusinessLogic
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:generarLoteFacturas(). 638segs System.Exception: No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 06/07/2016 05:04:21 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.06/07/2016 05:04:21 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.06/07/2016 05:04:21 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Error en la llamada a CreaFacturaCOMpronto. System.InvalidCastException: Operator '=' is not defined for type 'Field' and type 'Integer'.
+   at Microsoft.VisualBasic.CompilerServices.Operators.InvokeObjectUserDefinedOperator(UserDefinedOperator Op, Object[] Arguments)
+   at Microsoft.VisualBasic.CompilerServices.Operators.InvokeUserDefinedOperator(UserDefinedOperator Op, Object[] Arguments)
+   at Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   at LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 5721
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+BusinessLogic
+__________________________
+
+Log Entry : 
+07/06/2016 17:04:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:generarLoteFacturas(). 33segs System.Exception: No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+__________________________
+
+Log Entry : 
+07/06/2016 17:06:06
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:13
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 06/07/2016 05:07:14 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.06/07/2016 05:07:14 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+07/06/2016 17:07:15
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.06/07/2016 05:07:15 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:08:14
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:79390 79390Explosión al llamar a Compronto.Factura.Guardar(). Ojo porque si se generó pero no se manda a imprimir les rompe la numeración!!!  La factura quizas queda por la mitad y no genera el subdiario (eso es un problema del ComPronto).  Si es Type Mismatch se puede dar tanto  cuando se rompe la compatibilidad del COM, como cuando se rompe la compatibilidad del  recordset/storeproc/tabla (y esto es lo mas probable, ya que está pasando en el guardar() ) [verificar que desde Pronto se puede dar de alta esta misma factura con el  mismo cliente. Si sigue el error, verificar que están corridos los storeprocs de  Pronto actualizados]     Si es 'Application uses a value of the wrong type' puede ser el tipo o  un overflow del tipo, una cadena muy larga. Queda algún tipo de rastro en el log sql de Pronto? -no vas a encontrar mucha informacion ahí. Hay que correr el Profiler mientras facturás y ver cual es la ultima llamada antes de Log_InsertarRegistro.  Puede ser la actualizacion de la entidad Cliente,  así que por Pronto hay que intentar facturarle al mismo cliente Y TAMBIEN ver si se puede editar y grabar el formulario de cliente. -Por qué fue que tuvimos un problema así en Capen? Qué era lo que tenía el Clientes_M, mal el largo de un campo? System.Runtime.InteropServices.COMException (0x800A0CC1): No se encontró el elemento en la colección que corresponde al nombre o el ordinal solicitado.
+   at Microsoft.VisualBasic.CompilerServices.LateBinding.LateGet(Object o, Type objType, String name, Object[] args, String[] paramnames, Boolean[] CopyBack)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   at LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 6115
+__________________________
+
+Log Entry : 
+07/06/2016 17:08:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:08:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:08:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+BusinessLogic
+__________________________
+
+Log Entry : 
+07/06/2016 17:08:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:generarLoteFacturas(). 63segs System.Exception: No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:46
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 06/07/2016 05:11:47 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.06/07/2016 05:11:47 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:47
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+07/06/2016 17:11:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.06/07/2016 05:11:48 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:14:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:79390 79390Explosión al llamar a Compronto.Factura.Guardar(). Ojo porque si se generó pero no se manda a imprimir les rompe la numeración!!!  La factura quizas queda por la mitad y no genera el subdiario (eso es un problema del ComPronto).  Si es Type Mismatch se puede dar tanto  cuando se rompe la compatibilidad del COM, como cuando se rompe la compatibilidad del  recordset/storeproc/tabla (y esto es lo mas probable, ya que está pasando en el guardar() ) [verificar que desde Pronto se puede dar de alta esta misma factura con el  mismo cliente. Si sigue el error, verificar que están corridos los storeprocs de  Pronto actualizados]     Si es 'Application uses a value of the wrong type' puede ser el tipo o  un overflow del tipo, una cadena muy larga. Queda algún tipo de rastro en el log sql de Pronto? -no vas a encontrar mucha informacion ahí. Hay que correr el Profiler mientras facturás y ver cual es la ultima llamada antes de Log_InsertarRegistro.  Puede ser la actualizacion de la entidad Cliente,  así que por Pronto hay que intentar facturarle al mismo cliente Y TAMBIEN ver si se puede editar y grabar el formulario de cliente. -Por qué fue que tuvimos un problema así en Capen? Qué era lo que tenía el Clientes_M, mal el largo de un campo? System.Runtime.InteropServices.COMException (0x800A0CC1): No se encontró el elemento en la colección que corresponde al nombre o el ordinal solicitado.
+   at Microsoft.VisualBasic.CompilerServices.LateBinding.LateGet(Object o, Type objType, String name, Object[] args, String[] paramnames, Boolean[] CopyBack)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   at LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 6115
+__________________________
+
+Log Entry : 
+07/06/2016 17:14:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:14:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+07/06/2016 17:14:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+BusinessLogic
+__________________________
+
+Log Entry : 
+07/06/2016 17:14:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:generarLoteFacturas(). 144segs System.Exception: No se han podido generar facturas. 
+No se pudo crear la factura para <a href="Cliente.aspx?Id=1391" target="_blank">SISTEMAS AGROPECUARIOS SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4710
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+__________________________
+
+Log Entry : 
+07/06/2016 17:24:08
+
+Log Entry : 
+07/06/2016 17:25:08
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2277235. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:27
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6462
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 06/07/2016 05:25:31 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.06/07/2016 05:25:31 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+07/06/2016 17:25:32
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.06/07/2016 05:25:32 p.m.
+__________________________
+
+Log Entry : 
+07/06/2016 17:26:22
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at Pronto.ERP.Dal.GeneralDB.EjecutarSP(String SC, String Nombre, Object[] Parametros)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+07/06/2016 17:26:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Log_InsertarRegistro - System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at Pronto.ERP.Dal.GeneralDB.EjecutarSP(String SC, String Nombre, Object[] Parametros)
+ClientConnectionId:8eec5832-7c23-42e3-bdb1-7d14f44e6c70
+Error Number:-2,State:0,Class:11
+   at Pronto.ERP.Dal.GeneralDB.EjecutarSP(String SC, String Nombre, Object[] Parametros)
+   at Pronto.ERP.Bll.EntidadManager.Tarea(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 903
+   at Pronto.ERP.Bll.EntidadManager.LogPronto(String SC, Int64 Id, String sTipoEntidadVARCHAR5, String sNombreUsuario, String str3, String str4, String str5, Int32 num1, Int32 num2, Int32 num3) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 546
+DataAccess
+__________________________
+
+Log Entry : 
+07/06/2016 17:27:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at Pronto.ERP.Dal.GeneralDB.EjecutarSP(String SC, String Nombre, Object[] Parametros)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+07/06/2016 17:27:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Log_InsertarRegistro - System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at Pronto.ERP.Dal.GeneralDB.EjecutarSP(String SC, String Nombre, Object[] Parametros)
+ClientConnectionId:8eec5832-7c23-42e3-bdb1-7d14f44e6c70
+Error Number:-2,State:0,Class:11
+   at Pronto.ERP.Dal.GeneralDB.EjecutarSP(String SC, String Nombre, Object[] Parametros)
+   at Pronto.ERP.Bll.EntidadManager.Tarea(String SC, String sStoreProcedure, Object[] Parametros) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 903
+   at Pronto.ERP.Bll.EntidadManager.LogPronto(String SC, Int64 Id, String sTipoEntidadVARCHAR5, String sNombreUsuario, String str3, String str4, String str5, Int32 num1, Int32 num2, Int32 num3) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 546
+DataAccess
+__________________________
+
+Log Entry : 
+07/06/2016 17:29:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:8eec5832-7c23-42e3-bdb1-7d14f44e6c70
+Error Number:-2,State:0,Class:11 - UPDATE CartasDePorte SET IdFacturaImputada=79391  WHERE IdCartaDePorte=2277231 500 0
+__________________________
+
+Log Entry : 
+07/06/2016 17:30:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+__________________________
+
+Log Entry : 
+07/06/2016 17:30:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Explota la imputacion
+__________________________
+
+Log Entry : 
+07/06/2016 17:30:53
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 793
+   at CartaDePorteManager.ImputoLaCDP(CartaDePorte oCDP, Int32 idfactura, String SC, String nombreUsuario, List`1 imput) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 10765
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4661
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+07/06/2016 17:30:53
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:generarLoteFacturas(). 321segs System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 793
+   at CartaDePorteManager.ImputoLaCDP(CartaDePorte oCDP, Int32 idfactura, String SC, String nombreUsuario, List`1 imput) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 10765
+   at LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Object& pag, Object& sesionId, Int64 optFacturarA, GridView& gvFacturasGeneradas, String txtFacturarATerceros, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 4661
+   at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 1887
+ClientConnectionId:8eec5832-7c23-42e3-bdb1-7d14f44e6c70
+Error Number:-2,State:0,Class:11
+__________________________

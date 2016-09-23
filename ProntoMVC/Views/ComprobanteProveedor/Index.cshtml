@@ -262,10 +262,38 @@ If you want additionally remove vertical border between the cells in the grid yo
                         { name: 'Tipo', index: 'Numero', align: 'left', width: 230, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'Nro int', index: 'Numero', align: 'right', width: 80, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'Nro', index: 'Orden', align: 'right', width: 160, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
-                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                         { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                       {
+                            name: 'FechaSalida', index: 'FechaSalida', width: 100, align: 'center',
+                            sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                            datefmt: 'dd/mm/yy',
+
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
+
+                        },
+
+
+                       { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'codProveedor', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Proveedor', index: 'zzzzzz', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -289,8 +317,35 @@ If you want additionally remove vertical border between the cells in the grid yo
                         { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
                         { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+
+                        {
+                            name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center',
+                            sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                            datefmt: 'dd/mm/yy',
+
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
+
+                        },
+
+                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
