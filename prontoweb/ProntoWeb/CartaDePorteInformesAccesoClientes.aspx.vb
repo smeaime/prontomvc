@@ -82,8 +82,7 @@ Partial Class CartaDePorteInformesAccesoClientes
             'agregar al where que aparezca la razon social de este cliente
             Dim rs As String
             Try
-                rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
-
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
                 rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
@@ -242,7 +241,8 @@ Partial Class CartaDePorteInformesAccesoClientes
         'agregar al where que aparezca la razon social de este cliente
         Dim rs As String
         Try
-            rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
+            rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+
         Catch ex As Exception
             'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, 
             ' uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
@@ -285,7 +285,8 @@ Partial Class CartaDePorteInformesAccesoClientes
 
                 Case Else
                     Try
-                        rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial
+                        rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+
                         Dim acopio As String = Mid(rs, InStr(rs, "A.C.A. ") + Len("A.C.A. "))
                         BuscaTextoEnCombo(optDivisionSyngenta, acopio)
 
@@ -329,7 +330,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         'agregar al where que aparezca la razon social de este cliente
         Dim rs As String
         Try
-            rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
+            rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
         Catch ex As Exception
             'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, 
             ' uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
@@ -1534,7 +1535,7 @@ Partial Class CartaDePorteInformesAccesoClientes
     Sub desc(b As Boolean, reducido As Boolean)
         Dim rs As String
         Try
-            rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
+            rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
         Catch ex As Exception
             'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, 
             ' uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla

@@ -264,7 +264,7 @@ namespace ProntoMVC
                 string nombrebase = "";
                 try
                 {
-                    nombrebase = System.Web.HttpContext.Current.Session["BasePronto"].ToString();
+                    if (System.Web.HttpContext.Current.Session!=null) nombrebase = System.Web.HttpContext.Current.Session["BasePronto"].ToString();
                     //nombrebase = this.HttpContext.Session["BasePronto"].ToString();
                 }
                 catch (Exception)
