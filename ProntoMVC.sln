@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Archivos Compartidos", "{A7AAB93D-0E57-4580-96C8-51710EF8D2FA}"
 	ProjectSection(SolutionItems) = preProject
@@ -91,7 +91,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProntoWeb", "ProntoWeb", "{
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ProntoCartaPorteApp", "..\prontoweb\ProntoCartaPorteApp.vbproj", "{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb(3)", "http://localhost:58911", "{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb", "http://localhost:58911", "{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
@@ -391,7 +391,6 @@ Global
 		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
