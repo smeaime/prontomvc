@@ -1,0 +1,129 @@
+
+Log Entry : 
+08/31/2016 16:24:08
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+08/31/2016 16:25:24
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/31/2016 16:25:28
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/31/2016 16:25:47
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85760. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/31/2016 16:25:49
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85760. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/31/2016 16:26:00
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:ImprimirFacturaElectronica idfac 85759
+__________________________
+
+Log Entry : 
+08/31/2016 16:26:02
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:Creando docx
+__________________________
+
+Log Entry : 
+08/31/2016 16:26:12
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(String str) in c:\Users\Administrador\Documents\bdl\pronto\Data\FuncionesGenerales.cs:line 88
+   at Pronto.ERP.Bll.EntidadManager.regexReplace2(String& cadena, String buscar, String reemplazo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 61
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+08/31/2016 16:27:49
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:docx creado
+__________________________
+
+Log Entry : 
+08/31/2016 16:27:49
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:Creando codigo barras
+__________________________
+
+Log Entry : 
+08/31/2016 16:27:50
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:Creando pdf
+__________________________
+
+Log Entry : 
+08/31/2016 16:28:16
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=85759. Error Message:salgo
+__________________________
+
+Log Entry : 
+08/31/2016 16:37:54
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+08/31/2016 16:55:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.InvalidCastException
+Operator '=' is not defined for type 'DBNull' and string "BarraCP".
+   at Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   at ExcelImportadorManager.FormatearColumnasFlexicapture(DataTable& dt) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4705
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/31/2016 16:55:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][TRANSPCUIT][][][][][][][][][][][][][][][][][][][][][][VAGON][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+08/31/2016 16:56:10
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.InvalidCastException
+Operator '=' is not defined for type 'DBNull' and string "BarraCP".
+   at Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   at ExcelImportadorManager.FormatearColumnasFlexicapture(DataTable& dt) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4705
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/31/2016 16:56:10
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][TRANSPCUIT][][][][][][][][][][][][][][][][][][][][][][VAGON][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+08/31/2016 16:57:19
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.InvalidCastException
+Operator '=' is not defined for type 'DBNull' and string "BarraCP".
+   at Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   at ExcelImportadorManager.FormatearColumnasFlexicapture(DataTable& dt) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4705
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/31/2016 16:57:19
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][TRANSPCUIT][][][][][][][][][][][][][][][][][][][][][][VAGON][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________

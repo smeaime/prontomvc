@@ -154,8 +154,32 @@
 
                     { name: 'IdComparativa', index: 'IdFactura', align: 'left', width: 0, editable: false, hidden: true },
                     { name: 'Numero', index: 'TipoABC', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                    { name: 'Fecha', index: 'PuntoVenta', align: 'center', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                 
+                   {
+                       name: 'Fecha', index: 'Fecha', width: 100, align: 'center',
+                       sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                       datefmt: 'dd/mm/yy',
 
+                       search: true,
+                       searchrules: {
+                           date: true
+                       },
+                       searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                           sopt: ['ge', 'le', 'eq'],
+                           dataInit: function (elem) {
+                               $(elem).datepicker({
+                                   dateFormat: 'dd/mm/yy',
+                                   changeYear: true,
+                                   changeMonth: true,
+                                   showButtonPanel: true,
+                                   onSelect: function () {
+                                       $(this).keydown();
+                                   }
+                               });
+                           }
+                       }
+
+                   },
                     { name: 'seleccion', index: '', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                     { name: 'Confecciono', index: '', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                     { name: 'Aprobo', index: '', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -166,8 +190,32 @@
                     { name: 'adjunto', index: '', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                     { name: 'adjunto', index: '', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                     { name: 'Anulada', index: '', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Fecha', index: '', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                
+                   {
+                       name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center',
+                       sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                       datefmt: 'dd/mm/yy',
 
+                       search: true,
+                       searchrules: {
+                           date: true
+                       },
+                       searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                           sopt: ['ge', 'le', 'eq'],
+                           dataInit: function (elem) {
+                               $(elem).datepicker({
+                                   dateFormat: 'dd/mm/yy',
+                                   changeYear: true,
+                                   changeMonth: true,
+                                   showButtonPanel: true,
+                                   onSelect: function () {
+                                       $(this).keydown();
+                                   }
+                               });
+                           }
+                       }
+
+                   },
 
 
                     { name: 'Anulo', index: '', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -215,7 +263,7 @@
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50, 100],
-            sortname: 'FechaFactura',
+            sortname: 'Fecha',
             sortorder: 'desc',
             viewrecords: true,
 

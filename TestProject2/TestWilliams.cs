@@ -31,12 +31,21 @@ using System.IO;
 
 using Pronto.ERP.Bll;
 
+using System.Data;
 
 using System.Diagnostics;
 
 using Microsoft.Reporting.WebForms;
 
 using System.Configuration;
+
+using BitMiracle.LibTiff.Classic;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+using System.Text;
+using System.Reflection;
+
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -93,14 +102,18 @@ namespace ProntoMVC.Tests
             //    sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
             //
 
-            DirApp = ConfigurationManager.AppSettings["DirApp"];
+            DirApp = ConfigurationManager.AppSettings["AplicacionConImagenes"];
 
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC"]);
 
             plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
 
             //probar conexion con timeout cortopp
-            var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
+            if (false)
+            {
+                // no logro que el timeout sea corto
+                var x = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 * from provincias", 8);
+            }
 
 
             bdlmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -177,6 +190,41 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void probar_todos_los_sincros()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+            string[] sincros = { "Beraza", "Granar" };
+//            string[] sincros = { "Beraza", "Zeni" };
+
+
+            for (int n = 0; n < sincros.Count(); n++)
+            {
+                var output2 = SincronismosWilliamsManager.GenerarSincro(sincros[n], ref sErrores, SC, "dominio", ref sTitulo,
+                                     CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                     "", -1, -1, -1, -1,
+                                     -1, -1, -1, -1,
+                                     CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                                     new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                                     -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+
+                //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+                System.Diagnostics.Process.Start(output2);
+            }
+
+
+        }
 
 
 
@@ -198,6 +246,1355 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+        [TestMethod]
+        public void Pegatina_23519_reyser_analisis_23519()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\150916\Anali19.txt";
+            
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556275834, 0, 0);
+            carta.NumeroCartaDePorte = 556275834;
+            carta.FechaArribo = new DateTime(2016, 1, 1);
+            carta.FechaDescarga = new DateTime(2016, 1, 1);
+            carta.PuntoVenta = 1;
+            carta.Cosecha = "2016/17";
+            carta.IdArticulo = 5;
+            carta.NetoFinalIncluyendoMermas = 30160;
+            carta.Merma = 0;
+            carta.Humedad = 0;
+            carta.HumedadDesnormalizada = 0;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, Convert.ToInt32( carta.PuntoVenta) , ref log, 
+                                    carta.FechaArribo.ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556275834, 0, 0);
+
+            Assert.AreEqual(528, carta.HumedadDesnormalizada);
+            Assert.AreEqual(0, carta.Merma);
+        }
+
+
+
+
+        [TestMethod]
+        public void Pegatina_23519_reyser_analisis_23761()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\080916\Anali19.txt";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556447516, 0, 0);
+            carta.NumeroCartaDePorte = 556447516;
+            carta.FechaArribo = new DateTime(2016, 1, 1);
+            carta.FechaDescarga= new DateTime(2016, 1, 1);
+            carta.PuntoVenta = 1;
+            carta.Cosecha = "2016/17";
+            carta.IdArticulo = 4;
+            carta.NetoFinalSinMermas = 30160;
+            carta.Merma = 0;
+            carta.Humedad= 0; 
+            carta.HumedadDesnormalizada = 0; 
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 556447516, 0, 0);
+
+            Assert.AreEqual(528, carta.HumedadDesnormalizada);
+            Assert.AreEqual(0, carta.Merma);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void InformeControlDeKilos_23685()
+        {
+
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter[] yourParams = new ReportParameter[6];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2015, 11, 1).ToString());
+            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2016, 11, 1).ToString());
+            yourParams[4] = new ReportParameter("IdDestino", "-1");
+            yourParams[5] = new ReportParameter("IdPuntoVenta", "0");
+            //yourParams[7] = new ReportParameter("Consulta", strSQL);
+
+
+            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                "Williams - Controles De Kilos Clientes.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void liquidacionsubcon_22294()
+        {
+
+
+            // Sería agregar dos tarifas más que servirían para la liquidación de subcontratistas, especialmente para Vagones, separado por  Calada y Descarga
+
+
+            var c = CartaDePorteManager.GetItem(SC, 1372987);
+            c.SubnumeroVagon = 222;
+            string ms = "";
+            CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
+
+            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 10),
+                        -1, -1, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void PegatinaRamalloBunge_22408()
+        {
+
+            //explota
+
+            string ms = "";
+
+            //string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.BungeRamalloDescargaTexto, SC, 0,
+                                    ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void acopio_23480_22255()
+        {
+
+            //caso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
+            var s1 = LogicaFacturacion.LeyendaAcopio(85759, SC);
+
+            // caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
+            var s2 = LogicaFacturacion.LeyendaAcopio(85760, SC);
+
+
+
+            var s3 = LogicaFacturacion.LeyendaAcopio(86082, SC);
+            //Assert.AreEqual(s3, "");
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void OCR_Tickets()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\tickets y cartas.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(@"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\" + excels[0] + @"\ExportToXLS.xls");
+
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void InformeControlDiario_22052_2()
+        {
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            List<CartasDePorteControlDescarga> control = (from a in db.CartasDePorteControlDescargas select a).ToList();
+
+
+            int iddest = db.WilliamsDestinos.Where(x => x.Descripcion == "Villa Constitucion - Servicios Portuarios")
+                            .Select(x => x.IdWilliamsDestino).FirstOrDefault();
+
+            db.CartasDePorteControlDescargas.Add(new CartasDePorteControlDescarga { Fecha = new DateTime(2016, 1, 22), IdPuntoVenta = 1, TotalDescargaDia = 400, IdDestino = iddest });
+            db.SaveChanges();
+
+
+
+            db.Database.CommandTimeout = 180;
+
+
+            List<ProntoFlexicapture.FuncionesCSharpBLL.ret> xxx = ProntoFlexicapture.FuncionesCSharpBLL.InformeControlDiario(scEF);
+
+
+
+            string output = "c:\\adasdasd.xls";
+
+            //exportar excel al estilo Pronto, como tenemos hacer en las grillas de mvc
+
+            //CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
+
+            FuncionesCSharpBLL.ExportToExcelEntityCollection<CartasDePorteControlDescarga>(control, output);
+            //FuncionesCSharpBLL.ExportToExcelEntityCollection<ProntoFlexicapture.FuncionesCSharpBLL.ret>(xxx, output);
+
+
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void InformeControlDiario_22052()
+        {
+
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter[] yourParams = new ReportParameter[6];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2015, 11, 1).ToString());
+            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2016, 11, 1).ToString());
+            yourParams[4] = new ReportParameter("IdDestino", "-1");
+            yourParams[5] = new ReportParameter("IdPuntoVenta", "0");
+            //yourParams[7] = new ReportParameter("Consulta", strSQL);
+
+
+            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                "Williams - Controles Diarios.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+        [TestMethod]
+        public void OCR_bug_23629()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\TIFFFF1.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+
+        }
+
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373_3()
+        {
+            using (Bitmap bmp = new Bitmap(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg"))
+            {
+                using (Tiff tif = Tiff.Open(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\BitmapTo24BitColorTiff.tif", "w"))
+                {
+                    byte[] raster = getImageRasterBytes(bmp, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                    tif.SetField(TiffTag.IMAGEWIDTH, bmp.Width);
+                    tif.SetField(TiffTag.IMAGELENGTH, bmp.Height);
+                    tif.SetField(TiffTag.COMPRESSION, Compression.NONE);
+                    tif.SetField(TiffTag.PHOTOMETRIC, Photometric.MINISWHITE);
+
+                    tif.SetField(TiffTag.ROWSPERSTRIP, bmp.Height);
+
+                    tif.SetField(TiffTag.XRESOLUTION, bmp.HorizontalResolution);
+                    tif.SetField(TiffTag.YRESOLUTION, bmp.VerticalResolution);
+
+                    tif.SetField(TiffTag.BITSPERSAMPLE, 8);
+                    tif.SetField(TiffTag.SAMPLESPERPIXEL, 3);
+
+                    tif.SetField(TiffTag.PLANARCONFIG, PlanarConfig.CONTIG);
+
+                    int stride = raster.Length / bmp.Height;
+                    convertSamples(raster, bmp.Width, bmp.Height);
+
+                    for (int i = 0, offset = 0; i < bmp.Height; i++)
+                    {
+                        tif.WriteScanline(raster, offset, i, 0);
+                        offset += stride;
+                    }
+                }
+
+                System.Diagnostics.Process.Start(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\BitmapTo24BitColorTiff.tif");
+            }
+        }
+
+
+
+
+        private static byte[] getImageRasterBytes(Bitmap bmp, PixelFormat format)
+        {
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            byte[] bits = null;
+
+            try
+            {
+                // Lock the managed memory
+                BitmapData bmpdata = bmp.LockBits(rect, ImageLockMode.ReadWrite, format);
+
+                // Declare an array to hold the bytes of the bitmap.
+                bits = new byte[bmpdata.Stride * bmpdata.Height];
+
+                // Copy the values into the array.
+                System.Runtime.InteropServices.Marshal.Copy(bmpdata.Scan0, bits, 0, bits.Length);
+
+                // Release managed memory
+                bmp.UnlockBits(bmpdata);
+            }
+            catch
+            {
+                return null;
+            }
+
+            return bits;
+        }
+
+        /// <summary> 
+        /// Converts BGR samples into RGB samples 
+        /// </summary> 
+        private static void convertSamples(byte[] data, int width, int height)
+        {
+            int stride = data.Length / height;
+            const int samplesPerPixel = 3;
+
+            for (int y = 0; y < height; y++)
+            {
+                int offset = stride * y;
+                int strideEnd = offset + width * samplesPerPixel;
+
+                for (int i = offset; i < strideEnd; i += samplesPerPixel)
+                {
+                    byte temp = data[i + 2];
+                    data[i + 2] = data[i];
+                    data[i] = temp;
+                }
+            }
+        }
+
+
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373_2()
+        {
+
+
+            string archivo = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg";
+            string output = archivo + ".salida.jpg";
+            string output2 = archivo + ".salida.tif";
+
+            if (true)
+                CartaDePorteManager.ResizeImage_ToTIFF(archivo, 0, 0, output2, "", "");
+            else
+            {
+                CartaDePorteManager.ResizeImage(archivo, 300, 450, output, "", "");
+
+                CartaDePorteManager.ResizeImage_ToTIFF(output, 800, 1100, output2, "", "");
+            }
+
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373()
+        {
+
+            //CartaDePorteManager.JuntarImagenesYhacerTiff(@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg",
+            //                                  @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff"
+            //                                  );
+
+
+            if (false)
+            {
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
+                                              @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                ClassFlexicapture.SaveAsMultiPageTiff(
+                                                     @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff",
+                                                     sss
+                                                     );
+            }
+
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2016, 5, 29), new DateTime(2016, 5, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void Pegatina_20886_unidad6_analisis()
+        {
+
+            //explota
+
+            string ms = "";
+
+            //string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
+            string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Unidad6Analisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void asdasd_23498()
+        {
+
+            //tarda 5 min
+
+            string ms = "", warn = "";
+            var carta = CartaDePorteManager.GetItem(SC, 114444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
+            Assert.AreEqual(1, carta.NobleGrado);
+
+            carta = null;
+            carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
+            carta.NobleGrado = 3;
+            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+            Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
+            Assert.AreEqual(2, carta.NobleGrado);
+
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void liquidacionsubcon_22294_2()
+        {
+
+            CartaDePorteManager.ReasignoTarifaSubcontratistasDeTodasLasCDPsDescargadasSinFacturarYLasGrabo(SC, 1, "nano", 2066);
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void OCR_y_Tickets()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\imagenescp\tickets.zip";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            if (true)
+            {
+
+                // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+                ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+                // ProntoWindowsService.Service1.Initialize();
+            }
+            else
+            {
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                                        plantilla, 30,
+                                         SC, DirApp, true, ref sError);
+                var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
+            }
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(excels[0]);
+
+
+            // mostrar info del lote1
+            //VerInfoDelLote(ticket);
+
+
+
+            string archivoExcel = excels[0];
+
+
+            int m_IdMaestro = 0;
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void Exportacion_a_Excel_de_Entities()
+        {
+
+            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de otro modo, pasandole como maxrows un numero grandisimo
+            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
+            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            List<CartasDePorteControlDescarga> control = (from a in db.CartasDePorteControlDescargas select a).ToList();
+
+
+            int iddest = db.WilliamsDestinos.Where(x => x.Descripcion == "Villa Constitucion - Servicios Portuarios")
+                            .Select(x => x.IdWilliamsDestino).FirstOrDefault();
+
+            db.CartasDePorteControlDescargas.Add(new CartasDePorteControlDescarga { Fecha = new DateTime(2016, 1, 22), IdPuntoVenta = 1, TotalDescargaDia = 400, IdDestino = iddest });
+            db.SaveChanges();
+
+
+
+            db.Database.CommandTimeout = 180;
+
+
+
+            string output = "c:\\adasdasd.xls";
+
+            //exportar excel al estilo Pronto, como tenemos hacer en las grillas de mvc
+
+            //CartaDePorteManager.InformeAdjuntoDeFacturacionWilliamsExcel_ParaBLD(SC, IdFactura, ref output, ref ReporteLocal);
+
+            FuncionesCSharpBLL.ExportToExcelEntityCollection<CartasDePorteControlDescarga>(control, output);
+            //FuncionesCSharpBLL.ExportToExcelEntityCollection<ProntoFlexicapture.FuncionesCSharpBLL.ret>(xxx, output);
+
+
+
+
+
+            //var copia = @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output);
+            //File.Copy(output,copia, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void OCR_alta_automatica_de_clientes_22172()
+        {
+            var a = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("20");
+            var b = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4");
+            var c = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4");
+            var d = CartaDePorteManager.VerfCuit("30537771274");
+        }
+
+
+
+        [TestMethod]
+        public void Pegatina_22167()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, 0,
+                                    ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void primer_test_para_temas_de_facturacion_22221()
+        {
+
+            // tenes instalado el pronto? server2/publico/actualizacion
+
+            //    tarifas en cero de buques
+            //LogicaFacturacion.GenerarLoteFacturas_NUEVO(tablaEditadaDeFacturasParaGenerar, HFSC.Value, ViewState("pagina"), ViewState("sesionId"), optFacturarA.SelectedValue, gvFacturasGeneradas, _
+            //                    txtFacturarATerceros.Text, SeEstaSeparandoPorCorredor, Session, cmbPuntoVenta.Text, _
+            //                    dtViewstateRenglonesManuales, cmbAgruparArticulosPor.SelectedItem.Text, _
+            //                    txtBuscar.Text, txtTarifaGastoAdministrativo.Text, errLog, txtCorredor.Text, chkPagaCorredor.Checked, txtOrdenCompra.Text, ViewState("PrimeraIdFacturaGenerada"), ViewState("UltimaIdFacturaGenerada"), 0)
+
+
+
+
+            //              ByRef pag As Object, _
+            //  ByRef sesionId As Object, _
+
+
+
+            //ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String, _
+
+
+            //System.Web.SessionState.HttpSessionState Session;
+            //Session[CartaDePorteManager.SESSIONPRONTO_glbIdUsuario] = 4;
+
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+
+            int optFacturarA = 4;
+            string agruparArticulosPor = "Destino";
+
+
+            string txtCorredor = "";
+            long idClienteAfacturarle = 164;
+            int idClienteObservaciones = -1;
+            bool SeEstaSeparandoPorCorredor = true;
+            int PuntoVenta = 2;
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+            for (int n = 1372900; n < 1372910; n++)
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.IdFacturaImputada = 0;
+                db.SaveChanges();
+
+                var c = CartaDePorteManager.GetItem(SC, n);
+                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
+
+                lote.Add(c);
+            }
+
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+
+            int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
+                                                 dtRenglonesAgregados, SC, null, optFacturarA,
+                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
+                                                txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
+
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void problema_informe_liquidacionsubcon()
+        {
+
+
+            var c = CartaDePorteManager.GetItem(SC, 1372987);
+            c.SubnumeroVagon = 222;
+            string ms = "";
+            CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
+
+            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 10),
+                        -1, -1, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroZeni_17945_22197()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                        "", -1, -1, -1, -1,
+                        -1, -1, -1, -1,
+                        CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                        -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void probar_informe_estandar_con_el_EnviarMailFiltroPorId_DLL()
+        {
+
+            //  https://prontoweb.williamsentregas.com.ar/ProntoWeb/Reporte.aspx?ReportName=Listado%20DOW
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 6, 30);
+            int pventa = 0;
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = 1618; // DOW
+            dr["CuentaOrden1"] = 1618;
+            dr["CuentaOrden2"] = 1618;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+
+            dr["ModoImpresion"] = "Excel";
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+
+            string output;
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+            output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                   pventa, "", estado,
+                                                ref dr, ref sError, false,
+                                               ConfigurationManager.AppSettings["SmtpServer"],
+                                                 ConfigurationManager.AppSettings["SmtpUser"],
+                                                 ConfigurationManager.AppSettings["SmtpPass"],
+                                                 Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                   "", ref sError2, inlinePNG, inlinePNG2);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void webServiceParaBLDconDescargaDeImagenes_18181_20864()
+        {
+            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
+
+
+            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
+
+            //string archivodestino = "c:\\Source.jpg";
+            string archivodestino = "c:\\Source.pdf";
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            byte[] b1 = null;
+
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, bdlmasterappconfig);
+            //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
+
+            fs1 = new FileStream(archivodestino, FileMode.Create);
+            fs1.Write(b1, 0, b1.Length);
+            fs1.Close();
+            fs1 = null;
+
+            //cómo sé en qué formato está?
+
+            System.Diagnostics.Process.Start(archivodestino);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void SincroDiazForti_17962_20845()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Forti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+        [TestMethod]
+        public void problema_informe_22009()
+        {
+            ReportParameter p2 = null;
+
+            var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "31/5/2016", "1/11/2015", "31/5/2016",
+                                            "Personalizar",
+                                            1, "Todos", SC, -1, -1, -1);
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void problema_informe_totalespormes()
+        {
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.totpormesmodo(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "");
+
+
+            var q2 = ConsultasLinq.totpormessucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+
+            var q3 = ConsultasLinq.totpormesmodoysucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+            var q4 = ConsultasLinq.totpormes(SC,
+             "", "", "", 1, 10,
+              CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+             -1, -1,
+             -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+              new DateTime(2014, 1, 1),
+              new DateTime(2014, 2, 1),
+              -1, ref sTitulo, "Ambas", false, "");
+        }
 
 
 
@@ -231,11 +1628,11 @@ namespace ProntoMVC.Tests
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2016, 4, 10), new DateTime(2016, 5, 30),
+                new DateTime(2016, 5, 29), new DateTime(2016, 5, 30),
                 0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp);
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp, false);
             System.Diagnostics.Process.Start(output);
 
         }
@@ -451,35 +1848,6 @@ namespace ProntoMVC.Tests
         }
 
 
-
-
-
-        [TestMethod]
-        public void webServiceParaBLDconDescargaDeImagenes_18181()
-        {
-            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
-
-
-            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
-
-            string archivodestino = "c:\\Source.jpg";
-
-            System.IO.FileStream fs1 = null;
-            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
-            byte[] b1 = null;
-
-            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, bdlmasterappconfig);
-            //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
-
-            fs1 = new FileStream(archivodestino, FileMode.Create);
-            fs1.Write(b1, 0, b1.Length);
-            fs1.Close();
-            fs1 = null;
-
-            //cómo sé en qué formato está?
-
-            System.Diagnostics.Process.Start(archivodestino);
-        }
 
 
 
@@ -851,6 +2219,8 @@ namespace ProntoMVC.Tests
             ClassFlexicapture.Log("safasdfsf");
         }
 
+
+
         [TestMethod]
         public void EquivalenciasOCR_18223()
         {
@@ -1140,33 +2510,7 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void SincroDiazForti_17962()
-        {
 
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Forti", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
 
 
         [TestMethod]
@@ -1236,38 +2580,6 @@ namespace ProntoMVC.Tests
             //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
             System.Diagnostics.Process.Start(output);
         }
-
-
-
-        [TestMethod]
-        public void SincroZeni_17945()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Zeni", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
 
 
 
@@ -1421,7 +2733,7 @@ namespace ProntoMVC.Tests
         void VaciarDirectorioTemp()
         {
 
-            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Administrador\Documents\bdl\prontoweb\Temp");
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp");
 
             foreach (FileInfo file in di.GetFiles())
             {
@@ -1628,6 +2940,47 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void movimientos_22213()
+        {
+
+            //Cuando pone del 27/06 al 27/06 le tira tantos kg netos . Y cuando tira del 01/01 al 27/06 le tira otros kg netos. Los kg netos tendrian que ser los mismos, ya que la fecha final es la misma ( 27/06).
+
+            int pv = 2;
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ACA SAN LORENZO", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
+            DateTime desde = new DateTime(2016, 1, 1);
+            DateTime hasta = new DateTime(2015, 7, 27);
+
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario);
+
+            string sTitulo = "";
+
+            // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
+            //var dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC,
+            //        "", "", "", 1, 0,
+            //        CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+            //        destinatario, -1,
+            //        -1, idarticulo, -1, destino,
+            //        CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+            //         desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                    "", "", "", 1, 0,
+                    CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    destinatario, -1,
+                    -1, idarticulo, -1, destino,
+                    CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                     desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C");
+
+            decimal total = Convert.ToDecimal(dt.Rows[0][0]);
+
+        }
 
 
 
@@ -2735,8 +4088,8 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
                 0, ref titulo, "Ambas", false);
 
 
-            var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false);
-            System.Diagnostics.Process.Start(output);
+            // var output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, "poner SC", false, DirApp);
+            // System.Diagnostics.Process.Start(output);
 
         }
 

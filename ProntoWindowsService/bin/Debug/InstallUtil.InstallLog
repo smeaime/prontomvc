@@ -1,0 +1,339 @@
+﻿
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+An exception occurred during the Install phase.
+System.ComponentModel.Win32Exception: El servicio especificado ya existe
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoWindowsService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+The uninstall has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe assembly's progress.
+The file is located at C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.

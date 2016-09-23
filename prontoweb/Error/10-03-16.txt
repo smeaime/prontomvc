@@ -1,0 +1,290 @@
+
+Log Entry : 
+03/10/2016 09:28:50
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/10/2016 09:34:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [COLUMNAADICIONAL2][COLUMNAADICIONAL][PESOBRUTODESCARGA][TARIFAREF][KMARECORRER][FLETEAPAGAR1][FLETEPAGADO][CAMIÓN][PAGADORDELFLETE][PROVINCIA2][LOCALIDAD2][DIRECCION2][PROVINCIA1][LOCALIDAD1][DIRECCION1][ESABLECIMIENTO][PESONETO][PESOTARA][PESOBRUTO][CONDICIONAL][CONFORME][DECLARACIÓNDECALIDAD][LACARGASERÁPESADAENDESTINO][CONTRATONRO][TIPOGRANO][GRANOESPECIE][COSECHA][CHOFERCUIT][TRANSPORTISTACUIT][DESTINOCUIT][DESTINATARIOCUIT][CORREDORCUIT][FECHAVENCIMIENTO][FECHACARGA][NUMEROCARTA][BARRACEE][REMITENTECUIT][INTERMEDIARIOCUIT][TITULARCUIT] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+03/10/2016 09:56:13
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/10/2016 10:20:39
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/10/2016 10:21:52
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/10/2016 10:40:26
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at Facturas._Lambda$__4(Factura x) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 2188
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Facturas.btnFacturasNoEnviadas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 2187
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+App_Web_facturas.aspx.4199bbd4.vfrmkfdr
+__________________________
+
+Log Entry : 
+03/10/2016 10:45:19
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e34a68794f854683b02a085152accf08&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/10/2016 10:45:19
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e34a68794f854683b02a085152accf08&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+03/10/2016 10:45:19
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=7a25efee53e94f5bb7db8a9c6461b869&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+03/10/2016 10:45:19
+Error in: http://localhost:59798/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=7a25efee53e94f5bb7db8a9c6461b869&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+03/10/2016 10:46:50
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277139. Error Message:La carta numero 551308405 id=2277139 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 10:47:17
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277139. Error Message:La carta numero 551308405 id=2277139 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 10:49:14
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277139. Error Message:La carta numero 551308405 id=2277139 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 11:36:58
+Error in: http://localhost:59798/ProntoWeb/Facturas.aspx?tipo=Confirmados. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at Facturas._Lambda$__4(Factura x) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 2188
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Facturas.btnFacturasNoEnviadas_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Facturas.aspx.vb:line 2187
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+App_Web_facturas.aspx.4199bbd4.vfrmkfdr
+__________________________
+
+Log Entry : 
+03/10/2016 12:21:11
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 1
+__________________________
+
+Log Entry : 
+03/10/2016 12:25:06
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [COLUMNAADICIONAL2][COLUMNAADICIONAL][PESOBRUTODESCARGA][TARIFAREF][KMARECORRER][FLETEAPAGAR1][FLETEPAGADO][PAGADORDELFLETE][PROVINCIA2][LOCALIDAD2][DIRECCION2][PROVINCIA1][DIRECCION1][ESABLECIMIENTO][PESOTARA][PESOBRUTO][CONDICIONAL][CONFORME][DECLARACIÓNDECALIDAD][LACARGASERÁPESADAENDESTINO][CONTRATONRO][TIPOGRANO][COSECHA][CHOFERCUIT][TRANSPORTISTACUIT][DESTINOCUIT][DESTINATARIOCUIT][CORREDORCUIT][FECHAVENCIMIENTO][FECHACARGA][NUMEROCARTA][BARRACEE][REMITENTECUIT][INTERMEDIARIOCUIT][TITULARCUIT] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+03/10/2016 12:31:20
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/10/2016 13:57:57
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/10/2016 14:02:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][RECIBO][][][][][][TURNO][TRANSPCUIT][CONTRATO][][][][][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+03/10/2016 14:19:48
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:La carta numero 551458476 id=2277142 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 14:19:48
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 14:21:09
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:La carta numero 551458476 id=2277142 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 14:21:09
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 14:26:43
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:La carta numero 551458476 id=2277142 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 14:26:43
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 14:28:50
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:La carta numero 551458476 id=2277142 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 14:28:50
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 14:37:09
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:La carta numero 551458476 id=2277142 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 14:37:09
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277142. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 15:53:44
+Error in: http://localhost:59798/prontoweb/cartadeporte.aspx. Error Message:PV 0 1
+__________________________
+
+Log Entry : 
+03/10/2016 15:56:54
+Error in: http://localhost:59798/prontoweb/CartaDePorte.aspx?Id=2277144. Error Message:La carta numero 435345 id=2277144 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 15:56:54
+Error in: http://localhost:59798/prontoweb/CartaDePorte.aspx?Id=2277144. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 15:57:42
+Error in: http://localhost:59798/prontoweb/CartaDePorte.aspx?Id=2277144. Error Message:La carta numero 435345 id=2277144 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 15:57:42
+Error in: http://localhost:59798/prontoweb/CartaDePorte.aspx?Id=2277144. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 15:58:11
+Error in: http://localhost:59798/prontoweb/CartaDePorte.aspx?Id=2277144. Error Message:La carta numero 435345 id=2277144 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+03/10/2016 15:58:11
+Error in: http://localhost:59798/prontoweb/CartaDePorte.aspx?Id=2277144. Error Message:PV 1 1
+__________________________
+
+Log Entry : 
+03/10/2016 16:40:26
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________

@@ -36,6 +36,12 @@ using System.Drawing;
 
 using BitMiracle.LibTiff.Classic;
 
+using System.Configuration;
+
+using System.Text;
+using System.Reflection;
+
+
 namespace ProntoFlexicapture
 {
     public class ClassFlexicapture  // :  Sample.FlexiCaptureEngineSnippets
@@ -99,9 +105,9 @@ namespace ProntoFlexicapture
 
 
 
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(
-            ref IEngine engine, ref IFlexiCaptureProcessor processor, string plantilla,
-                                                int cuantasImagenes, string SC, string DirApp, bool bProcesar, ref string sError)
+        public static List<FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(
+                                        ref IEngine engine, ref IFlexiCaptureProcessor processor, string plantilla,
+                                        int cuantasImagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
 
@@ -196,6 +202,19 @@ namespace ProntoFlexicapture
             }
             catch (Exception xxx)
             {
+
+
+
+
+                //System.Runtime.InteropServices.COMException (0x8000FFFF): Error interno del programa:
+                //FCESupport\FCESupportImpl.h, 42.
+                //   at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
+                //   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 206
+                //   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 129
+                //   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 322
+
+                Log(xxx.ToString());
+
                 //tirar la Lista de imagenes sospechosas
                 foreach (string s in imagenes)
                 {
@@ -215,6 +234,7 @@ namespace ProntoFlexicapture
                 FuncionesGenericasCSharp.Resultados output = null;
 
                 if (count > imagenes.Count - 1) break;
+
 
                 Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
                 Console.WriteLine("reconocer imagen " + imagenes[count]);
@@ -239,9 +259,25 @@ namespace ProntoFlexicapture
 
                     document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
 
+
+
                 }
+
                 catch (Exception xx)
                 {
+                    // si no esta la licencia, acá explota
+
+
+                    // puede ser por falta de memoria tambien
+                    //                 System.OutOfMemoryException: Insufficient memory to continue the execution of the program.
+                    //at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
+                    //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 252
+                    //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 129
+                    //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
+                    //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+
+                    Log(xx.ToString());
+
                     foreach (string s in imagenes)
                     {
                         DesmarcarImagenComoProcesandose(s);
@@ -360,6 +396,7 @@ namespace ProntoFlexicapture
                             }
                             catch (Exception x)
                             {
+                                Log(x.ToString());
                                 ErrHandler2.WriteError(x);
                             }
 
@@ -487,8 +524,6 @@ namespace ProntoFlexicapture
         public static IQueryable<ProntoMVC.Data.Models.CartasDePorteLogDeOCR> ExtraerListaDeImagenesIrreconocibles(string DirApp, string SC)
         {
             string dir = DirApp + @"\Temp\";
-            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
             ProntoMVC.Data.Models.DemoProntoEntities db =
@@ -501,6 +536,9 @@ namespace ProntoFlexicapture
 
             if (false)
             {
+                DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+
+                FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
                 IQueryable<procesGrilla> q = (from f in files
                                               where (EsArchivoDeImagen(f.Name) && !f.FullName.Contains("_IMPORT1")
                                                      &&
@@ -527,17 +565,17 @@ namespace ProntoFlexicapture
             //FileInfo[] files = d.GetFiles("Export*.xls", SearchOption.AllDirectories); //Getting Text files
             // IEnumerable<FileInfo> files = d.EnumerateFiles("Export*.xls", SearchOption. .AllDirectories); //Getting Text files
 
-            // levantá solo los nombres de directorios y agregales EXPORTToXLS
-            string[] ld = Directory.GetDirectories(dir);
-
-
-            //  http://stackoverflow.com/questions/7865159/retrieving-files-from-directory-that-contains-large-amount-of-files
-            //http://stackoverflow.com/questions/1199732/directoryinfo-getfiles-slow-when-using-searchoption-alldirectories
-
-            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
 
 
 
+            var di = new DirectoryInfo(dir);
+            List<string> directories = di.EnumerateDirectories()
+                    .Where(d => !d.Name.Contains("_IMPORT1"))
+                    .OrderByDescending(d => d.CreationTime)
+                    .Select(d => d.Name)
+                    .ToList();
+
+            return directories;
 
 
             //foreach (FileInfo file in Files)
@@ -550,11 +588,22 @@ namespace ProntoFlexicapture
             //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
 
 
+
+            // levantá solo los nombres de directorios y agregales EXPORTToXLS
+            string[] ld = Directory.GetDirectories(dir);
+
+
+            //  http://stackoverflow.com/questions/7865159/retrieving-files-from-directory-that-contains-large-amount-of-files
+            //http://stackoverflow.com/questions/1199732/directoryinfo-getfiles-slow-when-using-searchoption-alldirectories
+
+            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+
             List<string> sss = new List<string>();
             foreach (string Dir in ld)
             {
                 var dirInfo = new System.IO.DirectoryInfo(Dir);
-                sss.Add(dirInfo.Name );
+                sss.Add(dirInfo.Name);
             }
 
             //  TO DO ordenar por fecha
@@ -565,6 +614,7 @@ namespace ProntoFlexicapture
             //         orderby f.LastWriteTime descending
             //         select f.FullName);
             //     return q.ToList();
+
 
         }
 
@@ -590,18 +640,57 @@ namespace ProntoFlexicapture
         }
 
 
+        private static void MoverDirectoriosViejos() { 
+        
+        
+        }
+
+        
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
             string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
-            //como hacer eficiente esto?
+            //como hacer eficiente esto? -por lo menos borra las imagenes viejas
+
+            MoverDirectoriosViejos();
+
 
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
-            // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+            FileInfo[] files;
+
+
+            try
+            {
+
+                //esto es durisimo
+
+                files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
+                // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+                //d.EnumerateFiles()
+            }
+            catch (Exception ex)
+            {
+                //             System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+                //at System.IO.FileInfoResultHandler.CreateObject(SearchResult result)
+                //at System.IO.FileSystemEnumerableIterator`1.MoveNext()
+                //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+                //at System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
+                //at System.IO.DirectoryInfo.GetFiles(String searchPattern, SearchOption searchOption)
+                //at ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(Int32 cuantas, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 582
+                //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 108
+                //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
+                //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+                Log("Probablemente explota Getfiles");
+                Log(ex.ToString());
+                return null;
+            }
+
+
+
 
 
             //foreach (FileInfo file in Files)
@@ -684,24 +773,37 @@ namespace ProntoFlexicapture
             //cdp.Corredor2
             //  cdp.
 
-
-            // si la grabas acá, despues va a volver a pisar los datos de la carta
-            using (DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+            try
             {
 
 
-                CartasDePorteLogDeOCR q = new CartasDePorteLogDeOCR();
-
-                q.Fecha = DateAndTime.Now;
-                q.NumeroCarta = Convert.ToInt32(cdp.NumeroCartaDePorte);
-                q.IdCartaDePorte = cdp.Id;
-                q.TextoAux1 = usu;
-                q.Observaciones = cdp.MotivoAnulacion;
+                // si la grabas acá, despues va a volver a pisar los datos de la carta
+                using (DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))))
+                {
 
 
-                db.CartasDePorteLogDeOCRs.Add(q);
-                db.SaveChanges();
+                    CartasDePorteLogDeOCR q = new CartasDePorteLogDeOCR();
+
+                    q.Fecha = DateAndTime.Now;
+                    q.NumeroCarta = Convert.ToInt32(cdp.NumeroCartaDePorte);
+                    q.IdCartaDePorte = cdp.Id;
+                    q.TextoAux1 = usu;
+                    q.Observaciones = cdp.MotivoAnulacion;
+
+
+                    db.CartasDePorteLogDeOCRs.Add(q);
+                    db.SaveChanges();
+                }
+
             }
+
+            catch (Exception)
+            {
+                Log("trate de grabar con id " + cdp.Id);
+
+                throw;
+            }
+
         }
 
 
@@ -1242,9 +1344,18 @@ namespace ProntoFlexicapture
             string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe();
             string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe();
             string Condicional = Sample.AdvancedTechniques.findField(document, "Condicional").NullStringSafe();
+
             string PesoBruto = Sample.AdvancedTechniques.findField(document, "PesoBruto").NullStringSafe();
             string PesoTara = Sample.AdvancedTechniques.findField(document, "PesoTara").NullStringSafe();
             string PesoNeto = Sample.AdvancedTechniques.findField(document, "PesoNeto").NullStringSafe();
+
+            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
+            string PesoTaraDescarga = Sample.AdvancedTechniques.findField(document, "PesoTaraDescarga").NullStringSafe();
+            string PesoNetoDescarga = Sample.AdvancedTechniques.findField(document, "PesoNetoDescarga").NullStringSafe();
+
+            string PesoNetoFinal = Sample.AdvancedTechniques.findField(document, "PesoNetoFinal").NullStringSafe();
+
+
             string Observaciones = Sample.AdvancedTechniques.findField(document, "Observaciones").NullStringSafe();
             string Esablecimiento = Sample.AdvancedTechniques.findField(document, "Esablecimiento").NullStringSafe();
             string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe();
@@ -1257,7 +1368,6 @@ namespace ProntoFlexicapture
             string KmARecorrer = Sample.AdvancedTechniques.findField(document, "KmARecorrer").NullStringSafe();
             string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe();
             string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe();
-            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe();
 
             string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe();
 
@@ -1266,9 +1376,10 @@ namespace ProntoFlexicapture
 
             string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe();
 
+            string PlantillaUsada = Sample.AdvancedTechniques.findField(document, "PlantillaUsada").NullStringSafe();
+            //string plantillaUsada = document.Pages[0].SectionDefinition.FlexibleDescription.Name;
 
-
-
+            string FechaDescarga = Sample.AdvancedTechniques.findField(document, "FechaDescarga").NullStringSafe();
 
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
@@ -1279,47 +1390,50 @@ namespace ProntoFlexicapture
 
 
 
-            // if (BarraCP.Value.AsString != ""   )
+            bool esTicket = (PlantillaUsada != "");
 
-
-            if (BarraCP != null)
+            if (!esTicket)
             {
-                if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
+                if (BarraCP != null)
                 {
-                    //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
-                    // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
-                    if (numeroCarta.ToString().Length == 9)
+                    if (long.TryParse(BarraCP.Value.AsString, out numeroCarta))
                     {
-                        ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
+                        //Debug.Print(NCarta.Value.AsString + " " + BarraCP.Value.AsString);
+                        // numeroCarta = Convert.ToInt64(BarraCP.Value.AsString);
+                        if (numeroCarta.ToString().Length == 9)
+                        {
+                            ErrHandler2.WriteError("Detectó bien el numero con el Flexicapture: " + numeroCarta.ToString());
 
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
 
-                        numeroCarta = 0;
+                            numeroCarta = 0;
+                        }
                     }
+                }
+
+
+
+                if (numeroCarta == 0)
+                {
+
+                    // qué pasa si no esta la licencia?
+                    // detectar con lectores de codigo de barra
+
+                    ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
+
+                    numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
+
+                    ErrHandler2.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
+
+
+                    //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
+
+
                 }
             }
 
-
-
-            if (numeroCarta == 0)
-            {
-
-                // qué pasa si no esta la licencia?
-                // detectar con lectores de codigo de barra
-
-                ErrHandler2.WriteError("No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
-
-                numeroCarta = CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(archivoOriginal, ref sError);
-
-                ErrHandler2.WriteError("Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra");
-
-
-                //Debug.Print("nada documento " + count.ToString() + " " + document.Title);
-
-
-            }
 
 
             if (numeroCarta == 0)
@@ -1329,7 +1443,7 @@ namespace ProntoFlexicapture
                 if (NCarta != "")
                 {
                     long n = 0;
-                    long.TryParse(NCarta.Replace(" ", ""), out n);
+                    long.TryParse(NCarta.Replace("-", "").Replace(" ", ""), out n);
                     if (n.ToString().Length == 9) numeroCarta = n;
                 }
             }
@@ -1386,7 +1500,7 @@ namespace ProntoFlexicapture
                 // if (cdp.Titular > 0) bPisar = false;
 
                 // no pisar si ya esta la info
-                if (bPisar)
+                if (bPisar && !esTicket)
                 {
 
 
@@ -1428,12 +1542,25 @@ namespace ProntoFlexicapture
                         cdp.IdTransportista = CartaDePorteManager.BuscarTransportistaPorCUIT(TransportistaCUIT, SC, Transportista);
                         cdp.IdChofer = CartaDePorteManager.BuscarChoferPorCUIT(ChoferCUIT, SC, Chofer);
 
-                        cdp.Acoplado = Acoplado;
-                        cdp.Patente = Camión;
+                        cdp.Acoplado = Acoplado.Replace("-", "").Replace(" ", "");
+                        cdp.Patente = Camión.Replace("-", "").Replace(" ", "");
+                        if (cdp.Acoplado.Length != 6 && cdp.Acoplado.Length != 7) cdp.Acoplado = "";
+                        if (cdp.Patente.Length != 6 && cdp.Patente.Length != 6) cdp.Patente = "";
+
                         cdp.NetoPto = Conversion.Val(PesoNeto.Replace(".", "").Replace(",", ""));
                         cdp.TaraPto = Conversion.Val(PesoTara.Replace(".", "").Replace(",", ""));
                         cdp.BrutoPto = Conversion.Val(PesoBruto.Replace(".", "").Replace(",", ""));
+
                         cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
+                        cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
+                        cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
+
+                        cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+
+
+
+
+
                         cdp.Observaciones = Observaciones;
 
 
@@ -1507,6 +1634,7 @@ namespace ProntoFlexicapture
                             ErrHandler2.WriteError(ex2);
                         }
 
+
                         double.TryParse(Tarifa.Replace(".", ","), out cdp.TarifaTransportista);
 
 
@@ -1516,6 +1644,34 @@ namespace ProntoFlexicapture
                     {
                         ErrHandler2.WriteError(ex);
                     }
+                }
+                else if (esTicket)
+                {
+                    cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
+                    cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
+                    cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
+
+                    cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+                    try
+                    {
+                        cdp.FechaDescarga = Convert.ToDateTime(FechaDescarga);
+                    }
+                    catch (Exception ex2)
+                    {
+
+                        ErrHandler2.WriteError(ex2);
+                    }
+                }
+
+
+
+                if (cdp.NetoFinalIncluyendoMermas > 0)
+                {
+                    if (cdp.FechaDescarga == DateTime.MinValue)
+                    {
+                        cdp.NetoFinalIncluyendoMermas = 0;
+                    }
+
                 }
 
 
@@ -1553,8 +1709,8 @@ namespace ProntoFlexicapture
                     }
                     else if (cdp.Destino <= 0)
                     {
-                        cdp.MotivoAnulacion = "destino no detectado";
-                        CartaDePorteManager.Anular(SC, cdp, 1, "");
+                        // cdp.MotivoAnulacion = "destino no detectado";
+                        // CartaDePorteManager.Anular(SC, cdp, 1, "");
                     }
                 }
                 else
@@ -1563,6 +1719,12 @@ namespace ProntoFlexicapture
 
                 }
 
+                //  por qué llegó hasta acá con id=-1? -porque es una carta nueva pero inválida que no se intentó grabar 
+                if (id == -1 || id <= 0)
+                {
+                    Log(ms + " " + warn);
+                    Debug.Print(ms + " " + warn);
+                }
 
                 MarcarCartaComoProcesada(ref cdp, nombreusuario, SC);
 
@@ -1664,8 +1826,11 @@ namespace ProntoFlexicapture
 
                     //se da cuenta si es un ticket? no lo esta poniendo en 2 posicion?
 
+                    //si es un ticket lo tiene que poner en segunda posicion
+
+
                     var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
-                                                  , ref sError, DirApp, bCodigoBarrasDetectado);
+                                                  , ref sError, DirApp, bCodigoBarrasDetectado, esTicket);
 
 
 
@@ -2073,8 +2238,216 @@ Additionally you can manage the priority of work processes and control whether t
         [DllImport(FceConfig.DllPath, CharSet = CharSet.Unicode), PreserveSig]
         static extern int DeinitializeEngine();
 
+
+
+
     }
 
+
+
+
+
+
+
+
+
+    public class FuncionesCSharpBLL
+    {
+
+
+        public class ret
+        {
+            public int IdCartasDePorteControlDescarga;
+            public int? Destino;
+            public DateTime? FechaDescarga;
+            public decimal? Total;
+            public decimal? TotalDescargaDia;
+            public decimal? dif;
+            public int? Cartas;
+            public List<long?> cuales;
+        }
+
+
+        public static List<ret> InformeControlDiario(string SC)
+        {
+
+            DemoProntoEntities db = new DemoProntoEntities(SC);
+            List<CartasDePorteControlDescarga> control = (from a in db.CartasDePorteControlDescargas select a).ToList();
+
+
+            // buscar factura de LDC (id2775) y de ACA (id10)
+            var xxx = (from d in control
+                       from c in db.CartasDePortes.Where(x => x.FechaDescarga == d.Fecha && x.Destino == d.IdDestino && x.SubnumeroDeFacturacion <= 0).DefaultIfEmpty()
+                       group c by new { d.IdCartasDePorteControlDescarga, c.Destino, c.FechaDescarga, d.TotalDescargaDia } into g
+                       select new ret
+                       {
+                           IdCartasDePorteControlDescarga = g.Key.IdCartasDePorteControlDescarga,
+                           Destino = g.Key.Destino,
+                           FechaDescarga = g.Key.FechaDescarga,
+                           Total = g.Sum(x => x.NetoFinal),
+                           TotalDescargaDia = g.Key.TotalDescargaDia,
+                           dif = g.Key.TotalDescargaDia - g.Sum(x => x.NetoFinal),
+                           Cartas = g.Count(),
+                           cuales = g.Select(x => x.NumeroCartaDePorte).ToList()
+                       }
+                      );
+
+
+            return xxx.ToList();
+        }
+
+
+
+        public static void ExportToExcelEntityCollection<T>(List<T> list, string path)
+        {
+            int columnCount = 0;
+
+            DateTime StartTime = DateTime.Now;
+
+            StringBuilder rowData = new StringBuilder();
+
+            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            rowData.Append("<Row ss:StyleID=\"s62\">");
+            foreach (PropertyInfo p in properties)
+            {
+                if (p.PropertyType.Name != "EntityCollection`1" && p.PropertyType.Name != "EntityReference`1" && p.PropertyType.Name != p.Name)
+                {
+                    columnCount++;
+                    rowData.Append("<Cell><Data ss:Type=\"String\">" + p.Name + "</Data></Cell>");
+                }
+                else
+                    break;
+
+            }
+            rowData.Append("</Row>");
+
+            foreach (T item in list)
+            {
+                rowData.Append("<Row>");
+                for (int x = 0; x < columnCount; x++) //each (PropertyInfo p in properties)
+                {
+                    object o = properties[x].GetValue(item, null);
+                    string value = o == null ? "" : o.ToString();
+                    rowData.Append("<Cell><Data ss:Type=\"String\">" + value + "</Data></Cell>");
+
+                }
+                rowData.Append("</Row>");
+            }
+
+            var sheet = @"<?xml version=""1.0""?>
+                    <?mso-application progid=""Excel.Sheet""?>
+                    <Workbook xmlns=""urn:schemas-microsoft-com:office:spreadsheet""
+                        xmlns:o=""urn:schemas-microsoft-com:office:office""
+                        xmlns:x=""urn:schemas-microsoft-com:office:excel""
+                        xmlns:ss=""urn:schemas-microsoft-com:office:spreadsheet""
+                        xmlns:html=""http://www.w3.org/TR/REC-html40"">
+                        <DocumentProperties xmlns=""urn:schemas-microsoft-com:office:office"">
+                            <Author>MSADMIN</Author>
+                            <LastAuthor>MSADMIN</LastAuthor>
+                            <Created>2011-07-12T23:40:11Z</Created>
+                            <Company>Microsoft</Company>
+                            <Version>12.00</Version>
+                        </DocumentProperties>
+                        <ExcelWorkbook xmlns=""urn:schemas-microsoft-com:office:excel"">
+                            <WindowHeight>6600</WindowHeight>
+                            <WindowWidth>12255</WindowWidth>
+                            <WindowTopX>0</WindowTopX>
+                            <WindowTopY>60</WindowTopY>
+                            <ProtectStructure>False</ProtectStructure>
+                            <ProtectWindows>False</ProtectWindows>
+                        </ExcelWorkbook>
+                        <Styles>
+                            <Style ss:ID=""Default"" ss:Name=""Normal"">
+                                <Alignment ss:Vertical=""Bottom""/>
+                                <Borders/>
+                                <Font ss:FontName=""Calibri"" x:Family=""Swiss"" ss:Size=""11"" ss:Color=""#000000""/>
+                                <Interior/>
+                                <NumberFormat/>
+                                <Protection/>
+                            </Style>
+                            <Style ss:ID=""s62"">
+                                <Font ss:FontName=""Calibri"" x:Family=""Swiss"" ss:Size=""11"" ss:Color=""#000000""
+                                    ss:Bold=""1""/>
+                            </Style>
+                        </Styles>
+                        <Worksheet ss:Name=""Sheet1"">
+                            <Table ss:ExpandedColumnCount=""" + (properties.Count() + 1) + @""" ss:ExpandedRowCount=""" + (list.Count() + 1) + @""" x:FullColumns=""1""
+                                x:FullRows=""1"" ss:DefaultRowHeight=""15"">
+                                " + rowData.ToString() + @"
+                            </Table>
+                            <WorksheetOptions xmlns=""urn:schemas-microsoft-com:office:excel"">
+                                <PageSetup>
+                                    <Header x:Margin=""0.3""/>
+                                    <Footer x:Margin=""0.3""/>
+                                    <PageMargins x:Bottom=""0.75"" x:Left=""0.7"" x:Right=""0.7"" x:Top=""0.75""/>
+                                </PageSetup>
+                                <Print>
+                                    <ValidPrinterInfo/>
+                                    <HorizontalResolution>300</HorizontalResolution>
+                                    <VerticalResolution>300</VerticalResolution>
+                                </Print>
+                                <Selected/>
+                                <Panes>
+                                    <Pane>
+                                        <Number>3</Number>
+                                        <ActiveCol>2</ActiveCol>
+                                    </Pane>
+                                </Panes>
+                                <ProtectObjects>False</ProtectObjects>
+                                <ProtectScenarios>False</ProtectScenarios>
+                            </WorksheetOptions>
+                        </Worksheet>
+                        <Worksheet ss:Name=""Sheet2"">
+                            <Table ss:ExpandedColumnCount=""1"" ss:ExpandedRowCount=""1"" x:FullColumns=""1""
+                                x:FullRows=""1"" ss:DefaultRowHeight=""15"">
+                            </Table>
+                            <WorksheetOptions xmlns=""urn:schemas-microsoft-com:office:excel"">
+                                <PageSetup>
+                                    <Header x:Margin=""0.3""/>
+                                    <Footer x:Margin=""0.3""/>
+                                    <PageMargins x:Bottom=""0.75"" x:Left=""0.7"" x:Right=""0.7"" x:Top=""0.75""/>
+                                </PageSetup>
+                                <ProtectObjects>False</ProtectObjects>
+                                <ProtectScenarios>False</ProtectScenarios>
+                            </WorksheetOptions>
+                        </Worksheet>
+                        <Worksheet ss:Name=""Sheet3"">
+                            <Table ss:ExpandedColumnCount=""1"" ss:ExpandedRowCount=""1"" x:FullColumns=""1""
+                                x:FullRows=""1"" ss:DefaultRowHeight=""15"">
+                            </Table>
+                            <WorksheetOptions xmlns=""urn:schemas-microsoft-com:office:excel"">
+                                <PageSetup>
+                                    <Header x:Margin=""0.3""/>
+                                    <Footer x:Margin=""0.3""/>
+                                    <PageMargins x:Bottom=""0.75"" x:Left=""0.7"" x:Right=""0.7"" x:Top=""0.75""/>
+                                </PageSetup>
+                                <ProtectObjects>False</ProtectObjects>
+                                <ProtectScenarios>False</ProtectScenarios>
+                            </WorksheetOptions>
+                        </Worksheet>
+                    </Workbook>";
+
+            System.Diagnostics.Debug.Print(StartTime.ToString() + " - " + DateTime.Now);
+            System.Diagnostics.Debug.Print((DateTime.Now - StartTime).ToString());
+
+            if (true)
+            {
+                File.WriteAllText(path, sheet);
+            }
+            else
+            {
+                //string attachment = "attachment; filename=Report.xml";
+                //HttpContext.Current.Response.ClearContent();
+                //HttpContext.Current.Response.AddHeader("content-disposition", attachment);
+                //HttpContext.Current.Response.Write(sheet);
+                //HttpContext.Current.Response.ContentType = "application/ms-excel";
+                //HttpContext.Current.Response.End();
+            }
+        }
+
+
+    }
 
 
 
