@@ -1,0 +1,226 @@
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para <>f__AnonymousType0`2: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para <>f__AnonymousType1`2: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para <>f__AnonymousType2`2: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para <>f__AnonymousType3`2: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para System.Reflection.TypeExtensions: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Mapper: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.MemberList: el tipo es un tipo de valor.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.QueryableExtensions.Extensions: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.QueryableExtensions.Impl.QueryMapperHelper: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.QueryableExtensions.Impl.QueryMapperVisitor: el tipo no tiene constructores visibles de familia.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Mappers.MapperRegistry: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Mappers.ObjectCreator: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Mappers.ArrayExtensions: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Mappers.TypeHelper: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Mappers.TypeMapObjectMapperRegistry: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.EnumerableExtensions: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundMethod: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundPropertyGet: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundFieldGet: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundFieldSet: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundPropertySet: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundValueTypeFieldSet: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundValueTypePropertySet: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundCtor: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LateBoundParamsCtor: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.FeatureDetector: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.LazyFactory: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.PlatformAdapter: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.PrimitiveExtensions: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar stub para AutoMapper.Internal.ReflectionHelper: el tipo está sellado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para <>f__AnonymousType0`2: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para <>f__AnonymousType1`2: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para <>f__AnonymousType2`2: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para <>f__AnonymousType3`2: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para System.Reflection.TypeExtensions: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.AutoMapperConfigurationException+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.AutoMapperMappingException+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.AutoMapperMappingException+<GetContexts>d__13: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__100`2: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass104_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass104_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass104_2: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass104_3: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass64_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass64_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass64_2: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass72_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass81_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass82_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass92_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<>c__DisplayClass96_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<GetAllTypes>d__93: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConfigurationStore+<GetDerivedTypeMaps>d__65: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConstructorMap+<>c__DisplayClass10_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConstructorMap+<>c__DisplayClass9_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ConstructorParameterMap+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IConfiguration: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IConfigurationProvider: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ICtorParamConfigurationExpression`1: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.CtorParamConfigurationExpression`1+MemberInfoFinderVisitor: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingAction`2: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingEngine: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingEngineRunner: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingExpression: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingExpression`2: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingOperationOptions: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingOperationOptions`2: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMappingOptions: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMemberAccessor: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMemberConfigurationExpression`1: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMemberConfigurationExpression: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMemberGetter: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IMemberResolver: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.INamingConvention: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IObjectMapper: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IProfileConfiguration: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IProfileExpression: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IResolutionExpression`1: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IResolutionExpression: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IResolverConfigurationExpression`1: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IResolverConfigurationExpression`2: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IResolverConfigurationExpression: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ISourceMemberConfigurationExpression`1: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ISourceMemberConfigurationExpression: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ITypeConverter`2: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ITypeMapFactory: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.IValueResolver: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mapper+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+<>c__DisplayClass38_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+<>c__DisplayClass38_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+<>c__DisplayClass39_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+<>c__DisplayClass39_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+<>c__DisplayClass41_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+<>c__DisplayClass41_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+ConstantExpressionReplacementVisitor: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingEngine+NewFinderVisitor: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingOperationOptions`2+<>c__DisplayClass0_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingOperationOptions`2+<>c__DisplayClass1_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MappingOperationOptions+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.MemberList: el tipo es una enumeración.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.PropertyMap+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.PropertyMap+<GetSourceValueResolvers>d__42: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.ThreadSafeList`1+<>c__DisplayClass5_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeInfo+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeInfo+<>c__DisplayClass21_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeInfo+<>c__DisplayClass21_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeInfo+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeInfo+<>c__DisplayClass30_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeInfo+<>c__DisplayClass30_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMap+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMap+<>c__DisplayClass61_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMap+<>c__DisplayClass77_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMap+<>c__DisplayClass87_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMap+<>c__DisplayClass93_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMap+<>c__DisplayClass97_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+<>c__DisplayClass4_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+<>c__DisplayClass6_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+<>c__DisplayClass7_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+<>c__DisplayClass8_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+<>c__DisplayClass8_1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+<PossibleNames>d__8: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.TypeMapFactory+NameSnippet: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.ExpressionRequest+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.IExpressionBinder: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.IExpressionResultConverter: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.IProjectionExpression: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.ProjectionExpression+<>c__6`1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.ProjectionExpression+<>c__DisplayClass6_0`1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.Impl.EnumerableExpressionBinder+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.Impl.MemberResolverExpressionResultConverter+ParameterConversionVisitor: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.Impl.NullSubstitutionExpressionResultConverter+NullSubstitutionConversionVisitor: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.Impl.IQueryDataSourceInjection`1: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.Impl.QueryMapperHelper+<>c__DisplayClass0_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.QueryableExtensions.Impl.SourceInjectedQueryInspector+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.CollectionMapper+EnumerableMapper`2: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.DictionaryMapper+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.ExplicitConversionOperatorMapper+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.ExplicitConversionOperatorMapper+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.ExpressionMapper+MappingVisitor: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.HashSetMapper+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.HashSetMapper+EnumerableMapper`2: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.ImplicitConversionOperatorMapper+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.ITypeMapObjectMapper: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.ArrayExtensions: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.ReadOnlyCollectionMapper+EnumerableMapper`1: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeHelper+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapMapper+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapObjectMapperRegistry+CacheMappingStrategy: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapObjectMapperRegistry+CustomMapperStrategy: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapObjectMapperRegistry+ExistingObjectMappingStrategy: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapObjectMapperRegistry+NewObjectPropertyMapMappingStrategy: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapObjectMapperRegistry+NullMappingStrategy: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapObjectMapperRegistry+PropertyMapMappingStrategy: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Mappers.TypeMapObjectMapperRegistry+SubstutitionMapperStrategy: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.DelegateFactory+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.DelegateFactory+<>c__DisplayClass7_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.DelegateFactory+<>c__DisplayClass8_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.DelegateFactory+<>c__DisplayClass9_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.DictionaryFactory+DictionaryAdapter`2: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.FieldAccessor+<>c__DisplayClass1_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.FieldGetter+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundMethod: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundPropertyGet: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundFieldGet: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundFieldSet: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundPropertySet: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundValueTypeFieldSet: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundValueTypePropertySet: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundCtor: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LateBoundParamsCtor: el tipo es un delegado.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IDictionary`2: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.FeatureDetector+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IDictionaryFactory: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IEnumNameValueMapper: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IEnumNameValueMapperFactory: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.ILazy`1: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.INullableConverter: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.INullableConverterFactory: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IProxyGenerator: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IProxyGeneratorFactory: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IReaderWriterLockSlim: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.IReaderWriterLockSlimFactory: el tipo es una interfaz.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.LazyFactory+LazyImpl`1: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.NullableConverterFactory+NullableConverterImpl: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression+<>c__DisplayClass17_0`1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression+SourceMappingExpression: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass22_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass26_0`1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass27_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass28_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass30_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass38_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass43_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass44_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass45_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass48_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass50_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass52_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass53_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass54_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass57_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass58_0`1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+<>c__DisplayClass9_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MappingExpression`2+SourceMappingExpression: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.MethodGetter+<>c__DisplayClass3_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.EnumNameValueMapperFactory+EnumVameValueMapper: el tipo no es visible para exported or assembly(AutoMapper.Fakes).
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.PlatformAdapter+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.PrimitiveExtensions+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.ProfileConfiguration+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.PropertyAccessor+<>c__DisplayClass1_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.PropertyGetter+<>c: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.PropertyGetter+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.ResolutionExpression`1+<>c__DisplayClass4_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.ResolutionExpression`1+<>c__DisplayClass7_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.ResolutionExpression`2+<>c__DisplayClass2_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Internal.ResolutionExpression`2+<>c__DisplayClass4_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Configuration.CreateTypeMapExpression+<>c__14`1: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Configuration.CreateTypeMapExpression+<>c__DisplayClass15_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Configuration.CreateTypeMapExpression+<>c__DisplayClass16_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Configuration.CreateTypeMapExpression+<>c__DisplayClass17_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Configuration.CreateTypeMapExpression+<>c__DisplayClass18_0: no se admite el tipo debido a limitaciones internas.
+D:\ProntoMVC3\ProntoMVC\Fakes\AutoMapper.fakes : warning : No se puede generar shim para AutoMapper.Configuration.CreateTypeMapExpression+<>c__DisplayClass19_0: no se admite el tipo debido a limitaciones internas.
