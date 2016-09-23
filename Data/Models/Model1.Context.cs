@@ -789,5 +789,23 @@ namespace ProntoMVC.Data.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fSQL_GetDataTableFiltradoYPaginado_Result3>("[DemoProntoEntities].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @optDivisionSyngenta, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, optDivisionSyngentaParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, optCamionVagonParameter);
         }
+    
+        public virtual int Requerimientos_TX_PendientesDeAsignacion(string depositos)
+        {
+            var depositosParameter = depositos != null ?
+                new ObjectParameter("Depositos", depositos) :
+                new ObjectParameter("Depositos", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_TX_PendientesDeAsignacion", depositosParameter);
+        }
+    
+        public virtual int Requerimientos_TX_PendientesDeAsignacion1(string depositos)
+        {
+            var depositosParameter = depositos != null ?
+                new ObjectParameter("Depositos", depositos) :
+                new ObjectParameter("Depositos", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_TX_PendientesDeAsignacion1", depositosParameter);
+        }
     }
 }

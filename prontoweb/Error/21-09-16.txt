@@ -1,0 +1,800 @@
+
+Log Entry : 
+09/21/2016 13:55:44
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:39
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:45
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:45
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:45
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3479
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+09/21/2016 13:56:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3479
+__________________________
+
+Log Entry : 
+09/21/2016 14:00:50
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 14:00:53
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+09/21/2016 14:00:53
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+09/21/2016 14:00:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3479
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_141541.xls
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_141541.xls
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3480
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:45
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_141546.xls
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_141546.xls
+__________________________
+
+Log Entry : 
+09/21/2016 14:15:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3480
+__________________________
+
+Log Entry : 
+09/21/2016 19:10:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:10:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Hubo un error al generar el informe. Control Kilos de Descarga System.InvalidCastException: Conversion from string "" to type 'Boolean' is not valid. ---> System.FormatException: Input string was not in a correct format.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ParseDouble(String Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   --- End of inner exception stack trace ---
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3283
+__________________________
+
+Log Entry : 
+09/21/2016 19:10:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:10:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Hubo un error al generar el informe. Control Kilos de Descarga System.InvalidCastException: Conversion from string "" to type 'Boolean' is not valid. ---> System.FormatException: Input string was not in a correct format.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ParseDouble(String Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   --- End of inner exception stack trace ---
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3283
+__________________________
+
+Log Entry : 
+09/21/2016 19:11:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:11:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Hubo un error al generar el informe. Control Kilos de Descarga System.InvalidCastException: Conversion from string "" to type 'Boolean' is not valid. ---> System.FormatException: Input string was not in a correct format.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ParseDouble(String Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   --- End of inner exception stack trace ---
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3283
+__________________________
+
+Log Entry : 
+09/21/2016 19:13:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:13:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Hubo un error al generar el informe. Control Kilos de Descarga System.InvalidCastException: Conversion from string "" to type 'Boolean' is not valid. ---> System.FormatException: Input string was not in a correct format.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ParseDouble(String Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   --- End of inner exception stack trace ---
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3283
+__________________________
+
+Log Entry : 
+09/21/2016 19:16:01
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:16:04
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Hubo un error al generar el informe. Control Kilos de Descarga System.InvalidCastException: Conversion from string "" to type 'Boolean' is not valid. ---> System.FormatException: Input string was not in a correct format.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ParseDouble(String Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   --- End of inner exception stack trace ---
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3283
+__________________________
+
+Log Entry : 
+09/21/2016 19:18:43
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:18:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Hubo un error al generar el informe. Control Kilos de Descarga System.InvalidCastException: Conversion from string "" to type 'Boolean' is not valid. ---> System.FormatException: Input string was not in a correct format.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ParseDouble(String Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   --- End of inner exception stack trace ---
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToBoolean(String Value)
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3283
+__________________________
+
+Log Entry : 
+09/21/2016 19:20:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:20:06
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Hubo un error al generar el informe. Control Kilos de Descarga System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3292
+__________________________
+
+Log Entry : 
+09/21/2016 19:20:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:20:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: Se ha intentado establecer un parámetro de informe 'PuntoVenta', que no está definido en este informe. (rsUnknownReportParameter)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 19:20:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192029.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:20:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192029.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:20:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:21:53
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:23:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: Se ha intentado establecer un parámetro de informe 'PuntoVenta', que no está definido en este informe. (rsUnknownReportParameter)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 19:23:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192155.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:23:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192155.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:23:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:23:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:24:06
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: Se ha intentado establecer un parámetro de informe 'PuntoVenta', que no está definido en este informe. (rsUnknownReportParameter)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 19:24:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192343.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:24:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192343.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:24:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:29:12
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:29:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192915.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:29:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_192915.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:29:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:30:20
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:30:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_193021.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:30:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_193021.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:30:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:50:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:50:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195048.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:50:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195048.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:50:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:51:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:51:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195107.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:51:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195107.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:51:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:52:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:52:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195244.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:52:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195244.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:52:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:54:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195500.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195500.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195529.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195529.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:55:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 19:56:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 19:57:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 19:57:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195628.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:57:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_195628.xls
+__________________________
+
+Log Entry : 
+09/21/2016 19:57:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:  Informe: Todas (menos las rechazadas),  del 20/09/2016 al 20/09/2016           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201144.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201144.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 20:11:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 20:12:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 20:12:04
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201202.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:12:04
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201202.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:12:04
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 20:12:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 20:13:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 20:13:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201251.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:13:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201251.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:13:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 20:13:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4066
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201355.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201355.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201449.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201449.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:14:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 20:16:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 20:16:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201615.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:16:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201615.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:16:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________
+
+Log Entry : 
+09/21/2016 20:19:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+09/21/2016 20:19:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201930.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:19:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 21sep2016_201930.xls
+__________________________
+
+Log Entry : 
+09/21/2016 20:19:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3491
+__________________________

@@ -80,7 +80,7 @@ Partial Class CartaDePorteInformesAccesoClientes
             'agregar al where que aparezca la razon social de este cliente
             Dim rs As String
             Try
-                rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
 
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
@@ -305,7 +305,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
         Dim rs As String
         Try
-            rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
+            rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
             rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
@@ -462,7 +462,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         'agregar al where que aparezca la razon social de este cliente
         Dim rs As String
         Try
-            rs = UserDatosExtendidosManager.Traer(Session(SESSIONPRONTO_UserId), ConexBDLmaster).RazonSocial.ToUpper
+            rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
 
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
