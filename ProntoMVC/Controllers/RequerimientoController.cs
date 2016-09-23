@@ -31,7 +31,28 @@ namespace ProntoMVC.Controllers
         //    [Authorize(Roles = "SuperAdmin,Requerimientos")] //ojo que el web.config tambien te puede bochar hacia el login
 
 
+
+
         public virtual ViewResult Index(bool bAConfirmar = false, bool bALiberar = false)
+        {
+            //var requerimientos = db.Requerimientos.Include(r => r.Obra).Include(r => r.Empleados).Include(r => r.Empleados1).Include(r => r.Sectores)
+            //    .OrderBy(r => r.NumeroRequerimiento);
+            //return View(db.Requerimientos.ToList());
+
+            if (!PuedeLeer(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
+
+
+
+
+            ViewBag.bAConfirmar = (bool)(Request.QueryString["bAConfirmar"].NullSafeToString() == "SI");
+            ViewBag.bALiberar = (bool)(Request.QueryString["bALiberar"].NullSafeToString() == "SI");
+
+
+
+            return View();
+        }
+
+        public virtual ViewResult RMsPendientesDeAsignar(bool bAConfirmar = false, bool bALiberar = false)
         {
             //var requerimientos = db.Requerimientos.Include(r => r.Obra).Include(r => r.Empleados).Include(r => r.Empleados1).Include(r => r.Sectores)
             //    .OrderBy(r => r.NumeroRequerimiento);
@@ -454,6 +475,8 @@ namespace ProntoMVC.Controllers
                     // Perform Update
 
 
+                    ValidaryReformatearRequerimiento(requerimiento);
+
 
                     if (requerimiento.IdRequerimiento > 0)
                     {
@@ -585,6 +608,82 @@ namespace ProntoMVC.Controllers
 
 
 
+        public void ValidaryReformatearRequerimiento(Requerimiento requerimiento)
+        {
+            // migrando codigo que es del DetRequerimientos_A y DetRequerimientos_M
+
+            Parametros parametros = db.Parametros.Find(1);
+
+            foreach (var dr in requerimiento.DetalleRequerimientos)
+            {
+
+
+
+
+                //esto solo en el alta
+                if (requerimiento.IdRequerimiento <= 0)
+                {
+
+                    if (parametros.ActivarSolicitudMateriales == "SI") dr.TipoDesignacion = "S/D";
+                }
+
+
+                string TipoDeCompraEnRMHabilitado = BuscarClaveINI("Habilitar tipo de compra en RM");
+                //  SET @TipoDeCompraEnRMHabilitado=Isnull((Select Top 1 ProntoIni.Valor From ProntoIni   
+                //Left Outer Join ProntoIniClaves pic On pic.IdProntoIniClave=ProntoIni.IdProntoIniClave  
+                //Where pic.Clave='Habilitar tipo de compra en RM'),'')  
+
+
+
+
+                if (TipoDeCompraEnRMHabilitado == "SI")
+                {
+
+                    string Modalidad = db.TiposCompras.Find(requerimiento.IdTipoCompra).Modalidad ?? "CC";
+
+
+                    int IdDetallePedido = (from dp in dr.DetallePedidos
+                                           join p in db.Pedidos on dp.IdPedido equals p.IdPedido
+                                           where (dp.Cumplido ?? "NO") != "AN" && (p.Cumplido ?? "NO") != "AN"
+                                           select dp.IdDetallePedido
+                           ).FirstOrDefault();
+                    //int IdDetallePedido=IsNull((Select Top 1 dp.IdDetallePedido From DetallePedidos dp   
+                    //         Left Outer Join Pedidos On Pedidos.IdPedido = dp.IdPedido  
+                    //         Where dp.IdDetalleRequerimiento=@IdDetalleRequerimiento and 
+                    //             IsNull(dp.Cumplido,"NO")<>"AN" and IsNull(Pedidos.Cumplido,"NO")<>"AN"),0)  
+
+
+                    if (Modalidad == "CR" && IdDetallePedido == 0 && dr.TipoDesignacion == null)
+                        dr.TipoDesignacion = "S/D";
+                    else if (Modalidad == "CO" && IdDetallePedido == 0 && dr.TipoDesignacion == "S/D")
+                        dr.TipoDesignacion = null;
+                    else if (Modalidad == "CN" && IdDetallePedido == 0 && dr.TipoDesignacion == "S/D")
+                        dr.TipoDesignacion = null;
+
+                }
+
+                if (dr.IdComprador == null)
+                {
+
+                    /*
+                DECLARE @AsignarLiberadorComoCompradorEnRM varchar(3), @Aprobo int, @Sector varchar(50)  
+                SET @AsignarLiberadorComoCompradorEnRM=IsNull((Select Top 1 P2.Valor From Parametros2 P2 Where P2.Campo="AsignarLiberadorComoCompradorEnRM"),"NO")  
+                SET @Aprobo=IsNull((Select Top 1 Requerimientos.Aprobo From Requerimientos Where Requerimientos.IdRequerimiento=@IdRequerimiento),0)  
+                SET @Sector=IsNull((Select Top 1 Sectores.Descripcion From Empleados   
+                     Left Outer Join Sectores On Sectores.IdSector=Empleados.IdSector  
+                     Where Empleados.IdEmpleado=@Aprobo),"")  
+                IF @AsignarLiberadorComoCompradorEnRM="SI" and @Aprobo<>0 and Upper(@Sector)="COMPRAS"  
+                  BEGIN  
+                 SET @IdComprador=@Aprobo  
+                 SET @FechaAsignacionComprador=GetDate()  
+                  END  
+             
+                     * */
+                }
+
+
+            }
+        }
 
 
 
@@ -894,7 +993,7 @@ namespace ProntoMVC.Controllers
 
 
         public virtual ActionResult Requerimientos_DynamicGridData
-                (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)   
+                (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
             /*
             var aada =( db.Requerimientos
@@ -1005,9 +1104,9 @@ namespace ProntoMVC.Controllers
 
 
             var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord)
-                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                           //.Skip((currentPage - 1) * pageSize).Take(pageSize)
                         .ToList()
-                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
+                       select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 
             var jsonData = new jqGridJson()
             {
@@ -1019,7 +1118,7 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdRequerimiento.ToString(),
                             cell = new string[] { 
-                                //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
+                                //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target="' >Editar</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
 							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
                                 a.IdRequerimiento.ToString(), 
@@ -1095,6 +1194,95 @@ namespace ProntoMVC.Controllers
         }
 
 
+
+
+
+          public virtual ActionResult RequerimientosPendientesAsignar_DynamicGridData
+                (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
+        {
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
+            //DateTime FechaFinal = DateTime.Today.AddDays(0); 
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIIBB", FechaInicial, FechaFinal, TipoArchivo, 2);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            int totalRecords = Entidad.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdAux = a[0],
+                            IdComprobanteProveedor = a[1],
+                            IdProvincia = a[2],
+                            Tipo = a[3],
+                            Jurisdiccion = a[4],
+                            Provincia = a[5],
+                            Proveedor = a[6],
+                            Cuit = a[7],
+                            Fecha = a[8],
+                            FechaComprobante = a[9],
+                            NumeroComprobante1 = a[10],
+                            NumeroComprobante2 = a[11],
+                            TipoComprobante = a[12],
+                            Letra = a[13],
+                            ImporteIIBB = (a[14].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[14].NullSafeToString()),
+                            Importacion_Despacho = a[15],
+                            CBU = a[16],
+                            Registro = a[17],
+                            IdMoneda = a[18],
+                            ImporteBase = (a[19].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[19].NullSafeToString()),
+                            IdObra = a[20],
+                            Obra = a[21]
+                        }).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdAux.ToString(),
+                            cell = new string[] { 
+                                string.Empty, 
+                                a.IdAux.ToString(), 
+                                a.IdComprobanteProveedor.ToString(), 
+                                a.IdProvincia.ToString(), 
+                                a.Tipo.ToString(), 
+                                a.Jurisdiccion.ToString(), 
+                                a.Provincia.ToString(), 
+                                a.Proveedor.ToString(), 
+                                a.Cuit.ToString(), 
+                                a.Fecha == null || a.Fecha.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.FechaComprobante == null || a.FechaComprobante.ToString() == "" ? "" : Convert.ToDateTime(a.FechaComprobante.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.NumeroComprobante1.ToString(), 
+                                a.NumeroComprobante2.ToString(), 
+                                a.TipoComprobante.ToString(), 
+                                a.Letra.ToString(), 
+                                a.ImporteIIBB.ToString(), 
+                                a.Importacion_Despacho.ToString(), 
+                                a.CBU.ToString(), 
+                                a.Registro.ToString(), 
+                                a.IdMoneda.ToString(), 
+                                a.ImporteBase.ToString(), 
+                                a.IdObra.ToString(), 
+                                a.Obra.ToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+      
         public virtual ActionResult Requerimientos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                                    string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
@@ -1430,7 +1618,7 @@ namespace ProntoMVC.Controllers
                              sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req);
 
 
-            
+
 
             //    var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Requerimiento>
             //                        (Req as ObjectQuery<Data.Models.Requerimiento>
@@ -1533,8 +1721,8 @@ namespace ProntoMVC.Controllers
                             Recepciones = a.Recepciones,
                             Salidas = a.SalidasMateriales,
                             Libero = (a.AproboRequerimiento != null) ? a.AproboRequerimiento.Nombre : "",
-                            Solicito =  (a.SolicitoRequerimiento!=null) ?a.SolicitoRequerimiento.Nombre : "",
-                            Sector = (a.Sectores!=null) ?  a.Sectores.Descripcion : "",
+                            Solicito = (a.SolicitoRequerimiento != null) ? a.SolicitoRequerimiento.Nombre : "",
+                            Sector = (a.Sectores != null) ? a.Sectores.Descripcion : "",
                             Usuario_anulo = a.UsuarioAnulacion,
                             Fecha_anulacion = a.FechaAnulacion,
                             Motivo_anulacion = a.MotivoAnulacion,
@@ -1546,7 +1734,7 @@ namespace ProntoMVC.Controllers
                             a.ConfirmadoPorWeb
 
                         })//.Where(campo)
-                        //.OrderBy(sidx + " " + sord)
+                //.OrderBy(sidx + " " + sord)
                 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -1890,10 +2078,10 @@ namespace ProntoMVC.Controllers
                                 a.Cumplido,
                                 a.ArchivoAdjunto1,
                                 a.OrigenDescripcion.ToString(),
-                                                            a.IdRequerimiento.NullSafeToString(),
+                                a.IdRequerimiento.NullSafeToString(),
 
-                                                            a.IdControlCalidad.NullSafeToString(),
-                                                            a.ControlCalidadDesc.NullSafeToString()
+                                a.IdControlCalidad.NullSafeToString(),
+                                a.ControlCalidadDesc.NullSafeToString()
 
                          }
                         }).ToArray()
@@ -2053,7 +2241,7 @@ namespace ProntoMVC.Controllers
                             a.NumeroItem,
                             a.Cantidad,
                             (a.Unidad ?? new Unidad()).Abreviatura,
-                            (a.Articulo ?? new Articulo()) .Codigo,
+                            (a.Articulo ?? new Articulo()).Codigo,
                             (a.Articulo ?? new Articulo()).Descripcion,
                             a.FechaEntrega,
                             a.Observaciones,

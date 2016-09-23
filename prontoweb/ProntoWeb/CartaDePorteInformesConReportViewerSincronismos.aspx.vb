@@ -3001,7 +3001,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                                      "Ambos", _
                                     Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                                     Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text, , , , , , db)
+                                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text, _
+                                    , , , , , db)
 
 
                     Dim qq As List(Of ProntoMVC.Data.Models.CartasDePorte) = LogicaFacturacion.CartasConCopiaPendiente(q, ms, HFSC.Value)
@@ -3237,6 +3238,68 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
                     RebindReportViewer("ProntoWeb\Informes\Descargas por Destino-Articulo.rdl", ProntoFuncionesGenerales.DataTableWHERE(dt, sWHERE))
+
+
+                Case "Control Kilos de Descarga"
+
+
+                    Dim ArchivoExcelDestino = Path.GetTempPath & "Control Kilos de Descarga " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
+
+                    Dim rep As Microsoft.Reporting.WebForms.ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
+
+                    Dim yourParams(26) As ReportParameter
+                    yourParams(0) = New ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(HFSC.Value))
+                    yourParams(1) = New ReportParameter("sServidorWeb", ConfigurationManager.AppSettings("UrlDominio"))
+                    yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#).ToString))
+                    yourParams(3) = New ReportParameter("FechaHasta", Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#).ToString))
+                    yourParams(4) = New ReportParameter("IdDestino", idDestino.ToString)
+
+                    yourParams(5) = New ReportParameter("puntoventa", cmbPuntoVenta.SelectedValue.ToString)
+
+
+                    yourParams(6) = New ReportParameter("startRowIndex", "0")
+                    yourParams(7) = New ReportParameter("maximumRows", "100000")
+                    yourParams(8) = New ReportParameter("estado", estadofiltro)
+                    yourParams(9) = New ReportParameter("QueContenga", "0")
+                    yourParams(10) = New ReportParameter("idVendedor", idVendedor.ToString())
+                    yourParams(11) = New ReportParameter("idDestinatario", idDestinatario.ToString())
+                    yourParams(12) = New ReportParameter("idIntermediario", idIntermediario)
+                    yourParams(13) = New ReportParameter("idRemComercial", idRComercial)
+                    yourParams(14) = New ReportParameter("idArticulo", idArticulo)
+                    yourParams(15) = New ReportParameter("idProcedencia", idProcedencia)
+                    yourParams(16) = New ReportParameter("AplicarANDuORalFiltro", CInt(IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR)))
+                    yourParams(17) = New ReportParameter("ModoExportacion", DropDownList2.Text)
+                    yourParams(18) = New ReportParameter("optDivisionSyngenta", "-1")
+                    yourParams(19) = New ReportParameter("Contrato", "-1")
+                    yourParams(20) = New ReportParameter("QueContenga2", "-1")
+                    yourParams(21) = New ReportParameter("idClienteAuxiliarint", "-1")
+                    yourParams(22) = New ReportParameter("AgrupadorDeTandaPeriodos", "-1")
+                    yourParams(23) = New ReportParameter("Vagon", "-1")
+                    yourParams(24) = New ReportParameter("Patente", "-1")
+                    yourParams(25) = New ReportParameter("optCamionVagon", "-1")
+
+
+                    Dim titulo As String = ""
+                    titulo = FormatearTitulo(HFSC.Value, _
+                              titulo, estadofiltro, "", idVendedor, idCorredor, _
+                            idDestinatario, idIntermediario, _
+                            idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                              IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
+                            Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                            Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , _
+                            txtContrato.Text, idClienteAuxiliar)
+                    yourParams(26) = New ReportParameter("Titulo", titulo)
+
+
+
+
+
+                    output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep, "Williams - Controles De Kilos Clientes.rdl", yourParams, ArchivoExcelDestino, False)
+
+
+
+
 
 
                 Case "Totales generales por mes"

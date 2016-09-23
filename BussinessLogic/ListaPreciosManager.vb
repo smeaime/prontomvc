@@ -83,12 +83,13 @@ Namespace Pronto.ERP.Bll
 
         Public Shared Function Fetch(ByVal SC As String, ByVal IdLista As Integer) As DataTable
 
-            Return ExecDinamico(SC, String.Format("SELECT IdListaPreciosDetalle,IdListaPrecios,Precio,A.IdArticulo, " & _
-                                " Articulos.Descripcion as Producto, A.* ," & _
+            Return ExecDinamico(SC, String.Format("SELECT A.IdListaPreciosDetalle,A.IdListaPrecios,Precio,A.IdArticulo, " & _
+                                " Articulos.Descripcion as Producto, A.* , CLI.RazonSocial, " & _
                                 " isnull(LOCDES.Descripcion,'') as DestinoDesc " & _
                                 " FROM " & Tabla & " A " & _
                                 " LEFT OUTER JOIN WilliamsDestinos LOCDES ON IdDestinoDeCartaDePorte = LOCDES.IdWilliamsDestino " & _
-                                " LEFT OUTER JOIN Articulos ON A.IdArticulo = Articulos.IdArticulo  WHERE IdListaPrecios=" & IdLista & _
+                                " LEFT OUTER JOIN Clientes CLI ON A.IdCliente = CLI.IdCliente " & _
+                                " LEFT OUTER JOIN Articulos ON A.IdArticulo = Articulos.IdArticulo  WHERE A.IdListaPrecios=" & IdLista & _
                                 " order by LOCDES.Descripcion,Articulos.Descripcion  "))
 
         End Function
