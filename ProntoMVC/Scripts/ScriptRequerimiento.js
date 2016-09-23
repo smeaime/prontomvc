@@ -782,8 +782,12 @@ $(function () {
                             },
                             editrules: { required: true }
                         },
-                        { name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 }, index: 'FechaEntrega', label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
-                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
+                        {
+                            name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 }, index: 'FechaEntrega',
+                            label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
+                            //formatter:'date', 
+                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
                         },
                         { formoptions: { rowpos: 11, colpos: 1, label: 'Obs' }, name: 'Observaciones', index: 'Observaciones', classes: "textInDiv", label: 'TB', align: 'left', editable: true, edittype: 'text', width: 300, editoptions: { rows: '4', cols: '40' } },
                         { formoptions: { rowpos: 21, colpos: 1 }, name: 'Cumplido', index: 'Cumplido', label: 'TB', align: 'center', width: 50, sortable: false, editable: false },

@@ -49,6 +49,9 @@ namespace ProntoMVC.Reportes
         {
             string nombreBase;
 
+
+            var memb = new Generales.StaticMembershipService();
+
             try
             {
                 nombreBase = this.Session["BasePronto"].ToString();
@@ -56,7 +59,7 @@ namespace ProntoMVC.Reportes
             catch (Exception)
             {
                 var c = new ProntoMVC.Controllers.AccountController();
-                nombreBase = c.BuscarUltimaBaseAccedida(new Generales.StaticMembershipService());
+                nombreBase = c.BuscarUltimaBaseAccedida(memb);
             }
 
             if (nombreBase == "")
@@ -68,8 +71,8 @@ namespace ProntoMVC.Reportes
             int idcliente;
             int idauxiliar;
 
-            var scEF = Generales.sCadenaConex(nombreBase);
-            var scsql = Generales.sCadenaConexSQL(nombreBase, null);
+            var scEF = Generales.sCadenaConex(nombreBase, memb);
+            var scsql = Generales.sCadenaConexSQL(nombreBase, memb);
             var scsql_Cubos = "Data Source=serversql3\\testing;Initial Catalog=DemoProntoWeb";
             
             // ReportViewerRemoto.Reset

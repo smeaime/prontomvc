@@ -735,6 +735,7 @@
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />
     <None Include="Documentos\vb6\Facturamts.clsz" />
+    <Content Include="Documentos\sql\ALTERTABLE 2011 Modulo WEB.sql" />
     <Content Include="Documentos\sql\cargar_grabar.sql" />
     <Content Include="Documentos\sql\CtasCtesD_TXPorTrs_AuxiliarEntityFramework.sql" />
     <Content Include="Documentos\sql\dbo.wCtasCtesA_TXPorTrs.StoredProcedure.sql" />
@@ -742,6 +743,7 @@
     <Content Include="Documentos\sql\FK_Pronto - Adicionales por ProntoMVC.sql" />
     <Content Include="Documentos\sql\FK_Pronto mariano manual.sql" />
     <Content Include="Documentos\sql\FK_Pronto.sql" />
+    <Content Include="Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql" />
     <Content Include="Documentos\sql\Para los cubos\Generacion de tablas para cubos.sql" />
     <Content Include="Documentos\sql\pruebas\autotrol mvc alter table.sql" />
     <Content Include="Documentos\sql\pruebas\autotrol mvc.sql" />
@@ -1384,6 +1386,7 @@
     <Content Include="Views\ResumenConciliacion\Edit.cshtml" />
     <Content Include="Views\ResumenConciliacion\Index.cshtml" />
     <Content Include="Views\Valor\IndexChequesSegunEmision.cshtml" />
+    <Content Include="Views\Requerimiento\RMsPendientesDeAsignar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />

@@ -78,6 +78,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem>Totales generales por mes</asp:ListItem>
                             <asp:ListItem>Taras por Camiones</asp:ListItem>
                             <asp:ListItem>Liquidación de Subcontratistas</asp:ListItem>
+                            <asp:ListItem>Control Kilos de Descarga</asp:ListItem>
                             <%--                    <asp:ListItem>Totales por puerto y por fábrica</asp:ListItem>
                             --%>
                             <asp:ListItem Enabled="false">Comisiones por puerto y por cereal</asp:ListItem>

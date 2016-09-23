@@ -59,7 +59,7 @@ namespace ProntoMVC.Controllers
 
 
             //string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService;
-            string SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString());
+            string SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
             string usuario = ViewBag.NombreUsuario;
             int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
             if (!Generales.TienePermisosDeFirma(SC, IdUsuario)) throw new Exception("No tiene permisos de autorización");
