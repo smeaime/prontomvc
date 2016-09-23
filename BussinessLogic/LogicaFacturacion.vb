@@ -237,7 +237,8 @@ Public Class LogicaFacturacion
 
             For Each cdp In q2
                 Dim ccc = db.CartasDePortes.Where(Function(x) x.IdCartaDePorte = cdp).FirstOrDefault()
-                ccc.SubnumeroDeFacturacion = -1
+                ccc.SubnumeroDeFacturacion = 0
+                'ccc.SubnumeroDeFacturacion = -1
                 Try
                     db.SubmitChanges()
                 Catch ex As Exception
@@ -254,8 +255,10 @@ Public Class LogicaFacturacion
                     MandarMailDeError("Se intentará emparchar. Error en CorrectorSubnumeroFacturacion: Carta Porte " & ccc.IdCartaDePorte & " numero " & _
                                         ccc.NumeroCartaDePorte & " " & ccc.SubnumeroVagon & " " & ex.ToString)
                     ErrHandler2.WriteError(ex.ToString)
-                    Dim ccorig = db.CartasDePortes.Where(Function(x) x.NumeroCartaDePorte = ccc.NumeroCartaDePorte And x.SubnumeroVagon = ccc.SubnumeroVagon And x.SubnumeroDeFacturacion = -1).FirstOrDefault()
-                    ccorig.SubnumeroDeFacturacion = 0
+                    If False Then
+                        Dim ccorig = db.CartasDePortes.Where(Function(x) x.NumeroCartaDePorte = ccc.NumeroCartaDePorte And x.SubnumeroVagon = ccc.SubnumeroVagon And x.SubnumeroDeFacturacion = -1).FirstOrDefault()
+                        ccorig.SubnumeroDeFacturacion = 0
+                    End If
                     ccc.SubnumeroDeFacturacion = 1
                     Try
                         db.SubmitChanges()
@@ -3042,12 +3045,17 @@ Public Class LogicaFacturacion
     End Function
 
 
-    Public Shared Function ListaEmbarquesQueryable(ByVal sc As String, ByVal FechaDesde As Date, ByVal FechaHasta As Date, Optional ByVal idTitular As Integer = -1, Optional ByVal pventa As Integer = 0, Optional ByVal idQueContenga As Integer = -1) As IQueryable(Of CartasPorteMovimiento)
-        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+    Public Shared Function ListaEmbarquesQueryable(ByVal sc As String, ByVal FechaDesde As Date, ByVal FechaHasta As Date, Optional ByVal idTitular As Integer = -1, Optional ByVal pventa As Integer = 0, Optional ByVal idQueContenga As Integer = -1) As IQueryable(Of Models.CartasPorteMovimiento)
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc)))
+
+
 
         ' Dim q = From i In db.CartasPorteMovimientos
         Dim embarques = From i In db.CartasPorteMovimientos _
-                        Join c In db.linqClientes On c.IdCliente Equals i.IdExportadorOrigen _
+                        Join c In db.Clientes On c.IdCliente Equals i.IdExportadorOrigen _
                           Where ( _
                                 i.Tipo = 4 _
                                 And If(i.Anulada, "NO") <> "SI" _
@@ -4642,9 +4650,12 @@ Public Class LogicaFacturacion
 
 
                 Catch ex As Exception
+                 
                     'si esto falla, anular la ultima factura y cortar el proceso
                     'anular factura idfactura
                     MandarMailDeError(ex)
+
+                    'y por que no la anuló? me mandó el mail bien (del timeout) del 22 de junio a las 15:42
 
                     Dim myFactura As Pronto.ERP.BO.Factura = FacturaManager.GetItem(SC, idFactura)
                     FacturaManager.AnularFactura(SC, myFactura, Session(SESSIONPRONTO_glbIdUsuario))
@@ -4774,7 +4785,7 @@ Public Class LogicaFacturacion
 
 
 
-    Class grup
+    Public Class grup
         Public cartas As System.Collections.Generic.IEnumerable(Of Pronto.ERP.BO.CartaDePorte)
         Public IdArticulo As Integer
         Public Entregador As Integer
@@ -5092,17 +5103,28 @@ Public Class LogicaFacturacion
         Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
-        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
+        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura).ToList
         Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
 
         Dim acopios = (From x In oListaCDP
-                       Select New With {
-                        x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6, x.AcopioFacturarleA
+                       Select New With { _
+                        .Acopio1 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio1, 0))), _
+                        .Acopio2 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio2, 0))), _
+                        .Acopio3 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio3, 0))), _
+                        .Acopio4 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio4, 0))), _
+                        .Acopio5 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio5, 0))), _
+                        .Acopio6 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio6, 0))) _
                         }).ToList
 
+        'caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
+        Dim acopiosdelcliente = db.CartasPorteAcopios.Where(Function(x) x.IdCliente = oFac.IdCliente).Select(Function(x) x.IdAcopio).ToList
 
-        Dim ccc As List(Of Integer) = acopios.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6, x.AcopioFacturarleA}).Where(Function(x) If(x, 0) <> 0).Select(Function(x) If(x, 0)).Distinct.ToList
+        Dim ccc As List(Of Integer) = acopios.SelectMany(Function(x) _
+                                                         {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6} _
+                            ).Where(Function(x) x <> 0 And acopiosdelcliente.Contains(x)).Distinct.ToList
+
+
 
         'Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
         'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio1
@@ -5120,6 +5142,11 @@ Public Class LogicaFacturacion
 
 
 
+
+        'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=22255
+        'caso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
+        'caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
+
         If ccc.Count > 1 Then
             'Return vbCrLf + "Acopios id" + nombreacopio(acopios(0), SC)
             s = "ACOPIO " & nombreacopio(ccc(0), SC)
@@ -5132,6 +5159,20 @@ Public Class LogicaFacturacion
             'Return ""
         End If
 
+
+
+        Dim EsExportacion As Boolean = oListaCDP.Exists(Function(x) x.Exporta = "SI")
+        EsExportacion = LogicaFacturacion.EsDeExportacion(oFac.IdFactura, SC)
+
+
+        If oFac.IdCliente = 2775 And EsExportacion And s = "ACOPIO OTROS" Then
+            'caso 1: si es LDC y elevacion (o sea exportacion), NO mostrar "ACOPIO OTROS" (pero sí los demás)
+            s = ""
+        End If
+
+
+
+
         ' esto se lo paso al OBSITEM
         ' If oFac.IdCliente = 2775 And EsDeExportacion(idfactura, SC) Then s = "ELEVACION " & s
 
@@ -5141,8 +5182,8 @@ Public Class LogicaFacturacion
 
 
     Public Shared Function EsDeExportacion(idfactura As Integer, SC As String) As Boolean
-        
-        
+
+
 
         Try
 
@@ -5362,6 +5403,8 @@ Public Class LogicaFacturacion
         'factura (daríamos de alta los 4 centros de costo)
 
 
+        Dim usuario As Integer = 1
+        If Session IsNot Nothing Then usuario = Session(SESSIONPRONTO_glbIdUsuario)
 
 
         Dim tTemp As Date = Now
@@ -5410,7 +5453,6 @@ Public Class LogicaFacturacion
 
 
             If IdClienteAFacturarle <= 0 Then Return -1
-
 
 
 
@@ -5493,10 +5535,34 @@ Public Class LogicaFacturacion
                         'hay una tablita de condiciones
                         'se llama "Conciciones Compra"
                         'que tiene la cantidad de dias CantidadDias
-                        Dim dtcondiciones As DataTable = EntidadManager.ExecDinamico(SC, "SELECT IdCondicionVenta FROM Clientes WHERE idCliente= " & IdClienteAFacturarle)
-                        Dim idcondicion As Integer = iisNull(dtcondiciones.Rows(0).Item("IdCondicionVenta"), 1)
-                        .Fields("IdCondicionVenta").Value = idcondicion
-                        Dim dias As Integer = iisNull(EntidadManager.ExecDinamico(SC, "SELECT CantidadDias1 FROM  [Condiciones Compra]  WHERE idCondicionCompra=" & idcondicion).Rows(0).Item(0), 0)
+                        Dim idcondicion As Integer = 4
+                        Try
+
+                            Dim dtcondiciones As DataTable = EntidadManager.ExecDinamico(SC, "SELECT IdCondicionVenta FROM Clientes WHERE idCliente= " & IdClienteAFacturarle)
+
+                            'había un idcondicion que no existia como id en la tabla (estaban usando la id=15) -claro, explotaba la linea de CantidadDias!
+
+                            idcondicion = iisNull(dtcondiciones.Rows(0).Item("IdCondicionVenta"), 1)
+                            .Fields("IdCondicionVenta").Value = idcondicion
+                        Catch ex As Exception
+                            ErrHandler2.WriteError("Problema con la IdCondicionVenta?    " & IdClienteAFacturarle & " " & ex.ToString)
+                            'Throw no rompas la facturacion
+                        End Try
+
+                        Dim dias As Integer = 0
+                        Try
+
+
+                            dias = iisNull(EntidadManager.ExecDinamico(SC, "SELECT CantidadDias1 FROM  [Condiciones Compra]  WHERE idCondicionCompra=" & idcondicion).Rows(0).Item(0), 0)
+                        Catch ex As Exception
+                            ErrHandler2.WriteError("Problema con  CantidadDias1?    " & idcondicion & " " & ex.ToString)
+                            'Throw no rompas la facturacion
+                        End Try
+
+
+
+
+
                         .Fields("FechaVencimiento").Value = DateAdd(DateInterval.Day, dias, Today) ' mFecha 
 
 
@@ -5559,7 +5625,11 @@ Public Class LogicaFacturacion
 
                         .Fields("NumeroCAI").Value = Val(mCAI)
                         .Fields("FechaVencimientoCAI").Value = mFechaCAI
-                        .Fields("IdUsuarioIngreso").Value = Session(SESSIONPRONTO_glbIdUsuario)
+
+
+
+                        .Fields("IdUsuarioIngreso").Value = usuario
+
                         .Fields("FechaIngreso").Value = Today
                         .Fields("IdCodigoIva").Value = mIdCodigoIva   'este no lo estas asignando (ahora)... Igual, la factura graba
                         '.Fields("PercepcionIVA").Value = 1 ' 0   'Esta linea tira error
@@ -5665,8 +5735,6 @@ Public Class LogicaFacturacion
                     'como hago para que el imputador revise esto?
 
 
-
-
                     Dim renglons As Integer = 0
                     For Each o In ImputacionDevuelta
                         renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
@@ -5713,6 +5781,7 @@ Public Class LogicaFacturacion
 
                                 .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
 
+                                If (.Fields("PrecioUnitario").Value = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
 
 
                                 .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value 'mTotal - mIVA
@@ -5812,6 +5881,9 @@ Public Class LogicaFacturacion
 
                                 .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
                                 .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
+
+                                If (dr.Item("TarifaFacturada") = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+
                                 .Fields("PrecioUnitario").Value = dr.Item("TarifaFacturada")
                                 .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
                                 .Fields("Costo").Value = 0
@@ -5894,6 +5966,7 @@ Public Class LogicaFacturacion
                                     End If
 
 
+                                    If (tarif = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
 
 
                                     .Fields("PrecioUnitario").Value = tarif
@@ -6149,7 +6222,7 @@ Public Class LogicaFacturacion
 
 
                 Try
-                    EntidadManager.LogPronto(SC, idFacturaCreada, "Factura por ProntoWeb", Session(SESSIONPRONTO_glbIdUsuario))
+                    EntidadManager.LogPronto(SC, idFacturaCreada, "Factura por ProntoWeb", usuario)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
@@ -6519,6 +6592,9 @@ Public Class LogicaFacturacion
 
 
 
+        Dim usuario As Integer = 1
+        If session IsNot Nothing Then usuario = session(SESSIONPRONTO_glbIdUsuario)
+
         Dim totIVA As Double = 0
 
 
@@ -6600,9 +6676,10 @@ Public Class LogicaFacturacion
                     'el total es el total, no importa que discrimine
                     mTotal += .Fields("Cantidad").Value * (mvarPrecio + iva)
 
+
                     '
                     If mvarTipoABC = "B" And mvarTipoIVA <> 8 And _
-                          EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, session(SESSIONPRONTO_glbIdUsuario)) <> "SI" Then
+                          EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, usuario) <> "SI" Then
                         'acá hace "la magia" de encajarle el iva en el precio del item (recordá que 
                         'no discriminar el iva es solo un tema de presentacion)
                         mvarPrecio = mvarPrecio + iva
@@ -6709,7 +6786,7 @@ Public Class LogicaFacturacion
                 .Fields("ImporteTotal").Value = Math.Round(mvarSubTotal + mvarIBrutos + Math.Round(totIVA, 2), 2)   ' Math.Round(mTotal, 2)
 
                 If mvarTipoABC = "B" And mvarTipoIVA <> 8 And _
-                      EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, session(SESSIONPRONTO_glbIdUsuario)) <> "SI" Then
+                      EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, usuario) <> "SI" Then
                     .Fields("IVANoDiscriminado").Value = Math.Round(totIVA, 2) ' totIVA
                     .Fields("ImporteIva1").Value = 0
                 Else

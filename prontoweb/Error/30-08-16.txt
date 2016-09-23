@@ -1,0 +1,364 @@
+
+Log Entry : 
+08/30/2016 00:28:44
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_002840.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:28:44
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_002840.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:28:44
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 00:31:59
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003157.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:31:59
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003157.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:31:59
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 00:33:40
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003338.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:33:40
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003338.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:33:40
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 00:36:42
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003640.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:36:42
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_003640.xls
+__________________________
+
+Log Entry : 
+08/30/2016 00:36:42
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 01:31:25
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013122.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:31:25
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013122.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:31:25
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 01:32:19
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013217.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:32:19
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013217.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:32:19
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 01:34:57
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013455.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:34:57
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013455.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:34:57
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 01:38:22
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013819.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:38:22
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_013819.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:38:22
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 01:40:38
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_014035.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:40:38
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_30ago2016_014035.xls
+__________________________
+
+Log Entry : 
+08/30/2016 01:40:38
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+08/30/2016 18:41:19
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+08/30/2016 18:41:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2583945. Error Message:La carta numero 900257096 id=2583945 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 18:41:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2583945. Error Message:PV 3 0
+__________________________
+
+Log Entry : 
+08/30/2016 18:41:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2583944. Error Message:La carta numero 900520761 id=2583944 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 18:41:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2583944. Error Message:PV 3 0
+__________________________
+
+Log Entry : 
+08/30/2016 18:42:56
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2583932. Error Message:La carta numero 555094127 id=2583932 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 18:42:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2583932. Error Message:PV 3 0
+__________________________
+
+Log Entry : 
+08/30/2016 18:43:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+08/30/2016 18:43:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:La carta numero 555247277 id=2544648 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 18:43:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/30/2016 18:51:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:La carta numero 555247277 id=2544648 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 18:51:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:02:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla1
+__________________________
+
+Log Entry : 
+08/30/2016 19:02:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla2
+__________________________
+
+Log Entry : 
+08/30/2016 19:02:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla3
+__________________________
+
+Log Entry : 
+08/30/2016 19:02:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla4
+__________________________
+
+Log Entry : 
+08/30/2016 19:02:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla5
+__________________________
+
+Log Entry : 
+08/30/2016 19:31:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:31:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:La carta numero 555247277 id=2544648 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 19:31:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:39:11
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:39:20
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:La carta numero 555247277 id=2544648 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 19:39:20
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:39:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8874
+   at CartadeporteABM.btnSave_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 2519
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/30/2016 19:39:50
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 9335
+EntityFramework
+__________________________
+
+Log Entry : 
+08/30/2016 19:40:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:La carta numero 555247277 id=2544648 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 19:40:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:40:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:45:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:47:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:La carta numero 555247277 id=2544648 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+08/30/2016 19:47:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2544648. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:48:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2545315. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+08/30/2016 19:48:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2542932. Error Message:PV 1 0
+__________________________

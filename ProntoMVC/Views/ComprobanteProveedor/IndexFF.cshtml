@@ -456,10 +456,84 @@ If you want additionally remove vertical border between the cells in the grid yo
           
           
 
+    {
+                                name: 'FechaComprobante', index: 'FechaComprobante', width: 100, align: 'center',
+                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                                datefmt: 'dd/mm/yy',
 
-                        { name: 'Fechacomp', index: 'FechaComprobante', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'recep', index: 'FechaRecepcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Vence', index: 'FechaVencimiento', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                                search: true,
+                                searchrules: {
+                                    date: true
+                                },
+                                searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                    sopt: ['ge', 'le', 'eq'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            changeYear: true,
+                                            changeMonth: true,
+                                            showButtonPanel: true,
+                                            onSelect: function () {
+                                                $(this).keydown();
+                                            }
+                                        });
+                                    }
+                                }
+
+                            },
+
+                            {
+                                name: 'FechaRecepcion', index: 'FechaRecepcion', width: 100, align: 'center',
+                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                                datefmt: 'dd/mm/yy',
+
+                                search: true,
+                                searchrules: {
+                                    date: true
+                                },
+                                searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                    sopt: ['ge', 'le', 'eq'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            changeYear: true,
+                                            changeMonth: true,
+                                            showButtonPanel: true,
+                                            onSelect: function () {
+                                                $(this).keydown();
+                                            }
+                                        });
+                                    }
+                                }
+
+                            },
+
+                          {
+                                name: 'FechaVencimiento', index: 'FechaVencimiento', width: 100, align: 'center',
+                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                                datefmt: 'dd/mm/yy',
+
+                                search: true,
+                                searchrules: {
+                                    date: true
+                                },
+                                searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                    sopt: ['ge', 'le', 'eq'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            changeYear: true,
+                                            changeMonth: true,
+                                            showButtonPanel: true,
+                                            onSelect: function () {
+                                                $(this).keydown();
+                                            }
+                                        });
+                                    }
+                                }
+
+                            },
+
                         { name: 'codProveedor', index: 'Proveedore.CodigoEmpresa', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'ProveedorFF', index: 'Proveedor.RazonSocial', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
@@ -486,9 +560,58 @@ If you want additionally remove vertical border between the cells in the grid yo
 
   
                         { name: 'UsuarioIngreso', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                           {
+                                name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center',
+                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                                datefmt: 'dd/mm/yy',
+
+                                search: true,
+                                searchrules: {
+                                    date: true
+                                },
+                                searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                    sopt: ['ge', 'le', 'eq'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            changeYear: true,
+                                            changeMonth: true,
+                                            showButtonPanel: true,
+                                            onSelect: function () {
+                                                $(this).keydown();
+                                            }
+                                        });
+                                    }
+                                }
+
+                            },
+
                         { name: 'IdUsuarioModifico', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'FechaModifico', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                           {
+                                name: 'FechaModifico', index: 'FechaModifico', width: 100, align: 'center',
+                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                                datefmt: 'dd/mm/yy',
+
+                                search: true,
+                                searchrules: {
+                                    date: true
+                                },
+                                searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                    sopt: ['ge', 'le', 'eq'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            changeYear: true,
+                                            changeMonth: true,
+                                            showButtonPanel: true,
+                                            onSelect: function () {
+                                                $(this).keydown();
+                                            }
+                                        });
+                                    }
+                                }
+
+                            },
 
                         { name: 'DestinoPago', index: 'DestinoPago', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'NumeroRendicionFF', index: 'NumeroRendicionFF', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn'] } },

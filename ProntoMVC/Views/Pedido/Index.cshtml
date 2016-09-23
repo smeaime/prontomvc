@@ -170,46 +170,130 @@ If you want additionally remove vertical border between the cells in the grid yo
 
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-
-                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'idaux', index: 'zzzzzz', align: 'left', width: 100, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'SubNumero', index: 'SubNumero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
 
 
-                        { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                     
+                        {
+                            name: 'FechaPedido', index: 'FechaPedido', width: 100, align: 'center',
+                            sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                            datefmt: 'dd/mm/yy',
 
-                        { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
 
-                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        },
+
+
+
+                        {
+                            name: 'FechaSalida', index: 'FechaSalida', width: 100, align: 'center',
+                            sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                            datefmt: 'dd/mm/yy',
+
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
+
+                        },
+
+
+
+                        { name: 'Cumplido', index: 'Cumplido', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RMs', index: 'RMs', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obras', index: 'Obras', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalPedido', index: 'TotalPedido', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalIva1', index: 'TotalIva1', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdMoneda', index: 'IdMoneda', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdComprador', index: 'IdComprador', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'cantitems', index: 'cantitems', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'idaux', index: 'idaux', align: 'left', width: 100, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroComparativa', index: 'NumeroComparativa', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdTipoCompraRM', index: 'IdTipoCompraRM', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'DetalleCondicionCompra', index: 'DetalleCondicionCompra', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+
+                        { name: 'PedidoExterior', index: 'PedidoExterior', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdPedidoAbierto', index: 'IdPedidoAbierto', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroLicitacion', index: 'NumeroLicitacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Impresa', index: 'Impresa', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'UsuarioAnulacion', index: 'UsuarioAnulacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+
+
+                        {
+                            name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center',
+                            sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                            datefmt: 'dd/mm/yy',
+
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
+
+                        },
+
+                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ImpuestosInternos', index: 'ImpuestosInternos', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Equipos', index: 'Equipos', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdCodigoIva', index: 'IdCodigoIva', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
                         { name: '', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: '', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },

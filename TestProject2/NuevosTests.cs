@@ -19,10 +19,16 @@ using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
 
+
+using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
+
+
 using ProntoMVC.ViewModels;
 
 using System.Transactions;
+using ProntoFlexicapture;
 
+using System.IO;
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -52,7 +58,8 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
-        const string nombreempresa = "Pronto"; 
+        const string nombreempresa = "Williams2";
+        //const string nombreempresa = "Pronto";
         //const string nombreempresa = "DemoProntoWeb";
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
@@ -70,8 +77,257 @@ namespace ProntoMVC.Tests
         {
             string bldmastersql = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
+
             sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+
+
+
+        [TestMethod]
+        public void Exportacion_a_Excel_de_Entities_3()
+        {
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+            string filters = "";
+
+
+            var c = new FacturaController();
+            GetMockedControllerGenerico(c);
+            var f = c.TT_DynamicGridData_ExcelExportacion(sidx, sord, page, rows, _search, filters, "", "");
+            string o = "lala.xlsx";
+
+            // formatear el excel con encabezados, ancho de columna y totales...
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+            // http://stackoverflow.com/questions/10501528/openxml-libraries-alternatives-to-closedxml
+
+
+            ToFile(f, o);
+            FormatearConEPPLUS(o);
+
+
+            System.Diagnostics.Process.Start(o);
+        }
+
+
+
+        void FormatearConEPPLUS(string archivo)
+        {
+            //http://fourleafit.wikispaces.com/EPPlus
+
+
+            using (var package = new ExcelPackage(new FileInfo(archivo)))
+            {
+                //var ws = package.Workbook.Worksheets.SingleOrDefault(x => x.Name == "Test Grid");
+                //if (wk != null) { package.Workbook.Worksheets.Delete(wk); }
+
+
+
+                //ws.View.ShowGridLines = true;
+
+                //ws.Column(4).OutlineLevel = 1;
+                //ws.Column(4).Collapsed = true;
+                //ws.Column(5).OutlineLevel = 1;
+                //ws.Column(5).Collapsed = true;
+                //ws.OutLineSummaryRight = true;
+
+                //Headers
+                //ws.Cells["B1"].Value = "Name";
+                //ws.Cells["C1"].Value = "Size";
+                //ws.Cells["D1"].Value = "Created";
+                //ws.Cells["E1"].Value = "Last modified";
+                //ws.Cells["B1:E1"].Style.Font.Bold = true;
+
+                // calculate all formulas in the workbook
+                //package.Workbook.Calculate();
+                //// calculate one worksheet
+                //package.Workbook.Worksheets["Test Grid"].Calculate();
+                //// calculate a range
+                //package.Workbook.Worksheets["Test Grid"].Cells["A1"].Calculate();
+
+
+                //Create the worksheet
+                //Dim ws As ExcelWorksheet = pck.Workbook.Worksheets.Add("Accounts")
+                //Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
+                //ws.Cells("A1").LoadFromDataTable(pDataTable, True);
+               // package.Save();
+
+
+            }
+
+        }
+
+
+
+        public void ToFile(FileResult fileResult, string fileName)
+        {
+            if (fileResult is FileContentResult)
+            {
+                File.WriteAllBytes(fileName, ((FileContentResult)fileResult).FileContents);
+            }
+            else if (fileResult is FilePathResult)
+            {
+                File.Copy(((FilePathResult)fileResult).FileName, fileName, true); //overwrite file if it already exists
+            }
+            else if (fileResult is FileStreamResult)
+            {
+                //from http://stackoverflow.com/questions/411592/how-do-i-save-a-stream-to-a-file-in-c
+                using (var fileStream = File.Create(fileName))
+                {
+                    var fileStreamResult = (FileStreamResult)fileResult;
+                    fileStreamResult.FileStream.Seek(0, SeekOrigin.Begin);
+                    fileStreamResult.FileStream.CopyTo(fileStream);
+                    fileStreamResult.FileStream.Seek(0, SeekOrigin.Begin); //reset position to beginning. If there's any chance the FileResult will be used by a future method, this will ensure it gets left in a usable state - Suggestion by Steven Liekens
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Unsupported FileResult type");
+            }
+        }
+
+
+
+        [TestMethod]
+        public void Exportacion_a_Excel_de_Entities_2()
+        {
+
+            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de
+            // otro modo, pasandole como maxrows un numero grandisimo
+            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
+            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
+
+            // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
+
+
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 99999999;
+            bool _search = false;
+            string filters = "";
+
+
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+
+
+            //llamo directo a FiltroGenerico o a Pedidos_DynamicGridData??? -y, filtroGenerico no va a incluir las columnas recalculadas!!!!
+            // Cuanto tarda ExportToExcelEntityCollection en crear el excel de un FiltroGenerico de toda la tabla de Pedidos?
+
+
+            IQueryable<Data.Models.Factura> q = (from a in db.Facturas select a).AsQueryable();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            List<Data.Models.Factura> pagedQuery =
+                    Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Factura>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+            JsonResult result;
+
+            if (true)
+            {
+                var c = new FacturaController();
+                GetMockedControllerGenerico(c);
+                result = (JsonResult)c.TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
+
+                // cómo convertir el JsonResult (o mejor dicho, un array de strings)  en un excel?
+            }
+
+            string output = "c:\\adasdasd.xls";
+
+            List<string[]> lista = new List<string[]>();
+
+            jqGridJson listado = (jqGridJson)result.Data;
+
+
+            for (int n = 0; n < listado.rows.Count(); n++)
+            {
+                string[] renglon = listado.rows[n].cell;
+                lista.Add(renglon);
+            }
+
+
+
+            var excelData = new jqGridWeb.DataForExcel(
+                // column Header
+                    new[] { "Col1", "Col2", "Col3" },
+                    new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
+                          jqGridWeb.DataForExcel.DataType.String},
+                //      new List<string[]> {
+                //    new[] {"a", "1", "c1"},
+                //    new[] {"a", "2", "c2"}
+                //},
+                    lista,
+
+
+                    "Test Grid");
+            Stream stream = new FileStream(output, FileMode.Create);
+            excelData.CreateXlsxAndFillData(stream);
+            stream.Close();
+
+
+
+            List<Data.Models.Factura> control = pagedQuery.ToList();
+
+
+            if (false)
+            {
+                FuncionesCSharpBLL.ExportToExcelEntityCollection<Data.Models.Factura>(control, output);
+            }
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
 
 
 
@@ -96,7 +352,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Pedido Pedido = db.Pedidos.OrderByDescending(x=>x.IdPedido).First();
+            Pedido Pedido = db.Pedidos.OrderByDescending(x => x.IdPedido).First();
 
             var c = new PedidoController();
 
@@ -113,7 +369,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Requerimiento o = db.Requerimientos.OrderByDescending(x=>x.IdRequerimiento).First();
+            Requerimiento o = db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
 
             var c = new RequerimientoController();
 
@@ -130,7 +386,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Presupuesto o = db.Presupuestos.OrderByDescending(x=>x.IdPresupuesto).First();
+            Presupuesto o = db.Presupuestos.OrderByDescending(x => x.IdPresupuesto).First();
 
             var c = new PresupuestoController();
 
@@ -147,7 +403,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Comparativa o = db.Comparativas.OrderByDescending(x=>x.IdComparativa).First();
+            Comparativa o = db.Comparativas.OrderByDescending(x => x.IdComparativa).First();
 
             var c = new ComparativaController();
 
@@ -164,7 +420,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            ComprobanteProveedor o = db.ComprobantesProveedor.OrderByDescending(x=>x.IdComprobanteProveedor).First();
+            ComprobanteProveedor o = db.ComprobantesProveedor.OrderByDescending(x => x.IdComprobanteProveedor).First();
 
 
 
@@ -188,7 +444,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            OrdenPago o = db.OrdenesPago.OrderByDescending(x=>x.IdOrdenPago).First();
+            OrdenPago o = db.OrdenesPago.OrderByDescending(x => x.IdOrdenPago).First();
 
 
             var c = new OrdenPagoController();
@@ -207,7 +463,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Factura o = db.Facturas.OrderByDescending(x=>x.IdFactura).First();
+            Factura o = db.Facturas.OrderByDescending(x => x.IdFactura).First();
 
 
             var c = new FacturaController();
@@ -225,7 +481,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Recibo o = db.Recibos.OrderByDescending(x=>x.IdRecibo).First();
+            Recibo o = db.Recibos.OrderByDescending(x => x.IdRecibo).First();
 
 
             var c = new ReciboController();
@@ -246,7 +502,7 @@ namespace ProntoMVC.Tests
 
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Articulo o = db.Articulos.OrderByDescending(x=>x.IdArticulo).First();
+            Articulo o = db.Articulos.OrderByDescending(x => x.IdArticulo).First();
 
 
             var c = new ArticuloController();
@@ -266,7 +522,7 @@ namespace ProntoMVC.Tests
 
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Cliente o = db.Clientes.OrderByDescending(x=>x.IdCliente).First();
+            Cliente o = db.Clientes.OrderByDescending(x => x.IdCliente).First();
 
 
             var c = new ClienteController();
@@ -284,7 +540,7 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            Proveedor o = db.Proveedores.OrderByDescending(x=>x.IdProveedor).First();
+            Proveedor o = db.Proveedores.OrderByDescending(x => x.IdProveedor).First();
 
 
             var c = new ProveedorController();
@@ -407,7 +663,7 @@ namespace ProntoMVC.Tests
 
 
 
-        static private void GetMockedControllerGenerico(ProntoBaseController c)
+        static public void GetMockedControllerGenerico(ProntoBaseController c)
         {
 
             var controllerContext = new Mock<ControllerContext>();

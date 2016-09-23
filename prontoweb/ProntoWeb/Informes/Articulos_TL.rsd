@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>DemoPronto</DataSourceReference>
+      <CommandText>Select -1 as [IdArticulo], '_Todos' as [Titulo]
+Union all
+Select IdArticulo as [IdArticulo], Substring(Descripcion,1,100) as [Titulo]
+From Articulos
+Where IsNull(Activo,'')&lt;&gt;'NO' 
+Order By [Titulo]</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="IdArticulo">
+        <DataField>IdArticulo</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Titulo">
+        <DataField>Titulo</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProntoMVC.Controllers
 {
-    class jqGridJson
+    public class jqGridJson
     {
         public int total { get; set; }
         public int page { get; set; }

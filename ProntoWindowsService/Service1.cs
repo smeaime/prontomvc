@@ -338,16 +338,16 @@ FCESupport\FCESupportImpl.h, 42.
                 {
                     Console.WriteLine(html);
                     ClassFlexicapture.Log(html);
+
+
+
+
+                    using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
+                    using (StreamWriter sw = new StreamWriter(fs))
+                    {
+                        sw.WriteLine(html);
+                    }
                 }
-
-
-
-                using (FileStream fs = new FileStream(DirApp + @"\Temp\log.html", FileMode.Append, FileAccess.Write))
-                using (StreamWriter sw = new StreamWriter(fs))
-                {
-                    sw.WriteLine(html);
-                }
-
 
             }
 

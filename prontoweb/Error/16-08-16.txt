@@ -1,0 +1,62 @@
+
+Log Entry : 
+08/16/2016 11:08:01
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+08/16/2016 11:13:59
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.IndexOutOfRangeException
+Cannot find column 86.
+   at System.Data.DataColumnCollection.get_Item(Int32 index)
+   at System.Data.DataRow.set_Item(Int32 columnIndex, Object value)
+   at ExcelImportadorManager.BungeRamalloDescargaTextoToDataset(String pFileName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 2104
+   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32& m_IdMaestro, String archivoExcel, FormatosDeExcel Formato, String SC, Int32 cmbPuntoVenta, String& txtLogErrores, String txtFechaArribo, Int32 glbIdUsuario, String UserName) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 4023
+   at CartasDePorteImportador.FormatearExcelImportado(String nombre) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 590
+   at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 284
+System.Data
+__________________________
+
+Log Entry : 
+08/16/2016 11:14:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:C:\Users\Administrador\AppData\Local\Temp\4702_PORTE0500419999.txt
+__________________________
+
+Log Entry : 
+08/16/2016 12:49:04
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=86206. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/16/2016 12:49:07
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=86206. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/16/2016 13:23:56
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=86082. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/16/2016 13:23:58
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=86082. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/16/2016 13:24:23
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2516446. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+08/16/2016 13:24:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2513421. Error Message:PV 2 0
+__________________________

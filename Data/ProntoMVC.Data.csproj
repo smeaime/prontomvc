@@ -181,6 +181,9 @@
     <Compile Include="Models\CartasDePorte.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartasDePorteControlDescarga.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CartasDePorteDetalle_EF.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -548,6 +551,18 @@
     <Compile Include="Models\Formulario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\fSQL_GetDataTableFiltradoYPaginado_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fSQL_GetDataTableFiltradoYPaginado_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fSQL_GetDataTableFiltradoYPaginado_Result2.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fSQL_GetDataTableFiltradoYPaginado_Result3.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ganancia.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -873,6 +888,12 @@
     </Compile>
     <Compile Include="Models\vw_aspnet_UsersInRoles.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\wCartasDePorte_TX_EstadisticasDeDescarga_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\wCartasDePorte_TX_EstadisticasDeDescarga_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\wGrillaPersistencia_EF.cs">
       <DependentUpon>Model1.tt</DependentUpon>

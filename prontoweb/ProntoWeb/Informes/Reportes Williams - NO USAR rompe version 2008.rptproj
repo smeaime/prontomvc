@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ToolsVersion="2.0">
+  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
+  <DataSources />
+  <DataSets />
+  <Reports>
+    <ProjectItem>
+      <Name>Análisis de Tarifa.rdl</Name>
+      <FullPath>Análisis de Tarifa.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Adjuntos de Facturacion para exportar a Excel.rdl</Name>
+      <FullPath>Adjuntos de Facturacion para exportar a Excel.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cartas con Copia sin asignar.rdl</Name>
+      <FullPath>Cartas con Copia sin asignar.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Comisiones por puerto y por cereal.rdl</Name>
+      <FullPath>Comisiones por puerto y por cereal.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Descargas por Contrato - Compactado.rdl</Name>
+      <FullPath>Descargas por Contrato - Compactado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Descargas por Contrato - Detallado.rdl</Name>
+      <FullPath>Descargas por Contrato - Detallado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Descargas por Corredor - Compactado.rdl</Name>
+      <FullPath>Descargas por Corredor - Compactado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Descargas por Corredor - Detallado.rdl</Name>
+      <FullPath>Descargas por Corredor - Detallado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Descargas por Destino-Articulo.rdl</Name>
+      <FullPath>Descargas por Destino-Articulo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Descargas por Titular - Compactado.rdl</Name>
+      <FullPath>Descargas por Titular - Compactado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Descargas por Titular - Detallado.rdl</Name>
+      <FullPath>Descargas por Titular - Detallado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Diferencias Por Destino.rdl</Name>
+      <FullPath>Diferencias Por Destino.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Duplicadas.rdl</Name>
+      <FullPath>Duplicadas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Estadísticas de Toneladas descargadas.rdl</Name>
+      <FullPath>Estadísticas de Toneladas descargadas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Estadísticas de Toneladas descargadas Sucursal-Modo.rdl</Name>
+      <FullPath>Estadísticas de Toneladas descargadas Sucursal-Modo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ImagenesCartaPorte.rdl</Name>
+      <FullPath>ImagenesCartaPorte.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Liquidación de Subcontratistas.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Liquidación de Subcontratistas 2.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) .rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) .rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original)  para Corredores.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original)  para Corredores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto .rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto .rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto para html.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto para html.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) todo en una tabla.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) todo en una tabla.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Movimientos.rdl</Name>
+      <FullPath>Movimientos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Notas de Entrega (a impresora de matriz de puntos).rdl</Name>
+      <FullPath>Notas de Entrega (a impresora de matriz de puntos).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Notas de Entrega (a impresora de matriz de puntos) bak.rdl</Name>
+      <FullPath>Notas de Entrega (a impresora de matriz de puntos) bak.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Notas de Entrega (a laser - sin limite de renglones).rdl</Name>
+      <FullPath>Notas de Entrega (a laser - sin limite de renglones).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Notas de Entrega (a laser).rdl</Name>
+      <FullPath>Notas de Entrega (a laser).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Posiciones BLD demorados.rdl</Name>
+      <FullPath>Posiciones BLD demorados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Proyección de Facturación.rdl</Name>
+      <FullPath>Proyección de Facturación.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>pruebas.rdl</Name>
+      <FullPath>pruebas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ranking de Cereales.rdl</Name>
+      <FullPath>Ranking de Cereales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ranking de Cereales (un solo punto venta).rdl</Name>
+      <FullPath>Ranking de Cereales (un solo punto venta).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ranking de Clientes.rdl</Name>
+      <FullPath>Ranking de Clientes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Resumen de facturación.rdl</Name>
+      <FullPath>Resumen de facturación.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo BLD.rdl</Name>
+      <FullPath>Sincronismo BLD.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo BLD demorados.rdl</Name>
+      <FullPath>Sincronismo BLD demorados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo DOW.rdl</Name>
+      <FullPath>Sincronismo DOW.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Sincronismo YPF.rdl</Name>
+      <FullPath>Sincronismo YPF.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Taras por Titular.rdl</Name>
+      <FullPath>Taras por Titular.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Tarifas.rdl</Name>
+      <FullPath>Tarifas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Totales por Mes.rdl</Name>
+      <FullPath>Totales por Mes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Totales por Mes por Modo.rdl</Name>
+      <FullPath>Totales por Mes por Modo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Totales por Mes por Modo y Sucursal.rdl</Name>
+      <FullPath>Totales por Mes por Modo y Sucursal.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Totales por Mes por Sucursal.rdl</Name>
+      <FullPath>Totales por Mes por Sucursal.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Valorizado por Subcontratista.rdl</Name>
+      <FullPath>Valorizado por Subcontratista.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Volumen de Carga.rdl</Name>
+      <FullPath>Volumen de Carga.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Adjuntos de Facturacion (a impresora de matriz de puntos).rdl</Name>
+      <FullPath>Adjuntos de Facturacion (a impresora de matriz de puntos).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos).rdl</Name>
+      <FullPath>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos).rdl</FullPath>
+    </ProjectItem>
+  </Reports>
+  <Configurations>
+    <Configuration>
+      <Name>Debug</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\Debug</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>Reportes Williams</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>DebugLocal</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\DebugLocal</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>Reportes Williams</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>Release</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\Release</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>Reportes Williams</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+  </Configurations>
+</Project>

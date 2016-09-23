@@ -1,0 +1,10 @@
+SESSION
+
+UserId = 
+UserName
+IdEmpresa
+IdEmpleado
+
+APPLICATION
+
+EmpresaList = 
