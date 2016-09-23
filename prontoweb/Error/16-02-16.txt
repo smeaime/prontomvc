@@ -1,0 +1,339 @@
+
+Log Entry : 
+02/16/2016 20:12:40
+Error in: http://localhost:59798/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+02/16/2016 20:39:26
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+02/16/2016 20:41:36
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteFotos.aspx.vb(256): error BC30451: 'Extraer' is not declared. It may be inaccessible due to its protection level.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+02/16/2016 20:42:18
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteFotos.aspx.vb(284): error BC30455: Argument not specified for parameter 'archivo' of 'Public Shared Function PreprocesarImagenesTiff(archivo As String, bEsFormatoCPTK As Boolean) As System.Collections.Generic.List(Of String)'.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+02/16/2016 20:51:55
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+02/16/2016 20:54:30
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb205406 Mariano\CPTKCPTK.tif_pag0_unido.tif 550166736
+__________________________
+
+Log Entry : 
+02/16/2016 20:54:35
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+02/16/2016 20:54:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+02/16/2016 20:58:41
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+02/16/2016 20:58:41
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+02/16/2016 20:58:47
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb205406 Mariano\CPTKCPTK.tif_pag2_unido.tif 216001629
+__________________________
+
+Log Entry : 
+02/16/2016 20:58:50
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+02/16/2016 21:04:07
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2270689. Error Message:La carta numero 550672769 id=2270689 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:04:31
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=200000. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 7381
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/16/2016 21:04:31
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=200000. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at CartadeporteABM.MostrarLinksAFamiliaDeDuplicados(CartaDePorte oCP) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 771
+   at CartadeporteABM.EditarSetup(Int64 CopiaDeOtroId) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 511
+App_Web_cartadeporte.aspx.4199bbd4.pglsb05n
+__________________________
+
+Log Entry : 
+02/16/2016 21:04:42
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:La carta numero 999793097 id=2277105 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:05:10
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:La carta numero 216001629 id=2277105 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:05:26
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:System.ArgumentOutOfRangeException
+'optDivisionSyngentaCliobs' has a SelectedValue which is invalid because it does not exist in the list of items.
+Parameter name: value
+   at System.Web.UI.WebControls.ListControl.set_SelectedValue(String value)
+   at CartadeporteABM.RecargarEncabezado(CartaDePorte myCartaDePorte, Boolean CopiarSoloLosGenerales) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 1902
+System.Web
+__________________________
+
+Log Entry : 
+02/16/2016 21:05:35
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:La carta numero 216001629 id=2277105 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:36
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb210607 Mariano\CPTKCPTK.tif_pag0_unido.tif 550166736
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:41
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:52
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:52
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:53
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb210607 Mariano\CPTKCPTK.tif_pag2_unido.tif 216001629
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+02/16/2016 21:06:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+02/16/2016 21:07:11
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+02/16/2016 21:07:11
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+02/16/2016 21:07:22
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:La carta numero 216001629 id=2277105 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:07:58
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:La carta numero 216001629 id=2277105 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:08:09
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:La carta numero 216001629 id=2277105 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:08:42
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb210813 Mariano\3333.tif_pag0_unido.tif 550166736
+__________________________
+
+Log Entry : 
+02/16/2016 21:08:44
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+02/16/2016 21:08:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+02/16/2016 21:08:59
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+02/16/2016 21:08:59
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+02/16/2016 21:09:00
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb210813 Mariano\3333.tif_pag2_unido.tif 216001629
+__________________________
+
+Log Entry : 
+02/16/2016 21:09:01
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+02/16/2016 21:09:03
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+02/16/2016 21:09:18
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+02/16/2016 21:09:19
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+02/16/2016 21:09:26
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277105. Error Message:La carta numero 216001629 id=2277105 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:35
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb211037 Mariano\doc02102016173229.tif_pag0_unido.tif 0
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:36
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb211037 Mariano\doc02102016173229.tif_pag2_unido.tif 550651392
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:36
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:37
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:52
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabo en base
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:53
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:grabado
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:54
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb211037 Mariano\doc02102016173229.tif_pag4_unido.tif 0
+__________________________
+
+Log Entry : 
+02/16/2016 21:11:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteFotos.aspx?Id=-1. Error Message:C:\Users\Administrador\Documents\bdl\prontoweb\\Temp\Lote 16feb211037 Mariano\doc02102016173229.tif_pag6_unido.tif 0
+__________________________
+
+Log Entry : 
+02/16/2016 21:16:13
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277053. Error Message:La carta numero 550651392 id=2277053 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+02/16/2016 23:16:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteReasignarImagenListado.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________

@@ -1661,6 +1661,10 @@
       <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
       <Name>ProntoMVC.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InterfazFlexicapture\InterfazFlexicapture.csproj">
+      <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
+      <Name>InterfazFlexicapture</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -1,0 +1,1157 @@
+
+Log Entry : 
+03/02/2016 14:04:23
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Monsanto 01/03/2016 01/03/2016 -1 -1 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/02/2016 14:04:25
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para MONSANTO
+__________________________
+
+Log Entry : 
+03/02/2016 14:04:26
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se está eligiendo bien el sincroMONSANTO
+__________________________
+
+Log Entry : 
+03/02/2016 14:04:26
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada Monsanto
+__________________________
+
+Log Entry : 
+03/02/2016 14:08:40
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Monsanto 01/01/2016 01/02/2016 -1 -1 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/02/2016 14:09:07
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para MONSANTO
+__________________________
+
+Log Entry : 
+03/02/2016 14:09:32
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se está eligiendo bien el sincroMONSANTO
+__________________________
+
+Log Entry : 
+03/02/2016 14:09:32
+Error in: http://localhost:53829/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada Monsanto
+__________________________
+
+Log Entry : 
+03/02/2016 14:14:23
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+03/02/2016 14:15:13
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para Monsanto 01/01/2016 01/02/2016 3208 -1 -1 3208 3208 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+03/02/2016 14:15:16
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para MONSANTO
+__________________________
+
+Log Entry : 
+03/02/2016 14:16:16
+Error in: http://localhost:59798/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2288
+__________________________
+
+Log Entry : 
+03/02/2016 14:41:33
+Error in: http://localhost:59798/. Error Message:System.ComponentModel.Win32Exception
+Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
+
+
+__________________________
+
+Log Entry : 
+03/02/2016 14:43:49
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][RECIBO][][][][][][TURNO][TRANSPCUIT][CONTRATO][][][][][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:19
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 549768066 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:26
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 549768066 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:26
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 549768066 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:28
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428687 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:31
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428687 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:31
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428687 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:33
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428684 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:36
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428684 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:36
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428684 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 549768067 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 549768067 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 549768067 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428686 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428686 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428686 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428685 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428685 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428685 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:42
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428688 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:42
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428688 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:42
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428688 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:44
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550509035 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:44
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550509035 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:44
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550509035 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550192539 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550192539 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:46
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550192539 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:47
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550137916 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:47
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550137916 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:47
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550137916 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:48
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550399709 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:48
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550399709 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:48
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550399709 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:50
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550399708 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:50
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550399708 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:50
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550399708 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:51
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550192543 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:51
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550192543 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:51
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550192543 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:53
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550569653 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:53
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550569653 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:53
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550569653 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550569655 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550569655 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:55
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550569655 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:57
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550192538 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:57
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550192538 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:57
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550192538 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:51:58
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550575675  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:09
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550575675  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:09
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550575675  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:11
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550575676  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:11
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550575676  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:11
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550575676  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:12
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550000796  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:12
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550000796  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:12
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550000796  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550540737 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550540737 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:13
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550540737 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:15
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550491249  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:15
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550491249  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:15
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550491249  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:16
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428689 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:16
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428689 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:16
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428689 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:17
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428683 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:17
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428683 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:17
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428683 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:19
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550269429 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:19
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550269429 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:19
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550269429 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:20
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550269430 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:20
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550269430 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:20
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550269430 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:22
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550576817  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:22
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550576817  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:22
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550576817  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:23
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550424418 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:23
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550424418 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:23
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550424418 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:25
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550192537 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:25
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550192537 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:25
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550192537 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:27
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550137924 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:27
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550137924 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:27
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550137924 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:28
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550424417 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:28
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550424417 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:28
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550424417 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:29
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550424420 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:30
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550424420 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:30
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550424420 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:31
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550345847  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:31
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550345847  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:31
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550345847  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:33
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550424419 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:33
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550424419 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:33
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550424419 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:34
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550475620 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:34
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550475620 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:34
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550475620 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:35
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550475619 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:35
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550475619 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:35
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550475619 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:37
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550576818  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:37
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550576818  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:37
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550576818  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550000794  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550000794  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:38
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550000794  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550573515  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550573515  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:39
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550573515  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550000797  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550000797  está en estado <descarga> y no se le pueden pisar datos. 
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:40
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550000797  está en estado <descarga> y no se le pueden pisar datos.  System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22830
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:42
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550355521 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:42
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550355521 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:42
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550355521 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:43
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La Carta 550428691 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:43
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+La Carta 550428691 no puede ser importada porque ya existe como facturada
+__________________________
+
+Log Entry : 
+03/02/2016 14:52:43
+Error in: http://localhost:59798/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Error paso 1: faltan datos? La Carta 550428691 no puede ser importada porque ya existe como facturada System.Exception: Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at LogicaImportador.GrabaRenglonEnTablaCDP(DataRow& dr, String SC, HttpSessionState Session, TextBox txtDestinatario, TextBox txtDestino, CheckBox chkAyer, TextBox txtLogErrores, DropDownList cmbPuntoVenta, TextBox txtFechaArribo, DropDownList cmbFormato, List`1 NoValidarColumnas) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 22822
+   at CartasDePorteImportador.proximoerror(DataTable dt) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1282
+__________________________
+
+Log Entry : 
+03/02/2016 14:55:24
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2257342. Error Message:La carta numero 550576818 id=2257342 tiene el subnumerodefacturacion mal subn=0
+__________________________

@@ -374,6 +374,7 @@ Public Class CartaDePorteManager
         Public idcliente As Integer?
     End Class
 
+
     Public Shared Function excepcionesAcopios(SC As String, Optional idcliente As Integer = 0) As List(Of aaa)
         'Get
 
@@ -832,6 +833,7 @@ Public Class CartaDePorteManager
 
 
         If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+        If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
 
 
 
@@ -841,12 +843,14 @@ Public Class CartaDePorteManager
 
 
 
-
         If q Is Nothing Then
             If RazonSocial.Trim.Length > 4 Then
                 q = New ProntoMVC.Data.Models.Cliente
                 q.RazonSocial = RazonSocial
+
+                'hay q guardarlo con guiones????? -sí!!!!!
                 q.Cuit = cuit
+
                 'acá había un insertonsubmit
                 db.Clientes.Add(q)
                 db.SaveChanges()
@@ -871,6 +875,35 @@ Public Class CartaDePorteManager
 
 
     End Function
+
+
+    Public Shared Function VerfCuit(ByVal e As String) As Boolean
+
+        e = e.Replace("-", "").Replace(" ", "")
+
+        Dim numconst As String = 5432765432
+        Dim x As Integer
+        Dim valor1 As Integer
+        Dim valor2 As Integer
+        Dim valor3 As Integer
+        Dim comprobante As Integer = CInt(e.ToArray.GetValue(e.ToArray.Length - 1).ToString)
+
+        For x = 0 To CInt(CInt(e.ToArray.Length).ToString - 2)
+            valor1 += CInt(e.ToArray.GetValue(x).ToString) * CInt(numconst.ToArray.GetValue(x).ToString)
+        Next
+
+        valor2 = valor1 Mod 11
+        valor3 = 11 - valor2
+
+        If valor3 = comprobante Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+
+
 
 
     Public Shared Function CrearEquivalencia(palabra As String, traduccion As String, SC As String)
@@ -3846,10 +3879,144 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    Public Shared Function RebindReportViewerLINQ_Excel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, ByVal rdlFile As String, ByVal q As Object, Optional ByRef ArchivoExcelDestino As String = "", Optional parametros As IEnumerable(Of ReportParameter) = Nothing) As String
+
+
+        If ArchivoExcelDestino = "" Then
+            ArchivoExcelDestino = Path.GetTempPath & "Informe " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+        End If
+
+        'Dim vFileName As String = "c:\archivo.txt"
+        ' FileOpen(1, ArchivoExcelDestino, OpenMode.Output)
+
+
+        'http://forums.asp.net/t/1183208.aspx
+
+        With oReportViewer
+            .ProcessingMode = ProcessingMode.Local
+            .Visible = True
+
+            .Reset()
+
+
+            With .LocalReport
+                .ReportPath = rdlFile
+                .EnableHyperlinks = True
+
+                .DataSources.Clear()
+
+                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
+                .DataSources.Add(New ReportDataSource("DataSet1", q)) '//the first parameter is the name of the datasource which you bind your report table to.
+
+                '.ReportEmbeddedResource = rdlFile
+
+
+                .EnableExternalImages = True
+
+
+                '.DataSources.Add(New ReportDataSource("http://www.google.com/intl/en_ALL/images/logo.gif", "Image1"))
+                'DataSource.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
+                '.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
+
+
+
+                '/////////////////////
+                'parametros (no uses la @ delante del parametro!!!!)
+                '/////////////////////
+                Try
+                    If parametros IsNot Nothing Then
+                        .SetParameters(parametros)
+                    End If
+                    '    If .GetParameters.Count > 1 Then
+                    '        If .GetParameters.Item(1).Name = "FechaDesde" Then
+                    '            Dim p1 = New ReportParameter("IdCartaDePorte", -1)
+                    '            Dim p2 = New ReportParameter("FechaDesde", Today)
+                    '            Dim p3 = New ReportParameter("FechaHasta", Today)
+                    '            .SetParameters(New ReportParameter() {p1, p2, p3})
+                    '        End If
+                    '    End If
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex.ToString)
+                End Try
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+
+            '.LocalReport.Refresh()
+            '.DataBind()
+
+
+
+
+            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType, encoding, extension As String
+
+            Dim bytes As Byte()
+
+
+
+            Try
+                bytes = oReportViewer.LocalReport.Render( _
+                       "Excel", Nothing, mimeType, encoding, _
+                         extension, _
+                        streamids, warnings)
+
+            Catch e As System.Exception
+                Dim inner As Exception = e.InnerException
+                While Not (inner Is Nothing)
+
+                    If System.Diagnostics.Debugger.IsAttached() Then
+                        MsgBox(inner.Message)
+                    End If
+
+                    ErrHandler2.WriteError(inner.Message)
+                    inner = inner.InnerException
+                End While
+                Throw
+            End Try
+
+
+            Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
+            fs.Write(bytes, 0, bytes.Length)
+            fs.Close()
+
+
+
+        End With
+
+        Return ArchivoExcelDestino
+    End Function
+
+
+
+
+
 
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
                                     ByRef ArchivoExcelDestino As String, bDescargaHtml As Boolean) As String
+
+
+        'errores
+        '   rsCredentialsNotSpecified     porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
+        '   rsProcessingAborted           porque la cuenta que corre el repservice no tiene permisos: 
+        '                                         GRANT  Execute on [dbo].your_object to [public]
+        '                                         REVOKE Execute on [dbo].your_object to [public]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\NETWORK SERVICE]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
+        '                                         grant execute on wCart... to public
+
 
         For Each i In parametros
             If i Is Nothing Then
@@ -4036,6 +4203,11 @@ Public Class CartaDePorteManager
                                     Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "", _
                                     Optional ByVal bDescargaHtml As Boolean = False) As String
         'http://forums.asp.net/t/1183208.aspx
+
+
+
+
+        'no es suficiente con poner permisos al usuario en el server\reports\ "Configuracion de sitio", tambien hay que ponerlo en cada carpeta
 
 
 
@@ -4257,7 +4429,7 @@ Public Class CartaDePorteManager
                             'MsgBox(inner.Message)
                             'Stop
                         End If
-                        ' ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        ErrHandler2.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filtro:" & titulo)
                         inner = inner.InnerException
                     End While
                     Throw
@@ -4577,7 +4749,7 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String) As String
 
 
 
@@ -4598,21 +4770,24 @@ Public Class CartaDePorteManager
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
-        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
-
-        If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
-            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
-            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
-        Else
-            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
-            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
-            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-        End If
+        'Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
 
 
+        'gggggg()
 
+        'If System.Diagnostics.Debugger.IsAttached() Then
+        '    sDirFTP = "C:\Users\Administrador\Documents\bdl\pronto\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        'Else
+        '    'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+        '    'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+        '    'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        'End If
 
+        Dim sDirFTP = DirApp + "\DataBackupear\"
+        Dim sDirFTPdest = sDirFTP '+ "\borrar\"
+        'xxxxx()
 
 
         Dim wordFiles As New List(Of String)
@@ -4634,7 +4809,6 @@ Public Class CartaDePorteManager
 
 
 
-
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
             '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
             '000123456789-cp
@@ -4647,13 +4821,18 @@ Public Class CartaDePorteManager
             Dim imagenpathtk = myCartaDePorte.PathImagen2
             Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
 
+            Dim destinocp = sDirFTPdest + nombrecp
+            Dim destinotk = sDirFTPdest + nombretk
+
+
+
 
             If imagenpathcp <> "" Then
 
                 Try
                     Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
                     If fcp.Exists Then
-                        fcp.CopyTo(sDirFTP + nombrecp, True)
+                        fcp.CopyTo(destinocp, True)
                     End If
                     wordFiles.Add(nombrecp)
 
@@ -4670,7 +4849,7 @@ Public Class CartaDePorteManager
 
                     Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
                     If ftk.Exists Then
-                        ftk.CopyTo(sDirFTP + nombretk, True)
+                        ftk.CopyTo(destinotk, True)
                     End If
                     wordFiles.Add(nombretk)
                 Catch ex As Exception
@@ -4688,13 +4867,13 @@ Public Class CartaDePorteManager
                     If True Then
                         'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
 
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
-                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinotk)))
+                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinocp)))
 
                         Dim bimp = MergeTwoImages(oImg, oImg2)
 
 
-                        bimp.Save(sDirFTP + nombrecp)
+                        bimp.Save(destinocp)
 
 
                         wordFiles.Remove(nombretk)
@@ -4704,16 +4883,16 @@ Public Class CartaDePorteManager
                         'juntar las imagenes para DOW
                         'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
 
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinotk)))
 
                         Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
-                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(destinocp)))
                             grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
 
 
                         End Using
 
-                        oImg.Save(sDirFTP + nombrecp)
+                        oImg.Save(destinocp)
 
 
 
@@ -4741,7 +4920,7 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDirFTP + s
+            s = sDirFTPdest + s
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -4800,6 +4979,7 @@ Public Class CartaDePorteManager
 
 
 
+
         'http://stackoverflow.com/questions/398388/convert-bitmaps-to-one-multipage-tiff-image-in-net-2-0
 
         ' Start with the first bitmap by putting it into an Image object
@@ -4818,6 +4998,8 @@ Public Class CartaDePorteManager
         Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
 
         Dim encoderParams As EncoderParameters = New EncoderParameters(2)
+        'Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionNone)
+        'no va mas rapido sin compresion, y pesa mucho mas
         Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
         encoderParams.Param(0) = parameter
         parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.MultiFrame)
@@ -4841,6 +5023,7 @@ Public Class CartaDePorteManager
 
             Dim encoderParams2 As EncoderParameters = New EncoderParameters(2)
             Dim SaveEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.FrameDimensionPage)
+            'Dim CompressionEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionNone)
             Dim CompressionEncodeParam As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
             encoderParams2.Param(0) = CompressionEncodeParam
             encoderParams2.Param(1) = SaveEncodeParam
@@ -4877,25 +5060,25 @@ Public Class CartaDePorteManager
     End Function 'GetEncoderInfo
 
 
-    Shared Function DescargarImagenesAdjuntas_PDF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+    Shared Function DescargarImagenesAdjuntas_PDF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String) As String
 
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
-        Dim sDirFTP As String
+        'Dim sDirFTP As String
 
-        If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
-            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
-            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
-        Else
-            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
-            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
-            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-            sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-            sDirFTP = "E:\Sites\Pronto\DataBackupear\"
-        End If
+        'If System.Diagnostics.Debugger.IsAttached() Then
+        '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        'Else
+        '    'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+        '    'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+        '    'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        '    sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        '    sDirFTP = "E:\Sites\Pronto\DataBackupear\"
+        'End If
 
 
 
@@ -4935,7 +5118,7 @@ Public Class CartaDePorteManager
             Dim imagenpathtk = myCartaDePorte.PathImagen2
             Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
 
-            Dim archivopdf = ImagenPDF(SC, id)
+            Dim archivopdf = ImagenPDF(SC, id, DirApp)
 
 
             wordFiles.Add(archivopdf)
@@ -5002,8 +5185,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-
-    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String) As String
+    Shared Function DescargarImagenesAdjuntas_TIFF_anterior(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String, reducir As Boolean) As String
 
 
 
@@ -5028,6 +5210,11 @@ Public Class CartaDePorteManager
 
 
         Dim sDIRFTP = DirApp & "\DataBackupear\"
+        Dim sDirFTPdest = sDIRFTP '+ "\borrar\"
+        'xxxx()
+
+
+
         'If System.Diagnostics.Debugger.IsAttached() Then
         '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
         '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
@@ -5055,11 +5242,11 @@ Public Class CartaDePorteManager
         '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
 
 
+        Const MAXIMO = 200
+
         For Each c As DataRow In dt.Rows
             Dim id As Long = c.Item("IdCartaDePorte")
             Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
-
-
 
 
 
@@ -5070,40 +5257,63 @@ Public Class CartaDePorteManager
             'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
 
             Dim imagenpathcp = myCartaDePorte.PathImagen
-            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + Path.GetExtension(imagenpathcp)
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".tif"
 
             Dim imagenpathtk = myCartaDePorte.PathImagen2
-            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".tif"
 
 
-            If imagenpathcp <> "" Then
+
+
+
+
+            If (reducir) Then
+                Try
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathcp, 800, 1100, nombrecp, sDIRFTP, DirApp)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+
 
                 Try
-                    Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
-                    If fcp.Exists Then
-                        fcp.CopyTo(sDIRFTP + nombrecp, True)
-                    End If
-                    'wordFiles.Add(nombrecp)
-
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathtk, 800, 1100, nombretk, sDIRFTP, DirApp)
                 Catch ex As Exception
-                    ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
+                    ErrHandler2.WriteError(ex)
                 End Try
-            End If
+            Else
+
+
+                If imagenpathcp <> "" Then
+
+                    Try
+                        Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
+                        If fcp.Exists Then
+                            fcp.CopyTo(sDirFTPdest + nombrecp, True)
+                        End If
+                        'wordFiles.Add(nombrecp)
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
+                    End Try
+                End If
 
 
 
-            If imagenpathtk <> "" Then
+                If imagenpathtk <> "" Then
 
-                Try
+                    Try
 
-                    Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
-                    If ftk.Exists Then
-                        ftk.CopyTo(sDIRFTP + nombretk, True)
-                    End If
-                    'wordFiles.Add(nombretk)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
-                End Try
+                        Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
+                        If ftk.Exists Then
+                            ftk.CopyTo(sDirFTPdest + nombretk, True)
+                        End If
+                        'wordFiles.Add(nombretk)
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
+                    End Try
+                End If
+
+
             End If
 
 
@@ -5120,7 +5330,7 @@ Public Class CartaDePorteManager
 
                 If True Then
                     'metodo 1
-                    Dim bimp = MergeTwoImages_TiffMultipage(sDIRFTP + nombrecp, sDIRFTP + nombretk, sDIRFTP + archivo)
+                    'Dim bimp = MergeTwoImages_TiffMultipage(sDirFTPdest + nombrecp, sDirFTPdest + nombretk, sDirFTPdest + archivo)
 
                 Else
 
@@ -5132,7 +5342,9 @@ Public Class CartaDePorteManager
                 End If
 
 
-                wordFiles.Add(archivo)
+                wordFiles.Add(nombrecp)
+                wordFiles.Add(nombretk)
+                If wordFiles.Count >= MAXIMO Then Exit For
 
 
             Catch ex As Exception
@@ -5157,7 +5369,7 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDIRFTP + s
+            s = sDirFTPdest + s
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -5172,6 +5384,220 @@ Public Class CartaDePorteManager
         Next
 
         zip.Save()
+
+
+
+        Return output
+
+    End Function
+
+
+
+    Shared Function DescargarImagenesAdjuntas_TIFF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean, DirApp As String, reducir As Boolean) As String
+
+
+
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+
+
+
+
+        'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
+        'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
+
+
+        Dim sDIRFTP = DirApp & "\DataBackupear\"
+        Dim sDirFTPdest = sDIRFTP '+ "\borrar\"
+        'xxxx()
+
+
+
+        'If System.Diagnostics.Debugger.IsAttached() Then
+        '    sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+        '    'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        'Else
+        '    'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+        '    'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+        '    'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        'End If
+
+
+
+
+
+
+        Dim wordFiles As New List(Of String)
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        'Dim idorig = _
+        '                 (From c In db.CartasDePortes _
+        '                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+        '                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+        '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+
+
+        Const MAXIMO = 200
+
+        For Each c As DataRow In dt.Rows
+            Dim id As Long = c.Item("IdCartaDePorte")
+            Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
+
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
+            '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
+            '000123456789-cp
+            '000123456789-tk
+            'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
+
+            Dim imagenpathcp = myCartaDePorte.PathImagen
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".tif"
+            'Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + ".jpg"
+
+            Dim imagenpathtk = myCartaDePorte.PathImagen2
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".tif"
+            'Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + ".jpg"
+
+
+
+
+
+
+            If (reducir) Then
+                Try
+                    'CartaDePorteManager.ResizeImage(imagenpathcp, 300, 450, nombrecp, sDIRFTP, DirApp)
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathcp, 0, 0, nombrecp, sDIRFTP, DirApp)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+
+
+                Try
+                    'CartaDePorteManager.ResizeImage(imagenpathtk, 500, 800, nombretk, sDIRFTP, DirApp)
+                    CartaDePorteManager.ResizeImage_ToTIFF(imagenpathtk, 0, 0, nombretk, sDIRFTP, DirApp)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+            Else
+
+
+                If imagenpathcp <> "" Then
+
+                    Try
+                        Dim fcp = New FileInfo(sDIRFTP + imagenpathcp)
+                        If fcp.Exists Then
+                            fcp.CopyTo(sDirFTPdest + nombrecp, True)
+                        End If
+                        'wordFiles.Add(nombrecp)
+
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathcp + " " + nombrecp)
+                    End Try
+                End If
+
+
+
+                If imagenpathtk <> "" Then
+
+                    Try
+
+                        Dim ftk = New FileInfo(sDIRFTP + imagenpathtk)
+                        If ftk.Exists Then
+                            ftk.CopyTo(sDirFTPdest + nombretk, True)
+                        End If
+                        'wordFiles.Add(nombretk)
+                    Catch ex As Exception
+                        ErrHandler2.WriteError(imagenpathtk + " " + nombretk)
+                    End Try
+                End If
+
+
+            End If
+
+
+
+            'http://stackoverflow.com/questions/398388/convert-bitmaps-to-one-multipage-tiff-image-in-net-2-0
+
+            Try
+
+                'JuntarImagenesYhacerTiff(sDirFTP + nombretk, sDirFTP + nombrecp, sDirFTP + nombrecp)
+
+
+                'Dim archivo As String = Path.GetFileNameWithoutExtension(nombrecp) + ".tif"
+
+
+                If True Then
+                    'metodo 1
+                    'Dim bimp = MergeTwoImages_TiffMultipage(sDirFTPdest + nombrecp, sDirFTPdest + nombretk, sDirFTPdest + archivo)
+
+                Else
+
+                    'metodo 2 
+                    'sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+                    '                          @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                    'SaveAsMultiPageTiff()
+                End If
+
+
+                wordFiles.Add(nombrecp)
+                wordFiles.Add(nombretk)
+                If wordFiles.Count >= MAXIMO Then Exit For
+
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
+
+        Next
+
+
+
+
+
+
+        '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
+
+        Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
+        Dim MyFile1 = New FileInfo(output)
+        If MyFile1.Exists Then
+            MyFile1.Delete()
+        End If
+        Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
+        For Each s In wordFiles
+            If s = "" Then Continue For
+            s = sDirFTPdest + s
+            Dim MyFile2 = New FileInfo(s)
+            If MyFile2.Exists Then
+                Try
+                    zip.AddFile(s, "")
+                Catch ex As Exception
+                    ErrHandler2.WriteError(s)
+                    ErrHandler2.WriteError(ex)
+                End Try
+
+            End If
+
+        Next
+
+        zip.Save()
+
+
 
         Return output
 
@@ -5191,7 +5617,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function ImagenPDF(SC As String, IdCarta As Long) As String
+    Shared Function ImagenPDF(SC As String, IdCarta As Long, DirApp As String) As String
 
         Dim sDirFTP As String
 
@@ -5258,15 +5684,15 @@ Public Class CartaDePorteManager
 
         Try
 
-            If System.Diagnostics.Debugger.IsAttached() Then
+            If System.Diagnostics.Debugger.IsAttached() And False Then
                 sDirFTP = "~/" + "DataBackupear\"
-
+                sDirFTP = DirApp + "\DataBackupear\"
 
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP, DirApp)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP, DirApp)
 
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -5283,16 +5709,18 @@ Public Class CartaDePorteManager
 
                 sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
                 sDirFTP = "E:\Sites\Pronto\DataBackupear\"
+                sDirFTP = DirApp + "\DataBackupear\"
+
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, 600, 800, myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), sDirFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
 
 
                 Try
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, 600, 800, myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), sDirFTP, DirApp)
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
@@ -5318,7 +5746,6 @@ Public Class CartaDePorteManager
             Return ""
 
         End Try
-
 
 
 
@@ -5424,7 +5851,7 @@ Public Class CartaDePorteManager
 
 
     'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
-    Public Shared Sub ResizeImage(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
+    Public Shared Sub ResizeImage(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String, DirApp As String)
         'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
         'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
 
@@ -5433,13 +5860,23 @@ Public Class CartaDePorteManager
 
         If System.Diagnostics.Debugger.IsAttached() And HttpContext.Current IsNot Nothing Then
             'sDirVirtual = "~/DataBackupear\"
-            sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
+            'sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
             ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
             sDir = "E:\Sites\Pronto\DataBackupear\"
             'sDir = HttpContext.Current.Server.MapPath(AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\")
             'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
+
+        If DirApp <> "" Then
+            sDir = DirApp & "\DataBackupear\"
+        Else
+            sDir = ""
+        End If
+        Dim sDirDest = sDir '& "\borrar\"
+
+        'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
+
 
 
         ErrHandler2.WriteError("ResizeImage " & sDir & image)
@@ -5478,18 +5915,18 @@ Public Class CartaDePorteManager
             If newimagename = "" Then
                 If image.Substring(image.LastIndexOf(".")) <> ".png" Then
                     ErrHandler2.WriteError("resize 1")
-                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    oThumbNail.Save(sDirDest & image, System.Drawing.Imaging.ImageFormat.Jpeg)
                 Else
                     ErrHandler2.WriteError("resize 2")
-                    oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+                    oThumbNail.Save(sDirDest & image, System.Drawing.Imaging.ImageFormat.Png)
                 End If
             Else
                 If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
                     ErrHandler2.WriteError("resize 3")
-                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    oThumbNail.Save(sDirDest & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
                 Else
                     ErrHandler2.WriteError("resize 4")
-                    oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
+                    oThumbNail.Save(sDirDest & newimagename, System.Drawing.Imaging.ImageFormat.Png)
                 End If
             End If
 
@@ -5503,7 +5940,7 @@ Public Class CartaDePorteManager
             ErrHandler2.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
             ErrHandler2.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
             ErrHandler2.WriteError(ex)
-            ErrHandler2.WriteError(sDir & "---" & image & "---" & newimagename)
+            ErrHandler2.WriteError(sDirDest & "---" & image & "---" & newimagename)
         End Try
 
 
@@ -5513,6 +5950,108 @@ Public Class CartaDePorteManager
 
 
 
+
+    'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
+    Public Shared Sub ResizeImage_ToTIFF(image As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String, DirApp As String)
+        'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
+        'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
+
+
+        Dim sDir As String
+
+        If System.Diagnostics.Debugger.IsAttached() And HttpContext.Current IsNot Nothing Then
+            'sDirVirtual = "~/DataBackupear\"
+            'sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
+        Else
+            ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+            sDir = "E:\Sites\Pronto\DataBackupear\"
+            'sDir = HttpContext.Current.Server.MapPath(AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\")
+            'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        End If
+
+        If DirApp <> "" Then
+            sDir = DirApp & "\DataBackupear\"
+        Else
+            sDir = ""
+        End If
+        Dim sDirDest = sDir '& "\borrar\"
+
+        'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
+
+
+
+        ErrHandler2.WriteError("ResizeImage " & sDir & image)
+
+
+
+        'Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings(Okey) & image))
+        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(sDir & image)
+
+        'http://siderite.blogspot.com/2009/09/outofmemoryexception-in.html
+        oImg = oImg.GetThumbnailImage(oImg.Width, oImg.Height, Nothing, IntPtr.Zero)
+        If height = 0 And width = 0 Then
+            height = oImg.Height
+            width = oImg.Width
+        End If
+
+
+        Dim oThumbNail As System.Drawing.Image = New System.Drawing.Bitmap(width, height)
+        ', System.Drawing.Imaging.PixelFormat.Format24bppRgb
+        Dim oGraphic As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oThumbNail)
+
+        oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed
+
+        'set smoothing mode to high quality
+        oGraphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+        'set the interpolation mode
+        oGraphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+        'set the offset mode
+        oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed
+
+
+        Dim oRectangle As New System.Drawing.Rectangle(0, 0, width, height)
+
+        oGraphic.DrawImage(oImg, oRectangle)
+
+
+        Try
+
+            Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
+            Dim encoderParams As EncoderParameters = New EncoderParameters(1)
+
+            Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
+            'Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT3)
+
+            encoderParams.Param(0) = parameter
+            'parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.)
+            'encoderParams.Param(1) = parameter
+
+
+
+            oThumbNail.Save(sDirDest & newimagename, encoderInfo, encoderParams)
+            
+        Catch ex As Exception
+            'acá está pasando lo del gdi
+            'A generic error occurred in GDI+.
+            'parece ser que el archivo ya existe?
+            'NO!!!! es por el subdirectorio de destino!!! 
+            'http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream
+            'If you are getting that error , then I can say that your application doesn't have a write permission on some directory.
+            ErrHandler2.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
+            ErrHandler2.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
+            ErrHandler2.WriteError(ex)
+            ErrHandler2.WriteError(sDirDest & "---" & image & "---" & newimagename)
+        End Try
+
+
+
+        oImg.Dispose()
+    End Sub
+
+
+
+
+    
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5568,7 +6107,8 @@ Public Class CartaDePorteManager
                     ByVal puntoventa As Integer, _
                     Optional ByVal optDivisionSyngenta As String = "Ambas", _
                     Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-                    Optional ByVal optCamionVagon As String = "Ambas" _
+                    Optional ByVal optCamionVagon As String = "Ambas", _
+                    Optional ByVal idClienteAuxiliar As Integer = -1 _
                 ) As String
 
 
@@ -5602,13 +6142,14 @@ Public Class CartaDePorteManager
             strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
+                    iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
+
         Else
             Dim s = " AND (1=0 " & _
-                     iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
+                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") & _
+                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
                     "  )  "
 
             If s <> " AND (1=0   )  " Then strWHERE += s
@@ -5619,6 +6160,7 @@ Public Class CartaDePorteManager
         strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
         strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
         strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
+        strWHERE += iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
 
 
 
@@ -5833,16 +6375,15 @@ Public Class CartaDePorteManager
             strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
                     ""
-            'iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
         Else
             Dim s = " AND (1=0 " & _
                     iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
                     iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
                     iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
                                                        "  )  "
-
-            'iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
 
             If s <> " AND (1=0   )  " Then strWHERE += s
         End If
@@ -5856,7 +6397,7 @@ Public Class CartaDePorteManager
         strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
         strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
         strWHERE += iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
-        strWHERE += iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
+        'strWHERE += iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
 
 
         '//////////////////////////////////////////////////////////////////////////////////////////////
@@ -6520,7 +7061,7 @@ Public Class CartaDePorteManager
     "           Calidad, " & _
     "          Cosecha, NobleGrado,Factor, ESTAB.Descripcion as CodigoEstablecimientoProcedencia, ESTAB.AuxiliarString1 as DescripcionEstablecimientoProcedencia, " & _
     "           CTG as CTG, CEE, FechaAnulacion,MotivoAnulacion, " & _
-    "          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia, Corredor2  " & _
+    "          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia, Corredor2, IdClienteAuxiliar  " & _
       " FROM CartasDePorte CDP " & _
                    " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
                    " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
@@ -7206,27 +7747,30 @@ Public Class CartaDePorteManager
 
     Public Shared Function ReasignoTarifaSubcontratistasDeTodasLasCDPsDescargadasSinFacturarYLasGrabo(ByVal SC As String, ByVal IdUsuario As Integer, ByVal NombreUsuario As String, Optional ByVal IdListaPrecio As Long = -1) As Integer
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
         'me traigo la lista de subcontratistas que usan esa lista de precios
-        Dim lSubcontratistasParaActualizar = (From c In db.linqClientes _
+        Dim lSubcontratistasParaActualizar = (From c In db.Clientes _
                                                 From l In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = c.IdListaPrecios).DefaultIfEmpty _
                                                 From pd In db.ListasPreciosDetalles.Where(Function(i) i.IdListaPrecios = l.IdListaPrecios).DefaultIfEmpty _
-                                                Where c.IdListaPrecios = IdListaPrecio Select c.IdCliente, pd.PrecioCaladaLocal, pd.PrecioCaladaExportacion, pd.PrecioDescargaLocal, pd.PrecioDescargaExportacion).ToList
+                                                Where c.IdListaPrecios = IdListaPrecio Select c.IdCliente, pd.PrecioCaladaLocal, pd.PrecioCaladaExportacion, pd.PrecioDescargaLocal, pd.PrecioDescargaExportacion, pd.PrecioVagonesBalanza, pd.PrecioVagonesCalada).ToList
 
 
 
-        Dim sublista = From i In lSubcontratistasParaActualizar Select i.IdCliente
+        Dim sublista = (From i In lSubcontratistasParaActualizar Select i.IdCliente).ToList
 
-        Dim q = (From cdp In db.CartasDePortes _
+        Dim aaa = (From cdp In db.CartasDePortes _
                Where _
                      (cdp.IdFacturaImputada Is Nothing Or cdp.IdFacturaImputada = 0 Or cdp.IdFacturaImputada = -1) _
                  And (cdp.Anulada <> "SI") _
                  And (sublista.Contains(cdp.Subcontr1) Or sublista.Contains(cdp.Subcontr2)) _
-                ).ToList
+                )
 
+        Debug.Print(aaa.Count)
 
+        Dim q = aaa.ToList()
 
 
 
@@ -7249,7 +7793,10 @@ Public Class CartaDePorteManager
                     If True Then
                         'cdp.TarifaSubcontratista1 = tarifaDefaultCalada
                         'cdp.TarifaSubcontratista2 = tarifaDefaultBalanza
-                        If cdp.Exporta = "SI" Then
+                        If If(cdp.SubnumeroVagon, 0) > 0 Then
+                            cdp.TarifaSubcontratista1 = i.PrecioVagonesCalada
+                            cdp.TarifaSubcontratista2 = i.PrecioVagonesBalanza
+                        ElseIf cdp.Exporta = "SI" Then
                             cdp.TarifaSubcontratista1 = i.PrecioCaladaExportacion
                             cdp.TarifaSubcontratista2 = i.PrecioDescargaExportacion
                         Else
@@ -7269,7 +7816,7 @@ Public Class CartaDePorteManager
             r = r + 1
         Next
 
-        db.SubmitChanges()
+        db.SaveChanges()
 
         Return cartasactualizadas
     End Function
@@ -8305,8 +8852,9 @@ Public Class CartaDePorteManager
         'arreglar esto, porque la segunda vez que se llama con el mismo subnumerodefacturacion, va a devolver un error
 
 
-
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        ' hay que revisar por qué no se banca el demoprontoentities
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))        ' hay que revisar por qué no se banca el demoprontoentities
 
         Dim familia = (From e In db.CartasDePortes _
                                       Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
@@ -8323,7 +8871,10 @@ Public Class CartaDePorteManager
         If SubnumeroFacturacion > 0 Then Return New CartaDePorte
         If familia.Count = 1 Then Return CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
 
-        ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & NumeroCartaDePorte & " " & SubNumeroVagon & ".  Puede ser una con otro Subnumero de facturacion ")
+        ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & _
+                                       NumeroCartaDePorte & " " & SubNumeroVagon & " " & SubnumeroFacturacion & _
+                                       ".  Puede ser una con otro Subnumero de facturacion. " & familia.Count & " " & sss.IdCartaDePorte & _
+                                       " Estas haciendo altas usando el -1 en SubnumeroDeFacturacion? estas buscando con -1 cuando solo hay con 0?")
 
 
 
@@ -8410,6 +8961,37 @@ Public Class CartaDePorteManager
 
 
 
+    Shared Function IdFacturaImputadaEnLaBase(ByVal SC As String, id As Long) As Integer?
+
+
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+        Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = id).SingleOrDefault
+
+        Return oCarta.IdFacturaImputada
+
+
+    End Function
+
+
+
+    Shared Function DesfacturarCarta(ByVal SC As String, myCartaDePorte As CartaDePorte, usuario As String)
+
+        Try
+            LogPronto(SC, myCartaDePorte.Id, "Se desimputa la carta id" & myCartaDePorte.Id & " de la factura id" & myCartaDePorte.IdFacturaImputada, usuario, , , , , myCartaDePorte.IdFacturaImputada)
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+        Using db = New LinqCartasPorteDataContext(Encriptar(SC))
+            Dim cp = (From i In db.CartasDePortes Where i.IdCartaDePorte = myCartaDePorte.Id).Single
+            cp.IdFacturaImputada = 0
+            db.SubmitChanges()
+            'MsgBoxAjax(Me, "Desfacturada con éxito")
+        End Using
+
+    End Function
 
 
     <DataObjectMethod(DataObjectMethodType.Update, True)> _
@@ -8441,8 +9023,12 @@ Public Class CartaDePorteManager
 
                 Else
                     'If .IdFacturaImputadaOriginal Then
-                    If .IdFacturaImputada >= 0 Then
+                    If .IdFacturaImputada <= 0 Then
 
+                        'creo que en el caso de la factura Id=85806 no se pasó por estas lineas, porque supongo que cflores tenía
+                        '       .IdFacturaImputada  en 0  mientras la mandaron a facturar, y al grabarla cflores evidentemente no pasaría
+                        '   por acá. No sería conveniente entonces llamar a CopiarEnHistorico siempre? o directamente impedir que se libere 
+                        ' la IdFacturaImputada en este metodo?
 
                         If Not VerificarConcurrenciaTimeStamp(SC, .Id, .FechaTimeStamp) Then
                             'si es un duplicado, por ahora no verifiquemos la concurrencia, porque creo que modifican primero la original
@@ -8465,7 +9051,16 @@ Public Class CartaDePorteManager
                         '          DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
                         '          99990, DBNull.Value, DBNull.Value)
 
+                        'no permitir desimputar usando el Save. Que se use otro método especifico para eso (DesfacturarCarta())
+
+
+                        If .IdFacturaImputada <> IdFacturaImputadaEnLaBase(SC, .Id) Then
+
+                            Throw New Exception("Otro usuario actualizó la carta mientras vos la editabas. Por favor, volvé a cargar la carta y hacé nuevamente las modificaciones. Es posible que no esté más disponible para editar")
+                        End If
+
                         CopiarEnHistorico(SC, .Id)
+
                     End If
 
 
@@ -9297,6 +9892,14 @@ Public Class CartaDePorteManager
 
 
 
+            If .Id > 0 Then
+                If .IdFacturaImputada <> IdFacturaImputadaEnLaBase(SC, .Id) Then
+                    ms &= "Otro usuario actualizó la carta mientras vos la editabas. Por favor, volvé a cargar la carta y hacé nuevamente las modificaciones. Es posible que no esté más disponible para editar"
+                End If
+            End If
+
+
+
 
             Try
                 If .CalidadDe > 0 Then
@@ -9365,6 +9968,26 @@ Public Class CartaDePorteManager
 
 
             End If
+
+
+
+            Dim pat As String = .Patente.Replace(" ", "")
+            If Not (pat.Length = 6 Or pat.Length = 7 Or pat.Length = 0) Then
+
+                ms &= "La patente del camión es inválida "
+                ms &= vbCrLf   'return false
+
+            End If
+
+
+            Dim aco As String = .Acoplado.Replace(" ", "")
+            If Not (aco.Length = 6 Or aco.Length = 7 Or aco.Length = 0) Then
+
+                ms &= "La patente del acoplado es inválida "
+                ms &= vbCrLf   'return false
+
+            End If
+
 
 
 
@@ -9618,6 +10241,11 @@ Public Class CartaDePorteManager
                     ms &= vbCrLf   'return false
 
                 End If
+
+
+
+
+
 
 
             End If
@@ -10365,7 +10993,10 @@ Public Class CartaDePorteManager
         ErrHandler2.WriteError("InformeAdjuntoDeFacturacionWilliamsExcel Idfactura=" & IdFactura)
 
 
-        Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+        'Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+        Dim dt = EntidadManager.ExecDinamico(SC, "wCartasDePorte_TX_PorIdFactura " & IdFactura, 100)
+
+
 
         If ArchivoExcelDestino = "" Then
             ArchivoExcelDestino = IO.Path.GetTempPath & "AdjuntoDeFactura " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
@@ -11068,7 +11699,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
+    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False, Optional bForzarCasillaTK As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
         ErrHandler2.WriteError("GrabarImagen 1")
@@ -11139,7 +11770,7 @@ Public Class CartaDePorteManager
 
 
                 'primera pagina del tiff
-                If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
+                If Not InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 And Not bForzarCasillaTK Then
                     listapaginas(0).Save(DIRDATABACKUPEAR + archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg", Imaging.ImageFormat.Jpeg)
                     BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen)
                     oCarta.PathImagen = archivoImagenSinPathUbicadaEnDATABACKUPEAR + ".jpg"
@@ -11166,7 +11797,7 @@ Public Class CartaDePorteManager
             End Try
 
 
-        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Then
+        ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "TK") > 0 Or bForzarCasillaTK Then
             If oCarta.PathImagen2 <> "" Then BorroArchivo(DIRDATABACKUPEAR + oCarta.PathImagen2)
             oCarta.PathImagen2 = archivoImagenSinPathUbicadaEnDATABACKUPEAR
         ElseIf InStr(archivoImagenSinPathUbicadaEnDATABACKUPEAR.ToUpper, "CP") > 0 Then
@@ -11736,7 +12367,12 @@ Public Class CartaDePorteManager
                         System.GC.Collect()
                         System.GC.WaitForPendingFinalizers()
                         ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14955
-                        'MyFile6.Delete() 'me está tirando que es usado por otro proceso
+
+                        Try
+                            MyFile6.Delete() 'me está tirando que es usado por otro proceso
+                        Catch ex As Exception
+                            ErrHandler2.WriteError(ex)
+                        End Try
                     End If
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -11895,6 +12531,7 @@ Public Class CartaDePorteManager
         '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     End Function
+
 
 
 
@@ -13406,9 +14043,28 @@ Public Class CartaDePorteManager
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Shared Function usuariosBLD(SC As String) As List(Of String)
         Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor"), "") _
-                            + "|" + iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "")
+                            + "|" + iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "") _
+                            + "|" + iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor3"), "")
+
         Dim sss = aaa.Split("|").ToList
         sss.Add("BLDCORREDOR")
         sss.Add("BLD_ALABERN")
@@ -13433,6 +14089,7 @@ Public Class CartaDePorteManager
 
     Shared Function TraerCUITClientesSegunUsuario(usuario As String, SC As String) As List(Of String)
 
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=14187
 
         Dim c1() As String = { _
                                       "20268165178" _
@@ -13458,7 +14115,7 @@ Public Class CartaDePorteManager
 
 
 
-
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=20348
         Dim c2() As String = { _
                               "33708480849" _
                             , "30668239559" _
@@ -13513,10 +14170,190 @@ Public Class CartaDePorteManager
                             }
 
 
-        Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "")
-        Dim sss = aaa.Split("|").ToList
+        'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=20848
+        Dim c3() As String = { _
+ "30508255965" _
+, "30708547758" _
+, "30613957509" _
+, "30550246771" _
+, "30502793175" _
+, "30712157107" _
+, "30709054704" _
+, "30590467010" _
+, "27173198146" _
+, "20220775640" _
+, "30667622707" _
+, "20162019873" _
+, "23073814499" _
+, "30710132395" _
+, "33693971239" _
+, "30714038911" _
+, "20226532537" _
+, "30552574822" _
+, "20103905932" _
+, "30710225733" _
+, "30700522314" _
+, "20085369645" _
+, "30649229755" _
+, "20170298358" _
+, "30634408475" _
+, "98927187872" _
+, "33710880579" _
+, "33631032929" _
+, "20045814484" _
+, "20135485501" _
+, "24040384525" _
+, "30714659258" _
+, "20107656910" _
+, "24113366210" _
+, "30708724463" _
+, "33615604599" _
+, "30711806209" _
+, "30691552590" _
+, "33623538899" _
+, "20108993627" _
+, "20044232619" _
+, "30709936812" _
+, "30619381064" _
+, "30688956427" _
+, "30617007785" _
+, "30711544646" _
+, "30708363827" _
+, "30665352893" _
+, "30696150520" _
+, "30714626945" _
+, "30711955530" _
+, "33710309529" _
+, "33621155429" _
+, "30708451629" _
+, "23210571299" _
+, "20176690772" _
+, "20265609415" _
+, "20303380605" _
+, "27035489733" _
+, "20229905830" _
+, "20262092632" _
+, "20185006183" _
+, "27217201077" _
+, "30707049843" _
+, "20140057453" _
+, "30711988099" _
+, "30712210253" _
+, "30710256507" _
+, "30547406776" _
+, "20226480723" _
+, "30557861420" _
+, "30607229828" _
+, "30710194250" _
+, "20175222791" _
+, "27066336978" _
+, "27050046414" _
+, "20268133985" _
+, "20125834621" _
+, "20278570798" _
+, "27226443237" _
+, "30511824563" _
+, "30708924985" _
+, "30649023316" _
+, "30683682302" _
+, "30683044098" _
+, "30709049565" _
+, "30710822170" _
+, "30710328427" _
+, "30708414308" _
+, "33709199779" _
+, "30707818707" _
+, "30683941499" _
+, "30528794544" _
+, "20238353948" _
+, "30708855703" _
+, "30710731604" _
+, "27215151153" _
+, "27054880206" _
+, "20239541179" _
+, "20220470718" _
+, "30708418788" _
+, "30711124108" _
+, "20052568243" _
+, "27124852515" _
+, "20043838483" _
+, "20121825075" _
+, "30615426829" _
+, "27042589255" _
+, "30519261517" _
+, "27004059730" _
+, "20043578155" _
+, "20266070641" _
+, "33708285639" _
+, "30619004449" _
+, "20304689618" _
+, "30711306958" _
+, "30713609508" _
+, "30707463259" _
+, "20294464418" _
+, "30709242993" _
+, "33708714289" _
+, "30711515719" _
+, "20050615287" _
+, "30711731020" _
+, "20116593700" _
+, "20228254488" _
+, "27181169937" _
+, "20300301593" _
+, "20206542587" _
+, "30712149562" _
+, "30668774268" _
+, "30696156499" _
+, "33708414609" _
+, "30708139846" _
+, "30708729996" _
+, "30667592565" _
+, "30708508094" _
+, "30538263431" _
+, "30709917788" _
+, "30565748811" _
+, "30528749166" _
+, "20122852580" _
+, "20177302164" _
+, "23125564909" _
+, "20236836178" _
+, "30644492563" _
+, "30640655247" _
+, "20129916924" _
+, "30526381943" _
+, "30710229372" _
+, "30708047461" _
+, "30501036125" _
+, "20139950985" _
+, "30709042390" _
+, "30558314539" _
+, "30595526511" _
+, "30658938300" _
+, "33708830599" _
+, "33594705829" _
+, "30552646750" _
+, "30631839319" _
+, "20052577447" _
+, "20085369564" _
+, "30553563182" _
+, "30522189894" _
+, "23182504114" _
+, "27209562389" _
+, "20939127977" _
+, "23116523914" _
+, "20043789083" _
+, "30619509133" _
+}
 
-        If sss.Contains(usuario) Then
+
+
+        Dim lista2 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "").Split("|"), IEnumerable(Of String)).ToList
+        Dim lista3 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor3"), "").Split("|"), IEnumerable(Of String)).ToList
+
+        If lista3.Contains(usuario) Then
+            Return c3.ToList
+
+        ElseIf lista2.Contains(usuario) Then
             Return c2.ToList
         Else
             Return c1.ToList
@@ -13582,23 +14419,37 @@ Public Class CartaDePorteManager
 
             Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numerocarta, 0, 0)
 
-            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente Then
+            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente And _
+              IdClienteEquivalenteDelIdVendedor(cdp.Corredor2, SC) <> idcliente Then
                 ErrHandler2.WriteError("La carta no corresponde al usuario")
                 Return Nothing
             End If
 
 
 
+            Dim FName As String
+            If True Then
+
+                'PDF
+                FName = ImagenPDF(SC, cdp.Id, DirApp)
+
+            Else
+
+                'imagen
+
+                Dim DIRFTP As String = DirApp & "\DataBackupear\"
+
+                'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
+                'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
+                'Return File.ReadAllText(FullPath)
+
+                FName = DIRFTP + cdp.PathImagen
+
+            End If
 
 
 
-            Dim DIRFTP As String = DirApp & "\DataBackupear\"
 
-            'Dim FilePath = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
-            'Dim  FullPath as string= ConfigurationManager.AppSettings["FilePath"]  + FilePath
-            'Return File.ReadAllText(FullPath)
-
-            Dim FName As String = DIRFTP + cdp.PathImagen
 
             Dim fs1 As System.IO.FileStream = Nothing
             fs1 = System.IO.File.Open(FName, FileMode.Open, FileAccess.Read)
@@ -13642,6 +14493,10 @@ Public Class CartaDePorteManager
         'End If
 
 
+    End Function
+
+    Private Shared Function idClienteAuxiliar() As Object
+        Throw New NotImplementedException
     End Function
 
 
@@ -16692,38 +17547,55 @@ Public Class CDPMailFiltrosManager2
         Dim logo = "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\n/Tfimth/I/4H/IqMrS7KwMAAAAAASUVORK5CYII="
 
         Dim html = "" '" <img src=""data:image/jpg;base64, " + logo + """ />"""
-        Dim a = ""
+        Dim a = "", b = ""
+
 
 
         Select Case puntoventa
             Case 1
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a>"
+
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Buenos Aires<br/>" + vbCrLf + _
                         "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf + _
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
 
 
             Case 2
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a sanlorenzo@williamsentregas.com.ar</a>"
+
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina San Lorenzo<br/>" + vbCrLf + _
                         "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf + _
                         "Tel: 03476 - 430234 / 430158<br/>sanlorenzo@williamsentregas.com.ar" + vbCrLf
 
             Case 3
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a arroyoseco@williamsentregas.com.ar</a>"
+
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Arroyo Seco<br/>" + vbCrLf + _
                         "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf + _
                         "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
 
             Case 4
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a bahiablanca@williamsentregas.com.ar</a>"
+
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Bahia Blanca<br/>" + vbCrLf + _
                         "Playa el Triangulo<br/>" + vbCrLf + _
                         "Tel: 0291 - 4007928 / 4816778<br/>bahiablanca@williamsentregas.com.ar" + vbCrLf
 
 
             Case Else
-                a = "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
+
+                b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a>"
+
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
                         "Oficina Buenos Aires<br/>" + vbCrLf + _
                         "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf + _
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
@@ -16731,7 +17603,7 @@ Public Class CDPMailFiltrosManager2
         End Select
 
 
-        html &= "<br/><a href=""http://williamsentregas.com.ar/""> <img src=""cid:Image""></a>" + a +
+        html &= b + "<br/><a href=""http://williamsentregas.com.ar/""> <img src=""cid:Image""></a>" + a +
                "<br/><a href=""https://twitter.com/WEntregas?lang=es""><img src=""cid:Image2""></a>"
 
 
@@ -17073,7 +17945,7 @@ Public Class CDPMailFiltrosManager2
                                                                 output, _
                                                               SmtpPort, _
                                                       , _
-                                                      CCOaddress, , , , , inlinePNG, inlinePNG2)
+                                                      CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
                     ElseIf bDescargaHtml Then
@@ -17093,7 +17965,7 @@ Public Class CDPMailFiltrosManager2
                                           "", _
                                         SmtpPort, _
                                 , _
-                                CCOaddress, , , , , inlinePNG, inlinePNG2)
+                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
                         'MandaEmail(destinatario, _
@@ -17124,7 +17996,7 @@ Public Class CDPMailFiltrosManager2
                                          , _
                                          CCOaddress, _
                                             truquito _
-                                            , "Williams Entregas", , , inlinePNG, inlinePNG2 _
+                                            , "Williams Entregas", De, , inlinePNG, inlinePNG2 _
                                        )
 
                     End If
@@ -17581,6 +18453,7 @@ Public Class LogicaInformesWilliams
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
 
 
+
         Dim movs = (From i In db.CartasPorteMovimientos _
                     Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente _
                     Where _
@@ -17668,17 +18541,24 @@ Public Class LogicaInformesWilliams
 
         'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
 
-        If False Then
 
-            'no puedo usar esto, porque necesito traer cartas desde el principio de los tiempos
+        If True Then
 
-            'Dim dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
-            '        "", "", "", 1, 0, _
-            '        enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-            '        iddestinatario, -1, _
-            '        -1, IdArticulo, -1, idDestino, _
-            '        "1", "Export", _
-            '          #1/1/1980#, hasta, -1, sTitulo, , , , , , , , , )
+            'acá tenes un tema con usar Fecha o Fecha-1
+            '-si el tipo elige desde hoy hasta hoy, tenes que llamar a la funcion con el ultimo segundo de ayer, porque GetDataTableFiltradoYPaginado_CadenaSQL usa menor o igual
+
+
+            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc, _
+                    "", "", "", 1, 0, _
+                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
+                    iddestinatario, -1, _
+                    -1, IdArticulo, -1, IdDestinoWilliams, _
+                   "1", "Export", _
+                      #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
+
+
+
+            entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C").Rows(0).Item(0)
 
 
 
@@ -17702,13 +18582,15 @@ Public Class LogicaInformesWilliams
 
         Else
 
+            'el true está obviando la condicion de SubnumeroDeFacturacion
             'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
 
 
             Dim q = Aggregate i In db.CartasDePortes _
                     Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
-                    And (True Or If(i.SubnumeroDeFacturacion, 0) <= 0) _
-                        And i.Exporta = "SI" And i.Anulada <> "SI" _
+                        And (If(i.SubnumeroDeFacturacion, 0) <= 0) _
+                        And db.CartasDePortes.Any(Function(x) x.Exporta = "SI" And x.NumeroCartaDePorte = i.NumeroCartaDePorte) _
+                        And i.Anulada <> "SI" _
                         And If(i.Destino, 0) = IdDestinoWilliams _
                         And If(i.IdArticulo, 0) = IdArticulo _
                         And If(i.Entregador, 0) = iddestinatario _
@@ -17721,7 +18603,6 @@ Public Class LogicaInformesWilliams
         '///////////////////////////////////////////////
         'movimientos:
         '///////////////////////////////////////////////
-
 
         Dim temp = From i In db.CartasPorteMovimientos _
                    Where _

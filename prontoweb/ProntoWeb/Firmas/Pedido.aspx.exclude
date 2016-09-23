@@ -1,0 +1,96 @@
+﻿<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Pedido.aspx.vb" Inherits="Pedido" title="BDL" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <br />
+    <table width="700" style="border-right: thin solid; border-top: thin solid; border-left: thin solid; border-bottom: thin solid">
+        <tr>
+            <td style="width: 100px">
+                <span style="color: #ffffff"><strong>
+                Nro.Pedido :</strong></span></td>
+            <td style="width: 224px">
+                <asp:Label ID="lblNumero" runat="server" Font-Bold="True" ForeColor="White"></asp:Label></td>
+            <td style="width: 100px">
+                <strong><span style="color: #ffffff">
+                Fecha :</span></strong></td>
+            <td style="width: 249px">
+                <asp:Label ID="lblFecha" runat="server" Font-Bold="True" ForeColor="White"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="width: 100px">
+                <strong><span style="color: #ffffff">
+                Obras :</span></strong></td>
+            <td style="width: 224px">
+                <asp:Label ID="lblObra" runat="server" Font-Bold="True" ForeColor="White"></asp:Label></td>
+            <td style="width: 100px">
+                </td>
+            <td style="width: 249px">
+                </td>
+        </tr>
+        <tr>
+            <td style="width: 100px">
+            </td>
+            <td style="width: 224px; border-top-width: thin; border-left-width: thin; border-bottom-width: thin; border-right-width: thin;">
+            </td>
+            <td style="width: 100px">
+            </td>
+            <td style="width: 249px">
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100px">
+            </td>
+            <td style="width: 224px">
+            </td>
+            <td style="width: 100px">
+            </td>
+            <td style="width: 249px">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="t1">
+                    <RowStyle ForeColor="White" Font-Bold="True" />
+                    <HeaderStyle CssClass="header" />
+                    <Columns>
+                        <asp:BoundField DataField="NumeroItem" HeaderText="Item" />
+                        <asp:BoundField DataField="Codigo" HeaderText="Codigo" />
+                        <asp:BoundField DataField="Articulo" HeaderText="Articulo" >
+                            <ItemStyle Wrap="False" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Cantidad" HeaderText="Cant." />
+                        <asp:BoundField DataField="Unidad" HeaderText="Un." />
+                        <asp:BoundField DataField="Precio" HeaderText="Precio" />
+                        <asp:BoundField DataField="PorcentajeBonificacion" HeaderText="%Bn." />
+                        <asp:BoundField DataField="ImporteBonificacion" HeaderText="Bonif." />
+                        <asp:BoundField DataField="PorcentajeIVA" HeaderText="% IVA" />
+                        <asp:BoundField DataField="ImporteIVA" HeaderText="Imp.IVA" />
+                        <asp:BoundField DataField="ImporteTotalItem" HeaderText="Total" />
+                        <asp:BoundField DataField="Observaciones" HeaderText="Observaciones" />
+                        <asp:BoundField DataField="Cumplido" HeaderText="Cumplido" />
+                        <asp:TemplateField HeaderText="FechaEntrega" SortExpression="Fecha entrega">
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("FechaEntrega", "{0:d}") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="FechaNecesidad" SortExpression="Fecha necesidad">
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("FechaNecesidad", "{0:d}") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+                <asp:HiddenField ID="HFSC" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100px">
+            </td>
+            <td style="width: 224px">
+            </td>
+            <td style="width: 100px">
+            </td>
+            <td style="width: 249px">
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

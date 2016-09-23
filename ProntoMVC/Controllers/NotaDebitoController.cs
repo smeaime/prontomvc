@@ -129,13 +129,57 @@ namespace ProntoMVC.Controllers
 
         }
 
-        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+        public virtual ActionResult TT // (string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+                                       (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
-            string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
 
-            var data = (from a in db.NotasDebitoes
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaDesde = DateTime.MinValue;
+            }
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            //        }
+
+            IQueryable<Data.Models.NotasDebito> q = (from a in db.NotasDebitoes where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            List<Data.Models.NotasDebito> pagedQuery =
+            Filters.FiltroGenerico_UsandoIQueryable<Data.Models.NotasDebito>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       
+
+            string campo = String.Empty;
+            int pageSize = rows;
+            int currentPage = page;
+
+
+
+
+
+            var data = (from a in pagedQuery
                         from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
                         from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
                         from d in db.Vendedores.Where(v => v.IdVendedor == a.IdVendedor).DefaultIfEmpty()
@@ -176,21 +220,21 @@ namespace ProntoMVC.Controllers
                             a.Observaciones
                         }).AsQueryable();
 
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                data = (from a in data where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
-            }
+            //if (FechaInicial != string.Empty)
+            //{
+            //    DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            //    DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            //    data = (from a in data where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
+            //}
 
-            int totalRecords = data.Count();  
+  //          int totalRecords = data.Count();  
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data1 = (from a in data select a)
-                        .OrderByDescending(x => x.FechaNotaDebito)
+            var data1 = (from a in data select a);
+                        //.OrderByDescending(x => x.FechaNotaDebito)
                         
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+//.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -310,7 +354,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-                        .OrderByDescending(x => x.FechaNotaDebito)
+                //        .OrderByDescending(x => x.FechaNotaDebito)
                         
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();

@@ -1,0 +1,320 @@
+
+Log Entry : 
+04/27/2016 11:22:29
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+04/27/2016 11:22:51
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2250644. Error Message:La carta numero 550268692 id=2250644 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+04/27/2016 11:22:51
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2250644. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+04/27/2016 11:22:56
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2251024. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:41:29
+Error in: http://localhost:59798/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+04/27/2016 12:42:05
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Web.HttpParseException
+Cannot create an object of type 'System.Int16' from its string representation '' for the 'TabIndex' property.
+   at System.Web.UI.TemplateParser.ProcessException(Exception ex)
+   at System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   at System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+System.Web
+__________________________
+
+Log Entry : 
+04/27/2016 12:42:54
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:43:58
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:44:56
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:45:44
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:48:45
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:49:12
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:54:03
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:54:39
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277228. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:57:16
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277228. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:58:28
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277228. Error Message:Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 12:58:28
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277228. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8048
+   at CartadeporteABM.btnSave_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 2517
+Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 12:59:18
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277228. Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8462
+EntityFramework
+__________________________
+
+Log Entry : 
+04/27/2016 12:59:25
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277228. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 12:59:34
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:00:48
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:00:48
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8048
+   at CartadeporteABM.btnSave_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 2517
+Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:01:07
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8462
+EntityFramework
+__________________________
+
+Log Entry : 
+04/27/2016 13:01:13
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:01:24
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:02:25
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:02:25
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8048
+   at CartadeporteABM.btnSave_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 2517
+Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:04:05
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8462
+EntityFramework
+__________________________
+
+Log Entry : 
+04/27/2016 13:04:12
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:04:57
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:04:57
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8048
+   at CartadeporteABM.btnSave_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 2517
+Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:05:53
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8462
+EntityFramework
+__________________________
+
+Log Entry : 
+04/27/2016 13:06:01
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:06:12
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:06:13
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8048
+   at CartadeporteABM.btnSave_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 2517
+Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:06:32
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8462
+EntityFramework
+__________________________
+
+Log Entry : 
+04/27/2016 13:06:40
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:06:53
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:06:53
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3076
+   at CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8048
+   at CartadeporteABM.btnSave_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 2517
+Ya existe una carta con ese número y vagon: 600462988 0.  Puede ser una con otro Subnumero de facturacion 
+__________________________
+
+Log Entry : 
+04/27/2016 13:07:17
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8462
+EntityFramework
+__________________________
+
+Log Entry : 
+04/27/2016 13:07:23
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:08:21
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:09:00
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:09:26
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+04/27/2016 13:10:26
+Error in: http://localhost:59798/ProntoWeb/CartaDePorte.aspx?Id=2277227. Error Message:PV 1 0
+__________________________

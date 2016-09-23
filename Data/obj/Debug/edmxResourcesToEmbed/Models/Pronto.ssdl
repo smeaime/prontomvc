@@ -661,6 +661,17 @@
     <Property Name="MotivoRechazo" Type="int" />
     <Property Name="FacturarA_Manual" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="CartasDePorteControlDescarga">
+    <Key>
+      <PropertyRef Name="IdCartasDePorteControlDescarga" />
+    </Key>
+    <Property Name="IdCartasDePorteControlDescarga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="IdDestino" Type="int" />
+    <Property Name="IdPuntoVenta" Type="int" />
+    <Property Name="TotalDescargaDia" Type="int" />
+    <Property Name="PorcentajeDesnormalizado" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
   <EntityType Name="CartasDePorteDetalle">
     <Key>
       <PropertyRef Name="IdCartaDePorteDetalle" />
@@ -1001,6 +1012,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="EsEntregador" Type="varchar" MaxLength="2" />
     <Property Name="OperacionesMercadoInternoEntidadVinculada" Type="varchar" MaxLength="2" />
     <Property Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="int" />
+    <Property Name="FechaInicioExclusionPercepcionIVA" Type="datetime" />
+    <Property Name="FechaFinExclusionPercepcionIVA" Type="datetime" />
   </EntityType>
   <EntityType Name="Colores">
     <Key>
@@ -1183,6 +1196,9 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="NoTomarParaCalculoDeImpuestos" Type="varchar" MaxLength="2" />
     <Property Name="IdPuntoVenta" Type="int" />
     <Property Name="PuntoVenta" Type="int" />
+    <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="int" />
+    <Property Name="CompensacionGastosProveedorCliente" Type="varchar" MaxLength="2" />
+    <Property Name="CircuitoLiquidacionFlete" Type="int" />
   </EntityType>
   <EntityType Name="Conceptos">
     <Key>
@@ -2117,6 +2133,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
     <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
     <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="IdDetalleLiquidacionFlete" Type="int" />
   </EntityType>
   <EntityType Name="DetalleFacturasClientesPRESTO">
     <Key>
@@ -2263,6 +2280,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
     <Property Name="Observaciones" Type="ntext" />
     <Property Name="OrigenDescripcion" Type="int" />
+    <Property Name="IdDetalleLiquidacionFlete" Type="int" />
   </EntityType>
   <EntityType Name="DetalleNotasDebitoProvincias">
     <Key>
@@ -3087,6 +3105,33 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="OtrasPercepciones3" Type="numeric" Precision="18" Scale="2" />
     <Property Name="OtrasPercepciones3Desc" Type="varchar" MaxLength="15" />
     <Property Name="AjusteIva" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdIBCondicion31" Type="int" />
+    <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="int" />
+    <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="int" />
+    <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="int" />
+    <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="int" />
+    <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="int" />
+    <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="int" />
+    <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="int" />
+    <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="int" />
+    <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
   </EntityType>
   <EntityType Name="DiccionarioEquivalencias">
     <Key>
@@ -3429,6 +3474,34 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="FechaInicioServicio" Type="datetime" />
     <Property Name="FechaFinServicio" Type="datetime" />
     <Property Name="IdLiquidacionFlete" Type="int" />
+    <Property Name="IdIBCondicion31" Type="int" />
+    <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="int" />
+    <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="int" />
+    <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="int" />
+    <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="int" />
+    <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="int" />
+    <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="int" />
+    <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="int" />
+    <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="int" />
+    <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="CircuitoLiquidacionFlete" Type="int" />
   </EntityType>
   <EntityType Name="Feriados">
     <Key>
@@ -3596,6 +3669,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="TopeAnual" Type="numeric" Precision="18" Scale="2" />
     <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="varchar" MaxLength="2" />
     <Property Name="CodigoRegimen" Type="int" />
+    <Property Name="ImpuestoMinimo" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="ListasPrecios">
     <Key>
@@ -3640,6 +3714,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="Precio9" Type="numeric" Precision="18" Scale="2" />
     <Property Name="PrecioEmbarque2" Type="money" />
     <Property Name="MaximaCantidadParaPrecioEmbarque" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PrecioVagonesBalanza" Type="money" />
+    <Property Name="PrecioVagonesCalada" Type="money" />
+    <Property Name="PrecioVagonesBalanzaExportacion" Type="money" />
+    <Property Name="PrecioVagonesCaladaExportacion" Type="money" />
   </EntityType>
   <EntityType Name="LMateriales">
     <Key>
@@ -3831,6 +3909,37 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdClienteObservaciones" Type="int" />
     <Property Name="FechaInicioServicio" Type="datetime" />
     <Property Name="FechaFinServicio" Type="datetime" />
+    <Property Name="IdIBCondicion31" Type="int" />
+    <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="int" />
+    <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="int" />
+    <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="int" />
+    <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="int" />
+    <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="int" />
+    <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="int" />
+    <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="int" />
+    <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="int" />
+    <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="int" />
+    <Property Name="IdComprobanteProveedor_Compensacion" Type="int" />
+    <Property Name="IdLiquidacionFlete" Type="int" />
+    <Property Name="CircuitoLiquidacionFlete" Type="int" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -3896,6 +4005,37 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="FechaVencimientoORechazoCAE" Type="datetime" />
     <Property Name="IdIdentificacionCAE" Type="int" />
     <Property Name="IdClienteObservaciones" Type="int" />
+    <Property Name="IdIBCondicion31" Type="int" />
+    <Property Name="RetencionIBrutos31" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos31" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion32" Type="int" />
+    <Property Name="RetencionIBrutos32" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos32" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion33" Type="int" />
+    <Property Name="RetencionIBrutos33" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos33" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion34" Type="int" />
+    <Property Name="RetencionIBrutos34" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos34" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion35" Type="int" />
+    <Property Name="RetencionIBrutos35" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos35" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion36" Type="int" />
+    <Property Name="RetencionIBrutos36" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos36" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion37" Type="int" />
+    <Property Name="RetencionIBrutos37" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos37" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion38" Type="int" />
+    <Property Name="RetencionIBrutos38" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos38" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdIBCondicion39" Type="int" />
+    <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="ActivarRecuperoGastos" Type="varchar" MaxLength="2" />
+    <Property Name="IdAutorizoRecuperoGastos" Type="int" />
+    <Property Name="IdLiquidacionFlete" Type="int" />
+    <Property Name="CircuitoLiquidacionFlete" Type="int" />
   </EntityType>
   <EntityType Name="Obras">
     <Key>
@@ -3958,6 +4098,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="DiasLiquidacionCertificados" Type="int" />
     <Property Name="IdObraRelacionada" Type="int" />
     <Property Name="OrdenamientoSecundario" Type="int" />
+    <Property Name="RegimenMinero" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="OrdenesCompra">
     <Key>
@@ -4904,6 +5045,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="ResolucionAfip3668" Type="varchar" MaxLength="2" />
     <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="varchar" MaxLength="2" />
     <Property Name="ExcluirDeActualizacionIvaRG18" Type="varchar" MaxLength="2" />
+    <Property Name="ResolucionAfip3692" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="Provincias">
     <Key>
@@ -5508,6 +5650,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="LimiteSuperior" Type="numeric" Precision="18" Scale="2" />
     <Property Name="IdUnidad" Type="int" />
     <Property Name="FechaVigencia" Type="datetime" />
+    <Property Name="ValorUnitario2" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="TarjetasCredito">
     <Key>
@@ -5869,6 +6012,9 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdOrigen" Type="int" />
     <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
     <Property Name="IdReciboAsignado" Type="int" />
+    <Property Name="PercepcionIva" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdCuentaPercepcionIva" Type="int" />
+    <Property Name="PorcentajePercepcionIva" Type="numeric" Precision="6" Scale="2" />
   </EntityType>
   <EntityType Name="ValoresFaltantesVistos">
     <Key>
@@ -6082,6 +6228,18 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
       </Principal>
       <Dependent Role="CartasDePorte">
         <PropertyRef Name="IdCorredor2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartasDeP__IdDes__4C581317">
+    <End Role="WilliamsDestinos" Type="Self.WilliamsDestinos" Multiplicity="0..1" />
+    <End Role="CartasDePorteControlDescarga" Type="Self.CartasDePorteControlDescarga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WilliamsDestinos">
+        <PropertyRef Name="IdWilliamsDestino" />
+      </Principal>
+      <Dependent Role="CartasDePorteControlDescarga">
+        <PropertyRef Name="IdDestino" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -9289,13 +9447,13 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
   </Function>
   <Function Name="AutorizacionesPorComprobante_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAutorizacionPorComprobante" Type="int" Mode="InOut" />
+    <Parameter Name="IdFormulario" Type="int" Mode="In" />
+    <Parameter Name="IdComprobante" Type="int" Mode="In" />
     <Parameter Name="OrdenAutorizacion" Type="int" Mode="In" />
     <Parameter Name="IdAutorizo" Type="int" Mode="In" />
     <Parameter Name="FechaAutorizacion" Type="datetime" Mode="In" />
     <Parameter Name="Visto" Type="varchar" Mode="In" />
-    <Parameter Name="IdFormulario" Type="int" Mode="In" />
-    <Parameter Name="IdComprobante" Type="int" Mode="In" />
-    <Parameter Name="IdAutorizacionPorComprobante" Type="int" Mode="InOut" />
   </Function>
   <Function Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdFormulario" Type="int" Mode="In" />
@@ -9306,12 +9464,12 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Parameter Name="IdMoneda" Type="int" Mode="In" />
   </Function>
   <Function Name="CtasCtesA_TXPorTrs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Pendiente" Type="varchar" Mode="In" />
     <Parameter Name="IdProveedor" Type="int" Mode="In" />
     <Parameter Name="Todo" Type="int" Mode="In" />
     <Parameter Name="FechaLimite" Type="datetime" Mode="In" />
     <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
     <Parameter Name="Consolidar" Type="int" Mode="In" />
+    <Parameter Name="Pendiente" Type="varchar" Mode="In" />
   </Function>
   <Function Name="CtasCtesD_TXPorTrs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdCliente" Type="int" Mode="In" />
@@ -9335,14 +9493,234 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
   <Function Name="Facturas_Remitos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
     <Parameter Name="IdFactura" Type="int" Mode="In" />
   </Function>
+  <Function Name="fSQL_GetDataTableFiltradoYPaginado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="estado" Type="int" Mode="In" />
+    <Parameter Name="QueContenga" Type="varchar" Mode="In" />
+    <Parameter Name="idVendedor" Type="int" Mode="In" />
+    <Parameter Name="idCorredor" Type="int" Mode="In" />
+    <Parameter Name="idDestinatario" Type="int" Mode="In" />
+    <Parameter Name="idIntermediario" Type="int" Mode="In" />
+    <Parameter Name="idRemComercial" Type="int" Mode="In" />
+    <Parameter Name="idArticulo" Type="int" Mode="In" />
+    <Parameter Name="idProcedencia" Type="int" Mode="In" />
+    <Parameter Name="idDestino" Type="int" Mode="In" />
+    <Parameter Name="AplicarANDuORalFiltro" Type="int" Mode="In" />
+    <Parameter Name="ModoExportacion" Type="varchar" Mode="In" />
+    <Parameter Name="fechadesde" Type="datetime" Mode="In" />
+    <Parameter Name="fechahasta" Type="datetime" Mode="In" />
+    <Parameter Name="puntoventa" Type="int" Mode="In" />
+    <Parameter Name="optDivisionSyngenta" Type="varchar" Mode="In" />
+    <Parameter Name="Contrato" Type="varchar" Mode="In" />
+    <Parameter Name="QueContenga2" Type="varchar" Mode="In" />
+    <Parameter Name="idClienteAuxiliarint" Type="int" Mode="In" />
+    <Parameter Name="AgrupadorDeTandaPeriodos" Type="int" Mode="In" />
+    <Parameter Name="Vagon" Type="int" Mode="In" />
+    <Parameter Name="Patente" Type="varchar" Mode="In" />
+    <Parameter Name="optCamionVagon" Type="varchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="IdCartaDePorte" Type="int" Nullable="false" />
+          <Property Name="NumeroCartaDePorte" Type="bigint" />
+          <Property Name="IdUsuarioIngreso" Type="int" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="Anulada" Type="varchar" MaxLength="2" />
+          <Property Name="IdUsuarioAnulo" Type="int" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="200" />
+          <Property Name="FechaTimeStamp" Type="timestamp" />
+          <Property Name="Vendedor" Type="int" />
+          <Property Name="CuentaOrden1" Type="int" />
+          <Property Name="CuentaOrden2" Type="int" />
+          <Property Name="Corredor" Type="int" />
+          <Property Name="Entregador" Type="int" />
+          <Property Name="Procedencia" Type="varchar" MaxLength="30" />
+          <Property Name="Patente" Type="varchar" MaxLength="30" />
+          <Property Name="IdArticulo" Type="int" />
+          <Property Name="IdStock" Type="int" />
+          <Property Name="Partida" Type="varchar" MaxLength="20" />
+          <Property Name="IdUnidad" Type="int" />
+          <Property Name="IdUbicacion" Type="int" />
+          <Property Name="Cantidad" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="Cupo" Type="varchar" MaxLength="30" />
+          <Property Name="NetoProc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Calidad" Type="varchar" MaxLength="30" />
+          <Property Name="BrutoPto" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TaraPto" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NetoPto" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Acoplado" Type="varchar" MaxLength="30" />
+          <Property Name="Humedad" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Merma" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NetoFinal" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FechaDeCarga" Type="datetime" />
+          <Property Name="FechaVencimiento" Type="datetime" />
+          <Property Name="CEE" Type="varchar" MaxLength="20" />
+          <Property Name="IdTransportista" Type="int" />
+          <Property Name="TransportistaCUITdesnormalizado" Type="varchar" MaxLength="13" />
+          <Property Name="IdChofer" Type="int" />
+          <Property Name="ChoferCUITdesnormalizado" Type="varchar" MaxLength="13" />
+          <Property Name="CTG" Type="int" />
+          <Property Name="Contrato" Type="varchar" MaxLength="20" />
+          <Property Name="Destino" Type="int" />
+          <Property Name="Subcontr1" Type="int" />
+          <Property Name="Subcontr2" Type="int" />
+          <Property Name="Contrato1" Type="int" />
+          <Property Name="contrato2" Type="int" />
+          <Property Name="KmARecorrer" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Tarifa" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FechaDescarga" Type="datetime" />
+          <Property Name="Hora" Type="datetime" />
+          <Property Name="NRecibo" Type="int" />
+          <Property Name="CalidadDe" Type="int" />
+          <Property Name="TaraFinal" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="BrutoFinal" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Fumigada" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Secada" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Exporta" Type="varchar" MaxLength="2" />
+          <Property Name="NobleExtranos" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleNegros" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleQuebrados" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleDaniados" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleChamico" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleChamico2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleRevolcado" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleObjetables" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleAmohosados" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleHectolitrico" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleCarbon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NoblePanzaBlanca" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NoblePicados" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleMGrasa" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleAcidezGrasa" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleVerdes" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NobleGrado" Type="int" />
+          <Property Name="NobleConforme" Type="varchar" MaxLength="2" />
+          <Property Name="NobleACamara" Type="varchar" MaxLength="2" />
+          <Property Name="Cosecha" Type="varchar" MaxLength="20" />
+          <Property Name="HumedadDesnormalizada" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Factor" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdFacturaImputada" Type="int" />
+          <Property Name="PuntoVenta" Type="int" />
+          <Property Name="SubnumeroVagon" Type="int" />
+          <Property Name="TarifaFacturada" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TarifaSubcontratista1" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TarifaSubcontratista2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FechaArribo" Type="datetime" />
+          <Property Name="Version" Type="int" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
+          <Property Name="NumeroSubfijo" Type="int" />
+          <Property Name="IdEstablecimiento" Type="int" />
+          <Property Name="EnumSyngentaDivision" Type="varchar" MaxLength="10" />
+          <Property Name="Corredor2" Type="int" />
+          <Property Name="IdUsuarioModifico" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="FechaEmision" Type="datetime" />
+          <Property Name="EstaArchivada" Type="varchar" MaxLength="2" />
+          <Property Name="ExcluirDeSubcontratistas" Type="varchar" MaxLength="2" />
+          <Property Name="IdTipoMovimiento" Type="int" />
+          <Property Name="IdClienteAFacturarle" Type="int" />
+          <Property Name="SubnumeroDeFacturacion" Type="int" />
+          <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
+          <Property Name="CalidadGranosQuemados" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CalidadGranosQuemadosBonifica_o_Rebaja" Type="varchar" MaxLength="2" />
+          <Property Name="CalidadTierra" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CalidadTierraBonifica_o_Rebaja" Type="varchar" MaxLength="2" />
+          <Property Name="CalidadMermaChamico" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CalidadMermaChamicoBonifica_o_Rebaja" Type="varchar" MaxLength="2" />
+          <Property Name="CalidadMermaZarandeo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CalidadMermaZarandeoBonifica_o_Rebaja" Type="varchar" MaxLength="2" />
+          <Property Name="FueraDeEstandar" Type="varchar" MaxLength="2" />
+          <Property Name="CalidadPuntaSombreada" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CobraAcarreo" Type="varchar" MaxLength="2" />
+          <Property Name="LiquidaViaje" Type="varchar" MaxLength="2" />
+          <Property Name="IdClienteAuxiliar" Type="int" />
+          <Property Name="CalidadDescuentoFinal" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PathImagen" Type="varchar" MaxLength="150" />
+          <Property Name="PathImagen2" Type="varchar" MaxLength="150" />
+          <Property Name="AgrupadorDeTandaPeriodos" Type="int" />
+          <Property Name="ClaveEncriptada" Type="varchar" MaxLength="150" />
+          <Property Name="NumeroCartaEnTextoParaBusqueda" Type="varchar" MaxLength="20" />
+          <Property Name="IdClienteEntregador" Type="int" />
+          <Property Name="IdDetalleFactura" Type="int" />
+          <Property Name="SojaSustentableCodCondicion" Type="varchar" MaxLength="50" />
+          <Property Name="SojaSustentableCondicion" Type="varchar" MaxLength="50" />
+          <Property Name="SojaSustentableNroEstablecimientoDeProduccion" Type="varchar" MaxLength="50" />
+          <Property Name="IdClientePagadorFlete" Type="int" />
+          <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="varchar" MaxLength="50" />
+          <Property Name="IdCorredor2" Type="int" />
+          <Property Name="Acopio1" Type="int" />
+          <Property Name="Acopio2" Type="int" />
+          <Property Name="Acopio3" Type="int" />
+          <Property Name="Acopio4" Type="int" />
+          <Property Name="Acopio5" Type="int" />
+          <Property Name="Acopio6" Type="int" />
+          <Property Name="AcopioFacturarleA" Type="int" />
+          <Property Name="CalidadGranosDanadosRebaja" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CalidadGranosExtranosRebaja" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NumeroCompleto" Type="varchar" MaxLength="93" />
+          <Property Name="MinutosModifico" Type="int" />
+          <Property Name="EspecieONCAA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodigoSAJPYA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="txtCodigoZeni" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TitularDesc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TitularCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="IntermediarioDesc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IntermediarioCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="RComercialDesc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RComercialCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="CorredorDesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CorredorCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="DestinatarioDesc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EntregadorDesc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DestinatarioCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="ClienteAuxiliarDesc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClienteAuxiliarCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Subcontr1Desc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Subcontr2Desc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Producto" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="TransportistaCUIT" Type="varchar" MaxLength="13" />
+          <Property Name="TransportistaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChoferCUIT" Type="varchar" MaxLength="13" />
+          <Property Name="ChoferDesc" Type="varchar" MaxLength="50" />
+          <Property Name="ProcedenciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProcedenciaCodigoPostal" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProcedenciaCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProcedenciaProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DestinoDesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DestinoCodigoPostal" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DestinoCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mes" Type="nvarchar" MaxLength="30" />
+          <Property Name="Ano" Type="int" />
+          <Property Name="Factura" Type="varchar" MaxLength="63" />
+          <Property Name="FechaFactura" Type="datetime" />
+          <Property Name="ClienteFacturado" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClienteFacturadoCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="CalidadDesc" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioIngreso" Type="varchar" MaxLength="50" />
+          <Property Name="EstablecimientoDesc" Type="varchar" MaxLength="202" Nullable="false" />
+          <Property Name="ClientePagadorFleteDesc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProcedenciaProvinciaPartido" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ProcedenciaPartidoNormalizadaCodigo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="DestinoProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProcedenciaPartidoNormalizada" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CorredorDesc2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CorredorCUIT2" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="EntregadorCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="CodigoAFIP" Type="int" Nullable="false" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="LogComprobantesElectronicos_InsertarRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Recibido" Type="ntext" Mode="In" />
     <Parameter Name="Tipo" Type="varchar" Mode="In" />
     <Parameter Name="Letra" Type="varchar" Mode="In" />
     <Parameter Name="PuntoVenta" Type="int" Mode="In" />
     <Parameter Name="NumeroComprobante" Type="int" Mode="In" />
     <Parameter Name="Identificador" Type="int" Mode="In" />
     <Parameter Name="Enviado" Type="ntext" Mode="In" />
+    <Parameter Name="Recibido" Type="ntext" Mode="In" />
   </Function>
   <Function Name="Obras_EliminarCuentasNoUsadasPorIdObra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdObra" Type="int" Mode="In" />
@@ -9389,6 +9767,35 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
     <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="wCartasDePorte_TX_EstadisticasDeDescarga" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="estado" Type="int" Mode="In" />
+    <Parameter Name="QueContenga" Type="varchar" Mode="In" />
+    <Parameter Name="idVendedor" Type="int" Mode="In" />
+    <Parameter Name="idCorredor" Type="int" Mode="In" />
+    <Parameter Name="idDestinatario" Type="int" Mode="In" />
+    <Parameter Name="idIntermediario" Type="int" Mode="In" />
+    <Parameter Name="idRemComercial" Type="int" Mode="In" />
+    <Parameter Name="idArticulo" Type="int" Mode="In" />
+    <Parameter Name="idProcedencia" Type="int" Mode="In" />
+    <Parameter Name="idDestino" Type="int" Mode="In" />
+    <Parameter Name="AplicarANDuORalFiltro" Type="int" Mode="In" />
+    <Parameter Name="ModoExportacion" Type="varchar" Mode="In" />
+    <Parameter Name="fechadesde" Type="datetime" Mode="In" />
+    <Parameter Name="fechahasta" Type="datetime" Mode="In" />
+    <Parameter Name="puntoventa" Type="int" Mode="In" />
+    <Parameter Name="optDivisionSyngenta" Type="varchar" Mode="In" />
+    <Parameter Name="Contrato" Type="varchar" Mode="In" />
+    <Parameter Name="QueContenga2" Type="varchar" Mode="In" />
+    <Parameter Name="idClienteAuxiliarint" Type="int" Mode="In" />
+    <Parameter Name="AgrupadorDeTandaPeriodos" Type="int" Mode="In" />
+    <Parameter Name="Vagon" Type="int" Mode="In" />
+    <Parameter Name="Patente" Type="varchar" Mode="In" />
+    <Parameter Name="optCamionVagon" Type="varchar" Mode="In" />
+    <Parameter Name="fechadesdeAnterior" Type="datetime" Mode="In" />
+    <Parameter Name="fechahastaAnterior" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="wTarifaWilliams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
     <Parameter Name="idCliente" Type="int" Mode="In" />
     <Parameter Name="IdArticulo" Type="int" Mode="In" />
@@ -9420,6 +9827,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorte" EntityType="Self.CartasDePorte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CartasDePorteControlDescarga" EntityType="Self.CartasDePorteControlDescarga" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteDetalle" EntityType="Self.CartasDePorteDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteLogDeOCR" EntityType="Self.CartasDePorteLogDeOCR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteReglasDeFacturacion" EntityType="Self.CartasDePorteReglasDeFacturacion" Schema="dbo" store:Type="Tables" />
@@ -9804,6 +10212,10 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <AssociationSet Name="FK__CartasDeP__IdCor__7D7A6D5F" Association="Self.FK__CartasDeP__IdCor__7D7A6D5F">
       <End Role="Vendedores" EntitySet="Vendedores" />
       <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartasDeP__IdDes__4C581317" Association="Self.FK__CartasDeP__IdDes__4C581317">
+      <End Role="WilliamsDestinos" EntitySet="WilliamsDestinos" />
+      <End Role="CartasDePorteControlDescarga" EntitySet="CartasDePorteControlDescarga" />
     </AssociationSet>
     <AssociationSet Name="FK__CartasDeP__IdDet__55D69059" Association="Self.FK__CartasDeP__IdDet__55D69059">
       <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />

@@ -111,6 +111,7 @@ Public Class LogicaImportador
         Unidad6Analisis
         AdmServPortuarios
 
+        BungeRamalloDescargaTexto
 
         Nidera
         'esta enumeracion debe tener el mismo orden que el combo
@@ -1296,10 +1297,10 @@ Public Class ExcelImportadorManager
                 Return "NetoProc"
 
 
-            Case "PESOBRUTO"
+            Case "PESOBRUTO", "BRUTO PROC"
                 Return "BrutoProc"
 
-            Case "PESOTARA"
+            Case "PESOTARA", "TARA PROC"
                 Return "TaraProc"
 
                 '/////////////////////////////////////////////////////////////////////////
@@ -1310,12 +1311,12 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_DEST"
+            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_DEST", "PESOBRUTODESCARGA"
 
                 Return "column12"
-            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_DEST"
+            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_DEST", "PESOTARADESCARGA"
                 Return "column13"
-            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_DEST"
+            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_DEST", "PESONETODESCARGA"
 
                 Return "column14"
 
@@ -1333,7 +1334,7 @@ Public Class ExcelImportadorManager
             Case "OTRASMERMAS"
                 Return "Auxiliar5" '"OtrasMermas"
 
-            Case "NETO FINAL", "FINAL", "NETO_DEST"
+            Case "NETO FINAL", "FINAL", "PESONETOFINAL" '  "NETO_DEST" <- este ya lo estoy usando en descarga
 
                 Return "column17"
 
@@ -1889,6 +1890,347 @@ Public Class ExcelImportadorManager
 
 
     End Function
+
+
+    Public Shared Function BungeRamalloDescargaTextoToDataset(ByVal pFileName As String) As Data.DataSet
+
+
+        '7:41 (hace 13 minutos)
+
+        '        para(mí, soporte)
+        'System.ArgumentNullException: Argument cannot be Nothing. Parameter name: path at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) STACKTRACE: at Microsoft.VisualBasic.FileIO.TextFieldParser.InitializeFromPath(String path, Encoding defaultEncoding, Boolean detectEncoding) at Microsoft.VisualBasic.FileIO.TextFieldParser..ctor(String path) at ExcelImportadorManager.ReyserToDataset(String pFileName) at CartasDePorteImportador.FormatearExcelImportado(String nombre) at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e)
+
+
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 1: abrirlo a lo macho y meterlo en un dataset
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+
+
+        Dim dt As New Data.DataTable
+        For i As Integer = 0 To 85
+            dt.Columns.Add("column" & i + 1)
+        Next
+
+        Dim dr = dt.NewRow()
+
+
+
+
+        'dr(0) = "Prefijo Cp"
+        dr(1) = "CARTA PORTE"
+        dr(2) = "CARGADOR"
+        dr(4) = "CORREDOR"
+        dr(6) = "DESTINATARIO"
+        dr(8) = "PRODUCTO"
+
+        dr(14) = "PROCEDENCIA"
+        dr(18) = "F. DE DESCARGA"
+
+        dr(20) = "VAGON"
+        dr(21) = "F. DE CARGA"
+
+        dr(22) = "PATENTE"
+
+        dr(23) = "NETO PROC"
+        dr(24) = "BRUTO PROC"
+        dr(25) = "BRUTO PTO"
+        dr(26) = "TARA PROC"
+        dr(27) = "TARA PTO"
+        dr(28) = "NETO PTO"
+
+        
+        dr(29) = "HUMEDAD"
+        dr(31) = "MERMA"
+
+        dr(42) = "CALIDAD"
+        dr(43) = "INTERMEDIARIO"
+        dr(45) = "REMITENTE COMERCIAL"
+
+        dr(49) = "CEE"
+
+
+        dr(56) = "TRANSPCUIT"
+        dr(57) = "TRANSPORTISTA"
+        dr(58) = "CHOFER"
+
+
+        dr(61) = "ACOPLADO" 'le agrego una columna por la columna adicional que me crea el doble renglon
+        dr(62) = "FECHAVENCIMIENTO"
+
+        
+
+        'dr(42) = "Bruto Descarga"
+        'dr(43) = "Tara Descarga"
+        'dr() = "MERMA"
+
+
+        'dr(27) = "BRUTO PROC"
+        'dr(28) = "TARA PROC"
+
+
+
+        'dr(2) = "Nro Vagon"
+        'dr(3) = "Cuit Entregador"
+        'dr(4) = "Razon Social Entregador"
+        'dr(5) = "Cuit Corredor"
+
+        'dr(6) = "CUIT"
+        'dr(8) = "CUIT"
+
+
+        'dr(43) = "OBSERVACIONES"
+
+
+        'dr(10) = "CUIT"
+
+        'dr(20) = "DESTINATARIOCUIT"
+
+        'dr(6) = "Razon Social Corredor"
+        'dr(7) = "Cuit Destinatario"
+        'dr(8) = "Razon Social Destinatario"
+        'dr(9) = "Cuit Titular"
+        'dr(10) = "Razon Social Titular"
+        'dr(11) = "Nro Planta Oncca Titular"
+        'dr(12) = "Descripcion Planta Titular"
+        'dr(13) = "Cuit Intermediario"
+        'dr(14) = "Razon Social Intermediario"
+        'dr(15) = "Nro Planta Oncca Intermediario"
+        'dr(16) = "Descripcion Planta Intermediario"
+        'dr(17) = "Cuit Remitente C."
+        'dr(18) = "Razon Social  Remitente C."
+        'dr(19) = "Nro Planta Oncca Remitente C."
+        'dr(20) = "Descripcion Planta Remitente C."
+        'dr(21) = "Cod Oncca Cereal"
+        'dr(22) = "Descrip. Oncca"
+        'dr(23) = "Cod Oncca Procedencia"
+        'dr(24) = "Descrip. Procedencia"
+
+        'dr(24) = "CHOFERCUIT"
+        
+        'dr(33) = "ACOPLADO"
+        'dr(26) = "CONTRATO"
+        'dr(33) = "OBSERVACIONES"
+
+
+
+        'dr(25) = "Kilos Netos Procedencia"
+        'dr(27) = "Patente"
+
+        'dr(28) = "Cuit Transportista"
+        'dr(29) = "Razon Social Transportista"
+        'dr(30) = "Turno"
+        'dr(31) = "Estado"
+        'dr(33) = "Observacion"
+        'dr(34) = "Hora Entrada"
+        'dr(35) = "Cod Puerto"
+        'dr(36) = "Medio"
+        'dr(37) = "Kilos Netos Descargados"
+        'dr(38) = "Tipo"
+        'dr(39) = "Fecha Descarga"
+        'dr(40) = "Calidad"
+        'dr(41) = "Hora Salida"
+
+        'dr(44) = "RECIBO"
+
+
+        'dr(1) = "CARTA PORTE"
+        'dr(30) = "TURNO"
+        'dr(4) = "CTG"
+
+
+        'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=13119
+        'dr(38) = "EXPORTA"
+        'dr(50) = "SUBNUMERODEFACTURACION"
+
+        dt.Rows.Add(dr)
+
+
+
+        'to do
+        'no guardar datos de descarga
+
+
+
+        '        0005;54520954 (numero de cp);
+        'ARAMBURU HNOS AGROPECUARIA SA (Titular)                     
+        ';30648082408(cuit titular);
+        'GRANAR S.A.C.Y.F. (corredor)                            
+        '     ;30528981700(cuit corredor);
+        'BUNGE ARGENTINA S.A.  (destinatario)                            
+        ';30700869918(cuit destinatario);
+        '        SOJA(product)
+        ' ;023;BUNGE ARGENTINA S.A.;
+        '30700869918;WILLIAMS ENTREGAS S.A.                
+        '     ;30707386076;9 DE JULIO (BS.AS.)(procedencia)                       
+        '        ;0000030;000101;000001;05/07/2016;(fecha de descarga)    
+        '        ;CAMION;04/07/2016 (fecha de carga) ;ESY835(pat camion)    ;000029380(kg neto proce);000044800(kg Bruto);000044600(bruto descar);000015420(Tara proce);000015310(tara descar);000029290(neto descar);15,00(humedad);02,55;0000747;0000747(merma humedad? no se pq esta dos veces);0000000;04/07/2016 ;1909;1136;Sergio (nombre del chofer)                                            ;0056;          ;GRANEL    ;N;CONDICIONAL(calidad)         ;ILLINOIS S.A.(Intermediario)                                     ;30709162094;QUEBRACHITO GRANOS SA (remitente)                            ;30696426127(cuit remitente);                                                  ;00000000000;86248882908556 (cee);0;0;0000000000;0000023405;58;0;30648082408 (cuit transportista);ARAMBURU HNOS AGROPECUARIA SA (transportista)                    ;RILGENMAN (nombre chofer)                      
+        '                   ;23236808629(cuit chofer);00000501,95;CYU363    
+        ' ;10/08/2016;(fecha vencimiento)
+
+
+
+        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
+            'REYSER VA SEPARADO CON TABS!
+            'REYSER VA SEPARADO CON TABS!
+            'REYSER VA SEPARADO CON TABS!
+            'REYSER VA SEPARADO CON TABS!
+
+
+            MyReader.TextFieldType = Microsoft.VisualBasic.FileIO.FieldType.Delimited
+            MyReader.Delimiters = New String() {";"}
+
+            Dim currentRow As String()
+            'Loop through all of the fields in the file. 
+            'If any lines are corrupt, report an error and continue parsing. 
+            While Not MyReader.EndOfData
+                Try
+
+                    Dim l = MyReader.ReadFields().ToList
+                    'leo 2 renglones seguidos (así es este formato) -dan marcha atrás con esto http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=23529
+                    'l.AddRange(MyReader.ReadFields().ToList)
+
+                    currentRow = l.ToArray
+
+
+                    ' Include code here to handle the row.
+
+
+                    dr = dt.NewRow()
+                    For i As Integer = 0 To currentRow.Length - 1
+                        dr(i) = currentRow(i)
+                    Next
+                    dt.Rows.Add(dr)
+
+
+                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                    ErrHandler2.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                End Try
+            End While
+        End Using
+
+
+        For Each r In dt.Rows
+
+            Try
+                If Val(r(1)) = 0 Then Continue For
+
+                r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
+
+
+                r(29) = r(29).Replace(".", "").Replace(",", ".")
+
+                'r(40) = CodigoCalidad(Val(r(40)))
+
+                'Select Case r(38)
+                '    Case "1"
+                '        r(38) = "NO"
+                '    Case "2"
+                '        r(38) = "SI"
+                '    Case "3"
+                '        r(38) = "NO"
+                '    Case Else
+
+                'End Select
+            Catch ex As Exception
+
+            End Try
+
+        Next
+
+
+
+
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        'duplico renglones con tipo de exportacion especial
+
+        'lo que necesitamos es que si viene código 2 ,que pegue duplicada. 
+        '(Original con el tilde de exportación y la duplicada sin el tilde es de entrega)
+        'otra posibilidad si no se puede hacer la anterior es que pegue como entrega solamente.
+
+        Dim dtcopias = dt.Clone
+
+        Dim sourceRow As DataRow
+
+        For Each r As DataRow In dt.Rows
+            If Not IsDBNull(r(38)) Then
+                If r(38) = "SI" Then
+
+                    sourceRow = r
+                    r(38) = "NO"
+
+
+                    Dim desRow As DataRow = dtcopias.NewRow
+                    desRow.ItemArray = sourceRow.ItemArray.Clone
+                    desRow(50) = "1" 'segundo subnumero de facturacion
+                    desRow(38) = "SI"
+                    dtcopias.Rows.Add(desRow)
+                End If
+            End If
+        Next
+
+        For Each r In dtcopias.Rows
+            Dim desRow As DataRow = dt.NewRow
+            desRow.ItemArray = r.ItemArray.Clone
+            dt.Rows.Add(desRow)
+        Next
+
+
+
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+        Dim ds As New Data.DataSet
+        ds.Tables.Add(dt)
+        Return ds
+
+
+
+
+
+        'http://stackoverflow.com/questions/1103495/is-there-a-proper-way-to-read-csv-files
+        'http://www.codeproject.com/KB/database/GenericParser.aspx
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 2: convertirlo a excel con OOXML
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'Dim oExc As SpreadsheetDocument=SpreadsheetDocument.Open(pFileName,False,OpenSettings.
+
+
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 3: a excel pero con EPPLUS
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+
+
+    End Function
+
 
     Public Shared Function ReyserToDataset(ByVal pFileName As String) As Data.DataSet
 
@@ -2564,7 +2906,7 @@ Public Class ExcelImportadorManager
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
 
             MyReader.TextFieldType = Microsoft.VisualBasic.FileIO.FieldType.Delimited
-            MyReader.Delimiters = New String() {vbTab}
+            MyReader.Delimiters = New String() {";"}
 
             Dim currentRow As String()
             'Loop through all of the fields in the file. 
@@ -2612,20 +2954,53 @@ Public Class ExcelImportadorManager
                 If Val(r(1)) = 0 Then Continue For
                 r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
 
+
+                'el separado por tabs
                 Dim numeroCarta As Long = r(1)   '  Val(Replace(r(0), "-", ""))
-                Dim vagon As Long = Val(r(4)) 'por ahora, las cdp importadas tendran subnumero 0
-                Dim Rubro As Long = r(3)
-                Dim analisis As Double = r(7)
+                Dim vagon As Long = 0 ' Val(r(4)) 'por ahora, las cdp importadas tendran subnumero 0
+
+                Dim Rubro As Long = r(2)
+                Dim kilosmerma As Double = Val(r(4))
+                Dim porcentajehum As Double = Val(r(5))
+                Dim analisis As Double = r(6)
+
+
+
+             
 
                 Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
                 If cdp.Id = -1 Then
                     cdp.NumeroCartaDePorte = numeroCarta
                     cdp.SubnumeroVagon = vagon
                 End If
+
+
                 With cdp
                     Select Case Rubro
                         Case 1 'dañado
                             cdp.NobleDaniados = analisis
+                        Case 2
+                            '                http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=23519
+                            '                Bueno, después de hablar con la gente del sistema y la gente que carga los datos en el puerto se llegó a la conclusión de que viene mal cargado de origen y va a seguir viniendo asi.
+
+                            'Por lo que dicen, siempre mandan todas las mermas juntas en un solo campo, sean por el motivo que sean.
+
+                            'Solución propuesta por Williams:
+                            'Si hay porcentaje de Humedad informado -> calcular la merma según la tabla de humedad y poner eso en merma por humedad. En Otras Mermas, poner la diferencia entre el total informado y esta merma calculada
+                            'Si no hay porcentaje de Humedad informado -> enviar a Otras Mermas el numero informado
+
+                            Dim kiloshumedad As Double = 0
+                            If porcentajehum > 0 Then
+                                Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, cdp.IdArticulo, porcentajehum)
+                                kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalSinMermas
+                            End If
+
+                            cdp.Humedad = porcentajehum
+                            cdp.HumedadDesnormalizada = kiloshumedad
+                            cdp.Merma = kilosmerma - kiloshumedad
+
+
+
 
                         Case 3
                             .NobleHectolitrico = analisis
@@ -2635,127 +3010,33 @@ Public Class ExcelImportadorManager
                             .NobleQuebrados = analisis
                         Case 7
                             .NoblePicados = analisis
-
-
-
-                            '	1	DAÑADO                        	DÑ 
-                            '	2	HUMEDAD                       	HD 
-                            '	3	PESO HECTOLITRICO             	PH 
-                            '	4	MATERIA EXTRAÑA               	C/E 
-                            '	5	QUEBRADO.                     	QB 
-                            '	6	PARTIDO                       	PAR 
-                            '	7	PICADO                        	PIC 
-
-
                         Case 8
                             .CalidadPuntaSombreada = analisis
                         Case 9
                             .NobleNegros = analisis
                         Case 10
                             .NobleObjetables = analisis
-
-
-                            '	8	PUNTA SOMBREADO               	PS 
-                            '	9	PUNTA NEGRA                   	PN 
-                            '	10	OLORES OBJETABLES             	OL 
-                            '	11	SEMILLAS DE TREBOL            	STR 
-                            '	12	TIPO	TIP 
-
-
-                            '	13	COLOR            	COL 
-                            '	14	GRANOS AMOHOSADOS            	MH 
                         Case 14
                             .NobleAmohosados = analisis
-                            '	15	CHAMICO                       	CHA 
                         Case 15
                             .CalidadMermaChamico = analisis
-                            '	16	GRANOS CON CARBON             	GC  
                         Case 16
                             .NobleCarbon = analisis
-                            '	17	REVOLCADO TIERRA              	REV 
-                            '	18	FUMIGACION PART               	F/P 
                         Case 18
                             .Fumigada = analisis
-                            '	19	FUMIGACION CINTA              	F/C 
-                            '	24	TEMPERATURA                   	TP 
-                            '	25	PROTEINAS                     	PRT 
-                            '	26	FONDO                         	FDO 
-                            '	27	MERMA CONVENIDA               	MC 
-                            '	28	TIERRA                        	TIE
                         Case 28
                             .CalidadTierra = analisis
-
-                            '	29	AVERIA                        	AVE 
-                            '	30	PANZA BLANCA                  	PBA 
                         Case 30
                             .NoblePanzaBlanca = analisis
-                            '	31	MERMA TOTAL                   	MT
-
-                            '	32	CUERPOS EXTRAÑOS      	C.E
-
-                            '	33	TOTAL DAÑADOS	TD
-
-                            '	34	QUEBRADOS Y/O CHUZOS	CHU 
                         Case 34
                             .NobleQuebrados = analisis
-                            '	38	ARDIDO                        	ARD 
-                            '	39	GRANOS VERDES                 	GV
                         Case 39
                             .NobleVerdes = analisis
-                            '	40	Humedad y chamicos	H/C 
                         Case 40
                             .CalidadMermaChamico = analisis
-                            '	41	P.H. grado y tipo (trigo)	G/T
-
-                            '	42	Grado y color (sorgo)	G/C
-                            '	43	Grado tipo y color (ma¡z)	GTC
-                            '	44	Análisis completo	A.C
-                            '	45	Granos Ardidos y/o Dañados	A/D
-                            '	46	Gastos Secada	G.S.
-                            '	47	Merma x chamicos	MCH
-                            '	48	SILO	SIL
-                            '	49	Merma Volatil	MV
-
-                            '	50	Acidez s/Materia Grasa	AMG
-                            '	51	Aflatoxinas 	AFL
-                            '	52	Arbitraje Otras Causas Calidad Inferior	CAL
-                            '	53	Ardidos y Dañados por Calor	ADC
-                            '	54	Brotados	BRO
-
-                            '	55	Coloreados y/o con Estrias Roja	CER
-                            '	56	Contenido Proteico	C/P
-                            '	57	Cornezuelo	COR
-                            '	58	Descascarado y Roto	D/R
-                            '	59	Enyesados o Muertos	E/M
-                            '	60	Esclerotos	ESC
-                            '	61	Excremento de Roedores	EXC
-
-                            '	62	Falling Number	FN
-                            '	63	Granos Helados	GH
-                            '	64	Granos Negros	GN
-                            '	65	Granos Otro Color	OCO
-                            '	66	Granos Sueltos	GS
-
-                            '	67	Manchados y/o Coloreados	M/C
-                            '	68	Materia Grasa S.S.S.	MG
                         Case 68
                             .NobleMGrasa = analisis
-                            '	70	Otro Tipo	OT
-                            '	71	Quebrados y/o Chuzos	Q/C
-                            '	72	Quebrados y/o Partidos	Q/P
 
-                            '	73	Rendimiento de Granos Enteros	EGE
-
-                            '	74	Rendimiento de Granos Quebrados	RGQ
-                            '	75	Rendimiento sobre zaranda 6.25 mm	Z62
-                            '	76	Rendimiento sobre zaranda 7.5 mm	Z75
-                            '	77	Sedimento	SED
-                            '	78	Semillas de Bejuco y/o Porotillo	B/P
-                            '	79	Total Dañados	TDÑ
-                            '	80	Verde Intenso	VIN
-                            '	81	GRADO	GRA
-                            '	85	Insectos vivos 	INS.V
-                            '	502	Granos clorados 	G.CLO
                         Case Else
                             If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
 
@@ -3019,23 +3300,79 @@ Public Class ExcelImportadorManager
 
                 Dim analisis As Double = r(7)
 
-                Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
+                Dim cdp As CartaDePorte
+                Try
+                    cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, 0)
+                Catch ex As Exception
+                    cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
+                End Try
+
+
                 If cdp.Id = -1 Then
                     cdp.NumeroCartaDePorte = numeroCarta
                     cdp.SubnumeroVagon = vagon
 
-                    cdp.SubnumeroDeFacturacion = -1
+                    cdp.SubnumeroDeFacturacion = 0
                 End If
 
                 cdp.PuntoVenta = cmbPuntoVenta
+
+
+
+
+
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '                http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=23519
+                '                Bueno, después de hablar con la gente del sistema y la gente que carga los datos en el puerto se llegó a la conclusión de que viene mal cargado de origen y va a seguir viniendo asi.
+
+                'Por lo que dicen, siempre mandan todas las mermas juntas en un solo campo, sean por el motivo que sean.
+
+                'Solución propuesta por Williams:
+                'Si hay porcentaje de Humedad informado -> calcular la merma según la tabla de humedad y poner eso en merma por humedad. En Otras Mermas, poner la diferencia entre el total informado y esta merma calculada
+                'Si no hay porcentaje de Humedad informado -> enviar a Otras Mermas el numero informado
+
+
+
+                Dim kiloshumedad As Long = 0
+                If Rubro = 2 And porcentajehum > 0 Then
+                    Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, cdp.IdArticulo, porcentajehum)
+                    kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalIncluyendoMermas
+                    cdp.Humedad = porcentajehum
+                    cdp.HumedadDesnormalizada = kiloshumedad
+                End If
+
+                If kilosmerma > 0 And Rubro = 2 Then
+                    cdp.Merma = kilosmerma - kiloshumedad
+                ElseIf kilosmerma > 0 And Rubro <> 2 Then
+                    cdp.Merma = kilosmerma - cdp.HumedadDesnormalizada 'seria bueno acá restar el  cdp.HumedadDesnormalizada ??
+                End If
+
+
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
                 With cdp
                     Select Case Rubro
                         Case 1 'dañado
                             cdp.NobleDaniados = analisis
                         Case 2
+
                             cdp.Humedad = porcentajehum
-                            cdp.HumedadDesnormalizada = kilosmerma
+                         
                         Case 3
                             .NobleHectolitrico = analisis
                         Case 4
@@ -3091,6 +3428,10 @@ Public Class ExcelImportadorManager
                             '	26	FONDO                         	FDO 
                             '	27	MERMA CONVENIDA               	MC 
                             '	28	TIERRA                        	TIE
+
+                        Case 27
+                            'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=22167
+                            cdp.HumedadDesnormalizada = kilosmerma
                         Case 28
                             .CalidadTierra = analisis
 
@@ -3166,9 +3507,8 @@ Public Class ExcelImportadorManager
                             '	85	Insectos vivos 	INS.V
                             '	502	Granos clorados 	G.CLO
                         Case Else
-                            If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
-
-                            Continue For
+                            'If False Then txtLogErrores &= "No se pudo importar rubro " & Rubro & vbCrLf
+                            'Continue For
                     End Select
 
                     c += 1
@@ -3738,6 +4078,10 @@ Public Class ExcelImportadorManager
             Case Unidad6Analisis
                 ds = Unidad6CalidadesToDataset(archivoExcel, SC, cmbPuntoVenta, txtLogErrores, txtFechaArribo, glbIdUsuario, UserName)
 
+
+
+            Case BungeRamalloDescargaTexto
+                ds = BungeRamalloDescargaTextoToDataset(archivoExcel)
 
 
             Case PuertoACA

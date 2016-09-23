@@ -1,0 +1,504 @@
+Línea 17: la clase EPSON_Impresora_Fiscal.PrinterFiscal del control PrinterFiscal1 no era una clase de control cargada.
+Línea 28: la clase MSComctlLib.ImageList del control img32 no era una clase de control cargada.
+Línea 790: la clase RichTextLib.RichTextBox del control RichTextBox1 no era una clase de control cargada.
+Línea 812: la clase MSComctlLib.Toolbar del control Toolbar1 no era una clase de control cargada.
+Línea 981: la clase MSComctlLib.StatusBar del control StatusBar1 no era una clase de control cargada.
+Línea 1046: la clase MSComctlLib.TreeView del control Arbol no era una clase de control cargada.
+Línea 1063: la clase MSComctlLib.ImageList del control imlToolbarIcons no era una clase de control cargada.
+Línea 1229: la clase Controles1013.DbListView del control Lista no era una clase de control cargada.
+Línea 1251: la clase MSComctlLib.TreeView del control ArbolDefault no era una clase de control cargada.
+Línea 1295: la clase MSComctlLib.ImageList del control img_cPMenu no era una clase de control cargada.
+Línea 1341: la clase MSComctlLib.ImageList del control img16 no era una clase de control cargada.
+Línea 2107: la clase FiscalPrinterLibCtl.HASAR del control HASAR1 no era una clase de control cargada.
+Línea 12: la propiedad Icon de frmPrincipal tenía una referencia a archivo no válida.
+Línea 20: el nombre de la propiedad _ExtentX de PrinterFiscal1 no es válido.
+Línea 21: el nombre de la propiedad _ExtentY de PrinterFiscal1 no es válido.
+Línea 31: el nombre de la propiedad _ExtentX de img32 no es válido.
+Línea 32: el nombre de la propiedad _ExtentY de img32 no es válido.
+Línea 34: el nombre de la propiedad ImageWidth de img32 no es válido.
+Línea 35: el nombre de la propiedad ImageHeight de img32 no es válido.
+Línea 36: el nombre de la propiedad MaskColor de img32 no es válido.
+Línea 37: el nombre de la propiedad _Version de img32 no es válido.
+Línea 41: la propiedad Picture de ListImage1 tenía una referencia a archivo no válida.
+Línea 45: la propiedad Picture de ListImage2 tenía una referencia a archivo no válida.
+Línea 49: la propiedad Picture de ListImage3 tenía una referencia a archivo no válida.
+Línea 53: la propiedad Picture de ListImage4 tenía una referencia a archivo no válida.
+Línea 57: la propiedad Picture de ListImage5 tenía una referencia a archivo no válida.
+Línea 61: la propiedad Picture de ListImage6 tenía una referencia a archivo no válida.
+Línea 65: la propiedad Picture de ListImage7 tenía una referencia a archivo no válida.
+Línea 69: la propiedad Picture de ListImage8 tenía una referencia a archivo no válida.
+Línea 73: la propiedad Picture de ListImage9 tenía una referencia a archivo no válida.
+Línea 77: la propiedad Picture de ListImage10 tenía una referencia a archivo no válida.
+Línea 81: la propiedad Picture de ListImage11 tenía una referencia a archivo no válida.
+Línea 85: la propiedad Picture de ListImage12 tenía una referencia a archivo no válida.
+Línea 89: la propiedad Picture de ListImage13 tenía una referencia a archivo no válida.
+Línea 93: la propiedad Picture de ListImage14 tenía una referencia a archivo no válida.
+Línea 97: la propiedad Picture de ListImage15 tenía una referencia a archivo no válida.
+Línea 101: la propiedad Picture de ListImage16 tenía una referencia a archivo no válida.
+Línea 105: la propiedad Picture de ListImage17 tenía una referencia a archivo no válida.
+Línea 109: la propiedad Picture de ListImage18 tenía una referencia a archivo no válida.
+Línea 113: la propiedad Picture de ListImage19 tenía una referencia a archivo no válida.
+Línea 117: la propiedad Picture de ListImage20 tenía una referencia a archivo no válida.
+Línea 121: la propiedad Picture de ListImage21 tenía una referencia a archivo no válida.
+Línea 125: la propiedad Picture de ListImage22 tenía una referencia a archivo no válida.
+Línea 129: la propiedad Picture de ListImage23 tenía una referencia a archivo no válida.
+Línea 133: la propiedad Picture de ListImage24 tenía una referencia a archivo no válida.
+Línea 137: la propiedad Picture de ListImage25 tenía una referencia a archivo no válida.
+Línea 141: la propiedad Picture de ListImage26 tenía una referencia a archivo no válida.
+Línea 145: la propiedad Picture de ListImage27 tenía una referencia a archivo no válida.
+Línea 149: la propiedad Picture de ListImage28 tenía una referencia a archivo no válida.
+Línea 153: la propiedad Picture de ListImage29 tenía una referencia a archivo no válida.
+Línea 157: la propiedad Picture de ListImage30 tenía una referencia a archivo no válida.
+Línea 161: la propiedad Picture de ListImage31 tenía una referencia a archivo no válida.
+Línea 165: la propiedad Picture de ListImage32 tenía una referencia a archivo no válida.
+Línea 169: la propiedad Picture de ListImage33 tenía una referencia a archivo no válida.
+Línea 173: la propiedad Picture de ListImage34 tenía una referencia a archivo no válida.
+Línea 177: la propiedad Picture de ListImage35 tenía una referencia a archivo no válida.
+Línea 181: la propiedad Picture de ListImage36 tenía una referencia a archivo no válida.
+Línea 185: la propiedad Picture de ListImage37 tenía una referencia a archivo no válida.
+Línea 189: la propiedad Picture de ListImage38 tenía una referencia a archivo no válida.
+Línea 193: la propiedad Picture de ListImage39 tenía una referencia a archivo no válida.
+Línea 197: la propiedad Picture de ListImage40 tenía una referencia a archivo no válida.
+Línea 201: la propiedad Picture de ListImage41 tenía una referencia a archivo no válida.
+Línea 205: la propiedad Picture de ListImage42 tenía una referencia a archivo no válida.
+Línea 209: la propiedad Picture de ListImage43 tenía una referencia a archivo no válida.
+Línea 213: la propiedad Picture de ListImage44 tenía una referencia a archivo no válida.
+Línea 217: la propiedad Picture de ListImage45 tenía una referencia a archivo no válida.
+Línea 221: la propiedad Picture de ListImage46 tenía una referencia a archivo no válida.
+Línea 225: la propiedad Picture de ListImage47 tenía una referencia a archivo no válida.
+Línea 229: la propiedad Picture de ListImage48 tenía una referencia a archivo no válida.
+Línea 233: la propiedad Picture de ListImage49 tenía una referencia a archivo no válida.
+Línea 237: la propiedad Picture de ListImage50 tenía una referencia a archivo no válida.
+Línea 241: la propiedad Picture de ListImage51 tenía una referencia a archivo no válida.
+Línea 245: la propiedad Picture de ListImage52 tenía una referencia a archivo no válida.
+Línea 249: la propiedad Picture de ListImage53 tenía una referencia a archivo no válida.
+Línea 253: la propiedad Picture de ListImage54 tenía una referencia a archivo no válida.
+Línea 257: la propiedad Picture de ListImage55 tenía una referencia a archivo no válida.
+Línea 261: la propiedad Picture de ListImage56 tenía una referencia a archivo no válida.
+Línea 265: la propiedad Picture de ListImage57 tenía una referencia a archivo no válida.
+Línea 269: la propiedad Picture de ListImage58 tenía una referencia a archivo no válida.
+Línea 273: la propiedad Picture de ListImage59 tenía una referencia a archivo no válida.
+Línea 277: la propiedad Picture de ListImage60 tenía una referencia a archivo no válida.
+Línea 281: la propiedad Picture de ListImage61 tenía una referencia a archivo no válida.
+Línea 285: la propiedad Picture de ListImage62 tenía una referencia a archivo no válida.
+Línea 289: la propiedad Picture de ListImage63 tenía una referencia a archivo no válida.
+Línea 293: la propiedad Picture de ListImage64 tenía una referencia a archivo no válida.
+Línea 297: la propiedad Picture de ListImage65 tenía una referencia a archivo no válida.
+Línea 301: la propiedad Picture de ListImage66 tenía una referencia a archivo no válida.
+Línea 305: la propiedad Picture de ListImage67 tenía una referencia a archivo no válida.
+Línea 309: la propiedad Picture de ListImage68 tenía una referencia a archivo no válida.
+Línea 313: la propiedad Picture de ListImage69 tenía una referencia a archivo no válida.
+Línea 317: la propiedad Picture de ListImage70 tenía una referencia a archivo no válida.
+Línea 321: la propiedad Picture de ListImage71 tenía una referencia a archivo no válida.
+Línea 325: la propiedad Picture de ListImage72 tenía una referencia a archivo no válida.
+Línea 329: la propiedad Picture de ListImage73 tenía una referencia a archivo no válida.
+Línea 333: la propiedad Picture de ListImage74 tenía una referencia a archivo no válida.
+Línea 337: la propiedad Picture de ListImage75 tenía una referencia a archivo no válida.
+Línea 341: la propiedad Picture de ListImage76 tenía una referencia a archivo no válida.
+Línea 345: la propiedad Picture de ListImage77 tenía una referencia a archivo no válida.
+Línea 349: la propiedad Picture de ListImage78 tenía una referencia a archivo no válida.
+Línea 353: la propiedad Picture de ListImage79 tenía una referencia a archivo no válida.
+Línea 357: la propiedad Picture de ListImage80 tenía una referencia a archivo no válida.
+Línea 361: la propiedad Picture de ListImage81 tenía una referencia a archivo no válida.
+Línea 365: la propiedad Picture de ListImage82 tenía una referencia a archivo no válida.
+Línea 369: la propiedad Picture de ListImage83 tenía una referencia a archivo no válida.
+Línea 373: la propiedad Picture de ListImage84 tenía una referencia a archivo no válida.
+Línea 377: la propiedad Picture de ListImage85 tenía una referencia a archivo no válida.
+Línea 381: la propiedad Picture de ListImage86 tenía una referencia a archivo no válida.
+Línea 385: la propiedad Picture de ListImage87 tenía una referencia a archivo no válida.
+Línea 389: la propiedad Picture de ListImage88 tenía una referencia a archivo no válida.
+Línea 393: la propiedad Picture de ListImage89 tenía una referencia a archivo no válida.
+Línea 397: la propiedad Picture de ListImage90 tenía una referencia a archivo no válida.
+Línea 401: la propiedad Picture de ListImage91 tenía una referencia a archivo no válida.
+Línea 405: la propiedad Picture de ListImage92 tenía una referencia a archivo no válida.
+Línea 409: la propiedad Picture de ListImage93 tenía una referencia a archivo no válida.
+Línea 413: la propiedad Picture de ListImage94 tenía una referencia a archivo no válida.
+Línea 417: la propiedad Picture de ListImage95 tenía una referencia a archivo no válida.
+Línea 421: la propiedad Picture de ListImage96 tenía una referencia a archivo no válida.
+Línea 425: la propiedad Picture de ListImage97 tenía una referencia a archivo no válida.
+Línea 429: la propiedad Picture de ListImage98 tenía una referencia a archivo no válida.
+Línea 433: la propiedad Picture de ListImage99 tenía una referencia a archivo no válida.
+Línea 437: la propiedad Picture de ListImage100 tenía una referencia a archivo no válida.
+Línea 441: la propiedad Picture de ListImage101 tenía una referencia a archivo no válida.
+Línea 445: la propiedad Picture de ListImage102 tenía una referencia a archivo no válida.
+Línea 449: la propiedad Picture de ListImage103 tenía una referencia a archivo no válida.
+Línea 453: la propiedad Picture de ListImage104 tenía una referencia a archivo no válida.
+Línea 457: la propiedad Picture de ListImage105 tenía una referencia a archivo no válida.
+Línea 461: la propiedad Picture de ListImage106 tenía una referencia a archivo no válida.
+Línea 465: la propiedad Picture de ListImage107 tenía una referencia a archivo no válida.
+Línea 469: la propiedad Picture de ListImage108 tenía una referencia a archivo no válida.
+Línea 473: la propiedad Picture de ListImage109 tenía una referencia a archivo no válida.
+Línea 477: la propiedad Picture de ListImage110 tenía una referencia a archivo no válida.
+Línea 481: la propiedad Picture de ListImage111 tenía una referencia a archivo no válida.
+Línea 485: la propiedad Picture de ListImage112 tenía una referencia a archivo no válida.
+Línea 489: la propiedad Picture de ListImage113 tenía una referencia a archivo no válida.
+Línea 493: la propiedad Picture de ListImage114 tenía una referencia a archivo no válida.
+Línea 497: la propiedad Picture de ListImage115 tenía una referencia a archivo no válida.
+Línea 501: la propiedad Picture de ListImage116 tenía una referencia a archivo no válida.
+Línea 505: la propiedad Picture de ListImage117 tenía una referencia a archivo no válida.
+Línea 509: la propiedad Picture de ListImage118 tenía una referencia a archivo no válida.
+Línea 513: la propiedad Picture de ListImage119 tenía una referencia a archivo no válida.
+Línea 517: la propiedad Picture de ListImage120 tenía una referencia a archivo no válida.
+Línea 521: la propiedad Picture de ListImage121 tenía una referencia a archivo no válida.
+Línea 525: la propiedad Picture de ListImage122 tenía una referencia a archivo no válida.
+Línea 529: la propiedad Picture de ListImage123 tenía una referencia a archivo no válida.
+Línea 533: la propiedad Picture de ListImage124 tenía una referencia a archivo no válida.
+Línea 537: la propiedad Picture de ListImage125 tenía una referencia a archivo no válida.
+Línea 541: la propiedad Picture de ListImage126 tenía una referencia a archivo no válida.
+Línea 545: la propiedad Picture de ListImage127 tenía una referencia a archivo no válida.
+Línea 549: la propiedad Picture de ListImage128 tenía una referencia a archivo no válida.
+Línea 553: la propiedad Picture de ListImage129 tenía una referencia a archivo no válida.
+Línea 557: la propiedad Picture de ListImage130 tenía una referencia a archivo no válida.
+Línea 561: la propiedad Picture de ListImage131 tenía una referencia a archivo no válida.
+Línea 565: la propiedad Picture de ListImage132 tenía una referencia a archivo no válida.
+Línea 569: la propiedad Picture de ListImage133 tenía una referencia a archivo no válida.
+Línea 573: la propiedad Picture de ListImage134 tenía una referencia a archivo no válida.
+Línea 577: la propiedad Picture de ListImage135 tenía una referencia a archivo no válida.
+Línea 581: la propiedad Picture de ListImage136 tenía una referencia a archivo no válida.
+Línea 585: la propiedad Picture de ListImage137 tenía una referencia a archivo no válida.
+Línea 589: la propiedad Picture de ListImage138 tenía una referencia a archivo no válida.
+Línea 593: la propiedad Picture de ListImage139 tenía una referencia a archivo no válida.
+Línea 597: la propiedad Picture de ListImage140 tenía una referencia a archivo no válida.
+Línea 601: la propiedad Picture de ListImage141 tenía una referencia a archivo no válida.
+Línea 605: la propiedad Picture de ListImage142 tenía una referencia a archivo no válida.
+Línea 609: la propiedad Picture de ListImage143 tenía una referencia a archivo no válida.
+Línea 613: la propiedad Picture de ListImage144 tenía una referencia a archivo no válida.
+Línea 617: la propiedad Picture de ListImage145 tenía una referencia a archivo no válida.
+Línea 621: la propiedad Picture de ListImage146 tenía una referencia a archivo no válida.
+Línea 625: la propiedad Picture de ListImage147 tenía una referencia a archivo no válida.
+Línea 629: la propiedad Picture de ListImage148 tenía una referencia a archivo no válida.
+Línea 633: la propiedad Picture de ListImage149 tenía una referencia a archivo no válida.
+Línea 637: la propiedad Picture de ListImage150 tenía una referencia a archivo no válida.
+Línea 641: la propiedad Picture de ListImage151 tenía una referencia a archivo no válida.
+Línea 645: la propiedad Picture de ListImage152 tenía una referencia a archivo no válida.
+Línea 649: la propiedad Picture de ListImage153 tenía una referencia a archivo no válida.
+Línea 653: la propiedad Picture de ListImage154 tenía una referencia a archivo no válida.
+Línea 657: la propiedad Picture de ListImage155 tenía una referencia a archivo no válida.
+Línea 661: la propiedad Picture de ListImage156 tenía una referencia a archivo no válida.
+Línea 665: la propiedad Picture de ListImage157 tenía una referencia a archivo no válida.
+Línea 669: la propiedad Picture de ListImage158 tenía una referencia a archivo no válida.
+Línea 673: la propiedad Picture de ListImage159 tenía una referencia a archivo no válida.
+Línea 677: la propiedad Picture de ListImage160 tenía una referencia a archivo no válida.
+Línea 681: la propiedad Picture de ListImage161 tenía una referencia a archivo no válida.
+Línea 685: la propiedad Picture de ListImage162 tenía una referencia a archivo no válida.
+Línea 689: la propiedad Picture de ListImage163 tenía una referencia a archivo no válida.
+Línea 693: la propiedad Picture de ListImage164 tenía una referencia a archivo no válida.
+Línea 697: la propiedad Picture de ListImage165 tenía una referencia a archivo no válida.
+Línea 701: la propiedad Picture de ListImage166 tenía una referencia a archivo no válida.
+Línea 705: la propiedad Picture de ListImage167 tenía una referencia a archivo no válida.
+Línea 709: la propiedad Picture de ListImage168 tenía una referencia a archivo no válida.
+Línea 713: la propiedad Picture de ListImage169 tenía una referencia a archivo no válida.
+Línea 717: la propiedad Picture de ListImage170 tenía una referencia a archivo no válida.
+Línea 721: la propiedad Picture de ListImage171 tenía una referencia a archivo no válida.
+Línea 725: la propiedad Picture de ListImage172 tenía una referencia a archivo no válida.
+Línea 729: la propiedad Picture de ListImage173 tenía una referencia a archivo no válida.
+Línea 733: la propiedad Picture de ListImage174 tenía una referencia a archivo no válida.
+Línea 737: la propiedad Picture de ListImage175 tenía una referencia a archivo no válida.
+Línea 741: la propiedad Picture de ListImage176 tenía una referencia a archivo no válida.
+Línea 745: la propiedad Picture de ListImage177 tenía una referencia a archivo no válida.
+Línea 749: la propiedad Picture de ListImage178 tenía una referencia a archivo no válida.
+Línea 753: la propiedad Picture de ListImage179 tenía una referencia a archivo no válida.
+Línea 757: la propiedad Picture de ListImage180 tenía una referencia a archivo no válida.
+Línea 761: la propiedad Picture de ListImage181 tenía una referencia a archivo no válida.
+Línea 765: la propiedad Picture de ListImage182 tenía una referencia a archivo no válida.
+Línea 769: la propiedad Picture de ListImage183 tenía una referencia a archivo no válida.
+Línea 773: la propiedad Picture de ListImage184 tenía una referencia a archivo no válida.
+Línea 777: la propiedad Picture de ListImage185 tenía una referencia a archivo no válida.
+Línea 781: la propiedad Picture de ListImage186 tenía una referencia a archivo no válida.
+Línea 785: la propiedad Picture de ListImage187 tenía una referencia a archivo no válida.
+Línea 788: el nombre de la propiedad Images de img32 no es válido.
+Línea 797: el nombre de la propiedad _ExtentX de RichTextBox1 no es válido.
+Línea 798: el nombre de la propiedad _ExtentY de RichTextBox1 no es válido.
+Línea 799: el nombre de la propiedad _Version de RichTextBox1 no es válido.
+Línea 800: el nombre de la propiedad TextRTF de RichTextBox1 no es válido.
+Línea 819: el nombre de la propiedad _ExtentX de Toolbar1 no es válido.
+Línea 820: el nombre de la propiedad _ExtentY de Toolbar1 no es válido.
+Línea 821: el nombre de la propiedad ButtonWidth de Toolbar1 no es válido.
+Línea 822: el nombre de la propiedad ButtonHeight de Toolbar1 no es válido.
+Línea 824: el nombre de la propiedad ImageList de Toolbar1 no es válido.
+Línea 825: el nombre de la propiedad _Version de Toolbar1 no es válido.
+Línea 969: el nombre de la propiedad Buttons de Toolbar1 no es válido.
+Línea 988: el nombre de la propiedad _ExtentX de StatusBar1 no es válido.
+Línea 989: el nombre de la propiedad _ExtentY de StatusBar1 no es válido.
+Línea 990: el nombre de la propiedad _Version de StatusBar1 no es válido.
+Línea 997: la propiedad Picture de Panel1 tenía una referencia a archivo no válida.
+Línea 1044: el nombre de la propiedad Panels de StatusBar1 no es válido.
+Línea 1052: el nombre de la propiedad _ExtentX de Arbol no es válido.
+Línea 1053: el nombre de la propiedad _ExtentY de Arbol no es válido.
+Línea 1054: el nombre de la propiedad _Version de Arbol no es válido.
+Línea 1055: el nombre de la propiedad Indentation de Arbol no es válido.
+Línea 1056: el nombre de la propiedad LabelEdit de Arbol no es válido.
+Línea 1057: el nombre de la propiedad LineStyle de Arbol no es válido.
+Línea 1058: el nombre de la propiedad Style de Arbol no es válido.
+Línea 1059: el nombre de la propiedad ImageList de Arbol no es válido.
+Línea 1066: el nombre de la propiedad _ExtentX de imlToolbarIcons no es válido.
+Línea 1067: el nombre de la propiedad _ExtentY de imlToolbarIcons no es válido.
+Línea 1069: el nombre de la propiedad ImageWidth de imlToolbarIcons no es válido.
+Línea 1070: el nombre de la propiedad ImageHeight de imlToolbarIcons no es válido.
+Línea 1071: el nombre de la propiedad MaskColor de imlToolbarIcons no es válido.
+Línea 1072: el nombre de la propiedad _Version de imlToolbarIcons no es válido.
+Línea 1076: la propiedad Picture de ListImage1 tenía una referencia a archivo no válida.
+Línea 1080: la propiedad Picture de ListImage2 tenía una referencia a archivo no válida.
+Línea 1084: la propiedad Picture de ListImage3 tenía una referencia a archivo no válida.
+Línea 1088: la propiedad Picture de ListImage4 tenía una referencia a archivo no válida.
+Línea 1092: la propiedad Picture de ListImage5 tenía una referencia a archivo no válida.
+Línea 1096: la propiedad Picture de ListImage6 tenía una referencia a archivo no válida.
+Línea 1100: la propiedad Picture de ListImage7 tenía una referencia a archivo no válida.
+Línea 1104: la propiedad Picture de ListImage8 tenía una referencia a archivo no válida.
+Línea 1108: la propiedad Picture de ListImage9 tenía una referencia a archivo no válida.
+Línea 1112: la propiedad Picture de ListImage10 tenía una referencia a archivo no válida.
+Línea 1116: la propiedad Picture de ListImage11 tenía una referencia a archivo no válida.
+Línea 1120: la propiedad Picture de ListImage12 tenía una referencia a archivo no válida.
+Línea 1124: la propiedad Picture de ListImage13 tenía una referencia a archivo no válida.
+Línea 1128: la propiedad Picture de ListImage14 tenía una referencia a archivo no válida.
+Línea 1132: la propiedad Picture de ListImage15 tenía una referencia a archivo no válida.
+Línea 1136: la propiedad Picture de ListImage16 tenía una referencia a archivo no válida.
+Línea 1140: la propiedad Picture de ListImage17 tenía una referencia a archivo no válida.
+Línea 1144: la propiedad Picture de ListImage18 tenía una referencia a archivo no válida.
+Línea 1148: la propiedad Picture de ListImage19 tenía una referencia a archivo no válida.
+Línea 1152: la propiedad Picture de ListImage20 tenía una referencia a archivo no válida.
+Línea 1156: la propiedad Picture de ListImage21 tenía una referencia a archivo no válida.
+Línea 1160: la propiedad Picture de ListImage22 tenía una referencia a archivo no válida.
+Línea 1164: la propiedad Picture de ListImage23 tenía una referencia a archivo no válida.
+Línea 1168: la propiedad Picture de ListImage24 tenía una referencia a archivo no válida.
+Línea 1172: la propiedad Picture de ListImage25 tenía una referencia a archivo no válida.
+Línea 1176: la propiedad Picture de ListImage26 tenía una referencia a archivo no válida.
+Línea 1180: la propiedad Picture de ListImage27 tenía una referencia a archivo no válida.
+Línea 1184: la propiedad Picture de ListImage28 tenía una referencia a archivo no válida.
+Línea 1188: la propiedad Picture de ListImage29 tenía una referencia a archivo no válida.
+Línea 1192: la propiedad Picture de ListImage30 tenía una referencia a archivo no válida.
+Línea 1196: la propiedad Picture de ListImage31 tenía una referencia a archivo no válida.
+Línea 1200: la propiedad Picture de ListImage32 tenía una referencia a archivo no válida.
+Línea 1204: la propiedad Picture de ListImage33 tenía una referencia a archivo no válida.
+Línea 1208: la propiedad Picture de ListImage34 tenía una referencia a archivo no válida.
+Línea 1212: la propiedad Picture de ListImage35 tenía una referencia a archivo no válida.
+Línea 1216: la propiedad Picture de ListImage36 tenía una referencia a archivo no válida.
+Línea 1220: la propiedad Picture de ListImage37 tenía una referencia a archivo no válida.
+Línea 1224: la propiedad Picture de ListImage38 tenía una referencia a archivo no válida.
+Línea 1227: el nombre de la propiedad Images de imlToolbarIcons no es válido.
+Línea 1235: el nombre de la propiedad _ExtentX de Lista no es válido.
+Línea 1236: el nombre de la propiedad _ExtentY de Lista no es válido.
+Línea 1246: la propiedad MouseIcon de Lista tenía una referencia a archivo no válida.
+Línea 1248: el nombre de la propiedad PictureAlignment de Lista no es válido.
+Línea 1249: el nombre de la propiedad ColumnHeaderIcons de Lista no es válido.
+Línea 1258: el nombre de la propiedad _ExtentX de ArbolDefault no es válido.
+Línea 1259: el nombre de la propiedad _ExtentY de ArbolDefault no es válido.
+Línea 1260: el nombre de la propiedad _Version de ArbolDefault no es válido.
+Línea 1261: el nombre de la propiedad Indentation de ArbolDefault no es válido.
+Línea 1262: el nombre de la propiedad LabelEdit de ArbolDefault no es válido.
+Línea 1263: el nombre de la propiedad LineStyle de ArbolDefault no es válido.
+Línea 1264: el nombre de la propiedad Style de ArbolDefault no es válido.
+Línea 1265: el nombre de la propiedad ImageList de ArbolDefault no es válido.
+Línea 1274: la propiedad Picture de picBackground tenía una referencia a archivo no válida.
+Línea 1287: la propiedad Picture de picBackgroundArbol tenía una referencia a archivo no válida.
+Línea 1298: el nombre de la propiedad _ExtentX de img_cPMenu no es válido.
+Línea 1299: el nombre de la propiedad _ExtentY de img_cPMenu no es válido.
+Línea 1301: el nombre de la propiedad ImageWidth de img_cPMenu no es válido.
+Línea 1302: el nombre de la propiedad ImageHeight de img_cPMenu no es válido.
+Línea 1303: el nombre de la propiedad MaskColor de img_cPMenu no es válido.
+Línea 1304: el nombre de la propiedad _Version de img_cPMenu no es válido.
+Línea 1308: la propiedad Picture de ListImage1 tenía una referencia a archivo no válida.
+Línea 1312: la propiedad Picture de ListImage2 tenía una referencia a archivo no válida.
+Línea 1316: la propiedad Picture de ListImage3 tenía una referencia a archivo no válida.
+Línea 1320: la propiedad Picture de ListImage4 tenía una referencia a archivo no válida.
+Línea 1324: la propiedad Picture de ListImage5 tenía una referencia a archivo no válida.
+Línea 1328: la propiedad Picture de ListImage6 tenía una referencia a archivo no válida.
+Línea 1332: la propiedad Picture de ListImage7 tenía una referencia a archivo no válida.
+Línea 1336: la propiedad Picture de ListImage8 tenía una referencia a archivo no válida.
+Línea 1339: el nombre de la propiedad Images de img_cPMenu no es válido.
+Línea 1344: el nombre de la propiedad _ExtentX de img16 no es válido.
+Línea 1345: el nombre de la propiedad _ExtentY de img16 no es válido.
+Línea 1347: el nombre de la propiedad ImageWidth de img16 no es válido.
+Línea 1348: el nombre de la propiedad ImageHeight de img16 no es válido.
+Línea 1349: el nombre de la propiedad MaskColor de img16 no es válido.
+Línea 1350: el nombre de la propiedad _Version de img16 no es válido.
+Línea 1354: la propiedad Picture de ListImage1 tenía una referencia a archivo no válida.
+Línea 1358: la propiedad Picture de ListImage2 tenía una referencia a archivo no válida.
+Línea 1362: la propiedad Picture de ListImage3 tenía una referencia a archivo no válida.
+Línea 1366: la propiedad Picture de ListImage4 tenía una referencia a archivo no válida.
+Línea 1370: la propiedad Picture de ListImage5 tenía una referencia a archivo no válida.
+Línea 1374: la propiedad Picture de ListImage6 tenía una referencia a archivo no válida.
+Línea 1378: la propiedad Picture de ListImage7 tenía una referencia a archivo no válida.
+Línea 1382: la propiedad Picture de ListImage8 tenía una referencia a archivo no válida.
+Línea 1386: la propiedad Picture de ListImage9 tenía una referencia a archivo no válida.
+Línea 1390: la propiedad Picture de ListImage10 tenía una referencia a archivo no válida.
+Línea 1394: la propiedad Picture de ListImage11 tenía una referencia a archivo no válida.
+Línea 1398: la propiedad Picture de ListImage12 tenía una referencia a archivo no válida.
+Línea 1402: la propiedad Picture de ListImage13 tenía una referencia a archivo no válida.
+Línea 1406: la propiedad Picture de ListImage14 tenía una referencia a archivo no válida.
+Línea 1410: la propiedad Picture de ListImage15 tenía una referencia a archivo no válida.
+Línea 1414: la propiedad Picture de ListImage16 tenía una referencia a archivo no válida.
+Línea 1418: la propiedad Picture de ListImage17 tenía una referencia a archivo no válida.
+Línea 1422: la propiedad Picture de ListImage18 tenía una referencia a archivo no válida.
+Línea 1426: la propiedad Picture de ListImage19 tenía una referencia a archivo no válida.
+Línea 1430: la propiedad Picture de ListImage20 tenía una referencia a archivo no válida.
+Línea 1434: la propiedad Picture de ListImage21 tenía una referencia a archivo no válida.
+Línea 1438: la propiedad Picture de ListImage22 tenía una referencia a archivo no válida.
+Línea 1442: la propiedad Picture de ListImage23 tenía una referencia a archivo no válida.
+Línea 1446: la propiedad Picture de ListImage24 tenía una referencia a archivo no válida.
+Línea 1450: la propiedad Picture de ListImage25 tenía una referencia a archivo no válida.
+Línea 1454: la propiedad Picture de ListImage26 tenía una referencia a archivo no válida.
+Línea 1458: la propiedad Picture de ListImage27 tenía una referencia a archivo no válida.
+Línea 1462: la propiedad Picture de ListImage28 tenía una referencia a archivo no válida.
+Línea 1466: la propiedad Picture de ListImage29 tenía una referencia a archivo no válida.
+Línea 1470: la propiedad Picture de ListImage30 tenía una referencia a archivo no válida.
+Línea 1474: la propiedad Picture de ListImage31 tenía una referencia a archivo no válida.
+Línea 1478: la propiedad Picture de ListImage32 tenía una referencia a archivo no válida.
+Línea 1482: la propiedad Picture de ListImage33 tenía una referencia a archivo no válida.
+Línea 1486: la propiedad Picture de ListImage34 tenía una referencia a archivo no válida.
+Línea 1490: la propiedad Picture de ListImage35 tenía una referencia a archivo no válida.
+Línea 1494: la propiedad Picture de ListImage36 tenía una referencia a archivo no válida.
+Línea 1498: la propiedad Picture de ListImage37 tenía una referencia a archivo no válida.
+Línea 1502: la propiedad Picture de ListImage38 tenía una referencia a archivo no válida.
+Línea 1506: la propiedad Picture de ListImage39 tenía una referencia a archivo no válida.
+Línea 1510: la propiedad Picture de ListImage40 tenía una referencia a archivo no válida.
+Línea 1514: la propiedad Picture de ListImage41 tenía una referencia a archivo no válida.
+Línea 1518: la propiedad Picture de ListImage42 tenía una referencia a archivo no válida.
+Línea 1522: la propiedad Picture de ListImage43 tenía una referencia a archivo no válida.
+Línea 1526: la propiedad Picture de ListImage44 tenía una referencia a archivo no válida.
+Línea 1530: la propiedad Picture de ListImage45 tenía una referencia a archivo no válida.
+Línea 1534: la propiedad Picture de ListImage46 tenía una referencia a archivo no válida.
+Línea 1538: la propiedad Picture de ListImage47 tenía una referencia a archivo no válida.
+Línea 1542: la propiedad Picture de ListImage48 tenía una referencia a archivo no válida.
+Línea 1546: la propiedad Picture de ListImage49 tenía una referencia a archivo no válida.
+Línea 1550: la propiedad Picture de ListImage50 tenía una referencia a archivo no válida.
+Línea 1554: la propiedad Picture de ListImage51 tenía una referencia a archivo no válida.
+Línea 1558: la propiedad Picture de ListImage52 tenía una referencia a archivo no válida.
+Línea 1562: la propiedad Picture de ListImage53 tenía una referencia a archivo no válida.
+Línea 1566: la propiedad Picture de ListImage54 tenía una referencia a archivo no válida.
+Línea 1570: la propiedad Picture de ListImage55 tenía una referencia a archivo no válida.
+Línea 1574: la propiedad Picture de ListImage56 tenía una referencia a archivo no válida.
+Línea 1578: la propiedad Picture de ListImage57 tenía una referencia a archivo no válida.
+Línea 1582: la propiedad Picture de ListImage58 tenía una referencia a archivo no válida.
+Línea 1586: la propiedad Picture de ListImage59 tenía una referencia a archivo no válida.
+Línea 1590: la propiedad Picture de ListImage60 tenía una referencia a archivo no válida.
+Línea 1594: la propiedad Picture de ListImage61 tenía una referencia a archivo no válida.
+Línea 1598: la propiedad Picture de ListImage62 tenía una referencia a archivo no válida.
+Línea 1602: la propiedad Picture de ListImage63 tenía una referencia a archivo no válida.
+Línea 1606: la propiedad Picture de ListImage64 tenía una referencia a archivo no válida.
+Línea 1610: la propiedad Picture de ListImage65 tenía una referencia a archivo no válida.
+Línea 1614: la propiedad Picture de ListImage66 tenía una referencia a archivo no válida.
+Línea 1618: la propiedad Picture de ListImage67 tenía una referencia a archivo no válida.
+Línea 1622: la propiedad Picture de ListImage68 tenía una referencia a archivo no válida.
+Línea 1626: la propiedad Picture de ListImage69 tenía una referencia a archivo no válida.
+Línea 1630: la propiedad Picture de ListImage70 tenía una referencia a archivo no válida.
+Línea 1634: la propiedad Picture de ListImage71 tenía una referencia a archivo no válida.
+Línea 1638: la propiedad Picture de ListImage72 tenía una referencia a archivo no válida.
+Línea 1642: la propiedad Picture de ListImage73 tenía una referencia a archivo no válida.
+Línea 1646: la propiedad Picture de ListImage74 tenía una referencia a archivo no válida.
+Línea 1650: la propiedad Picture de ListImage75 tenía una referencia a archivo no válida.
+Línea 1654: la propiedad Picture de ListImage76 tenía una referencia a archivo no válida.
+Línea 1658: la propiedad Picture de ListImage77 tenía una referencia a archivo no válida.
+Línea 1662: la propiedad Picture de ListImage78 tenía una referencia a archivo no válida.
+Línea 1666: la propiedad Picture de ListImage79 tenía una referencia a archivo no válida.
+Línea 1670: la propiedad Picture de ListImage80 tenía una referencia a archivo no válida.
+Línea 1674: la propiedad Picture de ListImage81 tenía una referencia a archivo no válida.
+Línea 1678: la propiedad Picture de ListImage82 tenía una referencia a archivo no válida.
+Línea 1682: la propiedad Picture de ListImage83 tenía una referencia a archivo no válida.
+Línea 1686: la propiedad Picture de ListImage84 tenía una referencia a archivo no válida.
+Línea 1690: la propiedad Picture de ListImage85 tenía una referencia a archivo no válida.
+Línea 1694: la propiedad Picture de ListImage86 tenía una referencia a archivo no válida.
+Línea 1698: la propiedad Picture de ListImage87 tenía una referencia a archivo no válida.
+Línea 1702: la propiedad Picture de ListImage88 tenía una referencia a archivo no válida.
+Línea 1706: la propiedad Picture de ListImage89 tenía una referencia a archivo no válida.
+Línea 1710: la propiedad Picture de ListImage90 tenía una referencia a archivo no válida.
+Línea 1714: la propiedad Picture de ListImage91 tenía una referencia a archivo no válida.
+Línea 1718: la propiedad Picture de ListImage92 tenía una referencia a archivo no válida.
+Línea 1722: la propiedad Picture de ListImage93 tenía una referencia a archivo no válida.
+Línea 1726: la propiedad Picture de ListImage94 tenía una referencia a archivo no válida.
+Línea 1730: la propiedad Picture de ListImage95 tenía una referencia a archivo no válida.
+Línea 1734: la propiedad Picture de ListImage96 tenía una referencia a archivo no válida.
+Línea 1738: la propiedad Picture de ListImage97 tenía una referencia a archivo no válida.
+Línea 1742: la propiedad Picture de ListImage98 tenía una referencia a archivo no válida.
+Línea 1746: la propiedad Picture de ListImage99 tenía una referencia a archivo no válida.
+Línea 1750: la propiedad Picture de ListImage100 tenía una referencia a archivo no válida.
+Línea 1754: la propiedad Picture de ListImage101 tenía una referencia a archivo no válida.
+Línea 1758: la propiedad Picture de ListImage102 tenía una referencia a archivo no válida.
+Línea 1762: la propiedad Picture de ListImage103 tenía una referencia a archivo no válida.
+Línea 1766: la propiedad Picture de ListImage104 tenía una referencia a archivo no válida.
+Línea 1770: la propiedad Picture de ListImage105 tenía una referencia a archivo no válida.
+Línea 1774: la propiedad Picture de ListImage106 tenía una referencia a archivo no válida.
+Línea 1778: la propiedad Picture de ListImage107 tenía una referencia a archivo no válida.
+Línea 1782: la propiedad Picture de ListImage108 tenía una referencia a archivo no válida.
+Línea 1786: la propiedad Picture de ListImage109 tenía una referencia a archivo no válida.
+Línea 1790: la propiedad Picture de ListImage110 tenía una referencia a archivo no válida.
+Línea 1794: la propiedad Picture de ListImage111 tenía una referencia a archivo no válida.
+Línea 1798: la propiedad Picture de ListImage112 tenía una referencia a archivo no válida.
+Línea 1802: la propiedad Picture de ListImage113 tenía una referencia a archivo no válida.
+Línea 1806: la propiedad Picture de ListImage114 tenía una referencia a archivo no válida.
+Línea 1810: la propiedad Picture de ListImage115 tenía una referencia a archivo no válida.
+Línea 1814: la propiedad Picture de ListImage116 tenía una referencia a archivo no válida.
+Línea 1818: la propiedad Picture de ListImage117 tenía una referencia a archivo no válida.
+Línea 1822: la propiedad Picture de ListImage118 tenía una referencia a archivo no válida.
+Línea 1826: la propiedad Picture de ListImage119 tenía una referencia a archivo no válida.
+Línea 1830: la propiedad Picture de ListImage120 tenía una referencia a archivo no válida.
+Línea 1834: la propiedad Picture de ListImage121 tenía una referencia a archivo no válida.
+Línea 1838: la propiedad Picture de ListImage122 tenía una referencia a archivo no válida.
+Línea 1842: la propiedad Picture de ListImage123 tenía una referencia a archivo no válida.
+Línea 1846: la propiedad Picture de ListImage124 tenía una referencia a archivo no válida.
+Línea 1850: la propiedad Picture de ListImage125 tenía una referencia a archivo no válida.
+Línea 1854: la propiedad Picture de ListImage126 tenía una referencia a archivo no válida.
+Línea 1858: la propiedad Picture de ListImage127 tenía una referencia a archivo no válida.
+Línea 1862: la propiedad Picture de ListImage128 tenía una referencia a archivo no válida.
+Línea 1866: la propiedad Picture de ListImage129 tenía una referencia a archivo no válida.
+Línea 1870: la propiedad Picture de ListImage130 tenía una referencia a archivo no válida.
+Línea 1874: la propiedad Picture de ListImage131 tenía una referencia a archivo no válida.
+Línea 1878: la propiedad Picture de ListImage132 tenía una referencia a archivo no válida.
+Línea 1882: la propiedad Picture de ListImage133 tenía una referencia a archivo no válida.
+Línea 1886: la propiedad Picture de ListImage134 tenía una referencia a archivo no válida.
+Línea 1890: la propiedad Picture de ListImage135 tenía una referencia a archivo no válida.
+Línea 1894: la propiedad Picture de ListImage136 tenía una referencia a archivo no válida.
+Línea 1898: la propiedad Picture de ListImage137 tenía una referencia a archivo no válida.
+Línea 1902: la propiedad Picture de ListImage138 tenía una referencia a archivo no válida.
+Línea 1906: la propiedad Picture de ListImage139 tenía una referencia a archivo no válida.
+Línea 1910: la propiedad Picture de ListImage140 tenía una referencia a archivo no válida.
+Línea 1914: la propiedad Picture de ListImage141 tenía una referencia a archivo no válida.
+Línea 1918: la propiedad Picture de ListImage142 tenía una referencia a archivo no válida.
+Línea 1922: la propiedad Picture de ListImage143 tenía una referencia a archivo no válida.
+Línea 1926: la propiedad Picture de ListImage144 tenía una referencia a archivo no válida.
+Línea 1930: la propiedad Picture de ListImage145 tenía una referencia a archivo no válida.
+Línea 1934: la propiedad Picture de ListImage146 tenía una referencia a archivo no válida.
+Línea 1938: la propiedad Picture de ListImage147 tenía una referencia a archivo no válida.
+Línea 1942: la propiedad Picture de ListImage148 tenía una referencia a archivo no válida.
+Línea 1946: la propiedad Picture de ListImage149 tenía una referencia a archivo no válida.
+Línea 1950: la propiedad Picture de ListImage150 tenía una referencia a archivo no válida.
+Línea 1954: la propiedad Picture de ListImage151 tenía una referencia a archivo no válida.
+Línea 1958: la propiedad Picture de ListImage152 tenía una referencia a archivo no válida.
+Línea 1962: la propiedad Picture de ListImage153 tenía una referencia a archivo no válida.
+Línea 1966: la propiedad Picture de ListImage154 tenía una referencia a archivo no válida.
+Línea 1970: la propiedad Picture de ListImage155 tenía una referencia a archivo no válida.
+Línea 1974: la propiedad Picture de ListImage156 tenía una referencia a archivo no válida.
+Línea 1978: la propiedad Picture de ListImage157 tenía una referencia a archivo no válida.
+Línea 1982: la propiedad Picture de ListImage158 tenía una referencia a archivo no válida.
+Línea 1986: la propiedad Picture de ListImage159 tenía una referencia a archivo no válida.
+Línea 1990: la propiedad Picture de ListImage160 tenía una referencia a archivo no válida.
+Línea 1994: la propiedad Picture de ListImage161 tenía una referencia a archivo no válida.
+Línea 1998: la propiedad Picture de ListImage162 tenía una referencia a archivo no válida.
+Línea 2002: la propiedad Picture de ListImage163 tenía una referencia a archivo no válida.
+Línea 2006: la propiedad Picture de ListImage164 tenía una referencia a archivo no válida.
+Línea 2010: la propiedad Picture de ListImage165 tenía una referencia a archivo no válida.
+Línea 2014: la propiedad Picture de ListImage166 tenía una referencia a archivo no válida.
+Línea 2018: la propiedad Picture de ListImage167 tenía una referencia a archivo no válida.
+Línea 2022: la propiedad Picture de ListImage168 tenía una referencia a archivo no válida.
+Línea 2026: la propiedad Picture de ListImage169 tenía una referencia a archivo no válida.
+Línea 2030: la propiedad Picture de ListImage170 tenía una referencia a archivo no válida.
+Línea 2034: la propiedad Picture de ListImage171 tenía una referencia a archivo no válida.
+Línea 2038: la propiedad Picture de ListImage172 tenía una referencia a archivo no válida.
+Línea 2042: la propiedad Picture de ListImage173 tenía una referencia a archivo no válida.
+Línea 2046: la propiedad Picture de ListImage174 tenía una referencia a archivo no válida.
+Línea 2050: la propiedad Picture de ListImage175 tenía una referencia a archivo no válida.
+Línea 2054: la propiedad Picture de ListImage176 tenía una referencia a archivo no válida.
+Línea 2058: la propiedad Picture de ListImage177 tenía una referencia a archivo no válida.
+Línea 2062: la propiedad Picture de ListImage178 tenía una referencia a archivo no válida.
+Línea 2066: la propiedad Picture de ListImage179 tenía una referencia a archivo no válida.
+Línea 2070: la propiedad Picture de ListImage180 tenía una referencia a archivo no válida.
+Línea 2074: la propiedad Picture de ListImage181 tenía una referencia a archivo no válida.
+Línea 2078: la propiedad Picture de ListImage182 tenía una referencia a archivo no válida.
+Línea 2082: la propiedad Picture de ListImage183 tenía una referencia a archivo no válida.
+Línea 2086: la propiedad Picture de ListImage184 tenía una referencia a archivo no válida.
+Línea 2090: la propiedad Picture de ListImage185 tenía una referencia a archivo no válida.
+Línea 2094: la propiedad Picture de ListImage186 tenía una referencia a archivo no válida.
+Línea 2098: la propiedad Picture de ListImage187 tenía una referencia a archivo no válida.
+Línea 2102: la propiedad Picture de ListImage188 tenía una referencia a archivo no válida.
+Línea 2105: el nombre de la propiedad Images de img16 no es válido.
+Línea 2109: el nombre de la propiedad OleObjectBlob de HASAR1 no es válido.

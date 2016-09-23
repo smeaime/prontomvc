@@ -329,7 +329,18 @@ namespace ProntoMVC
 
 
                     // 'apgurisatti@bdlconsultores.com.ar", _
-                    ProntoFuncionesGenerales.MandaEmailSimple(direccion,
+                    //ProntoFuncionesGenerales.MandaEmailSimple(direccion,
+                    //           (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + nombrebase + " " + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
+                    //               Body,
+                    //                ConfigurationManager.AppSettings["SmtpUser"],
+                    //                ConfigurationManager.AppSettings["SmtpServer"],
+                    //                ConfigurationManager.AppSettings["SmtpUser"],
+                    //                ConfigurationManager.AppSettings["SmtpPass"],
+                    //                   (YSODmarkup + log) ?? "",
+                    //               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+
+                    Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(direccion,
                                (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + nombrebase + " " + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
                                    Body,
                                     ConfigurationManager.AppSettings["SmtpUser"],
@@ -339,7 +350,7 @@ namespace ProntoMVC
                                        (YSODmarkup + log) ?? "",
                                    Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
-
+                    
 
 
 
