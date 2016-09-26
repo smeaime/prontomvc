@@ -3,10 +3,8 @@
     ViewBag.Title = "Requerimientos";
 }
 
-Requerimientos pendientes de asignar
 
 @*<div class="container-fluid">*@
-<br />
 @if (false)
 {
     <style>
@@ -99,8 +97,37 @@ Requerimientos pendientes de asignar
         </div>
     </div>
 </div>
+
+
+
+<div class="contextMenu" id="myMenu1" style="display:none">
+    <ul style="width: 400px">
+        <li id="add">
+            <span class="ui-icon ui-icon-plus" style="float:left"></span>
+            <span id="Vale" style="font-size:11px; font-family:Verdana">Vale salida (stock)</span>
+        </li>
+        <li id="edit">
+            <span class="ui-icon ui-icon-pencil" style="float:left"></span>
+            <span style="font-size:11px; font-family:Verdana">Para compras</span>
+        </li>
+        <li id="del">
+            <span class="ui-icon ui-icon-trash" style="float:left"></span>
+            <span style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
+        </li>
+    </ul>
+</div>
+
+
+
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $("#Vale").click(function () {
+
+        })
+
+
+
 
 
         $("#BuscadorListado").keyup(function () {
@@ -316,6 +343,38 @@ Requerimientos pendientes de asignar
 
 
 
+            loadComplete: function() {
+                $("tr.jqgrow", this).contextMenu('myMenu1', {
+                    bindings: {
+                        'edit': function(trigger) {
+                            // trigger is the DOM element ("tr.jqgrow") which are triggered
+                            grid.editGridRow(trigger.id, editSettings);
+                        },
+                        'add': function(/*trigger*/) {
+                            grid.editGridRow("new", addSettings);
+                        },
+                        'del': function(trigger) {
+                            if ($('#del').hasClass('ui-state-disabled') === false) {
+                                // disabled item can do be choosed
+                                grid.delGridRow(trigger.id, delSettings);
+                            }
+                        }
+                    },
+                    onContextMenu: function(event/*, menu*/) {
+                        var rowId = $(event.target).closest("tr.jqgrow").attr("id");
+                        //grid.setSelection(rowId);
+                        // disable menu for rows with even rowids
+                        $('#del').attr("disabled",Number(rowId)%2 === 0);
+                        if (Number(rowId)%2 === 0) {
+                            $('#del').attr("disabled","disabled").addClass('ui-state-disabled');
+                        } else {
+                            $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+                        }
+                        return true;
+                    }
+                });
+            },
+
 
             pager: $('#ListaPager'),
             rowNum: 500,
@@ -350,7 +409,7 @@ Requerimientos pendientes de asignar
 
             //imgpath: '/content/cupertino/images',
             //loadonce: true,
-            //, caption: '<b>REQUERIMIENTOS</b>'
+            , caption: '<b>Requerimientos pendientes de asignar</b>'
         });
         jQuery("#Lista").jqGrid('bindKeys');
 
