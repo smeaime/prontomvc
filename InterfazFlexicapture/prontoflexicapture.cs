@@ -1392,6 +1392,9 @@ namespace ProntoFlexicapture
 
             bool esTicket = (PlantillaUsada != "");
 
+
+            //grabarrenglontipado??
+
             if (!esTicket)
             {
                 if (BarraCP != null)

@@ -304,6 +304,10 @@ Public Class LogicaImportador
 
     End Function
 
+
+    'grabarrenglontipado
+
+
     Public Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
                                     txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _

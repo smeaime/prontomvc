@@ -248,6 +248,11 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void ClientesEspecificosDelUsuarioBLD_23822()
+        {
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("Mariano", SC);
+        }
 
 
 
