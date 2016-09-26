@@ -1200,14 +1200,14 @@ namespace ProntoMVC.Controllers
           public virtual ActionResult RequerimientosPendientesAsignar_DynamicGridData
                 (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int pageSize = 20; // rows ?? 20;
+            int currentPage = 1; // page ?? 1;
 
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
-            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIIBB", FechaInicial, FechaFinal, TipoArchivo, 2);
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIIBB", FechaInicial, FechaFinal);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
             int totalRecords = Entidad.Count();
