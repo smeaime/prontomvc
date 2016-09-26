@@ -14091,6 +14091,13 @@ Public Class CartaDePorteManager
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=14187
 
+
+        Dim a0() As String = iisNull(ParametroManager.TraerValorParametro2(SC, "BLDcorredorCUITsLista0"), "").Split("|")
+        Dim a1() As String = iisNull(ParametroManager.TraerValorParametro2(SC, "BLDcorredorCUITsLista1"), "").Split("|")
+        Dim a2() As String = iisNull(ParametroManager.TraerValorParametro2(SC, "BLDcorredorCUITsLista2"), "").Split("|")
+
+    
+
         Dim c1() As String = { _
                                       "20268165178" _
                                     , "20081166383" _
@@ -14111,7 +14118,10 @@ Public Class CartaDePorteManager
                                     , "30712353097" _
                                     , "30510718441" _
                                     , "xxxxxxxxxxx" _
-                                    }
+                   }
+
+
+        
 
 
 
@@ -14343,7 +14353,14 @@ Public Class CartaDePorteManager
                     , "23116523914" _
                     , "20043789083" _
                     , "30619509133" _
+                    , "20122393136" _
+                    , "20052561575" _
                     }
+
+
+        c1 = c1.Union(a0).ToArray
+        c2 = c2.Union(a1).ToArray
+        c3 = c3.Union(a2).ToArray
 
 
 
