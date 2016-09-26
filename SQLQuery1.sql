@@ -6,4 +6,4 @@ set cumplido='NO'
 
 
 
-Requerimientos_TX_PendientesDeAsignacion
+sp_helptext Requerimientos_TX_PendientesDeAsignacion
