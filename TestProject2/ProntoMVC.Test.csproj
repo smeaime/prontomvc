@@ -185,7 +185,7 @@
     <Compile Include="CompProvTests.cs" />
     <Compile Include="FFtests.cs" />
     <Compile Include="TestWilliams.cs" />
-    <Compile Include="NuevosTests.cs" />
+    <Compile Include="NuevosTestsMVC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
