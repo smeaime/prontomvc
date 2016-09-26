@@ -2742,7 +2742,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        void AsignaComprador(List<int> idRMs)
+        public void AsignaComprador(List<int> idRMs)
         {
             /*
    Dim mvarOK As Boolean
@@ -2841,7 +2841,7 @@ namespace ProntoMVC.Controllers
         }
 
 
-        void DarPorCumplido(List<int> idRMs)
+        public void DarPorCumplido(List<int> idRMs)
         {
             /*
 
@@ -2952,7 +2952,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        void GenerarValesAlmacen(List<int> idRMs)
+        public void GenerarValesAlmacen(List<int> idRMs)
         {
             /*
             

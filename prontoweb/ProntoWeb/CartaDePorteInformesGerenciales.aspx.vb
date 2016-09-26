@@ -220,7 +220,7 @@ Partial Class CartaDePorteInformesGerenciales
         Try
             Dim ff = New String() {"mgarcia", "twilliams2", "mcabrera", "gradice", "dberzoni", "cflores"}
             If ff.Contains(Session(SESSIONPRONTO_UserName)) Then
-                cmbInforme.Items.FindByText("Resumen de Facturación").Enabled = True
+                cmbInforme.Items.FindByText("Resumen de facturación").Enabled = True
                 cmbInforme.Items.FindByText("Proyección de facturación").Enabled = True
                 cmbInforme.Items.FindByText("Listado de Tarifas").Enabled = True
             End If
