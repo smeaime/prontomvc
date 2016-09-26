@@ -5,12 +5,9 @@
 @*<div class="container-fluid">*@
 <br />
 @if (false)
-{
-    <style>
+{    <style>
         /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-
-
-
+    
         .ui-widget-content {
             border: 0px solid #aaaaaa;
         }
@@ -50,7 +47,6 @@
         }
     </style>
 }
-
 
 <div style=" padding-left: 15px;  padding-right: 15px ;">
     <div>
@@ -134,31 +130,35 @@
         "></table>
         <div id="ListaPager" class="scroll" style="text-align: center;">
         </div>
+        <div class="contextMenu" id="myMenu1" style="display:none">
+            <ul style="width: 200px">
+                <li id="add">
+                    <span class="ui-icon ui-icon-plus" style="float:left"></span>
+                    <span style="font-size:11px; font-family:Verdana">Add Row</span>
+                </li>
+                <li id="edit">
+                    <span class="ui-icon ui-icon-pencil" style="float:left"></span>
+                    <span style="font-size:11px; font-family:Verdana">Edit Row</span>
+                </li>
+                <li id="del">
+                    <span class="ui-icon ui-icon-trash" style="float:left"></span>
+                    <span style="font-size:11px; font-family:Verdana">Delete Row</span>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
-
-
         $("#BuscadorListado").keyup(function () {
-
-
             filtrar()
-
         });
-
-
         $("#BuscadorListado").change(function () {
-
             filtrar()
-
-
         });
 
         function filtrar() {
-
-
-
             var grid = jQuery("#Lista");
             var postdata = grid.jqGrid('getGridParam', 'postData');
             jQuery.extend(postdata,
@@ -170,15 +170,8 @@
                });
             grid.jqGrid('setGridParam', { search: true, postData: postdata });
             grid.trigger("reloadGrid", [{ page: 1 }]);
-
-
             //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
         }
-
-
-
-
-
 
         var lastSelectedId;
         var inEdit;
@@ -189,7 +182,6 @@
 
         $('#Lista').jqGrid({
             url: '@Url.Action("Requerimientos_DynamicGridData", "Requerimiento")',
-
             postData: {
                 'FechaInicial': function () { return $("#FechaInicial").val(); },
                 'FechaFinal': function () { return $("#FechaFinal").val(); },
@@ -201,8 +193,6 @@
                     return $('#bALiberar').is(":checked");
                 }
             },
-
-
             datatype: 'json',
             mtype: 'POST',
             colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
@@ -213,8 +203,7 @@
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
                         { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-
-                           {
+                        {
                                name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center',
                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
                                datefmt: 'dd/mm/yy',
@@ -238,9 +227,7 @@
                                    }
                                }
 
-                           },
-
-
+                        },
                         { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Entregado', index: 'Entregado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -256,9 +243,7 @@
                         { name: 'Solicito', index: 'Solicito', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Sector', index: 'Sector', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-
-
-                           {
+                        {
                                name: 'Fecha_anulacion', index: 'Fecha_anulacion', width: 100, align: 'center',
                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
                                datefmt: 'dd/mm/yy',
@@ -281,14 +266,9 @@
                                        });
                                    }
                                }
-
-                           },
-
-
-                    { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-
-
-                           {
+                        },
+                        { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        {
                                name: 'Fechas_liberacion', index: 'Fechas_liberacion', width: 100, align: 'center',
                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
                                datefmt: 'dd/mm/yy',
@@ -312,15 +292,12 @@
                                    }
                                }
 
-                           },
-
-
+                        },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
-
             ],
             //            onSelectRow: function (id) {
             //                if (id && id !== lastSelectedId) {
@@ -333,10 +310,7 @@
 
             ondblClickRow: function (idrow) {
                 window.location.href = ROOT + 'Requerimiento/Edit/' + idrow;
-
-
                 // $("#edtData").click();
-
                 //edicion inline
                 // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
                 //                if(id && id!==lastSel){
@@ -345,45 +319,57 @@
                 //                }
                 //                jQuery('#Lista').editRow(id, true);
                 //
-
             },
-            loadComplete: function () {
-                //$("#Lista").jqGrid('filterToolbar', {})
-            },
-
-
-
-
-            pager: $('#ListaPager'),
+            //loadComplete: function() {
+            //    $("tr.jqgrow", this).contextMenu('myMenu1', {
+            //        bindings: {
+            //            'edit': function(trigger) {
+            //                // trigger is the DOM element ("tr.jqgrow") which are triggered
+            //                grid.editGridRow(trigger.id, editSettings);
+            //            },
+            //            'add': function(/*trigger*/) {
+            //                grid.editGridRow("new", addSettings);
+            //            },
+            //            'del': function(trigger) {
+            //                if ($('#del').hasClass('ui-state-disabled') === false) {
+            //                    // disabled item can do be choosed
+            //                    grid.delGridRow(trigger.id, delSettings);
+            //                }
+            //            }
+            //        },
+            //        onContextMenu: function(event/*, menu*/) {
+            //            var rowId = $(event.target).closest("tr.jqgrow").attr("id");
+            //            //grid.setSelection(rowId);
+            //            // disable menu for rows with even rowids
+            //            $('#del').attr("disabled",Number(rowId)%2 === 0);
+            //            if (Number(rowId)%2 === 0) {
+            //                $('#del').attr("disabled","disabled").addClass('ui-state-disabled');
+            //            } else {
+            //                $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+            //            }
+            //            return true;
+            //        }
+            //    });
+            //},            pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50],
             sortname: 'NumeroRequerimiento', // 'FechaRecibo,NumeroRecibo',
             sortorder: 'desc',
             viewrecords: true,
             emptyrecords: 'No hay registros para mostrar', //,
-
-
             ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
             //////////////////////////////
-
             height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
             userDataOnFooter: true
             // ,caption: '<b>FACTURAS</b>'
-
-        , gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
-
-
-
-
-
-
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
             //imgpath: '/content/cupertino/images',
             //loadonce: true,
             //, caption: '<b>REQUERIMIENTOS</b>'
@@ -399,33 +385,21 @@
          }
         );
 
-
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,
             defaultSearch: 'cn',
             enableClear: false
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
-
-
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
         });
 
-
         //$("#Requerimientos").click();
-
-
-
-
 
         pageLayout.hide('east');
         pageLayout.hide('south');
-
-
     });
-
-
 </script>
 @*
     @{
