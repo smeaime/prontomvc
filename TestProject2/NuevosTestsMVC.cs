@@ -121,7 +121,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void Exportacion_a_Excel_de_Entities_3()
+        public void GenerarValesAlmacen_24848()
         {
 
             string sidx = "NumeroPedido";
@@ -134,7 +134,7 @@ namespace ProntoMVC.Tests
 
             var c = new RequerimientoController();
             GetMockedControllerGenerico(c);
-            var f = c.GenerarValesAlmacen(new int[] {15,16,17});
+            //var f = c.GenerarValesAlmacen(new int[] {15,16,17});
             string o = "lala.xlsx";
 
         }
