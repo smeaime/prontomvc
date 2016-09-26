@@ -341,7 +341,7 @@ namespace ProntoMVC
 
 
                     Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(direccion,
-                               (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + nombrebase + " " + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
+                                    (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + nombrebase + " " + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
                                    Body,
                                     ConfigurationManager.AppSettings["SmtpUser"],
                                     ConfigurationManager.AppSettings["SmtpServer"],

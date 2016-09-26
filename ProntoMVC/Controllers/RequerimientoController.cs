@@ -1200,14 +1200,14 @@ namespace ProntoMVC.Controllers
           public virtual ActionResult RequerimientosPendientesAsignar_DynamicGridData
                 (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
-            int pageSize = 20; // rows ?? 20;
-            int currentPage = 1; // page ?? 1;
+            int pageSize = 20;  //rows ?? 20;
+            int currentPage = 1;  //page ?? 1;
 
             //DateTime FechaInicial = DateTime.Today.AddMonths(-9);
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
-            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PercepcionesIIBB", FechaInicial, FechaFinal);
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Requerimientos_TX_PendientesDeAsignacion");
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
             int totalRecords = Entidad.Count();
@@ -1216,63 +1216,70 @@ namespace ProntoMVC.Controllers
             var data = (from a in Entidad
                         select new
                         {
-                            IdAux = a[0],
-                            IdComprobanteProveedor = a[1],
-                            IdProvincia = a[2],
-                            Tipo = a[3],
-                            Jurisdiccion = a[4],
-                            Provincia = a[5],
-                            Proveedor = a[6],
-                            Cuit = a[7],
-                            Fecha = a[8],
-                            FechaComprobante = a[9],
-                            NumeroComprobante1 = a[10],
-                            NumeroComprobante2 = a[11],
-                            TipoComprobante = a[12],
-                            Letra = a[13],
-                            ImporteIIBB = (a[14].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[14].NullSafeToString()),
-                            Importacion_Despacho = a[15],
-                            CBU = a[16],
-                            Registro = a[17],
-                            IdMoneda = a[18],
-                            ImporteBase = (a[19].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[19].NullSafeToString()),
-                            IdObra = a[20],
-                            Obra = a[21]
+                            IdDetalleRequerimiento = a[0],
+                            NumeroRequerimiento = a[1],
+                            IdAux1 = a[2],
+                            IdAux2 = a[3],
+                            IdAux3 = a[4],
+                            IdAux4 = a[5],
+                            Item = a[6],
+                            Cant = a[7],
+                            Unidad = a[8],
+                            Vales = a[9],
+                            Valess = a[10],
+                            CantPed = a[11],
+                            Recibido = a[12],
+                            Recepcion = a[13],
+                            UltRecepcion = a[14],
+
+                            EnStock = a[15],
+                            StkMin = a[16],
+
+                            Articulo= a[17],
+                            FEntrega= a[18],
+                            Solicito = a[19],
+                            TipoReq= a[20],
+                            Obra = a[21],
+
+                            Cump = a[22],
+                            Recepcionado  = a[23],
+                            Observacionesitem  = a[24],
+                            Deposito  = a[25],
+                            Observacionesfirmante    = a[26],
+                            Firmanteobservo   = a[27],
+                            Fechaultobservacion= a[28],
+
+                            CodEqDestino  = a[29],
+                            EquipoDestino= a[30]
                         }).ToList();
+
+
+
+
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in Entidad 
                         select new jqGridRowJson
                         {
-                            id = a.IdAux.ToString(),
+                            id = a[0].ToString(),
                             cell = new string[] { 
-                                string.Empty, 
-                                a.IdAux.ToString(), 
-                                a.IdComprobanteProveedor.ToString(), 
-                                a.IdProvincia.ToString(), 
-                                a.Tipo.ToString(), 
-                                a.Jurisdiccion.ToString(), 
-                                a.Provincia.ToString(), 
-                                a.Proveedor.ToString(), 
-                                a.Cuit.ToString(), 
-                                a.Fecha == null || a.Fecha.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
-                                a.FechaComprobante == null || a.FechaComprobante.ToString() == "" ? "" : Convert.ToDateTime(a.FechaComprobante.NullSafeToString()).ToString("dd/MM/yyyy"),
-                                a.NumeroComprobante1.ToString(), 
-                                a.NumeroComprobante2.ToString(), 
-                                a.TipoComprobante.ToString(), 
-                                a.Letra.ToString(), 
-                                a.ImporteIIBB.ToString(), 
-                                a.Importacion_Despacho.ToString(), 
-                                a.CBU.ToString(), 
-                                a.Registro.ToString(), 
-                                a.IdMoneda.ToString(), 
-                                a.ImporteBase.ToString(), 
-                                a.IdObra.ToString(), 
-                                a.Obra.ToString()
+                                   a[0].ToString(),
+                                   a[1].ToString(),
+                                   a[2].ToString(),
+                                   a[3].ToString(),
+                                   a[4].ToString(),
+                                   a[5].ToString(),
+                                   a[6].ToString(),
+                                   a[7].ToString(),
+                                   a[8].ToString(),
+                                   a[9].ToString(),
+                                   a[10].ToString(),
+                                   a[11].ToString(),
+                                   a[12].ToString()
                             }
                         }).ToArray()
             };
