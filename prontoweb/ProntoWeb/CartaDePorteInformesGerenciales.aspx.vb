@@ -214,6 +214,23 @@ Partial Class CartaDePorteInformesGerenciales
         End Try
 
 
+
+
+
+        Try
+            Dim ff = New String() {"mgarcia", "twilliams2", "mcabrera", "gradice", "dberzoni", "cflores"}
+            If ff.Contains(Session(SESSIONPRONTO_UserName)) Then
+                cmbInforme.Items.FindByText("Resumen de Facturación").Enabled = True
+                cmbInforme.Items.FindByText("Proyección de facturación").Enabled = True
+                cmbInforme.Items.FindByText("Listado de Tarifas").Enabled = True
+            End If
+        Catch ex As Exception
+
+        End Try
+
+
+
+
         '        [02:10:43 p.m.] Mariano Scalella: apuntamelo en una consulta. tengo enel codigo harcodeado q mgarcia y mgarcia2 no pueden ver totales generales. q hago?
         '[02:11:19 p.m.] an78gubad: tengo el ok de hugo, asi que mgarcia y dberzoni tienen que verlo
 
