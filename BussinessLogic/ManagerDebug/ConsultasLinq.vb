@@ -383,15 +383,6 @@ Public Class ConsultasLinq
 
 
         Dim qq = From cdp In aaa _
-                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = CInt(cdp.Calidad)).DefaultIfEmpty _
-                From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
                 From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
                 From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty _
                 From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty _
@@ -406,11 +397,6 @@ Public Class ConsultasLinq
                                And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                         .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
                 Where 1 = 1 _
-                      And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                      And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                      And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                      And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                      And (idDestino = -1 Or cdp.Destino = idDestino) _
                       And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
                       And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
                       And If(cdp.SubnumeroDeFacturacion, 0) <= 0
@@ -424,12 +410,12 @@ Public Class ConsultasLinq
                     .agrupVagon = If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
                     cdp.ExcluirDeSubcontratistas, _
                     cdp.SubnumeroDeFacturacion, _
-                    .VendedorDesc = clitit.RazonSocial, _
-                    .CuentaOrden1Desc = cliint.RazonSocial, _
-                    .CuentaOrden2Desc = clircom.RazonSocial, _
-                    .CorredorDesc = corr.Nombre, _
-                    .EntregadorDesc = clidest.RazonSocial, _
-                    .ProcedenciaDesc = loc.Nombre, _
+                    .VendedorDesc = cdp.TitularDesc, _
+                    .CuentaOrden1Desc = cdp.IntermediarioDesc, _
+                    .CuentaOrden2Desc = cdp.RComercialDesc, _
+                    .CorredorDesc = cdp.CorredorDesc, _
+                    .EntregadorDesc = cdp.EntregadorDesc, _
+                    .ProcedenciaDesc = cdp.ProcedenciaDesc, _
                     .DestinoDesc = dest.Descripcion, _
                     .Subcontr1Desc = clisub1.RazonSocial, _
                     .Subcontr2Desc = clisub2.RazonSocial, _
@@ -443,11 +429,11 @@ Public Class ConsultasLinq
                     .tarif2 = CDec(If(If( _
                         (cdp.Exporta = "SI") _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                pd2.PrecioDescargaExportacion, _
+                                If(pd2.PrecioDescargaExportacion = 0, pd2.PrecioCaladaExportacion, pd2.PrecioDescargaExportacion), _
                                 If(pd2.PrecioVagonesBalanzaExportacion = 0, pd2.PrecioVagonesCaladaExportacion, pd2.PrecioVagonesBalanzaExportacion) _
                                 ) _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                pd2.PrecioDescargaLocal, _
+                                If(pd2.PrecioDescargaLocal = 0, pd2.PrecioCaladaLocal, pd2.PrecioDescargaLocal), _
                                 If(pd2.PrecioVagonesBalanza = 0, pd2.PrecioVagonesCalada, pd2.PrecioVagonesBalanza) _
                                 ) _
                                 ), 0)), _
