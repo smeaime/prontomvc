@@ -219,10 +219,10 @@ where 1=1
  		
 			(@AplicarANDuORalFiltro = 0 and
 				(
-						(cdp.Vendedor = @idVendedor  Or isnull(@idVendedor,-1)=-1) Or  
-						(cdp.CuentaOrden1= @idIntermediario  Or isnull(@idIntermediario,-1)=-1) Or  
-						(cdp.CuentaOrden2 = @idRemComercial  Or isnull(@idRemComercial,-1)=-1) Or  
-						(cdp.idClienteAuxiliar = @idClienteAuxiliarint  Or isnull(@idClienteAuxiliarint,-1)=-1)
+						(cdp.Vendedor = @idVendedor  ) Or  
+						(cdp.CuentaOrden1= @idIntermediario ) Or  
+						(cdp.CuentaOrden2 = @idRemComercial ) Or  
+						(cdp.idClienteAuxiliar = @idClienteAuxiliarint)
 				)
 			)
 	)
@@ -439,3 +439,7 @@ wCartasPorte_WraperDeLaTVF
 
 go
 
+
+
+GRANT EXECUTE ON wCartasPorte_WraperDeLaTVF to [NT AUTHORITY\ANONYMOUS LOGON]
+go
