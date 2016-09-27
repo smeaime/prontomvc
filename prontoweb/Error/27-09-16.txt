@@ -1641,3 +1641,149 @@ Log Entry :
 09/27/2016 14:10:03
 Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
 __________________________
+
+Log Entry : 
+09/27/2016 14:32:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+09/27/2016 15:08:27
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2016 15:10:05
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+09/27/2016 15:10:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:
+ 549921550    2234645 1.4650 0.0000
+__________________________
+
+Log Entry : 
+09/27/2016 15:10:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+09/27/2016 15:11:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+09/27/2016 15:12:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2234645. Error Message:PV 3 0
+__________________________
+
+Log Entry : 
+09/27/2016 15:17:17
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2016 15:17:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+09/27/2016 15:17:43
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:
+ 549921550    2234645 1.4650 1.4650
+__________________________
+
+Log Entry : 
+09/27/2016 15:17:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+09/27/2016 15:17:51
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=3ad08ae3adbf45c4be241d14d6f52a1a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+09/27/2016 15:17:56
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+09/27/2016 15:18:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:
+ 549921550    2234645 1.4650 1.4650
+__________________________
+
+Log Entry : 
+09/27/2016 15:18:09
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+09/27/2016 15:18:10
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=3ad08ae3adbf45c4be241d14d6f52a1a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+09/27/2016 15:18:12
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=3ad08ae3adbf45c4be241d14d6f52a1a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+09/27/2016 15:18:20
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=3ad08ae3adbf45c4be241d14d6f52a1a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
