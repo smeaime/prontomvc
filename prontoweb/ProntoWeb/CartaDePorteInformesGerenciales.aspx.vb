@@ -129,13 +129,12 @@ Partial Class CartaDePorteInformesGerenciales
         Dim admins = New String() {"Mariano", "Andres", "hwilliams"}
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
         Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea"}
+        Dim ff2 = New String() {"mgarcia", "twilliams2", "mcabrera", "gradice", "dberzoni", "cflores"}
 
-        If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString) Then
+        If Not admins.Union(encargados).Union(ff2).Contains(Session(SESSIONPRONTO_UserName).ToString) Then
             MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
             Exit Sub
         End If
-
-
 
 
 
@@ -218,8 +217,7 @@ Partial Class CartaDePorteInformesGerenciales
 
 
         Try
-            Dim ff = New String() {"mgarcia", "twilliams2", "mcabrera", "gradice", "dberzoni", "cflores"}
-            If ff.Contains(Session(SESSIONPRONTO_UserName)) Then
+            If ff2.Contains(Session(SESSIONPRONTO_UserName)) Then
                 cmbInforme.Items.FindByText("Resumen de facturación").Enabled = True
                 cmbInforme.Items.FindByText("Proyección de facturación").Enabled = True
                 cmbInforme.Items.FindByText("Listado de Tarifas").Enabled = True
@@ -239,7 +237,7 @@ Partial Class CartaDePorteInformesGerenciales
         '    cmbInforme.Items.FindByText("Totales generales por mes").Enabled = True
         'End If
 
-        
+
 
 
         '////////////////////////////////////////////

@@ -45,3 +45,47 @@ Object reference not set to an instance of an object.
    at Admin_EditarUsuario.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:line 82
 BusinessLogic
 __________________________
+
+Log Entry : 
+09/27/2016 10:13:25
+Error in: http://localhost:58911/login.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 176
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2016 10:13:25
+Error in: http://localhost:58911/login.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 178
+App_Web_login.aspx.cdcab7d2.owq0qdgh
+__________________________
+
+Log Entry : 
+09/27/2016 10:13:33
+Error in: http://localhost:58911/login.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 176
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2016 10:13:33
+Error in: http://localhost:58911/login.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 178
+App_Web_login.aspx.cdcab7d2.owq0qdgh
+__________________________
