@@ -76,7 +76,7 @@ Public Class ConsultasLinq
         'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
         db.CommandTimeout = 5 * 60 ' 3 Mins
-
+        ddddd()
         'If False Then
 
         '    ''Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
