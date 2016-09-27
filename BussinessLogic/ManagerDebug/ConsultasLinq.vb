@@ -347,12 +347,12 @@ Public Class ConsultasLinq
         'updates the compatibility level of the database and fixes the problem.
 
 
-        Dim aaa = From xz In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, Nothing,
-                                                                 Nothing, idDestinatario, Nothing, Nothing, Nothing, Nothing, idDestino, Nothing,
-                                                                     ModoExportacion, fechadesde, fechahasta, puntoventa,
-                                                                  Nothing,
-                                                                    Nothing, Nothing, Nothing,
-                                                                 Nothing, Nothing, Nothing, Nothing)
+        Dim aaa = From xz In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, idVendedor,
+                                                idCorredor, idDestinatario, idIntermediario, idRemComercial,
+                                                idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion,
+                                                fechadesde, fechahasta, puntoventa,
+                                                Nothing, Nothing, Nothing, Nothing,
+                                                Nothing, Nothing, Nothing, Nothing)
                         Select xz
 
         'aaa.ToList()
@@ -381,6 +381,7 @@ Public Class ConsultasLinq
         '          ) _
         '    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
 
+
         Dim qq = From cdp In aaa _
                 From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
                 From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
@@ -397,12 +398,12 @@ Public Class ConsultasLinq
                 From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty _
                 From pd1 In db.ListasPreciosDetalles _
                         .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
-                            And (i.IdCliente Is Nothing Or i.IdCliente = clisub1.IdCliente)) _
+                            And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                         .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
                 From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty _
                 From pd2 In db.ListasPreciosDetalles _
                         .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
-                            And (i.IdCliente Is Nothing Or i.IdCliente = clisub1.IdCliente)) _
+                               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                         .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
                 Where 1 = 1 _
                       And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
@@ -442,9 +443,13 @@ Public Class ConsultasLinq
                     .tarif2 = CDec(If(If( _
                         (cdp.Exporta = "SI") _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                pd2.PrecioDescargaExportacion, pd2.PrecioVagonesBalanzaExportacion) _
+                                pd2.PrecioDescargaExportacion, _
+                                If(pd2.PrecioVagonesBalanzaExportacion = 0, pd2.PrecioVagonesCaladaExportacion, pd2.PrecioVagonesBalanzaExportacion) _
+                                ) _
                         , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                pd2.PrecioDescargaLocal, pd2.PrecioVagonesBalanza) _
+                                pd2.PrecioDescargaLocal, _
+                                If(pd2.PrecioVagonesBalanza = 0, pd2.PrecioVagonesCalada, pd2.PrecioVagonesBalanza) _
+                                ) _
                                 ), 0)), _
                     .Exporta = cdp.Exporta, _
                     cdp.Corredor, _
