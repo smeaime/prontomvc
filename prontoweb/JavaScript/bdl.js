@@ -163,7 +163,10 @@ function getBaseURL() {
     var url = location.href.toLowerCase();;  // entire url including querystring - also: window.location.href;
     var baseURL = url.substring(0, url.indexOf('/', 14)); // qué quiere decir el 14? -desde dónde empieza...
 
-    if (url.indexOf('williamsentregas') != -1) {
+    if (url.indexOf('bdlconsultores') != -1) {
+        return "https://prontotesting.bdlconsultores.com.ar/";
+    }
+    else if (url.indexOf('williamsentregas') != -1) {
         return "https://prontoweb.williamsentregas.com.ar/";
     }
     else if (url.indexOf('williamsdebug') != -1) {
