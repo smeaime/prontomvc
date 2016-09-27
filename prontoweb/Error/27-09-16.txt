@@ -1,0 +1,47 @@
+
+Log Entry : 
+09/27/2016 09:49:16
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2016 09:51:12
+Error in: http://localhost:58911/Admin/EditarUsuario.aspx?UserName=mgarcia. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at UserDatosExtendidosManager.TraerRazonSocialDelUsuario(String UserId, String ConexBDLmaster, String SC) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 18774
+   at Admin_EditarUsuario.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:line 80
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2016 09:53:20
+Error in: http://localhost:58911/Admin/EditarUsuario.aspx?UserName=mgarcia. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at UserDatosExtendidosManager.TraerRazonSocialDelUsuario(String UserId, String ConexBDLmaster, String SC) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 18774
+   at Admin_EditarUsuario.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:line 80
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2016 09:53:31
+Error in: http://localhost:58911/Admin/EditarUsuario.aspx?UserName=mgarcia. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at UserDatosExtendidosManager.TraerRazonSocialDelUsuario(String UserId, String ConexBDLmaster, String SC) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 18774
+   at Admin_EditarUsuario.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:line 82
+BusinessLogic
+__________________________
