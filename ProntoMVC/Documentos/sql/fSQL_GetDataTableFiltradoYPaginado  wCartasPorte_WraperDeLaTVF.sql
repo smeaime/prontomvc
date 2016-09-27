@@ -252,8 +252,9 @@ where 1=1
 					) 
 				)
 
-	AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
-	       
+	  --If Not bTraerDuplicados Then 
+	  AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
+	  
 
 go
 
@@ -266,8 +267,8 @@ go
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-/*
-select  * --count(*)
+
+select  exporta, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				( 
 					NULL, 
@@ -283,12 +284,12 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 
 					NULL, 
-					32, 
+					NULL, 
 					NULL,
-				 	'Entregas', 
-					'2016-01-07 00:00:00',
+				 	'Export', 
+					'2016-01-09 00:00:00',
 
-					'2016-31-07 00:00:00',
+					'2016-30-09 00:00:00',
 					NULL, 
 					NULL,
 					NULL, 
@@ -304,7 +305,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
             
 go
 
-*/
+
 
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
 go
