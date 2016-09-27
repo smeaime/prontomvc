@@ -1572,6 +1572,11 @@
             <TablixMember />
             <TablixMember>
               <Group Name="Details" />
+              <SortExpressions>
+                <SortExpression>
+                  <Value>=Fields!DestinoDesc.Value</Value>
+                </SortExpression>
+              </SortExpressions>
             </TablixMember>
             <TablixMember />
           </TablixMembers>
@@ -1776,13 +1781,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Avg(
+                    <Value>=round(Avg(
 Code.IsNullOrZero(Fields!NetoFinal.Value,Code.IsNull(Fields!NetoPto.Value,0)) -
 Code.IsNullOrZero(Fields!NetoPto.Value,Code.IsNull(Fields!NetoFinal.Value,0))	
-)</Value>
+))</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
-                      <Format>0.00</Format>
+                      <Format>N0</Format>
                       <Color>White</Color>
                     </Style>
                   </TextRun>
@@ -1813,13 +1818,13 @@ Code.IsNullOrZero(Fields!NetoPto.Value,Code.IsNull(Fields!NetoFinal.Value,0))
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Avg(
+                    <Value>=round(Avg(
 Code.IsNullOrZero(Fields!TaraFinal.Value,Code.IsNull(Fields!TaraPto.Value,0)) -
 Code.IsNullOrZero(Fields!TaraPto.Value,Code.IsNull(Fields!TaraFinal.Value,0))	
-)</Value>
+))</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
-                      <Format>0.00</Format>
+                      <Format>N0</Format>
                       <Color>White</Color>
                     </Style>
                   </TextRun>
@@ -1850,13 +1855,13 @@ Code.IsNullOrZero(Fields!TaraPto.Value,Code.IsNull(Fields!TaraFinal.Value,0))
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Avg(
+                    <Value>=round(Avg(
 Code.IsNullOrZero(Fields!BrutoFinal.Value,Code.IsNull(Fields!BrutoPto.Value,0)) -
 Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))	
-)</Value>
+))</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
-                      <Format>0.00</Format>
+                      <Format>N0</Format>
                       <Color>White</Color>
                     </Style>
                   </TextRun>

@@ -366,18 +366,18 @@ create procedure  wCartasPorte_WraperDeLaTVF
 
 		*
 
-		from dbo.fSQL_GetDataTableFiltradoYPaginado
+    	from dbo.fSQL_GetDataTableFiltradoYPaginado
 		( 
-							NULL, 
-							NULL, 
-							NULL,
-							NULL, 
-							NULL, 
+							@startRowIndex, 
+							@maximumRows, 
+							@estado,
+							@QueContenga, 
+							@idVendedor, 
 
-							NULL, 
-							NULL, 
-							NULL,
-							NULL, 
+							@idCorredor, 
+							@idDestinatario, 
+							@idIntermediario,
+							@idRemComercial, 
 							@idArticulo,
 
 							@idProcedencia,
@@ -388,16 +388,16 @@ create procedure  wCartasPorte_WraperDeLaTVF
 							@fechadesde,
 
 							@fechahasta, 
-							NULL, 
-							NULL,
-							NULL, 
-							NULL, 
+							@puntoventa, 
+							@optDivisionSyngenta,
+							@Contrato, 
+							@QueContenga2, 
 
-							NULL, 
-							NULL, 
-							NULL,
-							NULL, 
-							NULL
+							@idClienteAuxiliarint, 
+							@AgrupadorDeTandaPeriodos, 
+							@Vagon,
+							@Patente, 
+							@optCamionVagon
 
 							) as cdp
 
