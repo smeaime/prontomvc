@@ -687,7 +687,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Patente.Value</Value>
+                              <Value>=iif(Fields!SubnumeroVagon.Value&gt;0,"vagón " &amp; Fields!SubnumeroVagon.Value &amp; " - ","") &amp; Fields!Patente.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -2071,7 +2071,7 @@ Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))
   <DataSets>
     <DataSet Name="ds1">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
+        <DataSourceName>TestHarcodeada</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@startRowIndex">
             <Value>=Parameters!startRowIndex.Value</Value>
@@ -3035,6 +3035,7 @@ Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))
     <ReportParameter Name="optDivisionSyngenta">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>opt Division Syngenta</Prompt>
     </ReportParameter>
     <ReportParameter Name="Contrato">
@@ -3065,6 +3066,7 @@ Code.IsNullOrZero(Fields!BrutoPto.Value,Code.IsNull(Fields!BrutoFinal.Value,0))
     <ReportParameter Name="Patente">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>Patente</Prompt>
     </ReportParameter>
     <ReportParameter Name="optCamionVagon">
