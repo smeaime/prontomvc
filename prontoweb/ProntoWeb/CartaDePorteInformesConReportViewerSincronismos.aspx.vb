@@ -3247,7 +3247,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                     Dim rep As Microsoft.Reporting.WebForms.ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
 
-                    Dim yourParams(26) As ReportParameter
+                    Dim yourParams(27) As ReportParameter
                     yourParams(0) = New ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(HFSC.Value))
                     yourParams(1) = New ReportParameter("sServidorWeb", ConfigurationManager.AppSettings("UrlDominio"))
                     yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#).ToString))
@@ -3262,21 +3262,22 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     yourParams(8) = New ReportParameter("estado", estadofiltro)
                     yourParams(9) = New ReportParameter("QueContenga", "0")
                     yourParams(10) = New ReportParameter("idVendedor", idVendedor.ToString())
-                    yourParams(11) = New ReportParameter("idDestinatario", idDestinatario.ToString())
-                    yourParams(12) = New ReportParameter("idIntermediario", idIntermediario)
-                    yourParams(13) = New ReportParameter("idRemComercial", idRComercial)
-                    yourParams(14) = New ReportParameter("idArticulo", idArticulo)
-                    yourParams(15) = New ReportParameter("idProcedencia", idProcedencia)
-                    yourParams(16) = New ReportParameter("AplicarANDuORalFiltro", CInt(IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR)))
-                    yourParams(17) = New ReportParameter("ModoExportacion", DropDownList2.Text)
-                    yourParams(18) = New ReportParameter("optDivisionSyngenta", "-1")
-                    yourParams(19) = New ReportParameter("Contrato", "-1")
-                    yourParams(20) = New ReportParameter("QueContenga2", "-1")
-                    yourParams(21) = New ReportParameter("idClienteAuxiliarint", "-1")
-                    yourParams(22) = New ReportParameter("AgrupadorDeTandaPeriodos", "-1")
-                    yourParams(23) = New ReportParameter("Vagon", "-1")
-                    yourParams(24) = New ReportParameter("Patente", "-1")
-                    yourParams(25) = New ReportParameter("optCamionVagon", "-1")
+                    yourParams(11) = New ReportParameter("idCorredor", idCorredor.ToString())
+                    yourParams(12) = New ReportParameter("idDestinatario", idDestinatario.ToString())
+                    yourParams(13) = New ReportParameter("idIntermediario", idIntermediario)
+                    yourParams(14) = New ReportParameter("idRemComercial", idRComercial)
+                    yourParams(15) = New ReportParameter("idArticulo", idArticulo)
+                    yourParams(16) = New ReportParameter("idProcedencia", idProcedencia)
+                    yourParams(17) = New ReportParameter("AplicarANDuORalFiltro", CInt(IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR)))
+                    yourParams(18) = New ReportParameter("ModoExportacion", DropDownList2.Text)
+                    yourParams(19) = New ReportParameter("optDivisionSyngenta", optDivisionSyngenta.Text)
+                    yourParams(20) = New ReportParameter("Contrato", "-1")
+                    yourParams(21) = New ReportParameter("QueContenga2", "-1")
+                    yourParams(22) = New ReportParameter("idClienteAuxiliarint", idClienteAuxiliar.ToString)
+                    yourParams(23) = New ReportParameter("AgrupadorDeTandaPeriodos", "-1")
+                    yourParams(24) = New ReportParameter("Vagon", IIf(txtVagon.Text = "", 0, txtVagon.Text).ToString)
+                    yourParams(25) = New ReportParameter("Patente", txtPatente.Text)
+                    yourParams(26) = New ReportParameter("optCamionVagon", optCamionVagon.Text)
 
 
                     Dim titulo As String = ""
@@ -3289,7 +3290,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                             Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
                              cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , _
                             txtContrato.Text, idClienteAuxiliar)
-                    yourParams(26) = New ReportParameter("Titulo", titulo)
+                    yourParams(27) = New ReportParameter("Titulo", titulo)
 
 
 
