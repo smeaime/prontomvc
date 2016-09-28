@@ -236,6 +236,17 @@ where 1=1
 
 
 
+	
+    AND (  
+			(@optCamionVagon = 'Camiones' AND isnull(CDP.SubNumeroVagon,'')='' )
+			OR 
+			(@optCamionVagon = 'Vagones' AND isnull(CDP.SubNumeroVagon,'')<>'')
+			OR 
+			@optCamionVagon = 'Todos' OR @optCamionVagon  IS NULL
+		)
+
+	AND	 (@Vagon IS NULL OR  @Vagon=0 or CDP.SubnumeroVagon=@Vagon) 
+
 
 
 
@@ -286,7 +297,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 					NULL, 
 					NULL,
-				 	'Export', 
+				 	'Todos', 
 					'2016-01-09 00:00:00',
 
 					'2016-30-09 00:00:00',
