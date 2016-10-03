@@ -2742,363 +2742,392 @@ namespace ProntoMVC.Controllers
 
 
 
-        public void AsignaComprador(List<int> idRMs)
+        public JsonResult AsignaComprador(List<int> idDetalleRequerimientos, string userComprador, string passComprador)
         {
-            /*
-   Dim mvarOK As Boolean
-   
-   Dim oF As frmAutorizacion2
-   Set oF = New frmAutorizacion2
-   With oF
-      .Sector = "Compras"
-      .Show vbModal, Me
-   End With
-   mvarOK = oF.Ok
-   Unload oF
-   Set oF = Nothing
-   If Not mvarOK Then
-'      MsgBox "Solo personal de COMPRAS puede asignar comprador", vbExclamation
-      Exit Sub
-   End If
-   
-   Dim oF1 As frmAsignaComprador
-   Dim oL As ListItem
-   Dim oReq As ComPronto.Requerimiento
-   Dim oDetR As ComPronto.DetRequerimiento
-   Dim oRs1 As ADOR.Recordset
-   Dim mvarIdComprador As Long
-   Dim iFilas As Integer
-   Dim mvarComprador As String
-   Dim Filas, Columnas
-   
-   Set oF1 = New frmAsignaComprador
-   
-   With oF1
-      .Id = 1
-      .Show vbModal, Me
-      mvarOK = .Ok
-      If IsNumeric(.DataCombo1(0).BoundText) Then
-         mvarIdComprador = .DataCombo1(0).BoundText
-         mvarComprador = .DataCombo1(0).Text
-      End If
-   End With
-   
-   Unload oF1
-   Set oF1 = Nothing
-   
-   If Not mvarOK Then
-      Exit Sub
-   End If
-   
-   Me.MousePointer = vbHourglass
-   
-   Filas = VBA.Split(Lista.GetString, vbCrLf)
-   For iFilas = LBound(Filas) + 1 To UBound(Filas)
-      Columnas = VBA.Split(Filas(iFilas), vbTab)
-      Select Case ModoConsulta
-         Case 0
-            If IsNumeric(Columnas(18)) Then '.SubItems(17)
-               '.SubItems(4) = "" & mvarComprador
-               If IsNumeric(Columnas(17)) Then
-                  Set oReq = Aplicacion.Requerimientos.Item(Columnas(18))
-                  Set oDetR = oReq.DetRequerimientos.Item(Columnas(17))
-                  oDetR.Registro.Fields("IdComprador").Value = mvarIdComprador
-                  oDetR.Registro.Fields("FechaAsignacionComprador").Value = Now
-                  oDetR.Modificado = True
-                  '.SmallIcon = "Modificado"
-                  oReq.Guardar
-                  Set oDetR = Nothing
-                  Set oReq = Nothing
-               End If
-            End If
-         Case 1
-            If IsNumeric(Columnas(8)) Then '.SubItems(7)
-               '.SubItems(3) = "" & mvarComprador
-               Set oReq = Aplicacion.Requerimientos.Item(Columnas(8))
-               oReq.Registro.Fields("IdComprador").Value = mvarIdComprador
-               Set oRs1 = oReq.DetRequerimientos.TraerTodos
-               With oRs1
-                  If .RecordCount > 0 Then
-                     .MoveFirst
-                     Do While Not .EOF
-                        Set oDetR = oReq.DetRequerimientos.Item(.Fields(0).Value)
-                        oDetR.Registro.Fields("IdComprador").Value = mvarIdComprador
-                        oDetR.Registro.Fields("FechaAsignacionComprador").Value = Now
-                        oDetR.Modificado = True
-                        Set oDetR = Nothing
-                        .MoveNext
-                     Loop
-                  End If
-                  .Close
-               End With
-               oReq.Guardar
-               oReq.GuardarNovedadUsuario 1, mvarIdComprador, "RM: " & oReq.Registro.Fields("NumeroRequerimiento").Value
-               Set oReq = Nothing
-            End If
-      End Select
-   Next
-   */
-        }
-
-
-        public void DarPorCumplido(List<int> idRMs)
-        {
-            /*
-
-           Dim mvarOK As Boolean
-           Dim mvarIdAutorizo As Long
-   
-           Dim oF As frmAutorizacion2
-           Set oF = New frmAutorizacion2
-           With oF
-              .Sector = "Compras"
-              .Show vbModal, Me
-           End With
-           mvarOK = oF.Ok
-           mvarIdAutorizo = oF.IdAutorizo
-           Unload oF
-           Set oF = Nothing
-        
-           Dim oF1 As frmAsignarComoCumplido
-           Dim oL As ListItem
-           Dim oReq As ComPronto.Requerimiento
-           Dim oDetR As ComPronto.DetRequerimiento
-           Dim oRs1 As ADOR.Recordset
-           Dim mvarIdDioPorCumplido As Long
-           Dim i As Integer
-           Dim mAux1 As String
-           Dim Filas, Columnas
-   
-           Set oF1 = New frmAsignarComoCumplido
-           With oF1
-              .Show vbModal, Me
-              mvarOK = .Ok
-              If IsNumeric(.dcfields(1).BoundText) Then mvarIdDioPorCumplido = .dcfields(1).BoundText
-              rchObservacionesCumplido.Text = .rchObservacionesCumplido.Text
-           End With
-           Unload oF1
-           Set oF1 = Nothing
-   
-           If Not mvarOK Then Exit Sub
-   
-           Me.MousePointer = vbHourglass
-   
-           mAux1 = BuscarClaveINI("Avisar al solicitante de la RM que fue dada por cumplida")
-   
-           Filas = VBA.Split(Lista.GetString, vbCrLf)
-           For i = 1 To UBound(Filas)
-              Columnas = VBA.Split(Filas(i), vbTab)
-              Select Case ModoConsulta
-                 Case 0
-                    If IsNumeric(Columnas(18)) And Columnas(23) <> "SI" Then
-                       Columnas(23) = "SI"
-                       If IsNumeric(Columnas(18)) Then
-                          Set oReq = Aplicacion.Requerimientos.Item(Columnas(18))
-                          Set oDetR = oReq.DetRequerimientos.Item(Columnas(17))
-                          oDetR.Registro.Fields("Cumplido").Value = "SI"
-                          oDetR.Registro.Fields("IdAutorizoCumplido").Value = mvarIdAutorizo
-                          oDetR.Registro.Fields("IdDioPorCumplido").Value = mvarIdDioPorCumplido
-                          oDetR.Registro.Fields("FechaDadoPorCumplido").Value = Now
-                          oDetR.Registro.Fields("ObservacionesCumplido").Value = rchObservacionesCumplido.Text
-                          oDetR.Modificado = True
-                          '.SmallIcon = "Modificado"
-                          If mAux1 = "SI" Then oReq.GuardarNovedadUsuario 1, oReq.Registro.Fields("IdSolicito").Value, "RM " & oReq.Registro.Fields("NumeroRequerimiento").Value & " dada por cumplida : " & mId(rchObservacionesCumplido.Text, 1, 175)
-                          oReq.Guardar
-                          Set oDetR = Nothing
-                          Set oReq = Nothing
-                          Aplicacion.Tarea "Requerimientos_ActualizarEstado", Array(Columnas(18), 0)
-                       End If
-                    End If
-                 Case 1
-                    If IsNumeric(Columnas(8)) And Columnas(7) <> "SI" Then
-                       Columnas(7) = "SI"
-                       Set oReq = Aplicacion.Requerimientos.Item(Columnas(8))
-                       oReq.Registro.Fields("Cumplido").Value = "SI"
-                       oReq.Registro.Fields("IdAutorizoCumplido").Value = mvarIdAutorizo
-                       oReq.Registro.Fields("IdDioPorCumplido").Value = mvarIdDioPorCumplido
-                       oReq.Registro.Fields("FechaDadoPorCumplido").Value = Now
-                       oReq.Registro.Fields("ObservacionesCumplido").Value = rchObservacionesCumplido.Text
-                       Set oRs1 = oReq.DetRequerimientos.TraerTodos
-                       With oRs1
-                          If .RecordCount > 0 Then
-                             .MoveFirst
-                             Do While Not .EOF
-                                Set oDetR = oReq.DetRequerimientos.Item(.Fields(0).Value)
-                                oDetR.Registro.Fields("Cumplido").Value = "SI"
-                                oDetR.Registro.Fields("IdAutorizoCumplido").Value = mvarIdAutorizo
-                                oDetR.Registro.Fields("IdDioPorCumplido").Value = mvarIdDioPorCumplido
-                                oDetR.Registro.Fields("FechaDadoPorCumplido").Value = Now
-                                oDetR.Registro.Fields("ObservacionesCumplido").Value = rchObservacionesCumplido.Text
-                                oDetR.Modificado = True
-                                Set oDetR = Nothing
-                                .MoveNext
-                             Loop
-                          End If
-                          .Close
-                       End With
-                       If mAux1 = "SI" Then oReq.GuardarNovedadUsuario 1, oReq.Registro.Fields("IdSolicito").Value, "RM " & oReq.Registro.Fields("NumeroRequerimiento").Value & " dada por cumplida : " & mId(rchObservacionesCumplido.Text, 1, 175)
-                       oReq.Guardar
-                       Set oReq = Nothing
-                       Aplicacion.Tarea "Requerimientos_ActualizarEstado", Array(Columnas(8), 0)
-                    End If
-              End Select
-           Next
-
-        End Sub
-
-            */
-
-        }
 
 
 
-        public void GenerarValesAlmacen(List<int> idRMs)
-        {
-            /*
-            
-     bool mvarOK;
-long mvarIdAutorizo;
-string mSector;
+            //autoriza
+            //   Dim oF As frmAutorizacion2
+            //   Set oF = New frmAutorizacion2
+            //   With oF
+            //      .Sector = "Compras"
+            //      .Show vbModal, Me
+            //   End With
+            //   mvarOK = oF.Ok
+            //   Unload oF
+            //   Set oF = Nothing
+            //   If Not mvarOK Then
+            //'      MsgBox "Solo personal de COMPRAS puede asignar comprador", vbExclamation
+            //      Exit Sub
+            //   End If
+            int mvarIdComprador = 0;  sale de la autorizacion
 
-DataTable oRs;
 
-mSector = "Compras";
+            //asigna comprador
+            //Dim oF1 As frmAsignaComprador
+            //Dim oL As ListItem
+            //Dim oReq As ComPronto.Requerimiento
+            //Dim oDetR As ComPronto.DetRequerimiento
+            //Dim oRs1 As ADOR.Recordset
+            //Dim mvarIdComprador As Long
+            //Dim iFilas As Integer
+            //Dim mvarComprador As String
+            //Dim Filas, Columnas
 
-                        var mAux1 = db.Parametros2.Where(p => p.Campo == "IdSectorReasignador").FirstOrDefault();
-            if (Parametros2 != null) { if ((Parametros2.Valor ?? "") == "SI") { glbDebugFacturaElectronica = true; } }
+            //Set oF1 = New frmAsignaComprador
 
-            
+            //With oF1
+            //   .Id = 1
+            //   .Show vbModal, Me
+            //   mvarOK = .Ok
+            //   If IsNumeric(.DataCombo1(0).BoundText) Then
+            //      mvarIdComprador = .DataCombo1(0).BoundText
+            //      mvarComprador = .DataCombo1(0).Text
+            //   End If
+            //End With
 
+            //Unload oF1
+            //Set oF1 = Nothing
 
-var mAux1 = TraerValorParametro2("IdSectorReasignador");
-if ((!IsNull(mAux1) 
-            && IsNumeric(mAux1))) {
-    oRs = Aplicacion.Sectores.TraerFiltrado("_PorId", double.Parse(mAux1));
-    if ((oRs.RecordCount > 0)) {
-        mSector = ( IsNull(oRs.Fields("Descripcion").Value) ? "" : oRs.Fields("Descripcion").Value );
-    }
-    
-    oRs.Close;
-}
+            //If Not mvarOK Then
+            //   Exit Sub
+            //End If
 
-frmAutorizacion2 oF;
-SetoF = new frmAutorizacion2();
+            //Me.MousePointer = vbHourglass
 
-            if (!mvarOK) {
-    return;
-}
+            int ModoConsulta = 0;
 
-ComPronto.Aplicacion oAp;
-ComPronto.Requerimiento oReq;
-ComPronto.DetRequerimiento oDetR;
-frmValesSalida oF1;
-ListItem oL;
-int i;
-string s;
-,string s1;
-,string mObra;
-,string mAviso;
-object Filas;
-s = "";
-Filas = StringRequerimientos.Split("\r\n");
-for (i = 1; (i <= UBound(Filas)); i++) {
-    Columnas = Filas(i).Split('\t');
-    vbModal;
-    Ok;
-    IdAutorizo;
-    object Columnas;
-    if ((i == 1)) {
-        mObra = Columnas(4);
-    }
-    
-    if ((mObra != Columnas(4))) {
-        MsgBox;
-        "Hay items con distinta Obra/C.Costos, deben ser iguales";
-        vbExclamation;
-        return;
-    }
-    
-    s = (s 
-                + (Columnas(2) + ","));
-}
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
 
-if ((s.Length > 0)) {
-    s = s.Substring(0, (s.Length - 1));
-}
+            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+            {
+                if (ModoConsulta == 0)
+                {
 
-mAviso = "";
-Filas = StringRequerimientos.Split("\r\n");
-for (i = 1; (i <= UBound(Filas)); i++) {
-    Columnas = Filas(i).Split('\t');
-    if (IsNumeric(Columnas(2))) {
-        oRs = Aplicacion.Requerimientos.TraerFiltrado("_DatosRequerimiento", Columnas(2));
-        if ((oRs.RecordCount > 0)) {
-            s1 = ( IsNull(oRs.Fields("ObservacionesFirmante").Value) ? "" : oRs.Fields("ObservacionesFirmante").Value );
-            if ((s1.Length > 0)) {
-                mAviso = (mAviso + ("\r\n" + ("La RM " 
-                            + (oRs.Fields("NumeroRequerimiento").Value + (" item " 
-                            + (oRs.Fields("NumeroItem").Value + " esta observada por el firmante."))))));
+                    detrm.IdComprador = mvarIdComprador;
+                    detrm.FechaAsignacionComprador = DateTime.Now;
+
+                }
+
+                /*
+Case 1
+    If IsNumeric(Columnas(8)) Then '.SubItems(7)
+       '.SubItems(3) = "" & mvarComprador
+       Set oReq = Aplicacion.Requerimientos.Item(Columnas(8))
+       oReq.Registro.Fields("IdComprador").Value = mvarIdComprador
+       Set oRs1 = oReq.DetRequerimientos.TraerTodos
+       With oRs1
+          If .RecordCount > 0 Then
+             .MoveFirst
+             Do While Not .EOF
+                Set oDetR = oReq.DetRequerimientos.Item(.Fields(0).Value)
+                oDetR.Registro.Fields("IdComprador").Value = mvarIdComprador
+                oDetR.Registro.Fields("FechaAsignacionComprador").Value = Now
+                oDetR.Modificado = True
+                Set oDetR = Nothing
+                .MoveNext
+             Loop
+          End If
+          .Close
+       End With
+       oReq.Guardar
+       oReq.GuardarNovedadUsuario 1, mvarIdComprador, "RM: " & oReq.Registro.Fields("NumeroRequerimiento").Value
+       Set oReq = Nothing
+    End If
+                 * */
+
             }
-            
-        }
-        
-        oRs.Close;
-    }
-    
-}
 
-if ((mAviso.Length > 0)) {
-    DoEvents;
-    MsgBox;
-    ("Notificaciones en generacion de vale : " + mAviso);
-    System.Windows.Forms.MessageBoxIcon.Information;
-}
+            db.SaveChanges();
 
-SetoF1 = new frmValesSalida();
-// With...
-SetoF1 = null;
-if (!mvarOK) {
-    return;
-}
 
-SetoAp = Aplicacion;
-Filas = StringRequerimientos.Split("\r\n");
-for (i = 1; (i <= UBound(Filas)); i++) {
-    Columnas = Filas(i).Split('\t');
-    vbModal;
-    s.NivelAcceso = (1.Show * -1);
-    oF1.DetalleRequerimientos = (1.Show * -1);
-    Ok;
-    if (IsNumeric(Columnas(3))) {
-        oReq = oAp.Requerimientos.Item[Columnas(3)];
-        oDetR = oReq.DetRequerimientos.Item[Columnas(2)];
-        oRs = oAp.Parametros.TraerFiltrado("_PorId", 1);
-        if ((!IsNull(oRs.Fields("ActivarSolicitudMateriales").Value) 
-                    && (oRs.Fields("ActivarSolicitudMateriales").Value == "SI"))) {
-            oDetR.Registro.Fields("TipoDesignacion").Value = "STK";
-            oDetR.Modificado = true;
-            oReq.Guardar;
-            // OJO QUE ESTA COMENTADO ABAJO
-        }
-        
-        oRs.Close;
-        //          oReq.Guardar
-        oDetR = null;
-        oReq = null;
-        oRs = null;
-        oAp.Tarea;
-        "Requerimientos_ActualizarEstado";
-        Array(Columnas(3), 0);
-    }
-    
-}
-
-            */
-            
-
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
 
 
 
+
+
+        public JsonResult DarPorCumplido(List<int> idDetalleRequerimientos, string userAutorizador, string passAutorizador, string userCumplidor, string sObsCumplido)
+        {
+
+
+            int mvarIdDioPorCumplido = userCumplidor;
+            int mvarIdAutorizo = userAutorizador;
+
+            // pedir autorizacion    
+            //Dim oF As frmAutorizacion2
+            //Set oF = New frmAutorizacion2
+            //With oF
+            //   .Sector = "Compras"
+            //   .Show vbModal, Me
+            //End With
+            //mvarOK = oF.Ok
+            //mvarIdAutorizo = oF.IdAutorizo
+            //Unload oF
+            //Set oF = Nothing
+
+            DataTable oRs1;
+            bool mvarOK;
+            string mAux1;
+
+
+            //otra autorizacion?
+            //Set oF1 = New frmAsignarComoCumplido
+            //With oF1
+            //   .Show vbModal, Me
+            //   mvarOK = .Ok
+            //   If IsNumeric(.dcfields(1).BoundText) Then mvarIdDioPorCumplido = .dcfields(1).BoundText
+            //   rchObservacionesCumplido.Text = .rchObservacionesCumplido.Text
+            //End With
+            //Unload oF1
+            //Set oF1 = Nothing
+
+            //If Not mvarOK Then Exit Sub
+
+
+            int ModoConsulta = 0; // esto depende de qué tipo de rmspendientes se listaron 
+
+            mAux1 = BuscarClaveINI("Avisar al solicitante de la RM que fue dada por cumplida");
+
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+
+            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+            {
+
+                if (ModoConsulta == 0)
+                {
+                    if (detrm.Cumplido != "SI")
+                    {
+
+                        detrm.Cumplido = "SI";
+                        detrm.IdAutorizoCumplido = mvarIdAutorizo;
+                        detrm.IdDioPorCumplido = mvarIdDioPorCumplido;
+                        detrm.FechaDadoPorCumplido = DateTime.Now;
+                        detrm.ObservacionesCumplido = sObsCumplido;
+
+
+                        if (mAux1 == "SI")
+                        {
+                            GuardarNovedadUsuario(1, detrm.Requerimientos.IdSolicito ?? 0,
+                                    "RM " + detrm.Requerimientos.NumeroRequerimiento +
+                                    " dada por cumplida : " + sObsCumplido.Substring(0, 175));
+                        }
+
+                        db.SaveChanges();
+                        EntidadManager.Tarea(SC, "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, 0);
+
+                    }
+                }
+
+                /*     
+                Case 1
+                        If IsNumeric(Columnas(8)) And Columnas(7) <> "SI" Then
+                           Columnas(7) = "SI"
+                           Set oReq = Aplicacion.Requerimientos.Item(Columnas(8))
+                           oReq.Registro.Fields("Cumplido").Value = "SI"
+                           oReq.Registro.Fields("IdAutorizoCumplido").Value = mvarIdAutorizo
+                           oReq.Registro.Fields("IdDioPorCumplido").Value = mvarIdDioPorCumplido
+                           oReq.Registro.Fields("FechaDadoPorCumplido").Value = Now
+                           oReq.Registro.Fields("ObservacionesCumplido").Value = rchObservacionesCumplido.Text
+                           Set oRs1 = oReq.DetRequerimientos.TraerTodos
+                           With oRs1
+                              If .RecordCount > 0 Then
+                                 .MoveFirst
+                                 Do While Not .EOF
+                                    Set oDetR = oReq.DetRequerimientos.Item(.Fields(0).Value)
+                                    oDetR.Registro.Fields("Cumplido").Value = "SI"
+                                    oDetR.Registro.Fields("IdAutorizoCumplido").Value = mvarIdAutorizo
+                                    oDetR.Registro.Fields("IdDioPorCumplido").Value = mvarIdDioPorCumplido
+                                    oDetR.Registro.Fields("FechaDadoPorCumplido").Value = Now
+                                    oDetR.Registro.Fields("ObservacionesCumplido").Value = rchObservacionesCumplido.Text
+                                    oDetR.Modificado = True
+                                    Set oDetR = Nothing
+                                    .MoveNext
+                                 Loop
+                              End If
+                              .Close
+                           End With
+                           If mAux1 = "SI" Then oReq.GuardarNovedadUsuario 1, oReq.Registro.Fields("IdSolicito").Value, "RM " & oReq.Registro.Fields("NumeroRequerimiento").Value & " dada por cumplida : " & mId(rchObservacionesCumplido.Text, 1, 175)
+                           oReq.Guardar
+                           Set oReq = Nothing
+                           Aplicacion.Tarea "Requerimientos_ActualizarEstado", Array(Columnas(8), 0)
+                        End If
+                 * */
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+        public JsonResult GenerarValesAlmacen(List<int> idDetalleRequerimientos, string user, string pass)
+        {
+
+
+            bool mvarOK;
+            long mvarIdAutorizo;
+
+            DataTable oRs;
+
+
+
+
+
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+
+            string mSector;
+            mSector = "Compras"; // se usa para la autorizacion
+
+            //bool glbDebugFacturaElectronica = false;
+            //            var mAux1 = db.Parametros2.Where(p => p.Campo == "IdSectorReasignador").FirstOrDefault();
+            //if ((mAux1.Valor ?? "") == "SI") { glbDebugFacturaElectronica = true; } 
+
+            try
+            {
+
+                var mAux2 = ParametroManager.TraerValorParametro2(SCsql(), "IdSectorReasignador");
+                var sss = db.Sectores.Find(mAux2);
+                mSector = sss.Descripcion;
+            }
+            catch (Exception)
+            {
+
+                ///   throw;
+            }
+
+            // hay que autorizar....
+            //frmAutorizacion2 oF;
+            //SetoF = new frmAutorizacion2();
+
+            //            if (!mvarOK) {
+            //    return;
+            //}
+
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+
+
+            object oAp;
+            object oReq;
+            object oDetR;
+            object oF1;
+            object oL;
+            int i;
+            string s;
+            string s1;
+            string mObra;
+            string mAviso;
+            object Filas;
+            s = "";
+
+            // le pasa mas datos en en string... ademas del id, pasa la obra, 
+
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+
+            if (reqs.Select(x => x.Requerimientos.IdObra).Distinct().Count() > 1)
+            {
+                string sError = "Hay items con distinta Obra/C.Costos, deben ser iguales";
+                return Json(sError);
+            }
+
+
+
+
+            if ((s.Length > 0))
+            {
+                s = s.Substring(0, (s.Length - 1));
+            }
+
+
+
+
+            mAviso = "";
+
+            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+            {
+                oRs = EntidadManager.GetStoreProcedure(SCsql(), "_DatosRequerimiento", detrm.IdDetalleRequerimiento);
+                if ((oRs.Rows.Count > 0))
+                {
+                    s1 = oRs.Rows[0]["ObservacionesFirmante"].ToString();
+                    if ((s1.Length > 0))
+                    {
+                        mAviso = (mAviso + ("\r\n" + ("La RM "
+                                    + (oRs.Rows[0]["NumeroRequerimiento"].ToString() + (" item "
+                                    + (oRs.Rows[0]["NumeroItem"].ToString() + " esta observada por el firmante."))))));
+                    }
+
+                }
+            }
+
+
+            if ((mAviso.Length > 0))
+            {
+                //devolverlo al final
+                //    MsgBox;    ("Notificaciones en generacion de vale : " + mAviso);    System.Windows.Forms.MessageBoxIcon.Information;
+            }
+
+
+
+            // acá tenemos otro formulario modal, UN ALTA DE VALE!!!
+            CrearAltaDeVale();
+            //Set oF1 = New frmValesSalida
+            //With oF1
+            //   .DetalleRequerimientos = s
+            //   .NivelAcceso = Alto
+            //   .Id = -1
+            //   .Show vbModal
+            //   mvarOK = .Ok
+            //End With
+            //Set oF1 = Nothing
+            //If Not mvarOK Then Exit Sub
+
+            //Set oAp = Aplicacion
+
+
+
+
+            bool ActivarSolicitudMateriales = (ParametroManager.TraerValorParametro2(SCsql(), "ActivarSolicitudMateriales").ToString() == "SI");
+
+            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+            {
+
+                if (ActivarSolicitudMateriales)
+                {
+                    detrm.TipoDesignacion = "STK";
+                    db.SaveChanges();
+                }
+
+                EntidadManager.Tarea(SCsql(), "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, detrm.IdDetalleRequerimiento);
+            }
+
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+
+
+        void CrearAltaDeVale()
+        {
+            var c = new ValeSalidaController();
+
+            var vale = new ValesSalida();
+
+            c.BatchUpdate(vale);
+
+        }
+
     }
+
 }
