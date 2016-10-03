@@ -3077,7 +3077,7 @@ Case 1
 
 
             // acá tenemos otro formulario modal, UN ALTA DE VALE!!!
-            CrearAltaDeVale();
+            CrearAltaDeVale(idDetalleRequerimientos, user, pass);
             //Set oF1 = New frmValesSalida
             //With oF1
             //   .DetalleRequerimientos = s
@@ -3118,11 +3118,24 @@ Case 1
 
 
 
-        void CrearAltaDeVale()
+        void CrearAltaDeVale(List<int> idDetalleRequerimientos, string user, string pass)
         {
-            var c = new ValeSalidaController();
 
+            var c = new ValeSalidaController();
             var vale = new ValesSalida();
+
+            vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First();
+
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+
+            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+            {
+                var detvale = new DetalleValesSalida();
+                detvale.IdArticulo = detrm.IdArticulo;
+
+
+                vale.DetalleValesSalidas.Add(detvale);
+            }
 
             c.BatchUpdate(vale);
 

@@ -323,7 +323,7 @@ namespace ProntoMVC.Controllers
                 oStaticMembershipService = new Generales.StaticMembershipService();
 
 
-                if (oStaticMembershipService.GetUser()==null)
+                if (oStaticMembershipService.GetUser() == null)
                 {
                     FormsAuthentication.SignOut();
                     Session.Abandon();
@@ -3367,7 +3367,59 @@ namespace ProntoMVC.Controllers
         private string GuardarNovedades(int IdEventoDelSistema, int IdEmpleado, string Detalle)
         {
 
-            return "";
+            db.DetalleEventosDelSistemas.nov
+
+                agregar fk
+
+          
+            if (IdEmpleado>0){
+           var nov= new NovedadesUsuario();
+               
+                nov.IdEmpleado= IdEmpleado ;
+                     nov.IdEventoDelSistema= IdEventoDelSistema;
+                    nov.FechaEvento=DateTime.Now;
+                    nov.Detalle = Detalle;
+                     nov.Confirmado = "NO";
+                
+            db.NovedadesUsuarios.Add(nov);
+
+                
+            }
+
+
+            CREATE Procedure [dbo].[EventosDelSistema_TX_IdEmpleadosPorIdEvento]
+@IdEventoDelSistema int
+AS 
+Select 
+DEV.IdDetalleEventoDelSistema,
+DEV.IdEmpleado
+FROM DetalleEventosDelSistema DEV
+LEFT OUTER JOIN EventosDelSistema EV ON DEV.IdEventoDelSistema=EV.IdEventoDelSistema
+where (EV.IdEventoDelSistema=@IdEventoDelSistema)
+
+
+    oRs = oDet.TraerFiltrado("EventosDelSistema", "_IdEmpleadosPorIdEvento", IdEventoDelSistema)
+   If oRs.RecordCount > 0 Then
+      Do While Not oRs.EOF
+         Set Datos = oDet.TraerFiltrado("NovedadesUsuarios", "_Estructura")
+         Set Datos = CopiarRs(Datos)
+         With Datos
+            .Fields(0).Value = -1
+            .Fields("IdEmpleado").Value = oRs.Fields("IdEmpleado").Value
+            .Fields("IdEventoDelSistema").Value = IdEventoDelSistema
+            .Fields("FechaEvento").Value = Now
+            .Fields("Detalle").Value = Detalle
+            .Fields("Confirmado").Value = "NO"
+            .Update
+         End With
+         Resp = oDet.Guardar("NovedadesUsuarios", Datos)
+         Datos.Close
+         Set Datos = Nothing
+         oRs.MoveNext
+      Loop
+   End If
+            
+
         }
 
 
@@ -3484,9 +3536,9 @@ End Function
         */
 
 
-    
-    
-    
+
+
+
     }
 
     public interface IProntoInterface<T>
