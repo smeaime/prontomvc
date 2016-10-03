@@ -3345,6 +3345,148 @@ namespace ProntoMVC.Controllers
 
             return 0;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public string GuardarNovedadUsuario(int IdNovedadUsuario, int IdEmpleado, string Detalle) // As MisEstados
+        {
+
+            return GuardarNovedades(IdNovedadUsuario, IdEmpleado, Detalle);
+        }
+
+        private string GuardarNovedades(int IdEventoDelSistema, int IdEmpleado, string Detalle)
+        {
+
+            return "";
+        }
+
+
+        /*
+
+        Public Function GuardarNovedadUsuario(ByVal IdNovedadUsuario As Integer, ByVal IdEmpleado As Integer, ByVal Detalle As String) As MisEstados
+
+   Dim oSrvNov As MTSPronto.NovedadUsuario
+   
+   On Error GoTo MalGuardar
+   
+   Set oSrvNov = CreateObject("MTSPronto.NovedadUsuario")
+   GuardarNovedadUsuario = oSrvNov.GuardarNovedades(IdNovedadUsuario, IdEmpleado, Detalle)
+   Set oSrvNov = Nothing
+   
+   Exit Function
+
+MalGuardar:
+   Err.Raise Err.Number, Err.Source, Err.Description
+   Resume
+
+End Function
+
+
+
+    Public Function GuardarNovedades(ByVal IdEventoDelSistema As Long, ByVal IdEmpleado As Long, ByVal Detalle As String) As InterFazMTS.MisEstados
+
+   Dim oCont As ObjectContext
+   Dim oDet As iCompMTS
+   Dim Resp As InterFazMTS.MisEstados
+   Dim lErr As Long, sSource As String, sDesc As String
+   Dim oRs, Datos As ADOR.Recordset
+   Dim i As Integer
+   Dim oFld As ADOR.Field
+   
+   On Error GoTo Mal
+   
+   Set oCont = GetObjectContext
+   
+   If oCont Is Nothing Then
+      Set oDet = CreateObject("MTSPronto.General")
+   Else
+      Set oDet = oCont.CreateInstance("MTSPronto.General")
+   End If
+   
+   If IdEmpleado > 0 Then
+      Set Datos = oDet.TraerFiltrado("NovedadesUsuarios", "_Estructura")
+      Set Datos = CopiarRs(Datos)
+      With Datos
+         .Fields(0).Value = -1
+         .Fields("IdEmpleado").Value = IdEmpleado
+         .Fields("IdEventoDelSistema").Value = IdEventoDelSistema
+         .Fields("FechaEvento").Value = Now
+         .Fields("Detalle").Value = Detalle
+         .Fields("Confirmado").Value = "NO"
+         .Update
+      End With
+      Resp = oDet.Guardar("NovedadesUsuarios", Datos)
+      Datos.Close
+      Set Datos = Nothing
+   End If
+   
+   Set oRs = oDet.TraerFiltrado("EventosDelSistema", "_IdEmpleadosPorIdEvento", IdEventoDelSistema)
+   If oRs.RecordCount > 0 Then
+      Do While Not oRs.EOF
+         Set Datos = oDet.TraerFiltrado("NovedadesUsuarios", "_Estructura")
+         Set Datos = CopiarRs(Datos)
+         With Datos
+            .Fields(0).Value = -1
+            .Fields("IdEmpleado").Value = oRs.Fields("IdEmpleado").Value
+            .Fields("IdEventoDelSistema").Value = IdEventoDelSistema
+            .Fields("FechaEvento").Value = Now
+            .Fields("Detalle").Value = Detalle
+            .Fields("Confirmado").Value = "NO"
+            .Update
+         End With
+         Resp = oDet.Guardar("NovedadesUsuarios", Datos)
+         Datos.Close
+         Set Datos = Nothing
+         oRs.MoveNext
+      Loop
+   End If
+            
+   If Not oCont Is Nothing Then
+      With oCont
+         If .IsInTransaction Then .SetComplete
+      End With
+   End If
+   
+Salir:
+   GuardarNovedades = Resp
+   Set oDet = Nothing
+   Set oCont = Nothing
+   On Error GoTo 0
+   If lErr Then
+      Err.Raise lErr, sSource, sDesc
+   End If
+   Exit Function
+   
+Mal:
+   If Not oCont Is Nothing Then
+      With oCont
+         If .IsInTransaction Then .SetAbort
+      End With
+   End If
+   With Err
+      lErr = .Number
+      sSource = .Source
+      sDesc = .Description
+   End With
+   Resume Salir
+
+End Function
+        */
+
+
+    
+    
+    
     }
 
     public interface IProntoInterface<T>

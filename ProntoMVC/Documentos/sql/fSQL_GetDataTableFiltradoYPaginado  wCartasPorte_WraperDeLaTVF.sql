@@ -235,6 +235,11 @@ where 1=1
 	
 
 
+    And (@puntoventa IS NULL OR @puntoventa <=0 Or cdp.PuntoVenta = @puntoventa)
+
+    And (@Patente IS NULL OR @Patente ='' Or cdp.Patente = @Patente)
+    And (@Contrato IS NULL OR @Contrato ='' OR @Contrato ='-1' Or cdp.Contrato = @Contrato)
+
 
 	
     AND (  

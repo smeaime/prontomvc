@@ -117,6 +117,76 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void probar_context_del_rms_pendientes()
+        {
+
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+
+            c.DarPorCumplido((new int[] { 1, 2, 3 }).ToList(), "ffff", "Mariano", "pirulo!");
+
+            c.GenerarValesAlmacen((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!");
+            c.AsignaComprador((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!");
+
+
+        }
+
+
+
+        [TestMethod]
+        public void probar_circuito_externo()
+        {
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+            string filters = "";
+
+            // crear un extadmin
+            // y q este cree sus usuarios 
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+            List<int> myValues = new List<int>(new int[] { 1, 2, 3 });
+            string o = "lala.xlsx";
+
+
+            //ExternoCuentaCorrienteCliente",
+            //                                        "ExternoCuentaCorrienteProveedor",
+            //                                        "ExternoOrdenesPagoListas",
+            //                                        "ExternoPresupuestos
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void informeResumnenPosicionFinanciera_usandoVBA_24897()
+        {
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+
+
+            //ojo q en williams ya estoy usando xml para la factura. Esto es codigo obsoleto. Y ademas lo que quiero es sacar un excel, no un word
+            //string p = DirApp() & "\Documentos\" & "Factura_Williams.dot"
+            //output = ImprimirWordDOTyGenerarTambienTXT(p, Me, HFSC.Value, Session, Response, IdFactura, mvarClausula, mPrinter, mCopias, 
+
+            string o = "lala.xlsx";
+
+
+            System.Diagnostics.Process.Start(o);
+        }
 
 
 
@@ -138,6 +208,7 @@ namespace ProntoMVC.Tests
             string o = "lala.xlsx";
 
         }
+
 
 
 
@@ -216,7 +287,7 @@ namespace ProntoMVC.Tests
                 //Dim ws As ExcelWorksheet = pck.Workbook.Worksheets.Add("Accounts")
                 //Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
                 //ws.Cells("A1").LoadFromDataTable(pDataTable, True);
-               // package.Save();
+                // package.Save();
 
 
             }
