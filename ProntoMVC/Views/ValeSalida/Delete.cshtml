@@ -1,0 +1,313 @@
+﻿@model ProntoMVC.Data.Models.Requerimiento
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Requerimiento</legend>
+
+    <div class="display-label">IdRequerimiento</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdRequerimiento)
+    </div>
+
+    <div class="display-label">NumeroRequerimiento</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NumeroRequerimiento)
+    </div>
+
+    <div class="display-label">FechaRequerimiento</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaRequerimiento)
+    </div>
+
+    <div class="display-label">LugarEntrega</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LugarEntrega)
+    </div>
+
+    <div class="display-label">Observaciones</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Observaciones)
+    </div>
+
+    <div class="display-label">Obra</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Obra.NumeroObra)
+    </div>
+
+    <div class="display-label">IdCentroCosto</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdCentroCosto)
+    </div>
+
+    <div class="display-label">Empleados1</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Empleados1.Nombre)
+    </div>
+
+    <div class="display-label">Sectores</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sectores.Descripcion)
+    </div>
+
+    <div class="display-label">MontoPrevisto</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MontoPrevisto)
+    </div>
+
+    <div class="display-label">IdComprador</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdComprador)
+    </div>
+
+    <div class="display-label">Empleados</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Empleados.Nombre)
+    </div>
+
+    <div class="display-label">FechaAprobacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAprobacion)
+    </div>
+
+    <div class="display-label">MontoParaCompra</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MontoParaCompra)
+    </div>
+
+    <div class="display-label">Cumplido</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cumplido)
+    </div>
+
+    <div class="display-label">Consorcial</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Consorcial)
+    </div>
+
+    <div class="display-label">UsuarioAnulacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UsuarioAnulacion)
+    </div>
+
+    <div class="display-label">FechaAnulacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAnulacion)
+    </div>
+
+    <div class="display-label">MotivoAnulacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MotivoAnulacion)
+    </div>
+
+    <div class="display-label">EnviarEmail</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnviarEmail)
+    </div>
+
+    <div class="display-label">IdRequerimientoOriginal</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdRequerimientoOriginal)
+    </div>
+
+    <div class="display-label">IdOrigenTransmision</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdOrigenTransmision)
+    </div>
+
+    <div class="display-label">IdAutorizoCumplido</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdAutorizoCumplido)
+    </div>
+
+    <div class="display-label">IdDioPorCumplido</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdDioPorCumplido)
+    </div>
+
+    <div class="display-label">FechaDadoPorCumplido</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaDadoPorCumplido)
+    </div>
+
+    <div class="display-label">ObservacionesCumplido</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ObservacionesCumplido)
+    </div>
+
+    <div class="display-label">IdMoneda</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdMoneda)
+    </div>
+
+    <div class="display-label">Detalle</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Detalle)
+    </div>
+
+    <div class="display-label">DirectoACompras</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DirectoACompras)
+    </div>
+
+    <div class="display-label">IdAutorizoDirectoACompras</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdAutorizoDirectoACompras)
+    </div>
+
+    <div class="display-label">PRESTOContrato</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PRESTOContrato)
+    </div>
+
+    <div class="display-label">Confirmado</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Confirmado)
+    </div>
+
+    <div class="display-label">FechaImportacionTransmision</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaImportacionTransmision)
+    </div>
+
+    <div class="display-label">IdEquipoDestino</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdEquipoDestino)
+    </div>
+
+    <div class="display-label">Impresa</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Impresa)
+    </div>
+
+    <div class="display-label">Recepcionado</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Recepcionado)
+    </div>
+
+    <div class="display-label">Entregado</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Entregado)
+    </div>
+
+    <div class="display-label">TipoRequerimiento</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoRequerimiento)
+    </div>
+
+    <div class="display-label">IdOrdenTrabajo</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdOrdenTrabajo)
+    </div>
+
+    <div class="display-label">Aprobo2</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Aprobo2)
+    </div>
+
+    <div class="display-label">FechaAprobacion2</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAprobacion2)
+    </div>
+
+    <div class="display-label">IdTipoCompra</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdTipoCompra)
+    </div>
+
+    <div class="display-label">IdImporto</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdImporto)
+    </div>
+
+    <div class="display-label">FechaLlegadaImportacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaLlegadaImportacion)
+    </div>
+
+    <div class="display-label">CircuitoFirmasCompleto</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CircuitoFirmasCompleto)
+    </div>
+
+    <div class="display-label">IdCuentaPresupuesto</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdCuentaPresupuesto)
+    </div>
+
+    <div class="display-label">MesPresupuesto</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MesPresupuesto)
+    </div>
+
+    <div class="display-label">RequisitosSeguridad</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RequisitosSeguridad)
+    </div>
+
+    <div class="display-label">Adjuntos</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Adjuntos)
+    </div>
+
+    <div class="display-label">ConfirmadoPorWeb</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ConfirmadoPorWeb)
+    </div>
+
+    <div class="display-label">DetalleImputacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DetalleImputacion)
+    </div>
+
+    <div class="display-label">IdUsuarioDeslibero</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdUsuarioDeslibero)
+    </div>
+
+    <div class="display-label">FechaDesliberacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaDesliberacion)
+    </div>
+
+    <div class="display-label">NumeradorDesliberaciones</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NumeradorDesliberaciones)
+    </div>
+
+    <div class="display-label">IdUsuarioEliminoFirmas</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdUsuarioEliminoFirmas)
+    </div>
+
+    <div class="display-label">FechaEliminacionFirmas</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaEliminacionFirmas)
+    </div>
+
+    <div class="display-label">NumeradorEliminacionesFirmas</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NumeradorEliminacionesFirmas)
+    </div>
+
+    <div class="display-label">NumeradorModificaciones</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NumeradorModificaciones)
+    </div>
+
+    <div class="display-label">ParaTaller</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ParaTaller)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Volver al listado", "Index")
+    </p>
+}

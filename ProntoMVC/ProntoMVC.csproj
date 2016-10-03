@@ -1387,6 +1387,9 @@
     <Content Include="Views\ResumenConciliacion\Index.cshtml" />
     <Content Include="Views\Valor\IndexChequesSegunEmision.cshtml" />
     <Content Include="Views\Requerimiento\RMsPendientesDeAsignar.cshtml" />
+    <Content Include="Views\ValeSalida\Index.cshtml" />
+    <Content Include="Views\ValeSalida\Delete.cshtml" />
+    <Content Include="Views\ValeSalida\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />
