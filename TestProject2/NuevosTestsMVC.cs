@@ -126,9 +126,9 @@ namespace ProntoMVC.Tests
             GetMockedControllerGenerico(c);
 
 
-            c.DarPorCumplido((new int[] { 1, 2, 3 }).ToList(), "ffff", "Mariano", "pirulo!");
+            c.DarPorCumplido((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!", "usuarioCumplidor", "observacion de cumplido");
 
-            c.GenerarValesAlmacen((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!");
+            c.GenerarValesAlmacen((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!" );
             c.AsignaComprador((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!");
 
 

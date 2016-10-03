@@ -377,6 +377,9 @@
     <Compile Include="Models\DetalleEmpleadosUbicacione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleEventosDelSistema.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DetalleFactura.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -673,6 +676,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NotasDebito.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NovedadesUsuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Obra.cs">
