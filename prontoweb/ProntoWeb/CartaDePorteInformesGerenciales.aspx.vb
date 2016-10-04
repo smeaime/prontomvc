@@ -128,14 +128,12 @@ Partial Class CartaDePorteInformesGerenciales
 
         Dim admins = New String() {"Mariano", "Andres", "hwilliams"}
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
-        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea"}
+        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "twilliams2"}
 
         If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString) Then
             MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
             Exit Sub
         End If
-
-
 
 
 
@@ -173,9 +171,24 @@ Partial Class CartaDePorteInformesGerenciales
             cmbInforme.Items.FindByText("Totales generales por mes por modo").Enabled = False
 
             cmbInforme.Items.FindByText("Listado de Tarifas").Enabled = False
+
         End If
 
+
         If encargados.Contains(Session(SESSIONPRONTO_UserName)) Then
+
+            cmbInforme.Items.FindByText("Ranking de Cereales").Enabled = True
+            cmbInforme.Items.FindByText("Ranking de Clientes").Enabled = True
+            cmbInforme.Items.FindByText("Proyección de facturación").Enabled = True
+            cmbInforme.Items.FindByText("Planilla de movimientos").Enabled = True
+            cmbInforme.Items.FindByText("Resumen de facturación").Enabled = True
+
+
+
+            cmbInforme.Items.FindByText("Volumen de Carga").Enabled = True
+            cmbInforme.Items.FindByText("Diferencias por Destino por Mes").Enabled = True
+
+
 
             cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Modo-Sucursal)").Enabled = True
             cmbInforme.Items.FindByText("Estadísticas de Toneladas descargadas (Sucursal-Modo)").Enabled = True
@@ -183,35 +196,19 @@ Partial Class CartaDePorteInformesGerenciales
             cmbInforme.Items.FindByText("Totales generales por mes por sucursal").Enabled = True
             cmbInforme.Items.FindByText("Totales generales por mes por modo y sucursal").Enabled = True
             cmbInforme.Items.FindByText("Totales generales por mes por modo").Enabled = True
+
+            cmbInforme.Items.FindByText("Resumen de facturación").Enabled = False
+            cmbInforme.Items.FindByText("Proyección de facturación").Enabled = False
+            cmbInforme.Items.FindByText("Listado de Tarifas").Enabled = False
+
+
         End If
 
 
 
-        Dim l = New String() {"Mariano", "Andres", "hwilliams", "factbsas", "factas", "factbb", "factbsas", "factsl", "cflores", "lcesar", "dberzoni", "mgarcia"}
-
-        Try
-
-            If Not l.Contains(Session(SESSIONPRONTO_UserName)) Then
-                cmbInforme.Items.FindByText("Liquidación de Subcontratistas").Enabled = False
-                ' cmbInforme.Items(13).Enabled = False 'liquidacion de subcontratistas
-            End If
-        Catch ex As Exception
-
-        End Try
 
 
-        Try
 
-            Dim ff = New String() {"mgarcia", "mgarcia2"}
-            If ff.Contains(Session(SESSIONPRONTO_UserName)) Then
-                cmbInforme.Items.FindByText("Totales generales por mes").Enabled = False
-                cmbInforme.Items.FindByText("Totales generales por mes por sucursal").Enabled = False
-                cmbInforme.Items.FindByText("Totales generales por mes por modo y sucursal").Enabled = False
-                cmbInforme.Items.FindByText("Totales generales por mes por modo").Enabled = False
-            End If
-        Catch ex As Exception
-
-        End Try
 
 
         '        [02:10:43 p.m.] Mariano Scalella: apuntamelo en una consulta. tengo enel codigo harcodeado q mgarcia y mgarcia2 no pueden ver totales generales. q hago?
@@ -222,7 +219,7 @@ Partial Class CartaDePorteInformesGerenciales
         '    cmbInforme.Items.FindByText("Totales generales por mes").Enabled = True
         'End If
 
-        
+
 
 
         '////////////////////////////////////////////
