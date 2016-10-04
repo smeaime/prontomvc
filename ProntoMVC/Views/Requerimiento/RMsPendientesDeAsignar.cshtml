@@ -123,8 +123,63 @@
     $(document).ready(function () {
 
         $("#Vale").click(function () {
+            //juntar los ids y mandarlos?
+             var ids = [1, 4, 5];
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("YourAction", "Requerimiento")',
+                data: JSON.stringify( { ids: ids })
+            }).done(function () {
 
+            });
         })
+
+
+        function PisarFechaEntrega(nombre) {
+
+            var f = $("#InputFechaEntrega").val();
+
+            var $grid = $("#Lista");
+            var righe = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((righe == null) || (righe.length == 0)) {
+                righe = $grid.jqGrid('getDataIDs');
+                // return false;
+            }
+
+
+            for (var i = 0; i < righe.length; i++) {
+                var Id = righe[i];
+
+                var rowData = $grid.jqGrid('getRowData', Id);
+                rowData[nombre] = f;
+                $grid.jqGrid('setRowData', Id, rowData);
+
+            }
+        }
+
+
+
+
+        $("#asignarPrecio").click(function () {
+            $("#InputFechaEntrega").val('');
+            $('[id$=labeldialog]').text("Ingrese el Precio");
+            $("#dialog").dialog({
+                buttons: {
+                    "Aceptar": function () {
+                        PisarFechaEntrega("Precio");
+                        $(this).dialog("close");
+                    },
+                    "Cerrar": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#dialog").dialog("open");
+        });
+
+
+
 
 
 
