@@ -14,7 +14,7 @@
             <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nueva Factura</button>
 
             <button onclick="window.location.href='@Url.Action("TT_DynamicGridData_ExcelExportacion", new { id = -1 })'" class="btn ">Excel</button>
-            <a id="boton">asdasdasd</a>
+            @*<a id="boton">asdasdasd</a>*@
         </div>
     </div>
     <br />
@@ -42,10 +42,6 @@
 
             location.href = '..\    TT_DynamicGridData_ExcelExportacion?sidx=' + p.sortname + '&sord=' + p.sortorder + '&page=1&rows=100&_search=false&filters=&FechaInicial=""&FechaFinal""';
         });
-
-
-
-
 
         //Para que haga wrap en las celdas
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
@@ -281,8 +277,8 @@
 
 
             pager: $('#ListaPager'),
-            rowNum: 15,
-            rowList: [10, 20, 50],
+            rowNum: 20,
+            rowList: [20, 50, 100],
             sortname: 'FechaFactura', // 'FechaFactura,NumeroFactura',
             sortorder: "desc",
             viewrecords: true,
