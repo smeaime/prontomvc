@@ -77,7 +77,12 @@ Partial Class Admin_EditarUsuario
                 ErrHandler2.WriteError(ex)
             End Try
 
-            Dim a = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster, HFSC.Value)
+            Dim a As String
+            Try
+                a = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster, HFSC.Value)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
 
             If IsNothing(a) Then
                 txtRazonSocial.Text = Usuario.Nombre
