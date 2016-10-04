@@ -219,10 +219,10 @@ where 1=1
  		
 			(@AplicarANDuORalFiltro = 0 and
 				(
-						(cdp.Vendedor = @idVendedor  Or isnull(@idVendedor,-1)=-1) Or  
-						(cdp.CuentaOrden1= @idIntermediario  Or isnull(@idIntermediario,-1)=-1) Or  
-						(cdp.CuentaOrden2 = @idRemComercial  Or isnull(@idRemComercial,-1)=-1) Or  
-						(cdp.idClienteAuxiliar = @idClienteAuxiliarint  Or isnull(@idClienteAuxiliarint,-1)=-1)
+						(cdp.Vendedor = @idVendedor  ) Or  
+						(cdp.CuentaOrden1= @idIntermediario ) Or  
+						(cdp.CuentaOrden2 = @idRemComercial ) Or  
+						(cdp.idClienteAuxiliar = @idClienteAuxiliarint)
 				)
 			)
 	)
@@ -235,6 +235,17 @@ where 1=1
 	
 
 
+
+	
+    AND (  
+			(@optCamionVagon = 'Camiones' AND isnull(CDP.SubNumeroVagon,'')='' )
+			OR 
+			(@optCamionVagon = 'Vagones' AND isnull(CDP.SubNumeroVagon,'')<>'')
+			OR 
+			@optCamionVagon = 'Todos' OR @optCamionVagon  IS NULL
+		)
+
+	AND	 (@Vagon IS NULL OR  @Vagon=0 or CDP.SubnumeroVagon=@Vagon) 
 
 
 
@@ -252,8 +263,9 @@ where 1=1
 					) 
 				)
 
-	AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
-	       
+	  --If Not bTraerDuplicados Then 
+	  AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
+	  
 
 go
 
@@ -266,8 +278,8 @@ go
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-/*
-select  * --count(*)
+
+select  exporta, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				( 
 					NULL, 
@@ -283,12 +295,12 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 
 					NULL, 
-					32, 
+					NULL, 
 					NULL,
-				 	'Entregas', 
-					'2016-01-07 00:00:00',
+				 	'Todos', 
+					'2016-01-09 00:00:00',
 
-					'2016-31-07 00:00:00',
+					'2016-30-09 00:00:00',
 					NULL, 
 					NULL,
 					NULL, 
@@ -304,7 +316,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
             
 go
 
-*/
+
 
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
 go
@@ -366,18 +378,18 @@ create procedure  wCartasPorte_WraperDeLaTVF
 
 		*
 
-		from dbo.fSQL_GetDataTableFiltradoYPaginado
+    	from dbo.fSQL_GetDataTableFiltradoYPaginado
 		( 
-							NULL, 
-							NULL, 
-							NULL,
-							NULL, 
-							NULL, 
+							@startRowIndex, 
+							@maximumRows, 
+							@estado,
+							@QueContenga, 
+							@idVendedor, 
 
-							NULL, 
-							NULL, 
-							NULL,
-							NULL, 
+							@idCorredor, 
+							@idDestinatario, 
+							@idIntermediario,
+							@idRemComercial, 
 							@idArticulo,
 
 							@idProcedencia,
@@ -388,16 +400,16 @@ create procedure  wCartasPorte_WraperDeLaTVF
 							@fechadesde,
 
 							@fechahasta, 
-							NULL, 
-							NULL,
-							NULL, 
-							NULL, 
+							@puntoventa, 
+							@optDivisionSyngenta,
+							@Contrato, 
+							@QueContenga2, 
 
-							NULL, 
-							NULL, 
-							NULL,
-							NULL, 
-							NULL
+							@idClienteAuxiliarint, 
+							@AgrupadorDeTandaPeriodos, 
+							@Vagon,
+							@Patente, 
+							@optCamionVagon
 
 							) as cdp
 
@@ -439,3 +451,7 @@ wCartasPorte_WraperDeLaTVF
 
 go
 
+
+
+GRANT EXECUTE ON wCartasPorte_WraperDeLaTVF to [NT AUTHORITY\ANONYMOUS LOGON]
+go

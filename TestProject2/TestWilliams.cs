@@ -248,6 +248,11 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void ClientesEspecificosDelUsuarioBLD_23822()
+        {
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("Mariano", SC);
+        }
 
 
 
@@ -308,7 +313,7 @@ namespace ProntoMVC.Tests
                        -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                         new DateTime(2014, 1, 1),
                         new DateTime(2014, 1, 10),
-                        -1, -1, ref sTitulo);
+                        -1,29146, ref sTitulo);
 
 
 
