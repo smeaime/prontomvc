@@ -17,5 +17,7 @@ namespace ProntoMVC.Data.Models
         public int IdDetalleEventoDelSistema { get; set; }
         public Nullable<int> IdEventoDelSistema { get; set; }
         public Nullable<int> IdEmpleado { get; set; }
+    
+        public virtual EventosDelSistema EventosDelSistema { get; set; }
     }
 }

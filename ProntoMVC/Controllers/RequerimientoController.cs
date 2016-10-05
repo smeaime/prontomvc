@@ -2761,7 +2761,7 @@ namespace ProntoMVC.Controllers
             //'      MsgBox "Solo personal de COMPRAS puede asignar comprador", vbExclamation
             //      Exit Sub
             //   End If
-            int mvarIdComprador = 0;  sale de la autorizacion
+            int mvarIdComprador = db.Empleados.Where(x => x.Nombre == userComprador).Select(x => x.IdEmpleado).First();
 
 
             //asigna comprador
@@ -2853,8 +2853,8 @@ Case 1
         {
 
 
-            int mvarIdDioPorCumplido = userCumplidor;
-            int mvarIdAutorizo = userAutorizador;
+            int mvarIdDioPorCumplido =  db.Empleados.Where(x => x.Nombre == userCumplidor).Select(x => x.IdEmpleado).First();
+            int mvarIdAutorizo =   db.Empleados.Where(x => x.Nombre == userAutorizador).Select(x => x.IdEmpleado).First();
 
             // pedir autorizacion    
             //Dim oF As frmAutorizacion2
@@ -2992,9 +2992,12 @@ Case 1
             try
             {
 
-                var mAux2 = ParametroManager.TraerValorParametro2(SCsql(), "IdSectorReasignador");
-                var sss = db.Sectores.Find(mAux2);
-                mSector = sss.Descripcion;
+                string mAux2 = ParametroManager.TraerValorParametro2(SCsql(), ParametroManager.eParam2.IdSectorReasignador);
+                if (mAux2 != "")
+                {
+                    var sss = db.Sectores.Find(mAux2);
+                    mSector = sss.Descripcion;
+                }
             }
             catch (Exception)
             {
@@ -3053,7 +3056,7 @@ Case 1
 
             foreach (Data.Models.DetalleRequerimiento detrm in reqs)
             {
-                oRs = EntidadManager.GetStoreProcedure(SCsql(), "_DatosRequerimiento", detrm.IdDetalleRequerimiento);
+                oRs = EntidadManager.GetStoreProcedure(SCsql(), ProntoFuncionesGenerales.enumSPs.Requerimientos_TX_DatosRequerimiento, detrm.IdDetalleRequerimiento);
                 if ((oRs.Rows.Count > 0))
                 {
                     s1 = oRs.Rows[0]["ObservacionesFirmante"].ToString();
@@ -3121,7 +3124,6 @@ Case 1
         void CrearAltaDeVale(List<int> idDetalleRequerimientos, string user, string pass)
         {
 
-            var c = new ValeSalidaController();
             var vale = new ValesSalida();
 
             vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First();
@@ -3137,8 +3139,15 @@ Case 1
                 vale.DetalleValesSalidas.Add(detvale);
             }
 
+
+            
+
+            var c = new ValeSalidaController(); //ese controlador no recibe el membership que estoy usando en este
             c.BatchUpdate(vale);
 
+            //var controller = DependencyResolver.Current.GetService<ValeSalidaController>();
+            //controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+            //controller.BatchUpdate(vale);
         }
 
     }

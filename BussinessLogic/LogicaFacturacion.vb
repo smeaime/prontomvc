@@ -5266,6 +5266,8 @@ Public Class LogicaFacturacion
 
                     Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
                     'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                    'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                    Return vbCrLf + quienautoriza
                     Return vbCrLf + "División AGRO – Andreas Bluhm"
                     Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
 
@@ -5276,9 +5278,14 @@ Public Class LogicaFacturacion
                     'quienautoriza()
                     Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
                     'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                    'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                    Return vbCrLf + quienautoriza
                     Return vbCrLf + "División AGRO – Andreas Bluhm"
                     Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
                 Else
+                    Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                    'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                    Return vbCrLf + quienautoriza
                     Return vbCrLf + "División AGRO – Andreas Bluhm"
                 End If
 
@@ -5317,7 +5324,10 @@ Public Class LogicaFacturacion
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
 
 
-                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903}
+                'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+
+                Return vbCrLf + quienautoriza
                 Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Agro. Autoriza: " & quienautoriza
 
@@ -5328,6 +5338,8 @@ Public Class LogicaFacturacion
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
                 'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                Return vbCrLf + quienautoriza
                 Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Seeds. Autoriza: " & quienautoriza
 
