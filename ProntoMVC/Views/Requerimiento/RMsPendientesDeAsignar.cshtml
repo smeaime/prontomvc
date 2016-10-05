@@ -57,7 +57,7 @@
     <div>
         <div class="row-fluid">
             <div class="span12 lightblue">
-            
+
                 @if (false)
                 {
                     <div class="btn-group span2">
@@ -108,11 +108,11 @@
         </li>
         <li id="edit">
             <span class="ui-icon ui-icon-pencil" style="float:left"></span>
-            <span style="font-size:11px; font-family:Verdana">Para compras</span>
+            <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Para compras</span>
         </li>
         <li id="del">
             <span class="ui-icon ui-icon-trash" style="float:left"></span>
-            <span style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
+            <span id="DarPorCumplido" style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
         </li>
     </ul>
 </div>
@@ -123,17 +123,92 @@
     $(document).ready(function () {
 
         $("#Vale").click(function () {
+
+            
+            $("#dialog-password").dialog({
+                buttons: {
+                    'Aceptar': function () {
+                        //alert('hola');
+                        // $(this).dialog('close');
+                        // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
+                        validatePwd2(generarvale( "administrador" , ""), function () { });
+                        $(this).dialog('close');
+                    },
+                    'Cancelar': function () {
+                        $(this).dialog('close');
+                    }
+                },
+                open: function () {
+
+                }
+            });
+
+            $('#dialog-password').data('Combo', 'Aprobo');
+            $('#dialog-password').dialog('open');
+
+
+        })
+
+        
+        function generarvale() {
             //juntar los ids y mandarlos?
-             var ids = [1, 4, 5];
+            var ids = [1, 4, 5];
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: '@Url.Action("YourAction", "Requerimiento")',
-                data: JSON.stringify( { ids: ids })
+                url: '@Url.Action("GenerarValesAlmacen", "Requerimiento")',
+                data: JSON.stringify({
+                    idDetalleRequerimientos: ids,
+                    user: user,
+                    pass: pass
+                })
+            }).done(function () {
+            
+            });
+        }
+
+
+        $("#DarPorCumplido").click(function () {
+            //juntar los ids y mandarlos?
+            var ids = [1, 4, 5];
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("DarPorCumplido", "Requerimiento")',
+                data: JSON.stringify({
+                    idDetalleRequerimientos: ids,
+                    userAutorizador: "administrador",
+                    passAutorizador: "",
+                    userCumplidor: "administrador",
+                    sObsCumplido: "asdasd asd asd asd asd asdasdasd asd asdasd asd "
+                })
             }).done(function () {
 
             });
         })
+
+
+        $("#ParaCompras").click(function () {
+            //juntar los ids y mandarlos?
+            var ids = [1, 4, 5];
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("AsignaComprador", "Requerimiento")',
+                data: JSON.stringify({
+                    idDetalleRequerimientos: ids,
+                    userComprador: "administrador",
+                    passComprador: ""
+
+                })
+            }).done(function () {
+
+            });
+        })
+
+
+
+
 
 
         function PisarFechaEntrega(nombre) {
@@ -398,35 +473,50 @@
 
 
 
-            loadComplete: function() {
+            loadComplete: function () {
                 $("tr.jqgrow", this).contextMenu('myMenu1', {
                     bindings: {
-                        'edit': function(trigger) {
+                        'edit': function (trigger) {
                             // trigger is the DOM element ("tr.jqgrow") which are triggered
                             grid.editGridRow(trigger.id, editSettings);
                         },
-                        'add': function(/*trigger*/) {
+                        'add': function (/*trigger*/) {
                             grid.editGridRow("new", addSettings);
                         },
-                        'del': function(trigger) {
+                        'del': function (trigger) {
                             if ($('#del').hasClass('ui-state-disabled') === false) {
                                 // disabled item can do be choosed
                                 grid.delGridRow(trigger.id, delSettings);
                             }
                         }
                     },
-                    onContextMenu: function(event/*, menu*/) {
+                    onContextMenu: function (event/*, menu*/) {
                         var rowId = $(event.target).closest("tr.jqgrow").attr("id");
                         //grid.setSelection(rowId);
                         // disable menu for rows with even rowids
-                        $('#del').attr("disabled",Number(rowId)%2 === 0);
-                        if (Number(rowId)%2 === 0) {
-                            $('#del').attr("disabled","disabled").addClass('ui-state-disabled');
+                        $('#del').attr("disabled", Number(rowId) % 2 === 0);
+                        if (Number(rowId) % 2 === 0) {
+                            $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
                         } else {
                             $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
                         }
                         return true;
+                    },
+
+                    //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
+                    menuStyle: {
+                        backgroundColor: '#fcfdfd',
+                        border: '1px solid #a6c9e2',
+                        maxWidth: '600px', // to be sure
+                        width: '100%' // to have good width of the menu
+                    },
+                    itemHoverStyle: {
+                        border: '1px solid #79b7e7',
+                        color: '#1d5987',
+                        backgroundColor: '#d0e5f5'
                     }
+
+
                 });
             },
 
