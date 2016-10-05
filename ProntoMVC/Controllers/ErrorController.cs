@@ -208,9 +208,8 @@ namespace ProntoMVC.Controllers
 		
 		//throw;
 	}
-                
 
-                ProntoFuncionesGenerales.MandaEmailSimple( ConfigurationManager.AppSettings["ErrorMail"],
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
                                    nombrebase + ": JScript Linea " + line + "  " + body,
                                 body,
                                 ConfigurationManager.AppSettings["SmtpUser"],
@@ -218,7 +217,18 @@ namespace ProntoMVC.Controllers
                                 ConfigurationManager.AppSettings["SmtpUser"],
                                 ConfigurationManager.AppSettings["SmtpPass"],
                                   "",
-                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]) );
+
+
+                //ProntoFuncionesGenerales.MandaEmailSimple( ConfigurationManager.AppSettings["ErrorMail"],
+                //                   nombrebase + ": JScript Linea " + line + "  " + body,
+                //                body,
+                //                ConfigurationManager.AppSettings["SmtpUser"],
+                //                ConfigurationManager.AppSettings["SmtpServer"],
+                //                ConfigurationManager.AppSettings["SmtpUser"],
+                //                ConfigurationManager.AppSettings["SmtpPass"],
+                //                  "",
+                //               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
             }
 
