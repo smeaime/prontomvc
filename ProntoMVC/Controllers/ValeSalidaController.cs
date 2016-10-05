@@ -116,7 +116,7 @@ namespace ProntoMVC.Controllers
 
                 bool mAnulada = false;
 
-                string usuario = ViewBag.NombreUsuario;
+                string usuario = oStaticMembershipService.GetUser().UserName;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
 
                 if (!Validar(ValeSalida, ref errs, ref warnings))

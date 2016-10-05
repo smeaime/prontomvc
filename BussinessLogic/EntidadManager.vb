@@ -202,64 +202,71 @@ Namespace Pronto.ERP.Bll
                 '/////////////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////////////
-
-                'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
-
-                If inlinePNG = "" Then
-                    inlinePNG = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\Unnamed.png" '  Server.MapPath("~/Imagenes/williams.gif")
-                End If
-
-
-                'message.IsBodyHtml = True
-                Dim inlineLogo As Attachment = New Attachment(inlinePNG)
-                message.Attachments.Add(inlineLogo)
-                Dim contentID As String = "Image"
-                inlineLogo.ContentId = contentID
-
-                'To make the image display as inline and not as attachment
-
-                inlineLogo.ContentDisposition.Inline = True
-                inlineLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
-
-                '//To embed image in email
-
-                'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
+                Try
 
 
 
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
+                    'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
 
-                'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
+                    If inlinePNG = "" Then
+                        inlinePNG = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\Unnamed.png" '  Server.MapPath("~/Imagenes/williams.gif")
+                    End If
 
 
-                If inlinePNG2 = "" Then
-                    inlinePNG2 = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\twitterwilliams.jpg" '  Server.MapPath("~/Imagenes/williams.gif")
-                End If
+                    'message.IsBodyHtml = True
+                    Dim inlineLogo As Attachment = New Attachment(inlinePNG)
+                    message.Attachments.Add(inlineLogo)
+                    Dim contentID As String = "Image"
+                    inlineLogo.ContentId = contentID
 
+                    'To make the image display as inline and not as attachment
 
+                    inlineLogo.ContentDisposition.Inline = True
+                    inlineLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
 
-                'message.IsBodyHtml = True
-                Dim twLogo As Attachment = New Attachment(inlinePNG2)
-                message.Attachments.Add(twLogo)
-                Dim contentIDtw As String = "Image2"
-                twLogo.ContentId = contentIDtw
+                    '//To embed image in email
 
-                'To make the image display as inline and not as attachment
-
-                twLogo.ContentDisposition.Inline = True
-                twLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
-
-                '//To embed image in email
-
-                'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
+                    'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
 
 
 
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
 
+                    'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
+
+
+                    If inlinePNG2 = "" Then
+                        inlinePNG2 = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\twitterwilliams.jpg" '  Server.MapPath("~/Imagenes/williams.gif")
+                    End If
+
+
+
+                    'message.IsBodyHtml = True
+                    Dim twLogo As Attachment = New Attachment(inlinePNG2)
+                    message.Attachments.Add(twLogo)
+                    Dim contentIDtw As String = "Image2"
+                    twLogo.ContentId = contentIDtw
+
+                    'To make the image display as inline and not as attachment
+
+                    twLogo.ContentDisposition.Inline = True
+                    twLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
+
+                    '//To embed image in email
+
+                    'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
+
+
+
+
+                Catch ex As Exception
+
+                    ErrHandler2.WriteError(ex)
+                End Try
 
                 '/////////////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////////////

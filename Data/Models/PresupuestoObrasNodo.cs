@@ -47,6 +47,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdCuenta { get; set; }
         public Nullable<int> IdArticulo { get; set; }
         public string BaseDatosOrigen { get; set; }
+        public string HabilitarAvanceReal { get; set; }
     
         public virtual ICollection<PresupuestoObrasNodosConsumo> PresupuestoObrasNodosConsumos { get; set; }
         public virtual ICollection<PresupuestoObrasNodosDato> PresupuestoObrasNodosDatos { get; set; }

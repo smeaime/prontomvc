@@ -19,6 +19,7 @@ using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
 
+using System.Configuration;
 
 using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
 
@@ -58,9 +59,11 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
-        const string nombreempresa = "Williams2";
+        const string nombreempresa = "Pronto_Alemarsa";
+        //const string nombreempresa = "Williams2";
         //const string nombreempresa = "Pronto";
         //const string nombreempresa = "DemoProntoWeb";
+        //const string usuario = "administrador";
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
@@ -117,6 +120,24 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void mail_de_error()
+        {
+
+            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                               "asuntoasuntoasunto ",
+                            "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpServer"],
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpPass"],
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+        }
+
+
+
         [TestMethod]
         public void probar_context_del_rms_pendientes()
         {
@@ -126,10 +147,10 @@ namespace ProntoMVC.Tests
             GetMockedControllerGenerico(c);
 
 
-            c.DarPorCumplido((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!", "usuarioCumplidor", "observacion de cumplido");
+            c.DarPorCumplido((new int[] { 1, 2, 3 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
 
-            c.GenerarValesAlmacen((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!" );
-            c.AsignaComprador((new int[] { 1, 2, 3 }).ToList(), "Mariano", "pirulo!");
+            c.GenerarValesAlmacen((new int[] { 1, 2, 3 }).ToList(), "administrador", "");
+            c.AsignaComprador((new int[] { 1, 2, 3 }).ToList(), "administrador", "");
 
 
         }
@@ -841,13 +862,16 @@ namespace ProntoMVC.Tests
 
             var m = new Mock<Generales.IStaticMembershipService>();
             var us = new Mock<MembershipUser>();
-            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
+            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+            // supervisor       1804B573-0439-4EA0-B631-712684B54473
+            //us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
+            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1804B573-0439-4EA0-B631-712684B54473"));
+            us.Setup(u => u.UserName).Returns("administrador");
             m.Setup(s => s.GetUser()).Returns(us.Object);
             m.Setup(s => s.EsSuperAdmin()).Returns(true);
             m.Setup(s => s.UsuarioTieneElRol(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
             c.oStaticMembershipService = m.Object;
-            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
-            // supervisor       1804B573-0439-4EA0-B631-712684B54473
+ 
 
 
 
