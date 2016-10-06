@@ -232,9 +232,6 @@ namespace ProntoMVC.Controllers
                 mImporteDetalle = (x.Cantidad ?? 0) * (x.PrecioUnitario ?? 0);
                 mImporteDetalle = mImporteDetalle * (1 - (x.Bonificacion ?? 0) / 100);
                 mSubtotal += mImporteDetalle;
-
-
-
                 //x.Articulo.AuxiliarNumerico1 = 0;
             }
             if (mSubtotal <= 0) sErrorMsg += "\n" + "El subtotal de la factura debe ser mayor a cero";
@@ -247,8 +244,6 @@ namespace ProntoMVC.Controllers
                     if ((CtaCte.ImporteTotal ?? 0) != (CtaCte.Saldo ?? 0)) { sErrorMsg += "\n" + "La factura ha sido cancelada parcial o totalmente y no puede anularse"; }
                 }
             }
-
-
 
             //If mvarId < 0 And IsNumeric(dcfields(10).BoundText) And Not BuscarClaveINI("Validar fecha de facturas nuevas") = "NO" Then
             //   Set oRs = Aplicacion.Facturas.TraerFiltrado("_UltimaPorIdPuntoVenta", dcfields(10).BoundText)
@@ -323,8 +318,6 @@ namespace ProntoMVC.Controllers
                 mIdCuentaOtrasPercepciones2 = parametros.IdCuentaOtrasPercepciones2 ?? 0;
                 mIdCuentaOtrasPercepciones3 = parametros.IdCuentaOtrasPercepciones3 ?? 0;
                 mIdCuentaPercepcionesIVA = parametros.IdCuentaPercepcionesIVA ?? 0;
-
-
 
                 string usuario = ViewBag.NombreUsuario;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -1137,7 +1130,11 @@ namespace ProntoMVC.Controllers
                             a.FechaFactura,
                             Sucursal = a.Deposito != null ? a.Deposito.Descripcion : "",
                             a.Anulada,
+<<<<<<< HEAD
+                            ClienteSubCod = a.Cliente != null ? (a.Cliente.Codigo.Length > 2 ? a.Cliente.Codigo.Substring(0, 2) : "") : "", //a.Cliente.Codigo.Substring(1, 2) : "",
+=======
                             ClienteSubCod = a.Cliente != null ? a.Cliente.Codigo.PadLeft(2,' ').Substring(0, 2) : "",
+>>>>>>> 41aaf25e868fca4aa9e225285bf32814b56e601e
                             ClienteCodigo = a.Cliente != null ? a.Cliente.CodigoCliente : 0,
                             ClienteNombre = a.Cliente != null ? a.Cliente.RazonSocial : "",
                             DescripcionIva = a.DescripcionIva != null ? a.DescripcionIva.Descripcion : "",
@@ -1711,6 +1708,7 @@ namespace ProntoMVC.Controllers
             string mArchivoXMLEnviado2 = "";
             string mArchivoXMLRecibido2 = "";
             string glbArchivoCertificadoPassWord = "";
+            string mCuitCliente = "";
 
             Int32 mIdPuntoVenta = 0;
             Int32 mPuntoVenta = 0;
@@ -1722,10 +1720,13 @@ namespace ProntoMVC.Controllers
             Int32 mDetalleTributoItemCantidad = 0;
             Int32 mIndiceItem = 0;
             Int32 mTipoIvaAFIP = 0;
+            Int32 mIdCodigoIva = 1;
             Int32 mNumeroComprobanteElectronico = 0;
 
             decimal mImporteTotal = 0;
             decimal mSubTotal = 0;
+            decimal mSubTotalExento = 0;
+            decimal mImporteIva = 0;
             decimal mImporteIva1 = 0;
             decimal mIVANoDiscriminado = 0;
             decimal mPercepcionIVA = 0;
@@ -1738,9 +1739,12 @@ namespace ProntoMVC.Controllers
             decimal mOtrasPercepciones1 = 0;
             decimal mOtrasPercepciones2 = 0;
             decimal mOtrasPercepciones3 = 0;
-
+            decimal mImporteBonificacion = 0;
+            decimal mAuxD1 = 0;
+            
             bool mResul = false;
             bool glbDebugFacturaElectronica = false;
+            bool mAplicarIVANoDiscriminado = false;
 
             Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mIdMonedaPesos = parametros.IdMoneda ?? 0;
@@ -1761,6 +1765,18 @@ namespace ProntoMVC.Controllers
             mIdMoneda = o.IdMoneda ?? 1;
             mTipoABC = o.TipoABC;
             mFecha = String.Format("{0:yyyyMMdd}", o.FechaFactura);
+            mIdCodigoIva = o.IdCodigoIva ?? 1;
+            mImporteBonificacion = o.ImporteBonificacion ?? 0;
+
+            foreach (ProntoMVC.Data.Models.DetalleFactura x in o.DetalleFacturas)
+            {
+                mImporteIva = mImporteIva + (x.ImporteIva ?? 0);
+                if (mImporteIva == 0)
+                {
+                    mAuxD1 = ((x.Cantidad ?? 0) * (x.PrecioUnitario ?? 0) * (1 - (x.Bonificacion ?? 0) / 100));
+                    mSubTotalExento +=  Math.Round((mAuxD1), 2); 
+                }
+            }
 
             mSubTotal = (o.ImporteTotal ?? 0) - (o.ImporteIva1 ?? 0) - (o.AjusteIva ?? 0) - (o.PercepcionIVA ?? 0) - (o.RetencionIBrutos1 ?? 0) - (o.RetencionIBrutos2 ?? 0) - (o.RetencionIBrutos3 ?? 0) - (o.OtrasPercepciones1 ?? 0) - (o.OtrasPercepciones2 ?? 0) - (o.OtrasPercepciones3 ?? 0) + (o.ImporteBonificacion ?? 0);
             mImporteIva1 = o.ImporteIva1 ?? 0;
@@ -1781,6 +1797,8 @@ namespace ProntoMVC.Controllers
             mOtrasPercepciones3Desc = o.OtrasPercepciones3Desc ?? "";
 
             mPercepcionIVA = o.PercepcionIVA ?? 0;
+
+            mCuitCliente = db.Clientes.Find(o.IdCliente).Cuit.Replace("-", "");
 
             mTipoIvaAFIP = 0;
             if ((double)(o.PorcentajeIva1 ?? 0) == 21) { mTipoIvaAFIP = 5; }
@@ -1859,15 +1877,23 @@ namespace ProntoMVC.Controllers
 
                         FE.f1Indice = 0;
                         FE.F1DetalleConcepto = 3;
-                        FE.F1DetalleDocTipo = 80;
-                        FE.F1DetalleDocNro = db.Clientes.Find(o.IdCliente).Cuit.Replace("-", "");
+                        if (mCuitCliente.Length > 0)
+                        {
+                            FE.F1DetalleDocTipo = 80;
+                            FE.F1DetalleDocNro = mCuitCliente;
+                        }
+                        else
+                        {
+                            FE.F1DetalleDocTipo = 99;
+                            FE.F1DetalleDocNro = "0";
+                        }
                         FE.F1DetalleCbteDesde = o.NumeroFactura ?? 0;
                         FE.F1DetalleCbteHasta = o.NumeroFactura ?? 0;
                         FE.F1DetalleCbteFch = mFecha;
                         FE.F1DetalleImpTotal = Math.Round((double)mImporteTotal, 2);
                         FE.F1DetalleImpTotalConc = 0;
-                        FE.F1DetalleImpNeto = Math.Round((double)mSubTotal - (double)mIVANoDiscriminado, 2);
-                        FE.F1DetalleImpOpEx = 0;
+                        FE.F1DetalleImpNeto = Math.Round((double)mSubTotal - (double)mSubTotalExento - (double)mIVANoDiscriminado - (double)mImporteBonificacion, 2);
+                        FE.F1DetalleImpOpEx = (double)mSubTotalExento;
                         FE.F1DetalleImpTrib = Math.Round((double)mRetencionIBrutos1 + (double)mRetencionIBrutos2 + (double)mRetencionIBrutos3 + (double)mOtrasPercepciones1 + (double)mOtrasPercepciones2 + (double)mOtrasPercepciones3 + (double)mPercepcionIVA, 2);
                         FE.F1DetalleImpIva = (double)mImporteIva1 + (double)mIVANoDiscriminado;
                         FE.F1DetalleFchServDesde = mFecha;
@@ -1877,6 +1903,9 @@ namespace ProntoMVC.Controllers
                         FE.F1DetalleMonCotiz = (double)(o.CotizacionMoneda ?? 0);
                         FE.F1DetalleCbtesAsocItemCantidad = 0;
                         FE.F1DetalleOpcionalItemCantidad = 0;
+                        if ((o.FechaInicioServicio ?? DateTime.MinValue) > DateTime.MinValue) { FE.F1DetalleFchServDesde = String.Format("{0:yyyyMMdd}", o.FechaInicioServicio); }
+                        if ((o.FechaFinServicio ?? DateTime.MinValue) > DateTime.MinValue) { FE.F1DetalleFchServHasta = String.Format("{0:yyyyMMdd}", o.FechaFinServicio); }
+
 
                         mDetalleTributoItemCantidad = 0;
                         if (mRetencionIBrutos1 != 0) { mDetalleTributoItemCantidad++; }
@@ -1968,7 +1997,7 @@ namespace ProntoMVC.Controllers
                             FE.F1DetalleIvaItemCantidad = 1;
                             FE.f1IndiceItem = 0;
                             FE.F1DetalleIvaId = mTipoIvaAFIP;
-                            FE.F1DetalleIvaBaseImp = Math.Round((double)mSubTotal - (double)mIVANoDiscriminado, 2);
+                            FE.F1DetalleIvaBaseImp = Math.Round((double)mSubTotal - (double)mSubTotalExento - (double)mIVANoDiscriminado - (double)mImporteBonificacion, 2);
                             FE.F1DetalleIvaImporte = Math.Round((double)mImporteIva1 + (double)mIVANoDiscriminado, 2);
                         }
 
@@ -2040,13 +2069,11 @@ namespace ProntoMVC.Controllers
                 else
                 {
                     ErrHandler.WriteError("algo anduvo mal : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
-
                 }
 
                 sErrores = FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg;
                 FE = null;
             }
-
 
             return mResul;
         }
