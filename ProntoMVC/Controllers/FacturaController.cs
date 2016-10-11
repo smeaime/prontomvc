@@ -1130,11 +1130,10 @@ namespace ProntoMVC.Controllers
                             a.FechaFactura,
                             Sucursal = a.Deposito != null ? a.Deposito.Descripcion : "",
                             a.Anulada,
-<<<<<<< HEAD
-                            ClienteSubCod = a.Cliente != null ? (a.Cliente.Codigo.Length > 2 ? a.Cliente.Codigo.Substring(0, 2) : "") : "", //a.Cliente.Codigo.Substring(1, 2) : "",
-=======
+
                             ClienteSubCod = a.Cliente != null ? a.Cliente.Codigo.PadLeft(2,' ').Substring(0, 2) : "",
->>>>>>> 41aaf25e868fca4aa9e225285bf32814b56e601e
+
+
                             ClienteCodigo = a.Cliente != null ? a.Cliente.CodigoCliente : 0,
                             ClienteNombre = a.Cliente != null ? a.Cliente.RazonSocial : "",
                             DescripcionIva = a.DescripcionIva != null ? a.DescripcionIva.Descripcion : "",
