@@ -203,7 +203,7 @@ namespace ProntoMVC.Tests
 
 
             string[] sincros = { "Beraza", "Granar" };
-//            string[] sincros = { "Beraza", "Zeni" };
+            //            string[] sincros = { "Beraza", "Zeni" };
 
 
             for (int n = 0; n < sincros.Count(); n++)
@@ -244,6 +244,251 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        [TestMethod]
+        public void mail_de_error()
+        {
+
+            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                               "asuntoasuntoasunto ",
+                            "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpServer"],
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpPass"],
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+        }
+
+
+
+
+        [TestMethod]
+        public void formato_mail_html_24908()
+        {
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+            dr["ModoImpresion"] = "ExcHtm";
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+            dr["ModoImpresion"] = "EHOlav";
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void Pegatina_toepfer_23761()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\230916\descar19.txt";
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.CerealnetToepfer, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
+
+        [TestMethod]
+        public void InformeControlDiario_24958()
+        {
+                    
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter[] yourParams = new ReportParameter[6];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2016, 7, 1).ToString());
+            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2016, 10, 30).ToString());
+            yourParams[4] = new ReportParameter("IdDestino", "-1");
+            yourParams[5] = new ReportParameter("IdPuntoVenta", "0");
+            //yourParams[7] = new ReportParameter("Consulta", strSQL);
+
+
+            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                "Williams - Controles Diarios.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void PegatinaRamalloBunge_23529()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Desktop\PORTE050041.txt";  // tabs
+            // string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.BungeRamalloDescargaTexto, SC, 0,
+                                    ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -313,7 +558,7 @@ namespace ProntoMVC.Tests
                        -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                         new DateTime(2014, 1, 1),
                         new DateTime(2014, 1, 10),
-                        -1,29146, ref sTitulo);
+                        -1, 29146, ref sTitulo);
 
 
 
@@ -359,7 +604,7 @@ namespace ProntoMVC.Tests
             string ms = "";
 
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\150916\Anali19.txt";
-            
+
 
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
@@ -386,7 +631,7 @@ namespace ProntoMVC.Tests
             string log = "";
             //hay que pasar el formato como parametro 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, Convert.ToInt32( carta.PuntoVenta) , ref log, 
+                                    LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, Convert.ToInt32(carta.PuntoVenta), ref log,
                                     carta.FechaArribo.ToShortDateString(), 0, "");
 
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
@@ -432,14 +677,14 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 556447516, 0, 0);
             carta.NumeroCartaDePorte = 556447516;
             carta.FechaArribo = new DateTime(2016, 1, 1);
-            carta.FechaDescarga= new DateTime(2016, 1, 1);
+            carta.FechaDescarga = new DateTime(2016, 1, 1);
             carta.PuntoVenta = 1;
             carta.Cosecha = "2016/17";
             carta.IdArticulo = 4;
             carta.NetoFinalSinMermas = 30160;
             carta.Merma = 0;
-            carta.Humedad= 0; 
-            carta.HumedadDesnormalizada = 0; 
+            carta.Humedad = 0;
+            carta.HumedadDesnormalizada = 0;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 

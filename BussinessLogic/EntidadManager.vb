@@ -292,6 +292,7 @@ Namespace Pronto.ERP.Bll
                 'End If
 
                 emailClient.EnableSsl = True
+                'emailClient.UseDefaultCredentials = False
                 emailClient.Credentials = New System.Net.NetworkCredential(SmtpUser, SmtpPass)
 
 
@@ -430,6 +431,8 @@ Namespace Pronto.ERP.Bll
 
                 Return True
             Catch ex As Exception
+                'if your Gmail account does not allow "Less Secure" apps to access it, you'll get an error and message sent to your inbox stating an unauthorized access attempt was caught.
+
                 ErrHandler2.WriteError(ex)
                 ErrHandler2.WriteError(De)
                 ErrHandler2.WriteError(Para)
