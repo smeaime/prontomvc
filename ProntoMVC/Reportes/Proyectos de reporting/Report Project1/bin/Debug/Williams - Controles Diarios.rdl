@@ -1471,7 +1471,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2814,7 +2813,6 @@
   <ReportParameters>
     <ReportParameter Name="CadenaConexion">
       <DataType>String</DataType>
-      <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
           <Value>Data Source=SERVERSQL3;Initial Catalog=Williams2;user=sa;password=.SistemaPronto.</Value>

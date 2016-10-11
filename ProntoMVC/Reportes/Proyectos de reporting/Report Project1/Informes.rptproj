@@ -419,6 +419,10 @@
       <FullPath>Valores diferidos pendientes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Williams - Controles de Kilos Clientes.rdl</Name>
+      <FullPath>Williams - Controles de Kilos Clientes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Williams - Controles Diarios.rdl</Name>
       <FullPath>Williams - Controles Diarios.rdl</FullPath>
     </ProjectItem>
@@ -439,8 +443,8 @@
       <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Williams - Controles de Kilos Clientes.rdl</Name>
-      <FullPath>Williams - Controles de Kilos Clientes.rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) Olavarria.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) Olavarria.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -484,6 +488,20 @@
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
         <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Pronto informes</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>DebugWilly</Name>
+      <Options>
+        <OutputPath>bin\Debug</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerURL>http://bdlconsultores.sytes.net:10080/ReportServer</TargetServerURL>
+        <TargetFolder>Pronto informes</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <OverwriteDataSources>true</OverwriteDataSources>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <OverwriteDatasets>true</OverwriteDatasets>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
       </Options>
     </Configuration>
   </Configurations>

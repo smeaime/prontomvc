@@ -41,7 +41,8 @@ select
 			AND (C.Destino=@IdDestino or @IdDestino=-1)
 			AND (D.Fecha between @FechaDesde and @FechaHasta)
 			AND (C.FechaDescarga between @FechaDesde and @FechaHasta)
-	group by YEAR(D.Fecha),DATENAME(month, D.Fecha),d.IdCartasDePorteControlDescarga,D.IdDestino , DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
+	group by YEAR(D.Fecha),DATENAME(month, D.Fecha),d.IdCartasDePorteControlDescarga,D.IdDestino , 
+							DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
     order by D.Fecha desc, DEST.Descripcion asc
 
 
@@ -51,8 +52,12 @@ go
 --select * from WilliamsDestinos where IdWilliamsDestino=47
 --select * from CartasDePorteControlDescarga
 
-
+ 
 exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20140810','20160810',-1,0
+
+exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20160701','20161030',-1,0
+
+exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20160701','20161030',-1,-1
 
 /*
 CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]

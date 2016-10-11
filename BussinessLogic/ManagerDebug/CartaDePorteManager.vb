@@ -3840,9 +3840,12 @@ Public Class CartaDePorteManager
             ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+
             ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
                 'este es de servidor, así que saco el path
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "EHOlav" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
             Else
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
@@ -17831,7 +17834,7 @@ Public Class CDPMailFiltrosManager2
 
             Dim tiempoinforme, tiemposql As Integer
 
-            If Debugger.IsAttached And False Then
+            If False And Debugger.IsAttached Then
                 'output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
             Else
                 output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)

@@ -2128,6 +2128,12 @@ Public Class ExcelImportadorManager
 
                 r(29) = r(29).Replace(".", "").Replace(",", ".")
 
+                If r(4) = "" Then
+                    r(4) = "DIRECTO"
+                End If
+             
+
+
                 'r(40) = CodigoCalidad(Val(r(40)))
 
                 'Select Case r(38)
@@ -3320,8 +3326,6 @@ Public Class ExcelImportadorManager
                 End If
 
                 cdp.PuntoVenta = cmbPuntoVenta
-
-
 
 
 
@@ -4949,7 +4953,9 @@ Public Class ExcelImportadorManager
             End If
 
             'TE AGREGO UN DATO MAS , CUANDO ES DESTINATARIO CHS , NO TIENE QUE PEGAR EL CAMION
-            '    If destinatario.Contains("CHS") Then dr.Item("NumeroCDP") = ""
+            If destinatario.Contains("CHS") Then
+                dr.Item("NumeroCDP") = ""
+            End If
 
         Next
 
