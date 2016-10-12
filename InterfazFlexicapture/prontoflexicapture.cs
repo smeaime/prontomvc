@@ -1677,8 +1677,8 @@ namespace ProntoFlexicapture
                     cdp.Observaciones = Observaciones;
                     cdp.Humedad = Conversion.Val(HumedadPorc.Replace(".", "").Replace(",", ""));
                     cdp.HumedadDesnormalizada = Conversion.Val(HumedadKilos.Replace(".", "").Replace(",", ""));
-                    cdp.CalidadMermaZarandeo = Conversion.Val(ZarandeoKilosMerma.Replace(".", "").Replace(",", ""));
-                    cdp.CalidadZarandeoRebaja = Conversion.Val(ZarandeoPorc.Replace(".", "").Replace(",", ""));
+                    cdp.CalidadMermaZarandeo = Conversion.Val(ZarandeoPorc.Replace(".", "").Replace(",", ""));
+                    cdp.CalidadZarandeoRebaja = Conversion.Val(ZarandeoKilosMerma.Replace(".", "").Replace(",", ""));
 
 
 
