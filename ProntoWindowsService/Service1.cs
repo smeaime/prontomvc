@@ -285,6 +285,7 @@ FCESupport\FCESupportImpl.h, 42.
                     processor = null;
 
                     ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
+                    //cuantas veces debo probar de nuevo?
 
                     ClassFlexicapture.Log("funciona?");
 

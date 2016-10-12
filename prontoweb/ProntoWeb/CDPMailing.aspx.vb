@@ -412,7 +412,8 @@ Partial Class CDPMailing
 
             Dim AgrupadorDeTandaPeriodos As String = iisNull(.Item("AgrupadorDeTandaPeriodos"), -1)
 
-            bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+            bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm" Or iisNull(.Item("ModoImpresion"), "Excel") = "EHOlav")
 
 
             Dim AplicarANDuORalFiltro, ModoExportacion, optDivisionSyngenta
@@ -719,7 +720,11 @@ Partial Class CDPMailing
 
             Dim AgrupadorDeTandaPeriodos As String = iisNull(.Item("AgrupadorDeTandaPeriodos"), -1)
 
-            bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+
+            bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm" Or iisNull(.Item("ModoImpresion"), "Excel") = "EHOlav")
+
+
 
 
             Dim AplicarANDuORalFiltro, ModoExportacion, optDivisionSyngenta
@@ -793,6 +798,14 @@ Partial Class CDPMailing
 
 
 
+
+
+
+
+
+
+
+
             Dim asunto As String = CartaDePorteManager.FormatearAsunto(HFSC.Value, _
                   "", _
                   estado, "", idVendedor, idCorredor, _
@@ -804,7 +817,10 @@ Partial Class CDPMailing
 
 
 
-            cuerpo &= AgregarFirmaHtml(cmbPuntoVenta.SelectedValue)
+
+
+
+            cuerpo = EncabezadoHtml(cmbPuntoVenta.SelectedValue) & cuerpo & AgregarFirmaHtml(cmbPuntoVenta.SelectedValue) 'aunque agrego la firma al final de la cadena, sale al principio en el mail
 
 
 
@@ -1477,7 +1493,7 @@ Partial Class CDPMailing
 
 
 
-            
+
 
             If False Then
                 Dim dt = DataTableWHERE(Fetch(HFSC.Value, 0), GenerarWHEREparaFiltrarFiltros_ODS(HFSC.Value, txtBuscar.Text, cmbBuscarEsteCampo.SelectedValue, cmbPuntoVenta.SelectedValue))
@@ -1490,7 +1506,7 @@ Partial Class CDPMailing
             Dim dr = FetchById(HFSC.Value, m_Id)
 
             EditarPopupABM(dr)
-            End If
+        End If
 
     End Sub
 

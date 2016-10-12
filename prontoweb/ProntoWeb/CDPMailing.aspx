@@ -980,7 +980,7 @@ llama explicitamente al show y update (acordate que este panel es condicional)
                                                     <asp:ListItem Value="ExcHtm" Text="Excel y Html" />
                                                     <asp:ListItem Value="Html" Text="Html" />
                                                     <asp:ListItem Value="HtmlIm" Text="Html con imágenes " />
-                                                    <asp:ListItem Value="EHOlav" Text="Html Olavarria " />
+                                                    <asp:ListItem Value="EHOlav" Text="Html corto" />
                                                 </asp:DropDownList>
                                             </td>
                                             <td class="EncabezadoCell"></td>
