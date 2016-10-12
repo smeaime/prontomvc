@@ -344,7 +344,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-            If iisNull(dr.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
+            If iisNull(dr.Item("ModoImpresion"), "Excel") = "ExcHtm" Or iisNull(dr.Item("ModoImpresion"), "Excel") = "EHOlav" Then
                 Return CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
             End If

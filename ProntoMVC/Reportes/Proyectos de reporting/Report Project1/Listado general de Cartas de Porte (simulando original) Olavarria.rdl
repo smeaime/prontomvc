@@ -18,7 +18,7 @@
               <Width>15.58595mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>17.32712mm</Width>
+              <Width>25.5292mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>17.96974mm</Width>
@@ -27,7 +27,7 @@
               <Width>16.04899mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>12.54684mm</Width>
+              <Width>14.66351mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>15.53286mm</Width>
@@ -42,7 +42,7 @@
               <Width>29.49778mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>24.99995mm</Width>
+              <Width>25.7937mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>24.99995mm</Width>
@@ -2645,7 +2645,7 @@
         <Top>43.05329mm</Top>
         <Left>3.12769mm</Left>
         <Height>17.47089mm</Height>
-        <Width>546.61816mm</Width>
+        <Width>557.73066mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2653,199 +2653,6 @@
           <FontSize>8pt</FontSize>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox1">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>..Visite: www.williamsentregas.com.ar y vea toda su información en linea!</Value>
-                <ActionInfo>
-                  <Actions>
-                    <Action>
-                      <Hyperlink>http://www.williamsentregas.com.ar/</Hyperlink>
-                    </Action>
-                  </Actions>
-                </ActionInfo>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>Underline</TextDecoration>
-                  <Color>#0000ff</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>13.6492mm</Top>
-        <Left>119.62565mm</Left>
-        <Height>8.64578mm</Height>
-        <Width>100.80625mm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox1522">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Formato Granos Olavarría </Value>
-                <Style>
-                  <FontFamily>Verdana</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <TextDecoration>None</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=Parameters!titulo.Value</Value>
-                <Style>
-                  <FontFamily>Verdana</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <TextDecoration>None</TextDecoration>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Verdana</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <TextDecoration>None</TextDecoration>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=CountRows("DataSet1")</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value> cartas listadas</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1522</rd:DefaultName>
-        <Top>24.05887mm</Top>
-        <Left>3.12769mm</Left>
-        <Height>15.95919mm</Height>
-        <Width>364.56758mm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="sServidor2">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Posibles servidores: (usar en parametro sServidor)</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>http://localhost:48391/Pronto</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>https://prontoweb.williamsentregas.com.ar</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>86.34589mm</Top>
-        <Left>11.29242mm</Left>
-        <Height>21.43125mm</Height>
-        <Width>86.25417mm</Width>
-        <ZIndex>3</ZIndex>
-        <Visibility>
-          <Hidden>true</Hidden>
-        </Visibility>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Image Name="Image3">
-        <Source>External</Source>
-        <Value>http://prontoweb.williamsentregas.com.ar/imagenes/williamscomprimido.gif</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>6.81739mm</Top>
-        <Left>3.12767mm</Left>
-        <Height>15.47759mm</Height>
-        <Width>76.8582mm</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
     </ReportItems>
     <Height>148.87575mm</Height>
     <Style>
