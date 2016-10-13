@@ -37,12 +37,22 @@ Partial Class CDPFacturacion
 
     Dim q As String 'busqueda en el paso 2
 
+    Function EsteUsuarioPuedeVerTarifa() As Boolean
+        Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), "CDPs Facturacion")
+
+        Return p("PuedeModificar")
+    End Function
+
+
+
+
 
     '///////////////////////////////////
     '///////////////////////////////////
     'load
     '///////////////////////////////////
     '///////////////////////////////////
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'Session.Add("SC", ConfigurationManager.ConnectionStrings("Pronto").ConnectionString)
@@ -51,7 +61,14 @@ Partial Class CDPFacturacion
 
 
 
+
+        GridView2.Columns(9).Visible = EsteUsuarioPuedeVerTarifa()
+
+
+
         If Not IsPostBack Then
+
+     
             'es decir, es la primera vez que se carga
 
             '////////////////////////////////////////////
@@ -707,9 +724,7 @@ Partial Class CDPFacturacion
             ac = e.Row.FindControl("AutoCompleteExtender21")
             If Not IsNothing(ac) Then ac.ContextKey = HFSC.Value 'por qué pregunta esto???
 
-
-
-
+          
         End If
 
 
@@ -2022,6 +2037,7 @@ Partial Class CDPFacturacion
         Dim vista As Data.DataView = dt.DefaultView
         Try
             'dt = vista.ToTable(False, "NumeroCartaDePorte", "FechaArribo", "FechaDescarga", "FacturarselaA", "Producto", "KgNetos", "Titular", "Intermediario", "R. Comercial", "Corredor ", "Destinatario", "DestinoDesc", "Procedcia.", "TarifaFacturada", "ClienteSeparado")
+
             dt = vista.ToTable(False, "NumeroCartaDePorte", "FechaArribo", "FechaDescarga", "FacturarselaA", "Producto", "KgNetos", "Titular", "Intermediario", "RComercial", "Corredor", "Destinatario", "DestinoDesc", "Procedcia", "TarifaFacturada", "ClienteSeparado")
 
         Catch ex As Exception
@@ -2038,6 +2054,14 @@ Partial Class CDPFacturacion
             For Each row In dt.Rows
                 row("Total") = row("KgNetos") * row("TarifaFacturada") / 1000D
             Next
+
+
+
+            If Not EsteUsuarioPuedeVerTarifa() Then
+                dt.Columns.Remove("TarifaFacturada")
+                dt.Columns.Remove("Total")
+            End If
+
 
             ViewState("ExcelDeLaGrillaDelPaso2") = DataTableToExcel(dt)
 
@@ -2106,6 +2130,11 @@ Partial Class CDPFacturacion
         'saco estas columnas que molestan en la presentacion
         dt.Columns.Remove("Factura")
         dt.Columns.Remove("IdClienteSeparado")
+
+        If Not EsteUsuarioPuedeVerTarifa() Then
+            dt.Columns.Remove("Tarifa")
+            dt.Columns.Remove("Total")
+        End If
 
 
         '/////////////////////////////////////
@@ -2277,6 +2306,10 @@ Partial Class CDPFacturacion
         dt.Columns.Remove("IdCodigoIVA")
         dt.Columns.Remove("ClienteSeparado")
 
+        If Not EsteUsuarioPuedeVerTarifa() Then
+            dt.Columns.Remove("TarifaFacturada")
+            dt.Columns.Remove("Total")
+        End If
 
 
 

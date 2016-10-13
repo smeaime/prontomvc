@@ -17073,6 +17073,13 @@ Namespace Pronto.ERP.Bll
                     End If
                     'Campo 61 ConCalidad: Poner siempre la condición “CC” Condición Cámara.
                     sCalidad = "CC"
+                    If Not .IsCalidadDescNull Then
+                        If InStr(.CalidadDesc.ToString.ToLower, "conforme") > 0 Then
+                            sCalidad = "G2"
+                            'consulta 24964 : Te resumo: Siempre que aparezca la calidad CONFORME . Que en el txt salga GRADO 2. Con la sigla "G2" . 
+                        End If
+                    End If
+
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
 
 
