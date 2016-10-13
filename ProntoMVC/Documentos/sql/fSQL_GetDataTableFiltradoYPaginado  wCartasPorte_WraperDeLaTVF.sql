@@ -272,6 +272,111 @@ where 1=1
 	  AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
 	  
 
+
+
+	  and	
+	  (
+
+
+	  --Enum enumCDPestado
+   --     Todas
+   --     TodasMenosLasRechazadas 1
+   --     Incompletas 2
+   --     Posicion 3
+   --     DescargasMasFacturadas 4 
+   --     DescargasSinFacturar 5
+   --     Facturadas 6
+   --     NoFacturadas 7
+   --     Rechazadas 8
+   --     FacturadaPeroEnNotaCredito 9
+   --     DescargasDeHoyMasTodasLasPosiciones 10 
+   --     DescargasDeHoyMasTodasLasPosicionesEnRangoFecha 11
+
+
+			@estado=0 --OR @estado is null
+			OR
+			(@estado=1 AND  	 ISNULL(cdp.Anulada,'NO')<>'SI'  )
+			OR
+			(
+			@estado=2  AND (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR cdp.IdArticulo IS NULL) 
+			AND ISNULL(IdFacturaImputada,0)=0 AND ISNULL(cdp.Anulada,'NO')<>'SI'
+			)
+            OR
+			(
+				@estado=3  --posicion
+				 AND NOT (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR cdp.IdArticulo IS NULL) 
+				 AND ISNULL(cdp.NetoProc,0)=0 AND ISNULL(cdp.IdFacturaImputada,0)=0 AND ISNULL(cdp.Anulada,'NO')<>'SI' 
+			)
+			OR
+			(
+				@estado=10 --Case enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
+						 AND 
+                                 (                                              
+                                       ( NOT (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR cdp.IdArticulo IS NULL) 
+											AND ISNULL(NetoProc,0)=0 AND ISNULL(cdp.IdFacturaImputada,0)=0 AND ISNULL(cdp.Anulada,'NO')<>'SI' ) 
+                                   OR                                           
+                                       ( ISNULL(cdp.NetoProc,0)>0 AND cdp.fechadescarga >= getdate()  )
+                                 ) 
+			
+			)
+			OR
+			(
+				@estado=11 -- Case enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+                  AND 
+                                 (                                             
+                                       ( NOT (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR 
+                                cdp.IdArticulo IS NULL) AND ISNULL(cdp.NetoProc,0)=0 AND ISNULL(IdFacturaImputada,0)=0 AND 
+                                      ISNULL(cdp.Anulada,'NO')<>'SI' ) 
+                                   OR                                            
+                                       ( ISNULL(NetoProc,0)>0 AND fechadescarga >= getdate()  )
+                                ) 
+
+			)
+			OR
+			(
+				@estado=4 --Case enumCDPestado.DescargasMasFacturadas
+                AND NOT (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR cdp.IdArticulo IS NULL) AND 
+							ISNULL(cdp.NetoProc,0)>0 AND ISNULL(cdp.Anulada,'NO')<>'SI'
+			)
+			OR
+			(
+				@estado=5 --  Case enumCDPestado.DescargasSinFacturar
+                 AND NOT (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR cdp.IdArticulo IS NULL) AND 
+						ISNULL(cdp.NetoProc,0)>0 AND ISNULL(cdp.Anulada,'NO')<>'SI' AND ISNULL(cdp.IdFacturaImputada,0)=0 
+			)
+			OR
+			(
+				@estado=6 -- Case enumCDPestado.Facturadas
+                 AND ISNULL(cdp.IdFacturaImputada,0)>0 AND ISNULL(cdp.Anulada,'NO')<>'SI'
+			)
+			OR
+			(
+				@estado=7 -- Case enumCDPestado.NoFacturadas
+                 AND NOT(ISNULL(cdp.IdFacturaImputada,0)>0 AND ISNULL(cdp.Anulada,'NO')<>'SI')
+			)
+			OR
+			(
+				@estado=8 -- Case enumCDPestado.Rechazadas
+                 AND ISNULL(cdp.Anulada,'NO')='SI'
+			)
+			OR
+			(
+			  
+				@estado=9 --  Case enumCDPestado.FacturadaPeroEnNotaCredito
+						 AND 0=1
+						 						  --Select distinct  
+               --            "               CuentasCorrientesDeudores.idcomprobante 
+               --            "               FROM DetalleNotasCreditoImputaciones DetCre
+               --            "               LEFT OUTER JOIN NotasCredito ON NotasCredito.IdNotaCredito=DetCre.IdNotaCredito
+               --            "               LEFT OUTER JOIN CuentasCorrientesDeudores ON CuentasCorrientesDeudores.IdCtaCte=DetCre.IdImputacion 
+               --            "               LEFT OUTER JOIN TiposComprobante ON TiposComprobante.IdTipoComprobante=CuentasCorrientesDeudores.IdTipoComp 
+               --            "               where TiposComprobante.DescripcionAB='FA' and CuentasCorrientesDeudores.idcomprobante <>0 
+               --            "              ")
+						   
+			)
+		)         
+
+
 go
 
 
@@ -289,7 +394,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 				( 
 					NULL, 
 					NULL, 
-					NULL,
+					0,
 					NULL, 
 					NULL, 
 
