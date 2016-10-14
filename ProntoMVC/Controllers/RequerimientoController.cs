@@ -3143,6 +3143,8 @@ Case 1
             
 
             var c = new ValeSalidaController(); //ese controlador no recibe el membership que estoy usando en este
+            c.db = db;
+            c.oStaticMembershipService = oStaticMembershipService;
             c.BatchUpdate(vale);
 
             //var controller = DependencyResolver.Current.GetService<ValeSalidaController>();

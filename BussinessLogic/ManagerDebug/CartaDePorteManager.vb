@@ -3152,7 +3152,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function ExcelToHtml(ArchivoExcelDestino As String, Optional grid As GridView = Nothing) As String
+    Shared Function ExcelToHtml(ArchivoExcelDestino As String, Optional grid As GridView = Nothing, Optional constwidth As Long = 3000) As String
 
         Dim ds As DataSet = New DataSet()
 
@@ -3225,7 +3225,7 @@ Public Class CartaDePorteManager
             If ds.Tables.Count = 0 Then Return "NoSeConvirtieronTablas" & "_" & firstSheetName & "_" & ArchivoExcelDestino & "_" & err
             ErrHandler2.WriteError("Tablas  " & ds.Tables.Count.ToString())
             ErrHandler2.WriteError("Convertido " + ArchivoExcelDestino + " Lineas: " + ds.Tables(0).Rows.Count.ToString())
-            s = DatatableToHtmlUsandoGridview(ds.Tables(0), grid)
+            s = DatatableToHtmlUsandoGridview(ds.Tables(0), grid, constwidth)
             's = DatatableToHtml(ds.Tables(0))
 
         Catch ex As Exception
@@ -3238,14 +3238,14 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function DatatableToHtmlUsandoGridview(dt As DataTable, Optional gridView As GridView = Nothing) As String
+    Shared Function DatatableToHtmlUsandoGridview(dt As DataTable, Optional gridView As GridView = Nothing, Optional constwidth As Long = 3000) As String
         'http://stackoverflow.com/questions/1018785/asp-net-shortest-way-to-render-datatable-to-a-string-html
         'http://stackoverflow.com/questions/8908363/exporting-gridview-to-xls-paging-issue
 
 
 
         Const maxrows = 400
-        Const constwidth = 3000
+        'Const constwidth = 3000
         Const fontsize = 6
         Const padding = 2
 
@@ -18112,7 +18112,6 @@ Public Class CDPMailFiltrosManager2
                     End Try
 
 
-
                     If iisNull(.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
 
                         Dim grid As New GridView
@@ -18131,7 +18130,25 @@ Public Class CDPMailFiltrosManager2
                                                       CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
-                    ElseIf bDescargaHtml Or iisNull(.Item("ModoImpresion"), "Excel") = "EHOlav" Then
+
+                    ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "EHOlav" Then
+                        Dim grid As New GridView
+                        Dim html = ExcelToHtml(output, grid, 2000)
+
+                        MandaEmail_Nuevo(destinatario, _
+                                    asunto, _
+                              EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                               De, _
+                               SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                          "", _
+                                        SmtpPort, _
+                                , _
+                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
+
+
+                    ElseIf bDescargaHtml Then
 
 
 
