@@ -90,11 +90,11 @@
         <div id="ListaPager" class="scroll" style="text-align: center;">
         </div>
 
-        <div style="margin-top: 4px">
+        @*<div style="margin-top: 4px">
             <input type="button" class="btn btn-small" id="addData" value="Vale salida (stock)" />
             <input type="button" class="btn btn-small" id="edtData" value="Para compras" />
             <input type="button" class="btn btn-small" id="delData" value="dar por cumplido" />
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -103,15 +103,15 @@
 <div class="contextMenu" id="myMenu1" style="display:none">
     <ul style="width: 400px">
         <li id="add">
-            <span class="ui-icon ui-icon-plus" style="float:left"></span>
+            @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
             <span id="Vale" style="font-size:11px; font-family:Verdana">Vale salida (stock)</span>
         </li>
         <li id="edit">
-            <span class="ui-icon ui-icon-pencil" style="float:left"></span>
+            @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
             <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Para compras</span>
         </li>
         <li id="del">
-            <span class="ui-icon ui-icon-trash" style="float:left"></span>
+            @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
             <span id="DarPorCumplido" style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
         </li>
     </ul>
@@ -131,7 +131,17 @@
                         //alert('hola');
                         // $(this).dialog('close');
                         // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
-                        validatePwd2(generarvale( "administrador" , ""), function () { });
+
+
+
+                        var $grid = $("#Lista");
+                        var lista = $grid.jqGrid("getGridParam", "selarrrow");
+                        if ((lista == null) || (lista.length == 0)) {
+                            lista = $grid.jqGrid('getDataIDs');
+                        }
+
+
+                        validatePwd2(generarvale(lista, "administrador", ""), function () { });
                         $(this).dialog('close');
                     },
                     'Cancelar': function () {
@@ -150,9 +160,12 @@
         })
 
         
-        function generarvale() {
+        function generarvale(ids,user,pass) {
             //juntar los ids y mandarlos?
-            var ids = [1, 4, 5];
+          
+
+
+
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
