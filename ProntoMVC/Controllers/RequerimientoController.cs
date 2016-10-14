@@ -1268,7 +1268,7 @@ namespace ProntoMVC.Controllers
                             id = a[0].ToString(),
                             cell = new string[] { 
                                    a[0].ToString(),
-                                   a[1].ToString(),
+                                   "<a href="+ Url.Action("Edit",new {id =  a[1] } ) + "  >Editar</>" ,
                                    a[2].ToString(),
                                    a[3].ToString(),
                                    a[4].ToString(),
@@ -2798,7 +2798,7 @@ namespace ProntoMVC.Controllers
 
             int ModoConsulta = 0;
 
-            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento)).ToList();
 
             foreach (Data.Models.DetalleRequerimiento detrm in reqs)
             {
@@ -2891,7 +2891,7 @@ Case 1
 
             mAux1 = BuscarClaveINI("Avisar al solicitante de la RM que fue dada por cumplida");
 
-            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento)).ToList();
 
             foreach (Data.Models.DetalleRequerimiento detrm in reqs)
             {
@@ -2916,7 +2916,7 @@ Case 1
                         }
 
                         db.SaveChanges();
-                        EntidadManager.Tarea(SC, "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, 0);
+                        EntidadManager.Tarea(SCsql(), "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, 0);
 
                     }
                 }
@@ -3033,7 +3033,7 @@ Case 1
 
             // le pasa mas datos en en string... ademas del id, pasa la obra, 
 
-            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento)).ToList();
 
             if (reqs.Select(x => x.Requerimientos.IdObra).Distinct().Count() > 1)
             {
@@ -3127,6 +3127,7 @@ Case 1
             var vale = new ValesSalida();
 
             vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First();
+            vale.FechaValeSalida = DateTime.Today;
 
             var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
 
@@ -3134,7 +3135,9 @@ Case 1
             {
                 var detvale = new DetalleValesSalida();
                 detvale.IdArticulo = detrm.IdArticulo;
-
+                detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
+                detvale.Cantidad = detrm.Cantidad;
+                
 
                 vale.DetalleValesSalidas.Add(detvale);
             }
@@ -3146,6 +3149,7 @@ Case 1
             c.db = db;
             c.oStaticMembershipService = oStaticMembershipService;
             c.BatchUpdate(vale);
+            c = null;
 
             //var controller = DependencyResolver.Current.GetService<ValeSalidaController>();
             //controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);

@@ -91,10 +91,10 @@
         </div>
 
         @*<div style="margin-top: 4px">
-            <input type="button" class="btn btn-small" id="addData" value="Vale salida (stock)" />
-            <input type="button" class="btn btn-small" id="edtData" value="Para compras" />
-            <input type="button" class="btn btn-small" id="delData" value="dar por cumplido" />
-        </div>*@
+                <input type="button" class="btn btn-small" id="addData" value="Vale salida (stock)" />
+                <input type="button" class="btn btn-small" id="edtData" value="Para compras" />
+                <input type="button" class="btn btn-small" id="delData" value="dar por cumplido" />
+            </div>*@
     </div>
 </div>
 
@@ -124,7 +124,15 @@
 
         $("#Vale").click(function () {
 
-            
+            var $grid = $("#Lista");
+            var lista = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((lista == null) || (lista.length == 0)) {
+                alert("No hay rms elegidas");
+                return;
+                lista = $grid.jqGrid('getGridParam', 'selrow')
+            }
+
+
             $("#dialog-password").dialog({
                 buttons: {
                     'Aceptar': function () {
@@ -134,15 +142,24 @@
 
 
 
-                        var $grid = $("#Lista");
-                        var lista = $grid.jqGrid("getGridParam", "selarrrow");
-                        if ((lista == null) || (lista.length == 0)) {
-                            lista = $grid.jqGrid('getDataIDs');
+                        $("#loading").show();
+
+
+
+
+                        validatePwd2(function () {
+                            generarvale(lista, "administrador", "",
+                                function () {
+                                    $("#loading").hide();
+                                    $('#Lista').trigger('reloadGrid');
+                                }
+                            )
                         }
+                                       , function () { $("#loading").hide(); }
+                         );
 
-
-                        validatePwd2(generarvale(lista, "administrador", ""), function () { });
                         $(this).dialog('close');
+
                     },
                     'Cancelar': function () {
                         $(this).dialog('close');
@@ -159,10 +176,10 @@
 
         })
 
-        
-        function generarvale(ids,user,pass) {
+
+        function generarvale(ids, user, pass, callback) {
             //juntar los ids y mandarlos?
-          
+
 
 
 
@@ -176,20 +193,34 @@
                     pass: pass
                 })
             }).done(function () {
-            
+                if (typeof callback == "function") callback();
             });
         }
 
 
+
+
+
+
+
         $("#DarPorCumplido").click(function () {
             //juntar los ids y mandarlos?
-            var ids = [1, 4, 5];
+
+            var $grid = $("#Lista");
+            var lista = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((lista == null) || (lista.length == 0)) {
+                alert("No hay rms elegidas");
+                return;
+                lista = $grid.jqGrid('getGridParam', 'selrow')
+            }
+
+
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 url: '@Url.Action("DarPorCumplido", "Requerimiento")',
                 data: JSON.stringify({
-                    idDetalleRequerimientos: ids,
+                    idDetalleRequerimientos: lista,
                     userAutorizador: "administrador",
                     passAutorizador: "",
                     userCumplidor: "administrador",
@@ -201,15 +232,26 @@
         })
 
 
+
+
         $("#ParaCompras").click(function () {
             //juntar los ids y mandarlos?
-            var ids = [1, 4, 5];
+
+            var $grid = $("#Lista");
+            var lista = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((lista == null) || (lista.length == 0)) {
+                alert("No hay rms elegidas");
+                return;
+                lista = $grid.jqGrid('getGridParam', 'selrow')
+            }
+
+
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 url: '@Url.Action("AsignaComprador", "Requerimiento")',
                 data: JSON.stringify({
-                    idDetalleRequerimientos: ids,
+                    idDetalleRequerimientos: lista,
                     userComprador: "administrador",
                     passComprador: ""
 
@@ -491,15 +533,15 @@
                     bindings: {
                         'edit': function (trigger) {
                             // trigger is the DOM element ("tr.jqgrow") which are triggered
-                            grid.editGridRow(trigger.id, editSettings);
+                            //   grid.editGridRow(trigger.id, editSettings);
                         },
                         'add': function (/*trigger*/) {
-                            grid.editGridRow("new", addSettings);
+                            //  grid.editGridRow("new", addSettings);
                         },
                         'del': function (trigger) {
                             if ($('#del').hasClass('ui-state-disabled') === false) {
                                 // disabled item can do be choosed
-                                grid.delGridRow(trigger.id, delSettings);
+                                //      grid.delGridRow(trigger.id, delSettings);
                             }
                         }
                     },
@@ -507,12 +549,12 @@
                         var rowId = $(event.target).closest("tr.jqgrow").attr("id");
                         //grid.setSelection(rowId);
                         // disable menu for rows with even rowids
-                        $('#del').attr("disabled", Number(rowId) % 2 === 0);
-                        if (Number(rowId) % 2 === 0) {
-                            $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
-                        } else {
-                            $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
-                        }
+                        //$('#del').attr("disabled", Number(rowId) % 2 === 0);
+                        //if (Number(rowId) % 2 === 0) {
+                        //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
+                        //} else {
+                        //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+                        //}
                         return true;
                     },
 

@@ -1,9 +1,5 @@
-﻿select top 10 tipodesignacion,* from detallerequerimientos order by iddetallerequerimiento desc
-select top 10 * from requerimientos order by idrequerimiento desc
+﻿select * from valessalida
+select * from detallevalessalida
+select * from salidasmateriales
 
-update requerimientos
-set cumplido='NO'
-
-
-
-sp_helptext Requerimientos_TX_PendientesDeAsignacion
+ValesSalida_TX_PendientesDetallado
