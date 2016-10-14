@@ -53,7 +53,7 @@
         <div class="row-fluid">
             <div class="span12 lightblue">
                 <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-                    Nuevo requerimiento
+                    Nuevo Vale
                 </button>
                 @*   <button onclick="  " class="btn span1">
                         Excel
@@ -181,7 +181,7 @@
         //$('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Requerimientos_DynamicGridData", "Requerimiento")',
+            url: '@Url.Action("ValesSalidaPendientesDeSalidaMateriales", "ValeSalida")',
             postData: {
                 'FechaInicial': function () { return $("#FechaInicial").val(); },
                 'FechaFinal': function () { return $("#FechaFinal").val(); },
@@ -195,12 +195,11 @@
             },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
+            colNames: ['', 'IdDetalleValeSalida', 'IdValeSalida', 'IdArticulo', 'NumeroValeSalida.', 'FechaValeSalida.', 'ArticuloCodigo.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
                        'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
                        'Observaciones', 'Lugar de entrega', '', '', 'Web'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
                         { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         {

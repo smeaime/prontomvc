@@ -149,7 +149,7 @@ namespace ProntoMVC.Tests
 
             c.DarPorCumplido((new int[] { 1, 2, 3 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
 
-            c.GenerarValesAlmacen((new int[] { 1, 2, 3 }).ToList(), "administrador", "");
+            c.GenerarValesAlmacen((new int[] { 48631 }).ToList(), "administrador", "");
             c.AsignaComprador((new int[] { 1, 2, 3 }).ToList(), "administrador", "");
 
 

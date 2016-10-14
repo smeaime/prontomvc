@@ -26,7 +26,7 @@ Imports Microsoft.VisualBasic
 <WebService(Namespace:="http://microsoft.com/webservices/")> _
 Public Class WebServiceCartas
 
-
+    ''
 
     Public ReadOnly Property scLocal() As String
         Get

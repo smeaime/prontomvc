@@ -539,8 +539,8 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleValeSalida.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
-                                a.IdDetalleValeSalida.NullSafeToString(), 
+                                  "<a href="+ Url.Action("Edit",new {id = a.IdValeSalida} ) + "  >Editar</>" ,
+                                a.IdDetalleValeSalida.NullSafeToString(),
                                 a.IdValeSalida.NullSafeToString(), 
                                 a.IdArticulo.NullSafeToString(), 
                                 a.NumeroValeSalida.NullSafeToString(), 
