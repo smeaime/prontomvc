@@ -37,10 +37,13 @@ select
 								AND D.idPuntoVenta=C.puntoVenta
 							    AND C.FechaDescarga = D.Fecha -- aca habria que tomar solo el dia de las dos fechas, sin tomar en cuenta la hora
 	left  join WilliamsDestinos DEST on D.IdDestino=DEST.IdWilliamsDestino
-	where	(DEST.PuntoVenta=@IdPuntoVenta or @IdPuntoVenta<=0)
-			AND (C.Destino=@IdDestino or @IdDestino=-1)
-			AND (D.Fecha between @FechaDesde and @FechaHasta)
-			AND (C.FechaDescarga between @FechaDesde and @FechaHasta)
+
+	where	1=1
+			AND (DEST.PuntoVenta=@IdPuntoVenta or @IdPuntoVenta<=0)
+			AND (D.Fecha between @FechaDesde and @FechaHasta )
+			AND (D.IdDestino=@IdDestino or @IdDestino=-1) 
+			AND ((C.FechaDescarga between @FechaDesde and @FechaHasta) or C.IdCartaDePorte is null)
+
 	group by YEAR(D.Fecha),DATENAME(month, D.Fecha),d.IdCartasDePorteControlDescarga,D.IdDestino , 
 							DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
     order by D.Fecha desc, DEST.Descripcion asc

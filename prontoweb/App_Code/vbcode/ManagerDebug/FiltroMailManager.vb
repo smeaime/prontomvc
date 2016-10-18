@@ -344,10 +344,12 @@ Namespace Pronto.ERP.Bll
 
 
 
-            If iisNull(dr.Item("ModoImpresion"), "Excel") = "ExcHtm" Or iisNull(dr.Item("ModoImpresion"), "Excel") = "EHOlav" Then
+            If iisNull(dr.Item("ModoImpresion"), "Excel") = "ExcHtm" Or iisNull(dr.Item("ModoImpresion"), "Excel") = "EHOlav" Or iisNull(dr.Item("ModoImpresion"), "Excel") = "HOlav" Then
                 Return CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
             End If
+
+
 
             Dim output As String
             'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
@@ -394,8 +396,12 @@ Namespace Pronto.ERP.Bll
                 End Try
 
 
-                ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
-                Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+                Dim ModoImpresion As String = iisNull(.Item("ModoImpresion"), "Excel")
+                Dim informesHtml = New String() {"Html", "HtmlIm", "EHOlav", "HOlav"}
+                Dim bDescargaHtml = informesHtml.Contains(ModoImpresion)
+
+
 
 
                 Dim tiempoinforme, tiemposql As Integer
