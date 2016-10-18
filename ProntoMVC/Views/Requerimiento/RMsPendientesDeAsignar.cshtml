@@ -104,11 +104,11 @@
     <ul style="width: 400px">
         <li id="add">
             @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
-            <span id="Vale" style="font-size:11px; font-family:Verdana">Vale salida (stock)</span>
+            <span id="Vale" style="font-size:11px; font-family:Verdana">Generar Vale salida (stock)</span>
         </li>
         <li id="edit">
             @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
-            <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Para compras</span>
+            <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Liberar para Compras</span>
         </li>
         <li id="del">
             @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
@@ -120,6 +120,13 @@
 
 
 <script type="text/javascript">
+
+
+
+
+
+
+
     $(document).ready(function () {
 
         $("#Vale").click(function () {
@@ -127,6 +134,7 @@
             var $grid = $("#Lista");
             var lista = $grid.jqGrid("getGridParam", "selarrrow");
             if ((lista == null) || (lista.length == 0)) {
+                // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
                 alert("No hay rms elegidas");
                 return;
                 lista = $grid.jqGrid('getGridParam', 'selrow')
@@ -227,7 +235,7 @@
                     sObsCumplido: "asdasd asd asd asd asd asdasdasd asd asdasd asd "
                 })
             }).done(function () {
-
+                $('#Lista').trigger('reloadGrid');
             });
         })
 
@@ -257,7 +265,7 @@
 
                 })
             }).done(function () {
-
+                $('#Lista').trigger('reloadGrid');
             });
         })
 

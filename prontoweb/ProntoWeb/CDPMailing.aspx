@@ -977,8 +977,8 @@ llama explicitamente al show y update (acordate que este panel es condicional)
                                                     <asp:ListItem Value="Imagen" Text="Excel con imágenes " />
                                                     <asp:ListItem Value="ExcRec" Text="Excel con n°recibo" />
                                                     <asp:ListItem Value="Grobo" Text="Excel Grobo" />
-                                                    <asp:ListItem Value="ExcHtm" Text="Excel y Html" />
-                                                    <asp:ListItem Value="Html" Text="Html" />
+                                                    <asp:ListItem Value="ExcHtm" Text="Excel y Html" Enabled="false" />
+                                                    <asp:ListItem Value="Html" Text="Html"  Enabled="false"  />
                                                     <asp:ListItem Value="HtmlIm" Text="Html con imágenes " />
                                                     <asp:ListItem Value="EHOlav" Text="Html corto" />
                                                 </asp:DropDownList>

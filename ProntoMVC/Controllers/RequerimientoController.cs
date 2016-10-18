@@ -2763,6 +2763,10 @@ namespace ProntoMVC.Controllers
             //   End If
             int mvarIdComprador = db.Empleados.Where(x => x.Nombre == userComprador).Select(x => x.IdEmpleado).First();
 
+            string usuario = oStaticMembershipService.GetUser().UserName;
+            int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
+
 
             //asigna comprador
             //Dim oF1 As frmAsignaComprador
@@ -2808,6 +2812,8 @@ namespace ProntoMVC.Controllers
                     detrm.IdComprador = mvarIdComprador;
                     detrm.FechaAsignacionComprador = DateTime.Now;
 
+                    detrm.TipoDesignacion = "CMP";
+                    detrm.IdLiberoParaCompras = IdUsuario;
                 }
 
                 /*
@@ -2853,8 +2859,8 @@ Case 1
         {
 
 
-            int mvarIdDioPorCumplido =  db.Empleados.Where(x => x.Nombre == userCumplidor).Select(x => x.IdEmpleado).First();
-            int mvarIdAutorizo =   db.Empleados.Where(x => x.Nombre == userAutorizador).Select(x => x.IdEmpleado).First();
+            int mvarIdDioPorCumplido = db.Empleados.Where(x => x.Nombre == userCumplidor).Select(x => x.IdEmpleado).First();
+            int mvarIdAutorizo = db.Empleados.Where(x => x.Nombre == userAutorizador).Select(x => x.IdEmpleado).First();
 
             // pedir autorizacion    
             //Dim oF As frmAutorizacion2
@@ -2898,6 +2904,7 @@ Case 1
 
                 if (ModoConsulta == 0)
                 {
+
                     if (detrm.Cumplido != "SI")
                     {
 
@@ -2906,6 +2913,8 @@ Case 1
                         detrm.IdDioPorCumplido = mvarIdDioPorCumplido;
                         detrm.FechaDadoPorCumplido = DateTime.Now;
                         detrm.ObservacionesCumplido = sObsCumplido;
+                        detrm.TipoDesignacion = "CMP";
+
 
 
                         if (mAux1 == "SI")
@@ -3080,7 +3089,16 @@ Case 1
 
 
             // acá tenemos otro formulario modal, UN ALTA DE VALE!!!
-            CrearAltaDeVale(idDetalleRequerimientos, user, pass);
+            var vale = CrearValeSegunItemDeRM(idDetalleRequerimientos, user, pass);
+
+            var c = new ValeSalidaController(); //ese controlador no recibe el membership que estoy usando en este
+            c.db = db;
+            c.oStaticMembershipService = oStaticMembershipService;
+            c.BatchUpdate(vale);
+            c = null;
+
+
+
             //Set oF1 = New frmValesSalida
             //With oF1
             //   .DetalleRequerimientos = s
@@ -3096,8 +3114,8 @@ Case 1
 
 
 
-
-            bool ActivarSolicitudMateriales = (ParametroManager.TraerValorParametro2(SCsql(), "ActivarSolicitudMateriales").ToString() == "SI");
+            string ss = db.Parametros.FirstOrDefault().ActivarSolicitudMateriales;
+            bool ActivarSolicitudMateriales = (ss == "SI");
 
             foreach (Data.Models.DetalleRequerimiento detrm in reqs)
             {
@@ -3121,9 +3139,8 @@ Case 1
 
 
 
-        void CrearAltaDeVale(List<int> idDetalleRequerimientos, string user, string pass)
+        ValesSalida CrearValeSegunItemDeRM(List<int> idDetalleRequerimientos, string user, string pass)
         {
-
             var vale = new ValesSalida();
 
             vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First();
@@ -3137,25 +3154,13 @@ Case 1
                 detvale.IdArticulo = detrm.IdArticulo;
                 detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
                 detvale.Cantidad = detrm.Cantidad;
-                
+
 
                 vale.DetalleValesSalidas.Add(detvale);
             }
 
-
-            
-
-            var c = new ValeSalidaController(); //ese controlador no recibe el membership que estoy usando en este
-            c.db = db;
-            c.oStaticMembershipService = oStaticMembershipService;
-            c.BatchUpdate(vale);
-            c = null;
-
-            //var controller = DependencyResolver.Current.GetService<ValeSalidaController>();
-            //controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
-            //controller.BatchUpdate(vale);
+            return vale;
         }
-
     }
 
 }
