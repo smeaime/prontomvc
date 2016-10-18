@@ -1,8 +1,16 @@
-﻿CREATE PROCEDURE [dbo].[Requerimientos_TX_PendientesDeAsignacion]
+﻿
+[Requerimientos_TX_PendientesDeAsignacion]
 
-@Depositos varchar(100) = Null
+select top 10 * from valessalida order by idvalesalida desc
 
-AS
+select top 10 * from detallerequerimientos where iddetallerequerimiento=48866 order by iddetallerequerimiento desc
+
+
+
+
+
+
+declare @Depositos varchar(100) = Null
 
 SET NOCOUNT ON
 
@@ -73,6 +81,14 @@ INSERT INTO #Auxiliar1
 		(DetReq.TipoDesignacion='S/D' or 
 		 (DetReq.TipoDesignacion='REC' and Requerimientos.IdObra<>@IdObraStockDisponible) or 
 		 (DetReq.TipoDesignacion='STK' and DetReq.Cantidad > IsNull((Select Sum(IsNull(DetalleValesSalida.Cantidad,0)) From DetalleValesSalida Where DetalleValesSalida.IdDetalleRequerimiento=DetReq.IdDetalleRequerimiento and (DetalleValesSalida.Estado is null or DetalleValesSalida.Estado<>'AN')),0))))
+
+
+
+select * from #Auxiliar1 order by IdDetalleRequerimiento
+
+
+
+
 
 IF @EquipoDestinoDesdePRONTO_MANTENIMIENTO_RM_VA='SI' and Len(@BasePRONTOMANT)>0
   BEGIN
