@@ -261,6 +261,143 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void InformeSincroLaBiznaga_25066()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("La Biznaga", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 5),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+        
+        [TestMethod]
+        public void OCR_Tickets()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\tickets y cartas.zip";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\141016\TIFFF.zip";
+            
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // 2 caminos
+            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
+            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
+
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+
+            var ver = engine.Version;
+
+
+            string sError = "";
+
+
+            // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
+            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+
+
+
+            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
+
+            System.Diagnostics.Process.Start(@"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\" + excels[0] + @"\ExportToXLS.xls");
+
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void problema_informe_totalespormes()
+        {
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q4 = ConsultasLinq.totpormes(SC,
+             "", "", "", 1, 10,
+              CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+             -1, -1,
+             -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+              new DateTime(2014, 1, 1),
+              new DateTime(2014, 2, 1),
+              -1, ref sTitulo, "Ambas", false, "");
+
+            
+            var q = ConsultasLinq.totpormesmodo(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "");
+
+
+            var q2 = ConsultasLinq.totpormessucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+
+            var q3 = ConsultasLinq.totpormesmodoysucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+        }
+
+
+
+
         
         [TestMethod]
         public void liquidacionsubcon_22294_23568()
@@ -277,7 +414,7 @@ namespace ProntoMVC.Tests
 
             ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
 
-
+            
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
 
             ReportParameter p2 = null;
@@ -866,60 +1003,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-        [TestMethod]
-        public void OCR_Tickets()
-        {
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            string zipFile;
-            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\tickets y cartas.zip";
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-            VaciarDirectorioTemp();
-
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-            // 2 caminos
-            // ProcesoLasProximas10ImagenesDelFTPqueNoHayanSidoProcesadasAun_yDevuelvoListaDeIDsYdeErrores
-            //o  ProcesoLaListaQueYoLePaso_yDevuelvoListaDeIDsYdeErrores
-
-            IEngine engine = null;
-            IEngineLoader engineLoader = null;
-            IFlexiCaptureProcessor processor = null;
-
-
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
-
-            var ver = engine.Version;
-
-
-            string sError = "";
-
-
-            // cuanto va a estar andando esto? -le estás pasando la lista explícita "l"
-            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
-
-
-
-            var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
-
-            System.Diagnostics.Process.Start(@"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\" + excels[0] + @"\ExportToXLS.xls");
-
-
-
-        }
 
 
 
@@ -1875,51 +1958,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-        [TestMethod]
-        public void problema_informe_totalespormes()
-        {
-            ReportParameter p2 = null;
-            string sTitulo = "";
-
-            var q = ConsultasLinq.totpormesmodo(SC,
-                       "", "", "", 1, 10,
-                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                       -1, -1,
-                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                        new DateTime(2014, 1, 1),
-                        new DateTime(2014, 1, 1),
-                        -1, ref sTitulo, "Ambas", false, "");
-
-
-            var q2 = ConsultasLinq.totpormessucursal(SC,
-              "", "", "", 1, 10,
-               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-              -1, -1,
-              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-               new DateTime(2014, 1, 1),
-               new DateTime(2014, 1, 1),
-               -1, ref sTitulo, "Ambas", false, "");
-
-
-            var q3 = ConsultasLinq.totpormesmodoysucursal(SC,
-              "", "", "", 1, 10,
-               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-              -1, -1,
-              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-               new DateTime(2014, 1, 1),
-               new DateTime(2014, 1, 1),
-               -1, ref sTitulo, "Ambas", false, "");
-
-            var q4 = ConsultasLinq.totpormes(SC,
-             "", "", "", 1, 10,
-              CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-             -1, -1,
-             -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-              new DateTime(2014, 1, 1),
-              new DateTime(2014, 2, 1),
-              -1, ref sTitulo, "Ambas", false, "");
-        }
 
 
 
