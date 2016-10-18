@@ -1033,6 +1033,49 @@ Namespace Pronto.ERP.Bll
                                     "Williams - Nidera con SQL.rdl", yourParams, ArchivoExcelDestino, False)
 
 
+
+
+                        Case "LA BIZNAGA"
+
+
+                            sTitulo = ""
+
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
+                                            "", "", "", 1, maximumRows, _
+                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
+                                            idDestinatario, idIntermediario, _
+                                            idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                                                "1", ModoExportacion, _
+                                            Convert.ToDateTime(sDesde), _
+                                            Convert.ToDateTime(sHasta), _
+                                             Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
+
+
+                            Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
+
+
+                            Dim yourParams As ReportParameter() = New ReportParameter(9) {}
+
+                            yourParams(0) = New ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx")
+                            yourParams(1) = New ReportParameter("sServidor", "kjhkjlh")
+                            yourParams(2) = New ReportParameter("idArticulo", -1)
+                            yourParams(3) = New ReportParameter("idDestino", -1)
+                            yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+                            yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+                            yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+                            yourParams(7) = New ReportParameter("Consulta", sql)
+                            yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+                            yourParams(9) = New ReportParameter("titulo", "hhghj")
+
+
+                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "LaBiznaga" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
+
+                            output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep,
+                                    "Williams - Sincro LaBiznaga.rdl", yourParams, ArchivoExcelDestino, False)
+
+
+
+
                         Case "BLD x"
                             'output = Sincronismo_BLD(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
 
