@@ -18130,6 +18130,21 @@ Public Class CDPMailFiltrosManager2
                                                       CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
+                    ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "HOlav" Then
+                        Dim grid As New GridView
+                        Dim html = ExcelToHtml(output, grid, 2000)
+
+                        MandaEmail_Nuevo(destinatario, _
+                                    asunto, _
+                              EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                               De, _
+                               SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                           "", _
+                                        SmtpPort, _
+                                , _
+                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
                     ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "EHOlav" Then
                         Dim grid As New GridView
@@ -18142,7 +18157,7 @@ Public Class CDPMailFiltrosManager2
                                SmtpServer, _
                                         SmtpUser, _
                                         SmtpPass, _
-                                          "", _
+                                          output, _
                                         SmtpPort, _
                                 , _
                                 CCOaddress, , , De, , inlinePNG, inlinePNG2)

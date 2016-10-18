@@ -4922,6 +4922,7 @@ Public Class ExcelImportadorManager
             Dim dr = dt.Rows(r)
 
             Dim destinatario = dr.Item(enumColumnasDeGrillaFinal.Comprador.ToString()).ToString.Trim
+            Dim destino = dr.Item(enumColumnasDeGrillaFinal.Destino.ToString()).ToString.Trim.ToUpper
 
 
             If destinatario.Contains("AMAGGI EXPORT") _
@@ -4952,10 +4953,24 @@ Public Class ExcelImportadorManager
                 dr.Item(enumColumnasDeGrillaFinal.Exporta.ToString()) = "NO"
             End If
 
+
+
+            '            	Buenas noches, los archivos de LDC los estamos importando con, texto reyser (archivo Descar19) y texto ReyserAnalisis (archivo Anali19). y Para Toepfer usamos, texto Toepfer (archivo Descar19) y texto ReyserAnalisis (archivo Anali19.
+
+            'La forma para que interprete el sistema seria:
+            '* Cuando viene Destinatario CHS con Destino General Lagos (Tiene que pegar la descarga)
+            '* Cuando viene Destinatario CHS con Destino Arroyo Toepfer ( No tiene que pegar la descarga)
+            '* Cuando viene Destinatario CHS con Destino Punta Alvear ( No tiene que pegar la descarga)
+            '* Cuando viene Destinatario CHS con Destino Rosario ( No tiene que pegar la descarga)
+
             'TE AGREGO UN DATO MAS , CUANDO ES DESTINATARIO CHS , NO TIENE QUE PEGAR EL CAMION
-            If destinatario.Contains("CHS") Then
+            If destinatario.Contains("CHS") And Not destino.Contains("GENERAL LAGOS") Then
                 dr.Item("NumeroCDP") = ""
             End If
+
+
+
+
 
         Next
 
@@ -5027,6 +5042,7 @@ Public Class ExcelImportadorManager
             Dim dr = dt.Rows(r)
 
             Dim destinatario = dr.Item(enumColumnasDeGrillaFinal.Comprador.ToString()).ToString.Trim
+            Dim destino = dr.Item(enumColumnasDeGrillaFinal.Destino.ToString()).ToString.Trim.ToUpper
 
 
             If destinatario.Contains("AMAGGI EXPORT") _
@@ -5055,7 +5071,9 @@ Public Class ExcelImportadorManager
             End If
 
             'TE AGREGO UN DATO MAS , CUANDO ES DESTINATARIO CHS , NO TIENE QUE PEGAR EL CAMION
-            If destinatario.Contains("CHS") Then dr.Item("NumeroCDP") = ""
+            If destinatario.Contains("CHS") And Not destino.Contains("GENERAL LAGOS") Then
+                dr.Item("NumeroCDP") = ""
+            End If
 
         Next
 
@@ -5092,6 +5110,7 @@ Public Class ExcelImportadorManager
             Dim dr = dt.Rows(r)
 
             Dim destinatario = dr.Item(enumColumnasDeGrillaFinal.Comprador.ToString()).ToString.Trim
+            Dim destino = dr.Item(enumColumnasDeGrillaFinal.Destino.ToString()).ToString.Trim.ToUpper
 
             'If destinatario = "CARGILL S.A.C.I." Then
             '    dr.Item(enumColumnasDeGrillaFinal.Exporta.ToString()) = "NO"
@@ -5116,7 +5135,10 @@ Public Class ExcelImportadorManager
             'Andres buenas tardes, hay algo que nunca te avisamos, 
             '    Todo lo que venga de CHS en cargill (como exportación - destinatario), 
             '    no lo tiene que pegar en la pegatina, (solo tiene que pegar cuando también vamos por entrega). favor de hacerlo urgente...
-            If destinatario.Contains("CHS") And dr.Item(enumColumnasDeGrillaFinal.Exporta.ToString()) = "SI" Then dr.Item("NumeroCDP") = ""
+
+            If destinatario.Contains("CHS") And dr.Item(enumColumnasDeGrillaFinal.Exporta.ToString()) = "SI" And Not destino.Contains("GENERAL LAGOS") Then
+                dr.Item("NumeroCDP") = ""
+            End If
 
 
 
@@ -5145,6 +5167,7 @@ Public Class ExcelImportadorManager
             Dim dr = dt.Rows(r)
 
             Dim destinatario = dr.Item(enumColumnasDeGrillaFinal.Comprador.ToString()).ToString.Trim.ToUpper
+            Dim destino = dr.Item(enumColumnasDeGrillaFinal.Destino.ToString()).ToString.Trim.ToUpper
 
             'Dim destinatario As String = dr.Item("column18").ToString.Trim ' dr.Item("Destinatario").ToString.Trim
 
@@ -5158,7 +5181,10 @@ Public Class ExcelImportadorManager
             End If
 
 
-            If destinatario.Contains("CHS") And dr.Item(enumColumnasDeGrillaFinal.Exporta.ToString()) = "SI" Then dr.Item("NumeroCDP") = ""
+            
+            If destinatario.Contains("CHS") And dr.Item(enumColumnasDeGrillaFinal.Exporta.ToString()) = "SI" And Not destino.Contains("GENERAL LAGOS") Then
+                dr.Item("NumeroCDP") = ""
+            End If
 
         Next
 
