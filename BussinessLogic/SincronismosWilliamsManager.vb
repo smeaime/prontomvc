@@ -496,7 +496,7 @@ Namespace Pronto.ERP.Bll
 
             Using ds As New WillyInformesDataSet
 
-                If sSincronismo.ToUpper <> "YPF" And sSincronismo.ToUpper <> "NIDERA" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
+                If sSincronismo.ToUpper <> "YPF" And sSincronismo.ToUpper <> "NIDERA" And sSincronismo.ToUpper <> "LA BIZNAGA" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
 
                     '// Customize the connection string.
                     Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(SC)) ' Properties.Settings.Default.DistXsltDbConnectionString)
@@ -1037,9 +1037,6 @@ Namespace Pronto.ERP.Bll
 
                         Case "LA BIZNAGA"
 
-
-                            sTitulo = ""
-
                             Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
                                             "", "", "", 1, maximumRows, _
                                             CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
@@ -1054,24 +1051,53 @@ Namespace Pronto.ERP.Bll
                             Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
 
 
-                            Dim yourParams As ReportParameter() = New ReportParameter(9) {}
+                            Dim yourParams(27) As ReportParameter
+                            yourParams(0) = New ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))
+                            yourParams(1) = New ReportParameter("sServidorWeb", sUrlDominio)
+                            yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#).ToString))
+                            yourParams(3) = New ReportParameter("FechaHasta", Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#).ToString))
+                            yourParams(4) = New ReportParameter("IdDestino", idDestino.ToString)
+                            yourParams(5) = New ReportParameter("puntoventa", puntoventa.ToString)
+                            yourParams(6) = New ReportParameter("startRowIndex", "0")
+                            yourParams(7) = New ReportParameter("maximumRows", maximumRows)
+                            yourParams(8) = New ReportParameter("estado", estado)
+                            yourParams(9) = New ReportParameter("QueContenga", "0")
+                            yourParams(10) = New ReportParameter("idVendedor", idVendedor.ToString())
+                            yourParams(11) = New ReportParameter("idCorredor", idCorredor.ToString())
+                            yourParams(12) = New ReportParameter("idDestinatario", idDestinatario.ToString())
+                            yourParams(13) = New ReportParameter("idIntermediario", idIntermediario)
+                            yourParams(14) = New ReportParameter("idRemComercial", idRComercial)
+                            yourParams(15) = New ReportParameter("idArticulo", idArticulo)
+                            yourParams(16) = New ReportParameter("idProcedencia", idProcedencia)
+                            yourParams(17) = New ReportParameter("AplicarANDuORalFiltro", CInt(AplicarANDuORalFiltro))
+                            yourParams(18) = New ReportParameter("ModoExportacion", ModoExportacion)
+                            yourParams(19) = New ReportParameter("optDivisionSyngenta", optDivisionSyngenta)
+                            yourParams(20) = New ReportParameter("Contrato", "-1")
+                            yourParams(21) = New ReportParameter("QueContenga2", "-1")
+                            yourParams(22) = New ReportParameter("idClienteAuxiliarint", idClienteAuxiliar.ToString)
+                            yourParams(23) = New ReportParameter("AgrupadorDeTandaPeriodos", "-1")
+                            yourParams(24) = New ReportParameter("Vagon", 0)
+                            yourParams(25) = New ReportParameter("Patente", "")
+                            yourParams(26) = New ReportParameter("optCamionVagon", "Todos")
 
-                            yourParams(0) = New ReportParameter("webservice", "http://190.12.108.166/ProntoTesting/ProntoWeb/WebServiceCartas.asmx")
-                            yourParams(1) = New ReportParameter("sServidor", "kjhkjlh")
-                            yourParams(2) = New ReportParameter("idArticulo", -1)
-                            yourParams(3) = New ReportParameter("idDestino", -1)
-                            yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-                            yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-                            yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
-                            yourParams(7) = New ReportParameter("Consulta", sql)
-                            yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
-                            yourParams(9) = New ReportParameter("titulo", "hhghj")
+
+                            'Dim titulo As String = ""
+                            'titulo = FormatearTitulo(HFSC.Value, _
+                            '          titulo, estadofiltro, "", idVendedor, idCorredor, _
+                            '        idDestinatario, idIntermediario, _
+                            '        idRComercial, idArticulo, idProcedencia, idDestino, _
+                            '                                          IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
+                            '        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                            '        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                            '         cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , _
+                            '        txtContrato.Text, idClienteAuxiliar)
+                            yourParams(27) = New ReportParameter("Titulo", titulo)
 
 
                             Dim ArchivoExcelDestino = IO.Path.GetTempPath & "LaBiznaga" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
 
                             output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep,
-                                    "Williams - Sincro LaBiznaga.rdl", yourParams, ArchivoExcelDestino, False)
+                                    "Williams - Sincro LaBiznaga2.rdl", yourParams, ArchivoExcelDestino, False)
 
 
 

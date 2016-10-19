@@ -87,40 +87,56 @@ https://msdn.microsoft.com/en-us/data/hh859577.aspx
 
 return 
 
+			--CalidadMermaVolatil hay que sacarlo de la tabla CartasDePorteDetalle
+            --Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF _
+            --                                    Where i.IdCartaDePorte = id _
+            --                                    And i.Campo = nombrecampo
+            --                                ).SingleOrDefault
+            --If IsNothing(oDet) Then
+            --    oDet = New ProntoMVC.Data.Models.CartasDePorteDetalle_EF
+            --    oDet.IdCartaDePorte = id
+            --    oDet.Campo = nombrecampo
+            --    oDet.Valor = valor
+            --    'acá había un insertonsubmit
+            --    db.CartasDePorteDetalle_EF.Add(oDet)
+
+
+
 SELECT 
 	-- TOP (@maximumRows)  --creo que no puedo usar top con parametros en una TVF
- CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, 
- CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, 
- CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, 
- CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad       ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      
-,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE  
-,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG  
-,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1       ,CDP.contrato2      ,CDP.KmARecorrer
-,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal     
-,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros
-,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado
-,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon      
-,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa     
-,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha 
-,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
-,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
-,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
-,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
-,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      
-,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas   
-,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion   
-,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      
-,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico       
-,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      
-,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada    
-,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal   
-,CDP.PathImagen      ,CDP.PathImagen2       ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada     
-,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura     
-,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion     
-,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete     
-,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2       ,CDP.Acopio1      ,CDP.Acopio2    
-,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      
-,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , 			
+	CDP.*,
+-- CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, 
+-- CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, 
+-- CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, 
+-- CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad       ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      
+--,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE  
+--,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG  
+--,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1       ,CDP.contrato2      ,CDP.KmARecorrer
+--,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal     
+--,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros
+--,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado
+--,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon      
+--,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa     
+--,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha 
+--,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
+--,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
+--,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
+--,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
+--,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      
+--,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas   
+--,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion   
+--,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      
+--,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico       
+--,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      
+--,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada    
+--,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal   
+--,CDP.PathImagen      ,CDP.PathImagen2       ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada     
+--,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura     
+--,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion     
+--,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete     
+--,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2       ,CDP.Acopio1      ,CDP.Acopio2    
+--,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      
+--,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , 			
 cast (cdp.NumeroCartaDePorte as varchar) +					
 				CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 
 					THEN            '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 						
@@ -160,7 +176,7 @@ isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,           isnull(
 isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
 isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 			isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
 isnull(CLICOR2.cuit,'') AS CorredorCUIT2, 			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, 		
-isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP    
+isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
 
 
@@ -260,7 +276,7 @@ where 1=1
 					and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
 					and (
 						@ModoExportacion is null
-						or (@ModoExportacion = 'Ambos') 
+						or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') 
 						Or (@ModoExportacion = 'Todos') 
 						Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI') 
 						Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
@@ -293,7 +309,7 @@ where 1=1
    --     DescargasDeHoyMasTodasLasPosicionesEnRangoFecha 11
 
 
-			@estado=0 --OR @estado is null
+			@estado=0 OR @estado is null
 			OR
 			(@estado=1 AND  	 ISNULL(cdp.Anulada,'NO')<>'SI'  )
 			OR
@@ -389,11 +405,43 @@ go
 --------------------------------------------------------------------------------
 
 
+
+			--@startRowIndex int ,
+   --         @maximumRows int ,
+   --         @estado int  ,
+   --         @QueContenga  VARCHAR(50) ,
+   --         @idVendedor int ,
+            
+			--@idCorredor int  ,
+   --         @idDestinatario int ,
+   --         @idIntermediario int ,
+   --         @idRemComercial int ,
+   --         @idArticulo int  ,
+
+   --         @idProcedencia int ,
+   --         @idDestino int  ,
+   --         @AplicarANDuORalFiltro int  ,
+   --         @ModoExportacion  VARCHAR(20) ,
+   --         @fechadesde As DateTime,
+			
+			--@fechahasta As DateTime,
+   --         @puntoventa int , 
+   --         @optDivisionSyngenta  VARCHAR(50) ,
+   --         @Contrato  VARCHAR(50) , 
+   --         @QueContenga2  VARCHAR(50) ,
+            
+			--@idClienteAuxiliarint int ,
+   --         @AgrupadorDeTandaPeriodos int  ,
+   --         @Vagon  int  ,
+			--@Patente VARCHAR(10) ,
+   --         @optCamionVagon  VARCHAR(10) 
+
+
 select  exporta, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
-				( 
-					NULL, 
-					NULL, 
+				(  
+					 NULL, 
+					10, 
 					0,
 					NULL, 
 					NULL, 
@@ -402,7 +450,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 					NULL,
 					NULL, 
-					NULL, 
+					53, 
 
 					NULL, 
 					NULL, 
@@ -410,8 +458,9 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 				 	'Todos', 
 					'2016-01-09 00:00:00',
 
-					'2016-30-09 00:00:00',
-					NULL, 
+			
+					'2016-01-09 00:00:00',
+								NULL, 
 					NULL,
 					NULL, 
 					NULL, 
@@ -539,15 +588,15 @@ wCartasPorte_WraperDeLaTVF
 					NULL, 
 					NULL,
 					NULL, 
-					-1, --@idArticulo,
+					NULL, --@idArticulo,
 
 					NULL, --@idProcedencia,
-					-1,---1, --@idDestino,
+					NULL,---1, --@idDestino,
 					0, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
 					'2016-08-03 00:00:00',
 					
-					'2016-08-03 00:00:00',
+					'2016-30-03 00:00:00',
 					NULL, 
 					NULL,
 					NULL, 
@@ -565,3 +614,25 @@ go
 
 GRANT EXECUTE ON wCartasPorte_WraperDeLaTVF to [NT AUTHORITY\ANONYMOUS LOGON]
 go
+
+
+
+exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2000-01-01 00:00:00',@maximumRows=100,@fechahasta='2100-01-01 00:00:00'
+,@estado=NULL,@idDestino=-1,@QueContenga=NULL,@idVendedor=NULL,@idCorredor=NULL,@idDestinatario=NULL,
+@idIntermediario=NULL,@idRemComercial=NULL,@idArticulo=NULL,@idProcedencia=NULL,@AplicarANDuORalFiltro=NULL,@ModoExportacion='Ambos',
+@puntoventa=0,
+@optDivisionSyngenta=NULL,@Contrato=NULL,@QueContenga2=NULL,@idClienteAuxiliarint=NULL,@AgrupadorDeTandaPeriodos=NULL,@Vagon=NULL,
+@Patente=NULL,@optCamionVagon=NULL
+go
+
+
+exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2015-01-01 00:00:00',@maximumRows=40,@fechahasta='2016-01-01 00:00:00',
+@estado=4,@idDestino=-1,@QueContenga=NULL,@idVendedor=-1,@idCorredor=-1,@idDestinatario=-1,
+@idIntermediario=-1,@idRemComercial=-1,@idArticulo=-1,@idProcedencia=-1,@AplicarANDuORalFiltro=0,@ModoExportacion=N'Ambos',
+@puntoventa=-1,@optDivisionSyngenta=N'Ambas',@Contrato=NULL,@QueContenga2=N'-1',@idClienteAuxiliarint=-1,
+@AgrupadorDeTandaPeriodos=NULL,@Vagon=NULL,@Patente=NULL,@optCamionVagon=N'Todos'
+go
+
+
+exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-01 00:00:00',@maximumRows=40,@fechahasta='2016-01-01 00:00:00',@estado=4,@idDestino=-1,@QueContenga=N'0',
+@idVendedor=-1,@idCorredor=-1,@idDestinatario=-1,@idIntermediario=-1,@idRemComercial=-1,@idArticulo=-1,@idProcedencia=-1,@AplicarANDuORalFiltro=0,@ModoExportacion=N'Ambas',@puntoventa=-1,@optDivisionSyngenta=N'Ambas',@Contrato=N'-1',@QueContenga2=N'-1',@idClienteAuxiliarint=-1,@AgrupadorDeTandaPeriodos=-1,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
