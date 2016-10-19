@@ -520,8 +520,8 @@
                                             </asp:DropDownList>
 
                                             <br />
-                                            
-                                          
+
+
                                             <asp:LinkButton ID="butVerLog" Text="Historial" runat="server" CausesValidation="false" />
                                             &nbsp;&nbsp;&nbsp;
                                             <asp:CheckBox ID="chkFacturarManual" runat="server" Text="manual" ForeColor="White" ToolTip="marcar si no se quiere calcular automáticamente el cliente"
@@ -1706,6 +1706,14 @@
                                                 DelimiterCharacters="" Enabled="True" CompletionInterval="100">
                                             </cc1:AutoCompleteExtender>
                                         </td>
+
+
+                                        <td class="EncabezadoCell" style="width: 15%">Entrega SAP
+                                        </td>
+                                        <td class="EncabezadoCell" style="width: 15%">
+                                            <asp:TextBox ID="txtEntregaSAP" runat="server" CssClass="CssTextBox"></asp:TextBox>
+                                        </td>
+
                                     </tr>
 
 

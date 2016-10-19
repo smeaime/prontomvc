@@ -8721,7 +8721,7 @@ Public Class CartaDePorteManager
                 .ClienteAcondicionador = iisNull(oCarta.ClienteAcondicionador, -1)
 
                 .FacturarAManual = oCarta.FacturarA_Manual
-
+                .EntregaSAP = oCarta.EntregaSAP
 
 
                 Try
@@ -9205,7 +9205,7 @@ Public Class CartaDePorteManager
 
                     oCarta.FacturarA_Manual = .FacturarAManual
 
-
+                    oCarta.EntregaSAP = .EntregaSAP
                     'Try
 
                     '    Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
