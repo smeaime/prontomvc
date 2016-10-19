@@ -24,19 +24,19 @@
               <Width>30.60107mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>17.83851mm</Width>
+              <Width>41.651mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>18.17869mm</Width>
+              <Width>30.34952mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>18.02731mm</Width>
+              <Width>30.99189mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>23.23922mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>29.49778mm</Width>
+              <Width>54.89778mm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -479,11 +479,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!EntregaSAP.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>SemiBold</FontWeight>
-                                <Color>Blue</Color>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -519,7 +518,7 @@
                             <TextRun>
                               <Value>=Fields!NumeroCartaDePorte.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>SemiBold</FontWeight>
                                 <Color>Blue</Color>
                               </Style>
@@ -531,13 +530,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox3</rd:DefaultName>
-                      <ActionInfo>
-                        <Actions>
-                          <Action>
-                            <Hyperlink>=Parameters!sServidor.Value &amp; "/ProntoWeb/CartaDePorte.aspx?Id=" &amp; Fields!IdCartaDePorte.Value</Hyperlink>
-                          </Action>
-                        </Actions>
-                      </ActionInfo>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -672,7 +664,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!ClienteAcondicionador.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -702,14 +694,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox5">
+                    <Textbox Name="Textbox1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!CalidadMermaVolatilMerma.Value</Value>
+                              <Value />
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -721,7 +713,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -857,7 +849,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!CalidadZarandeoMerma.Value</Value>
+                              <Value>= Fields!NetoFinal.Value- Fields!HumedadDesnormalizada.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -933,11 +925,11 @@
         </TablixRowHierarchy>
         <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <RepeatRowHeaders>true</RepeatRowHeaders>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>ds1</DataSetName>
         <Top>0mm</Top>
         <Left>0mm</Left>
         <Height>17.29173mm</Height>
-        <Width>258.28497mm</Width>
+        <Width>332.63288mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1612,25 +1604,49 @@
           <DataField>Acopio6</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="CalidadGranosExtranosMerma">
+          <DataField>CalidadGranosExtranosMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="AcopioFacturarleA">
           <DataField>AcopioFacturarleA</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="CalidadQuebradosMerma">
+          <DataField>CalidadQuebradosMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="CalidadGranosDanadosRebaja">
           <DataField>CalidadGranosDanadosRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadDanadosMerma">
+          <DataField>CalidadDanadosMerma</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="CalidadGranosExtranosRebaja">
           <DataField>CalidadGranosExtranosRebaja</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="CalidadChamicoMerma">
+          <DataField>CalidadChamicoMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="NumeroCompleto">
           <DataField>NumeroCompleto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadRevolcadosMerma">
+          <DataField>CalidadRevolcadosMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="MinutosModifico">
           <DataField>MinutosModifico</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CalidadObjetablesMerma">
+          <DataField>CalidadObjetablesMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="EspecieONCAA">
           <DataField>EspecieONCAA</DataField>
@@ -1640,25 +1656,53 @@
           <DataField>CodigoSAJPYA</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadAmohosadosMerma">
+          <DataField>CalidadAmohosadosMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="txtCodigoZeni">
           <DataField>txtCodigoZeni</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadPuntaSombreadaMerma">
+          <DataField>CalidadPuntaSombreadaMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="TitularDesc">
           <DataField>TitularDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadHectolitricoMerma">
+          <DataField>CalidadHectolitricoMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="TitularCUIT">
           <DataField>TitularCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadCarbonMerma">
+          <DataField>CalidadCarbonMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="IntermediarioDesc">
           <DataField>IntermediarioDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadPanzaBlancaMerma">
+          <DataField>CalidadPanzaBlancaMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadPicadosMerma">
+          <DataField>CalidadPicadosMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="IntermediarioCUIT">
           <DataField>IntermediarioCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadVerdesMerma">
+          <DataField>CalidadVerdesMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="RComercialDesc">
           <DataField>RComercialDesc</DataField>
@@ -1668,49 +1712,101 @@
           <DataField>RComercialCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadQuemadosMerma">
+          <DataField>CalidadQuemadosMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="CorredorDesc">
           <DataField>CorredorDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadTierraMerma">
+          <DataField>CalidadTierraMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="CorredorCUIT">
           <DataField>CorredorCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadZarandeoMerma">
+          <DataField>CalidadZarandeoMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="DestinatarioDesc">
           <DataField>DestinatarioDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadDescuentoFinalMerma">
+          <DataField>CalidadDescuentoFinalMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="EntregadorDesc">
           <DataField>EntregadorDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadHumedadMerma">
+          <DataField>CalidadHumedadMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="DestinatarioCUIT">
           <DataField>DestinatarioCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadGastosFumigacionMerma">
+          <DataField>CalidadGastosFumigacionMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="ClienteAuxiliarDesc">
           <DataField>ClienteAuxiliarDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadQuebradosRebaja">
+          <DataField>CalidadQuebradosRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="ClienteAuxiliarCUIT">
           <DataField>ClienteAuxiliarCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadChamicoRebaja">
+          <DataField>CalidadChamicoRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Subcontr1Desc">
           <DataField>Subcontr1Desc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadRevolcadosRebaja">
+          <DataField>CalidadRevolcadosRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="Subcontr2Desc">
           <DataField>Subcontr2Desc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadObjetablesRebaja">
+          <DataField>CalidadObjetablesRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Producto">
           <DataField>Producto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadAmohosadosRebaja">
+          <DataField>CalidadAmohosadosRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="TransportistaCUIT">
           <DataField>TransportistaCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadPuntaSombreadaRebaja">
+          <DataField>CalidadPuntaSombreadaRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadHectolitricoRebaja">
+          <DataField>CalidadHectolitricoRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="TransportistaDesc">
           <DataField>TransportistaDesc</DataField>
@@ -1720,6 +1816,14 @@
           <DataField>ChoferCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadCarbonRebaja">
+          <DataField>CalidadCarbonRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadPanzaBlancaRebaja">
+          <DataField>CalidadPanzaBlancaRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="ChoferDesc">
           <DataField>ChoferDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1728,9 +1832,21 @@
           <DataField>ProcedenciaDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadPicadosRebaja">
+          <DataField>CalidadPicadosRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadVerdesRebaja">
+          <DataField>CalidadVerdesRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="ProcedenciaCodigoPostal">
           <DataField>ProcedenciaCodigoPostal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadQuemadosRebaja">
+          <DataField>CalidadQuemadosRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="ProcedenciaCodigoONCAA">
           <DataField>ProcedenciaCodigoONCAA</DataField>
@@ -1740,17 +1856,45 @@
           <DataField>ProcedenciaProvinciaDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadTierraRebaja">
+          <DataField>CalidadTierraRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="DestinoDesc">
           <DataField>DestinoDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadZarandeoRebaja">
+          <DataField>CalidadZarandeoRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadDescuentoFinalRebaja">
+          <DataField>CalidadDescuentoFinalRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="DestinoCUIT">
+          <DataField>DestinoCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="DestinoCodigoPostal">
           <DataField>DestinoCodigoPostal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadHumedadRebaja">
+          <DataField>CalidadHumedadRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CalidadGastosFumigacionRebaja">
+          <DataField>CalidadGastosFumigacionRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="DestinoCodigoONCAA">
           <DataField>DestinoCodigoONCAA</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadHumedadResultado">
+          <DataField>CalidadHumedadResultado</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Factura">
           <DataField>Factura</DataField>
@@ -1760,6 +1904,10 @@
           <DataField>FechaFactura</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
+        <Field Name="CalidadGastosFumigacionResultado">
+          <DataField>CalidadGastosFumigacionResultado</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="ClienteFacturado">
           <DataField>ClienteFacturado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1768,29 +1916,61 @@
           <DataField>ClienteFacturadoCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ConDuplicados">
+          <DataField>ConDuplicados</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="CalidadDesc">
           <DataField>CalidadDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TieneRecibidorOficial">
+          <DataField>TieneRecibidorOficial</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="UsuarioIngreso">
           <DataField>UsuarioIngreso</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="EstadoRecibidor">
+          <DataField>EstadoRecibidor</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ClienteAcondicionador">
+          <DataField>ClienteAcondicionador</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="EstablecimientoDesc">
           <DataField>EstablecimientoDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MotivoRechazo">
+          <DataField>MotivoRechazo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="ClientePagadorFleteDesc">
           <DataField>ClientePagadorFleteDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="FacturarA_Manual">
+          <DataField>FacturarA_Manual</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
         <Field Name="ProcedenciaProvinciaPartido">
           <DataField>ProcedenciaProvinciaPartido</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CalidadPuntaSobreadaMerma">
+          <DataField>CalidadPuntaSobreadaMerma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="ProcedenciaPartidoNormalizadaCodigo">
           <DataField>ProcedenciaPartidoNormalizadaCodigo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalidadPuntaSobreadaRebaja">
+          <DataField>CalidadPuntaSobreadaRebaja</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="DestinoProvinciaDesc">
           <DataField>DestinoProvinciaDesc</DataField>
@@ -1815,6 +1995,10 @@
         <Field Name="CodigoAFIP">
           <DataField>CodigoAFIP</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="EntregaSAP">
+          <DataField>EntregaSAP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
