@@ -279,7 +279,7 @@ namespace ProntoMVC.Tests
                 -1, -1,
                 -1, -1, -1, -1,
                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2016, 1, 1), new DateTime(2016, 1, 5),
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
                 -1, "Ambas", false, "", "", -1, ref registrosf, 40);
 
 
