@@ -353,6 +353,17 @@ Namespace Pronto.ERP.Bll
                     txtRcomercial.Text = "AGROSUR S.A"
                     txtPopClienteAuxiliar.Text = "AGROSUR S.A"
 
+
+                Case "LA BIZNAGA"
+                    '                ENTREGAS: titular, Intermediario, Rte comercial y cliente Obs.
+                    'EXPORTACION:    Destinatario()
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "LA BIZNAGA SA AGROPECUARIA"
+                    txtIntermediario.Text = "LA BIZNAGA SA AGROPECUARIA"
+                    txtRcomercial.Text = "LA BIZNAGA SA AGROPECUARIA"
+                    txtPopClienteAuxiliar.Text = "LA BIZNAGA SA AGROPECUARIA"
+
+
                 Case Else
                     Throw New Exception(sSincronismo.ToUpper + " No existe ese sincro")
 
@@ -1047,6 +1058,7 @@ Namespace Pronto.ERP.Bll
                                             Convert.ToDateTime(sHasta), _
                                              Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
 
+                            registrosFiltrados = 1 'no sé por qué no está andando bien
 
                             Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
 
@@ -1054,8 +1066,14 @@ Namespace Pronto.ERP.Bll
                             Dim yourParams(27) As ReportParameter
                             yourParams(0) = New ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))
                             yourParams(1) = New ReportParameter("sServidorWeb", sUrlDominio)
+
+
                             yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#).ToString))
                             yourParams(3) = New ReportParameter("FechaHasta", Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#).ToString))
+
+                         
+
+
                             yourParams(4) = New ReportParameter("IdDestino", idDestino.ToString)
                             yourParams(5) = New ReportParameter("puntoventa", puntoventa.ToString)
                             yourParams(6) = New ReportParameter("startRowIndex", "0")

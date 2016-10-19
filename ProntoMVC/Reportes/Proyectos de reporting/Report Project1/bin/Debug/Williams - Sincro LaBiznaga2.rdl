@@ -704,6 +704,7 @@
                               <Value />
                               <Style>
                                 <FontSize>8pt</FontSize>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -778,6 +779,7 @@
                               <Value>=Fields!CalidadZarandeoMerma.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -849,9 +851,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>= Fields!NetoFinal.Value- Fields!HumedadDesnormalizada.Value</Value>
+                              <Value>=Fields!NetoProc.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -2186,7 +2189,7 @@ End Function
 Public Function IsNullOrZero(input As Object, defaultValue As Object) As Object
   Return IIf(input Is Nothing, defaultValue, IIf(input =0, defaultValue, input) )
 End Function</Code>
-  <Language>es-AR</Language>
+  <Language>en-US</Language>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>224ddd05-cbf9-4a2b-9d3e-6c9d69290d61</rd:ReportID>
 </Report>
