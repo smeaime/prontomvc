@@ -636,3 +636,14 @@ go
 
 exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-01 00:00:00',@maximumRows=40,@fechahasta='2016-01-01 00:00:00',@estado=4,@idDestino=-1,@QueContenga=N'0',
 @idVendedor=-1,@idCorredor=-1,@idDestinatario=-1,@idIntermediario=-1,@idRemComercial=-1,@idArticulo=-1,@idProcedencia=-1,@AplicarANDuORalFiltro=0,@ModoExportacion=N'Ambas',@puntoventa=-1,@optDivisionSyngenta=N'Ambas',@Contrato=N'-1',@QueContenga2=N'-1',@idClienteAuxiliarint=-1,@AgrupadorDeTandaPeriodos=-1,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
+
+
+
+exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-10 00:00:00',@maximumRows=3000,
+@fechahasta='2016-31-10 00:00:00',@estado=4,@idDestino=-1,@QueContenga=N'0',@idVendedor=6762,@idCorredor=-1,
+@idDestinatario=-1,@idIntermediario=6762,@idRemComercial=6762,@idArticulo=-1,@idProcedencia=-1,@AplicarANDuORalFiltro=0,
+@ModoExportacion=N'Entregas',@puntoventa=-1,@optDivisionSyngenta=N'',@Contrato=N'-1',@QueContenga2=N'-1',
+@idClienteAuxiliarint=6762,@AgrupadorDeTandaPeriodos=-1,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
+
+
+

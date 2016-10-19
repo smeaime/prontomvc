@@ -1699,6 +1699,9 @@ namespace ProntoFlexicapture
 
                         ErrHandler2.WriteError(ex2);
                     }
+
+                    if (cdp.FechaDescarga < cdp.FechaArribo) cdp.FechaArribo = cdp.FechaDescarga;
+
                 }
 
 
