@@ -3539,7 +3539,9 @@ Public Class CartaDePorteManager
                 Dim AgrupadorDeTandaPeriodos As String = iisNull(.Item("AgrupadorDeTandaPeriodos"), -1)
 
 
-                bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+
+                ' bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
 
                 'antes se filtraba con generarWHEREparaDataset
 
@@ -3791,6 +3793,26 @@ Public Class CartaDePorteManager
     End Function
 
 
+
+
+
+
+
+
+
+
+    Public Shared informesHtml = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2"}
+
+    Enum eInformesGeneralFormatos
+        Html
+        HtmlIm
+        EHOlav 'olavarria html + excel
+        HOlav 'olavarria html
+        HImag2 'html corto con imagenes
+    End Enum
+
+
+
     Shared Function QueInforme(SC As String, dr As DataRow) As String
 
 
@@ -3844,8 +3866,14 @@ Public Class CartaDePorteManager
             ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
                 'este es de servidor, así que saco el path
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
+
             ElseIf iisNull(.Item("ModoImpresion"), "") = "EHOlav" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
+
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "HImag2" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
+
+
             Else
                 'formato normal para clientes (incluye la foto)
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
@@ -17930,8 +17958,8 @@ Public Class CDPMailFiltrosManager2
 
 
 
-
-
+    
+ 
 
 
     Public Shared Function EnviarMailFiltroPorRegistro_DLL(ByVal SC As String, ByVal fechadesde As Date, _
@@ -17944,6 +17972,16 @@ Public Class CDPMailFiltrosManager2
                                                   ByRef sError2 As String, Optional inlinePNG As String = "" _
                                                 , Optional inlinePNG2 As String = "" _
                                                      ) As String
+
+
+
+
+        Dim ModoImpresion As String = iisNull(dr.Item("ModoImpresion"), "Excel")
+
+
+        If ModoImpresion = "Html" Or ModoImpresion = "HtmlIm" Then
+            Throw New Exception("El informe HTML y HTMLIM no salen por servidor de informes, sino por modo local (son los informes que se llaman desde el AppCode\FiltroManager, y que deberiamos migrar) ")
+        End If
 
 
 
@@ -18112,6 +18150,8 @@ Public Class CDPMailFiltrosManager2
                     End Try
 
 
+
+
                     If iisNull(.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
 
                         Dim grid As New GridView
@@ -18147,6 +18187,23 @@ Public Class CDPMailFiltrosManager2
                                 CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
                     ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "EHOlav" Then
+                        Dim grid As New GridView
+                        Dim html = ExcelToHtml(output, grid, 2000)
+
+                        MandaEmail_Nuevo(destinatario, _
+                                    asunto, _
+                              EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                               De, _
+                               SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                          output, _
+                                        SmtpPort, _
+                                , _
+                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
+
+
+                    ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "HImag2" Then
                         Dim grid As New GridView
                         Dim html = ExcelToHtml(output, grid, 2000)
 

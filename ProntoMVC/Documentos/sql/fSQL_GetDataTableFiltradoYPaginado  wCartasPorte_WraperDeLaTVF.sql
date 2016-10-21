@@ -266,6 +266,33 @@ where 1=1
 			@optCamionVagon = 'Todos' OR @optCamionVagon  IS NULL
 		)
 
+
+
+
+--AND (		
+
+--        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta, sc)
+
+
+--        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
+--            strWHERE += " AND ("
+
+--            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+
+--            strWHERE += " OR Acopio1=" & IdAcopio & ""
+--            strWHERE += " OR Acopio2=" & IdAcopio & ""
+--            strWHERE += " OR Acopio3=" & IdAcopio & ""
+--            strWHERE += " OR Acopio4=" & IdAcopio & ""
+--            strWHERE += " OR Acopio5=" & IdAcopio & ""
+--            strWHERE += " OR Acopio6=" & IdAcopio & ""
+
+--            strWHERE += " )"
+--        End If
+        
+
+
+
+
 	AND	 (@Vagon IS NULL OR  @Vagon=0 or CDP.SubnumeroVagon=@Vagon) 
 
 

@@ -329,7 +329,8 @@ Namespace Pronto.ERP.Bll
 
 
 
-   
+
+
 
 
         Public Shared Function EnviarMailFiltroPorRegistro(ByVal SC As String, ByVal fechadesde As Date, _
@@ -343,11 +344,17 @@ Namespace Pronto.ERP.Bll
                                                      ) As String
 
 
+            Dim ModoImpresion As String = iisNull(dr.Item("ModoImpresion"), "Excel")
+            Dim bDescargaHtml = CartaDePorteManager.informesHtml.Contains(ModoImpresion)
 
-            If iisNull(dr.Item("ModoImpresion"), "Excel") = "ExcHtm" Or iisNull(dr.Item("ModoImpresion"), "Excel") = "EHOlav" Or iisNull(dr.Item("ModoImpresion"), "Excel") = "HOlav" Then
+
+            If bDescargaHtml Then
                 Return CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
             End If
+
+
+
 
 
 
@@ -397,9 +404,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-                Dim ModoImpresion As String = iisNull(.Item("ModoImpresion"), "Excel")
-                Dim informesHtml = New String() {"Html", "HtmlIm", "EHOlav", "HOlav"}
-                Dim bDescargaHtml = informesHtml.Contains(ModoImpresion)
 
 
 
@@ -626,6 +630,9 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
+
+
+
         Public Shared Function EnviarMailFiltroPorId(ByVal SC As String, ByVal fechadesde As Date, _
                                                      ByVal fechahasta As Date, ByVal puntoventa As Integer, _
                                                      ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
@@ -641,298 +648,313 @@ Namespace Pronto.ERP.Bll
 
 
             'Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
-            Dim dt = TraerMetadata(SC, id)
+            Dim dt = CDPMailFiltrosManager2.TraerMetadata(SC, id)
             Dim dr = dt.Rows(0)
 
 
+            Return EnviarMailFiltroPorRegistro(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
-            If iisNull(dr.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
-                ErrHandler2.WriteError("llamando a EnviarMailFiltroPorId_DLL")
 
-                Dim s = CDPMailFiltrosManager2.EnviarMailFiltroPorId_DLL(SC, fechadesde, fechahasta, puntoventa, id, titulo, estado, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
-                ErrHandler2.WriteError("terminado EnviarMailFiltroPorId_DLL. " & sError2)
 
-                Return s
-            End If
 
 
 
 
-            Dim output As String
-            'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
-            With dr
-                Dim l As Long
 
+            ''Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
+            'Dim dt = TraerMetadata(SC, id)
+            'Dim dr = dt.Rows(0)
 
 
-                'If Not chkConLocalReport.Checked Then
-                '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
-                '                                iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-                '                                iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
-                '    output = generarNotasDeEntrega(sc, dr, estado, l, titulo, sWHERE, Server.MapPath("~/Imagenes/Williams.bmp"))
-                'Else
 
+            'If iisNull(dr.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
+            '    ErrHandler2.WriteError("llamando a EnviarMailFiltroPorId_DLL")
 
+            '    Dim s = CDPMailFiltrosManager2.EnviarMailFiltroPorId_DLL(SC, fechadesde, fechahasta, puntoventa, id, titulo, estado, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
+            '    ErrHandler2.WriteError("terminado EnviarMailFiltroPorId_DLL. " & sError2)
 
-                If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
-                    fechadesde = #1/1/1753#
-                    fechahasta = #1/1/2100#
+            '    Return s
+            'End If
 
-                ElseIf estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha Then
-                    fechadesde = #1/1/1753#
-                    fechahasta = #1/1/2100#
 
-                End If
 
 
-                Try
-                    Dim sWHERE = generarWHEREparaDataset(SC, dr, titulo, estado, _
-                                                iisValidSqlDate(fechadesde, #1/1/1753#), _
-                                                iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
+            'Dim output As String
+            ''output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
+            'With dr
+            '    Dim l As Long
 
-                Catch ex As Exception
-                    'logear el idfiltro con problemas
 
-                    ErrHandler2.WriteError(ex.ToString)
-                    ErrHandler2.WriteError("Error en llamada a generarWHEREparaDataset().   IdFiltro " + id.ToString())
-                    'dddd()
-                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló: " & ex.ToString, 100)
-                    Throw
-                End Try
 
+            '    'If Not chkConLocalReport.Checked Then
+            '    '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
+            '    '                                iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
+            '    '                                iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
+            '    '    output = generarNotasDeEntrega(sc, dr, estado, l, titulo, sWHERE, Server.MapPath("~/Imagenes/Williams.bmp"))
+            '    'Else
 
-                ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
-                Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
 
 
-                Dim tiempoinforme, tiemposql As Integer
 
-                If Debugger.IsAttached And False Then
-                    'output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
-                Else
-                    output = generarNotasDeEntregaConReportViewer(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
-                End If
+            '    If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
+            '        fechadesde = #1/1/1753#
+            '        fechahasta = #1/1/2100#
 
+            '    ElseIf estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha Then
+            '        fechadesde = #1/1/1753#
+            '        fechahasta = #1/1/2100#
 
-                'End If
+            '    End If
 
 
+            '    Try
+            '        Dim sWHERE = generarWHEREparaDataset(SC, dr, titulo, estado, _
+            '                                    iisValidSqlDate(fechadesde, #1/1/1753#), _
+            '                                    iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
 
+            '    Catch ex As Exception
+            '        'logear el idfiltro con problemas
 
+            '        ErrHandler2.WriteError(ex.ToString)
+            '        ErrHandler2.WriteError("Error en llamada a generarWHEREparaDataset().   IdFiltro " + id.ToString())
+            '        'dddd()
+            '        dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló: " & ex.ToString, 100)
+            '        Throw
+            '    End Try
 
-                If output <> "-1" And output <> "-2" Then
-                    'MandaEmail("mscalella911@gmail.com", "Mailing Williams", "", , , , , "C:\ProntoWeb\doc\williams\Excels de salida\NE Descargas para el corredor Intagro.xls")
 
-                    'Dim mails() As String = Split(.Item("EMails"), ",")
-                    'For Each s As String In mails
-                    'ErrHandler2.WriteError("asdasde")
-                    Dim De As String
+            '    ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
+            '    Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
 
-                    Select Case puntoventa
-                        Case 1
-                            De = "buenosaires@williamsentregas.com.ar"
-                            CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                        Case 2
-                            De = "sanlorenzo@williamsentregas.com.ar"
-                            CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
-                        Case 3
-                            De = "arroyoseco@williamsentregas.com.ar"
-                            CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
-                        Case 4
-                            De = "bahiablanca@williamsentregas.com.ar"
-                            CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
-                        Case Else
-                            De = "buenosaires@williamsentregas.com.ar"
-                            CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                    End Select
 
-                    Try
-                        Dim destinatario As String
-                        Dim truquito As String '= "    <img src =""http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & "/Pronto/mailPage.aspx?q=" & iisNull(UsuarioSesion.Mail(sc, Session)) & "&e=" & .Item("EMails") & "_" & tit & """/>" 'imagen para que llegue respuesta cuando sea leido
-                        Dim cuerpo As String
+            '    Dim tiempoinforme, tiemposql As Integer
 
-                        If bVistaPrevia Then ' chkVistaPrevia.Checked Then
-                            'lo manda a la casilla del usuario
-                            'ver cómo crear una regla en Outlook para forwardearlo a la casilla correspondiente
-                            'http://www.eggheadcafe.com/software/aspnet/34183421/question-on-rules-on-unattended-mailbox.aspx
-                            destinatario = .Item("AuxiliarString2") ' UsuarioSesion.Mail(sc, Session)
-                            cuerpo = .Item("EMails") & truquito
-                        Else
-                            'lo manda a la casilla del destino
-                            destinatario = .Item("EMails")
+            '    If Debugger.IsAttached And False Then
+            '        'output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            '    Else
+            '        output = generarNotasDeEntregaConReportViewer(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            '    End If
 
-                            'destinatario &= "," & De
 
-                            cuerpo = truquito
-                        End If
+            '    'End If
 
 
-                        Dim stopWatch As New Stopwatch()
-                        stopWatch.Start()
 
 
 
-                        cuerpo &= AgregarFirmaHtml(puntoventa)
+            '    If output <> "-1" And output <> "-2" Then
+            '        'MandaEmail("mscalella911@gmail.com", "Mailing Williams", "", , , , , "C:\ProntoWeb\doc\williams\Excels de salida\NE Descargas para el corredor Intagro.xls")
 
+            '        'Dim mails() As String = Split(.Item("EMails"), ",")
+            '        'For Each s As String In mails
+            '        'ErrHandler2.WriteError("asdasde")
+            '        Dim De As String
 
+            '        Select Case puntoventa
+            '            Case 1
+            '                De = "buenosaires@williamsentregas.com.ar"
+            '                CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+            '            Case 2
+            '                De = "sanlorenzo@williamsentregas.com.ar"
+            '                CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+            '            Case 3
+            '                De = "arroyoseco@williamsentregas.com.ar"
+            '                CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+            '            Case 4
+            '                De = "bahiablanca@williamsentregas.com.ar"
+            '                CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+            '            Case Else
+            '                De = "buenosaires@williamsentregas.com.ar"
+            '                CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+            '        End Select
 
+            '        Try
+            '            Dim destinatario As String
+            '            Dim truquito As String '= "    <img src =""http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & "/Pronto/mailPage.aspx?q=" & iisNull(UsuarioSesion.Mail(sc, Session)) & "&e=" & .Item("EMails") & "_" & tit & """/>" 'imagen para que llegue respuesta cuando sea leido
+            '            Dim cuerpo As String
 
+            '            If bVistaPrevia Then ' chkVistaPrevia.Checked Then
+            '                'lo manda a la casilla del usuario
+            '                'ver cómo crear una regla en Outlook para forwardearlo a la casilla correspondiente
+            '                'http://www.eggheadcafe.com/software/aspnet/34183421/question-on-rules-on-unattended-mailbox.aspx
+            '                destinatario = .Item("AuxiliarString2") ' UsuarioSesion.Mail(sc, Session)
+            '                cuerpo = .Item("EMails") & truquito
+            '            Else
+            '                'lo manda a la casilla del destino
+            '                destinatario = .Item("EMails")
 
-                        'Adjuntar zip de imagenes
-                        'imagenes = CartaDePorteManager.DescargarImagenesAdjuntas(dt, SC, False)
+            '                'destinatario &= "," & De
 
+            '                cuerpo = truquito
+            '            End If
 
 
+            '            Dim stopWatch As New Stopwatch()
+            '            stopWatch.Start()
 
-                        Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
-                        Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
-                        Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
-                        Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
-                        Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
-                        Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
-                        Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
-                        Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
 
 
+            '            cuerpo &= AgregarFirmaHtml(puntoventa)
 
-                        Dim AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR = iisNull(.Item("AplicarANDuORalFiltro"), 0)
-                        Dim ModoExportacion As String = .Item("modo").ToString
-                        Dim optDivisionSyngenta As String = "Ambas"
 
 
-                        Dim asunto As String
 
-                        Try
 
-                            'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
-                            'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
+            '            'Adjuntar zip de imagenes
+            '            'imagenes = CartaDePorteManager.DescargarImagenesAdjuntas(dt, SC, False)
 
 
-                            asunto = CartaDePorteManager.FormatearAsunto(SC, _
-                                 "", _
-                               estado, "", idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                               AplicarANDuORalFiltro, ModoExportacion, _
-                              fechadesde, fechahasta, _
-                               puntoventa, optDivisionSyngenta, False, "", "", -1)
-                        Catch ex As Exception
-                            asunto = "mal formateado"
-                            ErrHandler2.WriteError(ex.ToString + " asunto mal formateado")
-                        End Try
 
 
+            '            Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
+            '            Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
+            '            Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
+            '            Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
+            '            Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
+            '            Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
+            '            Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
+            '            Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
 
-                        If bDescargaHtml Then
 
 
+            '            Dim AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR = iisNull(.Item("AplicarANDuORalFiltro"), 0)
+            '            Dim ModoExportacion As String = .Item("modo").ToString
+            '            Dim optDivisionSyngenta As String = "Ambas"
 
-                            MandaEmail_Nuevo(destinatario, _
-                                        asunto, _
-                                      cuerpo + output, _
-                                   De, _
-                                   SmtpServer, _
-                                            SmtpUser, _
-                                            SmtpPass, _
-                                             "", _
-                                            SmtpPort, _
-                                    , _
-                                    CCOaddress, , , De)
 
+            '            Dim asunto As String
 
-                            'MandaEmail(destinatario, _
-                            '                    asunto, _
-                            '                  cuerpo + output, _
-                            '                   De, _
-                            '                 SmtpServer, _
-                            '                SmtpUser, _
-                            '                SmtpPass, _
-                            '                "", _
-                            '                SmtpPort, _
-                            '                 , _
-                            '                 CCOaddress, _
-                            '                    truquito _
-                            '                    , "Williams Entregas" _
-                            '               )
-                        Else
+            '            Try
 
-                            MandaEmail_Nuevo(destinatario, _
-                                                asunto, _
-                                              cuerpo, _
-                                               De, _
-                                             SmtpServer, _
-                                            SmtpUser, _
-                                            SmtpPass, _
-                                            output, _
-                                            SmtpPort, _
-                                             , _
-                                             CCOaddress, _
-                                                truquito _
-                                                , "Williams Entregas", De _
-                                           )
+            '                'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
+            '                'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
 
-                        End If
 
+            '                asunto = CartaDePorteManager.FormatearAsunto(SC, _
+            '                     "", _
+            '                   estado, "", idVendedor, idCorredor, _
+            '                  idDestinatario, idIntermediario, _
+            '                  idRemComercial, idArticulo, idProcedencia, idDestino, _
+            '                   AplicarANDuORalFiltro, ModoExportacion, _
+            '                  fechadesde, fechahasta, _
+            '                   puntoventa, optDivisionSyngenta, False, "", "", -1)
+            '            Catch ex As Exception
+            '                asunto = "mal formateado"
+            '                ErrHandler2.WriteError(ex.ToString + " asunto mal formateado")
+            '            End Try
 
-                        stopWatch.Stop()
-                        Dim tiempomail = stopWatch.Elapsed.Milliseconds
 
 
-                        Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
+            '            If bDescargaHtml Then
 
-                        If False Then
-                            ErrHandler2.WriteError("IdFiltro(no de cola)=" & id & " Enviado con éxito a las " & Now.ToString & ". CDPs filtradas: " & l)
-                        End If
 
-                        dr.Item("UltimoResultado") = s
 
-                        Update(SC, dt)
+            '                MandaEmail_Nuevo(destinatario, _
+            '                            asunto, _
+            '                          cuerpo + output, _
+            '                       De, _
+            '                       SmtpServer, _
+            '                                SmtpUser, _
+            '                                SmtpPass, _
+            '                                 "", _
+            '                                SmtpPort, _
+            '                        , _
+            '                        CCOaddress, , , De)
 
-                    Catch ex As Exception
-                        'Verificar Mails rechazados en la cuenta que los envió
-                        '        http://www.experts-exchange.com/Programming/Languages/C_Sharp/Q_23268068.html
-                        'TheLearnedOne:
-                        'The only way that I know of is to look in the Inbox for rejected messages.
 
-                        '        Bob
+            '                'MandaEmail(destinatario, _
+            '                '                    asunto, _
+            '                '                  cuerpo + output, _
+            '                '                   De, _
+            '                '                 SmtpServer, _
+            '                '                SmtpUser, _
+            '                '                SmtpPass, _
+            '                '                "", _
+            '                '                SmtpPort, _
+            '                '                 , _
+            '                '                 CCOaddress, _
+            '                '                    truquito _
+            '                '                    , "Williams Entregas" _
+            '                '               )
+            '            Else
 
+            '                MandaEmail_Nuevo(destinatario, _
+            '                                    asunto, _
+            '                                  cuerpo, _
+            '                                   De, _
+            '                                 SmtpServer, _
+            '                                SmtpUser, _
+            '                                SmtpPass, _
+            '                                output, _
+            '                                SmtpPort, _
+            '                                 , _
+            '                                 CCOaddress, _
+            '                                    truquito _
+            '                                    , "Williams Entregas", De _
+            '                               )
 
+            '            End If
 
-                        ErrHandler2.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
-                        'dddd()
-                        dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
-                        Update(SC, dt)
-                        'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
-                    End Try
 
-                    'Next
-                ElseIf output = "-1" Then
-                    sError += "El filtro " & id & " genera un informe vacío." & vbCrLf
+            '            stopWatch.Stop()
+            '            Dim tiempomail = stopWatch.Elapsed.Milliseconds
 
-                    dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
-                    Update(SC, dt)
-                ElseIf output = "-2" Then
 
-                    sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
+            '            Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
 
-                    dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
-                    Update(SC, dt)
-                End If
+            '            If False Then
+            '                ErrHandler2.WriteError("IdFiltro(no de cola)=" & id & " Enviado con éxito a las " & Now.ToString & ". CDPs filtradas: " & l)
+            '            End If
 
+            '            dr.Item("UltimoResultado") = s
 
+            '            Update(SC, dt)
 
+            '        Catch ex As Exception
+            '            'Verificar Mails rechazados en la cuenta que los envió
+            '            '        http://www.experts-exchange.com/Programming/Languages/C_Sharp/Q_23268068.html
+            '            'TheLearnedOne:
+            '            'The only way that I know of is to look in the Inbox for rejected messages.
 
-            End With
+            '            '        Bob
 
-            Try
-                sError2 = dr.Item("UltimoResultado")
-            Catch ex As Exception
 
-            End Try
 
-            Return output
+            '            ErrHandler2.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
+            '            'dddd()
+            '            dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
+            '            Update(SC, dt)
+            '            'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
+            '        End Try
+
+            '        'Next
+            '    ElseIf output = "-1" Then
+            '        sError += "El filtro " & id & " genera un informe vacío." & vbCrLf
+
+            '        dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+            '        Update(SC, dt)
+            '    ElseIf output = "-2" Then
+
+            '        sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
+
+            '        dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+            '        Update(SC, dt)
+            '    End If
+
+
+
+
+            'End With
+
+            'Try
+            '    sError2 = dr.Item("UltimoResultado")
+            'Catch ex As Exception
+
+            'End Try
+
+            'Return output
 
         End Function
 
