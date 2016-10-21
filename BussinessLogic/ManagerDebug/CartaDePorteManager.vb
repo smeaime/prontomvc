@@ -3801,7 +3801,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared informesHtml = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2"}
+    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2"}
 
     Enum eInformesGeneralFormatos
         Html
@@ -3819,6 +3819,14 @@ Public Class CartaDePorteManager
         '<asp:ListItem Value="EHOlav" Text="Html corto" />
 
     End Enum
+
+    'Enum FormatosInforme
+    '    Html
+    '    HtmlIm
+    '    ExcRec
+    '    Grobo
+    'End Enum
+
 
 
 
@@ -3892,6 +3900,103 @@ Public Class CartaDePorteManager
 
         Return rdl
     End Function
+
+
+
+
+
+    Shared Function PlantillaDeInforme(SC As String, ByRef rdl As String, idVendedor As Long, idRemComercial As Long, idIntermediario As Long, idCorredor As Long, idDestinatario As Long, IdClienteAuxiliar As Long, ByVal fechadesde As Date, _
+                                                         ByVal fechahasta As Date, ByVal dr As DataRow, _
+                                                         ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                         ByRef lineasGeneradas As Long, ByRef titulo As String, _
+                                                         ByVal logo As String, ByVal puntoventa As Integer, _
+                                                          ByRef tiemposql As Integer, _
+                                                          ByRef tiempoinforme As Integer, _
+                                                          ByVal bDescargaHtml As Boolean, _
+                                                          grid As GridView) As String
+
+        PlantillaDeInforme = ""
+
+        With dr
+
+            If iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
+
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcRec" Then
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto con numero recibo.rdl"
+
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "Grobo" Then
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl"
+
+
+            ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
+                'formato para corredores (menos BLD)
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original)  para Corredores.rdl"
+
+
+
+            ElseIf NombreCliente(SC, idVendedor) = "DOW AGROSCIENCES ARG. SA" _
+                    Or NombreCliente(SC, idRemComercial) = "DOW AGROSCIENCES ARG. SA" _
+                    Or NombreCliente(SC, idIntermediario) = "DOW AGROSCIENCES ARG. SA" _
+                    Or NombreCliente(SC, idDestinatario) = "DOW AGROSCIENCES ARG. SA" _
+                        Then
+
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Dow"
+                'hay que mandarle el informe extendido
+                If True Then
+                    Return CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
+                Else
+
+                End If
+
+
+            ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
+            ElseIf NombreCliente(SC, IdClienteAuxiliar) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
+
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "Html" Then
+                'este era el tradicional
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel" Then
+                'este era el tradicional
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
+                'formato normal para clientes (incluye la foto)
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+
+
+                If False Then
+                    Return CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
+                End If
+
+
+            Else
+                'formato normal para clientes (incluye la foto)
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+
+                If False Then
+                    Return CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
+                End If
+
+            End If
+
+
+        End With
+
+
+        Return ""
+    End Function
+
+
+
+
+
+
+
 
 
     Public Shared Function GenerarSufijoRand() As String
