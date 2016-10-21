@@ -345,7 +345,7 @@ Namespace Pronto.ERP.Bll
 
 
             Dim ModoImpresion As String = iisNull(dr.Item("ModoImpresion"), "Excel")
-            Dim bDescargaHtml = CartaDePorteManager.informesHtml.Contains(ModoImpresion)
+            Dim bDescargaHtml = CartaDePorteManager.informesHtml.ToList().Contains(ModoImpresion)
 
 
             If bDescargaHtml Then
@@ -475,8 +475,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                        cuerpo &= AgregarFirmaHtml(puntoventa)
-
+                        
 
 
 
@@ -526,32 +525,36 @@ Namespace Pronto.ERP.Bll
 
 
 
-                        If bDescargaHtml Then
+                        If bDescargaHtml Or ModoImpresion = "ExcHtm" Then
 
                             Dim html As String = ""
                             html = cuerpo
 
+
                             If True Then
                                 'ahora mando un html corto aunque use el excel grande
                                 dr("ModoImpresion") = "HImag2"
-                                Dim output2 = generarNotasDeEntregaConReportViewer(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+                                Dim lineasGeneradas As Integer = 0
+                                Dim output2 = CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+
                                 Dim grid As New GridView
                                 html = CartaDePorteManager.ExcelToHtml(output2, grid)
                                 dr("ModoImpresion") = ModoImpresion
                             End If
 
 
+                            cuerpo = EncabezadoHtml(puntoventa) & cuerpo & html & AgregarFirmaHtml(puntoventa)
 
 
 
                             MandaEmail_Nuevo(destinatario, _
                                         asunto, _
-                                      cuerpo + html, _
+                                      cuerpo, _
                                    De, _
                                    SmtpServer, _
                                             SmtpUser, _
                                             SmtpPass, _
-                                             "", _
+                                             output, _
                                             SmtpPort, _
                                     , _
                                     CCOaddress, , , De)
@@ -572,6 +575,10 @@ Namespace Pronto.ERP.Bll
                             '                    , "Williams Entregas" _
                             '               )
                         Else
+
+
+                            cuerpo = EncabezadoHtml(puntoventa) & cuerpo & AgregarFirmaHtml(puntoventa)
+
 
                             MandaEmail_Nuevo(destinatario, _
                                                 asunto, _
@@ -1294,100 +1301,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
-        Enum FormatosInforme
-            Html
-            HtmlIm
-            ExcRec
-            Grobo
-        End Enum
-
-
-
-        Shared Function PlantillaDeInforme(SC As String, ByRef rdl As String, idVendedor As Long, idRemComercial As Long, idIntermediario As Long, idCorredor As Long, idDestinatario As Long, IdClienteAuxiliar As Long, ByVal fechadesde As Date, _
-                                                             ByVal fechahasta As Date, ByVal dr As DataRow, _
-                                                             ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                             ByRef lineasGeneradas As Long, ByRef titulo As String, _
-                                                             ByVal logo As String, ByVal puntoventa As Integer, _
-                                                              ByRef tiemposql As Integer, _
-                                                              ByRef tiempoinforme As Integer, _
-                                                              ByVal bDescargaHtml As Boolean, _
-                                                              grid As GridView) As String
-
-            PlantillaDeInforme = ""
-
-            With dr
-
-                If iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
-
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcRec" Then
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto con numero recibo.rdl"
-
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "Grobo" Then
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl"
-
-
-                ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
-                    'formato para corredores (menos BLD)
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original)  para Corredores.rdl"
-
-
-
-                ElseIf NombreCliente(SC, idVendedor) = "DOW AGROSCIENCES ARG. SA" _
-                        Or NombreCliente(SC, idRemComercial) = "DOW AGROSCIENCES ARG. SA" _
-                        Or NombreCliente(SC, idIntermediario) = "DOW AGROSCIENCES ARG. SA" _
-                        Or NombreCliente(SC, idDestinatario) = "DOW AGROSCIENCES ARG. SA" _
-                            Then
-
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                    rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Dow"
-                    'hay que mandarle el informe extendido
-                    If True Then
-                        Return CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
-                    Else
-
-                    End If
-
-
-                ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
-                ElseIf NombreCliente(SC, IdClienteAuxiliar) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
-
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "Html" Then
-                    'este era el tradicional
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel" Then
-                    'este era el tradicional
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
-                    'formato normal para clientes (incluye la foto)
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
-
-
-                    If False Then
-                        Return CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
-                    End If
-
-                Else
-                    'formato normal para clientes (incluye la foto)
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
-
-                    If False Then
-                        Return CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
-                    End If
-
-                End If
-
-
-            End With
-
-
-            Return ""
-        End Function
-
+ 
 
         Shared Function generarNotasDeEntregaConReportViewer(ByVal SC As String, ByVal fechadesde As Date, _
                                                              ByVal fechahasta As Date, ByVal dr As DataRow, _
@@ -1496,7 +1410,7 @@ Namespace Pronto.ERP.Bll
 
                     '                    agregar uno para grobo
                     Dim ret As String
-                    ret = PlantillaDeInforme(SC, rdl, idVendedor, idRemComercial, idIntermediario, idCorredor, idDestinatario, IdClienteAuxiliar, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
+                    ret = CartaDePorteManager.PlantillaDeInforme(SC, rdl, idVendedor, idRemComercial, idIntermediario, idCorredor, idDestinatario, IdClienteAuxiliar, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
                     If ret <> "" Then
                         Return ret
                     End If
