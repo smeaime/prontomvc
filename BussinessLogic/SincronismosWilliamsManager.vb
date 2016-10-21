@@ -2812,8 +2812,12 @@ Namespace Pronto.ERP.Bll
 
 
                     'sb &= IIf(.NobleConforme = "0", "NO", "SI").PadRight(2)
-                    sb &= IIf(.CalidadDe = 25, "SI", "NO").PadRight(2) 'Andres, solamente poner si cuando es CONFORME, resto poner NO ( Todo el resto del listado que detallas )
-
+                    If .IsCalidadDescNull Then 
+                        sb &= "NO"
+                    Else
+                        sb &= IIf(.CalidadDe = 25, "SI", "NO").PadRight(2) 'Andres, solamente poner si cuando es CONFORME, resto poner NO ( Todo el resto del listado que detallas )
+                    End If
+                    
 
                     '//////////////////////////////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////////////////////////////
