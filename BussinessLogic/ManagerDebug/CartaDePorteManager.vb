@@ -3809,6 +3809,15 @@ Public Class CartaDePorteManager
         EHOlav 'olavarria html + excel
         HOlav 'olavarria html
         HImag2 'html corto con imagenes
+        '<asp:ListItem Value="Excel" Text="Excel" />
+        '<asp:ListItem Value="Imagen" Text="Excel con imágenes " />
+        '<asp:ListItem Value="ExcRec" Text="Excel con n°recibo" />
+        '<asp:ListItem Value="Grobo" Text="Excel Grobo" />
+        '<asp:ListItem Value="ExcHtm" Text="Excel y Html" Enabled="false" />
+        '<asp:ListItem Value="Html" Text="Html"  Enabled="false"  />
+        '<asp:ListItem Value="HtmlIm" Text="Html con imágenes " />
+        '<asp:ListItem Value="EHOlav" Text="Html corto" />
+
     End Enum
 
 

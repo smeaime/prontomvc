@@ -528,11 +528,25 @@ Namespace Pronto.ERP.Bll
 
                         If bDescargaHtml Then
 
+                            Dim html As String = ""
+                            html = cuerpo
+
+                            If True Then
+                                'ahora mando un html corto aunque use el excel grande
+                                dr("ModoImpresion") = "HImag2"
+                                Dim output2 = generarNotasDeEntregaConReportViewer(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+                                Dim grid As New GridView
+                                html = CartaDePorteManager.ExcelToHtml(output2, grid)
+                                dr("ModoImpresion") = ModoImpresion
+                            End If
+
+
+
 
 
                             MandaEmail_Nuevo(destinatario, _
                                         asunto, _
-                                      cuerpo + output, _
+                                      cuerpo + html, _
                                    De, _
                                    SmtpServer, _
                                             SmtpUser, _
@@ -566,7 +580,7 @@ Namespace Pronto.ERP.Bll
                                              SmtpServer, _
                                             SmtpUser, _
                                             SmtpPass, _
-                                            output, _
+                                             output, _
                                             SmtpPort, _
                                              , _
                                              CCOaddress, _
