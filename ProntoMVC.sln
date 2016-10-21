@@ -89,8 +89,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProntoWeb", "ProntoWeb", "{
 		..\prontoweb\ProntoWeb\Facturas.aspx.vb = ..\prontoweb\ProntoWeb\Facturas.aspx.vb
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ProntoCartaPorteApp", "..\prontoweb\ProntoCartaPorteApp.vbproj", "{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}"
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb(3)", "http://localhost:58911", "{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
