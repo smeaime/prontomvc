@@ -46,7 +46,7 @@ create function fSQL_GetDataTableFiltradoYPaginado(
             @fechadesde As DateTime,
 			@fechahasta As DateTime,
             @puntoventa int , 
-            @optDivisionSyngenta  VARCHAR(50) ,
+            @IdAcopio int,
             --@bTraerDuplicados As Boolean ,
             @Contrato  VARCHAR(50) , 
             @QueContenga2  VARCHAR(50) ,
@@ -84,6 +84,8 @@ http://stackoverflow.com/questions/1462174/use-inline-table-valued-function-in-l
 http://weblogs.asp.net/zeeshanhirani/table-valued-functions-in-linq-to-sql
 https://msdn.microsoft.com/en-us/data/hh859577.aspx
 */
+
+
 
 return 
 
@@ -269,25 +271,17 @@ where 1=1
 
 
 
---AND (		
+	AND (		
+			isnull(@IdAcopio,-1)=-1
+			OR CDP.Acopio1=@IdAcopio 
+			OR CDP.Acopio2=@IdAcopio 
+			OR CDP.Acopio3=@IdAcopio 
+			OR CDP.Acopio4=@IdAcopio 
+			OR CDP.Acopio5=@IdAcopio 
+			OR CDP.Acopio6=@IdAcopio 
+		)
 
---        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta, sc)
 
-
---        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
---            strWHERE += " AND ("
-
---            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
-
---            strWHERE += " OR Acopio1=" & IdAcopio & ""
---            strWHERE += " OR Acopio2=" & IdAcopio & ""
---            strWHERE += " OR Acopio3=" & IdAcopio & ""
---            strWHERE += " OR Acopio4=" & IdAcopio & ""
---            strWHERE += " OR Acopio5=" & IdAcopio & ""
---            strWHERE += " OR Acopio6=" & IdAcopio & ""
-
---            strWHERE += " )"
---        End If
         
 
 
@@ -559,6 +553,10 @@ create procedure  wCartasPorte_WraperDeLaTVF
 
 
 
+		declare @IdAcopio int
+		select top 1 @IdAcopio=IdAcopio from CartasPorteAcopios   where Descripcion = @optDivisionSyngenta
+
+
 		SELECT  
 		TOP (@maximumRows)  --quizas usando el TOP sin ORDERBY no haya diferencia de performance
 
@@ -587,7 +585,7 @@ create procedure  wCartasPorte_WraperDeLaTVF
 
 							@fechahasta, 
 							@puntoventa, 
-							@optDivisionSyngenta,
+							@IdAcopio,
 							@Contrato, 
 							@QueContenga2, 
 
@@ -669,7 +667,7 @@ exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-01 00:00:0
 exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-10 00:00:00',@maximumRows=3000,
 @fechahasta='2016-31-10 00:00:00',@estado=4,@idDestino=-1,@QueContenga=N'0',@idVendedor=6762,@idCorredor=-1,
 @idDestinatario=-1,@idIntermediario=6762,@idRemComercial=6762,@idArticulo=-1,@idProcedencia=-1,@AplicarANDuORalFiltro=0,
-@ModoExportacion=N'Entregas',@puntoventa=-1,@optDivisionSyngenta=N'',@Contrato=N'-1',@QueContenga2=N'-1',
+@ModoExportacion=N'Entregas',@puntoventa=-1,@optDivisionSyngenta=N'BANDERA',@Contrato=N'-1',@QueContenga2=N'-1',
 @idClienteAuxiliarint=6762,@AgrupadorDeTandaPeriodos=-1,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
 
 
