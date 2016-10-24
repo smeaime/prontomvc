@@ -1,0 +1,64 @@
+
+Log Entry : 
+10/24/2016 11:10:39
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+10/24/2016 11:18:34
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+10/24/2016 11:23:20
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_24oct2016_111902.xls
+__________________________
+
+Log Entry : 
+10/24/2016 11:23:20
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_24oct2016_111902.xls
+__________________________
+
+Log Entry : 
+10/24/2016 11:23:20
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________
+
+Log Entry : 
+10/24/2016 12:25:38
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.ArgumentNullException: Value cannot be null.
+Parameter name: fileName
+   at System.IO.FileInfo..ctor(String fileName)
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 182
+__________________________
+
+Log Entry : 
+10/24/2016 12:36:23
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.ArgumentNullException: Value cannot be null.
+Parameter name: fileName
+   at System.IO.FileInfo..ctor(String fileName)
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 182
+__________________________

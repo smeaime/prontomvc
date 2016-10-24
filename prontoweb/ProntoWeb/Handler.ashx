@@ -176,6 +176,15 @@ public class JQGridHandler : IHttpHandler
 
     public void ProcessRequest(HttpContext context)
     {
+
+        
+                string SC;
+        //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+        if (System.Diagnostics.Debugger.IsAttached)
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+        else
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+
         HttpRequest request = context.Request;
         HttpResponse response = context.Response;
 
@@ -192,12 +201,19 @@ public class JQGridHandler : IHttpHandler
         string FechaInicial = request["FechaInicial"];
         string FechaFinal = request["FechaFinal"];
 
+        string puntovent = request["puntovent"];
+        string destino = request["destino"];
+
+        
         if (sortColumnName == null) return;
 
-        string output = Pedidos_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal);
+        string output = Pedidos_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC));
 
         response.ContentType = "application/json";
         response.Write(output);
+        
+        
+            
     }
 
 
@@ -230,7 +246,7 @@ public class JQGridHandler : IHttpHandler
     // de la misma manera que estas llamando con jquery para buscar los acopios por cliente
 
 
-    public virtual string Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+    public virtual string Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino)
     {
 
         // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -252,7 +268,7 @@ public class JQGridHandler : IHttpHandler
         var usuario = Membership.GetUser();
         System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'");
         int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
-        int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+        // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
 
 
         DateTime FechaDesde = new DateTime(1980, 1, 1);
@@ -303,7 +319,9 @@ public class JQGridHandler : IHttpHandler
                                                 //&&
                                                 (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
                                                  &&
-                                                (x.WilliamsDestino.PuntoVenta == puntovent || puntovent == 0)
+                                                (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
+                                                 &&
+                                                (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
                                              )
                                         );
 
@@ -349,7 +367,7 @@ public class JQGridHandler : IHttpHandler
 
         var data = (from a in Entidad
                     select a
-                    ).Where(campo).OrderBy(sidx + " " + sord)
+                    )//.Where(campo).OrderBy(sidx + " " + sord)
                     .ToList();
 
         var jsonData = new jqGridJson()
