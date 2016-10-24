@@ -279,6 +279,33 @@ Public Class ConsultasLinq
     End Function
 
 
+    Class asas
+        Public IdCartaDePorte As Integer?
+        Public NumeroCartaDePorte As Integer?
+        Public FechaDescarga As Date
+        Public agrupVagon As String
+        Public NetoFinal As Integer?
+        Public Subcontr1 As Integer?
+        Public Subcontr2 As Integer?
+        Public ExcluirDeSubcontratistas As String
+        Public SubnumeroDeFacturacion
+        Public VendedorDesc As String
+        Public CuentaOrden1Desc As String
+        Public CuentaOrden2Desc As String
+        Public CorredorDesc As String
+        Public EntregadorDesc As String
+        Public ProcedenciaDesc As String
+        Public DestinoDesc As String
+        Public Subcontr1Desc As String
+        Public Subcontr2Desc As String
+        Public Exporta As String
+        Public Corredor As Integer?
+        Public IdClienteEntregador
+        Public tarif1 As Decimal?
+        Public tarif2 As Decimal?
+    End Class
+
+
     Public Shared Function LiquidacionSubcontratistas(ByVal SC As String, _
           ByVal ColumnaParaFiltrar As String, _
           ByVal TextoParaFiltrar As String, _
@@ -403,16 +430,16 @@ Public Class ConsultasLinq
                       And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
                       And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
                       And If(cdp.SubnumeroDeFacturacion, 0) <= 0
-                Select New With { _
-                    cdp.NumeroCartaDePorte, _
-                    cdp.IdCartaDePorte, _
-                    cdp.FechaDescarga, _
-                    cdp.NetoFinal, _
+                Select New asas With { _
+                    .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
+                    .IdCartaDePorte = cdp.IdCartaDePorte, _
+                    .FechaDescarga = cdp.FechaDescarga, _
+                    .NetoFinal = cdp.NetoFinal, _
                     .Subcontr1 = If(cdp.Subcontr1, dest.Subcontratista1), _
                     .Subcontr2 = If(cdp.Subcontr2, dest.Subcontratista2), _
                     .agrupVagon = If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
-                    cdp.ExcluirDeSubcontratistas, _
-                    cdp.SubnumeroDeFacturacion, _
+                    .ExcluirDeSubcontratistas = cdp.ExcluirDeSubcontratistas, _
+                    .SubnumeroDeFacturacion = cdp.SubnumeroDeFacturacion, _
                     .VendedorDesc = cdp.TitularDesc, _
                     .CuentaOrden1Desc = cdp.IntermediarioDesc, _
                     .CuentaOrden2Desc = cdp.RComercialDesc, _
@@ -441,8 +468,8 @@ Public Class ConsultasLinq
                                 ) _
                                 ), 0)), _
                     .Exporta = cdp.Exporta, _
-                    cdp.Corredor, _
-                    cdp.IdClienteEntregador}
+                   .Corredor = cdp.Corredor, _
+                    .IdClienteEntregador = cdp.IdClienteEntregador}
         'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
 
 
@@ -474,51 +501,51 @@ Public Class ConsultasLinq
 
         If ModoExportacion = "Buques" Then
 
-            'Dim q5 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
+            Dim q7 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
 
-            'Dim ooo = (From cdp As ProntoMVC.Data.Models.CartasPorteMovimiento In q5 _
-            '           Join dest In db.WilliamsDestinos On dest.IdWilliamsDestino Equals cdp.Puerto _
-            '        Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
-            '        From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = dest.Subcontratista1).DefaultIfEmpty _
-            '        From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = dest.Subcontratista2).DefaultIfEmpty _
-            '                        From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty _
-            '    From pd1 In db.ListasPreciosDetalles _
-            '            .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
-            '                And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
-            '            .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
-            '    From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty _
-            '    From pd2 In db.ListasPreciosDetalles _
-            '            .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
-            '                   And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
-            '            .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
-            'Select New With { _
-            '        cdp.NumeroCDPMovimiento, _
-            '        cdp.IdCartaDePorte, _
-            '        cdp.FechaIngreso, _
-            '        cdp.Cantidad, _
-            '        .Subcontr1 = dest.Subcontratista1, _
-            '        .Subcontr2 = dest.Subcontratista2, _
-            '        .agrupVagon = "Buques", _
-            '        cdp.ExcluirDeSubcontratistas, _
-            '        0, _
-            '        .VendedorDesc = cdp.TitularDesc, _
-            '        .CuentaOrden1Desc = cdp.IntermediarioDesc, _
-            '        .CuentaOrden2Desc = cdp.RComercialDesc, _
-            '        .CorredorDesc = cdp.CorredorDesc, _
-            '        .EntregadorDesc = cdp.EntregadorDesc, _
-            '        .ProcedenciaDesc = cdp.ProcedenciaDesc, _
-            '        .DestinoDesc = dest.Descripcion, _
-            '        .Subcontr1Desc = clisub1.RazonSocial, _
-            '        .Subcontr2Desc = clisub2.RazonSocial, _
-            '        .tarif1 = pd1.PrecioBuqueCalada, _
-            '        .tarif2 = pd2.PrecioBuqueCalada, _
-            '        .Exporta = cdp.Exporta, _
-            '        cdp.Corredor, _
-            '        cdp.IdClienteEntregador})
+            Dim ooo = (From cdp As ProntoMVC.Data.Models.CartasPorteMovimiento In q7 _
+                       Join dest In db.WilliamsDestinos On dest.IdWilliamsDestino Equals cdp.Puerto _
+                    Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
+                    From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = dest.Subcontratista1).DefaultIfEmpty _
+                    From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = dest.Subcontratista2).DefaultIfEmpty _
+                                    From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty _
+                From pd1 In db.ListasPreciosDetalles _
+                        .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                            And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
+                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
+                From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty _
+                From pd2 In db.ListasPreciosDetalles _
+                        .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
+                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
+            Select New asas With { _
+                   .NumeroCartaDePorte = cdp.NumeroCDPMovimiento, _
+                 .IdCartaDePorte = cdp.IdCartaDePorte, _
+                   .FechaDescarga = cdp.FechaIngreso, _
+                  .NetoFinal = cdp.Cantidad, _
+                    .Subcontr1 = dest.Subcontratista1, _
+                    .Subcontr2 = dest.Subcontratista2, _
+                    .agrupVagon = "Buques", _
+                    .ExcluirDeSubcontratistas = "NO", _
+                    .SubnumeroDeFacturacion = 0, _
+                    .VendedorDesc = cdp.IdExportadorOrigen, _
+                    .CuentaOrden1Desc = cdp.IdExportadorOrigen, _
+                    .CuentaOrden2Desc = "", _
+                    .CorredorDesc = "", _
+                    .EntregadorDesc = cdp.IdExportadorOrigen, _
+                    .ProcedenciaDesc = cdp.IdExportadorOrigen, _
+                    .DestinoDesc = dest.Descripcion, _
+                    .Subcontr1Desc = clisub1.RazonSocial, _
+                    .Subcontr2Desc = clisub2.RazonSocial, _
+                    .tarif1 = pd1.PrecioBuquesCalada, _
+                    .tarif2 = pd2.PrecioBuquesCalada, _
+                    .Exporta = "SI", _
+                    .Corredor = cdp.IdExportadorOrigen, _
+                    .IdClienteEntregador = cdp.IdExportadorOrigen})
 
 
 
-            'qq = qq.Union(ooo).ToList()
+            qq = qq.Union(ooo).ToList()
 
         End If
 
