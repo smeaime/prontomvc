@@ -50,76 +50,86 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             Width="150" Height="40" />
         <br />
         <br />
-        <table>
-            <tr>
 
-                <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
-                <td class="EncabezadoCell" style="width: 400px; height: 18px;">
-                    <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
-                        Visible="true">
-                        <asp:ListItem Text="Hoy" />
-                        <asp:ListItem Text="Ayer" />
-                        <%--<asp:ListItem Text="Esta semana" />
+
+
+        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
+            <ContentTemplate>
+
+                <table>
+                    <tr>
+
+                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
+                        <td class="EncabezadoCell" style="width: 400px; height: 18px;">
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" 
+                                Visible="true">
+                                <asp:ListItem Text="Hoy" />
+                                <asp:ListItem Text="Ayer" />
+                                <%--<asp:ListItem Text="Esta semana" />
                         <asp:ListItem Text="Semana pasada" />--%>
-                        <asp:ListItem Text="Este mes" Selected="True" />
-                        <asp:ListItem Text="Mes anterior" />
-                        <asp:ListItem Text="Cualquier fecha" />
-                        <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
-                        <asp:ListItem Text="Personalizar" />
-                    </asp:DropDownList>
-                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"
-                        TabIndex="2" AutoPostBack="false"></asp:TextBox>
-                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
-                        Enabled="True">
-                    </cc1:CalendarExtender>
-                    <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
-                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
-                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                        Enabled="True">
-                    </cc1:MaskedEditExtender>
-                    <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
-                        WatermarkText="desde" WatermarkCssClass="watermarked" />
-                    <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2"
-                        AutoPostBack="false"></asp:TextBox>
-                    <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
-                        Enabled="True">
-                    </cc1:CalendarExtender>
-                    <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
-                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
-                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                        Enabled="True">
-                    </cc1:MaskedEditExtender>
-                    <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
-                        WatermarkText="hasta" WatermarkCssClass="watermarked" />
-                </td>
+                                <asp:ListItem Text="Este mes" Selected="True" />
+                                <asp:ListItem Text="Mes anterior" />
+                                <asp:ListItem Text="Cualquier fecha" />
+                                <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
+                                <asp:ListItem Text="Personalizar" />
+                            </asp:DropDownList>
+                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"
+                                TabIndex="2" AutoPostBack="false"></asp:TextBox>
+                            <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
+                                Enabled="True">
+                            </cc1:CalendarExtender>
+                            <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
+                                Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
+                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                Enabled="True">
+                            </cc1:MaskedEditExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
+                                WatermarkText="desde" WatermarkCssClass="watermarked" />
+                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2"
+                                AutoPostBack="false"></asp:TextBox>
+                            <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
+                                Enabled="True">
+                            </cc1:CalendarExtender>
+                            <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
+                                Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
+                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                Enabled="True">
+                            </cc1:MaskedEditExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
+                                WatermarkText="hasta" WatermarkCssClass="watermarked" />
+                        </td>
 
-            </tr>
-            <tr>
-                <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
-                </td>
-                <td class="EncabezadoCell">
-                    <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" />
-                </td>
+                    </tr>
+                    <tr>
+                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
+                        </td>
+                        <td class="EncabezadoCell">
+                            <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" />
+                        </td>
 
-            </tr>
+                    </tr>
 
-            <tr>
-                <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
-                </td>
-                <td class="EncabezadoCell" style="width: 250px; height: 18px;">
-                    <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
-                        autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
-                    <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
-                        CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
-                        ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
-                        UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
-                        DelimiterCharacters="" Enabled="True">
-                    </cc1:AutoCompleteExtender>
-            </tr>
+                    <tr>
+                        <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
+                        </td>
+                        <td class="EncabezadoCell" style="width: 250px; height: 18px;">
+                            <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
+                                autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
+                            <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
+                                 OnClientItemSelected="RefrescaGrilla()"
+                                CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
+                                ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
+                                UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
+                                DelimiterCharacters="" Enabled="True">
+                            </cc1:AutoCompleteExtender>
+                    </tr>
 
-        </table>
+                </table>
+
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
         <br />
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
@@ -802,6 +812,37 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+
+
+            $('#ctl00_ContentPlaceHolder1_cmbPuntoVenta').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
+
+
+            $('#ctl00_ContentPlaceHolder1_txtDestino').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
+
+            
+            $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
+
+            
+            $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
+
+            $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
+            
+
+            function RefrescaGrilla() {
+                $('#Lista').trigger("reloadGrid");
+            }
+
+
             $().ready(function () {
                 'use strict';
 
@@ -814,6 +855,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     postData: {
                         'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
                         'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                        'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                        'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
                     },
                     datatype: 'json',
                     mtype: 'POST',
