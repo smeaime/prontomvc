@@ -279,6 +279,10 @@
       <FullPath>Listado general de Cartas de Porte (simulando original) Olavarria.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Mayor.rdl</Name>
       <FullPath>Mayor.rdl</FullPath>
     </ProjectItem>
@@ -455,8 +459,12 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl</FullPath>
+      <Name>Liquidación de Subcontratistas 2.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Liquidación de Subcontratistas 3.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
