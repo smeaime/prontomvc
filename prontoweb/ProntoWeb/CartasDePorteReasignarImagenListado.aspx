@@ -63,7 +63,7 @@
     <br />
     <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="22" BackColor="White" ForeColor="black" />
     <asp:Button ID="Button1" runat="server" Text="Subir como CP-TK" OnClick="Button1_Click" Font-Size="22" />
-    <asp:Button ID="Button6" runat="server" Text="Subir como CP-CP" OnClick="Button6_Click" Font-Size="22" />
+    <asp:Button ID="Button6" runat="server" Text="Subir sin orden" OnClick="Button6_Click" Font-Size="22" />
 
     <script>
         $(document).ready(
