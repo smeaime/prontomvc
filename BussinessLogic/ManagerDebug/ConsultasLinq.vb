@@ -537,11 +537,11 @@ Public Class ConsultasLinq
                     .DestinoDesc = dest.Descripcion, _
                     .Subcontr1Desc = clisub1.RazonSocial, _
                     .Subcontr2Desc = clisub2.RazonSocial, _
-                    .tarif1 = pd1.PrecioBuquesCalada, _
-                    .tarif2 = pd2.PrecioBuquesCalada, _
+                    .tarif1 = If(pd1 Is Nothing, 0, pd1.PrecioBuquesCalada), _
+                    .tarif2 = If(pd2 Is Nothing, 0, pd2.PrecioBuquesCalada), _
                     .Exporta = "SI", _
                     .Corredor = cdp.IdExportadorOrigen, _
-                    .IdClienteEntregador = cdp.IdExportadorOrigen})
+                    .IdClienteEntregador = cdp.IdExportadorOrigen}).ToList()
 
 
 
