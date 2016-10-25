@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="ListasPrecios, App_Web_lv5mhbqq" title="Listas de precios" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="ListasPrecios, App_Web_pt31r3lz" title="Listas de precios" theme="Azul" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
@@ -380,6 +380,19 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
+            
+
+                    <asp:TemplateField HeaderText="Calada Buques">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrecioCaladaBuques" Width="40px" runat="server" Text='<%# Bind("PrecioBuquesCalada", "{0:F3}")%>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewPrecioCaladaBuques" Width="40px" runat="server"></asp:TextBox>
+                        </FooterTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrecioCaladaBuques" Width="40px" runat="server" Text='<%# Bind("PrecioBuquesCalada", "{0:F3}")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
 
                     <asp:TemplateField HeaderText="Calada Local">
@@ -393,6 +406,7 @@
                             <asp:Label ID="lblPrecioCaladaLocal" Width="40px" runat="server" Text='<%# Bind("PrecioCaladaLocal","{0:F3}") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
                     <asp:TemplateField HeaderText="Calada Exp">
                         <EditItemTemplate>
                             <asp:TextBox ID="txtPrecioCaladaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioCaladaExportacion","{0:F3}") %>'></asp:TextBox>

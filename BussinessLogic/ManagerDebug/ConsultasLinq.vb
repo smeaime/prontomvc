@@ -288,7 +288,7 @@ Public Class ConsultasLinq
         Public Subcontr1 As Integer?
         Public Subcontr2 As Integer?
         Public ExcluirDeSubcontratistas As String
-        Public SubnumeroDeFacturacion
+        Public SubnumeroDeFacturacion As Integer?
         Public VendedorDesc As String
         Public CuentaOrden1Desc As String
         Public CuentaOrden2Desc As String
@@ -300,7 +300,7 @@ Public Class ConsultasLinq
         Public Subcontr2Desc As String
         Public Exporta As String
         Public Corredor As Integer?
-        Public IdClienteEntregador
+        Public IdClienteEntregador As Integer
         Public tarif1 As Decimal?
         Public tarif2 As Decimal?
     End Class
@@ -412,7 +412,7 @@ Public Class ConsultasLinq
 
 
 
-        Dim qq = From cdp In aaa _
+        Dim qq = (From cdp In aaa _
                 From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
                 From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty _
                 From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty _
@@ -430,7 +430,7 @@ Public Class ConsultasLinq
                       And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
                       And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
                       And If(cdp.SubnumeroDeFacturacion, 0) <= 0
-                Select New asas With { _
+                Select New asas() With { _
                     .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
                     .IdCartaDePorte = cdp.IdCartaDePorte, _
                     .FechaDescarga = cdp.FechaDescarga, _
@@ -469,8 +469,8 @@ Public Class ConsultasLinq
                                 ), 0)), _
                     .Exporta = cdp.Exporta, _
                    .Corredor = cdp.Corredor, _
-                    .IdClienteEntregador = cdp.IdClienteEntregador}
-        'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciosDetalle2 = pd2.IdListaPreciosDetalle
+                    .IdClienteEntregador = cdp.IdClienteEntregador}).ToList
+        'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciossDetalle2 = pd2.IdListaPreciosDetalle
 
 
 
@@ -541,11 +541,11 @@ Public Class ConsultasLinq
                     .tarif2 = If(pd2 Is Nothing, 0, pd2.PrecioBuquesCalada), _
                     .Exporta = "SI", _
                     .Corredor = cdp.IdExportadorOrigen, _
-                    .IdClienteEntregador = cdp.IdExportadorOrigen}).ToList()
+                    .IdClienteEntregador = cdp.IdExportadorOrigen}).ToList
 
 
-
-            qq = qq.Union(ooo).ToList()
+            'qq = ooo
+            qq = qq.Union(ooo).ToList
 
         End If
 
@@ -555,7 +555,7 @@ Public Class ConsultasLinq
 
 
 
-        Dim q = From i In aa _
+        Dim q = From i In qq _
                 Group By _
                     i.IdCartaDePorte, _
                     i.NumeroCartaDePorte, _
@@ -611,11 +611,17 @@ Public Class ConsultasLinq
 
 
         If Debugger.IsAttached Or True Then
-            q.ToList()
+            Try
 
-            Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select SqlFunctions.StringConvert(x.NumeroCartaDePorte) & " " & SqlFunctions.StringConvert(x.IdCartaDePorte) & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
+                q.ToList()
 
-            ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
+                Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select SqlFunctions.StringConvert(x.NumeroCartaDePorte) & " " & SqlFunctions.StringConvert(x.IdCartaDePorte) & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
+
+                ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
         End If
 
 
@@ -638,8 +644,8 @@ Public Class ConsultasLinq
                                    , " - Export.", " - Entrega"), _
                         .SubcontrDesc = cdp.Subcontr1Desc, _
                         .NetoPto = cdp.NetoFinal, _
-                        .Tarifa = cdp.tarif1, _
-                        .Comision = cdp.NetoFinal * cdp.tarif1 / 1000, _
+                        .Tarifa = If(cdp.tarif1, 0), _
+                        .Comision = cdp.NetoFinal * If(cdp.tarif1, 0) / 1000, _
                         .numerocarta = cdp.NumeroCartaDePorte _
                 }).ToList
 
@@ -653,8 +659,8 @@ Public Class ConsultasLinq
                                     , " - Export.", " - Entrega"), _
                         .SubcontrDesc = cdp.Subcontr2Desc, _
                         .NetoPto = cdp.NetoFinal, _
-                        .Tarifa = cdp.tarif2, _
-                        .Comision = cdp.NetoFinal * cdp.tarif2 / 1000, _
+                        .Tarifa = If(cdp.tarif2, 0), _
+                        .Comision = cdp.NetoFinal * If(cdp.tarif2, 0) / 1000, _
                         .numerocarta = cdp.NumeroCartaDePorte _
                 }).ToList
 

@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CDPMailing, App_Web_vlpjqanu" title="Envío de correos" enableeventvalidation="false" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CDPMailing, App_Web_2raejehb" title="Envío de correos" enableeventvalidation="false" theme="Azul" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
@@ -976,7 +976,7 @@ llama explicitamente al show y update (acordate que este panel es condicional)
                                                     <asp:ListItem Value="Imagen" Text="Excel con imágenes " />
                                                     <asp:ListItem Value="ExcRec" Text="Excel con n°recibo" />
                                                     <asp:ListItem Value="Grobo" Text="Excel Grobo" />
-                                                    <asp:ListItem Value="ExcHtm" Text="Excel y Html" Enabled="false" />
+                                                    <asp:ListItem Value="ExcHtm" Text="Excel y Html" Enabled="true" />
                                                     <asp:ListItem Value="Html" Text="Html"  Enabled="false"  />
                                                     <asp:ListItem Value="HtmlIm" Text="Html con imágenes "  Enabled="false"  />
                                                     <asp:ListItem Value="HImag2" Text="Html con imágenes 2 " />

@@ -136,6 +136,32 @@ Public Class WebServiceCartas
             ErrHandler2.WriteError(ex)
         End Try
 
+    End Function
+
+
+
+
+    <WebMethod(Description:="Devuelve un archivo con la imagen de la carta porte", EnableSession:=False)> _
+    Public Function BajarListadoDeCartaPorte(usuario As String, password As String, fechadesde As DateTime, fechahasta As DateTime) As Byte()
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_DLL(usuario, password, fechadesde, fechahasta, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
 
     End Function
 

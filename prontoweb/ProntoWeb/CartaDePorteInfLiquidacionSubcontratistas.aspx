@@ -167,6 +167,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                             <asp:ListItem Selected="True">Entregas</asp:ListItem>
                                             <asp:ListItem>Export</asp:ListItem>
                                             <asp:ListItem>Ambos</asp:ListItem>
+                                            <asp:ListItem>Buques</asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
