@@ -260,6 +260,96 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+        [TestMethod]
+        public void liquidacionsubcon_22294_23568()
+        {
+
+
+            // En la liquidación de subcontratistas agregar el modo BUQUES
+            //  * En las listas de precios, agregar las tarifas de CALADA y BALANZA para buques
+
+            var c = CartaDePorteManager.GetItem(SC, 1372987);
+            c.SubnumeroVagon = 222;
+            string ms = "";
+            CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
+
+            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Buques",
+                        new DateTime(2016, 9, 1),
+                        new DateTime(2016, 9, 30),
+                        -1, -1, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void webServiceParaDescargarPlanilla_22085()
+        {
+            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
+
+
+            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
+
+            //string archivodestino = "c:\\Source.jpg";
+            string archivodestino = "c:\\Source.pdf";
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            byte[] b1 = null;
+            
+            b1 = CartaDePorteManager.BajarListadoDeCartaPorte_DLL("Mariano", "pirulo!",  new DateTime(10,10,2015 ) , new DateTime(10,10,2015) , SC, DirApp, bdlmasterappconfig);
+            //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
+
+            fs1 = new FileStream(archivodestino, FileMode.Create);
+            fs1.Write(b1, 0, b1.Length);
+            fs1.Close();
+            fs1 = null;
+
+            //cómo sé en qué formato está?
+
+            System.Diagnostics.Process.Start(archivodestino);
+        }
+
+
+
+
+
         [TestMethod]
         public void formato_mail_html_24908_3()
         {
@@ -642,60 +732,6 @@ namespace ProntoMVC.Tests
         }
 
 
-
-
-        
-        [TestMethod]
-        public void liquidacionsubcon_22294_23568()
-        {
-
-
-             // En la liquidación de subcontratistas agregar el modo BUQUES
-            //  * En las listas de precios, agregar las tarifas de CALADA y BALANZA para buques
-
-            var c = CartaDePorteManager.GetItem(SC, 1372987);
-            c.SubnumeroVagon = 222;
-            string ms = "";
-            CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
-
-            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
-
-            
-            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-
-            ReportParameter p2 = null;
-            string sTitulo = "";
-
-            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
-                       "", "", "", 1, 2000,
-                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                       -1, -1,
-                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Buques",
-                        new DateTime(2016, 9, 1),
-                        new DateTime(2016, 9, 30),
-                        -1, -1, ref sTitulo);
-
-
-
-            string titulo = EntidadManager.NombreCliente(SC, 105);
-
-
-            ReportParameter[] p = new ReportParameter[5];
-            p[0] = new ReportParameter("Concepto1", "");
-            p[1] = new ReportParameter("titulo", "");
-            p[2] = new ReportParameter("Concepto2", "");
-            p[3] = new ReportParameter("Concepto1Importe", "-1");
-            p[4] = new ReportParameter("Concepto2Importe", "-1");
-
-
-            string output = "";
-
-            CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
-
-            System.Diagnostics.Process.Start(output);
-
-        }
 
 
 

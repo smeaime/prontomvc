@@ -14526,7 +14526,144 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function BajarListadoDeCartaPorte_DLL(usuario As String, password As String, fechadesde As DateTime, fechahasta As DateTime, SC As String, DirApp As String, ConexBDLmaster As String) As Byte()
 
+        'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+        '      DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+        'Dim IdCartaDePorte = EntidadManager.decryptQueryString(identificador)
+
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+
+        Try
+
+            'validar pass
+
+            If Not Debugger.IsAttached Then
+                If Not Membership.ValidateUser(usuario, password) Then
+                    ErrHandler2.WriteError("No logra autenticarse")
+                    Return Nothing
+                End If
+            End If
+
+
+
+
+            'verificar q la carta tenga como cliente ese usuario
+            'pero como se qué empresa tiene vinculada ese usuario?
+
+            'agregar al where que aparezca la razon social de este cliente
+            Dim rs As String
+            Try
+                Dim idusuario As String
+                '
+                If Debugger.IsAttached Then
+                    idusuario = "920688e1-7e8f-4da7-a793-9d0dac7968e6"
+                Else
+                    idusuario = Membership.GetUser(usuario).ProviderUserKey.ToString
+                End If
+
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(idusuario, ConexBDLmaster, SC)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+                Return Nothing
+            End Try
+
+
+            Dim idcliente As Integer = BuscaIdClientePreciso(rs, SC)
+            If idcliente <= 0 Then
+                ErrHandler2.WriteError("No se encontró usuario equivalente")
+                Return Nothing
+            End If
+
+            Const limitedecartas = 2222
+
+       
+         
+
+
+
+            Dim dt As DataTable
+
+
+            ' If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente And _
+            'IdClienteEquivalenteDelIdVendedor(cdp.Corredor2, SC) <> idcliente Then
+            '     ErrHandler2.WriteError("La carta no corresponde al usuario")
+            '     Return Nothing
+            ' End If
+
+            ' dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
+            '               "", "", "", 1, 0, _
+            '               estadofiltro, "", idVendedor, idCorredor, _
+            '               idDestinatario, idIntermediario, _
+            '               idRComercial, idArticulo, idProcedencia, idDestino, _
+            '                                                 IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
+            '                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+            '               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+            '                cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, True, txtContrato.Text, , idClienteAuxiliar, , , , )
+
+
+
+
+            Dim FName As String
+
+            'PDF
+            Dim dataSet = New DataSet()
+            dataSet.Tables.Add(dt)
+
+            dataSet.WriteXml("C:\MyDataset.xml")
+
+
+
+
+
+
+
+            Dim fs1 As System.IO.FileStream = Nothing
+            fs1 = System.IO.File.Open("C:\MyDataset.xml", FileMode.Open, FileAccess.Read)
+            Dim b1(fs1.Length) As Byte
+            fs1.Read(b1, 0, fs1.Length)
+            fs1.Close()
+            Return b1
+
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return Nothing
+        End Try
+
+        'usaria la descarga que usa bld en el informe?
+
+        'usando response para que baje el archivo
+
+
+        'Response.Clear()
+        'Response.ClearHeaders()
+        'Response.ContentType = "text/html; charset=UTF-8"
+        'Response.AddHeader("Content-Disposition", "attachment; filename=\"" & filePath & " \ "")
+        'Response.AddHeader("Content-Length", b1.Length)
+        'Response.OutputStream.Write(b1, 0, b1.Length)
+        'Response.Flush()
+        'Response.End()
+
+        'pdfreducido()
+        'oenjpg()
+
+
+        'If Not b Then
+        '    output = CartaDePorteManager.DescargarImagenesAdjuntas(dt, HFSC.Value, True)
+        'Else
+        '    output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False)
+        'End If
+
+
+    End Function
     Public Shared Function BajarImagenDeCartaPorte_DLL(usuario As String, password As String, numerocarta As Long, SC As String, DirApp As String, ConexBDLmaster As String) As Byte()
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));

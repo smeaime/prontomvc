@@ -46,6 +46,29 @@ create procedure  wCartasPorte_LiquidacionSubcontratistas
 
 
 
+
+
+
+
+		SELECT
+			CONS2.agrupvagon
+			--,
+			--case 
+			--	when Subcontr1 = @idSubcontr then
+			--		 cdp.DestinoDesc & " Calada" & If((cdp.Exporta = "SI"), " - Export.", " - Entrega"), 
+			--	when Subcontr2	= @idSubcontr 	then
+   --                  cdp.DestinoDesc & " Balanza" & If(                                       (cdp.Exporta = "SI")                                     , " - Export.", " - Entrega"), 			            cdp.Subcontr1Desc, 
+			--end,
+
+   --         cdp.NetoFinal, 
+   --         cdp.tarif1, 
+   --         cdp.NetoFinal case 
+			--	when Subcontr1 = @idSubcontr then* cdp.tarif1 / 1000, 
+   --         cdp.NumeroCartaDePorte 
+ 
+		from
+		(
+
 		SELECT  
 		     CONS.IdCartaDePorte, 
 			        NumeroCartaDePorte, 
@@ -210,7 +233,7 @@ create procedure  wCartasPorte_LiquidacionSubcontratistas
                       And (ISNULL(@puntoventa,-1) = -1 Or cdp.PuntoVenta = @puntoventa) 
                       And ISNULL(cdp.SubnumeroDeFacturacion, 0) <= 0
 
-		) as CONS
+			) as CONS
 
 
                 Group By 
@@ -236,8 +259,12 @@ create procedure  wCartasPorte_LiquidacionSubcontratistas
                     Corredor, 
                     IdClienteEntregador
                
+		) as CONS2
 			   
-			   
+
+
+
+
 
 		/*
 
