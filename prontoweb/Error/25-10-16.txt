@@ -1,0 +1,302 @@
+
+Log Entry : 
+10/25/2016 14:38:48
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+10/25/2016 14:45:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+10/25/2016 14:46:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.ArgumentException
+A valid ResultType could not be inferred from the ResultTypes of the specified 'Then' expressions.
+   at System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder.Internal.ArgumentValidation.ValidateCase(IEnumerable`1 whenExpressions, IEnumerable`1 thenExpressions, DbExpression elseExpression, DbExpressionList& validWhens, DbExpressionList& validThens)
+   at System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder.DbExpressionBuilder.Case(IEnumerable`1 whenExpressions, IEnumerable`1 thenExpressions, DbExpression elseExpression)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.CoalesceTranslator.TranslateBinary(ExpressionConverter parent, DbExpression left, DbExpression right, BinaryExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.BinaryTranslator.TypedTranslate(ExpressionConverter parent, BinaryExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.StringTranslatorUtil.ConvertToString(ExpressionConverter parent, Expression linqExpression)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.StringTranslatorUtil.<>c__DisplayClass1c.<ConcatArgs>b__1a(Expression arg)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.StringTranslatorUtil.ConcatArgs(ExpressionConverter parent, Expression linq, Expression[] linqArgs)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.StringConcatTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SelectTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, SequenceMethod sequenceMethod)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.Convert()
+   at System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 620
+EntityFramework
+__________________________
+
+Log Entry : 
+10/25/2016 14:46:16
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+10/25/2016 14:47:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+10/25/2016 14:50:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 616
+EntityFramework
+__________________________
+
+Log Entry : 
+10/25/2016 14:50:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Hubo un error al generar el informe. System.Data.Entity.Core.EntityCommandExecutionException: An error occurred while executing the command definition. See the inner exception for details. ---> System.InvalidOperationException: ExecuteReader requires an open and available Connection. The connection's current state is closed.
+   at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at Glimpse.Ado.AlternateType.GlimpseDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<Reader>b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 638
+   at CartaDePorteInfLiquidacionSubcontratistas.LiquidacionDeSubcontratistas() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInfLiquidacionSubcontratistas.aspx.vb:line 456
+   at CartaDePorteInfLiquidacionSubcontratistas.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInfLiquidacionSubcontratistas.aspx.vb:line 352
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:16
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   at ConsultasLinq._Lambda$__27(VB$AnonymousType_16`23 x) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 618
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 620
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:16
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:19
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:19
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   at ConsultasLinq._Lambda$__27(VB$AnonymousType_16`23 x) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 618
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 620
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:34
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:34
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:36
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:36
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:44
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/25/2016 15:21:44
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/25/2016 15:56:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+10/25/2016 15:56:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   at ConsultasLinq._Lambda$__27(VB$AnonymousType_16`23 x) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 618
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 620
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+10/25/2016 15:56:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+10/25/2016 15:56:53
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/25/2016 15:56:53
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/25/2016 15:56:53
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/25/2016 15:56:53
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=0febbba550fb44ccb876f849b1be8668&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________

@@ -539,6 +539,9 @@ Partial Class ListasPrecios
                 dr.Item("PrecioExportacion") = Val(TextoWebControl(.FindControl("txtNewPrecioExportacion")))
 
 
+                dr.Item("PrecioBuquesCalada") = Val(TextoWebControl(.FindControl("txtNewPrecioCaladaBuques")))
+
+
                 dr.Item("PrecioCaladaLocal") = Val(TextoWebControl(.FindControl("txtNewPrecioCaladaLocal")))
                 dr.Item("PrecioCaladaExportacion") = Val(TextoWebControl(.FindControl("txtNewPrecioCaladaExportacion")))
                 dr.Item("PrecioDescargaLocal") = Val(TextoWebControl(.FindControl("txtNewPrecioDescargaLocal")))
@@ -621,7 +624,10 @@ Partial Class ListasPrecios
                     Or iisNull(dr.Item("PrecioVagonesBalanza"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanza"))) _
                     Or iisNull(dr.Item("PrecioVagonesCalada"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesCaladaExportacion"))) _
                     Or iisNull(dr.Item("PrecioVagonesBalanza"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanzaExportacion"))) _
+                    Or iisNull(dr.Item("PrecioBuquesCalada"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioCaladaBuques"))) _
                     Then
+
+                    dr.Item("PrecioBuquesCalada") = Val(TextoWebControl(.FindControl("txtPrecioCaladaBuques")))
 
                     dr.Item("PrecioCaladaLocal") = Val(TextoWebControl(.FindControl("txtPrecioCaladaLocal")))
                     dr.Item("PrecioCaladaExportacion") = Val(TextoWebControl(.FindControl("txtPrecioCaladaExportacion")))

@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Admin_AsignarEmpresa, App_Web_hoykjidt" title="Pronto Web" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Admin_AsignarEmpresa, App_Web_3cpd2af5" title="Pronto Web" theme="Azul" %>
 
 <%@ PreviousPageType VirtualPath="~/Admin/ListadoUsuarios.aspx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
