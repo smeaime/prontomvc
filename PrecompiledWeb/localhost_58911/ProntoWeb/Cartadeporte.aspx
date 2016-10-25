@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CartadeporteABM, App_Web_ifedldyw" title="Untitled Page" enableeventvalidation="false" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CartadeporteABM, App_Web_xfaclkjq" title="Untitled Page" enableeventvalidation="false" theme="Azul" %>
 
 <%--lo del enableeventvalidation lo puse porque tenia un problema con este abm. no copiarlo a los demas abms--%>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>

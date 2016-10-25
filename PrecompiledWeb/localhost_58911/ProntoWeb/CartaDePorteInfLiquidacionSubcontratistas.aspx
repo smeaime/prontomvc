@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CartaDePorteInfLiquidacionSubcontratistas, App_Web_lv5mhbqq" title="Liquidación de Subcontratistas" validaterequest="false" enableeventvalidation="false" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CartaDePorteInfLiquidacionSubcontratistas, App_Web_pt31r3lz" title="Liquidación de Subcontratistas" validaterequest="false" enableeventvalidation="false" theme="Azul" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
@@ -165,6 +165,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
                                             <asp:ListItem Selected="True">Entregas</asp:ListItem>
                                             <asp:ListItem>Export</asp:ListItem>
                                             <asp:ListItem>Ambos</asp:ListItem>
+                                            <asp:ListItem>Buques</asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
