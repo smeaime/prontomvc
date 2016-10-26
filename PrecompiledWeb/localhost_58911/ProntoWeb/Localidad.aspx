@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" autoeventwireup="false" inherits="ProntoWeb_Localidad, App_Web_wg3i33aw" theme="Azul" %>
+﻿<%@ page language="VB" autoeventwireup="false" inherits="ProntoWeb_Localidad, App_Web_auymxxcj" theme="Azul" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

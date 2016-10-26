@@ -2,7 +2,7 @@
     CodeFile="Oops.aspx.vb" Inherits="ProntoWeb_Principal" Title="Pronto Web"
     EnableViewState="False" %>--%>
 
-<%@ page language="VB" autoeventwireup="false" inherits="ProntoWeb_Principal, App_Web_mjz23gac" title="Pronto Web" enableviewstate="False" theme="Azul" %>
+<%@ page language="VB" autoeventwireup="false" inherits="ProntoWeb_Principal, App_Web_u5zusovb" title="Pronto Web" enableviewstate="False" theme="Azul" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

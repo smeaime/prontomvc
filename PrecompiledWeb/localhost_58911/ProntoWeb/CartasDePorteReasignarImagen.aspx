@@ -1,4 +1,4 @@
-<%@ page language="VB" autoeventwireup="false" inherits="CartasDePorteReasignarImagen, App_Web_inm4yq2m" title="Asignar imagen" theme="Azul" %>
+<%@ page language="VB" autoeventwireup="false" inherits="CartasDePorteReasignarImagen, App_Web_clj4gonl" title="Asignar imagen" theme="Azul" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, 
