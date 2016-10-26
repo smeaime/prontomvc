@@ -348,6 +348,13 @@ namespace ProntoMVC.Tests
             cliente.IBCondicion = 2; //usar 2 o 3    "Exento"  "Inscripto Convenio Multilateral "    "Inscripto Jurisdicción Local "  "No Alcanzado"
             cliente.IdIBCondicionPorDefecto = 5;  //en williams,  6 es  "Santa Fe Convenio Multilateral 0.7%" <-- las condiciones estan relacionadas a una provincia
 
+            //ibcondicion
+            //en la tabla IBCondiciones, q diferencia hay entre Alicuota, AlicuotaPercepcion y AlicuotaPercepcionConvenio?
+            // -la primera es de retencion.
+            var ibcondicion = db.IBCondiciones.Find(5);
+            ibcondicion.AlicuotaPercepcion = 7;
+            ibcondicion.AlicuotaPercepcionConvenio = 8;
+
 
 
             db.SaveChanges();
