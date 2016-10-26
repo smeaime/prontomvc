@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" autoeventwireup="false" inherits="CDPStockMovimientos, App_Web_ujcp202p" title="Seguimiento de bugs y desarrollo" theme="Azul" %>
+﻿<%@ page language="VB" autoeventwireup="false" inherits="CDPStockMovimientos, App_Web_j25jc2th" title="Seguimiento de bugs y desarrollo" theme="Azul" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="System.Web.Entity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
