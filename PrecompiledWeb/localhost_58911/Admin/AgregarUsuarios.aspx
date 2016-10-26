@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Admin_Usuarios, App_Web_imhzrebr" title="Pronto Web" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Admin_Usuarios, App_Web_ea4s2r0n" title="Pronto Web" theme="Azul" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div align="center">

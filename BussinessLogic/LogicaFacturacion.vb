@@ -6230,8 +6230,7 @@ Public Class LogicaFacturacion
 
                 End With
                 idFacturaCreada = oFac.Registro.Fields(0).Value
-                oFac = Nothing
-
+            
 
                 '///////////////////////////////////////////////////////////////////////
                 '///////////////////////////////////////////////////////////////////////
@@ -6246,7 +6245,7 @@ Public Class LogicaFacturacion
                 Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-                If oFac.Fields("RetencionIBrutos1").Value > 0 Then
+                If oFac.Registro.Fields("RetencionIBrutos1").Value > 0 Then
 
                     Dim cli = db.Clientes.Find(IdClienteAFacturarle)
                     Dim ibcond = db.IBCondiciones.Find(cli.IdIBCondicionPorDefecto)
@@ -6284,6 +6283,7 @@ Public Class LogicaFacturacion
                 '///////////////////////////////////////////////////////////////////////
                 '///////////////////////////////////////////////////////////////////////
 
+                oFac = Nothing
 
 
 
@@ -7110,7 +7110,10 @@ Public Class LogicaFacturacion
                 Dim dt = ExecDinamico(sc, "SELECT ProximoNumeroCertificadoPercepcionIIBB from provincias where IdProvincia=" & mIdProvinciaIIBB)
                 Dim numcertif As Long
                 If dt.Rows.Count > 0 Then numcertif = iisNull(dt.Rows(0).Item(0), 1)
-                ExecDinamico(sc, "UPDATE  provincias set ProximoNumeroCertificadoPercepcionIIBB= " & numcertif + 1 & " where IdProvincia=" & mIdProvinciaIIBB)
+
+                If False Then 'ahora esto lo hago despues de que se creó la factura, en CreaFacturaCOMpronto
+                    ExecDinamico(sc, "UPDATE  provincias set ProximoNumeroCertificadoPercepcionIIBB= " & numcertif + 1 & " where IdProvincia=" & mIdProvinciaIIBB)
+                End If
 
                 .Fields("NumeroCertificadoPercepcionIIBB").Value = numcertif
             Catch ex As Exception
