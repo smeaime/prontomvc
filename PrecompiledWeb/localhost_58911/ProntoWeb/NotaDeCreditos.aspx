@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="NotasDeCredito, App_Web_ybmx5aia" title="Notas de Credito" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="NotasDeCredito, App_Web_110g2pon" title="Notas de Credito" theme="Azul" %>
 
 <%--<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" 
 tagprefix="rsweb" %>--%>

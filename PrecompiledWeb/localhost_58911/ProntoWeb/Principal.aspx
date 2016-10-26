@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="ProntoWeb_Principal, App_Web_x0qhyvv1" title="Pronto Web" enableviewstate="False" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="ProntoWeb_Principal, App_Web_ujcp202p" title="Pronto Web" enableviewstate="False" theme="Azul" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
