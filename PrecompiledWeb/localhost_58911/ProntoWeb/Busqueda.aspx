@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Buscador, App_Web_clj4gonl" title="Buscador" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Buscador, App_Web_jgdhli0d" title="Buscador" theme="Azul" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="UpdatePanel2" runat="server">

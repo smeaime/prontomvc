@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CartasDePortes, App_Web_110g2pon" title="Cartas de Porte" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="CartasDePortes, App_Web_lblyf4m2" title="Cartas de Porte" theme="Azul" %>
 
 <%--<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, 
 Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms"
