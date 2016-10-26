@@ -1,5 +1,9 @@
-﻿select * from valessalida
-select * from detallevalessalida
-select * from salidasmateriales
+﻿select * from parametros2 where valor like '%esag%'
 
-ValesSalida_TX_PendientesDetallado
+select * from puntosventa
+
+select AlicuotaPercepcionConvenio,AlicuotaPercepcion,* from ibcondiciones
+
+select top 10 ibcondicion, CategoriaIIBB,* from clientes
+
+select * from provincias
