@@ -877,6 +877,55 @@ Public Class CartaDePorteManager
     End Function
 
 
+
+
+    Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000000") Then
+            Dim id = (From c In db.Vendedores Where c.Nombre = "DIRECTO" Select c.IdVendedor).FirstOrDefault()
+            Return id
+        End If
+
+
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+        If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
+
+
+        Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+
+
+
+
+        If q Is Nothing Then
+            If RazonSocial.Trim.Length > 4 Then
+                q = New ProntoMVC.Data.Models.Vendedor
+                q.Nombre = RazonSocial
+                q.Cuit = cuit
+                'acá había un insertonsubmit
+                db.Vendedores.Add(q)
+                db.SaveChanges()
+                Return q.IdVendedor
+            Else
+                Return 0
+            End If
+
+        Else
+            CrearEquivalencia(RazonSocial, q.Nombre, SC)
+
+            Return q.IdVendedor
+        End If
+
+        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
+
+
+
+
+
+    End Function
+
     Public Shared Function VerfCuit(ByVal e As String) As Boolean
 
         e = e.Replace("-", "").Replace(" ", "")
@@ -936,53 +985,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
-
-
-        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
-
-
-        If (RazonSocial.ToUpper.Trim = "DIRECTO" Or cuit.Trim.Replace("-", "") = "00000000000") Then
-            Dim id = (From c In db.Vendedores Where c.Nombre = "DIRECTO" Select c.IdVendedor).FirstOrDefault()
-            Return id
-        End If
-
-
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
-
-
-
-        Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
-
-
-
-
-        If q Is Nothing Then
-            If RazonSocial.Trim.Length > 4 Then
-                q = New ProntoMVC.Data.Models.Vendedor
-                q.Nombre = RazonSocial
-                q.Cuit = cuit
-                'acá había un insertonsubmit
-                db.Vendedores.Add(q)
-                db.SaveChanges()
-                Return q.IdVendedor
-            Else
-                Return 0
-            End If
-
-        Else
-            CrearEquivalencia(RazonSocial, q.Nombre, SC)
-
-            Return q.IdVendedor
-        End If
-
-        'DarDeAltaClienteProvisorio(cuit, SC, RazonSocial)
-
-
-
-
-
-    End Function
+    
 
     Public Shared Function DarDeAltaClienteProvisorio(cuit As String, SC As String, RazonSocial As String) As Integer
         'Dim oDet As ProntoMVC.Data.Models.Cliente = (From i In db.CartasDePorteDetalles _
