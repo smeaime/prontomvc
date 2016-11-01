@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="true" inherits="ProntoMVC.Reportes.Reporte, App_Web_tpltxehw" title="Informe" enableeventvalidation="false" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="true" inherits="ProntoMVC.Reportes.Reporte, App_Web_zggrbt5m" title="Informe" enableeventvalidation="false" theme="Azul" %>
 
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
