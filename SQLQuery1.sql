@@ -2,8 +2,10 @@
 
 select * from puntosventa
 
-select AlicuotaPercepcionConvenio,AlicuotaPercepcion,* from ibcondiciones
+select ImporteTopeMinimoPercepcion,AlicuotaPercepcionConvenio,AlicuotaPercepcion,* from ibcondiciones
 
-select top 10 ibcondicion, CategoriaIIBB,* from clientes
+select top 10 ibcondicion, * from clientes where idcliente=30446
 
 select * from provincias
+
+IBCondiciones_TX_PorId 5

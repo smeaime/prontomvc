@@ -4650,7 +4650,7 @@ Public Class LogicaFacturacion
 
 
                 Catch ex As Exception
-                 
+
                     'si esto falla, anular la ultima factura y cortar el proceso
                     'anular factura idfactura
                     MandarMailDeError(ex)
@@ -6230,7 +6230,7 @@ Public Class LogicaFacturacion
 
                 End With
                 idFacturaCreada = oFac.Registro.Fields(0).Value
-            
+
 
                 '///////////////////////////////////////////////////////////////////////
                 '///////////////////////////////////////////////////////////////////////
@@ -6942,7 +6942,7 @@ Public Class LogicaFacturacion
 
 
         mvarIBCondicion = cli.IBCondicion
-        
+
 
 
         '        If dcfields(4).Enabled And Check1(0).Value = 1 And IsNumeric(dcfields(4).BoundText) Then
@@ -6967,9 +6967,16 @@ Public Class LogicaFacturacion
                 If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
                 oRs1.Close()
                 If mCodigoProvincia = "902" And fechafactura >= mFechaInicioVigenciaIBDirecto And fechafactura <= mFechaFinVigenciaIBDirecto Then
-                    mvarPorcentajeIBrutos = mAlicuotaDirecta
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos = mAlicuotaDirecta
+                    End If
+
                 ElseIf mCodigoProvincia = "901" And fechafactura >= mFechaInicioVigenciaIBDirectoCapital And fechafactura <= mFechaFinVigenciaIBDirectoCapital Then
-                    mvarPorcentajeIBrutos = mAlicuotaDirectaCapital
+                    If mvarNetoGravado > mTopeIIBB Then
+
+
+                        mvarPorcentajeIBrutos = mAlicuotaDirectaCapital
+                    End If
                 Else
                     If mvarNetoGravado > mTopeIIBB And fechafactura >= mFecha1 Then
                         If mvarIBCondicion = 2 Then
@@ -7006,9 +7013,15 @@ Public Class LogicaFacturacion
                 If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
                 oRs1.Close()
                 If mCodigoProvincia = "902" And fechafactura >= mFechaInicioVigenciaIBDirecto And fechafactura <= mFechaFinVigenciaIBDirecto Then
-                    mvarPorcentajeIBrutos2 = mAlicuotaDirecta
+                    If mvarNetoGravado > mTopeIIBB Then
+
+                        mvarPorcentajeIBrutos2 = mAlicuotaDirecta
+                    End If
+
                 ElseIf mCodigoProvincia = "901" And fechafactura >= mFechaInicioVigenciaIBDirectoCapital And fechafactura <= mFechaFinVigenciaIBDirectoCapital Then
-                    mvarPorcentajeIBrutos2 = mAlicuotaDirectaCapital
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos2 = mAlicuotaDirectaCapital
+                    End If
                 Else
                     If mvarNetoGravado > mTopeIIBB And fechafactura >= mFecha1 Then
                         If mvarIBCondicion = 2 Then
@@ -7048,9 +7061,13 @@ Public Class LogicaFacturacion
                 If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
                 oRs1.Close()
                 If mCodigoProvincia = "902" And fechafactura >= mFechaInicioVigenciaIBDirecto And fechafactura <= mFechaFinVigenciaIBDirecto Then
-                    mvarPorcentajeIBrutos3 = mAlicuotaDirecta
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos3 = mAlicuotaDirecta
+                    End If
                 ElseIf mCodigoProvincia = "901" And fechafactura >= mFechaInicioVigenciaIBDirectoCapital And fechafactura <= mFechaFinVigenciaIBDirectoCapital Then
-                    mvarPorcentajeIBrutos3 = mAlicuotaDirectaCapital
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos3 = mAlicuotaDirectaCapital
+                    End If
                 Else
                     If mvarNetoGravado > mTopeIIBB And fechafactura >= mFecha1 Then
                         If mvarIBCondicion = 2 Then
