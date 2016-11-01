@@ -6916,6 +6916,14 @@ Public Class LogicaFacturacion
         Dim clicatiibb As Integer = cli.IBCondicion '.IdIBCondicionPorDefecto
         Dim facturaTieneCheckCategoria1 = True
 
+        mAlicuotaDirecta = cli.PorcentajeIBDirecto
+        mFechaInicioVigenciaIBDirecto = cli.FechaInicioVigenciaIBDirecto
+        mFechaFinVigenciaIBDirecto = cli.FechaFinVigenciaIBDirecto
+        mAlicuotaDirectaCapital = cli.PorcentajeIBDirectoCapital
+        mFechaInicioVigenciaIBDirectoCapital = cli.FechaInicioVigenciaIBDirectoCapital
+        mFechaFinVigenciaIBDirectoCapital = cli.FechaFinVigenciaIBDirectoCapital
+
+
 
 
         'los montos que importan son los campos "RetencionIBrutos1" / "2" / "3" 
