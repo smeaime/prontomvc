@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" enableeventvalidation="false" inherits="FacturaABM, App_Web_ds5gje5q" title="Untitled Page" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" enableeventvalidation="false" inherits="FacturaABM, App_Web_tsoyddnw" title="Untitled Page" theme="Azul" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, 

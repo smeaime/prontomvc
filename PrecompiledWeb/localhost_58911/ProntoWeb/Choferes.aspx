@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Choferes, App_Web_jwihcld1" title="Choferes" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Choferes, App_Web_tsoyddnw" title="Choferes" theme="Azul" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"

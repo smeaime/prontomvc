@@ -262,6 +262,196 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void ingresosbrutos_facturacion_26131_3_topeminimo()
+        {
+
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+
+            int optFacturarA = 4;
+            string agruparArticulosPor = "Destino";
+
+
+            string txtCorredor = "";
+            long idClienteAfacturarle = 30446; // la celestina s.a.
+            int idClienteObservaciones = -1;
+            bool SeEstaSeparandoPorCorredor = true;
+            int PuntoVenta = 1;
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            // empresa (para que sea agente de percepcion)
+            db.Parametros.First().PercepcionIIBB = "SI";
+
+            // punto de venta para que perciba ingresos brutos
+            //Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
+            //Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC, _
+            //                                "PuntosVenta", _
+            //                                "PuntoVenta=" & numeropuntoVenta & " AND Letra='" & _
+            //                                mLetra & "' AND IdTipoComprobante=" & EntidadManager.IdTipoComprobante.Factura)
+            //Dim IdObra As Integer = PuntoVentaWilliams.ObraSegunSucursalWilliams(sucursalWilliams, SC)
+            var pv = db.PuntosVentas.Where(x => x.PuntoVenta == 10).FirstOrDefault();
+            pv.AgentePercepcionIIBB = "SI";
+
+
+            // cliente
+            var cliente = db.Clientes.Find(idClienteAfacturarle);
+            // no poner. la tabla IBCondiciones ya esta relacionada a un IdProvincia. //  cliente.IdProvincia = 3; //capital
+            cliente.IBCondicion = 2; //usar 2 o 3    "Exento"  "Inscripto Convenio Multilateral "    "Inscripto Jurisdicción Local "  "No Alcanzado"
+            cliente.IdIBCondicionPorDefecto = 5;  //en williams,  6 es  "Santa Fe Convenio Multilateral 0.7%" <-- las condiciones estan relacionadas a una provincia
+
+
+            //ibcondicion
+            //en la tabla IBCondiciones, q diferencia hay entre Alicuota, AlicuotaPercepcion y AlicuotaPercepcionConvenio?
+            // -la primera es de retencion.
+            var ibcondicion = db.IBCondiciones.Find(5);
+            ibcondicion.AlicuotaPercepcion = 7;
+            ibcondicion.AlicuotaPercepcionConvenio = 8;
+            ibcondicion.ImporteTopeMinimo=5000;
+
+
+            db.SaveChanges();
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+
+
+
+
+
+            for (int n = 1372900; n < 1372900; n++)
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.IdFacturaImputada = 0;
+                db.SaveChanges();
+
+                var c = CartaDePorteManager.GetItem(SC, n);
+                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
+
+                lote.Add(c);
+            }
+
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+
+            int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
+                                                 dtRenglonesAgregados, SC, null, optFacturarA,
+                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
+                                                txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
+
+            var f = db.Facturas.Find(idFactura);
+
+            Assert.AreEqual(true, f.ImporteTotal<100);
+            Assert.AreEqual(0, f.RetencionIBrutos1);
+
+
+
+        }
+
+
+
+        [TestMethod]
+        public void ingresosbrutos_facturacion_26131_2_facturo_sin_cambiar_la_configuracion_del_cliente()
+        {
+
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+
+            int optFacturarA = 4;
+            string agruparArticulosPor = "Destino";
+
+
+            string txtCorredor = "";
+            long idClienteAfacturarle = 30446; // la celestina s.a.
+            int idClienteObservaciones = -1;
+            bool SeEstaSeparandoPorCorredor = true;
+            int PuntoVenta = 1;
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+            //////////////////////////////////////
+            //////////////////////////////////////
+
+
+
+
+
+            for (int n = 1372900; n < 1372910; n++)
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.IdFacturaImputada = 0;
+                db.SaveChanges();
+
+                var c = CartaDePorteManager.GetItem(SC, n);
+                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
+
+                lote.Add(c);
+            }
+
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+
+            int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
+                                                 dtRenglonesAgregados, SC, null, optFacturarA,
+                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
+                                                txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
+
+
+        }
+
+
+
 
         [TestMethod]
         public void ingresosbrutos_facturacion_26131()
@@ -330,9 +520,9 @@ namespace ProntoMVC.Tests
             //////////////////////////////////////
             // empresa (para que sea agente de percepcion)
             db.Parametros.First().PercepcionIIBB = "SI";
-                
+
             // punto de venta para que perciba ingresos brutos
-                        //Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
+            //Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
             //Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC, _
             //                                "PuntosVenta", _
             //                                "PuntoVenta=" & numeropuntoVenta & " AND Letra='" & _
@@ -366,7 +556,7 @@ namespace ProntoMVC.Tests
             //////////////////////////////////////
             //////////////////////////////////////
             //////////////////////////////////////
-      
+
 
 
 
@@ -472,8 +662,8 @@ namespace ProntoMVC.Tests
             System.IO.FileStream fs1 = null;
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
             byte[] b1 = null;
-            
-            b1 = CartaDePorteManager.BajarListadoDeCartaPorte_DLL("Mariano", "pirulo!",  new DateTime(10,10,2015 ) , new DateTime(10,10,2015) , SC, DirApp, bdlmasterappconfig);
+
+            b1 = CartaDePorteManager.BajarListadoDeCartaPorte_DLL("Mariano", "pirulo!", new DateTime(10, 10, 2015), new DateTime(10, 10, 2015), SC, DirApp, bdlmasterappconfig);
             //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
 
             fs1 = new FileStream(archivodestino, FileMode.Create);
@@ -764,7 +954,7 @@ namespace ProntoMVC.Tests
 
 
 
-        
+
         [TestMethod]
         public void OCR_Tickets()
         {
@@ -773,7 +963,7 @@ namespace ProntoMVC.Tests
             string zipFile;
             zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\tickets y cartas.zip";
             zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\141016\TIFFF.zip";
-            
+
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -839,7 +1029,7 @@ namespace ProntoMVC.Tests
               new DateTime(2014, 2, 1),
               -1, ref sTitulo, "Ambas", false, "");
 
-            
+
             var q = ConsultasLinq.totpormesmodo(SC,
                        "", "", "", 1, 10,
                         CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
@@ -932,16 +1122,16 @@ namespace ProntoMVC.Tests
 
 
 
-     
 
 
 
-   
+
+
 
         [TestMethod]
         public void InformeControlDiario_24958()
         {
-                    
+
             string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
