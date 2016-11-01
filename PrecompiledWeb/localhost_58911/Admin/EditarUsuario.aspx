@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Admin_EditarUsuario, App_Web_lxxn4ckh" title="Editar usuario" validaterequest="false" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Admin_EditarUsuario, App_Web_usbvu22e" title="Editar usuario" validaterequest="false" theme="Azul" %>
 
 <%@ PreviousPageType VirtualPath="~/Admin/ListadoUsuarios.aspx" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>

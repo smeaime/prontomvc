@@ -1,4 +1,4 @@
-<%@ page language="C#" masterpagefile="~/MasterPage.master" autoeventwireup="true" inherits="CambiaPassword, App_Web_beddljq5" title="Pronto Web" theme="Azul" %>
+<%@ page language="C#" masterpagefile="~/MasterPage.master" autoeventwireup="true" inherits="CambiaPassword, App_Web_on23y2s3" title="Pronto Web" theme="Azul" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 <br />
 <br />
