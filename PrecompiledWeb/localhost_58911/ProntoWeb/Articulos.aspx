@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Articulos, App_Web_zggrbt5m" title="Articulos" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Articulos, App_Web_wojhspd3" title="Articulos" theme="Azul" %>
 
 
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>

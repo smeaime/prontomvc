@@ -141,7 +141,7 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="Devuelve un archivo con la imagen de la carta porte", EnableSession:=False)> _
+    <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)> _
     Public Function BajarListadoDeCartaPorte(usuario As String, password As String, fechadesde As DateTime, fechahasta As DateTime) As Byte()
 
 
@@ -166,6 +166,29 @@ Public Class WebServiceCartas
     End Function
 
 
+    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)> _
+    Public Function BajarListadoDeCartaPorte_CerealNet(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(usuario, password, cuit, fechadesde, fechahasta, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+    End Function
 
 
 

@@ -1,4 +1,4 @@
-﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="ArticuloABM, App_Web_1oq1vce2" title="Artículo" theme="Azul" %>
+﻿<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="ArticuloABM, App_Web_dpg2bfma" title="Artículo" theme="Azul" %>
 
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>

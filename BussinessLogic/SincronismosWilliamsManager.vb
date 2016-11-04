@@ -852,7 +852,7 @@ Namespace Pronto.ERP.Bll
                                                                  AplicarANDuORalFiltro, ModoExportacion, _
                                Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)), _
                                Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)), _
-                               puntoventa, sTitulo, optDivisionSyngenta, , Contrato, , , 17497) 'filtrar "La Tijereta"
+                               puntoventa, sTitulo, optDivisionSyngenta, , Contrato, , idClienteAuxiliar) 'filtrar "La Tijereta"
 
                             Dim q As Generic.List(Of CartasConCalada) = iq.ToList
 

@@ -1,4 +1,4 @@
-<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Configuracion, App_Web_zggrbt5m" title="Configuración" theme="Azul" %>
+<%@ page language="VB" masterpagefile="~/MasterPage.master" autoeventwireup="false" inherits="Configuracion, App_Web_hpwltzg2" title="Configuración" theme="Azul" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
