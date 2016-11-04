@@ -673,15 +673,15 @@ Namespace Pronto.ERP.Bll
             Dim dr = dt.Rows(0)
 
 
-            Return EnviarMailFiltroPorRegistro(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
+            Dim archivo = EnviarMailFiltroPorRegistro(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
 
+            Update(SC, dt)
+
+            Return archivo
 
 
-
-
-
-
+            
 
             ''Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
             'Dim dt = TraerMetadata(SC, id)
