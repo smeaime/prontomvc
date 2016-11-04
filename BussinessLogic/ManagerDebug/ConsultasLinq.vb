@@ -469,7 +469,7 @@ Public Class ConsultasLinq
                                 ), 0)), _
                     .Exporta = cdp.Exporta, _
                    .Corredor = cdp.Corredor, _
-                    .IdClienteEntregador = cdp.IdClienteEntregador}).ToList
+                    .IdClienteEntregador = If(cdp.IdClienteEntregador, 0)}).ToList
         'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciossDetalle2 = pd2.IdListaPreciosDetalle
 
 
@@ -541,7 +541,7 @@ Public Class ConsultasLinq
                     .tarif2 = If(pd2 Is Nothing, 0, pd2.PrecioBuquesCalada), _
                     .Exporta = "SI", _
                     .Corredor = cdp.IdExportadorOrigen, _
-                    .IdClienteEntregador = cdp.IdExportadorOrigen}).ToList
+                    .IdClienteEntregador = If(cdp.IdExportadorOrigen, 0)}).ToList
 
 
             'qq = ooo
