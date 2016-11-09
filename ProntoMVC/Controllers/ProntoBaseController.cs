@@ -323,7 +323,7 @@ namespace ProntoMVC.Controllers
                 oStaticMembershipService = new Generales.StaticMembershipService();
 
 
-                if (oStaticMembershipService.GetUser()==null)
+                if (oStaticMembershipService.GetUser() == null)
                 {
                     FormsAuthentication.SignOut();
                     Session.Abandon();
@@ -3345,6 +3345,77 @@ namespace ProntoMVC.Controllers
 
             return 0;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public string GuardarNovedadUsuario(int IdNovedadUsuario, int IdEmpleado, string Detalle) // As MisEstados
+        {
+
+            return GuardarNovedades(IdNovedadUsuario, IdEmpleado, Detalle);
+        }
+
+        private string GuardarNovedades(int IdEventoDelSistema, int IdEmpleado, string Detalle)
+        {
+
+
+
+
+            //       agregar fk
+
+
+            if (IdEmpleado > 0)
+            {
+                var nov = new NovedadesUsuario();
+
+                nov.IdEmpleado = IdEmpleado;
+                nov.IdEventoDelSistema = IdEventoDelSistema;
+                nov.FechaEvento = DateTime.Now;
+                nov.Detalle = Detalle;
+                nov.Confirmado = "NO";
+
+                db.NovedadesUsuarios.Add(nov);
+
+            }
+
+            var q = from det in db.DetalleEventosDelSistemas where det.IdEventoDelSistema == IdEventoDelSistema select det;
+
+
+            // si un evento esta asociado a mas de un usuario, le informa al resto que este usuario hizo algo
+
+            foreach (DetalleEventosDelSistema d in q)
+            {
+                var nov = new NovedadesUsuario();
+
+                nov.IdEmpleado = d.IdEmpleado ?? 0;
+                nov.IdEventoDelSistema = IdEventoDelSistema;
+                nov.FechaEvento = DateTime.Now;
+                nov.Detalle = Detalle;
+                nov.Confirmado = "NO";
+
+                db.NovedadesUsuarios.Add(nov);
+
+            }
+
+
+
+
+            return "";
+        }
+
+
+
+
+
     }
 
     public interface IProntoInterface<T>

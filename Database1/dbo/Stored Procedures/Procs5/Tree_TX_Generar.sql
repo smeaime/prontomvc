@@ -1,4 +1,5 @@
-﻿CREATE Procedure [dbo].[Tree_TX_Generar]  
+﻿
+CREATE Procedure [dbo].[Tree_TX_Generar]  
   
 AS   
 
@@ -1175,3 +1176,7 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
 DROP TABLE #Auxiliar0
 DROP TABLE #Auxiliar1
 DROP TABLE #Auxiliar2
+
+go
+
+

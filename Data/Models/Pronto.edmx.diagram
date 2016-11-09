@@ -2461,6 +2461,10 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK__WilliamsD__IdLoc__0C72982C" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorteControlDescarga" Width="1.5" PointX="22.25" PointY="91" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdDes__4C581317" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.NovedadesUsuario" Width="1.5" PointX="22.375" PointY="29.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEventosDelSistema" Width="1.5" PointX="30.375" PointY="3.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.EventosDelSistema" Width="1.5" PointX="28.125" PointY="38.75" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEventosDelSistema_IdEventoDelSistema" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />

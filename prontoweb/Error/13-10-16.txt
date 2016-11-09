@@ -1,0 +1,2635 @@
+
+Log Entry : 
+10/13/2016 09:09:30
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+10/13/2016 09:09:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:46
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:46
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 6
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:14:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:10
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:10
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3863
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:10
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 6 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.ArgumentException
+Column 'TarifaFacturada' does not belong to table VB$AnonymousType_70`10.
+   at System.Data.DataColumnCollection.Remove(String name)
+   at CDPFacturacion.generarResumido() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2130
+   at CDPFacturacion.PreviewResumidoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2564
+   at CDPFacturacion.lnkVistaPrevia_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 4451
+   at System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Data
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 6157
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 6157
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6157
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6157
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6157
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:21:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:42
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:53
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:53
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:53
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:53
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:24:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:25:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewResumidoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2577
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:03
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:04
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2336
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5513
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2336
+__________________________
+
+Log Entry : 
+10/13/2016 09:26:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:15
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:15
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:15
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 105
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:15
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:16
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 939
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 1454
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 1454
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 1454
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 1454
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 1454
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:36
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:51
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:51
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:27:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:01
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:02
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:03
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+10/13/2016 09:28:03
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2339
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2343
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5735
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:45
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+10/13/2016 09:30:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2343
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:37
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:37
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:37
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)0
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 331
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 331
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 331
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:32:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:27
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:27
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:28
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 6534
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 6534
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6534
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6534
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6534
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:33:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 180
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 180
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 180
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 180
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 180
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:00
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)0
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:40
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:41
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:41
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:41
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:41
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:41
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:53
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+10/13/2016 09:34:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2345
+__________________________
+
+Log Entry : 
+10/13/2016 09:35:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:35:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:35:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:35:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5952
+__________________________
+
+Log Entry : 
+10/13/2016 09:35:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:ActualizarCampoClienteSeparador 2 filas
+__________________________
+
+Log Entry : 
+10/13/2016 09:35:44
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CDPFacturacion.PreviewResumidoDeLaGeneracionEnPaso2() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:line 2586
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103517.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103517.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:28
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103525.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:28
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103525.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:28
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103530.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103530.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:35:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:37:23
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+10/13/2016 10:38:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:43:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103846.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:43:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_103846.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:43:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:43:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+10/13/2016 10:44:06
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 01/10/2016 al 31/10/2016           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/13/2016 10:44:11
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:44:11
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:44:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+10/13/2016 10:44:27
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 01/10/2016 al 31/10/2016           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/13/2016 10:45:25
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:45:29
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:45:44
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:45:48
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:04
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104614.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104614.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104626.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104626.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104645.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104645.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:46:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:06
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:08
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Posición,  del 07/10/2016 al 08/10/2016           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:16
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:18
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=59be465c839544f09b9f5dc43d1b3b66&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104729.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104729.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:47:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:48:06
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:48:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104810.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:48:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104810.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:48:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:48:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:53:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104903.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:53:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_104903.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:53:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:54:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:54:37
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_105433.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:54:37
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_105433.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:54:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 10:54:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 10:55:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_105510.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:55:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_105510.xls
+__________________________
+
+Log Entry : 
+10/13/2016 10:55:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:08:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 11:09:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_110935.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:09:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_110935.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:09:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:10:37
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 11:11:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_111058.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:11:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_111058.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:11:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:19:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 11:22:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112040.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:22:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112040.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:22:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:23:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 11:25:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112445.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:25:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112445.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:25:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:25:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 11:25:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112526.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:25:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112526.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:25:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:27:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 11:27:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112729.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:27:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112729.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:27:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:27:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Control Kilos de Descarga
+__________________________
+
+Log Entry : 
+10/13/2016 11:29:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112814.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:29:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Control Kilos de Descarga 13oct2016_112814.xls
+__________________________
+
+Log Entry : 
+10/13/2016 11:29:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 3492
+__________________________
+
+Log Entry : 
+10/13/2016 11:35:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:Generando sincro para A.C.A. 01/10/2016 31/10/2016 -1 2 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/13/2016 11:37:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:System.Data.StrongTypingException: The value for column 'CalidadDesc' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull. ---> System.InvalidCastException: Conversion from type 'DBNull' to type 'String' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToString(Object Value)
+   at WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_CalidadDesc() in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:line 5413
+   --- End of inner exception stack trace ---
+   at WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_CalidadDesc() in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:line 5415
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_ACA(String SC, wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 17076
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 896
+__________________________
+
+Log Entry : 
+10/13/2016 11:37:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3092
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2387
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+The value for column 'CalidadDesc' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+__________________________
+
+Log Entry : 
+10/13/2016 11:38:00
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:Generando sincro para A.C.A. 01/10/2016 31/10/2016 -1 2 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/13/2016 11:45:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:System.Data.StrongTypingException: The value for column 'CalidadDesc' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull. ---> System.InvalidCastException: Conversion from type 'DBNull' to type 'String' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToString(Object Value)
+   at WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_CalidadDesc() in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:line 5413
+   --- End of inner exception stack trace ---
+   at WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_CalidadDesc() in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:line 5415
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_ACA(String SC, wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 17076
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 896
+__________________________
+
+Log Entry : 
+10/13/2016 11:45:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3092
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2387
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+The value for column 'CalidadDesc' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+__________________________
+
+Log Entry : 
+10/13/2016 11:47:16
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+10/13/2016 11:47:50
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para A.C.A. 01/10/2016 31/10/2016 -1 2 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/13/2016 11:48:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2414
+__________________________

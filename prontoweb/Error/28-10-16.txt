@@ -1,0 +1,614 @@
+
+Log Entry : 
+10/28/2016 12:13:42
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+10/28/2016 12:15:39
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:17
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 2285
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 2285
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2285
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2285
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2285
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/28/2016 12:17:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:18
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 7237
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 7237
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7237
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7237
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7237
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:24
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/28/2016 12:25:38
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:03
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:03
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:03
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:03
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:08
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 3
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:12
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:29
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:29
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:29
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:30
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 28/10/2016 12:28:31 p.m. 5  Mariano
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.28/10/2016 12:28:31 p.m.
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 3 filas
+__________________________
+
+Log Entry : 
+10/28/2016 12:28:31
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.28/10/2016 12:28:31 p.m.
+__________________________
+
+Log Entry : 
+10/28/2016 12:33:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Fin facturacion.5208 5208  Tiempo usado: 323 segundos. 
+__________________________
+
+Log Entry : 
+10/28/2016 12:33:54
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:UPDATE    Facturas  SET numeroordencompraexterna=0   WHERE idFactura>= 87777  AND    idFactura <= 87777
+__________________________
+
+Log Entry : 
+10/28/2016 12:34:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:34:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:34:09
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:34:10
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 1780
+__________________________
+
+Log Entry : 
+10/28/2016 12:34:10
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 3 filas
+__________________________

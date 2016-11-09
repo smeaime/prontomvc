@@ -353,6 +353,17 @@ Namespace Pronto.ERP.Bll
                     txtRcomercial.Text = "AGROSUR S.A"
                     txtPopClienteAuxiliar.Text = "AGROSUR S.A"
 
+
+                Case "LA BIZNAGA"
+                    '                ENTREGAS: titular, Intermediario, Rte comercial y cliente Obs.
+                    'EXPORTACION:    Destinatario()
+                    txtCorredor.Text = ""
+                    txtTitular.Text = "LA BIZNAGA SA AGROPECUARIA"
+                    txtIntermediario.Text = "LA BIZNAGA SA AGROPECUARIA"
+                    txtRcomercial.Text = "LA BIZNAGA SA AGROPECUARIA"
+                    txtPopClienteAuxiliar.Text = "LA BIZNAGA SA AGROPECUARIA"
+
+
                 Case Else
                     Throw New Exception(sSincronismo.ToUpper + " No existe ese sincro")
 
@@ -496,7 +507,7 @@ Namespace Pronto.ERP.Bll
 
             Using ds As New WillyInformesDataSet
 
-                If sSincronismo.ToUpper <> "YPF" And sSincronismo.ToUpper <> "NIDERA" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
+                If sSincronismo.ToUpper <> "YPF" And sSincronismo.ToUpper <> "NIDERA" And sSincronismo.ToUpper <> "LA BIZNAGA" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
 
                     '// Customize the connection string.
                     Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(SC)) ' Properties.Settings.Default.DistXsltDbConnectionString)
@@ -841,7 +852,7 @@ Namespace Pronto.ERP.Bll
                                                                  AplicarANDuORalFiltro, ModoExportacion, _
                                Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)), _
                                Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)), _
-                               puntoventa, sTitulo, optDivisionSyngenta, , Contrato, , , 17497) 'filtrar "La Tijereta"
+                               puntoventa, sTitulo, optDivisionSyngenta, , Contrato, , idClienteAuxiliar) 'filtrar "La Tijereta"
 
                             Dim q As Generic.List(Of CartasConCalada) = iq.ToList
 
@@ -1031,6 +1042,82 @@ Namespace Pronto.ERP.Bll
 
                             output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep,
                                     "Williams - Nidera con SQL.rdl", yourParams, ArchivoExcelDestino, False)
+
+
+
+
+                        Case "LA BIZNAGA"
+
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
+                                            "", "", "", 1, maximumRows, _
+                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
+                                            idDestinatario, idIntermediario, _
+                                            idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                                                "1", ModoExportacion, _
+                                            Convert.ToDateTime(sDesde), _
+                                            Convert.ToDateTime(sHasta), _
+                                             Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
+
+                            registrosFiltrados = 1 'no sé por qué no está andando bien
+
+                            Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
+
+
+                            Dim yourParams(27) As ReportParameter
+                            yourParams(0) = New ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC))
+                            yourParams(1) = New ReportParameter("sServidorWeb", sUrlDominio)
+
+
+                            yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#).ToString))
+                            yourParams(3) = New ReportParameter("FechaHasta", Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#).ToString))
+
+                         
+
+
+                            yourParams(4) = New ReportParameter("IdDestino", idDestino.ToString)
+                            yourParams(5) = New ReportParameter("puntoventa", puntoventa.ToString)
+                            yourParams(6) = New ReportParameter("startRowIndex", "0")
+                            yourParams(7) = New ReportParameter("maximumRows", maximumRows)
+                            yourParams(8) = New ReportParameter("estado", estado)
+                            yourParams(9) = New ReportParameter("QueContenga", "0")
+                            yourParams(10) = New ReportParameter("idVendedor", idVendedor.ToString())
+                            yourParams(11) = New ReportParameter("idCorredor", idCorredor.ToString())
+                            yourParams(12) = New ReportParameter("idDestinatario", idDestinatario.ToString())
+                            yourParams(13) = New ReportParameter("idIntermediario", idIntermediario)
+                            yourParams(14) = New ReportParameter("idRemComercial", idRComercial)
+                            yourParams(15) = New ReportParameter("idArticulo", idArticulo)
+                            yourParams(16) = New ReportParameter("idProcedencia", idProcedencia)
+                            yourParams(17) = New ReportParameter("AplicarANDuORalFiltro", CInt(AplicarANDuORalFiltro))
+                            yourParams(18) = New ReportParameter("ModoExportacion", ModoExportacion)
+                            yourParams(19) = New ReportParameter("optDivisionSyngenta", optDivisionSyngenta)
+                            yourParams(20) = New ReportParameter("Contrato", "-1")
+                            yourParams(21) = New ReportParameter("QueContenga2", "-1")
+                            yourParams(22) = New ReportParameter("idClienteAuxiliarint", idClienteAuxiliar.ToString)
+                            yourParams(23) = New ReportParameter("AgrupadorDeTandaPeriodos", "-1")
+                            yourParams(24) = New ReportParameter("Vagon", 0)
+                            yourParams(25) = New ReportParameter("Patente", "")
+                            yourParams(26) = New ReportParameter("optCamionVagon", "Todos")
+
+
+                            'Dim titulo As String = ""
+                            'titulo = FormatearTitulo(HFSC.Value, _
+                            '          titulo, estadofiltro, "", idVendedor, idCorredor, _
+                            '        idDestinatario, idIntermediario, _
+                            '        idRComercial, idArticulo, idProcedencia, idDestino, _
+                            '                                          IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
+                            '        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                            '        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                            '         cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , _
+                            '        txtContrato.Text, idClienteAuxiliar)
+                            yourParams(27) = New ReportParameter("Titulo", titulo)
+
+
+                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "LaBiznaga" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
+
+                            output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep,
+                                    "Williams - Sincro LaBiznaga2.rdl", yourParams, ArchivoExcelDestino, False)
+
+
 
 
                         Case "BLD x"
@@ -2725,8 +2812,12 @@ Namespace Pronto.ERP.Bll
 
 
                     'sb &= IIf(.NobleConforme = "0", "NO", "SI").PadRight(2)
-                    sb &= IIf(.CalidadDe = 25, "SI", "NO").PadRight(2) 'Andres, solamente poner si cuando es CONFORME, resto poner NO ( Todo el resto del listado que detallas )
-
+                    If .IsCalidadDescNull Then 
+                        sb &= "NO"
+                    Else
+                        sb &= IIf(.CalidadDe = 25, "SI", "NO").PadRight(2) 'Andres, solamente poner si cuando es CONFORME, resto poner NO ( Todo el resto del listado que detallas )
+                    End If
+                    
 
                     '//////////////////////////////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////////////////////////////
@@ -17073,6 +17164,13 @@ Namespace Pronto.ERP.Bll
                     End If
                     'Campo 61 ConCalidad: Poner siempre la condición “CC” Condición Cámara.
                     sCalidad = "CC"
+                    If Not .IsCalidadDescNull Then
+                        If InStr(.CalidadDesc.ToString.ToLower, "conforme") > 0 Then
+                            sCalidad = "G2"
+                            'consulta 24964 : Te resumo: Siempre que aparezca la calidad CONFORME . Que en el txt salga GRADO 2. Con la sigla "G2" . 
+                        End If
+                    End If
+
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
 
 

@@ -18,6 +18,7 @@ Public Class WebServiceClientesCUIT
         'Dim c1 As Char
         'Dim c2 As Char
         'Dim c3 As Char
+        'jkhkjh
 
         If (count = 0) Then
             count = 10
