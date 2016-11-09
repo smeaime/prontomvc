@@ -465,19 +465,19 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					10, 
 					0,
 					NULL, 
-					NULL, 
+					-1, 
 
 					NULL, 
 					NULL, 
-					NULL,
-					NULL, 
-					53, 
+					-1,
+					-1, 
+					NULL,--53, 
 
 					NULL, 
 					NULL, 
 					NULL,
 				 	'Todos', 
-					'2016-01-09 00:00:00',
+					'2010-01-09 00:00:00',
 
 			
 					'2016-01-09 00:00:00',
@@ -495,8 +495,6 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					) as cdp
             
 go
-
-
 
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
 go
