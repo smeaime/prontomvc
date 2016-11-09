@@ -167,6 +167,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="true">El Enlace</asp:ListItem>
                             <asp:ListItem Enabled="false">El Tejar</asp:ListItem>
                             <asp:ListItem Enabled="True">Lartirigoyen</asp:ListItem>
+                            <asp:ListItem Enabled="True">La Biznaga</asp:ListItem>
                             <asp:ListItem Enabled="True">La Bragadense</asp:ListItem>
                             <asp:ListItem Enabled="True">Lelfun</asp:ListItem>
                             <asp:ListItem Enabled="True">Los Grobo [Algoritmo]</asp:ListItem>

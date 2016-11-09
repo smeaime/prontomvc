@@ -28,7 +28,7 @@
                                             Subject="Cambio de contrase&#241;a - ProntoWEB">
                                         </MailDefinition>
                                         <TitleTextStyle BackColor="#5D7B9D" Font-Bold="True" Font-Size="0.9em" ForeColor="White" />
-                                        <TextBoxStyle Font-Size="0.8em" />
+                                        <TextBoxStyle Font-Size="0.8em" />  
                                     </asp:ChangePassword>
 
 

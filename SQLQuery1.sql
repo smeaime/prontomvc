@@ -1,9 +1,10 @@
-﻿select top 10 tipodesignacion,* from detallerequerimientos order by iddetallerequerimiento desc
-select top 10 * from requerimientos order by idrequerimiento desc
+﻿select * from parametros2 where valor like '%esag%'
 
-update requerimientos
-set cumplido='NO'
+select * from puntosventa
 
+select ImporteTopeMinimoPercepcion,AlicuotaPercepcionConvenio,AlicuotaPercepcion,* from ibcondiciones
 
+select top 10 ibcondicion, * from clientes where idcliente=30446
 
-sp_helptext Requerimientos_TX_PendientesDeAsignacion
+select * from provincias
+

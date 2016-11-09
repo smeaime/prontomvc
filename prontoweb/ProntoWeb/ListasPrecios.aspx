@@ -381,6 +381,19 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
+            
+
+                    <asp:TemplateField HeaderText="Calada Buques">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrecioCaladaBuques" Width="40px" runat="server" Text='<%# Bind("PrecioBuquesCalada", "{0:F3}")%>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewPrecioCaladaBuques" Width="40px" runat="server"></asp:TextBox>
+                        </FooterTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrecioCaladaBuques" Width="40px" runat="server" Text='<%# Bind("PrecioBuquesCalada", "{0:F3}")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
 
                     <asp:TemplateField HeaderText="Calada Local">
@@ -394,6 +407,7 @@
                             <asp:Label ID="lblPrecioCaladaLocal" Width="40px" runat="server" Text='<%# Bind("PrecioCaladaLocal","{0:F3}") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
                     <asp:TemplateField HeaderText="Calada Exp">
                         <EditItemTemplate>
                             <asp:TextBox ID="txtPrecioCaladaExportacion" Width="40px" runat="server" Text='<%# Bind("PrecioCaladaExportacion","{0:F3}") %>'></asp:TextBox>

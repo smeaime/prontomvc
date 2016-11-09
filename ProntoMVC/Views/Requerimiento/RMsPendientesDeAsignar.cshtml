@@ -57,7 +57,7 @@
     <div>
         <div class="row-fluid">
             <div class="span12 lightblue">
-            
+
                 @if (false)
                 {
                     <div class="btn-group span2">
@@ -90,11 +90,11 @@
         <div id="ListaPager" class="scroll" style="text-align: center;">
         </div>
 
-        <div style="margin-top: 4px">
-            <input type="button" class="btn btn-small" id="addData" value="Vale salida (stock)" />
-            <input type="button" class="btn btn-small" id="edtData" value="Para compras" />
-            <input type="button" class="btn btn-small" id="delData" value="dar por cumplido" />
-        </div>
+        @*<div style="margin-top: 4px">
+                <input type="button" class="btn btn-small" id="addData" value="Vale salida (stock)" />
+                <input type="button" class="btn btn-small" id="edtData" value="Para compras" />
+                <input type="button" class="btn btn-small" id="delData" value="dar por cumplido" />
+            </div>*@
     </div>
 </div>
 
@@ -103,16 +103,16 @@
 <div class="contextMenu" id="myMenu1" style="display:none">
     <ul style="width: 400px">
         <li id="add">
-            <span class="ui-icon ui-icon-plus" style="float:left"></span>
-            <span id="Vale" style="font-size:11px; font-family:Verdana">Vale salida (stock)</span>
+            @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
+            <span id="Vale" style="font-size:11px; font-family:Verdana">Generar Vale salida (stock)</span>
         </li>
         <li id="edit">
-            <span class="ui-icon ui-icon-pencil" style="float:left"></span>
-            <span style="font-size:11px; font-family:Verdana">Para compras</span>
+            @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
+            <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Liberar para Compras</span>
         </li>
         <li id="del">
-            <span class="ui-icon ui-icon-trash" style="float:left"></span>
-            <span style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
+            @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+            <span id="DarPorCumplido" style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
         </li>
     </ul>
 </div>
@@ -120,20 +120,158 @@
 
 
 <script type="text/javascript">
+
+
+
+
+
+
+
     $(document).ready(function () {
 
         $("#Vale").click(function () {
+
+            var $grid = $("#Lista");
+            var lista = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((lista == null) || (lista.length == 0)) {
+                // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
+                alert("No hay rms elegidas");
+                return;
+                lista = $grid.jqGrid('getGridParam', 'selrow')
+            }
+
+
+            $("#dialog-password").dialog({
+                buttons: {
+                    'Aceptar': function () {
+                        //alert('hola');
+                        // $(this).dialog('close');
+                        // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
+
+
+
+                        $("#loading").show();
+
+
+
+
+                        validatePwd2(function () {
+                            generarvale(lista, "administrador", "",
+                                function () {
+                                    $("#loading").hide();
+                                    $('#Lista').trigger('reloadGrid');
+                                }
+                            )
+                        }
+                                       , function () { $("#loading").hide(); }
+                         );
+
+                        $(this).dialog('close');
+
+                    },
+                    'Cancelar': function () {
+                        $(this).dialog('close');
+                    }
+                },
+                open: function () {
+
+                }
+            });
+
+            $('#dialog-password').data('Combo', 'Aprobo');
+            $('#dialog-password').dialog('open');
+
+
+        })
+
+
+        function generarvale(ids, user, pass, callback) {
             //juntar los ids y mandarlos?
-             var ids = [1, 4, 5];
+
+
+
+
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: '@Url.Action("YourAction", "Requerimiento")',
-                data: JSON.stringify( { ids: ids })
+                url: '@Url.Action("GenerarValesAlmacen", "Requerimiento")',
+                data: JSON.stringify({
+                    idDetalleRequerimientos: ids,
+                    user: user,
+                    pass: pass
+                })
             }).done(function () {
+                if (typeof callback == "function") callback();
+            });
+        }
 
+
+
+
+
+
+
+        $("#DarPorCumplido").click(function () {
+            //juntar los ids y mandarlos?
+
+            var $grid = $("#Lista");
+            var lista = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((lista == null) || (lista.length == 0)) {
+                alert("No hay rms elegidas");
+                return;
+                lista = $grid.jqGrid('getGridParam', 'selrow')
+            }
+
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("DarPorCumplido", "Requerimiento")',
+                data: JSON.stringify({
+                    idDetalleRequerimientos: lista,
+                    userAutorizador: "administrador",
+                    passAutorizador: "",
+                    userCumplidor: "administrador",
+                    sObsCumplido: "asdasd asd asd asd asd asdasdasd asd asdasd asd "
+                })
+            }).done(function () {
+                $('#Lista').trigger('reloadGrid');
             });
         })
+
+
+
+
+        $("#ParaCompras").click(function () {
+            //juntar los ids y mandarlos?
+
+            var $grid = $("#Lista");
+            var lista = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((lista == null) || (lista.length == 0)) {
+                alert("No hay rms elegidas");
+                return;
+                lista = $grid.jqGrid('getGridParam', 'selrow')
+            }
+
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("AsignaComprador", "Requerimiento")',
+                data: JSON.stringify({
+                    idDetalleRequerimientos: lista,
+                    userComprador: "administrador",
+                    passComprador: ""
+
+                })
+            }).done(function () {
+                $('#Lista').trigger('reloadGrid');
+            });
+        })
+
+
+
+
 
 
         function PisarFechaEntrega(nombre) {
@@ -398,35 +536,50 @@
 
 
 
-            loadComplete: function() {
+            loadComplete: function () {
                 $("tr.jqgrow", this).contextMenu('myMenu1', {
                     bindings: {
-                        'edit': function(trigger) {
+                        'edit': function (trigger) {
                             // trigger is the DOM element ("tr.jqgrow") which are triggered
-                            grid.editGridRow(trigger.id, editSettings);
+                            //   grid.editGridRow(trigger.id, editSettings);
                         },
-                        'add': function(/*trigger*/) {
-                            grid.editGridRow("new", addSettings);
+                        'add': function (/*trigger*/) {
+                            //  grid.editGridRow("new", addSettings);
                         },
-                        'del': function(trigger) {
+                        'del': function (trigger) {
                             if ($('#del').hasClass('ui-state-disabled') === false) {
                                 // disabled item can do be choosed
-                                grid.delGridRow(trigger.id, delSettings);
+                                //      grid.delGridRow(trigger.id, delSettings);
                             }
                         }
                     },
-                    onContextMenu: function(event/*, menu*/) {
+                    onContextMenu: function (event/*, menu*/) {
                         var rowId = $(event.target).closest("tr.jqgrow").attr("id");
                         //grid.setSelection(rowId);
                         // disable menu for rows with even rowids
-                        $('#del').attr("disabled",Number(rowId)%2 === 0);
-                        if (Number(rowId)%2 === 0) {
-                            $('#del').attr("disabled","disabled").addClass('ui-state-disabled');
-                        } else {
-                            $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
-                        }
+                        //$('#del').attr("disabled", Number(rowId) % 2 === 0);
+                        //if (Number(rowId) % 2 === 0) {
+                        //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
+                        //} else {
+                        //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+                        //}
                         return true;
+                    },
+
+                    //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
+                    menuStyle: {
+                        backgroundColor: '#fcfdfd',
+                        border: '1px solid #a6c9e2',
+                        maxWidth: '600px', // to be sure
+                        width: '100%' // to have good width of the menu
+                    },
+                    itemHoverStyle: {
+                        border: '1px solid #79b7e7',
+                        color: '#1d5987',
+                        backgroundColor: '#d0e5f5'
                     }
+
+
                 });
             },
 

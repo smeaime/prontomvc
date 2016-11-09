@@ -370,9 +370,2056 @@ namespace ProntoMVC.Data
 
 
     }
+
+
+
+
+
+
+
+
 }
 
 
+
+
+namespace CerealNet.WSCartasDePorte
+{
+
+
+
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    public partial class respuestaPosicion : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private string codigoResultadoField;
+
+        private string descripcionField;
+
+        private cPposiafip[] posicionesField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        public string codigoResultado
+        {
+            get
+            {
+                return this.codigoResultadoField;
+            }
+            set
+            {
+                this.codigoResultadoField = value;
+                this.RaisePropertyChanged("codigoResultado");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        public string descripcion
+        {
+            get
+            {
+                return this.descripcionField;
+            }
+            set
+            {
+                this.descripcionField = value;
+                this.RaisePropertyChanged("descripcion");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("posiciones", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = true, Order = 2)]
+        public cPposiafip[] posiciones
+        {
+            get
+            {
+                return this.posicionesField;
+            }
+            set
+            {
+                this.posicionesField = value;
+                this.RaisePropertyChanged("posiciones");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    public partial class cPposiafip : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private string calidadField;
+
+        private int codmercaField;
+
+        private bool codmercaFieldSpecified;
+
+        private int codonccalocdestinoField;
+
+        private bool codonccalocdestinoFieldSpecified;
+
+        private int codonccaprocedenciaField;
+
+        private bool codonccaprocedenciaFieldSpecified;
+
+        private int codonccaprovProceField;
+
+        private bool codonccaprovProceFieldSpecified;
+
+        private int codonccaprovdestinoField;
+
+        private bool codonccaprovdestinoFieldSpecified;
+
+        private int codonccapuertoField;
+
+        private bool codonccapuertoFieldSpecified;
+
+        private string cuitcorredorField;
+
+        private string cuitentregadorField;
+
+        private string cuitexportadorField;
+
+        private string cuitintermediarioField;
+
+        private string cuitpuertoField;
+
+        private string cuitremitenteComercialField;
+
+        private string cuittitularField;
+
+        private string descripcionmercaField;
+
+        private string estadoField;
+
+        private System.DateTime fechaposicionField;
+
+        private bool fechaposicionFieldSpecified;
+
+        private int netodescargaField;
+
+        private bool netodescargaFieldSpecified;
+
+        private int netoprocedenciaField;
+
+        private bool netoprocedenciaFieldSpecified;
+
+        private string nombreentregadorField;
+
+        private string nombreexportadorField;
+
+        private string nombreintermediarioField;
+
+        private string nombreremitenteComercialField;
+
+        private string nombretitularField;
+
+        private int nroVagonField;
+
+        private bool nroVagonFieldSpecified;
+
+        private int nrocpField;
+
+        private string observacionesField;
+
+        private int prefijocpField;
+
+        private bool prefijocpFieldSpecified;
+
+        private string procedenciaField;
+
+        private string puertoField;
+
+        private int turnoField;
+
+        private bool turnoFieldSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        public string calidad
+        {
+            get
+            {
+                return this.calidadField;
+            }
+            set
+            {
+                this.calidadField = value;
+                this.RaisePropertyChanged("calidad");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        public int codmerca
+        {
+            get
+            {
+                return this.codmercaField;
+            }
+            set
+            {
+                this.codmercaField = value;
+                this.RaisePropertyChanged("codmerca");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codmercaSpecified
+        {
+            get
+            {
+                return this.codmercaFieldSpecified;
+            }
+            set
+            {
+                this.codmercaFieldSpecified = value;
+                this.RaisePropertyChanged("codmercaSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        public int codonccalocdestino
+        {
+            get
+            {
+                return this.codonccalocdestinoField;
+            }
+            set
+            {
+                this.codonccalocdestinoField = value;
+                this.RaisePropertyChanged("codonccalocdestino");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccalocdestinoSpecified
+        {
+            get
+            {
+                return this.codonccalocdestinoFieldSpecified;
+            }
+            set
+            {
+                this.codonccalocdestinoFieldSpecified = value;
+                this.RaisePropertyChanged("codonccalocdestinoSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
+        public int codonccaprocedencia
+        {
+            get
+            {
+                return this.codonccaprocedenciaField;
+            }
+            set
+            {
+                this.codonccaprocedenciaField = value;
+                this.RaisePropertyChanged("codonccaprocedencia");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccaprocedenciaSpecified
+        {
+            get
+            {
+                return this.codonccaprocedenciaFieldSpecified;
+            }
+            set
+            {
+                this.codonccaprocedenciaFieldSpecified = value;
+                this.RaisePropertyChanged("codonccaprocedenciaSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
+        public int codonccaprovProce
+        {
+            get
+            {
+                return this.codonccaprovProceField;
+            }
+            set
+            {
+                this.codonccaprovProceField = value;
+                this.RaisePropertyChanged("codonccaprovProce");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccaprovProceSpecified
+        {
+            get
+            {
+                return this.codonccaprovProceFieldSpecified;
+            }
+            set
+            {
+                this.codonccaprovProceFieldSpecified = value;
+                this.RaisePropertyChanged("codonccaprovProceSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
+        public int codonccaprovdestino
+        {
+            get
+            {
+                return this.codonccaprovdestinoField;
+            }
+            set
+            {
+                this.codonccaprovdestinoField = value;
+                this.RaisePropertyChanged("codonccaprovdestino");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccaprovdestinoSpecified
+        {
+            get
+            {
+                return this.codonccaprovdestinoFieldSpecified;
+            }
+            set
+            {
+                this.codonccaprovdestinoFieldSpecified = value;
+                this.RaisePropertyChanged("codonccaprovdestinoSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
+        public int codonccapuerto
+        {
+            get
+            {
+                return this.codonccapuertoField;
+            }
+            set
+            {
+                this.codonccapuertoField = value;
+                this.RaisePropertyChanged("codonccapuerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccapuertoSpecified
+        {
+            get
+            {
+                return this.codonccapuertoFieldSpecified;
+            }
+            set
+            {
+                this.codonccapuertoFieldSpecified = value;
+                this.RaisePropertyChanged("codonccapuertoSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 7)]
+        public string cuitcorredor
+        {
+            get
+            {
+                return this.cuitcorredorField;
+            }
+            set
+            {
+                this.cuitcorredorField = value;
+                this.RaisePropertyChanged("cuitcorredor");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 8)]
+        public string cuitentregador
+        {
+            get
+            {
+                return this.cuitentregadorField;
+            }
+            set
+            {
+                this.cuitentregadorField = value;
+                this.RaisePropertyChanged("cuitentregador");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
+        public string cuitexportador
+        {
+            get
+            {
+                return this.cuitexportadorField;
+            }
+            set
+            {
+                this.cuitexportadorField = value;
+                this.RaisePropertyChanged("cuitexportador");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
+        public string cuitintermediario
+        {
+            get
+            {
+                return this.cuitintermediarioField;
+            }
+            set
+            {
+                this.cuitintermediarioField = value;
+                this.RaisePropertyChanged("cuitintermediario");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 11)]
+        public string cuitpuerto
+        {
+            get
+            {
+                return this.cuitpuertoField;
+            }
+            set
+            {
+                this.cuitpuertoField = value;
+                this.RaisePropertyChanged("cuitpuerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 12)]
+        public string cuitremitenteComercial
+        {
+            get
+            {
+                return this.cuitremitenteComercialField;
+            }
+            set
+            {
+                this.cuitremitenteComercialField = value;
+                this.RaisePropertyChanged("cuitremitenteComercial");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 13)]
+        public string cuittitular
+        {
+            get
+            {
+                return this.cuittitularField;
+            }
+            set
+            {
+                this.cuittitularField = value;
+                this.RaisePropertyChanged("cuittitular");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 14)]
+        public string descripcionmerca
+        {
+            get
+            {
+                return this.descripcionmercaField;
+            }
+            set
+            {
+                this.descripcionmercaField = value;
+                this.RaisePropertyChanged("descripcionmerca");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 15)]
+        public string estado
+        {
+            get
+            {
+                return this.estadoField;
+            }
+            set
+            {
+                this.estadoField = value;
+                this.RaisePropertyChanged("estado");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 16)]
+        public System.DateTime fechaposicion
+        {
+            get
+            {
+                return this.fechaposicionField;
+            }
+            set
+            {
+                this.fechaposicionField = value;
+                this.RaisePropertyChanged("fechaposicion");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaposicionSpecified
+        {
+            get
+            {
+                return this.fechaposicionFieldSpecified;
+            }
+            set
+            {
+                this.fechaposicionFieldSpecified = value;
+                this.RaisePropertyChanged("fechaposicionSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 17)]
+        public int netodescarga
+        {
+            get
+            {
+                return this.netodescargaField;
+            }
+            set
+            {
+                this.netodescargaField = value;
+                this.RaisePropertyChanged("netodescarga");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool netodescargaSpecified
+        {
+            get
+            {
+                return this.netodescargaFieldSpecified;
+            }
+            set
+            {
+                this.netodescargaFieldSpecified = value;
+                this.RaisePropertyChanged("netodescargaSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 18)]
+        public int netoprocedencia
+        {
+            get
+            {
+                return this.netoprocedenciaField;
+            }
+            set
+            {
+                this.netoprocedenciaField = value;
+                this.RaisePropertyChanged("netoprocedencia");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool netoprocedenciaSpecified
+        {
+            get
+            {
+                return this.netoprocedenciaFieldSpecified;
+            }
+            set
+            {
+                this.netoprocedenciaFieldSpecified = value;
+                this.RaisePropertyChanged("netoprocedenciaSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 19)]
+        public string nombreentregador
+        {
+            get
+            {
+                return this.nombreentregadorField;
+            }
+            set
+            {
+                this.nombreentregadorField = value;
+                this.RaisePropertyChanged("nombreentregador");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 20)]
+        public string nombreexportador
+        {
+            get
+            {
+                return this.nombreexportadorField;
+            }
+            set
+            {
+                this.nombreexportadorField = value;
+                this.RaisePropertyChanged("nombreexportador");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 21)]
+        public string nombreintermediario
+        {
+            get
+            {
+                return this.nombreintermediarioField;
+            }
+            set
+            {
+                this.nombreintermediarioField = value;
+                this.RaisePropertyChanged("nombreintermediario");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 22)]
+        public string nombreremitenteComercial
+        {
+            get
+            {
+                return this.nombreremitenteComercialField;
+            }
+            set
+            {
+                this.nombreremitenteComercialField = value;
+                this.RaisePropertyChanged("nombreremitenteComercial");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 23)]
+        public string nombretitular
+        {
+            get
+            {
+                return this.nombretitularField;
+            }
+            set
+            {
+                this.nombretitularField = value;
+                this.RaisePropertyChanged("nombretitular");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 24)]
+        public int nroVagon
+        {
+            get
+            {
+                return this.nroVagonField;
+            }
+            set
+            {
+                this.nroVagonField = value;
+                this.RaisePropertyChanged("nroVagon");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool nroVagonSpecified
+        {
+            get
+            {
+                return this.nroVagonFieldSpecified;
+            }
+            set
+            {
+                this.nroVagonFieldSpecified = value;
+                this.RaisePropertyChanged("nroVagonSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 25)]
+        public int nrocp
+        {
+            get
+            {
+                return this.nrocpField;
+            }
+            set
+            {
+                this.nrocpField = value;
+                this.RaisePropertyChanged("nrocp");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 26)]
+        public string observaciones
+        {
+            get
+            {
+                return this.observacionesField;
+            }
+            set
+            {
+                this.observacionesField = value;
+                this.RaisePropertyChanged("observaciones");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 27)]
+        public int prefijocp
+        {
+            get
+            {
+                return this.prefijocpField;
+            }
+            set
+            {
+                this.prefijocpField = value;
+                this.RaisePropertyChanged("prefijocp");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool prefijocpSpecified
+        {
+            get
+            {
+                return this.prefijocpFieldSpecified;
+            }
+            set
+            {
+                this.prefijocpFieldSpecified = value;
+                this.RaisePropertyChanged("prefijocpSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 28)]
+        public string procedencia
+        {
+            get
+            {
+                return this.procedenciaField;
+            }
+            set
+            {
+                this.procedenciaField = value;
+                this.RaisePropertyChanged("procedencia");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 29)]
+        public string puerto
+        {
+            get
+            {
+                return this.puertoField;
+            }
+            set
+            {
+                this.puertoField = value;
+                this.RaisePropertyChanged("puerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 30)]
+        public int turno
+        {
+            get
+            {
+                return this.turnoField;
+            }
+            set
+            {
+                this.turnoField = value;
+                this.RaisePropertyChanged("turno");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool turnoSpecified
+        {
+            get
+            {
+                return this.turnoFieldSpecified;
+            }
+            set
+            {
+                this.turnoFieldSpecified = value;
+                this.RaisePropertyChanged("turnoSpecified");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    public partial class analisis : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private int kilosMermasField;
+
+        private bool kilosMermasFieldSpecified;
+
+        private decimal porcentajeAnalisisField;
+
+        private bool porcentajeAnalisisFieldSpecified;
+
+        private decimal porcentajeMermaField;
+
+        private bool porcentajeMermaFieldSpecified;
+
+        private string rubroField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        public int kilosMermas
+        {
+            get
+            {
+                return this.kilosMermasField;
+            }
+            set
+            {
+                this.kilosMermasField = value;
+                this.RaisePropertyChanged("kilosMermas");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool kilosMermasSpecified
+        {
+            get
+            {
+                return this.kilosMermasFieldSpecified;
+            }
+            set
+            {
+                this.kilosMermasFieldSpecified = value;
+                this.RaisePropertyChanged("kilosMermasSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        public decimal porcentajeAnalisis
+        {
+            get
+            {
+                return this.porcentajeAnalisisField;
+            }
+            set
+            {
+                this.porcentajeAnalisisField = value;
+                this.RaisePropertyChanged("porcentajeAnalisis");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool porcentajeAnalisisSpecified
+        {
+            get
+            {
+                return this.porcentajeAnalisisFieldSpecified;
+            }
+            set
+            {
+                this.porcentajeAnalisisFieldSpecified = value;
+                this.RaisePropertyChanged("porcentajeAnalisisSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        public decimal porcentajeMerma
+        {
+            get
+            {
+                return this.porcentajeMermaField;
+            }
+            set
+            {
+                this.porcentajeMermaField = value;
+                this.RaisePropertyChanged("porcentajeMerma");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool porcentajeMermaSpecified
+        {
+            get
+            {
+                return this.porcentajeMermaFieldSpecified;
+            }
+            set
+            {
+                this.porcentajeMermaFieldSpecified = value;
+                this.RaisePropertyChanged("porcentajeMermaSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
+        public string rubro
+        {
+            get
+            {
+                return this.rubroField;
+            }
+            set
+            {
+                this.rubroField = value;
+                this.RaisePropertyChanged("rubro");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    public partial class cartaPorte : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private int brutodestField;
+
+        private bool brutodestFieldSpecified;
+
+        private string cPoriginalField;
+
+        private string calidadField;
+
+        private int cartaporteField;
+
+        private int codmercaField;
+
+        private bool codmercaFieldSpecified;
+
+        private int codonccalocalidadpuertoField;
+
+        private bool codonccalocalidadpuertoFieldSpecified;
+
+        private int codonccalocalprocField;
+
+        private bool codonccalocalprocFieldSpecified;
+
+        private int codonccaprovincialprocField;
+
+        private bool codonccaprovincialprocFieldSpecified;
+
+        private int codonccaprovinciapuertoField;
+
+        private bool codonccaprovinciapuertoFieldSpecified;
+
+        private int codonccapuertoField;
+
+        private bool codonccapuertoFieldSpecified;
+
+        private string codpostalprocedenciaField;
+
+        private string contratoField;
+
+        private string cosechaField;
+
+        private string cuitcorredorField;
+
+        private string cuitentregadorField;
+
+        private string cuitexportField;
+
+        private string cuitinterField;
+
+        private string cuitpuertoField;
+
+        private string cuitremicField;
+
+        private string cuitremitenteField;
+
+        private string cuittituField;
+
+        private string entregadorField;
+
+        private System.DateTime fechadescargaField;
+
+        private bool fechadescargaFieldSpecified;
+
+        private System.DateTime fechaposicionField;
+
+        private bool fechaposicionFieldSpecified;
+
+        private string horadescargaField;
+
+        private string intermediarioField;
+
+        private analisis[] listaAnalisisField;
+
+        private string localidaddestinoField;
+
+        private string mercaderiaField;
+
+        private int netodestField;
+
+        private bool netodestFieldSpecified;
+
+        private int netoprocField;
+
+        private bool netoprocFieldSpecified;
+
+        private string nomExportField;
+
+        private string nomRemicField;
+
+        private string nomcorreField;
+
+        private string nroReciboField;
+
+        private string observacionesField;
+
+        private string observadoField;
+
+        private string patenteField;
+
+        private string procedenciaField;
+
+        private string puertoField;
+
+        private string remitenteField;
+
+        private int taradestField;
+
+        private bool taradestFieldSpecified;
+
+        private string titularField;
+
+        private string usuarioField;
+
+        private int vagonField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        public int brutodest
+        {
+            get
+            {
+                return this.brutodestField;
+            }
+            set
+            {
+                this.brutodestField = value;
+                this.RaisePropertyChanged("brutodest");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool brutodestSpecified
+        {
+            get
+            {
+                return this.brutodestFieldSpecified;
+            }
+            set
+            {
+                this.brutodestFieldSpecified = value;
+                this.RaisePropertyChanged("brutodestSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        public string CPoriginal
+        {
+            get
+            {
+                return this.cPoriginalField;
+            }
+            set
+            {
+                this.cPoriginalField = value;
+                this.RaisePropertyChanged("CPoriginal");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        public string calidad
+        {
+            get
+            {
+                return this.calidadField;
+            }
+            set
+            {
+                this.calidadField = value;
+                this.RaisePropertyChanged("calidad");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
+        public int cartaporte
+        {
+            get
+            {
+                return this.cartaporteField;
+            }
+            set
+            {
+                this.cartaporteField = value;
+                this.RaisePropertyChanged("cartaporte");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
+        public int codmerca
+        {
+            get
+            {
+                return this.codmercaField;
+            }
+            set
+            {
+                this.codmercaField = value;
+                this.RaisePropertyChanged("codmerca");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codmercaSpecified
+        {
+            get
+            {
+                return this.codmercaFieldSpecified;
+            }
+            set
+            {
+                this.codmercaFieldSpecified = value;
+                this.RaisePropertyChanged("codmercaSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
+        public int codonccalocalidadpuerto
+        {
+            get
+            {
+                return this.codonccalocalidadpuertoField;
+            }
+            set
+            {
+                this.codonccalocalidadpuertoField = value;
+                this.RaisePropertyChanged("codonccalocalidadpuerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccalocalidadpuertoSpecified
+        {
+            get
+            {
+                return this.codonccalocalidadpuertoFieldSpecified;
+            }
+            set
+            {
+                this.codonccalocalidadpuertoFieldSpecified = value;
+                this.RaisePropertyChanged("codonccalocalidadpuertoSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
+        public int codonccalocalproc
+        {
+            get
+            {
+                return this.codonccalocalprocField;
+            }
+            set
+            {
+                this.codonccalocalprocField = value;
+                this.RaisePropertyChanged("codonccalocalproc");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccalocalprocSpecified
+        {
+            get
+            {
+                return this.codonccalocalprocFieldSpecified;
+            }
+            set
+            {
+                this.codonccalocalprocFieldSpecified = value;
+                this.RaisePropertyChanged("codonccalocalprocSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 7)]
+        public int codonccaprovincialproc
+        {
+            get
+            {
+                return this.codonccaprovincialprocField;
+            }
+            set
+            {
+                this.codonccaprovincialprocField = value;
+                this.RaisePropertyChanged("codonccaprovincialproc");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccaprovincialprocSpecified
+        {
+            get
+            {
+                return this.codonccaprovincialprocFieldSpecified;
+            }
+            set
+            {
+                this.codonccaprovincialprocFieldSpecified = value;
+                this.RaisePropertyChanged("codonccaprovincialprocSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 8)]
+        public int codonccaprovinciapuerto
+        {
+            get
+            {
+                return this.codonccaprovinciapuertoField;
+            }
+            set
+            {
+                this.codonccaprovinciapuertoField = value;
+                this.RaisePropertyChanged("codonccaprovinciapuerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccaprovinciapuertoSpecified
+        {
+            get
+            {
+                return this.codonccaprovinciapuertoFieldSpecified;
+            }
+            set
+            {
+                this.codonccaprovinciapuertoFieldSpecified = value;
+                this.RaisePropertyChanged("codonccaprovinciapuertoSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 9)]
+        public int codonccapuerto
+        {
+            get
+            {
+                return this.codonccapuertoField;
+            }
+            set
+            {
+                this.codonccapuertoField = value;
+                this.RaisePropertyChanged("codonccapuerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codonccapuertoSpecified
+        {
+            get
+            {
+                return this.codonccapuertoFieldSpecified;
+            }
+            set
+            {
+                this.codonccapuertoFieldSpecified = value;
+                this.RaisePropertyChanged("codonccapuertoSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 10)]
+        public string codpostalprocedencia
+        {
+            get
+            {
+                return this.codpostalprocedenciaField;
+            }
+            set
+            {
+                this.codpostalprocedenciaField = value;
+                this.RaisePropertyChanged("codpostalprocedencia");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 11)]
+        public string contrato
+        {
+            get
+            {
+                return this.contratoField;
+            }
+            set
+            {
+                this.contratoField = value;
+                this.RaisePropertyChanged("contrato");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 12)]
+        public string cosecha
+        {
+            get
+            {
+                return this.cosechaField;
+            }
+            set
+            {
+                this.cosechaField = value;
+                this.RaisePropertyChanged("cosecha");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 13)]
+        public string cuitcorredor
+        {
+            get
+            {
+                return this.cuitcorredorField;
+            }
+            set
+            {
+                this.cuitcorredorField = value;
+                this.RaisePropertyChanged("cuitcorredor");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 14)]
+        public string cuitentregador
+        {
+            get
+            {
+                return this.cuitentregadorField;
+            }
+            set
+            {
+                this.cuitentregadorField = value;
+                this.RaisePropertyChanged("cuitentregador");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 15)]
+        public string cuitexport
+        {
+            get
+            {
+                return this.cuitexportField;
+            }
+            set
+            {
+                this.cuitexportField = value;
+                this.RaisePropertyChanged("cuitexport");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 16)]
+        public string cuitinter
+        {
+            get
+            {
+                return this.cuitinterField;
+            }
+            set
+            {
+                this.cuitinterField = value;
+                this.RaisePropertyChanged("cuitinter");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 17)]
+        public string cuitpuerto
+        {
+            get
+            {
+                return this.cuitpuertoField;
+            }
+            set
+            {
+                this.cuitpuertoField = value;
+                this.RaisePropertyChanged("cuitpuerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 18)]
+        public string cuitremic
+        {
+            get
+            {
+                return this.cuitremicField;
+            }
+            set
+            {
+                this.cuitremicField = value;
+                this.RaisePropertyChanged("cuitremic");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 19)]
+        public string cuitremitente
+        {
+            get
+            {
+                return this.cuitremitenteField;
+            }
+            set
+            {
+                this.cuitremitenteField = value;
+                this.RaisePropertyChanged("cuitremitente");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 20)]
+        public string cuittitu
+        {
+            get
+            {
+                return this.cuittituField;
+            }
+            set
+            {
+                this.cuittituField = value;
+                this.RaisePropertyChanged("cuittitu");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 21)]
+        public string entregador
+        {
+            get
+            {
+                return this.entregadorField;
+            }
+            set
+            {
+                this.entregadorField = value;
+                this.RaisePropertyChanged("entregador");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 22)]
+        public System.DateTime fechadescarga
+        {
+            get
+            {
+                return this.fechadescargaField;
+            }
+            set
+            {
+                this.fechadescargaField = value;
+                this.RaisePropertyChanged("fechadescarga");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechadescargaSpecified
+        {
+            get
+            {
+                return this.fechadescargaFieldSpecified;
+            }
+            set
+            {
+                this.fechadescargaFieldSpecified = value;
+                this.RaisePropertyChanged("fechadescargaSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 23)]
+        public System.DateTime fechaposicion
+        {
+            get
+            {
+                return this.fechaposicionField;
+            }
+            set
+            {
+                this.fechaposicionField = value;
+                this.RaisePropertyChanged("fechaposicion");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaposicionSpecified
+        {
+            get
+            {
+                return this.fechaposicionFieldSpecified;
+            }
+            set
+            {
+                this.fechaposicionFieldSpecified = value;
+                this.RaisePropertyChanged("fechaposicionSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 24)]
+        public string horadescarga
+        {
+            get
+            {
+                return this.horadescargaField;
+            }
+            set
+            {
+                this.horadescargaField = value;
+                this.RaisePropertyChanged("horadescarga");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 25)]
+        public string intermediario
+        {
+            get
+            {
+                return this.intermediarioField;
+            }
+            set
+            {
+                this.intermediarioField = value;
+                this.RaisePropertyChanged("intermediario");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("listaAnalisis", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = true, Order = 26)]
+        public analisis[] listaAnalisis
+        {
+            get
+            {
+                return this.listaAnalisisField;
+            }
+            set
+            {
+                this.listaAnalisisField = value;
+                this.RaisePropertyChanged("listaAnalisis");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 27)]
+        public string localidaddestino
+        {
+            get
+            {
+                return this.localidaddestinoField;
+            }
+            set
+            {
+                this.localidaddestinoField = value;
+                this.RaisePropertyChanged("localidaddestino");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 28)]
+        public string mercaderia
+        {
+            get
+            {
+                return this.mercaderiaField;
+            }
+            set
+            {
+                this.mercaderiaField = value;
+                this.RaisePropertyChanged("mercaderia");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 29)]
+        public int netodest
+        {
+            get
+            {
+                return this.netodestField;
+            }
+            set
+            {
+                this.netodestField = value;
+                this.RaisePropertyChanged("netodest");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool netodestSpecified
+        {
+            get
+            {
+                return this.netodestFieldSpecified;
+            }
+            set
+            {
+                this.netodestFieldSpecified = value;
+                this.RaisePropertyChanged("netodestSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 30)]
+        public int netoproc
+        {
+            get
+            {
+                return this.netoprocField;
+            }
+            set
+            {
+                this.netoprocField = value;
+                this.RaisePropertyChanged("netoproc");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool netoprocSpecified
+        {
+            get
+            {
+                return this.netoprocFieldSpecified;
+            }
+            set
+            {
+                this.netoprocFieldSpecified = value;
+                this.RaisePropertyChanged("netoprocSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 31)]
+        public string nomExport
+        {
+            get
+            {
+                return this.nomExportField;
+            }
+            set
+            {
+                this.nomExportField = value;
+                this.RaisePropertyChanged("nomExport");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 32)]
+        public string nomRemic
+        {
+            get
+            {
+                return this.nomRemicField;
+            }
+            set
+            {
+                this.nomRemicField = value;
+                this.RaisePropertyChanged("nomRemic");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 33)]
+        public string nomcorre
+        {
+            get
+            {
+                return this.nomcorreField;
+            }
+            set
+            {
+                this.nomcorreField = value;
+                this.RaisePropertyChanged("nomcorre");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 34)]
+        public string nroRecibo
+        {
+            get
+            {
+                return this.nroReciboField;
+            }
+            set
+            {
+                this.nroReciboField = value;
+                this.RaisePropertyChanged("nroRecibo");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 35)]
+        public string observaciones
+        {
+            get
+            {
+                return this.observacionesField;
+            }
+            set
+            {
+                this.observacionesField = value;
+                this.RaisePropertyChanged("observaciones");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 36)]
+        public string observado
+        {
+            get
+            {
+                return this.observadoField;
+            }
+            set
+            {
+                this.observadoField = value;
+                this.RaisePropertyChanged("observado");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 37)]
+        public string patente
+        {
+            get
+            {
+                return this.patenteField;
+            }
+            set
+            {
+                this.patenteField = value;
+                this.RaisePropertyChanged("patente");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 38)]
+        public string procedencia
+        {
+            get
+            {
+                return this.procedenciaField;
+            }
+            set
+            {
+                this.procedenciaField = value;
+                this.RaisePropertyChanged("procedencia");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 39)]
+        public string puerto
+        {
+            get
+            {
+                return this.puertoField;
+            }
+            set
+            {
+                this.puertoField = value;
+                this.RaisePropertyChanged("puerto");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 40)]
+        public string remitente
+        {
+            get
+            {
+                return this.remitenteField;
+            }
+            set
+            {
+                this.remitenteField = value;
+                this.RaisePropertyChanged("remitente");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 41)]
+        public int taradest
+        {
+            get
+            {
+                return this.taradestField;
+            }
+            set
+            {
+                this.taradestField = value;
+                this.RaisePropertyChanged("taradest");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool taradestSpecified
+        {
+            get
+            {
+                return this.taradestFieldSpecified;
+            }
+            set
+            {
+                this.taradestFieldSpecified = value;
+                this.RaisePropertyChanged("taradestSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 42)]
+        public string titular
+        {
+            get
+            {
+                return this.titularField;
+            }
+            set
+            {
+                this.titularField = value;
+                this.RaisePropertyChanged("titular");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 43)]
+        public string usuario
+        {
+            get
+            {
+                return this.usuarioField;
+            }
+            set
+            {
+                this.usuarioField = value;
+                this.RaisePropertyChanged("usuario");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 44)]
+        public int vagon
+        {
+            get
+            {
+                return this.vagonField;
+            }
+            set
+            {
+                this.vagonField = value;
+                this.RaisePropertyChanged("vagon");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    public partial class respuestaEntrega : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private string codigoResultadoField;
+
+        private cartaPorte[] descargasField;
+
+        private string descripcionField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        public string codigoResultado
+        {
+            get
+            {
+                return this.codigoResultadoField;
+            }
+            set
+            {
+                this.codigoResultadoField = value;
+                this.RaisePropertyChanged("codigoResultado");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("descargas", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = true, Order = 1)]
+        public cartaPorte[] descargas
+        {
+            get
+            {
+                return this.descargasField;
+            }
+            set
+            {
+                this.descargasField = value;
+                this.RaisePropertyChanged("descargas");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        public string descripcion
+        {
+            get
+            {
+                return this.descripcionField;
+            }
+            set
+            {
+                this.descripcionField = value;
+                this.RaisePropertyChanged("descripcion");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+   
+
+
+
+}
 
 
 namespace ExtensionMethods

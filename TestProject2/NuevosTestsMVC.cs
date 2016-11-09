@@ -19,6 +19,7 @@ using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
 
+using System.Configuration;
 
 using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
 
@@ -58,9 +59,11 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
-        const string nombreempresa = "Williams2";
+        const string nombreempresa = "Pronto_Alemarsa";
+        //const string nombreempresa = "Williams2";
         //const string nombreempresa = "Pronto";
         //const string nombreempresa = "DemoProntoWeb";
+        //const string usuario = "administrador";
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
@@ -86,20 +89,31 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        /// <summary>
+                /// <summary>
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        [TestMethod]
+        public void mail_de_error()
+        {
+
+            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                               "asuntoasuntoasunto ",
+                            "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpServer"],
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpPass"],
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+        }
+
+
+
+
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,6 +131,129 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+   
+
+
+
+        [TestMethod]
+        public void probar_context_del_rms_pendientesGenerarValesAlmacen()
+        {
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+            c.GenerarValesAlmacen((new int[] { 48862 }).ToList(), "administrador", "");
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void probar_context_del_rms_pendientesAsignaComprador()
+        {
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+            c.AsignaComprador((new int[] { 48858 }).ToList(), "administrador", "");
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void probar_context_del_rms_pendientesDarPorCumplido()
+        {
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+            c.DarPorCumplido((new int[] { 48631 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
+        }
+
+
+
+
+     [TestMethod]
+        public void probar_context_del_rms_pendientes()
+        {
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+
+            c.DarPorCumplido((new int[] { 1, 2, 3 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
+
+            c.GenerarValesAlmacen((new int[] { 48631 }).ToList(), "administrador", "");
+            c.AsignaComprador((new int[] { 1, 2, 3 }).ToList(), "administrador", "");
+        }
+
+
+
+
+
+        [TestMethod]
+        public void probar_circuito_externo()
+        {
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+            string filters = "";
+
+            // crear un extadmin
+            // y q este cree sus usuarios 
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+            List<int> myValues = new List<int>(new int[] { 1, 2, 3 });
+            string o = "lala.xlsx";
+
+
+            //ExternoCuentaCorrienteCliente",
+            //                                        "ExternoCuentaCorrienteProveedor",
+            //                                        "ExternoOrdenesPagoListas",
+            //                                        "ExternoPresupuestos
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void informeResumnenPosicionFinanciera_usandoVBA_24897()
+        {
+
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+
+
+            //ojo q en williams ya estoy usando xml para la factura. Esto es codigo obsoleto. Y ademas lo que quiero es sacar un excel, no un word
+            //string p = DirApp() & "\Documentos\" & "Factura_Williams.dot"
+            //output = ImprimirWordDOTyGenerarTambienTXT(p, Me, HFSC.Value, Session, Response, IdFactura, mvarClausula, mPrinter, mCopias, 
+
+            string o = "lala.xlsx";
+
+
+            System.Diagnostics.Process.Start(o);
+        }
 
 
 
@@ -138,6 +275,7 @@ namespace ProntoMVC.Tests
             string o = "lala.xlsx";
 
         }
+
 
 
 
@@ -216,7 +354,7 @@ namespace ProntoMVC.Tests
                 //Dim ws As ExcelWorksheet = pck.Workbook.Worksheets.Add("Accounts")
                 //Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
                 //ws.Cells("A1").LoadFromDataTable(pDataTable, True);
-               // package.Save();
+                // package.Save();
 
 
             }
@@ -770,13 +908,16 @@ namespace ProntoMVC.Tests
 
             var m = new Mock<Generales.IStaticMembershipService>();
             var us = new Mock<MembershipUser>();
-            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
+            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+            // supervisor       1804B573-0439-4EA0-B631-712684B54473
+            //us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
+            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1804B573-0439-4EA0-B631-712684B54473"));
+            us.Setup(u => u.UserName).Returns("administrador");
             m.Setup(s => s.GetUser()).Returns(us.Object);
             m.Setup(s => s.EsSuperAdmin()).Returns(true);
             m.Setup(s => s.UsuarioTieneElRol(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
             c.oStaticMembershipService = m.Object;
-            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
-            // supervisor       1804B573-0439-4EA0-B631-712684B54473
+ 
 
 
 

@@ -1529,3 +1529,11 @@ alter table  DetalleAsientos
 go
 
 
+alter table  DetalleEventosDelSistema
+		ADD CONSTRAINT FK_DetalleEventosDelSistema_IdEventoDelSistema
+		FOREIGN KEY (IdEventoDelSistema) REFERENCES EventosDelSistema(IdEventoDelSistema)
+go
+
+
+
+
