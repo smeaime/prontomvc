@@ -116,7 +116,7 @@ namespace ProntoMVC.Controllers
 
                 bool mAnulada = false;
 
-                string usuario = ViewBag.NombreUsuario;
+                string usuario = oStaticMembershipService.GetUser().UserName;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
 
                 if (!Validar(ValeSalida, ref errs, ref warnings))
@@ -539,8 +539,8 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleValeSalida.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
-                                a.IdDetalleValeSalida.NullSafeToString(), 
+                                  "<a href="+ Url.Action("Edit",new {id = a.IdValeSalida} ) + "  >Editar</>" ,
+                                a.IdDetalleValeSalida.NullSafeToString(),
                                 a.IdValeSalida.NullSafeToString(), 
                                 a.IdArticulo.NullSafeToString(), 
                                 a.NumeroValeSalida.NullSafeToString(), 

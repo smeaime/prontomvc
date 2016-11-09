@@ -347,7 +347,7 @@ namespace ProntoMVC
                                     ConfigurationManager.AppSettings["SmtpServer"],
                                     ConfigurationManager.AppSettings["SmtpUser"],
                                     ConfigurationManager.AppSettings["SmtpPass"],
-                                       (YSODmarkup + log) ?? "",
+                                      null, //(YSODmarkup + log) ?? "",
                                    Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
                     

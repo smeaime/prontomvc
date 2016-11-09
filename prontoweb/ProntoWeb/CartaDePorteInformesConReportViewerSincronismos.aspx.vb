@@ -1521,6 +1521,26 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
 
+                    Case "LA BIZNAGA"
+
+
+                        output = SincronismosWilliamsManager.GenerarSincro("LA BIZNAGA", sErrores, _
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"), _
+                           "", estadofiltro, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRComercial, idArticulo, idProcedencia, idDestino, _
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos", _
+                              CartaDePorteManager.FiltroANDOR.FiltroAND, _
+                            CartaDePorteManager.FiltroANDOR.FiltroOR), _
+                          DropDownList2.Text, _
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        sErrores = ""
+
+
                     Case "GRANAR"
 
 
@@ -2785,16 +2805,16 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
         ReportViewer2.Visible = True
 
         Dim sTitulo As String = ""
-        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
-        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-        Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
-        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
-        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
-        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-        Dim idCorredor2 = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+        Dim idVendedor As Long = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
+        Dim idCorredor As Long = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+        Dim idIntermediario As Long = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
+        Dim idRComercial As Long = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
+        Dim idClienteAuxiliar As Long = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
+        Dim idDestinatario As Long = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
+        Dim idArticulo As Long = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
+        Dim idProcedencia As Long = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
+        Dim idDestino As Long = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+        Dim idCorredor2 As Long = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
 
 
         If txtFechaDesde.Text <> "" And iisValidSqlDate(txtFechaDesde.Text) Is Nothing Then

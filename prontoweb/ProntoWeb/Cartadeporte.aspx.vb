@@ -1409,7 +1409,6 @@ Partial Class CartadeporteABM
 
 
 
-
             '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1473,6 +1472,8 @@ Partial Class CartadeporteABM
             .ClienteAcondicionador = BuscaIdClientePrecisoConCUIT(txtClienteAcondicionador.Text, SC)
             If .ClienteAcondicionador = -1 Then .ClienteAcondicionador = Nothing
 
+
+            .EntregaSAP = txtEntregaSAP.Text
 
 
 
@@ -1769,7 +1770,7 @@ Partial Class CartadeporteABM
                 cmbMotivoRechazoRecibidor.SelectedIndex = .MotivoRechazo
                 txtClienteAcondicionador.Text = NombreCliente(SC, .ClienteAcondicionador)
 
-
+                txtEntregaSAP.Text = .EntregaSAP
 
 
                 Try

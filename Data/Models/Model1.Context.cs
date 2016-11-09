@@ -249,6 +249,9 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DiccionarioEquivalencia> DiccionarioEquivalencias { get; set; }
         public virtual DbSet<ExcelImportador> ExcelImportadors { get; set; }
         public virtual DbSet<CartasDePorteControlDescarga> CartasDePorteControlDescargas { get; set; }
+        public virtual DbSet<NovedadesUsuario> NovedadesUsuarios { get; set; }
+        public virtual DbSet<DetalleEventosDelSistema> DetalleEventosDelSistemas { get; set; }
+        public virtual DbSet<EventosDelSistema> EventosDelSistemas { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

@@ -385,8 +385,8 @@ namespace Filtrador
             // to be able to use ToString() below which is NOT exist in the LINQ to Entity
 
 
-            List<T> pagedQuery = filteredQuery.OrderBy(sidx).Skip((page - 1) * rows).Take(rows).ToList();
-
+            List<T> pagedQuery = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows).ToList();
+            
             return pagedQuery;
 
             ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////

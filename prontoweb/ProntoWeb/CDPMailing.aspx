@@ -973,13 +973,16 @@ llama explicitamente al show y update (acordate que este panel es condicional)
                                             </td>
                                             <td class="EncabezadoCell" style="width: 197px">
                                                 <asp:DropDownList ID="cmbPopModoImpresion" runat="server" TabIndex="14">
+                                                    <%--eInformesGeneralFormatos--%>
                                                     <asp:ListItem Value="Excel" Text="Excel" />
                                                     <asp:ListItem Value="Imagen" Text="Excel con imágenes " />
                                                     <asp:ListItem Value="ExcRec" Text="Excel con n°recibo" />
                                                     <asp:ListItem Value="Grobo" Text="Excel Grobo" />
-                                                    <asp:ListItem Value="ExcHtm" Text="Excel y Html" />
-                                                    <asp:ListItem Value="Html" Text="Html" />
-                                                    <asp:ListItem Value="HtmlIm" Text="Html con imágenes " />
+                                                    <asp:ListItem Value="ExcHtm" Text="Excel y Html" Enabled="true" />
+                                                    <asp:ListItem Value="Html" Text="Html"  Enabled="false"  />
+                                                    <asp:ListItem Value="HtmlIm" Text="Html con imágenes "  Enabled="false"  />
+                                                    <asp:ListItem Value="HImag2" Text="Html con imágenes 2 " />
+                                                    <asp:ListItem Value="EHOlav" Text="Html corto" />
                                                 </asp:DropDownList>
                                             </td>
                                             <td class="EncabezadoCell"></td>
