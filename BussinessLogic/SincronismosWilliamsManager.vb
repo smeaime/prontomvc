@@ -520,7 +520,12 @@ Namespace Pronto.ERP.Bll
 
             Using ds As New WillyInformesDataSet
 
-                If sSincronismo.ToUpper <> "YPF" And sSincronismo.ToUpper <> "NIDERA" And sSincronismo.ToUpper <> "LA BIZNAGA" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
+                If sSincronismo.ToUpper <> "YPF" And _
+                    sSincronismo.ToUpper <> "NIDERA" And _
+                    sSincronismo.ToUpper <> "TOMAS HNOS" And _
+                    sSincronismo.ToUpper <> "MONSANTO" And _
+                    sSincronismo.ToUpper <> "LA BIZNAGA" And _
+                    InStr(sSincronismo.ToUpper, "BLD") = 0 Then
 
                     '// Customize the connection string.
                     Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(SC)) ' Properties.Settings.Default.DistXsltDbConnectionString)
@@ -1084,7 +1089,7 @@ Namespace Pronto.ERP.Bll
                             yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#).ToString))
                             yourParams(3) = New ReportParameter("FechaHasta", Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#).ToString))
 
-                         
+
 
 
                             yourParams(4) = New ReportParameter("IdDestino", idDestino.ToString)
@@ -1561,7 +1566,7 @@ Namespace Pronto.ERP.Bll
 
 
                             sForzarNombreDescarga = "BERAZA.TXT"
-                            
+
 
                         Case "SYNGENTA"
                             Dim sErrores As String
