@@ -135,6 +135,9 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> CartaPorteTipoDeAdjuntoDeFacturacion { get; set; }
         public Nullable<System.DateTime> FechaInicioExclusionPercepcionIVA { get; set; }
         public Nullable<System.DateTime> FechaFinExclusionPercepcionIVA { get; set; }
+        public Nullable<int> CodigoNormaCapital { get; set; }
+        public Nullable<System.DateTime> FechaInicioVigenciaCodigoNormaCapital { get; set; }
+        public Nullable<System.DateTime> FechaFinVigenciaCodigoNormaCapital { get; set; }
     
         public virtual Cuenta Cuenta { get; set; }
         public virtual IBCondicion IBCondicione { get; set; }

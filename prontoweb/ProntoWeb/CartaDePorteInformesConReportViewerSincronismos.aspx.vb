@@ -396,7 +396,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
         Try
 
-            SincronismosWilliamsManager.ElegirCombosSegunParametro(cmbSincronismo.Text.ToUpper, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2)
+            SincronismosWilliamsManager.ElegirCombosSegunParametro(cmbSincronismo.Text.ToUpper, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
         Catch ex As Exception
 
             MandarMailDeError(ex)

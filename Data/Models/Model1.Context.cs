@@ -688,7 +688,7 @@ namespace ProntoMVC.Data.Models
         }
     
         [DbFunction("DemoProntoEntities", "fSQL_GetDataTableFiltradoYPaginado")]
-        public virtual IQueryable<fSQL_GetDataTableFiltradoYPaginado_Result3> fSQL_GetDataTableFiltradoYPaginado(Nullable<int> startRowIndex, Nullable<int> maximumRows, Nullable<int> estado, string queContenga, Nullable<int> idVendedor, Nullable<int> idCorredor, Nullable<int> idDestinatario, Nullable<int> idIntermediario, Nullable<int> idRemComercial, Nullable<int> idArticulo, Nullable<int> idProcedencia, Nullable<int> idDestino, Nullable<int> aplicarANDuORalFiltro, string modoExportacion, Nullable<System.DateTime> fechadesde, Nullable<System.DateTime> fechahasta, Nullable<int> puntoventa, string optDivisionSyngenta, string contrato, string queContenga2, Nullable<int> idClienteAuxiliarint, Nullable<int> agrupadorDeTandaPeriodos, Nullable<int> vagon, string patente, string optCamionVagon)
+        public virtual IQueryable<fSQL_GetDataTableFiltradoYPaginado_Result3> fSQL_GetDataTableFiltradoYPaginado(Nullable<int> startRowIndex, Nullable<int> maximumRows, Nullable<int> estado, string queContenga, Nullable<int> idVendedor, Nullable<int> idCorredor, Nullable<int> idDestinatario, Nullable<int> idIntermediario, Nullable<int> idRemComercial, Nullable<int> idArticulo, Nullable<int> idProcedencia, Nullable<int> idDestino, Nullable<int> aplicarANDuORalFiltro, string modoExportacion, Nullable<System.DateTime> fechadesde, Nullable<System.DateTime> fechahasta, Nullable<int> puntoventa, Nullable<int> idAcopio, string contrato, string queContenga2, Nullable<int> idClienteAuxiliarint, Nullable<int> agrupadorDeTandaPeriodos, Nullable<int> vagon, string patente, string optCamionVagon)
         {
             var startRowIndexParameter = startRowIndex.HasValue ?
                 new ObjectParameter("startRowIndex", startRowIndex) :
@@ -758,9 +758,9 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("puntoventa", puntoventa) :
                 new ObjectParameter("puntoventa", typeof(int));
     
-            var optDivisionSyngentaParameter = optDivisionSyngenta != null ?
-                new ObjectParameter("optDivisionSyngenta", optDivisionSyngenta) :
-                new ObjectParameter("optDivisionSyngenta", typeof(string));
+            var idAcopioParameter = idAcopio.HasValue ?
+                new ObjectParameter("IdAcopio", idAcopio) :
+                new ObjectParameter("IdAcopio", typeof(int));
     
             var contratoParameter = contrato != null ?
                 new ObjectParameter("Contrato", contrato) :
@@ -790,7 +790,7 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("optCamionVagon", optCamionVagon) :
                 new ObjectParameter("optCamionVagon", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fSQL_GetDataTableFiltradoYPaginado_Result3>("[DemoProntoEntities].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @optDivisionSyngenta, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, optDivisionSyngentaParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, optCamionVagonParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fSQL_GetDataTableFiltradoYPaginado_Result3>("[DemoProntoEntities].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, idAcopioParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, optCamionVagonParameter);
         }
     
         public virtual int Requerimientos_TX_PendientesDeAsignacion(string depositos)
