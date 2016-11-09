@@ -37,12 +37,21 @@ Imports System.Web.UI.WebControls
 
 Namespace Pronto.ERP.Bll
 
+
+
+
+
+
     Public Class SincronismosWilliamsManager
 
 
 
+        Const MonsantoCUIT = "30503508725"
 
-        Public Shared Sub ElegirCombosSegunParametro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList)
+
+
+
+        Public Shared Sub ElegirCombosSegunParametro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList, SC As String)
 
             'ReportViewer2.Visible = False
             cmbEstado.Text = "Descargas"
@@ -185,7 +194,7 @@ Namespace Pronto.ERP.Bll
                     txtTitular.Text = ""
                     txtCorredor.Text = "GRANAR S.A.C"
 
-            
+
                 Case "LARTIRIGOYEN"
                     'LARTIRIGOYEN: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES 
                     txtTitular.Text = "LARTIRIGOYEN S.A."
@@ -235,10 +244,14 @@ Namespace Pronto.ERP.Bll
 
                 Case "MIGUEL CINQUE"
                     txtTitular.Text = "CINQUE MIGUEL MARTIN"
+
+
                 Case "MONSANTO"
-                    txtTitular.Text = "MONSANTO ARGENTINA S.A.I.C."
-                    txtIntermediario.Text = "MONSANTO ARGENTINA S.A.I.C."
-                    txtRcomercial.Text = "MONSANTO ARGENTINA S.A.I.C."
+                    txtTitular.Text = NombreCliente(SC, BuscarClientePorCUIT(MonsantoCUIT, SC, ""))
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(MonsantoCUIT, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(MonsantoCUIT, SC, ""))
+
+
                 Case "PSA LA CALIFORNIA", "PSA LA CALIFORNIA (CALIDADES)"
                     'PSA LA CALIFORNIA: CORREDOR
                     txtCorredor.Text = "PSA LA CALIFORNIA SA"
@@ -22333,6 +22346,12 @@ Namespace Pronto.ERP.Bll
                 '                                                       6.	Reingreso de Mercadería
                 '                                                       7.	Transferencia desde otra Planta
 
+
+
+                sb &= "&" & ""
+                sb &= "&" & dr("Pat. Chasis").ToString
+                sb &= "&" & dr("Pat. Acoplado").ToString
+        
 
 
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14) '
