@@ -44,13 +44,15 @@ create function fSQL_GetDataTableFiltradoYPaginado(
             @AplicarANDuORalFiltro int  ,
             @ModoExportacion  VARCHAR(20) ,
             @fechadesde As DateTime,
+			
 			@fechahasta As DateTime,
             @puntoventa int , 
             @IdAcopio int,
             --@bTraerDuplicados As Boolean ,
             @Contrato  VARCHAR(50) , 
             @QueContenga2  VARCHAR(50) ,
-            @idClienteAuxiliarint int ,
+            
+			@idClienteAuxiliarint int ,
             @AgrupadorDeTandaPeriodos int  ,
             @Vagon  int  ,
 			@Patente VARCHAR(10) ,
@@ -476,13 +478,13 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 					NULL, 
 					NULL,
-				 	'Todos', 
-					'2010-01-09 00:00:00',
+				 	'Ambas', 
+					'2016-01-09 00:00:00',
 
 			
 					'2016-01-09 00:00:00',
 								NULL, 
-					NULL,
+					'Ambas',
 					NULL, 
 					NULL, 
 
@@ -490,11 +492,29 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 					NULL,
 					NULL, 
-					NULL
+					'Ambas'
 
 					) as cdp
             
 go
+
+
+
+
+select  exporta, * --count(*)
+from dbo.fSQL_GetDataTableFiltradoYPaginado  
+				(  
+
+0,40,4,'',-1,-1,-1,-1,-1,-1,-1,-1,0,'Ambas','2016-01-01 00:00:00','2016-01-28 00:00:00',-1,NULL,'','-1',-1,-1,0,'','Ambas'
+
+					) as cdp
+            
+go
+
+
+
+
+
 
 --[wCartasDePorte_TX_EstadisticasDeDescarga] 'Buques',-1,'2014-01-06 00:00:00','2015-21-06 00:00:00','2013-01-06 00:00:00','2013-21-06 00:00:00'
 go

@@ -2393,7 +2393,14 @@ Public Class CartaDePorteManager
         '.NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8)
 
 
-        Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(0, 3000, estado, QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, optDivisionSyngenta, Contrato, QueContenga2, idClienteAuxiliar, AgrupadorDeTandaPeriodos, Vagon, Patente, optCamionVagon)
+        Dim idacopio = Nothing 'BuscarIdAcopio(optDivisionSyngenta, SC)
+
+        Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(
+                                        0, maximumRows, estado, QueContenga, idVendedor, idCorredor,
+                                        idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia,
+                                        idDestino, AplicarANDuORalFiltro, ModoExportacionString, fechadesde, _
+                                        fechahasta, puntoventa, idacopio, Contrato, QueContenga2, _
+                                        idClienteAuxiliar, AgrupadorDeTandaPeriodos, Vagon, Patente, optCamionVagon).Take(maximumRows)
         Select New CartasConCalada With { _
              .IdCartaDePorte = cdp.IdCartaDePorte, _
              .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
@@ -2490,7 +2497,6 @@ Public Class CartaDePorteManager
             .IdFacturaImputada = If(cdp.IdFacturaImputada, -1), _
             .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1), _
             .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1), _
-            .PrecioUnitarioTotal = 0, _
             .ClienteFacturado = cdp.ClienteFacturado, _
             .PathImagen = cdp.PathImagen, _
  _
