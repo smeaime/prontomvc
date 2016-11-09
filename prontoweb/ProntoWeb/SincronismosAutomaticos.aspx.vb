@@ -468,7 +468,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-        SincronismosWilliamsManager.ElegirCombosSegunParametro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2)
+        SincronismosWilliamsManager.ElegirCombosSegunParametro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
 
@@ -505,7 +505,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-            SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2)
+            SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
             Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
