@@ -4650,7 +4650,7 @@ Public Class LogicaFacturacion
 
 
                 Catch ex As Exception
-                 
+
                     'si esto falla, anular la ultima factura y cortar el proceso
                     'anular factura idfactura
                     MandarMailDeError(ex)
@@ -5266,6 +5266,8 @@ Public Class LogicaFacturacion
 
                     Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
                     'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                    'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                    Return vbCrLf + quienautoriza
                     Return vbCrLf + "División AGRO – Andreas Bluhm"
                     Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
 
@@ -5276,9 +5278,14 @@ Public Class LogicaFacturacion
                     'quienautoriza()
                     Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
                     'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                    'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                    Return vbCrLf + quienautoriza
                     Return vbCrLf + "División AGRO – Andreas Bluhm"
                     Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
                 Else
+                    Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                    'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                    Return vbCrLf + quienautoriza
                     Return vbCrLf + "División AGRO – Andreas Bluhm"
                 End If
 
@@ -5317,7 +5324,10 @@ Public Class LogicaFacturacion
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
 
 
-                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903}
+                'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+
+                Return vbCrLf + quienautoriza
                 Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Agro. Autoriza: " & quienautoriza
 
@@ -5328,6 +5338,8 @@ Public Class LogicaFacturacion
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
                 'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=24963
+                Return vbCrLf + quienautoriza
                 Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Seeds. Autoriza: " & quienautoriza
 
@@ -6218,7 +6230,64 @@ Public Class LogicaFacturacion
 
                 End With
                 idFacturaCreada = oFac.Registro.Fields(0).Value
+
+
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+                'esto es codigo que se ejecuta en el boton aceptar (cmd_Click index 0) del frmFacturas 
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+
+                'aumentar numerador IIBB 
+
+                Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+                If oFac.Registro.Fields("RetencionIBrutos1").Value > 0 Then
+
+                    Dim cli = db.Clientes.Find(IdClienteAFacturarle)
+                    Dim ibcond = db.IBCondiciones.Find(cli.IdIBCondicionPorDefecto)
+                    Dim mIdProvinciaIIBB = ibcond.IdProvincia
+                    Dim oPrv As Models.Provincia = db.Provincias.Find(mIdProvinciaIIBB)
+
+                    Dim mNum = oPrv.ProximoNumeroCertificadoPercepcionIIBB
+                    oPrv.ProximoNumeroCertificadoPercepcionIIBB = mNum + 1
+
+                    db.SaveChanges()
+                End If
+
+
+                'If dcfields(4).Enabled And Check1(0).Value = 1 Then
+                '    Dim oPrv As ComPronto.Provincia
+                '    oRs = Aplicacion.IBCondiciones.TraerFiltrado("_PorId", origen.Registro.Fields("IdIBCondicion").Value)
+                '    If oRs.RecordCount > 0 Then
+                '        If Not IsNull(oRs.Fields("IdProvincia").Value) Then
+                '            oPrv = db.Provincias.Find(  oRs.Fields("IdProvincia").Value))
+                '            With oPrv.Registro
+                '                mNum = IIf(IsNull(.Fields("ProximoNumeroCertificadoPercepcionIIBB").Value), 1, .Fields("ProximoNumeroCertificadoPercepcionIIBB").Value)
+                '                origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = mNum
+                '                .Fields("ProximoNumeroCertificadoPercepcionIIBB").Value = mNum + 1
+                '            End With
+
+                '            db.SaveChanges()
+                '        End If
+                '    End If
+                'End If
+
+
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////
+
                 oFac = Nothing
+
+
+
+
 
 
                 Try
@@ -6724,11 +6793,24 @@ Public Class LogicaFacturacion
 
 
 
+
+
+
+        Dim scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc))
+        Dim db = New DemoProntoEntities(scEF)
+
+
+
+
+
+
         Dim mvarIBrutos As Double = 0
         If True Then
             Try
-                Dim ccc = ExecDinamico(sc, "Select AgentePercepcionIIBB from PuntosVenta  where  IdPuntoVenta=" & IdPuntoVenta)
-                mvarIBrutos = PercepcionIngresosBrutos(oFac, sc, session, cli, mvarNetoGravado, True, "SI" = iisNull(ccc.Rows(0).Item("AgentePercepcionIIBB"), "NO")) '(puntoventa = 2 Or puntoventa = 3))
+                Dim puntoventapercepcion = ExecDinamico(sc, "Select AgentePercepcionIIBB from PuntosVenta  where  IdPuntoVenta=" & IdPuntoVenta)
+                mvarIBrutos = PercepcionIngresosBrutos(oFac, sc, session, cli, mvarNetoGravado, _
+                                                        "SI" = db.Parametros.First().PercepcionIIBB, _
+                                                        "SI" = iisNull(puntoventapercepcion.Rows(0).Item("AgentePercepcionIIBB"), "NO")) '(puntoventa = 2 Or puntoventa = 3))
             Catch ex As Exception
                 ErrHandler2.WriteError("Error al calcular ingresos brutos. " & ex.ToString)
             End Try
@@ -6810,6 +6892,10 @@ Public Class LogicaFacturacion
     End Sub
 
 
+
+
+
+
     Private Shared Function PercepcionIngresosBrutos(ByRef oFac As Object, ByVal sc As String, ByRef session As System.Web.SessionState.HttpSessionState, cli As ClienteNuevo, mvarNetoGravado As Double, Parametros_EsAgenteDePercepcionIIBB As Boolean, Pventa_AgentePercepcionIIBB As Boolean) As Double
 
         'origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = Null
@@ -6830,6 +6916,14 @@ Public Class LogicaFacturacion
         Dim clicatiibb As Integer = cli.IBCondicion '.IdIBCondicionPorDefecto
         Dim facturaTieneCheckCategoria1 = True
 
+        mAlicuotaDirecta = cli.PorcentajeIBDirecto
+        mFechaInicioVigenciaIBDirecto = cli.FechaInicioVigenciaIBDirecto
+        mFechaFinVigenciaIBDirecto = cli.FechaFinVigenciaIBDirecto
+        mAlicuotaDirectaCapital = cli.PorcentajeIBDirectoCapital
+        mFechaInicioVigenciaIBDirectoCapital = cli.FechaInicioVigenciaIBDirectoCapital
+        mFechaFinVigenciaIBDirectoCapital = cli.FechaFinVigenciaIBDirectoCapital
+
+
 
 
         'los montos que importan son los campos "RetencionIBrutos1" / "2" / "3" 
@@ -6847,7 +6941,12 @@ Public Class LogicaFacturacion
         If Not Pventa_AgentePercepcionIIBB Then Exit Function
 
 
+        mvarIBCondicion = cli.IBCondicion
 
+
+
+        '        If dcfields(4).Enabled And Check1(0).Value = 1 And IsNumeric(dcfields(4).BoundText) Then
+        '            oRs = Aplicacion.IBCondiciones.TraerFiltrado("_PorId", dcfields(4).BoundText)
         If clicatiibb = 2 Or clicatiibb = 3 Then 'Exit Function
 
             'importantisimo
@@ -6868,9 +6967,16 @@ Public Class LogicaFacturacion
                 If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
                 oRs1.Close()
                 If mCodigoProvincia = "902" And fechafactura >= mFechaInicioVigenciaIBDirecto And fechafactura <= mFechaFinVigenciaIBDirecto Then
-                    mvarPorcentajeIBrutos = mAlicuotaDirecta
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos = mAlicuotaDirecta
+                    End If
+
                 ElseIf mCodigoProvincia = "901" And fechafactura >= mFechaInicioVigenciaIBDirectoCapital And fechafactura <= mFechaFinVigenciaIBDirectoCapital Then
-                    mvarPorcentajeIBrutos = mAlicuotaDirectaCapital
+                    If mvarNetoGravado > mTopeIIBB Then
+
+
+                        mvarPorcentajeIBrutos = mAlicuotaDirectaCapital
+                    End If
                 Else
                     If mvarNetoGravado > mTopeIIBB And fechafactura >= mFecha1 Then
                         If mvarIBCondicion = 2 Then
@@ -6907,9 +7013,15 @@ Public Class LogicaFacturacion
                 If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
                 oRs1.Close()
                 If mCodigoProvincia = "902" And fechafactura >= mFechaInicioVigenciaIBDirecto And fechafactura <= mFechaFinVigenciaIBDirecto Then
-                    mvarPorcentajeIBrutos2 = mAlicuotaDirecta
+                    If mvarNetoGravado > mTopeIIBB Then
+
+                        mvarPorcentajeIBrutos2 = mAlicuotaDirecta
+                    End If
+
                 ElseIf mCodigoProvincia = "901" And fechafactura >= mFechaInicioVigenciaIBDirectoCapital And fechafactura <= mFechaFinVigenciaIBDirectoCapital Then
-                    mvarPorcentajeIBrutos2 = mAlicuotaDirectaCapital
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos2 = mAlicuotaDirectaCapital
+                    End If
                 Else
                     If mvarNetoGravado > mTopeIIBB And fechafactura >= mFecha1 Then
                         If mvarIBCondicion = 2 Then
@@ -6949,9 +7061,13 @@ Public Class LogicaFacturacion
                 If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
                 oRs1.Close()
                 If mCodigoProvincia = "902" And fechafactura >= mFechaInicioVigenciaIBDirecto And fechafactura <= mFechaFinVigenciaIBDirecto Then
-                    mvarPorcentajeIBrutos3 = mAlicuotaDirecta
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos3 = mAlicuotaDirecta
+                    End If
                 ElseIf mCodigoProvincia = "901" And fechafactura >= mFechaInicioVigenciaIBDirectoCapital And fechafactura <= mFechaFinVigenciaIBDirectoCapital Then
-                    mvarPorcentajeIBrutos3 = mAlicuotaDirectaCapital
+                    If mvarNetoGravado > mTopeIIBB Then
+                        mvarPorcentajeIBrutos3 = mAlicuotaDirectaCapital
+                    End If
                 Else
                     If mvarNetoGravado > mTopeIIBB And fechafactura >= mFecha1 Then
                         If mvarIBCondicion = 2 Then
@@ -7019,7 +7135,10 @@ Public Class LogicaFacturacion
                 Dim dt = ExecDinamico(sc, "SELECT ProximoNumeroCertificadoPercepcionIIBB from provincias where IdProvincia=" & mIdProvinciaIIBB)
                 Dim numcertif As Long
                 If dt.Rows.Count > 0 Then numcertif = iisNull(dt.Rows(0).Item(0), 1)
-                ExecDinamico(sc, "UPDATE  provincias set ProximoNumeroCertificadoPercepcionIIBB= " & numcertif + 1 & " where IdProvincia=" & mIdProvinciaIIBB)
+
+                If False Then 'ahora esto lo hago despues de que se creó la factura, en CreaFacturaCOMpronto
+                    ExecDinamico(sc, "UPDATE  provincias set ProximoNumeroCertificadoPercepcionIIBB= " & numcertif + 1 & " where IdProvincia=" & mIdProvinciaIIBB)
+                End If
 
                 .Fields("NumeroCertificadoPercepcionIIBB").Value = numcertif
             Catch ex As Exception
@@ -7103,6 +7222,333 @@ Public Class LogicaFacturacion
 
     End Function
 
+
+
+
+    'Private Sub CalculaFactura()
+
+    '    Dim oRs As ADOR.Recordset
+    '    Dim oRs1 As ADOR.Recordset
+    '    Dim oL As ListItem
+    '    Dim i As Integer, mIdProvinciaIIBB As Integer, mIdProvinciaRealIIBB As Integer
+    '    Dim mNumeroCertificadoPercepcionIIBB As Long
+    '    Dim mParteDolar As Double, mPartePesos As Double, mKilos As Double, mBonificacion As Double, mPrecioUnitario As Double, mCantidad As Double, mTopeIIBB As Double
+    '    Dim mPorcentajeIva As Double, mImporteIVA As Double, mAuxD1 As Double, mAuxD2 As Double, mAuxD3 As Double
+    '    Dim mCodigoProvincia As String, mPuntoVentaActivo As String
+    '    Dim mvarAplicarIVANoDiscriminado As Boolean
+    '    Dim mFecha1 As Date
+
+    '    mvarSubTotal = 0
+    '    mvarIBrutos = 0
+    '    mvarIBrutos2 = 0
+    '    mvarIBrutos3 = 0
+    '    mvarPorcentajeIBrutos = 0
+    '    mvarPorcentajeIBrutos2 = 0
+    '    mvarPorcentajeIBrutos3 = 0
+    '    mvar_IBrutos_Cap = 0
+    '    mvar_IBrutos_BsAs = 0
+    '    mvar_IBrutos_BsAsM = 0
+    '    mvarMultilateral = "NO"
+    '    mvarIVA1 = 0
+    '    mvarIVA2 = 0
+    '    mvarTotalFactura = 0
+    '    mvarParteDolares = 0
+    '    mvarPartePesos = 0
+    '    mvarImporteBonificacion = 0
+    '    mvarNetoGravado = 0
+    '    mvarPorcentajeBonificacion = 0
+    '    mvarIVANoDiscriminado = 0
+    '    mIdProvinciaIIBB = 0
+    '    mNumeroCertificadoPercepcionIIBB = 0
+    '    mvarPercepcionIVA = 0
+    '    mvarAjusteIVA = 0
+    '    mPuntoVentaActivo = ""
+
+    '    If IsNumeric(txtPorcentajeBonificacion.Text) Then mvarPorcentajeBonificacion = Val(txtPorcentajeBonificacion.Text)
+
+    '    If glbIdCodigoIva = 1 Then
+    '        If mvarTipoIVA = 1 Or mvarTipoIVA = 2 Then
+    '            mvarAplicarIVANoDiscriminado = False
+    '        ElseIf mvarTipoIVA = 3 Or mvarTipoIVA = 8 Or mvarTipoIVA = 9 Then
+    '            mvarAplicarIVANoDiscriminado = False
+    '        Else
+    '            mvarAplicarIVANoDiscriminado = True
+    '        End If
+    '    Else
+    '        mvarAplicarIVANoDiscriminado = False
+    '    End If
+
+
+
+    '    For Each oL In Lista.ListItems
+    '        With origen.DetFacturas.Item(oL.Tag)
+    '            If Not .Eliminado Then
+    '                mPrecioUnitario = IIf(IsNull(.Registro.Fields("PrecioUnitario").Value), 0, .Registro.Fields("PrecioUnitario").Value)
+    '                mCantidad = IIf(IsNull(.Registro.Fields("Cantidad").Value), 0, .Registro.Fields("Cantidad").Value)
+    '                mBonificacion = IIf(IsNull(.Registro.Fields("Bonificacion").Value), 0, .Registro.Fields("Bonificacion").Value)
+    '                mPorcentajeIva = IIf(IsNull(.Registro.Fields("PorcentajeIva").Value), 0, .Registro.Fields("PorcentajeIva").Value)
+
+    '                If mvarTipoIVA = 3 Or mvarTipoIVA = 8 Or mvarTipoIVA = 9 Then mPorcentajeIva = 0
+    '                mAuxD1 = Round(mCantidad * mPrecioUnitario * (1 - mBonificacion / 100) + 0.0001, 2)
+    '                mAuxD2 = mAuxD1 - Round(mAuxD1 * mvarPorcentajeBonificacion / 100, 2)
+
+    '                If Not mvarAplicarIVANoDiscriminado Then
+    '                    mImporteIVA = Round(mAuxD2 * mPorcentajeIva / 100, 4)
+    '                Else
+    '                    mImporteIVA = Round(mAuxD2 - (mAuxD2 / (1 + (mPorcentajeIva / 100))), 4)
+    '                End If
+
+    '                .Registro.Fields("PorcentajeIVA").Value = mPorcentajeIva
+    '                .Registro.Fields("ImporteIVA").Value = mImporteIVA
+
+    '                oL.SubItems(10) = "" & mPorcentajeIva
+    '                oL.SubItems(11) = "" & Format(mImporteIVA, "#,##0.00")
+
+    '                mvarIVA1 = mvarIVA1 + mImporteIVA
+    '                mvarSubTotal = mvarSubTotal + mAuxD1
+    '            End If
+    '        End With
+    '    Next
+
+
+    '    If mvarId > 0 Then
+    '        With origen.Registro
+    '            mvarTipoABC = IIf(IsNull(.Fields("TipoABC").Value), "", .Fields("TipoABC").Value)
+    '            mvarPuntoVenta = IIf(IsNull(.Fields("PuntoVenta").Value), mvarPuntoVentaDefault, .Fields("PuntoVenta").Value)
+    '            mvarTotalFactura = .Fields("ImporteTotal").Value
+    '            mvarIVA1 = IIf(IsNull(.Fields("ImporteIva1").Value), 0, .Fields("ImporteIva1").Value)
+    '            mvarIVA2 = IIf(IsNull(.Fields("ImporteIva2").Value), 0, .Fields("ImporteIva2").Value)
+    '            mvarIVANoDiscriminado = IIf(IsNull(.Fields("IVANoDiscriminado").Value), 0, .Fields("IVANoDiscriminado").Value)
+    '            mvarIBrutos = IIf(IsNull(.Fields("RetencionIBrutos1").Value), 0, .Fields("RetencionIBrutos1").Value)
+    '            mvarPorcentajeIBrutos = IIf(IsNull(.Fields("PorcentajeIBrutos1").Value), 0, .Fields("PorcentajeIBrutos1").Value)
+    '            mvarIBrutos2 = IIf(IsNull(.Fields("RetencionIBrutos2").Value), 0, .Fields("RetencionIBrutos2").Value)
+    '            mvarPorcentajeIBrutos2 = IIf(IsNull(.Fields("PorcentajeIBrutos2").Value), 0, .Fields("PorcentajeIBrutos2").Value)
+    '            mvarMultilateral = IIf(IsNull(.Fields("ConvenioMultilateral").Value), 0, .Fields("ConvenioMultilateral").Value)
+    '            mvarIBrutos3 = IIf(IsNull(.Fields("RetencionIBrutos3").Value), 0, .Fields("RetencionIBrutos3").Value)
+    '            mvarPorcentajeIBrutos3 = IIf(IsNull(.Fields("PorcentajeIBrutos3").Value), 0, .Fields("PorcentajeIBrutos3").Value)
+    '            mvarParteDolares = IIf(IsNull(.Fields("ImporteParteEnDolares").Value), 0, .Fields("ImporteParteEnDolares").Value)
+    '            mvarPartePesos = IIf(IsNull(.Fields("ImporteParteEnPesos").Value), 0, .Fields("ImporteParteEnPesos").Value)
+    '            mvarImporteBonificacion = IIf(IsNull(.Fields("ImporteBonificacion").Value), 0, .Fields("ImporteBonificacion").Value)
+    '            mvarPorcentajeBonificacion = IIf(IsNull(.Fields("PorcentajeBonificacion").Value), 0, .Fields("PorcentajeBonificacion").Value)
+    '            mvarPercepcionIVA = IIf(IsNull(.Fields("PercepcionIVA").Value), 0, .Fields("PercepcionIVA").Value)
+    '            mvarAjusteIVA = IIf(IsNull(.Fields("AjusteIVA").Value), 0, .Fields("AjusteIVA").Value)
+    '        End With
+    '    Else
+    '        mvarImporteBonificacion = Round(mvarSubTotal * mvarPorcentajeBonificacion / 100, 2)
+    '        mvarNetoGravado = mvarSubTotal - mvarImporteBonificacion
+    '        mPuntoVentaActivo = "SI"
+
+    '        '      If mvarIBrutosC = "S" And mvarPorc_IBrutos_Cap <> 0 And mvarNetoGravado > mvarTope_IBrutos_Cap Then
+    '        '         mvar_IBrutos_Cap = Round(mvarPorc_IBrutos_Cap * mvarNetoGravado / 100, mvarDecimales)
+    '        '      End If
+    '        '
+    '        '      If mvarIBrutosB = "S" Then
+    '        '         If mvarMultilateral = "S" Then
+    '        '            If mvarPorc_IBrutos_BsAs <> 0 And mvarNetoGravado > mvarTope_IBrutos_BsAs Then
+    '        '               mvar_IBrutos_BsAs = Round(mvarPorc_IBrutos_BsAs * mvarNetoGravado / 100, mvarDecimales)
+    '        '            End If
+    '        '         Else
+    '        '            If mvarPorc_IBrutos_BsAsM <> 0 And mvarNetoGravado > mvarTope_IBrutos_BsAsM Then
+    '        '               mvar_IBrutos_BsAsM = Round(mvarPorc_IBrutos_BsAsM * mvarNetoGravado / 100, mvarDecimales)
+    '        '            End If
+    '        '         End If
+    '        '      End If
+
+    '        If glbIdCodigoIva = 1 Then
+    '            Select Case mvarTipoIVA
+    '                Case 1
+    '                    'mvarIVA1 = Round(mvarNetoGravado * Val(txtPorcentajeIva1.Text) / 100, mvarDecimales)
+    '                    mvarTipoABC = "A"
+    '                Case 2
+    '                    'mvarIVA1 = Round(mvarNetoGravado * Val(txtPorcentajeIva1.Text) / 100, mvarDecimales)
+    '                    mvarIVA2 = Round(mvarNetoGravado * Val(txtPorcentajeIva2.Text) / 100, mvarDecimales)
+    '                    mvarTipoABC = "A"
+    '                Case 3
+    '                    mvarTipoABC = "E"
+    '                Case 8
+    '                    mvarTipoABC = "B"
+    '                Case 9
+    '                    mvarTipoABC = "A"
+    '                Case Else
+    '                    'mvarIVANoDiscriminado = Round(mvarNetoGravado - (mvarNetoGravado / (1 + (Val(txtPorcentajeIva1.Text) / 100))), mvarDecimales)
+    '                    mvarIVANoDiscriminado = mvarIVA1
+    '                    mvarIVA1 = 0
+    '                    mvarTipoABC = "B"
+    '            End Select
+    '        Else
+    '            mvarTipoABC = "C"
+    '        End If
+    '        If mvarTipoABC = "A" And glbModalidadFacturacionAPrueba Then mvarTipoABC = "M"
+
+
+
+
+
+    '        origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = Null
+    '        If dcfields(4).Enabled And Check1(0).Value = 1 And IsNumeric(dcfields(4).BoundText) Then
+    '            oRs = Aplicacion.IBCondiciones.TraerFiltrado("_PorId", dcfields(4).BoundText)
+    '            If oRs.RecordCount > 0 Then
+    '                mTopeIIBB = IIf(IsNull(oRs.Fields("ImporteTopeMinimoPercepcion").Value), 0, oRs.Fields("ImporteTopeMinimoPercepcion").Value)
+    '                mIdProvinciaIIBB = IIf(IsNull(oRs.Fields("IdProvincia").Value), 0, oRs.Fields("IdProvincia").Value)
+    '                mIdProvinciaRealIIBB = IIf(IsNull(oRs.Fields("IdProvinciaReal").Value), oRs.Fields("IdProvincia").Value, oRs.Fields("IdProvinciaReal").Value)
+    '        mFecha1 = IIf(IsNull(oRs.Fields("FechaVigencia").Value), Date, oRs.Fields("FechaVigencia").Value)
+    '                mCodigoProvincia = ""
+    '                oRs1 = Aplicacion.Provincias.TraerFiltrado("_PorId", mIdProvinciaRealIIBB)
+    '                If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
+    '                oRs1.Close()
+    '                If mCodigoProvincia = "902" And DTFields(0).Value >= mFechaInicioVigenciaIBDirecto And DTFields(0).Value <= mFechaFinVigenciaIBDirecto Then
+    '                    mvarPorcentajeIBrutos = mAlicuotaDirecta
+    '                ElseIf mCodigoProvincia = "901" And DTFields(0).Value >= mFechaInicioVigenciaIBDirectoCapital And DTFields(0).Value <= mFechaFinVigenciaIBDirectoCapital Then
+    '                    mvarPorcentajeIBrutos = mAlicuotaDirectaCapital
+    '                Else
+    '                    If mvarNetoGravado > mTopeIIBB And DTFields(0).Value >= mFecha1 Then
+    '                        If mvarIBCondicion = 2 Then
+    '                            mvarPorcentajeIBrutos = IIf(IsNull(oRs.Fields("AlicuotaPercepcionConvenio").Value), 0, oRs.Fields("AlicuotaPercepcionConvenio").Value)
+    '                            mvarMultilateral = "SI"
+    '                        Else
+    '                            mvarPorcentajeIBrutos = IIf(IsNull(oRs.Fields("AlicuotaPercepcion").Value), 0, oRs.Fields("AlicuotaPercepcion").Value)
+    '                        End If
+    '                    End If
+    '                End If
+    '                mvarIBrutos = Round(mvarNetoGravado * mvarPorcentajeIBrutos / 100, 2) 'Round((mvarNetoGravado - mvarIVANoDiscriminado) * mvarPorcentajeIBrutos / 100, 2)
+    '            End If
+    '            oRs.Close()
+    '            If mvarIBrutos <> 0 Then
+    '                oRs = Aplicacion.Provincias.TraerFiltrado("_PorId", mIdProvinciaIIBB)
+    '                If oRs.RecordCount > 0 Then
+    '                    mNumeroCertificadoPercepcionIIBB = IIf(IsNull(oRs.Fields("ProximoNumeroCertificadoPercepcionIIBB").Value), 1, oRs.Fields("ProximoNumeroCertificadoPercepcionIIBB").Value)
+    '                End If
+    '                oRs.Close()
+    '                origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = mNumeroCertificadoPercepcionIIBB
+    '            End If
+    '            oRs = Nothing
+    '        End If
+
+
+    '        If dcfields(5).Enabled And Check1(1).Value = 1 And IsNumeric(dcfields(5).BoundText) Then
+    '            oRs = Aplicacion.IBCondiciones.TraerFiltrado("_PorId", dcfields(5).BoundText)
+    '            If oRs.RecordCount > 0 Then
+    '                mTopeIIBB = IIf(IsNull(oRs.Fields("ImporteTopeMinimoPercepcion").Value), 0, oRs.Fields("ImporteTopeMinimoPercepcion").Value)
+    '                mIdProvinciaIIBB = IIf(IsNull(oRs.Fields("IdProvincia").Value), 0, oRs.Fields("IdProvincia").Value)
+    '                mIdProvinciaRealIIBB = IIf(IsNull(oRs.Fields("IdProvinciaReal").Value), oRs.Fields("IdProvincia").Value, oRs.Fields("IdProvinciaReal").Value)
+    '                mCodigoProvincia = ""
+    '                oRs1 = Aplicacion.Provincias.TraerFiltrado("_PorId", mIdProvinciaRealIIBB)
+    '                If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
+    '                oRs1.Close()
+    '                If mCodigoProvincia = "902" And DTFields(0).Value >= mFechaInicioVigenciaIBDirecto And DTFields(0).Value <= mFechaFinVigenciaIBDirecto Then
+    '                    mvarPorcentajeIBrutos2 = mAlicuotaDirecta
+    '                ElseIf mCodigoProvincia = "901" And DTFields(0).Value >= mFechaInicioVigenciaIBDirectoCapital And DTFields(0).Value <= mFechaFinVigenciaIBDirectoCapital Then
+    '                    mvarPorcentajeIBrutos2 = mAlicuotaDirectaCapital
+    '                Else
+    '                    If mvarNetoGravado > mTopeIIBB And DTFields(0).Value >= mFecha1 Then
+    '                        If mvarIBCondicion = 2 Then
+    '                            mvarPorcentajeIBrutos2 = IIf(IsNull(oRs.Fields("AlicuotaPercepcionConvenio").Value), 0, oRs.Fields("AlicuotaPercepcionConvenio").Value)
+    '                            mvarMultilateral = "SI"
+    '                        Else
+    '                            mvarPorcentajeIBrutos2 = IIf(IsNull(oRs.Fields("AlicuotaPercepcion").Value), 0, oRs.Fields("AlicuotaPercepcion").Value)
+    '                        End If
+    '                    End If
+    '                End If
+    '                mvarIBrutos2 = Round(mvarNetoGravado * mvarPorcentajeIBrutos2 / 100, 2)  'Round((mvarNetoGravado - mvarIVANoDiscriminado) * mvarPorcentajeIBrutos2 / 100, 2)
+    '            End If
+    '            oRs.Close()
+    '            oRs = Nothing
+    '        End If
+
+    '        If dcfields(6).Enabled And Check1(2).Value = 1 And IsNumeric(dcfields(6).BoundText) Then
+    '            oRs = Aplicacion.IBCondiciones.TraerFiltrado("_PorId", dcfields(6).BoundText)
+    '            If oRs.RecordCount > 0 Then
+    '                mTopeIIBB = IIf(IsNull(oRs.Fields("ImporteTopeMinimoPercepcion").Value), 0, oRs.Fields("ImporteTopeMinimoPercepcion").Value)
+    '                mIdProvinciaIIBB = IIf(IsNull(oRs.Fields("IdProvincia").Value), 0, oRs.Fields("IdProvincia").Value)
+    '                mIdProvinciaRealIIBB = IIf(IsNull(oRs.Fields("IdProvinciaReal").Value), oRs.Fields("IdProvincia").Value, oRs.Fields("IdProvinciaReal").Value)
+    '                mCodigoProvincia = ""
+    '                oRs1 = Aplicacion.Provincias.TraerFiltrado("_PorId", mIdProvinciaRealIIBB)
+    '                If oRs1.RecordCount > 0 Then mCodigoProvincia = IIf(IsNull(oRs1.Fields("InformacionAuxiliar").Value), "", oRs1.Fields("InformacionAuxiliar").Value)
+    '                oRs1.Close()
+    '                If mCodigoProvincia = "902" And DTFields(0).Value >= mFechaInicioVigenciaIBDirecto And DTFields(0).Value <= mFechaFinVigenciaIBDirecto Then
+    '                    mvarPorcentajeIBrutos3 = mAlicuotaDirecta
+    '                ElseIf mCodigoProvincia = "901" And DTFields(0).Value >= mFechaInicioVigenciaIBDirectoCapital And DTFields(0).Value <= mFechaFinVigenciaIBDirectoCapital Then
+    '                    mvarPorcentajeIBrutos3 = mAlicuotaDirectaCapital
+    '                Else
+    '                    If mvarNetoGravado > mTopeIIBB And DTFields(0).Value >= mFecha1 Then
+    '                        If mvarIBCondicion = 2 Then
+    '                            mvarPorcentajeIBrutos3 = IIf(IsNull(oRs.Fields("AlicuotaPercepcionConvenio").Value), 0, oRs.Fields("AlicuotaPercepcionConvenio").Value)
+    '                            mvarMultilateral = "SI"
+    '                        Else
+    '                            mvarPorcentajeIBrutos3 = IIf(IsNull(oRs.Fields("AlicuotaPercepcion").Value), 0, oRs.Fields("AlicuotaPercepcion").Value)
+    '                        End If
+    '                    End If
+    '                End If
+    '                mvarIBrutos3 = Round(mvarNetoGravado * mvarPorcentajeIBrutos3 / 100, 2)  'Round((mvarNetoGravado - mvarIVANoDiscriminado) * mvarPorcentajeIBrutos3 / 100, 2)
+    '            End If
+    '            oRs.Close()
+    '            oRs = Nothing
+    '        End If
+
+    '        If mvarEsAgenteRetencionIVA = "NO" And mvarNetoGravado >= mvarBaseMinimaParaPercepcionIVA Then
+    '            mvarPercepcionIVA = Round(mvarNetoGravado * mvarPorcentajePercepcionIVA / 100, mvarDecimales)
+    '        End If
+
+    '        mvarPuntoVenta = 0
+    '        If IsNumeric(dcfields(10).BoundText) Then mvarPuntoVenta = dcfields(10).BoundText
+    '        If mvarNumeracionUnica And mvarTipoABC <> "E" Then
+    '            oRs = Aplicacion.PuntosVenta.TraerFiltrado("_PuntosVentaPorIdTipoComprobanteLetra", Array(1, mvarTipoABC, mPuntoVentaActivo))
+    '        Else
+    '            oRs = Aplicacion.PuntosVenta.TraerFiltrado("_PuntosVentaPorIdTipoComprobanteLetra", Array(1, mvarTipoABC, mPuntoVentaActivo))
+    '        End If
+    '        If oRs.RecordCount = 1 Then
+    '            oRs.MoveFirst()
+    '            mvarPuntoVenta = oRs.Fields(0).Value
+    '            If mvarId <= 0 Then
+    '                origen.Registro.Fields("NumeroFactura").Value = oRs.Fields("ProximoNumero").Value
+    '                txtNumeroFactura.Text = oRs.Fields("ProximoNumero").Value
+    '            End If
+    '        End If
+    '        dcfields(10).RowSource = oRs
+    '        dcfields(10).BoundText = mvarPuntoVenta
+    '        oRs = Nothing
+
+    '        If Len(dcfields(10).Text) = 0 Then
+    '            origen.Registro.Fields("NumeroFactura").Value = Null
+    '            txtNumeroFactura.Text = ""
+    '        Else
+    '            If mvarId <= 0 Then
+    '                oRs = Aplicacion.PuntosVenta.TraerFiltrado("_PorId", mvarPuntoVenta)
+    '                If oRs.RecordCount > 0 Then mvarAgentePercepcionIIBBPuntoVenta = IIf(IsNull(oRs.Fields("AgentePercepcionIIBB").Value), "", oRs.Fields("AgentePercepcionIIBB").Value)
+    '                oRs.Close()
+    '            End If
+    '        End If
+
+    '        mvarAjusteIVA = Val(txtTotal(12).Text)
+    '        mvarTotalFactura = mvarNetoGravado + mvarIVA1 + mvarIVA2 + mvarIBrutos + mvarIBrutos2 + mvarIBrutos3 + mvarPercepcionIVA + Val(txtTotal(6).Text) + Val(txtTotal(7).Text) + Val(txtTotal(10).Text) + mvarAjusteIVA
+    '    End If
+
+    '    If mvarTipoABC = "E" Then
+    '        If Not cmd(3).Enabled Then cmd(3).Enabled = True
+    '        lblLabels(14).Visible = True
+    '        Combo1(0).Visible = True
+    '        Frame3.Visible = True
+    '    Else
+    '        If cmd(3).Enabled Then cmd(3).Enabled = False
+    '        lblLabels(14).Visible = False
+    '        Combo1(0).Visible = False
+    '        Frame3.Visible = False
+    '    End If
+    '    lblLetra.Caption = mvarTipoABC
+
+    '    txtTotal(3).Text = Format(mvarSubTotal, "#,##0.00")
+    '    txtTotal(9).Text = Format(mvarImporteBonificacion, "#,##0.00")
+    '    txtTotal(4).Text = Format(mvarIVA1, "#,##0.00")
+    '    txtTotal(5).Text = Format(mvarIBrutos + mvarIBrutos2 + mvarIBrutos3, "#,##0.00")
+    '    txtTotal(11).Text = Format(mvarPercepcionIVA, "#,##0.00")
+    '    txtTotal(8).Text = Format(mvarTotalFactura, "#,##0.00")
+
+    '    MostrarTotales()
+
+    '    oRs = Nothing
+    '    oRs1 = Nothing
+
+    'End Sub
 
 
 

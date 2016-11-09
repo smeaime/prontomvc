@@ -640,12 +640,13 @@ namespace ProntoFlexicapture
         }
 
 
-        private static void MoverDirectoriosViejos() { 
-        
-        
+        private static void MoverDirectoriosViejos()
+        {
+
+
         }
 
-        
+
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
@@ -1381,6 +1382,19 @@ namespace ProntoFlexicapture
 
             string FechaDescarga = Sample.AdvancedTechniques.findField(document, "FechaDescarga").NullStringSafe();
 
+
+
+            string HumedadPorc = Sample.AdvancedTechniques.findField(document, "HumedadPorc").NullStringSafe();
+            string HumedadKilos = Sample.AdvancedTechniques.findField(document, "HumedadKilos").NullStringSafe();
+            string ZarandeoKilosMerma = Sample.AdvancedTechniques.findField(document, "ZarandeoKilosMerma").NullStringSafe();
+            string ZarandeoPorc = Sample.AdvancedTechniques.findField(document, "ZarandeoPorc").NullStringSafe();
+            string Recibo = Sample.AdvancedTechniques.findField(document, "Recibo").NullStringSafe();
+            string HoraDescarga = Sample.AdvancedTechniques.findField(document, "HoraDescarga").NullStringSafe();
+
+
+
+
+
             ErrHandler2.WriteError("Procesó carta: titular " + Titular);
 
 
@@ -1650,20 +1664,44 @@ namespace ProntoFlexicapture
                 }
                 else if (esTicket)
                 {
+
                     cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
                     cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
                     cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
 
                     cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+
+
+                    cdp.NRecibo = Convert.ToInt32(Conversion.Val(Recibo));
+
+                    cdp.Observaciones = Observaciones;
+                    cdp.Humedad = Conversion.Val(HumedadPorc.Replace(".", "").Replace(",", ""));
+                    cdp.HumedadDesnormalizada = Conversion.Val(HumedadKilos.Replace(".", "").Replace(",", ""));
+                    cdp.CalidadMermaZarandeo = Conversion.Val(ZarandeoPorc.Replace(".", "").Replace(",", ""));
+                    cdp.CalidadZarandeoRebaja = Conversion.Val(ZarandeoKilosMerma.Replace(".", "").Replace(",", ""));
+
+
+
+
                     try
                     {
                         cdp.FechaDescarga = Convert.ToDateTime(FechaDescarga);
+
+
+                        TimeSpan time;
+                        TimeSpan.TryParse(HoraDescarga, out time);
+                        cdp.Hora = Convert.ToDateTime(HoraDescarga);  // cdp.FechaDescarga.Add(time);
+
+
                     }
                     catch (Exception ex2)
                     {
 
                         ErrHandler2.WriteError(ex2);
                     }
+
+                    if (cdp.FechaDescarga < cdp.FechaArribo) cdp.FechaArribo = cdp.FechaDescarga;
+
                 }
 
 

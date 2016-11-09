@@ -247,15 +247,6 @@ Partial Class CDPMailing
 
 
 
-
-
-
-
-
-
-
-        Dim bDescargaHtml = CartaDePorteManager.CONSTANTE_HTML
-
         Dim output As String
 
         With dr
@@ -328,231 +319,8 @@ Partial Class CDPMailing
 
 
 
-            output = generarNotasDeEntregaConReportViewer(HFSC.Value, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-                                                          iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), dr, estado, l, tit, _
-                                                          Server.MapPath("~/Imagenes/Williams.bmp"), cmbPuntoVenta.SelectedValue, , , bDescargaHtml, gridParaEmbeberEnMail)
-
-
-
-
-
-
-            If output = "-1" Then
-                MsgBoxAjax(Me, "No hay cartas de porte que cumplan con el filtro")
-                ModalPopupExtender3.Show()
-                Exit Sub
-            ElseIf output = "-2" Then
-                MsgBoxAjax(Me, "Mail grande para modo IDE")
-                ModalPopupExtender3.Show()
-                Exit Sub
-            End If
-
-
-
-
-
-            Dim De As String
-            Dim ccoaddress As String = UsuarioSesion.Mail(HFSC.Value, Session)  'agregar en la copia a descargas sarasa
-
-            'Select Case cmbPuntoVenta.SelectedValue
-            '    Case 1
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta1") ' "buenosaires@williamsentregas.com.ar"
-            '    Case 2
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta2") '  "sanlorenzo@williamsentregas.com.ar"
-            '    Case 3
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta3") '  "arroyoseco@williamsentregas.com.ar"
-            '    Case 4
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta4") '  "bahiablanca@williamsentregas.com.ar" 
-            '    Case Else
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta1") '  "buenosaires@williamsentregas.com.ar"
-
-            'End Select
-
-            If UsuarioSesion.Mail(HFSC.Value, Session) = "" Then
-                MsgBoxAjax(Me, "Tu registro de empleado no tiene configurado el mail")
-                Exit Sub
-            End If
-
-
-
-            Select Case cmbPuntoVenta.SelectedValue
-                Case 1
-                    De = "buenosaires@williamsentregas.com.ar"
-                    ccoaddress = UsuarioSesion.Mail(HFSC.Value, Session) + ", descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                Case 2
-                    De = "sanlorenzo@williamsentregas.com.ar"
-                    ccoaddress = UsuarioSesion.Mail(HFSC.Value, Session) + ", descargas-sl@williamsentregas.com.ar" ' & CCOaddress
-                Case 3
-                    De = "arroyoseco@williamsentregas.com.ar"
-                    ccoaddress = UsuarioSesion.Mail(HFSC.Value, Session) + ", descargas-as@williamsentregas.com.ar" '& CCOaddress
-                Case 4
-                    De = "bahiablanca@williamsentregas.com.ar"
-                    ccoaddress = UsuarioSesion.Mail(HFSC.Value, Session) + ", descargas-bb@williamsentregas.com.ar" ' & CCOaddress
-                Case Else
-                    De = "buenosaires@williamsentregas.com.ar"
-                    ccoaddress = UsuarioSesion.Mail(HFSC.Value, Session) + ", descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-            End Select
-
-
-            Dim idVendedor As Long = iisNull(.Item("Vendedor"), -1)
-            Dim idCorredor As Long = iisNull(.Item("Corredor"), -1)
-            Dim idDestinatario As Long = iisNull(.Item("Entregador"), -1)
-            Dim idIntermediario As Long = iisNull(.Item("CuentaOrden1"), -1)
-            Dim idRemComercial As Long = iisNull(.Item("CuentaOrden2"), -1)
-            Dim IdClienteAuxiliar As Long = iisNull(.Item("IdClienteAuxiliar"), -1)
-            Dim idArticulo As Long = iisNull(.Item("IdArticulo"), -1)
-            Dim idProcedencia As Long = iisNull(.Item("Procedencia"), -1)
-            Dim idDestino As Long = iisNull(.Item("Destino"), -1)
-
-            Dim contrato As String = iisNull(.Item("Contrato"), -1)
-
-            Dim EnumSyngentaDivision As String = iisNull(.Item("EnumSyngentaDivision"), "")
-            Dim ModoImpresion As String = iisNull(.Item("ModoImpresion"), "")
-
-
-            Dim AgrupadorDeTandaPeriodos As String = iisNull(.Item("AgrupadorDeTandaPeriodos"), -1)
-
-            bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
-
-
-            Dim AplicarANDuORalFiltro, ModoExportacion, optDivisionSyngenta
-
-            Dim fechadesde As DateTime
-            Dim fechahasta As DateTime
-
-            Try
-
-                Try
-                    fechadesde = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
-
-                Catch ex As Exception
-
-                    fechadesde = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "MM/dd/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
-
-                End Try
-
-                Try
-                    fechahasta = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
-
-                Catch ex As Exception
-                    fechahasta = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "MM/dd/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
-
-                End Try
-            Catch ex As Exception
-
-            End Try
-
-
-
-
-
-            Dim asunto As String = CartaDePorteManager.FormatearAsunto(HFSC.Value, _
-                  "", _
-                  estado, "", idVendedor, idCorredor, _
-                  idDestinatario, idIntermediario, _
-                  idRemComercial, idArticulo, idProcedencia, idDestino, _
-                  AplicarANDuORalFiltro, ModoExportacion, _
-                  fechadesde, fechahasta, _
-                  cmbPuntoVenta.SelectedValue, optDivisionSyngenta, False, "", "", -1)
-
-
-
-            cuerpo &= AgregarFirmaHtml(cmbPuntoVenta.SelectedValue)
-
-
-
-            Try
-
-                If bDescargaHtml Then
-
-                    '  Dim strHtml = ConvertirExcelEnHtml(output)
-
-
-
-
-
-                    'MandaEmail(destinatario, _
-                    '            asunto, _
-                    '          cuerpo + output, _
-                    '       De, _
-                    '        ConfigurationManager.AppSettings("SmtpServer"), _
-                    '        ConfigurationManager.AppSettings("SmtpUser"), _
-                    '        ConfigurationManager.AppSettings("SmtpPass"), _
-                    '        "", _
-                    '        ConfigurationManager.AppSettings("SmtpPort"), _
-                    '        , _
-                    '        ccoaddress, _
-                    '                                 , "Williams Entregas", ccoaddress)
-
-                    'MandaEmailSimple sí me manda bien el formato html, en lugar de MandaEmail. Revisar despues
-
-                    'no uso adjunto
-
-                    MandaEmail_Nuevo(destinatario, _
-                                asunto, _
-                              cuerpo + output, _
-                           De, _
-                            ConfigurationManager.AppSettings("SmtpServer"), _
-                            ConfigurationManager.AppSettings("SmtpUser"), _
-                            ConfigurationManager.AppSettings("SmtpPass"), _
-                            "", _
-                            ConfigurationManager.AppSettings("SmtpPort"), _
-                            , _
-                            ccoaddress, "Williams Entregas", , De, True)
-
-
-
-
-                Else
-
-
-
-
-                    MandaEmail_Nuevo(destinatario, _
-                              asunto, _
-                            cuerpo, _
-                         De, _
-                          ConfigurationManager.AppSettings("SmtpServer"), _
-                          ConfigurationManager.AppSettings("SmtpUser"), _
-                          ConfigurationManager.AppSettings("SmtpPass"), _
-                          output, _
-                          ConfigurationManager.AppSettings("SmtpPort"), _
-                          , _
-                          ccoaddress, _
-                                                 , "Williams Entregas", De)
-
-                End If
-
-
-
-                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9850
-                '                Lo que precisan es solamente para los mails automaticos.
-
-                'RESUMIENDO:
-
-                '* Los mails automaticos deben salir con copia a la casilla nueva y con Responder A a la casilla de la sucursal
-
-                '* Los mails manuales deben salir con copia al usuario que los envia y con Responder A también a la casilla del usuario que los envia
-
-
-                ErrHandler2WriteErrorLogPronto("EnviarYa " & " Para: " & destinatario & "De:" & De & " CC: " & UsuarioSesion.Mail(HFSC.Value, Session) & " Filtro: " & tit, HFSC.Value, Session(SESSIONPRONTO_UserName))
-
-            Catch ex As Exception
-
-                ErrHandler2.WriteError("Error al enviar mail. " & ex.ToString & " " & destinatario & " " & tit & " " & output.Length)
-                MsgBoxAjax(Me, "Error al enviar mail. " & ex.ToString & "De:" & De & " Para: " & destinatario & " CC: " & UsuarioSesion.Mail(HFSC.Value, Session) & " Filtro: " & tit & " Tamaño:" & output.Length)
-                ModalPopupExtender3.Show()
-                Exit Sub
-            End Try
-
-
-
-            MsgBoxAjax(Me, "Enviada con éxito. CDPs filtradas: " & l)
-            ModalPopupExtender3.Show()
-            Exit Sub
 
         End With
-
 
 
     End Sub
@@ -596,33 +364,36 @@ Partial Class CDPMailing
         dr.Item("EsPosicion") = (cmbPopPosicion.SelectedValue = "Posicion")
         dr.Item("IdArticulo") = IdNull(BuscaIdArticuloPreciso(txtPopArticulo.Text, HFSC.Value))
 
+
+        Dim estado As CartaDePorteManager.enumCDPestado
+        Select Case cmbEstadoPopup.SelectedValue
+            Case "Posición"
+                estado = CartaDePorteManager.enumCDPestado.Posicion
+            Case "Descargas"
+                estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
+            Case "Rechazos"
+                estado = CartaDePorteManager.enumCDPestado.Rechazadas
+
+            Case "DescargasDeHoyMasTodasLasPosiciones"
+                estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
+            Case "DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
+                estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+        End Select
+
+
         'lo manda a la casilla del destino
         Dim destinatario = UsuarioSesion.Mail(HFSC.Value, Session)
         Dim cuerpo = ""
 
-        Dim bDescargaHtml = CartaDePorteManager.CONSTANTE_HTML
-
+        
         Dim output As String
+
+
 
         With dr
             Dim l As Long
             Dim tit = "" ' titulo
-            Dim estado As CartaDePorteManager.enumCDPestado
-
-
-            Select Case cmbEstadoPopup.SelectedValue
-                Case "Posición"
-                    estado = CartaDePorteManager.enumCDPestado.Posicion
-                Case "Descargas"
-                    estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
-                Case "Rechazos"
-                    estado = CartaDePorteManager.enumCDPestado.Rechazadas
-
-                Case "DescargasDeHoyMasTodasLasPosiciones"
-                    estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
-                Case "DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
-                    estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
-            End Select
+    
 
 
 
@@ -634,11 +405,6 @@ Partial Class CDPMailing
             End If
 
 
-
-
-
-            'tit = cmbEstadoPopup.SelectedValue
-            'Dim sWHERE = generarWHEREparaDataset(HFSC.Value, dr, tit, estado, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
 
 
 
@@ -660,20 +426,6 @@ Partial Class CDPMailing
 
             Dim De As String
             Dim ccoaddress As String = UsuarioSesion.Mail(HFSC.Value, Session)  'agregar en la copia a descargas sarasa
-
-            'Select Case cmbPuntoVenta.SelectedValue
-            '    Case 1
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta1") ' "buenosaires@williamsentregas.com.ar"
-            '    Case 2
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta2") '  "sanlorenzo@williamsentregas.com.ar"
-            '    Case 3
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta3") '  "arroyoseco@williamsentregas.com.ar"
-            '    Case 4
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta4") '  "bahiablanca@williamsentregas.com.ar" 
-            '    Case Else
-            '        De = ConfigurationManager.AppSettings("SmtpUserPuntoVenta1") '  "buenosaires@williamsentregas.com.ar"
-
-            'End Select
 
             If UsuarioSesion.Mail(HFSC.Value, Session) = "" Then
                 MsgBoxAjax(Me, "Tu registro de empleado no tiene configurado el mail")
@@ -701,25 +453,12 @@ Partial Class CDPMailing
             End Select
 
 
-            Dim idVendedor As Long = iisNull(.Item("Vendedor"), -1)
-            Dim idCorredor As Long = iisNull(.Item("Corredor"), -1)
-            Dim idDestinatario As Long = iisNull(.Item("Entregador"), -1)
-            Dim idIntermediario As Long = iisNull(.Item("CuentaOrden1"), -1)
-            Dim idRemComercial As Long = iisNull(.Item("CuentaOrden2"), -1)
-            Dim IdClienteAuxiliar As Long = iisNull(.Item("IdClienteAuxiliar"), -1)
-            Dim idArticulo As Long = iisNull(.Item("IdArticulo"), -1)
-            Dim idProcedencia As Long = iisNull(.Item("Procedencia"), -1)
-            Dim idDestino As Long = iisNull(.Item("Destino"), -1)
-
-            Dim contrato As String = iisNull(.Item("Contrato"), -1)
-
-            Dim EnumSyngentaDivision As String = iisNull(.Item("EnumSyngentaDivision"), "")
-            Dim ModoImpresion As String = iisNull(.Item("ModoImpresion"), "")
+    
 
 
             Dim AgrupadorDeTandaPeriodos As String = iisNull(.Item("AgrupadorDeTandaPeriodos"), -1)
 
-            bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
 
 
             Dim AplicarANDuORalFiltro, ModoExportacion, optDivisionSyngenta
@@ -788,185 +527,6 @@ Partial Class CDPMailing
                 Exit Sub
             End If
 
-
-
-
-
-
-            Dim asunto As String = CartaDePorteManager.FormatearAsunto(HFSC.Value, _
-                  "", _
-                  estado, "", idVendedor, idCorredor, _
-                  idDestinatario, idIntermediario, _
-                  idRemComercial, idArticulo, idProcedencia, idDestino, _
-                  AplicarANDuORalFiltro, ModoExportacion, _
-                  fechadesde, fechahasta, _
-                  cmbPuntoVenta.SelectedValue, optDivisionSyngenta, False, "", "", -1)
-
-
-
-            cuerpo &= AgregarFirmaHtml(cmbPuntoVenta.SelectedValue)
-
-
-
-
-
-
-            Try
-
-                If bDescargaHtml Then
-
-                    '  Dim strHtml = ConvertirExcelEnHtml(output)
-
-
-
-
-
-                    'MandaEmail(destinatario, _
-                    '            asunto, _
-                    '          cuerpo + output, _
-                    '       De, _
-                    '        ConfigurationManager.AppSettings("SmtpServer"), _
-                    '        ConfigurationManager.AppSettings("SmtpUser"), _
-                    '        ConfigurationManager.AppSettings("SmtpPass"), _
-                    '        "", _
-                    '        ConfigurationManager.AppSettings("SmtpPort"), _
-                    '        , _
-                    '        ccoaddress, _
-                    '                                 , "Williams Entregas", ccoaddress)
-
-                    'MandaEmailSimple sí me manda bien el formato html, en lugar de MandaEmail. Revisar despues
-
-                    'no uso adjunto
-
-
-                    Try
-
-                        output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(HFSC.Value, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-                                                  iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), dr, estado, l, tit, _
-                                                  Server.MapPath("~/Imagenes/Williams.bmp"), cmbPuntoVenta.SelectedValue, , , bDescargaHtml, gridParaEmbeberEnMail)
-
-
-
-                        MandaEmail_Nuevo(destinatario, _
-                                    "nuevo  " + asunto, _
-                                  cuerpo + output, _
-                               De, _
-                                ConfigurationManager.AppSettings("SmtpServer"), _
-                                ConfigurationManager.AppSettings("SmtpUser"), _
-                                ConfigurationManager.AppSettings("SmtpPass"), _
-                                "", _
-                                ConfigurationManager.AppSettings("SmtpPort"), _
-                                , _
-                                ccoaddress, , , De, True)
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
-
-
-
-                    Dim output2 = generarNotasDeEntregaConReportViewer(HFSC.Value, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-                                           iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), dr, estado, l, tit, _
-                                           Server.MapPath("~/Imagenes/Williams.bmp"), cmbPuntoVenta.SelectedValue, , , bDescargaHtml, gridParaEmbeberEnMail)
-
-
-
-                    MandaEmail_Nuevo(destinatario, _
-                                "viejo  " + asunto, _
-                              cuerpo + output2, _
-                           De, _
-                            ConfigurationManager.AppSettings("SmtpServer"), _
-                            ConfigurationManager.AppSettings("SmtpUser"), _
-                            ConfigurationManager.AppSettings("SmtpPass"), _
-                            "", _
-                            ConfigurationManager.AppSettings("SmtpPort"), _
-                            , _
-                            ccoaddress, , , De, True)
-
-
-                Else
-
-                    Try
-
-                        output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(HFSC.Value, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-                                                                      iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), dr, estado, l, tit, _
-                                                                      Server.MapPath("~/Imagenes/Williams.bmp"), cmbPuntoVenta.SelectedValue, , , bDescargaHtml, gridParaEmbeberEnMail)
-
-
-                        If output <> "-1" And output <> " -2" Then
-
-                            MandaEmail_Nuevo(destinatario, _
-                                       "nuevo " + asunto, _
-                                    cuerpo, _
-                                 De, _
-                                  ConfigurationManager.AppSettings("SmtpServer"), _
-                                  ConfigurationManager.AppSettings("SmtpUser"), _
-                                  ConfigurationManager.AppSettings("SmtpPass"), _
-                                  output, _
-                                  ConfigurationManager.AppSettings("SmtpPort"), _
-                                  , _
-                                  ccoaddress, _
-                                                         , "Williams Entregas", De)
-                        End If
-
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
-
-
-                    Dim output2 = generarNotasDeEntregaConReportViewer(HFSC.Value, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
-                                                                  iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), dr, estado, l, tit, _
-                                                                  Server.MapPath("~/Imagenes/Williams.bmp"), cmbPuntoVenta.SelectedValue, , , bDescargaHtml, gridParaEmbeberEnMail)
-
-
-                    If output2 <> "-1" And output2 <> " -2" Then
-                        MandaEmail_Nuevo(destinatario, _
-                                  "viejo " + asunto, _
-                                cuerpo, _
-                             De, _
-                              ConfigurationManager.AppSettings("SmtpServer"), _
-                              ConfigurationManager.AppSettings("SmtpUser"), _
-                              ConfigurationManager.AppSettings("SmtpPass"), _
-                              output2, _
-                              ConfigurationManager.AppSettings("SmtpPort"), _
-                              , _
-                              ccoaddress, _
-                                                     , "Williams Entregas", De)
-
-
-                    End If
-
-                End If
-
-
-
-                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9850
-                '                Lo que precisan es solamente para los mails automaticos.
-
-                'RESUMIENDO:
-
-                '* Los mails automaticos deben salir con copia a la casilla nueva y con Responder A a la casilla de la sucursal
-
-                '* Los mails manuales deben salir con copia al usuario que los envia y con Responder A también a la casilla del usuario que los envia
-
-
-                ErrHandler2WriteErrorLogPronto("EnviarYa " & " Para: " & destinatario & "De:" & De & " CC: " & UsuarioSesion.Mail(HFSC.Value, Session) & " Filtro: " & tit, HFSC.Value, Session(SESSIONPRONTO_UserName))
-
-
-
-
-            Catch ex As Exception
-
-                ErrHandler2.WriteError("Error al enviar mail. " & ex.ToString & " " & destinatario & " " & tit & " " & output.Length)
-                MsgBoxAjax(Me, "Error al enviar mail. " & ex.ToString & "De:" & De & " Para: " & destinatario & " CC: " & UsuarioSesion.Mail(HFSC.Value, Session) & " Filtro: " & tit & " Tamaño:" & output.Length)
-                ModalPopupExtender3.Show()
-                Exit Sub
-            End Try
-
-
-
-            MsgBoxAjax(Me, "Enviada con éxito.") ' CDPs filtradas: " & l)
-            ModalPopupExtender3.Show()
-            Exit Sub
 
         End With
 
@@ -1477,7 +1037,7 @@ Partial Class CDPMailing
 
 
 
-            
+
 
             If False Then
                 Dim dt = DataTableWHERE(Fetch(HFSC.Value, 0), GenerarWHEREparaFiltrarFiltros_ODS(HFSC.Value, txtBuscar.Text, cmbBuscarEsteCampo.SelectedValue, cmbPuntoVenta.SelectedValue))
@@ -1490,7 +1050,7 @@ Partial Class CDPMailing
             Dim dr = FetchById(HFSC.Value, m_Id)
 
             EditarPopupABM(dr)
-            End If
+        End If
 
     End Sub
 

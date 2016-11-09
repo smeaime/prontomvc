@@ -665,6 +665,7 @@
           <Property Name="ClienteAcondicionador" Type="int" />
           <Property Name="MotivoRechazo" Type="int" />
           <Property Name="FacturarA_Manual" Type="bit" Nullable="false" />
+          <Property Name="EntregaSAP" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="CartasDePorteControlDescarga">
           <Key>
@@ -2102,6 +2103,14 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="IdEmpleado" Type="int" />
           <Property Name="IdUbicacion" Type="int" />
         </EntityType>
+        <EntityType Name="DetalleEventosDelSistema">
+          <Key>
+            <PropertyRef Name="IdDetalleEventoDelSistema" />
+          </Key>
+          <Property Name="IdDetalleEventoDelSistema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEventoDelSistema" Type="int" />
+          <Property Name="IdEmpleado" Type="int" />
+        </EntityType>
         <EntityType Name="DetalleFacturas">
           <Key>
             <PropertyRef Name="IdDetalleFactura" />
@@ -3287,6 +3296,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="Activo" Type="varchar" MaxLength="2" />
         </EntityType>
+        <EntityType Name="EventosDelSistema">
+          <Key>
+            <PropertyRef Name="IdEventoDelSistema" />
+          </Key>
+          <Property Name="IdEventoDelSistema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Importancia" Type="smallint" />
+        </EntityType>
         <EntityType Name="ExcelImportador">
           <Key>
             <PropertyRef Name="IdExcelImportador" />
@@ -3724,6 +3741,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="PrecioVagonesCalada" Type="money" />
           <Property Name="PrecioVagonesBalanzaExportacion" Type="money" />
           <Property Name="PrecioVagonesCaladaExportacion" Type="money" />
+          <Property Name="PrecioBuquesCalada" Type="money" />
         </EntityType>
         <EntityType Name="LMateriales">
           <Key>
@@ -4042,6 +4060,22 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdAutorizoRecuperoGastos" Type="int" />
           <Property Name="IdLiquidacionFlete" Type="int" />
           <Property Name="CircuitoLiquidacionFlete" Type="int" />
+        </EntityType>
+        <EntityType Name="NovedadesUsuarios">
+          <Key>
+            <PropertyRef Name="IdNovedadUsuarios" />
+          </Key>
+          <Property Name="IdNovedadUsuarios" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="IdEventoDelSistema" Type="int" />
+          <Property Name="FechaEvento" Type="datetime" />
+          <Property Name="Confirmado" Type="varchar" MaxLength="2" />
+          <Property Name="FechaConfirmacion" Type="datetime" />
+          <Property Name="Detalle" Type="varchar" MaxLength="200" />
+          <Property Name="IdEnviadoPor" Type="int" />
+          <Property Name="IdElemento" Type="int" />
+          <Property Name="TipoElemento" Type="varchar" MaxLength="50" />
+          <Property Name="Mensaje" Type="ntext" />
         </EntityType>
         <EntityType Name="Obras">
           <Key>
@@ -4788,6 +4822,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdCuenta" Type="int" />
           <Property Name="IdArticulo" Type="int" />
           <Property Name="BaseDatosOrigen" Type="varchar" MaxLength="50" />
+          <Property Name="HabilitarAvanceReal" Type="varchar" MaxLength="2" />
+          <Property Name="IdCondicionCompra" Type="int" />
         </EntityType>
         <EntityType Name="PresupuestoObrasNodosConsumos">
           <Key>
@@ -7581,6 +7617,18 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleEventosDelSistema_IdEventoDelSistema">
+          <End Role="EventosDelSistema" Type="Self.EventosDelSistema" Multiplicity="0..1" />
+          <End Role="DetalleEventosDelSistema" Type="Self.DetalleEventosDelSistema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventosDelSistema">
+              <PropertyRef Name="IdEventoDelSistema" />
+            </Principal>
+            <Dependent Role="DetalleEventosDelSistema">
+              <PropertyRef Name="IdEventoDelSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetalleFacturas_DetalleRemitos">
           <End Role="DetalleRemitos" Type="Self.DetalleRemitos" Multiplicity="0..1" />
           <End Role="DetalleFacturas" Type="Self.DetalleFacturas" Multiplicity="*" />
@@ -9697,6 +9745,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="DestinoDesc" Type="varchar" MaxLength="50" Nullable="false" />
                 <Property Name="DestinoCodigoPostal" Type="varchar" MaxLength="1" Nullable="false" />
                 <Property Name="DestinoCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
+                <Property Name="DestinoCUIT" Type="varchar" MaxLength="13" Nullable="false" />
                 <Property Name="Mes" Type="nvarchar" MaxLength="30" />
                 <Property Name="Ano" Type="int" />
                 <Property Name="Factura" Type="varchar" MaxLength="63" />
@@ -9896,6 +9945,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySet Name="DetalleEmpleadosObras" EntityType="Self.DetalleEmpleadosObras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleEmpleadosSectores" EntityType="Self.DetalleEmpleadosSectores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleEmpleadosUbicaciones" EntityType="Self.DetalleEmpleadosUbicaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleEventosDelSistema" EntityType="Self.DetalleEventosDelSistema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleFacturas" EntityType="Self.DetalleFacturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleFacturasClientesPRESTO" EntityType="Self.DetalleFacturasClientesPRESTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleFacturasOrdenesCompra" EntityType="Self.DetalleFacturasOrdenesCompra" Schema="dbo" store:Type="Tables" />
@@ -9946,6 +9996,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySet Name="EmpleadosAccesos" EntityType="Self.EmpleadosAccesos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estados Proveedores" EntityType="Self.Estados Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventosDelSistema" EntityType="Self.EventosDelSistema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExcelImportador" EntityType="Self.ExcelImportador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" />
@@ -9970,6 +10021,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySet Name="Monedas" EntityType="Self.Monedas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotasCredito" EntityType="Self.NotasCredito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotasDebito" EntityType="Self.NotasDebito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NovedadesUsuarios" EntityType="Self.NovedadesUsuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Obras" EntityType="Self.Obras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenesCompra" EntityType="Self.OrdenesCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenesPago" EntityType="Self.OrdenesPago" Schema="dbo" store:Type="Tables" />
@@ -10669,6 +10721,10 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="Self.FK_DetalleEmpleadosUbicaciones_Empleados">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="DetalleEmpleadosUbicaciones" EntitySet="DetalleEmpleadosUbicaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEventosDelSistema_IdEventoDelSistema" Association="Self.FK_DetalleEventosDelSistema_IdEventoDelSistema">
+            <End Role="EventosDelSistema" EntitySet="EventosDelSistema" />
+            <End Role="DetalleEventosDelSistema" EntitySet="DetalleEventosDelSistema" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleFacturas_DetalleRemitos" Association="Self.FK_DetalleFacturas_DetalleRemitos">
             <End Role="DetalleRemitos" EntitySet="DetalleRemitos" />
@@ -13017,11 +13073,18 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <Parameter Name="optCamionVagon" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Requerimientos_TX_PendientesDeAsignacion">
-            <Parameter Name="Depositos" Mode="In" Type="String" />
+          <Parameter Name="Depositos" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Requerimientos_TX_PendientesDeAsignacion1">
-            <Parameter Name="Depositos" Mode="In" Type="String" />
+          <Parameter Name="Depositos" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="NovedadesUsuarios" EntityType="DemoProntoModel.NovedadesUsuario" />
+          <EntitySet Name="DetalleEventosDelSistemas" EntityType="DemoProntoModel.DetalleEventosDelSistema" />
+          <EntitySet Name="EventosDelSistemas" EntityType="DemoProntoModel.EventosDelSistema" />
+          <AssociationSet Name="FK_DetalleEventosDelSistema_IdEventoDelSistema" Association="DemoProntoModel.FK_DetalleEventosDelSistema_IdEventoDelSistema">
+            <End Role="EventosDelSistema" EntitySet="EventosDelSistemas" />
+            <End Role="DetalleEventosDelSistema" EntitySet="DetalleEventosDelSistemas" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -19271,6 +19334,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="PrecioVagonesCalada" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="PrecioVagonesBalanzaExportacion" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="PrecioVagonesCaladaExportacion" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrecioBuquesCalada" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <Association Name="FK_ListasPreciosDetalle_Articulos">
           <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -21635,6 +21699,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="PresupuestoObrasNodosPxQxPresupuestoPorDias" Relationship="DemoProntoModel.FK_PresupuestoObrasNodosPxQxPresupuestoPorDia_PresupuestoObrasNodos" FromRole="PresupuestoObrasNodo" ToRole="PresupuestoObrasNodosPxQxPresupuestoPorDia" />
           <NavigationProperty Name="PresupuestoObrasRedeterminaciones" Relationship="DemoProntoModel.FK_PresupuestoObrasRedeterminaciones_PresupuestoObrasNodos" FromRole="PresupuestoObrasNodo" ToRole="PresupuestoObrasRedeterminacione" />
           <Property Name="BaseDatosOrigen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HabilitarAvanceReal" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdCondicionCompra" Type="Int32" />
         </EntityType>
         <EntityType Name="PresupuestoObrasNodosConsumo">
           <Key>
@@ -22894,6 +22960,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="MotivoRechazo" Type="Int32" />
           <NavigationProperty Name="CartasDePorteLogDeOCRs" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" FromRole="CartasDePorte" ToRole="CartasDePorteLogDeOCR" />
           <Property Name="FacturarA_Manual" Type="Boolean" Nullable="false" />
+          <Property Name="EntregaSAP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CartasDePorteDetalle_EF">
           <Key>
@@ -25053,6 +25120,52 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
           <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
         </ComplexType>
+        <EntityType Name="NovedadesUsuario">
+          <Key>
+            <PropertyRef Name="IdNovedadUsuarios" />
+          </Key>
+          <Property Name="IdNovedadUsuarios" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="IdEventoDelSistema" Type="Int32" />
+          <Property Name="FechaEvento" Type="DateTime" Precision="3" />
+          <Property Name="Confirmado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaConfirmacion" Type="DateTime" Precision="3" />
+          <Property Name="Detalle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdEnviadoPor" Type="Int32" />
+          <Property Name="IdElemento" Type="Int32" />
+          <Property Name="TipoElemento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DetalleEventosDelSistema">
+          <Key>
+            <PropertyRef Name="IdDetalleEventoDelSistema" />
+          </Key>
+          <Property Name="IdDetalleEventoDelSistema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEventoDelSistema" Type="Int32" />
+          <Property Name="IdEmpleado" Type="Int32" />
+          <NavigationProperty Name="EventosDelSistema" Relationship="DemoProntoModel.FK_DetalleEventosDelSistema_IdEventoDelSistema" FromRole="DetalleEventosDelSistema" ToRole="EventosDelSistema" />
+        </EntityType>
+        <EntityType Name="EventosDelSistema">
+          <Key>
+            <PropertyRef Name="IdEventoDelSistema" />
+          </Key>
+          <Property Name="IdEventoDelSistema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Importancia" Type="Int16" />
+          <NavigationProperty Name="DetalleEventosDelSistemas" Relationship="DemoProntoModel.FK_DetalleEventosDelSistema_IdEventoDelSistema" FromRole="EventosDelSistema" ToRole="DetalleEventosDelSistema" />
+        </EntityType>
+        <Association Name="FK_DetalleEventosDelSistema_IdEventoDelSistema">
+          <End Type="DemoProntoModel.EventosDelSistema" Role="EventosDelSistema" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleEventosDelSistema" Role="DetalleEventosDelSistema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventosDelSistema">
+              <PropertyRef Name="IdEventoDelSistema" />
+            </Principal>
+            <Dependent Role="DetalleEventosDelSistema">
+              <PropertyRef Name="IdEventoDelSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -29197,6 +29310,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="ListasPreciosDetalles">
             <EntityTypeMapping TypeName="DemoProntoModel.ListasPreciosDetalle">
               <MappingFragment StoreEntitySet="ListasPreciosDetalle">
+                <ScalarProperty Name="PrecioBuquesCalada" ColumnName="PrecioBuquesCalada" />
                 <ScalarProperty Name="PrecioVagonesCaladaExportacion" ColumnName="PrecioVagonesCaladaExportacion" />
                 <ScalarProperty Name="PrecioVagonesBalanzaExportacion" ColumnName="PrecioVagonesBalanzaExportacion" />
                 <ScalarProperty Name="PrecioVagonesCalada" ColumnName="PrecioVagonesCalada" />
@@ -30594,6 +30708,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="PresupuestoObrasNodos">
             <EntityTypeMapping TypeName="DemoProntoModel.PresupuestoObrasNodo">
               <MappingFragment StoreEntitySet="PresupuestoObrasNodos">
+                <ScalarProperty Name="IdCondicionCompra" ColumnName="IdCondicionCompra" />
+                <ScalarProperty Name="HabilitarAvanceReal" ColumnName="HabilitarAvanceReal" />
                 <ScalarProperty Name="BaseDatosOrigen" ColumnName="BaseDatosOrigen" />
                 <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
                 <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
@@ -30954,6 +31070,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="CartasDePortes">
             <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
               <MappingFragment StoreEntitySet="CartasDePorte">
+                <ScalarProperty Name="EntregaSAP" ColumnName="EntregaSAP" />
                 <ScalarProperty Name="FacturarA_Manual" ColumnName="FacturarA_Manual" />
                 <ScalarProperty Name="MotivoRechazo" ColumnName="MotivoRechazo" />
                 <ScalarProperty Name="ClienteAcondicionador" ColumnName="ClienteAcondicionador" />
@@ -32016,6 +32133,41 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
           <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion1" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
+          <EntitySetMapping Name="NovedadesUsuarios">
+            <EntityTypeMapping TypeName="DemoProntoModel.NovedadesUsuario">
+              <MappingFragment StoreEntitySet="NovedadesUsuarios">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="TipoElemento" ColumnName="TipoElemento" />
+                <ScalarProperty Name="IdElemento" ColumnName="IdElemento" />
+                <ScalarProperty Name="IdEnviadoPor" ColumnName="IdEnviadoPor" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="FechaConfirmacion" ColumnName="FechaConfirmacion" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+                <ScalarProperty Name="FechaEvento" ColumnName="FechaEvento" />
+                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdNovedadUsuarios" ColumnName="IdNovedadUsuarios" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleEventosDelSistemas">
+            <EntityTypeMapping TypeName="DemoProntoModel.DetalleEventosDelSistema">
+              <MappingFragment StoreEntitySet="DetalleEventosDelSistema">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
+                <ScalarProperty Name="IdDetalleEventoDelSistema" ColumnName="IdDetalleEventoDelSistema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventosDelSistemas">
+            <EntityTypeMapping TypeName="DemoProntoModel.EventosDelSistema">
+              <MappingFragment StoreEntitySet="EventosDelSistema">
+                <ScalarProperty Name="Importancia" ColumnName="Importancia" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,0 +1,721 @@
+
+Log Entry : 
+10/19/2016 11:43:31
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+10/19/2016 12:03:26
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+10/19/2016 12:04:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 291 -1 -1 291 291 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 12:04:18
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 12:05:27
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Net.WebException: The remote name could not be resolved: 'bdlconsultores.sytes.net'
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4069
+__________________________
+
+Log Entry : 
+10/19/2016 12:09:11
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Net.WebException
+The remote name could not be resolved: 'bdlconsultores.sytes.net'
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4150
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1110
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 12:09:12
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Net.WebException: The remote name could not be resolved: 'bdlconsultores.sytes.net'
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4150
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1713
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 1527
+__________________________
+
+Log Entry : 
+10/19/2016 12:09:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3092
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2407
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+The remote name could not be resolved: 'bdlconsultores.sytes.net'
+__________________________
+
+Log Entry : 
+10/19/2016 12:09:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+10/19/2016 12:10:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:La carta numero 556852973 id=2638278 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/19/2016 12:10:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+10/19/2016 12:10:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:La carta numero 556852973 id=2638278 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/19/2016 12:10:50
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+10/19/2016 12:10:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:La carta numero 556852973 id=2638278 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/19/2016 12:10:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+10/19/2016 12:11:04
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 291 -1 -1 291 291 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 12:11:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 12:11:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Net.WebException: The remote name could not be resolved: 'bdlconsultores.sytes.net'
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4069
+__________________________
+
+Log Entry : 
+10/19/2016 12:14:00
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Net.WebException
+The remote name could not be resolved: 'bdlconsultores.sytes.net'
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4150
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1110
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 12:24:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Net.WebException: The remote name could not be resolved: 'bdlconsultores.sytes.net'
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4150
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1713
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 1527
+__________________________
+
+Log Entry : 
+10/19/2016 12:24:28
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Exception
+Application-defined or object-defined error.
+   at Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   at Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 3092
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2407
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+The remote name could not be resolved: 'bdlconsultores.sytes.net'
+__________________________
+
+Log Entry : 
+10/19/2016 12:24:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+10/19/2016 12:49:14
+
+Log Entry : 
+10/19/2016 12:50:17
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+10/19/2016 12:51:09
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 12:51:27
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 12:51:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125130.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:51:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125130.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:51:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 12:51:53
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:La carta numero 556852973 id=2638278 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/19/2016 12:51:53
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+10/19/2016 12:52:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:La carta numero 556852973 id=2638278 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/19/2016 12:52:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638278. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+10/19/2016 12:53:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+10/19/2016 12:53:16
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Descargas,  del 01/10/2016 al 31/10/2016 Titular: LA BIZNAGA SA AGROPECUARIA Intermediario LA BIZNAGA SA AGROPECUARIA R.Comercial: LA BIZNAGA SA AGROPECUARIA       Cliente Observaciones: LA BIZNAGA SA AGROPECUARIA  (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/19/2016 12:53:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 12:53:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 12:53:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125346.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:53:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125346.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:53:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:06
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:08
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125511.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125511.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125539.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_125539.xls
+__________________________
+
+Log Entry : 
+10/19/2016 12:55:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 13:06:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+10/19/2016 13:07:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 13:07:05
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 13:07:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_130708.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:07:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_130708.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:07:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 13:12:01
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+10/19/2016 13:12:27
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 13:12:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 13:14:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131451.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:14:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131451.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:14:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:25
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:25
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:26
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:26
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131556.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131556.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:15:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:01
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:01
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:01
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:01
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:04
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:06
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131608.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131608.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:13
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:13
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:14
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:14
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/19/2016 13:16:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 13:17:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131819.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131819.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:24
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:25
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131846.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:18:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_131846.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:22:00
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:No se pudo generar nada La Biznaga
+__________________________
+
+Log Entry : 
+10/19/2016 13:22:04
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=e3d494166b9547fd9ee94e7a4912085a&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:22:04
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=171ba8ddfb24448f96001c756c6112a1&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/19/2016 13:22:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para La Biznaga 01/10/2016 31/10/2016 6762 -1 -1 6762 6762 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+10/19/2016 13:22:08
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para LA BIZNAGA
+__________________________
+
+Log Entry : 
+10/19/2016 13:24:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_132413.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:24:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga19oct2016_132413.xls
+__________________________
+
+Log Entry : 
+10/19/2016 13:24:17
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:line 2434
+__________________________

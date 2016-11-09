@@ -1,0 +1,81 @@
+
+Log Entry : 
+10/06/2016 09:08:14
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+10/06/2016 09:10:17
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+10/06/2016 09:10:23
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 5 y se le pasaron 3
+__________________________
+
+Log Entry : 
+10/06/2016 09:12:28
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:ImprimirFacturaElectronica idfac 87720
+__________________________
+
+Log Entry : 
+10/06/2016 09:12:29
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:Creando docx
+__________________________
+
+Log Entry : 
+10/06/2016 09:13:45
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(String str) in c:\Users\Administrador\Documents\bdl\pronto\Data\FuncionesGenerales.cs:line 88
+   at Pronto.ERP.Bll.EntidadManager.regexReplace2(String& cadena, String buscar, String reemplazo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 61
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+10/06/2016 09:13:55
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(String str) in c:\Users\Administrador\Documents\bdl\pronto\Data\FuncionesGenerales.cs:line 88
+   at Pronto.ERP.Bll.EntidadManager.regexReplace2(String& cadena, String buscar, String reemplazo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 61
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+10/06/2016 09:13:57
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(String str) in c:\Users\Administrador\Documents\bdl\pronto\Data\FuncionesGenerales.cs:line 88
+   at Pronto.ERP.Bll.EntidadManager.regexReplace2(String& cadena, String buscar, String reemplazo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 61
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+10/06/2016 09:13:57
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:docx creado
+__________________________
+
+Log Entry : 
+10/06/2016 09:13:58
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:Creando codigo barras
+__________________________
+
+Log Entry : 
+10/06/2016 09:13:59
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:Creando pdf
+__________________________
+
+Log Entry : 
+10/06/2016 09:14:43
+Error in: http://localhost:58911/ProntoWeb/Factura.aspx?Id=87720. Error Message:salgo
+__________________________
