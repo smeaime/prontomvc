@@ -393,6 +393,26 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void FormatoImpresionPlantillaFactura_iibb()
+        {
+            
+            //explota
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(87781, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
+        }
+
+
+
+
 
         [TestMethod]
         public void SincroMonsanto_17940()
@@ -414,7 +434,7 @@ namespace ProntoMVC.Tests
                 -1, -1, -1, -1,
                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
                 new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+                -1,"Ambas", false, "", "", -1, ref registrosf, 40);
 
 
 

@@ -2400,7 +2400,7 @@ Public Class CartaDePorteManager
                                         idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia,
                                         idDestino, AplicarANDuORalFiltro, ModoExportacionString, fechadesde, _
                                         fechahasta, puntoventa, idacopio, Contrato, QueContenga2, _
-                                        idClienteAuxiliar, AgrupadorDeTandaPeriodos, Vagon, Patente, optCamionVagon).Take(maximumRows)
+                                        idClienteAuxiliar, AgrupadorDeTandaPeriodos, Vagon, Patente, "Todos").Take(maximumRows)
         Select New CartasConCalada With { _
              .IdCartaDePorte = cdp.IdCartaDePorte, _
              .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
@@ -13053,6 +13053,10 @@ Public Class CartaDePorteManager
 
 
 
+        Dim db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        Dim f = db.Facturas.Find(oFac.Id)
+        'oFac.IBrutos = f.RetencionIBrutos1
+
 
 
         'Dim oFac As Pronto.ERP.BO.Requerimiento = CType(Me.ViewState(mKey), Pronto.ERP.BO.Requerimiento)
@@ -13196,6 +13200,65 @@ Public Class CartaDePorteManager
 
             Dim SyngentaLeyenda = LogicaFacturacion.LeyendaSyngenta(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
             regexReplace2(docText, "#LeyendaSyngenta#", SyngentaLeyenda)
+
+
+            
+
+            '///////////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////////
+
+            Try
+
+                Dim ib = db.IBCondiciones.Find(f.IdIBCondicion)
+                Dim mvarIdProvinciaIIBB = ib.IdProvincia
+                Dim mvarNombreProvinciaIIBB = ib.Descripcion
+                Dim mvarPorcentajeIBrutos = f.PorcentajeIBrutos1
+
+                'If Not IsNull(oRs.Fields("IdIBCondicion").Value) Then
+                '    oRsTablas = oAp.IBCondiciones.TraerFiltrado("_PorId", oRs.Fields("IdIBCondicion").Value)
+                '    If oRsTablas.RecordCount > 0 Then
+                '        If Not IsNull(oRsTablas.Fields("IdProvincia").Value) Then
+                '            mvarIdProvinciaIIBB = oRsTablas.Fields("IdProvincia").Value
+                '        End If
+                '    End If
+                '    oRsTablas = oAp.Provincias.TraerFiltrado("_PorId", mvarIdProvinciaIIBB)
+                '    If oRsTablas.RecordCount > 0 Then
+                '        If Not IsNull(oRsTablas.Fields("Nombre").Value) Then
+                '            mvarNombreProvinciaIIBB = oRsTablas.Fields("Nombre").Value
+                '        End If
+                '    End If
+                'End If
+
+
+                Dim mAuxS1 = ""
+                If oFac.RetencionIBrutos1 <> 0 Then
+                    If mvarIdProvinciaIIBB = 3 Then
+                        mAuxS1 = "Percepción CABA: " & FF2(mvarPorcentajeIBrutos) & " %"
+                    Else
+                        mAuxS1 = "Percepción IIBB " & mvarNombreProvinciaIIBB & " " & FF2(mvarPorcentajeIBrutos) & " %"
+                    End If
+
+                    mAuxS1 &= " : " & FF2(oFac.RetencionIBrutos1)
+
+                End If
+
+                regexReplace2(docText, "#LeyendaPercepcionIIBB#", mAuxS1)
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
+
+            '///////////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13220
@@ -13573,10 +13636,12 @@ Public Class CartaDePorteManager
                 regexReplace2(docText, "fecharecepcion", oFac.Fecha)
                 regexReplace2(docText, "jefesector", "")
 
-                regexReplace2(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.IBrutos))
+
+
+                regexReplace2(docText, "#Subtotal#", "$ " + FF2(FF2(oFac.Total) - FF2(oFac.ImporteIva1) - oFac.RetencionIBrutos1))
                 regexReplace2(docText, "#PorcIVA#", oFac.PorcentajeIva1.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture))
                 regexReplace2(docText, "#IVA#", "$ " + FF2(oFac.ImporteIva1))
-                regexReplace2(docText, "#IIBB#", oFac.IBrutos)
+                regexReplace2(docText, "#IIBB#", oFac.RetencionIBrutos1)
                 regexReplace2(docText, "#Total#", "$ " + FF2(oFac.Total))
 
                 regexReplace2(docText, "#TotalPalabras#", "Pesos " + Numalet.ToCardinal(oFac.Total))
