@@ -13208,8 +13208,9 @@ Public Class CartaDePorteManager
             '///////////////////////////////////////////////////////////////////////////////////////
             '///////////////////////////////////////////////////////////////////////////////////////
 
-            Try
+            Dim mAuxS1 = ""
 
+            Try
                 Dim ib = db.IBCondiciones.Find(f.IdIBCondicion)
                 Dim mvarIdProvinciaIIBB = ib.IdProvincia
                 Dim mvarNombreProvinciaIIBB = ib.Descripcion
@@ -13231,7 +13232,6 @@ Public Class CartaDePorteManager
                 'End If
 
 
-                Dim mAuxS1 = ""
                 If oFac.RetencionIBrutos1 <> 0 Then
                     If mvarIdProvinciaIIBB = 3 Then
                         mAuxS1 = "Percepción CABA: " & FF2(mvarPorcentajeIBrutos) & " %"
@@ -13243,11 +13243,13 @@ Public Class CartaDePorteManager
 
                 End If
 
-                regexReplace2(docText, "#LeyendaPercepcionIIBB#", mAuxS1)
-
+       
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
             End Try
+
+
+            regexReplace2(docText, "#LeyendaPercepcionIIBB#", mAuxS1)
 
 
             '///////////////////////////////////////////////////////////////////////////////////////
