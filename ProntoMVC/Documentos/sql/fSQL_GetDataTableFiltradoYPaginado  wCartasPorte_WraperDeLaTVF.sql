@@ -267,7 +267,7 @@ where 1=1
 			OR 
 			(@optCamionVagon = 'Vagones' AND isnull(CDP.SubNumeroVagon,'')<>'')
 			OR 
-			@optCamionVagon = 'Todos' OR @optCamionVagon  IS NULL
+			@optCamionVagon = 'Todos' OR  @optCamionVagon = 'Ambas'  OR @optCamionVagon  IS NULL
 		)
 
 
@@ -460,20 +460,20 @@ go
    --         @optCamionVagon  VARCHAR(10) 
 
 
-select  exporta, * --count(*)
+select top 20  exporta, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 					 NULL, 
-					10, 
-					0,
 					NULL, 
-					-1, 
+					NULL, 
+					NULL, 
+					NULL, 
 
 					NULL, 
 					NULL, 
-					-1,
-					-1, 
-					NULL,--53, 
+					NULL, 
+					NULL, 
+					NULL,
 
 					NULL, 
 					NULL, 
@@ -484,7 +484,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 			
 					'2016-01-09 00:00:00',
 								NULL, 
-					'Ambas',
+					NULL,
 					NULL, 
 					NULL, 
 
@@ -492,7 +492,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 					NULL,
 					NULL, 
-					'Ambas'
+					NULL
 
 					) as cdp
             
@@ -505,7 +505,27 @@ select  exporta, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 
-0,40,4,'',-1,-1,-1,-1,-1,-1,-1,-1,0,'Ambas','2016-01-01 00:00:00','2016-01-28 00:00:00',-1,NULL,'','-1',-1,-1,0,'','Ambas'
+ NULL, 
+					10, 
+					0,
+					NULL, 
+					-1, 
+-1,-1,-1,-1,-1,
+
+	NULL, 
+					NULL, 
+					NULL,
+'Ambas','2016-01-01 00:00:00',
+'2016-01-28 00:00:00',NULL, 
+					'Ambas',
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
 
 					) as cdp
             
