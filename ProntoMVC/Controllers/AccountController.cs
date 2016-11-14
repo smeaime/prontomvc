@@ -34,7 +34,7 @@ namespace ProntoMVC.Controllers
 
 
 
-     
+
 
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
@@ -357,11 +357,11 @@ namespace ProntoMVC.Controllers
             MembershipUser membershipUser;
             //if (usuario == "")
             //{
-                membershipUser = ServicioMembership.GetUser();
+            membershipUser = ServicioMembership.GetUser();
             //}
             //else
             //{
-                //membershipUser = ServicioMembership.GetUser(usuario);
+            //membershipUser = ServicioMembership.GetUser(usuario);
             //}
 
             if (membershipUser == null)
@@ -509,24 +509,37 @@ namespace ProntoMVC.Controllers
 
 
 
-                    int b = Generales.BasesDelUsuario((Guid) Membership.GetUser(model.UserName).ProviderUserKey);
+                    int b = Generales.BasesDelUsuario((Guid)Membership.GetUser(model.UserName).ProviderUserKey);
 
                     if (true)
                     {
                         if (b == 0)
                         {
 
-                            //Roles.GetRolesForUser(oStaticMembershipService.GetUser().UserName)
-                            if (Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin"))
+                            try
                             {
-                                //    return RedirectToAction("Index", "Autorizacion", new { area = "" });
-                                return RedirectToAction("Details", "UserAdministration", new { area = "MvcMembership", id = Membership.GetUser().ProviderUserKey.ToString() });
+                                //Roles.GetRolesForUser(oStaticMembershipService.GetUser().UserName)
+                                if (Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin"))
+                                {
+                                    //    return RedirectToAction("Index", "Autorizacion", new { area = "" });
+                                    return RedirectToAction("Details", "UserAdministration", new { area = "MvcMembership", id = Membership.GetUser().ProviderUserKey.ToString() });
 
+
+                                }
 
                             }
+                            catch (Exception ex)
+                            {
+
+                                ErrHandler2.WriteError(ex);
+                            }
+
 
                             ModelState.AddModelError("", "El administrador habilitó tu cuenta, pero todavía no tenés base asignada. Por favor consultalo con el administrador");
                             return View(model);
+
+
+
                         }
 
 
@@ -546,7 +559,7 @@ namespace ProntoMVC.Controllers
                         if (false)
                         {
                             this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser(model.UserName).ProviderUserKey);
-                            GrabarUltimaBaseAccedida(model.UserName, this.Session["BasePronto"].ToString(),oStaticMembershipService);
+                            GrabarUltimaBaseAccedida(model.UserName, this.Session["BasePronto"].ToString(), oStaticMembershipService);
                         }
                         else
                         {
@@ -555,7 +568,7 @@ namespace ProntoMVC.Controllers
                                 this.Session["BasePronto"] = empresa;
                             }
 
-                            else if (BuscarUltimaBaseAccedida( oStaticMembershipService) != "")
+                            else if (BuscarUltimaBaseAccedida(oStaticMembershipService) != "")
                             {
                                 this.Session["BasePronto"] = BuscarUltimaBaseAccedida(oStaticMembershipService);
 
