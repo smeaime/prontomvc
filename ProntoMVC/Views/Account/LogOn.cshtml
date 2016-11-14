@@ -48,7 +48,7 @@ else
         /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
         font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
         font-size: 16px !important;
-        background-color:  rgb(250, 250, 250);
+        background-color: rgb(250, 250, 250);
     }
 
     input, button, select, textarea {
@@ -56,12 +56,11 @@ else
         /* font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;*/
         font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
     }
-
 </style>
 
 @* http://stackoverflow.com/questions/827905/asp-net-mvc-login-returnurl-always-null*@
 @*@using (Html.BeginForm(null, null, FormMethod.Post, new {id="formid",ReturnUrl = Request.QueryString["ReturnUrl"] }))*@
-@using (Html.BeginForm(null, null, FormMethod.Post, new {  }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { }))
 {
 
     <div style="background: rgb(250, 250, 250)">
@@ -94,7 +93,7 @@ else
                     Pronto
 
                 </div>
-    <br /><br /><br /><br />
+                <br /><br /><br /><br />
             }
             <br />
             <div class="row-fluid  text-center" style="vertical-align: middle; background: /* rgba(255, 255, 255, 0.58);
@@ -117,6 +116,10 @@ else
                     </div>
                     <div class="editor-label">
                     </div>
+                    <div class="text-center  editor-label" style="font-size: 16px; color: red; width: 100%;;  text-align: center  ">
+                        @*http://stackoverflow.com/questions/10307817/validation-summary-vertical-alignment*@
+                        @Html.ValidationSummary(false)
+                    </div>
                     <p>
                         @*                    <input type="button" value="Iniciar sesión" class="btn btn-large btn-primary"
                             onclick="document.forms['formid'].submit(); "
@@ -133,7 +136,7 @@ else
                     </p>
                     <div class="text-center  editor-label" style="font-size: 14px;   ">
                         @Html.CheckBoxFor(m => m.RememberMe, new { style = "vertical-align: top;" }) Entrar automáticamente @*@Html.LabelFor(m => m.RememberMe)*@
-                        @Html.ValidationSummary(false)
+
                     </div>
                     <p>
                         @*@Html.ValidationSummary(true, "No se ha iniciado la sesión. Corrija los errores e inténtelo de nuevo.")*@

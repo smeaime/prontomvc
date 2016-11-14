@@ -1002,7 +1002,21 @@ namespace ProntoFlexicapture
 
             if (bGirar180grados) MarcarImagenComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
 
-            List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
+
+            List<System.Drawing.Image> listapaginas;
+
+            try
+            {
+                listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
+
+            }
+            catch (Exception)
+            {
+
+                ErrHandler2.WriteError("Nombre archivo: " + archivo);
+
+                throw;
+            }
 
 
             List<string> l = new List<string>();
