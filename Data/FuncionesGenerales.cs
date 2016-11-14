@@ -99,6 +99,8 @@ namespace ProntoMVC.Data
 
         static public List<Image> GetAllPages(string file) // sacar las paginas de un tiff
         {
+
+
             List<Image> images = new List<Image>();
             Bitmap bitmap = (Bitmap)Image.FromFile(file);
             int count = bitmap.GetFrameCount(FrameDimension.Page);
@@ -109,8 +111,32 @@ namespace ProntoMVC.Data
                 MemoryStream byteStream = new MemoryStream();
 
                 //bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                try
+                {
+                    bitmap.Save(byteStream, ImageFormat.Tiff);
 
-                bitmap.Save(byteStream, ImageFormat.Tiff);
+                }
+                catch (Exception)
+                {
+                    //                A generic error occurred in GDI+.
+                    //Stack Trace:	at System.Drawing.Image.Save(Stream stream, ImageCodecInfo encoder, EncoderParameters encoderParams)
+                    //at System.Drawing.Image.Save(Stream stream, ImageFormat format)
+                    //at ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(String file) in c:\Users\Administrador\Documents\bdl\pronto\Data\FuncionesGenerales.cs:line 113
+
+                    //vos devolves la list de <image> habiendo cerrado el MemoryStream
+                    //    http://stackoverflow.com/questions/15862810/a-generic-error-occured-in-gdi-in-bitmap-save-method
+                    //    http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream?noredirect=1&lq=1
+
+
+                    //         verificá si no es un tema con el directorio
+                    //A generic error occurred in GDI+. May also result from incorrect save path! Took me half a day to notice that. So make sure that you have double checked the path to save the image as well.
+                    
+                    //A generic error occurred in GDI+. It can occur because of image storing paths issues,I got this error because my storing path is too long, I fixed this by first storing the image in a shortest path and move it to the correct location with long path handling techniques.
+
+                    throw;
+                }
+
+
                 // and then create a new Image from it
                 images.Add(Image.FromStream(byteStream));
             } return images;
@@ -2415,7 +2441,7 @@ namespace CerealNet.WSCartasDePorte
         }
     }
 
-   
+
 
 
 
