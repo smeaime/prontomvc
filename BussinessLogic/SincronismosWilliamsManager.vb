@@ -46,7 +46,11 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Const MonsantoCUIT = "30503508725"
+        Private Const MonsantoCUIT = "30503508725"
+        Private Const BtgPactualCUIT = "30714253189"
+        Private Const DowCUIT = "30636021578"
+        Private Const DiazFortiCUIT = "30714792942"
+
 
 
 
@@ -143,9 +147,10 @@ Namespace Pronto.ERP.Bll
 
                 Case "BTG PACTUAL [BIT]"
 
-                    txtIntermediario.Text = "BTG PACTUAL COMMODITIES S.A."
-                    txtRcomercial.Text = "BTG PACTUAL COMMODITIES S.A."
-                    txtDestinatario.Text = "BTG PACTUAL COMMODITIES S.A."
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(BtgPactualCUIT, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(BtgPactualCUIT, SC, ""))
+                    txtDestinatario.Text = NombreCliente(SC, BuscarClientePorCUIT(BtgPactualCUIT, SC, ""))
+
                 Case "BLD", "BLD 2", "BLD (CALIDADES)"
                     txtTitular.Text = ""
                     txtCorredor.Text = "BLD S.A"
@@ -166,9 +171,10 @@ Namespace Pronto.ERP.Bll
                     txtDestinatario.Text = "BUNGE ARGENTINA S.A."
 
                 Case "DIAZ FORTI", "DIAZ FORTI [BIT]"
-                    txtIntermediario.Text = "DIAZ & FORTI S.R.L"
-                    txtRcomercial.Text = "DIAZ & FORTI S.R.L"
-                    txtDestinatario.Text = "DIAZ & FORTI S.R.L"
+
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(DiazFortiCUIT, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(DiazFortiCUIT, SC, ""))
+                    txtDestinatario.Text = NombreCliente(SC, BuscarClientePorCUIT(DiazFortiCUIT, SC, ""))
 
 
                 Case "DIAZ RIGANTI"
@@ -180,9 +186,10 @@ Namespace Pronto.ERP.Bll
 
 
                 Case "DOW", "DOW FORMATO ANTERIOR"
+
                     'DOW:            RTTE(COMERCIAL / DESTINATARIO)
-                    txtRcomercial.Text = "DOW AGROSCIENCES ARG. SA"
-                    txtDestinatario.Text = "DOW AGROSCIENCES ARG. SA"
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(DowCUIT, SC, ""))
+                    txtDestinatario.Text = NombreCliente(SC, BuscarClientePorCUIT(DowCUIT, SC, ""))
                 Case "DUKAREVICH"
                     'DUKAREVICH:     CORREDOR()
                     txtTitular.Text = ""
@@ -23034,7 +23041,7 @@ Namespace Pronto.ERP.Bll
 
                     'seccion Procedencia de la mercaderia ---------------------------------
                     '25	no	Establecimiento	digits{1,6}	Numerico entre 1 y  11 digitos
-                    sb &= .Establecimiento
+                    sb &= Val(.Establecimiento).ToString
                     sb &= SEPARADOR
                     '26	yes	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
                     sb &= .ProcedenciaDesc
