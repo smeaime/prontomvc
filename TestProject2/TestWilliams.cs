@@ -434,7 +434,8 @@ namespace ProntoMVC.Tests
            SincronismosWilliamsManager.ElegirCombosSegunParametro("BTG PACTUAL [BIT]",new System.Web.UI.WebControls.TextBox()
                ,new System.Web.UI.WebControls.TextBox(),
                new System.Web.UI.WebControls.TextBox(),
-               new System.Web.UI.WebControls.TextBox(),new System.Web.UI.WebControls.TextBox(),new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.TextBox(),new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.TextBox(),
                new System.Web.UI.WebControls.DropDownList() ,new System.Web.UI.WebControls.DropDownList(),
                new System.Web.UI.WebControls.DropDownList(),SC);
 
