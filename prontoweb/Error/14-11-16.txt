@@ -1,0 +1,454 @@
+
+Log Entry : 
+11/14/2016 16:55:57
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:01
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Agrosur
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:03
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Alabern
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:05
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para ALABERN (CALIDADES)
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:06
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Alea
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:08
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Aibal
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:10
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Amaggi (descargas)
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:11
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para AMAGGI (CALIDADES)
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:13
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Andreoli
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:15
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Areco
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:17
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Argencer
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:18
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Beraza
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:20
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para BLD
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:21
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro BLD
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:21
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message: generar en C:\Users\Administrador\AppData\Local\Temp\SincroBLD14nov2016_165621.pronto Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:22
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No se pudo generar el informe de bld! Microsoft.Reporting.WebForms.ReportServerException: La acción actual no se puede completar. Las credenciales del origen de datos del usuario no cumplen los requisitos necesarios para ejecutar este informe o conjunto de datos compartido. Es posible que las credenciales del origen de datos del usuario no estén almacenadas en la base de datos del servidor de informes, o bien que el origen de datos del usuario esté configurado para no requerir credenciales pero no se haya configurado la cuenta de ejecución desatendida. (rsInvalidDataSourceCredentialSetting)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.GetParameters()
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4581
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1177
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:22
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Se generó el reporte en 
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:24
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  System.Runtime.InteropServices.COMException (0x800A03EC): No se encontró "". Compruebe la ortografía del nombre del archivo y si su ubicación es correcta.
+
+Si intenta abrir el archivo desde la lista de los usados recientemente, asegúrese de que no se ha cambiado el nombre del archivo, ni se ha eliminado o movido.
+   at Microsoft.Office.Interop.Excel.Workbooks.Open(String Filename, Object UpdateLinks, Object ReadOnly, Object Format, Object Password, Object WriteResPassword, Object IgnoreReadOnlyRecommended, Object Origin, Object Delimiter, Object Editable, Object Notify, Object Converter, Object AddToMru, Object Local, Object CorruptLoad)
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.ExcelToCSV_SincroBLD(String fileExcelName, Int32 MAXCOLS) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1810
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:24
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Runtime.InteropServices.COMException
+No se encontró "". Compruebe la ortografía del nombre del archivo y si su ubicación es correcta.
+
+Si intenta abrir el archivo desde la lista de los usados recientemente, asegúrese de que no se ha cambiado el nombre del archivo, ni se ha eliminado o movido.
+   at Microsoft.Office.Interop.Excel.Workbooks.Open(String Filename, Object UpdateLinks, Object ReadOnly, Object Format, Object Password, Object WriteResPassword, Object IgnoreReadOnlyRecommended, Object Origin, Object Delimiter, Object Editable, Object Notify, Object Converter, Object AddToMru, Object Local, Object CorruptLoad)
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.ExcelToCSV_SincroBLD(String fileExcelName, Int32 MAXCOLS) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1810
+Microsoft Excel
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:24
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No pudo extraer el excel. System.NullReferenceException: Object reference not set to an instance of an object.
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.ExcelToCSV_SincroBLD(String fileExcelName, Int32 MAXCOLS) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1834
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:24
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at System.Runtime.InteropServices.Marshal.ReleaseComObject(Object o)
+   at ProntoDebug.NAR(Object o)
+mscorlib
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:24
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: fileName
+   at System.IO.FileInfo..ctor(String fileName)
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1707
+mscorlib
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:24
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No se pudo generar nada BLD
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:24
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para BLD (CALIDADES)
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:25
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para BTG PACTUAL [BIT]
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:26
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Bunge
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:28
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Diaz Forti
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:29
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Diaz Riganti
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:30
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para DOW
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:35
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\SincroDOW14nov2016_165632.xls
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:35
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\SincroDOW14nov2016_165632.xls
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:37
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Dukarevich
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para El Enlace
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:40
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Lartirigoyen
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:42
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para La Biznaga
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:57
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\LaBiznaga14nov2016_165644.xls
+__________________________
+
+Log Entry : 
+11/14/2016 16:56:57
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\LaBiznaga14nov2016_165644.xls
+__________________________
+
+Log Entry : 
+11/14/2016 16:57:16
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para La Bragadense
+__________________________
+
+Log Entry : 
+11/14/2016 16:57:40
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Lelfun
+__________________________
+
+Log Entry : 
+11/14/2016 16:57:58
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Los Grobo
+__________________________
+
+Log Entry : 
+11/14/2016 16:58:12
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Granar
+__________________________
+
+Log Entry : 
+11/14/2016 16:58:25
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para FYO
+__________________________
+
+Log Entry : 
+11/14/2016 16:58:34
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Granos del Parana
+__________________________
+
+Log Entry : 
+11/14/2016 16:58:47
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Granos del Litoral
+__________________________
+
+Log Entry : 
+11/14/2016 16:58:57
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Grimaldi Grassi
+__________________________
+
+Log Entry : 
+11/14/2016 16:59:10
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Miguel Cinque
+__________________________
+
+Log Entry : 
+11/14/2016 16:59:34
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at CartaDePorteManager.BuscarClientePorCUIT(String cuit, String SC, String RazonSocial) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 842
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.ElegirCombosSegunParametro(String sSincronismo, TextBox txtTitular, TextBox txtCorredor, TextBox txtIntermediario, TextBox txtDestinatario, TextBox txtRcomercial, TextBox txtPopClienteAuxiliar, DropDownList cmbEstado, DropDownList cmbCriterioWHERE, DropDownList DropDownList2, String SC) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 250
+   at SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:line 523
+EntityFramework
+__________________________
+
+Log Entry : 
+11/14/2016 16:59:48
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Morgan (descargas)
+__________________________
+
+Log Entry : 
+11/14/2016 17:00:02
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Noble
+__________________________
+
+Log Entry : 
+11/14/2016 17:00:13
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Noble (anexo calidades)
+__________________________
+
+Log Entry : 
+11/14/2016 17:00:23
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Ojeda
+__________________________
+
+Log Entry : 
+11/14/2016 17:00:48
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para PetroAgro
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:12
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para PSA La California
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:22
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro PSA La California
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:27
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message: generar en C:\Users\Administrador\AppData\Local\Temp\SincroPSA14nov2016_170127.pronto Mirá que puede explotar por los permisos de NETWORK SERVICE para usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:37
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No se pudo generar el informe de bld! 
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:37
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Se generó el reporte en 
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  System.Runtime.InteropServices.COMException (0x800A03EC): No se encontró "". Compruebe la ortografía del nombre del archivo y si su ubicación es correcta.
+
+Si intenta abrir el archivo desde la lista de los usados recientemente, asegúrese de que no se ha cambiado el nombre del archivo, ni se ha eliminado o movido.
+   at Microsoft.Office.Interop.Excel.Workbooks.Open(String Filename, Object UpdateLinks, Object ReadOnly, Object Format, Object Password, Object WriteResPassword, Object IgnoreReadOnlyRecommended, Object Origin, Object Delimiter, Object Editable, Object Notify, Object Converter, Object AddToMru, Object Local, Object CorruptLoad)
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.ExcelToCSV_SincroBLD(String fileExcelName, Int32 MAXCOLS) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1810
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Runtime.InteropServices.COMException
+No se encontró "". Compruebe la ortografía del nombre del archivo y si su ubicación es correcta.
+
+Si intenta abrir el archivo desde la lista de los usados recientemente, asegúrese de que no se ha cambiado el nombre del archivo, ni se ha eliminado o movido.
+   at Microsoft.Office.Interop.Excel.Workbooks.Open(String Filename, Object UpdateLinks, Object ReadOnly, Object Format, Object Password, Object WriteResPassword, Object IgnoreReadOnlyRecommended, Object Origin, Object Delimiter, Object Editable, Object Notify, Object Converter, Object AddToMru, Object Local, Object CorruptLoad)
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.ExcelToCSV_SincroBLD(String fileExcelName, Int32 MAXCOLS) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1810
+Microsoft Excel
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No pudo extraer el excel. System.IO.IOException: File already open.
+   at Microsoft.VisualBasic.FileSystem.FileOpen(Int32 FileNumber, String FileName, OpenMode Mode, OpenAccess Access, OpenShare Share, Int32 RecordLength)
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.ExcelToCSV_SincroBLD(String fileExcelName, Int32 MAXCOLS) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1830
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at System.Runtime.InteropServices.Marshal.ReleaseComObject(Object o)
+   at ProntoDebug.NAR(Object o)
+mscorlib
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.ArgumentNullException
+Value cannot be null.
+Parameter name: fileName
+   at System.IO.FileInfo..ctor(String fileName)
+   at Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:line 1707
+mscorlib
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:No se pudo generar nada PSA La California
+__________________________
+
+Log Entry : 
+11/14/2016 17:01:41
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Rivara
+__________________________
+
+Log Entry : 
+11/14/2016 17:02:03
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Santa Catalina
+__________________________
+
+Log Entry : 
+11/14/2016 17:02:18
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Syngenta
+__________________________
+
+Log Entry : 
+11/14/2016 17:02:38
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Syngenta renglones sincro 0
+__________________________
+
+Log Entry : 
+11/14/2016 17:02:40
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Tomas Hnos
+__________________________
+
+Log Entry : 
+11/14/2016 17:03:02
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Tecnocampo
+__________________________
+
+Log Entry : 
+11/14/2016 17:03:23
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Zeni
+__________________________
+
+Log Entry : 
+11/14/2016 17:14:52
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx?_TSM_HiddenField_=ctl00_ScriptManager1_HiddenField&_TSM_CombinedScripts_=;. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/14/2016 17:14:54
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/14/2016 17:16:18
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\ControlDiario_14nov2016_171615.xls
+__________________________
+
+Log Entry : 
+11/14/2016 17:16:18
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\ControlDiario_14nov2016_171615.xls
+__________________________
+
+Log Entry : 
+11/14/2016 17:16:18
+Error in: http://localhost:58911/ProntoWeb/ControlesDiarios.aspx. Error Message:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ControlesDiarios.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ControlesDiarios.aspx.vb:line 190
+__________________________

@@ -391,6 +391,61 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+        [TestMethod]
+        public void SincroMonsanto_29381()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void ElegirCombosSegunParametro_29385()
+        {
+
+           SincronismosWilliamsManager.ElegirCombosSegunParametro("BTG PACTUAL [BIT]",new System.Web.UI.WebControls.TextBox()
+               ,new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.TextBox(),new System.Web.UI.WebControls.TextBox(),new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.DropDownList() ,new System.Web.UI.WebControls.DropDownList(),
+               new System.Web.UI.WebControls.DropDownList(),SC);
+
+        }
+
+        
+
+
+
+
+
         [TestMethod]
         public void OCR_bug_alsubirdesdeReasignarListado_se_trula_separando_laspaginasdeltiff()
         {
