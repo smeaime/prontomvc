@@ -282,7 +282,7 @@ Public Class ConsultasLinq
     Class asas
         Public IdCartaDePorte As Integer?
         Public NumeroCartaDePorte As Integer?
-        Public FechaDescarga As Date
+        Public FechaDescarga As Date?
         Public agrupVagon As String
         Public NetoFinal As Integer?
         Public Subcontr1 As Integer?

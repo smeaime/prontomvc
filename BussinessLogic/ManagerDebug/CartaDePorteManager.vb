@@ -2482,7 +2482,7 @@ Public Class CartaDePorteManager
  _
              .Patente = cdp.Patente, _
             .Acoplado = cdp.Acoplado, _
-             .DestinoCUIT = "", _
+             .DestinoCUIT = cdp.DestinoCUIT, _
             .DestinoCodigoYPF = cdp.DestinoCodigoONCAA, _
             .DestinoCodigoSAGPYA = cdp.DestinoCodigoONCAA, _
             .TransportistaCUIT = cdp.TransportistaCUIT.Replace("-", ""), _
@@ -2492,7 +2492,7 @@ Public Class CartaDePorteManager
             .EspecieONCCA = cdp.CodigoSAJPYA, _
             .Cosecha = cdp.Cosecha.Replace("/", "-20"), _
             .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""), _
-            .Establecimiento = cdp.EstablecimientoDesc, _
+            .Establecimiento = cdp.EstablecimientoCodigo, _
  _
             .IdFacturaImputada = If(cdp.IdFacturaImputada, -1), _
             .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1), _

@@ -11,7 +11,7 @@ namespace ProntoMVC.Data.Models
 {
     using System;
     
-    public partial class fSQL_GetDataTableFiltradoYPaginado_Result3
+    public partial class fSQL_GetDataTableFiltradoYPaginado1_Result
     {
         public int IdCartaDePorte { get; set; }
         public Nullable<long> NumeroCartaDePorte { get; set; }
@@ -139,67 +139,16 @@ namespace ProntoMVC.Data.Models
         public string SojaSustentableCondicion { get; set; }
         public string SojaSustentableNroEstablecimientoDeProduccion { get; set; }
         public Nullable<int> IdClientePagadorFlete { get; set; }
-        public string SubnumeroVagonEnTextoParaBusqueda { get; set; }
         public Nullable<int> IdCorredor2 { get; set; }
         public Nullable<int> Acopio1 { get; set; }
         public Nullable<int> Acopio2 { get; set; }
         public Nullable<int> Acopio3 { get; set; }
         public Nullable<int> Acopio4 { get; set; }
         public Nullable<int> Acopio5 { get; set; }
-        public Nullable<int> Acopio6 { get; set; }
+        public string SubnumeroVagonEnTextoParaBusqueda { get; set; }
         public Nullable<int> AcopioFacturarleA { get; set; }
         public Nullable<decimal> CalidadGranosDanadosRebaja { get; set; }
         public Nullable<decimal> CalidadGranosExtranosRebaja { get; set; }
-        public string NumeroCompleto { get; set; }
-        public Nullable<int> MinutosModifico { get; set; }
-        public string EspecieONCAA { get; set; }
-        public string CodigoSAJPYA { get; set; }
-        public string txtCodigoZeni { get; set; }
-        public string TitularDesc { get; set; }
-        public string TitularCUIT { get; set; }
-        public string IntermediarioDesc { get; set; }
-        public string IntermediarioCUIT { get; set; }
-        public string RComercialDesc { get; set; }
-        public string RComercialCUIT { get; set; }
-        public string CorredorDesc { get; set; }
-        public string CorredorCUIT { get; set; }
-        public string DestinatarioDesc { get; set; }
-        public string EntregadorDesc { get; set; }
-        public string DestinatarioCUIT { get; set; }
-        public string ClienteAuxiliarDesc { get; set; }
-        public string ClienteAuxiliarCUIT { get; set; }
-        public string Subcontr1Desc { get; set; }
-        public string Subcontr2Desc { get; set; }
-        public string Producto { get; set; }
-        public string TransportistaCUIT { get; set; }
-        public string TransportistaDesc { get; set; }
-        public string ChoferCUIT { get; set; }
-        public string ChoferDesc { get; set; }
-        public string ProcedenciaDesc { get; set; }
-        public string ProcedenciaCodigoPostal { get; set; }
-        public string ProcedenciaCodigoONCAA { get; set; }
-        public string ProcedenciaProvinciaDesc { get; set; }
-        public string DestinoDesc { get; set; }
-        public string DestinoCodigoPostal { get; set; }
-        public string DestinoCodigoONCAA { get; set; }
-        public string Mes { get; set; }
-        public Nullable<int> Ano { get; set; }
-        public string Factura { get; set; }
-        public Nullable<System.DateTime> FechaFactura { get; set; }
-        public string ClienteFacturado { get; set; }
-        public string ClienteFacturadoCUIT { get; set; }
-        public string CalidadDesc { get; set; }
-        public string UsuarioIngreso { get; set; }
-        public string EstablecimientoDesc { get; set; }
-        public string ClientePagadorFleteDesc { get; set; }
-        public string ProcedenciaProvinciaPartido { get; set; }
-        public string ProcedenciaPartidoNormalizadaCodigo { get; set; }
-        public string DestinoProvinciaDesc { get; set; }
-        public string ProcedenciaPartidoNormalizada { get; set; }
-        public string CorredorDesc2 { get; set; }
-        public string CorredorCUIT2 { get; set; }
-        public string EntregadorCUIT { get; set; }
-        public int CodigoAFIP { get; set; }
         public Nullable<decimal> CalidadGranosExtranosMerma { get; set; }
         public Nullable<decimal> CalidadQuebradosMerma { get; set; }
         public Nullable<decimal> CalidadDanadosMerma { get; set; }
@@ -238,6 +187,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> CalidadGastosFumigacionRebaja { get; set; }
         public Nullable<decimal> CalidadHumedadResultado { get; set; }
         public Nullable<decimal> CalidadGastosFumigacionResultado { get; set; }
+        public Nullable<int> Acopio6 { get; set; }
         public Nullable<int> ConDuplicados { get; set; }
         public string TieneRecibidorOficial { get; set; }
         public Nullable<int> EstadoRecibidor { get; set; }
@@ -245,9 +195,59 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> MotivoRechazo { get; set; }
         public bool FacturarA_Manual { get; set; }
         public string EntregaSAP { get; set; }
+        public string NumeroCompleto { get; set; }
+        public Nullable<int> MinutosModifico { get; set; }
+        public string EspecieONCAA { get; set; }
+        public string CodigoSAJPYA { get; set; }
+        public string txtCodigoZeni { get; set; }
+        public string TitularDesc { get; set; }
+        public string TitularCUIT { get; set; }
+        public string IntermediarioDesc { get; set; }
+        public string IntermediarioCUIT { get; set; }
+        public string RComercialDesc { get; set; }
+        public string RComercialCUIT { get; set; }
+        public string CorredorDesc { get; set; }
+        public string CorredorCUIT { get; set; }
+        public string DestinatarioDesc { get; set; }
+        public string EntregadorDesc { get; set; }
+        public string DestinatarioCUIT { get; set; }
+        public string ClienteAuxiliarDesc { get; set; }
+        public string ClienteAuxiliarCUIT { get; set; }
+        public string Subcontr1Desc { get; set; }
+        public string Subcontr2Desc { get; set; }
+        public string Producto { get; set; }
+        public string TransportistaCUIT { get; set; }
+        public string TransportistaDesc { get; set; }
+        public string ChoferCUIT { get; set; }
+        public string ChoferDesc { get; set; }
+        public string ProcedenciaDesc { get; set; }
+        public string ProcedenciaCodigoPostal { get; set; }
+        public string ProcedenciaCodigoONCAA { get; set; }
+        public string ProcedenciaProvinciaDesc { get; set; }
+        public string DestinoDesc { get; set; }
+        public string DestinoCodigoPostal { get; set; }
+        public string DestinoCodigoONCAA { get; set; }
         public string DestinoCUIT { get; set; }
+        public string Mes { get; set; }
+        public Nullable<int> Ano { get; set; }
+        public string Factura { get; set; }
+        public Nullable<System.DateTime> FechaFactura { get; set; }
+        public string ClienteFacturado { get; set; }
+        public string ClienteFacturadoCUIT { get; set; }
+        public string CalidadDesc { get; set; }
+        public string UsuarioIngreso { get; set; }
+        public string EstablecimientoDesc { get; set; }
         public string EstablecimientoCodigo { get; set; }
         public string EstablecimientoCUIT { get; set; }
         public string EstablecimientoNombre { get; set; }
+        public string ClientePagadorFleteDesc { get; set; }
+        public string ProcedenciaProvinciaPartido { get; set; }
+        public string ProcedenciaPartidoNormalizadaCodigo { get; set; }
+        public string DestinoProvinciaDesc { get; set; }
+        public string ProcedenciaPartidoNormalizada { get; set; }
+        public string CorredorDesc2 { get; set; }
+        public string CorredorCUIT2 { get; set; }
+        public string EntregadorCUIT { get; set; }
+        public int CodigoAFIP { get; set; }
     }
 }
