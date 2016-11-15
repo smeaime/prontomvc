@@ -141,6 +141,8 @@ namespace ProntoMVC.Tests
         public void probar_context_del_rms_pendientesGenerarValesAlmacen()
         {
 
+            // a veces no desaparecen desde web. desaparecen si lo hago desde el prontovb6?
+
             var c = new RequerimientoController();
             GetMockedControllerGenerico(c);
 
