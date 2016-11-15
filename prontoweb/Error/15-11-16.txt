@@ -1,0 +1,110 @@
+
+Log Entry : 
+11/15/2016 14:14:00
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:16
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ff8be99939224cbd883cddf6da2d0afc&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:17
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=022de39f8a844601873986440d3a7866&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:29
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ff8be99939224cbd883cddf6da2d0afc&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:29
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=022de39f8a844601873986440d3a7866&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:40
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ff8be99939224cbd883cddf6da2d0afc&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:41
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=022de39f8a844601873986440d3a7866&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:56
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ff8be99939224cbd883cddf6da2d0afc&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/15/2016 14:14:56
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=022de39f8a844601873986440d3a7866&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   at Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   at Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   at Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________

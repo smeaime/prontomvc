@@ -956,7 +956,7 @@ WHILE @@FETCH_STATUS = 0
 		  END  
 		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
 	
-	en Niro, repite el id de los presupuestos. Se esta saltando el IF donde asigna @Parent, usa el anterior, y entonces se traba 
+	   --en Niro, repite el id de los presupuestos. Se esta saltando el IF donde asigna @Parent, usa el anterior, y entonces se traba 
 	
 		INSERT INTO #Auxiliar0   
 		 SELECT @Clave, 'ComparativasAgrupados'+Convert(varchar,@AñoAnt103)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
