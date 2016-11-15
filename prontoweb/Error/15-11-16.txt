@@ -108,3 +108,250 @@ ASP.NET session has expired or could not be found
    at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 Microsoft.ReportViewer.WebForms
 __________________________
+
+Log Entry : 
+11/15/2016 14:42:55
+Error in: http://localhost:58911/ProntoWeb/CDPDestinos.aspx?tipo=0. Error Message:System.InvalidOperationException
+Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Web.DataAccess.SqlConnectionHolder.Open(HttpContext context, Boolean revertImpersonate)
+   at System.Web.DataAccess.SqlConnectionHelper.GetConnection(String connectionString, Boolean revertImpersonation)
+   at System.Web.Security.SqlRoleProvider.GetRolesForUser(String username)
+   at System.Web.Security.RolePrincipal.IsInRole(String role)
+   at System.Web.Configuration.AuthorizationRule.IsTheUserInAnyRole(StringCollection roles, IPrincipal principal)
+   at System.Web.Configuration.AuthorizationRule.IsUserAllowed(IPrincipal user, String verb)
+   at System.Web.Configuration.AuthorizationRuleCollection.IsUserAllowed(IPrincipal user, String verb)
+   at System.Web.Security.UrlAuthorizationModule.OnEnter(Object source, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Data
+__________________________
+
+Log Entry : 
+11/15/2016 14:42:56
+Error in: http://localhost:58911/ProntoWeb/CDPEstablecimientos.aspx?tipo=0. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/15/2016 14:43:04
+Error in: http://localhost:58911/ProntoWeb/CDPDestinos.aspx?tipo=0. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - Tiempo de espera de la operación de espera agotado.) ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:258,State:0,Class:20 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+11/15/2016 14:43:04
+Error in: http://localhost:58911/ProntoWeb/CDPDestinos.aspx?tipo=0. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+__________________________
+
+Log Entry : 
+11/15/2016 14:43:05
+Error in: http://localhost:58911/ProntoWeb/CDPDestinos.aspx?tipo=0. Error Message:System.Data.SqlClient.SqlException
+A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 803
+   at CartaDePorteManager.Log_sp_who2(String sc) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 7889
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/15/2016 15:33:34
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/15/2016 15:34:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+11/15/2016 15:34:39
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:
+
+__________________________
+
+Log Entry : 
+11/15/2016 15:34:39
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+11/15/2016 15:35:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+11/15/2016 15:35:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:
+
+__________________________
+
+Log Entry : 
+11/15/2016 15:35:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+11/15/2016 15:38:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+11/15/2016 15:40:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Hubo un error al generar el informe. System.InvalidOperationException: The cast to value type 'System.DateTime' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.GetColumnValueWithErrorHandling[TColumn](Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 415
+   at CartaDePorteInfLiquidacionSubcontratistas.LiquidacionDeSubcontratistas() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInfLiquidacionSubcontratistas.aspx.vb:line 456
+   at CartaDePorteInfLiquidacionSubcontratistas.AsignaInformeAlReportViewer(Boolean bDescargaExcel) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInfLiquidacionSubcontratistas.aspx.vb:line 352
+__________________________
+
+Log Entry : 
+11/15/2016 15:49:48
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/15/2016 15:50:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+11/15/2016 15:50:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:
+
+__________________________
+
+Log Entry : 
+11/15/2016 15:50:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+11/15/2016 15:50:53
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+11/15/2016 15:51:09
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   at ConsultasLinq._Lambda$__27(VB$AnonymousType_16`23 x) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 618
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 620
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+11/15/2016 15:51:09
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+11/15/2016 15:51:23
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+11/15/2016 15:51:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   at ConsultasLinq._Lambda$__27(VB$AnonymousType_16`23 x) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 618
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 620
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+11/15/2016 15:51:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+11/15/2016 15:51:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+11/15/2016 15:52:00
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   at ConsultasLinq._Lambda$__27(VB$AnonymousType_16`23 x) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 618
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:line 620
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+11/15/2016 15:52:00
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________

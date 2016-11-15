@@ -164,7 +164,7 @@ choferes.cuil as  ChoferCUIT, 			choferes.Nombre as  ChoferDesc,            isnu
 isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, 		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA,      
 isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc,    
 isnull(LOCDES.Descripcion,'') AS DestinoDesc, 
-'' AS  DestinoCodigoPostal, 	
+isnull(LOCDES.CodigoPostal,'')  AS  DestinoCodigoPostal, 	
 isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA,
 isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT,
 DATENAME(month, FechaDescarga) AS Mes,          
@@ -176,6 +176,9 @@ Calidades.Descripcion AS CalidadDesc,
 E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '
 + isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '
 + isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS as EstablecimientoDesc, 			
+ESTAB.Descripcion  as EstablecimientoCodigo,
+ESTAB.AuxiliarString2  as EstablecimientoCUIT,
+ESTAB.AuxiliarString1 as EstablecimientoNombre,
 isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,           isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido, 
 isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
 isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 			isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
