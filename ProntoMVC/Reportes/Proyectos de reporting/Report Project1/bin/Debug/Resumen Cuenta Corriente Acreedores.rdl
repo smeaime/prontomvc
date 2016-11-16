@@ -1599,6 +1599,9 @@ Fields!IdTipoComp.Value=53,"Comprobante Proveedores"
         <Height>0.6cm</Height>
         <Width>4.69604cm</Width>
         <ZIndex>5</ZIndex>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
