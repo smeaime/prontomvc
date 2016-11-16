@@ -2814,7 +2814,7 @@ namespace ProntoMVC.Controllers
 
             if ((Roles.IsUserInRole(usuario, "Externo") || Roles.IsUserInRole(usuario, "AdminExterno")) && !Roles.IsUserInRole(usuario, "Administrador") && !Roles.IsUserInRole(usuario, "SuperAdmin")) // Generales.TienePermisosDeFirma(SC, IdUsuario))
             {
-                // return null;
+                return null;
             }
 
 
