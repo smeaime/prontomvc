@@ -519,7 +519,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL, 
 					NULL,
 'Ambas','2016-01-01 00:00:00',
-'2016-01-28 00:00:00',NULL, 
+'2016-01-12 00:00:00',NULL, 
 					'Ambas',
 					NULL, 
 					NULL, 
