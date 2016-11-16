@@ -1,0 +1,158 @@
+
+Log Entry : 
+11/07/2016 14:13:02
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet. Error Message:System.ArgumentOutOfRangeException
+Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14687
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:13:15
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet. Error Message:System.ArgumentOutOfRangeException
+Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14687
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:13:28
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet. Error Message:System.ArgumentOutOfRangeException
+Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14687
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:14:06
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet. Error Message:System.ArgumentOutOfRangeException
+Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14687
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:18:37
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:24:51
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:28:45
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet. Error Message:System.InvalidOperationException
+Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.op_Explicit(Nullable`1 value)
+   at CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14706
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:31:21
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2016 14:34:06
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryCloseInternal(Boolean closeReader)
+   at System.Data.SqlClient.SqlDataReader.Close()
+   at System.Data.Common.DbDataReader.Dispose(Boolean disposing)
+   at System.Data.Common.DbDataReader.Dispose()
+   at Glimpse.Ado.AlternateType.GlimpseDbDataReader.Dispose(Boolean disposing)
+   at System.Data.Common.DbDataReader.Dispose()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at CartaDePorteManager.ListadoSegunCliente(String SC, Int32 idcliente, DateTime fechadesde, DateTime fechahasta) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14595
+   at CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14680
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/07/2016 14:40:18
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet. Error Message:System.Data.SqlClient.SqlException
+Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryCloseInternal(Boolean closeReader)
+   at System.Data.SqlClient.SqlDataReader.Close()
+   at System.Data.Common.DbDataReader.Dispose(Boolean disposing)
+   at System.Data.Common.DbDataReader.Dispose()
+   at Glimpse.Ado.AlternateType.GlimpseDbDataReader.Dispose(Boolean disposing)
+   at System.Data.Common.DbDataReader.Dispose()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at CartaDePorteManager.ListadoSegunCliente(String SC, Int32 idcliente, DateTime fechadesde, DateTime fechahasta) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14595
+   at CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 14680
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/07/2016 14:53:59
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________

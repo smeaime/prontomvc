@@ -137,6 +137,138 @@ namespace ProntoMVC.Tests
 
 
 
+
+        static public void GetMockedControllerGenerico(ProntoBaseController c)
+        {
+
+            // http://stackoverflow.com/questions/1981426/how-do-i-mock-fake-the-session-object-in-asp-net-web-forms
+            // http://stackoverflow.com/questions/1981426/how-do-i-mock-fake-the-session-object-in-asp-net-web-forms
+            // http://stackoverflow.com/questions/1981426/how-do-i-mock-fake-the-session-object-in-asp-net-web-forms
+            // http://stackoverflow.com/questions/1981426/how-do-i-mock-fake-the-session-object-in-asp-net-web-forms
+
+
+            /*
+            var controllerContext = new Mock<ControllerContext>();
+
+
+
+            // cómo hacer con la cadena de conexion en ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            // http://stackoverflow.com/questions/9486087/how-to-mock-configurationmanager-appsettings-with-moq
+            // agregarlas en el app config de este proyecto!!!
+            // agregarlas en el app config de este proyecto!!!
+            // agregarlas en el app config de este proyecto!!!
+            // http://stackoverflow.com/questions/17580485/cannot-use-configurationmanager-inside-unit-test-project
+
+
+
+            //controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns(Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey));
+            controllerContext.SetupGet(p => p.HttpContext.Session["BasePronto"]).Returns(nombreempresa);
+            controllerContext.SetupGet(p => p.HttpContext.Session["Usuario"]).Returns(usuario);
+            //  controllerContext.SetupGet(p => p.HttpContext.User.Identity.Name).Returns(_testEmail);
+            controllerContext.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
+            controllerContext.SetupGet(p => p.HttpContext.Response.Cookies).Returns(new HttpCookieCollection());
+
+            controllerContext.Setup(p => p.HttpContext.Request.Form.Get("ReturnUrl")).Returns("sample-return-url");
+            controllerContext.Setup(p => p.HttpContext.Request.Params.Get("q")).Returns("sample-search-term");
+
+
+
+
+
+
+            // si queres que te funcionen las llamadas a Url.Action(...), tenes que mandar una url mockeada
+        http://stackoverflow.com/questions/15258669/mocking-controller-url-actionstring-string-object-string-in-asp-net-mvc
+
+            var routes = new System.Web.Routing.RouteCollection();
+            MvcApplication.RegisterRoutes(routes);
+
+            var request = new Mock<HttpRequestBase>(); //MockBehavior.Strict);
+            request.SetupGet(x => x.ApplicationPath).Returns("/");
+            request.SetupGet(x => x.Url).Returns(new Uri("http://localhost/a", UriKind.Absolute));
+            request.SetupGet(x => x.ServerVariables).Returns(new System.Collections.Specialized.NameValueCollection());
+
+            var response = new Mock<HttpResponseBase>(); //MockBehavior.Strict);
+            response.Setup(x => x.ApplyAppPathModifier("/post1")).Returns("http://localhost/post1");
+
+            var context = new Mock<HttpContextBase>(); // (MockBehavior.Strict);
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            context.SetupGet(x => x.Response).Returns(response.Object);
+
+            //controllerContext.SetupGet(x => x.Request).Returns(request.Object);
+            //controllerContext.SetupGet(x => x.Response).Returns(response.Object);
+
+
+
+
+
+            c.ControllerContext = controllerContext.Object;
+
+
+            //var controller = new LinkbackController(dbF.Object);
+            //controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            c.Url = new UrlHelper(new System.Web.Routing.RequestContext(context.Object, new System.Web.Routing.RouteData()), routes);
+
+
+
+
+
+
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+
+
+            // http://stackoverflow.com/questions/4257793/mocking-a-membershipuser
+
+            var m = new Mock<Generales.IStaticMembershipService>();
+            var us = new Mock<MembershipUser>();
+            // administrador    1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9
+            // supervisor       1804B573-0439-4EA0-B631-712684B54473
+            //us.Setup(u => u.ProviderUserKey).Returns(new Guid("1BC7CE95-2FC3-4A27-89A0-5C31D59E14E9"));
+            us.Setup(u => u.ProviderUserKey).Returns(new Guid("1804B573-0439-4EA0-B631-712684B54473"));
+            us.Setup(u => u.UserName).Returns("administrador");
+            m.Setup(s => s.GetUser()).Returns(us.Object);
+            m.Setup(s => s.EsSuperAdmin()).Returns(true);
+            m.Setup(s => s.UsuarioTieneElRol(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            c.oStaticMembershipService = m.Object;
+
+
+
+
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+            // necesito llamar a mano al Initialize  http://stackoverflow.com/questions/1452665/how-to-trigger-initialize-method-while-trying-to-unit-test
+            //  http://stackoverflow.com/questions/1452418/how-do-i-mock-the-httpcontext-in-asp-net-mvc-using-moq
+
+
+            //var requestContext = new System.Web.Routing.RequestContext(controllerContext.Object, new System.Web.Routing.RouteData());
+            //var requestContext = new System.Web.Routing.RequestContext(contextMock.Object, new System.Web.Routing.RouteData());
+            //IController controller = c;
+            //controller.Execute(requestContext);
+
+
+            c.FakeInitialize(nombreempresa);
+
+            // este tipo sugiere directamente sacar del Initialize el codigo y meterlo en un metodo para llamarlo aparte
+            // http://stackoverflow.com/questions/5769163/asp-net-mvc-unit-testing-override-initialize-method
+            // I suggest you to factor out your custom Initialize() logic out into different method. Then create fake (stub) subclass with 
+            // public method that calls this factored out protected Initialzie. Are you with me?
+
+            /////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////
+
+
+            */
+
+        }
+
+
+
+
+
         /// <summary>
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,6 +393,178 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void SincroMonsanto_29381()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void ElegirCombosSegunParametro_29385()
+        {
+
+           SincronismosWilliamsManager.ElegirCombosSegunParametro("BTG PACTUAL [BIT]",new System.Web.UI.WebControls.TextBox()
+               ,new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.TextBox(),new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.TextBox(),
+               new System.Web.UI.WebControls.DropDownList() ,new System.Web.UI.WebControls.DropDownList(),
+               new System.Web.UI.WebControls.DropDownList(),SC);
+
+        }
+
+        
+
+
+
+
+
+        [TestMethod]
+        public void OCR_bug_alsubirdesdeReasignarListado_se_trula_separando_laspaginasdeltiff()
+        {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
+        }
+
+
+
+
+        [TestMethod]
+        public void FormatoImpresionPlantillaFactura_iibb()
+        {
+
+            //explota
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var f = db.Facturas.Find(87781);
+            f.CAE = "654646";
+            db.SaveChanges();
+
+            var f2 = db.Facturas.Find(87700);
+            f2.CAE = "654646";
+            db.SaveChanges();
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(87781, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
+
+            var output3 = CartaDePorteManager.ImprimirFacturaElectronica(87700, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output3);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void SincroMonsanto_17940()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroTomasHnos_27154()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("TOMAS HNOS", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
         [TestMethod]
         public void ServicioWebDescargas()
         {
@@ -274,7 +578,7 @@ namespace ProntoMVC.Tests
             string cuit = "30703605105";
 
             // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
-            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL("Mariano", "pirulo!", cuit, new DateTime(2015,10, 10), new DateTime(2015,10, 10), SC, DirApp, bdlmasterappconfig);
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL("Mariano", "pirulo!", cuit, new DateTime(2010, 10, 10), new DateTime(2016, 10, 10), SC, DirApp, bdlmasterappconfig);
 
 
             foreach (var desc in respEntrega.descargas)
@@ -289,7 +593,7 @@ namespace ProntoMVC.Tests
                     }
                 }
             }
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
 
@@ -415,7 +719,7 @@ namespace ProntoMVC.Tests
             var ibcondicion = db.IBCondiciones.Find(5);
             ibcondicion.AlicuotaPercepcion = 7;
             ibcondicion.AlicuotaPercepcionConvenio = 8;
-            ibcondicion.ImporteTopeMinimoPercepcion=10;
+            ibcondicion.ImporteTopeMinimoPercepcion = 10;
 
 
             db.SaveChanges();
@@ -3458,34 +3762,6 @@ namespace ProntoMVC.Tests
             barras.MarcarEnviada(SC, 17000);
         }
 
-
-        [TestMethod]
-        public void SincroMonsanto_17940()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
 
 
 

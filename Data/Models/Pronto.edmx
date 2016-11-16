@@ -1020,6 +1020,9 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="int" />
           <Property Name="FechaInicioExclusionPercepcionIVA" Type="datetime" />
           <Property Name="FechaFinExclusionPercepcionIVA" Type="datetime" />
+          <Property Name="CodigoNormaCapital" Type="int" />
+          <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
+          <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
         </EntityType>
         <EntityType Name="Colores">
           <Key>
@@ -2621,16 +2624,16 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="OrigenDescripcion" Type="int" />
           <Property Name="IdDetalleLMateriales" Type="int" />
           <Property Name="IdCuenta" Type="int" />
-          <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="100" />
+          <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="200" />
+          <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="200" />
           <Property Name="FechaEntrega" Type="datetime" />
           <Property Name="IdCentroCosto" Type="int" />
           <Property Name="PorcentajeBonificacion" Type="numeric" Precision="6" Scale="2" />
@@ -4269,6 +4272,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="CuitOpcional" Type="varchar" MaxLength="13" />
           <Property Name="IdPuntoVenta" Type="int" />
           <Property Name="PuntoVenta" Type="int" />
+          <Property Name="DocumentacionCompleta" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="OrdenesTrabajo">
           <Key>
@@ -5088,6 +5092,9 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="varchar" MaxLength="2" />
           <Property Name="ExcluirDeActualizacionIvaRG18" Type="varchar" MaxLength="2" />
           <Property Name="ResolucionAfip3692" Type="varchar" MaxLength="2" />
+          <Property Name="CodigoNormaCapital" Type="int" />
+          <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
+          <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5879,6 +5886,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Codigo" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -9565,7 +9574,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Parameter Name="fechadesde" Type="datetime" Mode="In" />
           <Parameter Name="fechahasta" Type="datetime" Mode="In" />
           <Parameter Name="puntoventa" Type="int" Mode="In" />
-          <Parameter Name="optDivisionSyngenta" Type="varchar" Mode="In" />
+          <Parameter Name="IdAcopio" Type="int" Mode="In" />
           <Parameter Name="Contrato" Type="varchar" Mode="In" />
           <Parameter Name="QueContenga2" Type="varchar" Mode="In" />
           <Parameter Name="idClienteAuxiliarint" Type="int" Mode="In" />
@@ -9702,17 +9711,62 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="SojaSustentableCondicion" Type="varchar" MaxLength="50" />
                 <Property Name="SojaSustentableNroEstablecimientoDeProduccion" Type="varchar" MaxLength="50" />
                 <Property Name="IdClientePagadorFlete" Type="int" />
-                <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="varchar" MaxLength="50" />
                 <Property Name="IdCorredor2" Type="int" />
                 <Property Name="Acopio1" Type="int" />
                 <Property Name="Acopio2" Type="int" />
                 <Property Name="Acopio3" Type="int" />
                 <Property Name="Acopio4" Type="int" />
                 <Property Name="Acopio5" Type="int" />
-                <Property Name="Acopio6" Type="int" />
+                <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="varchar" MaxLength="50" />
                 <Property Name="AcopioFacturarleA" Type="int" />
                 <Property Name="CalidadGranosDanadosRebaja" Type="numeric" Precision="18" Scale="2" />
                 <Property Name="CalidadGranosExtranosRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadGranosExtranosMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadQuebradosMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadDanadosMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadChamicoMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadRevolcadosMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadObjetablesMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadAmohosadosMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadPuntaSombreadaMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadHectolitricoMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadCarbonMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadPanzaBlancaMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadPicadosMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadVerdesMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadQuemadosMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadTierraMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadZarandeoMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadDescuentoFinalMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadHumedadMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadGastosFumigacionMerma" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadQuebradosRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadChamicoRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadRevolcadosRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadObjetablesRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadAmohosadosRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadPuntaSombreadaRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadHectolitricoRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadCarbonRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadPanzaBlancaRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadPicadosRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadVerdesRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadQuemadosRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadTierraRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadZarandeoRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadDescuentoFinalRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadHumedadRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadGastosFumigacionRebaja" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadHumedadResultado" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="CalidadGastosFumigacionResultado" Type="numeric" Precision="18" Scale="2" />
+                <Property Name="Acopio6" Type="int" />
+                <Property Name="ConDuplicados" Type="int" />
+                <Property Name="TieneRecibidorOficial" Type="varchar" MaxLength="2" />
+                <Property Name="EstadoRecibidor" Type="int" />
+                <Property Name="ClienteAcondicionador" Type="int" />
+                <Property Name="MotivoRechazo" Type="int" />
+                <Property Name="FacturarA_Manual" Type="bit" Nullable="false" />
+                <Property Name="EntregaSAP" Type="varchar" MaxLength="20" />
                 <Property Name="NumeroCompleto" Type="varchar" MaxLength="93" />
                 <Property Name="MinutosModifico" Type="int" />
                 <Property Name="EspecieONCAA" Type="varchar" MaxLength="50" Nullable="false" />
@@ -9743,7 +9797,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="ProcedenciaCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="ProcedenciaProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
                 <Property Name="DestinoDesc" Type="varchar" MaxLength="50" Nullable="false" />
-                <Property Name="DestinoCodigoPostal" Type="varchar" MaxLength="1" Nullable="false" />
+                <Property Name="DestinoCodigoPostal" Type="varchar" MaxLength="30" Nullable="false" />
                 <Property Name="DestinoCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="DestinoCUIT" Type="varchar" MaxLength="13" Nullable="false" />
                 <Property Name="Mes" Type="nvarchar" MaxLength="30" />
@@ -9755,6 +9809,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="CalidadDesc" Type="varchar" MaxLength="50" />
                 <Property Name="UsuarioIngreso" Type="varchar" MaxLength="50" />
                 <Property Name="EstablecimientoDesc" Type="varchar" MaxLength="202" Nullable="false" />
+                <Property Name="EstablecimientoCodigo" Type="varchar" MaxLength="50" />
+                <Property Name="EstablecimientoCUIT" Type="varchar" MaxLength="50" />
+                <Property Name="EstablecimientoNombre" Type="varchar" MaxLength="100" />
                 <Property Name="ClientePagadorFleteDesc" Type="varchar" MaxLength="100" Nullable="false" />
                 <Property Name="ProcedenciaProvinciaPartido" Type="varchar" MaxLength="60" Nullable="false" />
                 <Property Name="ProcedenciaPartidoNormalizadaCodigo" Type="varchar" MaxLength="15" Nullable="false" />
@@ -10076,7 +10133,6 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transportistas" EntityType="Self.Transportistas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tree" EntityType="Self.Tree" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnidadesOperativas" EntityType="Self.UnidadesOperativas" Schema="dbo" store:Type="Tables" />
@@ -10242,6 +10298,20 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
     [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
     FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Tree" EntityType="Self.Tree" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tree].[IdItem] AS [IdItem], 
+    [Tree].[Clave] AS [Clave], 
+    [Tree].[Descripcion] AS [Descripcion], 
+    [Tree].[ParentId] AS [ParentId], 
+    [Tree].[Orden] AS [Orden], 
+    [Tree].[Parametros] AS [Parametros], 
+    [Tree].[Link] AS [Link], 
+    [Tree].[Imagen] AS [Imagen], 
+    [Tree].[EsPadre] AS [EsPadre], 
+    [Tree].[GrupoMenu] AS [GrupoMenu]
+    FROM [dbo].[Tree] AS [Tree]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="wGrillaPersistencia" EntityType="Self.wGrillaPersistencia" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -13063,7 +13133,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <Parameter Name="fechadesde" Mode="In" Type="DateTime" />
             <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
             <Parameter Name="puntoventa" Mode="In" Type="Int32" />
-            <Parameter Name="optDivisionSyngenta" Mode="In" Type="String" />
+            <Parameter Name="IdAcopio" Mode="In" Type="Int32" />
             <Parameter Name="Contrato" Mode="In" Type="String" />
             <Parameter Name="QueContenga2" Mode="In" Type="String" />
             <Parameter Name="idClienteAuxiliarint" Mode="In" Type="Int32" />
@@ -14237,6 +14307,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="Cliente" ToRole="CartasDePorte" />
           <Property Name="FechaInicioExclusionPercepcionIVA" Type="DateTime" Precision="3" />
           <Property Name="FechaFinExclusionPercepcionIVA" Type="DateTime" Precision="3" />
+          <Property Name="CodigoNormaCapital" Type="Int32" />
+          <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PuntosVenta">
           <Key>
@@ -14593,16 +14666,16 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="Int32" Name="OrigenDescripcion" />
           <Property Type="Int32" Name="IdDetalleLMateriales" />
           <Property Type="Int32" Name="IdCuenta" />
-          <Property Type="String" Name="ArchivoAdjunto1" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto2" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto3" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto4" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto5" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto6" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto7" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto8" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto9" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto10" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto1" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto2" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto3" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto4" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto5" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto6" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto7" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto8" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto9" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ArchivoAdjunto10" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="FechaEntrega" Precision="3" />
           <Property Type="Int32" Name="IdCentroCosto" />
           <Property Type="Decimal" Name="PorcentajeBonificacion" Precision="6" Scale="2" />
@@ -15958,6 +16031,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="ExcluirDelCircuitoDeFirmasComprobantes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="ExcluirDeActualizacionIvaRG18" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="ResolucionAfip3692" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoNormaCapital" Type="Int32" />
+          <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -18086,6 +18162,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="CuitOpcional" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
           <Property Name="IdPuntoVenta" Type="Int32" />
           <Property Name="PuntoVenta" Type="Int32" />
+          <Property Name="DocumentacionCompleta" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
           <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -25099,7 +25176,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="ProcedenciaCodigoONCAA" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="ProcedenciaProvinciaDesc" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="DestinoDesc" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="DestinoCodigoPostal" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DestinoCodigoPostal" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="DestinoCodigoONCAA" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="Mes" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Ano" Nullable="true" />
@@ -25119,6 +25196,55 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="CorredorCUIT2" Nullable="false" MaxLength="13" />
           <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
           <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
+          <Property Type="Decimal" Name="CalidadGranosExtranosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuebradosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadDanadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadChamicoMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadRevolcadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadObjetablesMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadAmohosadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPuntaSombreadaMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHectolitricoMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadCarbonMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPanzaBlancaMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPicadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadVerdesMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuemadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadTierraMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadZarandeoMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadDescuentoFinalMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHumedadMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGastosFumigacionMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuebradosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadChamicoRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadRevolcadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadObjetablesRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadAmohosadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPuntaSombreadaRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHectolitricoRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadCarbonRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPanzaBlancaRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPicadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadVerdesRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuemadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadTierraRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadZarandeoRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadDescuentoFinalRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHumedadRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGastosFumigacionRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHumedadResultado" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGastosFumigacionResultado" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="ConDuplicados" Nullable="true" />
+          <Property Type="String" Name="TieneRecibidorOficial" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="EstadoRecibidor" Nullable="true" />
+          <Property Type="Int32" Name="ClienteAcondicionador" Nullable="true" />
+          <Property Type="Int32" Name="MotivoRechazo" Nullable="true" />
+          <Property Type="Boolean" Name="FacturarA_Manual" Nullable="false" />
+          <Property Type="String" Name="EntregaSAP" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DestinoCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="EstablecimientoCodigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstablecimientoCUIT" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstablecimientoNombre" Nullable="true" MaxLength="100" />
         </ComplexType>
         <EntityType Name="NovedadesUsuario">
           <Key>
@@ -25166,6 +25292,244 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="fSQL_GetDataTableFiltradoYPaginado1_Result">
+          <Property Type="Int32" Name="IdCartaDePorte" Nullable="false" />
+          <Property Type="Int64" Name="NumeroCartaDePorte" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuarioIngreso" Nullable="true" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Anulada" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="IdUsuarioAnulo" Nullable="true" />
+          <Property Type="DateTime" Name="FechaAnulacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Observaciones" Nullable="true" MaxLength="200" />
+          <Property Type="Binary" Name="FechaTimeStamp" Nullable="true" MaxLength="8" />
+          <Property Type="Int32" Name="Vendedor" Nullable="true" />
+          <Property Type="Int32" Name="CuentaOrden1" Nullable="true" />
+          <Property Type="Int32" Name="CuentaOrden2" Nullable="true" />
+          <Property Type="Int32" Name="Corredor" Nullable="true" />
+          <Property Type="Int32" Name="Entregador" Nullable="true" />
+          <Property Type="String" Name="Procedencia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Patente" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="IdArticulo" Nullable="true" />
+          <Property Type="Int32" Name="IdStock" Nullable="true" />
+          <Property Type="String" Name="Partida" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IdUnidad" Nullable="true" />
+          <Property Type="Int32" Name="IdUbicacion" Nullable="true" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="String" Name="Cupo" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="NetoProc" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Calidad" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="BrutoPto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TaraPto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NetoPto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Acoplado" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="Humedad" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Merma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NetoFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="FechaDeCarga" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaVencimiento" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CEE" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IdTransportista" Nullable="true" />
+          <Property Type="String" Name="TransportistaCUITdesnormalizado" Nullable="true" MaxLength="13" />
+          <Property Type="Int32" Name="IdChofer" Nullable="true" />
+          <Property Type="String" Name="ChoferCUITdesnormalizado" Nullable="true" MaxLength="13" />
+          <Property Type="Int32" Name="CTG" Nullable="true" />
+          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Destino" Nullable="true" />
+          <Property Type="Int32" Name="Subcontr1" Nullable="true" />
+          <Property Type="Int32" Name="Subcontr2" Nullable="true" />
+          <Property Type="Int32" Name="Contrato1" Nullable="true" />
+          <Property Type="Int32" Name="contrato2" Nullable="true" />
+          <Property Type="Decimal" Name="KmARecorrer" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="Int32" Name="CalidadDe" Nullable="true" />
+          <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Fumigada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Secada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Exporta" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="NobleExtranos" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleNegros" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleQuebrados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleDaniados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleChamico" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleChamico2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleRevolcado" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleObjetables" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleAmohosados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleHectolitrico" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleCarbon" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NoblePanzaBlanca" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NoblePicados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleMGrasa" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleAcidezGrasa" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleVerdes" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NobleGrado" Nullable="true" />
+          <Property Type="String" Name="NobleConforme" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="NobleACamara" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Cosecha" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="HumedadDesnormalizada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Factor" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="IdFacturaImputada" Nullable="true" />
+          <Property Type="Int32" Name="PuntoVenta" Nullable="true" />
+          <Property Type="Int32" Name="SubnumeroVagon" Nullable="true" />
+          <Property Type="Decimal" Name="TarifaFacturada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TarifaSubcontratista1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TarifaSubcontratista2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="FechaArribo" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Version" Nullable="true" />
+          <Property Type="String" Name="MotivoAnulacion" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="NumeroSubfijo" Nullable="true" />
+          <Property Type="Int32" Name="IdEstablecimiento" Nullable="true" />
+          <Property Type="String" Name="EnumSyngentaDivision" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Corredor2" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuarioModifico" Nullable="true" />
+          <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaEmision" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EstaArchivada" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ExcluirDeSubcontratistas" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="IdTipoMovimiento" Nullable="true" />
+          <Property Type="Int32" Name="IdClienteAFacturarle" Nullable="true" />
+          <Property Type="Int32" Name="SubnumeroDeFacturacion" Nullable="true" />
+          <Property Type="String" Name="AgregaItemDeGastosAdministrativos" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadGranosQuemados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadGranosQuemadosBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadTierra" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadTierraBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadMermaChamico" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadMermaChamicoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadMermaZarandeo" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadMermaZarandeoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="FueraDeEstandar" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadPuntaSombreada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CobraAcarreo" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="LiquidaViaje" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="IdClienteAuxiliar" Nullable="true" />
+          <Property Type="Decimal" Name="CalidadDescuentoFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="PathImagen" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="PathImagen2" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="AgrupadorDeTandaPeriodos" Nullable="true" />
+          <Property Type="String" Name="ClaveEncriptada" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NumeroCartaEnTextoParaBusqueda" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IdClienteEntregador" Nullable="true" />
+          <Property Type="Int32" Name="IdDetalleFactura" Nullable="true" />
+          <Property Type="String" Name="SojaSustentableCodCondicion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SojaSustentableCondicion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SojaSustentableNroEstablecimientoDeProduccion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdClientePagadorFlete" Nullable="true" />
+          <Property Type="Int32" Name="IdCorredor2" Nullable="true" />
+          <Property Type="Int32" Name="Acopio1" Nullable="true" />
+          <Property Type="Int32" Name="Acopio2" Nullable="true" />
+          <Property Type="Int32" Name="Acopio3" Nullable="true" />
+          <Property Type="Int32" Name="Acopio4" Nullable="true" />
+          <Property Type="Int32" Name="Acopio5" Nullable="true" />
+          <Property Type="String" Name="SubnumeroVagonEnTextoParaBusqueda" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AcopioFacturarleA" Nullable="true" />
+          <Property Type="Decimal" Name="CalidadGranosDanadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGranosExtranosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGranosExtranosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuebradosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadDanadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadChamicoMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadRevolcadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadObjetablesMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadAmohosadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPuntaSombreadaMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHectolitricoMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadCarbonMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPanzaBlancaMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPicadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadVerdesMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuemadosMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadTierraMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadZarandeoMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadDescuentoFinalMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHumedadMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGastosFumigacionMerma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuebradosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadChamicoRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadRevolcadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadObjetablesRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadAmohosadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPuntaSombreadaRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHectolitricoRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadCarbonRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPanzaBlancaRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadPicadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadVerdesRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadQuemadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadTierraRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadZarandeoRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadDescuentoFinalRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHumedadRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGastosFumigacionRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadHumedadResultado" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGastosFumigacionResultado" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Acopio6" Nullable="true" />
+          <Property Type="Int32" Name="ConDuplicados" Nullable="true" />
+          <Property Type="String" Name="TieneRecibidorOficial" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="EstadoRecibidor" Nullable="true" />
+          <Property Type="Int32" Name="ClienteAcondicionador" Nullable="true" />
+          <Property Type="Int32" Name="MotivoRechazo" Nullable="true" />
+          <Property Type="Boolean" Name="FacturarA_Manual" Nullable="false" />
+          <Property Type="String" Name="EntregaSAP" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="NumeroCompleto" Nullable="true" MaxLength="93" />
+          <Property Type="Int32" Name="MinutosModifico" Nullable="true" />
+          <Property Type="String" Name="EspecieONCAA" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CodigoSAJPYA" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="txtCodigoZeni" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TitularDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TitularCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="IntermediarioDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="IntermediarioCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="RComercialDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="RComercialCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="CorredorDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CorredorCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="DestinatarioDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EntregadorDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DestinatarioCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="ClienteAuxiliarDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClienteAuxiliarCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Subcontr1Desc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Subcontr2Desc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="TransportistaCUIT" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="TransportistaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ChoferCUIT" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="ChoferDesc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProcedenciaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProcedenciaCodigoPostal" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ProcedenciaCodigoONCAA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ProcedenciaProvinciaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DestinoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DestinoCodigoPostal" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="DestinoCodigoONCAA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DestinoCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Mes" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="Ano" Nullable="true" />
+          <Property Type="String" Name="Factura" Nullable="true" MaxLength="63" />
+          <Property Type="DateTime" Name="FechaFactura" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ClienteFacturado" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClienteFacturadoCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="CalidadDesc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UsuarioIngreso" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstablecimientoDesc" Nullable="false" MaxLength="202" />
+          <Property Type="String" Name="EstablecimientoCodigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstablecimientoCUIT" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstablecimientoNombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ClientePagadorFleteDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ProcedenciaProvinciaPartido" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="ProcedenciaPartidoNormalizadaCodigo" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="DestinoProvinciaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProcedenciaPartidoNormalizada" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CorredorDesc2" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CorredorCUIT2" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -25989,6 +26353,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="DemoProntoModel.Cliente">
               <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="FechaFinVigenciaCodigoNormaCapital" ColumnName="FechaFinVigenciaCodigoNormaCapital" />
+                <ScalarProperty Name="FechaInicioVigenciaCodigoNormaCapital" ColumnName="FechaInicioVigenciaCodigoNormaCapital" />
+                <ScalarProperty Name="CodigoNormaCapital" ColumnName="CodigoNormaCapital" />
                 <ScalarProperty Name="FechaFinExclusionPercepcionIVA" ColumnName="FechaFinExclusionPercepcionIVA" />
                 <ScalarProperty Name="FechaInicioExclusionPercepcionIVA" ColumnName="FechaInicioExclusionPercepcionIVA" />
                 <ScalarProperty Name="CartaPorteTipoDeAdjuntoDeFacturacion" ColumnName="CartaPorteTipoDeAdjuntoDeFacturacion" />
@@ -26964,6 +27331,9 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="FechaFinVigenciaCodigoNormaCapital" ColumnName="FechaFinVigenciaCodigoNormaCapital" />
+                <ScalarProperty Name="FechaInicioVigenciaCodigoNormaCapital" ColumnName="FechaInicioVigenciaCodigoNormaCapital" />
+                <ScalarProperty Name="CodigoNormaCapital" ColumnName="CodigoNormaCapital" />
                 <ScalarProperty Name="ResolucionAfip3692" ColumnName="ResolucionAfip3692" />
                 <ScalarProperty Name="ExcluirDeActualizacionIvaRG18" ColumnName="ExcluirDeActualizacionIvaRG18" />
                 <ScalarProperty Name="ExcluirDelCircuitoDeFirmasComprobantes" ColumnName="ExcluirDelCircuitoDeFirmasComprobantes" />
@@ -28425,6 +28795,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="OrdenesPago">
             <EntityTypeMapping TypeName="DemoProntoModel.OrdenPago">
               <MappingFragment StoreEntitySet="OrdenesPago">
+                <ScalarProperty Name="DocumentacionCompleta" ColumnName="DocumentacionCompleta" />
                 <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
                 <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
                 <ScalarProperty Name="CuitOpcional" ColumnName="CuitOpcional" />
@@ -31938,6 +32309,43 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
+          <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion1" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
+          <EntitySetMapping Name="NovedadesUsuarios">
+            <EntityTypeMapping TypeName="DemoProntoModel.NovedadesUsuario">
+              <MappingFragment StoreEntitySet="NovedadesUsuarios">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="TipoElemento" ColumnName="TipoElemento" />
+                <ScalarProperty Name="IdElemento" ColumnName="IdElemento" />
+                <ScalarProperty Name="IdEnviadoPor" ColumnName="IdEnviadoPor" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="FechaConfirmacion" ColumnName="FechaConfirmacion" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+                <ScalarProperty Name="FechaEvento" ColumnName="FechaEvento" />
+                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdNovedadUsuarios" ColumnName="IdNovedadUsuarios" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleEventosDelSistemas">
+            <EntityTypeMapping TypeName="DemoProntoModel.DetalleEventosDelSistema">
+              <MappingFragment StoreEntitySet="DetalleEventosDelSistema">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
+                <ScalarProperty Name="IdDetalleEventoDelSistema" ColumnName="IdDetalleEventoDelSistema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventosDelSistemas">
+            <EntityTypeMapping TypeName="DemoProntoModel.EventosDelSistema">
+              <MappingFragment StoreEntitySet="EventosDelSistema">
+                <ScalarProperty Name="Importancia" ColumnName="Importancia" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="fSQL_GetDataTableFiltradoYPaginado" FunctionName="DemoProntoModel.Store.fSQL_GetDataTableFiltradoYPaginado">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result3">
@@ -32128,46 +32536,58 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <ScalarProperty Name="CorredorCUIT2" ColumnName="CorredorCUIT2" />
                 <ScalarProperty Name="EntregadorCUIT" ColumnName="EntregadorCUIT" />
                 <ScalarProperty Name="CodigoAFIP" ColumnName="CodigoAFIP" />
+                <ScalarProperty Name="CalidadGranosExtranosMerma" ColumnName="CalidadGranosExtranosMerma" />
+                <ScalarProperty Name="CalidadQuebradosMerma" ColumnName="CalidadQuebradosMerma" />
+                <ScalarProperty Name="CalidadDanadosMerma" ColumnName="CalidadDanadosMerma" />
+                <ScalarProperty Name="CalidadChamicoMerma" ColumnName="CalidadChamicoMerma" />
+                <ScalarProperty Name="CalidadRevolcadosMerma" ColumnName="CalidadRevolcadosMerma" />
+                <ScalarProperty Name="CalidadObjetablesMerma" ColumnName="CalidadObjetablesMerma" />
+                <ScalarProperty Name="CalidadAmohosadosMerma" ColumnName="CalidadAmohosadosMerma" />
+                <ScalarProperty Name="CalidadPuntaSombreadaMerma" ColumnName="CalidadPuntaSombreadaMerma" />
+                <ScalarProperty Name="CalidadHectolitricoMerma" ColumnName="CalidadHectolitricoMerma" />
+                <ScalarProperty Name="CalidadCarbonMerma" ColumnName="CalidadCarbonMerma" />
+                <ScalarProperty Name="CalidadPanzaBlancaMerma" ColumnName="CalidadPanzaBlancaMerma" />
+                <ScalarProperty Name="CalidadPicadosMerma" ColumnName="CalidadPicadosMerma" />
+                <ScalarProperty Name="CalidadVerdesMerma" ColumnName="CalidadVerdesMerma" />
+                <ScalarProperty Name="CalidadQuemadosMerma" ColumnName="CalidadQuemadosMerma" />
+                <ScalarProperty Name="CalidadTierraMerma" ColumnName="CalidadTierraMerma" />
+                <ScalarProperty Name="CalidadZarandeoMerma" ColumnName="CalidadZarandeoMerma" />
+                <ScalarProperty Name="CalidadDescuentoFinalMerma" ColumnName="CalidadDescuentoFinalMerma" />
+                <ScalarProperty Name="CalidadHumedadMerma" ColumnName="CalidadHumedadMerma" />
+                <ScalarProperty Name="CalidadGastosFumigacionMerma" ColumnName="CalidadGastosFumigacionMerma" />
+                <ScalarProperty Name="CalidadQuebradosRebaja" ColumnName="CalidadQuebradosRebaja" />
+                <ScalarProperty Name="CalidadChamicoRebaja" ColumnName="CalidadChamicoRebaja" />
+                <ScalarProperty Name="CalidadRevolcadosRebaja" ColumnName="CalidadRevolcadosRebaja" />
+                <ScalarProperty Name="CalidadObjetablesRebaja" ColumnName="CalidadObjetablesRebaja" />
+                <ScalarProperty Name="CalidadAmohosadosRebaja" ColumnName="CalidadAmohosadosRebaja" />
+                <ScalarProperty Name="CalidadPuntaSombreadaRebaja" ColumnName="CalidadPuntaSombreadaRebaja" />
+                <ScalarProperty Name="CalidadHectolitricoRebaja" ColumnName="CalidadHectolitricoRebaja" />
+                <ScalarProperty Name="CalidadCarbonRebaja" ColumnName="CalidadCarbonRebaja" />
+                <ScalarProperty Name="CalidadPanzaBlancaRebaja" ColumnName="CalidadPanzaBlancaRebaja" />
+                <ScalarProperty Name="CalidadPicadosRebaja" ColumnName="CalidadPicadosRebaja" />
+                <ScalarProperty Name="CalidadVerdesRebaja" ColumnName="CalidadVerdesRebaja" />
+                <ScalarProperty Name="CalidadQuemadosRebaja" ColumnName="CalidadQuemadosRebaja" />
+                <ScalarProperty Name="CalidadTierraRebaja" ColumnName="CalidadTierraRebaja" />
+                <ScalarProperty Name="CalidadZarandeoRebaja" ColumnName="CalidadZarandeoRebaja" />
+                <ScalarProperty Name="CalidadDescuentoFinalRebaja" ColumnName="CalidadDescuentoFinalRebaja" />
+                <ScalarProperty Name="CalidadHumedadRebaja" ColumnName="CalidadHumedadRebaja" />
+                <ScalarProperty Name="CalidadGastosFumigacionRebaja" ColumnName="CalidadGastosFumigacionRebaja" />
+                <ScalarProperty Name="CalidadHumedadResultado" ColumnName="CalidadHumedadResultado" />
+                <ScalarProperty Name="CalidadGastosFumigacionResultado" ColumnName="CalidadGastosFumigacionResultado" />
+                <ScalarProperty Name="ConDuplicados" ColumnName="ConDuplicados" />
+                <ScalarProperty Name="TieneRecibidorOficial" ColumnName="TieneRecibidorOficial" />
+                <ScalarProperty Name="EstadoRecibidor" ColumnName="EstadoRecibidor" />
+                <ScalarProperty Name="ClienteAcondicionador" ColumnName="ClienteAcondicionador" />
+                <ScalarProperty Name="MotivoRechazo" ColumnName="MotivoRechazo" />
+                <ScalarProperty Name="FacturarA_Manual" ColumnName="FacturarA_Manual" />
+                <ScalarProperty Name="EntregaSAP" ColumnName="EntregaSAP" />
+                <ScalarProperty Name="DestinoCUIT" ColumnName="DestinoCUIT" />
+                <ScalarProperty Name="EstablecimientoCodigo" ColumnName="EstablecimientoCodigo" />
+                <ScalarProperty Name="EstablecimientoCUIT" ColumnName="EstablecimientoCUIT" />
+                <ScalarProperty Name="EstablecimientoNombre" ColumnName="EstablecimientoNombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
-          <FunctionImportMapping FunctionImportName="Requerimientos_TX_PendientesDeAsignacion1" FunctionName="DemoProntoModel.Store.Requerimientos_TX_PendientesDeAsignacion" />
-          <EntitySetMapping Name="NovedadesUsuarios">
-            <EntityTypeMapping TypeName="DemoProntoModel.NovedadesUsuario">
-              <MappingFragment StoreEntitySet="NovedadesUsuarios">
-                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
-                <ScalarProperty Name="TipoElemento" ColumnName="TipoElemento" />
-                <ScalarProperty Name="IdElemento" ColumnName="IdElemento" />
-                <ScalarProperty Name="IdEnviadoPor" ColumnName="IdEnviadoPor" />
-                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
-                <ScalarProperty Name="FechaConfirmacion" ColumnName="FechaConfirmacion" />
-                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
-                <ScalarProperty Name="FechaEvento" ColumnName="FechaEvento" />
-                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdNovedadUsuarios" ColumnName="IdNovedadUsuarios" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetalleEventosDelSistemas">
-            <EntityTypeMapping TypeName="DemoProntoModel.DetalleEventosDelSistema">
-              <MappingFragment StoreEntitySet="DetalleEventosDelSistema">
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
-                <ScalarProperty Name="IdDetalleEventoDelSistema" ColumnName="IdDetalleEventoDelSistema" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EventosDelSistemas">
-            <EntityTypeMapping TypeName="DemoProntoModel.EventosDelSistema">
-              <MappingFragment StoreEntitySet="EventosDelSistema">
-                <ScalarProperty Name="Importancia" ColumnName="Importancia" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdEventoDelSistema" ColumnName="IdEventoDelSistema" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

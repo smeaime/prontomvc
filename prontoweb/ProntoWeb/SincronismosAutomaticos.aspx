@@ -627,6 +627,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     AutoPostBack="false" autocomplete="off"> </asp:TextBox>
             </div>
         </div>
+          <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxBiznaga" runat="server" Checked="true" />
+                La Biznaga
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailBiznaga" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxBragadense" runat="server" Checked="true" />
