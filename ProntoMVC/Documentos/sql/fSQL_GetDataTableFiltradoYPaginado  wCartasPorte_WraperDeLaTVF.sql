@@ -44,13 +44,15 @@ create function fSQL_GetDataTableFiltradoYPaginado(
             @AplicarANDuORalFiltro int  ,
             @ModoExportacion  VARCHAR(20) ,
             @fechadesde As DateTime,
+			
 			@fechahasta As DateTime,
             @puntoventa int , 
             @IdAcopio int,
             --@bTraerDuplicados As Boolean ,
             @Contrato  VARCHAR(50) , 
             @QueContenga2  VARCHAR(50) ,
-            @idClienteAuxiliarint int ,
+            
+			@idClienteAuxiliarint int ,
             @AgrupadorDeTandaPeriodos int  ,
             @Vagon  int  ,
 			@Patente VARCHAR(10) ,
@@ -162,7 +164,7 @@ choferes.cuil as  ChoferCUIT, 			choferes.Nombre as  ChoferDesc,            isnu
 isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, 		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA,      
 isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc,    
 isnull(LOCDES.Descripcion,'') AS DestinoDesc, 
-'' AS  DestinoCodigoPostal, 	
+isnull(LOCDES.CodigoPostal,'')  AS  DestinoCodigoPostal, 	
 isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA,
 isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT,
 DATENAME(month, FechaDescarga) AS Mes,          
@@ -174,6 +176,9 @@ Calidades.Descripcion AS CalidadDesc,
 E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '
 + isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '
 + isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS as EstablecimientoDesc, 			
+ESTAB.Descripcion  as EstablecimientoCodigo,
+ESTAB.AuxiliarString2  as EstablecimientoCUIT,
+ESTAB.AuxiliarString1 as EstablecimientoNombre,
 isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,           isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido, 
 isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
 isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 			isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
@@ -265,7 +270,7 @@ where 1=1
 			OR 
 			(@optCamionVagon = 'Vagones' AND isnull(CDP.SubNumeroVagon,'')<>'')
 			OR 
-			@optCamionVagon = 'Todos' OR @optCamionVagon  IS NULL
+			@optCamionVagon = 'Todos' OR  @optCamionVagon = 'Ambas'  OR @optCamionVagon  IS NULL
 		)
 
 
@@ -458,25 +463,25 @@ go
    --         @optCamionVagon  VARCHAR(10) 
 
 
-select  exporta, * --count(*)
+select top 20  exporta, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 					 NULL, 
-					10, 
-					0,
+					NULL, 
+					NULL, 
 					NULL, 
 					NULL, 
 
 					NULL, 
 					NULL, 
-					NULL,
 					NULL, 
-					53, 
+					NULL, 
+					NULL,
 
 					NULL, 
 					NULL, 
 					NULL,
-				 	'Todos', 
+				 	'Ambas', 
 					'2016-01-09 00:00:00',
 
 			
@@ -495,6 +500,42 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					) as cdp
             
 go
+
+
+
+
+select  exporta, * --count(*)
+from dbo.fSQL_GetDataTableFiltradoYPaginado  
+				(  
+
+ NULL, 
+					10, 
+					0,
+					NULL, 
+					-1, 
+-1,-1,-1,-1,-1,
+
+	NULL, 
+					NULL, 
+					NULL,
+'Ambas','2016-01-01 00:00:00',
+'2016-01-28 00:00:00',NULL, 
+					'Ambas',
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
+
+					) as cdp
+            
+go
+
+
+
 
 
 

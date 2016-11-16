@@ -108,6 +108,7 @@ Partial Class SincronismosAutomaticos
             txtMailDukarevich.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteDukarevich" & pv).ToString
             txtMailElEnlace.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteElEnlace" & pv).ToString
             txtMailLartirigoyen.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteLartirigoyen" & pv).ToString
+            txtMailBiznaga.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBiznaga" & pv).ToString
             txtMailBragadense.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv).ToString
             txtMailFYO.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteFYO" & pv).ToString
             txtMailGranar.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGranar" & pv).ToString
@@ -359,6 +360,7 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteDukarevich" & pv, txtMailDukarevich.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteElEnlace" & pv, txtMailElEnlace.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteLartirigoyen" & pv, txtMailLartirigoyen.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBiznaga" & pv, txtMailBiznaga.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv, txtMailBragadense.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteFYO" & pv, txtMailFYO.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGrobo" & pv, txtMailGrobo.Text)
@@ -439,6 +441,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxDukarevich.Checked) Then sTodosErr += Enviar("Dukarevich", txtMailDukarevich.Text, sErr, bVistaPrevia)
         If (CheckBoxElEnlace.Checked) Then sTodosErr += Enviar("El Enlace", txtMailElEnlace.Text, sErr, bVistaPrevia)
         If (CheckBoxLartirigoyen.Checked) Then sTodosErr += Enviar("Lartirigoyen", txtMailLartirigoyen.Text, sErr, bVistaPrevia)
+        If (CheckBoxBiznaga.Checked) Then sTodosErr += Enviar("La Biznaga", txtMailBiznaga.Text, sErr, bVistaPrevia)
         If (CheckBoxBragadense.Checked) Then sTodosErr += Enviar("La Bragadense", txtMailBragadense.Text, sErr, bVistaPrevia)
         If (CheckBoxLelfun.Checked) Then sTodosErr += Enviar("Lelfun", txtMailLelfun.Text, sErr, bVistaPrevia)
         If (CheckBoxGrobo.Checked) Then sTodosErr += Enviar("Los Grobo", txtMailGrobo.Text, sErr, bVistaPrevia)
@@ -468,7 +471,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-        SincronismosWilliamsManager.ElegirCombosSegunParametro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2)
+        SincronismosWilliamsManager.ElegirCombosSegunParametro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
 
@@ -485,6 +488,18 @@ Partial Class SincronismosAutomaticos
 
 
     Function verificarTamañoArchivo(f As String) As Boolean
+
+        Try
+            Dim myFile As New FileInfo(f)
+            Dim sizeInBytes As Long = myFile.Length
+
+            Return (sizeInBytes > 0)
+
+        Catch ex As Exception
+            Return False
+
+        End Try
+
 
     End Function
 
@@ -505,7 +520,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-            SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2)
+            SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
             Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
@@ -554,9 +569,9 @@ Partial Class SincronismosAutomaticos
                                                                cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar
 )
 
-            If sArchivo <> "" Then
+            If sArchivo <> "" And verificarTamañoArchivo(sArchivo) Then
 
-                verificarTamañoArchivo(sArchivo)
+
 
                 Dim dest As String = IIf(bvistaPrevia, txtRedirigirA.Text, sEmail + "," + txtRedirigirA.Text)
                 Dim puntoventa As Integer = cmbPuntoVenta.SelectedValue
