@@ -37,12 +37,25 @@ Imports System.Web.UI.WebControls
 
 Namespace Pronto.ERP.Bll
 
+
+
+
+
+
     Public Class SincronismosWilliamsManager
 
 
 
+        Private Const MonsantoCUIT = "30503508725"
+        Private Const BtgPactualCUIT = "30714253189"
+        Private Const DowCUIT = "30636021578"
+        Private Const DiazFortiCUIT = "30714792942"
 
-        Public Shared Sub ElegirCombosSegunParametro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList)
+
+
+
+
+        Public Shared Sub ElegirCombosSegunParametro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList, SC As String)
 
             'ReportViewer2.Visible = False
             cmbEstado.Text = "Descargas"
@@ -134,9 +147,10 @@ Namespace Pronto.ERP.Bll
 
                 Case "BTG PACTUAL [BIT]"
 
-                    txtIntermediario.Text = "BTG PACTUAL COMMODITIES S.A."
-                    txtRcomercial.Text = "BTG PACTUAL COMMODITIES S.A."
-                    txtDestinatario.Text = "BTG PACTUAL COMMODITIES S.A."
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(BtgPactualCUIT, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(BtgPactualCUIT, SC, ""))
+                    txtDestinatario.Text = NombreCliente(SC, BuscarClientePorCUIT(BtgPactualCUIT, SC, ""))
+
                 Case "BLD", "BLD 2", "BLD (CALIDADES)"
                     txtTitular.Text = ""
                     txtCorredor.Text = "BLD S.A"
@@ -157,9 +171,10 @@ Namespace Pronto.ERP.Bll
                     txtDestinatario.Text = "BUNGE ARGENTINA S.A."
 
                 Case "DIAZ FORTI", "DIAZ FORTI [BIT]"
-                    txtIntermediario.Text = "DIAZ & FORTI S.R.L"
-                    txtRcomercial.Text = "DIAZ & FORTI S.R.L"
-                    txtDestinatario.Text = "DIAZ & FORTI S.R.L"
+
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(DiazFortiCUIT, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(DiazFortiCUIT, SC, ""))
+                    txtDestinatario.Text = NombreCliente(SC, BuscarClientePorCUIT(DiazFortiCUIT, SC, ""))
 
 
                 Case "DIAZ RIGANTI"
@@ -171,9 +186,10 @@ Namespace Pronto.ERP.Bll
 
 
                 Case "DOW", "DOW FORMATO ANTERIOR"
+
                     'DOW:            RTTE(COMERCIAL / DESTINATARIO)
-                    txtRcomercial.Text = "DOW AGROSCIENCES ARG. SA"
-                    txtDestinatario.Text = "DOW AGROSCIENCES ARG. SA"
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(DowCUIT, SC, ""))
+                    txtDestinatario.Text = NombreCliente(SC, BuscarClientePorCUIT(DowCUIT, SC, ""))
                 Case "DUKAREVICH"
                     'DUKAREVICH:     CORREDOR()
                     txtTitular.Text = ""
@@ -185,7 +201,7 @@ Namespace Pronto.ERP.Bll
                     txtTitular.Text = ""
                     txtCorredor.Text = "GRANAR S.A.C"
 
-            
+
                 Case "LARTIRIGOYEN"
                     'LARTIRIGOYEN: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES 
                     txtTitular.Text = "LARTIRIGOYEN S.A."
@@ -235,10 +251,14 @@ Namespace Pronto.ERP.Bll
 
                 Case "MIGUEL CINQUE"
                     txtTitular.Text = "CINQUE MIGUEL MARTIN"
+
+
                 Case "MONSANTO"
-                    txtTitular.Text = "MONSANTO ARGENTINA S.A.I.C."
-                    txtIntermediario.Text = "MONSANTO ARGENTINA S.A.I.C."
-                    txtRcomercial.Text = "MONSANTO ARGENTINA S.A.I.C."
+                    txtTitular.Text = NombreCliente(SC, BuscarClientePorCUIT(MonsantoCUIT, SC, ""))
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(MonsantoCUIT, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(MonsantoCUIT, SC, ""))
+
+
                 Case "PSA LA CALIFORNIA", "PSA LA CALIFORNIA (CALIDADES)"
                     'PSA LA CALIFORNIA: CORREDOR
                     txtCorredor.Text = "PSA LA CALIFORNIA SA"
@@ -507,7 +527,12 @@ Namespace Pronto.ERP.Bll
 
             Using ds As New WillyInformesDataSet
 
-                If sSincronismo.ToUpper <> "YPF" And sSincronismo.ToUpper <> "NIDERA" And sSincronismo.ToUpper <> "LA BIZNAGA" And InStr(sSincronismo.ToUpper, "BLD") = 0 Then
+                If sSincronismo.ToUpper <> "YPF" And _
+                    sSincronismo.ToUpper <> "NIDERA" And _
+                    sSincronismo.ToUpper <> "TOMAS HNOS" And _
+                    sSincronismo.ToUpper <> "MONSANTO" And _
+                    sSincronismo.ToUpper <> "LA BIZNAGA" And _
+                    InStr(sSincronismo.ToUpper, "BLD") = 0 Then
 
                     '// Customize the connection string.
                     Dim builder = New SqlClient.SqlConnectionStringBuilder(Encriptar(SC)) ' Properties.Settings.Default.DistXsltDbConnectionString)
@@ -1071,7 +1096,7 @@ Namespace Pronto.ERP.Bll
                             yourParams(2) = New ReportParameter("FechaDesde", Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#).ToString))
                             yourParams(3) = New ReportParameter("FechaHasta", Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#).ToString))
 
-                         
+
 
 
                             yourParams(4) = New ReportParameter("IdDestino", idDestino.ToString)
@@ -1548,7 +1573,7 @@ Namespace Pronto.ERP.Bll
 
 
                             sForzarNombreDescarga = "BERAZA.TXT"
-                            
+
 
                         Case "SYNGENTA"
                             Dim sErrores As String
@@ -22335,6 +22360,12 @@ Namespace Pronto.ERP.Bll
 
 
 
+                sb &= "&" & ""
+                sb &= "&" & dr("Pat. Chasis").ToString
+                sb &= "&" & dr("Pat. Acoplado").ToString
+        
+
+
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14) '
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14)
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14)
@@ -23010,7 +23041,7 @@ Namespace Pronto.ERP.Bll
 
                     'seccion Procedencia de la mercaderia ---------------------------------
                     '25	no	Establecimiento	digits{1,6}	Numerico entre 1 y  11 digitos
-                    sb &= .Establecimiento
+                    sb &= Val(.Establecimiento).ToString
                     sb &= SEPARADOR
                     '26	yes	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
                     sb &= .ProcedenciaDesc

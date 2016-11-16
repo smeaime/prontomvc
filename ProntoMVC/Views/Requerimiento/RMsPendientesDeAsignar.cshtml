@@ -141,6 +141,8 @@
             }
 
 
+            // http://stackoverflow.com/questions/4234619/how-to-avoid-long-nesting-of-asynchronous-functions-in-node-js
+
             $("#dialog-password").dialog({
                 buttons: {
                     'Aceptar': function () {
@@ -155,15 +157,16 @@
 
 
 
-                        validatePwd2(function () {
-                            generarvale(lista, "administrador", "",
-                                function () {
-                                    $("#loading").hide();
-                                    $('#Lista').trigger('reloadGrid');
-                                }
-                            )
-                        }
-                                       , function () { $("#loading").hide(); }
+                        validatePwd2(
+                            function () {
+                                generarvale(lista, "administrador", "",
+                                    function () {
+                                        $("#loading").hide();
+                                        $('#Lista').trigger('reloadGrid');
+                                    }
+                                )
+                            }   
+                            , function () { $("#loading").hide(); }
                          );
 
                         $(this).dialog('close');
@@ -189,6 +192,7 @@
             //juntar los ids y mandarlos?
 
 
+            $("#loading").show();
 
 
             $.ajax({
@@ -201,7 +205,12 @@
                     pass: pass
                 })
             }).done(function () {
-                if (typeof callback == "function") callback();
+                //if (typeof callback == "function") callback();
+                $("#loading").hide();
+                alert("Vale creado")
+            }).fail(function () {
+                $("#loading").hide();
+                alert("No se pudo crear el vale")
             });
         }
 
@@ -584,7 +593,7 @@
             },
 
 
-            pager: $('#ListaPager'),
+            //pager: $('#ListaPager'),
             rowNum: 500,
             rowList: [100, 500],
             sortname: 'NumeroRequerimiento', // 'FechaRecibo,NumeroRecibo',

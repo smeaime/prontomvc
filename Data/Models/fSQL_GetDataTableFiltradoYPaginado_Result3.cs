@@ -200,5 +200,54 @@ namespace ProntoMVC.Data.Models
         public string CorredorCUIT2 { get; set; }
         public string EntregadorCUIT { get; set; }
         public int CodigoAFIP { get; set; }
+        public Nullable<decimal> CalidadGranosExtranosMerma { get; set; }
+        public Nullable<decimal> CalidadQuebradosMerma { get; set; }
+        public Nullable<decimal> CalidadDanadosMerma { get; set; }
+        public Nullable<decimal> CalidadChamicoMerma { get; set; }
+        public Nullable<decimal> CalidadRevolcadosMerma { get; set; }
+        public Nullable<decimal> CalidadObjetablesMerma { get; set; }
+        public Nullable<decimal> CalidadAmohosadosMerma { get; set; }
+        public Nullable<decimal> CalidadPuntaSombreadaMerma { get; set; }
+        public Nullable<decimal> CalidadHectolitricoMerma { get; set; }
+        public Nullable<decimal> CalidadCarbonMerma { get; set; }
+        public Nullable<decimal> CalidadPanzaBlancaMerma { get; set; }
+        public Nullable<decimal> CalidadPicadosMerma { get; set; }
+        public Nullable<decimal> CalidadVerdesMerma { get; set; }
+        public Nullable<decimal> CalidadQuemadosMerma { get; set; }
+        public Nullable<decimal> CalidadTierraMerma { get; set; }
+        public Nullable<decimal> CalidadZarandeoMerma { get; set; }
+        public Nullable<decimal> CalidadDescuentoFinalMerma { get; set; }
+        public Nullable<decimal> CalidadHumedadMerma { get; set; }
+        public Nullable<decimal> CalidadGastosFumigacionMerma { get; set; }
+        public Nullable<decimal> CalidadQuebradosRebaja { get; set; }
+        public Nullable<decimal> CalidadChamicoRebaja { get; set; }
+        public Nullable<decimal> CalidadRevolcadosRebaja { get; set; }
+        public Nullable<decimal> CalidadObjetablesRebaja { get; set; }
+        public Nullable<decimal> CalidadAmohosadosRebaja { get; set; }
+        public Nullable<decimal> CalidadPuntaSombreadaRebaja { get; set; }
+        public Nullable<decimal> CalidadHectolitricoRebaja { get; set; }
+        public Nullable<decimal> CalidadCarbonRebaja { get; set; }
+        public Nullable<decimal> CalidadPanzaBlancaRebaja { get; set; }
+        public Nullable<decimal> CalidadPicadosRebaja { get; set; }
+        public Nullable<decimal> CalidadVerdesRebaja { get; set; }
+        public Nullable<decimal> CalidadQuemadosRebaja { get; set; }
+        public Nullable<decimal> CalidadTierraRebaja { get; set; }
+        public Nullable<decimal> CalidadZarandeoRebaja { get; set; }
+        public Nullable<decimal> CalidadDescuentoFinalRebaja { get; set; }
+        public Nullable<decimal> CalidadHumedadRebaja { get; set; }
+        public Nullable<decimal> CalidadGastosFumigacionRebaja { get; set; }
+        public Nullable<decimal> CalidadHumedadResultado { get; set; }
+        public Nullable<decimal> CalidadGastosFumigacionResultado { get; set; }
+        public Nullable<int> ConDuplicados { get; set; }
+        public string TieneRecibidorOficial { get; set; }
+        public Nullable<int> EstadoRecibidor { get; set; }
+        public Nullable<int> ClienteAcondicionador { get; set; }
+        public Nullable<int> MotivoRechazo { get; set; }
+        public bool FacturarA_Manual { get; set; }
+        public string EntregaSAP { get; set; }
+        public string DestinoCUIT { get; set; }
+        public string EstablecimientoCodigo { get; set; }
+        public string EstablecimientoCUIT { get; set; }
+        public string EstablecimientoNombre { get; set; }
     }
 }
