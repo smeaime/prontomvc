@@ -393,6 +393,18 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void GeneraYEnviaLosMailsTildadosDeLaGrilla_29401()
+        {
+            //CartaDePorteManager.encolarfiltr
+        }
+
+
+        [TestMethod]
+        public void OcrBarajaAsignacionDeImagenes_()
+        {
+        }
+
 
 
         [TestMethod]
@@ -431,17 +443,17 @@ namespace ProntoMVC.Tests
         public void ElegirCombosSegunParametro_29385()
         {
 
-           SincronismosWilliamsManager.ElegirCombosSegunParametro("BTG PACTUAL [BIT]",new System.Web.UI.WebControls.TextBox()
-               ,new System.Web.UI.WebControls.TextBox(),
-               new System.Web.UI.WebControls.TextBox(),
-               new System.Web.UI.WebControls.TextBox(),new System.Web.UI.WebControls.TextBox(),
-               new System.Web.UI.WebControls.TextBox(),
-               new System.Web.UI.WebControls.DropDownList() ,new System.Web.UI.WebControls.DropDownList(),
-               new System.Web.UI.WebControls.DropDownList(),SC);
+            SincronismosWilliamsManager.ElegirCombosSegunParametro("BTG PACTUAL [BIT]", new System.Web.UI.WebControls.TextBox()
+                , new System.Web.UI.WebControls.TextBox(),
+                new System.Web.UI.WebControls.TextBox(),
+                new System.Web.UI.WebControls.TextBox(), new System.Web.UI.WebControls.TextBox(),
+                new System.Web.UI.WebControls.TextBox(),
+                new System.Web.UI.WebControls.DropDownList(), new System.Web.UI.WebControls.DropDownList(),
+                new System.Web.UI.WebControls.DropDownList(), SC);
 
         }
 
-        
+
 
 
 

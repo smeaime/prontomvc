@@ -2477,12 +2477,12 @@ Public Class CartaDePorteManager
  _
             .ProcedenciaLocalidadONCCA_SAGPYA = cdp.ProcedenciaCodigoONCAA, _
             .ProcedenciaPartidoONCCA = cdp.ProcedenciaCodigoONCAA, _
-          .ProcedenciaLocalidadAFIP = cdp.ProcedenciaCodigoONCAA, _
-            .DestinoLocalidadAFIP = cdp.DestinoCodigoONCAA, _
+            .ProcedenciaLocalidadAFIP = cdp.ProcedenciaCodigoONCAA, _
+            .DestinoLocalidadAFIP = cdp.DestinoLocalidadAFIP, _
  _
-             .Patente = cdp.Patente, _
+            .Patente = cdp.Patente, _
             .Acoplado = cdp.Acoplado, _
-             .DestinoCUIT = cdp.DestinoCUIT, _
+            .DestinoCUIT = cdp.DestinoCUIT, _
             .DestinoCodigoYPF = cdp.DestinoCodigoONCAA, _
             .DestinoCodigoSAGPYA = cdp.DestinoCodigoONCAA, _
             .TransportistaCUIT = cdp.TransportistaCUIT.Replace("-", ""), _
@@ -3265,6 +3265,66 @@ Public Class CartaDePorteManager
 
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    Public Shared Function EncolarFiltros(ByRef s() As String, ByVal estado As CartaDePorteManager.enumCDPestado, bVistaPrevia As Boolean, AgrupadorDeTandaPeriodos As Long, pv As Integer, fechadesde As Date, fechahasta As Date, redirigira As String, SC As String, idusuario As Integer)
+
+        Dim nMailsEncolados As Integer
+
+        'TODO: este for each...
+        Dim flagHayChecksTildados As Boolean = False
+
+
+        For Each id As Long In s
+            If id = 0 Then Continue For
+
+            Dim dt = TraerMetadata(SC, id)
+            Dim dr = dt.Rows(0)
+
+            dr.Item("UltimoResultado") = "En Cola"
+            dr.Item("AuxiliarString2") = IIf(bVistaPrevia, redirigira, "")
+            dr.Item("FechaDesde") = fechadesde
+            dr.Item("FechaHasta") = fechahasta
+            dr.Item("EstadoDeCartaPorte") = Val(estado).ToString
+            dr.Item("AuxiliarString1") = pv 'el punto de venta ya viene en el filtro
+            dr.Item("AgrupadorDeTandaPeriodos") = AgrupadorDeTandaPeriodos
+
+            Update(SC, dt)
+
+            '///////////////////////////////////
+            '///////////////////////////////////
+            'lo pongo en cola
+            '///////////////////////////////////
+
+
+            Dim dtCola = ColaMails.TraerMetadata(SC)
+            Dim drCola = dtCola.NewRow
+            With drCola
+                For Each column As DataColumn In dt.Columns
+                    drCola(column.ColumnName) = dr(column.ColumnName)
+                Next
+                .Item("IdUsuarioEncolo") = idusuario
+                .Item("AgrupadorDeTandaPeriodos") = AgrupadorDeTandaPeriodos
+            End With
+            dtCola.Rows.Add(drCola)
+            ColaMails.Insert_o_Update(SC, dtCola)
+
+
+            '///////////////////////////////////
+            '///////////////////////////////////
+            '///////////////////////////////////
+            '///////////////////////////////////
+
+
+            nMailsEncolados += 1
+            flagHayChecksTildados = True
+        Next
+
+        Return nMailsEncolados
+    End Function
+
+
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

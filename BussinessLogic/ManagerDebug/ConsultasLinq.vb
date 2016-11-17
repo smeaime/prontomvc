@@ -675,7 +675,7 @@ Public Class ConsultasLinq
                 Group i By agrupVagon = i.agrupVagon, DestinoDesc = i.DestinoDesc, SubcontrDesc = i.SubcontrDesc, Tarifa = i.Tarifa Into g = Group _
                 Select agrupVagon = agrupVagon, DestinoDesc = DestinoDesc, SubcontrDesc = SubcontrDesc, Tarifa = Tarifa, _
                 NetoPto = g.Sum(Function(i) i.NetoPto), Comision = g.Sum(Function(i) i.Comision), CantCartas = g.Count, _
-                numeros = vbCrLf + vbCrLf + vbCrLf + String.Join(vbCrLf, g.Select(Function(i) i.numerocarta.ToString).ToList)
+                numeros = Left(vbCrLf + vbCrLf + vbCrLf + "[comienzo  " + String.Join(vbCrLf, g.Select(Function(i) i.numerocarta.ToString).ToList) + "  fin]", 30000)
         'le meto esos vbCrLf para que no se vean los primeros renglones y así no me modifique automaticamente el ancho de la columna "oculta"
 
         ErrHandler2.WriteError("     Excluidas por nofacturarasubcontratistas o duplicadas: " & filtr)
