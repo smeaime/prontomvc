@@ -8,7 +8,7 @@ select top 10 ibcondicion, * from clientes where idcliente=30446
 
 select * from provincias
 
-
+select * from localidades
 select * from CDPEstablecimientos 
 select * from  WilliamsDestinos
 

@@ -9800,6 +9800,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="DestinoCodigoPostal" Type="varchar" MaxLength="30" Nullable="false" />
                 <Property Name="DestinoCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="DestinoCUIT" Type="varchar" MaxLength="13" Nullable="false" />
+                <Property Name="DestinoLocalidadAFIP" Type="int" Nullable="false" />
                 <Property Name="Mes" Type="nvarchar" MaxLength="30" />
                 <Property Name="Ano" Type="int" />
                 <Property Name="Factura" Type="varchar" MaxLength="63" />
@@ -25245,6 +25246,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="EstablecimientoCodigo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EstablecimientoCUIT" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EstablecimientoNombre" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="DestinoLocalidadAFIP" Nullable="false" />
         </ComplexType>
         <EntityType Name="NovedadesUsuario">
           <Key>
@@ -32585,6 +32587,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <ScalarProperty Name="EstablecimientoCodigo" ColumnName="EstablecimientoCodigo" />
                 <ScalarProperty Name="EstablecimientoCUIT" ColumnName="EstablecimientoCUIT" />
                 <ScalarProperty Name="EstablecimientoNombre" ColumnName="EstablecimientoNombre" />
+                <ScalarProperty Name="DestinoLocalidadAFIP" ColumnName="DestinoLocalidadAFIP" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
