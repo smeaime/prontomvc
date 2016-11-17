@@ -34,11 +34,13 @@ create function fSQL_GetDataTableFiltradoYPaginado(
             @estado int  ,
             @QueContenga  VARCHAR(50) ,
             @idVendedor int ,
+
             @idCorredor int  ,
             @idDestinatario int ,
             @idIntermediario int ,
             @idRemComercial int ,
             @idArticulo int  ,
+
             @idProcedencia int ,
             @idDestino int  ,
             @AplicarANDuORalFiltro int  ,
@@ -149,6 +151,7 @@ datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico,
 ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	  	
 ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	  			
 ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 		
+
 isnull(CLIVEN.Razonsocial,'') AS TitularDesc,             isnull(CLIVEN.cuit,'') AS TitularCUIT,
 isnull(CLICO1.Razonsocial,'') AS IntermediarioDesc,             isnull(CLICO1.cuit,'') AS IntermediarioCUIT, 		
 isnull(CLICO2.Razonsocial,'') AS RComercialDesc,             isnull(CLICO2.cuit,'') AS RComercialCUIT, 			
@@ -158,27 +161,42 @@ isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc,             isnull(CLIENT.cu
 isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, 		
 isnull(CLIAUX.cuit,'') AS ClienteAuxiliarCUIT, 			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc,        
 isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc,              isnull(Articulos.Descripcion,'') AS Producto, 			
+
 Transportistas.cuit as  TransportistaCUIT,         
 isnull(Transportistas.RazonSocial,'') AS TransportistaDesc, 		
-choferes.cuil as  ChoferCUIT, 			choferes.Nombre as  ChoferDesc,            isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, 	
-isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, 		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA,      
+choferes.cuil as  ChoferCUIT, 			
+choferes.Nombre as  ChoferDesc,
+
+isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, 	
+isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, 		
+isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA,      
 isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc,    
+
 isnull(LOCDES.Descripcion,'') AS DestinoDesc, 
 isnull(LOCDES.CodigoPostal,'')  AS  DestinoCodigoPostal, 	
 isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA,
 isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT,
+isnull(LOCDES2.CodigoAFIP,'') 	 AS  DestinoLocalidadAFIP,
+
+
 DATENAME(month, FechaDescarga) AS Mes,          
 DATEPART(year, FechaDescarga) AS Ano,        	
-FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura,            FAC.FechaFactura,         
+FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura,
+FAC.FechaFactura,         
 isnull(CLIFAC.RazonSocial,'') AS ClienteFacturado,          
 isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT, 		
 Calidades.Descripcion AS CalidadDesc, 	    
-E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '
-+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '
-+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS as EstablecimientoDesc, 			
+E1.Nombre as UsuarioIngreso,
+
+
+isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '
+	+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '
+	+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS as EstablecimientoDesc, 			
 ESTAB.Descripcion  as EstablecimientoCodigo,
 ESTAB.AuxiliarString2  as EstablecimientoCUIT,
 ESTAB.AuxiliarString1 as EstablecimientoNombre,
+
+
 isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,           isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido, 
 isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
 isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 			isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
@@ -205,7 +223,10 @@ LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTranspo
 LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer            
 LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
 LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
-LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino          
+
+LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino     
+LEFT OUTER JOIN Localidades LOCDES2 ON LOCDES.IdLocalidad = LOCDES2.IdLocalidad          
+
 LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento        
 LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura            
 LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente             
@@ -463,6 +484,9 @@ go
    --         @optCamionVagon  VARCHAR(10) 
 
 
+
+
+
 select top 20  exporta, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
@@ -512,15 +536,19 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					10, 
 					0,
 					NULL, 
-					-1, 
+					-1,
+					 
 -1,-1,-1,-1,-1,
 
 	NULL, 
 					NULL, 
 					NULL,
-'Ambas','2016-01-01 00:00:00',
-'2016-01-12 00:00:00',NULL, 
 					'Ambas',
+					'2016-01-01 00:00:00',
+
+					'2016-02-01 00:00:00',
+					NULL, 
+					NULL,
 					NULL, 
 					NULL, 
 

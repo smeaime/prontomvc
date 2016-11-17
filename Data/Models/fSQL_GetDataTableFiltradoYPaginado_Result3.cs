@@ -249,5 +249,6 @@ namespace ProntoMVC.Data.Models
         public string EstablecimientoCodigo { get; set; }
         public string EstablecimientoCUIT { get; set; }
         public string EstablecimientoNombre { get; set; }
+        public int DestinoLocalidadAFIP { get; set; }
     }
 }
