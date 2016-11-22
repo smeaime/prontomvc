@@ -16,8 +16,8 @@ namespace ProntoMVC.Data.Models
     {
         public CartasDePorte()
         {
-            this.CartasDePorteDetalles = new HashSet<CartasDePorteDetalle_EF>();
             this.CartasDePorteLogDeOCRs = new HashSet<CartasDePorteLogDeOCR>();
+            this.CartasDePorteDetalles = new HashSet<CartasDePorteDetalle_EF>();
         }
     
         public int IdCartaDePorte { get; set; }
@@ -202,12 +202,17 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> MotivoRechazo { get; set; }
         public bool FacturarA_Manual { get; set; }
         public string EntregaSAP { get; set; }
+        public Nullable<int> Situacion { get; set; }
+        public Nullable<int> SituacionAntesDeEditarManualmente { get; set; }
+        public Nullable<System.DateTime> FechaActualizacionAutomatica { get; set; }
+        public Nullable<System.DateTime> FechaAutorizacion { get; set; }
+        public string ObservacionesSituacion { get; set; }
     
         public virtual CartasPorteAcopio CartasPorteAcopio { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public virtual ICollection<CartasDePorteLogDeOCR> CartasDePorteLogDeOCRs { get; set; }
         public virtual ICollection<CartasDePorteDetalle_EF> CartasDePorteDetalles { get; set; }
         public virtual Vendedor Vendedore { get; set; }
         public virtual DetalleFactura DetalleFactura { get; set; }
-        public virtual Cliente Cliente { get; set; }
-        public virtual ICollection<CartasDePorteLogDeOCR> CartasDePorteLogDeOCRs { get; set; }
     }
 }

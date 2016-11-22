@@ -1790,6 +1790,8 @@ Partial Class CDPMailing
     End Property
 
 
+  
+
 
     Sub GeneraYEnviaLosMailsTildadosDeLaGrilla(ByVal estado As CartaDePorteManager.enumCDPestado, Optional ByVal bVistaPrevia As Boolean = False)
         'Cómo hacer este proceso desatendido?????? -Un windows service en .net, como dice el tipo de abajo
@@ -1807,7 +1809,6 @@ Partial Class CDPMailing
 
         Dim chkFirmar As CheckBox
         Dim keys(3) As String
-        Dim flagHayChecksTildados As Boolean = False
         Dim sError As String = ""
 
         tHoraEmpieza = Now
@@ -1855,53 +1856,15 @@ Partial Class CDPMailing
         End If
 
 
-        'TODO: este for each...
 
 
-        For Each id As Long In s
-            If id = 0 Then Continue For
 
-            Dim dt = TraerMetadata(HFSC.Value, id)
-            Dim dr = dt.Rows(0)
-
-            dr.Item("UltimoResultado") = "En Cola"
-            dr.Item("AuxiliarString2") = IIf(bVistaPrevia, txtRedirigirA.Text, "")
-            dr.Item("FechaDesde") = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-            dr.Item("FechaHasta") = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-            dr.Item("EstadoDeCartaPorte") = Val(estado).ToString
-            dr.Item("AuxiliarString1") = cmbPuntoVenta.SelectedValue 'el punto de venta ya viene en el filtro
-            dr.Item("AgrupadorDeTandaPeriodos") = AgrupadorDeTandaPeriodos
-
-            Update(HFSC.Value, dt)
-
-            '///////////////////////////////////
-            '///////////////////////////////////
-            'lo pongo en cola
-            '///////////////////////////////////
+        nMailsEncolados = ColaMails.EncolarFiltros(s, bVistaPrevia, estado, AgrupadorDeTandaPeriodos, cmbPuntoVenta.SelectedValue, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), txtRedirigirA.Text, HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario))
 
 
-            Dim dtCola = ColaMails.TraerMetadata(HFSC.Value)
-            Dim drCola = dtCola.NewRow
-            With drCola
-                For Each column As DataColumn In dt.Columns
-                    drCola(column.ColumnName) = dr(column.ColumnName)
-                Next
-                .Item("IdUsuarioEncolo") = Session(SESSIONPRONTO_glbIdUsuario)
-                .Item("AgrupadorDeTandaPeriodos") = AgrupadorDeTandaPeriodos
-            End With
-            dtCola.Rows.Add(drCola)
-            ColaMails.Insert_o_Update(HFSC.Value, dtCola)
 
 
-            '///////////////////////////////////
-            '///////////////////////////////////
-            '///////////////////////////////////
-            '///////////////////////////////////
 
-
-            nMailsEncolados += 1
-            flagHayChecksTildados = True
-        Next
 
         If nMailsEncolados = 0 Then
             MsgBoxAjax(Me, "No hay filtros tildados para enviar")
@@ -2144,26 +2107,9 @@ Partial Class CDPMailing
     End Sub
 
     Protected Sub btnCancelarTrabajos_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelarTrabajos.Click
-        Dim dta = CDPMailFiltrosManager2.Fetch(HFSC.Value, 0)
-        dta = DataTableWHERE(dta, "UltimoResultado='En Cola' OR UltimoResultado like 'Procesandose%' ")
 
-        ColaMails.CancelarTrabajos(HFSC.Value)
+        ColaMails.CancelarCola(HFSC.Value)
 
-        For Each iddr As DataRow In dta.Rows
-
-            Dim dt = TraerMetadata(HFSC.Value, iddr.Item(0))
-            Dim dr = dt.Rows(0)
-
-            dr.Item("UltimoResultado") = "Cancelado"
-            dr.Item("AuxiliarString2") = ""
-            dr.Item("FechaDesde") = DBNull.Value
-            dr.Item("FechaHasta") = DBNull.Value
-            'dr.Item("EstadoDeCartaPorte") = estado
-            'dr.Item("PuntoVenta") = cmbPuntoVenta.SelectedValue 'el punto de venta ya viene en el filtro
-
-            Update(HFSC.Value, dt)
-
-        Next
         ReBind()
     End Sub
 
