@@ -114,6 +114,7 @@ Public Class LogicaImportador
         BungeRamalloDescargaTexto
 
         Nidera
+        Urenport
         'esta enumeracion debe tener el mismo orden que el combo
         'esta enumeracion debe tener el mismo orden que el combo
         'esta enumeracion debe tener el mismo orden que el combo
@@ -1896,6 +1897,52 @@ Public Class ExcelImportadorManager
     End Function
 
 
+
+    Public Shared Function UrenportExcelToDataset(ByVal pFileName As String) As Data.DataSet
+        Dim ds = GetExcel(pFileName, 1)
+
+        'le hago algun tratamiento a los cuits
+        For Each r In ds.Tables(0).Rows
+
+            Try
+                'If Val(r(1)) = 0 Then Continue For
+
+                'r(1) = Val(Val(r(0)) & Val(Replace(r(1), "-", "")))
+
+
+                'r(29) = r(29).Replace(".", "").Replace(",", ".")
+
+                'If r(4) = "" Then
+                '    r(4) = "DIRECTO"
+                'End If
+
+
+
+                'r(40) = CodigoCalidad(Val(r(40)))
+
+                'Select Case r(38)
+                '    Case "1"
+                '        r(38) = "NO"
+                '    Case "2"
+                '        r(38) = "SI"
+                '    Case "3"
+                '        r(38) = "NO"
+                '    Case Else
+
+                'End Select
+            Catch ex As Exception
+
+            End Try
+
+        Next
+
+
+
+        Return ds
+    End Function
+
+
+
     Public Shared Function BungeRamalloDescargaTextoToDataset(ByVal pFileName As String) As Data.DataSet
 
 
@@ -1947,7 +1994,7 @@ Public Class ExcelImportadorManager
         dr(27) = "TARA PTO"
         dr(28) = "NETO PTO"
 
-        
+
         dr(29) = "HUMEDAD"
         dr(31) = "MERMA"
 
@@ -1966,7 +2013,7 @@ Public Class ExcelImportadorManager
         dr(61) = "ACOPLADO" 'le agrego una columna por la columna adicional que me crea el doble renglon
         dr(62) = "FECHAVENCIMIENTO"
 
-        
+
 
         'dr(42) = "Bruto Descarga"
         'dr(43) = "Tara Descarga"
@@ -2014,7 +2061,7 @@ Public Class ExcelImportadorManager
         'dr(24) = "Descrip. Procedencia"
 
         'dr(24) = "CHOFERCUIT"
-        
+
         'dr(33) = "ACOPLADO"
         'dr(26) = "CONTRATO"
         'dr(33) = "OBSERVACIONES"
@@ -2130,7 +2177,7 @@ Public Class ExcelImportadorManager
                 If r(4) = "" Then
                     r(4) = "DIRECTO"
                 End If
-             
+
 
 
                 'r(40) = CodigoCalidad(Val(r(40)))
@@ -2975,7 +3022,7 @@ Public Class ExcelImportadorManager
 
 
 
-             
+
 
                 Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, -1)
                 If cdp.Id = -1 Then
@@ -3379,7 +3426,7 @@ Public Class ExcelImportadorManager
                         Case 2
 
                             cdp.Humedad = porcentajehum
-                         
+
                         Case 3
                             .NobleHectolitrico = analisis
                         Case 4
@@ -4108,6 +4155,11 @@ Public Class ExcelImportadorManager
 
             Case CargillPlantaQuebracho, CargillPtaAlvear
                 ds = GetExcel(archivoExcel, 1) 'hoja 1
+
+
+            Case Urenport
+                ds = UrenportExcelToDataset(archivoExcel)
+
 
             Case Else
                 ds = GetExcel(archivoExcel)
@@ -5180,7 +5232,7 @@ Public Class ExcelImportadorManager
             End If
 
 
-            
+
             If destinatario.Contains("CHS") And dr.Item(enumColumnasDeGrillaFinal.Exporta.ToString()) = "SI" And Not destino.Contains("GENERAL LAGOS") Then
                 dr.Item("NumeroCDP") = ""
             End If
