@@ -355,7 +355,15 @@ namespace Filtrador
 
             try
             {
+
+            //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+            //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+            //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+
+
                 totalRecords = filteredQuery.Count();
+
+
             }
             catch (Exception)
             {

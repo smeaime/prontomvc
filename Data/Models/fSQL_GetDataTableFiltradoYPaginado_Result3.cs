@@ -249,5 +249,11 @@ namespace ProntoMVC.Data.Models
         public string EstablecimientoCodigo { get; set; }
         public string EstablecimientoCUIT { get; set; }
         public string EstablecimientoNombre { get; set; }
+        public int DestinoLocalidadAFIP { get; set; }
+        public Nullable<int> Situacion { get; set; }
+        public Nullable<int> SituacionAntesDeEditarManualmente { get; set; }
+        public Nullable<System.DateTime> FechaActualizacionAutomatica { get; set; }
+        public Nullable<System.DateTime> FechaAutorizacion { get; set; }
+        public string ObservacionesSituacion { get; set; }
     }
 }

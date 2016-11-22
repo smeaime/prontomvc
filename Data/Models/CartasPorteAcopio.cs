@@ -23,7 +23,7 @@ namespace ProntoMVC.Data.Models
         public string Descripcion { get; set; }
         public Nullable<int> IdCliente { get; set; }
     
-        public virtual ICollection<CartasDePorte> CartasDePortes { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual ICollection<CartasDePorte> CartasDePortes { get; set; }
     }
 }
