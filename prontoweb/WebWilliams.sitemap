@@ -219,6 +219,8 @@
 
       <siteMapNode url="ProntoWeb/ControlesDiarios.aspx"  title="Estd. d/descargas"  description="Control" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
 
+      <siteMapNode url="ProntoWeb/SituacionCalidad.aspx"  title="Calidad Situacion"  description="" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
+
     </siteMapNode>
 
     <siteMapNode url="" title="FERTILIZANTES"  description="Cartas de Porte" roles="Administrador,WilliamsAdmin,AdministradorLimitado" >

@@ -1,0 +1,115 @@
+
+Log Entry : 
+11/22/2016 08:46:41
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/22/2016 08:51:14
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at Filtrador.Filters.CrearFiltro[T](StringBuilder sb, List`1 objParams, Boolean EsParaLinqDynamic) in c:\Users\Administrador\Documents\bdl\pronto\Data\Filtros.cs:line 591
+   at Filtrador.Filters.FiltroGenerico_UsandoIQueryable[T](String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, DemoProntoEntities db, Int32& totalRecords, IQueryable`1 q) in c:\Users\Administrador\Documents\bdl\pronto\Data\Filtros.cs:line 326
+   at ServicioCartaPorte.servi.CartasPorte_DynamicGridData(String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, String FechaInicial, String FechaFinal, Int32 puntovent, Int32 iddestino, String SC, String nombreusuario) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2880
+   at JQGridHandler.ProcessRequest(HttpContext context) in c:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:line 214
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+11/22/2016 08:51:28
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at Filtrador.Filters.CrearFiltro[T](StringBuilder sb, List`1 objParams, Boolean EsParaLinqDynamic) in c:\Users\Administrador\Documents\bdl\pronto\Data\Filtros.cs:line 591
+   at Filtrador.Filters.FiltroGenerico_UsandoIQueryable[T](String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, DemoProntoEntities db, Int32& totalRecords, IQueryable`1 q) in c:\Users\Administrador\Documents\bdl\pronto\Data\Filtros.cs:line 326
+   at ServicioCartaPorte.servi.CartasPorte_DynamicGridData(String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, String FechaInicial, String FechaFinal, Int32 puntovent, Int32 iddestino, String SC, String nombreusuario) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2880
+   at JQGridHandler.ProcessRequest(HttpContext context) in c:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:line 214
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+11/22/2016 08:52:36
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.FormatException
+String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at Filtrador.Filters.CrearFiltro[T](StringBuilder sb, List`1 objParams, Boolean EsParaLinqDynamic) in c:\Users\Administrador\Documents\bdl\pronto\Data\Filtros.cs:line 676
+   at Filtrador.Filters.FiltroGenerico_UsandoIQueryable[T](String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, DemoProntoEntities db, Int32& totalRecords, IQueryable`1 q) in c:\Users\Administrador\Documents\bdl\pronto\Data\Filtros.cs:line 326
+   at ServicioCartaPorte.servi.CartasPorte_DynamicGridData(String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, String FechaInicial, String FechaFinal, Int32 puntovent, Int32 iddestino, String SC, String nombreusuario) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2880
+   at JQGridHandler.ProcessRequest(HttpContext context) in c:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:line 214
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+mscorlib
+__________________________
+
+Log Entry : 
+11/22/2016 09:07:13
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/22/2016 09:16:52
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: La acción actual no se puede completar. Las credenciales del origen de datos del usuario no cumplen los requisitos necesarios para ejecutar este informe o conjunto de datos compartido. Es posible que las credenciales del origen de datos del usuario no estén almacenadas en la base de datos del servidor de informes, o bien que el origen de datos del usuario esté configurado para no requerir credenciales pero no se haya configurado la cuenta de ejecución desatendida. (rsInvalidDataSourceCredentialSetting)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4339
+__________________________
+
+Log Entry : 
+11/22/2016 09:16:53
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException
+La acción actual no se puede completar. Las credenciales del origen de datos del usuario no cumplen los requisitos necesarios para ejecutar este informe o conjunto de datos compartido. Es posible que las credenciales del origen de datos del usuario no estén almacenadas en la base de datos del servidor de informes, o bien que el origen de datos del usuario esté configurado para no requerir credenciales pero no se haya configurado la cuenta de ejecución desatendida. (rsInvalidDataSourceCredentialSetting)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   at Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4420
+   at SituacionCalidad.informe_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 177
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/22/2016 10:12:41
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
