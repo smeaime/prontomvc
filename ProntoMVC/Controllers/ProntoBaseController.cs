@@ -2682,7 +2682,7 @@ namespace ProntoMVC.Controllers
 
 
                         n = new Tablas.Tree();
-                        n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores'>Mi Cuenta Corriente</a>";
+                        n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores Por Mayor'>Mi Cuenta Corriente</a>";
                         n.Descripcion = "CuentasAcreedor";
                         n.Clave = "CuentasAcreedor";
                         n.EsPadre = "NO";

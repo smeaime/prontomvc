@@ -280,26 +280,66 @@ namespace ProntoMVC.Reportes
                 }
             }
 
+            else if (reportName == "Resumen Cuenta Corriente Acreedores Por Mayor")
+            {
+                if (idproveedor > 0 || true)
+                {
+                    ReportParameter[] yourParams = new ReportParameter[10];
+                    yourParams[0] = new ReportParameter("CadenaConexion", scsql, false); // false); // S/N
+                    if (idproveedor <= 0)
+                    {
+                        yourParams[1] = new ReportParameter("IdProveedor", "-1", true); //, false);//Adjust value 
+                    }
+                    else
+                    {
+                        yourParams[1] = new ReportParameter("IdProveedor", idproveedor.ToString(),  bMostrar); //, false);//Adjust value
+                    }
+                    yourParams[2] = new ReportParameter("Todo", "-1");
+                    yourParams[3] = new ReportParameter("FechaLimite", DateTime.Today.ToShortDateString()); //temita con formato en ingles o castellano:  DateTime.Today.ToShortDateString());
+                    yourParams[4] = new ReportParameter("FechaDesde", "1/1/1980"); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
+                    yourParams[5] = new ReportParameter("Consolidar", "-1");
+                    yourParams[6] = new ReportParameter("Pendiente", "N", true); // S/N
+                    yourParams[7] = new ReportParameter("IdMoneda", "1"); // S/N
+
+                    string s = ConfigurationManager.AppSettings["UrlDominio"] + "Content/Images/Empresas/" + (((Session["BasePronto"].NullSafeToString() ?? "") == "") ? "DemoPronto" : Session["BasePronto"].NullSafeToString()) + ".png";
+                    yourParams[8] = new ReportParameter("ImagenPath", s); // S/N
+                    yourParams[9] = new ReportParameter("UrlDominio", ConfigurationManager.AppSettings["UrlDominio"].ToString()); // S/N
+
+                    try
+                    {
+                        if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
+                    }
+                    catch (Exception ex)
+                    {
+                        ProntoFuncionesGenerales.MandaEmailSimple("mscalella911@gmail.com", "getparam", scsql + " " + ex.ToString(),
+                                        ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpUser"],
+                                        ConfigurationManager.AppSettings["SmtpPass"], "", Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                    }
+
+                    ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+                }
+            }
+
             else if (reportName == "Resumen Cuenta Corriente Deudores")
             {
                 if (idcliente > 0 || true)
                 {
                     ReportParameter[] yourParams = new ReportParameter[8];
-                    yourParams[0] = new ReportParameter("CadenaConexion", scsql, false); 
+                    yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
                     if (idcliente <= 0)
                     {
-                        yourParams[1] = new ReportParameter("IdCliente", "-1", true); 
+                        yourParams[1] = new ReportParameter("IdCliente", "-1", true);
                     }
                     else
                     {
-                        yourParams[1] = new ReportParameter("IdCliente", idcliente.ToString(), bMostrar); 
+                        yourParams[1] = new ReportParameter("IdCliente", idcliente.ToString(), bMostrar);
                     }
                     yourParams[2] = new ReportParameter("Todo", "-1");
-                    yourParams[3] = new ReportParameter("FechaLimite", DateTime.Today.ToShortDateString()); 
-                    yourParams[4] = new ReportParameter("FechaDesde", "1/1/1980"); 
+                    yourParams[3] = new ReportParameter("FechaLimite", DateTime.Today.ToShortDateString());
+                    yourParams[4] = new ReportParameter("FechaDesde", "1/1/1980");
                     yourParams[5] = new ReportParameter("Consolidar", "-1");
-                    yourParams[6] = new ReportParameter("Pendiente", "N", true); 
-                    yourParams[7] = new ReportParameter("UrlDominio", ConfigurationManager.AppSettings["UrlDominio"], false); 
+                    yourParams[6] = new ReportParameter("Pendiente", "N", true);
+                    yourParams[7] = new ReportParameter("UrlDominio", ConfigurationManager.AppSettings["UrlDominio"], false);
 
                     try
                     {

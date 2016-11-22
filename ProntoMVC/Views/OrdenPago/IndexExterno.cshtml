@@ -68,6 +68,7 @@
             var lastSelectedId;
             var inEdit;
             grid = $("#Lista");
+            $("#btnConmutarPanelDerecho").hide();
 
             //Para que haga wrap en las celdas
             $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
@@ -78,67 +79,27 @@
                 postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
                 datatype: 'json',
                 mtype: 'POST',
-                colNames: [
-                'ver', 'Emitir cert.',
-                       'IdOPComplementariaFF', 'Orden en caja', 'IdOP', 'Cod',
-
-
-                           'Fecha Pago', 'Tipo', 'Estado', 'Proveedor', 'Cuenta',
-                           'Mon.', 'Efectivo', 'Descuentos', 'Valores', 'Documentos',
-
-                           'Acreedores', 'Ret.IVA', 'Ret.gan', 'Ret.ing.b.', 'Ret.SUSS',
-                           'Dev.F.F.', 'Dif. Balanceo', 'OP complem. FF', 'Cotiz. dolar', 'Destinatario fondo fijo',
-                           'Observaciones', 'Obra', 'Modalidad', 'Certificados', 'Auxiliar',
-                           '', ''
-                ],
-
+                colNames: ['ver', 'Emitir cert.', 'IdOPComplementariaFF', 'Orden en caja', 'IdOP', 'Fecha Pago', 'Tipo', 'Estado', 'Proveedor', 
+                           'Mon.', 'Valores', 'Acreedores', 'Ret.IVA', 'Ret.gan', 'Ret.IIBB', 'Ret.SUSS', 'Cot.U$S', 'Observaciones'],
                 colModel: [
-
-                  { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                  { name: 'Emitir', index: '', hidden: true, width: 50 },
-              { name: 'IdOPComplementariaFF', index: '', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-
-                            { name: 'Orden en caja', index: 'IdPresupuesto', align: 'left', width: 80, editable: false, hidden: false },
-
-                            { name: 'IdOP', index: 'Numero', align: 'right', width: 80, editable: false, hidden: true, search: true, searchoptions: { sopt: ['eq'] } },
-                            { name: 'Cod', index: 'Orden', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-
-                            { name: 'Fecha', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-
-                            { name: 'Tipo', index: 'Proveedor', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'Estado', index: 'Validez', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'Proveedor', index: 'Bonificacion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                            { name: 'Cuenta', index: 'PorcentajeIva1', align: 'left', width: 300, editable: false },
+                            { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                            { name: 'Emitir', index: '', hidden: true, width: 50 },
+                            { name: 'IdOPComplementariaFF', index: '', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                            { name: 'Orden en caja', index: '', align: 'left', width: 80, editable: false, hidden: false },
+                            { name: 'IdOP', index: 'IdOP', align: 'right', width: 80, editable: false, hidden: true, search: true, searchoptions: { sopt: ['eq'] } },
+                            { name: 'Fecha', index: 'Fecha', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                            { name: 'Tipo', index: 'Tipo', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Estado', index: 'Estado', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                             { name: 'Mon', index: 'Moneda', align: 'center', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-
-                            { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                            { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                            { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                            { name: 'Documentos', index: 'PlazoEntrega', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-
-                            { name: 'Acreedores', index: 'CondicionCompra', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'Garantia', index: 'Garantia', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'LugarEntrega', index: 'LugarEntrega', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'Comprador', index: 'Comprador', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'Aprobo', index: 'Aprobo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-
-                            { name: 'Dev', index: 'Referencia', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'Detalle', index: 'Detalle', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: 'Contacto', index: 'Contacto', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                            { name: '', index: '', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-
-                             { name: '', index: '', width: 200 },
-                               { name: 'Observaciones', index: '', width: 300 },
-
-
-                                   { name: '', index: '' },
-                                   { name: '', index: '' },
-
-                             { name: '', index: '', width: 300 },
-                             { name: '', index: '', width: 300 },
-                           { name: 'EnviarA', index: '', width: 300 },
-
-                                { name: '', index: '', hidden: true }
+                            { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Acreedores', index: 'Acreedores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'RetencionGanancias', index: 'RetencionGanancias', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'RetencionIBrutos', index: 'RetencionIBrutos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'RetencionSUSS', index: 'RetencionSUSS', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'CotizacionDolar', index: 'CotizacionDolar', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                            { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq'] } }
                 ],
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
@@ -171,4 +132,5 @@
             jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         });
 
+    pageLayout.hide('east');
 </script>
