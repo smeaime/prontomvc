@@ -330,7 +330,7 @@ namespace ProntoFlexicapture
                 exportParams.ImageExportParams.Prefix = "ExportToXLS_" + rnd.Next(100000, 999999).ToString(); // en realidad las imagenes exportadas deberían ir a parar todas al raiz, porque no hay manera de saber a qué imagen corresponden. Entonces las dejo todas en el mismo lugar, y genero un random al prefijo para asegurarme de que ese nombre es exclusivo
                 //IExcelExportParams excelParametros;
                 //exportParams.ExcelParams = excelParametros;
-                
+
 
                 var w = imagenes[count].IndexOf(@"\Temp\");
                 var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
@@ -2884,17 +2884,17 @@ namespace ServicioCartaPorte
                                                             -1, -1, -1, -1, -1,
                                                             -1, 0, "Ambas", FechaDesde,
                                                             FechaHasta, puntovent, null, "", "",
-                                                            -1, null , 0, "", "Todos")
+                                                            -1, null, 0, "", "Todos")
                              );
 
-              //db.CartasDePortes
-              //                              .Where(x =>
-              //                                      (x.FechaDescarga >= FechaDesde && x.FechaDescarga <= FechaHasta)
-              //                                       &&
-              //                                      (x.PuntoVenta == puntovent || puntovent <= 0)
-              //                                       &&
-              //                                      (x.Destino == iddestino || iddestino <= 0)
-              //                                   )
+            //db.CartasDePortes
+            //                              .Where(x =>
+            //                                      (x.FechaDescarga >= FechaDesde && x.FechaDescarga <= FechaHasta)
+            //                                       &&
+            //                                      (x.PuntoVenta == puntovent || puntovent <= 0)
+            //                                       &&
+            //                                      (x.Destino == iddestino || iddestino <= 0)
+            //                                   )
 
 
 
@@ -2967,7 +2967,7 @@ namespace ServicioCartaPorte
                                  a.DestinatarioDesc,
                                  a.DestinoDesc.ToString(),
                                  a.Destino ==null ? "" : a.Destino.ToString(),
-                                 a.Procedencia.ToString(),
+                                 a.ProcedenciaDesc.ToString(),
 
                                  a.Producto.ToString(),
                                  a.TitularDesc,

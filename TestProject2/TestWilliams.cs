@@ -399,9 +399,10 @@ namespace ProntoMVC.Tests
         {
 
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
-
+            //string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"NIDERA SA ( PGSM )\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+            
             var s = new ServicioCartaPorte.servi();
-            var output = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, false,  filtro,
+            var output = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true,  filtro,
                                                         "01/01/2016",
                                                         "01/01/2016",
                                                         0, -1, SC, "Mariano");
@@ -420,7 +421,7 @@ namespace ProntoMVC.Tests
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
 
             var s = new ServicioCartaPorte.servi();
-            var output2 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, false, filtro,
+            var output2 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                 "01/01/2015",
                                                 "01/01/2016",
                                                 0, -1, SC, "Mariano");
@@ -432,9 +433,11 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void grillaParaModuloCalidad_29439_3()
         {
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
 
+   
             var s = new ServicioCartaPorte.servi();
-            var output3 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, false, "",
+            var output3 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true,  filtro,
                                                  "01/01/2010",
                                                  "01/01/2016",
                                                  0, -1, SC, "Mariano");
