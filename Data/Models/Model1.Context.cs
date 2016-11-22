@@ -218,7 +218,6 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleLMateriale> DetalleLMateriales { get; set; }
         public virtual DbSet<LMateriale> LMateriales { get; set; }
         public virtual DbSet<CentrosCosto> CentrosCostoes { get; set; }
-        public virtual DbSet<CartasDePorte> CartasDePortes { get; set; }
         public virtual DbSet<CartasDePorteDetalle_EF> CartasDePorteDetalle_EF { get; set; }
         public virtual DbSet<CartasDePorteReglasDeFacturacion> CartasDePorteReglasDeFacturacions { get; set; }
         public virtual DbSet<CartasPorteAcopio> CartasPorteAcopios { get; set; }
@@ -252,6 +251,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<NovedadesUsuario> NovedadesUsuarios { get; set; }
         public virtual DbSet<DetalleEventosDelSistema> DetalleEventosDelSistemas { get; set; }
         public virtual DbSet<EventosDelSistema> EventosDelSistemas { get; set; }
+        public virtual DbSet<CartasDePorte> CartasDePortes { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
