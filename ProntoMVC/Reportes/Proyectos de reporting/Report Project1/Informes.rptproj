@@ -239,6 +239,14 @@
       <FullPath>IVA Ventas.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Liquidación de Subcontratistas 2.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Liquidación de Subcontratistas 3.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado de comprobantes de venta ingresados.rdl</Name>
       <FullPath>Listado de comprobantes de venta ingresados.rdl</FullPath>
     </ProjectItem>
@@ -459,12 +467,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Liquidación de Subcontratistas 2.rdl</Name>
-      <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Liquidación de Subcontratistas 3.rdl</Name>
-      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
+      <Name>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</Name>
+      <FullPath>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -474,7 +478,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://bdlconsultores.sytes.net:10080/ReportServer</TargetServerURL>
+        <TargetServerURL>http://serversql4/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
