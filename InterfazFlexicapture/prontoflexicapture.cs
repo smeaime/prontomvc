@@ -2843,9 +2843,9 @@ namespace ServicioCartaPorte
 
                 FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                throw;
             }
 
             try
@@ -2853,8 +2853,9 @@ namespace ServicioCartaPorte
                 FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                throw;
 
             }
 
@@ -2868,7 +2869,7 @@ namespace ServicioCartaPorte
                                    ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
 
-            db.Database.CommandTimeout = 180;
+            db.Database.CommandTimeout = 240;
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2951,15 +2952,32 @@ namespace ServicioCartaPorte
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
                                 a.IdCartaDePorte.ToString(), 
-                                
+
+                                a.NumeroCartaDePorte.ToString(),
+                                a.Situacion.ToString(),
+
+                                a.ObservacionesSituacion,
+
+                                a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
+
+
                                 a.FechaDescarga==null ? "" :  a.FechaDescarga.GetValueOrDefault().ToShortDateString(),
                             
+                                 a.CorredorDesc,
+                                 a.DestinatarioDesc,
+                                 a.DestinoDesc.ToString(),
                                  a.Destino ==null ? "" : a.Destino.ToString(),
-     
-                                 a.Destino.ToString(),
-                                 
-                                 a.NumeroCartaDePorte.ToString(),
+                                 a.Procedencia.ToString(),
 
+                                 a.Producto.ToString(),
+                                 a.TitularDesc,
+                                 a.RComercialDesc,
+                                 a.IntermediarioDesc,
+                                 a.Patente,
+
+                                 a.NetoProc.ToString(),
+
+                                 
                                  a.PuntoVenta.ToString()
                                  
                                  
