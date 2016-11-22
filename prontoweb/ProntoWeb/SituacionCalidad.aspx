@@ -135,7 +135,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
 
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="700px">
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
         </div>
@@ -863,7 +863,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'Descarga', 'Destino', 'IdDestino', 'Numero CP', 'Sucursal'
+                    colNames: ['', 'Id', 'Descarga', 'Destino', 'IdDestino', 'Numero CP', 'Sucursal', 'Sucursal', 'Sucursal', 'Sucursal'
 
                     ],
 
@@ -875,7 +875,27 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     search: false,
                                 },
                                 { name: ' IdCartasDePorteControlDescarga', index: ' IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
-                                {
+            {
+                name: 'NumeroCartaDePorte', index: 'NumeroCartaDePorte', width: 140, align: 'right', sorttype: "number"
+                , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+
+                searchoptions: { sopt: ['eq'] },
+
+                editoptions: {
+                    maxlength: 20, defaultValue: '0.00',
+                    dataEvents: [
+                    {
+                        type: 'keypress',
+                        fn: function (e) {
+                            var key = e.charCode || e.keyCode;
+                            if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                            if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                        }
+                    }]
+                }
+            },
+
+                        {
                                     name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: true,
                                     editoptions: {
                                         size: 10,
@@ -907,10 +927,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+                       { name: '', index: '', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
+                       { name: '', index: '', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
+                       { name: '', index: '', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
 
 
                                  {
-                                     name: 'WilliamsDestino.Descripcion', index: 'WilliamsDestino.Descripcion',
+                                     name: 'DestinoDesc', index: 'DestinoDesc',
                                      formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
                                      editoptions: {
                                          rows: '1', cols: '1',
@@ -1017,26 +1040,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
-            {
-                name: 'NumeroCartaDePorte', index: 'NumeroCartaDePorte', width: 140, align: 'right', sorttype: "number"
-                , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
-
-                searchoptions: { sopt: ['eq'] },
-
-                editoptions: {
-                    maxlength: 20, defaultValue: '0.00',
-                    dataEvents: [
-                    {
-                        type: 'keypress',
-                        fn: function (e) {
-                            var key = e.charCode || e.keyCode;
-                            if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                            if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                        }
-                    }]
-                }
-            }
-                                ,
+            
             {
                 name: 'IdPuntoVenta', index: 'IdPuntoVenta',
 
@@ -1098,11 +1102,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     pager: $('#ListaPager'),
                     rowNum: 10,
                     rowList: [10, 20, 50, 100],
-                    sortname: 'FechaDescarga', //'NumeroCartaDePorte',
+                    sortname: 'IdCartaDePorte' ,  //'FechaDescarga', //'NumeroCartaDePorte',
                     sortorder: 'desc',
                     viewrecords: true,
                     multiselect: true,
-                    shrinkToFit: true,
+                    shrinkToFit: false,
                     width: 'auto',
                     height: $(window).height() - 300, // '100%'
                     altRows: false,
@@ -1158,11 +1162,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
+                $('#Lista').jqGrid('setGridWidth', '1000');
+
             });
 
 
 
             $(window).resize(function () {
+                $('#Lista').jqGrid('setGridWidth', '800');
                 //RefrescaAnchoJqgrids();
             });
 
