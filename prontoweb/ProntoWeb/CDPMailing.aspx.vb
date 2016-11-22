@@ -1859,7 +1859,7 @@ Partial Class CDPMailing
 
 
 
-        nMailsEncolados = EncolarFiltros(s, bVistaPrevia, estado, AgrupadorDeTandaPeriodos, cmbPuntoVenta.SelectedValue, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), txtRedirigirA.Text, HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario))
+        nMailsEncolados = ColaMails.EncolarFiltros(s, bVistaPrevia, estado, AgrupadorDeTandaPeriodos, cmbPuntoVenta.SelectedValue, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), txtRedirigirA.Text, HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario))
 
 
 
@@ -2107,26 +2107,9 @@ Partial Class CDPMailing
     End Sub
 
     Protected Sub btnCancelarTrabajos_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelarTrabajos.Click
-        Dim dta = CDPMailFiltrosManager2.Fetch(HFSC.Value, 0)
-        dta = DataTableWHERE(dta, "UltimoResultado='En Cola' OR UltimoResultado like 'Procesandose%' ")
 
-        ColaMails.CancelarTrabajos(HFSC.Value)
+        ColaMails.CancelarCola(HFSC.Value)
 
-        For Each iddr As DataRow In dta.Rows
-
-            Dim dt = TraerMetadata(HFSC.Value, iddr.Item(0))
-            Dim dr = dt.Rows(0)
-
-            dr.Item("UltimoResultado") = "Cancelado"
-            dr.Item("AuxiliarString2") = ""
-            dr.Item("FechaDesde") = DBNull.Value
-            dr.Item("FechaHasta") = DBNull.Value
-            'dr.Item("EstadoDeCartaPorte") = estado
-            'dr.Item("PuntoVenta") = cmbPuntoVenta.SelectedValue 'el punto de venta ya viene en el filtro
-
-            Update(HFSC.Value, dt)
-
-        Next
         ReBind()
     End Sub
 

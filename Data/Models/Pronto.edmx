@@ -666,6 +666,11 @@
           <Property Name="MotivoRechazo" Type="int" />
           <Property Name="FacturarA_Manual" Type="bit" Nullable="false" />
           <Property Name="EntregaSAP" Type="varchar" MaxLength="20" />
+          <Property Name="Situacion" Type="int" />
+          <Property Name="SituacionAntesDeEditarManualmente" Type="int" />
+          <Property Name="FechaActualizacionAutomatica" Type="datetime" />
+          <Property Name="FechaAutorizacion" Type="datetime" />
+          <Property Name="ObservacionesSituacion" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CartasDePorteControlDescarga">
           <Key>
@@ -5700,6 +5705,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdUnidad" Type="int" />
           <Property Name="FechaVigencia" Type="datetime" />
           <Property Name="ValorUnitario2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ComisionAsociada" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="TarjetasCredito">
           <Key>
@@ -21703,6 +21709,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="IdUnidad" Type="Int32" />
           <Property Name="FechaVigencia" Type="DateTime" Precision="3" />
           <Property Name="ValorUnitario2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ComisionAsociada" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <Association Name="FK_DetalleSalidasMateriales_DetalleRecepciones">
           <End Type="DemoProntoModel.DetalleRecepcione" Role="DetalleRecepcione" Multiplicity="0..1" />
@@ -23039,6 +23046,11 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="CartasDePorteLogDeOCRs" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" FromRole="CartasDePorte" ToRole="CartasDePorteLogDeOCR" />
           <Property Name="FacturarA_Manual" Type="Boolean" Nullable="false" />
           <Property Name="EntregaSAP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Situacion" Type="Int32" />
+          <Property Name="SituacionAntesDeEditarManualmente" Type="Int32" />
+          <Property Name="FechaActualizacionAutomatica" Type="DateTime" Precision="3" />
+          <Property Name="FechaAutorizacion" Type="DateTime" Precision="3" />
+          <Property Name="ObservacionesSituacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CartasDePorteDetalle_EF">
           <Key>
@@ -25247,6 +25259,11 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="EstablecimientoCUIT" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EstablecimientoNombre" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="DestinoLocalidadAFIP" Nullable="false" />
+          <Property Type="Int32" Name="Situacion" Nullable="true" />
+          <Property Type="Int32" Name="SituacionAntesDeEditarManualmente" Nullable="true" />
+          <Property Type="DateTime" Name="FechaActualizacionAutomatica" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaAutorizacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ObservacionesSituacion" Nullable="true" MaxLength="200" />
         </ComplexType>
         <EntityType Name="NovedadesUsuario">
           <Key>
@@ -31048,6 +31065,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="TarifasFletes">
             <EntityTypeMapping TypeName="DemoProntoModel.TarifasFlete">
               <MappingFragment StoreEntitySet="TarifasFletes">
+                <ScalarProperty Name="ComisionAsociada" ColumnName="ComisionAsociada" />
                 <ScalarProperty Name="ValorUnitario2" ColumnName="ValorUnitario2" />
                 <ScalarProperty Name="FechaVigencia" ColumnName="FechaVigencia" />
                 <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
@@ -31443,6 +31461,11 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="CartasDePortes">
             <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
               <MappingFragment StoreEntitySet="CartasDePorte">
+                <ScalarProperty Name="ObservacionesSituacion" ColumnName="ObservacionesSituacion" />
+                <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
+                <ScalarProperty Name="FechaActualizacionAutomatica" ColumnName="FechaActualizacionAutomatica" />
+                <ScalarProperty Name="SituacionAntesDeEditarManualmente" ColumnName="SituacionAntesDeEditarManualmente" />
+                <ScalarProperty Name="Situacion" ColumnName="Situacion" />
                 <ScalarProperty Name="EntregaSAP" ColumnName="EntregaSAP" />
                 <ScalarProperty Name="FacturarA_Manual" ColumnName="FacturarA_Manual" />
                 <ScalarProperty Name="MotivoRechazo" ColumnName="MotivoRechazo" />
@@ -32588,6 +32611,11 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <ScalarProperty Name="EstablecimientoCUIT" ColumnName="EstablecimientoCUIT" />
                 <ScalarProperty Name="EstablecimientoNombre" ColumnName="EstablecimientoNombre" />
                 <ScalarProperty Name="DestinoLocalidadAFIP" ColumnName="DestinoLocalidadAFIP" />
+                <ScalarProperty Name="Situacion" ColumnName="Situacion" />
+                <ScalarProperty Name="SituacionAntesDeEditarManualmente" ColumnName="SituacionAntesDeEditarManualmente" />
+                <ScalarProperty Name="FechaActualizacionAutomatica" ColumnName="FechaActualizacionAutomatica" />
+                <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
+                <ScalarProperty Name="ObservacionesSituacion" ColumnName="ObservacionesSituacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

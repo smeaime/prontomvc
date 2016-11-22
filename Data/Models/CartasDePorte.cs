@@ -202,6 +202,11 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> MotivoRechazo { get; set; }
         public bool FacturarA_Manual { get; set; }
         public string EntregaSAP { get; set; }
+        public Nullable<int> Situacion { get; set; }
+        public Nullable<int> SituacionAntesDeEditarManualmente { get; set; }
+        public Nullable<System.DateTime> FechaActualizacionAutomatica { get; set; }
+        public Nullable<System.DateTime> FechaAutorizacion { get; set; }
+        public string ObservacionesSituacion { get; set; }
     
         public virtual CartasPorteAcopio CartasPorteAcopio { get; set; }
         public virtual ICollection<CartasDePorteDetalle_EF> CartasDePorteDetalles { get; set; }
