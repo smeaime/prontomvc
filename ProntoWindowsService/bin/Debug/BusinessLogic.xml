@@ -6,7 +6,198 @@ BusinessLogic
 </name>
 </assembly>
 <members>
-<member name="M:CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(System.String,System.String,System.String,System.String,System.Int64,System.Int64,CartaDePorteManager.enumCDPestado,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,CartaDePorteManager.FiltroANDOR,System.String,System.DateTime,System.DateTime,System.Int32,System.String@,System.String,System.Boolean,System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.Boolean,System.String,System.Boolean)">
+<member name="T:DataSetCDPmovimientos.CartasPorteMovimientosDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.AjustesStockDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.ClientesDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.CartasDePorteDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.VistaCartasPorteMovimientosDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.CartasPorteMovimientosRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.AjustesStockRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.ClientesRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.CartasDePorteRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.VistaCartasPorteMovimientosRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DataSetCDPmovimientos.CartasPorteMovimientosRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DataSetCDPmovimientos.AjustesStockRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DataSetCDPmovimientos.ClientesRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DataSetCDPmovimientos.CartasDePorteRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DataSetCDPmovimientos.VistaCartasPorteMovimientosRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DataSetCDPmovimientos">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.CartasPorteMovimientosTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.AjustesStockTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.ClientesTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.CartasDePorteTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.VistaCartasPorteMovimientosTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateUpdatedRows(DataSetCDPmovimientos,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Update rows in top-down order.
+</summary>
+</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateInsertedRows(DataSetCDPmovimientos,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Insert rows in top-down order.
+</summary>
+</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateDeletedRows(DataSetCDPmovimientos,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Delete rows in bottom-up order.
+</summary>
+</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateAll(DataSetCDPmovimientos)">
+	<summary>
+Update all changes to the dataset.
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateOrderOption">
+	<summary>
+Update Order Option
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.TableAdapterManager.SelfReferenceComparer">
+	<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member><member name="T:DataSetCDPmovimientosTableAdapters.TableAdapterManager">
+	<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member><member name="M:Pronto.ERP.Bll.ReciboManager.ProximoNumeroReciboPorNumeroDePuntoVenta(System.String,System.Int32)">
+	<summary>
+ ' OJO: es el numero, no el ID del punto de venta. El recibo es letra X, no necesita el IdCodigoIVA
+ </summary>
+	<param name="SC"></param>
+	<param name="NumeroDePuntoVenta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pronto.ERP.Bll.RecepcionManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
+	<summary>
+ ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
+ </summary>
+	<param name="SC"></param>
+	<param name="NumeroDePuntoVenta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Numalet.Decimales">
+	<summary>
+ Indica la cantidad de decimales que se pasarán a entero para la conversión
+ </summary>
+	<remarks>Esta propiedad cambia al cambiar MascaraDecimal por un valor que empieze con '0'</remarks>
+</member><member name="P:Numalet.CultureInfo">
+	<summary>
+ Objeto CultureInfo utilizado para convertir las cadenas de entrada en números
+ </summary>
+</member><member name="P:Numalet.SeparadorDecimalSalida">
+	<summary>
+ Indica la cadena a intercalar entre la parte entera y la decimal del número
+ </summary>
+</member><member name="P:Numalet.MascaraSalidaDecimal">
+	<summary>
+ Indica el formato que se le dara a la parte decimal del número
+ </summary>
+</member><member name="P:Numalet.LetraCapital">
+	<summary>
+ Indica si la primera letra del resultado debe estár en mayúscula
+ </summary>
+</member><member name="P:Numalet.ConvertirDecimales">
+	<summary>
+ Indica si se deben convertir los decimales a su expresión nominal
+ </summary>
+</member><member name="P:Numalet.ApocoparUnoParteEntera">
+	<summary>
+ Indica si de debe cambiar "uno" por "un" en las unidades.
+ </summary>
+</member><member name="P:Numalet.ApocoparUnoParteDecimal">
+	<summary>
+ Determina si se debe apococopar el "uno" en la parte decimal
+ </summary>
+	<remarks>El valor de esta propiedad cambia al setear ConvertirDecimales</remarks>
+</member><member name="T:Numalet">
+	<summary>
+ Convierte números en su expresión numérica a su numeral cardinal
+ </summary>
+</member><member name="P:My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:Pronto.ERP.Bll.ComprobantePrvManagerFondoFijo.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
+	<summary>
+ ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
+ </summary>
+	<param name="SC"></param>
+	<param name="NumeroDePuntoVenta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(System.String,System.String,System.String,System.String,System.Int64,System.Int64,CartaDePorteManager.enumCDPestado,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,CartaDePorteManager.FiltroANDOR,System.String,System.DateTime,System.DateTime,System.Int32,System.String@,System.String,System.Boolean,System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.Boolean,System.String,System.Boolean)">
 	<summary>
  el SQL de la funcion estrella
  </summary>
@@ -50,14 +241,6 @@ BusinessLogic
  </summary>
 	<param name="Fecha"></param>
 	<param name="IdMoneda"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:Pronto.ERP.Bll.ReciboManager.ProximoNumeroReciboPorNumeroDePuntoVenta(System.String,System.Int32)">
-	<summary>
- ' OJO: es el numero, no el ID del punto de venta. El recibo es letra X, no necesita el IdCodigoIVA
- </summary>
-	<param name="SC"></param>
-	<param name="NumeroDePuntoVenta"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="P:ReportingService.TrustedUserHeader.UserName">
@@ -785,14 +968,6 @@ BusinessLogic
 	<param name="NumeroDePuntoVenta"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:Pronto.ERP.Bll.ComprobantePrvManagerFondoFijo.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
-	<summary>
- ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
- </summary>
-	<param name="SC"></param>
-	<param name="NumeroDePuntoVenta"></param>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:Pronto.ERP.Bll.ParametroManager.TraerRenglonUnicoDeTablaParametroOriginal(System.String)">
 	<summary>
  asoioiadiooadsihhoiadsh asdohadsoh  adsoidasho
@@ -809,6 +984,58 @@ BusinessLogic
 	<param name="Valor"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="T:WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:WillyInformesDataSet">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(WillyInformesDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Update rows in top-down order.
+</summary>
+</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(WillyInformesDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Insert rows in top-down order.
+</summary>
+</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(WillyInformesDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Delete rows in bottom-up order.
+</summary>
+</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateAll(WillyInformesDataSet)">
+	<summary>
+Update all changes to the dataset.
+</summary>
+</member><member name="T:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+	<summary>
+Update Order Option
+</summary>
+</member><member name="T:WillyInformesDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+	<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member><member name="T:WillyInformesDataSetTableAdapters.TableAdapterManager">
+	<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
 </member><member name="M:Pronto.ERP.Bll.AsientoManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
 	<summary>
  ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
@@ -822,44 +1049,6 @@ BusinessLogic
  Displays the page on which the error occured
  
 
-</member><member name="P:Numalet.Decimales">
-	<summary>
- Indica la cantidad de decimales que se pasarán a entero para la conversión
- </summary>
-	<remarks>Esta propiedad cambia al cambiar MascaraDecimal por un valor que empieze con '0'</remarks>
-</member><member name="P:Numalet.CultureInfo">
-	<summary>
- Objeto CultureInfo utilizado para convertir las cadenas de entrada en números
- </summary>
-</member><member name="P:Numalet.SeparadorDecimalSalida">
-	<summary>
- Indica la cadena a intercalar entre la parte entera y la decimal del número
- </summary>
-</member><member name="P:Numalet.MascaraSalidaDecimal">
-	<summary>
- Indica el formato que se le dara a la parte decimal del número
- </summary>
-</member><member name="P:Numalet.LetraCapital">
-	<summary>
- Indica si la primera letra del resultado debe estár en mayúscula
- </summary>
-</member><member name="P:Numalet.ConvertirDecimales">
-	<summary>
- Indica si se deben convertir los decimales a su expresión nominal
- </summary>
-</member><member name="P:Numalet.ApocoparUnoParteEntera">
-	<summary>
- Indica si de debe cambiar "uno" por "un" en las unidades.
- </summary>
-</member><member name="P:Numalet.ApocoparUnoParteDecimal">
-	<summary>
- Determina si se debe apococopar el "uno" en la parte decimal
- </summary>
-	<remarks>El valor de esta propiedad cambia al setear ConvertirDecimales</remarks>
-</member><member name="T:Numalet">
-	<summary>
- Convierte números en su expresión numérica a su numeral cardinal
- </summary>
 </member><member name="P:ReportExecutionService.TrustedUserHeader.UserName">
 	<remarks/>
 </member><member name="P:ReportExecutionService.TrustedUserHeader.UserToken">
@@ -1106,195 +1295,6 @@ BusinessLogic
 	<remarks/>
 </member><member name="T:ReportExecutionService.SortDirectionEnum">
 	<remarks/>
-</member><member name="T:DataSetCDPmovimientos.CartasPorteMovimientosDataTable">
-	<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.AjustesStockDataTable">
-	<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.ClientesDataTable">
-	<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.CartasDePorteDataTable">
-	<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.VistaCartasPorteMovimientosDataTable">
-	<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.CartasPorteMovimientosRow">
-	<summary>
-Represents strongly named DataRow class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.AjustesStockRow">
-	<summary>
-Represents strongly named DataRow class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.ClientesRow">
-	<summary>
-Represents strongly named DataRow class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.CartasDePorteRow">
-	<summary>
-Represents strongly named DataRow class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.VistaCartasPorteMovimientosRow">
-	<summary>
-Represents strongly named DataRow class.
-</summary>
-</member><member name="T:DataSetCDPmovimientos.CartasPorteMovimientosRowChangeEvent">
-	<summary>
-Row event argument class
-</summary>
-</member><member name="T:DataSetCDPmovimientos.AjustesStockRowChangeEvent">
-	<summary>
-Row event argument class
-</summary>
-</member><member name="T:DataSetCDPmovimientos.ClientesRowChangeEvent">
-	<summary>
-Row event argument class
-</summary>
-</member><member name="T:DataSetCDPmovimientos.CartasDePorteRowChangeEvent">
-	<summary>
-Row event argument class
-</summary>
-</member><member name="T:DataSetCDPmovimientos.VistaCartasPorteMovimientosRowChangeEvent">
-	<summary>
-Row event argument class
-</summary>
-</member><member name="T:DataSetCDPmovimientos">
-	<summary>
-Represents a strongly typed in-memory cache of data.
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.CartasPorteMovimientosTableAdapter">
-	<summary>
-Represents the connection and commands used to retrieve and save data.
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.AjustesStockTableAdapter">
-	<summary>
-Represents the connection and commands used to retrieve and save data.
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.ClientesTableAdapter">
-	<summary>
-Represents the connection and commands used to retrieve and save data.
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.CartasDePorteTableAdapter">
-	<summary>
-Represents the connection and commands used to retrieve and save data.
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.VistaCartasPorteMovimientosTableAdapter">
-	<summary>
-Represents the connection and commands used to retrieve and save data.
-</summary>
-</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateUpdatedRows(DataSetCDPmovimientos,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Update rows in top-down order.
-</summary>
-</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateInsertedRows(DataSetCDPmovimientos,System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Insert rows in top-down order.
-</summary>
-</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateDeletedRows(DataSetCDPmovimientos,System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Delete rows in bottom-up order.
-</summary>
-</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
-</summary>
-</member><member name="M:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateAll(DataSetCDPmovimientos)">
-	<summary>
-Update all changes to the dataset.
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.TableAdapterManager.UpdateOrderOption">
-	<summary>
-Update Order Option
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.TableAdapterManager.SelfReferenceComparer">
-	<summary>
-Used to sort self-referenced table's rows
-</summary>
-</member><member name="T:DataSetCDPmovimientosTableAdapters.TableAdapterManager">
-	<summary>
-TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
-</summary>
-</member><member name="M:Pronto.ERP.Bll.RecepcionManager.ProximoNumeroComprobantePrvPorNumeroDePuntoVenta(System.String,System.Int32)">
-	<summary>
- ' OJO: es el numero, no el ID del punto de venta. El ComprobantePrv es letra X, no necesita el IdCodigoIVA
- </summary>
-	<param name="SC"></param>
-	<param name="NumeroDePuntoVenta"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="T:WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable">
-	<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member><member name="T:WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow">
-	<summary>
-Represents strongly named DataRow class.
-</summary>
-</member><member name="T:WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRowChangeEvent">
-	<summary>
-Row event argument class
-</summary>
-</member><member name="T:WillyInformesDataSet">
-	<summary>
-Represents a strongly typed in-memory cache of data.
-</summary>
-</member><member name="T:WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter">
-	<summary>
-Represents the connection and commands used to retrieve and save data.
-</summary>
-</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(WillyInformesDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Update rows in top-down order.
-</summary>
-</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(WillyInformesDataSet,System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Insert rows in top-down order.
-</summary>
-</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(WillyInformesDataSet,System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Delete rows in bottom-up order.
-</summary>
-</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
-	<summary>
-Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
-</summary>
-</member><member name="M:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateAll(WillyInformesDataSet)">
-	<summary>
-Update all changes to the dataset.
-</summary>
-</member><member name="T:WillyInformesDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
-	<summary>
-Update Order Option
-</summary>
-</member><member name="T:WillyInformesDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
-	<summary>
-Used to sort self-referenced table's rows
-</summary>
-</member><member name="T:WillyInformesDataSetTableAdapters.TableAdapterManager">
-	<summary>
-TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
-</summary>
 </member>
 </members>
 </doc>
