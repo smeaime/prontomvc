@@ -111,7 +111,7 @@ Partial Class CartaDePorteInfLiquidacionSubcontratistas
 
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_Facturacion)
 
-        Dim a = New String() {"Mariano", "Andres", "hwilliams", "factbsas", "factas", "factbb", "factbsas", "factsl", "cflores", "lcesar", "dberzoni", "mgarcia"}
+        Dim a = New String() {"Mariano", "Andres", "hwilliams", "factbsas", "factas", "factbb", "factbsas", "factsl", "cflores", "lcesar", "dberzoni", "mgarcia", "cpereyra"}
 
         'If Not p("PuedeLeer") Then
         If Not a.Contains(Session(SESSIONPRONTO_UserName)) Then
