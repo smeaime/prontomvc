@@ -392,11 +392,142 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        //CartasPorte_DynamicGridData
+
+        [TestMethod]
+        public void grillaParaModuloCalidad_29439()
+        {
+
+            var s = new ServicioCartaPorte.servi();
+            var output = s.CartasPorte_DynamicGridData("FechaDescarga", "desc", 1, 50, false, "",
+                                                        "1/1/2016",
+                                                        "1/1/2016",
+                                                        0, -1, SC, "Mariano");
+
+            var output2 = s.CartasPorte_DynamicGridData("FechaDescarga", "desc", 1, 50, false, "",
+                                                 "1/1/2015",
+                                                 "1/1/2016",
+                                                 0, -1, SC, "Mariano");
+
+            var output3 = s.CartasPorte_DynamicGridData("FechaDescarga", "desc", 1, 50, false, "",
+                                                 "1/1/2010",
+                                                 "1/1/2016",
+                                                 0, -1, SC, "Mariano");
+        }
+
+
+        [TestMethod]
+        public void exportacion_29439()
+        {
+            string output = "c:\asdad.xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            List<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3> q =
+                                                 db.fSQL_GetDataTableFiltradoYPaginado(
+                                                            0, 9999999, 0, "", -1, -1,
+                                                            -1, -1, -1, -1, -1,
+                                                            -1, 0, "Ambas"
+                                                            , new DateTime(2016, 1, 1), new DateTime(2016,1,1),
+                                                            0, null, "", "",
+                                                            -1, null, 0, "", "Todos").ToList();
+
+            FuncionesCSharpBLL.ExportToExcelEntityCollection<fSQL_GetDataTableFiltradoYPaginado_Result3>(q, output);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+        [TestMethod]
+        public void panelDeControl_29439()
+        {
+            string output = "c:\asdad.xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            //SegunDestino
+
+            var q =
+                                                 db.fSQL_GetDataTableFiltradoYPaginado(
+                                                            0, 9999999, 0, "", -1, -1,
+                                                            -1, -1, -1, -1, -1,
+                                                            -1, 0, "Ambas"
+                                                            , new DateTime(2016, 1, 1), new DateTime(2016, 1, 1),
+                                                            0, null, "", "",
+                                                            -1, null, 0, "", "Todos").GroupBy(x=>x.Situacion).Select(x=>x.Count()).ToList();
+
+            // FuncionesCSharpBLL.ExportToExcelEntityCollection<fSQL_GetDataTableFiltradoYPaginado_Result3>(q, output);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+        [TestMethod]
+        public void pegatina_29439()
+        {
+
+           string archivoExcel=@"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
+
+
+          //explota
+
+           string ms = "";
+
+           int m_IdMaestro = 0;
+           Pronto.ERP.BO.CartaDePorte carta;
+
+
+           // escribir descarga de una carta
+           carta = null;
+           carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+           carta.NobleGrado = 2;
+           CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+           // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            
+
+           string log = "";
+           //hay que pasar el formato como parametro 
+           ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                   LogicaImportador.FormatosDeExcel.Urenport   , SC, 0, ref log, "", 0, "");
+
+           //var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+           //foreach (System.Data.DataRow r in dt.Rows)
+           //{
+           //    var dr = r;
+           //    var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+           //                                            null, null, null, null,
+           //                                            null, null);
+           //}
+
+
+
+
+           ////verificar que sigue así
+           //carta = null;
+           //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+           //carta.NobleGrado = 2;
+           //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+           //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+       }
+
+
+
+
+
+
 
         [TestMethod]
         public void GeneraYEnviaLosMailsTildadosDeLaGrilla_29401()
         {
-            //CartaDePorteManager.encolarfiltr
+            //ColaMails.EncolarFiltros(null, null, true, 1, 1, null, null, null, null, null);
+            ColaMails.CancelarCola(SC);
         }
 
 
@@ -404,6 +535,10 @@ namespace ProntoMVC.Tests
         public void OcrBarajaAsignacionDeImagenes_()
         {
         }
+
+
+
+
 
 
 
@@ -1950,6 +2085,7 @@ namespace ProntoMVC.Tests
 
 
             List<CartasDePorteControlDescarga> control = (from a in db.CartasDePorteControlDescargas select a).ToList();
+            //            FuncionesCSharpBLL.ExportToExcelEntityCollection<CartasDePorteControlDescarga>(control, output);
 
 
             int iddest = db.WilliamsDestinos.Where(x => x.Descripcion == "Villa Constitucion - Servicios Portuarios")

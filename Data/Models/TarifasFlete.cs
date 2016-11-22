@@ -23,5 +23,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdUnidad { get; set; }
         public Nullable<System.DateTime> FechaVigencia { get; set; }
         public Nullable<decimal> ValorUnitario2 { get; set; }
+        public Nullable<decimal> ComisionAsociada { get; set; }
     }
 }

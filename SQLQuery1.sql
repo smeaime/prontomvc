@@ -13,6 +13,12 @@ select * from CDPEstablecimientos
 select * from  WilliamsDestinos
 
 
+select top 10 * from cartasdeporte order by fechadescarga
+select top 10 * from cartasdeporte order by fechamodificacion
+
+
+
+
 --////////////////////////////////////////////////////////////////////////////////////////
 -- horas
 
@@ -25,8 +31,3 @@ where idusuario=125 and
         FechaComentario between '9/28/2016' and '11/5/2016'
 and (comentario like '%Test%' ) -- or not comentario like '%Reclamo%' )
 order by idcomentario asc 
-
-
-
-
-Tree_TX_Generar 
