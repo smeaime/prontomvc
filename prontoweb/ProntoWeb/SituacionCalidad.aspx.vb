@@ -74,7 +74,7 @@ Partial Class SituacionCalidad
             '////////////////////////////////////////////
 
 
-            Me.Title = "Estadísticas de Descargas"
+            Me.Title = "Situacion"
 
             BindTypeDropDown()
             refrescaPeriodo()
