@@ -487,7 +487,7 @@ go
 
 
 
-select top 20  exporta, * --count(*)
+select top 20  exporta, situacion, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 					 NULL, 

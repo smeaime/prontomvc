@@ -1,1 +1,0 @@
-create una vista y chau

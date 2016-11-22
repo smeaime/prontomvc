@@ -177,8 +177,8 @@ public class JQGridHandler : IHttpHandler
     public void ProcessRequest(HttpContext context)
     {
 
-        
-                string SC;
+
+        string SC;
         //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
         if (System.Diagnostics.Debugger.IsAttached)
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
@@ -204,16 +204,22 @@ public class JQGridHandler : IHttpHandler
         string puntovent = request["puntovent"];
         string destino = request["destino"];
 
-        
+
         if (sortColumnName == null) return;
 
-        string output = Pedidos_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC));
+            
+        string output = ControlesDiarios_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC));
+
+        
+        //var a = new ServicioCartaPorte.servi();
+        //string output = a.CartasPorte_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),SC,Membership.GetUser().UserName);
+
 
         response.ContentType = "application/json";
         response.Write(output);
-        
-        
-            
+
+
+
     }
 
 
@@ -246,7 +252,7 @@ public class JQGridHandler : IHttpHandler
     // de la misma manera que estas llamando con jquery para buscar los acopios por cliente
 
 
-    public virtual string Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino)
+    public virtual string ControlesDiarios_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino)
     {
 
         // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -315,8 +321,8 @@ public class JQGridHandler : IHttpHandler
                         (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
                                 db.CartasDePorteControlDescargas
                                         .Where(x =>
-                                                //(x.IdPuntoVenta == puntovent || puntovent == 0)
-                                                //&&
+                                            //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                            //&&
                                                 (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
                                                  &&
                                                 (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
@@ -446,6 +452,13 @@ public class JQGridHandler : IHttpHandler
 
 
     }
+
+
+
+
+
+
+
 
 
     //public ActionResult ArticulosGridData2(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
