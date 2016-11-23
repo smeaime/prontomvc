@@ -518,9 +518,19 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                     nombreproveedor = db.Proveedores.Find(idproveedor).RazonSocial;
                 }
             }
-            catch (Exception)
+            catch (Exception x)
             {
-
+    
+                ProntoFuncionesGenerales.MandaEmailSimple(ConfigurationManager.AppSettings["ErrorMail"],
+                                "Error de proveedor", 
+                                x.ToString() ,
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpServer"],
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpPass"],
+                                "",
+                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                
                 //throw;
             }
             if (grupo != "")
