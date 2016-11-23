@@ -770,6 +770,9 @@ Public Class LogicaImportador
 
 
 
+
+
+
             'PEGATINA PLAYA PEREZ: (POSICION)
             '•	Cuando hacemos la pegatina de Playa Perez , Posición pega los KILOS de procedencia en 
             '           la solapa de descarga, lo tiene que pegar en la primer solapa en KILOS NETOS de procedencia.
@@ -1898,7 +1901,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function UrenportExcelToDataset(ByVal pFileName As String) As Data.DataSet
+    Public Shared Function UrenportExcelToDataset(ByVal pFileName As String, SC As String) As Data.DataSet
         Dim ds = GetExcel(pFileName, 1)
 
         'le hago algun tratamiento a los cuits
@@ -1930,8 +1933,36 @@ Public Class ExcelImportadorManager
                 '    Case Else
 
                 'End Select
-            Catch ex As Exception
 
+
+                
+                Dim cpnumero As Long = Val(r(0))
+
+                If cpnumero < 500000000 Then Continue For
+ 
+                Dim myCartaDePorte As CartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, cpnumero, 0, 0)
+
+
+                With myCartaDePorte
+                    .Titular = BuscarClientePorCUIT(r(7), SC, r(6))
+                    r(6) = NombreCliente(SC, .Titular)
+
+                    .FechaArribo = iisValidSqlDate(r(3))
+                    .Situacion = BuscarSituacionId(r(2))
+                End With
+
+
+
+
+                CartaDePorteManager.Save(SC, myCartaDePorte, 1, "")
+
+
+
+
+
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
             End Try
 
         Next
@@ -1940,6 +1971,26 @@ Public Class ExcelImportadorManager
 
         Return ds
     End Function
+
+
+
+
+
+
+    Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
+
+    Public Shared Function BuscarSituacionId(sit As String) As Integer
+        Dim index As Integer = Array.FindIndex(Situaciones, Function(s) s = sit)
+
+        Return index
+
+    End Function
+
+
+
+
+
+
 
 
 
@@ -4158,7 +4209,7 @@ Public Class ExcelImportadorManager
 
 
             Case Urenport
-                ds = UrenportExcelToDataset(archivoExcel)
+                ds = UrenportExcelToDataset(archivoExcel, SC)
 
 
             Case Else
