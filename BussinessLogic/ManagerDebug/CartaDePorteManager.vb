@@ -8994,6 +8994,18 @@ Public Class CartaDePorteManager
                 .EntregaSAP = oCarta.EntregaSAP
 
 
+                .Situacion = oCarta.Situacion
+                .SituacionAntesDeEditarManualmente = oCarta.SituacionAntesDeEditarManualmente
+                .FechaActualizacionAutomatica = If(oCarta.FechaActualizacionAutomatica, DateTime.MinValue)
+                .FechaAutorizacion = If(oCarta.FechaAutorizacion, DateTime.MinValue)
+                .ObservacionesSituacion = oCarta.ObservacionesSituacion
+
+
+                
+
+
+
+
                 Try
 
                     Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF _
@@ -9035,6 +9047,7 @@ Public Class CartaDePorteManager
                 .CalidadTalCualVicentinRebaja = GetDetalle("CalidadTalCualVicentinRebaja", db, id)
                 .CalidadTalCualVicentinMerma = GetDetalle("CalidadTalCualVicentinMerma", db, id)
                 .TipoMermaTalCualVicentin = GetDetalle("TipoMermaTalCualVicentin", db, id)
+
 
 
 
@@ -9476,6 +9489,18 @@ Public Class CartaDePorteManager
                     oCarta.FacturarA_Manual = .FacturarAManual
 
                     oCarta.EntregaSAP = .EntregaSAP
+
+
+
+                    oCarta.Situacion = .Situacion
+                    oCarta.SituacionAntesDeEditarManualmente = .SituacionAntesDeEditarManualmente
+                    oCarta.FechaActualizacionAutomatica = IIf(.FechaActualizacionAutomatica = DateTime.MinValue, Nothing, .FechaActualizacionAutomatica)
+                    oCarta.FechaAutorizacion = IIf(.FechaAutorizacion = DateTime.MinValue, Nothing, .FechaActualizacionAutomatica)
+                    oCarta.ObservacionesSituacion = .ObservacionesSituacion
+
+
+
+
                     'Try
 
                     '    Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _

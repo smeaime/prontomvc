@@ -2954,7 +2954,7 @@ namespace ServicioCartaPorte
                                 a.IdCartaDePorte.ToString(), 
 
                                 a.NumeroCartaDePorte.ToString(),
-                                a.Situacion.ToString(),
+                                ExcelImportadorManager.Situaciones[a.Situacion ?? 0],
 
                                 a.ObservacionesSituacion,
 
