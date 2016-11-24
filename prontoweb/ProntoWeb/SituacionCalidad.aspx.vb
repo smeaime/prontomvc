@@ -86,6 +86,7 @@ Partial Class SituacionCalidad
 
 
         'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(informe)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExportarGrilla)
 
         'AutoCompleteExtender2.ContextKey = HFSC.Value
         AutoCompleteExtender26.ContextKey = HFSC.Value
@@ -322,6 +323,33 @@ Partial Class SituacionCalidad
 
     Protected Sub btnExportarGrilla_Click(sender As Object, e As EventArgs) Handles btnExportarGrilla.Click
         'asdfasdf()
+
+        Dim Filtro = ""
+        Dim s = New ServicioCartaPorte.servi()
+        Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
+                                             "11/01/2016",
+                                             "11/01/2016",
+                                             0, -1, HFSC.Value, "Mariano")
+
+        Try
+            Dim MyFile1 = New FileInfo(output3) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+            If MyFile1.Exists Then
+                Response.ContentType = "application/octet-stream"
+                Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
+                'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+                'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
+                'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
+                Response.TransmitFile(output3) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+                Response.End()
+            Else
+                MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
+            End If
+        Catch ex As Exception
+            'ErrHandler2.WriteAndRaiseError(ex.ToString)
+            ErrHandler2.WriteError(ex.ToString)
+            'MsgBoxAjax(Me, ex.ToString)
+            Return
+        End Try
     End Sub
 
 
@@ -331,6 +359,9 @@ Partial Class SituacionCalidad
         '       var s = new ServicioCartaPorte.servi();
         '    var q = s.InformeSituacion();
 
+        Dim s = New ServicioCartaPorte.servi()
+        Dim q = s.InformeSituacion(HFSC.Value)
+        salida.Text = q
 
     End Sub
 End Class
