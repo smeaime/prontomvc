@@ -1945,16 +1945,25 @@ Public Class ExcelImportadorManager
 
                 With myCartaDePorte
                     .Titular = BuscarClientePorCUIT(r(7), SC, r(6))
+                    If .Titular = -1 Then
+                        Console.Write(.Titular)
+                    End If
                     r(6) = NombreCliente(SC, .Titular)
 
                     .FechaArribo = iisValidSqlDate(r(3))
+                    .FechaDescarga = iisValidSqlDate(r(28))
+
                     .Situacion = BuscarSituacionId(r(2))
+
+                    .PuntoVenta = 1
+                    .Cosecha = "1617"
                 End With
 
 
 
-
-                CartaDePorteManager.Save(SC, myCartaDePorte, 1, "")
+                Dim ms As String = ""
+                CartaDePorteManager.Save(SC, myCartaDePorte, 1, "", , ms)
+                Console.Write(ms)
 
 
 
