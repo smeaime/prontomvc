@@ -9507,7 +9507,7 @@ Public Class CartaDePorteManager
                     oCarta.Situacion = .Situacion
                     oCarta.SituacionAntesDeEditarManualmente = .SituacionAntesDeEditarManualmente
                     oCarta.FechaActualizacionAutomatica = IIf(.FechaActualizacionAutomatica = DateTime.MinValue, Nothing, .FechaActualizacionAutomatica)
-                    oCarta.FechaAutorizacion = IIf(.FechaAutorizacion = DateTime.MinValue, Nothing, .FechaActualizacionAutomatica)
+                    oCarta.FechaAutorizacion = IIf(.FechaAutorizacion = DateTime.MinValue, Nothing, .FechaAutorizacion)
                     oCarta.ObservacionesSituacion = .ObservacionesSituacion
 
 
@@ -15103,6 +15103,26 @@ Public Class CartaDePorteManager
 
 
     End Function
+
+
+    Public Shared Function AutorizarSituacion_DLL(SC As String, idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String)
+
+
+        Dim cp = CartaDePorteManager.GetItem(SC, idcarta)
+
+        cp.ObservacionesSituacion = sObservacionesSituacion
+        cp.FechaAutorizacion = Now
+
+        Dim ms As String = ""
+        CartaDePorteManager.Save(SC, cp, 1, "", , ms)
+
+        Return ms
+
+    End Function
+
+
+
+
 
 
     Public Shared Function RenglonCerealnetCalidad(ByVal cdp As ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3, _

@@ -2816,6 +2816,36 @@ namespace ServicioCartaPorte
     public class servi
     {
 
+
+        public virtual string InformeSituacion(string SC)
+        {
+
+            string s = "";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            var q =
+                                         db.fSQL_GetDataTableFiltradoYPaginado(
+                                                    0, 9999999, 0, "", -1, -1,
+                                                    -1, -1, -1, -1, -1,
+                                                    -1, 0, "Ambas"
+                                                    , new DateTime(2016, 11, 1), new DateTime(2016, 12, 1),
+                                                    0, null, "", "",
+                                                    -1, null, 0, "", "Todos").Select(x => x.Situacion).GroupBy(x => x).Select(g => new { sit = g.Key, cant = g.Count() }).ToList();
+
+            foreach (var line in q)
+            {
+                s += line.sit + " " + line.cant + "\n";
+            }
+
+            return s;
+
+        }
+
+
+
         public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
         {
 
@@ -2953,7 +2983,8 @@ namespace ServicioCartaPorte
                                 
                                 a.IdCartaDePorte.ToString(), 
 
-                                a.NumeroCartaDePorte.ToString(),
+                                "<a href=\"ProntoWeb/CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.ToString() + "</>" ,
+                                
                                 ExcelImportadorManager.Situaciones[a.Situacion ?? 0],
 
                                 a.ObservacionesSituacion,
@@ -3032,6 +3063,146 @@ namespace ServicioCartaPorte
 
 
         }
+
+
+        public virtual byte[] CartasPorte_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        {
+            //asdad
+
+            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de
+            // otro modo, pasandole como maxrows un numero grandisimo
+            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
+            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
+
+            // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
+
+
+
+
+
+
+
+            //var usuario = Membership.GetUser();
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            }
+            catch (Exception e)
+            {
+                throw;
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new ProntoMVC.Data.Models.DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            db.Database.CommandTimeout = 240;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+
+            //var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+            //                (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+            //                             db.fSQL_GetDataTableFiltradoYPaginado(
+            //                                                0, 9999999, 0, "", -1, -1,
+            //                                                -1, -1, -1, -1, -1,
+            //                                                -1, 0, "Ambas", FechaDesde,
+            //                                                FechaHasta, puntovent, null, "", "",
+            //                                                -1, null, 0, "", "Todos")
+            //                 );
+
+
+
+
+
+
+
+            System.Web.Mvc.JsonResult result;
+
+            //result = (System.Web.Mvc.JsonResult)CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", puntovent, iddestino, SC, nombreusuario);
+            string result2 = CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
+
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            //result = jsonSerializer.Deserialize<jqGridJson>(result2);
+
+
+            string output = "c:\\adasdasd.xls";
+
+            List<string[]> lista = new List<string[]>();
+
+            // jqGridJson listado = (jqGridJson) result.Data;
+            jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(result2);
+
+            for (int n = 0; n < listado.rows.Count(); n++)
+            {
+                string[] renglon = listado.rows[n].cell;
+                lista.Add(renglon);
+            }
+
+
+
+            var excelData = new jqGridWeb.DataForExcel(
+                // column Header
+                    new[] { "Col1", "Col2", "Col3" },
+                    new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
+                          jqGridWeb.DataForExcel.DataType.String},
+                //      new List<string[]> {
+                //    new[] {"a", "1", "c1"},
+                //    new[] {"a", "2", "c2"}
+                //},
+                    lista,
+
+                    "Test Grid");
+
+
+            Stream stream = new FileStream(output, FileMode.Create);
+            excelData.CreateXlsxAndFillData(stream);
+            stream.Close();
+
+
+            //PreFormatear();
+            //abrir con eeplus y poner autowidth?
+
+
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return contents;
+            //return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
+
+        }
+
+
+
+
     }
 }
 

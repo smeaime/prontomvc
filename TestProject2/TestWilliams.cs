@@ -394,6 +394,19 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void GrabarFilaEnGrillaDeSituacionCalidad_29439()
+        {
+            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
+
+            CartaDePorteManager.AutorizarSituacion_DLL(SC, 2638292, 2, "RECHAZADO EN PLAYA EXTERNA");
+
+        }
+
+
+
+
+
+        [TestMethod]
         public void pegatina_29439()
         {
 
@@ -502,6 +515,26 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void exportacionPeroLlamandoAlAction_29439_2()
+        {
+            string output = "c:\asdad.xls";
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            var s = new ServicioCartaPorte.servi();
+            var output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "11/01/2016",
+                                                 "11/01/2016",
+                                                 0, -1, SC, "Mariano");
+
+            //System.Diagnostics.Process.Start(output3);
+        }
+
+
 
 
         [TestMethod]
@@ -517,7 +550,7 @@ namespace ProntoMVC.Tests
                                                             0, 9999999, 0, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                             -1, 0, "Ambas"
-                                                            , new DateTime(2016, 1, 1), new DateTime(2016, 1, 1),
+                                                            , new DateTime(2016, 11, 1), new DateTime(2016, 11, 1),
                                                             0, null, "", "",
                                                             -1, null, 0, "", "Todos").ToList();
 
@@ -532,24 +565,14 @@ namespace ProntoMVC.Tests
         {
             string output = "c:\asdad.xls";
 
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
             //SegunDestino
+            var s = new ServicioCartaPorte.servi();
+            var q = s.InformeSituacion(SC);
 
-            var q =
-                                                 db.fSQL_GetDataTableFiltradoYPaginado(
-                                                            0, 9999999, 0, "", -1, -1,
-                                                            -1, -1, -1, -1, -1,
-                                                            -1, 0, "Ambas"
-                                                            , new DateTime(2016, 11, 1), new DateTime(2016, 12, 1),
-                                                            0, null, "", "",
-                                                            -1, null, 0, "", "Todos").Select(x => x.Situacion).GroupBy(x => x).Select(g => new { sit = g.Key, cant = g.Count() }).ToList();
 
-            foreach (var line in q)
-            {
-                Console.WriteLine("{0} {1}", line.sit, line.cant);
-            }
+        
+           
+                Console.WriteLine(q);
 
 
             // FuncionesCSharpBLL.ExportToExcelEntityCollection<fSQL_GetDataTableFiltradoYPaginado_Result3>(q, output);
