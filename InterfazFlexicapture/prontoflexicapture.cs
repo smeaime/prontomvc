@@ -3065,7 +3065,7 @@ namespace ServicioCartaPorte
         }
 
 
-        public virtual byte[] CartasPorte_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
         {
             //asdad
 
@@ -3149,13 +3149,13 @@ namespace ServicioCartaPorte
             System.Web.Mvc.JsonResult result;
 
             //result = (System.Web.Mvc.JsonResult)CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", puntovent, iddestino, SC, nombreusuario);
-            string result2 = CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
+            string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
 
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             //result = jsonSerializer.Deserialize<jqGridJson>(result2);
 
 
-            string output = "c:\\adasdasd.xls";
+            string output = Path.GetTempPath() + "Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
 
             List<string[]> lista = new List<string[]>();
 
@@ -3192,10 +3192,10 @@ namespace ServicioCartaPorte
             //PreFormatear();
             //abrir con eeplus y poner autowidth?
 
+            return output;
 
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
-            return contents;
             //return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
 
         }
