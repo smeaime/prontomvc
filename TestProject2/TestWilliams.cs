@@ -399,7 +399,7 @@ namespace ProntoMVC.Tests
 
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
-            
+
 
             //explota
 
@@ -457,17 +457,17 @@ namespace ProntoMVC.Tests
 
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
             //string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"NIDERA SA ( PGSM )\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
-            
+
             var s = new ServicioCartaPorte.servi();
-            var output = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true,  filtro,
+            var output = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                         "01/01/2016",
                                                         "01/01/2016",
                                                         0, -1, SC, "Mariano");
 
 
 
-//            hacer test donde filtras por mas de un puerto
-  //              Los filtros Producto, Puerto, Procedencia serán múltiples (se podrá elegir más de uno para filtrar el listado).
+            //            hacer test donde filtras por mas de un puerto
+            //              Los filtros Producto, Puerto, Procedencia serán múltiples (se podrá elegir más de uno para filtrar el listado).
         }
 
 
@@ -492,9 +492,9 @@ namespace ProntoMVC.Tests
         {
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
 
-   
+
             var s = new ServicioCartaPorte.servi();
-            var output3 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true,  filtro,
+            var output3 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                  "01/01/2010",
                                                  "01/01/2016",
                                                  0, -1, SC, "Mariano");
@@ -542,12 +542,18 @@ namespace ProntoMVC.Tests
                                                             0, 9999999, 0, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                             -1, 0, "Ambas"
-                                                            , new DateTime(2016, 1, 1), new DateTime(2016, 1, 1),
+                                                            , new DateTime(2016, 11, 1), new DateTime(2016, 12, 1),
                                                             0, null, "", "",
-                                                            -1, null, 0, "", "Todos").GroupBy(x => x.Situacion).Select(x => x.Count()).ToList();
+                                                            -1, null, 0, "", "Todos").Select(x => x.Situacion).GroupBy(x => x).Select(g => new { sit = g.Key, cant = g.Count() }).ToList();
+
+            foreach (var line in q)
+            {
+                Console.WriteLine("{0} {1}", line.sit, line.cant);
+            }
+
 
             // FuncionesCSharpBLL.ExportToExcelEntityCollection<fSQL_GetDataTableFiltradoYPaginado_Result3>(q, output);
-            System.Diagnostics.Process.Start(output);
+            //System.Diagnostics.Process.Start(output);
         }
 
 
