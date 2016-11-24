@@ -28,10 +28,9 @@
         <li>@Html.ActionLink("Empresas", "UsersEmpresas", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
         @if (Model.IsRolesEnabled)
         {
-            <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
+            @*<li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>*@
         }
-        @*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { id = ViewBag.EmpleadoEquivalente, area = "" }, null)</li>*@
-        <li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }, null)</li>
+        @*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }, null)</li>*@
     </ul>
     <div class="row-fluid">
         <div class="span6">

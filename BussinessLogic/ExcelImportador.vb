@@ -1950,8 +1950,30 @@ Public Class ExcelImportadorManager
                     End If
                     r(6) = NombreCliente(SC, .Titular)
 
+                    .CuentaOrden1 = BuscarClientePorCUIT(r(9), SC, r(8))
+                    r(8) = NombreCliente(SC, .CuentaOrden1)
+
+                    .CuentaOrden2 = BuscarClientePorCUIT(r(11), SC, r(10))
+                    r(10) = NombreCliente(SC, .CuentaOrden2)
+
+
+                    .Corredor = BuscarVendedorPorCUIT(r(13), SC, r(12))
+                    r(12) = NombreCliente(SC, .Corredor)
+
+
+                    .Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
+                    r(14) = NombreCliente(SC, .Entregador)
+
+                    .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
+                    .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
+
+                    .IdArticulo = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)
+
+
                     .FechaArribo = iisValidSqlDate(r(3))
                     .FechaDescarga = iisValidSqlDate(r(28))
+
+                    .ObservacionesSituacion = r(35)
 
                     .Situacion = BuscarSituacionId(r(2))
 
