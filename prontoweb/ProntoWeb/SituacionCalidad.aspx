@@ -57,9 +57,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-        <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="True" CssClass="btn btn-primary"
+        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
             Width="150" Height="40" />
+                <asp:Button ID="btnPanelInforme" Text="PANEL DE SITUACION" runat="server" Visible="True" CssClass="btn btn-primary"
+            Width="150" Height="40" />
+        <asp:Label ID="salida" runat="server"></asp:Label>
         <br />
+
         <br />
 
 
@@ -544,7 +548,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceClientes.asmx/DestinoBatchUpdate",
+                        url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
                         dataType: 'json',
                         data: JSON.stringify({ o: datos }),
                         success: function (result) {
@@ -888,7 +892,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 },
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
 {
-    name: 'NumeroCartaDePorte', index: 'NumeroCartaDePorte', width: 140, align: 'right', sorttype: "number"
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'right', sorttype: "number"
 , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
 
     searchoptions: { sopt: ['eq'] },
@@ -913,7 +917,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: false, hidden: false, label: 'TB' },
+{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: true, hidden: false, label: 'TB' },
 
 
 {
@@ -1134,7 +1138,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //if (name == 'Fecha') {
                         //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                         //}
-                        var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                        var se = "<input style='height:22px;width:100px;' type='button' value='Autorizar' onclick=\"GrabarFila('" + id + "');\"  />";
                         jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                     },
                     //beforeSelectRow: function (rowid, e) {

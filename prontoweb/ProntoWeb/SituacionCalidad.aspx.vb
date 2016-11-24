@@ -85,7 +85,7 @@ Partial Class SituacionCalidad
         End If
 
 
-        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(informe)
+        'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(informe)
 
         'AutoCompleteExtender2.ContextKey = HFSC.Value
         AutoCompleteExtender26.ContextKey = HFSC.Value
@@ -133,72 +133,72 @@ Partial Class SituacionCalidad
     End Sub
 
 
-    Protected Sub informe_Click(sender As Object, e As EventArgs) Handles informe.Click
+    'Protected Sub informe_Click(sender As Object, e As EventArgs) Handles informe.Click
 
-        Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
+    '    Dim rep = New Microsoft.Reporting.WebForms.ReportViewer()
 
-        Dim FechaDesde = New DateTime(1980, 1, 1)
-        Dim FechaHasta = New DateTime(2050, 1, 1)
+    '    Dim FechaDesde = New DateTime(1980, 1, 1)
+    '    Dim FechaHasta = New DateTime(2050, 1, 1)
 
-        Try
+    '    Try
 
-            FechaDesde = DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Nothing)
-        Catch ex As Exception
+    '        FechaDesde = DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Nothing)
+    '    Catch ex As Exception
 
-        End Try
+    '    End Try
 
-        Try
-            FechaHasta = DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Nothing)
+    '    Try
+    '        FechaHasta = DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Nothing)
 
-        Catch ex As Exception
+    '    Catch ex As Exception
 
-        End Try
-
-
-        'Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
-        Dim pventa = cmbPuntoVenta.SelectedValue
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+    '    End Try
 
 
-        Dim yourParams As ReportParameter() = New ReportParameter(5) {}
-
-        Dim ArchivoExcelDestino As String = Path.GetTempPath & "ControlDiario_" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
-
-        yourParams(0) = New ReportParameter("CadenaConexion", Encriptar(HFSC.Value))
-        yourParams(1) = New ReportParameter("sServidorWeb", "kjhkjlh")
-        yourParams(2) = New ReportParameter("FechaDesde", FechaDesde)
-        yourParams(3) = New ReportParameter("FechaHasta", FechaHasta)
-        yourParams(4) = New ReportParameter("IdDestino", idDestino)
-        yourParams(5) = New ReportParameter("IdPuntoVenta", pventa)
-        'yourParams(7) = New ReportParameter("Consulta", Sql)
+    '    'Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+    '    Dim pventa = cmbPuntoVenta.SelectedValue
+    '    Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
 
 
+    '    Dim yourParams As ReportParameter() = New ReportParameter(5) {}
 
-        Dim output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep, _
-                      "Williams - Controles Diarios.rdl", yourParams, ArchivoExcelDestino, False)
+    '    Dim ArchivoExcelDestino As String = Path.GetTempPath & "ControlDiario_" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls"
+
+    '    yourParams(0) = New ReportParameter("CadenaConexion", Encriptar(HFSC.Value))
+    '    yourParams(1) = New ReportParameter("sServidorWeb", "kjhkjlh")
+    '    yourParams(2) = New ReportParameter("FechaDesde", FechaDesde)
+    '    yourParams(3) = New ReportParameter("FechaHasta", FechaHasta)
+    '    yourParams(4) = New ReportParameter("IdDestino", idDestino)
+    '    yourParams(5) = New ReportParameter("IdPuntoVenta", pventa)
+    '    'yourParams(7) = New ReportParameter("Consulta", Sql)
 
 
-        Try
-            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
-            If MyFile1.Exists Then
-                Response.ContentType = "application/octet-stream"
-                Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
-                'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
-                'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
-                Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                Response.End()
-            Else
-                MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
-            End If
-        Catch ex As Exception
-            'ErrHandler2.WriteAndRaiseError(ex.ToString)
-            ErrHandler2.WriteError(ex.ToString)
-            'MsgBoxAjax(Me, ex.ToString)
-            Return
-        End Try
 
-    End Sub
+    '    Dim output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep, _
+    '                  "Williams - Controles Diarios.rdl", yourParams, ArchivoExcelDestino, False)
+
+
+    '    Try
+    '        Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+    '        If MyFile1.Exists Then
+    '            Response.ContentType = "application/octet-stream"
+    '            Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
+    '            'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+    '            'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
+    '            'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
+    '            Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+    '            Response.End()
+    '        Else
+    '            MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
+    '        End If
+    '    Catch ex As Exception
+    '        'ErrHandler2.WriteAndRaiseError(ex.ToString)
+    '        ErrHandler2.WriteError(ex.ToString)
+    '        'MsgBoxAjax(Me, ex.ToString)
+    '        Return
+    '    End Try
+
+    'End Sub
 
 
 
@@ -320,6 +320,19 @@ Partial Class SituacionCalidad
 
 
 
+    Protected Sub btnExportarGrilla_Click(sender As Object, e As EventArgs) Handles btnExportarGrilla.Click
+        'asdfasdf()
+    End Sub
+
+
+    Protected Sub btnPanelInforme_Click(sender As Object, e As EventArgs) Handles btnPanelInforme.Click
+        'salida = se InformeSituacion()
+
+        '       var s = new ServicioCartaPorte.servi();
+        '    var q = s.InformeSituacion();
+
+
+    End Sub
 End Class
 
 
