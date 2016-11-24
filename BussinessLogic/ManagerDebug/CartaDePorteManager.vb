@@ -9152,9 +9152,21 @@ Public Class CartaDePorteManager
         Dim sss = familia.Where(Function(x) x.SubnumeroDeFacturacion = SubnumeroFacturacion).FirstOrDefault
 
 
-        If familia.Count = 0 Then Return New CartaDePorte
+        If familia.Count = 0 Then
+            Dim c = New CartaDePorte
+            c.NumeroCartaDePorte = NumeroCartaDePorte
+            c.SubnumeroVagon = SubNumeroVagon
+            c.SubnumeroDeFacturacion = SubnumeroFacturacion
+            Return c
+        End If
         If sss IsNot Nothing Then Return CartaDePorteManager.GetItem(SC, sss.IdCartaDePorte)
-        If SubnumeroFacturacion > 0 Then Return New CartaDePorte
+        If SubnumeroFacturacion > 0 Then
+            Dim c = New CartaDePorte
+            c.NumeroCartaDePorte = NumeroCartaDePorte
+            c.SubnumeroVagon = SubNumeroVagon
+            c.SubnumeroDeFacturacion = SubnumeroFacturacion
+            Return c
+        End If
         If familia.Count = 1 Then Return CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
 
         ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & _
