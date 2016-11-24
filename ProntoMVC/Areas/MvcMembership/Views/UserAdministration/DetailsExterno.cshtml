@@ -96,6 +96,18 @@
                             @Html.TextArea("comments", Model.User.Comment)
                         </p>
                         
+
+                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
+                        {
+                            <p>
+                                <label for="grupo">
+                                    Grupo (o CUIT con o sin guiones)
+                                </label>
+                                @Html.TextBox("grupo", Model.Grupo)
+                            </p>
+                        }
+                        
+
                         <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
                             Aceptar
                         </button>
