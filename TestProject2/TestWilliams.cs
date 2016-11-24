@@ -518,7 +518,6 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void exportacionPeroLlamandoAlAction_29439_2()
         {
-            string output = "c:\asdad.xls";
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
@@ -531,7 +530,7 @@ namespace ProntoMVC.Tests
                                                  "11/01/2016",
                                                  0, -1, SC, "Mariano");
 
-            //System.Diagnostics.Process.Start(output3);
+            System.Diagnostics.Process.Start(output3);
         }
 
 
