@@ -1723,6 +1723,44 @@
                     </asp:UpdatePanel>
                 </ContentTemplate>
             </cc1:TabPanel>
+            <cc1:TabPanel ID="TabPanel1" runat="server" BackColor="#6600FF">
+                <HeaderTemplate>
+                    <u>S</u>ituacion
+                </HeaderTemplate>
+                <ContentTemplate>
+                    <table style="padding: 0px; border: none #FFFFFF; width: 696px; height: 202px; margin-left: 5px; margin-right: 0px;"
+                        cellpadding="1" cellspacing="1">
+                        <tr>
+
+                            <td class="EncabezadoCell" style="">observaciones situacion
+                                            <asp:TextBox ID="txtObsSituacion" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+
+                            </td>
+
+                            <td class="EncabezadoCell" style="">situacion
+                                            <asp:DropDownList ID="cmbSituacion" runat="server" CssClass="CssCombo" Width="100px">
+                                                <asp:ListItem Value="0">Física</asp:ListItem>
+                                                <asp:ListItem Value="1">Arbitrado</asp:ListItem>
+                                            </asp:DropDownList>
+                            </td>
+
+                            <td>
+                            <asp:Button ID="btnAutorizarSituacion" runat="server" CssClass="butcancela" Text="autorizar"
+                                CausesValidation="False" UseSubmitBehavior="False" Style="margin-left: 28px"
+                                ></asp:Button>
+
+                                fecha de autorizacion
+
+                            </td>
+                        
+                        </tr>
+                    </table>
+                </ContentTemplate>
+            </cc1:TabPanel>
+
+
+
+
             <cc1:TabPanel ID="TabPanel4" runat="server" BackColor="#6600FF">
                 <HeaderTemplate>
                     <u>C</u>alidad
