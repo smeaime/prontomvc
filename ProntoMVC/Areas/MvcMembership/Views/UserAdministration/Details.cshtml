@@ -97,7 +97,7 @@
                             </label>
                             @Html.TextArea("comments", Model.User.Comment)
                         </p>
-                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador"))
+                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
                         {
                             <p>
                                 <label for="grupo">
