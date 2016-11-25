@@ -59,7 +59,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
             Width="150" Height="40" />
-                <asp:Button ID="btnPanelInforme" Text="PANEL DE SITUACION" runat="server" Visible="True" CssClass="btn btn-primary"
+        <asp:Button ID="btnPanelInforme" Text="PANEL DE SITUACION" runat="server" Visible="True" CssClass="btn btn-primary"
             Width="150" Height="40" />
         <asp:Label ID="salida" runat="server"></asp:Label>
         <br />
@@ -528,29 +528,36 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 var err;
 
 
-                datos.IdCartasDePorteControlDescarga = gridId;
-                datos.Fecha = dataFromTheRow.Fecha;
-                datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
-                //datos.Cotizacion = dataFromTheRow.Cotizacion;
-                datos.TotalDescargaDia = dataFromTheRow.TotalDescargaDia;
-                datos.IdPuntoVenta = dataFromTheRow.IdPuntoVenta;
+                datos.idcarta = gridId;
+                datos.idsituacion = dataFromTheRow.Situacion;
+                datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
 
 
                 err = ""
-                if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
-                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
+                //if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
+                //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
+                //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
 
                 if (err != "") {
                     alert('No se pudo grabar el registro.\n' + err);
                 } else {
                     //$('html, body').css('cursor', 'wait');
+
+
+
+                    
+
+
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
+                        url: "WebServiceCartas.asmx/GrabarSituacion",
                         dataType: 'json',
-                        data: JSON.stringify({ o: datos }),
+                        data: JSON.stringify({
+                            idcarta: gridId,
+                            idsituacion: 0, //dataFromTheRow.Situacion,
+                            sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
+                        }),
                         success: function (result) {
                             if (result) {
                                 $grid.jqGrid('setRowData', gridId, { act: "" });
@@ -870,10 +877,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'nro cp', 'Situacion', 'ObservacionesSituacion', 'FechaArribo', 'FechaDescarga', 'CorredorDesc', 'DestinatarioDesc', 'DestinoDesc',
+                    colNames: ['', 'Id', 'Nro CP', 'Situacion', 'Obs Situacion', 'Arribo', 'Descarga', 'Corredor', 'Destinatario', 'Destino',
 
-                                'IdDestino', 'Procedencia', 'Producto', 'TitularDesc',
-                                'RComercialDesc', 'IntermediarioDesc', 'Patente', 'NetoProc', 'PuntoVenta'
+                                'IdDestino', 'Procedencia', 'Producto', 'Titular',
+                                'R Comercial', 'Intermediario', 'Patente', 'Neto', 'Punto Venta'
 
 
 
@@ -892,10 +899,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 },
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
 {
-    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'right', sorttype: "number"
-, editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 160, align: 'left', sorttype: "text", sortable: false
+, editable: true, editrules: { required: false, number: true }, edittype: 'text', 
 
-    searchoptions: { sopt: ['eq'] },
+    searchoptions: { sopt: ['bw','cn','eq'] },
+
 
     editoptions: {
         maxlength: 20, defaultValue: '0.00',
@@ -912,16 +920,23 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 },
 
 
-{ name: 'Situacion', index: 'Situacion', align: 'left', width: 100, hidden: false, editable: true, edittype: 'text' },
+{ 
+    name: 'Situacion', index: 'Situacion', align: 'left', width: 100, hidden: false, editable: true, edittype: 'select', sortable: false ,
+    editoptions: {
+                    //defaultValue: OrigenDescripcionDefault,
+                    value: "0:Autorizado; 1:Demorado;"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
+                }
+},
 
 
 
 
-{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: true, hidden: false, label: 'TB' },
+
+{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: true, hidden: false, sortable: false },
 
 
 {
-    name: 'FechaArribo', index: 'FechaArribo', width: 200, sortable: true, align: 'right', editable: true,
+    name: 'FechaArribo', index: 'FechaArribo', width: 200, sortable: true, align: 'right', editable: true, sortable: false ,
     editoptions: {
         size: 10,
         maxlengh: 10,
@@ -953,7 +968,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: true,
+    name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: true, sortable: false ,
     editoptions: {
         size: 10,
         maxlengh: 10,
@@ -972,13 +987,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         , searchoptions: {
-        sopt: ['eq', 'ne'],
-        dataInit: function (elem) {
-            $(elem).datepicker({
-                dateFormat: 'dd/mm/yy',
-                showButtonPanel: true
-            })
-        }
+            sopt: ['eq', 'ne'],
+            dataInit: function (elem) {
+                $(elem).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    showButtonPanel: true
+                })
+            }
         }
 },
 
@@ -990,14 +1005,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-{ name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
+{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false  },
+{ name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false  },
 
 
 
 {
     name: 'DestinoDesc', index: 'DestinoDesc',
-    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
+    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false ,
     editoptions: {
         rows: '1', cols: '1',
         dataInit: function (elem) {
@@ -1102,16 +1117,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 },
 
 
-{ name: 'Destino', index: 'Destino', align: 'left', width: 450, hidden: true, editable: true, edittype: 'text' },
-{ name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-{ name: 'Producto', index: 'Producto', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-{ name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-{ name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
+{ name: 'Destino', index: 'Destino', align: 'left', width: 450, hidden: true, editable: true, edittype: 'text', sortable: false },
+{ name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'Producto', index: 'Producto', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
 
-{ name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-{ name: 'Patente', index: 'Patente', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
+{ name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'Patente', index: 'Patente', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
 
 
 
@@ -1168,7 +1183,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     multiselect: true,
                     shrinkToFit: false,
                     width: 'auto',
-                    height: $(window).height() - 300, // '100%'
+                    height: $(window).height() - 500, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
@@ -1222,14 +1237,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
-                $('#Lista').jqGrid('setGridWidth', '1000');
+                //$('#Lista').jqGrid('setGridWidth', '1000');
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 200 );
 
             });
 
 
 
             $(window).resize(function () {
-                $('#Lista').jqGrid('setGridWidth', '800');
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 200 );
                 //RefrescaAnchoJqgrids();
             });
 

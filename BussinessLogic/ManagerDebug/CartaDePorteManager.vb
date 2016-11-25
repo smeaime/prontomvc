@@ -15104,12 +15104,12 @@ Public Class CartaDePorteManager
 
     End Function
 
-
-    Public Shared Function AutorizarSituacion_DLL(SC As String, idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String)
+    Public Shared Function GrabarSituacion_DLL(idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
 
 
         Dim cp = CartaDePorteManager.GetItem(SC, idcarta)
 
+        cp.Situacion = idsituacion
         cp.ObservacionesSituacion = sObservacionesSituacion
         cp.FechaAutorizacion = Now
 

@@ -2817,7 +2817,7 @@ namespace ServicioCartaPorte
     {
 
 
-        public virtual string InformeSituacion(string SC)
+        public virtual string InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC)
         {
 
             string s = "";
@@ -2830,14 +2830,17 @@ namespace ServicioCartaPorte
                                          db.fSQL_GetDataTableFiltradoYPaginado(
                                                     0, 9999999, 0, "", -1, -1,
                                                     -1, -1, -1, -1, -1,
-                                                    -1, 0, "Ambas"
-                                                    , new DateTime(2016, 11, 1), new DateTime(2016, 12, 1),
+                                                    iddestino, 0, "Ambas"
+                                                    , desde, hasta,
                                                     0, null, "", "",
                                                     -1, null, 0, "", "Todos").Select(x => x.Situacion).GroupBy(x => x).Select(g => new { sit = g.Key, cant = g.Count() }).ToList();
 
+
+              
+
             foreach (var line in q)
             {
-                s += line.sit + " " + line.cant + "\n";
+                s += (line.sit==null ?  "SIN ASIGNAR" : ExcelImportadorManager.Situaciones[line.sit ?? 0]) + " " + line.cant + "\n";
             }
 
             return s;

@@ -24,7 +24,9 @@ Imports Microsoft.VisualBasic
 
 '<SoapDocumentService(Use:=System.Web.Services.Description.SoapBindingUse.Literal,   ParameterStyle:=SoapParameterStyle.Wrapped)> _
 <WebService(Namespace:="http://microsoft.com/webservices/")> _
+<System.Web.Script.Services.ScriptService()> _
 Public Class WebServiceCartas
+    Inherits System.Web.Services.WebService
 
     ''
 
@@ -194,9 +196,8 @@ Public Class WebServiceCartas
 
 
 
-
     <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)> _
-    Public Function ActualizarSituacion(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega
+    Public Function GrabarSituacion(idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String) As String
 
 
         Try
@@ -209,7 +210,7 @@ Public Class WebServiceCartas
                 scs = scWilliamsRelease
             End If
 
-            Return CartaDePorteManager.AutorizarSituacion_DLL(Encriptar(scs), 1, 1, "asdfsdf")
+            Return CartaDePorteManager.GrabarSituacion_DLL(idcarta, idsituacion, sObservacionesSituacion, Encriptar(scs))
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
