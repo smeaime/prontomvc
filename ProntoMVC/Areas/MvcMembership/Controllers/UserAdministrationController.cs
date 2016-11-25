@@ -345,8 +345,21 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
 
+             string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
+                                                    "ExternoCuentaCorrienteProveedor",
+                                                    "ExternoOrdenesPagoListas",
+                                                    "ExternoPresupuestos", "AdminExterno", "Externo"};
+
             foreach (MembershipUser u in users)
             {
+                if (!(Roles.IsUserInRole(u.UserName,"AdminExterno")
+                    || Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteCliente")
+                    || Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor")
+                    || Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas")
+                    || Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") 
+                    ))
+                    continue;
+
                 if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) 
                     || DatosExtendidosDelUsuario_GrupoUsuarios(guiduser)=="")
                 {
