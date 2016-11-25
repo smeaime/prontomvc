@@ -327,8 +327,8 @@ Partial Class SituacionCalidad
         Dim Filtro = ""
         Dim s = New ServicioCartaPorte.servi()
         Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
-                                             "11/01/2016",
-                                             "11/01/2016",
+                                             txtFechaDesde.Text,
+                                             txtFechaHasta.Text,
                                              0, -1, HFSC.Value, "Mariano")
 
         Try
@@ -359,8 +359,27 @@ Partial Class SituacionCalidad
         '       var s = new ServicioCartaPorte.servi();
         '    var q = s.InformeSituacion();
 
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+        Dim FechaDesde = New DateTime(1980, 1, 1)
+        Dim FechaHasta = New DateTime(2050, 1, 1)
+
+        Try
+
+            FechaDesde = DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Nothing)
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            FechaHasta = DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Nothing)
+
+        Catch ex As Exception
+
+        End Try
+
+
         Dim s = New ServicioCartaPorte.servi()
-        Dim q = s.InformeSituacion(HFSC.Value)
+        Dim q = s.InformeSituacion(idDestino, FechaDesde, FechaHasta, HFSC.Value)
         salida.Text = q
 
     End Sub
