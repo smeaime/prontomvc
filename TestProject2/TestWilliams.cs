@@ -515,6 +515,57 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void exportacionPeroLlamandoAlRepServicesAlosupermachoconLINQ_29439_3()
+        {
+            string output = "c:\asdad.xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+            //string sqlquery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+            //                        (
+            //                                               0, 9999999, 0, "", -1, -1,
+            //                                               -1, -1, -1, -1, -1,
+            //                                               -1, 0, "Ambas"
+            //                                               , new DateTime(2016, 11, 1), new DateTime(2016, 11, 1),
+            //                                               0, null, "", "",
+            //                                               -1, null, 0, "", "Todos"));
+
+            var query = db.fSQL_GetDataTableFiltradoYPaginado(
+                                                           0, 9999999, 0, "", -1, -1,
+                                                           -1, -1, -1, -1, -1,
+                                                           -1, 0, "Ambas"
+                                                           , new DateTime(2016, 11, 1), new DateTime(2016, 11, 1),
+                                                           0, null, "", "",
+                                                           -1, null, 0, "", "Todos");
+
+            // http://stackoverflow.com/questions/1412863/how-do-i-view-the-sql-generated-by-the-entity-framework?noredirect=1&lq=1.
+            //https://www.stevefenton.co.uk/2015/07/getting-the-sql-query-from-an-entity-framework-iqueryable/
+
+            string sqlquery = ((System.Data.Entity.Core.Objects.ObjectQuery)query).ToTraceString();
+
+
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery, SC, false, ref output);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+
+
+        }
+
+
+
+
+
+
         [TestMethod]
         public void exportacionPeroLlamandoAlAction_29439_2()
         {
@@ -569,9 +620,9 @@ namespace ProntoMVC.Tests
             var q = s.InformeSituacion(SC);
 
 
-        
-           
-                Console.WriteLine(q);
+
+
+            Console.WriteLine(q);
 
 
             // FuncionesCSharpBLL.ExportToExcelEntityCollection<fSQL_GetDataTableFiltradoYPaginado_Result3>(q, output);
@@ -5562,4 +5613,67 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
     }
 
+}
+
+
+
+
+
+
+namespace Fenton.Example
+{
+    public static class IQueryableExtensions
+    {
+        /// <summary>
+        /// For an Entity Framework IQueryable, returns the SQL with inlined Parameters.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static string ToTraceQuery<T>(this IQueryable<T> query)
+        {
+            System.Data.Entity.Core.Objects.ObjectQuery<T> objectQuery = GetQueryFromQueryable(query);
+
+            var result = objectQuery.ToTraceString();
+            foreach (var parameter in objectQuery.Parameters)
+            {
+                var name = "@" + parameter.Name;
+                var value = "'" + parameter.Value.ToString() + "'";
+                result = result.Replace(name, value);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// For an Entity Framework IQueryable, returns the SQL and Parameters.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static string ToTraceString<T>(this IQueryable<T> query)
+        {
+            System.Data.Entity.Core.Objects.ObjectQuery<T> objectQuery = GetQueryFromQueryable(query);
+
+            var traceString = new StringBuilder();
+
+            traceString.AppendLine(objectQuery.ToTraceString());
+            traceString.AppendLine();
+
+            foreach (var parameter in objectQuery.Parameters)
+            {
+                traceString.AppendLine(parameter.Name + " [" + parameter.ParameterType.FullName + "] = " + parameter.Value);
+            }
+
+            return traceString.ToString();
+        }
+
+        private static System.Data.Entity.Core.Objects.ObjectQuery<T> GetQueryFromQueryable<T>(IQueryable<T> query)
+        {
+            var internalQueryField = query.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Where(f => f.Name.Equals("_internalQuery")).FirstOrDefault();
+            var internalQuery = internalQueryField.GetValue(query);
+            var objectQueryField = internalQuery.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Where(f => f.Name.Equals("_objectQuery")).FirstOrDefault();
+            return objectQueryField.GetValue(internalQuery) as System.Data.Entity.Core.Objects.ObjectQuery<T>;
+        }
+    }
 }
