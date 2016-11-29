@@ -74,6 +74,7 @@
                         <asp:ListItem Text="texto BungeRamalloDescargas.." Value="BungeRamalloDescargaTexto" />
 
                         <asp:ListItem Text=".rtf.  Nidera" Value="Nidera" />
+                        <asp:ListItem Text="excel  Urenport" Value="Urenport" />
                         <%--            <asp:ListItem Text="AdmServPortuarios" Value="AdmServPortuarios" />--%>
                     </asp:DropDownList>
                 </div>
