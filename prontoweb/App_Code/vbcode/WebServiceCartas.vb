@@ -24,7 +24,9 @@ Imports Microsoft.VisualBasic
 
 '<SoapDocumentService(Use:=System.Web.Services.Description.SoapBindingUse.Literal,   ParameterStyle:=SoapParameterStyle.Wrapped)> _
 <WebService(Namespace:="http://microsoft.com/webservices/")> _
+<System.Web.Script.Services.ScriptService()> _
 Public Class WebServiceCartas
+    Inherits System.Web.Services.WebService
 
     ''
 
@@ -181,6 +183,35 @@ Public Class WebServiceCartas
             End If
 
             Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(usuario, password, cuit, fechadesde, fechahasta, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+    End Function
+
+
+
+
+
+    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)> _
+    Public Function GrabarSituacion(idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String) As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+            Return CartaDePorteManager.GrabarSituacion_DLL(idcarta, idsituacion, sObservacionesSituacion, Encriptar(scs))
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
