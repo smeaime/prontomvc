@@ -1525,14 +1525,15 @@ namespace ProntoFlexicapture
 
 
 
-                bool bPisar = true;
+                bool bPisar = false;
+                if (cdp.NetoFinalIncluyendoMermas == 0) bPisar = true;
 
-                // if (cdp.Titular > 0) bPisar = false;
 
-                // no pisar si ya esta la info
-                if (bPisar && !esTicket)
+
+
+
+                if (!esTicket && bPisar)
                 {
-
 
                     cdp.PuntoVenta = pv;
 
@@ -2836,11 +2837,20 @@ namespace ServicioCartaPorte
                                                     -1, null, 0, "", "Todos").Select(x => x.Situacion).GroupBy(x => x).Select(g => new { sit = g.Key, cant = g.Count() }).ToList();
 
 
-              
+
 
             foreach (var line in q)
             {
-                s += (line.sit==null ?  "SIN ASIGNAR" : ExcelImportadorManager.Situaciones[line.sit ?? 0]) + " " + line.cant + "\n";
+                try
+                {
+
+                    s += (line.sit == null ? "SIN ASIGNAR" : ExcelImportadorManager.Situaciones[line.sit ?? 0]) + " " + line.cant + "\n";
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
             }
 
             return s;
@@ -2915,7 +2925,7 @@ namespace ServicioCartaPorte
                                          db.fSQL_GetDataTableFiltradoYPaginado(
                                                             0, 9999999, 0, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
-                                                            -1, 0, "Ambas", FechaDesde,
+                                                            iddestino, 0, "Ambas", FechaDesde,
                                                             FechaHasta, puntovent, null, "", "",
                                                             -1, null, 0, "", "Todos")
                              );
@@ -2986,7 +2996,7 @@ namespace ServicioCartaPorte
                                 
                                 a.IdCartaDePorte.ToString(), 
 
-                                "<a href=\"ProntoWeb/CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.ToString() + "</>" ,
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.ToString() + "</>" ,
                                 
                                 ExcelImportadorManager.Situaciones[a.Situacion ?? 0],
 
@@ -3149,7 +3159,7 @@ namespace ServicioCartaPorte
 
 
 
-            System.Web.Mvc.JsonResult result;
+            //System.Web.Mvc.JsonResult result;
 
             //result = (System.Web.Mvc.JsonResult)CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", puntovent, iddestino, SC, nombreusuario);
             string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
