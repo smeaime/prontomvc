@@ -307,6 +307,15 @@ Namespace Pronto.ERP.BO
 
         Public EntregaSAP As String
 
+        Public Situacion As Integer? = 0
+        Public SituacionAntesDeEditarManualmente As Integer? = 0
+        Public FechaActualizacionAutomatica As DateTime = DateTime.MinValue
+        Public FechaAutorizacion As DateTime = DateTime.MinValue
+        Public ObservacionesSituacion As String
+        
+
+
+
 
         'Public CartaLINQ As New CartasDePorte 'probar poniendo el "Serialization Mode" del .dbml en "Unidirectional" (porque explota al intentar meterlo en el Viewstate)
         '-no... parecería no bastar.... probaré agregando un  " <Serializable()> _ Partial Class CartasDePorte " en un archivo aparte
