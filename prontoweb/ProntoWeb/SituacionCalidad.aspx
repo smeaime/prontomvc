@@ -35,7 +35,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         Situación de CPs
     </div>
     <br />
-    <br />
     <div>
         <%--   <table id="list9">
         </table>
@@ -45,15 +44,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
             id="m1s">Select(Unselect) row 13</a>--%>
 
-
-        <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="True" CssClass="btn btn-primary"
-            Width="150" Height="40" />
-        <br />
-        <br />
-
-
-
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
+            <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
 
                 <table>
@@ -61,7 +52,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
                         <td class="EncabezadoCell" style="width: 400px; height: 18px;">
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" 
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" />
                                 <asp:ListItem Text="Ayer" />
@@ -118,7 +109,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
                                 autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                             <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
-                                 OnClientItemSelected="RefrescaGrilla()"
+                                OnClientItemSelected="RefrescaGrilla()"
                                 CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
                                 ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
                                 UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
@@ -131,6 +122,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </ContentTemplate>
         </asp:UpdatePanel>
 
+
+    <br />
+          <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
+            Width="150" Height="40" />
+        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary"
+            Width="150" Height="40" />
+        <asp:Label ID="salida" runat="server"></asp:Label>
+        <br />
         <br />
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
@@ -139,6 +138,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
         </div>
+
+
+
+      
+
+        <br />
+
+
+
+    
         <%--<script>
 
 
@@ -521,29 +530,36 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 var err;
 
 
-                datos.IdCartasDePorteControlDescarga = gridId;
-                datos.Fecha = dataFromTheRow.Fecha;
-                datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
-                //datos.Cotizacion = dataFromTheRow.Cotizacion;
-                datos.TotalDescargaDia = dataFromTheRow.TotalDescargaDia;
-                datos.IdPuntoVenta = dataFromTheRow.IdPuntoVenta;
+                datos.idcarta = gridId;
+                datos.idsituacion = dataFromTheRow.Situacion;
+                datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
 
 
                 err = ""
-                if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
-                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
+                //if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
+                //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
+                //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
 
                 if (err != "") {
                     alert('No se pudo grabar el registro.\n' + err);
                 } else {
                     //$('html, body').css('cursor', 'wait');
+
+
+
+                    
+
+
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceClientes.asmx/DestinoBatchUpdate",
+                        url: "WebServiceCartas.asmx/GrabarSituacion",
                         dataType: 'json',
-                        data: JSON.stringify({ o: datos }),
+                        data: JSON.stringify({
+                            idcarta: gridId,
+                            idsituacion: 0, //dataFromTheRow.Situacion,
+                            sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
+                        }),
                         success: function (result) {
                             if (result) {
                                 $grid.jqGrid('setRowData', gridId, { act: "" });
@@ -823,12 +839,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 $('#Lista').trigger("reloadGrid")
             });
 
-            
+
             $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
                 $('#Lista').trigger("reloadGrid")
             });
 
-            
+
             $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
                 $('#Lista').trigger("reloadGrid")
             });
@@ -836,7 +852,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
                 $('#Lista').trigger("reloadGrid")
             });
-            
+
 
             function RefrescaGrilla() {
                 $('#Lista').trigger("reloadGrid");
@@ -863,195 +879,256 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'Descarga', 'Destino', 'IdDestino', 'Numero CP', 'Sucursal', 'Sucursal', 'Sucursal', 'Sucursal'
+                    colNames: ['', 'Id', 'Nro CP', 'Situacion', 'Obs Situacion', 'Arribo', 'Descarga', 'Corredor', 'Destinatario', 'Destino',
+
+                                'IdDestino', 'Procedencia', 'Producto', 'Titular',
+                                'R Comercial', 'Intermediario', 'Patente', 'Neto', 'Punto Venta'
+
+
+
+
+
+
 
                     ],
 
 
 
                     colModel: [
-                                {
-                                    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false,
-                                    search: false,
-                                },
-                                { name: ' IdCartasDePorteControlDescarga', index: ' IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
-            {
-                name: 'NumeroCartaDePorte', index: 'NumeroCartaDePorte', width: 140, align: 'right', sorttype: "number"
-                , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+{
+    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false,
+    search: false,
+},
+{ name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
+{
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 160, align: 'left', sorttype: "text", sortable: false
+, editable: true, editrules: { required: false, number: true }, edittype: 'text', 
 
-                searchoptions: { sopt: ['eq'] },
-
-                editoptions: {
-                    maxlength: 20, defaultValue: '0.00',
-                    dataEvents: [
-                    {
-                        type: 'keypress',
-                        fn: function (e) {
-                            var key = e.charCode || e.keyCode;
-                            if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                            if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                        }
-                    }]
-                }
-            },
-
-                        {
-                                    name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: true,
-                                    editoptions: {
-                                        size: 10,
-                                        maxlengh: 10,
-                                        dataInit: function (element) {
-                                            $(element).datepicker({
-                                                dateFormat: 'dd/mm/yy',
-                                                constrainInput: false,
-                                                showOn: 'button',
-                                                buttonText: '...'
-                                            });
-                                        }
-                                    },
-                                    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-                                    //, formatter: 'date'
-                                    , sorttype: 'date'
+    searchoptions: { sopt: ['bw','cn','eq'] },
 
 
-                                    , searchoptions: {
-                                        sopt: ['eq', 'ne'],
-                                        dataInit: function (elem) {
-                                            $(elem).datepicker({
-                                                dateFormat: 'dd/mm/yy',
-                                                showButtonPanel: true
-                                            })
-                                        }
-                                    }
-                                },
-
-
-
-                       { name: '', index: '', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-                       { name: '', index: '', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-                       { name: '', index: '', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text' },
-
-
-                                 {
-                                     name: 'DestinoDesc', index: 'DestinoDesc',
-                                     formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
-                                     editoptions: {
-                                         rows: '1', cols: '1',
-                                         dataInit: function (elem) {
-                                             var NoResultsLabel = "No se encontraron resultados";
-
-
-                                             $(elem).autocomplete({
-                                                 source: function (request, response) {
-                                                     $.ajax({
-                                                         type: "POST",
-                                                         url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                                                         dataType: "json",
-                                                         contentType: "application/json; charset=utf-8",
-
-                                                         data: JSON.stringify({
-                                                             term: request.term
-                                                             //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                                                         }),
-
-
-                                                         success: function (data2) {
-                                                             var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                                                             if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                                                 var ui = data[0];
-
-                                                                 if (ui.id == "") {
-                                                                     alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                                     $("#Descripcion").val("");
-                                                                     return;
-                                                                 }
-                                                                 $("#IdWilliamsDestino").val(ui.id);
-
-                                                                 UltimoIdArticulo = ui.id;
-                                                             }
-                                                             else {
-                                                                 alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                             }
-
-                                                             response($.map(data, function (item) {
-                                                                 return {
-                                                                     label: item.value,
-                                                                     value: item.value //item.id
-                                                                     , id: item.id
-                                                                 }
-                                                             }));
-
-                                                         }
-
-
-
-                                                     })
-
-
-                                                 }
-
-                                                  ,
-                                                 select: function (e, ui) {
-                                                     //http://stackoverflow.com/questions/27635689/jqgrid-autocomplete-cannot-post-id-column
-                                                     // Oleg
-                                                     //UPDATED: It's really important to know which editing mode you use because 
-                                                     //id of input fields will be set based on different rules. The below code detect
-                                                     //whether form editing, inline editing or toolbar filter will be used which to choose the corresponding id.
-
-                                                     try {
-                                                         var id;
-                                                         if ($(elem).hasClass("FormElement")) {
-                                                             // form editing
-                                                             id = "IdWilliamsDestino";
-                                                         } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
-                                                             // filter foolbar
-                                                             id = "gs_IdWilliamsDestino";
-                                                         } else if ($(elem).closest("tr.jqgrow").length > 0) {
-                                                             //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
-
-                                                             var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
-                                                             var rowData = $("#Lista").jqGrid('getRowData', rowId);
-                                                             rowData.Descripcion = ui.item.value;
-                                                             rowData.IdWilliamsDestino = ui.item.id;
-                                                             // $("#Lista").jqGrid('setRowData', rowId, rowData);
-
-                                                             $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
-                                                         }
-                                                         //$("#" + id).val(ui.item.id);
-
-                                                     } catch (e) {
-
-                                                     }
-                                                 }
-                                             });
-
-
-
-
-
-
-                                         }
-
-
-                                     },
-                                     editrules: { required: true }
-                                 },
-
-
-            { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
-            
-            {
-                name: 'IdPuntoVenta', index: 'IdPuntoVenta',
-
-                width: 100, resizable: true,
-                align: "left", sorttype: "number", editable: true, edittype: "select", hidden: true,
-                editoptions: { value: "1:1;2:2;3:3;4:4" }, // { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" },
-                searchoptions: { sopt: ['eq'] },
-                editrules: { required: true }
+    editoptions: {
+        maxlength: 20, defaultValue: '0.00',
+        dataEvents: [
+        {
+            type: 'keypress',
+            fn: function (e) {
+                var key = e.charCode || e.keyCode;
+                if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
             }
+        }]
+    }
+},
 
 
+{ 
+    name: 'Situacion', index: 'Situacion', align: 'left', width: 100, hidden: false, editable: true, edittype: 'select', sortable: false ,
+    editoptions: {
+                    //defaultValue: OrigenDescripcionDefault,
+                    value: "0:Autorizado; 1:Demorado;"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
+                }
+},
+
+
+
+
+
+{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: true, hidden: false, sortable: false },
+
+
+{
+    name: 'FechaArribo', index: 'FechaArribo', width: 200, sortable: true, align: 'right', editable: true, sortable: false ,
+    editoptions: {
+        size: 10,
+        maxlengh: 10,
+        dataInit: function (element) {
+            $(element).datepicker({
+                dateFormat: 'dd/mm/yy',
+                constrainInput: false,
+                showOn: 'button',
+                buttonText: '...'
+            });
+        }
+    },
+    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+    //, formatter: 'date'
+, sorttype: 'date'
+
+
+, searchoptions: {
+    sopt: ['eq', 'ne'],
+    dataInit: function (elem) {
+        $(elem).datepicker({
+            dateFormat: 'dd/mm/yy',
+            showButtonPanel: true
+        })
+    }
+}
+},
+
+
+
+{
+    name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: true, sortable: false ,
+    editoptions: {
+        size: 10,
+        maxlengh: 10,
+        dataInit: function (element) {
+            $(element).datepicker({
+                dateFormat: 'dd/mm/yy',
+                constrainInput: false,
+                showOn: 'button',
+                buttonText: '...'
+            });
+        }
+    },
+    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+    //, formatter: 'date'
+        , sorttype: 'date'
+
+
+        , searchoptions: {
+            sopt: ['eq', 'ne'],
+            dataInit: function (elem) {
+                $(elem).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    showButtonPanel: true
+                })
+            }
+        }
+},
+
+
+
+
+
+
+
+
+
+{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false  },
+{ name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false  },
+
+
+
+{
+    name: 'DestinoDesc', index: 'DestinoDesc',
+    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false ,
+    editoptions: {
+        rows: '1', cols: '1',
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                var ui = data[0];
+
+                                if (ui.id == "") {
+                                    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                    $("#Descripcion").val("");
+                                    return;
+                                }
+                                $("#IdWilliamsDestino").val(ui.id);
+
+                                UltimoIdArticulo = ui.id;
+                            }
+                            else {
+                                alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            }
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+            ,
+                select: function (e, ui) {
+                    //http://stackoverflow.com/questions/27635689/jqgrid-autocomplete-cannot-post-id-column
+                    // Oleg
+                    //UPDATED: It's really important to know which editing mode you use because 
+                    //id of input fields will be set based on different rules. The below code detect
+                    //whether form editing, inline editing or toolbar filter will be used which to choose the corresponding id.
+
+                    try {
+                        var id;
+                        if ($(elem).hasClass("FormElement")) {
+                            // form editing
+                            id = "IdWilliamsDestino";
+                        } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
+                            // filter foolbar
+                            id = "gs_IdWilliamsDestino";
+                        } else if ($(elem).closest("tr.jqgrow").length > 0) {
+                            //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
+
+                            var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
+                            var rowData = $("#Lista").jqGrid('getRowData', rowId);
+                            rowData.Descripcion = ui.item.value;
+                            rowData.IdWilliamsDestino = ui.item.id;
+                            // $("#Lista").jqGrid('setRowData', rowId, rowData);
+
+                            $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
+                        }
+                        //$("#" + id).val(ui.item.id);
+
+                    } catch (e) {
+
+                    }
+                }
+            });
+
+
+
+
+
+
+        }
+
+
+    },
+    editrules: { required: true }
+},
+
+
+{ name: 'Destino', index: 'Destino', align: 'left', width: 450, hidden: true, editable: true, edittype: 'text', sortable: false },
+{ name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'Producto', index: 'Producto', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+
+{ name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'Patente', index: 'Patente', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
 
 
 
@@ -1078,7 +1155,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //if (name == 'Fecha') {
                         //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                         //}
-                        var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                        var se = "<input style='height:22px;width:100px;' type='button' value='Autorizar' onclick=\"GrabarFila('" + id + "');\"  />";
                         jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                     },
                     //beforeSelectRow: function (rowid, e) {
@@ -1102,13 +1179,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     pager: $('#ListaPager'),
                     rowNum: 10,
                     rowList: [10, 20, 50, 100],
-                    sortname: 'IdCartaDePorte' ,  //'FechaDescarga', //'NumeroCartaDePorte',
+                    sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                     sortorder: 'desc',
                     viewrecords: true,
                     multiselect: true,
                     shrinkToFit: false,
                     width: 'auto',
-                    height: $(window).height() - 300, // '100%'
+                    height: $(window).height() - 500, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
@@ -1162,14 +1239,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
-                $('#Lista').jqGrid('setGridWidth', '1000');
+                //$('#Lista').jqGrid('setGridWidth', '1000');
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220 );
 
             });
 
 
 
             $(window).resize(function () {
-                $('#Lista').jqGrid('setGridWidth', '800');
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220 );
                 //RefrescaAnchoJqgrids();
             });
 

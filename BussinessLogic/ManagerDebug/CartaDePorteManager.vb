@@ -8994,6 +8994,18 @@ Public Class CartaDePorteManager
                 .EntregaSAP = oCarta.EntregaSAP
 
 
+                .Situacion = oCarta.Situacion
+                .SituacionAntesDeEditarManualmente = oCarta.SituacionAntesDeEditarManualmente
+                .FechaActualizacionAutomatica = If(oCarta.FechaActualizacionAutomatica, DateTime.MinValue)
+                .FechaAutorizacion = If(oCarta.FechaAutorizacion, DateTime.MinValue)
+                .ObservacionesSituacion = oCarta.ObservacionesSituacion
+
+
+                
+
+
+
+
                 Try
 
                     Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF _
@@ -9035,6 +9047,7 @@ Public Class CartaDePorteManager
                 .CalidadTalCualVicentinRebaja = GetDetalle("CalidadTalCualVicentinRebaja", db, id)
                 .CalidadTalCualVicentinMerma = GetDetalle("CalidadTalCualVicentinMerma", db, id)
                 .TipoMermaTalCualVicentin = GetDetalle("TipoMermaTalCualVicentin", db, id)
+
 
 
 
@@ -9139,9 +9152,21 @@ Public Class CartaDePorteManager
         Dim sss = familia.Where(Function(x) x.SubnumeroDeFacturacion = SubnumeroFacturacion).FirstOrDefault
 
 
-        If familia.Count = 0 Then Return New CartaDePorte
+        If familia.Count = 0 Then
+            Dim c = New CartaDePorte
+            c.NumeroCartaDePorte = NumeroCartaDePorte
+            c.SubnumeroVagon = SubNumeroVagon
+            c.SubnumeroDeFacturacion = SubnumeroFacturacion
+            Return c
+        End If
         If sss IsNot Nothing Then Return CartaDePorteManager.GetItem(SC, sss.IdCartaDePorte)
-        If SubnumeroFacturacion > 0 Then Return New CartaDePorte
+        If SubnumeroFacturacion > 0 Then
+            Dim c = New CartaDePorte
+            c.NumeroCartaDePorte = NumeroCartaDePorte
+            c.SubnumeroVagon = SubNumeroVagon
+            c.SubnumeroDeFacturacion = SubnumeroFacturacion
+            Return c
+        End If
         If familia.Count = 1 Then Return CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
 
         ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & _
@@ -9476,6 +9501,18 @@ Public Class CartaDePorteManager
                     oCarta.FacturarA_Manual = .FacturarAManual
 
                     oCarta.EntregaSAP = .EntregaSAP
+
+
+
+                    oCarta.Situacion = .Situacion
+                    oCarta.SituacionAntesDeEditarManualmente = .SituacionAntesDeEditarManualmente
+                    oCarta.FechaActualizacionAutomatica = IIf(.FechaActualizacionAutomatica = DateTime.MinValue, Nothing, .FechaActualizacionAutomatica)
+                    oCarta.FechaAutorizacion = IIf(.FechaAutorizacion = DateTime.MinValue, Nothing, .FechaAutorizacion)
+                    oCarta.ObservacionesSituacion = .ObservacionesSituacion
+
+
+
+
                     'Try
 
                     '    Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
@@ -15066,6 +15103,26 @@ Public Class CartaDePorteManager
 
 
     End Function
+
+    Public Shared Function GrabarSituacion_DLL(idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
+
+
+        Dim cp = CartaDePorteManager.GetItem(SC, idcarta)
+
+        cp.Situacion = idsituacion
+        cp.ObservacionesSituacion = sObservacionesSituacion
+        cp.FechaAutorizacion = Now
+
+        Dim ms As String = ""
+        CartaDePorteManager.Save(SC, cp, 1, "", , ms)
+
+        Return ms
+
+    End Function
+
+
+
+
 
 
     Public Shared Function RenglonCerealnetCalidad(ByVal cdp As ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3, _
