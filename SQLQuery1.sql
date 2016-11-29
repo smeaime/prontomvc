@@ -16,7 +16,7 @@ select * from  WilliamsDestinos
 select top 10 * from cartasdeporte order by fechadescarga
 select top 10 * from cartasdeporte order by fechamodificacion
 
-
+select vendedor,* from cartasdeporte where idcartadeporte=2638292
 
 
 --////////////////////////////////////////////////////////////////////////////////////////

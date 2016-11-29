@@ -38,7 +38,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             try
             {
-                ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
+               if  (oStaticMembershipService!=null) ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
             }
             catch (Exception e)
             {
@@ -48,6 +48,26 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
         }
+
+
+        protected override void Initialize(System.Web.Routing.RequestContext rc)
+        {
+
+            base.Initialize(rc);
+
+            try
+            {
+                ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
+            }
+            catch (Exception e)
+            {
+                ErrHandler.WriteError(e);
+            }
+        }
+
+
+
+
 
         public UserAdministrationController(AspNetMembershipProviderWrapper membership, IRolesService roles, ISmtpClient smtp)
             : this(membership.Settings, membership, membership, roles, smtp)
@@ -189,8 +209,24 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
                 foreach (MembershipUser u in users)
                 {
-                    if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser))
-                    {
+                    if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser)
+                             || (DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
+                      {
+
+                        if ((DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
+                        {
+                           if  (!(
+                                Roles.IsUserInRole(u.UserName, "AdminExterno") ||
+                                Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas") ||
+                                Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor") ||
+                                Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") ||
+                                Roles.IsUserInRole(u.UserName, "Externo")
+                               )) 
+
+                               continue; // para que el adminexterno general (que no tiene cuit/grupo) no vea a usuarios supervisores 
+                        }
+
+
                         l.Add((Guid)u.ProviderUserKey);
                     }
                 }
@@ -324,10 +360,34 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
 
+             string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
+                                                    "ExternoCuentaCorrienteProveedor",
+                                                    "ExternoOrdenesPagoListas",
+                                                    "ExternoPresupuestos", "AdminExterno", "Externo"};
+
             foreach (MembershipUser u in users)
             {
-                if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser))
+             
+                if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) 
+                         || (DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
                 {
+
+
+                    if ((DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
+                    {
+                        if (!(
+                             Roles.IsUserInRole(u.UserName, "AdminExterno") ||
+                             Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas") ||
+                             Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor") ||
+                             Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") ||
+                             Roles.IsUserInRole(u.UserName, "Externo")
+                            ))
+
+                            continue; // para que el adminexterno general (que no tiene cuit/grupo) no vea a usuarios supervisores 
+                    }
+
+
+
                     l.Add((Guid)u.ProviderUserKey);
                 }
             }
@@ -409,7 +469,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 if (nombrebase.NullSafeToString() != "")
                 {
                     //si no hay con qué llenar .Empleados, llora la vista
-                    using (var tempdb = new DemoProntoEntities(Generales.sCadenaConex(nombrebase)))
+                    using (var tempdb = new DemoProntoEntities(Generales.sCadenaConex(nombrebase, oStaticMembershipService)))
                     {
                         // no mostrar los que ya estan en la bdlmaster
                         ViewBag.Empleados = new SelectList(tempdb.Empleados.ToList(), "IdEmpleado", "UsuarioNT");
@@ -462,6 +522,13 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                                                         v => _userService.Get(v)
                                                      )
                             });
+        
+        }
+
+
+        public virtual ViewResult DetailsExterno(Guid id)
+        {
+            return Details(id);
         }
 
         public virtual ViewResult Details(Guid id)
@@ -518,9 +585,19 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                     nombreproveedor = db.Proveedores.Find(idproveedor).RazonSocial;
                 }
             }
-            catch (Exception)
+            catch (Exception x)
             {
-
+    
+                ProntoFuncionesGenerales.MandaEmailSimple(ConfigurationManager.AppSettings["ErrorMail"],
+                                "Error de proveedor", 
+                                x.ToString() ,
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpServer"],
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpPass"],
+                                "",
+                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                
                 //throw;
             }
             if (grupo != "")
