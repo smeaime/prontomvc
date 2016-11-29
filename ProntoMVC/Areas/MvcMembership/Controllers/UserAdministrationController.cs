@@ -369,7 +369,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             {
              
                 if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) 
-                    || DatosExtendidosDelUsuario_GrupoUsuarios(guiduser)=="")
+                         || (DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
                 {
 
 

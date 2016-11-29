@@ -2224,6 +2224,21 @@ Released   : 20120723
                                style="width: 100%; margin-left: 14px; background: transparent; border: 0" />
                     }
 
+                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno")
+                        || Roles.IsUserInRole(ViewBag.NombreUsuario, "Externo")
+                        || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoOrdenesPagoListas")
+                        || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoCuentaCorrienteProveedor")
+                        || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoCuentaCorrienteCliente")
+                        || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoCotizaciones")
+                        )
+                    {
+                        <div class="alert alert-error fade in span12 " id="asdasd" style="width: 150px">
+
+                            Solo estarán disponibles para retirar las ordenes de pago que estén en Caja
+                        </div>
+
+                    }
+
 
                     @*   <a href="#">ADMINISTRACION</a></h6>*@
                     @if (!ViewBag.MenuYoutube)
@@ -2232,8 +2247,7 @@ Released   : 20120723
                         if (false)
                         {
                             <div class="row-fluid">
-                                <div class="test link-class span12 " style="width: ; overflow-y: hidden; visibility: ;
-                    display: ">
+                                <div class="test link-class span12 " style="width: ; overflow-y: hidden; ">
                                     @if (true)
                                     {
 
@@ -2317,14 +2331,14 @@ Released   : 20120723
                             }
                             <div>
                                 <style>
-                                        /* este truco me provoca el desfasaje de los encabezados con el cuerpo
+                                    /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                                                     /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                                                     .ui-jqgrid .ui-jqgrid-btable
                                                                     {
                                                                         /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                                                         /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                                                         /* http://stackoverflow.com/questions/1395746/jqgrid-how-do-i-removed-the-annoying-horizontal-scrollbar-when-autowidth-true */
-                                        /*table-layout: auto;*/ /* este truco me provoca el desfasaje de los encabezados con el cuerpo
+                                    /*table-layout: auto;*/ /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                                                     }
 
                                                                     .ui-icon ui-icon-document-b tree-leaf treeclick
@@ -2581,22 +2595,22 @@ Released   : 20120723
                     *@ @*<div class="container">*@ @* http://stackoverflow.com/questions/14735274/bootstrap-css-hides-portion-of-container-below-navbar-navbar-fixed-top *@
                     @*   if (pageLayout.state.west.isHidden || pageLayout.state.west.isClosed) {*@
                     <style>
-                            .margen body {
-                                /*
+                        .margen body {
+                            /*
                         padding-top: 60px;
                         */
-                            }
+                        }
 
-                            body {
-                                padding-top: 50px;
-                            }
+                        body {
+                            padding-top: 50px;
+                        }
 
-                            .container-fluid {
-                                /* padding-left: 0px; */ /* padding-top: 60px;  */ /*
+                        .container-fluid {
+                            /* padding-left: 0px; */ /* padding-top: 60px;  */ /*
                         padding-right: 0px;
 
                         */
-                            }
+                        }
                     </style>
                     <div class="container-fluid" style="padding: 0px;">
                         <div class="row-fluid margen" style="">
@@ -2710,7 +2724,7 @@ Released   : 20120723
 
 
                                         <style>
-                                                /*#btnConmutarPanelIzquierdo {
+                                            /*#btnConmutarPanelIzquierdo {
                                                 -webkit-transform: rotate(90deg);
                                                 -moz-transform: rotate(90deg);
                                                 -o-transform: rotate(90deg);
@@ -2718,13 +2732,13 @@ Released   : 20120723
                                                 -ms-transform: rotate(90deg);
                                             }*/
 
-                                                #btnConmutarPanelDerecho {
-                                                    -webkit-transform: rotate(90deg);
-                                                    -moz-transform: rotate(90deg);
-                                                    -o-transform: rotate(90deg);
-                                                    /* filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5); */
-                                                    -ms-transform: rotate(90deg);
-                                                }
+                                            #btnConmutarPanelDerecho {
+                                                -webkit-transform: rotate(90deg);
+                                                -moz-transform: rotate(90deg);
+                                                -o-transform: rotate(90deg);
+                                                /* filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5); */
+                                                -ms-transform: rotate(90deg);
+                                            }
                                         </style>
 
 
@@ -2994,11 +3008,11 @@ Released   : 20120723
                                             </li>
                                         </ul>
                                         <style>
-                                                    .ui-tabs .ui-tabs-panel {
-                                                        padding: 0px;
-                                                    }
+                                            .ui-tabs .ui-tabs-panel {
+                                                padding: 0px;
+                                            }
 
-                                                    /* .ui-pager-control
+                                            /* .ui-pager-control
                                             {
                                                 height: 30px;
                                             }
