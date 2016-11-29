@@ -23041,7 +23041,7 @@ Namespace Pronto.ERP.Bll
 
                     'seccion Procedencia de la mercaderia ---------------------------------
                     '25	no	Establecimiento	digits{1,6}	Numerico entre 1 y  11 digitos
-                    sb &= Val(.Establecimiento).ToString
+                    ' sb &= Val(.Establecimiento).ToString
                     sb &= SEPARADOR
                     '26	yes	Direccion	String{1,60}	Texto entre 1 y 60 caracteres
                     sb &= .ProcedenciaDesc

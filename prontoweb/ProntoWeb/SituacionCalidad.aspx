@@ -35,7 +35,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         Situación de CPs
     </div>
     <br />
-    <br />
     <div>
         <%--   <table id="list9">
         </table>
@@ -45,30 +44,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
             id="m1s">Select(Unselect) row 13</a>--%>
 
-
-        <br />
-        <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
-
-
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="700px">
-        </table>
-        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
-        </div>
-
-
-
-        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
-            Width="150" Height="40" />
-        <asp:Button ID="btnPanelInforme" Text="PANEL DE SITUACION" runat="server" Visible="True" CssClass="btn btn-primary"
-            Width="150" Height="40" />
-        <asp:Label ID="salida" runat="server"></asp:Label>
-        <br />
-
-        <br />
-
-
-
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
+            <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
 
                 <table>
@@ -146,6 +122,32 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </ContentTemplate>
         </asp:UpdatePanel>
 
+
+    <br />
+          <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
+            Width="150" Height="40" />
+        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary"
+            Width="150" Height="40" />
+        <asp:Label ID="salida" runat="server"></asp:Label>
+        <br />
+        <br />
+        <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
+
+
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="700px">
+        </table>
+        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
+        </div>
+
+
+
+      
+
+        <br />
+
+
+
+    
         <%--<script>
 
 
@@ -1238,14 +1240,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                 //$('#Lista').jqGrid('setGridWidth', '1000');
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 200 );
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220 );
 
             });
 
 
 
             $(window).resize(function () {
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 200 );
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220 );
                 //RefrescaAnchoJqgrids();
             });
 

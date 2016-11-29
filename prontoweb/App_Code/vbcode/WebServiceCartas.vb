@@ -207,7 +207,8 @@ Public Class WebServiceCartas
             If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
                 scs = scLocal
             Else
-                scs = scWilliamsRelease
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
             End If
 
             Return CartaDePorteManager.GrabarSituacion_DLL(idcarta, idsituacion, sObservacionesSituacion, Encriptar(scs))

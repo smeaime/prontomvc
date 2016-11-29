@@ -4241,7 +4241,7 @@ Public Class ExcelImportadorManager
 
             Case Urenport
                 ds = UrenportExcelToDataset(archivoExcel, SC)
-
+                Return ds.Tables(0).Rows.Count
 
             Case Else
                 ds = GetExcel(archivoExcel)

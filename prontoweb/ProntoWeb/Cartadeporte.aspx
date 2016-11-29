@@ -1725,34 +1725,64 @@
             </cc1:TabPanel>
             <cc1:TabPanel ID="TabPanel1" runat="server" BackColor="#6600FF">
                 <HeaderTemplate>
-                    <u>S</u>ituacion
+                    <u>S</u>ituación
                 </HeaderTemplate>
                 <ContentTemplate>
                     <table style="padding: 0px; border: none #FFFFFF; width: 696px; height: 202px; margin-left: 5px; margin-right: 0px;"
                         cellpadding="1" cellspacing="1">
                         <tr>
 
-                            <td class="EncabezadoCell" style="">observaciones situacion
-                                            <asp:TextBox ID="txtObsSituacion" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
 
-                            </td>
-
-                            <td class="EncabezadoCell" style="">situacion
-                                            <asp:DropDownList ID="cmbSituacion" runat="server" CssClass="CssCombo" Width="100px">
-                                                <asp:ListItem Value="0">Física</asp:ListItem>
-                                                <asp:ListItem Value="1">Arbitrado</asp:ListItem>
-                                            </asp:DropDownList>
-                            </td>
-
+                            <td class="EncabezadoCell" style="width: 150px;">Situación</td>
                             <td>
-                            <asp:Button ID="btnAutorizarSituacion" runat="server" CssClass="butcancela" Text="autorizar"
-                                CausesValidation="False" UseSubmitBehavior="False" Style="margin-left: 28px"
-                                ></asp:Button>
+                                <asp:DropDownList ID="cmbSituacion" runat="server" CssClass="CssCombo" Width="100px" Enabled="false">
+                                    <asp:ListItem Value="0">Física</asp:ListItem>
+                                    <asp:ListItem Value="1">Arbitrado</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
 
-                                fecha de autorizacion
+                        </tr>
+                        <tr>
+                            <td class="EncabezadoCell" style="width: 150px;">Observaciones
 
                             </td>
-                        
+
+                            <td class="EncabezadoCell" style="">
+                                <asp:TextBox ID="txtObsSituacion" runat="server" CssClass="CssTextBox" Width="200px" TextMode="MultiLine"></asp:TextBox>
+
+                            </td>
+
+
+
+                        </tr>
+                        <tr>
+
+                            <td class="EncabezadoCell" style="width: 150px;">Fecha de autorización
+                            </td>
+
+                            <td class="EncabezadoCell" style="width: 15%">
+
+                                <asp:TextBox ID="txtFechaAutorizacion" runat="server" MaxLength="1" Width="72px" TabIndex="27"
+                                    onchange="" AutoPostBack="false"></asp:TextBox>&nbsp
+                                            <asp:Button ID="Button6" runat="server" />
+                                <cc1:CalendarExtender ID="CalendarExtender5" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaAutorizacion"
+                                    PopupButtonID="Button1">
+                                </cc1:CalendarExtender>
+
+                                <cc1:MaskedEditExtender ID="MaskedEditExtender5" runat="server" AcceptNegative="Left"
+                                    DisplayMoney="Left" ErrorTooltipEnabled="True" Mask="99/99/9999" MaskType="Date"
+                                    TargetControlID="txtFechaAutorizacion">
+                                </cc1:MaskedEditExtender>
+
+                            </td>
+
+                            <td class="EncabezadoCell" style="">
+                                <asp:Button ID="btnAutorizarSituacion" runat="server" CssClass="butcancela" Text="Autorizar"
+                                    CausesValidation="False" UseSubmitBehavior="False" Style="margin-left: 28px"></asp:Button>
+                            </td>
+                        </tr>
+
+
                         </tr>
                     </table>
                 </ContentTemplate>
