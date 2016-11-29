@@ -323,13 +323,15 @@ Partial Class SituacionCalidad
 
     Protected Sub btnExportarGrilla_Click(sender As Object, e As EventArgs) Handles btnExportarGrilla.Click
         'asdfasdf()
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
 
         Dim Filtro = ""
+
         Dim s = New ServicioCartaPorte.servi()
         Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
                                              txtFechaDesde.Text,
                                              txtFechaHasta.Text,
-                                             0, -1, HFSC.Value, "Mariano")
+                                              -1, idDestino, HFSC.Value, "Mariano")
 
         Try
             Dim MyFile1 = New FileInfo(output3) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...

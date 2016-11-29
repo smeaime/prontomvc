@@ -212,6 +212,21 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                     if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser)
                              || (DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
                       {
+
+                        if ((DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
+                        {
+                           if  (!(
+                                Roles.IsUserInRole(u.UserName, "AdminExterno") ||
+                                Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas") ||
+                                Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor") ||
+                                Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") ||
+                                Roles.IsUserInRole(u.UserName, "Externo")
+                               )) 
+
+                               continue; // para que el adminexterno general (que no tiene cuit/grupo) no vea a usuarios supervisores 
+                        }
+
+
                         l.Add((Guid)u.ProviderUserKey);
                     }
                 }
@@ -352,17 +367,27 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             foreach (MembershipUser u in users)
             {
-                if (!(Roles.IsUserInRole(u.UserName,"AdminExterno")
-                    || Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteCliente")
-                    || Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor")
-                    || Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas")
-                    || Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") 
-                    ))
-                    continue;
-
+             
                 if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) 
                     || DatosExtendidosDelUsuario_GrupoUsuarios(guiduser)=="")
                 {
+
+
+                    if ((DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
+                    {
+                        if (!(
+                             Roles.IsUserInRole(u.UserName, "AdminExterno") ||
+                             Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas") ||
+                             Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor") ||
+                             Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") ||
+                             Roles.IsUserInRole(u.UserName, "Externo")
+                            ))
+
+                            continue; // para que el adminexterno general (que no tiene cuit/grupo) no vea a usuarios supervisores 
+                    }
+
+
+
                     l.Add((Guid)u.ProviderUserKey);
                 }
             }

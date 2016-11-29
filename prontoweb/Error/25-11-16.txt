@@ -124,3 +124,253 @@ Thread was being aborted.
    at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
 mscorlib
 __________________________
+
+Log Entry : 
+11/25/2016 11:20:57
+
+Log Entry : 
+11/25/2016 11:21:51
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
+mscorlib
+__________________________
+
+Log Entry : 
+11/25/2016 11:54:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:IMPORTADOR No se pudo importar ningún renglón C:\Users\Administrador\AppData\Local\Temp\71711_Posicion-161117-1722.xls
+__________________________
+
+Log Entry : 
+11/25/2016 11:56:06
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/25/2016 11:59:55
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.IndexOutOfRangeException
+Index was outside the bounds of the array.
+   at ServicioCartaPorte.servi.InformeSituacion(Int32 iddestino, DateTime desde, DateTime hasta, String SC) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2843
+   at SituacionCalidad.btnPanelInforme_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 382
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+InterfazFlexicapture
+__________________________
+
+Log Entry : 
+11/25/2016 12:01:57
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.IndexOutOfRangeException
+Index was outside the bounds of the array.
+   at ServicioCartaPorte.servi.InformeSituacion(Int32 iddestino, DateTime desde, DateTime hasta, String SC) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2843
+   at SituacionCalidad.btnPanelInforme_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 382
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+InterfazFlexicapture
+__________________________
+
+Log Entry : 
+11/25/2016 12:08:13
+Error in: http://localhost:58911/ProntoWeb/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:System.Web.HttpException
+The file '/ProntoWeb/ProntoWeb/CartaDePorte.aspx' does not exist.
+   at System.Web.UI.Util.CheckVirtualFileExists(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+11/25/2016 12:09:24
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/25/2016 12:12:52
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/25/2016 12:13:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:13:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:18:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:System.Web.HttpParseException
+Type 'AjaxControlToolkit.MaskedEditExtender' does not have a public property named 'TabPanel'.
+   at System.Web.UI.TemplateParser.ProcessException(Exception ex)
+   at System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   at System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+System.Web
+__________________________
+
+Log Entry : 
+11/25/2016 12:18:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:System.Web.HttpParseException
+Type 'AjaxControlToolkit.MaskedEditExtender' does not have a public property named 'TabPanel'.
+   at System.Web.UI.TemplateParser.ProcessException(Exception ex)
+   at System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   at System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+System.Web
+__________________________
+
+Log Entry : 
+11/25/2016 12:19:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:19:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:19:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:19:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:20:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:20:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:52:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:52:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:54:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:54:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:54:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:54:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:55:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:55:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:56:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:56:54
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:57:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:57:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:58:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:58:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+11/25/2016 12:58:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:La carta numero 557566050 id=2638418 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/25/2016 12:58:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638418. Error Message:PV 1 0
+__________________________
