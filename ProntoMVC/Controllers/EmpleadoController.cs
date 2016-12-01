@@ -30,6 +30,14 @@ namespace ProntoMVC.Controllers
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
         {
+           
+            if (!PuedeLeer(enumNodos.Empleados)) throw new Exception("No tenés permisos");
+            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+                !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") 
+                ) throw new Exception("No tenés permisos");
+
+
+
             var Empleados = db.Empleados
                 .OrderBy(s => s.Nombre)
                 .Skip((page - 1) * pageSize)

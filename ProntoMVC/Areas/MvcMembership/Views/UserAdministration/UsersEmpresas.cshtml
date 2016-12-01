@@ -16,16 +16,26 @@
         <li>Empresas</li>
         <li>@Html.ActionLink("Contraseña", "Password", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
         <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
-        <li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }, null)</li>
+
+
+        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador"))
+        {
+
+            <li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }, null)</li>
+
+
+        }
+
     </ul>
     <h3 class="mvcMembership">
-        Empresas</h3>
+        Empresas
+    </h3>
     <div class="mvcMembership-userRoles">
         @foreach (var empresa in Model.Empresas)
         {
 
             if (empresa.Key == "") { continue; }
-        
+
             <div class="row-fluid">
                 <div class="span2">
                     @Html.ActionLink(empresa.Key, "empresa", new { id = empresa.Key })
@@ -35,13 +45,13 @@
                     {
                         using (Html.BeginForm("RemoveFromEmpresa", "UserAdministration", new { id = Model.User.ProviderUserKey, empresa = empresa.Key }))
                         {
-                        <input type="submit" value="Quitar" />
-                    
-                     
+                            <input type="submit" value="Quitar" />
 
-@*
-                    @Html.ActionLink("Accesos detalle", "Edit", "Acceso", new { Area = "", id = empleadoEnEstaEmpresa(empresa.Key, Model.User.ProviderUserKey) }, new { })
-                    *@
+
+
+                            @*
+                                @Html.ActionLink("Accesos detalle", "Edit", "Acceso", new { Area = "", id = empleadoEnEstaEmpresa(empresa.Key, Model.User.ProviderUserKey) }, new { })
+                            *@
 
                         }
                     }
@@ -49,11 +59,11 @@
                     {
                         using (Html.BeginForm("AddToEmpresa", "UserAdministration", new { id = Model.User.ProviderUserKey, empresa = empresa.Key }))
                         {
-                        <input type="submit" value="Agregar" />
+                            <input type="submit" value="Agregar" />
                         }
                     }
                 </div>
-            </div>          
+            </div>
         }
     </div>
 </div>
