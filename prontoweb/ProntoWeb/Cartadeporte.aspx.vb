@@ -2236,12 +2236,12 @@ Partial Class CartadeporteABM
 
                 Try
                     cmbSituacion.Text = ExcelImportadorManager.Situaciones(If(.Situacion, 0))
-                    txtObservaciones.Text = .ObservacionesSituacion
+                    txtObsSituacion.Text = .ObservacionesSituacion
                     txtFechaAutorizacion.Text = .FechaAutorizacion
                 Catch ex As Exception
 
                 End Try
-                
+
 
 
                 'BuscaIDEnCombo(cmbProveedor, .IdProveedor)

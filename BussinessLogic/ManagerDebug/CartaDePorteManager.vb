@@ -2212,6 +2212,9 @@ Public Class CartaDePorteManager
                             )
 
 
+            If (IIf(sTituloFiltroUsado = "", sEst, sTituloFiltroUsado).trim = "") Then
+                ErrHandler2.WriteError("Prefijo de asunto vacio. " & sTituloFiltroUsado & " - " & sEst & " " & estado.ToString)
+            End If
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13222
             s = s.Replace("Descargas de Hoy + Todas las Posiciones", "Posición y Descargas de Hoy")
@@ -3340,6 +3343,7 @@ Public Class CartaDePorteManager
 
 
             ErrHandler2.WriteError(err)
+            ErrHandler2.WriteError("excel: " & ArchivoExcelDestino)
             Throw
         Finally
             ' Close connection
@@ -10719,6 +10723,7 @@ Public Class CartaDePorteManager
             Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
                 Return "Descargas de Hoy + Todas las Posiciones "
             Case Else
+
                 Return ""
         End Select
 
@@ -18976,8 +18981,9 @@ Public Class CDPMailFiltrosManager2
         Dim ModoImpresion As String = iisNull(dr.Item("ModoImpresion"), "Excel")
 
 
-        If ModoImpresion = "Html" Or ModoImpresion = "HtmlIm" Then
-            Throw New Exception("El informe HTML y HTMLIM no salen por servidor de informes, sino por modo local (son los informes que se llaman desde el AppCode\FiltroManager, y que deberiamos migrar) ")
+        If ModoImpresion = "Html" Or ModoImpresion = "HtmlIm" Or ModoImpresion = "Excel" Or ModoImpresion = "ExcelIm" Then
+            Throw New Exception("Los modos HTML,HTMLIM,Excel,ExcelIm no salen por servidor de informes, sino por modo local " & _
+                                " (son los informes que se llaman desde el AppCode\FiltroManager\EnviarMailFiltroPorRegistro, y que deberiamos migrar) ")
         End If
 
 
@@ -19131,6 +19137,7 @@ Public Class CDPMailFiltrosManager2
 
                         'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
                         'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
+
 
 
                         asunto = CartaDePorteManager.FormatearAsunto(SC, _
@@ -19444,7 +19451,7 @@ Public Class ColaMails
         For Each id As Long In s
             If id = 0 Then Continue For
 
-            Dim dt = TraerMetadata(SC, id)
+            Dim dt = CDPMailFiltrosManager2.TraerMetadata(SC, id)
             Dim dr = dt.Rows(0)
 
             dr.Item("UltimoResultado") = "En Cola"
