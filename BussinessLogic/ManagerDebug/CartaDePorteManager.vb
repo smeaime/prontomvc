@@ -2213,7 +2213,7 @@ Public Class CartaDePorteManager
 
 
             If (IIf(sTituloFiltroUsado = "", sEst, sTituloFiltroUsado).trim = "") Then
-                ErrHandler2.WriteError("Prefijo de asunto vacio. " & sTituloFiltroUsado & " - " & sEst & " " & estado.ToString)
+                ErrHandler2.WriteError("Prefijo de asunto vacio. " & sTituloFiltroUsado & " - " & sEst & " - " & Val(estado).ToString)
             End If
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13222
