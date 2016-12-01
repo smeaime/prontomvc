@@ -1,0 +1,152 @@
+
+Log Entry : 
+11/30/2016 14:20:05
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/30/2016 14:28:07
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.IndexOutOfRangeException
+There is no row at position 0.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ColaMails.EncolarFiltros(String[]& s, enumCDPestado estado, Boolean bVistaPrevia, Int64 AgrupadorDeTandaPeriodos, Int32 pv, DateTime fechadesde, DateTime fechahasta, String redirigira, String SC, Int32 idusuario) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 19448
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1862
+   at CDPMailing.lnkEnviarVistaPrevia_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 192
+   at System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Data
+__________________________
+
+Log Entry : 
+11/30/2016 14:29:18
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb(295): error BC32206: The project currently contains references to more than one version of BusinessLogic, a direct reference to version 1.0.35.15881 and an indirect reference (through 'Pronto.ERP.Bll.CDPMailFiltrosManager.EnviarMailFiltroPorRegistro') to version 1.0.35.19558. Change the direct reference to use version 1.0.35.19558 (or higher) of BusinessLogic.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+11/30/2016 14:31:03
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/30/2016 14:31:03
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+11/30/2016 14:32:16
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló el despertar. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión 127.0.0.1:59798
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadData(Uri address)
+   at System.Net.WebClient.DownloadData(String address)
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1897 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
+__________________________
+
+Log Entry : 
+11/30/2016 14:33:26
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/30/2016 14:34:27
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/30/2016 14:35:28
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/30/2016 14:36:29
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/30/2016 14:37:29
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/30/2016 14:38:30
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+11/30/2016 17:15:38
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
