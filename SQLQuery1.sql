@@ -12,11 +12,22 @@ select * from localidades
 select * from CDPEstablecimientos 
 select * from  WilliamsDestinos
 
+delete from WilliamsMailFiltrosCola
+select EstadoDeCartaPorte, * from WilliamsMailFiltrosCola
+
 
 select top 10 * from cartasdeporte order by fechadescarga
 select top 10 * from cartasdeporte order by fechamodificacion
 
 select vendedor,* from cartasdeporte where idcartadeporte=2638292
+
+
+
+
+
+
+
+
 
 
 --////////////////////////////////////////////////////////////////////////////////////////

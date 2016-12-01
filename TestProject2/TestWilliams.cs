@@ -395,6 +395,91 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void formato_mail_html_25065()
+        {
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+            dr["ModoImpresion"] = "ExcHtm";
+            //dr["ModoImpresion"] = "HtmlIm";
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
         public void OCR_29441()
         {
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
