@@ -1864,8 +1864,6 @@ Partial Class CDPMailing
 
 
 
-
-
         If nMailsEncolados = 0 Then
             MsgBoxAjax(Me, "No hay filtros tildados para enviar")
             Exit Sub
