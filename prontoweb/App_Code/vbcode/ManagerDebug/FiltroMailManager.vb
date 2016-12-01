@@ -348,6 +348,7 @@ Namespace Pronto.ERP.Bll
             Dim bDescargaHtml = CartaDePorteManager.informesHtml.ToList().Contains(ModoImpresion)
 
 
+
             If bDescargaHtml Then
                 Return CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
@@ -398,7 +399,7 @@ Namespace Pronto.ERP.Bll
                     'logear el idfiltro con problemas
 
                     ErrHandler2.WriteError(ex.ToString)
-                     dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló: " & ex.ToString, 100)
+                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló: " & ex.ToString, 100)
                     Throw
                 End Try
 
@@ -475,7 +476,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                        
+
 
 
 
@@ -510,9 +511,10 @@ Namespace Pronto.ERP.Bll
                             'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
 
 
+
                             asunto = CartaDePorteManager.FormatearAsunto(SC, _
                                  "", _
-                               estado, "", idVendedor, idCorredor, _
+                                estado, "", idVendedor, idCorredor, _
                               idDestinatario, idIntermediario, _
                               idRemComercial, idArticulo, idProcedencia, idDestino, _
                                AplicarANDuORalFiltro, ModoExportacion, _
@@ -619,7 +621,7 @@ Namespace Pronto.ERP.Bll
                         ErrHandler2.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
                         'dddd()
                         dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Falló:  " & ex.ToString, 100)
-                       'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
+                        'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
                     End Try
 
                     'Next
@@ -627,7 +629,7 @@ Namespace Pronto.ERP.Bll
                     sError += "El filtro genera un informe vacío." & vbCrLf
 
                     dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
-                 ElseIf output = "-2" Then
+                ElseIf output = "-2" Then
 
                     sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
 
@@ -664,7 +666,7 @@ Namespace Pronto.ERP.Bll
                                                         ) As String
 
 
-      
+
 
 
 
@@ -681,7 +683,7 @@ Namespace Pronto.ERP.Bll
             Return archivo
 
 
-            
+
 
             ''Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
             'Dim dt = TraerMetadata(SC, id)
@@ -1301,7 +1303,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
- 
+
 
         Shared Function generarNotasDeEntregaConReportViewer(ByVal SC As String, ByVal fechadesde As Date, _
                                                              ByVal fechahasta As Date, ByVal dr As DataRow, _

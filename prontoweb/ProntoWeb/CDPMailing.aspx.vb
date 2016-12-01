@@ -1859,9 +1859,7 @@ Partial Class CDPMailing
 
 
 
-        nMailsEncolados = ColaMails.EncolarFiltros(s, bVistaPrevia, estado, AgrupadorDeTandaPeriodos, cmbPuntoVenta.SelectedValue, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), txtRedirigirA.Text, HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario))
-
-
+        nMailsEncolados = ColaMails.EncolarFiltros(s, estado, bVistaPrevia, AgrupadorDeTandaPeriodos, cmbPuntoVenta.SelectedValue, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), txtRedirigirA.Text, HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario))
 
 
 
