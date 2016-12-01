@@ -12,3 +12,131 @@ Thread was being aborted.
    at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 169
 mscorlib
 __________________________
+
+Log Entry : 
+12/01/2016 10:39:04
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló el despertar. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión 127.0.0.1:80
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadData(Uri address)
+   at System.Net.WebClient.DownloadData(String address)
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1900 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
+__________________________
+
+Log Entry : 
+12/01/2016 10:40:12
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+12/01/2016 10:42:15
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló el despertar. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión 127.0.0.1:59798
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadData(Uri address)
+   at System.Net.WebClient.DownloadData(String address)
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1897 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
+__________________________
+
+Log Entry : 
+12/01/2016 10:43:12
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló el despertar. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión 127.0.0.1:80
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadData(Uri address)
+   at System.Net.WebClient.DownloadData(String address)
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1900 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
+__________________________
+
+Log Entry : 
+12/01/2016 10:48:25
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+12/01/2016 10:49:17
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló el despertar. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión 127.0.0.1:59798
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadData(Uri address)
+   at System.Net.WebClient.DownloadData(String address)
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1897 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
+__________________________
+
+Log Entry : 
+12/01/2016 10:54:12
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló el despertar. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión 127.0.0.1:80
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadData(Uri address)
+   at System.Net.WebClient.DownloadData(String address)
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1900 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
+__________________________
+
+Log Entry : 
+12/01/2016 10:56:28
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+12/01/2016 10:56:29
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________
+
+Log Entry : 
+12/01/2016 10:57:33
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló el despertar. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión 127.0.0.1:59798
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadData(Uri address)
+   at System.Net.WebClient.DownloadData(String address)
+   at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1897 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
+__________________________
