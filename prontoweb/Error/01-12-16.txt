@@ -140,3 +140,27 @@ Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Falló
    at System.Net.WebClient.DownloadData(String address)
    at CDPMailing.GeneraYEnviaLosMailsTildadosDeLaGrilla(enumCDPestado estado, Boolean bVistaPrevia) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb:line 1897 http://localhost/Pronto/TestCacheTimeout/WebForm1.aspx
 __________________________
+
+Log Entry : 
+12/01/2016 11:00:47
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/01/2016 11:01:06
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/01/2016 11:01:50
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
