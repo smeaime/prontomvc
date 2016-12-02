@@ -1412,7 +1412,7 @@ Namespace Pronto.ERP.Bll
 
                     '                    agregar uno para grobo
                     Dim ret As String
-                    ret = CartaDePorteManager.PlantillaDeInforme(SC, rdl, idVendedor, idRemComercial, idIntermediario, idCorredor, idDestinatario, IdClienteAuxiliar, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
+                    ret = CartaDePorteManager.QueInforme_PorModoLocal(SC, rdl, idVendedor, idRemComercial, idIntermediario, idCorredor, idDestinatario, IdClienteAuxiliar, fechadesde, fechahasta, dr, estado, lineasGeneradas, titulo, logo, puntoventa, tiemposql, tiempoinforme, bDescargaHtml, grid)
                     If ret <> "" Then
                         Return ret
                     End If
