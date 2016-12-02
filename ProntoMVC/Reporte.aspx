@@ -324,7 +324,8 @@ If you want additionally remove vertical border between the cells in the grid yo
                             <img src="<%=Page.ResolveUrl("~/")%>Content/Images/Empresas/<%=  (( Session["BasePronto"].NullSafeToString() ?? "") =="" )? "DemoPronto" : Session["BasePronto"].NullSafeToString()   %>.png"
                                 alt="" style="text-align: left; margin-top: 2px; margin-left: 27px; width: ; height: 42px;" />
                         </a></li>
-                        <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0; margin-top: 9px; width: 322px">
+
+<%--                        <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0; margin-top: 9px; width: 322px">
                             <div class="span10">
                                 <div class="input-prepend input-append">
                                     <input id="SuperBuscador2" type="text" class="" style="width: 322px"
@@ -333,7 +334,8 @@ If you want additionally remove vertical border between the cells in the grid yo
 
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
+
                         <li class="span1"><a href=""></a></li>
                         <div id="navigation3" class="pull-left ">
                         </div>
