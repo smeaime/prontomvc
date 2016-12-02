@@ -3749,7 +3749,7 @@ Public Class CartaDePorteManager
                 'Dim IdClienteEquivalenteAlCorredor = BuscaIdVendedorPreciso(EntidadManager.NombreVendedor(SC, drCDP("Corredor")), SC)
                 'If IdClienteEquivalenteAlCorredor < 1 Then Return 0
 
-                rdl = QueInforme(SC, dr)
+                rdl = QueInforme_PorServidor(SC, dr)
 
 
                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3933,7 +3933,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2"}
+    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc"}
 
     Enum eInformesGeneralFormatos
         Html
@@ -3962,7 +3962,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function QueInforme(SC As String, dr As DataRow) As String
+    Shared Function QueInforme_PorServidor(SC As String, dr As DataRow) As String
 
 
         Dim rdl As String
@@ -3978,11 +3978,15 @@ Public Class CartaDePorteManager
             Dim idDestino As Long = iisNull(.Item("Destino"), -1)
 
 
-            If iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
+            Dim ModoImpresion As String = iisNull(.Item("ModoImpresion"), "")
 
 
-            ElseIf NombreCliente(SC, idVendedor) = "DOW AGROSCIENCES ARG. SA" _
+
+            'If ModoImpresion = "HtmlIm" Then
+            '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
+
+
+            If NombreCliente(SC, idVendedor) = "DOW AGROSCIENCES ARG. SA" _
                     Or NombreCliente(SC, idRemComercial) = "DOW AGROSCIENCES ARG. SA" _
                     Or NombreCliente(SC, idIntermediario) = "DOW AGROSCIENCES ARG. SA" _
                     Or NombreCliente(SC, idDestinatario) = "DOW AGROSCIENCES ARG. SA" _
@@ -3991,41 +3995,50 @@ Public Class CartaDePorteManager
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl"
                 'hay que mandarle el informe extendido
 
-            ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
-                'formato para corredores (menos BLD)
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original)  para Corredores.rdl"
+                'ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not ModoImpresion = "Imagen" AndAlso Not ModoImpresion = "HtmlIm" Then
+                '    'formato para corredores (menos BLD)
+                '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original)  para Corredores.rdl"
 
-            ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
-                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
-            ElseIf NombreCliente(SC, IdClienteAuxiliar) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
-                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
+                'ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
+                '    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
+                'ElseIf NombreCliente(SC, IdClienteAuxiliar) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
+                '    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
 
-            ElseIf iisNull(.Item("ModoImpresion"), "") = "Html" Then
-                'este era el tradicional
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
-            ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel" Then
-                'este era el tradicional
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
-            ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
-                'formato normal para clientes (incluye la foto)
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+                'ElseIf ModoImpresion = "Html" Then
+                '    'este era el tradicional
+                '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+                'ElseIf ModoImpresion = "Excel" Then
+                '    'este era el tradicional
+                '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+                'ElseIf ModoImpresion = "ExcelIm" Then
+                '    'formato normal para clientes (incluye la foto)
+                '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
 
-            ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
+            ElseIf ModoImpresion = "ExcHtm" Then
                 'este es de servidor, así que saco el path
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
 
-            ElseIf iisNull(.Item("ModoImpresion"), "") = "EHOlav" Then
+            ElseIf ModoImpresion = "EHOlav" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
 
-            ElseIf iisNull(.Item("ModoImpresion"), "") = "HImag2" Then
+            ElseIf ModoImpresion = "HImag2" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
+
+            ElseIf ModoImpresion = "GrobHc" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl"
+
+            ElseIf ModoImpresion = "ExcHc" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
+
+
 
 
             Else
+                Throw New Exception("ModoImpresion no encontrado: " & ModoImpresion)
                 'formato normal para clientes (incluye la foto)
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+                ' rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
             End If
 
         End With
@@ -4037,7 +4050,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function PlantillaDeInforme(SC As String, ByRef rdl As String, idVendedor As Long, idRemComercial As Long, idIntermediario As Long, idCorredor As Long, idDestinatario As Long, IdClienteAuxiliar As Long, ByVal fechadesde As Date, _
+    Shared Function QueInforme_PorModoLocal(SC As String, ByRef rdl As String, idVendedor As Long, idRemComercial As Long, idIntermediario As Long, idCorredor As Long, idDestinatario As Long, IdClienteAuxiliar As Long, ByVal fechadesde As Date, _
                                                          ByVal fechahasta As Date, ByVal dr As DataRow, _
                                                          ByVal estado As CartaDePorteManager.enumCDPestado, _
                                                          ByRef lineasGeneradas As Long, ByRef titulo As String, _
@@ -4047,7 +4060,7 @@ Public Class CartaDePorteManager
                                                           ByVal bDescargaHtml As Boolean, _
                                                           grid As GridView) As String
 
-        PlantillaDeInforme = ""
+        QueInforme_PorModoLocal = ""
 
         With dr
 
@@ -14750,12 +14763,12 @@ Public Class CartaDePorteManager
         Dim lista3 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor3"), "").Split("|"), IEnumerable(Of String)).ToList
 
         If lista3.Contains(usuario) Then
-            Return c3.ToList
+            Return c3.ToList.Where(Function(x) x <> "")
 
         ElseIf lista2.Contains(usuario) Then
-            Return c2.ToList
+            Return c2.ToList.Where(Function(x) x <> "")
         Else
-            Return c1.ToList
+            Return c1.ToList.Where(Function(x) x <> "")
         End If
 
     End Function
@@ -19155,128 +19168,199 @@ Public Class CDPMailFiltrosManager2
 
 
 
+                    
 
-                    If iisNull(.Item("ModoImpresion"), "Excel") = "ExcHtm" Then
+                    Select ModoImpresion
 
-                        Dim grid As New GridView
-                        Dim html = ExcelToHtml(output, grid)
+                        Case "ExcHtm"
 
-                        MandaEmail_Nuevo(destinatario, _
-                                                          asunto, _
-                                                        cuerpo + html, _
-                                                     De, _
-                                                     SmtpServer, _
-                                                              SmtpUser, _
-                                                              SmtpPass, _
-                                                                output, _
-                                                              SmtpPort, _
-                                                      , _
-                                                      CCOaddress, , , De, , inlinePNG, inlinePNG2)
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(output, grid)
 
-
-                    ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "HOlav" Then
-                        Dim grid As New GridView
-                        Dim html = ExcelToHtml(output, grid, 2000)
-
-                        MandaEmail_Nuevo(destinatario, _
-                                    asunto, _
-                              EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                               De, _
-                               SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                           "", _
-                                        SmtpPort, _
-                                , _
-                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
-
-                    ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "EHOlav" Then
-                        Dim grid As New GridView
-                        Dim html = ExcelToHtml(output, grid, 2000)
-
-                        MandaEmail_Nuevo(destinatario, _
-                                    asunto, _
-                              EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                               De, _
-                               SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                          output, _
-                                        SmtpPort, _
-                                , _
-                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
+                            MandaEmail_Nuevo(destinatario, _
+                                                              asunto, _
+                                                            cuerpo + html, _
+                                                         De, _
+                                                         SmtpServer, _
+                                                                  SmtpUser, _
+                                                                  SmtpPass, _
+                                                                    output, _
+                                                                  SmtpPort, _
+                                                          , _
+                                                          CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
-                    ElseIf iisNull(.Item("ModoImpresion"), "Excel") = "HImag2" Then
-                        Dim grid As New GridView
-                        Dim html = ExcelToHtml(output, grid, 2000)
-
-                        MandaEmail_Nuevo(destinatario, _
-                                    asunto, _
-                              EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                               De, _
-                               SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                          output, _
-                                        SmtpPort, _
-                                , _
-                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
+                        Case "GrobHc"
 
 
-                    ElseIf bDescargaHtml Then
+                            dr("ModoImpresion") = "HImag2"
+                            Dim outputHtml = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+                            dr("ModoImpresion") = "GrobHc"
+
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(outputHtml, grid)
+
+                            MandaEmail_Nuevo(destinatario, _
+                                                              asunto, _
+                                                            cuerpo + html, _
+                                                         De, _
+                                                         SmtpServer, _
+                                                                  SmtpUser, _
+                                                                  SmtpPass, _
+                                                                    output, _
+                                                                  SmtpPort, _
+                                                          , _
+                                                          CCOaddress, , , De, , inlinePNG, inlinePNG2)
+
+
+                        Case "ExcHc"
+
+                            dr("ModoImpresion") = "HImag2"
+                            Dim outputHtml = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+                            dr("ModoImpresion") = "ExcHc"
+
+
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(outputHtml, grid, 2000)
+
+
+                            MandaEmail_Nuevo(destinatario, _
+                                                              asunto, _
+                                                            cuerpo + html, _
+                                                         De, _
+                                                         SmtpServer, _
+                                                                  SmtpUser, _
+                                                                  SmtpPass, _
+                                                                    output, _
+                                                                  SmtpPort, _
+                                                          , _
+                                                          CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
 
-                        Dim grid As New GridView
-                        Dim html = ExcelToHtml(output, grid)
+                        Case "HOlav"
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(output, grid, 2000)
 
-                        MandaEmail_Nuevo(destinatario, _
-                                    asunto, _
-                              EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                               De, _
-                               SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                          "", _
-                                        SmtpPort, _
-                                , _
-                                CCOaddress, , , De, , inlinePNG, inlinePNG2)
+                            MandaEmail_Nuevo(destinatario, _
+                                        asunto, _
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                                   De, _
+                                   SmtpServer, _
+                                            SmtpUser, _
+                                            SmtpPass, _
+                                               "", _
+                                            SmtpPort, _
+                                    , _
+                                    CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
-                        'MandaEmail(destinatario, _
-                        '                    asunto, _
-                        '                  cuerpo + output, _
-                        '                   De, _
-                        '                 SmtpServer, _
-                        '                SmtpUser, _
-                        '                SmtpPass, _
-                        '                "", _
-                        '                SmtpPort, _
-                        '                 , _
-                        '                 CCOaddress, _
-                        '                    truquito _
-                        '                    , "Williams Entregas" _
-                        '               )
-                    Else
+                        Case "HOlav"
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(output, grid, 2000)
 
-                        MandaEmail_Nuevo(destinatario, _
+                            MandaEmail_Nuevo(destinatario, _
+                                        asunto, _
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                                   De, _
+                                   SmtpServer, _
+                                            SmtpUser, _
+                                            SmtpPass, _
+                                               "", _
+                                            SmtpPort, _
+                                    , _
+                                    CCOaddress, , , De, , inlinePNG, inlinePNG2)
+
+                        Case "EHOlav"
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(output, grid, 2000)
+
+                            MandaEmail_Nuevo(destinatario, _
+                                        asunto, _
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                                   De, _
+                                   SmtpServer, _
+                                            SmtpUser, _
+                                            SmtpPass, _
+                                              output, _
+                                            SmtpPort, _
+                                    , _
+                                    CCOaddress, , , De, , inlinePNG, inlinePNG2)
+
+
+                        Case "HImag2"
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(output, grid, 2000)
+
+                            MandaEmail_Nuevo(destinatario, _
+                                        asunto, _
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                                   De, _
+                                   SmtpServer, _
+                                            SmtpUser, _
+                                            SmtpPass, _
+                                              output, _
+                                            SmtpPort, _
+                                    , _
+                                    CCOaddress, , , De, , inlinePNG, inlinePNG2)
+
+                        Case Else
+
+
+                            If bDescargaHtml Then
+
+
+
+                                Dim grid As New GridView
+                                Dim html = ExcelToHtml(output, grid)
+
+                                MandaEmail_Nuevo(destinatario, _
                                             asunto, _
-                                          cuerpo, _
-                                           De, _
-                                         SmtpServer, _
-                                        SmtpUser, _
-                                        SmtpPass, _
-                                        output, _
-                                        SmtpPort, _
-                                         , _
-                                         CCOaddress, _
-                                            truquito _
-                                            , "Williams Entregas", De, , inlinePNG, inlinePNG2 _
-                                       )
+                                      EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
+                                       De, _
+                                       SmtpServer, _
+                                                SmtpUser, _
+                                                SmtpPass, _
+                                                  "", _
+                                                SmtpPort, _
+                                        , _
+                                        CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
-                    End If
 
+                                'MandaEmail(destinatario, _
+                                '                    asunto, _
+                                '                  cuerpo + output, _
+                                '                   De, _
+                                '                 SmtpServer, _
+                                '                SmtpUser, _
+                                '                SmtpPass, _
+                                '                "", _
+                                '                SmtpPort, _
+                                '                 , _
+                                '                 CCOaddress, _
+                                '                    truquito _
+                                '                    , "Williams Entregas" _
+                                '               )
+                            Else
+
+                                MandaEmail_Nuevo(destinatario, _
+                                                    asunto, _
+                                                  cuerpo, _
+                                                   De, _
+                                                 SmtpServer, _
+                                                SmtpUser, _
+                                                SmtpPass, _
+                                                output, _
+                                                SmtpPort, _
+                                                 , _
+                                                 CCOaddress, _
+                                                    truquito _
+                                                    , "Williams Entregas", De, , inlinePNG, inlinePNG2 _
+                                               )
+
+                            End If
+
+                    End Select
 
                     stopWatch.Stop()
                     Dim tiempomail = stopWatch.Elapsed.Milliseconds
