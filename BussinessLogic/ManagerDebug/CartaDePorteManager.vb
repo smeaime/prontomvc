@@ -3933,7 +3933,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2"}
+    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc"}
 
     Enum eInformesGeneralFormatos
         Html
