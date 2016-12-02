@@ -286,3 +286,78 @@ A network-related or instance-specific error occurred while establishing a conne
    at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 433
 .Net SqlClient Data Provider
 __________________________
+
+Log Entry : 
+12/02/2016 14:47:39
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_144739_MMC.xls  Informe: Descargas,  del 01/11/2016 al 02/12/2016           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+12/02/2016 14:51:48
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145143_CVD.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:51:48
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145143_CVD.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:51:51
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145149_IWX.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:51:51
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145149_IWX.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:51:54
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+12/02/2016 14:51:54
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+12/02/2016 14:51:54
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Convertido C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145149_IWX.xls Lineas: 10
+__________________________
+
+Log Entry : 
+12/02/2016 14:52:10
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145208_XXQ.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:52:10
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145208_XXQ.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:52:14
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145211_MOO.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:52:14
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145211_MOO.xls
+__________________________
+
+Log Entry : 
+12/02/2016 14:52:14
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+12/02/2016 14:52:14
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+12/02/2016 14:52:14
+Error in: http://localhost:58911/ProntoWeb/CDPMailing.aspx. Error Message:Convertido C:\Users\Administrador\AppData\Local\Temp\Listado general 02dic2016_145211_MOO.xls Lineas: 10
+__________________________
