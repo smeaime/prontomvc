@@ -128,7 +128,7 @@ Partial Class CartaDePorteInformesGerenciales
 
         Dim admins = New String() {"Mariano", "Andres", "hwilliams"}
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
-        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "twilliams2"}
+        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "twilliams2","mgarcia2" ,"jtropea2"}
 
         If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString) Then
             MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
