@@ -47,6 +47,8 @@ using System.Text;
 using System.Reflection;
 
 
+
+
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
@@ -392,10 +394,40 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        [TestMethod]
+        public void bldcorredor_29608()
+        {
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+            DemoProntoEntities db2 = null;
+
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO" , SC).Where(x=> x != "");
+            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
+            var sss = aaa.Split('|').ToList();
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                     "", "", "", 1, 10,
+                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                     -1, -1,
+                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                      new DateTime(2013, 1, 1),
+                      new DateTime(2014, 1, 1),
+                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
+
+                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                        .ToList();
+        }
+
+
+
 
 
         [TestMethod]
-        public void formato_mail_html_25065()
+        public void formato_mail_html_25065_estandar_2()
         {
 
             //aaaaaa
@@ -409,7 +441,24 @@ namespace ProntoMVC.Tests
 
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
-            dr["ModoImpresion"] = "ExcHtm";
+            //dr["ModoImpresion"] = "GrobHc"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
+            dr["ModoImpresion"] = "ExcHc";  
+
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
+            //    'este es de servidor, así que saco el path
+            //    rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "EHOlav" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "HImag2" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
+
+    
+
+
+
             //dr["ModoImpresion"] = "HtmlIm";
 
             dr["Emails"] = "mscalella911@gmail.com";
@@ -473,6 +522,102 @@ namespace ProntoMVC.Tests
 
         }
 
+
+        [TestMethod]
+        public void formato_mail_html_grobo_25065()
+        {
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+            dr["ModoImpresion"] = "GrobHc"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
+            //dr["ModoImpresion"] = "ExcHc";
+
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
+            //    'este es de servidor, así que saco el path
+            //    rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "EHOlav" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "HImag2" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
+
+
+
+
+
+            //dr["ModoImpresion"] = "HtmlIm";
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
 
 
 
@@ -1674,7 +1819,7 @@ namespace ProntoMVC.Tests
             dr["EnumSyngentaDivision"] = "";
             dr["EsPosicion"] = false;
             dr["IdArticulo"] = -1;
-            
+
             CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
             //CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha;
             //CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.Posicion;

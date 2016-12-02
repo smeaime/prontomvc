@@ -363,6 +363,10 @@
       <FullPath>Requerimientos pendientes sin pedido.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</Name>
+      <FullPath>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Resumen Cuenta Corriente Acreedores.rdl</Name>
       <FullPath>Resumen Cuenta Corriente Acreedores.rdl</FullPath>
     </ProjectItem>
@@ -467,8 +471,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</Name>
-      <FullPath>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
