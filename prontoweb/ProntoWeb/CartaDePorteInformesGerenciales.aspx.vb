@@ -126,11 +126,11 @@ Partial Class CartaDePorteInformesGerenciales
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_Facturacion)
 
 
-        Dim admins = New String() {"Mariano", "Andres", "hwilliams"}
+        Dim admins = New String() {"mariano", "andres", "hwilliams"}
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
         Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "twilliams2","mgarcia2" ,"jtropea2"}
 
-        If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString) Then
+        If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
             MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
             Exit Sub
         End If
@@ -138,7 +138,7 @@ Partial Class CartaDePorteInformesGerenciales
 
 
         'If Not p("PuedeLeer") Then
-        If Not admins.Contains(Session(SESSIONPRONTO_UserName)) Then
+        If Not admins.Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
             'anular la columna de edicion
             'getGridIDcolbyHeader(
 
@@ -175,7 +175,7 @@ Partial Class CartaDePorteInformesGerenciales
         End If
 
 
-        If encargados.Contains(Session(SESSIONPRONTO_UserName)) Then
+        If encargados.Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
 
             cmbInforme.Items.FindByText("Ranking de Cereales").Enabled = True
             cmbInforme.Items.FindByText("Ranking de Clientes").Enabled = True
