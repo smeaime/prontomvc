@@ -701,7 +701,8 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdOrdenesPago.ToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("EditExterno",new {id = a.IdOrdenesPago} ) + " target='' >Editar</>", 
+                                "<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Orden%20Pago2&Id=" + a.IdOrdenesPago + "'>Editar</a> ",
+                                //"<a href="+ Url.Action("EditExterno",new {id = a.IdOrdenesPago} ) + " target='' >Editar</>", 
                                  //+"|"+"<a href=../OrdenPago/EditExterno/" + a.IdOrdenesPago + "?code=1" + ">Detalles</a> "
                                 "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenesPago} ) + ">Emitir</a> ",
                                 a.IdOPComplementariaFF.NullSafeToString(),
