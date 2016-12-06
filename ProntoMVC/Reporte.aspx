@@ -492,6 +492,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                 <%--196px http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=12643--%>
                 <br />
                 <%-- <a   title="fdasdasd"  href="Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores"    >... </a>--%>
+
                 <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);">
                 </table>
                 <div id="paddtree">
