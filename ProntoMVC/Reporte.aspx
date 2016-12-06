@@ -325,7 +325,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                                 alt="" style="text-align: left; margin-top: 2px; margin-left: 27px; width: ; height: 42px;" />
                         </a></li>
 
-<%--                        <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0; margin-top: 9px; width: 322px">
+                        <%--                        <div id="spanDelSuperbuscador" class="span3 " style="padding: 0px; margin: 0; margin-top: 9px; width: 322px">
                             <div class="span10">
                                 <div class="input-prepend input-append">
                                     <input id="SuperBuscador2" type="text" class="" style="width: 322px"
@@ -492,6 +492,27 @@ If you want additionally remove vertical border between the cells in the grid yo
                 <%--196px http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=12643--%>
                 <br />
                 <%-- <a   title="fdasdasd"  href="Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores"    >... </a>--%>
+
+
+
+
+
+                <%                                   
+                    if (Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno")
+                     || Roles.IsUserInRole(Membership.GetUser().UserName, "Externo")
+                     || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoOrdenesPagoListas")
+                     || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoCuentaCorrienteProveedor")
+                     || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoCuentaCorrienteCliente")
+                     || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoCotizaciones")
+                     )
+                    { %>
+                <div class="alert alert-error fade in span12 " id="asdasd" style="width: 150px; font-size: 16px">
+                    Solo estarán disponibles para retirar las ordenes de pago que estén en Caja
+                </div>
+                <% } %>
+
+
+
                 <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);">
                 </table>
                 <div id="paddtree">
@@ -739,7 +760,7 @@ If you want additionally remove vertical border between the cells in the grid yo
         // no me está llamando estas funciones, entonces repetí las llamadas más arriba
         // no me está llamando estas funciones, entonces repetí las llamadas más arriba
 
-   //     armarMenu();
-   //     estiloArbol();
+        //     armarMenu();
+        //     estiloArbol();
     })
 </script>
