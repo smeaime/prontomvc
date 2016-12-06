@@ -506,7 +506,7 @@ namespace ProntoMVC.Reportes
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
             }
 
-            else if (reportName == "Factura Venta" || reportName == "Recibo" || reportName == "Nota Debito" || reportName == "Nota Credito" || reportName == "Orden Pago" || reportName == "Gasto Bancario" || reportName == "Plazo Fijo" || reportName == "Salida Materiales" || reportName == "Recepcion" || reportName == "Deposito" || reportName == "Comprobante Proveedores")
+            else if (reportName == "Factura Venta" || reportName == "Recibo" || reportName == "Nota Debito" || reportName == "Nota Credito" || reportName == "Orden Pago" || reportName == "Orden Pago2" || reportName == "Gasto Bancario" || reportName == "Plazo Fijo" || reportName == "Salida Materiales" || reportName == "Recepcion" || reportName == "Deposito" || reportName == "Comprobante Proveedores")
             {
                 ReportParameter[] yourParams = new ReportParameter[2];
                 yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
