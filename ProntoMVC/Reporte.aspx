@@ -493,6 +493,21 @@ If you want additionally remove vertical border between the cells in the grid yo
                 <br />
                 <%-- <a   title="fdasdasd"  href="Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores"    >... </a>--%>
 
+                  <%                                   
+                      if (Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno")
+                       || Roles.IsUserInRole(Membership.GetUser().UserName, "Externo")
+                       || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoOrdenesPagoListas")
+                       || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoCuentaCorrienteProveedor")
+                       || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoCuentaCorrienteCliente")
+                       || Roles.IsUserInRole(Membership.GetUser().UserName, "ExternoCotizaciones")
+                       )
+                      { %>
+                  <div class="alert alert-error fade in span12 " id="asdasd" style="width: 200px; font-size: 16px">
+                      Solo estarán disponibles para retirar las ordenes de pago que estén en Caja
+                  </div>
+                  <% } %>
+
+
                 <table id="addtree" class="test link-class" style="background: transparent; font-size: 14px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);">
                 </table>
                 <div id="paddtree">
