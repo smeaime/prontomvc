@@ -2277,7 +2277,7 @@ Additionally you can manage the priority of work processes and control whether t
                     probá hacer "telnet 186.18.248.116 3011" o lo que figure en el LicenseSettings.xml
                  * 190.16.100.211
               * */
-                Log(" probá hacer \"telnet 186.18.248.116 3011\". El hresult fue: " + hresult.ToString());
+                Log(" probá hacer \"telnet 186.18.248.116 3011\" usando la ip del licensesettings.xml . El hresult fue: " + hresult.ToString());
                 throw;
             }
 
