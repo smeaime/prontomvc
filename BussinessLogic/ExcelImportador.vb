@@ -1333,10 +1333,9 @@ Public Class ExcelImportadorManager
                 'mermas y neto total final
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "HUMEDAD", "GDO/HUM", "HUM" ',  "H"
+            Case "HUMEDAD", "GDO/HUM", "HUM" ',  porcentaje de humedad
                 Return "column15"
-            Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA", "MERMA_KG"
-
+            Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA", "MERMA_KG" 'merma por humedad
                 Return "column16"
 
             Case "OTRASMERMAS"
@@ -2025,7 +2024,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function BungeRamalloDescargaTextoToDataset(ByVal pFileName As String) As Data.DataSet
+    Public Shared Function BungeRamalloDescargaTextoToDataset(ByVal pFileName As String, SC As String) As Data.DataSet
 
 
         '7:41 (hace 13 minutos)
@@ -2078,7 +2077,12 @@ Public Class ExcelImportadorManager
 
 
         dr(29) = "HUMEDAD"
-        dr(31) = "MERMA"
+        dr(30) = "MERMA"
+        'la columna 31 (32 en el excel) es la merma total, o sea la 30+32
+        dr(32) = "OTRASMERMAS"
+
+
+
 
         dr(42) = "CALIDAD"
         dr(43) = "INTERMEDIARIO"
@@ -2164,7 +2168,6 @@ Public Class ExcelImportadorManager
         'dr(37) = "Kilos Netos Descargados"
         'dr(38) = "Tipo"
         'dr(39) = "Fecha Descarga"
-        'dr(40) = "Calidad"
         'dr(41) = "Hora Salida"
 
         'dr(44) = "RECIBO"
@@ -2259,6 +2262,22 @@ Public Class ExcelImportadorManager
                 If r(4) = "" Then
                     r(4) = "DIRECTO"
                 End If
+
+
+
+
+
+                'calidad
+                'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=25040
+                '  Si hay "otras mermas"  tiene que poner FUERA DE BASE
+                'Si no hay otras mermas, pero hay merma humedad, poner CONFORME
+
+                If Val(dr(32)) > 0 Then
+                    dr(42) = BuscaIdCalidadPreciso("FUERA DE BASE", SC)
+                ElseIf Val(dr(30)) > 0 Then
+                    dr(42) = BuscaIdCalidadPreciso("CONFORME", SC)
+                End If
+
 
 
 
@@ -4217,7 +4236,7 @@ Public Class ExcelImportadorManager
 
 
             Case BungeRamalloDescargaTexto
-                ds = BungeRamalloDescargaTextoToDataset(archivoExcel)
+                ds = BungeRamalloDescargaTextoToDataset(archivoExcel, SC)
 
 
             Case PuertoACA
