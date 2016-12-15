@@ -41,6 +41,166 @@ using System.Configuration;
 using System.Text;
 using System.Reflection;
 
+using System.Data.Objects;
+
+
+namespace Fenton.Example
+{
+    public static class IQueryableExtensions
+    {
+
+        public static string ToTraceQuery_SinUsarExtension<T>(IQueryable<T> query)
+        {
+            System.Data.Entity.Core.Objects.ObjectQuery<T> objectQuery = GetQueryFromQueryable(query);
+
+            var result = objectQuery.ToTraceString();
+            foreach (var parameter in objectQuery.Parameters)
+            {
+                var name = "@" + parameter.Name;
+                var value = "'" + parameter.Value.ToString() + "'";
+                result = result.Replace(name, value);
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// For an Entity Framework IQueryable, returns the SQL with inlined Parameters.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static string ToTraceQuery<T>(this IQueryable<T> query)
+        {
+            System.Data.Entity.Core.Objects.ObjectQuery<T> objectQuery = GetQueryFromQueryable(query);
+
+            var result = objectQuery.ToTraceString();
+            foreach (var parameter in objectQuery.Parameters)
+            {
+                var name = "@" + parameter.Name;
+                var value = "'" + parameter.Value.ToString() + "'";
+                result = result.Replace(name, value);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// For an Entity Framework IQueryable, returns the SQL and Parameters.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static string ToTraceString<T>(this IQueryable<T> query)
+        {
+            System.Data.Entity.Core.Objects.ObjectQuery<T> objectQuery = GetQueryFromQueryable(query);
+
+            var traceString = new StringBuilder();
+
+            traceString.AppendLine(objectQuery.ToTraceString());
+            traceString.AppendLine();
+
+            foreach (var parameter in objectQuery.Parameters)
+            {
+                traceString.AppendLine(parameter.Name + " [" + parameter.ParameterType.FullName + "] = " + parameter.Value);
+            }
+
+            return traceString.ToString();
+        }
+
+        private static System.Data.Entity.Core.Objects.ObjectQuery<T> GetQueryFromQueryable<T>(IQueryable<T> query)
+        {
+            var internalQueryField = query.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Where(f => f.Name.Equals("_internalQuery")).FirstOrDefault();
+            var internalQuery = internalQueryField.GetValue(query);
+            var objectQueryField = internalQuery.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Where(f => f.Name.Equals("_objectQuery")).FirstOrDefault();
+            return objectQueryField.GetValue(internalQuery) as System.Data.Entity.Core.Objects.ObjectQuery<T>;
+        }
+    }
+}
+
+
+
+public class LinqProvider<T>
+{
+    static readonly FieldInfo INTERNAL_QUERY_FIELD;
+    static readonly FieldInfo QUERYSTATE_FIELD;
+
+    static LinqProvider()
+    {
+        INTERNAL_QUERY_FIELD = typeof(System.Data.Entity.Infrastructure.DbQuery<T>).GetFields(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(f => f.Name.Equals("_internalQuery"));
+        QUERYSTATE_FIELD = typeof(System.Data.Entity.Core.Objects.ObjectQuery<>).BaseType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(x => x.Name == "_state");
+    }
+
+    public IQueryable<T> QueryContext { get; set; }
+
+    InternalQuery _InternalQueryContext;
+    public InternalQuery InternalQueryContext
+    {
+        get
+        {
+            if (_InternalQueryContext == null)
+            {
+                _InternalQueryContext = new InternalQuery();
+
+                if (QueryContext is System.Data.Entity.Infrastructure.DbQuery<T>)
+                {
+                    var internalQuery = INTERNAL_QUERY_FIELD.GetValue(QueryContext);
+
+                    var objectQueryField = internalQuery.GetType().GetProperties().FirstOrDefault(f => f.Name.Equals("ObjectQuery"));
+
+                    _InternalQueryContext.ObjectQueryContext = objectQueryField.GetValue(internalQuery,null) as System.Data.Entity.Core.Objects.ObjectQuery<T>;
+                }
+                else if (QueryContext is System.Data.Entity.Core.Objects.ObjectQuery<T>)
+                {
+                    _InternalQueryContext.ObjectQueryContext = (QueryContext as System.Data.Entity.Core.Objects.ObjectQuery<T>);
+                }
+            }
+
+            return _InternalQueryContext;
+        }
+    }
+
+    public LinqProvider(IQueryable<T> queryContext)
+    {
+        QueryContext = queryContext;
+    }
+
+    public class InternalQuery
+    {
+        public System.Data.Entity.Core.Objects.ObjectQuery<T> ObjectQueryContext { get; set; }
+
+        public string ToTraceString(IDictionary<string, object> Parameters = null)
+        {
+            var state = QUERYSTATE_FIELD.GetValue(ObjectQueryContext);
+
+            var mi = state.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(x => x.Name == "GetExecutionPlan");
+
+            mi.Invoke(state, new object[] { null });
+
+            var paramState = state.GetType().BaseType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(x => x.Name == "_parameters");
+
+            if (paramState != null)
+            {
+                System.Data.Entity.Core.Objects.ObjectParameterCollection col = paramState.GetValue(state) as System.Data.Entity.Core.Objects.ObjectParameterCollection;
+
+                if (col != null && Parameters != null)
+                {
+                    foreach (var item in col)
+                    {
+                        Parameters.Add(item.Name, item.Value);
+                    }
+                }
+            }
+
+            return ObjectQueryContext.ToTraceString();
+        }
+    }
+}
+
+
+
+
 
 namespace ProntoFlexicapture
 {
@@ -2818,25 +2978,11 @@ namespace ServicioCartaPorte
     {
 
 
-        public virtual string InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC)
+        public virtual string InformeSituacion_string(int iddestino, DateTime desde, DateTime hasta, string SC)
         {
-
             string s = "";
 
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-
-            var q =
-                                         db.fSQL_GetDataTableFiltradoYPaginado(
-                                                    0, 9999999, 0, "", -1, -1,
-                                                    -1, -1, -1, -1, -1,
-                                                    iddestino, 0, "Ambas"
-                                                    , desde, hasta,
-                                                    0, null, "", "",
-                                                    -1, null, 0, "", "Todos").Select(x => x.Situacion).GroupBy(x => x).Select(g => new { sit = g.Key, cant = g.Count() }).ToList();
-
-
+            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC);
 
 
             foreach (var line in q)
@@ -2844,7 +2990,7 @@ namespace ServicioCartaPorte
                 try
                 {
 
-                    s += (line.sit == null ? "SIN ASIGNAR" : ExcelImportadorManager.Situaciones[line.sit ?? 0]) + " " + line.cant + "\n";
+                    s += (line.Key == null ? "SIN ASIGNAR" : ExcelImportadorManager.Situaciones[line.Key]) + " " + line.Value + "\n";
                 }
                 catch (Exception)
                 {
@@ -2856,6 +3002,113 @@ namespace ServicioCartaPorte
             return s;
 
         }
+
+
+
+
+        public virtual string InformeSituacion_html(int iddestino, DateTime desde, DateTime hasta, string SC)
+        {
+            string html = "";
+
+            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC);
+
+
+            
+            //Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
+
+            string titulo = " <table cellpadding=15 style=\"text-align: center; font-size: large;\"> <tr> " +
+                        "   <td> Posición </td>" +
+                        "   <td>Demorado</td>" +
+                        "   <td>Autorizado</td>" +
+                        "   <td>A Descargar</td>" +
+                        "   <td>Descargado</td>" +
+                        "   <td>Rechazado</td>" +
+                        "   <td>Desviado</td>" +
+                        "   <td>CP p/cambiar</td>" +
+                        "   <td>Sin Cupo</td>" +
+                        "</tr> ";
+
+            int unidad = q.Values.Max() / 10;
+            var uni = new int[10];
+
+            for (int n = 0; n < 10; n++)
+            {
+                int myValue;
+                if (q.TryGetValue(n, out myValue))
+                {
+                    uni[n] = myValue / unidad;
+                }
+            }
+
+
+            html += titulo;
+
+            for (int n = 1; n < 10; n++)
+            {
+                string renglon = " <tr> " +
+                            "   <td style=\"color: blue;\">  " + ((uni[2] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: red\">  " + ((uni[1] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: green\">  " + ((uni[0] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: yellow\">  " + ((uni[4] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: cyan\"> " + ((uni[3] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: orange\"> " + ((uni[5] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: pink\"> " + ((uni[6] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: black\"> " + ((uni[7] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: white\"> " + ((uni[8] > n) ? "*" : "") + "</td>" +
+                            "</tr> ";
+
+                html += renglon;
+            }
+
+            html += "</table>";
+
+            return html;
+
+        }
+
+
+
+
+        public class situacion
+        {
+            public int sit;
+            public int cant;
+        }
+
+
+        public virtual Dictionary<int, int> InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC)
+        {
+
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            List<situacion> q2 = db.fSQL_GetDataTableFiltradoYPaginado(
+                                                    0, 9999999, 0, "", -1, -1,
+                                                    -1, -1, -1, -1, -1,
+                                                    iddestino, 0, "Ambas"
+                                                    , desde, hasta,
+                                                    0, null, "", "",
+                                                    -1, null, 0, "", "Todos").Select(x => x.Situacion ?? -1).GroupBy(x => x)
+                                                    .Select(g => new situacion { sit = g.Key, cant = g.Count() }).ToList();
+
+            Dictionary<int, int> q = q2.ToDictionary(g => g.sit, g => g.cant);
+
+
+
+
+            return q;
+
+        }
+
+
+
+
+
+
+
 
 
 

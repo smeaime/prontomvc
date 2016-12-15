@@ -381,7 +381,7 @@ Partial Class SituacionCalidad
 
 
         Dim s = New ServicioCartaPorte.servi()
-        Dim q = s.InformeSituacion(idDestino, FechaDesde, FechaHasta, HFSC.Value)
+        Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
         salida.Text = q
 
     End Sub
