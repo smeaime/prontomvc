@@ -456,6 +456,34 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void exportacionUsandoInternalQuery_29439_4()
+        {
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+            string output = @"c:\asdad.xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "11/01/2016",
+                                                 "11/01/2016",
+                                                 0, -1, SC, "Mariano");
+
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, false, ref output);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
         [TestMethod]
         public void exportacionPeroLlamandoAlRepServicesAlosupermachoconLINQ_29439_3()
         {
@@ -482,6 +510,7 @@ namespace ProntoMVC.Tests
                                                            0, null, "", "",
                                                            -1, null, 0, "", "Todos")
                                     );
+
 
             //var query = db.fSQL_GetDataTableFiltradoYPaginado(
             //                                               0, 9999999, 0, "", -1, -1,
@@ -559,6 +588,9 @@ namespace ProntoMVC.Tests
 
             System.Diagnostics.Process.Start(output3);
         }
+
+
+
 
 
 
