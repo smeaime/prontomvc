@@ -4354,9 +4354,13 @@ Public Class CartaDePorteManager
                 Try
 
                     oReportViewer.ServerReport.SetParameters(parametros)
+                    'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
 
 
                 Catch ex As Exception
+                    'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+
+
                     ErrHandler2.WriteError(ex.ToString)
                     Dim inner As Exception = ex.InnerException
                     While Not (inner Is Nothing)
@@ -4599,10 +4603,15 @@ Public Class CartaDePorteManager
                 End If
                 yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
 
+                Try
 
-                If oReportViewer.ServerReport.GetParameters().Count <> yourParams.Count() Then
-                    Throw New Exception("Distinta cantidad de parámetros: " & oReportViewer.ServerReport.GetParameters().Count & " y " & yourParams.Count())
-                End If
+                    If oReportViewer.ServerReport.GetParameters().Count <> yourParams.Count() Then
+                        Throw New Exception("Distinta cantidad de parámetros: " & oReportViewer.ServerReport.GetParameters().Count & " y " & yourParams.Count())
+                    End If
+                Catch ex As Exception
+                    'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+                    Throw
+                End Try
 
 
 
