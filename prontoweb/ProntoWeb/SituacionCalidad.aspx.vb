@@ -328,10 +328,19 @@ Partial Class SituacionCalidad
         Dim Filtro = ""
 
         Dim s = New ServicioCartaPorte.servi()
-        Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
+
+        'Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
+        '                                     txtFechaDesde.Text,
+        '                                     txtFechaHasta.Text,
+        '                                      -1, idDestino, HFSC.Value, "Mariano")
+
+        Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
                                              txtFechaDesde.Text,
                                              txtFechaHasta.Text,
                                               -1, idDestino, HFSC.Value, "Mariano")
+
+        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, False, output)
+
 
         Try
             Dim MyFile1 = New FileInfo(output3) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
@@ -381,7 +390,8 @@ Partial Class SituacionCalidad
 
 
         Dim s = New ServicioCartaPorte.servi()
-        Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
+        'Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
+        Dim q = s.InformeSituacion_html(idDestino, FechaDesde, FechaHasta, HFSC.Value)
         salida.Text = q
 
     End Sub
