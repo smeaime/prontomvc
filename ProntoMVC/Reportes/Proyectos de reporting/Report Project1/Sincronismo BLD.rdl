@@ -4314,8 +4314,9 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=SERVERSQL3;Initial Catalog=Williams</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>9e3b419f-a20b-4f8b-bf90-59e3cfb68bcf</rd:DataSourceID>
     </DataSource>
   </DataSources>
