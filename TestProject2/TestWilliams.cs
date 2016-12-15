@@ -397,52 +397,132 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void InformeDeClientesIncompletos_16492()
+        {
+
+            // explota
+
+
+            //               Mariano,
+            //Con estas columnas estaría bien (si puede ser con un link al cliente):
+
+            //Codigo
+            //Razón Social
+            //CUIT
+            //Dirección
+            //Localidad
+            //Provincia
+
+            //Solo un comentario, en la imagen incluyen el campo Autorizador Syngenta que no debe tenerse en cuenta porque casi ningun cliente lo tiene
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            //var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+            //        "Williams - Listado de Clientes incompletos.rdl",
+            //                 "", SC, false, ref ArchivoExcelDestino, sTitulo, false);
+
+
+
+
+            ReportParameter[] yourParams = new ReportParameter[2];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+
+
+            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                  "Williams - Listado de Clientes incompletos.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+
+
+
+            //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErrores, bVistaPrevia);
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+        }
+
+
+
+
 
 
 
         [TestMethod]
         public void exportacionPeroLlamandoAlRepServicesAlosupermachoconLINQ_29439_3()
         {
-            string output = "c:\asdad.xls";
+            string output = @"c:\asdad.xls";
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
+            int totalrecords = 0;
+
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
 
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
 
-            //string sqlquery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
-            //                        (
+
+            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+                                    (
+                                                            "IdCartaDePorte", "desc", 1, 999999, true, filtro, db, ref totalrecords,
+                                                            db.fSQL_GetDataTableFiltradoYPaginado(
+                                                            0, 9999999, 0, "", -1, -1,
+                                                            -1, -1, -1, -1, -1,
+                                                          -1, 0, "Ambas"
+                                                           , new DateTime(2016, 10, 1), new DateTime(2016, 11, 1),
+                                                           0, null, "", "",
+                                                           -1, null, 0, "", "Todos")
+                                    );
+
+            //var query = db.fSQL_GetDataTableFiltradoYPaginado(
             //                                               0, 9999999, 0, "", -1, -1,
             //                                               -1, -1, -1, -1, -1,
             //                                               -1, 0, "Ambas"
             //                                               , new DateTime(2016, 11, 1), new DateTime(2016, 11, 1),
             //                                               0, null, "", "",
-            //                                               -1, null, 0, "", "Todos"));
-
-            var query = db.fSQL_GetDataTableFiltradoYPaginado(
-                                                           0, 9999999, 0, "", -1, -1,
-                                                           -1, -1, -1, -1, -1,
-                                                           -1, 0, "Ambas"
-                                                           , new DateTime(2016, 11, 1), new DateTime(2016, 11, 1),
-                                                           0, null, "", "",
-                                                           -1, null, 0, "", "Todos");
+            //                                               -1, null, 0, "", "Todos");
 
             // http://stackoverflow.com/questions/1412863/how-do-i-view-the-sql-generated-by-the-entity-framework?noredirect=1&lq=1.
             //https://www.stevefenton.co.uk/2015/07/getting-the-sql-query-from-an-entity-framework-iqueryable/
 
 
+            //System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)query;
+            //string sqlquery = (oq).ToTraceString();
 
-            var lp = new LinqProvider<fSQL_GetDataTableFiltradoYPaginado_Result3>(query);
-            string sqlquery3 = lp.InternalQueryContext.ToTraceString();
 
 
-            System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)query;
-            string sqlquery = (oq).ToTraceString();
+            //var result = oq.ToTraceString();
+            //var ps = oq.Parameters.ToList();
+            //for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
+            //{
+            //    var parameter = ps[n];
+            //    var name = "@" + parameter.Name;
+            //    var value = "'" + parameter.Value.NullSafeToString() + "'";
+            //    result = result.Replace(name, value);
+            //}
 
-            string sqlquery2 = Fenton.Example.IQueryableExtensions.ToTraceQuery_SinUsarExtension<fSQL_GetDataTableFiltradoYPaginado_Result3>(query);
 
-            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery2, SC, false, ref output);
+
+
+            //var lp = new LinqProvider<fSQL_GetDataTableFiltradoYPaginado_Result3>(query);
+            //string sqlquery3 = lp.InternalQueryContext.ToTraceString();
+
+
+            //string sqlquery2 = Fenton.Example.IQueryableExtensions.ToTraceQuery_SinUsarExtension<fSQL_GetDataTableFiltradoYPaginado_Result3>(query);
+
+
+
+
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, false, ref output);
 
 
 
@@ -5019,57 +5099,6 @@ Nombre de acondicionador: listado de clientes de Williams
 
         }
 
-
-
-        [TestMethod]
-        public void InformeDeClientesIncompletos_16492()
-        {
-
-            // explota
-
-
-            //               Mariano,
-            //Con estas columnas estaría bien (si puede ser con un link al cliente):
-
-            //Codigo
-            //Razón Social
-            //CUIT
-            //Dirección
-            //Localidad
-            //Provincia
-
-            //Solo un comentario, en la imagen incluyen el campo Autorizador Syngenta que no debe tenerse en cuenta porque casi ningun cliente lo tiene
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
-
-            //yourParams(0) = New ReportParameter("webservice", "")
-            //yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
-            //yourParams(2) = New ReportParameter("idArticulo", -1)
-            //yourParams(3) = New ReportParameter("idDestino", -1)
-            //yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-            //yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-            //yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
-            //yourParams(7) = New ReportParameter("Consulta", strSQL)
-            //yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
-
-            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
-
-            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-                    "Williams - Listado de Clientes incompletos.rdl",
-                             "", SC, false, ref ArchivoExcelDestino, sTitulo, false);
-
-            rep.Dispose();
-
-
-
-
-            //var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", txtMailDiazRiganti.Text, sErrores, bVistaPrevia);
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-        }
 
 
 

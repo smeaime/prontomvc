@@ -278,6 +278,161 @@ namespace Filtrador
 
 
 
+
+
+        static public string FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<T>(
+                         string sidx, string sord, int page, int rows, bool _search, string filters,
+                         ProntoMVC.Data.Models.DemoProntoEntities db,
+                         ref int totalRecords,
+                        IQueryable<T> q
+                     )
+                       where T : class
+        {
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Oleg: filtros avanzados con jqgrid y LINQ    http://stackoverflow.com/questions/5500805/asp-net-mvc-2-0-implementation-of-searching-in-jqgrid/5501644#5501644
+            // usando dbcontext en lugar de objectcontext   http://stackoverflow.com/questions/9027150/jqgrid-asp-net-4-mvc-how-to-make-search-implementation-on-a-dbcontext-reposit
+
+            //var sc = Generales.sCadenaConex("Autotrol");
+            //var dbcontext = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
+            var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
+
+
+
+
+
+
+
+            var serializer = new JavaScriptSerializer();
+            Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
+
+            string s = "true";
+
+            var sb = new StringBuilder();
+            var objParams = new List<ObjectParameter>();
+
+            IQueryable<T> filteredQuery;
+
+
+
+            // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
+            if (f != null)
+            {
+                f.CrearFiltro<T>(sb, objParams, true);
+                s = sb.ToString();
+                // s = "(Detalle.ToString().Contains(\"aaa\"))";
+                var parm = objParams.Select(x => x.Value).ToArray();
+                //s = s.Replace("it.", "");
+                //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
+                try
+                {
+                    filteredQuery = q.Where(s, parm);  // este where es de dynamic, no de EF
+
+                }
+                catch (Exception)
+                {
+                    s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
+                    filteredQuery = q.Where(s, parm);
+
+                }
+
+
+
+
+            }
+            else
+            {
+
+                filteredQuery = q;
+            }
+
+
+
+            try
+            {
+
+                //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+                //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+                //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+
+
+                totalRecords = filteredQuery.Count();
+
+
+            }
+            catch (Exception)
+            {
+
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica? no podes usar "cn", tenes que usar "eq" en searchoptions
+                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
+                throw;
+            }
+
+
+
+
+
+
+
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+
+
+            //var pagedQuery = filteredQuery
+            //                            .Skip("it." + sidx + " " + sord, "@skip",
+            //                                    new ObjectParameter("skip", (page - 1) * rows))
+            //                             .Top("@limit", new ObjectParameter("limit", rows));
+            // to be able to use ToString() below which is NOT exist in the LINQ to Entity
+
+
+            var qq = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows);
+
+
+            System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)qq;
+            string sqlquery = (oq).ToTraceString();
+
+
+
+            var result = oq.ToTraceString();
+            var ps = oq.Parameters.ToList();
+            for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
+            {
+                var parameter = ps[n];
+                var name = "@" + parameter.Name;
+                var value = "'" + (parameter.Value ?? "").ToString() + "'";
+                result = result.Replace(name, value);
+            }
+
+
+
+
+
+            return result;
+
+            ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        }
+
+
+
+
         static public List<T> FiltroGenerico_UsandoIQueryable<T>(
                          string sidx, string sord, int page, int rows, bool _search, string filters,
                          ProntoMVC.Data.Models.DemoProntoEntities db,
