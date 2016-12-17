@@ -126,9 +126,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <br />
           <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
             Width="150" Height="40" />
+
+        <input type="button" id="btnExportarGrillaAjax" value="EXCEL ajax" class="btn btn-primary" />
+
+
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary"
             Width="150" Height="40" />
-        <asp:Label ID="salida" runat="server"></asp:Label>
+        <asp:Literal ID="salida" runat="server"></asp:Literal>
         <br />
         <br />
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
@@ -319,6 +323,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             "use strict";
 
 
+
+            $('#btnExportarGrillaAjax').click(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "ExportarGrilla",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: { 
+                        filters: jQuery('#Lista').getGridParam("postData").filters,
+                        fechadesde: $("#ctl00_ContentPlaceHolder1_txtDestino").val(),
+                        fechahasta: $("#ctl00_ContentPlaceHolder1_txtDestino"),
+                        destino: $("#ctl00_ContentPlaceHolder1_txtDestino")
+                    },
+
+                    success: function (data) {
+                        alert(data);
+                    }
+
+                })                                                    
+
+
+            })
 
 
 

@@ -3419,11 +3419,12 @@ namespace ServicioCartaPorte
             string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
                                     (
                                                             "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
+
                                                             db.fSQL_GetDataTableFiltradoYPaginado(
                                                             0, 9999999, 0, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
-                                                          -1, 0, "Ambas"
-                                                           , new DateTime(2016, 10, 1), new DateTime(2016, 11, 1),
+                                                          iddestino, 0, "Ambas"
+                                                           , FechaDesde, FechaHasta,
                                                            0, null, "", "",
                                                            -1, null, 0, "", "Todos")
                                     );
