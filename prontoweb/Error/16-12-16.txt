@@ -1,0 +1,90 @@
+
+Log Entry : 
+12/16/2016 10:28:23
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Error al hacer el LocalReport.Render()  No se puede leer la siguiente fila de datos del conjunto de datos DataSet1. (rsErrorReadingNextDataRow)   Filtro:
+__________________________
+
+Log Entry : 
+12/16/2016 10:28:23
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Error al hacer el LocalReport.Render()  Error al convertir una cadena de caracteres en fecha y/u hora.   Filtro:
+__________________________
+
+Log Entry : 
+12/16/2016 10:28:26
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException
+Error al procesar el informe. (rsProcessingAborted)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.Render(String Format, String DeviceInfo, PageCountMode PaginationMode, String& Extension, String& MimeType, String& Encoding, Warning[]& Warnings, String[]& StreamIds)
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4734
+   at SituacionCalidad.btnExportarGrilla_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 374
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+12/16/2016 10:31:09
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Error al hacer el LocalReport.Render()  No se puede leer la siguiente fila de datos del conjunto de datos DataSet1. (rsErrorReadingNextDataRow)   Filtro:
+__________________________
+
+Log Entry : 
+12/16/2016 10:31:09
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Error al hacer el LocalReport.Render()  Error al convertir una cadena de caracteres en fecha y/u hora.   Filtro:
+__________________________
+
+Log Entry : 
+12/16/2016 10:31:09
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException
+Error al procesar el informe. (rsProcessingAborted)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.Render(String Format, String DeviceInfo, PageCountMode PaginationMode, String& Extension, String& MimeType, String& Encoding, Warning[]& Warnings, String[]& StreamIds)
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4734
+   at SituacionCalidad.btnExportarGrilla_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 374
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+12/16/2016 10:34:20
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Error al hacer el LocalReport.Render()  No se puede leer la siguiente fila de datos del conjunto de datos DataSet1. (rsErrorReadingNextDataRow)   Filtro:
+__________________________
+
+Log Entry : 
+12/16/2016 10:34:20
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Error al hacer el LocalReport.Render()  Error al convertir una cadena de caracteres en fecha y/u hora.   Filtro:
+__________________________
+
+Log Entry : 
+12/16/2016 10:34:24
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException
+Error al procesar el informe. (rsProcessingAborted)
+   at Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   at Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.Render(String Format, String DeviceInfo, PageCountMode PaginationMode, String& Extension, String& MimeType, String& Encoding, Warning[]& Warnings, String[]& StreamIds)
+   at Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   at CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 4734
+   at SituacionCalidad.btnExportarGrilla_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 374
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.ReportViewer.WebForms
+__________________________

@@ -22,6 +22,7 @@ Imports CartaDePorteManager
 Imports LogicaInformesWilliams
 Imports Pronto.ERP.Bll.EntidadManager
 
+Imports System.Web.Services
 
 Partial Class SituacionCalidad
     Inherits System.Web.UI.Page
@@ -320,12 +321,43 @@ Partial Class SituacionCalidad
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    <WebMethod()> _
+    Function ExportarGrilla(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
+        'asdfasdf()
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+
+        Dim output As String = Path.GetTempPath() + "Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
+
+        Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
+
+        Dim Filtro = ""
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
+                                             txtFechaDesde.Text,
+                                             txtFechaHasta.Text,
+                                              -1, idDestino, HFSC.Value, "Mariano")
+
+        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, HFSC.Value, False, output)
+
+        Return output
+    End Function
+
+
+
+
+
 
     Protected Sub btnExportarGrilla_Click(sender As Object, e As EventArgs) Handles btnExportarGrilla.Click
         'asdfasdf()
         Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
 
         Dim Filtro = ""
+
+        Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
+
+        Dim output As String = Path.GetTempPath() + "Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
 
         Dim s = New ServicioCartaPorte.servi()
 
@@ -334,23 +366,23 @@ Partial Class SituacionCalidad
         '                                     txtFechaHasta.Text,
         '                                      -1, idDestino, HFSC.Value, "Mariano")
 
-        Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
+        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
                                              txtFechaDesde.Text,
                                              txtFechaHasta.Text,
                                               -1, idDestino, HFSC.Value, "Mariano")
 
-        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, False, output)
+        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, HFSC.Value, False, output)
 
 
         Try
-            Dim MyFile1 = New FileInfo(output3) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
             If MyFile1.Exists Then
                 Response.ContentType = "application/octet-stream"
                 Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
                 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
                 'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
                 'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
-                Response.TransmitFile(output3) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+                Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
                 Response.End()
             Else
                 MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
