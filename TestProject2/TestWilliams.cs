@@ -397,6 +397,123 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void ServicioWebDescargas_29771()
+        {
+         /*   
+1) Error bloqueante al proceso de importación
+• La hora (un String) tiene más de 10 caracteres, esto entra en conflicto con las definición del campo 
+en la base de datos para CerealNet (VARCHAR(10) ). Por lo que pude ver, Williams a veces 
+está informando una fecha en este campo, otras veces no informa nada. 
+CerealNet lo manda vacio a este campo y si bien en Williams rompe el proceso de importación 
+no usamos este campo para nada. En pocas palabras podríamos no darle importancia a este campo y seguir adelante.
+
+2) Una vez sorteado ese error me encontré con
+
+• KGDescarga (netodest) no se está informando.
+• En la mayoría de las veces no está informando el CUIT remitente y CUIT remitente comercial. Esto se usa para el mapeo de la empresa compradora.
+• Los CUITs los informa con guiones (20-12123123-2) cuando debería informarlo sin guiones (20121231232)
+• Los CodigoOnccaProducto (codmerca) no se está informando
+• La cosecha a veces no se informa y cuando se informa tiene el formato “20xx/yy” cuando debería ser “xxyy”. Ej.: Se informa 2015/16, debería informar 1516
+
+• No está informando el campo CodigoOnccaLocalidadProcedencia (codonccalocalproc)
+• CodigoOnccaPuerto (codonccapuerto), CodigoOnccaLocalidadPuerto (codonccalocalidadpuerto) y CodigoOnccaProvinciaPuerto (codonccaprovinciapuerto) no se está informando.
+• Cuando se informa el CuitPuerto (cuitpuerto) informa un número entero (parecería ser un código de 2 dígitos) en vez de un CUIT.
+• No está informando las mermas.
+• No se está informando fecha de descarga (fechadescarga) y fecha de posición (fechaposicion).
+
+          * 
+          * 
+• El campo calidad lo está informando mal. Debería ser:
+Valor informado	Valor esperado
+COND. CAMARA	CC
+GRADO 1	G1
+FUERA DE STANDARD	FE
+GRADO 2	G2
+CONFORME	??????
+CONDICIONAL X M.E	??????
+FUERA DE BASE	??????
+
+Vale destacar que sacando el error bloqueante no se pudo importar ninguna descarga correctamente al sistema.
+Todo esto sale de probar en todas las descargas (200) que se pudo importar con el rango de fecha 01/01/2010 al 01/01/2017
+          * */
+
+
+            ////Trust all certificates
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+            //var cerealnet = new WS_CartasDePorteClient();
+
+            string usuario ="Mariano"; //"fyo";
+            string clave ="pirulo!"; // "76075";
+            string cuit = "30703605105";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(usuario, clave, cuit, 
+                                            new DateTime(2016, 11, 1), 
+                                            new DateTime(2017, 1, 1),
+                                            SC, DirApp, bdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void webServiceParaDescargarPlanilla_22085_Estilo_CerealNet()
+        {
+            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
+
+
+            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
+
+            //string archivodestino = "c:\\Source.jpg";
+            string archivodestino = "c:\\Source.pdf";
+
+            System.IO.FileStream fs1 = null;
+            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
+            byte[] b1 = null;
+
+            //b1 = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL("Mariano", "pirulo!", "30703605105", new DateTime(10, 10, 2015), new DateTime(10, 10, 2015), SC, DirApp, bdlmasterappconfig);
+            ////{920688e1-7e8f-4da7-a793-9d0dac7968e6}
+
+            //fs1 = new FileStream(archivodestino, FileMode.Create);
+            //fs1.Write(b1, 0, b1.Length);
+            //fs1.Close();
+            //fs1 = null;
+
+            //cómo sé en qué formato está?
+
+            System.Diagnostics.Process.Start(archivodestino);
+        }
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void InformeDeClientesIncompletos_16492()
         {
@@ -1272,76 +1389,6 @@ namespace ProntoMVC.Tests
             //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
             System.Diagnostics.Process.Start(output);
         }
-
-
-
-
-        [TestMethod]
-        public void ServicioWebDescargas()
-        {
-            ////Trust all certificates
-            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
-
-            //var cerealnet = new WS_CartasDePorteClient();
-
-            string usuario = "fyo";
-            string clave = "76075";
-            string cuit = "30703605105";
-
-            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
-            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL("Mariano", "pirulo!", cuit, new DateTime(2010, 10, 10), new DateTime(2016, 10, 10), SC, DirApp, bdlmasterappconfig);
-
-
-            foreach (var desc in respEntrega.descargas)
-            {
-                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
-
-                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
-                {
-                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
-                    {
-                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
-                    }
-                }
-            }
-            //Console.ReadKey();
-        }
-
-
-
-
-
-
-
-        [TestMethod]
-        public void webServiceParaDescargarPlanilla_22085_Estilo_CerealNet()
-        {
-            // http://stackoverflow.com/questions/371961/how-to-unit-test-c-sharp-web-service-with-visual-studio-2008
-
-
-            // var sss = Membership.ValidateUser("Mariano", "pirulo!");
-
-            //string archivodestino = "c:\\Source.jpg";
-            string archivodestino = "c:\\Source.pdf";
-
-            System.IO.FileStream fs1 = null;
-            //WSRef.FileDownload ls1 = new WSRef.FileDownload();
-            byte[] b1 = null;
-
-            //b1 = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL("Mariano", "pirulo!", "30703605105", new DateTime(10, 10, 2015), new DateTime(10, 10, 2015), SC, DirApp, bdlmasterappconfig);
-            ////{920688e1-7e8f-4da7-a793-9d0dac7968e6}
-
-            //fs1 = new FileStream(archivodestino, FileMode.Create);
-            //fs1.Write(b1, 0, b1.Length);
-            //fs1.Close();
-            //fs1 = null;
-
-            //cómo sé en qué formato está?
-
-            System.Diagnostics.Process.Start(archivodestino);
-        }
-
-
 
 
 
