@@ -87,15 +87,15 @@
                             <label for="email">
                                 Email
                             </label>
-                            @Html.TextBox("email", Model.User.Email)
+                            @Html.TextBox("email", Model.User.Email, new { @class = "span12" })
                         </p>
                         <p>
                             <label for="comments">
                                 Observaciones
                             </label>
-                            @Html.TextArea("comments", Model.User.Comment)
+                            @Html.TextArea("comments", Model.User.Comment, new { @class = "span12" })
                         </p>
-                        
+
 
                         @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
                         {
@@ -106,7 +106,7 @@
                                 @Html.TextBox("grupo", Model.Grupo)
                             </p>
                         }
-                        
+
 
                         <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
                             Aceptar
@@ -321,6 +321,6 @@
 
         pageLayout.hide('south');
 
-        
+
     })
 </script>
