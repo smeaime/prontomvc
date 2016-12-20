@@ -14984,7 +14984,28 @@ Public Class CartaDePorteManager
 
                     cp.cartaporte = dbc.NumeroCartaDePorte
                     cp.brutodest = dbc.BrutoFinal
-                    cp.calidad = ExcelImportadorManager.CodigoCalidad(If(dbc.CalidadDe, 0)) ' dbc.CalidadDesc
+
+
+                    Select Case dbc.CalidadDesc
+                        Case "CONFORME"
+                            cp.calidad = "" ' "CO"
+                        Case "GRADO 1"
+                            cp.calidad = "G1"
+                        Case "GRADO 2"
+                            cp.calidad = "G2"
+                        Case "GRADO 3"
+                            cp.calidad = "G3"
+                        Case "COND. CAMARA"
+                            cp.calidad = "CC"
+                        Case "FUERA DE STANDARD"
+                            cp.calidad = "FE"
+                        Case Else
+                            cp.calidad = ""
+                    End Select
+                    'cp.calidad = ExcelImportadorManager.CodigoCalidad(If(dbc.CalidadDe, 0)) ' dbc.CalidadDesc
+
+
+
 
                     'codigos oncaa    -qué tenemos que usar acá
                     cp.codmerca = Val(dbc.EspecieONCAA)
@@ -15041,7 +15062,7 @@ Public Class CartaDePorteManager
                     cp.patente = If(dbc.Patente, "")
 
 
-                    cp.usuario = dbc.UsuarioIngreso
+                    cp.usuario = "" 'dbc.UsuarioIngreso
                     cp.vagon = dbc.SubnumeroVagon
 
 
