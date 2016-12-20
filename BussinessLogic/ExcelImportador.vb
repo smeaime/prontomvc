@@ -3301,6 +3301,9 @@ Public Class ExcelImportadorManager
         'Perdona si te la pase mal la otra vez
 
 
+
+
+
         Select Case cal
             Case 1
                 Return "CO"
