@@ -15102,26 +15102,30 @@ Public Class CartaDePorteManager
 
 
 
-                    Dim cc = CartaDePorteManager.GetItem(SC, dbc.IdCartaDePorte)
-
+                 
                     'RenglonCerealnetCalidad(dbc, 18, cc.CalidadHumedadResultado, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Humedad", 0, False, anas)
                     RenglonCerealnetCalidad(dbc, 18, dbc.Humedad, dbc.HumedadDesnormalizada, dbc.HumedadDesnormalizada, Nothing, "01", "Humedad", dbc.HumedadDesnormalizada, False, anas)
 
 
-                    RenglonCerealnetCalidad(dbc, 19, cc.CalidadGastosFumigacionResultado, dbc.CalidadGranosDanadosRebaja, cc.CalidadGastosFumigacionRebaja, Nothing, "01", "GastosFumigacion", 0, False, anas)
+
+                    If False Then  'lento por cargar la carta
+                        Dim cc = CartaDePorteManager.GetItem(SC, dbc.IdCartaDePorte)
 
 
-                    RenglonCerealnetCalidad(dbc, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, Nothing, "01", "GastoDeSecada", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, Nothing, "01", "MermaVolatil", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, Nothing, "01", "FondoNidera", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, Nothing, "01", "MermaConvenida", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, Nothing, "01", "TalCualVicentin", 0, False, anas)
+                        RenglonCerealnetCalidad(dbc, 19, cc.CalidadGastosFumigacionResultado, dbc.CalidadGranosDanadosRebaja, cc.CalidadGastosFumigacionRebaja, Nothing, "01", "GastosFumigacion", 0, False, anas)
 
 
+                        RenglonCerealnetCalidad(dbc, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, Nothing, "01", "GastoDeSecada", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, Nothing, "01", "MermaVolatil", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, Nothing, "01", "FondoNidera", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, Nothing, "01", "MermaConvenida", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, Nothing, "01", "TalCualVicentin", 0, False, anas)
+
+                    End If
 
                     'For i = 0 To 3
                     '    Dim a As New CerealNet.WSCartasDePorte.analisis

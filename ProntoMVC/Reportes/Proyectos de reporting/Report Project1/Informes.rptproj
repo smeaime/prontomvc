@@ -267,6 +267,10 @@
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</FullPath>
     </ProjectItem>
@@ -471,8 +475,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</FullPath>
+      <Name>Orden Pago2.rdl</Name>
+      <FullPath>Orden Pago2.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -523,7 +527,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://bdlconsultores.sytes.net:10080/ReportServer</TargetServerURL>
+        <TargetServerURL>http://serversql4/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>

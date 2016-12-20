@@ -721,6 +721,10 @@ namespace ProntoMVC.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual JsonResult SetMiPassword(string password, string nuevapass)
         {
+            if (password=="" || nuevapass=="")
+            {
+                return Json("La contraseña está en blanco");
+            }
 
             var u = Membership.GetUser();
             if (u.ChangePassword(password, nuevapass))
