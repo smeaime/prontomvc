@@ -130,7 +130,7 @@ namespace ProntoMVC.Data
 
                     //         verificá si no es un tema con el directorio
                     //A generic error occurred in GDI+. May also result from incorrect save path! Took me half a day to notice that. So make sure that you have double checked the path to save the image as well.
-                    
+
                     //A generic error occurred in GDI+. It can occur because of image storing paths issues,I got this error because my storing path is too long, I fixed this by first storing the image in a shortest path and move it to the correct location with long path handling techniques.
 
                     throw;
@@ -397,7 +397,7 @@ namespace ProntoMVC.Data
 
     }
 
-    
+
 }
 
 
@@ -1242,6 +1242,23 @@ namespace CerealNet.WSCartasDePorte
     public partial class analisis : object, System.ComponentModel.INotifyPropertyChanged
     {
 
+        public string rubro;
+        public int kilosMermas;
+        public decimal porcentajeAnalisis;
+        public decimal porcentajeMerma;
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        /*
         private int kilosMermasField;
 
         private bool kilosMermasFieldSpecified;
@@ -1361,16 +1378,8 @@ namespace CerealNet.WSCartasDePorte
             }
         }
 
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null))
-            {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
+  
+          */
     }
 
     /// <remarks/>
