@@ -149,7 +149,7 @@ public class LinqProvider<T>
 
                     var objectQueryField = internalQuery.GetType().GetProperties().FirstOrDefault(f => f.Name.Equals("ObjectQuery"));
 
-                    _InternalQueryContext.ObjectQueryContext = objectQueryField.GetValue(internalQuery,null) as System.Data.Entity.Core.Objects.ObjectQuery<T>;
+                    _InternalQueryContext.ObjectQueryContext = objectQueryField.GetValue(internalQuery, null) as System.Data.Entity.Core.Objects.ObjectQuery<T>;
                 }
                 else if (QueryContext is System.Data.Entity.Core.Objects.ObjectQuery<T>)
                 {
@@ -819,37 +819,55 @@ namespace ProntoFlexicapture
 
 
             DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files;
+            FileInfo[] files = null;
 
 
-            try
+            // qué tal si levanto los directorios, me fijo cuales son nuevos, y sobre esos hago el getfiles?
+
+            if (true)
             {
+                IEnumerable<DirectoryInfo> dirs = d.GetDirectories().Where(x => x.CreationTime > DateTime.Now.AddDays(-1));
 
-                //esto es durisimo
+                foreach (DirectoryInfo dd in dirs)
+                {
 
-                files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
-                // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+                    if (files == null) files = dd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+                    else files = files.Concat(dd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
 
-                //d.EnumerateFiles()
+                }
+
+
             }
-            catch (Exception ex)
+            else
             {
-                //             System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
-                //at System.IO.FileInfoResultHandler.CreateObject(SearchResult result)
-                //at System.IO.FileSystemEnumerableIterator`1.MoveNext()
-                //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
-                //at System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
-                //at System.IO.DirectoryInfo.GetFiles(String searchPattern, SearchOption searchOption)
-                //at ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(Int32 cuantas, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 582
-                //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 108
-                //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
-                //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
-                Log("Probablemente explota Getfiles");
-                Log(ex.ToString());
-                return null;
+                try
+                {
+
+                    //esto es durisimo
+
+                    files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
+                    // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+                    //d.EnumerateFiles()
+                }
+                catch (Exception ex)
+                {
+                    //             System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+                    //at System.IO.FileInfoResultHandler.CreateObject(SearchResult result)
+                    //at System.IO.FileSystemEnumerableIterator`1.MoveNext()
+                    //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+                    //at System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
+                    //at System.IO.DirectoryInfo.GetFiles(String searchPattern, SearchOption searchOption)
+                    //at ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(Int32 cuantas, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 582
+                    //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 108
+                    //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
+                    //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+                    Log("Probablemente explota Getfiles");
+                    Log(ex.ToString());
+                    return null;
+                }
+
             }
-
-
 
 
 
@@ -904,7 +922,7 @@ namespace ProntoFlexicapture
 
         }
 
-        static int MarcarImagenComoProcesandose(string archivo)
+        public static int MarcarImagenComoProcesandose(string archivo)
         {
             //y si creo un archivo con extension?
 
@@ -3013,7 +3031,7 @@ namespace ServicioCartaPorte
             Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC);
 
 
-            
+
             //Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
 
             string titulo = " <table cellpadding=15 style=\"text-align: center; font-size: large;\"> <tr> " +

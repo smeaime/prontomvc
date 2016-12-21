@@ -1265,20 +1265,23 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-                                                {
-                                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
-                                                    onClickButton: function () {
-                                                        AgregarItemVacio(jQuery("#Lista"));
-                                                    },
-                                                });
-                jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-                                                {
-                                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
-                                                    onClickButton: function () {
-                                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
-                                                    },
-                                                });
+                //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                //                                {
+                //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                //                                    onClickButton: function () {
+                //                                        AgregarItemVacio(jQuery("#Lista"));
+                //                                    },
+                //                                });
+                //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                //                                {
+                //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                //                                    onClickButton: function () {
+                //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                //                                    },
+                //                                });
+
+
+
                 jQuery("#Lista").filterToolbar({
                     stringResult: true, searchOnEnter: true,
                     defaultSearch: 'cn',
