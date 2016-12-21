@@ -321,10 +321,22 @@ Partial Class SituacionCalidad
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    
     <WebMethod()> _
-    Function ExportarGrilla(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
-        'asdfasdf()
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+    Public Shared Function ExportarGrilla(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
+
+        Dim SC As String
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(destino, SC)
 
         Dim output As String = Path.GetTempPath() + "Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
 
@@ -335,11 +347,11 @@ Partial Class SituacionCalidad
         Dim s = New ServicioCartaPorte.servi()
 
         Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
-                                             txtFechaDesde.Text,
-                                             txtFechaHasta.Text,
-                                              -1, idDestino, HFSC.Value, "Mariano")
+                                             fechadesde,
+                                             fechahasta,
+                                              -1, idDestino, SC, "Mariano")
 
-        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, HFSC.Value, False, output)
+        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, False, output)
 
         Return output
     End Function
