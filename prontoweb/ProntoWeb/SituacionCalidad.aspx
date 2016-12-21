@@ -124,10 +124,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <br />
-        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
+        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
             Width="150" Height="40" />
 
-        <input type="button" id="btnExportarGrillaAjax" value="EXCEL ajax" class="btn btn-primary" />
+        <input type="button" id="btnExportarGrillaAjax" value="EXCEL" class="btn btn-primary" />
 
 
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary"
@@ -326,13 +326,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             $('#btnExportarGrillaAjax').click(function () {
 
-                var d=   { 
+                var d= { 
                     filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
                     fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
                     fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
                     destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
                 }
-
+                
+                if (typeof d.filters === "undefined") d.filters="";
 
                 $.ajax({
                     type: "POST",
@@ -341,11 +342,25 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
 
-                    data: d,
+                    data: JSON.stringify(d),
 
                     success: function (data) {
-                        alert(data);
+                        //alert(data.d);
+                        window.open(data.d);
                     }
+
+
+                    ,
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+
 
                 })                                                    
 

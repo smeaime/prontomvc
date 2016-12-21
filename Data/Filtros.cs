@@ -404,12 +404,27 @@ namespace Filtrador
 
 
             var result = oq.ToTraceString();
-            var ps = oq.Parameters.ToList();
+            List<ObjectParameter> ps = oq.Parameters.ToList();
             for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
             {
-                var parameter = ps[n];
+                ObjectParameter parameter = ps[n];
                 var name = "@" + parameter.Name;
-                var value = "'" + (parameter.Value ?? "").ToString() + "'";
+                string value; 
+                if (parameter.Value==null)
+                {
+                    value = " NULL ";
+
+                }
+                else if (!(parameter.Value.GetType()==typeof(DateTime)))
+                {
+                    
+                    value = "'" + (parameter.Value ?? "").ToString() + "'";
+                }
+                else
+                {
+
+                    value = "'" + (((DateTime)(parameter.Value)).ToString("s") ?? "").ToString() + "'";
+                }
                 result = result.Replace(name, value);
             }
 
