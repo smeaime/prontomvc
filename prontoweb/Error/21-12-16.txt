@@ -1,0 +1,126 @@
+
+Log Entry : 
+12/21/2016 12:02:44
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:05:14
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:14:02
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb(325): error BC30451: 'ResponseFormat' is not declared. It may be inaccessible due to its protection level.
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+12/21/2016 12:19:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:21:26
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:24:52
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:32:53
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:33:07
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:33:54
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/21/2016 12:35:53
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:System.ArgumentException
+Unknown web method ExportarGrilla.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Handlers.ScriptModule.OnPostAcquireRequestState(Object sender, EventArgs eventArgs)
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
