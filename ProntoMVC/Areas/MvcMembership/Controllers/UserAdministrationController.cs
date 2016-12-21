@@ -1345,13 +1345,65 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
 
-        public void resetearContr(Guid id)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual RedirectToRouteResult ResetPasswordConTexto(Guid id, string nuevapass)
         {
+
+            resetearContrConTexto(id, nuevapass);
+           
+            return RedirectToAction("Password", new { id });
+        }
+
+
+
+        /// <summary>
+        /// Checks password complexity requirements for the actual membership provider
+        /// </summary>
+        /// <param name="password">password to check</param>
+        /// <returns>true if the password meets the req. complexity</returns>
+        static public bool CheckPasswordComplexity(string password)
+        {
+            return CheckPasswordComplexity(Membership.Provider, password);
+        }
+
+
+        /// <summary>
+        /// Checks password complexity requirements for the given membership provider
+        /// </summary>
+        /// <param name="membershipProvider">membership provider</param>
+        /// <param name="password">password to check</param>
+        /// <returns>true if the password meets the req. complexity</returns>
+        static public bool CheckPasswordComplexity(MembershipProvider membershipProvider, string password)
+        {
+            if (string.IsNullOrEmpty(password)) return false;
+            if (password.Length < membershipProvider.MinRequiredPasswordLength) return false;
+            int nonAlnumCount = 0;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (!char.IsLetterOrDigit(password, i)) nonAlnumCount++;
+            }
+            if (nonAlnumCount < membershipProvider.MinRequiredNonAlphanumericCharacters) return false;
+            if (!string.IsNullOrEmpty(membershipProvider.PasswordStrengthRegularExpression) &&
+                !System.Text.RegularExpressions.Regex.IsMatch(password, membershipProvider.PasswordStrengthRegularExpression))
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        public void resetearContrConTexto(Guid id, string txtPass)
+        {
+
+            if (!CheckPasswordComplexity(txtPass)) {
+                TempData["Alerta"] = "La contraseña debe tener al menos 7 caracteres y debe tener un carácter no alfanumérico";
+                return; //throw new Exception("La contraseña es inválida");
+            }
+
             MembershipUser membershipUser = default(MembershipUser);
             //membershipUser = Membership.Providers("SqlMembershipProviderOther").GetUser(UserName, False)
             membershipUser = Membership.GetUser(id);
             string UserName = membershipUser.UserName;
-            string txtPass = GenerarPass();
 
             //http://team.desarrollosnea.com.ar/blogs/jfernandez/archive/2009/12/10/asp-net-membership-reset-password-with-ts-sql-por-si-las-moscas-tenerlo-a-mano.aspx
             try
@@ -1414,7 +1466,16 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             }
 
+        }
 
+
+
+
+        public void resetearContr(Guid id)
+        {
+
+            string txtPass = GenerarPass();
+            resetearContrConTexto(id, txtPass);
 
         }
 
