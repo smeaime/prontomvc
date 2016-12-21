@@ -332,28 +332,32 @@ Partial Class SituacionCalidad
             SC = Encriptar(scWilliamsRelease())
             'dddddd()
         Else
-            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
         End If
 
 
         Dim idDestino = BuscaIdWilliamsDestinoPreciso(destino, SC)
 
-        Dim output As String = Path.GetTempPath() + "Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
+        Dim output As String = "\DataBackupear\Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
+        Dim fisico As String = ConfigurationManager.AppSettings("DirApp") + output
+        Dim url As String = ConfigurationManager.AppSettings("UrlDominio").ToString + output
+
+
+
 
         Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
 
-        Dim Filtro = ""
-
+       
         Dim s = New ServicioCartaPorte.servi()
 
-        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
+        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
                                              fechadesde,
                                              fechahasta,
                                               -1, idDestino, SC, "Mariano")
 
-        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, False, output)
+        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, False, fisico)
 
-        Return output
+        Return url
     End Function
 
 
