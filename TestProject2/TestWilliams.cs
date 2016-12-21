@@ -396,49 +396,131 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void ProcesarTandaDeExcelsDeUrenport_29439()
+        {
+
+
+
+            var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(5, DirApp);
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+
+            foreach (string f in lista)
+            {
+                int m_IdMaestro = 0;
+
+                ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, f,
+                                        LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+                //var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+                // ClassFlexicapture.MarcarImagenComoProcesandose();
+            }
+
+        }
+
+
+
+        [TestMethod]
+        public void pegatina_29439()
+        {
+
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
+
+
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            //foreach (System.Data.DataRow r in dt.Rows)
+            //{
+            //    var dr = r;
+            //    var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+            //                                            null, null, null, null,
+            //                                            null, null);
+            //}
+
+
+
+
+            ////verificar que sigue así
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
+
 
 
 
         [TestMethod]
         public void ServicioWebDescargas_29771()
         {
-         /*   
-1) Error bloqueante al proceso de importación
-• La hora (un String) tiene más de 10 caracteres, esto entra en conflicto con las definición del campo 
-en la base de datos para CerealNet (VARCHAR(10) ). Por lo que pude ver, Williams a veces 
-está informando una fecha en este campo, otras veces no informa nada. 
-CerealNet lo manda vacio a este campo y si bien en Williams rompe el proceso de importación 
-no usamos este campo para nada. En pocas palabras podríamos no darle importancia a este campo y seguir adelante.
+            /*   
+   1) Error bloqueante al proceso de importación
+   • La hora (un String) tiene más de 10 caracteres, esto entra en conflicto con las definición del campo 
+   en la base de datos para CerealNet (VARCHAR(10) ). Por lo que pude ver, Williams a veces 
+   está informando una fecha en este campo, otras veces no informa nada. 
+   CerealNet lo manda vacio a este campo y si bien en Williams rompe el proceso de importación 
+   no usamos este campo para nada. En pocas palabras podríamos no darle importancia a este campo y seguir adelante.
 
-2) Una vez sorteado ese error me encontré con
+   2) Una vez sorteado ese error me encontré con
 
-• KGDescarga (netodest) no se está informando.
-• En la mayoría de las veces no está informando el CUIT remitente y CUIT remitente comercial. Esto se usa para el mapeo de la empresa compradora.
-• Los CUITs los informa con guiones (20-12123123-2) cuando debería informarlo sin guiones (20121231232)
-• Los CodigoOnccaProducto (codmerca) no se está informando
-• La cosecha a veces no se informa y cuando se informa tiene el formato “20xx/yy” cuando debería ser “xxyy”. Ej.: Se informa 2015/16, debería informar 1516
+   • KGDescarga (netodest) no se está informando.
+   • En la mayoría de las veces no está informando el CUIT remitente y CUIT remitente comercial. Esto se usa para el mapeo de la empresa compradora.
+   • Los CUITs los informa con guiones (20-12123123-2) cuando debería informarlo sin guiones (20121231232)
+   • Los CodigoOnccaProducto (codmerca) no se está informando
+   • La cosecha a veces no se informa y cuando se informa tiene el formato “20xx/yy” cuando debería ser “xxyy”. Ej.: Se informa 2015/16, debería informar 1516
 
-• No está informando el campo CodigoOnccaLocalidadProcedencia (codonccalocalproc)
-• CodigoOnccaPuerto (codonccapuerto), CodigoOnccaLocalidadPuerto (codonccalocalidadpuerto) y CodigoOnccaProvinciaPuerto (codonccaprovinciapuerto) no se está informando.
-• Cuando se informa el CuitPuerto (cuitpuerto) informa un número entero (parecería ser un código de 2 dígitos) en vez de un CUIT.
-• No está informando las mermas.
-• No se está informando fecha de descarga (fechadescarga) y fecha de posición (fechaposicion).
+   • No está informando el campo CodigoOnccaLocalidadProcedencia (codonccalocalproc)
+   • CodigoOnccaPuerto (codonccapuerto), CodigoOnccaLocalidadPuerto (codonccalocalidadpuerto) y CodigoOnccaProvinciaPuerto (codonccaprovinciapuerto) no se está informando.
+   • Cuando se informa el CuitPuerto (cuitpuerto) informa un número entero (parecería ser un código de 2 dígitos) en vez de un CUIT.
+   • No está informando las mermas.
+   • No se está informando fecha de descarga (fechadescarga) y fecha de posición (fechaposicion).
 
-          * 
-          * 
-• El campo calidad lo está informando mal. Debería ser:
-Valor informado	Valor esperado
-COND. CAMARA	CC
-GRADO 1	G1
-FUERA DE STANDARD	FE
-GRADO 2	G2
-CONFORME	??????
-CONDICIONAL X M.E	??????
-FUERA DE BASE	??????
+             * 
+             * 
+   • El campo calidad lo está informando mal. Debería ser:
+   Valor informado	Valor esperado
+   COND. CAMARA	CC
+   GRADO 1	G1
+   FUERA DE STANDARD	FE
+   GRADO 2	G2
+   CONFORME	??????
+   CONDICIONAL X M.E	??????
+   FUERA DE BASE	??????
 
-Vale destacar que sacando el error bloqueante no se pudo importar ninguna descarga correctamente al sistema.
-Todo esto sale de probar en todas las descargas (200) que se pudo importar con el rango de fecha 01/01/2010 al 01/01/2017
-          * */
+   Vale destacar que sacando el error bloqueante no se pudo importar ninguna descarga correctamente al sistema.
+   Todo esto sale de probar en todas las descargas (200) que se pudo importar con el rango de fecha 01/01/2010 al 01/01/2017
+             * */
 
 
             ////Trust all certificates
@@ -446,13 +528,13 @@ Todo esto sale de probar en todas las descargas (200) que se pudo importar con e
 
             //var cerealnet = new WS_CartasDePorteClient();
 
-            string usuario ="Mariano"; //"fyo";
-            string clave ="pirulo!"; // "76075";
+            string usuario = "Mariano"; //"fyo";
+            string clave = "pirulo!"; // "76075";
             string cuit = "30703605105";
 
             // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
-            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(usuario, clave, cuit, 
-                                            new DateTime(2016, 11, 1), 
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(usuario, clave, cuit,
+                                            new DateTime(2016, 11, 1),
                                             new DateTime(2017, 1, 1),
                                             SC, DirApp, bdlmasterappconfig);
 
@@ -1089,60 +1171,6 @@ Todo esto sale de probar en todas las descargas (200) que se pudo importar con e
 
 
 
-
-        [TestMethod]
-        public void pegatina_29439()
-        {
-
-            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
-
-
-            //explota
-
-            string ms = "";
-
-            int m_IdMaestro = 0;
-            Pronto.ERP.BO.CartaDePorte carta;
-
-
-            // escribir descarga de una carta
-            carta = null;
-            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-
-
-
-
-
-
-            string log = "";
-            //hay que pasar el formato como parametro 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
-
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
-
-            //foreach (System.Data.DataRow r in dt.Rows)
-            //{
-            //    var dr = r;
-            //    var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
-            //                                            null, null, null, null,
-            //                                            null, null);
-            //}
-
-
-
-
-            ////verificar que sigue así
-            //carta = null;
-            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            //carta.NobleGrado = 2;
-            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-        }
 
 
 
