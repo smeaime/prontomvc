@@ -124,3 +124,697 @@ Parameter name: methodName
    at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 System.Web.Extensions
 __________________________
+
+Log Entry : 
+12/21/2016 12:55:22
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/21/2016 13:09:39
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+Controlador no válido
+
+
+__________________________
+
+Log Entry : 
+12/21/2016 13:11:10
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  No se puede leer la siguiente fila de datos del conjunto de datos DataSet1. (rsErrorReadingNextDataRow)   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:11:15
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  Error al convertir una cadena de caracteres en fecha y/u hora.   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:13:37
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  No se puede leer la siguiente fila de datos del conjunto de datos DataSet1. (rsErrorReadingNextDataRow)   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:13:37
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  Error al convertir una cadena de caracteres en fecha y/u hora.   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:18:58
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  No se puede leer la siguiente fila de datos del conjunto de datos DataSet1. (rsErrorReadingNextDataRow)   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:18:58
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  Error al convertir una cadena de caracteres en fecha y/u hora.   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:29:26
+Error in: http://localhost:58911/Login.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:29:38
+Error in: http://localhost:58911/Login.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4{mAkmLjc+T}twd`_84du0(?LdcohdIP#8ncswiL=dwibw/Skhhywss('Ejvwbb4z\;  - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:71988a48-1a20-4437-947e-0b54636074dd
+Error Number:6,State:0,Class:20
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 530
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 516
+   at Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:line 25
+DataAccess
+__________________________
+
+Log Entry : 
+12/21/2016 13:29:38
+Error in: http://localhost:58911/Login.aspx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:a3cdd681-7637-44aa-a366-c9fc5b6efbdf
+Error Number:6,State:0,Class:20 - Empleados_TX_UsuarioNT 'Mariano' 500 15
+__________________________
+
+Log Entry : 
+12/21/2016 13:29:40
+Error in: http://localhost:58911/Login.aspx. Error Message:A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+__________________________
+
+Log Entry : 
+12/21/2016 13:29:42
+Error in: http://localhost:58911/Login.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 803
+   at Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:line 311
+   at Login.Login1_LoggedIn(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 502
+   at System.Web.UI.WebControls.Login.OnLoggedIn(EventArgs e)
+   at System.Web.UI.WebControls.Login.AttemptLogin()
+   at System.Web.UI.WebControls.Login.OnBubbleEvent(Object source, EventArgs e)
+   at System.Web.UI.Control.RaiseBubbleEvent(Object source, EventArgs args)
+   at System.Web.UI.WebControls.Button.OnCommand(CommandEventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:29:47
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:13700c25-4c2d-4a22-b4c1-77b180ed07f1
+Error Number:6,State:0,Class:20 - SELECT DISTINCT PuntoVenta FROM PuntosVenta WHERE not PuntoVenta is null 500 0
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 803
+   at PuntoVentaWilliams.IniciaComboPuntoVentaWilliams3(String SC) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 16435
+   at SituacionCalidad.BindTypeDropDown() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 120
+   at SituacionCalidad.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidad.aspx.vb:line 80
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:12fac0d0-6252-4ae6-822f-98c90ec77b7a
+Error Number:6,State:0,Class:20 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 803
+   at CartaDePorteManager.Log_sp_who2(String sc) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 7920
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:05
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:42
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:55
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:56
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4{mAkmLjc+T}twd`_84du0(?LdcohdIP#8ncswiL=dwibw/Skhhywss('Ejvwbb4z\;  - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:f668bffd-c4b6-448e-9723-a91d2fadc1ea
+Error Number:6,State:0,Class:20
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 530
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 516
+   at Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:line 25
+DataAccess
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:56
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:58
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4{mAkmLjc+T}twd`_84du0(?LdcohdIP#8ncswiL=dwibw/Skhhywss('Ejvwbb4z\;  - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:20101f3f-a6d5-4dbe-a474-bc5ac94be4ba
+Error Number:6,State:0,Class:20
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 530
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 516
+   at Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:line 25
+DataAccess
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:58
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:59
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4{mAkmLjc+T}twd`_84du0(?LdcohdIP#8ncswiL=dwibw/Skhhywss('Ejvwbb4z\;  - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:78cdc33c-c486-42f0-a84e-1a7e7fbf1958
+Error Number:6,State:0,Class:20
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 530
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 516
+   at Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:line 25
+DataAccess
+__________________________
+
+Log Entry : 
+12/21/2016 13:30:59
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Data.SqlClient.SqlException
+A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.)
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+12/21/2016 13:31:02
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion: xusv*8hautv4dvuavudfACSdimsnuA(sLcuAho4{mAkmLjc+T}twd`_84du0(?LdcohdIP#8ncswiL=dwibw/Skhhywss('Ejvwbb4z\;  - System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - Controlador no válido.) ---> System.ComponentModel.Win32Exception (0x80004005): Controlador no válido
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+ClientConnectionId:2b0905d7-2e9a-4739-a6b6-3487aa6475ec
+Error Number:6,State:0,Class:20
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 530
+   at Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:line 516
+   at Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario Usuario) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:line 202
+   at MasterPage.ConfiguracionDeLaEmpresa() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:line 543
+   at MasterPage.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:line 60
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+DataAccess
+__________________________
+
+Log Entry : 
+12/21/2016 13:38:28
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  Error de ejecución de consulta para el conjunto de datos 'DataSet1'. (rsErrorExecutingCommand)   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:38:28
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Error al hacer el LocalReport.Render()  Debe declarar la variable escalar "@IdAcopio".   Filtro:
+__________________________
+
+Log Entry : 
+12/21/2016 13:43:03
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134247.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:43:03
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134247.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:43:24
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134317.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:43:24
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134317.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:45:27
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134522.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:45:27
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134522.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:46:26
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134622.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:46:26
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134622.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:47:49
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134745.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:47:49
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134745.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:48:10
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134805.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:48:10
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134805.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:48:30
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134826.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:48:30
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134826.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:49:56
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134952.xls
+__________________________
+
+Log Entry : 
+12/21/2016 13:49:56
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado 21dic2016_134952.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:04:22
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo \Listado 21dic2016_140418.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:04:22
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado \Listado 21dic2016_140418.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:04:59
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo \Listado 21dic2016_140455.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:04:59
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado \Listado 21dic2016_140455.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:13:06
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141300.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:13:06
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141300.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:17:25
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141720.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:17:25
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141720.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:17:58
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141754.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:17:58
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141754.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:19:40
+Error in: http://localhost:58911/prontoweb/cartadeporte.aspx?id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+12/21/2016 14:19:54
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141946.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:19:54
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_141946.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:21:51
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_142147.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:21:51
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_142147.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:25:32
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_142459.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:25:32
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_142459.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:29:06
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_142900.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:29:06
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 21dic2016_142900.xls
+__________________________
+
+Log Entry : 
+12/21/2016 14:30:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638486. Error Message:La carta numero 558246098 id=2638486 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+12/21/2016 14:30:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638486. Error Message:PV 1 0
+__________________________
