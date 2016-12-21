@@ -44,7 +44,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
             id="m1s">Select(Unselect) row 13</a>--%>
 
-            <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
+        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
 
                 <table>
@@ -123,8 +123,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </asp:UpdatePanel>
 
 
-    <br />
-          <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
+        <br />
+        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="True" CssClass="btn btn-primary"
             Width="150" Height="40" />
 
         <input type="button" id="btnExportarGrillaAjax" value="EXCEL ajax" class="btn btn-primary" />
@@ -145,13 +145,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-      
+
 
         <br />
 
 
 
-    
+
         <%--<script>
 
 
@@ -326,18 +326,22 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             $('#btnExportarGrillaAjax').click(function () {
 
+                var d=   { 
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+
+
                 $.ajax({
                     type: "POST",
-                    url: "ExportarGrilla",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/ExportarGrilla",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
 
-                    data: { 
-                        filters: jQuery('#Lista').getGridParam("postData").filters,
-                        fechadesde: $("#ctl00_ContentPlaceHolder1_txtDestino").val(),
-                        fechahasta: $("#ctl00_ContentPlaceHolder1_txtDestino"),
-                        destino: $("#ctl00_ContentPlaceHolder1_txtDestino")
-                    },
+                    data: d,
 
                     success: function (data) {
                         alert(data);
@@ -953,9 +957,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { 
     name: 'Situacion', index: 'Situacion', align: 'left', width: 100, hidden: false, editable: true, edittype: 'select', sortable: false ,
     editoptions: {
-                    //defaultValue: OrigenDescripcionDefault,
-                    value: "0:Autorizado; 1:Demorado;"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
-                }
+        //defaultValue: OrigenDescripcionDefault,
+        value: "0:Autorizado; 1:Demorado;"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
+    }
 },
 
 
