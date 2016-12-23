@@ -307,7 +307,7 @@ namespace ProntoFlexicapture
                                                    List<string> imagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
 
-
+            if (imagenes == null) return null;
             if (imagenes.Count <= 0) return null;
 
             //engine.CurrentLicense
@@ -806,6 +806,110 @@ namespace ProntoFlexicapture
         }
 
 
+
+
+
+        public static List<string> ExtraerListaDeExcelsQueNoHanSidoProcesados(int cuantas, string DirApp)
+        {
+
+            string dir = DirApp + @"\Temp\Pegatinas\";
+            var l = new List<string>();
+
+            //como hacer eficiente esto? -por lo menos borra las imagenes viejas
+
+            MoverDirectoriosViejos();
+
+
+
+            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            FileInfo[] files = null;
+
+
+            // qué tal si levanto los directorios, me fijo cuales son nuevos, y sobre esos hago el getfiles?
+
+            var desde = DateTime.Now.AddHours(-4);
+
+
+            if (true)
+            {
+                IEnumerable<DirectoryInfo> dirs = d.GetDirectories("*.*", SearchOption.TopDirectoryOnly).Where(x => x.CreationTime > desde);
+
+                files = d.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+
+                foreach (DirectoryInfo subd in dirs)
+                {
+
+                    if (files == null) files = subd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+                    else files = files.Concat(subd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
+
+                }
+
+
+            }
+            else
+            {
+                try
+                {
+
+                    //esto es durisimo
+
+                    files = d.GetFiles("*.**", SearchOption.AllDirectories); //Getting Text files
+                    // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+
+                    //d.EnumerateFiles()
+                }
+                catch (Exception ex)
+                {
+                    //             System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+                    //at System.IO.FileInfoResultHandler.CreateObject(SearchResult result)
+                    //at System.IO.FileSystemEnumerableIterator`1.MoveNext()
+                    //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+                    //at System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
+                    //at System.IO.DirectoryInfo.GetFiles(String searchPattern, SearchOption searchOption)
+                    //at ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(Int32 cuantas, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 582
+                    //at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 108
+                    //at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 359
+                    //at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+                    Log("Probablemente explota Getfiles");
+                    Log(ex.ToString());
+                    return null;
+                }
+
+            }
+
+
+
+            //foreach (FileInfo file in Files)
+            //{
+            //    l.Add(file.Name);
+            //}
+
+
+            //var files = Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories).OrderByDescending(x=>x.last)
+            //                    .Where(s => s.EndsWith(".tif") || s.EndsWith(".tiff")  || s.EndsWith(".jpg"));
+
+            // (files.Where(x => x.Name == (f.Name + ".bdl")).FirstOrDefault() ?? f).LastWriteTime <= f.LastWriteTime
+
+            // tenes usar el creationtime para las que fueron extraidas del zip
+
+            if (files == null) return null;
+
+            var q = (from f in files
+                     where ((f.LastWriteTime > f.CreationTime ? f.LastWriteTime : f.CreationTime) > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
+                           && (
+                           (f.FullName.ToLower().EndsWith(".xls") || f.FullName.ToLower().EndsWith(".xlsx"))
+                            && !files.Any(x => x.FullName == (f.FullName + ".bdl") && x.LastWriteTime > f.LastWriteTime)
+                     )
+                     orderby f.LastWriteTime ascending
+                     select f.FullName).Take(cuantas).ToList();
+
+
+
+            return q;
+
+        }
+
+
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
@@ -824,15 +928,32 @@ namespace ProntoFlexicapture
 
             // qué tal si levanto los directorios, me fijo cuales son nuevos, y sobre esos hago el getfiles?
 
+            var desde = DateTime.Now.AddHours(-0);
+
+
             if (true)
             {
-                IEnumerable<DirectoryInfo> dirs = d.GetDirectories().Where(x => x.CreationTime > DateTime.Now.AddDays(-1));
+                //IEnumerable<DirectoryInfo> dirs = d.GetDirectories("*.*", SearchOption.TopDirectoryOnly).Where(x => x.CreationTime > desde); // no tiene sentido usar un IEnumerable porque necesitas chuparlos todos
+                List<DirectoryInfo> dirs;
 
-                foreach (DirectoryInfo dd in dirs)
+                ErrHandler2.WriteError("Leo listado de dirs");
+                try
                 {
+                    dirs = d.GetDirectories("*.*", SearchOption.TopDirectoryOnly).Where(x => x.CreationTime > desde).ToList();
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler2.WriteError(ex);
+                    return null;
+                }
 
-                    if (files == null) files = dd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
-                    else files = files.Concat(dd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
+                //files = d.GetFiles("*.*", SearchOption.TopDirectoryOnly); 
+
+                foreach (DirectoryInfo subd in dirs)
+                {
+                    ErrHandler2.WriteError("Leo " + subd);
+                    if (files == null) files = subd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+                    else files = files.Concat(subd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
 
                 }
 
@@ -884,8 +1005,12 @@ namespace ProntoFlexicapture
 
             // tenes usar el creationtime para las que fueron extraidas del zip
 
+            if (files == null) return null;
+
+            ErrHandler2.WriteError("Filtro los marcados");
+
             var q = (from f in files
-                     where ((f.LastWriteTime > f.CreationTime ? f.LastWriteTime : f.CreationTime) > DateAndTime.DateAdd(DateInterval.Hour, -24, DateTime.Now))
+                     where ((f.LastWriteTime > f.CreationTime ? f.LastWriteTime : f.CreationTime) > desde)
                             && (EsArchivoDeImagen(f.Name)
                             && !f.FullName.Contains("_IMPORT1")
                             && !files.Any(x => x.FullName == (f.FullName + ".bdl"))
@@ -894,7 +1019,7 @@ namespace ProntoFlexicapture
                      select f.FullName).Take(cuantas).ToList();
 
 
-
+            ErrHandler2.WriteError("Salgo");
             return q;
 
         }
@@ -3034,20 +3159,21 @@ namespace ServicioCartaPorte
 
             //Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
 
-            string titulo = " <table cellpadding=15 style=\"text-align: center; font-size: large;\"> <tr> " +
-                        "   <td> Posición </td>" +
-                        "   <td>Demorado</td>" +
-                        "   <td>Autorizado</td>" +
-                        "   <td>A Descargar</td>" +
-                        "   <td>Descargado</td>" +
-                        "   <td>Rechazado</td>" +
-                        "   <td>Desviado</td>" +
-                        "   <td>CP p/cambiar</td>" +
-                        "   <td>Sin Cupo</td>" +
+            string titulo = " <table cellpadding=15 style=\"text-align: center; font-size: large; width: 1100px;height: 400px;\"> <tr> " +
+                        "   <td style=\"color: blue;\"> Posición </td>" +
+                        "   <td style=\"color: red\">Demorado</td>" +
+                        "    <td style=\"color: green\"> Autorizado</td>" +
+                        "  <td style=\"color: yellow\">A Descargar</td>" +
+                        "    <td style=\"color: cyan\"> Descargado</td>" +
+                        "    <td style=\"color: orange\"> Rechazado</td>" +
+                        "    <td style=\"color: pink\">Desviado</td>" +
+                        "  <td style=\"color: black\">  CP p/cambiar</td>" +
+                        "    <td style=\"color: white\">Sin Cupo</td>" +
                         "</tr> ";
 
-            int unidad = q.Values.Max() / 10;
-            var uni = new int[10];
+
+            decimal unidad = q.Values.Max() / 10;
+            var uni = new decimal[10];
 
             for (int n = 0; n < 10; n++)
             {
@@ -3058,21 +3184,39 @@ namespace ServicioCartaPorte
                 }
             }
 
+            titulo += " <tr> " +
+                    "   <td style=\"color: blue;\">  " + Convert.ToInt16(uni[2] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: red\">  " + Convert.ToInt16(uni[1] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: green\">  " + Convert.ToInt16(uni[0] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: yellow\">  " + Convert.ToInt16(uni[4] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: cyan\"> " + Convert.ToInt16(uni[3] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: orange\"> " + Convert.ToInt16(uni[5] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: pink\"> " + Convert.ToInt16(uni[6] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: black\"> " + Convert.ToInt16(uni[7] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: white\"> " + Convert.ToInt16(uni[8] * unidad).ToString() + "</td>" +
+                    "</tr> ";
+
+
+
 
             html += titulo;
+
+
+            string icono = @"<span class=""glyphicon glyphicon-bed"" aria-hidden=""true"" style=""font-size: 2em;""></span>";
+
 
             for (int n = 1; n < 10; n++)
             {
                 string renglon = " <tr> " +
-                            "   <td style=\"color: blue;\">  " + ((uni[2] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: red\">  " + ((uni[1] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: green\">  " + ((uni[0] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: yellow\">  " + ((uni[4] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: cyan\"> " + ((uni[3] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: orange\"> " + ((uni[5] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: pink\"> " + ((uni[6] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: black\"> " + ((uni[7] > n) ? "*" : "") + "</td>" +
-                            "   <td style=\"color: white\"> " + ((uni[8] > n) ? "*" : "") + "</td>" +
+                            "   <td style=\"color: blue;\">  " + ((uni[2] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: red\">  " + ((uni[1] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: green\">  " + ((uni[0] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: yellow\">  " + ((uni[4] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: cyan\"> " + ((uni[3] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: orange\"> " + ((uni[5] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: pink\"> " + ((uni[6] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: black\"> " + ((uni[7] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: white\"> " + ((uni[8] > n) ? icono : "") + "</td>" +
                             "</tr> ";
 
                 html += renglon;

@@ -199,9 +199,10 @@ namespace ProntoWindowsService
 
 
 
+                if (Debugger.IsAttached) Debugger.Break();
+
                 try
                 {
-
 
                     if (bSignaled == true) break;
                     bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
@@ -213,8 +214,17 @@ namespace ProntoWindowsService
 
                     resultado2 = null;
                     resultado2 = Tanda(SC2, DirApp2);
+
+
+                    TandaPegatinas(SC1, DirApp1);
+                    TandaPegatinas(SC2, DirApp2);
+
                     
-                    
+
+
+
+
+
                     if (resultado == null && resultado2==null)
                     {
                         bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
@@ -349,6 +359,52 @@ FCESupport\FCESupportImpl.h, 42.
                         sw.WriteLine(html);
                     }
                 }
+
+            }
+
+            catch (Exception x)
+            {
+                //System.Runtime.InteropServices.COMException (0x80004005):
+                // que pasa si salto el error de la licencia? diferenciar si saltó por un archivo que no existe u otro error
+                ClassFlexicapture.Log(x.ToString());
+                throw;
+
+            }
+
+            return resultado;
+
+        }
+
+
+
+
+        static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> TandaPegatinas(string SC, string DirApp)
+        {
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
+
+            try
+            {
+
+
+                var lista = ClassFlexicapture.ExtraerListaDeExcelsQueNoHanSidoProcesados(5, DirApp);
+
+
+                string log = "";
+                //hay que pasar el formato como parametro 
+
+                foreach (string f in lista)
+                {
+                    int m_IdMaestro = 0;
+
+                    ClassFlexicapture.MarcarImagenComoProcesandose(f);
+
+                    ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, f,
+                                            LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+                    //var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+                }
+
 
             }
 

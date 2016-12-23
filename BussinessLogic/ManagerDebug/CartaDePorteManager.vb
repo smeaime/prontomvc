@@ -14772,12 +14772,12 @@ Public Class CartaDePorteManager
         Dim lista3 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor3"), "").Split("|"), IEnumerable(Of String)).ToList
 
         If lista3.Contains(usuario) Then
-            Return c3.ToList.Where(Function(x) x <> "")
+            Return c3.ToList.Where(Function(x) x <> "").ToList
 
         ElseIf lista2.Contains(usuario) Then
-            Return c2.ToList.Where(Function(x) x <> "")
+            Return c2.ToList.Where(Function(x) x <> "").ToList
         Else
-            Return c1.ToList.Where(Function(x) x <> "")
+            Return c1.ToList.Where(Function(x) x <> "").ToList
         End If
 
     End Function
@@ -15125,7 +15125,17 @@ Public Class CartaDePorteManager
 
                  
                     'RenglonCerealnetCalidad(dbc, 18, cc.CalidadHumedadResultado, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Humedad", 0, False, anas)
-                    RenglonCerealnetCalidad(dbc, 18, dbc.Humedad, dbc.HumedadDesnormalizada, dbc.HumedadDesnormalizada, Nothing, "01", "Humedad", dbc.HumedadDesnormalizada, False, anas)
+                    Dim porcentajemerma As Decimal
+                    Try
+                        porcentajemerma = dbc.HumedadDesnormalizada * 100 / dbc.NetoFinal
+                    Catch ex As Exception
+                        porcentajemerma = 0
+                    End Try
+                    
+                    RenglonCerealnetCalidad(dbc, 18, dbc.Humedad, porcentajemerma, porcentajemerma, Nothing, "01", "Humedad", dbc.HumedadDesnormalizada, False, anas)
+
+
+
 
 
 

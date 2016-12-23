@@ -395,6 +395,21 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void ImagenesPendientesIneficaz()
+        {
+
+
+            var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
+
+
+        }
+
+
+
+
+
+
 
         [TestMethod]
         public void ProcesarTandaDeExcelsDeUrenport_29439()
@@ -402,7 +417,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(5, DirApp);
+            var lista = ClassFlexicapture.ExtraerListaDeExcelsQueNoHanSidoProcesados(5, DirApp);
 
 
             string log = "";
@@ -412,12 +427,13 @@ namespace ProntoMVC.Tests
             {
                 int m_IdMaestro = 0;
 
+                ClassFlexicapture.MarcarImagenComoProcesandose(f);
+                
                 ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, f,
                                         LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
 
                 //var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
 
-                // ClassFlexicapture.MarcarImagenComoProcesandose();
             }
 
         }
