@@ -1903,6 +1903,10 @@ Public Class ExcelImportadorManager
     Public Shared Function UrenportExcelToDataset(ByVal pFileName As String, SC As String) As Data.DataSet
         Dim ds = GetExcel(pFileName, 1)
 
+
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
         'le hago algun tratamiento a los cuits
         For Each r In ds.Tables(0).Rows
 
@@ -1943,6 +1947,14 @@ Public Class ExcelImportadorManager
 
 
                 With myCartaDePorte
+
+                    .Situacion = BuscarSituacionId(r(2))  ' en el excel de Cerealnet (a diferencia del de Urenport) en esta columna viene la patente
+
+                    .FechaArribo = iisValidSqlDate(r(3))
+
+                    .IdArticulo = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)
+
+
                     .Titular = BuscarClientePorCUIT(r(7), SC, r(6))
                     If .Titular = -1 Then
                         Console.Write(.Titular)
@@ -1963,20 +1975,51 @@ Public Class ExcelImportadorManager
                     .Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
                     r(14) = NombreCliente(SC, .Entregador)
 
-                    .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
                     .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
 
-                    .IdArticulo = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)
 
 
-                    .FechaArribo = iisValidSqlDate(r(3))
+
+                    .IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
+                    .IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
+
+                    .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
+
+                    .BrutoPto = Val(r(25))
+                    .TaraPto = Val(r(26))
+                    .NetoPto = Val(r(27))
                     .FechaDescarga = iisValidSqlDate(r(28))
+                    .BrutoFinal = Val(r(29))
+                    .TaraFinal = Val(r(30))
+                    .NetoFinalIncluyendoMermas = Val(r(31))
+                    .Merma = Val(r(32))
+                    .NetoFinalSinMermas = Val(r(33))
 
+                    '.calidad = r(34)
                     .ObservacionesSituacion = r(35)
+                    .Contrato = r(36)
 
-                    .Situacion = BuscarSituacionId(r(2))
+                    .CEE = r(37)
+                    .CTG = Val(r(38))
+                    .FechaDeCarga = iisValidSqlDate(r(39))
+                    .FechaVencimiento = iisValidSqlDate(r(40))
+                    .Patente = r(41)
+                    .Acoplado = r(42)
 
-                    .PuntoVenta = 1
+
+
+
+                    Try
+                        If .Destino > 0 Then
+                            .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta
+                        Else
+                            .PuntoVenta = 1
+                        End If
+                    Catch ex As Exception
+                        .PuntoVenta = 1
+                    End Try
+
+
                     .Cosecha = "1617"
                 End With
 
@@ -2010,9 +2053,13 @@ Public Class ExcelImportadorManager
     Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
 
     Public Shared Function BuscarSituacionId(sit As String) As Integer
-        Dim index As Integer = Array.FindIndex(Situaciones, Function(s) s = sit)
+        Try
+            Dim index As Integer = Array.FindIndex(Situaciones, Function(s) s = sit)
 
-        Return index
+            Return index
+        Catch ex As Exception
+            Return -1
+        End Try
 
     End Function
 
