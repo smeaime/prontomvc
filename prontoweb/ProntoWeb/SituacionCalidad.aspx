@@ -19,8 +19,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--///////////     bootstrap    /////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
@@ -47,12 +47,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
 
-                <table>
+                <table style="color: black;">
                     <tr>
 
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
                         <td class="EncabezadoCell" style="width: 400px; height: 18px;">
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"  style="color: black;"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" />
                                 <asp:ListItem Text="Ayer" />
@@ -64,7 +64,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                 <asp:ListItem Text="Personalizar" />
                             </asp:DropDownList>
-                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"
+                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"  style="color: black;"
                                 TabIndex="2" AutoPostBack="false"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                 Enabled="True">
@@ -77,7 +77,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </cc1:MaskedEditExtender>
                             <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                 WatermarkText="desde" WatermarkCssClass="watermarked" />
-                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2"
+                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2"  style="color: black;"
                                 AutoPostBack="false"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                 Enabled="True">
@@ -97,7 +97,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
                         </td>
                         <td class="EncabezadoCell">
-                            <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" />
+                            <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px"  style="color: black;"/>
                         </td>
 
                     </tr>
@@ -106,7 +106,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
                         </td>
                         <td class="EncabezadoCell" style="width: 250px; height: 18px;">
-                            <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
+                            <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"  style="color: black;"
                                 autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                             <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
                                 OnClientItemSelected="RefrescaGrilla()"
@@ -131,7 +131,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary"
-            Width="150" Height="40" />
+             />
         <asp:Literal ID="salida" runat="server"></asp:Literal>
         <br />
         <br />

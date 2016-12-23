@@ -1397,7 +1397,7 @@ namespace CerealNet.WSCartasDePorte
         public string calidad;
         public int cartaporte;
         public int codmerca;
-        public bool codmercaSpecified;
+        //public bool codmercaSpecified;
         public int codonccalocalidadpuerto;
         //public bool codonccalocalidadpuertoSpecified;
         public int codonccalocalproc;
@@ -1444,7 +1444,7 @@ namespace CerealNet.WSCartasDePorte
         public string puerto;
         public string remitente;
         public int taradest;
-        public bool taradestSpecified;
+        //public bool taradestSpecified;
         public string titular;
         public string usuario;
         public int vagon;

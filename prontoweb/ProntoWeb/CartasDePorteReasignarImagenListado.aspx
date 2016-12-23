@@ -296,7 +296,7 @@
                     <td></td>
                     <td valign="top">
                         <asp:GridView ID="grillaEncoladas" runat="server" AutoGenerateColumns="False" ShowFooter="false"
-                            AllowPaging="True" AllowSorting="True" PageSize="100"
+                            AllowPaging="True" AllowSorting="True" PageSize="100" Width="300"
                             HeaderStyle-Wrap="true">
 
                             <Columns>
