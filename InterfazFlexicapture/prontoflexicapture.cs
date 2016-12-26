@@ -832,17 +832,17 @@ namespace ProntoFlexicapture
 
             if (true)
             {
-                IEnumerable<DirectoryInfo> dirs = d.GetDirectories("*.*", SearchOption.TopDirectoryOnly).Where(x => x.CreationTime > desde);
+                //IEnumerable<DirectoryInfo> dirs = d.GetDirectories("*.*", SearchOption.TopDirectoryOnly).Where(x => x.CreationTime > desde);
 
                 files = d.GetFiles("*.*", SearchOption.TopDirectoryOnly);
 
-                foreach (DirectoryInfo subd in dirs)
-                {
+                //foreach (DirectoryInfo subd in dirs)
+                //{
 
-                    if (files == null) files = subd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
-                    else files = files.Concat(subd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
+                //    if (files == null) files = subd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+                //    else files = files.Concat(subd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
 
-                }
+                //}
 
 
             }
@@ -955,6 +955,7 @@ namespace ProntoFlexicapture
                     if (files == null) files = subd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
                     else files = files.Concat(subd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
 
+                    if (files.Count() > 100) break;
                 }
 
 
@@ -3413,7 +3414,7 @@ namespace ServicioCartaPorte
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.ToString() + "</>" ,
                                 
-                                ExcelImportadorManager.Situaciones[a.Situacion ?? 0],
+                                ((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",
 
                                 a.ObservacionesSituacion,
 
