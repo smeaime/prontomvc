@@ -207,6 +207,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaActualizacionAutomatica { get; set; }
         public Nullable<System.DateTime> FechaAutorizacion { get; set; }
         public string ObservacionesSituacion { get; set; }
+        public string SituacionLog { get; set; }
     
         public virtual CartasPorteAcopio CartasPorteAcopio { get; set; }
         public virtual Cliente Cliente { get; set; }

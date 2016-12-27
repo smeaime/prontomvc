@@ -2061,6 +2061,7 @@ Public Class ExcelImportadorManager
                         .Cosecha = "1617"
 
 
+                        .SituacionLog = log
                     End If
 
 

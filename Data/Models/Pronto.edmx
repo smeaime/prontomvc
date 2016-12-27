@@ -671,6 +671,7 @@
           <Property Name="FechaActualizacionAutomatica" Type="datetime" />
           <Property Name="FechaAutorizacion" Type="datetime" />
           <Property Name="ObservacionesSituacion" Type="varchar" MaxLength="200" />
+          <Property Name="SituacionLog" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="CartasDePorteControlDescarga">
           <Key>
@@ -1213,6 +1214,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="int" />
           <Property Name="CompensacionGastosProveedorCliente" Type="varchar" MaxLength="2" />
           <Property Name="CircuitoLiquidacionFlete" Type="int" />
+          <Property Name="AcumularParaSUSS" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="Conceptos">
           <Key>
@@ -3675,6 +3677,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="CodigoNormaPercepcion" Type="int" />
           <Property Name="CodigoActividad" Type="int" />
           <Property Name="CodigoArticuloInciso" Type="varchar" MaxLength="5" />
+          <Property Name="CodigoRegimen" Type="int" />
         </EntityType>
         <EntityType Name="IGCondiciones">
           <Key>
@@ -15073,6 +15076,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="DetalleProveedoresIBs" Relationship="DemoProntoModel.FK_DetalleProveedoresIB_IBCondiciones" FromRole="IBCondicion" ToRole="DetalleProveedoresIB" />
           <Property Type="String" Name="CodigoArticuloInciso" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_IBCondiciones" FromRole="IBCondicion" ToRole="NotasCredito" />
+          <Property Name="CodigoRegimen" Type="Int32" />
         </EntityType>
         <Association Name="FK_Clientes_CatIIBB">
           <End Type="DemoProntoModel.IBCondicion" Role="IBCondicion" Multiplicity="0..1" />
@@ -18395,6 +18399,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="IdNotaDebitoVenta_RecuperoGastos" Type="Int32" />
           <Property Name="CompensacionGastosProveedorCliente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="CircuitoLiquidacionFlete" Type="Int32" />
+          <Property Name="AcumularParaSUSS" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DetalleComprobantesProveedore">
           <Key>
@@ -25481,6 +25486,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="CartasDePorteDetalles" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3" FromRole="CartasDePorte" ToRole="CartasDePorteDetalle_EF" />
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" FromRole="CartasDePorte" ToRole="Vendedor" />
           <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="CartasDePorte" ToRole="DetalleFactura" />
+          <Property Name="SituacionLog" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__CartasDeP__Acopi__5498535D">
           <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -26965,6 +26971,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="IBCondiciones">
             <EntityTypeMapping TypeName="DemoProntoModel.IBCondicion">
               <MappingFragment StoreEntitySet="IBCondiciones">
+                <ScalarProperty Name="CodigoRegimen" ColumnName="CodigoRegimen" />
                 <ScalarProperty Name="CodigoArticuloInciso" ColumnName="CodigoArticuloInciso" />
                 <ScalarProperty Name="CodigoActividad" ColumnName="CodigoActividad" />
                 <ScalarProperty Name="CodigoNormaPercepcion" ColumnName="CodigoNormaPercepcion" />
@@ -28946,6 +28953,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="ComprobantesProveedor">
             <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
               <MappingFragment StoreEntitySet="ComprobantesProveedores">
+                <ScalarProperty Name="AcumularParaSUSS" ColumnName="AcumularParaSUSS" />
                 <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
                 <ScalarProperty Name="CompensacionGastosProveedorCliente" ColumnName="CompensacionGastosProveedorCliente" />
                 <ScalarProperty Name="IdNotaDebitoVenta_RecuperoGastos" ColumnName="IdNotaDebitoVenta_RecuperoGastos" />
@@ -32434,6 +32442,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="CartasDePortes">
             <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
               <MappingFragment StoreEntitySet="CartasDePorte">
+                <ScalarProperty Name="SituacionLog" ColumnName="SituacionLog" />
                 <ScalarProperty Name="ObservacionesSituacion" ColumnName="ObservacionesSituacion" />
                 <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
                 <ScalarProperty Name="FechaActualizacionAutomatica" ColumnName="FechaActualizacionAutomatica" />
