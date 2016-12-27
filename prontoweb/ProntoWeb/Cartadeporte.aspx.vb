@@ -2235,10 +2235,13 @@ Partial Class CartadeporteABM
                 txtObservaciones.Text = .Observaciones
 
                 Try
-                    cmbSituacion.Text = ExcelImportadorManager.Situaciones(If(.Situacion, 0))
+                    'cmbSituacion.Text = ExcelImportadorManager.Situaciones(If(.Situacion, 0))
+                    cmbSituacion.SelectedIndex = If(.Situacion, 0)
+
                     txtObsSituacion.Text = .ObservacionesSituacion
-                    txtFechaAutorizacion.Text = .FechaAutorizacion
-                    txtFechaActualizacion.text = .FechaActualizacionAutomatica
+                    txtFechaAutorizacion.Text = IIf(.FechaAutorizacion = DateTime.MinValue, "", .FechaAutorizacion)
+                    txtFechaActualizacion.Text = IIf(.FechaActualizacionAutomatica = DateTime.MinValue, "", .FechaActualizacionAutomatica)
+                    txtLogSituacion.Text = .SituacionLog
                 Catch ex As Exception
 
                 End Try
