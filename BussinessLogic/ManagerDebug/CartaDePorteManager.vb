@@ -9025,7 +9025,7 @@ Public Class CartaDePorteManager
                 .FechaActualizacionAutomatica = If(oCarta.FechaActualizacionAutomatica, DateTime.MinValue)
                 .FechaAutorizacion = If(oCarta.FechaAutorizacion, DateTime.MinValue)
                 .ObservacionesSituacion = oCarta.ObservacionesSituacion
-
+                .SituacionLog = oCarta.SituacionLog
 
 
 
@@ -9535,7 +9535,7 @@ Public Class CartaDePorteManager
                     oCarta.FechaActualizacionAutomatica = IIf(.FechaActualizacionAutomatica = DateTime.MinValue, Nothing, .FechaActualizacionAutomatica)
                     oCarta.FechaAutorizacion = IIf(.FechaAutorizacion = DateTime.MinValue, Nothing, .FechaAutorizacion)
                     oCarta.ObservacionesSituacion = .ObservacionesSituacion
-
+                    oCarta.SituacionLog = .SituacionLog
 
 
 

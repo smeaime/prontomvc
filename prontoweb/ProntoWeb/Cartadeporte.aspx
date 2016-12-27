@@ -2625,8 +2625,14 @@
 
                             </td>
 
+                              <td class="EncabezadoCell" style="width: 150px;">Campos Actualizados
 
+                            </td>
+                            <td class="EncabezadoCell" style="">
+                                <asp:TextBox ID="txtLogSituacion" runat="server" CssClass="CssTextBox" Width="200px" TextMode="MultiLine"></asp:TextBox>
 
+                            </td>
+                            
                         </tr>
                         <tr>
 
@@ -2635,17 +2641,9 @@
 
                             <td class="EncabezadoCell" style="width: 15%">
 
-                                <asp:TextBox ID="txtFechaAutorizacion" runat="server" MaxLength="1" Width="72px" TabIndex="27"
+                                <asp:TextBox ID="txtFechaAutorizacion" runat="server" MaxLength="1" Width="150px" TabIndex="27"  Enabled="false"
                                     onchange="" AutoPostBack="false"></asp:TextBox>&nbsp
-                                            <asp:Button ID="Button6" runat="server" />
-                                <cc1:CalendarExtender ID="CalendarExtender5" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaAutorizacion"
-                                    PopupButtonID="Button1">
-                                </cc1:CalendarExtender>
-
-                                <cc1:MaskedEditExtender ID="MaskedEditExtender5" runat="server" AcceptNegative="Left"
-                                    DisplayMoney="Left" ErrorTooltipEnabled="True" Mask="99/99/9999" MaskType="Date"
-                                    TargetControlID="txtFechaAutorizacion">
-                                </cc1:MaskedEditExtender>
+                                            
 
                             </td>
 
@@ -2664,8 +2662,8 @@
 
                             <td class="EncabezadoCell" style="width: 15%">
 
-                                <asp:TextBox ID="txtFechaActualizacion" runat="server" MaxLength="1" Width="72px" TabIndex="27"
-                                    onchange="" AutoPostBack="false"></asp:TextBox>
+                                <asp:TextBox ID="txtFechaActualizacion" runat="server" MaxLength="1" Width="150px" TabIndex="27"
+                                    onchange="" AutoPostBack="false" Enabled="false"></asp:TextBox>
                             &nbsp
                         </tr>
 

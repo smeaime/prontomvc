@@ -312,7 +312,8 @@ Namespace Pronto.ERP.BO
         Public FechaActualizacionAutomatica As DateTime = DateTime.MinValue
         Public FechaAutorizacion As DateTime = DateTime.MinValue
         Public ObservacionesSituacion As String
-        
+        Public SituacionLog As String
+
 
 
 

@@ -928,7 +928,7 @@ namespace ProntoFlexicapture
 
             // qué tal si levanto los directorios, me fijo cuales son nuevos, y sobre esos hago el getfiles?
 
-            var desde = DateTime.Now.AddHours(-0);
+            var desde = DateTime.Now.AddHours(-4);
 
 
             if (true)
@@ -3414,7 +3414,8 @@ namespace ServicioCartaPorte
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.ToString() + "</>" ,
                                 
-                                ((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",
+                                (a.Situacion ?? 0).NullSafeToString(),
+                                //((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",
 
                                 a.ObservacionesSituacion,
 

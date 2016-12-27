@@ -706,16 +706,22 @@ Partial Class CartasDePorteReasignarImagenListado
 
             '10 segundos aca
 
+            Dim estado As String = ProntoFlexicapture.ClassFlexicapture.EstadoServicio()
+            lblCantidad.Text = "0 cartas en cola.     Estado del servicio: " & estado
+
             Dim lista = ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(100, DirApp).ToList
+
+            If lista Is Nothing Then
+            Else
+                lblCantidad.Text = lista.Count & " cartas en cola.     Estado del servicio: " & estado
+                If lista.Count > 100 Then lblCantidad.Text = " Más de 100 cartas en cola.     Estado del servicio: " & estado
+                If estado = "Stopped" Then FileUpload1.Enabled = False Else FileUpload1.Enabled = True
+            End If
 
             grillaEncoladas.DataSource = (From i In lista Where i.Contains(puntoventa) Select New With {.nombre = i.Substring(i.IndexOf("\Temp"))}).ToList
             grillaEncoladas.DataBind()
 
-            Dim estado As String = ProntoFlexicapture.ClassFlexicapture.EstadoServicio()
 
-            lblCantidad.Text = lista.Count & " cartas en cola.     Estado del servicio: " & estado
-            If lista.Count > 100 Then lblCantidad.Text = " Más de 100 cartas en cola.     Estado del servicio: " & estado
-            If estado = "Stopped" Then FileUpload1.Enabled = False Else FileUpload1.Enabled = True
 
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
