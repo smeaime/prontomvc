@@ -2238,6 +2238,7 @@ Partial Class CartadeporteABM
                     cmbSituacion.Text = ExcelImportadorManager.Situaciones(If(.Situacion, 0))
                     txtObsSituacion.Text = .ObservacionesSituacion
                     txtFechaAutorizacion.Text = .FechaAutorizacion
+                    txtFechaActualizacion.text = .FechaActualizacionAutomatica
                 Catch ex As Exception
 
                 End Try

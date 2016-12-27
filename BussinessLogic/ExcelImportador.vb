@@ -1899,6 +1899,17 @@ Public Class ExcelImportadorManager
     End Function
 
 
+    Shared Function actua(ByRef d As Object, ByRef o As Object) As Boolean
+        If o.ToString = d.ToString Then Return False
+        If d.ToString = "" Then Return False
+
+        o = d
+
+
+        Return True
+
+    End Function
+
 
     Public Shared Function UrenportExcelToDataset(ByVal pFileName As String, SC As String) As Data.DataSet
         Dim ds = GetExcel(pFileName, 1)
@@ -1938,89 +1949,121 @@ Public Class ExcelImportadorManager
                 'End Select
 
 
-                
+
                 Dim cpnumero As Long = Val(r(0))
 
                 If cpnumero < 500000000 Then Continue For
- 
+
                 Dim myCartaDePorte As CartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, cpnumero, 0, 0)
+
+
+                Dim log = ""
+
 
 
                 With myCartaDePorte
 
-                    .Situacion = BuscarSituacionId(r(2))  ' en el excel de Cerealnet (a diferencia del de Urenport) en esta columna viene la patente
+                    Dim bEditadaManual As Boolean = (.FechaModificacion > .FechaActualizacionAutomatica.AddSeconds(60))
 
-                    .FechaArribo = iisValidSqlDate(r(3))
+                    '+ Si la carta de porte fue editada manualmente no volver a importar los datos de la carta de porte. SI seguir importando los datos correspondientes a la situación del camion (Situación / Observaciones)
 
-                    .IdArticulo = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)
-
-
-                    .Titular = BuscarClientePorCUIT(r(7), SC, r(6))
-                    If .Titular = -1 Then
-                        Console.Write(.Titular)
+                    If bEditadaManual Then
+                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Demorado" a "Autorizado", la situación de la carta de porte no deberá volver a "Demorado" si se vuelve a importar la información y vuelve a venir como demorado
+                        If .SituacionAntesDeEditarManualmente = 1 And .Situacion = 0 And BuscarSituacionId(r(2)) = 1 Then Continue For
+                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Rechazado" a "Desviado", la situación de la carta de porte no deberá volver a "Rechazado" si se vuelve a importar la información y vuelve a venir como demorado
+                        If .SituacionAntesDeEditarManualmente = 5 And .Situacion = 6 And BuscarSituacionId(r(2)) = 5 Then Continue For
                     End If
-                    r(6) = NombreCliente(SC, .Titular)
-
-                    .CuentaOrden1 = BuscarClientePorCUIT(r(9), SC, r(8))
-                    r(8) = NombreCliente(SC, .CuentaOrden1)
-
-                    .CuentaOrden2 = BuscarClientePorCUIT(r(11), SC, r(10))
-                    r(10) = NombreCliente(SC, .CuentaOrden2)
 
 
-                    .Corredor = BuscarVendedorPorCUIT(r(13), SC, r(12))
-                    r(12) = NombreCliente(SC, .Corredor)
-
-
-                    .Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
-                    r(14) = NombreCliente(SC, .Entregador)
-
-                    .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
-
-
-
-
-                    .IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
-                    .IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
-
-                    .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
-
-                    .BrutoPto = Val(r(25))
-                    .TaraPto = Val(r(26))
-                    .NetoPto = Val(r(27))
-                    .FechaDescarga = iisValidSqlDate(r(28))
-                    .BrutoFinal = Val(r(29))
-                    .TaraFinal = Val(r(30))
-                    .NetoFinalIncluyendoMermas = Val(r(31))
-                    .Merma = Val(r(32))
-                    .NetoFinalSinMermas = Val(r(33))
-
-                    '.calidad = r(34)
+                    .Situacion = BuscarSituacionId(r(2))  ' en el excel de Cerealnet (a diferencia del de Urenport) viene la patente aca?
                     .ObservacionesSituacion = r(35)
-                    .Contrato = r(36)
-
-                    .CEE = r(37)
-                    .CTG = Val(r(38))
-                    .FechaDeCarga = iisValidSqlDate(r(39))
-                    .FechaVencimiento = iisValidSqlDate(r(40))
-                    .Patente = r(41)
-                    .Acoplado = r(42)
+                    .FechaActualizacionAutomatica = DateTime.Now
 
 
 
 
-                    Try
-                        If .Destino > 0 Then
-                            .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta
-                        Else
-                            .PuntoVenta = 1
+
+
+                    If (Not bEditadaManual) Then
+
+
+                        .FechaArribo = iisValidSqlDate(r(3), DateTime.Now)
+
+                        If actua(.IdArticulo, BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)) Then log += "Articulo; "
+
+
+                        If actua(.Titular, BuscarClientePorCUIT(r(7), SC, r(6))) Then log += "titular"
+                        If .Titular = -1 Then
+                            Console.Write(.Titular)
                         End If
-                    Catch ex As Exception
-                        .PuntoVenta = 1
-                    End Try
+                        r(6) = NombreCliente(SC, .Titular)
 
 
-                    .Cosecha = "1617"
+
+                        .CuentaOrden1 = BuscarClientePorCUIT(r(9), SC, r(8))
+                        r(8) = NombreCliente(SC, .CuentaOrden1) 'actualizo el datatable solo en caso de que se procese con "usuario interactivo"...
+
+                        .CuentaOrden2 = BuscarClientePorCUIT(r(11), SC, r(10))
+                        r(10) = NombreCliente(SC, .CuentaOrden2)
+
+
+                        .Corredor = BuscarVendedorPorCUIT(r(13), SC, r(12))
+                        r(12) = NombreCliente(SC, .Corredor)
+
+
+                        .Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
+                        r(14) = NombreCliente(SC, .Entregador)
+
+                        .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
+
+
+
+
+                        .IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
+                        .IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
+
+                        .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
+
+                        .BrutoPto = Val(r(25))
+                        .TaraPto = Val(r(26))
+                        .NetoPto = Val(r(27))
+                        .FechaDescarga = iisValidSqlDate(r(28))
+                        .BrutoFinal = Val(r(29))
+                        .TaraFinal = Val(r(30))
+                        .NetoFinalIncluyendoMermas = Val(r(31))
+                        .Merma = Val(r(32))
+                        .NetoFinalSinMermas = Val(r(33))
+
+                        '.calidad = r(34)
+                        .Contrato = r(36)
+
+                        .CEE = r(37)
+                        .CTG = Val(r(38))
+                        .FechaDeCarga = iisValidSqlDate(r(39))
+                        .FechaVencimiento = iisValidSqlDate(r(40))
+                        .Patente = r(41)
+                        .Acoplado = r(42)
+
+
+
+
+                        Try
+                            If .Destino > 0 Then
+                                .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta
+                            Else
+                                .PuntoVenta = 1
+                            End If
+                        Catch ex As Exception
+                            .PuntoVenta = 1
+                        End Try
+
+
+                        .Cosecha = "1617"
+
+
+                    End If
+
+
                 End With
 
 

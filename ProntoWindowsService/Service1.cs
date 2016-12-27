@@ -128,6 +128,8 @@ namespace ProntoWindowsService
         {
 
 
+            if (Debugger.IsAttached) Debugger.Break();
+
 
             ClassFlexicapture.Log("Empieza");
 
@@ -187,7 +189,7 @@ namespace ProntoWindowsService
 
             bool bSignaled = false;
 
-            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado,resultado2;
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
 
             while (true)
             {
@@ -198,15 +200,13 @@ namespace ProntoWindowsService
                 //no volver a cargar planilla!!!!
 
 
-
-                if (Debugger.IsAttached) Debugger.Break();
-
                 try
                 {
 
-                    if (bSignaled == true) break;
+
+                    if (bSignaled == true && !Debugger.IsAttached) break;
                     bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-                    if (bSignaled == true) break;
+                    if (bSignaled == true && !Debugger.IsAttached) break;
 
                     resultado = null;
                     resultado = Tanda(SC1, DirApp1);
@@ -219,18 +219,18 @@ namespace ProntoWindowsService
                     TandaPegatinas(SC1, DirApp1);
                     TandaPegatinas(SC2, DirApp2);
 
-                    
 
 
 
 
 
-                    if (resultado == null && resultado2==null)
+
+                    if (resultado == null && resultado2 == null)
                     {
                         bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-                        if (bSignaled == true) break;
+                        if (bSignaled == true && !Debugger.IsAttached) break;
                         System.Threading.Thread.Sleep(1000 * 15);
-                        if (bSignaled == true) break;
+                        if (bSignaled == true && !Debugger.IsAttached) break;
                         System.Threading.Thread.Sleep(1000 * 15);
                         Console.Write(".");
                     }
@@ -331,7 +331,7 @@ FCESupport\FCESupportImpl.h, 42.
                 try
                 {
                     resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
-                                   plantilla,  Convert.ToInt32(ConfigurationManager.AppSettings["CantidadLote"]),
+                                   plantilla, Convert.ToInt32(ConfigurationManager.AppSettings["CantidadLote"]),
                                     SC, DirApp, true, ref sError);
 
 
