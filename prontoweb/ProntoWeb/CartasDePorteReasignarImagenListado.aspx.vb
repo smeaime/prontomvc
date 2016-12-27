@@ -770,6 +770,8 @@ Partial Class CartasDePorteReasignarImagenListado
                 'Dim archivo = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + i.Substring(q)
                 Dim archivo = ConfigurationManager.AppSettings("UrlDominio") + q + "\ExportToXLS.xls"
 
+
+                If archivo.ToLower.Contains("pegatinas\") Then Continue For
                 If Not archivo.Contains(puntoventa) Then Continue For
 
 

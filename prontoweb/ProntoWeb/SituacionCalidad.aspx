@@ -132,6 +132,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary"
              />
+        <br />
         <asp:Literal ID="salida" runat="server"></asp:Literal>
         <br />
         <br />
@@ -974,7 +975,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     editoptions: {
         //defaultValue: OrigenDescripcionDefault,
         value: "0:Autorizado; 1:Demorado;"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
-    }
+    },
+    // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
+    formatter:'select',  stype: 'select', searchoptions:{ sopt:['eq'], value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo" }
+
+
 },
 
 
