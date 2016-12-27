@@ -146,7 +146,9 @@ SELECT
 cast (cdp.NumeroCartaDePorte as varchar) +					
 				CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 
 					THEN            '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 						
-					ELSE             ''            End				as NumeroCompleto,
+					ELSE             ''            
+				End	
+	as NumeroCompleto,
 datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico,  		
 ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	  	
 ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	  			
