@@ -1,0 +1,1206 @@
+
+Log Entry : 
+12/27/2016 12:03:23
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message:IMPORTADOR No se pudo importar ningún renglón C:\Users\Administrador\AppData\Local\Temp\57213_UrenPort Andres.xlsx
+__________________________
+
+Log Entry : 
+12/27/2016 12:04:12
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 12:09:52
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:861e2796-9b16-483f-8db3-78140945e43d
+Error Number:-2,State:0,Class:11 - select * from ExcelImportador where IdTanda=0 500 0
+__________________________
+
+Log Entry : 
+12/27/2016 12:09:52
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+__________________________
+
+Log Entry : 
+12/27/2016 12:09:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message:Problemas con IdMaestro? Quizas no pude importar filas. System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 803
+   at ExcelImportadorManager.TraerMetadataPorIdMaestro(String SC, Int32 id) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 5602
+   at LogicaImportador.TraerExcelDeBase(String SC, Int32& m_IdMaestro) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:line 1102
+ClientConnectionId:861e2796-9b16-483f-8db3-78140945e43d
+Error Number:-2,State:0,Class:11
+__________________________
+
+Log Entry : 
+12/27/2016 12:09:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at CartasDePorteImportador.GetTopN(DataTable dt, Int32 RowCount, Int32 Start) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1581
+   at CartasDePorteImportador.MostrarPrimerosDiezRenglones() in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 1571
+   at CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:line 327
+App_Web_cartasdeporteimportador.aspx.4199bbd4.3zy6x46h
+__________________________
+
+Log Entry : 
+12/27/2016 12:09:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at CartaDePorteManager.MandarMailDeError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 7849
+System
+__________________________
+
+Log Entry : 
+12/27/2016 12:09:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx. Error Message:C:\Users\Administrador\AppData\Local\Temp\22584_UrenPort Andres.xlsx
+__________________________
+
+Log Entry : 
+12/27/2016 12:11:31
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - Empleados_TX_UsuarioNT 'Mariano' 90 0
+__________________________
+
+Log Entry : 
+12/27/2016 12:12:02
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+12/27/2016 12:12:04
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+No se ha encontrado la ruta de acceso de la red
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 12:15:50
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638782. Error Message:La carta numero 558155640 id=2638782 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+12/27/2016 12:15:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638782. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+12/27/2016 14:46:23
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:46:31
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:46:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:46:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:46:51
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:47:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:47:12
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:57:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:57:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:57:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:57:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:57:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:57:54
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:02
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:07
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:12
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:17
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:22
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:45
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:58:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:02
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:20
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:29
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:45
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:52
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 14:59:57
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:00:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:00:13
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:00:20
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:00:29
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:00:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:00:48
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:00:57
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:06
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:20
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:51
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:01:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:07
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:12
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:20
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:25
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:50
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:02:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:09
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:19
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:25
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:44
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:50
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:03:56
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:06
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:22
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:28
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:48
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:04:55
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:05:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:05:18
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:05:23
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:05:31
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:05:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:05:54
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:09
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:14
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:22
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:31
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:49
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:06:59
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:07:10
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:07:16
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:07:33
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:07:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:08:47
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:09:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:09:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:09:51
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:10:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:10:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:10:21
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:10:27
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:10:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+Falta elegir a qué acopio corresponde el remitente comercial
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:10:45
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:10:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:11:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:11:15
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:11:25
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:11:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:11:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:11:56
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:06
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:12
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:18
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:24
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:45
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:50
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:54
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:12:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:13:15
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:13:25
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:13:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:13:45
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:13:55
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:10
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:19
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:28
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:50
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:14:57
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:15:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:15:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:15:19
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:15:26
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:15:33
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:15:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:35:11
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:40:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:43:20
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La patente del acoplado es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:44:07
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:44:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:51:33
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:52:12
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 15:57:19
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La fecha de la descarga es anterior a la de arribo
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 16:00:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 16:04:24
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:La patente del camión es inválida 
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 16:29:31
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - Empleados_TX_UsuarioNT 'Mariano' 90 0
+__________________________
+
+Log Entry : 
+12/27/2016 16:29:31
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+12/27/2016 16:29:31
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+No se ha encontrado la ruta de acceso de la red
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 16:29:35
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________

@@ -1723,7 +1723,7 @@
                     </asp:UpdatePanel>
                 </ContentTemplate>
             </cc1:TabPanel>
-            
+
 
 
 
@@ -2601,11 +2601,19 @@
                             <td class="EncabezadoCell" style="width: 150px;">Situación</td>
                             <td>
                                 <asp:DropDownList ID="cmbSituacion" runat="server" CssClass="CssCombo" Width="100px" Enabled="false">
-                                    <asp:ListItem Value="0">Física</asp:ListItem>
-                                    <asp:ListItem Value="1">Arbitrado</asp:ListItem>
+                                    <asp:ListItem Value="0">Autorizado</asp:ListItem>
+                                    <asp:ListItem Value="1">Demorado</asp:ListItem>
+                                    <asp:ListItem Value="1">Posicion</asp:ListItem>
+                                    <asp:ListItem Value="1">Descargado</asp:ListItem>
+                                    <asp:ListItem Value="1">A Descargar</asp:ListItem>
+                                    <asp:ListItem Value="1">Rechazado</asp:ListItem>
+                                    <asp:ListItem Value="1">Desviado</asp:ListItem>
+                                    <asp:ListItem Value="1">CP p/cambiar</asp:ListItem>
+                                    <asp:ListItem Value="1">Sin Cupo</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
 
+                            
                         </tr>
                         <tr>
                             <td class="EncabezadoCell" style="width: 150px;">Observaciones
@@ -2648,7 +2656,20 @@
                         </tr>
 
 
+
+                        <tr>
+
+                            <td class="EncabezadoCell" style="width: 150px;">Fecha de actualizacion
+                            </td>
+
+                            <td class="EncabezadoCell" style="width: 15%">
+
+                                <asp:TextBox ID="txtFechaActualizacion" runat="server" MaxLength="1" Width="72px" TabIndex="27"
+                                    onchange="" AutoPostBack="false"></asp:TextBox>
+                            &nbsp
                         </tr>
+
+
                     </table>
                 </ContentTemplate>
             </cc1:TabPanel>
