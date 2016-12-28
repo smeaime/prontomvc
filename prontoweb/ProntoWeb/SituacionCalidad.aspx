@@ -54,11 +54,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 400px; height: 18px;">
                             <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
                                 Visible="true">
-                                <asp:ListItem Text="Hoy" />
+                                <asp:ListItem Text="Hoy" Selected="True" />
                                 <asp:ListItem Text="Ayer" />
                                 <%--<asp:ListItem Text="Esta semana" />
                         <asp:ListItem Text="Semana pasada" />--%>
-                                <asp:ListItem Text="Este mes" Selected="True" />
+                                <asp:ListItem Text="Este mes" />
                                 <asp:ListItem Text="Mes anterior" />
                                 <asp:ListItem Text="Cualquier fecha" />
                                 <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
@@ -127,11 +127,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
             Width="150" Height="40" />
 
-        <input type="button" id="btnExportarGrillaAjax" value="EXCEL" class="btn btn-primary" />
+        <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
 
+        <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
 
-        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary" />
+        <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
+
+        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
         <br />
+        <br />
+        <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
         <br />
         <br />
@@ -322,7 +327,49 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             "use strict";
 
+            
+            $('#btnExportarGrillaAjax2').click(function () {
 
+                var d= { 
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+                
+                if (typeof d.filters === "undefined") d.filters="";
+
+                $.ajax({
+                    type: "POST",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/ExportarGrillaNormal",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(d),
+
+                    success: function (data) {
+                        //alert(data.d);
+                        window.open(data.d);
+                    }
+
+
+                    ,
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+
+
+                })                                                    
+
+
+            })
 
             $('#btnExportarGrillaAjax').click(function () {
 
@@ -347,6 +394,52 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     success: function (data) {
                         //alert(data.d);
                         window.open(data.d);
+                    }
+
+
+                    ,
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+
+
+                })                                                    
+
+
+            })
+
+            
+            $('#btnPanelInformeAjax').click(function () {
+
+                var d= { 
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+                
+                if (typeof d.filters === "undefined") d.filters="";
+
+                $.ajax({
+                    type: "POST",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/PanelInforme",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(d),
+
+                    success: function (data) {
+                        // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
+                        $("#Salida2").html("").append(data.d)
+                        //alert(data.d);
+                        
                     }
 
 
@@ -579,6 +672,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 datos.idcarta = gridId;
                 datos.idsituacion = dataFromTheRow.Situacion;
+                if  (datos.idsituacion == "") datos.idsituacion=-1;
                 datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
 
 
@@ -604,7 +698,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         dataType: 'json',
                         data: JSON.stringify({
                             idcarta: gridId,
-                            idsituacion: dataFromTheRow.Situacion,
+                            idsituacion: datos.idsituacion,
                             sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
                         }),
                         success: function (result) {
@@ -929,7 +1023,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     colNames: ['', 'Id', 'Nro CP', 'Situacion', 'Obs Situacion', 'Arribo', 'Descarga', 'Corredor', 'Destinatario', 'Destino',
 
                                 'IdDestino', 'Procedencia', 'Producto', 'Titular',
-                                'R Comercial', 'Intermediario', 'Patente', 'Neto', 'Punto Venta'
+                                'R Comercial', 'Intermediario', 'Patente', 'Neto', 'Punto Venta', 'Fecha actualizacion'
 
 
 
@@ -1453,70 +1547,70 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     ,searchoptions:{ 
         //    sopt:['eq'], 
-                    dataInit: function (elem) {
-                        var NoResultsLabel = "No se encontraron resultados";
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
 
 
-                        $(elem).autocomplete({
-                            source: function (request, response) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: "WebServiceClientes.asmx/GetClientes",
-                                    dataType: "json",
-                                    contentType: "application/json; charset=utf-8",
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
 
-                                    data: JSON.stringify({
-                                        term: request.term
-                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                                    }),
-
-
-                                    success: function (data2) {
-                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                        //    var ui = data[0];
-
-                                        //    if (ui.id == "") {
-                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                        //        $("#Descripcion").val("");
-                                        //        return;
-                                        //    }
-                                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                                        //    UltimoIdArticulo = ui.id;
-                                        //}
-                                        //else {
-                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                        //}
-
-                                        response($.map(data, function (item) {
-                                            return {
-                                                label: item.value,
-                                                value: item.value //item.id
-                                                , id: item.id
-                                            }
-                                        }));
-
-                                    }
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
 
 
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                                })
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
 
 
-                            }
+
+                    })
+
+
+                }
 
                   
-                        });
+            });
 
 
 
 
 
 
-                    }
-                }
+        }
+    }
 
 },
 { name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false
@@ -1664,6 +1758,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { name: 'NetoProc', index: 'NetoProc', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
 { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
 
+{
+    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 200,  align: 'right', editable: false, sortable: false}
 
 
                     ],

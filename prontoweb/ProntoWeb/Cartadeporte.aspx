@@ -2644,7 +2644,7 @@
 
                             </td>
                             <td class="EncabezadoCell" style="">
-                                <asp:TextBox ID="txtLogSituacion" Enabled="false" runat="server" CssClass="CssTextBox" Width="200px" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox ID="txtLogSituacion" Enabled="false" runat="server" CssClass="CssTextBox" Width="200px" Height="100px" TextMode="MultiLine"></asp:TextBox>
 
                             </td>
 

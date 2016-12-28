@@ -42,3 +42,393 @@ Failure sending mail.
    at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
 System
 __________________________
+
+Log Entry : 
+12/28/2016 09:03:55
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638788. Error Message:La carta numero 558237548 id=2638788 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+12/28/2016 09:03:55
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638788. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+12/28/2016 09:09:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638788. Error Message:System.ArgumentOutOfRangeException
+'optDivisionSyngentaCliobs' has a SelectedValue which is invalid because it does not exist in the list of items.
+Parameter name: value
+   at System.Web.UI.WebControls.ListControl.set_SelectedValue(String value)
+   at CartadeporteABM.RecargarEncabezado(CartaDePorte myCartaDePorte, Boolean CopiarSoloLosGenerales) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 1919
+System.Web
+__________________________
+
+Log Entry : 
+12/28/2016 09:12:02
+Error in: http://localhost:58911/prontoweb/cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+12/28/2016 09:12:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638788. Error Message:System.ArgumentOutOfRangeException
+'optDivisionSyngentaCliobs' has a SelectedValue which is invalid because it does not exist in the list of items.
+Parameter name: value
+   at System.Web.UI.WebControls.ListControl.set_SelectedValue(String value)
+   at CartadeporteABM.RecargarEncabezado(CartaDePorte myCartaDePorte, Boolean CopiarSoloLosGenerales) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:line 1919
+System.Web
+__________________________
+
+Log Entry : 
+12/28/2016 09:16:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638788. Error Message:La carta numero 558237548 id=2638788 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+12/28/2016 09:16:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638788. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+12/28/2016 09:17:53
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetProductos. Error Message:System.ArgumentException
+Unknown web method GetProductos.
+Parameter name: methodName
+   at System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   at System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   at System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   at System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   at System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+12/28/2016 09:22:20
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - Empleados_TX_UsuarioNT 'Mariano' 90 0
+__________________________
+
+Log Entry : 
+12/28/2016 09:22:20
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+12/28/2016 09:22:20
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+No se ha encontrado la ruta de acceso de la red
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 09:22:22
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________
+
+Log Entry : 
+12/28/2016 10:11:11
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 28dic2016_101051.xls
+__________________________
+
+Log Entry : 
+12/28/2016 10:11:12
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 28dic2016_101051.xls
+__________________________
+
+Log Entry : 
+12/28/2016 10:45:43
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/PanelInforme. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 11:28:41
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 28dic2016_112836.xls
+__________________________
+
+Log Entry : 
+12/28/2016 11:28:42
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 28dic2016_112836.xls
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:07
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283;  ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:f99ade83-c1cb-4ff9-9b6c-8039ed8d3afa
+Error Number:-2,State:0,Class:11 - Empleados_TX_UsuarioNT 'Mariano' 8 0
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:07
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message:Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283; 
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:07
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283;  ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:f99ade83-c1cb-4ff9-9b6c-8039ed8d3afa
+Error Number:-2,State:0,Class:11 - Empleados_TX_UsuarioNT 'Mariano' 8 0
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:07
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message:Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283; 
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:07
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283;  ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:f99ade83-c1cb-4ff9-9b6c-8039ed8d3afa
+Error Number:-2,State:0,Class:11 - Empleados_TX_UsuarioNT 'Mariano' 8 0
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:07
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message:Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283; 
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:09
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283;  ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:f99ade83-c1cb-4ff9-9b6c-8039ed8d3afa
+Error Number:-2,State:0,Class:11 - Empleados_TX_UsuarioNT 'Mariano' 8 0
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:09
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283;  ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:f99ade83-c1cb-4ff9-9b6c-8039ed8d3afa
+Error Number:-2,State:0,Class:11 - Empleados_TX_UsuarioNT 'Mariano' 8 0
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:09
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message:Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283; 
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:09
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message:Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283; 
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:10
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283;  ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:f99ade83-c1cb-4ff9-9b6c-8039ed8d3afa
+Error Number:-2,State:0,Class:11 - Empleados_TX_UsuarioNT 'Mariano' 8 0
+__________________________
+
+Log Entry : 
+12/28/2016 11:44:10
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/GetCorredores. Error Message:Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3062; handshake=7283; 
+__________________________
+
+Log Entry : 
+12/28/2016 11:51:13
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - Empleados_TX_UsuarioNT 'Mariano' 90 0
+__________________________
+
+Log Entry : 
+12/28/2016 11:51:13
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+12/28/2016 11:51:13
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+No se ha encontrado la ruta de acceso de la red
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 11:51:15
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________
+
+Log Entry : 
+12/28/2016 13:37:26
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrillaNormal. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 28dic2016_133716.xls
+__________________________
+
+Log Entry : 
+12/28/2016 13:37:26
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 28dic2016_133716.xls
+__________________________
+
+Log Entry : 
+12/28/2016 13:39:57
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.FormatException
+String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at ServicioCartaPorte.servi.CartasPorte_DynamicGridData(String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, String FechaInicial, String FechaFinal, Int32 puntovent, Int32 iddestino, String SC, String nombreusuario) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 3322
+   at JQGridHandler.ProcessRequest(HttpContext context) in c:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:line 215
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+mscorlib
+__________________________
+
+Log Entry : 
+12/28/2016 13:39:59
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________
+
+Log Entry : 
+12/28/2016 14:10:55
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Linq.Dynamic.ParseException
+Expression expected
+   at System.Linq.Dynamic.ExpressionParser.ParsePrimaryStart()
+   at System.Linq.Dynamic.ExpressionParser.ParsePrimary()
+   at System.Linq.Dynamic.ExpressionParser.ParseUnary()
+   at System.Linq.Dynamic.ExpressionParser.ParseMultiplicative()
+   at System.Linq.Dynamic.ExpressionParser.ParseAdditive()
+   at System.Linq.Dynamic.ExpressionParser.ParseComparison()
+   at System.Linq.Dynamic.ExpressionParser.ParseLogicalAnd()
+   at System.Linq.Dynamic.ExpressionParser.ParseLogicalOr()
+   at System.Linq.Dynamic.ExpressionParser.ParseExpression()
+   at System.Linq.Dynamic.ExpressionParser.Parse(Type resultType)
+   at System.Linq.Dynamic.DynamicExpression.ParseLambda(ParameterExpression[] parameters, Type resultType, String expression, Object[] values)
+   at System.Linq.Dynamic.DynamicExpression.ParseLambda(Type itType, Type resultType, String expression, Object[] values)
+   at System.Linq.Dynamic.DynamicQueryable.Where(IQueryable source, String predicate, Object[] values)
+   at System.Linq.Dynamic.DynamicQueryable.Where[T](IQueryable`1 source, String predicate, Object[] values)
+   at Filtrador.Filters.FiltroGenerico_UsandoIQueryable[T](String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, DemoProntoEntities db, Int32& totalRecords, IQueryable`1 q) in c:\Users\Administrador\Documents\bdl\pronto\Data\Filtros.cs:line 512
+   at ServicioCartaPorte.servi.CartasPorte_DynamicGridData(String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, String FechaInicial, String FechaFinal, Int32 puntovent, Int32 iddestino, String SC, String nombreusuario) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 3344
+   at JQGridHandler.ProcessRequest(HttpContext context) in c:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:line 215
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Linq.Dynamic
+__________________________
+
+Log Entry : 
+12/28/2016 14:10:57
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________
+
+Log Entry : 
+12/28/2016 14:13:32
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
+mscorlib
+__________________________

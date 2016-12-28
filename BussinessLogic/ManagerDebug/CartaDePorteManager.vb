@@ -9529,9 +9529,10 @@ Public Class CartaDePorteManager
                     oCarta.EntregaSAP = .EntregaSAP
 
 
-
+                    If oCarta.Situacion <> .Situacion Then oCarta.SituacionAntesDeEditarManualmente = .Situacion
                     oCarta.Situacion = .Situacion
-                    oCarta.SituacionAntesDeEditarManualmente = .SituacionAntesDeEditarManualmente
+
+
                     oCarta.FechaActualizacionAutomatica = IIf(.FechaActualizacionAutomatica = DateTime.MinValue, Nothing, .FechaActualizacionAutomatica)
                     oCarta.FechaAutorizacion = IIf(.FechaAutorizacion = DateTime.MinValue, Nothing, .FechaAutorizacion)
                     oCarta.ObservacionesSituacion = .ObservacionesSituacion

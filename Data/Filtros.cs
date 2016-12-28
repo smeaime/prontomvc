@@ -325,26 +325,28 @@ namespace Filtrador
             // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
             if (f != null)
             {
-                f.CrearFiltro<T>(sb, objParams, true);
-                s = sb.ToString();
-                // s = "(Detalle.ToString().Contains(\"aaa\"))";
-                var parm = objParams.Select(x => x.Value).ToArray();
-                //s = s.Replace("it.", "");
-                //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
-                try
+                if (f.rules.Count() > 0)
                 {
-                    filteredQuery = q.Where(s, parm);  // este where es de dynamic, no de EF
+                    f.CrearFiltro<T>(sb, objParams, true);
+                    s = sb.ToString();
+                    // s = "(Detalle.ToString().Contains(\"aaa\"))";
+                    var parm = objParams.Select(x => x.Value).ToArray();
+                    //s = s.Replace("it.", "");
+                    //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
+                    try
+                    {
+                        filteredQuery = q.Where(s, parm);  // este where es de dynamic, no de EF
+
+                    }
+                    catch (Exception)
+                    {
+                        s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
+                        filteredQuery = q.Where(s, parm);
+
+                    }
 
                 }
-                catch (Exception)
-                {
-                    s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
-                    filteredQuery = q.Where(s, parm);
-
-                }
-
-
-
+                else filteredQuery = q;
 
             }
             else
@@ -409,15 +411,15 @@ namespace Filtrador
             {
                 ObjectParameter parameter = ps[n];
                 var name = "@" + parameter.Name;
-                string value; 
-                if (parameter.Value==null)
+                string value;
+                if (parameter.Value == null)
                 {
                     value = " NULL ";
 
                 }
-                else if (!(parameter.Value.GetType()==typeof(DateTime)))
+                else if (!(parameter.Value.GetType() == typeof(DateTime)))
                 {
-                    
+
                     value = "'" + (parameter.Value ?? "").ToString() + "'";
                 }
                 else
@@ -488,31 +490,34 @@ namespace Filtrador
 
             IQueryable<T> filteredQuery;
 
-            
+
 
             // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
             if (f != null)
             {
-                f.CrearFiltro<T>(sb, objParams, true);
-                s = sb.ToString();
-               // s = "(Detalle.ToString().Contains(\"aaa\"))";
-                var parm = objParams.Select(x => x.Value).ToArray();
-                //s = s.Replace("it.", "");
-                //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
-                try
+                if (f.rules.Count() > 0)
                 {
-                      filteredQuery = q.Where(s,  parm);  // este where es de dynamic, no de EF
-                
-                }
-                catch (Exception)
-                {
-                    s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
-                    filteredQuery = q.Where(s,parm );
-                        
-                }
-              
 
+                    f.CrearFiltro<T>(sb, objParams, true);
+                    s = sb.ToString();
+                    // s = "(Detalle.ToString().Contains(\"aaa\"))";
+                    var parm = objParams.Select(x => x.Value).ToArray();
+                    //s = s.Replace("it.", "");
+                    //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
+                    try
+                    {
+                        filteredQuery = q.Where(s, parm);  // este where es de dynamic, no de EF
 
+                    }
+                    catch (Exception)
+                    {
+                        s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
+                        filteredQuery = q.Where(s, parm);
+
+                    }
+
+                }
+                else filteredQuery = q;
 
             }
             else
@@ -526,9 +531,9 @@ namespace Filtrador
             try
             {
 
-            //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
-            //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
-            //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+                //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+                //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+                //http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
 
 
                 totalRecords = filteredQuery.Count();
@@ -564,7 +569,7 @@ namespace Filtrador
 
 
             List<T> pagedQuery = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows).ToList();
-            
+
             return pagedQuery;
 
             ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////

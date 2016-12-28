@@ -124,7 +124,7 @@ Partial Class Login
 
 
 
-        If False And Debugger.IsAttached And ConfigurationManager.AppSettings("Debug") = "SI" Then ' Session("DebugPronto") <> "NO" Then ' And InStr(Encriptar(SC).ToUpper, "MARIANO") <> 0 Then
+        If Debugger.IsAttached And ConfigurationManager.AppSettings("Debug") = "SI" Then ' Session("DebugPronto") <> "NO" Then ' And InStr(Encriptar(SC).ToUpper, "MARIANO") <> 0 Then
 
             'probar si conecta a la base, si no hacer como siempre
 
