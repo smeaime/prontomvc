@@ -3884,6 +3884,52 @@ Partial Class CartadeporteABM
         Session("NombreAdjunto2") = ".."
         If IdCartaDePorte > 0 Then CartaDePorteManager.QuitarImagen2(SC, IdCartaDePorte)
     End Sub
+
+
+
+
+    Protected Sub btnAutorizarSituacion_Click(sender As Object, e As EventArgs) Handles btnAutorizarSituacion.Click
+
+        Dim bPassOK = True
+
+
+        If bPassOK Then
+
+
+
+            Dim myCartaDePorte As Pronto.ERP.BO.CartaDePorte = CType(Me.ViewState(mKey), Pronto.ERP.BO.CartaDePorte)
+            Debug.Print(myCartaDePorte.PuntoVenta)
+
+
+            DeObjetoHaciaPagina(myCartaDePorte)
+
+
+            'esto tiene que estar en el manager, dios!
+            With myCartaDePorte
+                .Situacion = 0
+                .FechaAutorizacion = Now
+
+                Try
+                    Dim r = CartaDePorteManager.Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
+
+                Catch ex As Exception
+                    ErrHandler2.WriteError(myCartaDePorte.Id & " " & myCartaDePorte.NumeroCartaDePorte & " " & myCartaDePorte.SubnumeroVagon & " " & ex.ToString)
+                    ErrHandler2.WriteAndRaiseError("Error al anular la carta. Casi seguro pasa porque aprietan varias veces el Ok. Le parece que es un duplicado y no deja anularla. O quizás tiró error de concurrencia. " & ex.ToString)
+
+                End Try
+
+
+            End With
+            Me.ViewState.Add(mKey, myCartaDePorte) 'guardo en el viewstate el objeto
+            'Dim r = CartaDePorteManager.Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
+
+
+
+        Else
+            MsgBoxAjax(Me, "PassWord incorrecta")
+        End If
+
+    End Sub
 End Class
 
 

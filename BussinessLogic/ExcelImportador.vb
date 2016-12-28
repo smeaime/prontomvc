@@ -1900,10 +1900,11 @@ Public Class ExcelImportadorManager
 
 
     Shared Function actua(ByRef d As Object, ByRef o As Object) As Boolean
+        If o Is Nothing Then Return False
+        If o.ToString = "" Then Return False
         If o.ToString = d.ToString Then Return False
-        If d.ToString = "" Then Return False
 
-        o = d
+        d = o
 
 
         Return True
@@ -1989,58 +1990,86 @@ Public Class ExcelImportadorManager
 
                         .FechaArribo = iisValidSqlDate(r(3), DateTime.Now)
 
-                        If actua(.IdArticulo, BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)) Then log += "Articulo; "
+                        If actua(.IdArticulo, BuscaIdArticuloPreciso(r(5), SC)) Then log += "Articulo; "
+                        If .IdArticulo = -1 Then
+                            If actua(.IdArticulo, BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)) Then log += "Articulo; "
+                        End If
+                        
 
-
-                        If actua(.Titular, BuscarClientePorCUIT(r(7), SC, r(6))) Then log += "titular"
+                        If actua(.Titular, BuscarClientePorCUIT(r(7), SC, r(6))) Then log += "Titular; "
                         If .Titular = -1 Then
                             Console.Write(.Titular)
                         End If
                         r(6) = NombreCliente(SC, .Titular)
 
 
-
-                        .CuentaOrden1 = BuscarClientePorCUIT(r(9), SC, r(8))
+                        If actua(.CuentaOrden1, BuscarClientePorCUIT(r(9), SC, r(8))) Then log += "CuentaOrden1; "
+                        '.CuentaOrden1 = BuscarClientePorCUIT(r(9), SC, r(8))
                         r(8) = NombreCliente(SC, .CuentaOrden1) 'actualizo el datatable solo en caso de que se procese con "usuario interactivo"...
 
-                        .CuentaOrden2 = BuscarClientePorCUIT(r(11), SC, r(10))
+                        If actua(.CuentaOrden2, BuscarClientePorCUIT(r(11), SC, r(10))) Then log += "CuentaOrden2; "
+                        '.CuentaOrden2 = BuscarClientePorCUIT(r(11), SC, r(10))
                         r(10) = NombreCliente(SC, .CuentaOrden2)
 
-
-                        .Corredor = BuscarVendedorPorCUIT(r(13), SC, r(12))
+                        If actua(.Corredor, BuscarVendedorPorCUIT(r(13), SC, r(12))) Then log += "Corredor; "
+                        '.Corredor = BuscarVendedorPorCUIT(r(13), SC, r(12))
                         r(12) = NombreCliente(SC, .Corredor)
 
 
                         .Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
                         r(14) = NombreCliente(SC, .Entregador)
 
-                        .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
+
+
+                        If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Corredor; "
+                        '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
 
 
 
 
-                        .IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
-                        .IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
+                        If actua(.IdTransportista, BuscarTransportistaPorCUIT(r(21), SC, r(20))) Then log += "IdTransportista; "
+                        '.IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
+                        If actua(.IdChofer, BuscarChoferPorCUIT(r(23), SC, r(22))) Then log += "IdChofer; "
+                        '.IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
 
                         .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
 
-                        .BrutoPto = Val(r(25))
-                        .TaraPto = Val(r(26))
-                        .NetoPto = Val(r(27))
-                        .FechaDescarga = iisValidSqlDate(r(28))
-                        .BrutoFinal = Val(r(29))
-                        .TaraFinal = Val(r(30))
-                        .NetoFinalIncluyendoMermas = Val(r(31))
-                        .Merma = Val(r(32))
-                        .NetoFinalSinMermas = Val(r(33))
+                        If actua(.BrutoPto, Val(r(25))) Then log += "BrutoPto; "
+                        '.BrutoPto = Val(r(25))
+                        If actua(.TaraPto, Val(r(26))) Then log += "TaraPto; "
+                        '.TaraPto = Val(r(26))
+                        If actua(.NetoPto, Val(r(27))) Then log += "NetoPto; "
+                        '.NetoPto = Val(r(27))
 
-                        '.calidad = r(34)
-                        .Contrato = r(36)
+                        If actua(.FechaDescarga, iisValidSqlDate(r(28))) Then log += "FechaDescarga; "
+                        '.FechaDescarga = iisValidSqlDate(r(28))
 
-                        .CEE = r(37)
-                        .CTG = Val(r(38))
-                        .FechaDeCarga = iisValidSqlDate(r(39))
-                        .FechaVencimiento = iisValidSqlDate(r(40))
+                        If actua(.BrutoFinal, Val(r(29))) Then log += "BrutoFinal; "
+                        '.BrutoFinal = Val(r(29))
+                        If actua(.TaraFinal, Val(r(30))) Then log += "TaraFinal; "
+                        '.TaraFinal = Val(r(30))
+                        If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinalIncluyendoMermas; "
+                        '.NetoFinalIncluyendoMermas = Val(r(31))
+                        If actua(.Merma, Val(r(32))) Then log += "Merma; "
+                        '.Merma = Val(r(32))
+                        If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalSinMermas; "
+                        '.NetoFinalSinMermas = Val(r(33))
+
+                        If actua(.CalidadDe, BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)) Then log += "CalidadDe; "
+                        '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
+
+                        If actua(.Contrato, Val(r(36))) Then log += "Contrato; "
+                        '.Contrato = r(36)
+                        If actua(.Contrato, Val(r(37))) Then log += "CEE; "
+                        '.CEE = r(37)
+                        If actua(.Contrato, Val(r(38))) Then log += "CTG; "
+                        '.CTG = Val(r(38))
+
+                        If actua(.FechaDeCarga, iisValidSqlDate(r(39))) Then log += "FechaDeCarga; "
+                        '.FechaDeCarga = iisValidSqlDate(r(39))
+                        If actua(.FechaVencimiento, iisValidSqlDate(r(40))) Then log += "FechaVencimiento; "
+                        '.FechaVencimiento = iisValidSqlDate(r(40))
+
                         .Patente = r(41)
                         .Acoplado = r(42)
 
