@@ -84,7 +84,7 @@ Partial Class DiccionarioEquivalencias
 
         ''Session.Add("SC", ConfigurationManager.ConnectionStrings("Pronto").ConnectionString)
         HFSC.Value = GetConnectionString(Server, Session)
-        HFIdObra.Value = IIf(IsDBNull(session(SESSIONPRONTO_glbIdObraAsignadaUsuario)), -1, session(SESSIONPRONTO_glbIdObraAsignadaUsuario))
+        HFIdObra.Value = IIf(IsDBNull(Session(SESSIONPRONTO_glbIdObraAsignadaUsuario)), -1, Session(SESSIONPRONTO_glbIdObraAsignadaUsuario))
 
 
 
@@ -242,6 +242,9 @@ Partial Class DiccionarioEquivalencias
 
 
 
+            'For Each cell As TableCell In e.Row.Cells
+            '    cell.Text = cell.Text.Replace(" ", "&nbsp;") 'para que me muestre las palabras originales con los espacios
+            'Next
 
             '    ac = e.Row.FindControl("AutoCompleteExtender21")
             '    ac.ContextKey = HFSC.Value
