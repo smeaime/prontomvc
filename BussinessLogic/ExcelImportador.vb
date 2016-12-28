@@ -1900,14 +1900,19 @@ Public Class ExcelImportadorManager
 
 
     Shared Function actua(ByRef d As Object, ByRef o As Object) As Boolean
-        If o Is Nothing Then Return False
-        If o.ToString = "" Then Return False
-        If o.ToString = d.ToString Then Return False
+        Try
 
-        d = o
+            If o Is Nothing Then Return False
+            If o.ToString = "" Then Return False
+            If o.ToString = If(d, "").ToString Then Return False
+
+            d = o
 
 
-        Return True
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
 
     End Function
 
@@ -2003,11 +2008,11 @@ Public Class ExcelImportadorManager
                         r(6) = NombreCliente(SC, .Titular)
 
 
-                        If actua(.CuentaOrden1, BuscarClientePorCUIT(r(9), SC, r(8))) Then log += "CuentaOrden1; "
+                        If actua(.CuentaOrden1, BuscarClientePorCUIT(r(9), SC, r(8))) Then log += "Intermediario; "
                         '.CuentaOrden1 = BuscarClientePorCUIT(r(9), SC, r(8))
                         r(8) = NombreCliente(SC, .CuentaOrden1) 'actualizo el datatable solo en caso de que se procese con "usuario interactivo"...
 
-                        If actua(.CuentaOrden2, BuscarClientePorCUIT(r(11), SC, r(10))) Then log += "CuentaOrden2; "
+                        If actua(.CuentaOrden2, BuscarClientePorCUIT(r(11), SC, r(10))) Then log += "Rem Comercial; "
                         '.CuentaOrden2 = BuscarClientePorCUIT(r(11), SC, r(10))
                         r(10) = NombreCliente(SC, .CuentaOrden2)
 
@@ -2015,24 +2020,25 @@ Public Class ExcelImportadorManager
                         '.Corredor = BuscarVendedorPorCUIT(r(13), SC, r(12))
                         r(12) = NombreCliente(SC, .Corredor)
 
-
-                        .Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
+                        If actua(.Entregador, BuscarClientePorCUIT(r(15), SC, r(14))) Then log += "Destinatario; "
+                        '.Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
                         r(14) = NombreCliente(SC, .Entregador)
 
 
 
-                        If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Corredor; "
+                        If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
                         '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
 
 
 
 
-                        If actua(.IdTransportista, BuscarTransportistaPorCUIT(r(21), SC, r(20))) Then log += "IdTransportista; "
+                        If actua(.IdTransportista, BuscarTransportistaPorCUIT(r(21), SC, r(20))) Then log += "Transportista; "
                         '.IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
-                        If actua(.IdChofer, BuscarChoferPorCUIT(r(23), SC, r(22))) Then log += "IdChofer; "
+                        If actua(.IdChofer, BuscarChoferPorCUIT(r(23), SC, r(22))) Then log += "Chofer; "
                         '.IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
 
-                        .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
+                        If actua(.Procedencia, BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)) Then log += "Procedencia; "
+                        '.Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
 
                         If actua(.BrutoPto, Val(r(25))) Then log += "BrutoPto; "
                         '.BrutoPto = Val(r(25))
@@ -2048,14 +2054,14 @@ Public Class ExcelImportadorManager
                         '.BrutoFinal = Val(r(29))
                         If actua(.TaraFinal, Val(r(30))) Then log += "TaraFinal; "
                         '.TaraFinal = Val(r(30))
-                        If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinalIncluyendoMermas; "
+                        If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinal; "
                         '.NetoFinalIncluyendoMermas = Val(r(31))
                         If actua(.Merma, Val(r(32))) Then log += "Merma; "
                         '.Merma = Val(r(32))
-                        If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalSinMermas; "
+                        If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalMenosMermas; "
                         '.NetoFinalSinMermas = Val(r(33))
 
-                        If actua(.CalidadDe, BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)) Then log += "CalidadDe; "
+                        If actua(.CalidadDe, BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)) Then log += "Calidad; "
                         '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
 
                         If actua(.Contrato, Val(r(36))) Then log += "Contrato; "
@@ -2065,9 +2071,9 @@ Public Class ExcelImportadorManager
                         If actua(.Contrato, Val(r(38))) Then log += "CTG; "
                         '.CTG = Val(r(38))
 
-                        If actua(.FechaDeCarga, iisValidSqlDate(r(39))) Then log += "FechaDeCarga; "
+                        If actua(.FechaDeCarga, iisValidSqlDate(r(39))) Then log += "Fecha Carga; "
                         '.FechaDeCarga = iisValidSqlDate(r(39))
-                        If actua(.FechaVencimiento, iisValidSqlDate(r(40))) Then log += "FechaVencimiento; "
+                        If actua(.FechaVencimiento, iisValidSqlDate(r(40))) Then log += "Fecha Vencimiento; "
                         '.FechaVencimiento = iisValidSqlDate(r(40))
 
                         .Patente = r(41)

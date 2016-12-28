@@ -3910,7 +3910,8 @@ Partial Class CartadeporteABM
                 .FechaAutorizacion = Now
 
                 Try
-                    Dim r = CartaDePorteManager.Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
+                    Dim ms = ""
+                    Dim r = CartaDePorteManager.Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName), True, ms)
 
                 Catch ex As Exception
                     ErrHandler2.WriteError(myCartaDePorte.Id & " " & myCartaDePorte.NumeroCartaDePorte & " " & myCartaDePorte.SubnumeroVagon & " " & ex.ToString)

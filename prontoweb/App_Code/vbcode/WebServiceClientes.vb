@@ -335,6 +335,60 @@ Public Class WebServiceClientes
 
     End Function
 
+
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
+    <WebMethod()> _
+    Public Function GetProductos(term As String) As String ' As List(Of autocomplete) 'As String()
+
+        Dim SC As String
+
+
+
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar(scLocal())
+            'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+        Dim usuario = Membership.GetUser()
+        Dim dt As System.Data.DataTable = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'")
+        Dim idUsuario As Integer = Convert.ToInt32(dt.Rows(0)(0))
+        Dim puntovent As Integer = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado
+
+
+
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From item In db.Articulos
+                   Where item.Descripcion.ToLower().Contains(term.ToLower())
+                   Order By item.Descripcion
+                   Select New autocomplete With
+                   {
+                       .id = item.IdArticulo,
+                       .value = item.Descripcion
+                   }).Take(10).ToList()
+
+
+        'Return q
+
+        '    return Json(q, JsonRequestBehavior.AllowGet);
+
+        Dim TheSerializer As JavaScriptSerializer = New JavaScriptSerializer()
+
+
+        Dim TheJson As String = TheSerializer.Serialize(q)
+
+        Return TheJson
+
+
+    End Function
+
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
     <WebMethod()> _
     Public Function GetClientes(term As String) As String ' As List(Of autocomplete) 'As String()

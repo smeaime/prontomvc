@@ -3158,6 +3158,7 @@ namespace ServicioCartaPorte
 
             Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC);
 
+            if (q.Count() == 0) return "Sin Datos";
 
 
             //Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
@@ -3172,10 +3173,11 @@ namespace ServicioCartaPorte
                         "    <td style=\"color: pink\">Desviado</td>" +
                         "  <td style=\"color: black\">  CP p/cambiar</td>" +
                         "    <td style=\"color: white\">Sin Cupo</td>" +
+                        "    <td style=\"color: white\">Total</td>" +
                         "</tr> ";
 
 
-            decimal unidad = q.Values.Max() / 10;
+            decimal unidad = (decimal)(q.Values.Max()) / 10;
             var uni = new decimal[10];
 
             for (int n = 0; n < 10; n++)
@@ -3197,6 +3199,7 @@ namespace ServicioCartaPorte
                     "   <td style=\"color: pink\"> " + Convert.ToInt16(uni[6] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: black\"> " + Convert.ToInt16(uni[7] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: white\"> " + Convert.ToInt16(uni[8] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: white\"> " + q.Values.Sum().ToString() + "</td>" +
                     "</tr> ";
 
 
@@ -3306,7 +3309,7 @@ namespace ServicioCartaPorte
             }
             catch (Exception e)
             {
-                throw;
+                //throw;
             }
 
             try
@@ -3316,7 +3319,7 @@ namespace ServicioCartaPorte
             }
             catch (Exception e)
             {
-                throw;
+                //throw;
 
             }
 
@@ -3441,9 +3444,11 @@ namespace ServicioCartaPorte
                                  a.NetoProc.ToString(),
 
                                  
-                                 a.PuntoVenta.ToString()
+                                 a.PuntoVenta.ToString(),
                                  
-                                 
+                                 a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().ToShortDateString()
+                                   
+
                                  // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 //a.Cumplido.NullSafeToString(), 
 
@@ -3531,7 +3536,7 @@ namespace ServicioCartaPorte
             }
             catch (Exception e)
             {
-                throw;
+                // throw;
             }
 
             try
@@ -3541,7 +3546,7 @@ namespace ServicioCartaPorte
             }
             catch (Exception e)
             {
-                throw;
+                // throw;
 
             }
 
