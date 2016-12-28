@@ -1386,3 +1386,111 @@ Log Entry :
 12/27/2016 18:12:19
 Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638760. Error Message:PV 2 0
 __________________________
+
+Log Entry : 
+12/27/2016 21:09:23
+
+Log Entry : 
+12/27/2016 21:09:27
+
+Log Entry : 
+12/27/2016 21:43:10
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 27dic2016_214251.xls
+__________________________
+
+Log Entry : 
+12/27/2016 21:43:10
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 27dic2016_214251.xls
+__________________________
+
+Log Entry : 
+12/27/2016 21:44:02
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 27dic2016_214354.xls
+__________________________
+
+Log Entry : 
+12/27/2016 21:44:02
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 27dic2016_214354.xls
+__________________________
+
+Log Entry : 
+12/27/2016 21:55:55
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 22:01:57
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 27dic2016_220143.xls
+__________________________
+
+Log Entry : 
+12/27/2016 22:01:58
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrilla. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 27dic2016_220143.xls
+__________________________
+
+Log Entry : 
+12/27/2016 22:21:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638920. Error Message:La carta numero 558102558 id=2638920 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+12/27/2016 22:21:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638920. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+12/27/2016 22:42:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638916. Error Message:La carta numero 558102560 id=2638916 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+12/27/2016 22:42:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638916. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+12/27/2016 22:44:43
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - Empleados_TX_UsuarioNT 'Mariano' 90 0
+__________________________
+
+Log Entry : 
+12/27/2016 22:44:43
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+__________________________
+
+Log Entry : 
+12/27/2016 22:44:43
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+No se ha encontrado la ruta de acceso de la red
+
+
+__________________________
+
+Log Entry : 
+12/27/2016 22:44:46
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________
