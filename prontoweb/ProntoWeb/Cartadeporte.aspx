@@ -2593,6 +2593,7 @@
                     <u>S</u>ituación
                 </HeaderTemplate>
                 <ContentTemplate>
+                    <br /><br />
                     <table style="padding: 0px; border: none #FFFFFF; width: 696px; height: 202px; margin-left: 5px; margin-right: 0px;"
                         cellpadding="1" cellspacing="1">
                         <tr>
@@ -2603,17 +2604,17 @@
                                 <asp:DropDownList ID="cmbSituacion" runat="server" CssClass="CssCombo" Width="100px" Enabled="false">
                                     <asp:ListItem Value="0">Autorizado</asp:ListItem>
                                     <asp:ListItem Value="1">Demorado</asp:ListItem>
-                                    <asp:ListItem Value="1">Posicion</asp:ListItem>
-                                    <asp:ListItem Value="1">Descargado</asp:ListItem>
-                                    <asp:ListItem Value="1">A Descargar</asp:ListItem>
-                                    <asp:ListItem Value="1">Rechazado</asp:ListItem>
-                                    <asp:ListItem Value="1">Desviado</asp:ListItem>
-                                    <asp:ListItem Value="1">CP p/cambiar</asp:ListItem>
-                                    <asp:ListItem Value="1">Sin Cupo</asp:ListItem>
+                                    <asp:ListItem Value="2">Posicion</asp:ListItem>
+                                    <asp:ListItem Value="3">Descargado</asp:ListItem>
+                                    <asp:ListItem Value="4">A Descargar</asp:ListItem>
+                                    <asp:ListItem Value="5">Rechazado</asp:ListItem>
+                                    <asp:ListItem Value="6">Desviado</asp:ListItem>
+                                    <asp:ListItem Value="7">CP p/cambiar</asp:ListItem>
+                                    <asp:ListItem Value="8">Sin Cupo</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
 
-                            
+
                         </tr>
                         <tr>
                             <td class="EncabezadoCell" style="width: 150px;">Observaciones
@@ -2625,35 +2626,9 @@
 
                             </td>
 
-                              <td class="EncabezadoCell" style="width: 150px;">Campos Actualizados
-
-                            </td>
-                            <td class="EncabezadoCell" style="">
-                                <asp:TextBox ID="txtLogSituacion" runat="server" CssClass="CssTextBox" Width="200px" TextMode="MultiLine"></asp:TextBox>
-
-                            </td>
-                            
-                        </tr>
-                        <tr>
-
-                            <td class="EncabezadoCell" style="width: 150px;">Fecha de autorización
-                            </td>
-
-                            <td class="EncabezadoCell" style="width: 15%">
-
-                                <asp:TextBox ID="txtFechaAutorizacion" runat="server" MaxLength="1" Width="150px" TabIndex="27"  Enabled="false"
-                                    onchange="" AutoPostBack="false"></asp:TextBox>&nbsp
-                                            
-
-                            </td>
-
-                            <td class="EncabezadoCell" style="">
-                                <asp:Button ID="btnAutorizarSituacion" runat="server" CssClass="butcancela" Text="Autorizar"
-                                    CausesValidation="False" UseSubmitBehavior="False" Style="margin-left: 28px"></asp:Button>
-                            </td>
                         </tr>
 
-
+                        
 
                         <tr>
 
@@ -2664,7 +2639,36 @@
 
                                 <asp:TextBox ID="txtFechaActualizacion" runat="server" MaxLength="1" Width="150px" TabIndex="27"
                                     onchange="" AutoPostBack="false" Enabled="false"></asp:TextBox>
-                            &nbsp
+                            </td>
+                            <td class="EncabezadoCell" style="width: 150px;">Campos Actualizados
+
+                            </td>
+                            <td class="EncabezadoCell" style="">
+                                <asp:TextBox ID="txtLogSituacion" Enabled="false" runat="server" CssClass="CssTextBox" Width="200px" TextMode="MultiLine"></asp:TextBox>
+
+                            </td>
+
+
+                        </tr>
+
+    
+                        <tr>
+
+                            <td class="EncabezadoCell" style="width: 150px;">Fecha de autorización
+                            </td>
+
+                            <td class="EncabezadoCell" style="width: 15%">
+
+                                <asp:TextBox ID="txtFechaAutorizacion" runat="server" MaxLength="1" Width="150px" TabIndex="27" Enabled="false"
+                                    onchange="" AutoPostBack="false"></asp:TextBox>&nbsp
+                                            
+
+                            </td>
+
+                            <td class="EncabezadoCell" style="">
+                                <asp:Button ID="btnAutorizarSituacion" runat="server" CssClass="butcancela" Text="Autorizar"
+                                    CausesValidation="False" UseSubmitBehavior="False" Style="margin-left: 28px"></asp:Button>
+                            </td>
                         </tr>
 
 

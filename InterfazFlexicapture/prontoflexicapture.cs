@@ -939,7 +939,7 @@ namespace ProntoFlexicapture
                 ErrHandler2.WriteError("Leo listado de dirs");
                 try
                 {
-                    dirs = d.GetDirectories("*.*", SearchOption.TopDirectoryOnly).Where(x => x.CreationTime > desde).ToList();
+                    dirs = d.GetDirectories("*.*", SearchOption.TopDirectoryOnly).Where(x => x.CreationTime > desde && !x.Name.Contains("_IMPORT1") && !x.Name.ToLower().Contains("pegatinas")).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -949,13 +949,15 @@ namespace ProntoFlexicapture
 
                 //files = d.GetFiles("*.*", SearchOption.TopDirectoryOnly); 
 
+                
+
                 foreach (DirectoryInfo subd in dirs)
                 {
                     ErrHandler2.WriteError("Leo " + subd);
                     if (files == null) files = subd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
                     else files = files.Concat(subd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
 
-                    if (files.Count() > 100) break;
+                    if (files.Count() > 1000) break;
                 }
 
 

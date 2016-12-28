@@ -52,7 +52,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
                         <td class="EncabezadoCell" style="width: 400px; height: 18px;">
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"  style="color: black;"
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" />
                                 <asp:ListItem Text="Ayer" />
@@ -64,7 +64,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                 <asp:ListItem Text="Personalizar" />
                             </asp:DropDownList>
-                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"  style="color: black;"
+                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;"
                                 TabIndex="2" AutoPostBack="false"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                 Enabled="True">
@@ -77,7 +77,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </cc1:MaskedEditExtender>
                             <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                 WatermarkText="desde" WatermarkCssClass="watermarked" />
-                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2"  style="color: black;"
+                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
                                 AutoPostBack="false"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                 Enabled="True">
@@ -97,7 +97,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
                         </td>
                         <td class="EncabezadoCell">
-                            <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px"  style="color: black;"/>
+                            <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" Style="color: black;" />
                         </td>
 
                     </tr>
@@ -106,7 +106,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
                         </td>
                         <td class="EncabezadoCell" style="width: 250px; height: 18px;">
-                            <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"  style="color: black;"
+                            <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
                                 autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                             <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
                                 OnClientItemSelected="RefrescaGrilla()"
@@ -130,8 +130,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <input type="button" id="btnExportarGrillaAjax" value="EXCEL" class="btn btn-primary" />
 
 
-        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary"
-             />
+        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="True" CssClass="btn btn-primary" />
         <br />
         <asp:Literal ID="salida" runat="server"></asp:Literal>
         <br />
@@ -605,7 +604,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         dataType: 'json',
                         data: JSON.stringify({
                             idcarta: gridId,
-                            idsituacion: 0, //dataFromTheRow.Situacion,
+                            idsituacion: dataFromTheRow.Situacion,
                             sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
                         }),
                         success: function (result) {
@@ -944,13 +943,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     colModel: [
 {
-    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false,
+    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false, sortable: false ,
     search: false,
 },
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
 {
     name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 160, align: 'left', sorttype: "text", sortable: false
-, editable: true, editrules: { required: false, number: true }, edittype: 'text', 
+, editable: false, editrules: { required: false, number: true }, edittype: 'text', 
 
     searchoptions: { sopt: ['bw','cn','eq'] },
 
@@ -971,13 +970,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 { 
-    name: 'Situacion', index: 'Situacion', align: 'left', width: 100, hidden: false, editable: true, edittype: 'select', sortable: false ,
+    name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false ,
     editoptions: {
         //defaultValue: OrigenDescripcionDefault,
-        value: "0:Autorizado; 1:Demorado;"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
+        value: "0:Autorizado; 6:Desviado"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
     },
     // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
-    formatter:'select',  stype: 'select', searchoptions:{ sopt:['eq'], value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo" }
+    formatter:'select',  stype: 'select',
+    searchoptions:{ sopt:['eq'], value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo" }
 
 
 },
@@ -990,7 +990,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'FechaArribo', index: 'FechaArribo', width: 200, sortable: true, align: 'right', editable: true, sortable: false ,
+    name: 'FechaArribo', index: 'FechaArribo', width: 200, sortable: true, align: 'right', editable: false, sortable: false ,
     editoptions: {
         size: 10,
         maxlengh: 10,
@@ -1022,7 +1022,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: true, sortable: false ,
+    name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: false, sortable: false ,
     editoptions: {
         size: 10,
         maxlengh: 10,
@@ -1059,16 +1059,154 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false  },
-{ name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false  },
+{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
+
+    ,searchoptions:{ 
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetCorredores",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+                  
+            });
+
+
+
+
+
+
+        }
+    }
+},
+{ name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
+
+
+    ,searchoptions:{ 
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+                  
+            });
+
+
+
+
+
+
+        }
+    }
+
+},
 
 
 
 {
     name: 'DestinoDesc', index: 'DestinoDesc',
     formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false ,
-    editoptions: {
-        rows: '1', cols: '1',
+    searchoptions:{ 
+        //    sopt:['eq'], 
         dataInit: function (elem) {
             var NoResultsLabel = "No se encontraron resultados";
 
@@ -1164,23 +1302,367 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         }
+    }
 
-
-    },
-    editrules: { required: true }
 },
 
 
-{ name: 'Destino', index: 'Destino', align: 'left', width: 450, hidden: true, editable: true, edittype: 'text', sortable: false },
-{ name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
-{ name: 'Producto', index: 'Producto', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
-{ name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
-{ name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+{ name: 'Destino', index: 'Destino', align: 'left', width: 450, hidden: true, editable: false, edittype: 'text', sortable: false },
+{ name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
 
-{ name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
-{ name: 'Patente', index: 'Patente', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
-{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
-{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false },
+
+    ,searchoptions:{ 
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetLocalidades",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+                  
+            });
+
+
+
+
+
+
+        }
+    }
+},
+{ name: 'Producto', index: 'Producto', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
+
+    ,searchoptions:{ 
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetProductos",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+                  
+            });
+
+
+
+
+
+
+        }
+    }
+
+},
+{ name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
+
+
+    ,searchoptions:{ 
+        //    sopt:['eq'], 
+                    dataInit: function (elem) {
+                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                        $(elem).autocomplete({
+                            source: function (request, response) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "WebServiceClientes.asmx/GetClientes",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify({
+                                        term: request.term
+                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                    }),
+
+
+                                    success: function (data2) {
+                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                        //    var ui = data[0];
+
+                                        //    if (ui.id == "") {
+                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                        //        $("#Descripcion").val("");
+                                        //        return;
+                                        //    }
+                                        //    $("#IdWilliamsDestino").val(ui.id);
+
+                                        //    UltimoIdArticulo = ui.id;
+                                        //}
+                                        //else {
+                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                        //}
+
+                                        response($.map(data, function (item) {
+                                            return {
+                                                label: item.value,
+                                                value: item.value //item.id
+                                                , id: item.id
+                                            }
+                                        }));
+
+                                    }
+
+
+
+                                })
+
+
+                            }
+
+                  
+                        });
+
+
+
+
+
+
+                    }
+                }
+
+},
+{ name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+    ,searchoptions:{ 
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+                  
+            });
+
+
+
+
+
+
+        }
+    }
+
+},
+
+{ name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false
+
+    ,searchoptions:{ 
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+                  
+            });
+
+
+
+
+
+
+        }
+    }
+},
+{ name: 'Patente', index: 'Patente', align: 'left', width: 200, hidden: false, editable: false, edittype: 'text', sortable: false },
+{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
+{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
 
@@ -1207,7 +1689,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //if (name == 'Fecha') {
                         //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                         //}
-                        var se = "<input style='height:22px;width:100px;' type='button' value='Autorizar' onclick=\"GrabarFila('" + id + "');\"  />";
+                        var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
                         jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                     },
                     //beforeSelectRow: function (rowid, e) {
@@ -1234,7 +1716,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                     sortorder: 'desc',
                     viewrecords: true,
-                    multiselect: true,
+                    multiselect: false,
                     shrinkToFit: false,
                     width: 'auto',
                     height: $(window).height() - 500, // '100%'
