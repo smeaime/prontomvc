@@ -361,6 +361,67 @@ Partial Class SituacionCalidad
     End Function
 
 
+    
+
+    <WebMethod()> _
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+    Public Shared Function ExportarGrillaNormal(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
+
+        Dim SC As String
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(destino, SC)
+
+        Dim output As String = "\DataBackupear\Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
+        Dim fisico As String = ConfigurationManager.AppSettings("DirApp") + output
+        Dim url As String = ConfigurationManager.AppSettings("UrlDominio").ToString + output
+
+
+
+
+        Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
+                                             fechadesde,
+                                             fechahasta,
+                                              -1, idDestino, SC, "Mariano")
+
+
+
+
+
+
+        Dim yourParams As ReportParameter() = New ReportParameter(9) {}
+
+        yourParams(0) = New ReportParameter("webservice", "")
+        yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+        yourParams(2) = New ReportParameter("idArticulo", -1)
+        yourParams(3) = New ReportParameter("idDestino", -1)
+        yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+        yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+        yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+        yourParams(7) = New ReportParameter("Consulta", sqlquery4)
+        yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+        yourParams(9) = New ReportParameter("titulo", "_")
+
+
+
+        RebindReportViewer_ServidorExcel(ReporteLocal, _
+                     "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, fisico, False)
+
+        
+        Return url
+    End Function
 
 
 
@@ -410,6 +471,53 @@ Partial Class SituacionCalidad
             Return
         End Try
     End Sub
+
+
+
+
+    <WebMethod()> _
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+    Public Shared Function PanelInforme(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
+
+        Dim SC As String
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(destino, SC)
+        Dim dFechaDesde = New DateTime(1980, 1, 1)
+        Dim dFechaHasta = New DateTime(2050, 1, 1)
+
+        Try
+
+            dFechaDesde = DateTime.ParseExact(fechadesde, "dd/MM/yyyy", Nothing)
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            dFechaHasta = DateTime.ParseExact(fechahasta, "dd/MM/yyyy", Nothing)
+
+        Catch ex As Exception
+
+        End Try
+
+
+        Dim s = New ServicioCartaPorte.servi()
+        'Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
+        Dim q As String = s.InformeSituacion_html(idDestino, dFechaDesde, dFechaHasta, SC)
+       
+
+
+        Return q
+    End Function
+
 
 
     Protected Sub btnPanelInforme_Click(sender As Object, e As EventArgs) Handles btnPanelInforme.Click
