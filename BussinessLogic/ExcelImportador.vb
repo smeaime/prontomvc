@@ -4267,9 +4267,11 @@ Public Class ExcelImportadorManager
             ds.Tables.Add(dt)
             Dim dr As DataRow
 
-            Dim sb As New StringBuilder()
-            Dim iValue As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+            Const MAXFILASEXCEL = 500
 
+            Dim sb As New StringBuilder()
+            Dim iValue As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILASEXCEL, MAXFILASEXCEL, oSheet.UsedRange.Cells.Rows.Count)
+            If iValue = MAXFILASEXCEL Then Throw New Exception("Limite de renglones importables del Excel")
 
 
             '///////////////////////////////////////////////////////////////////////////////////
