@@ -24,7 +24,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
-    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js" target></script>
+    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js" ></script>
     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
     <%--/////////////////////////////////////////////////////////////--%>
@@ -1319,34 +1319,34 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         }),
 
 
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+                        //success: function (data2) {
+                        //    var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                            if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                var ui = data[0];
+                        //    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //        var ui = data[0];
 
-                                if (ui.id == "") {
-                                    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                    $("#Descripcion").val("");
-                                    return;
-                                }
-                                $("#IdWilliamsDestino").val(ui.id);
+                        //        if (ui.id == "") {
+                        //            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //            $("#Descripcion").val("");
+                        //            return;
+                        //        }
+                        //        $("#IdWilliamsDestino").val(ui.id);
 
-                                UltimoIdArticulo = ui.id;
-                            }
-                            else {
-                                alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            }
+                        //        UltimoIdArticulo = ui.id;
+                        //    }
+                        //    else {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //    }
 
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
+                        //    response($.map(data, function (item) {
+                        //        return {
+                        //            label: item.value,
+                        //            value: item.value //item.id
+                        //            , id: item.id
+                        //        }
+                        //    }));
 
-                        }
+                        //}
 
 
 
