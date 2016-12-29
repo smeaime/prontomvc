@@ -1960,7 +1960,14 @@ Public Class ExcelImportadorManager
 
                 If cpnumero < 500000000 Then Continue For
 
-                Dim myCartaDePorte As CartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, cpnumero, 0, 0)
+                'Dim myCartaDePorte As CartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, cpnumero, 0, 0)
+
+                Dim myCartaDePorte As Models.CartasDePorte = _
+                           (From c In db.CartasDePortes Where c.NumeroCartaDePorte = cpnumero).FirstOrDefault()
+
+                If myCartaDePorte Is Nothing Then myCartaDePorte = New Models.CartasDePorte()
+
+
 
 
                 Dim log = ""
@@ -1969,7 +1976,8 @@ Public Class ExcelImportadorManager
 
                 With myCartaDePorte
 
-                    Dim bEditadaManual As Boolean = (.FechaModificacion > .FechaActualizacionAutomatica.AddSeconds(60))
+                    Dim bEditadaManual As Boolean = (If(.FechaModificacion, DateTime.MinValue) > _
+                                                            If(.FechaActualizacionAutomatica, DateTime.MinValue).AddSeconds(60))
 
                     '+ Si la carta de porte fue editada manualmente no volver a importar los datos de la carta de porte. SI seguir importando los datos correspondientes a la situación del camion (Situación / Observaciones)
 
@@ -1993,87 +2001,119 @@ Public Class ExcelImportadorManager
                     If (Not bEditadaManual) Then
 
 
-                        .FechaArribo = iisValidSqlDate(r(3), DateTime.Now)
+                        .FechaArribo = DateTime.Parse(iisValidSqlDate(r(3), DateTime.Now))
+                        .FechaModificacion = DateTime.Now
 
                         If actua(.IdArticulo, BuscaIdArticuloPreciso(r(5), SC)) Then log += "Articulo; "
                         If .IdArticulo = -1 Then
                             If actua(.IdArticulo, BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(5)), SC)) Then log += "Articulo; "
                         End If
-                        
+                        If .IdArticulo <= 0 Then .IdArticulo = Nothing
 
-                        If actua(.Titular, BuscarClientePorCUIT(r(7), SC, r(6))) Then log += "Titular; "
-                        If .Titular = -1 Then
-                            Console.Write(.Titular)
-                        End If
-                        r(6) = NombreCliente(SC, .Titular)
+                        If actua(.Vendedor, BuscarClientePorCUIT(r(7), SC, r(6))) Then log += "Titular; "
+                        If .Vendedor <= 0 Then .Vendedor = Nothing
+                        'r(6) = NombreCliente(SC, .Vendedor)
 
 
                         If actua(.CuentaOrden1, BuscarClientePorCUIT(r(9), SC, r(8))) Then log += "Intermediario; "
+                        If .CuentaOrden1 <= 0 Then .CuentaOrden1 = Nothing
                         '.CuentaOrden1 = BuscarClientePorCUIT(r(9), SC, r(8))
-                        r(8) = NombreCliente(SC, .CuentaOrden1) 'actualizo el datatable solo en caso de que se procese con "usuario interactivo"...
+                        'r(8) = NombreCliente(SC, .CuentaOrden1) 'actualizo el datatable solo en caso de que se procese con "usuario interactivo"...
 
                         If actua(.CuentaOrden2, BuscarClientePorCUIT(r(11), SC, r(10))) Then log += "Rem Comercial; "
+                        If .CuentaOrden2 <= 0 Then .CuentaOrden2 = Nothing
                         '.CuentaOrden2 = BuscarClientePorCUIT(r(11), SC, r(10))
-                        r(10) = NombreCliente(SC, .CuentaOrden2)
+                        'r(10) = NombreCliente(SC, .CuentaOrden2)
 
                         If actua(.Corredor, BuscarVendedorPorCUIT(r(13), SC, r(12))) Then log += "Corredor; "
+                        If .Corredor <= 0 Then .Corredor = Nothing
                         '.Corredor = BuscarVendedorPorCUIT(r(13), SC, r(12))
-                        r(12) = NombreCliente(SC, .Corredor)
+                        'r(12) = NombreCliente(SC, .Corredor)
 
                         If actua(.Entregador, BuscarClientePorCUIT(r(15), SC, r(14))) Then log += "Destinatario; "
+                        If .Entregador <= 0 Then .Entregador = Nothing
                         '.Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
-                        r(14) = NombreCliente(SC, .Entregador)
+                        'r(14) = NombreCliente(SC, .Entregador)
 
 
 
                         If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
+                        If .Destino <= 0 Then .Destino = Nothing
                         '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
 
 
 
 
                         If actua(.IdTransportista, BuscarTransportistaPorCUIT(r(21), SC, r(20))) Then log += "Transportista; "
+                        If .IdTransportista <= 0 Then .IdTransportista = Nothing
                         '.IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
                         If actua(.IdChofer, BuscarChoferPorCUIT(r(23), SC, r(22))) Then log += "Chofer; "
+                        If .IdChofer <= 0 Then .IdChofer = Nothing
                         '.IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
 
                         If actua(.Procedencia, BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)) Then log += "Procedencia; "
+                        If .Procedencia <= 0 Then .Procedencia = Nothing
                         '.Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
 
-                        If actua(.BrutoPto, Val(r(25))) Then log += "BrutoPto; "
+
+
+
+
+
+
+                        If actua(.BrutoPto, Decimal.Parse(Val(r(25)))) Then log += "BrutoPto; "
                         '.BrutoPto = Val(r(25))
-                        If actua(.TaraPto, Val(r(26))) Then log += "TaraPto; "
+                        If actua(.TaraPto, Decimal.Parse(Val(r(26)))) Then log += "TaraPto; "
                         '.TaraPto = Val(r(26))
-                        If actua(.NetoPto, Val(r(27))) Then log += "NetoPto; "
+                        If actua(.NetoPto, Decimal.Parse(Val(r(27)))) Then log += "NetoPto; "
                         '.NetoPto = Val(r(27))
 
-                        If actua(.FechaDescarga, iisValidSqlDate(r(28))) Then log += "FechaDescarga; "
-                        '.FechaDescarga = iisValidSqlDate(r(28))
-
-                        If actua(.BrutoFinal, Val(r(29))) Then log += "BrutoFinal; "
+                        If actua(.BrutoFinal, Decimal.Parse(Val(r(29)))) Then log += "BrutoFinal; "
                         '.BrutoFinal = Val(r(29))
-                        If actua(.TaraFinal, Val(r(30))) Then log += "TaraFinal; "
+                        If actua(.TaraFinal, Decimal.Parse(Val(r(30)))) Then log += "TaraFinal; "
                         '.TaraFinal = Val(r(30))
-                        If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinal; "
+
+                        'If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinal; "
+                        If actua(.NetoFinal, Decimal.Parse(Val(r(31)))) Then log += "NetoFinal; "
                         '.NetoFinalIncluyendoMermas = Val(r(31))
-                        If actua(.Merma, Val(r(32))) Then log += "Merma; "
+
+                        If actua(.Merma, Decimal.Parse(Val(r(32)))) Then log += "Merma; "
                         '.Merma = Val(r(32))
-                        If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalMenosMermas; "
+                        'If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalMenosMermas; "
+                        If actua(.NetoProc, Decimal.Parse(Val(r(33)))) Then log += "NetoFinalMenosMermas; "
                         '.NetoFinalSinMermas = Val(r(33))
 
+
+
+
                         If actua(.CalidadDe, BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)) Then log += "Calidad; "
+                        If .CalidadDe <= 0 Then .CalidadDe = Nothing
                         '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
 
                         If actua(.Contrato, Val(r(36))) Then log += "Contrato; "
                         '.Contrato = r(36)
-                        If actua(.Contrato, Val(r(37))) Then log += "CEE; "
+                        If actua(.CEE, Val(r(37))) Then log += "CEE; "
                         '.CEE = r(37)
-                        If actua(.Contrato, Val(r(38))) Then log += "CTG; "
+                        If actua(.CTG, Integer.Parse(Val(r(38)))) Then log += "CTG; "
                         '.CTG = Val(r(38))
 
-                        If actua(.FechaDeCarga, iisValidSqlDate(r(39))) Then log += "Fecha Carga; "
-                        '.FechaDeCarga = iisValidSqlDate(r(39))
-                        If actua(.FechaVencimiento, iisValidSqlDate(r(40))) Then log += "Fecha Vencimiento; "
+                        Try
+                            If r(28) <> "" Then
+                                If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(r(28)))) Then log += "FechaDescarga; "
+                            End If
+                           '.FechaDescarga = iisValidSqlDate(r(28))
+
+                            If r(39) <> "" Then
+                                If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(r(39)))) Then log += "Fecha Carga; "
+                            End If
+                            '.FechaDeCarga = iisValidSqlDate(r(39))
+
+                            If r(40) <> "" Then
+                                If actua(.FechaVencimiento, DateTime.Parse(iisValidSqlDate(r(40)))) Then log += "Fecha Vencimiento; "
+                            End If
+                        Catch ex As Exception
+
+                        End Try
                         '.FechaVencimiento = iisValidSqlDate(r(40))
 
                         .Patente = r(41)
@@ -2103,13 +2143,19 @@ Public Class ExcelImportadorManager
                 End With
 
 
+                'Dim ms As String = ""
+                'CartaDePorteManager.Save(SC, myCartaDePorte, 1, "", , ms)
+                'Console.Write(ms)
 
-                Dim ms As String = ""
-                CartaDePorteManager.Save(SC, myCartaDePorte, 1, "", , ms)
-                Console.Write(ms)
+                If myCartaDePorte.IdCartaDePorte <= 0 Then
+                    myCartaDePorte.NumeroCartaDePorte = cpnumero
+                    db.CartasDePortes.Add(myCartaDePorte)
+                Else
+                    'si es un update no hace falta tocar nada
+                End If
 
-
-
+                'http://stackoverflow.com/questions/21272763/entity-framework-performance-issue-savechanges-is-very-slow
+                db.SaveChanges()
 
 
 
@@ -2119,6 +2165,7 @@ Public Class ExcelImportadorManager
 
         Next
 
+        'db.SaveChanges()
 
 
         Return ds

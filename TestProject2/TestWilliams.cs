@@ -303,8 +303,42 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void CartaPorteFuncionalidadBasica_100veces_4()
+        public void Carta_GetItemPorNumero()
         {
+            //  2.1s  original
+
+
+            const int CUANTAS = 10;
+
+            // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
+            TimeSpan time = Time(() =>
+            {
+                // Do some work
+
+                for (int n = 0; n < CUANTAS; n++)
+                {
+                    string ms = "", warn = "";
+
+                    var carta = CartaDePorteManager.GetItemPorNumero(SC, 20488343, 0, 0);
+
+                    Console.Write(ms);
+
+                }
+            });
+
+            Console.WriteLine("Por carta={0} s", time.TotalSeconds / CUANTAS);
+
+            Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
+
+
+        }
+
+
+        [TestMethod]
+        public void Carta_GetItem()
+        {
+            //  1.8s  original
+
 
             const int CUANTAS = 10;
 
@@ -324,7 +358,7 @@ namespace ProntoMVC.Tests
                 }
             });
 
-            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+            Console.WriteLine("Por carta={0} s", time.TotalSeconds / CUANTAS);
 
             Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
 
@@ -336,13 +370,13 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void Cliente_GetItem()
         {
-            // 13 s    original
-            // 10 s    saltando la lectura de DetalleClientes
-            //  3 s    saltando tambien linqtosql
-            //    s    cambiando linqtosql por EF -no puedo porque la base oficial no tiene la tabla Clientes con esos campos nuevos!!!
+            // 0.78s    original
+            //     s    saltando la lectura de DetalleClientes
+            //     s    saltando tambien linqtosql
+            //     s    cambiando linqtosql por EF -no puedo porque la base oficial no tiene la tabla Clientes con esos campos nuevos!!!
 
         
-            const int CUANTAS = 40;
+            const int CUANTAS = 10;
             //var carta = CartaDePorteManager.GetItem(SC, 4444);
 
             // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
@@ -363,7 +397,7 @@ namespace ProntoMVC.Tests
                 }
             });
 
-            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+            Console.WriteLine("Cada uno={0} s", time.TotalSeconds / CUANTAS);
 
             Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
 
@@ -373,13 +407,16 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void CartaPorteFuncionalidadBasica_100veces_2()
+        public void Carta_IsValid()
         {
-            // 55 s    original
-            // 45 s    saltando UsaClientesQueEstanBloqueadosPorCobranzas
-            // 32 s    saltando tambien UsaClientesQueExigenDatosDeDescargaCompletos
+            // 12.34 s    original
+            //       s    saltando  UsaClientesQueEstanBloqueadosPorCobranzas
+            //  4.9  s    saltando  UsaClientesQueEstanBloqueadosPorCobranzas + UsaClientesQueExigenDatosDeDescargaCompletos
+            //  2.6       saltando  UsaClientesQueEstanBloqueadosPorCobranzas + UsaClientesQueExigenDatosDeDescargaCompletos + EsUnoDeLosClientesExportador
+            //  3.5  s    corregidas! UsaClientesQueEstanBloqueadosPorCobranzas + UsaClientesQueExigenDatosDeDescargaCompletos + EsUnoDeLosClientesExportador
 
-            const int CUANTAS = 6;
+
+            const int CUANTAS = 5;
             var carta = CartaDePorteManager.GetItem(SC, 4444);
 
             // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
@@ -398,7 +435,8 @@ namespace ProntoMVC.Tests
                 }
             });
 
-            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+            //Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+            Console.WriteLine("Por carta={0} s", time.TotalSeconds / CUANTAS);
 
             Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
 
@@ -409,10 +447,12 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void CartaPorteFuncionalidadBasica_100veces()
+        public void Carta_Save()
         {
+            // 16.4s por carta (12s son del IsValid dentro del Save)
+            //  5.4  despues de optimizar IsValid !!
 
-            const int CUANTAS = 6;
+            const int CUANTAS = 5;
             var carta = CartaDePorteManager.GetItem(SC, 4444);
 
             // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
@@ -431,7 +471,7 @@ namespace ProntoMVC.Tests
                         }
                     });
 
-            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+            Console.WriteLine("Por carta={0} s", time.TotalSeconds / CUANTAS);
 
             Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
 
@@ -610,10 +650,10 @@ namespace ProntoMVC.Tests
 
 
             // escribir descarga de una carta
-            carta = null;
-            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
 
 
