@@ -1189,7 +1189,7 @@ Namespace Pronto.ERP.Bll
                 With myCliente
 
                     
-                    If False Then
+                    If True Then
 
                         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
@@ -1256,7 +1256,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                        If False Then
+                        If True Then
 
                             Try
 
