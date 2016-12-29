@@ -396,7 +396,7 @@ FCESupport\FCESupportImpl.h, 42.
                 {
                     int m_IdMaestro = 0;
 
-                    ClassFlexicapture.MarcarImagenComoProcesandose(f);
+                    ClassFlexicapture.MarcarArchivoComoProcesandose(f);
 
                     ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, f,
                                             LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");

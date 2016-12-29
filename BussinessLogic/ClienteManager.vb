@@ -1150,7 +1150,8 @@ Namespace Pronto.ERP.Bll
             'End If
 
 
-            If False Then
+
+            If True Then
                 Try
                     myCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores = EntidadManager.TablaSelect(SC, "ExpresionRegularNoAgruparFacturasConEstosVendedores", "Clientes", "IdCliente", id)
                     myCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse = EntidadManager.TablaSelect(SC, "ExigeDatosCompletosEnCartaDePorteQueLoUse", "Clientes", "IdCliente", id)
@@ -1174,149 +1175,168 @@ Namespace Pronto.ERP.Bll
                 End Try
             End If
 
+
+
+
+
+
+
+
+
             Try
+
 
                 With myCliente
 
-                    Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-                    Dim oCliente As linqCliente = (From i In db.linqClientes Where i.IdCliente = id).SingleOrDefault
+                    
+                    If False Then
 
-                    'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
-                    'Dim oCliente As ProntoMVC.Data.Models.Cliente = (From i In db.Clientes Where i.IdCliente = id).SingleOrDefault
+                        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-                    Try
+                        Dim oCliente As linqCliente = (From i In db.linqClientes Where i.IdCliente = id).SingleOrDefault
 
+                        'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+                        'Dim oCliente As ProntoMVC.Data.Models.Cliente = (From i In db.Clientes Where i.IdCliente = id).SingleOrDefault
 
-                        .ExpresionRegularNoAgruparFacturasConEstosVendedores = oCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores
-                        .ExigeDatosCompletosEnCartaDePorteQueLoUse = oCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse
-                        .IncluyeTarifaEnFactura = oCliente.IncluyeTarifaEnFactura
-
-                        .IdCondicionCompra = If(oCliente.IdCondicionVenta, -1)
-                        .IdCondicionVenta = If(oCliente.IdCondicionVenta, -1)
+                        Try
 
 
-                        .DireccionDeCorreos = oCliente.DireccionDeCorreos
-                        .IdLocalidadDeCorreos = If(oCliente.IdLocalidadDeCorreos, -1)
-                        .IdProvinciaDeCorreos = If(oCliente.IdProvinciaDeCorreos, -1)
-                        .CodigoPostalDeCorreos = oCliente.CodigoPostalDeCorreos
-                        .ObservacionesDeCorreos = oCliente.ObservacionesDeCorreos
+                            .ExpresionRegularNoAgruparFacturasConEstosVendedores = oCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores
+                            .ExigeDatosCompletosEnCartaDePorteQueLoUse = oCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse
+                            .IncluyeTarifaEnFactura = oCliente.IncluyeTarifaEnFactura
+
+                            .IdCondicionCompra = If(oCliente.IdCondicionVenta, -1)
+                            .IdCondicionVenta = If(oCliente.IdCondicionVenta, -1)
 
 
-                        .SeLeFacturaCartaPorteComoTitular = oCliente.SeLeFacturaCartaPorteComoTitular
-                        .SeLeFacturaCartaPorteComoIntermediario = oCliente.SeLeFacturaCartaPorteComoIntermediario
-                        .SeLeFacturaCartaPorteComoRemcomercial = oCliente.SeLeFacturaCartaPorteComoRemcomercial
-                        .SeLeFacturaCartaPorteComoCorredor = oCliente.SeLeFacturaCartaPorteComoCorredor
-
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                            .DireccionDeCorreos = oCliente.DireccionDeCorreos
+                            .IdLocalidadDeCorreos = If(oCliente.IdLocalidadDeCorreos, -1)
+                            .IdProvinciaDeCorreos = If(oCliente.IdProvinciaDeCorreos, -1)
+                            .CodigoPostalDeCorreos = oCliente.CodigoPostalDeCorreos
+                            .ObservacionesDeCorreos = oCliente.ObservacionesDeCorreos
 
 
-                    Try
-                        .SeLeFacturaCartaPorteComoDestinatarioLocal = oCliente.SeLeFacturaCartaPorteComoDestinatario
-                        .SeLeFacturaCartaPorteComoDestinatarioExportador = oCliente.SeLeFacturaCartaPorteComoDestinatarioExportador
-                        .SeLeDerivaSuFacturaAlCorredorDeLaCarta = oCliente.SeLeDerivaSuFacturaAlCorredorDeLaCarta
+                            .SeLeFacturaCartaPorteComoTitular = oCliente.SeLeFacturaCartaPorteComoTitular
+                            .SeLeFacturaCartaPorteComoIntermediario = oCliente.SeLeFacturaCartaPorteComoIntermediario
+                            .SeLeFacturaCartaPorteComoRemcomercial = oCliente.SeLeFacturaCartaPorteComoRemcomercial
+                            .SeLeFacturaCartaPorteComoCorredor = oCliente.SeLeFacturaCartaPorteComoCorredor
 
-                        .SeLeFacturaCartaPorteComoClienteAuxiliar = oCliente.SeLeFacturaCartaPorteComoClienteAuxiliar
-                        .EsAcondicionadoraDeCartaPorte = oCliente.EsAcondicionadoraDeCartaPorte
-
-                        .HabilitadoParaCartaPorte = iisNull(oCliente.HabilitadoParaCartaPorte, "SI") <> "NO"
-
-                        .Eventual = IIf(iisNull(oCliente.IdEstado, 1) = 2, "SI", "NO")
-
-                        .Contactos = oCliente.Contactos
-                        .CorreosElectronicos = oCliente.CorreosElectronicos
-                        .TelefonosFijosOficina = oCliente.TelefonosFijosOficina
-                        .TelefonosCelulares = oCliente.TelefonosCelulares
-
-                        .EsEntregador = oCliente.EsEntregador
-
-                        .CartaPorteTipoDeAdjuntoDeFacturacion = If(oCliente.CartaPorteTipoDeAdjuntoDeFacturacion, -1)
+                        Catch ex As Exception
+                            ErrHandler2.WriteError(ex)
+                        End Try
 
 
+                        Try
+                            .SeLeFacturaCartaPorteComoDestinatarioLocal = oCliente.SeLeFacturaCartaPorteComoDestinatario
+                            .SeLeFacturaCartaPorteComoDestinatarioExportador = oCliente.SeLeFacturaCartaPorteComoDestinatarioExportador
+                            .SeLeDerivaSuFacturaAlCorredorDeLaCarta = oCliente.SeLeDerivaSuFacturaAlCorredorDeLaCarta
 
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                            .SeLeFacturaCartaPorteComoClienteAuxiliar = oCliente.SeLeFacturaCartaPorteComoClienteAuxiliar
+                            .EsAcondicionadoraDeCartaPorte = oCliente.EsAcondicionadoraDeCartaPorte
+
+                            .HabilitadoParaCartaPorte = iisNull(oCliente.HabilitadoParaCartaPorte, "SI") <> "NO"
+
+                            .Eventual = IIf(iisNull(oCliente.IdEstado, 1) = 2, "SI", "NO")
+
+                            .Contactos = oCliente.Contactos
+                            .CorreosElectronicos = oCliente.CorreosElectronicos
+                            .TelefonosFijosOficina = oCliente.TelefonosFijosOficina
+                            .TelefonosCelulares = oCliente.TelefonosCelulares
+
+                            .EsEntregador = oCliente.EsEntregador
+
+                            .CartaPorteTipoDeAdjuntoDeFacturacion = If(oCliente.CartaPorteTipoDeAdjuntoDeFacturacion, -1)
 
 
 
-                    Try
-
-                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
-                                                            Where i.IdCliente = myCliente.Id _
-                                                            And i.Acciones = "EmailFacturacionElectronica"
-                                                        ).SingleOrDefault
-
-                        If oDet IsNot Nothing Then .EmailFacturacionElectronica = oDet.Email
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
-
-                    Try
-
-                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
-                                                            Where i.IdCliente = myCliente.Id _
-                                                            And i.Acciones = "AutorizacionSyngenta"
-                                                        ).SingleOrDefault
-
-                        If oDet IsNot Nothing Then .AutorizacionSyngenta = oDet.Contacto
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
-
-                    Try
-
-                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
-                                                            Where i.IdCliente = myCliente.Id _
-                                                            And i.Acciones = "EsExportadorCartaPorte"
-                                                        ).SingleOrDefault
-
-                        If oDet IsNot Nothing Then .EsClienteExportador = oDet.Contacto
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                        Catch ex As Exception
+                            ErrHandler2.WriteError(ex)
+                        End Try
 
 
 
-                    Try
 
-                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
-                                                            Where i.IdCliente = myCliente.Id _
-                                                            And i.Acciones = "UsaGastosAdmin"
-                                                        ).SingleOrDefault
+                        If False Then
 
-                        If oDet IsNot Nothing Then .UsaGastosAdmin = oDet.Contacto Else .UsaGastosAdmin = "SI"
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                            Try
+
+                                Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                                    Where i.IdCliente = myCliente.Id _
+                                                                    And i.Acciones = "EmailFacturacionElectronica"
+                                                                ).SingleOrDefault
+
+                                If oDet IsNot Nothing Then .EmailFacturacionElectronica = oDet.Email
+                            Catch ex As Exception
+                                ErrHandler2.WriteError(ex)
+                            End Try
+
+                            Try
+
+                                Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                                    Where i.IdCliente = myCliente.Id _
+                                                                    And i.Acciones = "AutorizacionSyngenta"
+                                                                ).SingleOrDefault
+
+                                If oDet IsNot Nothing Then .AutorizacionSyngenta = oDet.Contacto
+                            Catch ex As Exception
+                                ErrHandler2.WriteError(ex)
+                            End Try
+
+                            Try
+
+                                Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                                    Where i.IdCliente = myCliente.Id _
+                                                                    And i.Acciones = "EsExportadorCartaPorte"
+                                                                ).SingleOrDefault
+
+                                If oDet IsNot Nothing Then .EsClienteExportador = oDet.Contacto
+                            Catch ex As Exception
+                                ErrHandler2.WriteError(ex)
+                            End Try
 
 
 
-                    Try
+                            Try
 
-                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
-                                                            Where i.IdCliente = myCliente.Id _
-                                                            And i.Acciones = "DeshabilitadoPorCobranzas"
-                                                        ).SingleOrDefault
+                                Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                                    Where i.IdCliente = myCliente.Id _
+                                                                    And i.Acciones = "UsaGastosAdmin"
+                                                                ).SingleOrDefault
 
-                        If oDet IsNot Nothing Then .DeshabilitadoPorCobranzas = oDet.Contacto Else .DeshabilitadoPorCobranzas = "SI"
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                                If oDet IsNot Nothing Then .UsaGastosAdmin = oDet.Contacto Else .UsaGastosAdmin = "SI"
+                            Catch ex As Exception
+                                ErrHandler2.WriteError(ex)
+                            End Try
 
 
-                    Try
 
-                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
-                                                            Where i.IdCliente = myCliente.Id _
-                                                            And i.Acciones = "EsClienteObservacionesFacturadoComoCorredor"
-                                                        ).SingleOrDefault
+                            Try
 
-                        If oDet IsNot Nothing Then .EsClienteObservacionesFacturadoComoCorredor = oDet.Contacto Else .EsClienteObservacionesFacturadoComoCorredor = "SI"
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                    End Try
+                                Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                                    Where i.IdCliente = myCliente.Id _
+                                                                    And i.Acciones = "DeshabilitadoPorCobranzas"
+                                                                ).SingleOrDefault
+
+                                If oDet IsNot Nothing Then .DeshabilitadoPorCobranzas = oDet.Contacto Else .DeshabilitadoPorCobranzas = "SI"
+                            Catch ex As Exception
+                                ErrHandler2.WriteError(ex)
+                            End Try
+
+
+                            Try
+
+                                Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                                    Where i.IdCliente = myCliente.Id _
+                                                                    And i.Acciones = "EsClienteObservacionesFacturadoComoCorredor"
+                                                                ).SingleOrDefault
+
+                                If oDet IsNot Nothing Then .EsClienteObservacionesFacturadoComoCorredor = oDet.Contacto Else .EsClienteObservacionesFacturadoComoCorredor = "SI"
+                            Catch ex As Exception
+                                ErrHandler2.WriteError(ex)
+                            End Try
+
+                        End If
+                    End If
 
 
 

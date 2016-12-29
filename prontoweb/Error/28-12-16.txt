@@ -432,3 +432,63 @@ Thread was being aborted.
    at Login.Page_Load(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:line 171
 mscorlib
 __________________________
+
+Log Entry : 
+12/28/2016 14:41:13
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 14:41:15
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________
+
+Log Entry : 
+12/28/2016 14:41:51
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 14:42:12
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 16:05:13
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 16:17:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638787. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+12/28/2016 16:17:43
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2638787. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ASP.global_asax.Application_Error(Object sender, EventArgs e) in C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:line 472
+System
+__________________________

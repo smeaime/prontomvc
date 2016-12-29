@@ -345,7 +345,7 @@ namespace ProntoFlexicapture
             foreach (string s in imagenes)
             {
                 imageSource.AddImageFileByRef(s);
-                MarcarImagenComoProcesandose(s);
+                MarcarArchivoComoProcesandose(s);
             }
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
@@ -378,7 +378,7 @@ namespace ProntoFlexicapture
                 //tirar la Lista de imagenes sospechosas
                 foreach (string s in imagenes)
                 {
-                    DesmarcarImagenComoProcesandose(s);
+                    DesmarcarArchivoComoProcesandose(s);
                 }
 
                 CartaDePorteManager.MandarMailDeError(xxx);
@@ -440,7 +440,7 @@ namespace ProntoFlexicapture
 
                     foreach (string s in imagenes)
                     {
-                        DesmarcarImagenComoProcesandose(s);
+                        DesmarcarArchivoComoProcesandose(s);
                     }
 
                     CartaDePorteManager.MandarMailDeError(xx);
@@ -1040,7 +1040,7 @@ namespace ProntoFlexicapture
 
 
 
-        static int DesmarcarImagenComoProcesandose(string archivo)
+        static int DesmarcarArchivoComoProcesandose(string archivo)
         {
             //y si creo un archivo con extension?
 
@@ -1050,7 +1050,7 @@ namespace ProntoFlexicapture
 
         }
 
-        public static int MarcarImagenComoProcesandose(string archivo)
+        public static int MarcarArchivoComoProcesandose(string archivo)
         {
             //y si creo un archivo con extension?
 
@@ -1205,7 +1205,7 @@ namespace ProntoFlexicapture
             if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
                 return null;
 
-            if (bGirar180grados) MarcarImagenComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
+            if (bGirar180grados) MarcarArchivoComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
 
             //  List<System.Drawing.Image> listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
             //open tif file
@@ -1263,7 +1263,7 @@ namespace ProntoFlexicapture
 
                     BitMiracle.TiffCP.Program.Main(arguments);
 
-                    if (!bProcesarConOCR) MarcarImagenComoProcesandose(final);
+                    if (!bProcesarConOCR) MarcarArchivoComoProcesandose(final);
 
                     //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
                     //p.StartInfo.UseShellExecute = False
@@ -1305,7 +1305,7 @@ namespace ProntoFlexicapture
             if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
                 return null;
 
-            if (bGirar180grados) MarcarImagenComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
+            if (bGirar180grados) MarcarArchivoComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
 
 
             List<System.Drawing.Image> listapaginas;
@@ -1366,7 +1366,7 @@ namespace ProntoFlexicapture
 
                     BitMiracle.TiffCP.Program.Main(arguments);
 
-                    if (!bProcesarConOCR) MarcarImagenComoProcesandose(final);
+                    if (!bProcesarConOCR) MarcarArchivoComoProcesandose(final);
 
                     //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
                     //p.StartInfo.UseShellExecute = False
@@ -1425,7 +1425,7 @@ namespace ProntoFlexicapture
 
             foreach (string f in l)
             {
-                MarcarImagenComoProcesandose(f);
+                MarcarArchivoComoProcesandose(f);
             }
 
             foreach (string f in l)
@@ -1442,7 +1442,7 @@ namespace ProntoFlexicapture
                 else
                 {
                     l2.Add(f);
-                    if (bProcesarConOCR) DesmarcarImagenComoProcesandose(f);
+                    if (bProcesarConOCR) DesmarcarArchivoComoProcesandose(f);
                 }
             }
 
