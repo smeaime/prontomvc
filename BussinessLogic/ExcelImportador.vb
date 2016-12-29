@@ -1923,6 +1923,9 @@ Public Class ExcelImportadorManager
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
+        db.Configuration.AutoDetectChangesEnabled = True
+
+
 
         'le hago algun tratamiento a los cuits
         For Each r In ds.Tables(0).Rows
@@ -1967,8 +1970,9 @@ Public Class ExcelImportadorManager
 
                 If myCartaDePorte Is Nothing Then myCartaDePorte = New Models.CartasDePorte()
 
-
-
+                If myCartaDePorte.SubnumeroVagon Is Nothing Then myCartaDePorte.SubnumeroVagon = 0
+                If myCartaDePorte.SubnumeroDeFacturacion Is Nothing Then myCartaDePorte.SubnumeroDeFacturacion = 0
+                If myCartaDePorte.NumeroCartaEnTextoParaBusqueda Is Nothing Then myCartaDePorte.NumeroCartaEnTextoParaBusqueda = cpnumero.ToString
 
                 Dim log = ""
 
@@ -2098,10 +2102,12 @@ Public Class ExcelImportadorManager
                         '.CTG = Val(r(38))
 
                         Try
+                            'If If(.FechaDescarga, DateTime.MinValue) = DateTime.MinValue Then .FechaDescarga = .FechaArribo 'corregir: estoy truchando esto para poder incluir las q no fueron descargadas en el filtro de fecha que está ahora en la jqgrid de situacion
+
                             If r(28) <> "" Then
                                 If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(r(28)))) Then log += "FechaDescarga; "
                             End If
-                           '.FechaDescarga = iisValidSqlDate(r(28))
+                            '.FechaDescarga = iisValidSqlDate(r(28))
 
                             If r(39) <> "" Then
                                 If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(r(39)))) Then log += "Fecha Carga; "
@@ -2149,12 +2155,16 @@ Public Class ExcelImportadorManager
 
                 If myCartaDePorte.IdCartaDePorte <= 0 Then
                     myCartaDePorte.NumeroCartaDePorte = cpnumero
+                    myCartaDePorte.SubnumeroVagon = 0
+                    myCartaDePorte.SubnumeroDeFacturacion = 0
+                    myCartaDePorte.NumeroCartaEnTextoParaBusqueda = cpnumero.ToString
                     db.CartasDePortes.Add(myCartaDePorte)
                 Else
                     'si es un update no hace falta tocar nada
                 End If
 
                 'http://stackoverflow.com/questions/21272763/entity-framework-performance-issue-savechanges-is-very-slow
+                'http://stackoverflow.com/questions/5940225/fastest-way-of-inserting-in-entity-framework
                 db.SaveChanges()
 
 
@@ -2176,11 +2186,11 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
+    Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo", "Calado"}
 
     Public Shared Function BuscarSituacionId(sit As String) As Integer
         Try
-            Dim index As Integer = Array.FindIndex(Situaciones, Function(s) s = sit)
+            Dim index As Integer = Array.FindIndex(Situaciones, Function(s) s.Trim.ToLower = sit.Trim.ToLower)
 
             Return index
         Catch ex As Exception
