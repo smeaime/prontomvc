@@ -1067,11 +1067,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false ,
     editoptions: {
         //defaultValue: OrigenDescripcionDefault,
-        value: "0:Autorizado; 6:Desviado"   // "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"
+        //value: "0:Autorizado; 6:Desviado" 
+        value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado" 
     },
     // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
     formatter:'select',  stype: 'select',
-    searchoptions:{ sopt:['eq'], value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo" }
+    searchoptions:{ sopt:['eq'], 
+        value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado" }
 
 
 },

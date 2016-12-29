@@ -3417,7 +3417,7 @@ namespace ServicioCartaPorte
                                 
                                 a.IdCartaDePorte.ToString(), 
 
-                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.ToString() + "</>" ,
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
                                 
                                 (a.Situacion ?? 0).NullSafeToString(),
                                 //((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",

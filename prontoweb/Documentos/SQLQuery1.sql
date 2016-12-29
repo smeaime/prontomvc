@@ -1,500 +1,195 @@
 
+	declare @startRowIndex int,@maximumRows int,@estado int,@QueContenga nvarchar(4000),@idVendedor int,@idCorredor int,@idDestinatario int,@idIntermediario int,@idRemComercial int,@idArticulo int,@idProcedencia int,@idDestino int,@AplicarANDuORalFiltro int,@ModoExportacion nvarchar(4000),@fechadesde datetime2(7),@fechahasta datetime2(7),@puntoventa int,@IdAcopio int,@Contrato nvarchar(4000),@QueContenga2 nvarchar(4000),@idClienteAuxiliarint int,@AgrupadorDeTandaPeriodos int,@Vagon int,@Patente nvarchar(4000),@optCamionVagon nvarchar(4000)
+	
+	
+	select @startRowIndex=0,@maximumRows=9999999,@estado=0,@QueContenga=N'',@idVendedor=-1,@idCorredor=-1,@idDestinatario=-1,
+	@idIntermediario=-1,@idRemComercial=-1,@idArticulo=-1,@idProcedencia=-1,@idDestino=-1,@AplicarANDuORalFiltro=0,@ModoExportacion=N'Ambas',
+	@fechadesde='2016-12-29 00:00:00',@fechahasta='2050-01-01 00:00:00',
+	@puntoventa=0,@IdAcopio=NULL,@Contrato=N'',@QueContenga2=N'',@idClienteAuxiliarint=-1,@AgrupadorDeTandaPeriodos=NULL,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
+
+
+	select * from fSQL_GetDataTableFiltradoYPaginado(@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)
 
 
 
-SELECT TOP (999999) 
-    [Project1].[C1] AS [C1], 
-    [Project1].[IdCartaDePorte] AS [IdCartaDePorte], 
-    [Project1].[NumeroCartaDePorte] AS [NumeroCartaDePorte], 
-    [Project1].[IdUsuarioIngreso] AS [IdUsuarioIngreso], 
-    [Project1].[FechaIngreso] AS [FechaIngreso], 
-    [Project1].[Anulada] AS [Anulada], 
-    [Project1].[IdUsuarioAnulo] AS [IdUsuarioAnulo], 
-    [Project1].[FechaAnulacion] AS [FechaAnulacion], 
-    [Project1].[Observaciones] AS [Observaciones], 
-    [Project1].[FechaTimeStamp] AS [FechaTimeStamp], 
-    [Project1].[Vendedor] AS [Vendedor], 
-    [Project1].[CuentaOrden1] AS [CuentaOrden1], 
-    [Project1].[CuentaOrden2] AS [CuentaOrden2], 
-    [Project1].[Corredor] AS [Corredor], 
-    [Project1].[Entregador] AS [Entregador], 
-    [Project1].[Procedencia] AS [Procedencia], 
-    [Project1].[Patente] AS [Patente], 
-    [Project1].[IdArticulo] AS [IdArticulo], 
-    [Project1].[IdStock] AS [IdStock], 
-    [Project1].[Partida] AS [Partida], 
-    [Project1].[IdUnidad] AS [IdUnidad], 
-    [Project1].[IdUbicacion] AS [IdUbicacion], 
-    [Project1].[Cantidad] AS [Cantidad], 
-    [Project1].[Cupo] AS [Cupo], 
-    [Project1].[NetoProc] AS [NetoProc], 
-    [Project1].[Calidad] AS [Calidad], 
-    [Project1].[BrutoPto] AS [BrutoPto], 
-    [Project1].[TaraPto] AS [TaraPto], 
-    [Project1].[NetoPto] AS [NetoPto], 
-    [Project1].[Acoplado] AS [Acoplado], 
-    [Project1].[Humedad] AS [Humedad], 
-    [Project1].[Merma] AS [Merma], 
-    [Project1].[NetoFinal] AS [NetoFinal], 
-    [Project1].[FechaDeCarga] AS [FechaDeCarga], 
-    [Project1].[FechaVencimiento] AS [FechaVencimiento], 
-    [Project1].[CEE] AS [CEE], 
-    [Project1].[IdTransportista] AS [IdTransportista], 
-    [Project1].[TransportistaCUITdesnormalizado] AS [TransportistaCUITdesnormalizado], 
-    [Project1].[IdChofer] AS [IdChofer], 
-    [Project1].[ChoferCUITdesnormalizado] AS [ChoferCUITdesnormalizado], 
-    [Project1].[CTG] AS [CTG], 
-    [Project1].[Contrato] AS [Contrato], 
-    [Project1].[Destino] AS [Destino], 
-    [Project1].[Subcontr1] AS [Subcontr1], 
-    [Project1].[Subcontr2] AS [Subcontr2], 
-    [Project1].[Contrato1] AS [Contrato1], 
-    [Project1].[contrato2] AS [contrato2], 
-    [Project1].[KmARecorrer] AS [KmARecorrer], 
-    [Project1].[Tarifa] AS [Tarifa], 
-    [Project1].[FechaDescarga] AS [FechaDescarga], 
-    [Project1].[Hora] AS [Hora], 
-    [Project1].[NRecibo] AS [NRecibo], 
-    [Project1].[CalidadDe] AS [CalidadDe], 
-    [Project1].[TaraFinal] AS [TaraFinal], 
-    [Project1].[BrutoFinal] AS [BrutoFinal], 
-    [Project1].[Fumigada] AS [Fumigada], 
-    [Project1].[Secada] AS [Secada], 
-    [Project1].[Exporta] AS [Exporta], 
-    [Project1].[NobleExtranos] AS [NobleExtranos], 
-    [Project1].[NobleNegros] AS [NobleNegros], 
-    [Project1].[NobleQuebrados] AS [NobleQuebrados], 
-    [Project1].[NobleDaniados] AS [NobleDaniados], 
-    [Project1].[NobleChamico] AS [NobleChamico], 
-    [Project1].[NobleChamico2] AS [NobleChamico2], 
-    [Project1].[NobleRevolcado] AS [NobleRevolcado], 
-    [Project1].[NobleObjetables] AS [NobleObjetables], 
-    [Project1].[NobleAmohosados] AS [NobleAmohosados], 
-    [Project1].[NobleHectolitrico] AS [NobleHectolitrico], 
-    [Project1].[NobleCarbon] AS [NobleCarbon], 
-    [Project1].[NoblePanzaBlanca] AS [NoblePanzaBlanca], 
-    [Project1].[NoblePicados] AS [NoblePicados], 
-    [Project1].[NobleMGrasa] AS [NobleMGrasa], 
-    [Project1].[NobleAcidezGrasa] AS [NobleAcidezGrasa], 
-    [Project1].[NobleVerdes] AS [NobleVerdes], 
-    [Project1].[NobleGrado] AS [NobleGrado], 
-    [Project1].[NobleConforme] AS [NobleConforme], 
-    [Project1].[NobleACamara] AS [NobleACamara], 
-    [Project1].[Cosecha] AS [Cosecha], 
-    [Project1].[HumedadDesnormalizada] AS [HumedadDesnormalizada], 
-    [Project1].[Factor] AS [Factor], 
-    [Project1].[IdFacturaImputada] AS [IdFacturaImputada], 
-    [Project1].[PuntoVenta] AS [PuntoVenta], 
-    [Project1].[SubnumeroVagon] AS [SubnumeroVagon], 
-    [Project1].[TarifaFacturada] AS [TarifaFacturada], 
-    [Project1].[TarifaSubcontratista1] AS [TarifaSubcontratista1], 
-    [Project1].[TarifaSubcontratista2] AS [TarifaSubcontratista2], 
-    [Project1].[FechaArribo] AS [FechaArribo], 
-    [Project1].[Version] AS [Version], 
-    [Project1].[MotivoAnulacion] AS [MotivoAnulacion], 
-    [Project1].[NumeroSubfijo] AS [NumeroSubfijo], 
-    [Project1].[IdEstablecimiento] AS [IdEstablecimiento], 
-    [Project1].[EnumSyngentaDivision] AS [EnumSyngentaDivision], 
-    [Project1].[Corredor2] AS [Corredor2], 
-    [Project1].[IdUsuarioModifico] AS [IdUsuarioModifico], 
-    [Project1].[FechaModificacion] AS [FechaModificacion], 
-    [Project1].[FechaEmision] AS [FechaEmision], 
-    [Project1].[EstaArchivada] AS [EstaArchivada], 
-    [Project1].[ExcluirDeSubcontratistas] AS [ExcluirDeSubcontratistas], 
-    [Project1].[IdTipoMovimiento] AS [IdTipoMovimiento], 
-    [Project1].[IdClienteAFacturarle] AS [IdClienteAFacturarle], 
-    [Project1].[SubnumeroDeFacturacion] AS [SubnumeroDeFacturacion], 
-    [Project1].[AgregaItemDeGastosAdministrativos] AS [AgregaItemDeGastosAdministrativos], 
-    [Project1].[CalidadGranosQuemados] AS [CalidadGranosQuemados], 
-    [Project1].[CalidadGranosQuemadosBonifica_o_Rebaja] AS [CalidadGranosQuemadosBonifica_o_Rebaja], 
-    [Project1].[CalidadTierra] AS [CalidadTierra], 
-    [Project1].[CalidadTierraBonifica_o_Rebaja] AS [CalidadTierraBonifica_o_Rebaja], 
-    [Project1].[CalidadMermaChamico] AS [CalidadMermaChamico], 
-    [Project1].[CalidadMermaChamicoBonifica_o_Rebaja] AS [CalidadMermaChamicoBonifica_o_Rebaja], 
-    [Project1].[CalidadMermaZarandeo] AS [CalidadMermaZarandeo], 
-    [Project1].[CalidadMermaZarandeoBonifica_o_Rebaja] AS [CalidadMermaZarandeoBonifica_o_Rebaja], 
-    [Project1].[FueraDeEstandar] AS [FueraDeEstandar], 
-    [Project1].[CalidadPuntaSombreada] AS [CalidadPuntaSombreada], 
-    [Project1].[CobraAcarreo] AS [CobraAcarreo], 
-    [Project1].[LiquidaViaje] AS [LiquidaViaje], 
-    [Project1].[IdClienteAuxiliar] AS [IdClienteAuxiliar], 
-    [Project1].[CalidadDescuentoFinal] AS [CalidadDescuentoFinal], 
-    [Project1].[PathImagen] AS [PathImagen], 
-    [Project1].[PathImagen2] AS [PathImagen2], 
-    [Project1].[AgrupadorDeTandaPeriodos] AS [AgrupadorDeTandaPeriodos], 
-    [Project1].[ClaveEncriptada] AS [ClaveEncriptada], 
-    [Project1].[NumeroCartaEnTextoParaBusqueda] AS [NumeroCartaEnTextoParaBusqueda], 
-    [Project1].[IdClienteEntregador] AS [IdClienteEntregador], 
-    [Project1].[IdDetalleFactura] AS [IdDetalleFactura], 
-    [Project1].[SojaSustentableCodCondicion] AS [SojaSustentableCodCondicion], 
-    [Project1].[SojaSustentableCondicion] AS [SojaSustentableCondicion], 
-    [Project1].[SojaSustentableNroEstablecimientoDeProduccion] AS [SojaSustentableNroEstablecimientoDeProduccion], 
-    [Project1].[IdClientePagadorFlete] AS [IdClientePagadorFlete], 
-    [Project1].[SubnumeroVagonEnTextoParaBusqueda] AS [SubnumeroVagonEnTextoParaBusqueda], 
-    [Project1].[IdCorredor2] AS [IdCorredor2], 
-    [Project1].[Acopio1] AS [Acopio1], 
-    [Project1].[Acopio2] AS [Acopio2], 
-    [Project1].[Acopio3] AS [Acopio3], 
-    [Project1].[Acopio4] AS [Acopio4], 
-    [Project1].[Acopio5] AS [Acopio5], 
-    [Project1].[Acopio6] AS [Acopio6], 
-    [Project1].[AcopioFacturarleA] AS [AcopioFacturarleA], 
-    [Project1].[CalidadGranosDanadosRebaja] AS [CalidadGranosDanadosRebaja], 
-    [Project1].[CalidadGranosExtranosRebaja] AS [CalidadGranosExtranosRebaja], 
-    [Project1].[NumeroCompleto] AS [NumeroCompleto], 
-    [Project1].[MinutosModifico] AS [MinutosModifico], 
-    [Project1].[EspecieONCAA] AS [EspecieONCAA], 
-    [Project1].[CodigoSAJPYA] AS [CodigoSAJPYA], 
-    [Project1].[txtCodigoZeni] AS [txtCodigoZeni], 
-    [Project1].[TitularDesc] AS [TitularDesc], 
-    [Project1].[TitularCUIT] AS [TitularCUIT], 
-    [Project1].[IntermediarioDesc] AS [IntermediarioDesc], 
-    [Project1].[IntermediarioCUIT] AS [IntermediarioCUIT], 
-    [Project1].[RComercialDesc] AS [RComercialDesc], 
-    [Project1].[RComercialCUIT] AS [RComercialCUIT], 
-    [Project1].[CorredorDesc] AS [CorredorDesc], 
-    [Project1].[CorredorCUIT] AS [CorredorCUIT], 
-    [Project1].[DestinatarioDesc] AS [DestinatarioDesc], 
-    [Project1].[EntregadorDesc] AS [EntregadorDesc], 
-    [Project1].[DestinatarioCUIT] AS [DestinatarioCUIT], 
-    [Project1].[ClienteAuxiliarDesc] AS [ClienteAuxiliarDesc], 
-    [Project1].[ClienteAuxiliarCUIT] AS [ClienteAuxiliarCUIT], 
-    [Project1].[Subcontr1Desc] AS [Subcontr1Desc], 
-    [Project1].[Subcontr2Desc] AS [Subcontr2Desc], 
-    [Project1].[Producto] AS [Producto], 
-    [Project1].[TransportistaCUIT] AS [TransportistaCUIT], 
-    [Project1].[TransportistaDesc] AS [TransportistaDesc], 
-    [Project1].[ChoferCUIT] AS [ChoferCUIT], 
-    [Project1].[ChoferDesc] AS [ChoferDesc], 
-    [Project1].[ProcedenciaDesc] AS [ProcedenciaDesc], 
-    [Project1].[ProcedenciaCodigoPostal] AS [ProcedenciaCodigoPostal], 
-    [Project1].[ProcedenciaCodigoONCAA] AS [ProcedenciaCodigoONCAA], 
-    [Project1].[ProcedenciaProvinciaDesc] AS [ProcedenciaProvinciaDesc], 
-    [Project1].[DestinoDesc] AS [DestinoDesc], 
-    [Project1].[DestinoCodigoPostal] AS [DestinoCodigoPostal], 
-    [Project1].[DestinoCodigoONCAA] AS [DestinoCodigoONCAA], 
-    [Project1].[Mes] AS [Mes], 
-    [Project1].[Ano] AS [Ano], 
-    [Project1].[Factura] AS [Factura], 
-    [Project1].[FechaFactura] AS [FechaFactura], 
-    [Project1].[ClienteFacturado] AS [ClienteFacturado], 
-    [Project1].[ClienteFacturadoCUIT] AS [ClienteFacturadoCUIT], 
-    [Project1].[CalidadDesc] AS [CalidadDesc], 
-    [Project1].[UsuarioIngreso] AS [UsuarioIngreso], 
-    [Project1].[EstablecimientoDesc] AS [EstablecimientoDesc], 
-    [Project1].[ClientePagadorFleteDesc] AS [ClientePagadorFleteDesc], 
-    [Project1].[ProcedenciaProvinciaPartido] AS [ProcedenciaProvinciaPartido], 
-    [Project1].[ProcedenciaPartidoNormalizadaCodigo] AS [ProcedenciaPartidoNormalizadaCodigo], 
-    [Project1].[DestinoProvinciaDesc] AS [DestinoProvinciaDesc], 
-    [Project1].[ProcedenciaPartidoNormalizada] AS [ProcedenciaPartidoNormalizada], 
-    [Project1].[CorredorDesc2] AS [CorredorDesc2], 
-    [Project1].[CorredorCUIT2] AS [CorredorCUIT2], 
-    [Project1].[EntregadorCUIT] AS [EntregadorCUIT], 
-    [Project1].[CodigoAFIP] AS [CodigoAFIP], 
-    [Project1].[CalidadGranosExtranosMerma] AS [CalidadGranosExtranosMerma], 
-    [Project1].[CalidadQuebradosMerma] AS [CalidadQuebradosMerma], 
-    [Project1].[CalidadDanadosMerma] AS [CalidadDanadosMerma], 
-    [Project1].[CalidadChamicoMerma] AS [CalidadChamicoMerma], 
-    [Project1].[CalidadRevolcadosMerma] AS [CalidadRevolcadosMerma], 
-    [Project1].[CalidadObjetablesMerma] AS [CalidadObjetablesMerma], 
-    [Project1].[CalidadAmohosadosMerma] AS [CalidadAmohosadosMerma], 
-    [Project1].[CalidadPuntaSombreadaMerma] AS [CalidadPuntaSombreadaMerma], 
-    [Project1].[CalidadHectolitricoMerma] AS [CalidadHectolitricoMerma], 
-    [Project1].[CalidadCarbonMerma] AS [CalidadCarbonMerma], 
-    [Project1].[CalidadPanzaBlancaMerma] AS [CalidadPanzaBlancaMerma], 
-    [Project1].[CalidadPicadosMerma] AS [CalidadPicadosMerma], 
-    [Project1].[CalidadVerdesMerma] AS [CalidadVerdesMerma], 
-    [Project1].[CalidadQuemadosMerma] AS [CalidadQuemadosMerma], 
-    [Project1].[CalidadTierraMerma] AS [CalidadTierraMerma], 
-    [Project1].[CalidadZarandeoMerma] AS [CalidadZarandeoMerma], 
-    [Project1].[CalidadDescuentoFinalMerma] AS [CalidadDescuentoFinalMerma], 
-    [Project1].[CalidadHumedadMerma] AS [CalidadHumedadMerma], 
-    [Project1].[CalidadGastosFumigacionMerma] AS [CalidadGastosFumigacionMerma], 
-    [Project1].[CalidadQuebradosRebaja] AS [CalidadQuebradosRebaja], 
-    [Project1].[CalidadChamicoRebaja] AS [CalidadChamicoRebaja], 
-    [Project1].[CalidadRevolcadosRebaja] AS [CalidadRevolcadosRebaja], 
-    [Project1].[CalidadObjetablesRebaja] AS [CalidadObjetablesRebaja], 
-    [Project1].[CalidadAmohosadosRebaja] AS [CalidadAmohosadosRebaja], 
-    [Project1].[CalidadPuntaSombreadaRebaja] AS [CalidadPuntaSombreadaRebaja], 
-    [Project1].[CalidadHectolitricoRebaja] AS [CalidadHectolitricoRebaja], 
-    [Project1].[CalidadCarbonRebaja] AS [CalidadCarbonRebaja], 
-    [Project1].[CalidadPanzaBlancaRebaja] AS [CalidadPanzaBlancaRebaja], 
-    [Project1].[CalidadPicadosRebaja] AS [CalidadPicadosRebaja], 
-    [Project1].[CalidadVerdesRebaja] AS [CalidadVerdesRebaja], 
-    [Project1].[CalidadQuemadosRebaja] AS [CalidadQuemadosRebaja], 
-    [Project1].[CalidadTierraRebaja] AS [CalidadTierraRebaja], 
-    [Project1].[CalidadZarandeoRebaja] AS [CalidadZarandeoRebaja], 
-    [Project1].[CalidadDescuentoFinalRebaja] AS [CalidadDescuentoFinalRebaja], 
-    [Project1].[CalidadHumedadRebaja] AS [CalidadHumedadRebaja], 
-    [Project1].[CalidadGastosFumigacionRebaja] AS [CalidadGastosFumigacionRebaja], 
-    [Project1].[CalidadHumedadResultado] AS [CalidadHumedadResultado], 
-    [Project1].[CalidadGastosFumigacionResultado] AS [CalidadGastosFumigacionResultado], 
-    [Project1].[ConDuplicados] AS [ConDuplicados], 
-    [Project1].[TieneRecibidorOficial] AS [TieneRecibidorOficial], 
-    [Project1].[EstadoRecibidor] AS [EstadoRecibidor], 
-    [Project1].[ClienteAcondicionador] AS [ClienteAcondicionador], 
-    [Project1].[MotivoRechazo] AS [MotivoRechazo], 
-    [Project1].[FacturarA_Manual] AS [FacturarA_Manual], 
-    [Project1].[EntregaSAP] AS [EntregaSAP], 
-    [Project1].[DestinoCUIT] AS [DestinoCUIT], 
-    [Project1].[EstablecimientoCodigo] AS [EstablecimientoCodigo], 
-    [Project1].[EstablecimientoCUIT] AS [EstablecimientoCUIT], 
-    [Project1].[EstablecimientoNombre] AS [EstablecimientoNombre], 
-    [Project1].[DestinoLocalidadAFIP] AS [DestinoLocalidadAFIP], 
-    [Project1].[Situacion] AS [Situacion], 
-    [Project1].[SituacionAntesDeEditarManualmente] AS [SituacionAntesDeEditarManualmente], 
-    [Project1].[FechaActualizacionAutomatica] AS [FechaActualizacionAutomatica], 
-    [Project1].[FechaAutorizacion] AS [FechaAutorizacion], 
-    [Project1].[ObservacionesSituacion] AS [ObservacionesSituacion]
-    FROM ( SELECT [Project1].[IdCartaDePorte] AS [IdCartaDePorte], [Project1].[NumeroCartaDePorte] AS [NumeroCartaDePorte], [Project1].[IdUsuarioIngreso] AS [IdUsuarioIngreso], [Project1].[FechaIngreso] AS [FechaIngreso], [Project1].[Anulada] AS [Anulada], [Project1].[IdUsuarioAnulo] AS [IdUsuarioAnulo], [Project1].[FechaAnulacion] AS [FechaAnulacion], [Project1].[Observaciones] AS [Observaciones], [Project1].[FechaTimeStamp] AS [FechaTimeStamp], [Project1].[Vendedor] AS [Vendedor], [Project1].[CuentaOrden1] AS [CuentaOrden1], [Project1].[CuentaOrden2] AS [CuentaOrden2], [Project1].[Corredor] AS [Corredor], [Project1].[Entregador] AS [Entregador], [Project1].[Procedencia] AS [Procedencia], [Project1].[Patente] AS [Patente], [Project1].[IdArticulo] AS [IdArticulo], [Project1].[IdStock] AS [IdStock], [Project1].[Partida] AS [Partida], [Project1].[IdUnidad] AS [IdUnidad], [Project1].[IdUbicacion] AS [IdUbicacion], [Project1].[Cantidad] AS [Cantidad], [Project1].[Cupo] AS [Cupo], [Project1].[NetoProc] AS [NetoProc], [Project1].[Calidad] AS [Calidad], [Project1].[BrutoPto] AS [BrutoPto], [Project1].[TaraPto] AS [TaraPto], [Project1].[NetoPto] AS [NetoPto], [Project1].[Acoplado] AS [Acoplado], [Project1].[Humedad] AS [Humedad], [Project1].[Merma] AS [Merma], [Project1].[NetoFinal] AS [NetoFinal], [Project1].[FechaDeCarga] AS [FechaDeCarga], [Project1].[FechaVencimiento] AS [FechaVencimiento], [Project1].[CEE] AS [CEE], [Project1].[IdTransportista] AS [IdTransportista], [Project1].[TransportistaCUITdesnormalizado] AS [TransportistaCUITdesnormalizado], [Project1].[IdChofer] AS [IdChofer], [Project1].[ChoferCUITdesnormalizado] AS [ChoferCUITdesnormalizado], [Project1].[CTG] AS [CTG], [Project1].[Contrato] AS [Contrato], [Project1].[Destino] AS [Destino], [Project1].[Subcontr1] AS [Subcontr1], [Project1].[Subcontr2] AS [Subcontr2], [Project1].[Contrato1] AS [Contrato1], [Project1].[contrato2] AS [contrato2], [Project1].[KmARecorrer] AS [KmARecorrer], [Project1].[Tarifa] AS [Tarifa], [Project1].[FechaDescarga] AS [FechaDescarga], [Project1].[Hora] AS [Hora], [Project1].[NRecibo] AS [NRecibo], [Project1].[CalidadDe] AS [CalidadDe], [Project1].[TaraFinal] AS [TaraFinal], [Project1].[BrutoFinal] AS [BrutoFinal], [Project1].[Fumigada] AS [Fumigada], [Project1].[Secada] AS [Secada], [Project1].[Exporta] AS [Exporta], [Project1].[NobleExtranos] AS [NobleExtranos], [Project1].[NobleNegros] AS [NobleNegros], [Project1].[NobleQuebrados] AS [NobleQuebrados], [Project1].[NobleDaniados] AS [NobleDaniados], [Project1].[NobleChamico] AS [NobleChamico], [Project1].[NobleChamico2] AS [NobleChamico2], [Project1].[NobleRevolcado] AS [NobleRevolcado], [Project1].[NobleObjetables] AS [NobleObjetables], [Project1].[NobleAmohosados] AS [NobleAmohosados], [Project1].[NobleHectolitrico] AS [NobleHectolitrico], [Project1].[NobleCarbon] AS [NobleCarbon], [Project1].[NoblePanzaBlanca] AS [NoblePanzaBlanca], [Project1].[NoblePicados] AS [NoblePicados], [Project1].[NobleMGrasa] AS [NobleMGrasa], [Project1].[NobleAcidezGrasa] AS [NobleAcidezGrasa], [Project1].[NobleVerdes] AS [NobleVerdes], [Project1].[NobleGrado] AS [NobleGrado], [Project1].[NobleConforme] AS [NobleConforme], [Project1].[NobleACamara] AS [NobleACamara], [Project1].[Cosecha] AS [Cosecha], [Project1].[HumedadDesnormalizada] AS [HumedadDesnormalizada], [Project1].[Factor] AS [Factor], [Project1].[IdFacturaImputada] AS [IdFacturaImputada], [Project1].[PuntoVenta] AS [PuntoVenta], [Project1].[SubnumeroVagon] AS [SubnumeroVagon], [Project1].[TarifaFacturada] AS [TarifaFacturada], [Project1].[TarifaSubcontratista1] AS [TarifaSubcontratista1], [Project1].[TarifaSubcontratista2] AS [TarifaSubcontratista2], [Project1].[FechaArribo] AS [FechaArribo], [Project1].[Version] AS [Version], [Project1].[MotivoAnulacion] AS [MotivoAnulacion], [Project1].[NumeroSubfijo] AS [NumeroSubfijo], [Project1].[IdEstablecimiento] AS [IdEstablecimiento], [Project1].[EnumSyngentaDivision] AS [EnumSyngentaDivision], [Project1].[Corredor2] AS [Corredor2], [Project1].[IdUsuarioModifico] AS [IdUsuarioModifico], [Project1].[FechaModificacion] AS [FechaModificacion], [Project1].[FechaEmision] AS [FechaEmision], [Project1].[EstaArchivada] AS [EstaArchivada], [Project1].[ExcluirDeSubcontratistas] AS [ExcluirDeSubcontratistas], [Project1].[IdTipoMovimiento] AS [IdTipoMovimiento], [Project1].[IdClienteAFacturarle] AS [IdClienteAFacturarle], [Project1].[SubnumeroDeFacturacion] AS [SubnumeroDeFacturacion], [Project1].[AgregaItemDeGastosAdministrativos] AS [AgregaItemDeGastosAdministrativos], [Project1].[CalidadGranosQuemados] AS [CalidadGranosQuemados], [Project1].[CalidadGranosQuemadosBonifica_o_Rebaja] AS [CalidadGranosQuemadosBonifica_o_Rebaja], [Project1].[CalidadTierra] AS [CalidadTierra], [Project1].[CalidadTierraBonifica_o_Rebaja] AS [CalidadTierraBonifica_o_Rebaja], [Project1].[CalidadMermaChamico] AS [CalidadMermaChamico], [Project1].[CalidadMermaChamicoBonifica_o_Rebaja] AS [CalidadMermaChamicoBonifica_o_Rebaja], [Project1].[CalidadMermaZarandeo] AS [CalidadMermaZarandeo], [Project1].[CalidadMermaZarandeoBonifica_o_Rebaja] AS [CalidadMermaZarandeoBonifica_o_Rebaja], [Project1].[FueraDeEstandar] AS [FueraDeEstandar], [Project1].[CalidadPuntaSombreada] AS [CalidadPuntaSombreada], [Project1].[CobraAcarreo] AS [CobraAcarreo], [Project1].[LiquidaViaje] AS [LiquidaViaje], [Project1].[IdClienteAuxiliar] AS [IdClienteAuxiliar], [Project1].[CalidadDescuentoFinal] AS [CalidadDescuentoFinal], [Project1].[PathImagen] AS [PathImagen], [Project1].[PathImagen2] AS [PathImagen2], [Project1].[AgrupadorDeTandaPeriodos] AS [AgrupadorDeTandaPeriodos], [Project1].[ClaveEncriptada] AS [ClaveEncriptada], [Project1].[NumeroCartaEnTextoParaBusqueda] AS [NumeroCartaEnTextoParaBusqueda], [Project1].[IdClienteEntregador] AS [IdClienteEntregador], [Project1].[IdDetalleFactura] AS [IdDetalleFactura], [Project1].[SojaSustentableCodCondicion] AS [SojaSustentableCodCondicion], [Project1].[SojaSustentableCondicion] AS [SojaSustentableCondicion], [Project1].[SojaSustentableNroEstablecimientoDeProduccion] AS [SojaSustentableNroEstablecimientoDeProduccion], [Project1].[IdClientePagadorFlete] AS [IdClientePagadorFlete], [Project1].[IdCorredor2] AS [IdCorredor2], [Project1].[Acopio1] AS [Acopio1], [Project1].[Acopio2] AS [Acopio2], [Project1].[Acopio3] AS [Acopio3], [Project1].[Acopio4] AS [Acopio4], [Project1].[Acopio5] AS [Acopio5], [Project1].[SubnumeroVagonEnTextoParaBusqueda] AS [SubnumeroVagonEnTextoParaBusqueda], [Project1].[AcopioFacturarleA] AS [AcopioFacturarleA], [Project1].[CalidadGranosDanadosRebaja] AS [CalidadGranosDanadosRebaja], [Project1].[CalidadGranosExtranosRebaja] AS [CalidadGranosExtranosRebaja], [Project1].[CalidadGranosExtranosMerma] AS [CalidadGranosExtranosMerma], [Project1].[CalidadQuebradosMerma] AS [CalidadQuebradosMerma], [Project1].[CalidadDanadosMerma] AS [CalidadDanadosMerma], [Project1].[CalidadChamicoMerma] AS [CalidadChamicoMerma], [Project1].[CalidadRevolcadosMerma] AS [CalidadRevolcadosMerma], [Project1].[CalidadObjetablesMerma] AS [CalidadObjetablesMerma], [Project1].[CalidadAmohosadosMerma] AS [CalidadAmohosadosMerma], [Project1].[CalidadPuntaSombreadaMerma] AS [CalidadPuntaSombreadaMerma], [Project1].[CalidadHectolitricoMerma] AS [CalidadHectolitricoMerma], [Project1].[CalidadCarbonMerma] AS [CalidadCarbonMerma], [Project1].[CalidadPanzaBlancaMerma] AS [CalidadPanzaBlancaMerma], [Project1].[CalidadPicadosMerma] AS [CalidadPicadosMerma], [Project1].[CalidadVerdesMerma] AS [CalidadVerdesMerma], [Project1].[CalidadQuemadosMerma] AS [CalidadQuemadosMerma], [Project1].[CalidadTierraMerma] AS [CalidadTierraMerma], [Project1].[CalidadZarandeoMerma] AS [CalidadZarandeoMerma], [Project1].[CalidadDescuentoFinalMerma] AS [CalidadDescuentoFinalMerma], [Project1].[CalidadHumedadMerma] AS [CalidadHumedadMerma], [Project1].[CalidadGastosFumigacionMerma] AS [CalidadGastosFumigacionMerma], [Project1].[CalidadQuebradosRebaja] AS [CalidadQuebradosRebaja], [Project1].[CalidadChamicoRebaja] AS [CalidadChamicoRebaja], [Project1].[CalidadRevolcadosRebaja] AS [CalidadRevolcadosRebaja], [Project1].[CalidadObjetablesRebaja] AS [CalidadObjetablesRebaja], [Project1].[CalidadAmohosadosRebaja] AS [CalidadAmohosadosRebaja], [Project1].[CalidadPuntaSombreadaRebaja] AS [CalidadPuntaSombreadaRebaja], [Project1].[CalidadHectolitricoRebaja] AS [CalidadHectolitricoRebaja], [Project1].[CalidadCarbonRebaja] AS [CalidadCarbonRebaja], [Project1].[CalidadPanzaBlancaRebaja] AS [CalidadPanzaBlancaRebaja], [Project1].[CalidadPicadosRebaja] AS [CalidadPicadosRebaja], [Project1].[CalidadVerdesRebaja] AS [CalidadVerdesRebaja], [Project1].[CalidadQuemadosRebaja] AS [CalidadQuemadosRebaja], [Project1].[CalidadTierraRebaja] AS [CalidadTierraRebaja], [Project1].[CalidadZarandeoRebaja] AS [CalidadZarandeoRebaja], [Project1].[CalidadDescuentoFinalRebaja] AS [CalidadDescuentoFinalRebaja], [Project1].[CalidadHumedadRebaja] AS [CalidadHumedadRebaja], [Project1].[CalidadGastosFumigacionRebaja] AS [CalidadGastosFumigacionRebaja], [Project1].[CalidadHumedadResultado] AS [CalidadHumedadResultado], [Project1].[CalidadGastosFumigacionResultado] AS [CalidadGastosFumigacionResultado], [Project1].[Acopio6] AS [Acopio6], [Project1].[ConDuplicados] AS [ConDuplicados], [Project1].[TieneRecibidorOficial] AS [TieneRecibidorOficial], [Project1].[EstadoRecibidor] AS [EstadoRecibidor], [Project1].[ClienteAcondicionador] AS [ClienteAcondicionador], [Project1].[MotivoRechazo] AS [MotivoRechazo], [Project1].[FacturarA_Manual] AS [FacturarA_Manual], [Project1].[EntregaSAP] AS [EntregaSAP], [Project1].[Situacion] AS [Situacion], [Project1].[SituacionAntesDeEditarManualmente] AS [SituacionAntesDeEditarManualmente], [Project1].[FechaActualizacionAutomatica] AS [FechaActualizacionAutomatica], [Project1].[FechaAutorizacion] AS [FechaAutorizacion], [Project1].[ObservacionesSituacion] AS [ObservacionesSituacion], [Project1].[NumeroCompleto] AS [NumeroCompleto], [Project1].[MinutosModifico] AS [MinutosModifico], [Project1].[EspecieONCAA] AS [EspecieONCAA], [Project1].[CodigoSAJPYA] AS [CodigoSAJPYA], [Project1].[txtCodigoZeni] AS [txtCodigoZeni], [Project1].[TitularDesc] AS [TitularDesc], [Project1].[TitularCUIT] AS [TitularCUIT], [Project1].[IntermediarioDesc] AS [IntermediarioDesc], [Project1].[IntermediarioCUIT] AS [IntermediarioCUIT], [Project1].[RComercialDesc] AS [RComercialDesc], [Project1].[RComercialCUIT] AS [RComercialCUIT], [Project1].[CorredorDesc] AS [CorredorDesc], [Project1].[CorredorCUIT] AS [CorredorCUIT], [Project1].[DestinatarioDesc] AS [DestinatarioDesc], [Project1].[EntregadorDesc] AS [EntregadorDesc], [Project1].[DestinatarioCUIT] AS [DestinatarioCUIT], [Project1].[ClienteAuxiliarDesc] AS [ClienteAuxiliarDesc], [Project1].[ClienteAuxiliarCUIT] AS [ClienteAuxiliarCUIT], [Project1].[Subcontr1Desc] AS [Subcontr1Desc], [Project1].[Subcontr2Desc] AS [Subcontr2Desc], [Project1].[Producto] AS [Producto], [Project1].[TransportistaCUIT] AS [TransportistaCUIT], [Project1].[TransportistaDesc] AS [TransportistaDesc], [Project1].[ChoferCUIT] AS [ChoferCUIT], [Project1].[ChoferDesc] AS [ChoferDesc], [Project1].[ProcedenciaDesc] AS [ProcedenciaDesc], [Project1].[ProcedenciaCodigoPostal] AS [ProcedenciaCodigoPostal], [Project1].[ProcedenciaCodigoONCAA] AS [ProcedenciaCodigoONCAA], [Project1].[ProcedenciaProvinciaDesc] AS [ProcedenciaProvinciaDesc], [Project1].[DestinoDesc] AS [DestinoDesc], [Project1].[DestinoCodigoPostal] AS [DestinoCodigoPostal], [Project1].[DestinoCodigoONCAA] AS [DestinoCodigoONCAA], [Project1].[DestinoCUIT] AS [DestinoCUIT], [Project1].[DestinoLocalidadAFIP] AS [DestinoLocalidadAFIP], [Project1].[Mes] AS [Mes], [Project1].[Ano] AS [Ano], [Project1].[Factura] AS [Factura], [Project1].[FechaFactura] AS [FechaFactura], [Project1].[ClienteFacturado] AS [ClienteFacturado], [Project1].[ClienteFacturadoCUIT] AS [ClienteFacturadoCUIT], [Project1].[CalidadDesc] AS [CalidadDesc], [Project1].[UsuarioIngreso] AS [UsuarioIngreso], [Project1].[EstablecimientoDesc] AS [EstablecimientoDesc], [Project1].[EstablecimientoCodigo] AS [EstablecimientoCodigo], [Project1].[EstablecimientoCUIT] AS [EstablecimientoCUIT], [Project1].[EstablecimientoNombre] AS [EstablecimientoNombre], [Project1].[ClientePagadorFleteDesc] AS [ClientePagadorFleteDesc], [Project1].[ProcedenciaProvinciaPartido] AS [ProcedenciaProvinciaPartido], [Project1].[ProcedenciaPartidoNormalizadaCodigo] AS [ProcedenciaPartidoNormalizadaCodigo], [Project1].[DestinoProvinciaDesc] AS [DestinoProvinciaDesc], [Project1].[ProcedenciaPartidoNormalizada] AS [ProcedenciaPartidoNormalizada], [Project1].[CorredorDesc2] AS [CorredorDesc2], [Project1].[CorredorCUIT2] AS [CorredorCUIT2], [Project1].[EntregadorCUIT] AS [EntregadorCUIT], [Project1].[CodigoAFIP] AS [CodigoAFIP], [Project1].[C1] AS [C1], row_number() OVER (ORDER BY [Project1].[IdCartaDePorte] DESC) AS [row_number]
-        FROM ( SELECT 
-            [Extent1].[IdCartaDePorte] AS [IdCartaDePorte], 
-            [Extent1].[NumeroCartaDePorte] AS [NumeroCartaDePorte], 
-            [Extent1].[IdUsuarioIngreso] AS [IdUsuarioIngreso], 
-            [Extent1].[FechaIngreso] AS [FechaIngreso], 
-            [Extent1].[Anulada] AS [Anulada], 
-            [Extent1].[IdUsuarioAnulo] AS [IdUsuarioAnulo], 
-            [Extent1].[FechaAnulacion] AS [FechaAnulacion], 
-            [Extent1].[Observaciones] AS [Observaciones], 
-            [Extent1].[FechaTimeStamp] AS [FechaTimeStamp], 
-            [Extent1].[Vendedor] AS [Vendedor], 
-            [Extent1].[CuentaOrden1] AS [CuentaOrden1], 
-            [Extent1].[CuentaOrden2] AS [CuentaOrden2], 
-            [Extent1].[Corredor] AS [Corredor], 
-            [Extent1].[Entregador] AS [Entregador], 
-            [Extent1].[Procedencia] AS [Procedencia], 
-            [Extent1].[Patente] AS [Patente], 
-            [Extent1].[IdArticulo] AS [IdArticulo], 
-            [Extent1].[IdStock] AS [IdStock], 
-            [Extent1].[Partida] AS [Partida], 
-            [Extent1].[IdUnidad] AS [IdUnidad], 
-            [Extent1].[IdUbicacion] AS [IdUbicacion], 
-            [Extent1].[Cantidad] AS [Cantidad], 
-            [Extent1].[Cupo] AS [Cupo], 
-            [Extent1].[NetoProc] AS [NetoProc], 
-            [Extent1].[Calidad] AS [Calidad], 
-            [Extent1].[BrutoPto] AS [BrutoPto], 
-            [Extent1].[TaraPto] AS [TaraPto], 
-            [Extent1].[NetoPto] AS [NetoPto], 
-            [Extent1].[Acoplado] AS [Acoplado], 
-            [Extent1].[Humedad] AS [Humedad], 
-            [Extent1].[Merma] AS [Merma], 
-            [Extent1].[NetoFinal] AS [NetoFinal], 
-            [Extent1].[FechaDeCarga] AS [FechaDeCarga], 
-            [Extent1].[FechaVencimiento] AS [FechaVencimiento], 
-            [Extent1].[CEE] AS [CEE], 
-            [Extent1].[IdTransportista] AS [IdTransportista], 
-            [Extent1].[TransportistaCUITdesnormalizado] AS [TransportistaCUITdesnormalizado], 
-            [Extent1].[IdChofer] AS [IdChofer], 
-            [Extent1].[ChoferCUITdesnormalizado] AS [ChoferCUITdesnormalizado], 
-            [Extent1].[CTG] AS [CTG], 
-            [Extent1].[Contrato] AS [Contrato], 
-            [Extent1].[Destino] AS [Destino], 
-            [Extent1].[Subcontr1] AS [Subcontr1], 
-            [Extent1].[Subcontr2] AS [Subcontr2], 
-            [Extent1].[Contrato1] AS [Contrato1], 
-            [Extent1].[contrato2] AS [contrato2], 
-            [Extent1].[KmARecorrer] AS [KmARecorrer], 
-            [Extent1].[Tarifa] AS [Tarifa], 
-            [Extent1].[FechaDescarga] AS [FechaDescarga], 
-            [Extent1].[Hora] AS [Hora], 
-            [Extent1].[NRecibo] AS [NRecibo], 
-            [Extent1].[CalidadDe] AS [CalidadDe], 
-            [Extent1].[TaraFinal] AS [TaraFinal], 
-            [Extent1].[BrutoFinal] AS [BrutoFinal], 
-            [Extent1].[Fumigada] AS [Fumigada], 
-            [Extent1].[Secada] AS [Secada], 
-            [Extent1].[Exporta] AS [Exporta], 
-            [Extent1].[NobleExtranos] AS [NobleExtranos], 
-            [Extent1].[NobleNegros] AS [NobleNegros], 
-            [Extent1].[NobleQuebrados] AS [NobleQuebrados], 
-            [Extent1].[NobleDaniados] AS [NobleDaniados], 
-            [Extent1].[NobleChamico] AS [NobleChamico], 
-            [Extent1].[NobleChamico2] AS [NobleChamico2], 
-            [Extent1].[NobleRevolcado] AS [NobleRevolcado], 
-            [Extent1].[NobleObjetables] AS [NobleObjetables], 
-            [Extent1].[NobleAmohosados] AS [NobleAmohosados], 
-            [Extent1].[NobleHectolitrico] AS [NobleHectolitrico], 
-            [Extent1].[NobleCarbon] AS [NobleCarbon], 
-            [Extent1].[NoblePanzaBlanca] AS [NoblePanzaBlanca], 
-            [Extent1].[NoblePicados] AS [NoblePicados], 
-            [Extent1].[NobleMGrasa] AS [NobleMGrasa], 
-            [Extent1].[NobleAcidezGrasa] AS [NobleAcidezGrasa], 
-            [Extent1].[NobleVerdes] AS [NobleVerdes], 
-            [Extent1].[NobleGrado] AS [NobleGrado], 
-            [Extent1].[NobleConforme] AS [NobleConforme], 
-            [Extent1].[NobleACamara] AS [NobleACamara], 
-            [Extent1].[Cosecha] AS [Cosecha], 
-            [Extent1].[HumedadDesnormalizada] AS [HumedadDesnormalizada], 
-            [Extent1].[Factor] AS [Factor], 
-            [Extent1].[IdFacturaImputada] AS [IdFacturaImputada], 
-            [Extent1].[PuntoVenta] AS [PuntoVenta], 
-            [Extent1].[SubnumeroVagon] AS [SubnumeroVagon], 
-            [Extent1].[TarifaFacturada] AS [TarifaFacturada], 
-            [Extent1].[TarifaSubcontratista1] AS [TarifaSubcontratista1], 
-            [Extent1].[TarifaSubcontratista2] AS [TarifaSubcontratista2], 
-            [Extent1].[FechaArribo] AS [FechaArribo], 
-            [Extent1].[Version] AS [Version], 
-            [Extent1].[MotivoAnulacion] AS [MotivoAnulacion], 
-            [Extent1].[NumeroSubfijo] AS [NumeroSubfijo], 
-            [Extent1].[IdEstablecimiento] AS [IdEstablecimiento], 
-            [Extent1].[EnumSyngentaDivision] AS [EnumSyngentaDivision], 
-            [Extent1].[Corredor2] AS [Corredor2], 
-            [Extent1].[IdUsuarioModifico] AS [IdUsuarioModifico], 
-            [Extent1].[FechaModificacion] AS [FechaModificacion], 
-            [Extent1].[FechaEmision] AS [FechaEmision], 
-            [Extent1].[EstaArchivada] AS [EstaArchivada], 
-            [Extent1].[ExcluirDeSubcontratistas] AS [ExcluirDeSubcontratistas], 
-            [Extent1].[IdTipoMovimiento] AS [IdTipoMovimiento], 
-            [Extent1].[IdClienteAFacturarle] AS [IdClienteAFacturarle], 
-            [Extent1].[SubnumeroDeFacturacion] AS [SubnumeroDeFacturacion], 
-            [Extent1].[AgregaItemDeGastosAdministrativos] AS [AgregaItemDeGastosAdministrativos], 
-            [Extent1].[CalidadGranosQuemados] AS [CalidadGranosQuemados], 
-            [Extent1].[CalidadGranosQuemadosBonifica_o_Rebaja] AS [CalidadGranosQuemadosBonifica_o_Rebaja], 
-            [Extent1].[CalidadTierra] AS [CalidadTierra], 
-            [Extent1].[CalidadTierraBonifica_o_Rebaja] AS [CalidadTierraBonifica_o_Rebaja], 
-            [Extent1].[CalidadMermaChamico] AS [CalidadMermaChamico], 
-            [Extent1].[CalidadMermaChamicoBonifica_o_Rebaja] AS [CalidadMermaChamicoBonifica_o_Rebaja], 
-            [Extent1].[CalidadMermaZarandeo] AS [CalidadMermaZarandeo], 
-            [Extent1].[CalidadMermaZarandeoBonifica_o_Rebaja] AS [CalidadMermaZarandeoBonifica_o_Rebaja], 
-            [Extent1].[FueraDeEstandar] AS [FueraDeEstandar], 
-            [Extent1].[CalidadPuntaSombreada] AS [CalidadPuntaSombreada], 
-            [Extent1].[CobraAcarreo] AS [CobraAcarreo], 
-            [Extent1].[LiquidaViaje] AS [LiquidaViaje], 
-            [Extent1].[IdClienteAuxiliar] AS [IdClienteAuxiliar], 
-            [Extent1].[CalidadDescuentoFinal] AS [CalidadDescuentoFinal], 
-            [Extent1].[PathImagen] AS [PathImagen], 
-            [Extent1].[PathImagen2] AS [PathImagen2], 
-            [Extent1].[AgrupadorDeTandaPeriodos] AS [AgrupadorDeTandaPeriodos], 
-            [Extent1].[ClaveEncriptada] AS [ClaveEncriptada], 
-            [Extent1].[NumeroCartaEnTextoParaBusqueda] AS [NumeroCartaEnTextoParaBusqueda], 
-            [Extent1].[IdClienteEntregador] AS [IdClienteEntregador], 
-            [Extent1].[IdDetalleFactura] AS [IdDetalleFactura], 
-            [Extent1].[SojaSustentableCodCondicion] AS [SojaSustentableCodCondicion], 
-            [Extent1].[SojaSustentableCondicion] AS [SojaSustentableCondicion], 
-            [Extent1].[SojaSustentableNroEstablecimientoDeProduccion] AS [SojaSustentableNroEstablecimientoDeProduccion], 
-            [Extent1].[IdClientePagadorFlete] AS [IdClientePagadorFlete], 
-            [Extent1].[IdCorredor2] AS [IdCorredor2], 
-            [Extent1].[Acopio1] AS [Acopio1], 
-            [Extent1].[Acopio2] AS [Acopio2], 
-            [Extent1].[Acopio3] AS [Acopio3], 
-            [Extent1].[Acopio4] AS [Acopio4], 
-            [Extent1].[Acopio5] AS [Acopio5], 
-            [Extent1].[SubnumeroVagonEnTextoParaBusqueda] AS [SubnumeroVagonEnTextoParaBusqueda], 
-            [Extent1].[AcopioFacturarleA] AS [AcopioFacturarleA], 
-            [Extent1].[CalidadGranosDanadosRebaja] AS [CalidadGranosDanadosRebaja], 
-            [Extent1].[CalidadGranosExtranosRebaja] AS [CalidadGranosExtranosRebaja], 
-            [Extent1].[CalidadGranosExtranosMerma] AS [CalidadGranosExtranosMerma], 
-            [Extent1].[CalidadQuebradosMerma] AS [CalidadQuebradosMerma], 
-            [Extent1].[CalidadDanadosMerma] AS [CalidadDanadosMerma], 
-            [Extent1].[CalidadChamicoMerma] AS [CalidadChamicoMerma], 
-            [Extent1].[CalidadRevolcadosMerma] AS [CalidadRevolcadosMerma], 
-            [Extent1].[CalidadObjetablesMerma] AS [CalidadObjetablesMerma], 
-            [Extent1].[CalidadAmohosadosMerma] AS [CalidadAmohosadosMerma], 
-            [Extent1].[CalidadPuntaSombreadaMerma] AS [CalidadPuntaSombreadaMerma], 
-            [Extent1].[CalidadHectolitricoMerma] AS [CalidadHectolitricoMerma], 
-            [Extent1].[CalidadCarbonMerma] AS [CalidadCarbonMerma], 
-            [Extent1].[CalidadPanzaBlancaMerma] AS [CalidadPanzaBlancaMerma], 
-            [Extent1].[CalidadPicadosMerma] AS [CalidadPicadosMerma], 
-            [Extent1].[CalidadVerdesMerma] AS [CalidadVerdesMerma], 
-            [Extent1].[CalidadQuemadosMerma] AS [CalidadQuemadosMerma], 
-            [Extent1].[CalidadTierraMerma] AS [CalidadTierraMerma], 
-            [Extent1].[CalidadZarandeoMerma] AS [CalidadZarandeoMerma], 
-            [Extent1].[CalidadDescuentoFinalMerma] AS [CalidadDescuentoFinalMerma], 
-            [Extent1].[CalidadHumedadMerma] AS [CalidadHumedadMerma], 
-            [Extent1].[CalidadGastosFumigacionMerma] AS [CalidadGastosFumigacionMerma], 
-            [Extent1].[CalidadQuebradosRebaja] AS [CalidadQuebradosRebaja], 
-            [Extent1].[CalidadChamicoRebaja] AS [CalidadChamicoRebaja], 
-            [Extent1].[CalidadRevolcadosRebaja] AS [CalidadRevolcadosRebaja], 
-            [Extent1].[CalidadObjetablesRebaja] AS [CalidadObjetablesRebaja], 
-            [Extent1].[CalidadAmohosadosRebaja] AS [CalidadAmohosadosRebaja], 
-            [Extent1].[CalidadPuntaSombreadaRebaja] AS [CalidadPuntaSombreadaRebaja], 
-            [Extent1].[CalidadHectolitricoRebaja] AS [CalidadHectolitricoRebaja], 
-            [Extent1].[CalidadCarbonRebaja] AS [CalidadCarbonRebaja], 
-            [Extent1].[CalidadPanzaBlancaRebaja] AS [CalidadPanzaBlancaRebaja], 
-            [Extent1].[CalidadPicadosRebaja] AS [CalidadPicadosRebaja], 
-            [Extent1].[CalidadVerdesRebaja] AS [CalidadVerdesRebaja], 
-            [Extent1].[CalidadQuemadosRebaja] AS [CalidadQuemadosRebaja], 
-            [Extent1].[CalidadTierraRebaja] AS [CalidadTierraRebaja], 
-            [Extent1].[CalidadZarandeoRebaja] AS [CalidadZarandeoRebaja], 
-            [Extent1].[CalidadDescuentoFinalRebaja] AS [CalidadDescuentoFinalRebaja], 
-            [Extent1].[CalidadHumedadRebaja] AS [CalidadHumedadRebaja], 
-            [Extent1].[CalidadGastosFumigacionRebaja] AS [CalidadGastosFumigacionRebaja], 
-            [Extent1].[CalidadHumedadResultado] AS [CalidadHumedadResultado], 
-            [Extent1].[CalidadGastosFumigacionResultado] AS [CalidadGastosFumigacionResultado], 
-            [Extent1].[Acopio6] AS [Acopio6], 
-            [Extent1].[ConDuplicados] AS [ConDuplicados], 
-            [Extent1].[TieneRecibidorOficial] AS [TieneRecibidorOficial], 
-            [Extent1].[EstadoRecibidor] AS [EstadoRecibidor], 
-            [Extent1].[ClienteAcondicionador] AS [ClienteAcondicionador], 
-            [Extent1].[MotivoRechazo] AS [MotivoRechazo], 
-            [Extent1].[FacturarA_Manual] AS [FacturarA_Manual], 
-            [Extent1].[EntregaSAP] AS [EntregaSAP], 
-            [Extent1].[Situacion] AS [Situacion], 
-            [Extent1].[SituacionAntesDeEditarManualmente] AS [SituacionAntesDeEditarManualmente], 
-            [Extent1].[FechaActualizacionAutomatica] AS [FechaActualizacionAutomatica], 
-            [Extent1].[FechaAutorizacion] AS [FechaAutorizacion], 
-            [Extent1].[ObservacionesSituacion] AS [ObservacionesSituacion], 
-            [Extent1].[NumeroCompleto] AS [NumeroCompleto], 
-            [Extent1].[MinutosModifico] AS [MinutosModifico], 
-            [Extent1].[EspecieONCAA] AS [EspecieONCAA], 
-            [Extent1].[CodigoSAJPYA] AS [CodigoSAJPYA], 
-            [Extent1].[txtCodigoZeni] AS [txtCodigoZeni], 
-            [Extent1].[TitularDesc] AS [TitularDesc], 
-            [Extent1].[TitularCUIT] AS [TitularCUIT], 
-            [Extent1].[IntermediarioDesc] AS [IntermediarioDesc], 
-            [Extent1].[IntermediarioCUIT] AS [IntermediarioCUIT], 
-            [Extent1].[RComercialDesc] AS [RComercialDesc], 
-            [Extent1].[RComercialCUIT] AS [RComercialCUIT], 
-            [Extent1].[CorredorDesc] AS [CorredorDesc], 
-            [Extent1].[CorredorCUIT] AS [CorredorCUIT], 
-            [Extent1].[DestinatarioDesc] AS [DestinatarioDesc], 
-            [Extent1].[EntregadorDesc] AS [EntregadorDesc], 
-            [Extent1].[DestinatarioCUIT] AS [DestinatarioCUIT], 
-            [Extent1].[ClienteAuxiliarDesc] AS [ClienteAuxiliarDesc], 
-            [Extent1].[ClienteAuxiliarCUIT] AS [ClienteAuxiliarCUIT], 
-            [Extent1].[Subcontr1Desc] AS [Subcontr1Desc], 
-            [Extent1].[Subcontr2Desc] AS [Subcontr2Desc], 
-            [Extent1].[Producto] AS [Producto], 
-            [Extent1].[TransportistaCUIT] AS [TransportistaCUIT], 
-            [Extent1].[TransportistaDesc] AS [TransportistaDesc], 
-            [Extent1].[ChoferCUIT] AS [ChoferCUIT], 
-            [Extent1].[ChoferDesc] AS [ChoferDesc], 
-            [Extent1].[ProcedenciaDesc] AS [ProcedenciaDesc], 
-            [Extent1].[ProcedenciaCodigoPostal] AS [ProcedenciaCodigoPostal], 
-            [Extent1].[ProcedenciaCodigoONCAA] AS [ProcedenciaCodigoONCAA], 
-            [Extent1].[ProcedenciaProvinciaDesc] AS [ProcedenciaProvinciaDesc], 
-            [Extent1].[DestinoDesc] AS [DestinoDesc], 
-            [Extent1].[DestinoCodigoPostal] AS [DestinoCodigoPostal], 
-            [Extent1].[DestinoCodigoONCAA] AS [DestinoCodigoONCAA], 
-            [Extent1].[DestinoCUIT] AS [DestinoCUIT], 
-            [Extent1].[DestinoLocalidadAFIP] AS [DestinoLocalidadAFIP], 
-            [Extent1].[Mes] AS [Mes], 
-            [Extent1].[Ano] AS [Ano], 
-            [Extent1].[Factura] AS [Factura], 
-            [Extent1].[FechaFactura] AS [FechaFactura], 
-            [Extent1].[ClienteFacturado] AS [ClienteFacturado], 
-            [Extent1].[ClienteFacturadoCUIT] AS [ClienteFacturadoCUIT], 
-            [Extent1].[CalidadDesc] AS [CalidadDesc], 
-            [Extent1].[UsuarioIngreso] AS [UsuarioIngreso], 
-            [Extent1].[EstablecimientoDesc] AS [EstablecimientoDesc], 
-            [Extent1].[EstablecimientoCodigo] AS [EstablecimientoCodigo], 
-            [Extent1].[EstablecimientoCUIT] AS [EstablecimientoCUIT], 
-            [Extent1].[EstablecimientoNombre] AS [EstablecimientoNombre], 
-            [Extent1].[ClientePagadorFleteDesc] AS [ClientePagadorFleteDesc], 
-            [Extent1].[ProcedenciaProvinciaPartido] AS [ProcedenciaProvinciaPartido], 
-            [Extent1].[ProcedenciaPartidoNormalizadaCodigo] AS [ProcedenciaPartidoNormalizadaCodigo], 
-            [Extent1].[DestinoProvinciaDesc] AS [DestinoProvinciaDesc], 
-            [Extent1].[ProcedenciaPartidoNormalizada] AS [ProcedenciaPartidoNormalizada], 
-            [Extent1].[CorredorDesc2] AS [CorredorDesc2], 
-            [Extent1].[CorredorCUIT2] AS [CorredorCUIT2], 
-            [Extent1].[EntregadorCUIT] AS [EntregadorCUIT], 
-            [Extent1].[CodigoAFIP] AS [CodigoAFIP], 
-            1 AS [C1]
-            FROM [dbo].[fSQL_GetDataTableFiltradoYPaginado]('0', '9999999', '0', '', '-1', '-1', '-1', '-1', '-1', '-1', '-1', '-1', '0', 'Ambas', '01/11/2016', '30/11/2016', '0', '', '', '', '-1', '', '0', '', 'Todos') AS [Extent1]
-        )  AS [Project1]
-    )  AS [Project1]
-    WHERE [Project1].[row_number] > 0
-    ORDER BY [Project1].[IdCartaDePorte] DESC
+select SubnumeroVagon,* from cartasdeporte where fechaarribo> (getdate()-15)
+
+--update cartasdeporte
+--set SubnumeroVagon=0
+-- where fechaarribo> (getdate()-10)
+	
+
+SELECT 
+	-- TOP (@maximumRows)  --creo que no puedo usar top con parametros en una TVF
+	 CDP.*,
+-- CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, 
+-- CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, 
+-- CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, 
+-- CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad       ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      
+--,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE  
+--,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG  
+--,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1       ,CDP.contrato2      ,CDP.KmARecorrer
+--,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal     
+--,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros
+--,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado
+--,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon      
+--,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa     
+--,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha 
+--,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
+--,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
+--,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
+--,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
+--,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      
+--,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas   
+--,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion   
+--,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      
+--,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico       
+--,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      
+--,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada    
+--,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal   
+--,CDP.PathImagen      ,CDP.PathImagen2       ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada     
+--,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura     
+--,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion     
+--,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete     
+--,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2       ,CDP.Acopio1      ,CDP.Acopio2    
+--,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      
+--,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , 			
+cast (cdp.NumeroCartaDePorte as varchar) +					
+				CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 
+					THEN            '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 						
+					ELSE             ''            
+				End	
+	as NumeroCompleto,
+datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico,  		
+ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	  	
+ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	  			
+ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 		
+
+isnull(CLIVEN.Razonsocial,'') AS TitularDesc,             isnull(CLIVEN.cuit,'') AS TitularCUIT,
+isnull(CLICO1.Razonsocial,'') AS IntermediarioDesc,             isnull(CLICO1.cuit,'') AS IntermediarioCUIT, 		
+isnull(CLICO2.Razonsocial,'') AS RComercialDesc,             isnull(CLICO2.cuit,'') AS RComercialCUIT, 			
+isnull(CLICOR.Nombre,'') AS CorredorDesc,             
+isnull(CLICOR.cuit,'') AS CorredorCUIT, 			isnull(CLIENT.Razonsocial,'') AS DestinatarioDesc, 		
+isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc,             isnull(CLIENT.cuit,'') AS DestinatarioCUIT, 		
+isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, 		
+isnull(CLIAUX.cuit,'') AS ClienteAuxiliarCUIT, 			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc,        
+isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc,              isnull(Articulos.Descripcion,'') AS Producto, 			
+
+Transportistas.cuit as  TransportistaCUIT,         
+isnull(Transportistas.RazonSocial,'') AS TransportistaDesc, 		
+choferes.cuil as  ChoferCUIT, 			
+choferes.Nombre as  ChoferDesc,
+
+isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, 	
+isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, 		
+isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA,      
+isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc,    
+
+isnull(LOCDES.Descripcion,'') AS DestinoDesc, 
+isnull(LOCDES.CodigoPostal,'')  AS  DestinoCodigoPostal, 	
+isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA,
+isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT,
+isnull(LOCDES2.CodigoAFIP,'') 	 AS  DestinoLocalidadAFIP,
+
+
+DATENAME(month, FechaDescarga) AS Mes,          
+DATEPART(year, FechaDescarga) AS Ano,        	
+FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura,
+FAC.FechaFactura,         
+isnull(CLIFAC.RazonSocial,'') AS ClienteFacturado,          
+isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT, 		
+Calidades.Descripcion AS CalidadDesc, 	    
+E1.Nombre as UsuarioIngreso,
+
+
+isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '
+	+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '
+	+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS as EstablecimientoDesc, 			
+ESTAB.Descripcion  as EstablecimientoCodigo,
+ESTAB.AuxiliarString2  as EstablecimientoCUIT,
+ESTAB.AuxiliarString1 as EstablecimientoNombre,
+
+
+isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,           isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido, 
+isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
+isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 			isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
+isnull(CLICOR2.cuit,'') AS CorredorCUIT2, 			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, 		
+isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
+
+
+
+FROM    CartasDePorte CDP          
+LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente       
+LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente   
+LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente       
+LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente     
+LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente  
+LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente        
+LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor       
+LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor       
+LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente         
+LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente         
+LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente         
+LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo         
+LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad        
+LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista 			
+LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer            
+LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
+LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
+
+LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino     
+LEFT OUTER JOIN Localidades LOCDES2 ON LOCDES.IdLocalidad = LOCDES2.IdLocalidad          
+
+LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento        
+LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura            
+LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente             
+LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido          
+LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia  
+LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado  
+			
+
+where 1=1              
+
+
+			
+	
+	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= @fechadesde
+	AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= @fechahasta
+
+
+
+
+
+
+
+	--LENTOS
+
+
+
+
+	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
+			where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
+			and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
+			and (
+				@ModoExportacion is null
+				or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') 
+				Or (@ModoExportacion = 'Todos') 
+				Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI') 
+				Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
+						
+			) 
+		)
+	--FIN LENTOS
+
+		
+
+	
+
+		
+
+go
+
+
+
 
 
