@@ -9330,8 +9330,7 @@ Public Class CartaDePorteManager
                 ErrHandler2.WriteError(ms)
                 Return -1
             End If
-
-
+            
 
 
             With myCartaDePorte
@@ -9560,37 +9559,37 @@ Public Class CartaDePorteManager
                     'End Try
 
 
-
-                    SetDetalle("CalidadGastoDeSecada", db, CartaDePorteId, .CalidadGastoDeSecada)
-                    SetDetalle("CalidadGastoDeSecadaRebaja", db, CartaDePorteId, .CalidadGastoDeSecadaRebaja)
-                    SetDetalle("CalidadGastoDeSecadaMerma", db, CartaDePorteId, .CalidadGastoDeSecadaMerma)
-                    SetDetalle("TipoMermaGastoDeSecada", db, CartaDePorteId, .TipoMermaGastoDeSecada)
-
-
-                    SetDetalle("CalidadMermaVolatil", db, CartaDePorteId, .CalidadMermaVolatil)
-                    SetDetalle("CalidadMermaVolatilRebaja", db, CartaDePorteId, .CalidadMermaVolatilRebaja)
-                    SetDetalle("CalidadMermaVolatilMerma", db, CartaDePorteId, .CalidadMermaVolatilMerma)
-                    SetDetalle("TipoMermaVolatil", db, CartaDePorteId, .TipoMermaVolatil)
+                    If (True) Then
+                        SetDetalle("CalidadGastoDeSecada", db, CartaDePorteId, .CalidadGastoDeSecada)
+                        SetDetalle("CalidadGastoDeSecadaRebaja", db, CartaDePorteId, .CalidadGastoDeSecadaRebaja)
+                        SetDetalle("CalidadGastoDeSecadaMerma", db, CartaDePorteId, .CalidadGastoDeSecadaMerma)
+                        SetDetalle("TipoMermaGastoDeSecada", db, CartaDePorteId, .TipoMermaGastoDeSecada)
 
 
-                    SetDetalle("CalidadFondoNidera", db, CartaDePorteId, .CalidadFondoNidera)
-                    SetDetalle("CalidadFondoNideraRebaja", db, CartaDePorteId, .CalidadFondoNideraRebaja)
-                    SetDetalle("CalidadFondoNideraMerma", db, CartaDePorteId, .CalidadFondoNideraMerma)
-                    SetDetalle("TipoMermaFondoNidera", db, CartaDePorteId, .TipoMermaFondoNidera)
+                        SetDetalle("CalidadMermaVolatil", db, CartaDePorteId, .CalidadMermaVolatil)
+                        SetDetalle("CalidadMermaVolatilRebaja", db, CartaDePorteId, .CalidadMermaVolatilRebaja)
+                        SetDetalle("CalidadMermaVolatilMerma", db, CartaDePorteId, .CalidadMermaVolatilMerma)
+                        SetDetalle("TipoMermaVolatil", db, CartaDePorteId, .TipoMermaVolatil)
 
 
-                    SetDetalle("CalidadMermaConvenida", db, CartaDePorteId, .CalidadMermaConvenida)
-                    SetDetalle("CalidadMermaConvenidaRebaja", db, CartaDePorteId, .CalidadMermaConvenidaRebaja)
-                    SetDetalle("CalidadMermaConvenidaMerma", db, CartaDePorteId, .CalidadMermaConvenidaMerma)
-                    SetDetalle("TipoMermaConvenida", db, CartaDePorteId, .TipoMermaConvenida)
+                        SetDetalle("CalidadFondoNidera", db, CartaDePorteId, .CalidadFondoNidera)
+                        SetDetalle("CalidadFondoNideraRebaja", db, CartaDePorteId, .CalidadFondoNideraRebaja)
+                        SetDetalle("CalidadFondoNideraMerma", db, CartaDePorteId, .CalidadFondoNideraMerma)
+                        SetDetalle("TipoMermaFondoNidera", db, CartaDePorteId, .TipoMermaFondoNidera)
 
 
-                    SetDetalle("CalidadTalCualVicentin", db, CartaDePorteId, .CalidadTalCualVicentin)
-                    SetDetalle("CalidadTalCualVicentinRebaja", db, CartaDePorteId, .CalidadTalCualVicentinRebaja)
-                    SetDetalle("CalidadTalCualVicentinMerma", db, CartaDePorteId, .CalidadTalCualVicentinMerma)
-                    SetDetalle("TipoMermaTalCualVicentin", db, CartaDePorteId, .TipoMermaTalCualVicentin)
+                        SetDetalle("CalidadMermaConvenida", db, CartaDePorteId, .CalidadMermaConvenida)
+                        SetDetalle("CalidadMermaConvenidaRebaja", db, CartaDePorteId, .CalidadMermaConvenidaRebaja)
+                        SetDetalle("CalidadMermaConvenidaMerma", db, CartaDePorteId, .CalidadMermaConvenidaMerma)
+                        SetDetalle("TipoMermaConvenida", db, CartaDePorteId, .TipoMermaConvenida)
 
 
+                        SetDetalle("CalidadTalCualVicentin", db, CartaDePorteId, .CalidadTalCualVicentin)
+                        SetDetalle("CalidadTalCualVicentinRebaja", db, CartaDePorteId, .CalidadTalCualVicentinRebaja)
+                        SetDetalle("CalidadTalCualVicentinMerma", db, CartaDePorteId, .CalidadTalCualVicentinMerma)
+                        SetDetalle("TipoMermaTalCualVicentin", db, CartaDePorteId, .TipoMermaTalCualVicentin)
+
+                    End If
 
 
 
@@ -10055,6 +10054,9 @@ Public Class CartaDePorteManager
     End Function
 
     Shared Function UsaClientesQueExigenDatosDeDescargaCompletos(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "") As Boolean
+
+        'Return True
+
         Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
         titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
         destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
@@ -10100,6 +10102,9 @@ Public Class CartaDePorteManager
 
 
     Shared Function UsaClientesQueEstanBloqueadosPorCobranzas(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "") As Boolean
+
+        'Return False
+
         Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
         titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
         destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
@@ -10501,6 +10506,11 @@ Public Class CartaDePorteManager
             End If
 
 
+
+
+
+
+
             If True Then
                 'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
                 'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos 
@@ -10517,6 +10527,13 @@ Public Class CartaDePorteManager
                     ms &= vbCrLf   'return false
                 End If
             End If
+
+
+
+
+
+
+
 
 
             Dim sClientesExigentes As String
@@ -15124,7 +15141,7 @@ Public Class CartaDePorteManager
 
 
 
-                 
+
                     'RenglonCerealnetCalidad(dbc, 18, cc.CalidadHumedadResultado, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Humedad", 0, False, anas)
                     Dim porcentajemerma As Decimal
                     Try
@@ -15132,7 +15149,7 @@ Public Class CartaDePorteManager
                     Catch ex As Exception
                         porcentajemerma = 0
                     End Try
-                    
+
                     RenglonCerealnetCalidad(dbc, 18, dbc.Humedad, porcentajemerma, porcentajemerma, Nothing, "01", "Humedad", dbc.HumedadDesnormalizada, False, anas)
 
 

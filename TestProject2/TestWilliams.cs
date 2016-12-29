@@ -270,6 +270,15 @@ namespace ProntoMVC.Tests
 
 
 
+        public static TimeSpan Time(Action action)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            action();
+            stopwatch.Stop();
+            return stopwatch.Elapsed;
+        }
+
+
 
         /// <summary>
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,6 +297,148 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
+
+
+
+
+
+        [TestMethod]
+        public void CartaPorteFuncionalidadBasica_100veces_4()
+        {
+
+            const int CUANTAS = 10;
+
+            // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
+            TimeSpan time = Time(() =>
+            {
+                // Do some work
+
+                for (int n = 0; n < CUANTAS; n++)
+                {
+                    string ms = "", warn = "";
+
+                    var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+                    Console.Write(ms);
+
+                }
+            });
+
+            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+
+            Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
+
+
+        }
+
+
+
+        [TestMethod]
+        public void Cliente_GetItem()
+        {
+            // 13 s    original
+            // 10 s    saltando la lectura de DetalleClientes
+            //  3 s    saltando tambien linqtosql
+            //    s    cambiando linqtosql por EF -no puedo porque la base oficial no tiene la tabla Clientes con esos campos nuevos!!!
+
+        
+            const int CUANTAS = 40;
+            //var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
+            TimeSpan time = Time(() =>
+            {
+                // Do some work
+
+                for (int n = 0; n < CUANTAS; n++)
+                {
+                    string ms = "", warn = "";
+
+
+                    ClienteManager.GetItem(SC, 8187); //carta.Titular);
+
+
+                    Console.Write(ms);
+
+                }
+            });
+
+            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+
+            Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
+
+
+        }
+
+
+
+        [TestMethod]
+        public void CartaPorteFuncionalidadBasica_100veces_2()
+        {
+            // 55 s    original
+            // 45 s    saltando UsaClientesQueEstanBloqueadosPorCobranzas
+            // 32 s    saltando tambien UsaClientesQueExigenDatosDeDescargaCompletos
+
+            const int CUANTAS = 6;
+            var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
+            TimeSpan time = Time(() =>
+            {
+                // Do some work
+
+                for (int n = 0; n < CUANTAS; n++)
+                {
+                    string ms = "", warn = "";
+
+                    CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+
+                    Console.Write(ms);
+
+                }
+            });
+
+            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+
+            Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void CartaPorteFuncionalidadBasica_100veces()
+        {
+
+            const int CUANTAS = 6;
+            var carta = CartaDePorteManager.GetItem(SC, 4444);
+
+            // http://stackoverflow.com/questions/969290/exact-time-measurement-for-performance-testing/16157458#16157458
+            TimeSpan time = Time(() =>
+                    {
+                        // Do some work
+
+                        for (int n = 0; n < CUANTAS; n++)
+                        {
+                            string ms = "", warn = "";
+
+                            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+
+                            Console.Write(ms);
+
+                        }
+                    });
+
+            Console.WriteLine("Elapsed={0}ms", time.TotalMilliseconds);
+
+            Assert.IsTrue((time.TotalSeconds / CUANTAS) < 3.3);
+
+
+        }
+
+
 
 
 
@@ -427,8 +578,8 @@ namespace ProntoMVC.Tests
             {
                 int m_IdMaestro = 0;
 
-                ClassFlexicapture.MarcarImagenComoProcesandose(f);
-                
+                ClassFlexicapture.MarcarArchivoComoProcesandose(f);
+
                 ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, f,
                                         LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
 
@@ -437,6 +588,8 @@ namespace ProntoMVC.Tests
             }
 
         }
+
+
 
 
 

@@ -111,6 +111,11 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb(3)", "http://loca
 		SlnRelativePath = "prontoweb\"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17DF5DFF-FC64-437F-9843-AD0B9728948C}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -453,6 +458,9 @@ Global
 		{AD47E999-E287-4218-AA37-C6C22B899D33} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
 		{D36118EC-8AAB-4E61-B264-5D29A5232BDC} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
 		{715BC03D-B453-4269-B1F4-08EDEF0BE038} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ProntoMVC.vsmdi
