@@ -587,59 +587,13 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void ImagenesPendientesIneficaz()
-        {
-
-
-            var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
-
-
-        }
-
-
-
-
-
-
-
-        [TestMethod]
-        public void ProcesarTandaDeExcelsDeUrenport_29439()
-        {
-
-
-
-            var lista = ClassFlexicapture.ExtraerListaDeExcelsQueNoHanSidoProcesados(5, DirApp);
-
-
-            string log = "";
-            //hay que pasar el formato como parametro 
-
-            foreach (string f in lista)
-            {
-                int m_IdMaestro = 0;
-
-                ClassFlexicapture.MarcarArchivoComoProcesandose(f);
-
-                ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, f,
-                                        LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
-
-                //var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
-
-            }
-
-        }
-
-
-
-
-
-        [TestMethod]
         public void pegatina_29439()
         {
 
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
-
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
 
             //explota
 
@@ -686,6 +640,70 @@ namespace ProntoMVC.Tests
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
         }
+
+
+
+
+
+        [TestMethod]
+        public void GeneraYEnviaLosMailsTildadosDeLaGrilla_29401()
+        {
+            //ColaMails.EncolarFiltros(null, null, true, 1, 1, null, null, null, null, null);
+            ColaMails.CancelarCola(SC);
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void ImagenesPendientesIneficaz()
+        {
+
+
+            var lista = ClassFlexicapture.ExtraerListaDeImagenesQueNoHanSidoProcesadas(50, DirApp).ToList();
+
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void ProcesarTandaDeExcelsDeUrenport_29439()
+        {
+
+
+
+            var lista = ClassFlexicapture.ExtraerListaDeExcelsQueNoHanSidoProcesados(5, DirApp);
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+
+            foreach (string f in lista)
+            {
+                int m_IdMaestro = 0;
+
+                ClassFlexicapture.MarcarArchivoComoProcesandose(f);
+
+                ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, f,
+                                        LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+                //var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+
+            }
+
+        }
+
+
+
 
 
 
@@ -1440,13 +1458,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-        [TestMethod]
-        public void GeneraYEnviaLosMailsTildadosDeLaGrilla_29401()
-        {
-            //ColaMails.EncolarFiltros(null, null, true, 1, 1, null, null, null, null, null);
-            ColaMails.CancelarCola(SC);
-        }
 
 
         [TestMethod]
